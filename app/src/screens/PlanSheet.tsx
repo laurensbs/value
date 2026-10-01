@@ -2,12 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { Dog } from '../data/dogs'
 import { DogFace } from '../components/DogFace'
 import { Icon } from '../components/Icon'
-
-export const SAFETY_RULES = [
-  'De eerste keer loop je samen met de eigenaar of iemand van de opvang.',
-  'Je laat iemand die je vertrouwt weten waar en wanneer je wandelt.',
-  'De hond blijft aan de lijn, tenzij de eigenaar iets anders met je afspreekt.',
-]
+import { SAFETY_RULES } from '../data/safety'
 
 interface Props {
   dog: Dog

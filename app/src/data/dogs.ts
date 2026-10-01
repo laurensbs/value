@@ -2,6 +2,8 @@ import type { DogLook } from '../components/DogFace'
 
 export type Energy = 'rustig' | 'gemiddeld' | 'energiek'
 export type HostKind = 'opvang' | 'buurt'
+/** Starter dogs suit anyone; experienced dogs need a walker with some dog experience. */
+export type Level = 'starter' | 'ervaren'
 
 export interface Dog {
   id: string
@@ -9,6 +11,7 @@ export interface Dog {
   breed: string
   age: number
   energy: Energy
+  level: Level
   walkMinutes: number
   area: string
   distanceKm: number
@@ -33,6 +36,7 @@ export const DOGS: Dog[] = [
     breed: 'Stafford-mix',
     age: 4,
     energy: 'gemiddeld',
+    level: 'ervaren',
     walkMinutes: 40,
     area: 'Lunetten',
     distanceKm: 1.4,
@@ -43,7 +47,7 @@ export const DOGS: Dog[] = [
     needs: 'Elke wandeling buiten de opvang maakt Mo rustiger in zijn kennel en laat toekomstige baasjes zien hoe hij écht is.',
     traits: ['Loopt netjes aan de lijn', 'Liever geen katten', 'Houdt van bankjes'],
     slots: ['Vandaag 16:30', 'Morgen 10:00', 'Za 11:00'],
-    meetPoint: 'Balie van Dierenopvang Zuidpark',
+    meetPoint: 'Dierenopvang Zuidpark, eerst met een begeleider',
     look: { fur: '#b98a62', ears: '#8e6443', muzzle: '#f1dfcb', earStyle: 'fold', patch: '#f1dfcb', collar: '#2d5d8a' },
     tile: '#f3e3d1',
   },
@@ -53,6 +57,7 @@ export const DOGS: Dog[] = [
     breed: 'Labrador',
     age: 9,
     energy: 'rustig',
+    level: 'starter',
     walkMinutes: 30,
     area: 'Wittevrouwen',
     distanceKm: 0.8,
@@ -73,6 +78,7 @@ export const DOGS: Dog[] = [
     breed: 'Beagle',
     age: 7,
     energy: 'gemiddeld',
+    level: 'starter',
     walkMinutes: 45,
     area: 'Oog in Al',
     distanceKm: 2.1,
@@ -83,7 +89,7 @@ export const DOGS: Dog[] = [
     needs: 'Snuffelen maakt Kees moe op een goede manier. Zonder wandelingen gaat hij blaffen in zijn kennel.',
     traits: ['Kan met andere honden', 'Trekt een beetje', 'Eet alles wat op straat ligt'],
     slots: ['Vandaag 18:00', 'Vr 12:30', 'Zo 15:00'],
-    meetPoint: 'Balie van Dierenopvang Zuidpark',
+    meetPoint: 'Groepswandeling vanaf Dierenopvang Zuidpark',
     look: { fur: '#c9874a', ears: '#7a4a26', muzzle: '#ffffff', earStyle: 'floppy', patch: '#ffffff', tongue: true, collar: '#1f5a3d' },
     tile: '#efe0cf',
   },
@@ -93,6 +99,7 @@ export const DOGS: Dog[] = [
     breed: 'Teckel',
     age: 11,
     energy: 'rustig',
+    level: 'starter',
     walkMinutes: 20,
     area: 'Lombok',
     distanceKm: 1.0,
@@ -113,6 +120,7 @@ export const DOGS: Dog[] = [
     breed: 'Bordercollie-mix',
     age: 3,
     energy: 'energiek',
+    level: 'ervaren',
     walkMinutes: 60,
     area: 'Maximapark',
     distanceKm: 3.2,
@@ -133,6 +141,7 @@ export const DOGS: Dog[] = [
     breed: 'Galgo',
     age: 5,
     energy: 'rustig',
+    level: 'starter',
     walkMinutes: 30,
     area: 'Griftpark',
     distanceKm: 1.7,
@@ -146,6 +155,48 @@ export const DOGS: Dog[] = [
     meetPoint: 'Opvang Het Bosrandje, met een begeleider',
     look: { fur: '#d9cbb8', ears: '#b9a690', muzzle: '#ece3d6', earStyle: 'fold', collar: '#7b4fa3' },
     tile: '#ece6dd',
+  },
+  {
+    id: 'tess',
+    name: 'Tess',
+    breed: 'Golden retriever',
+    age: 6,
+    energy: 'gemiddeld',
+    level: 'starter',
+    walkMinutes: 35,
+    area: 'Tuinwijk',
+    distanceKm: 1.2,
+    host: { kind: 'buurt', name: 'Marian, 69', detail: 'Is midden in een chemokuur' },
+    note: 'Neemt altijd een cadeautje mee terug. Meestal een tak.',
+    story:
+      'Marian is moe van de behandelingen en kan Tess nu niet zelf uitlaten. Haar dochter woont in Groningen. Een vaste wandelaar geeft Marian rust en Tess haar ritme terug.',
+    needs: 'Voor een paar maanden. Een vast rondje op dinsdag en vrijdag helpt Marian het meest.',
+    traits: ['Vriendelijk tegen iedereen', 'Zwemt graag', 'Luistert goed'],
+    slots: ['Di 11:00', 'Vr 11:00', 'Za 14:00'],
+    meetPoint: 'Bij Marian thuis, eerste keer samen',
+    look: { fur: '#e8bf7a', ears: '#d6a55a', muzzle: '#f5dfb5', earStyle: 'floppy', tongue: true, collar: '#2d5d8a' },
+    tile: '#f7ead2',
+  },
+  {
+    id: 'bolle',
+    name: 'Bolle',
+    breed: 'Franse bulldog',
+    age: 5,
+    energy: 'rustig',
+    level: 'starter',
+    walkMinutes: 20,
+    area: 'Zuilen',
+    distanceKm: 2.6,
+    host: { kind: 'buurt', name: 'Joop, 88', detail: 'Loopt met een rollator' },
+    note: 'Snurkt harder dan Joop. Rent nooit, wandelt wel graag.',
+    story:
+      'Joop woont nog zelfstandig en wil dat graag zo houden. Bolle is zijn maatje. Met de rollator lukt het rondje naar het park niet meer, het praatje na afloop mist hij het meest.',
+    needs: 'Korte, rustige rondjes. Bij warm weer liever in de ochtend, want Bolle kan slecht tegen hitte.',
+    traits: ['Niet geschikt voor lange stukken', 'Dol op aandacht', 'Kan met katten'],
+    slots: ['Morgen 10:30', 'Wo 10:30', 'Zo 10:30'],
+    meetPoint: 'Bij Joop thuis, eerste keer met zijn buurvrouw erbij',
+    look: { fur: '#4a4140', ears: '#2f2827', muzzle: '#8a7d78', earStyle: 'pointy', patch: '#f2ece4', collar: '#d9a400' },
+    tile: '#e6e1dc',
   },
 ]
 

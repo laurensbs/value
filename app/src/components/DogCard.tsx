@@ -1,7 +1,7 @@
-import type { CSSProperties } from 'react'
 import type { Dog, Energy } from '../data/dogs'
 import { DogFace } from './DogFace'
 import { Icon } from './Icon'
+import { tileStyle } from '../lib/tile'
 
 const ENERGY_LEVEL: Record<Energy, number> = { rustig: 1, gemiddeld: 2, energiek: 3 }
 
@@ -28,14 +28,10 @@ export function HostBadge({ dog }: { dog: Dog }) {
   )
 }
 
-export function tileStyle(dog: Dog): CSSProperties {
-  return { '--tile': dog.tile } as CSSProperties
-}
-
 export function DogCard({ dog, onOpen }: { dog: Dog; onOpen: (id: string) => void }) {
   return (
     <button type="button" className="dog-card" onClick={() => onOpen(dog.id)}>
-      <span className="dog-tile" style={tileStyle(dog)}>
+      <span className="dog-tile" style={tileStyle(dog.tile)}>
         <DogFace look={dog.look} size={84} />
       </span>
       <span className="dog-card-body">
@@ -57,6 +53,7 @@ export function DogCard({ dog, onOpen }: { dog: Dog; onOpen: (id: string) => voi
             {dog.distanceKm.toLocaleString('nl-NL')} km
           </span>
           <EnergyMeter energy={dog.energy} />
+          {dog.level === 'ervaren' && <span className="level-chip">Met ervaring</span>}
         </span>
       </span>
     </button>

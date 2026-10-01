@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import type { Dog } from '../data/dogs'
 import { DogFace } from '../components/DogFace'
-import { EnergyMeter, HostBadge, tileStyle } from '../components/DogCard'
+import { EnergyMeter, HostBadge } from '../components/DogCard'
+import { tileStyle } from '../lib/tile'
 import { Icon } from '../components/Icon'
 
 interface Props {
@@ -16,7 +17,7 @@ export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
 
   return (
     <div className="screen detail">
-      <div className="detail-hero" style={tileStyle(dog)}>
+      <div className="detail-hero" style={tileStyle(dog.tile)}>
         <button type="button" className="icon-button back" onClick={onBack} aria-label="Terug naar alle honden">
           <Icon name="back" />
         </button>
@@ -32,7 +33,7 @@ export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
           <HostBadge dog={dog} />
         </div>
         <p className="dog-breed">
-          {dog.breed}, {dog.age} jaar · {dog.area}
+          {dog.breed}, {dog.age} jaar · {dog.area} · {dog.distanceKm.toLocaleString('nl-NL')} km
         </p>
 
         <p className="hand-note big">“{dog.note}”</p>
@@ -59,8 +60,8 @@ export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
             </dd>
           </div>
           <div>
-            <dt>Afstand</dt>
-            <dd>{dog.distanceKm.toLocaleString('nl-NL')} km</dd>
+            <dt>Niveau</dt>
+            <dd>{dog.level === 'starter' ? 'Voor iedereen' : 'Met ervaring'}</dd>
           </div>
         </dl>
 
