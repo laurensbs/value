@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { Dog } from '../data/dogs'
+import { GROUP_SIZE, isGroupWalk, type Dog } from '../data/dogs'
 import { DogFace } from '../components/DogFace'
 import { Icon } from '../components/Icon'
 import { SAFETY_RULES } from '../data/safety'
@@ -37,6 +37,7 @@ export function PlanSheet(props: Props) {
   }, [onClose])
 
   const canContinue = adult === 'ja' && rules.every(Boolean)
+  const group = isGroupWalk(dog)
 
   return (
     <div className="sheet-backdrop" onClick={onClose}>
@@ -132,9 +133,13 @@ export function PlanSheet(props: Props) {
 
         {step === 'confirm' && (
           <>
-            <p className="eyebrow">{firstMeet ? 'Kennismaking' : 'Rondje plannen'}</p>
+            <p className="eyebrow">{group ? 'Groepswandeling' : firstMeet ? 'Kennismaking' : 'Rondje plannen'}</p>
             <h2 id="sheet-title" ref={headingRef} tabIndex={-1}>
-              {firstMeet ? `Kennismaken met ${dog.name}` : `Rondje met ${dog.name}`}
+              {group
+                ? `Groepswandeling met ${dog.name}`
+                : firstMeet
+                  ? `Kennismaken met ${dog.name}`
+                  : `Rondje met ${dog.name}`}
             </h2>
             <div className="summary-card">
               <DogFace look={dog.look} size={64} />
@@ -151,11 +156,17 @@ export function PlanSheet(props: Props) {
                   <dt>Duur</dt>
                   <dd>ongeveer {dog.walkMinutes} minuten</dd>
                 </div>
+                {group && (
+                  <div>
+                    <dt>Groep</dt>
+                    <dd>maximaal {GROUP_SIZE} wandelaars en een begeleider</dd>
+                  </div>
+                )}
               </dl>
             </div>
             <p className="muted">
-              {dog.host.kind === 'opvang'
-                ? `${dog.host.name} krijgt je aanvraag en bevestigt meestal binnen een dag.`
+              {group
+                ? `${dog.host.name} bevestigt je plek in de groep meestal binnen een dag.`
                 : `${dog.host.name.split(',')[0]} krijgt je aanvraag. Rondje stuurt nooit je adres of telefoonnummer mee.`}
             </p>
             <button

@@ -52,6 +52,7 @@ npm run test:e2e     # browsertests op mobiel en desktop (Playwright)
 npm run build        # productieversie in app/dist
 npm run build:single # alles in één HTML-bestand voor de preview
 npm run screens      # screenshots van alle schermen in licht en donker (preview-server moet draaien)
+npm run assets       # app-iconen en linkvoorbeeld (og.png) opnieuw maken
 ```
 
 Wordt Chromium niet gevonden bij de browsertests? Geef dan het pad mee met `PW_CHROMIUM_PATH=/pad/naar/chrome`.
@@ -64,6 +65,8 @@ De map `app/dist` is een statische site en draait gratis op Vercel, Netlify of C
 - **Netlify:** base directory `app`, build command `npm run build`, publish directory `app/dist`.
 
 Dat zet het prototype publiek online onder jouw account. Daarom is het niet automatisch gedaan, zie [`docs/DECISIONS.md`](docs/DECISIONS.md).
+
+Heb je een eigen domein? Zet dan in `app/index.html` bij `og:image` de volledige URL van `og.png`, bijvoorbeeld `https://rondje.app/og.png`. Sommige apps tonen het linkvoorbeeld alleen met een volledige URL.
 
 ## Techniek
 

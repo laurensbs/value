@@ -151,8 +151,8 @@
 .logo-route {
   fill: none;
   stroke: var(--ball);
-  stroke-width: 6;
-  stroke-dasharray: 7 5;
+  stroke-width: 5;
+  stroke-dasharray: 4 7;
   stroke-linecap: round;
 }
 
@@ -930,6 +930,11 @@ mark {
 
 .slots h2 {
   font-size: 1.05rem;
+}
+
+.chip-note {
+  font-weight: 500;
+  opacity: 0.75;
 }
 
 .meet-note {

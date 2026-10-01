@@ -1,4 +1,4 @@
-import { findDog } from '../data/dogs'
+import { findDog, isGroupWalk, walkKind } from '../data/dogs'
 import { DogFace } from '../components/DogFace'
 import { Icon } from '../components/Icon'
 import { MoodChart } from '../components/MoodChart'
@@ -68,15 +68,13 @@ export function Walks({ planned, logs, isExample, onStart, onCancel, onClearExam
                     <DogFace look={dog.look} size={56} />
                   </span>
                   <div className="planned-body">
-                    <p className="planned-kind">
-                      {walk.firstMeet ? 'Kennismaking' : walk.weekly ? 'Vast rondje' : 'Rondje'}
-                    </p>
+                    <p className="planned-kind">{walkKind(dog, walk)}</p>
                     <p className="planned-title">
                       {dog.name} · {walk.weekly ? weeklyLabel(walk.slot) : walk.slot}
                     </p>
                     <p className="planned-where">
                       <Icon name="pin" size={14} />
-                      {walk.firstMeet ? dog.meetPoint : dog.area}
+                      {walk.firstMeet || isGroupWalk(dog) ? dog.meetPoint : dog.area}
                     </p>
                     <div className="planned-actions">
                       <button type="button" className="button primary small" onClick={() => onStart(walk)}>

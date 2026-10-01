@@ -25,7 +25,7 @@ test('opens with dogs nearby and never scrolls sideways', async ({ page }) => {
 test('plans a first meeting and walks it', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('button', { name: /^Noor/ }).click()
-  await page.getByRole('button', { name: 'Maak kennis met Noor' }).click()
+  await page.getByRole('button', { name: 'Loop mee met Noor' }).click()
   const dialog = page.getByRole('dialog')
   await dialog.getByText('Ja', { exact: true }).click()
   for (const box of await dialog.getByRole('checkbox').all()) await box.check({ force: true })
@@ -34,7 +34,7 @@ test('plans a first meeting and walks it', async ({ page }) => {
   await dialog.getByRole('button', { name: 'Naar mijn rondjes' }).click()
 
   const noor = page.locator('.planned', { hasText: 'Noor' })
-  await expect(noor).toContainText('Kennismaking')
+  await expect(noor).toContainText('Groepswandeling')
   await noor.getByRole('button', { name: /Start rondje/ }).click()
   await page.getByRole('radio', { name: /Oké/ }).click()
   await page.getByRole('button', { name: 'Rondje klaar' }).click()

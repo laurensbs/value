@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { Dog } from '../data/dogs'
+import { GROUP_SIZE, isGroupWalk, spotsLabel, type Dog } from '../data/dogs'
 import { DogFace } from '../components/DogFace'
 import { EnergyMeter, HostBadge } from '../components/DogCard'
 import { tileStyle } from '../lib/tile'
@@ -15,6 +15,7 @@ interface Props {
 export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
   const [slot, setSlot] = useState(dog.slots[0])
   const headingRef = useRef<HTMLHeadingElement>(null)
+  const group = isGroupWalk(dog)
 
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true })
@@ -79,9 +80,11 @@ export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
         </ul>
 
         <section className="slots" aria-labelledby="slots-title">
-          <h2 id="slots-title">{hasMet ? 'Kies een moment' : 'Kies een moment om kennis te maken'}</h2>
+          <h2 id="slots-title">
+            {group ? 'Kies een groepswandeling' : hasMet ? 'Kies een moment' : 'Kies een moment om kennis te maken'}
+          </h2>
           <div className="chips" role="radiogroup" aria-labelledby="slots-title">
-            {dog.slots.map((s) => (
+            {dog.slots.map((s, i) => (
               <button
                 key={s}
                 type="button"
@@ -91,23 +94,45 @@ export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
                 onClick={() => setSlot(s)}
               >
                 {s}
+                {group && dog.groupSpots && (
+                  <>
+                    {' · '}
+                    <span className="chip-note">{spotsLabel(dog.groupSpots[i])}</span>
+                  </>
+                )}
               </button>
             ))}
           </div>
-          {!hasMet && (
+          {group ? (
             <p className="meet-note">
               <Icon name="shield" size={18} />
               <span>
-                De eerste keer loop je samen. Afspreken bij: <strong>{dog.meetPoint}</strong>
+                Je loopt in een groep van maximaal {GROUP_SIZE} wandelaars, met een begeleider van {dog.host.name}.
+                Verzamelen bij <strong>{dog.meetPoint}</strong>.
               </span>
             </p>
+          ) : (
+            !hasMet && (
+              <p className="meet-note">
+                <Icon name="shield" size={18} />
+                <span>
+                  De eerste keer loop je samen. Afspreken bij: <strong>{dog.meetPoint}</strong>
+                </span>
+              </p>
+            )
           )}
         </section>
       </div>
 
       <div className="sticky-action">
         <button type="button" className="button primary wide" onClick={() => onPlan(slot)}>
-          {hasMet ? `Plan rondje met ${dog.name}` : `Maak kennis met ${dog.name}`}
+          {group
+            ? hasMet
+              ? `Plan groepswandeling met ${dog.name}`
+              : `Loop mee met ${dog.name}`
+            : hasMet
+              ? `Plan rondje met ${dog.name}`
+              : `Maak kennis met ${dog.name}`}
           <Icon name="arrow" size={20} />
         </button>
       </div>

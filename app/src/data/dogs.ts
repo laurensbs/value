@@ -23,6 +23,8 @@ export interface Dog {
   needs: string
   traits: string[]
   slots: string[]
+  /** Shelter dogs walk in small supervised groups: places left per slot. */
+  groupSpots?: number[]
   meetPoint: string
   look: DogLook
   tile: string
@@ -47,7 +49,8 @@ export const DOGS: Dog[] = [
     needs: 'Elke wandeling buiten de opvang maakt Mo rustiger in zijn kennel en laat toekomstige baasjes zien hoe hij écht is.',
     traits: ['Loopt netjes aan de lijn', 'Liever geen katten', 'Houdt van bankjes'],
     slots: ['Vandaag 16:30', 'Morgen 10:00', 'Za 11:00'],
-    meetPoint: 'Dierenopvang Zuidpark, eerst met een begeleider',
+    groupSpots: [2, 1, 3],
+    meetPoint: 'Ingang Dierenopvang Zuidpark',
     look: { fur: '#b98a62', ears: '#8e6443', muzzle: '#f1dfcb', earStyle: 'fold', head: 'wide', blaze: '#f1dfcb', collar: '#2d5d8a' },
     tile: '#f3e3d1',
   },
@@ -89,7 +92,8 @@ export const DOGS: Dog[] = [
     needs: 'Snuffelen maakt Kees moe op een goede manier. Zonder wandelingen gaat hij blaffen in zijn kennel.',
     traits: ['Kan met andere honden', 'Trekt een beetje', 'Eet alles wat op straat ligt'],
     slots: ['Vandaag 18:00', 'Vr 12:30', 'Zo 15:00'],
-    meetPoint: 'Groepswandeling vanaf Dierenopvang Zuidpark',
+    groupSpots: [3, 2, 1],
+    meetPoint: 'Ingang Dierenopvang Zuidpark',
     look: { fur: '#c47c3e', ears: '#6b3f1f', muzzle: '#ffffff', earStyle: 'floppy', blaze: '#ffffff', tongue: true, collar: '#1f5a3d' },
     tile: '#efe0cf',
   },
@@ -152,7 +156,8 @@ export const DOGS: Dog[] = [
     needs: 'Noor heeft vertrouwen nodig. Dezelfde wandelaar elke week helpt haar sneller klaar te zijn voor adoptie.',
     traits: ['Gevoelig', 'Draagt een tuigje', 'Slaapt 18 uur per dag'],
     slots: ['Morgen 13:00', 'Za 09:30', 'Zo 13:00'],
-    meetPoint: 'Opvang Het Bosrandje, met een begeleider',
+    groupSpots: [1, 2, 2],
+    meetPoint: 'Opvang Het Bosrandje',
     look: { fur: '#d9cbb8', ears: '#b9a690', muzzle: '#ece3d6', earStyle: 'fold', head: 'narrow', collar: '#7b4fa3' },
     tile: '#ece6dd',
   },
@@ -199,6 +204,24 @@ export const DOGS: Dog[] = [
     tile: '#e6e1dc',
   },
 ]
+
+/** Shelter dogs are always walked in a small group with a supervisor. */
+export const GROUP_SIZE = 4
+
+export function isGroupWalk(dog: Dog): boolean {
+  return dog.host.kind === 'opvang'
+}
+
+export function spotsLabel(spots: number): string {
+  return spots === 1 ? 'nog 1 plek' : `nog ${spots} plekken`
+}
+
+/** What kind of walk a planned walk is, in the words the walker sees. */
+export function walkKind(dog: Dog, walk: { firstMeet: boolean; weekly?: boolean }): string {
+  if (isGroupWalk(dog)) return walk.weekly ? 'Vaste groepswandeling' : 'Groepswandeling'
+  if (walk.firstMeet) return 'Kennismaking'
+  return walk.weekly ? 'Vast rondje' : 'Rondje'
+}
 
 export function findDog(id: string): Dog | undefined {
   return DOGS.find((d) => d.id === id)

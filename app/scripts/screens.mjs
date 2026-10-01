@@ -31,7 +31,7 @@ for (const scheme of ['light', 'dark']) {
   await shoot('02-detail', m, async (p) => p.getByRole('button', { name: /Saar/ }).first().click())
   await shoot('03-safety', m, async (p) => {
     await p.getByRole('button', { name: /^Mo/ }).first().click()
-    await p.getByRole('button', { name: /Maak kennis met Mo/ }).click()
+    await p.getByRole('button', { name: /Loop mee met Mo/ }).click()
     await p.getByText('Ja', { exact: true }).click()
   })
   await shoot('04-walks', m, async (p) => p.getByRole('navigation').getByRole('button', { name: /Rondjes/ }).click())

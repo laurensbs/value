@@ -25,12 +25,21 @@ describe('Ontdekken', () => {
 })
 
 describe('Kennismaking plannen', () => {
+  it('shows shelter dogs as supervised group walks with places left', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: /^Noor/ }))
+    expect(screen.getByRole('heading', { name: 'Kies een groepswandeling' })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: /Morgen 13:00 · nog 1 plek/ })).toBeInTheDocument()
+    expect(screen.getByText(/met een begeleider van Opvang Het Bosrandje/)).toBeInTheDocument()
+  })
+
   it('asks for the safety agreements before the first meeting', async () => {
     const user = userEvent.setup()
     render(<App />)
 
     await user.click(screen.getByRole('button', { name: /^Mo/ }))
-    await user.click(screen.getByRole('button', { name: 'Maak kennis met Mo' }))
+    await user.click(screen.getByRole('button', { name: 'Loop mee met Mo' }))
 
     const dialog = screen.getByRole('dialog')
     const join = within(dialog).getByRole('button', { name: 'Ik doe mee' })
@@ -42,20 +51,22 @@ describe('Kennismaking plannen', () => {
     expect(join).toBeEnabled()
 
     await user.click(join)
-    expect(within(dialog).getByRole('heading', { name: 'Kennismaken met Mo' })).toBeInTheDocument()
+    expect(within(dialog).getByRole('heading', { name: 'Groepswandeling met Mo' })).toBeInTheDocument()
+    expect(within(dialog).getByText(/maximaal 4 wandelaars en een begeleider/)).toBeInTheDocument()
     await user.click(within(dialog).getByRole('button', { name: 'Verstuur aanvraag' }))
     expect(within(dialog).getByRole('heading', { name: 'Aanvraag verstuurd' })).toBeInTheDocument()
 
     await user.click(within(dialog).getByRole('button', { name: 'Naar mijn rondjes' }))
-    expect(screen.getByText(/Mo · Vandaag 16:30/)).toBeInTheDocument()
-    expect(screen.getByText('Kennismaking')).toBeInTheDocument()
+    const mo = screen.getByText(/Mo · Vandaag 16:30/).closest('li')!
+    expect(mo).toHaveTextContent('Groepswandeling')
+    expect(mo).toHaveTextContent('Ingang Dierenopvang Zuidpark')
   })
 
   it('points people under 18 to help instead of the agreements', async () => {
     const user = userEvent.setup()
     render(<App />)
     await user.click(screen.getByRole('button', { name: /^Kees/ }))
-    await user.click(screen.getByRole('button', { name: 'Maak kennis met Kees' }))
+    await user.click(screen.getByRole('button', { name: 'Loop mee met Kees' }))
     const dialog = screen.getByRole('dialog')
     await user.click(within(dialog).getByLabelText('Nee'))
     expect(within(dialog).getByText(/vanaf 18 jaar/)).toBeInTheDocument()

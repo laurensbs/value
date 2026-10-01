@@ -95,3 +95,33 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 - Een "bijna-tijd"-scherm voor het vaste rondje: herinnering en weer.
 - Een opvang-variant van de kennismaking: groepswandeling met begeleider en een tijdslot per groep.
 - Een lege staat zonder voorbeelddata nalopen met nieuwe gebruikers.
+
+---
+
+## Cyclus 3: groepswandelingen bij de opvang en klaar om te delen (1 oktober 2026)
+
+**Review:**
+- **Opvanghonden** gebruikten dezelfde één-op-één-kennismaking als honden uit de buurt. Volgens het onderzoek hebben opvanghonden vaak ervaren handen nodig. Opvangen werken daarom met begeleide groepen (zoals het boekmodel van Animal Trust).
+- **Een gedeelde link** zag er kaal uit: geen linkvoorbeeld, geen app-icoon, en niet te installeren.
+
+**Verbeteringen:**
+
+| # | Wat | Waarom |
+|---|---|---|
+| 1 | Opvanghonden zijn altijd een **groepswandeling**: maximaal 4 wandelaars en een begeleider, met het aantal vrije plekken per moment ("Morgen 13:00 · nog 1 plek") | Past bij hoe opvangen werken, en verlaagt het risico |
+| 2 | Duidelijkere soorten wandelingen in Rondjes: kennismaking, rondje, vast rondje, (vaste) groepswandeling | Je ziet meteen wat je gaat doen en waar je verzamelt |
+| 3 | Een schermlezer las "13:00· nog 1 plek" voor, zonder spatie | Scheidingsteken buiten het opgemaakte deel gezet |
+| 4 | **Linkvoorbeeld** (`og.png`, 1200×630) met de honden en de kernboodschap, plus Open Graph-tags | Een gedeelde link in WhatsApp of Instagram ziet er nu verzorgd uit |
+| 5 | **App-iconen** en een **manifest**: je kunt Rondje op je beginscherm zetten | Voelt als een echte app |
+| 6 | Eén merkteken overal: een stippellijn-route met een wandelaar | Het vorige icoon leek op een laadspinner |
+
+`npm run assets` maakt de iconen en het linkvoorbeeld opnieuw, met dezelfde hondentekeningen als de app.
+
+**Tests:** 25 unit- en integratietests (nieuw: groepswandelingen met plekken) en 6 browsertests. Alles groen.
+
+**Resultaat:** preview bijgewerkt naar versie 4.
+
+**Volgende stap:**
+- Lettertypes beperken tot de Latijnse tekenset, zodat de app sneller laadt.
+- Lege staat en eerste gebruik nalopen zonder voorbeelddata.
+- Teksten laten nalezen door iemand van 113 of MIND, voordat er echte gebruikers komen.
