@@ -47,6 +47,14 @@ for (const scheme of ['light', 'dark']) {
     await p.getByRole('button', { name: /Rondje klaar/ }).click()
     await p.getByRole('radio', { name: /Goed/ }).click()
   })
+  await shoot('09-before', m, async (p) => {
+    await p.getByRole('navigation').getByRole('button', { name: /Rondjes/ }).click()
+    await p.getByRole('button', { name: /Start rondje/ }).click()
+  })
+  await shoot('10-signup', m, async (p) => p.getByRole('button', { name: 'Meld een hond aan' }).click())
+  await shoot('11-owner-cta', m, async (p) => {
+    await p.getByRole('button', { name: 'Meld een hond aan' }).scrollIntoViewIfNeeded()
+  })
   await shoot('07-help', m, async (p) => p.getByRole('navigation').getByRole('button', { name: 'Hulp' }).click())
   await shoot('08-desktop', { width: 1440, height: 900, scheme })
 }

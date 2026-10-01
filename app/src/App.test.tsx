@@ -124,18 +124,51 @@ describe('Rondje lopen', () => {
   })
 })
 
-describe('Hulp', () => {
-  it('lists the help lines and accepts a dog sign-up', async () => {
+describe('Hulp en aanmelden', () => {
+  it('lists the help lines', async () => {
     const user = userEvent.setup()
     render(<App />)
     await user.click(screen.getByRole('button', { name: 'Even niet oké?' }))
     for (const name of ['113 Zelfmoordpreventie', 'MIND Hulplijn', 'In je bol', 'De Kindertelefoon']) {
       expect(screen.getByRole('heading', { name })).toBeInTheDocument()
     }
-    await user.type(screen.getByLabelText('Naam van de hond'), 'Bobbie')
-    await user.type(screen.getByLabelText('Wijk of postcode'), '3581')
-    await user.click(screen.getByLabelText('Voor iemand anders'))
-    await user.click(screen.getByRole('button', { name: 'Meld aan' }))
-    expect(screen.getByRole('status')).toHaveTextContent('Bedankt')
+  })
+
+  it('lets anyone sign up a dog from the dog list', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: 'Meld een hond aan' }))
+    const dialog = screen.getByRole('dialog')
+    await user.type(within(dialog).getByLabelText('Naam van de hond'), 'Bobbie')
+    await user.type(within(dialog).getByLabelText('Wijk of postcode'), '3581')
+    await user.click(within(dialog).getByLabelText('Voor iemand anders'))
+    await user.type(within(dialog).getByLabelText(/Telefoonnummer/), '0612345678')
+    await user.click(within(dialog).getByRole('button', { name: 'Meld aan' }))
+    expect(within(dialog).getByRole('status')).toHaveTextContent('coördinator')
+    await user.click(within(dialog).getByRole('button', { name: 'Terug naar de honden' }))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+})
+
+describe('Toegankelijkheid', () => {
+  it('makes the page underneath inert while a dog is open', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: /^Pip/ }))
+    expect(document.querySelector('main')).toHaveAttribute('inert')
+    expect(screen.getByRole('heading', { name: 'Pip', level: 1 })).toHaveFocus()
+    await user.click(screen.getByRole('button', { name: 'Terug naar alle honden' }))
+    expect(document.querySelector('main')).not.toHaveAttribute('inert')
+  })
+})
+
+describe('Veilig wandelen', () => {
+  it('prepares a message to tell someone about the walk', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(nav().getByRole('button', { name: /Rondjes/ }))
+    await user.click(screen.getByRole('button', { name: /Start rondje/ }))
+    await user.click(screen.getByRole('button', { name: 'Laat iemand weten dat je gaat' }))
+    expect(await screen.findByRole('status')).toHaveTextContent(/gekopieerd|Stuur dit/)
   })
 })

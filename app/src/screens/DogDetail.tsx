@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Dog } from '../data/dogs'
 import { DogFace } from '../components/DogFace'
 import { EnergyMeter, HostBadge } from '../components/DogCard'
@@ -14,6 +14,11 @@ interface Props {
 
 export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
   const [slot, setSlot] = useState(dog.slots[0])
+  const headingRef = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    headingRef.current?.focus({ preventScroll: true })
+  }, [])
 
   return (
     <div className="screen detail">
@@ -29,7 +34,9 @@ export function DogDetail({ dog, hasMet, onBack, onPlan }: Props) {
 
       <div className="detail-body">
         <div className="detail-title">
-          <h1>{dog.name}</h1>
+          <h1 ref={headingRef} tabIndex={-1}>
+            {dog.name}
+          </h1>
           <HostBadge dog={dog} />
         </div>
         <p className="dog-breed">

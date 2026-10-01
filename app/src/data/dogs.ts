@@ -48,7 +48,7 @@ export const DOGS: Dog[] = [
     traits: ['Loopt netjes aan de lijn', 'Liever geen katten', 'Houdt van bankjes'],
     slots: ['Vandaag 16:30', 'Morgen 10:00', 'Za 11:00'],
     meetPoint: 'Dierenopvang Zuidpark, eerst met een begeleider',
-    look: { fur: '#b98a62', ears: '#8e6443', muzzle: '#f1dfcb', earStyle: 'fold', patch: '#f1dfcb', collar: '#2d5d8a' },
+    look: { fur: '#b98a62', ears: '#8e6443', muzzle: '#f1dfcb', earStyle: 'fold', head: 'wide', blaze: '#f1dfcb', collar: '#2d5d8a' },
     tile: '#f3e3d1',
   },
   {
@@ -69,8 +69,8 @@ export const DOGS: Dog[] = [
     traits: ['Heel rustig', 'Goed met kinderen', 'Trekt nooit'],
     slots: ['Morgen 09:00', 'Do 14:00', 'Za 10:30'],
     meetPoint: 'Bij Ans thuis, eerste keer samen',
-    look: { fur: '#e2b45c', ears: '#c99540', muzzle: '#f2d79b', earStyle: 'floppy', collar: '#c0392b' },
-    tile: '#f6ebcf',
+    look: { fur: '#6e4632', ears: '#583624', muzzle: '#8d5e44', earStyle: 'floppy', collar: '#c0392b' },
+    tile: '#ecdcd0',
   },
   {
     id: 'kees',
@@ -90,7 +90,7 @@ export const DOGS: Dog[] = [
     traits: ['Kan met andere honden', 'Trekt een beetje', 'Eet alles wat op straat ligt'],
     slots: ['Vandaag 18:00', 'Vr 12:30', 'Zo 15:00'],
     meetPoint: 'Groepswandeling vanaf Dierenopvang Zuidpark',
-    look: { fur: '#c9874a', ears: '#7a4a26', muzzle: '#ffffff', earStyle: 'floppy', patch: '#ffffff', tongue: true, collar: '#1f5a3d' },
+    look: { fur: '#c47c3e', ears: '#6b3f1f', muzzle: '#ffffff', earStyle: 'floppy', blaze: '#ffffff', tongue: true, collar: '#1f5a3d' },
     tile: '#efe0cf',
   },
   {
@@ -111,8 +111,8 @@ export const DOGS: Dog[] = [
     traits: ['Blaft naar duiven', 'Draagt een jasje als het regent', 'Heel lief'],
     slots: ['Vandaag 15:00', 'Morgen 15:00', 'Do 15:00'],
     meetPoint: 'Bij Henk thuis, eerste keer samen',
-    look: { fur: '#7a3f22', ears: '#55291a', muzzle: '#a8653d', earStyle: 'floppy', collar: '#d9a400' },
-    tile: '#ecd9cc',
+    look: { fur: '#2b2220', ears: '#1c1513', muzzle: '#b4733f', earStyle: 'floppy', head: 'narrow', brows: '#b4733f', collar: '#d9a400' },
+    tile: '#efe0cf',
   },
   {
     id: 'luna',
@@ -132,7 +132,7 @@ export const DOGS: Dog[] = [
     traits: ['Super slim', 'Luistert naar commando’s', 'Rent graag los op het hondenveld'],
     slots: ['Morgen 08:30', 'Wo 08:30', 'Vr 08:30'],
     meetPoint: 'Ingang Maximapark, eerste keer met Fatima',
-    look: { fur: '#20242a', ears: '#20242a', muzzle: '#ffffff', earStyle: 'pointy', patch: '#ffffff', tongue: true, collar: '#d9f05a' },
+    look: { fur: '#20242a', ears: '#20242a', muzzle: '#ffffff', earStyle: 'pointy', blaze: '#ffffff', tongue: true, collar: '#d9f05a' },
     tile: '#dfe5ea',
   },
   {
@@ -153,7 +153,7 @@ export const DOGS: Dog[] = [
     traits: ['Gevoelig', 'Draagt een tuigje', 'Slaapt 18 uur per dag'],
     slots: ['Morgen 13:00', 'Za 09:30', 'Zo 13:00'],
     meetPoint: 'Opvang Het Bosrandje, met een begeleider',
-    look: { fur: '#d9cbb8', ears: '#b9a690', muzzle: '#ece3d6', earStyle: 'fold', collar: '#7b4fa3' },
+    look: { fur: '#d9cbb8', ears: '#b9a690', muzzle: '#ece3d6', earStyle: 'fold', head: 'narrow', collar: '#7b4fa3' },
     tile: '#ece6dd',
   },
   {
@@ -195,7 +195,7 @@ export const DOGS: Dog[] = [
     traits: ['Niet geschikt voor lange stukken', 'Dol op aandacht', 'Kan met katten'],
     slots: ['Morgen 10:30', 'Wo 10:30', 'Zo 10:30'],
     meetPoint: 'Bij Joop thuis, eerste keer met zijn buurvrouw erbij',
-    look: { fur: '#4a4140', ears: '#2f2827', muzzle: '#8a7d78', earStyle: 'pointy', patch: '#f2ece4', collar: '#d9a400' },
+    look: { fur: '#d6b48c', ears: '#c29a6c', muzzle: '#5b4a41', earStyle: 'bat', head: 'wide', collar: '#d9a400' },
     tile: '#e6e1dc',
   },
 ]

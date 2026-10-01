@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useState } from 'react'
 import { Icon } from '../components/Icon'
 
 interface Line {
@@ -79,14 +79,7 @@ const RED_LINES = [
   'Geen streaks of meldingen die je onder druk zetten.',
 ]
 
-export function Help() {
-  const [sent, setSent] = useState(false)
-
-  const submit = (e: FormEvent) => {
-    e.preventDefault()
-    setSent(true)
-  }
-
+export function Help({ onSignup }: { onSignup: () => void }) {
   return (
     <div className="screen help">
       <header className="intro compact">
@@ -146,43 +139,14 @@ export function Help() {
         </ul>
       </section>
 
-      <section className="block signup" aria-labelledby="signup-title" id="aanmelden">
+      <section className="block" aria-labelledby="signup-title">
         <h2 id="signup-title" className="section-title">
           Ken je een hond die vaker naar buiten wil?
         </h2>
-        <p className="muted">
-          Van jezelf, je oma of de buurman. Je mag iemand anders aanmelden; we bellen eerst voor een
-          kennismaking.
-        </p>
-        {sent ? (
-          <div className="notice success" role="status">
-            <Icon name="check" size={18} />
-            <p>Bedankt! In dit prototype wordt niets verstuurd. In de pilot belt de coördinator binnen twee dagen.</p>
-          </div>
-        ) : (
-          <form className="form" onSubmit={submit}>
-            <label htmlFor="su-dog">
-              Naam van de hond
-              <input id="su-dog" name="dog" required placeholder="Bijvoorbeeld Saar" />
-            </label>
-            <label htmlFor="su-area">
-              Wijk of postcode
-              <input id="su-area" name="area" required placeholder="3581 of Wittevrouwen" />
-            </label>
-            <fieldset className="radio-row">
-              <legend>Voor wie meld je aan?</legend>
-              <label>
-                <input id="su-self" type="radio" name="for" value="zelf" defaultChecked /> Mijn eigen hond
-              </label>
-              <label>
-                <input id="su-other" type="radio" name="for" value="ander" /> Voor iemand anders
-              </label>
-            </fieldset>
-            <button type="submit" className="button primary wide">
-              Meld aan
-            </button>
-          </form>
-        )}
+        <p className="muted">Van jezelf, je oma of de buurman. Je mag ook iemand anders aanmelden.</p>
+        <button type="button" className="button secondary" onClick={onSignup}>
+          Meld een hond aan
+        </button>
       </section>
     </div>
   )

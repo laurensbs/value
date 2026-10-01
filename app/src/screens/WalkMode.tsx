@@ -3,6 +3,7 @@ import type { Dog } from '../data/dogs'
 import { DogFace } from '../components/DogFace'
 import { Icon } from '../components/Icon'
 import { MoodPicker } from '../components/MoodPicker'
+import { ShareWalk } from '../components/ShareWalk'
 import { WALK_PROMPTS, formatDuration, minutesFromSeconds, moodLabel, type Mood } from '../lib/walks'
 
 type Phase = 'before' | 'walking' | 'after' | 'done'
@@ -66,6 +67,7 @@ export function WalkMode({ dog, onFinish, onClose, onHelp }: Props) {
           <button type="button" className="link-button" onClick={() => startWalk(undefined)}>
             Overslaan en beginnen
           </button>
+          <ShareWalk dog={dog} />
         </div>
       )}
 

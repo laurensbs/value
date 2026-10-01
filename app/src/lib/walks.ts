@@ -81,3 +81,10 @@ export const WALK_PROMPTS: string[] = [
 export function uid(): string {
   return Math.random().toString(36).slice(2, 10)
 }
+
+/** Text for safety agreement 2: tell someone you trust where you walk and when you're back. */
+export function walkMessage(dog: { name: string; area: string; walkMinutes: number }, now = new Date()): string {
+  const back = new Date(now.getTime() + dog.walkMinutes * 60_000)
+  const time = back.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
+  return `Ik ga een rondje lopen met ${dog.name} in ${dog.area}. Rond ${time} ben ik terug.`
+}

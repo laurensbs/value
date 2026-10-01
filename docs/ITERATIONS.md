@@ -35,3 +35,38 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 1. Review als drie personen: een gestreste student, een twijfelende eigenaar en een opvangmedewerker.
 2. Een vaste-maatje-flow na de kennismaking.
 3. Toegankelijkheid controleren met toetsenbord en schermlezer.
+
+---
+
+## Cyclus 1: aanbod, veiligheid en herkenbare honden (1 oktober 2026)
+
+**Review als drie gebruikers:**
+- **Sanne (21, student, gestrest in de tentamenweek, komt binnen via een TikTok-video):**
+  - Ze ziet direct honden, en dat is goed.
+  - Ze ziet niet dat het gratis en veilig is, en ook niet hoe het werkt.
+  - Afspraak 2 ("laat iemand weten waar je wandelt") moet ze zelf regelen.
+- **De dochter van Ans (81), die haar moeder wil aanmelden:**
+  - Aanmelden zat verstopt onderaan het tabblad Hulp.
+  - Volgens de pre-mortem is te weinig aanbod het grootste risico, dus dit moet juist prominent.
+- **Toetsenbord- en schermlezergebruiker:**
+  - Als een hond of paneel openging, bleef de focus achter op de achtergrond.
+  - Je kon met Tab achter het paneel terechtkomen.
+
+**Verbeteringen:**
+
+| # | Wat | Waarom |
+|---|---|---|
+| 1 | Blok "Zo werkt het" in drie stappen, met de stippellijn van de route als verbinding | Vertrouwen bij het eerste bezoek: kies, maak kennis samen met de eigenaar, vast rondje |
+| 2 | Kaart "Ken je een hond die vaker naar buiten wil?" onder de honden, plus een apart aanmeldscherm (ook voor een ander, met telefoonnummer voor de intake) | Wandelaars werven zelf eigenaren: een groeilus voor het aanbod |
+| 3 | Knop "Laat iemand weten dat je gaat" bij de start van een rondje: delen, met kopiëren als terugval | Maakt veiligheidsafspraak 2 één tik |
+| 4 | Panelen maken de achtergrond `inert`. Focus gaat naar de titel en terug naar de knop waarmee je het paneel opende. | Toegankelijkheid |
+| 5 | Nieuwe illustraties: kopvormen, vleermuisoren, bles, wenkbrauwen voor black-and-tan | Saar en Tess leken op elkaar, Bolle en Luna op katten |
+| 6 | Hover-effecten alleen op apparaten met een muis | Op een touchscreen bleef een stemmingsknop "omhoog" hangen |
+
+**Tests:** 20 unit- en integratietests (onder andere aanmelden, focus en `inert`, deelbericht) en 6 browsertests. Alles groen.
+
+**Resultaat:** preview bijgewerkt naar versie 2.
+
+**Volgende stap:**
+- De vaste-maatje-flow: na de kennismaking direct een vast moment per week voorstellen.
+- Een scherm "Voor organisaties" voor partners (welzijnswerk, opvang), voor de pitch.

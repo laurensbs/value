@@ -11,6 +11,7 @@ import { Discover } from './screens/Discover'
 import { DogDetail } from './screens/DogDetail'
 import { Help } from './screens/Help'
 import { PlanSheet } from './screens/PlanSheet'
+import { SignupSheet } from './screens/SignupSheet'
 import { WalkMode } from './screens/WalkMode'
 import { Walks } from './screens/Walks'
 
@@ -22,11 +23,27 @@ const TABS: { id: Tab; label: string; icon: IconName }[] = [
   { id: 'hulp', label: 'Hulp', icon: 'help' },
 ]
 
+/** Remembers which control opened a layer, so focus can go back there when it closes. */
+function useFocusReturn() {
+  const trigger = useRef<HTMLElement | null>(null)
+  const remember = useCallback(() => {
+    trigger.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+  }, [])
+  const restore = useCallback(() => {
+    const el = trigger.current
+    window.requestAnimationFrame(() => {
+      if (el?.isConnected) el.focus()
+    })
+  }, [])
+  return { remember, restore }
+}
+
 export default function App() {
   const [tab, setTab] = useState<Tab>('honden')
   const [openDogId, setOpenDogId] = useState<string | null>(null)
   const [plan, setPlan] = useState<{ dogId: string; slot: string } | null>(null)
   const [walking, setWalking] = useState<PlannedWalk | null>(null)
+  const [signup, setSignup] = useState(false)
 
   const [isExample, setIsExample] = usePersistent('example', true)
   const [planned, setPlanned] = usePersistent<PlannedWalk[]>('planned', () => exampleState().planned)
@@ -35,10 +52,12 @@ export default function App() {
   const [safetyAccepted, setSafetyAccepted] = usePersistent('safety', false)
 
   const viewportRef = useRef<HTMLElement>(null)
+  const dogFocus = useFocusReturn()
+  const layerFocus = useFocusReturn()
 
   useEffect(() => {
     if (viewportRef.current) viewportRef.current.scrollTop = 0
-  }, [tab, openDogId])
+  }, [tab])
 
   const goTo = useCallback((next: Tab) => {
     setOpenDogId(null)
@@ -49,6 +68,10 @@ export default function App() {
   const planDog = plan ? findDog(plan.dogId) : undefined
   const walkDog = walking ? findDog(walking.dogId) : undefined
 
+  // While a layer is open, everything underneath is inert: no focus, no clicks, hidden from screen readers.
+  const layerOpen = Boolean(plan || walking || signup)
+  const baseInert = Boolean(openDog) || layerOpen
+
   const clearExamples = () => {
     setPlanned([])
     setLogs([])
@@ -56,12 +79,17 @@ export default function App() {
     setIsExample(false)
   }
 
+  const openSignup = () => {
+    layerFocus.remember()
+    setSignup(true)
+  }
+
   return (
     <div className="stage">
       <ConceptPanel />
 
       <div className="phone">
-        <header className="topbar">
+        <header className="topbar" inert={baseInert}>
           <button type="button" className="brand" onClick={() => goTo('honden')} aria-label="Rondje, naar honden">
             <Logo />
             <span>Rondje</span>
@@ -71,29 +99,40 @@ export default function App() {
           </button>
         </header>
 
-        <main className="viewport" ref={viewportRef}>
-          {tab === 'honden' && <Discover onOpenDog={setOpenDogId} />}
+        <main className="viewport" ref={viewportRef} inert={baseInert}>
+          {tab === 'honden' && (
+            <Discover
+              onOpenDog={(id) => {
+                dogFocus.remember()
+                setOpenDogId(id)
+              }}
+              onSignup={openSignup}
+            />
+          )}
           {tab === 'rondjes' && (
             <Walks
               planned={planned}
               logs={logs}
               isExample={isExample}
-              onStart={setWalking}
+              onStart={(walk) => {
+                layerFocus.remember()
+                setWalking(walk)
+              }}
               onCancel={(id) => setPlanned(planned.filter((p) => p.id !== id))}
               onClearExamples={clearExamples}
               onDiscover={() => goTo('honden')}
             />
           )}
-          {tab === 'hulp' && <Help />}
+          {tab === 'hulp' && <Help onSignup={openSignup} />}
         </main>
 
-        <nav className="tabbar" aria-label="Hoofdmenu">
+        <nav className="tabbar" aria-label="Hoofdmenu" inert={baseInert}>
           {TABS.map((t) => (
             <button
               key={t.id}
               type="button"
               className="tab"
-              aria-current={tab === t.id && !openDog ? 'page' : undefined}
+              aria-current={tab === t.id ? 'page' : undefined}
               onClick={() => goTo(t.id)}
             >
               <Icon name={t.icon} size={24} />
@@ -108,13 +147,19 @@ export default function App() {
         </nav>
 
         {openDog && (
-          <div className="overlay">
+          <div className="overlay" inert={layerOpen}>
             <DogDetail
               key={openDog.id}
               dog={openDog}
               hasMet={met.includes(openDog.id)}
-              onBack={() => setOpenDogId(null)}
-              onPlan={(slot) => setPlan({ dogId: openDog.id, slot })}
+              onBack={() => {
+                setOpenDogId(null)
+                dogFocus.restore()
+              }}
+              onPlan={(slot) => {
+                layerFocus.remember()
+                setPlan({ dogId: openDog.id, slot })
+              }}
             />
           </div>
         )}
@@ -132,7 +177,10 @@ export default function App() {
                 { id: uid(), dogId: planDog.id, slot: plan.slot, firstMeet: !met.includes(planDog.id) },
               ])
             }
-            onClose={() => setPlan(null)}
+            onClose={() => {
+              setPlan(null)
+              layerFocus.restore()
+            }}
             onDone={() => {
               setPlan(null)
               goTo('rondjes')
@@ -140,10 +188,22 @@ export default function App() {
           />
         )}
 
+        {signup && (
+          <SignupSheet
+            onClose={() => {
+              setSignup(false)
+              layerFocus.restore()
+            }}
+          />
+        )}
+
         {walking && walkDog && (
           <WalkMode
             dog={walkDog}
-            onClose={() => setWalking(null)}
+            onClose={() => {
+              setWalking(null)
+              layerFocus.restore()
+            }}
             onHelp={() => {
               setWalking(null)
               goTo('hulp')

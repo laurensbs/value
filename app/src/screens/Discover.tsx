@@ -26,7 +26,12 @@ function matches(dog: Dog, filter: Filter): boolean {
   }
 }
 
-export function Discover({ onOpenDog }: { onOpenDog: (id: string) => void }) {
+interface Props {
+  onOpenDog: (id: string) => void
+  onSignup: () => void
+}
+
+export function Discover({ onOpenDog, onSignup }: Props) {
   const [filter, setFilter] = useState<Filter>('alle')
   const dogs = useMemo(
     () => DOGS.filter((d) => matches(d, filter)).sort((a, b) => a.distanceKm - b.distanceKm),
@@ -45,6 +50,21 @@ export function Discover({ onOpenDog }: { onOpenDog: (id: string) => void }) {
           buiten, zij ook.
         </p>
       </header>
+
+      <ol className="how" aria-label="Zo werkt Rondje">
+        <li>
+          <span className="how-dot" aria-hidden="true">1</span>
+          Kies een hond in de buurt
+        </li>
+        <li>
+          <span className="how-dot" aria-hidden="true">2</span>
+          Maak kennis, samen met de eigenaar
+        </li>
+        <li>
+          <span className="how-dot" aria-hidden="true">3</span>
+          Loop een vast rondje per week
+        </li>
+      </ol>
 
       <div className="chips" role="group" aria-label="Filter honden">
         {FILTERS.map((f) => (
@@ -67,6 +87,14 @@ export function Discover({ onOpenDog }: { onOpenDog: (id: string) => void }) {
           </li>
         ))}
       </ul>
+
+      <aside className="owner-cta" aria-labelledby="owner-cta-title">
+        <h2 id="owner-cta-title">Ken je een hond die vaker naar buiten wil?</h2>
+        <p>Van je oma, de buurman of jezelf. De eigenaar hoeft de app niet te gebruiken.</p>
+        <button type="button" className="button primary small" onClick={onSignup}>
+          Meld een hond aan
+        </button>
+      </aside>
     </div>
   )
 }
