@@ -4,24 +4,35 @@ import { DogFace } from '../components/DogFace'
 import { Icon } from '../components/Icon'
 import { MoodPicker } from '../components/MoodPicker'
 import { ShareWalk } from '../components/ShareWalk'
-import { WALK_PROMPTS, formatDuration, minutesFromSeconds, moodLabel, type Mood } from '../lib/walks'
+import { WALK_PROMPTS, formatDuration, minutesFromSeconds, moodLabel, weeklyLabel, type Mood } from '../lib/walks'
 
 type Phase = 'before' | 'walking' | 'after' | 'done'
 
+export interface WalkResult {
+  minutes: number
+  before?: Mood
+  after?: Mood
+  /** Chosen slot when the walker wants a fixed weekly walk with this dog. */
+  weeklySlot?: string
+}
+
 interface Props {
   dog: Dog
-  onFinish: (result: { minutes: number; before?: Mood; after?: Mood }) => void
+  /** True after a first meeting: then we offer to become regular buddies. */
+  offerWeekly: boolean
+  onFinish: (result: WalkResult) => void
   onClose: () => void
   onHelp: () => void
 }
 
-export function WalkMode({ dog, onFinish, onClose, onHelp }: Props) {
+export function WalkMode({ dog, offerWeekly, onFinish, onClose, onHelp }: Props) {
   const [phase, setPhase] = useState<Phase>('before')
   const [before, setBefore] = useState<Mood | undefined>()
   const [after, setAfter] = useState<Mood | undefined>()
   const [startedAt, setStartedAt] = useState<number | null>(null)
   const [elapsed, setElapsed] = useState(0)
   const [promptIndex, setPromptIndex] = useState(0)
+  const [weeklySlot, setWeeklySlot] = useState<string | undefined>()
   const headingRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
@@ -150,12 +161,36 @@ export function WalkMode({ dog, onFinish, onClose, onHelp }: Props) {
             </div>
           )}
 
+          {offerWeekly && (
+            <section className="buddy-offer" aria-labelledby="buddy-title">
+              <h3 id="buddy-title">Vaste maatjes worden?</h3>
+              <p>
+                Een vast moment per week maakt het makkelijker. {dog.name} weet wanneer je komt
+                {dog.host.kind === 'buurt' ? `, en ${dog.host.name.split(',')[0]} ook.` : '.'}
+              </p>
+              <div className="chips" role="radiogroup" aria-labelledby="buddy-title">
+                {dog.slots.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    role="radio"
+                    aria-checked={weeklySlot === s}
+                    className="chip"
+                    onClick={() => setWeeklySlot(weeklySlot === s ? undefined : s)}
+                  >
+                    {weeklyLabel(s).replace('Elke ', '')}
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+
           <button
             type="button"
             className="button primary wide"
-            onClick={() => onFinish({ minutes, before, after })}
+            onClick={() => onFinish({ minutes, before, after, weeklySlot })}
           >
-            Bewaar in mijn rondjes
+            {weeklySlot ? `Bewaar en word vaste maatjes` : 'Bewaar in mijn rondjes'}
           </button>
         </div>
       )}

@@ -14,6 +14,8 @@ export interface PlannedWalk {
   slot: string
   /** First meeting happens with the owner or shelter present. */
   firstMeet: boolean
+  /** A fixed weekly walk: it stays planned after each walk. */
+  weekly?: boolean
 }
 
 export interface WalkLog {
@@ -87,4 +89,28 @@ export function walkMessage(dog: { name: string; area: string; walkMinutes: numb
   const back = new Date(now.getTime() + dog.walkMinutes * 60_000)
   const time = back.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' })
   return `Ik ga een rondje lopen met ${dog.name} in ${dog.area}. Rond ${time} ben ik terug.`
+}
+
+const WEEKDAYS: Record<string, string> = {
+  ma: 'maandag',
+  di: 'dinsdag',
+  wo: 'woensdag',
+  do: 'donderdag',
+  vr: 'vrijdag',
+  za: 'zaterdag',
+  zo: 'zondag',
+}
+
+/** "Do 14:00" → "Elke donderdag 14:00". "Vandaag" and "Morgen" resolve against `today`. */
+export function weeklyLabel(slot: string, today = new Date()): string {
+  const [first, ...rest] = slot.split(' ')
+  const time = rest.join(' ')
+  const key = first.toLowerCase()
+  let day = WEEKDAYS[key]
+  if (!day && (key === 'vandaag' || key === 'morgen')) {
+    const d = new Date(today)
+    if (key === 'morgen') d.setDate(d.getDate() + 1)
+    day = d.toLocaleDateString('nl-NL', { weekday: 'long' })
+  }
+  return day ? `Elke ${day} ${time}`.trim() : `Elke week, ${slot}`
 }

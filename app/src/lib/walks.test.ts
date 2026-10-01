@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatDuration, minutesFromSeconds, moodLabel, walkStats, type WalkLog } from './walks'
+import { formatDuration, minutesFromSeconds, moodLabel, walkStats, weeklyLabel, type WalkLog } from './walks'
 
 describe('walkStats', () => {
   it('returns zeros and no mood shift for an empty log', () => {
@@ -57,5 +57,20 @@ describe('moodLabel', () => {
     expect(moodLabel(1)).toBe('Zwaar')
     expect(moodLabel(5)).toBe('Top')
     expect(moodLabel(undefined)).toBe('Niet ingevuld')
+  })
+})
+
+describe('weeklyLabel', () => {
+  // 1 October 2026 is a Thursday.
+  const today = new Date(2026, 9, 1, 12)
+
+  it('spells out short weekdays', () => {
+    expect(weeklyLabel('Di 11:00', today)).toBe('Elke dinsdag 11:00')
+    expect(weeklyLabel('Za 10:30', today)).toBe('Elke zaterdag 10:30')
+  })
+
+  it('resolves today and tomorrow', () => {
+    expect(weeklyLabel('Vandaag 16:30', today)).toBe('Elke donderdag 16:30')
+    expect(weeklyLabel('Morgen 09:00', today)).toBe('Elke vrijdag 09:00')
   })
 })

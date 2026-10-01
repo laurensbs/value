@@ -10,9 +10,10 @@ import { uid, type PlannedWalk, type WalkLog } from './lib/walks'
 import { Discover } from './screens/Discover'
 import { DogDetail } from './screens/DogDetail'
 import { Help } from './screens/Help'
+import { OrgPage } from './screens/OrgPage'
 import { PlanSheet } from './screens/PlanSheet'
 import { SignupSheet } from './screens/SignupSheet'
-import { WalkMode } from './screens/WalkMode'
+import { WalkMode, type WalkResult } from './screens/WalkMode'
 import { Walks } from './screens/Walks'
 
 type Tab = 'honden' | 'rondjes' | 'hulp'
@@ -44,6 +45,7 @@ export default function App() {
   const [plan, setPlan] = useState<{ dogId: string; slot: string } | null>(null)
   const [walking, setWalking] = useState<PlannedWalk | null>(null)
   const [signup, setSignup] = useState(false)
+  const [orgOpen, setOrgOpen] = useState(false)
 
   const [isExample, setIsExample] = usePersistent('example', true)
   const [planned, setPlanned] = usePersistent<PlannedWalk[]>('planned', () => exampleState().planned)
@@ -61,8 +63,15 @@ export default function App() {
 
   const goTo = useCallback((next: Tab) => {
     setOpenDogId(null)
+    setOrgOpen(false)
     setTab(next)
   }, [])
+
+  const openOrg = () => {
+    dogFocus.remember()
+    setOpenDogId(null)
+    setOrgOpen(true)
+  }
 
   const openDog = openDogId ? findDog(openDogId) : undefined
   const planDog = plan ? findDog(plan.dogId) : undefined
@@ -70,13 +79,25 @@ export default function App() {
 
   // While a layer is open, everything underneath is inert: no focus, no clicks, hidden from screen readers.
   const layerOpen = Boolean(plan || walking || signup)
-  const baseInert = Boolean(openDog) || layerOpen
+  const baseInert = Boolean(openDog) || orgOpen || layerOpen
 
   const clearExamples = () => {
     setPlanned([])
     setLogs([])
     setMet([])
     setIsExample(false)
+  }
+
+  const finishWalk = (walk: PlannedWalk, dogId: string, { minutes, before, after, weeklySlot }: WalkResult) => {
+    setLogs([...logs, { id: uid(), dogId, date: new Date().toISOString().slice(0, 10), minutes, before, after }])
+    // A weekly walk stays planned; a one-off walk or first meeting is done.
+    const rest = walk.weekly ? planned : planned.filter((p) => p.id !== walk.id)
+    setPlanned(
+      weeklySlot ? [...rest, { id: uid(), dogId, slot: weeklySlot, firstMeet: false, weekly: true }] : rest,
+    )
+    if (!met.includes(dogId)) setMet([...met, dogId])
+    setWalking(null)
+    goTo('rondjes')
   }
 
   const openSignup = () => {
@@ -86,7 +107,7 @@ export default function App() {
 
   return (
     <div className="stage">
-      <ConceptPanel />
+      <ConceptPanel onOpenOrg={openOrg} />
 
       <div className="phone">
         <header className="topbar" inert={baseInert}>
@@ -123,7 +144,7 @@ export default function App() {
               onDiscover={() => goTo('honden')}
             />
           )}
-          {tab === 'hulp' && <Help onSignup={openSignup} />}
+          {tab === 'hulp' && <Help onSignup={openSignup} onOpenOrg={openOrg} />}
         </main>
 
         <nav className="tabbar" aria-label="Hoofdmenu" inert={baseInert}>
@@ -159,6 +180,17 @@ export default function App() {
               onPlan={(slot) => {
                 layerFocus.remember()
                 setPlan({ dogId: openDog.id, slot })
+              }}
+            />
+          </div>
+        )}
+
+        {orgOpen && (
+          <div className="overlay" inert={layerOpen}>
+            <OrgPage
+              onBack={() => {
+                setOrgOpen(false)
+                dogFocus.restore()
               }}
             />
           </div>
@@ -200,6 +232,7 @@ export default function App() {
         {walking && walkDog && (
           <WalkMode
             dog={walkDog}
+            offerWeekly={walking.firstMeet && !planned.some((p) => p.dogId === walkDog.id && p.weekly)}
             onClose={() => {
               setWalking(null)
               layerFocus.restore()
@@ -208,16 +241,7 @@ export default function App() {
               setWalking(null)
               goTo('hulp')
             }}
-            onFinish={({ minutes, before, after }) => {
-              setLogs([
-                ...logs,
-                { id: uid(), dogId: walkDog.id, date: new Date().toISOString().slice(0, 10), minutes, before, after },
-              ])
-              setPlanned(planned.filter((p) => p.id !== walking.id))
-              if (!met.includes(walkDog.id)) setMet([...met, walkDog.id])
-              setWalking(null)
-              goTo('rondjes')
-            }}
+            onFinish={(result) => finishWalk(walking, walkDog.id, result)}
           />
         )}
       </div>

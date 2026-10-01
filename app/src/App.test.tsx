@@ -98,7 +98,34 @@ describe('Rondje lopen', () => {
     await user.click(screen.getByRole('button', { name: 'Bewaar in mijn rondjes' }))
 
     expect(screen.getByText('7').closest('.tag')).toHaveTextContent('rondjes')
-    expect(screen.getByText(/Nog niets gepland/)).toBeInTheDocument()
+    // Saar's walk is a fixed weekly walk, so it stays planned.
+    expect(screen.getByText(/Saar · Elke donderdag 14:00/)).toBeInTheDocument()
+  })
+
+  it('offers a fixed weekly walk after a first meeting', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: /^Tess/ }))
+    await user.click(screen.getByRole('button', { name: 'Maak kennis met Tess' }))
+    const dialog = screen.getByRole('dialog')
+    await user.click(within(dialog).getByLabelText('Ja'))
+    for (const box of within(dialog).getAllByRole('checkbox')) await user.click(box)
+    await user.click(within(dialog).getByRole('button', { name: 'Ik doe mee' }))
+    await user.click(within(dialog).getByRole('button', { name: 'Verstuur aanvraag' }))
+    await user.click(within(dialog).getByRole('button', { name: 'Naar mijn rondjes' }))
+
+    const tess = screen.getByText(/Tess · Di 11:00/).closest('li')!
+    await user.click(within(tess).getByRole('button', { name: /Start rondje/ }))
+    await user.click(screen.getByRole('button', { name: 'Overslaan en beginnen' }))
+    await user.click(screen.getByRole('button', { name: 'Rondje klaar' }))
+    await user.click(screen.getByRole('button', { name: 'Overslaan' }))
+
+    expect(screen.getByRole('heading', { name: 'Vaste maatjes worden?' })).toBeInTheDocument()
+    await user.click(screen.getByRole('radio', { name: 'vrijdag 11:00' }))
+    await user.click(screen.getByRole('button', { name: 'Bewaar en word vaste maatjes' }))
+
+    expect(screen.getByText(/Tess · Elke vrijdag 11:00/)).toBeInTheDocument()
+    expect(screen.queryByText(/Tess · Di 11:00/)).not.toBeInTheDocument()
   })
 
   it('offers help when someone feels bad after a walk', async () => {
@@ -147,6 +174,21 @@ describe('Hulp en aanmelden', () => {
     expect(within(dialog).getByRole('status')).toHaveTextContent('coördinator')
     await user.click(within(dialog).getByRole('button', { name: 'Terug naar de honden' }))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+})
+
+describe('Voor organisaties', () => {
+  it('explains a pilot, what is measured and how safety works', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(nav().getByRole('button', { name: 'Hulp' }))
+    await user.click(screen.getByRole('button', { name: /Voor welzijnswerk, opvangen en gemeenten/ }))
+    expect(screen.getByRole('heading', { name: 'Zo loopt een pilot van 8 weken' })).toBeInTheDocument()
+    expect(screen.getByText(/geen echte cijfers/)).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Plan een kennismaking' }))
+    expect(screen.getByRole('status')).toHaveTextContent('niets verstuurd')
+    await user.click(screen.getByRole('button', { name: 'Terug' }))
+    expect(screen.queryByRole('heading', { name: 'Zo loopt een pilot van 8 weken' })).not.toBeInTheDocument()
   })
 })
 

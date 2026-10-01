@@ -79,7 +79,12 @@ const RED_LINES = [
   'Geen streaks of meldingen die je onder druk zetten.',
 ]
 
-export function Help({ onSignup }: { onSignup: () => void }) {
+interface Props {
+  onSignup: () => void
+  onOpenOrg: () => void
+}
+
+export function Help({ onSignup, onOpenOrg }: Props) {
   return (
     <div className="screen help">
       <header className="intro compact">
@@ -137,6 +142,10 @@ export function Help({ onSignup }: { onSignup: () => void }) {
             </li>
           ))}
         </ul>
+        <button type="button" className="link-button org-link" onClick={onOpenOrg}>
+          Voor welzijnswerk, opvangen en gemeenten
+          <Icon name="arrow" size={16} />
+        </button>
       </section>
 
       <section className="block" aria-labelledby="signup-title">

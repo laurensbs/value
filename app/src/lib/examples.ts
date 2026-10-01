@@ -8,7 +8,7 @@ function daysAgo(n: number, from = new Date()): string {
 
 /** Example state shown on a first visit, clearly marked in the UI. */
 export function exampleState(today = new Date()) {
-  const planned: PlannedWalk[] = [{ id: 'ex-plan', dogId: 'saar', slot: 'Morgen 09:00', firstMeet: false }]
+  const planned: PlannedWalk[] = [{ id: 'ex-plan', dogId: 'saar', slot: 'Do 14:00', firstMeet: false, weekly: true }]
   const logs: WalkLog[] = [
     { id: 'ex-1', dogId: 'saar', date: daysAgo(19, today), minutes: 32, before: 2, after: 3 },
     { id: 'ex-2', dogId: 'saar', date: daysAgo(15, today), minutes: 28, before: 3, after: 4 },

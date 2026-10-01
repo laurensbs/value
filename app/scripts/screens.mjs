@@ -55,8 +55,30 @@ for (const scheme of ['light', 'dark']) {
   await shoot('11-owner-cta', m, async (p) => {
     await p.getByRole('button', { name: 'Meld een hond aan' }).scrollIntoViewIfNeeded()
   })
+  await shoot('12-buddy', m, async (p) => {
+    await p.getByRole('button', { name: /^Tess/ }).click()
+    await p.getByRole('button', { name: 'Maak kennis met Tess' }).click()
+    const d = p.getByRole('dialog')
+    await d.getByText('Ja', { exact: true }).click()
+    for (const box of await d.getByRole('checkbox').all()) await box.check({ force: true })
+    await d.getByRole('button', { name: 'Ik doe mee' }).click()
+    await d.getByRole('button', { name: 'Verstuur aanvraag' }).click()
+    await d.getByRole('button', { name: 'Naar mijn rondjes' }).click()
+    await p.locator('.planned', { hasText: 'Tess' }).getByRole('button', { name: /Start rondje/ }).click()
+    await p.getByRole('radio', { name: /Matig/ }).click()
+    await p.getByRole('button', { name: 'Rondje klaar' }).click()
+    await p.getByRole('radio', { name: /Goed/ }).click()
+    await p.getByRole('radio', { name: 'vrijdag 11:00' }).click()
+  })
+  await shoot('13-org', m, async (p) => {
+    await p.getByRole('navigation').getByRole('button', { name: 'Hulp' }).click()
+    await p.getByRole('button', { name: /Voor welzijnswerk/ }).click()
+  })
   await shoot('07-help', m, async (p) => p.getByRole('navigation').getByRole('button', { name: 'Hulp' }).click())
   await shoot('08-desktop', { width: 1440, height: 900, scheme })
+  await shoot('14-desktop-org', { width: 1440, height: 900, scheme }, async (p) =>
+    p.getByRole('button', { name: 'Bekijk hoe een pilot werkt' }).click(),
+  )
 }
 await browser.close()
 console.log('done')

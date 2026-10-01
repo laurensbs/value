@@ -19,7 +19,7 @@ const FACTS = [
 ]
 
 /** Shown next to the app on wide screens: what Rondje is and why. */
-export function ConceptPanel() {
+export function ConceptPanel({ onOpenOrg }: { onOpenOrg: () => void }) {
   return (
     <aside className="concept" aria-label="Over dit prototype">
       <div className="concept-brand">
@@ -44,7 +44,12 @@ export function ConceptPanel() {
           </li>
         ))}
       </ul>
-      <p className="concept-note">Prototype met voorbeelddata. Honden, mensen en opvangen zijn verzonnen.</p>
+      <div className="concept-actions">
+        <button type="button" className="button secondary" onClick={onOpenOrg}>
+          Bekijk hoe een pilot werkt
+        </button>
+        <p className="concept-note">Prototype met voorbeelddata. Honden, mensen en opvangen zijn verzonnen.</p>
+      </div>
     </aside>
   )
 }

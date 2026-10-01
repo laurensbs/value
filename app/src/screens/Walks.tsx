@@ -3,7 +3,7 @@ import { DogFace } from '../components/DogFace'
 import { Icon } from '../components/Icon'
 import { MoodChart } from '../components/MoodChart'
 import { tileStyle } from '../lib/tile'
-import { walkStats, type PlannedWalk, type WalkLog } from '../lib/walks'
+import { walkStats, weeklyLabel, type PlannedWalk, type WalkLog } from '../lib/walks'
 
 interface Props {
   planned: PlannedWalk[]
@@ -68,9 +68,11 @@ export function Walks({ planned, logs, isExample, onStart, onCancel, onClearExam
                     <DogFace look={dog.look} size={56} />
                   </span>
                   <div className="planned-body">
-                    <p className="planned-kind">{walk.firstMeet ? 'Kennismaking' : 'Rondje'}</p>
+                    <p className="planned-kind">
+                      {walk.firstMeet ? 'Kennismaking' : walk.weekly ? 'Vast rondje' : 'Rondje'}
+                    </p>
                     <p className="planned-title">
-                      {dog.name} · {walk.slot}
+                      {dog.name} · {walk.weekly ? weeklyLabel(walk.slot) : walk.slot}
                     </p>
                     <p className="planned-where">
                       <Icon name="pin" size={14} />
@@ -82,7 +84,7 @@ export function Walks({ planned, logs, isExample, onStart, onCancel, onClearExam
                         Start rondje
                       </button>
                       <button type="button" className="link-button" onClick={() => onCancel(walk.id)}>
-                        Afzeggen
+                        {walk.weekly ? 'Stoppen' : 'Afzeggen'}
                       </button>
                     </div>
                   </div>

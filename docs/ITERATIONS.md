@@ -70,3 +70,28 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 **Volgende stap:**
 - De vaste-maatje-flow: na de kennismaking direct een vast moment per week voorstellen.
 - Een scherm "Voor organisaties" voor partners (welzijnswerk, opvang), voor de pitch.
+
+---
+
+## Cyclus 2: vaste maatjes en een pagina voor partners (1 oktober 2026)
+
+**Review:**
+- **Pre-mortem risico 2 (wandelaars haken af na 2–3 rondjes)** had nog geen antwoord in het product. Na een kennismaking stopte de flow gewoon.
+- **Partners** (welzijnswerk, opvang, gemeente) zijn jouw echte volgende stap. Er was niets om hen te laten zien.
+
+**Verbeteringen:**
+
+| # | Wat | Waarom |
+|---|---|---|
+| 1 | Na een kennismaking vraagt de app: "Vaste maatjes worden?" Je kiest een vast moment per week. Het rondje blijft daarna ingepland ("Elke vrijdag 11:00") en heet "Vast rondje". | Gevoel van verplichting naar de hond is volgens onderzoek de motor van wandelen. Een vaste afspraak is het antwoord op het afhaakprobleem. |
+| 2 | Pagina **Voor organisaties**, met: een pilot in 4 stappen, wat er gemeten wordt (met privacy), een voorbeeld van een wijkrapport (duidelijk gemarkeerd als geen echte cijfers), veiligheid, en een oproep voor een pilot | Pitch-materiaal voor welzijnswerk, opvangen en gemeenten. Ook bereikbaar via "Bekijk hoe een pilot werkt" in het desktoppaneel. |
+| 3 | Desktoppaneel compacter op lage schermen | Op 1440×900 viel de onderkant weg |
+
+**Tests:** 24 unit- en integratietests (nieuw: vaste maatjes, `weeklyLabel`, organisatiepagina) en 6 browsertests. Alles groen.
+
+**Resultaat:** preview bijgewerkt naar versie 3.
+
+**Volgende stap:**
+- Een "bijna-tijd"-scherm voor het vaste rondje: herinnering en weer.
+- Een opvang-variant van de kennismaking: groepswandeling met begeleider en een tijdslot per groep.
+- Een lege staat zonder voorbeelddata nalopen met nieuwe gebruikers.
