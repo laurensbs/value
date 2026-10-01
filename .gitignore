@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-single/
+app/e2e/.results/
+app/e2e/screenshots/
+playwright-report/
+*.log
+.DS_Store

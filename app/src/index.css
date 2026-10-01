@@ -1,0 +1,160 @@
+/* Layout: one phone-width column. On wide screens the app sits next to a short
+   concept panel. A dashed walking route and round dog tags are the recurring
+   motifs; the tennis-ball yellow is used only as a highlighter. */
+:root {
+  --paper: #f4f6f0;
+  --surface: #ffffff;
+  --sunken: #e7ece3;
+  --ink: #16201a;
+  --muted: #55635a;
+  --line: #d3dbd0;
+  --grass: #1f5a3d;
+  --grass-soft: #dcebe0;
+  --on-grass: #ffffff;
+  --ball: #d9f05a;
+  --on-ball: #16201a;
+  --tag: #e9c46a;
+  --calm: #2d5d8a;
+  --calm-soft: #e1ebf5;
+  --shadow: 0 1px 2px rgb(22 32 26 / 0.06), 0 8px 24px rgb(22 32 26 / 0.08);
+
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Figtree Variable', 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2rem;
+  --step-4: 2.625rem;
+
+  --radius-s: 10px;
+  --radius-m: 18px;
+  --radius-l: 28px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #0d1310;
+    --surface: #161f1a;
+    --sunken: #1d2822;
+    --ink: #e7eee8;
+    --muted: #9eafa4;
+    --line: #2a372f;
+    --grass: #8fdcae;
+    --grass-soft: #1f3529;
+    --on-grass: #0d1310;
+    --ball: #d9f05a;
+    --on-ball: #16201a;
+    --tag: #e9c46a;
+    --calm: #9cc4ea;
+    --calm-soft: #1a2a3a;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #0d1310;
+  --surface: #161f1a;
+  --sunken: #1d2822;
+  --ink: #e7eee8;
+  --muted: #9eafa4;
+  --line: #2a372f;
+  --grass: #8fdcae;
+  --grass-soft: #1f3529;
+  --on-grass: #0d1310;
+  --ball: #d9f05a;
+  --on-ball: #16201a;
+  --tag: #e9c46a;
+  --calm: #9cc4ea;
+  --calm-soft: #1a2a3a;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
