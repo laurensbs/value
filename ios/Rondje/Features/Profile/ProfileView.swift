@@ -206,6 +206,7 @@ struct NotificationsView: View {
         case "walk-started": "figure.walk"
         case "walk-ended": "house.fill"
         case "walk-overdue": "clock.badge.exclamationmark"
+        case "chat-message": "bubble.left.fill"
         case "trust-granted": "hand.thumbsup.fill"
         default: "bell.fill"
         }
@@ -221,6 +222,7 @@ struct NotificationsView: View {
         case "walk-started": return L("\(walker) is op pad met \(dog). Kijk live mee.")
         case "walk-ended": return L("\(dog) is weer thuis.")
         case "walk-overdue": return L("Het rondje met \(dog) loopt uit.")
+        case "chat-message": return L("\(n.text("senderName")) stuurde een bericht over \(dog).")
         case "trust-granted": return L("Je mag nu zelfstandig met \(dog) wandelen.")
         case "group-walk-new": return L("Er is een nieuwe groepswandeling bij een opvang.")
         default: return L("Nieuwe melding")

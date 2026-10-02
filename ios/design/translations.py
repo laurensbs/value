@@ -432,6 +432,12 @@ T = {
     "Nodig vrienden uit": ("Invite friends", "Inviter des amis", "Invitar amigos"),
     "Wie wil er met %@ wandelen?": ("Who wants to walk %@?", "Qui veut promener %@ ?", "¿Quién quiere pasear a %@?"),
     "Deel": ("Share", "Partager", "Compartir"),
+    "Spreek geen geld af en houd persoonlijke gegevens voor jezelf tot je elkaar kent.": ("Don't agree on money, and keep personal details to yourself until you've met.", "Ne parle pas d'argent et garde tes données personnelles pour toi tant que vous ne vous êtes pas rencontrés.", "No acordéis dinero y guarda tus datos personales hasta que os conozcáis."),
+    "Nog geen berichten": ("No messages yet", "Pas encore de messages", "Aún no hay mensajes"),
+    "Stel je voor of spreek iets af over de wandeling.": ("Introduce yourself or arrange something about the walk.", "Présente-toi ou organise la balade.", "Preséntate o acordad algo sobre el paseo."),
+    "Dit gesprek is gesloten. Je kunt het nog teruglezen.": ("This conversation is closed. You can still read it back.", "Cette conversation est fermée. Tu peux encore la relire.", "Esta conversación está cerrada. Aún puedes releerla."),
+    "Chat": ("Chat", "Discuter", "Chat"),
+    "%@ stuurde een bericht over %@.": ("%@ sent a message about %@.", "%@ a envoyé un message à propos de %@.", "%@ envió un mensaje sobre %@."),
     # Info.plist
     "NSCameraUsageDescription": (
         "To send the owner a photo during a walk. Only the photos you send go to the owner.",

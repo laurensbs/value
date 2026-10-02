@@ -310,3 +310,18 @@ enum JSONValue: Codable, Hashable, Sendable {
         }
     }
 }
+
+struct ChatMessage: Codable, Identifiable, Hashable, Sendable {
+    var id: String
+    var senderId: String
+    var name: String
+    var body: String
+    var t: Double
+
+    var date: Date { Date(timeIntervalSince1970: t / 1000) }
+}
+
+struct ChatResponse: Codable, Sendable {
+    var messages: [ChatMessage]
+    var canSend: Bool
+}

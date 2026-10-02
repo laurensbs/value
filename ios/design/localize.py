@@ -44,3 +44,17 @@ if missing:
     print("Not translated yet:", *sorted(missing), sep="\n  ")
 else:
     print("All strings translated.")
+
+# The Dutch purpose texts must exist as a translation too: without an nl entry, iOS falls back to
+# English on a Dutch phone for Info.plist strings (seen in the simulator).
+import json, plistlib  # noqa: E402
+
+for catalog, plist in [("Rondje/Resources/InfoPlist.xcstrings", "Rondje/Resources/Info.plist")]:
+    info = plistlib.load(open(plist, "rb"))
+    data = json.load(open(catalog, encoding="utf-8"))
+    for key, entry in data["strings"].items():
+        value = info.get(key)
+        if isinstance(value, str) and not value.startswith("$("):
+            entry.setdefault("localizations", {})["nl"] = {"stringUnit": {"state": "translated", "value": value}}
+    json.dump(data, open(catalog, "w", encoding="utf-8"), ensure_ascii=False, indent=2, sort_keys=True)
+    print("Dutch Info.plist texts added to", catalog)

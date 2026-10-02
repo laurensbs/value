@@ -395,6 +395,34 @@
         }
       }
     },
+    "%@ stuurde een bericht over %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ sent a message about %@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ envió un mensaje sobre %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ a envoyé un message à propos de %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ stuurde een bericht over %2$@."
+          }
+        }
+      }
+    },
     "%@ wil graag met %@ wandelen." : {
       "localizations" : {
         "en" : {
@@ -1547,6 +1575,28 @@
         }
       }
     },
+    "Chat" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discuter"
+          }
+        }
+      }
+    },
     "Contactgegevens en afspreekplek zie je pas als je afspraak is geaccepteerd." : {
       "localizations" : {
         "en" : {
@@ -2005,6 +2055,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cette adresse e-mail n'est pas valide."
+          }
+        }
+      }
+    },
+    "Dit gesprek is gesloten. Je kunt het nog teruglezen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This conversation is closed. You can still read it back."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta conversación está cerrada. Aún puedes releerla."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette conversation est fermée. Tu peux encore la relire."
           }
         }
       }
@@ -5925,6 +5997,28 @@
         }
       }
     },
+    "Nog geen berichten" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No messages yet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay mensajes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore de messages"
+          }
+        }
+      }
+    },
     "Nog geen ervaring" : {
       "localizations" : {
         "en" : {
@@ -6893,6 +6987,28 @@
         }
       }
     },
+    "Spreek geen geld af en houd persoonlijke gegevens voor jezelf tot je elkaar kent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't agree on money, and keep personal details to yourself until you've met."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No acordéis dinero y guarda tus datos personales hasta que os conozcáis."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ne parle pas d'argent et garde tes données personnelles pour toi tant que vous ne vous êtes pas rencontrés."
+          }
+        }
+      }
+    },
     "Spreek geen geld af: %@ is gratis. De eigenaar zorgt voor zakjes en koekjes." : {
       "localizations" : {
         "en" : {
@@ -6955,6 +7071,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Présente-toi en quelques mots"
+          }
+        }
+      }
+    },
+    "Stel je voor of spreek iets af over de wandeling." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce yourself or arrange something about the walk."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preséntate o acordad algo sobre el paseo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Présente-toi ou organise la balade."
           }
         }
       }

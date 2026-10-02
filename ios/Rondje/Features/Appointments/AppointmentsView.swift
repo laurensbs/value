@@ -78,6 +78,7 @@ struct AppointmentCard: View {
     @State private var trustSheet = false
     @State private var following: String?
     @State private var feedbackFor: String?
+    @State private var chatting = false
 
     var body: some View {
         Card {
@@ -131,6 +132,10 @@ struct AppointmentCard: View {
                 .presentationDetents([.large])
                 .onDisappear { Task { await model.refreshAppointments() } }
         }
+        .sheet(isPresented: $chatting) {
+            ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name)
+                .presentationDetents([.large])
+        }
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
             Button("Annuleer afspraak", role: .destructive) { Task { await act("cancel") } }
         } message: {
@@ -144,12 +149,16 @@ struct AppointmentCard: View {
     private var contact: some View {
         let phone = asOwner ? item.walker?.phone : item.host?.phone
         let email = asOwner ? item.walker?.email : item.host?.email
-        if item.status == "accepted", phone != nil || email != nil {
+        let canChat = ["pending", "accepted", "completed"].contains(item.status)
+        if canChat || (item.status == "accepted" && (phone != nil || email != nil)) {
             HStack(spacing: 10) {
-                if let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
+                if canChat {
+                    Button("Chat", systemImage: "bubble.left.and.bubble.right.fill") { chatting = true }.buttonStyle(.bordered)
+                }
+                if item.status == "accepted", let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
                     Button("Bel", systemImage: "phone.fill") { openURL(url) }.buttonStyle(.bordered)
                 }
-                if let email, let url = URL(string: "mailto:\(email)") {
+                if item.status == "accepted", let email, let url = URL(string: "mailto:\(email)") {
                     Button("Mail", systemImage: "envelope.fill") { openURL(url) }.buttonStyle(.bordered)
                 }
             }

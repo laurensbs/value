@@ -19,6 +19,12 @@ struct RondjeTests {
         #expect(!dog.host.isShelter)
     }
 
+    @Test func drawsADogFromAPartialPortrait() throws {
+        let look = try JSONDecoder().decode(DogLook.self, from: Data(##"{"fur":"#b98a62","ears":"#8e6443","muzzle":"#f1dfcb","tongue":false}"##.utf8))
+        #expect(look.earStyle == "floppy")
+        #expect(look.collar == "#1f5a3d")
+    }
+
     @Test func decodesDatesWithAndWithoutMilliseconds() throws {
         struct Box: Decodable { var a: Date; var b: Date }
         let box = try APIClient.makeDecoder().decode(Box.self, from: Data(#"{"a":"2026-10-02T11:31:00.000Z","b":"2026-10-02T11:31:00Z"}"#.utf8))

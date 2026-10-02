@@ -35,6 +35,7 @@
 		89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E03C393BF21260C48A977 /* Keychain.swift */; };
 		8AFC612490A49580D6D08903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43456FF9403F24AC05FF054 /* Assets.xcassets */; };
 		8FC260210FFB86EA81151AB5 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */; };
+		8FC4508C7392A299F5B32ADA /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2783A9F80D81377B5AC59E /* ChatView.swift */; };
 		92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */; };
 		9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A13AA036854983EE311380 /* Reminders.swift */; };
@@ -135,6 +136,7 @@
 		F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		F7A13AA036854983EE311380 /* Reminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
 		F96821FF9F74F149B48CEA05 /* DogFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFace.swift; sourceTree = "<group>"; };
+		FA2783A9F80D81377B5AC59E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		FD670507F95B7E0867549B73 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,14 @@
 				67DED918E6B83E74ED1F0BF7 /* Rondje.entitlements */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		149A1E124629011813222EC9 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				FA2783A9F80D81377B5AC59E /* ChatView.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		201468F762F551C6326C5D44 /* RondjeWidgets */ = {
@@ -260,6 +270,7 @@
 			children = (
 				C075500CEDC1C31D95AC0C23 /* Appointments */,
 				8920EAEBDBB30C0E44894F32 /* Auth */,
+				149A1E124629011813222EC9 /* Chat */,
 				553D978CF87506047C11816A /* Discover */,
 				EAE74B5DF0748E9781D657A0 /* Dog */,
 				426DB77FC1CFFA02380230ED /* Membership */,
@@ -483,6 +494,7 @@
 				518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */,
 				4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */,
 				CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */,
+				8FC4508C7392A299F5B32ADA /* ChatView.swift in Sources */,
 				EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */,
 				4730F6F96A9FE6D28214E9D2 /* DiscoverView.swift in Sources */,
 				76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */,
