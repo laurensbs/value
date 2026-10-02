@@ -18,6 +18,7 @@ export async function GET() {
     dogs: await db.select().from(s.dog).where(eq(s.dog.ownerId, id)),
     requests: await db.select().from(s.walkRequest).where(eq(s.walkRequest.walkerId, id)),
     walks: await db.select().from(s.walk).where(eq(s.walk.walkerId, id)),
+    chatMessagesSent: await db.select().from(s.chatMessage).where(eq(s.chatMessage.senderId, id)),
     feedbackGiven: await db.select().from(s.feedback).where(eq(s.feedback.fromUserId, id)),
     reportsMade: await db.select().from(s.report).where(eq(s.report.reporterId, id)),
     idChecks: await db.select().from(s.idCheck).where(or(eq(s.idCheck.walkerId, id), eq(s.idCheck.checkedBy, id))),

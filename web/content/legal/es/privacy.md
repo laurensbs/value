@@ -134,7 +134,7 @@ Trabajamos con las siguientes entidades. Con los encargados del tratamiento firm
 | Neon Inc. | Base de datos (Postgres) | Región de la UE [pendiente de verificar: cuál] |
 | Resend Inc. (cuando el correo esté activado) | Envío de correos: una contraseña nueva y avisos como una solicitud nueva o un paseo que se alarga (puedes desactivarlos en tu perfil) | EE. UU.; transferencia basada en cláusulas contractuales tipo [por verificar] |
 | Google o Apple | Inicio de sesión, solo si lo eliges | Bajo la responsabilidad de Google o Apple |
-| Apple o Google | Notificaciones *push*, solo si las activas [pendiente de verificar] | Según las condiciones de Apple o Google |
+| Apple, Google o Mozilla | Notificaciones *push* a través de tu teléfono o navegador, solo si las activas. Reciben el texto del aviso, no rutas ni mensajes | Según las condiciones de Apple, Google o Mozilla |
 | OpenStreetMap Foundation | Imágenes de mapas (teselas) | Reino Unido [pendiente de verificar] |
 
 **Mapas.** Al abrir un mapa, tu dispositivo carga imágenes de los servidores de la OpenStreetMap Foundation. Esos servidores reciben tu dirección IP y datos técnicos de tu dispositivo. La OpenStreetMap Foundation es responsable de ese tratamiento [pendiente de verificar] y tiene su propia política de privacidad.
@@ -157,11 +157,12 @@ Para el Reino Unido existe una decisión de adecuación de la Comisión Europea 
 | Datos | Plazo de conservación |
 |---|---|
 | Datos de cuenta y perfil, perfiles de perros | Mientras exista tu cuenta. Tras eliminarla, hasta 30 días más (copias de seguridad) |
-| Puntos de recorrido de los paseos | 30 días. Más tiempo solo si hace falta para una denuncia abierta |
+| Puntos de recorrido y fotos de los paseos | 30 días. Más tiempo solo si hace falta para una denuncia abierta |
 | Valoraciones privadas | 1 año |
 | Denuncias y datos relacionados | Hasta 2 años después de cerrar la denuncia [propuesta] |
 | Datos sobre una expulsión, para evitar que alguien vuelva a registrarse | [propuesta: lo más breve posible, p. ej. 2 años – pendiente de verificar] |
-| Solicitudes y mensajes | [plazo por determinar] |
+| Solicitudes | [plazo por determinar] |
+| Mensajes de chat entre paseante y propietario o protectora | 1 año |
 | Recomendaciones y votos de protectoras | Hasta un año después de gestionarlas; las que no se gestionaron, a los dos años |
 | Registros de seguridad | [plazo por determinar, p. ej. 90 días] |
 | Registros de ánimo | No los tenemos. Solo en tu dispositivo, hasta que los borres |

@@ -1,0 +1,825 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		069A4CEC550C6B8F9D7F31B6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */; };
+		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
+		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
+		2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EA1B62ECCEC400102F6036 /* APIClient.swift */; };
+		2F60108EC649C7D6D370A542 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
+		31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
+		320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
+		335853283270DFF0D690A32E /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
+		36A9C3B86B83EBCBD703FD6D /* ActiveWalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894A396998000A3824F47B3 /* ActiveWalkView.swift */; };
+		3B290FB70F174DEDFD36485C /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 787E299C18C0D741D32C0544 /* InfoPlist.xcstrings */; };
+		3BE62065632AD4C2F8AE7309 /* RondjeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */; };
+		3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */; };
+		3BF3B61965BB09D5875A2004 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */; };
+		41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265151C9DD7CB381C0CE8F78 /* ProfileView.swift */; };
+		445F05C31F5873E97C2E7DD4 /* DogFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96821FF9F74F149B48CEA05 /* DogFace.swift */; };
+		4660BE55365FF96EE9B1FD6E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C56C585C3705ACBC5EBC617 /* LocationService.swift */; };
+		4730F6F96A9FE6D28214E9D2 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF25DE5216EB791FAD7058 /* DiscoverView.swift */; };
+		4951C59EC95C340A43E6DCBF /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E359D37F55A06E65249298 /* AppModel.swift */; };
+		4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88239320CAE586D79B3603F4 /* Brand.swift */; };
+		50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2B1E42F731544CC1E42AAC /* MembershipView.swift */; };
+		518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89ADE16C47AB0E0761B7EF /* AuthView.swift */; };
+		53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A4BC365EFDB4E41F534AF /* MyDogsView.swift */; };
+		76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD5CF06280BE763D95E942 /* DogDetailView.swift */; };
+		7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F500D8982F770787859D0608 /* OnboardingView.swift */; };
+		7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4094F34979CE06F5674464 /* AppointmentsView.swift */; };
+		89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E03C393BF21260C48A977 /* Keychain.swift */; };
+		8AFC612490A49580D6D08903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43456FF9403F24AC05FF054 /* Assets.xcassets */; };
+		8FC260210FFB86EA81151AB5 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */; };
+		92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */; };
+		9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A13AA036854983EE311380 /* Reminders.swift */; };
+		9CDA95671502696AA356E081 /* WalkReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */; };
+		A5B062402B7D781A373CFD12 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
+		B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24382B16C639D32D509682 /* EditProfileView.swift */; };
+		B7F0C4546418F674AF079676 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 80CB134CFF71E6AB85E8D340 /* Localizable.xcstrings */; };
+		BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96821FF9F74F149B48CEA05 /* DogFace.swift */; };
+		BF938F9011478C1964370149 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
+		C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABF8650A285AB54D3700A6 /* QuizView.swift */; };
+		CCEFB44617D607D474DA62B3 /* RondjeWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */; };
+		CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD05E7729A1853A5748BF1F /* Cache.swift */; };
+		D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
+		DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19F92B1AB52E54BEE189E52 /* ImageTools.swift */; };
+		E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38BF1BFD0974FB881BD72B /* Models.swift */; };
+		EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F8B3EE6862459619E1EDC /* Components.swift */; };
+		F1E78BE8FCA520FB54C3EABF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */; };
+		F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */; };
+		F5113606F3E26750DF757621 /* WalkTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26863FB98876ECFB2C52F0FF /* WalkTracker.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4B415EC5818F3E16D3B7F5F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 345A56CA32E8D13ADD5BC3CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2788904D7CEF67937A5A8463;
+			remoteInfo = Rondje;
+		};
+		661C32DE6CA30F5727B519EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 345A56CA32E8D13ADD5BC3CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D89B53B0D71DABE480EDE896;
+			remoteInfo = RondjeWidgets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C1675CC258989D0BA4E2D4D5 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0BDEFBB338DEF518134A6397 /* Rondje.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Rondje.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1894A396998000A3824F47B3 /* ActiveWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalkView.swift; sourceTree = "<group>"; };
+		1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.entitlements; sourceTree = "<group>"; };
+		1F24382B16C639D32D509682 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		265151C9DD7CB381C0CE8F78 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		26863FB98876ECFB2C52F0FF /* WalkTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkTracker.swift; sourceTree = "<group>"; };
+		26926AF94C5CD2A73149D080 /* WalkActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkActivity.swift; sourceTree = "<group>"; };
+		2AAF25DE5216EB791FAD7058 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		2B89ADE16C47AB0E0761B7EF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		2CABF8650A285AB54D3700A6 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		303A4BC365EFDB4E41F534AF /* MyDogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
+		3DD05E7729A1853A5748BF1F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		50EA1B62ECCEC400102F6036 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		54E359D37F55A06E65249298 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		630E03C393BF21260C48A977 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		67DED918E6B83E74ED1F0BF7 /* Rondje.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rondje.entitlements; sourceTree = "<group>"; };
+		6D4094F34979CE06F5674464 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		70E5204817845A7F3A04E605 /* RondjeWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RondjeWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7391B5B3612456961B4E3B8B /* DogLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogLook.swift; sourceTree = "<group>"; };
+		787E299C18C0D741D32C0544 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		80CB134CFF71E6AB85E8D340 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowWalkView.swift; sourceTree = "<group>"; };
+		847F8B3EE6862459619E1EDC /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		88239320CAE586D79B3603F4 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeTests.swift; sourceTree = "<group>"; };
+		9444E27E94A2B8808B22C5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9C2B1E42F731544CC1E42AAC /* MembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipView.swift; sourceTree = "<group>"; };
+		9C56C585C3705ACBC5EBC617 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeWidgets.swift; sourceTree = "<group>"; };
+		A5CD5CF06280BE763D95E942 /* DogDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailView.swift; sourceTree = "<group>"; };
+		AB627D88D88D1EB0404E149F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkReport.swift; sourceTree = "<group>"; };
+		C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeApp.swift; sourceTree = "<group>"; };
+		C38AD4205552639E40224CBC /* RequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSheet.swift; sourceTree = "<group>"; };
+		CBB7E66E9A9FD4894A0298B5 /* RondjeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RondjeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE38BF1BFD0974FB881BD72B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D19F92B1AB52E54BEE189E52 /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
+		E05B78B489C3C4D7955EFF48 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
+		EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		F43456FF9403F24AC05FF054 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F500D8982F770787859D0608 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		F7A13AA036854983EE311380 /* Reminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
+		F96821FF9F74F149B48CEA05 /* DogFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFace.swift; sourceTree = "<group>"; };
+		FD670507F95B7E0867549B73 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		11ECCD15864920918C90E503 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F43456FF9403F24AC05FF054 /* Assets.xcassets */,
+				AB627D88D88D1EB0404E149F /* Info.plist */,
+				787E299C18C0D741D32C0544 /* InfoPlist.xcstrings */,
+				954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */,
+				9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */,
+				67DED918E6B83E74ED1F0BF7 /* Rondje.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		201468F762F551C6326C5D44 /* RondjeWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				9444E27E94A2B8808B22C5AD /* Info.plist */,
+				F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */,
+				80CB134CFF71E6AB85E8D340 /* Localizable.xcstrings */,
+				1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */,
+				A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */,
+			);
+			path = RondjeWidgets;
+			sourceTree = "<group>";
+		};
+		2441BCBF4123D7C7C82A7339 = {
+			isa = PBXGroup;
+			children = (
+				DDCE47CED2465CBB5882FFDC /* Rondje */,
+				3D54E11EDED7982A9A500ED8 /* RondjeTests */,
+				201468F762F551C6326C5D44 /* RondjeWidgets */,
+				C589492400AF6BB4375A87D4 /* Shared */,
+				F118D676687F6079CB7CCDC8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3D54E11EDED7982A9A500ED8 /* RondjeTests */ = {
+			isa = PBXGroup;
+			children = (
+				921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */,
+			);
+			path = RondjeTests;
+			sourceTree = "<group>";
+		};
+		426DB77FC1CFFA02380230ED /* Membership */ = {
+			isa = PBXGroup;
+			children = (
+				9C2B1E42F731544CC1E42AAC /* MembershipView.swift */,
+			);
+			path = Membership;
+			sourceTree = "<group>";
+		};
+		553D978CF87506047C11816A /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				2AAF25DE5216EB791FAD7058 /* DiscoverView.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		7E28618485C7ABEC64928FB6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				847F8B3EE6862459619E1EDC /* Components.swift */,
+				F96821FF9F74F149B48CEA05 /* DogFace.swift */,
+				D19F92B1AB52E54BEE189E52 /* ImageTools.swift */,
+				FD670507F95B7E0867549B73 /* Theme.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		8920EAEBDBB30C0E44894F32 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2B89ADE16C47AB0E0761B7EF /* AuthView.swift */,
+				F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		97EDF6BA00B8CE243A18FEE3 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F500D8982F770787859D0608 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		B52BEB8FC192755A9861AC4A /* Walk */ = {
+			isa = PBXGroup;
+			children = (
+				1894A396998000A3824F47B3 /* ActiveWalkView.swift */,
+				83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */,
+				ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */,
+			);
+			path = Walk;
+			sourceTree = "<group>";
+		};
+		C075500CEDC1C31D95AC0C23 /* Appointments */ = {
+			isa = PBXGroup;
+			children = (
+				6D4094F34979CE06F5674464 /* AppointmentsView.swift */,
+			);
+			path = Appointments;
+			sourceTree = "<group>";
+		};
+		C589492400AF6BB4375A87D4 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				7391B5B3612456961B4E3B8B /* DogLook.swift */,
+				E05B78B489C3C4D7955EFF48 /* SharedStore.swift */,
+				26926AF94C5CD2A73149D080 /* WalkActivity.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		C8A209C7019652DC9BA25AC1 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				C075500CEDC1C31D95AC0C23 /* Appointments */,
+				8920EAEBDBB30C0E44894F32 /* Auth */,
+				553D978CF87506047C11816A /* Discover */,
+				EAE74B5DF0748E9781D657A0 /* Dog */,
+				426DB77FC1CFFA02380230ED /* Membership */,
+				97EDF6BA00B8CE243A18FEE3 /* Onboarding */,
+				EFC38ED52995A5B1AC192CEA /* Profile */,
+				B52BEB8FC192755A9861AC4A /* Walk */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D5714BFDC4754FC7B47B6EC8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				50EA1B62ECCEC400102F6036 /* APIClient.swift */,
+				3DD05E7729A1853A5748BF1F /* Cache.swift */,
+				EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */,
+				630E03C393BF21260C48A977 /* Keychain.swift */,
+				9C56C585C3705ACBC5EBC617 /* LocationService.swift */,
+				CE38BF1BFD0974FB881BD72B /* Models.swift */,
+				F7A13AA036854983EE311380 /* Reminders.swift */,
+				26863FB98876ECFB2C52F0FF /* WalkTracker.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		DDCE47CED2465CBB5882FFDC /* Rondje */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5790102D854F04D5A6990 /* App */,
+				D5714BFDC4754FC7B47B6EC8 /* Core */,
+				C8A209C7019652DC9BA25AC1 /* Features */,
+				11ECCD15864920918C90E503 /* Resources */,
+				7E28618485C7ABEC64928FB6 /* UI */,
+			);
+			path = Rondje;
+			sourceTree = "<group>";
+		};
+		EAE74B5DF0748E9781D657A0 /* Dog */ = {
+			isa = PBXGroup;
+			children = (
+				A5CD5CF06280BE763D95E942 /* DogDetailView.swift */,
+				C38AD4205552639E40224CBC /* RequestSheet.swift */,
+			);
+			path = Dog;
+			sourceTree = "<group>";
+		};
+		EFC38ED52995A5B1AC192CEA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1F24382B16C639D32D509682 /* EditProfileView.swift */,
+				303A4BC365EFDB4E41F534AF /* MyDogsView.swift */,
+				265151C9DD7CB381C0CE8F78 /* ProfileView.swift */,
+				2CABF8650A285AB54D3700A6 /* QuizView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		F118D676687F6079CB7CCDC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BDEFBB338DEF518134A6397 /* Rondje.app */,
+				CBB7E66E9A9FD4894A0298B5 /* RondjeTests.xctest */,
+				70E5204817845A7F3A04E605 /* RondjeWidgets.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FDA5790102D854F04D5A6990 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				54E359D37F55A06E65249298 /* AppModel.swift */,
+				88239320CAE586D79B3603F4 /* Brand.swift */,
+				C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0166CB6DA866EE7B8D44E0B5 /* RondjeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E82B584AC364982559DD1FA /* Build configuration list for PBXNativeTarget "RondjeTests" */;
+			buildPhases = (
+				22DB95036C549E90EBCEAC4A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				95AD6C5A33C993755A14CDF8 /* PBXTargetDependency */,
+			);
+			name = RondjeTests;
+			packageProductDependencies = (
+			);
+			productName = RondjeTests;
+			productReference = CBB7E66E9A9FD4894A0298B5 /* RondjeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2788904D7CEF67937A5A8463 /* Rondje */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6322CD52C0D8D8C83696719C /* Build configuration list for PBXNativeTarget "Rondje" */;
+			buildPhases = (
+				6B35C50B3EC1ECF65B57C5C4 /* Sources */,
+				5B5D1F5EB20C26C8B9E19CBD /* Resources */,
+				C1675CC258989D0BA4E2D4D5 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4809C9EB4DEFDDB235FDC8B8 /* PBXTargetDependency */,
+			);
+			name = Rondje;
+			packageProductDependencies = (
+			);
+			productName = Rondje;
+			productReference = 0BDEFBB338DEF518134A6397 /* Rondje.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D89B53B0D71DABE480EDE896 /* RondjeWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86C8BDE7470108ECEABA28A7 /* Build configuration list for PBXNativeTarget "RondjeWidgets" */;
+			buildPhases = (
+				F4A8B43F2FEAFB81CC152788 /* Sources */,
+				6818768D38B04FB2B57BA6A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RondjeWidgets;
+			packageProductDependencies = (
+			);
+			productName = RondjeWidgets;
+			productReference = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		345A56CA32E8D13ADD5BC3CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0166CB6DA866EE7B8D44E0B5 = {
+						DevelopmentTeam = "";
+					};
+					2788904D7CEF67937A5A8463 = {
+						DevelopmentTeam = "";
+					};
+					D89B53B0D71DABE480EDE896 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 43DDFA3EE296714D2B72E4CF /* Build configuration list for PBXProject "Rondje" */;
+			developmentRegion = nl;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				es,
+				fr,
+				nl,
+			);
+			mainGroup = 2441BCBF4123D7C7C82A7339;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F118D676687F6079CB7CCDC8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2788904D7CEF67937A5A8463 /* Rondje */,
+				D89B53B0D71DABE480EDE896 /* RondjeWidgets */,
+				0166CB6DA866EE7B8D44E0B5 /* RondjeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5B5D1F5EB20C26C8B9E19CBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AFC612490A49580D6D08903 /* Assets.xcassets in Resources */,
+				3B290FB70F174DEDFD36485C /* InfoPlist.xcstrings in Resources */,
+				3BF3B61965BB09D5875A2004 /* Localizable.xcstrings in Resources */,
+				069A4CEC550C6B8F9D7F31B6 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6818768D38B04FB2B57BA6A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1E78BE8FCA520FB54C3EABF /* InfoPlist.xcstrings in Resources */,
+				B7F0C4546418F674AF079676 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22DB95036C549E90EBCEAC4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BE62065632AD4C2F8AE7309 /* RondjeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B35C50B3EC1ECF65B57C5C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */,
+				36A9C3B86B83EBCBD703FD6D /* ActiveWalkView.swift in Sources */,
+				4951C59EC95C340A43E6DCBF /* AppModel.swift in Sources */,
+				7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */,
+				518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */,
+				4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */,
+				CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */,
+				EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */,
+				4730F6F96A9FE6D28214E9D2 /* DiscoverView.swift in Sources */,
+				76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */,
+				BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */,
+				0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */,
+				B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */,
+				3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */,
+				F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */,
+				DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */,
+				89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */,
+				4660BE55365FF96EE9B1FD6E /* LocationService.swift in Sources */,
+				50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */,
+				E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */,
+				53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */,
+				7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */,
+				41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */,
+				C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */,
+				9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */,
+				119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */,
+				92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */,
+				320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */,
+				D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */,
+				31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */,
+				9CDA95671502696AA356E081 /* WalkReport.swift in Sources */,
+				F5113606F3E26750DF757621 /* WalkTracker.swift in Sources */,
+				8FC260210FFB86EA81151AB5 /* WelcomeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4A8B43F2FEAFB81CC152788 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				445F05C31F5873E97C2E7DD4 /* DogFace.swift in Sources */,
+				335853283270DFF0D690A32E /* DogLook.swift in Sources */,
+				CCEFB44617D607D474DA62B3 /* RondjeWidgets.swift in Sources */,
+				A5B062402B7D781A373CFD12 /* SharedStore.swift in Sources */,
+				BF938F9011478C1964370149 /* Theme.swift in Sources */,
+				2F60108EC649C7D6D370A542 /* WalkActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4809C9EB4DEFDDB235FDC8B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D89B53B0D71DABE480EDE896 /* RondjeWidgets */;
+			targetProxy = 661C32DE6CA30F5727B519EE /* PBXContainerItemProxy */;
+		};
+		95AD6C5A33C993755A14CDF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2788904D7CEF67937A5A8463 /* Rondje */;
+			targetProxy = 4B415EC5818F3E16D3B7F5F6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		361CABDDA539BA65E95F06B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
+				INFOPLIST_FILE = RondjeWidgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile.widgets;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		5330740B41D2E945F229D184 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_DISPLAY_NAME = Rondje;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RONDJE_API_BASE_URL = "https:/$()/rondje-five.vercel.app";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		70E7E341EC8C9DAD86295ECB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Rondje/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		8106149EB01FAC6912F3B321 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Rondje/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B64ED374481278F25EC6E0CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
+				INFOPLIST_FILE = RondjeWidgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile.widgets;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B722406316A7F0C6CEA3A77B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_DISPLAY_NAME = Rondje;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RONDJE_API_BASE_URL = "http:/$()/localhost:3100";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		BDE40DAA97C43FD740C5EBE1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondje.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rondje";
+			};
+			name = Debug;
+		};
+		CB169A31D07C995A8DF6E531 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondje.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rondje";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		43DDFA3EE296714D2B72E4CF /* Build configuration list for PBXProject "Rondje" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B722406316A7F0C6CEA3A77B /* Debug */,
+				5330740B41D2E945F229D184 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4E82B584AC364982559DD1FA /* Build configuration list for PBXNativeTarget "RondjeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDE40DAA97C43FD740C5EBE1 /* Debug */,
+				CB169A31D07C995A8DF6E531 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6322CD52C0D8D8C83696719C /* Build configuration list for PBXNativeTarget "Rondje" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8106149EB01FAC6912F3B321 /* Debug */,
+				70E7E341EC8C9DAD86295ECB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		86C8BDE7470108ECEABA28A7 /* Build configuration list for PBXNativeTarget "RondjeWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B64ED374481278F25EC6E0CB /* Debug */,
+				361CABDDA539BA65E95F06B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 345A56CA32E8D13ADD5BC3CB /* Project object */;
+}

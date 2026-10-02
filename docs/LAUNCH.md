@@ -60,6 +60,11 @@ Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programme
 
 Mensen kiezen in hun profiel of ze e-mail willen bij meldingen; de taal volgt hun taalkeuze.
 
+**Pushmeldingen (optioneel).** Een seintje op telefoon of computer bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt.
+
+- *Website:* draai één keer `npx web-push generate-vapid-keys` in `web/`. Zet in Vercel `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` en `VAPID_SUBJECT` (bijvoorbeeld `mailto:hallo@jouwdomein.nl`) en redeploy. In het profiel verschijnt dan "Pushmeldingen in deze browser".
+- *iPhone-app:* maak bij developer.apple.com onder Keys een sleutel met "Apple Push Notifications service". Zet in Vercel `APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_PRIVATE_KEY` (de inhoud van het .p8-bestand) en `APNS_BUNDLE_ID` (de bundle-id van de app). In Xcode zet je bij de app de capability "Push Notifications" aan.
+
 **Je verhaal op Over ons.** Het sjabloon staat in `web/content/about/nl/story.md`, met schrijfvragen en de richtlijnen van 113 voor schrijven over somberheid. Vul het in, zet bovenaan `published: "true"` en commit: dan staat het op `/about`. Eerst bekijken kan als beheerder via `/about?preview=1`. Wil je een foto erbij? Zet die in `web/public/` en verwijs ernaar in het verhaal.
 
 ## 4. Vóór de echte lancering

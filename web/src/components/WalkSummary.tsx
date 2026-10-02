@@ -4,11 +4,13 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { formatWalkDistance } from '@/lib/geo'
-import type { Walk } from '@/server/walks'
+import { walkPhotos, type Walk } from '@/server/walks'
 import { DogPortrait } from './DogPortrait'
 import { Map } from './map'
 import { ReportButton } from './ReportButton'
 import { MoodCheck, WalkFeedback } from './WalkFeedback'
+import { WalkCareTally } from './WalkCare'
+import { WalkPhotoStrip } from './WalkPhotos'
 
 interface Props {
   walk: Walk
@@ -29,6 +31,7 @@ export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserI
     .select({ id: s.feedback.id })
     .from(s.feedback)
     .where(and(eq(s.feedback.walkId, walk.id), eq(s.feedback.fromUserId, viewerId)))
+  const photos = (await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))
   const minutes = Math.max(1, Math.round(((walk.endedAt ?? new Date()).getTime() - walk.startedAt.getTime()) / 60_000))
 
   return (
@@ -56,6 +59,8 @@ export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserI
           ariaLabel={t('walk.mapLabel')}
         />
       ) : null}
+      <WalkCareTally care={{ pee: walk.pee, poo: walk.poo, water: walk.water }} hideEmpty />
+      <WalkPhotoStrip photos={photos} dogName={dog.name} />
       {role === 'walker' ? <MoodCheck /> : null}
       {given ? (
         <p className="notice success">{t('walk.thanks')}</p>

@@ -134,7 +134,7 @@ We work with the parties below. We sign a data processing agreement with our pro
 | Neon Inc. | Database (Postgres) | EU region [to verify: which] |
 | Resend Inc. (once email is switched on) | Sending emails: a new password, and notifications such as a new request or a walk that runs late (you can turn these off in your profile) | USA; transfer based on standard contractual clauses [to be checked] |
 | Google or Apple | Sign-in, only if you choose it | Google or Apple's own responsibility |
-| Apple or Google | Push notifications, only if you turn them on [to verify] | Apple or Google's own terms |
+| Apple, Google or Mozilla | Push notifications through your phone or browser, only if you turn them on. They receive the notification text, no routes or messages | Apple's, Google's or Mozilla's own terms |
 | OpenStreetMap Foundation | Map images (tiles) | United Kingdom [to verify] |
 
 **Maps.** When you open a map, your device loads map images from the OpenStreetMap Foundation's servers. Those servers receive your IP address and technical data about your device. The OpenStreetMap Foundation is responsible for this itself [to verify] and has its own privacy policy.
@@ -157,11 +157,12 @@ Would you like to know more about these safeguards? Email us.
 | Data | Retention period |
 |---|---|
 | Account and profile data, dog profiles | As long as your account exists. After deletion, up to 30 more days (backups) |
-| Walk route points | 30 days. Longer only if needed for an open report |
+| Walk route points and photos | 30 days. Longer only if needed for an open report |
 | Private feedback | 1 year |
 | Reports and related data | Up to 2 years after the report is closed [proposal] |
 | Data about a ban, to prevent someone from signing up again | [proposal: as short as possible, e.g. 2 years – to verify] |
-| Requests and messages | [retention period to be decided] |
+| Requests | [retention period to be decided] |
+| Chat messages between walker and owner or shelter | 1 year |
 | Suggestions and votes for shelters | Up to a year after we handled them; suggestions nothing happened with after two years |
 | Security logs | [retention period to be decided, e.g. 90 days] |
 | Mood check-ins | Not with us. Only on your own device, until you delete them |

@@ -4,12 +4,14 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, SignOutButton } from '@/components/ProfileTools'
+import { PushToggle } from '@/components/PushToggle'
 import { WalkerCard } from '@/components/WalkerCard'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import type { Locale } from '@/i18n/config'
 import { siteUrl } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
+import { webPushKey } from '@/server/push'
 import { trustSignals } from '@/server/queries'
 import { requireOnboarded } from '@/server/session'
 
@@ -20,6 +22,7 @@ export async function generateMetadata() {
 
 export default async function ProfilePage() {
   const viewer = await requireOnboarded('/profile')
+  const pushKey = webPushKey()
   const native = await isNativeRequest()
   const p = viewer.profile
   const t = await getTranslations()
@@ -127,6 +130,7 @@ export default async function ProfilePage() {
           <div className="stack-s">
             <strong>{t('profile.email')}</strong>
             <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
+            {pushKey ? <PushToggle publicKey={pushKey} /> : null}
           </div>
         </div>
       </section>

@@ -2843,3 +2843,271 @@ legend {
     line-height: 44px;
   }
 }
+
+/* ---------- City pages ---------- */
+
+.big-number-line {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+  font-weight: 650;
+  font-size: 1.1rem;
+}
+
+.big-number-line .icon {
+  color: var(--grass);
+  flex-shrink: 0;
+}
+
+/* ---------- Motion: a dog's portrait grows from the list into its page ---------- */
+
+::view-transition-group(*) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ---------- Home: what we walked together ---------- */
+
+.impact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.impact > div {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+.impact dt {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.impact dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 760;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.small-title {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.walk-photos {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 4px;
+}
+
+.walk-photos li {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.walk-photos img {
+  display: block;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: var(--sunken);
+}
+
+.care-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.care-button {
+  position: relative;
+}
+
+.care-button > .button {
+  width: 100%;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 64px;
+}
+
+.care-button > .button strong {
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.care-undo {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.care-tally {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-head .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-title {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-empty {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.chat-bubble {
+  align-self: flex-start;
+  max-width: min(80%, 520px);
+  padding: 8px 12px;
+  border-radius: var(--radius-m) var(--radius-m) var(--radius-m) 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.chat-bubble.mine {
+  align-self: flex-end;
+  border-radius: var(--radius-m) var(--radius-m) 6px var(--radius-m);
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.chat-bubble p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.chat-name {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.chat-bubble time {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.chat-form {
+  position: sticky;
+  bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 8px;
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.chat-form textarea {
+  flex: 1;
+  min-height: 44px;
+  max-height: 160px;
+  field-sizing: content;
+  resize: none;
+  border: 0;
+  background: transparent;
+  padding: 10px 8px;
+  font: inherit;
+  color: inherit;
+}
+
+.chat-form textarea:focus {
+  outline: none;
+}
+
+.chat-form:focus-within {
+  outline: 2px solid var(--grass);
+  outline-offset: 2px;
+}
+
+.unread-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--danger);
+}
+
+/* Below 900px the tab bar covers the bottom of the screen; keep the chat box above it. */
+@media (max-width: 899px) {
+  .has-tabbar .chat-form {
+    bottom: calc(var(--tabbar-h) + 8px + env(safe-area-inset-bottom, 0px));
+  }
+}

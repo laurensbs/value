@@ -8,7 +8,7 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { countryInfo } from '@/lib/countries'
 import { requireOnboarded } from '@/server/session'
-import { pointsSince, walkAccess } from '@/server/walks'
+import { pointsSince, walkAccess, walkPhotos } from '@/server/walks'
 
 export async function generateMetadata() {
   const t = await getTranslations('walk')
@@ -58,10 +58,14 @@ export default async function FollowPage({ params }: { params: Promise<{ id: str
         startedAt={walk.startedAt.getTime()}
         plannedEndAt={walk.plannedEndAt.getTime()}
         initialRoute={points.map((p) => ({ id: p.id, lat: p.lat, lng: p.lng, t: p.t.getTime() }))}
+        initialCare={{ pee: walk.pee, poo: walk.poo, water: walk.water }}
+        initialPhotos={(await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))}
         fallbackCenter={center}
         locale={await getLocale()}
       />
-      <ReportButton walkId={walk.id} subjectUserId={walk.walkerId} dogId={dog.id} />
+      <div className="walk-layout">
+        <ReportButton walkId={walk.id} subjectUserId={walk.walkerId} dogId={dog.id} />
+      </div>
     </div>
   )
 }

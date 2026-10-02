@@ -134,7 +134,7 @@ Nous travaillons avec les acteurs ci-dessous. Nous concluons un contrat de sous-
 | Neon Inc. | Base de données (Postgres) | Région UE [à vérifier : laquelle] |
 | Resend Inc. (dès que l'e-mail est activé) | Envoi des e-mails : un nouveau mot de passe, et des notifications comme une nouvelle demande ou une promenade qui dure (désactivables dans votre profil) | États-Unis ; transfert fondé sur des clauses contractuelles types [à vérifier] |
 | Google ou Apple | Connexion, uniquement si vous la choisissez | Sous la responsabilité de Google ou d'Apple |
-| Apple ou Google | Notifications push, uniquement si vous les activez [à vérifier] | Selon les conditions d'Apple ou de Google |
+| Apple, Google ou Mozilla | Notifications push via votre téléphone ou navigateur, uniquement si vous les activez. Ils reçoivent le texte de la notification, ni trajets ni messages | Selon les conditions d'Apple, de Google ou de Mozilla |
 | OpenStreetMap Foundation | Images de cartes (tuiles) | Royaume-Uni [à vérifier] |
 
 **Cartes.** Lorsque vous ouvrez une carte, votre appareil charge des images depuis les serveurs de l'OpenStreetMap Foundation. Ces serveurs reçoivent votre adresse IP et des données techniques sur votre appareil. L'OpenStreetMap Foundation en est elle-même responsable [à vérifier] et dispose de sa propre politique de confidentialité.
@@ -157,11 +157,12 @@ Vous souhaitez en savoir plus sur ces garanties ? Écrivez-nous.
 | Données | Durée de conservation |
 |---|---|
 | Données de compte et de profil, profils des chiens | Tant que votre compte existe. Après suppression, jusqu'à 30 jours de plus (sauvegardes) |
-| Points de trajet des promenades | 30 jours. Plus longtemps uniquement si nécessaire pour un signalement en cours |
+| Points de trajet et photos des promenades | 30 jours. Plus longtemps uniquement si nécessaire pour un signalement en cours |
 | Avis privés | 1 an |
 | Signalements et données associées | Jusqu'à 2 ans après la clôture du signalement [proposition] |
 | Données liées à une exclusion, pour éviter une nouvelle inscription | [proposition : aussi courte que possible, p. ex. 2 ans – à vérifier] |
-| Demandes et messages | [durée à fixer] |
+| Demandes | [durée à fixer] |
+| Messages de discussion entre promeneur et propriétaire ou refuge | 1 an |
 | Recommandations et votes pour des refuges | Jusqu'à un an après leur traitement ; celles qui n'ont pas été traitées, après deux ans |
 | Journaux de sécurité | [durée à fixer, p. ex. 90 jours] |
 | Bilans d'humeur | Pas chez nous. Uniquement sur votre appareil, jusqu'à ce que vous les supprimiez |

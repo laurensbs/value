@@ -37,6 +37,8 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 | `SUPPORT_URL` + `OPERATOR_NAME` | optional | The support button on `/support` (https Patreon, Ko-fi, Open Collective or Buy Me a Coffee only). Shown only when both are set, and never in the apps. |
 | `INSTAGRAM_HANDLE`, `CONTACT_EMAIL` | optional | Instagram link (footer, about, support) and contact address. Hidden while empty. |
 | `RESEND_API_KEY` + `EMAIL_FROM` | recommended | Email through Resend: password reset, and notification emails (new request, accepted, overdue walk, shelter verified). Without them no email is sent and "forgot password" explains that. `EMAIL_FROM` like `Rondje <hallo@your-domain>` (a domain verified in Resend). |
+| `VAPID_PUBLIC_KEY` + `VAPID_PRIVATE_KEY` + `VAPID_SUBJECT` | optional | Push notifications in browsers (and on iPhone once the site is on the home screen). Generate a pair with `npx web-push generate-vapid-keys`; `VAPID_SUBJECT` is `mailto:` plus your address. Without them the toggle in the profile stays hidden. |
+| `APNS_KEY_ID` + `APNS_TEAM_ID` + `APNS_PRIVATE_KEY` + `APNS_BUNDLE_ID` | optional | Push notifications in the native iOS app, through Apple (token auth with a .p8 key from developer.apple.com → Keys). `APNS_PRIVATE_KEY` is the contents of the .p8 file; newlines may be written as `\n`. The app registers its device token at `POST /api/v1/devices`. |
 
 ## Where things are
 
@@ -52,6 +54,7 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 - `src/db/schema.ts` and `drizzle/`: schema and SQL migrations. After a schema change run `npm run db:generate`; it also embeds the SQL into `src/db/migrations.json`, which the app applies at runtime under an advisory lock.
 - `messages/*.json`: interface text. `nl` is the source; missing keys fall back to it.
 - `content/legal/<locale>/*.md`: terms, privacy, conduct code, safety, shelter terms, cookies.
+- `src/app/cities/**`, `src/lib/cities.ts`: a public page per city for search engines (cities from the shelter directory and verified shelters): shelters, group walks, a count of dogs waiting (never the dogs themselves) and the free promise. In the sitemap.
 - `content/shelters.json`: shelter directory for `/shelters` (public sources, unverified).
 
 ## Native apps

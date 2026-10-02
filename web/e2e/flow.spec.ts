@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test'
-import { newPerson, onboard, shot, signUp, soonSlot, unique } from './helpers'
+import { expect, request, test } from '@playwright/test'
+import { newPerson, onboard, PNG_1X1, shot, signUp, soonSlot, unique } from './helpers'
 
 test('owner and walker: meet request, accept, trust, live walk with GPS, follow along, private feedback', async ({ browser }) => {
   const id = unique()
@@ -55,6 +55,26 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
   await shot(walker.page, '05-request-sent')
 
+  // --- Before deciding, the owner asks a question in the chat; no phone numbers needed yet ---
+  await owner.page.goto('/requests')
+  await owner.page.getByRole('link', { name: 'Chat' }).click()
+  await expect(owner.page).toHaveURL(/\/chat\/[^/?]+$/)
+  const requestId = owner.page.url().split('/chat/')[1]
+  await expect(owner.page.getByRole('heading', { name: 'Chat over Bello' })).toBeVisible()
+  await owner.page.getByLabel('Typ een bericht').fill('Hoi Fleur! Heb je eerder met een jonge hond gelopen?')
+  await owner.page.getByRole('button', { name: 'Verstuur' }).click()
+  await expect(owner.page.locator('.chat-bubble.mine')).toContainText('jonge hond')
+
+  await walker.page.goto('/notifications')
+  await expect(walker.page.getByText('Ans stuurde een bericht over Bello.')).toBeVisible()
+  await walker.page.goto('/requests')
+  await walker.page.getByRole('link', { name: 'Chat' }).click()
+  await expect(walker.page.getByText('Heb je eerder met een jonge hond gelopen?')).toBeVisible()
+  await walker.page.getByLabel('Typ een bericht').fill('Ja, met de pup van mijn buren!')
+  await walker.page.getByRole('button', { name: 'Verstuur' }).click()
+  await expect(owner.page.getByText('Ja, met de pup van mijn buren!')).toBeVisible({ timeout: 10_000 })
+  await shot(owner.page, '05b-chat')
+
   // --- Owner accepts, sees contact details, records the ID check and allows solo walks ---
   await owner.page.goto('/requests')
   await expect(owner.page.getByText('Fleur', { exact: true }).first()).toBeVisible()
@@ -88,12 +108,45 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   }
   await walker.page.waitForTimeout(10_500) // the next upload
 
+  // The walker shares a photo along the way.
+  await walker.page.getByLabel('Stuur een foto').setInputFiles({ name: 'bello.png', mimeType: 'image/png', buffer: PNG_1X1 })
+  await expect(walker.page.getByText('Foto verstuurd')).toBeVisible()
+  await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
+  // ...and a quick walk report: two pees (one mis-tap taken back) and a drink.
+  for (let i = 0; i < 3; i++) await walker.page.getByRole('button', { name: /^Plas:/ }).click()
+  await walker.page.getByRole('button', { name: 'Eentje terug bij Plas' }).click()
+  await walker.page.getByRole('button', { name: /^Gedronken:/ }).click()
+  await expect(walker.page.getByRole('button', { name: 'Gedronken: 1' })).toBeVisible()
+  await expect(walker.page.getByRole('button', { name: 'Plas: 2' })).toBeVisible()
+
+  // The native app reaches the same report through the bearer-only JSON API; a cookie alone is refused.
+  const care = `/api/v1/walks/${walkId}/care`
+  expect((await walker.page.request.post(care, { data: { kind: 'poo', delta: 1 } })).status()).toBe(401)
+  const app = await request.newContext({ baseURL: new URL(walker.page.url()).origin }) // no cookies, like the iOS app
+  const signIn = await app.post('/api/auth/sign-in/email', { data: { email: `fleur-${id}@e2e.test`, password: 'wandelen-123' } })
+  const token = signIn.headers()['set-auth-token']
+  expect(token).toBeTruthy()
+  const bearer = { Authorization: `Bearer ${token}` }
+  expect(await (await app.post(care, { data: { kind: 'poo', delta: 1 }, headers: bearer })).json()).toEqual({ pee: 2, poo: 1, water: 1 })
+  expect((await (await app.get(`/api/v1/walks/${walkId}/photos`, { headers: bearer })).json()).photos).toHaveLength(1)
+  const chatUrl = `/api/v1/requests/${requestId}/messages`
+  const sent = await app.post(chatUrl, { data: { body: 'Bello doet het super!' }, headers: bearer })
+  expect((await sent.json()).chat.body).toBe('Bello doet het super!')
+  expect((await (await app.get(chatUrl, { headers: bearer })).json()).messages).toHaveLength(3)
+  // The iPhone app registers its push token; anything that isn't one is refused.
+  expect((await app.post('/api/v1/devices', { data: { token: 'a'.repeat(64), sandbox: true }, headers: bearer })).status()).toBe(200)
+  expect((await app.post('/api/v1/devices', { data: { token: 'not-a-token' }, headers: bearer })).status()).toBe(400)
+  await app.dispose()
+
   // --- Owner follows along live ---
   await owner.page.goto(`/follow/${walkId}`)
   await expect(owner.page.getByText(/Je ziet waar Fleur met Bello loopt/)).toBeVisible()
   await expect(owner.page.getByText(/Laatste locatie/)).toBeVisible()
   await expect(owner.page.locator('path.route-line')).toHaveCount(1)
   await expect(owner.page.getByRole('link', { name: /Bel Fleur/ })).toBeVisible()
+  await expect(owner.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
+  await expect(owner.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('2× Plas')
+  await expect(owner.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('1× Poep')
   await shot(owner.page, '09-follow')
   await shot(walker.page, '08-walk')
   await walker.page.getByRole('button', { name: 'Hulp nodig' }).click()
@@ -106,6 +159,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page).toHaveURL(/ended=1/)
   await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
   await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
+  await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('1× Gedronken')
+  await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
   await shot(walker.page, '10-summary')
   await walker.page.getByRole('radio', { name: 'Top' }).click()
   await walker.page.getByLabel('Makkelijk').check()

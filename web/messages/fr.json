@@ -120,7 +120,11 @@
     "freeText": "Pas de publicité, pas d'abonnement, et nous ne vendons jamais de données. Rondje vit du soutien volontaire, et plus tard de partenaires et de fonds qui respectent nos règles.",
     "exampleDogs": "Quelques chiens qui attendent une balade",
     "freeLink": "Comment nous restons gratuits",
-    "freeLinkApp": "À propos de Rondje"
+    "freeLinkApp": "À propos de Rondje",
+    "impactTitle": "Ce que nous avons marché ensemble",
+    "impactWalks": "Promenades",
+    "impactKm": "Kilomètres",
+    "impactDogs": "Chiens sortis"
   },
   "auth": {
     "loginTitle": "Bon retour parmi nous",
@@ -462,7 +466,22 @@
     "activeBack": "Retour à la balade",
     "watchBanner": "{dog} est en balade en ce moment.",
     "startPoint": "Départ",
-    "endPoint": "Arrivée"
+    "endPoint": "Arrivée",
+    "photoButton": "Envoyer une photo",
+    "photoSending": "Envoi de la photo…",
+    "photoSent": "Photo envoyée",
+    "photoError": "La photo n'a pas pu être envoyée. Réessayez.",
+    "photoTooMany": "Vous avez atteint le maximum de 12 photos.",
+    "photoHint": "Le propriétaire voit vos photos tout de suite. Elles sont supprimées après 30 jours, comme le trajet.",
+    "photosTitle": "Photos de la promenade",
+    "photoAlt": "Photo de {dogName} pendant la promenade",
+    "careTitle": "Compte rendu de la balade",
+    "careHint": "Touchez quand {dogName} fait pipi, caca ou boit. Le propriétaire le voit tout de suite.",
+    "carePee": "Pipi",
+    "carePoo": "Caca",
+    "careWater": "A bu",
+    "careUndo": "En retirer un de {kind}",
+    "careNone": "Rien de noté pour l’instant"
   },
   "myDogs": {
     "title": "Mes chiens",
@@ -562,7 +581,10 @@
     "flyer": "Imprimer un flyer pour votre quartier",
     "email": "E-mail",
     "emailNotifications": "M'envoyer un e-mail pour les notifications importantes",
-    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje."
+    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje.",
+    "pushNotifications": "Notifications push dans ce navigateur",
+    "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure. Sur iPhone : ajoutez d’abord Rondje à l’écran d’accueil.",
+    "pushBlocked": "Votre navigateur bloque les notifications de Rondje. Activez-les dans les réglages du navigateur."
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -864,7 +886,9 @@
       "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles.",
       "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
       "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
-      "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?"
+      "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?",
+      "walk-photo": "Nouvelle photo de {dogName} pendant la promenade.",
+      "chat-message": "{senderName} a envoyé un message à propos de {dogName}."
     }
   },
   "admin": {
@@ -1273,7 +1297,56 @@
       "shelter-joined": {
         "subject": "{orgName} est maintenant sur Rondje",
         "body": "Vous avez recommandé ce refuge ou voté pour lui, et il nous a rejoints. Découvrez les chiens et participez à une promenade en groupe."
+      },
+      "chat-message": {
+        "subject": "{senderName} vous a envoyé un message à propos de {dogName}",
+        "body": "Lisez-le et répondez dans Rondje. Ainsi, vous ne partagez votre numéro qu’une fois que vous vous connaissez."
       }
     }
+  },
+  "cities": {
+    "title": "Promener un chien par ville",
+    "lede": "Rondje fonctionne dans chaque ville. Pour chaque ville, vous voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent une promenade.",
+    "metaTitle": "Promener un chien à {city}",
+    "metaDescription": "Promenez gratuitement et régulièrement un chien à {city} : chiens de voisins et de refuges, promenades en groupe et première rencontre en sécurité. Sans publicité, sans abonnement.",
+    "cityLede": "Promenez gratuitement un chien de {city} : celui d'un voisin qui ne peut plus marcher loin, ou d'un refuge. D'abord une rencontre, ensuite une promenade régulière.",
+    "dogsWaiting": "{n, plural, =0 {Pas encore de chiens de {city} en ligne. Inscrivez le premier ou regardez aux alentours.} one {# chien de {city} attend une promenade.} other {# chiens de {city} attendent une promenade.}}",
+    "seeDogs": "Voir les chiens à {city}",
+    "addDog": "Inscrire un chien",
+    "sheltersTitle": "Refuges à {city}",
+    "onRondje": "Sur Rondje",
+    "dogCount": "{n, plural, one {# chien} other {# chiens}}",
+    "notYet": "Pas encore sur Rondje",
+    "noShelters": "Nous ne connaissons pas encore de refuge à {city}. Vous en connaissez un ?",
+    "voteHint": "Vous aimeriez promener des chiens dans l'un de ces refuges ? Dites-le sur la liste des refuges et nous les inviterons.",
+    "toDirectory": "Vers la liste des refuges",
+    "tipShelter": "Proposer un refuge",
+    "walksTitle": "Promenades en groupe à {city}",
+    "noWalks": "Aucune promenade en groupe n'est encore prévue à {city}.",
+    "allWalks": "Toutes les promenades en groupe",
+    "freeTitle": "Toujours gratuit, jamais de publicité",
+    "freeText": "Rondje ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n'y aura ni publicité ni version payante. Les membres et partenaires font vivre Rondje, et soutenir ne donne jamais de priorité.",
+    "howFree": "Comment Rondje reste gratuit",
+    "otherCities": "Autres villes",
+    "all": "Toutes les villes",
+    "footerLink": "Villes"
+  },
+  "chat": {
+    "title": "Discussion à propos de {dogName}",
+    "button": "Discuter",
+    "withOwner": "Avec {name}",
+    "withWalker": "Avec {name}",
+    "empty": "Pas encore de messages. Posez vos questions sur {dogName}, la balade ou le lieu de rendez-vous.",
+    "placeholder": "Écrivez un message",
+    "send": "Envoyer",
+    "sending": "Envoi…",
+    "you": "Vous",
+    "closed": "Cette demande est close. Vous pouvez encore lire les messages, mais plus en envoyer.",
+    "tooMany": "Doucement : vous avez envoyé beaucoup de messages en peu de temps. Réessayez dans un instant.",
+    "error": "L’envoi a échoué. Réessayez.",
+    "tooLong": "Ce message est trop long. Maximum {max} caractères.",
+    "safety": "La première fois, retrouvez-vous toujours ensemble, dans un lieu que vous connaissez tous les deux. Un souci ? Signalez-le depuis le profil.",
+    "back": "Retour aux demandes",
+    "label": "Messages"
   }
 }

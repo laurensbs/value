@@ -120,7 +120,11 @@
     "freeText": "Sin anuncios, sin suscripción y nunca vendemos datos. Rondje funciona con apoyo voluntario y, más adelante, con socios y fundaciones que respeten nuestras reglas.",
     "exampleDogs": "Algunos perros que esperan un paseo",
     "freeLink": "Cómo seguimos siendo gratis",
-    "freeLinkApp": "Sobre Rondje"
+    "freeLinkApp": "Sobre Rondje",
+    "impactTitle": "Lo que caminamos juntos",
+    "impactWalks": "Paseos",
+    "impactKm": "Kilómetros",
+    "impactDogs": "Perros que salieron"
   },
   "auth": {
     "loginTitle": "Hola de nuevo",
@@ -462,7 +466,22 @@
     "activeBack": "Volver al paseo",
     "watchBanner": "{dog} está de paseo ahora mismo.",
     "startPoint": "Salida",
-    "endPoint": "Llegada"
+    "endPoint": "Llegada",
+    "photoButton": "Enviar una foto",
+    "photoSending": "Enviando foto…",
+    "photoSent": "Foto enviada",
+    "photoError": "No se pudo enviar la foto. Inténtalo de nuevo.",
+    "photoTooMany": "Has llegado al máximo de 12 fotos.",
+    "photoHint": "El dueño ve tus fotos al instante. Se borran a los 30 días, igual que la ruta.",
+    "photosTitle": "Fotos del paseo",
+    "photoAlt": "Foto de {dogName} durante el paseo",
+    "careTitle": "Informe del paseo",
+    "careHint": "Toca cuando {dogName} haga pis, caca o beba. El dueño lo ve al momento.",
+    "carePee": "Pis",
+    "carePoo": "Caca",
+    "careWater": "Bebió",
+    "careUndo": "Quitar uno de {kind}",
+    "careNone": "Aún nada anotado"
   },
   "myDogs": {
     "title": "Mis perros",
@@ -562,7 +581,10 @@
     "flyer": "Imprime un folleto para tu barrio",
     "email": "Correo",
     "emailNotifications": "Enviarme un correo con los avisos importantes",
-    "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje."
+    "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje.",
+    "pushNotifications": "Notificaciones push en este navegador",
+    "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga. En iPhone: añade primero Rondje a la pantalla de inicio.",
+    "pushBlocked": "Tu navegador bloquea las notificaciones de Rondje. Actívalas en los ajustes del navegador."
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -864,7 +886,9 @@
       "org-verified": "Tu protectora ha sido verificada. Tus perros ya son visibles.",
       "org-pending": "{orgName} se ha registrado como protectora. Revisa los datos.",
       "shelter-joined": "{orgName} ya está en Rondje. ¡Echa un vistazo a los perros!",
-      "group-walk-new": "{orgName} ha organizado un paseo en grupo. ¿Te apuntas?"
+      "group-walk-new": "{orgName} ha organizado un paseo en grupo. ¿Te apuntas?",
+      "walk-photo": "Nueva foto de {dogName} durante el paseo.",
+      "chat-message": "{senderName} envió un mensaje sobre {dogName}."
     }
   },
   "admin": {
@@ -1273,7 +1297,56 @@
       "shelter-joined": {
         "subject": "{orgName} ya está en Rondje",
         "body": "Recomendaste o votaste esta protectora y ya se ha unido. Mira los perros y únete a un paseo en grupo."
+      },
+      "chat-message": {
+        "subject": "{senderName} te envió un mensaje sobre {dogName}",
+        "body": "Léelo y responde en Rondje. Así solo compartes tu teléfono cuando ya os conocéis."
       }
     }
+  },
+  "cities": {
+    "title": "Pasear perros por ciudad",
+    "lede": "Rondje funciona en todas las ciudades. En cada una ves qué protectoras hay, cuándo hay paseos en grupo y cuántos perros esperan un paseo.",
+    "metaTitle": "Pasear perros en {city}",
+    "metaDescription": "Pasea gratis y con regularidad a un perro en {city}: perros de vecinos y de protectoras, paseos en grupo y un primer encuentro seguro. Sin anuncios, sin suscripción.",
+    "cityLede": "Pasea gratis a un perro de {city}: de un vecino que ya no puede caminar lejos, o de una protectora. Primero os conocéis y después paseáis con regularidad.",
+    "dogsWaiting": "{n, plural, =0 {Todavía no hay perros de {city} en línea. Añade el primero o mira cerca.} one {# perro de {city} espera un paseo.} other {# perros de {city} esperan un paseo.}}",
+    "seeDogs": "Ver perros en {city}",
+    "addDog": "Añadir un perro",
+    "sheltersTitle": "Protectoras en {city}",
+    "onRondje": "En Rondje",
+    "dogCount": "{n, plural, one {# perro} other {# perros}}",
+    "notYet": "Aún no en Rondje",
+    "noShelters": "Aún no conocemos ninguna protectora en {city}. ¿Conoces alguna?",
+    "voteHint": "¿Te gustaría pasear en una de estas protectoras? Dilo en la lista de protectoras y las invitaremos.",
+    "toDirectory": "A la lista de protectoras",
+    "tipShelter": "Sugerir una protectora",
+    "walksTitle": "Paseos en grupo en {city}",
+    "noWalks": "Todavía no hay paseos en grupo previstos en {city}.",
+    "allWalks": "Todos los paseos en grupo",
+    "freeTitle": "Siempre gratis, nunca anuncios",
+    "freeText": "Rondje no cuesta nada, ni a paseadores, ni a dueños, ni a protectoras. No habrá anuncios ni versión de pago. Los socios y colaboradores mantienen Rondje, y apoyar nunca da prioridad.",
+    "howFree": "Cómo Rondje sigue gratis",
+    "otherCities": "Otras ciudades",
+    "all": "Todas las ciudades",
+    "footerLink": "Ciudades"
+  },
+  "chat": {
+    "title": "Chat sobre {dogName}",
+    "button": "Chat",
+    "withOwner": "Con {name}",
+    "withWalker": "Con {name}",
+    "empty": "Aún no hay mensajes. Pregunta lo que quieras sobre {dogName}, el paseo o dónde quedar.",
+    "placeholder": "Escribe un mensaje",
+    "send": "Enviar",
+    "sending": "Enviando…",
+    "you": "Tú",
+    "closed": "Esta solicitud está cerrada. Puedes leer los mensajes, pero no enviar nuevos.",
+    "tooMany": "Con calma: has enviado muchos mensajes seguidos. Inténtalo de nuevo en un momento.",
+    "error": "No se pudo enviar. Inténtalo de nuevo.",
+    "tooLong": "Ese mensaje es demasiado largo. Máximo {max} caracteres.",
+    "safety": "La primera vez quedad siempre juntos, en un sitio que conozcáis los dos. ¿Algo no va bien? Denúncialo desde el perfil.",
+    "back": "Volver a solicitudes",
+    "label": "Mensajes"
   }
 }

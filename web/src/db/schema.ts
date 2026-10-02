@@ -214,6 +214,26 @@ export const walkRequest = pgTable(
   ],
 )
 
+/**
+ * Messages between a walker and a dog's owner (or shelter staff) about one request, so
+ * nobody has to hand out a phone number before they have met.
+ */
+export const chatMessage = pgTable(
+  'chat_message',
+  {
+    id: text('id').primaryKey(),
+    requestId: text('request_id')
+      .notNull()
+      .references(() => walkRequest.id, { onDelete: 'cascade' }),
+    senderId: text('sender_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    body: text('body').notNull(),
+    createdAt: created(),
+  },
+  (t) => [index('chat_message_request_idx').on(t.requestId, t.createdAt)],
+)
+
 /** Per dog and walker: the owner saw the walker's ID and/or allows solo walks. */
 export const trustGrant = pgTable(
   'trust_grant',
@@ -306,6 +326,10 @@ export const walk = pgTable(
     lastLng: doublePrecision('last_lng'),
     lastAt: timestamp('last_at'),
     overdueNotifiedAt: timestamp('overdue_notified_at'),
+    // The little walk report owners ask for: how often the dog peed, pooped and drank.
+    pee: integer('pee').notNull().default(0),
+    poo: integer('poo').notNull().default(0),
+    water: integer('water').notNull().default(0),
     createdAt: created(),
   },
   (t) => [index('walk_dog_idx').on(t.dogId, t.status), index('walk_walker_idx').on(t.walkerId, t.status)],
@@ -324,6 +348,20 @@ export const walkPoint = pgTable(
     recordedAt: timestamp('recorded_at').notNull(),
   },
   (t) => [index('walk_point_walk_idx').on(t.walkId, t.id)],
+)
+
+/** A photo the walker shares during a walk, for the owner and their family. Deleted with the route after 30 days. */
+export const walkPhoto = pgTable(
+  'walk_photo',
+  {
+    id: text('id').primaryKey(),
+    walkId: text('walk_id')
+      .notNull()
+      .references(() => walk.id, { onDelete: 'cascade' }),
+    url: text('url').notNull(),
+    createdAt: created(),
+  },
+  (t) => [index('walk_photo_walk_idx').on(t.walkId, t.createdAt)],
 )
 
 /** Private feedback after a walk. Never shown to the other party; used for safety and moderation. */
@@ -393,6 +431,26 @@ export const notification = pgTable(
     createdAt: created(),
   },
   (t) => [index('notification_user_idx').on(t.userId, t.createdAt)],
+)
+
+/**
+ * Where to send push notifications for someone: a browser push subscription (kind 'web',
+ * endpoint plus keys) or an iPhone's APNs device token (kind 'apns'). Removed when it stops working.
+ */
+export const pushDevice = pgTable(
+  'push_device',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    kind: text('kind').notNull(),
+    endpoint: text('endpoint').notNull().unique(),
+    keys: jsonb('keys'),
+    sandbox: boolean('sandbox').notNull().default(false),
+    createdAt: created(),
+  },
+  (t) => [index('push_device_user_idx').on(t.userId)],
 )
 
 export const auditLog = pgTable('audit_log', {

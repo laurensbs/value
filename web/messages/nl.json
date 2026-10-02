@@ -120,7 +120,11 @@
     "freeText": "Geen advertenties, geen abonnement, en we verkopen nooit gegevens. Rondje draait op vrijwillige steun, en later op partners en fondsen die zich aan onze spelregels houden.",
     "exampleDogs": "Een paar honden die op een rondje wachten",
     "freeLink": "Hoe we gratis blijven",
-    "freeLinkApp": "Over Rondje"
+    "freeLinkApp": "Over Rondje",
+    "impactTitle": "Wat we samen liepen",
+    "impactWalks": "Rondjes gelopen",
+    "impactKm": "Kilometer",
+    "impactDogs": "Honden die naar buiten gingen"
   },
   "auth": {
     "loginTitle": "Welkom terug",
@@ -462,7 +466,22 @@
     "activeBack": "Terug naar het rondje",
     "watchBanner": "{dog} is nu op stap.",
     "startPoint": "Start",
-    "endPoint": "Einde"
+    "endPoint": "Einde",
+    "photoButton": "Stuur een foto",
+    "photoSending": "Foto versturen…",
+    "photoSent": "Foto verstuurd",
+    "photoError": "De foto kon niet worden verstuurd. Probeer het nog eens.",
+    "photoTooMany": "Je hebt het maximum van 12 foto's bereikt.",
+    "photoHint": "De eigenaar ziet je foto's meteen. Ze worden na 30 dagen gewist, net als de route.",
+    "photosTitle": "Foto's van het rondje",
+    "photoAlt": "Foto van {dogName} tijdens het rondje",
+    "careTitle": "Rondje-rapport",
+    "careHint": "Tik als {dogName} plast, poept of drinkt. De eigenaar ziet het meteen.",
+    "carePee": "Plas",
+    "carePoo": "Poep",
+    "careWater": "Gedronken",
+    "careUndo": "Eentje terug bij {kind}",
+    "careNone": "Nog niks genoteerd"
   },
   "myDogs": {
     "title": "Mijn honden",
@@ -562,7 +581,10 @@
     "flyer": "Print een flyer voor je buurt",
     "email": "E-mail",
     "emailNotifications": "Stuur me een e-mail bij belangrijke meldingen",
-    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje."
+    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje.",
+    "pushNotifications": "Pushmeldingen in deze browser",
+    "pushHint": "Een seintje bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt. Op iPhone: zet Rondje eerst op je beginscherm.",
+    "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -864,7 +886,9 @@
       "org-verified": "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.",
       "org-pending": "{orgName} heeft zich aangemeld als opvang. Controleer de gegevens.",
       "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!",
-      "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?"
+      "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?",
+      "walk-photo": "Nieuwe foto van {dogName} tijdens het rondje.",
+      "chat-message": "{senderName} stuurde een bericht over {dogName}."
     }
   },
   "admin": {
@@ -1273,7 +1297,56 @@
       "shelter-joined": {
         "subject": "{orgName} staat nu op Rondje",
         "body": "Je tipte of stemde op deze opvang, en hij doet nu mee. Bekijk de honden en loop mee met een groepswandeling."
+      },
+      "chat-message": {
+        "subject": "{senderName} stuurde je een bericht over {dogName}",
+        "body": "Lees en beantwoord het in Rondje. Zo hoef je je telefoonnummer pas te delen als jullie elkaar kennen."
       }
     }
+  },
+  "cities": {
+    "title": "Honden uitlaten per stad",
+    "lede": "Rondje werkt in elke stad. Per stad zie je welke opvangen er zijn, wanneer er groepswandelingen zijn en hoeveel honden op een rondje wachten.",
+    "metaTitle": "Honden uitlaten in {city}",
+    "metaDescription": "Gratis een vast rondje lopen met een hond in {city}: honden van buurtgenoten en uit de opvang, groepswandelingen en een veilige kennismaking. Geen advertenties, geen abonnement.",
+    "cityLede": "Wandel gratis met een hond uit {city}: van een buurtgenoot die zelf niet ver meer kan lopen, of uit de opvang. Eerst maak je samen kennis, daarna loop je een vast rondje.",
+    "dogsWaiting": "{n, plural, =0 {Nog geen honden in {city} online. Meld de eerste aan, of kijk in de buurt.} one {# hond in {city} wacht op een rondje.} other {# honden in {city} wachten op een rondje.}}",
+    "seeDogs": "Bekijk honden in {city}",
+    "addDog": "Meld een hond aan",
+    "sheltersTitle": "Opvangen in {city}",
+    "onRondje": "Op Rondje",
+    "dogCount": "{n, plural, one {# hond} other {# honden}}",
+    "notYet": "Nog niet op Rondje",
+    "noShelters": "We kennen nog geen opvang in {city}. Weet jij er een?",
+    "voteHint": "Wil je bij een van deze opvangen wandelen? Laat het weten op de opvangenlijst, dan nodigen wij ze uit.",
+    "toDirectory": "Naar de opvangenlijst",
+    "tipShelter": "Tip een opvang",
+    "walksTitle": "Groepswandelingen in {city}",
+    "noWalks": "Er staan nog geen groepswandelingen gepland in {city}.",
+    "allWalks": "Alle groepswandelingen",
+    "freeTitle": "Altijd gratis, nooit advertenties",
+    "freeText": "Rondje kost niets, voor wandelaars, eigenaren en opvangen. Er komen geen advertenties en geen betaalde versie. Leden en partners houden Rondje in de lucht, en steunen geeft nooit voorrang.",
+    "howFree": "Zo blijft Rondje gratis",
+    "otherCities": "Andere steden",
+    "all": "Alle steden",
+    "footerLink": "Steden"
+  },
+  "chat": {
+    "title": "Chat over {dogName}",
+    "button": "Chat",
+    "withOwner": "Met {name}",
+    "withWalker": "Met {name}",
+    "empty": "Nog geen berichten. Stel gerust een vraag over {dogName}, de afspraak of waar jullie elkaar zien.",
+    "placeholder": "Typ een bericht",
+    "send": "Verstuur",
+    "sending": "Versturen…",
+    "you": "Jij",
+    "closed": "Deze afspraak is gesloten. Je kunt de berichten nog lezen, maar niet meer sturen.",
+    "tooMany": "Rustig aan: je hebt veel berichten kort na elkaar gestuurd. Probeer het zo weer.",
+    "error": "Versturen lukte niet. Probeer het opnieuw.",
+    "tooLong": "Dat bericht is te lang. Houd het onder de {max} tekens.",
+    "safety": "Spreek de eerste keer altijd samen af, op een plek die jullie allebei kennen. Iets niet in orde? Meld het via het profiel.",
+    "back": "Terug naar afspraken",
+    "label": "Berichten"
   }
 }
