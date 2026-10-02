@@ -1,0 +1,123 @@
+import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
+import { DogCard } from '@/components/DogCard'
+import { DogsMap } from '@/components/DogsMap'
+import { Icon } from '@/components/Icon'
+import { COUNTRIES, countryInfo, isCountry } from '@/lib/countries'
+import { listDogs } from '@/server/queries'
+import { getViewer } from '@/server/session'
+
+export const metadata = { title: 'Honden' }
+
+type Search = { country?: string; host?: string; energy?: string; level?: string; q?: string; view?: string }
+
+export default async function DogsPage({ searchParams }: { searchParams: Promise<Search> }) {
+  const sp = await searchParams
+  const t = await getTranslations()
+  const viewer = await getViewer()
+  const country = isCountry(sp.country) ? sp.country : sp.country === 'all' ? undefined : (viewer?.profile?.country ?? undefined)
+  const near =
+    viewer?.profile?.lat != null && viewer.profile.lng != null
+      ? { lat: viewer.profile.lat, lng: viewer.profile.lng }
+      : country
+        ? countryInfo(country).center
+        : null
+  const host = sp.host === 'owner' || sp.host === 'shelter' ? sp.host : undefined
+  const energy = ['calm', 'medium', 'high'].includes(sp.energy ?? '') ? sp.energy : undefined
+  const items = await listDogs({ country, near, host, energy, q: sp.q?.slice(0, 60) })
+  const mapView = sp.view === 'map'
+
+  const query = (patch: Partial<Search>) => {
+    const next = new URLSearchParams()
+    const merged = { country: country ?? 'all', host, energy, q: sp.q, view: sp.view, ...patch }
+    for (const [k, v] of Object.entries(merged)) if (v) next.set(k, v)
+    return `/dogs?${next.toString()}`
+  }
+
+  return (
+    <div className="stack">
+      <header className="stack-s">
+        <h1>{t('dogs.title')}</h1>
+        <p className="lede">{t('dogs.lede')}</p>
+      </header>
+
+      <form className="filters" action="/dogs" method="get">
+        <input type="hidden" name="view" value={sp.view ?? ''} />
+        <label className="field grow">
+          <span className="visually-hidden">{t('dogs.search')}</span>
+          <input className="input" name="q" defaultValue={sp.q ?? ''} placeholder={t('dogs.search')} />
+        </label>
+        <label className="field">
+          <span className="visually-hidden">{t('common.country')}</span>
+          <select className="select" name="country" defaultValue={country ?? 'all'}>
+            <option value="all">{t('common.all')}</option>
+            {COUNTRIES.map((c) => (
+              <option key={c} value={c}>
+                {countryInfo(c).flag} {t(`common.countries.${c}`)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button className="button secondary" type="submit">
+          {t('dogs.filters')}
+        </button>
+      </form>
+
+      <div className="spread">
+        <div className="choices" role="group" aria-label={t('dogs.filters')}>
+          {(['all', 'owner', 'shelter'] as const).map((h) => (
+            <Link key={h} href={query({ host: h === 'all' ? undefined : h })} className={`chip${(host ?? 'all') === h ? ' on' : ''}`}>
+              {t(`dogs.host.${h}`)}
+            </Link>
+          ))}
+          {(['calm', 'high'] as const).map((e) => (
+            <Link key={e} href={query({ energy: energy === e ? undefined : e })} className={`chip${energy === e ? ' on' : ''}`}>
+              {t(`dogs.energy.${e}`)}
+            </Link>
+          ))}
+        </div>
+        <Link href={query({ view: mapView ? undefined : 'map' })} className="button ghost small">
+          <Icon name={mapView ? 'list' : 'map'} size={16} />
+          {mapView ? t('dogs.showList') : t('dogs.showMap')}
+        </Link>
+      </div>
+
+      {items.length === 0 ? (
+        <div className="card stack-s">
+          <p>{t('dogs.empty')}</p>
+          <div className="row">
+            <Link href="/shelters" className="button secondary small">
+              {t('dogs.findShelter')}
+            </Link>
+            <Link href="/profile#invite" className="button ghost small">
+              {t('dogs.inviteOwner')}
+            </Link>
+          </div>
+        </div>
+      ) : mapView ? (
+        <DogsMap
+          label={t('dogs.title')}
+          center={near ?? countryInfo(country).center}
+          markers={items
+            .filter((i) => i.dog.lat != null && i.dog.lng != null)
+            .map((i) => ({
+              id: i.dog.id,
+              lat: i.dog.lat!,
+              lng: i.dog.lng!,
+              label: `${i.dog.name} · ${i.dog.city}`,
+              href: `/dogs/${i.dog.id}`,
+              kind: i.host.kind === 'shelter' ? ('shelter' as const) : ('dog' as const),
+            }))}
+        />
+      ) : (
+        <ul className="dog-grid">
+          {items.map((item) => (
+            <li key={item.dog.id}>
+              <DogCard item={item} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
