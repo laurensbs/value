@@ -925,7 +925,21 @@
     },
     "referrals": "Inscriptions par code d'invitation",
     "referralCampaign": "code de campagne",
-    "referralCount": "{n, plural, one {# inscription} other {# inscriptions}}"
+    "referralCount": "{n, plural, one {# inscription} other {# inscriptions}}",
+    "growth": "Croissance",
+    "growthHint": "Les chiffres du plan marketing. Le plus important en premier : les promenades des duos réguliers (un promeneur et un chien avec au moins 3 promenades ensemble en 8 semaines). Les données d'exemple ne comptent pas.",
+    "kpi": {
+      "steadyWalksWeek": "Promenades des duos réguliers, cette semaine",
+      "steadyPairs": "{n, plural, one {# duo régulier} other {# duos réguliers}}",
+      "dogsOnline": "Chiens en ligne",
+      "dogsSplit": "{owner} de propriétaires, {shelter} de refuges",
+      "sheltersLive": "Refuges actifs",
+      "newPeopleWeek": "Nouvelles personnes, cette semaine",
+      "walksWeek": "Promenades, cette semaine",
+      "groupSignupsWeek": "Inscriptions aux promenades en groupe, cette semaine",
+      "groupFill": "{pct} % des places prises, 4 dernières semaines",
+      "tipsWeek": "Recommandations et votes, cette semaine"
+    }
   },
   "banned": {
     "title": "Votre compte a été bloqué",

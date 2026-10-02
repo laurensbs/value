@@ -8,6 +8,7 @@ import { enabledSocialProviders } from '@/lib/auth'
 import { emailMatchesWebsite, registryLookupUrl } from '@/lib/org-fields'
 import { adminEmails, siteUrl } from '@/lib/site'
 import { tipKey } from '@/lib/tips'
+import { growthKpis } from '@/server/kpis'
 import { requireAdmin } from '@/server/session'
 
 export const metadata = { robots: { index: false } }
@@ -92,6 +93,8 @@ export default async function AdminPage() {
     : []
   const referrerName = Object.fromEntries(referrers.map((r) => [r.code, r.firstName]))
 
+  const kpi = await growthKpis()
+
   const blob = Boolean(process.env.BLOB_READ_WRITE_TOKEN)
   const mode = dbMode()
 
@@ -119,6 +122,48 @@ export default async function AdminPage() {
           <div>
             <dt>{t('admin.openReports')}</dt>
             <dd>{open.n}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section className="stack-s">
+        <h2>{t('admin.growth')}</h2>
+        <p className="muted small">{t('admin.growthHint')}</p>
+        <dl className="facts">
+          <div>
+            <dt>{t('admin.kpi.steadyWalksWeek')}</dt>
+            <dd>
+              <strong>{kpi.steadyWalksWeek}</strong> <span className="muted small">({t('admin.kpi.steadyPairs', { n: kpi.steadyPairs })})</span>
+            </dd>
+          </div>
+          <div>
+            <dt>{t('admin.kpi.dogsOnline')}</dt>
+            <dd>
+              {kpi.dogsOnline} <span className="muted small">({t('admin.kpi.dogsSplit', { owner: kpi.ownerDogs, shelter: kpi.shelterDogs })})</span>
+            </dd>
+          </div>
+          <div>
+            <dt>{t('admin.kpi.sheltersLive')}</dt>
+            <dd>{kpi.sheltersLive}</dd>
+          </div>
+          <div>
+            <dt>{t('admin.kpi.newPeopleWeek')}</dt>
+            <dd>{kpi.newPeopleWeek}</dd>
+          </div>
+          <div>
+            <dt>{t('admin.kpi.walksWeek')}</dt>
+            <dd>{kpi.walksWeek}</dd>
+          </div>
+          <div>
+            <dt>{t('admin.kpi.groupSignupsWeek')}</dt>
+            <dd>
+              {kpi.groupSignupsWeek}
+              {kpi.groupFill != null ? <span className="muted small"> ({t('admin.kpi.groupFill', { pct: kpi.groupFill })})</span> : null}
+            </dd>
+          </div>
+          <div>
+            <dt>{t('admin.kpi.tipsWeek')}</dt>
+            <dd>{kpi.tipsWeek}</dd>
           </div>
         </dl>
       </section>

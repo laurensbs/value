@@ -925,7 +925,21 @@
     },
     "referrals": "Sign-ups per invite code",
     "referralCampaign": "campaign code",
-    "referralCount": "{n, plural, one {# sign-up} other {# sign-ups}}"
+    "referralCount": "{n, plural, one {# sign-up} other {# sign-ups}}",
+    "growth": "Growth",
+    "growthHint": "The numbers from the marketing plan. The most important first: walks by steady pairs (a walker and a dog with at least 3 walks together in 8 weeks). Example data does not count.",
+    "kpi": {
+      "steadyWalksWeek": "Walks by steady pairs, this week",
+      "steadyPairs": "{n, plural, one {# steady pair} other {# steady pairs}}",
+      "dogsOnline": "Dogs online",
+      "dogsSplit": "{owner} from owners, {shelter} from shelters",
+      "sheltersLive": "Shelters live",
+      "newPeopleWeek": "New people, this week",
+      "walksWeek": "Walks, this week",
+      "groupSignupsWeek": "Group walk sign-ups, this week",
+      "groupFill": "{pct}% of places taken, last 4 weeks",
+      "tipsWeek": "Suggestions and votes, this week"
+    }
   },
   "banned": {
     "title": "Your account has been blocked",

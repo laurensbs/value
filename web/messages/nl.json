@@ -925,7 +925,21 @@
     },
     "referrals": "Aanmeldingen per uitnodigingscode",
     "referralCampaign": "campagnecode",
-    "referralCount": "{n, plural, one {# aanmelding} other {# aanmeldingen}}"
+    "referralCount": "{n, plural, one {# aanmelding} other {# aanmeldingen}}",
+    "growth": "Groei",
+    "growthHint": "De cijfers uit het marketingplan. Bovenaan de belangrijkste: rondjes van vaste koppels (een wandelaar en een hond met minstens 3 rondjes samen in 8 weken). Voorbeelddata telt niet mee.",
+    "kpi": {
+      "steadyWalksWeek": "Rondjes van vaste koppels, deze week",
+      "steadyPairs": "{n, plural, one {# vast koppel} other {# vaste koppels}}",
+      "dogsOnline": "Honden online",
+      "dogsSplit": "{owner} van eigenaren, {shelter} uit opvangen",
+      "sheltersLive": "Opvangen live",
+      "newPeopleWeek": "Nieuwe mensen, deze week",
+      "walksWeek": "Rondjes gelopen, deze week",
+      "groupSignupsWeek": "Aanmeldingen groepswandelingen, deze week",
+      "groupFill": "{pct}% van de plekken bezet, laatste 4 weken",
+      "tipsWeek": "Tips en stemmen, deze week"
+    }
   },
   "banned": {
     "title": "Je account is geblokkeerd",
