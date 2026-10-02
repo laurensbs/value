@@ -427,6 +427,11 @@ T = {
     "Geen verbinding. Je ziet de afspraken van je laatste bezoek.": ("No connection. You're seeing the appointments from your last visit.", "Pas de connexion. Tu vois les rendez-vous de ta dernière visite.", "Sin conexión. Ves las citas de tu última visita."),
     "Kies een foto": ("Choose a photo", "Choisir une photo", "Elegir una foto"),
     "Een duidelijke foto van jezelf helpt eigenaren om je te vertrouwen.": ("A clear photo of yourself helps owners trust you.", "Une photo claire de toi aide les propriétaires à te faire confiance.", "Una foto clara tuya ayuda a los dueños a confiar en ti."),
+    "Wandel je mee?": ("Will you walk with me?", "Tu viens te promener ?", "¿Vienes a pasear?"),
+    "Ik wandel met honden uit de buurt via %@. Gratis, en je helpt er iemand mee. Doe je mee?": ("I walk dogs from the neighbourhood with %@. It's free, and you help someone. Want to join?", "Je promène des chiens du quartier avec %@. C'est gratuit, et tu aides quelqu'un. Tu viens ?", "Paseo perros del barrio con %@. Es gratis y ayudas a alguien. ¿Te apuntas?"),
+    "Nodig vrienden uit": ("Invite friends", "Inviter des amis", "Invitar amigos"),
+    "Wie wil er met %@ wandelen?": ("Who wants to walk %@?", "Qui veut promener %@ ?", "¿Quién quiere pasear a %@?"),
+    "Deel": ("Share", "Partager", "Compartir"),
     # Info.plist
     "NSCameraUsageDescription": (
         "To send the owner a photo during a walk. Only the photos you send go to the owner.",

@@ -16,6 +16,13 @@ enum Brand {
         return URL(string: raw) ?? URL(string: "https://rondje-five.vercel.app")!
     }
 
+    /// Links people share always point to the public website, also from a debug build.
+    static let publicURL = URL(string: "https://rondje-five.vercel.app")!
+
+    static func share(_ path: String) -> URL {
+        publicURL.appending(path: path.hasPrefix("/") ? String(path.dropFirst()) : path)
+    }
+
     static func web(_ path: String) -> URL {
         baseURL.appending(path: path.hasPrefix("/") ? String(path.dropFirst()) : path)
     }

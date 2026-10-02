@@ -12,6 +12,16 @@ struct ProfileView: View {
                 VStack(spacing: 18) {
                     header
                     MembershipCard()
+                    if let code = model.me?.profile?.referralCode {
+                        ShareLink(
+                            item: Brand.share("/r/\(code)"),
+                            subject: Text("Wandel je mee?"),
+                            message: Text("Ik wandel met honden uit de buurt via \(Brand.name). Gratis, en je helpt er iemand mee. Doe je mee?")
+                        ) {
+                            Label("Nodig vrienden uit", systemImage: "person.2.wave.2.fill")
+                        }
+                        .buttonStyle(.secondary)
+                    }
                     if let trust = model.me?.trust { stats(trust) }
                     links
                     Text("\(Brand.name) \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")

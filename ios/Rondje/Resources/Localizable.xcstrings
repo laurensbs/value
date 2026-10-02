@@ -1833,6 +1833,28 @@
         }
       }
     },
+    "Deel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager"
+          }
+        }
+      }
+    },
     "Depressie Vereniging" : {
       "localizations" : {
         "en" : {
@@ -4121,6 +4143,28 @@
         }
       }
     },
+    "Ik wandel met honden uit de buurt via %@. Gratis, en je helpt er iemand mee. Doe je mee?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I walk dogs from the neighbourhood with %@. It's free, and you help someone. Want to join?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paseo perros del barrio con %@. Es gratis y ayudas a alguien. ¿Te apuntas?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je promène des chiens du quartier avec %@. C'est gratuit, et tu aides quelqu'un. Tu viens ?"
+          }
+        }
+      }
+    },
     "Ik wil wandelen" : {
       "localizations" : {
         "en" : {
@@ -5789,6 +5833,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nécessaire pour les balades en solo"
+          }
+        }
+      }
+    },
+    "Nodig vrienden uit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invite friends"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invitar amigos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inviter des amis"
           }
         }
       }
@@ -7971,6 +8037,28 @@
         }
       }
     },
+    "Wandel je mee?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Will you walk with me?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Vienes a pasear?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu viens te promener ?"
+          }
+        }
+      }
+    },
     "Wandel met een hond uit je buurt die een extra rondje goed kan gebruiken." : {
       "localizations" : {
         "en" : {
@@ -8275,6 +8363,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Qui vient se promener aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "Wie wil er met %@ wandelen?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Who wants to walk %@?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Quién quiere pasear a %@?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qui veut promener %@ ?"
           }
         }
       }
