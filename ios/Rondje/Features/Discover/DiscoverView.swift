@@ -333,8 +333,7 @@ struct GroupWalkCard: View {
                 model.show(L("Je bent afgemeld"))
             } else {
                 let _: OK = try await APIClient.shared.post("/api/v1/group-walks/\(walk.id)", [String: String]())
-                Haptics.success()
-                model.show(L("Je doet mee! Neem je ID mee."))
+                model.celebrate(.wag(L("Je doet mee! Neem je ID mee.")))
             }
             await changed()
         } catch {

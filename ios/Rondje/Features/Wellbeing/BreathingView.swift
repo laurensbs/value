@@ -28,7 +28,7 @@ struct BreathingView: View {
                     .fill(Palette.ball)
                     .frame(width: 280, height: 280)
                     .scaleEffect(reduceMotion ? 0.7 : (expanded ? 1 : 0.45))
-                DogFace(look: IntroView.golden).frame(width: 110, height: 110)
+                Guus(mood: inhale ? .calm : .sleepy, size: 110, hop: false)
             }
             Text(inhale ? L("Adem in") : L("Adem uit"))
                 .font(.title2.weight(.semibold))

@@ -208,8 +208,7 @@ struct AddDogView: View {
         )
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/my-dogs", body)
-            Haptics.success()
-            model.show(L("\(name) staat erop!"), symbol: "pawprint.fill")
+            model.celebrate(.party(L("\(name) staat erop!")))
             await saved()
             dismiss()
         } catch {

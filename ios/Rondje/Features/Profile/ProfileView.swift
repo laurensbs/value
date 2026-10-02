@@ -123,6 +123,28 @@ struct ProfileView: View {
             Divider().padding(.leading, 56)
             NavigationLink { EditProfileView() } label: { row("pencil", L("Profiel bewerken"), nil) }
             Divider().padding(.leading, 56)
+            Toggle(isOn: Binding(get: { Keepsakes.shared.coachOn }, set: { Keepsakes.shared.coachOn = $0 })) {
+                HStack(spacing: 14) {
+                    Image(systemName: "pawprint.circle.fill")
+                        .frame(width: 28)
+                        .foregroundStyle(Palette.grass)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text("Guus mag tips geven").foregroundStyle(Palette.ink)
+                        Text("Guus is de hond die je steeds de volgende stap laat zien.").font(.caption).foregroundStyle(Palette.muted)
+                    }
+                }
+            }
+            .tint(Palette.grass)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            Divider().padding(.leading, 56)
+            Button {
+                Keepsakes.shared.resetHints()
+                model.show(L("Guus legt het straks weer uit"))
+            } label: {
+                row("arrow.counterclockwise", L("Laat Guus alles opnieuw uitleggen"), nil)
+            }
+            Divider().padding(.leading, 56)
             Button { openURL(Brand.web("/safety")) } label: { row("shield.lefthalf.filled", L("Veiligheid"), nil, external: true) }
             Divider().padding(.leading, 56)
             Button { openURL(Brand.web("/legal/privacy")) } label: { row("hand.raised.fill", L("Privacy en voorwaarden"), nil, external: true) }

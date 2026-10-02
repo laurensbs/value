@@ -16,6 +16,10 @@ final class AppModel {
     var banner: Banner?
     /// The last refresh failed: the screens show saved data.
     var offline = false
+    /// A step Guus or a notification asked for; the screen that handles it takes it (see CoachAction).
+    var pendingAction: CoachAction?
+    /// The celebration on screen right now, if any (see Celebration.swift).
+    var celebration: CelebrationEvent?
 
     enum Tab: Hashable { case discover, home, appointments, profile }
 
@@ -50,6 +54,7 @@ final class AppModel {
             default: break
             }
         }
+        NotificationRouter.shared.onAction = { [weak self] action in self?.perform(action) }
         NotificationCenter.default.addObserver(forName: .rondjeSignedOut, object: nil, queue: .main) { [weak self] _ in
             MainActor.assumeIsolated { self?.reset() }
         }
@@ -123,6 +128,7 @@ final class AppModel {
         SharedStore.save(nil)
         Cache.clear()
         MoodStore.clear()
+        Keepsakes.shared.clear()
         Reminders.clearAll()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut

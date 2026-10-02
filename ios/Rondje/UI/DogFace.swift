@@ -1,10 +1,17 @@
 import SwiftUI
 
+/// How an illustrated dog looks right now. Only the eyes, brows, cheeks and mouth change; the dog stays itself.
+/// `uneasy` shows the white of the eye and a tight mouth, for the lessons about body language.
+enum DogMood: String, Sendable, CaseIterable {
+    case neutral, happy, proud, curious, calm, sleepy, uneasy
+}
+
 /// Flat front-facing dog portrait, a direct port of the website's DogFace (web/src/components/DogFace.tsx).
 /// Drawn on a 120 × 120 grid and scaled to any size.
 struct DogFace: View {
     var look: DogLook
     var blink = false
+    var mood: DogMood = .neutral
 
     var body: some View {
         Canvas { ctx, size in
@@ -90,25 +97,15 @@ struct DogFace: View {
             ctx.fill(ellipse(60 + eyeDx, eyeY - 8, 3.4, 2.3), with: .color(Color(css: brows)))
         }
 
-        if blink {
-            var lids = Path()
-            lids.move(to: CGPoint(x: 60 - eyeDx - 4, y: eyeY)); lids.addLine(to: CGPoint(x: 60 - eyeDx + 4, y: eyeY))
-            lids.move(to: CGPoint(x: 60 + eyeDx - 4, y: eyeY)); lids.addLine(to: CGPoint(x: 60 + eyeDx + 4, y: eyeY))
-            ctx.stroke(lids, with: .color(ink), style: StrokeStyle(lineWidth: 2.4, lineCap: .round))
-        } else {
-            if Self.isDark(look.fur) {
-                // On a dark coat the eyes need a light rim, or they disappear.
-                ctx.fill(ellipse(60 - eyeDx, eyeY, 5.8, 5.8), with: .color(Color(hex: 0x8A7D78)))
-                ctx.fill(ellipse(60 + eyeDx, eyeY, 5.8, 5.8), with: .color(Color(hex: 0x8A7D78)))
-            }
-            ctx.fill(ellipse(60 - eyeDx, eyeY, 4.3, 4.3), with: .color(ink))
-            ctx.fill(ellipse(60 + eyeDx, eyeY, 4.3, 4.3), with: .color(ink))
-            ctx.fill(ellipse(60 - eyeDx + 1.5, eyeY - 1.4, 1.4, 1.4), with: .color(.white))
-            ctx.fill(ellipse(60 + eyeDx + 1.5, eyeY - 1.4, 1.4, 1.4), with: .color(.white))
-        }
+        drawEyes(in: &ctx, eyeDx: eyeDx, eyeY: eyeY, ink: ink, fur: fur)
 
         ctx.fill(ellipse(60, h.mcy, h.mrx, h.mry), with: .color(Color(css: look.muzzle)))
-        if look.tongue == true {
+        if mood == .proud {
+            let blush = Color(hex: 0xE8798A).opacity(0.35)
+            ctx.fill(ellipse(60 - eyeDx - 3, eyeY + 7, 5, 3), with: .color(blush))
+            ctx.fill(ellipse(60 + eyeDx + 3, eyeY + 7, 5, 3), with: .color(blush))
+        }
+        if showsTongue {
             var t = Path()
             t.move(to: CGPoint(x: 55.5, y: h.mcy + 4.5))
             t.addQuadCurve(to: CGPoint(x: 64.5, y: h.mcy + 4.5), control: CGPoint(x: 60, y: h.mcy + 15.5))
@@ -118,10 +115,16 @@ struct DogFace: View {
         ctx.fill(ellipse(60, noseY, 7, 5), with: .color(ink))
         ctx.fill(ellipse(58, noseY - 1.6, 2.2, 1.2), with: .color(.white.opacity(0.35)))
         var mouth = Path()
-        mouth.move(to: CGPoint(x: 60, y: noseY + 5)); mouth.addLine(to: CGPoint(x: 60, y: noseY + 9))
-        mouth.addQuadCurve(to: CGPoint(x: 51, y: noseY + 10), control: CGPoint(x: 55, y: noseY + 13))
-        mouth.move(to: CGPoint(x: 60, y: noseY + 9))
-        mouth.addQuadCurve(to: CGPoint(x: 69, y: noseY + 10), control: CGPoint(x: 65, y: noseY + 13))
+        if mood == .uneasy {
+            // A tight, flat mouth instead of the relaxed curves.
+            mouth.move(to: CGPoint(x: 60, y: noseY + 5)); mouth.addLine(to: CGPoint(x: 60, y: noseY + 10))
+            mouth.move(to: CGPoint(x: 55, y: noseY + 10)); mouth.addLine(to: CGPoint(x: 65, y: noseY + 10))
+        } else {
+            mouth.move(to: CGPoint(x: 60, y: noseY + 5)); mouth.addLine(to: CGPoint(x: 60, y: noseY + 9))
+            mouth.addQuadCurve(to: CGPoint(x: 51, y: noseY + 10), control: CGPoint(x: 55, y: noseY + 13))
+            mouth.move(to: CGPoint(x: 60, y: noseY + 9))
+            mouth.addQuadCurve(to: CGPoint(x: 69, y: noseY + 10), control: CGPoint(x: 65, y: noseY + 13))
+        }
         ctx.stroke(mouth, with: .color(ink), style: StrokeStyle(lineWidth: 2, lineCap: .round))
 
         let collar = Path(roundedRect: CGRect(x: 60 - h.rx * 0.68, y: collarY, width: h.rx * 1.36, height: 7), cornerRadius: 3.5)
@@ -130,12 +133,103 @@ struct DogFace: View {
         ctx.fill(tag, with: .color(Color(hex: 0xE9C46A)))
         ctx.stroke(tag, with: .color(ink), lineWidth: 1.5)
     }
+    /// Happy and proud dogs always show their tongue; the quieter moods never do.
+    private var showsTongue: Bool {
+        switch mood {
+        case .neutral: look.tongue == true
+        case .happy, .proud: true
+        case .curious, .calm, .sleepy, .uneasy: false
+        }
+    }
+
+    /// Blinking only makes sense for open eyes.
+    private var blinks: Bool {
+        blink && [.neutral, .curious, .calm, .uneasy].contains(mood)
+    }
+
+    /// Draws both eyes (and the brows that belong to a mood) at `60 ± eyeDx`.
+    private func drawEyes(in ctx: inout GraphicsContext, eyeDx: CGFloat, eyeY: CGFloat, ink: Color, fur: Color) {
+        let centres = [60 - eyeDx, 60 + eyeDx]
+        // Lines (closed eyes, brows, lids) in ink, or light on a dark coat where ink would vanish.
+        let line = Self.isDark(look.fur) ? Color(hex: 0xC9BEB8) : ink
+
+        func lines(dy: CGFloat, sag: CGFloat) {
+            var lids = Path()
+            for x in centres {
+                lids.move(to: CGPoint(x: x - 4, y: eyeY + dy))
+                lids.addQuadCurve(to: CGPoint(x: x + 4, y: eyeY + dy), control: CGPoint(x: x, y: eyeY + dy + sag * 2))
+            }
+            ctx.stroke(lids, with: .color(line), style: StrokeStyle(lineWidth: 2.4, lineCap: .round))
+        }
+
+        func arcs(width: CGFloat, height: CGFloat, lineWidth: CGFloat) {
+            // An upward arc: the ends low, the middle `height` higher.
+            var p = Path()
+            for x in centres {
+                p.move(to: CGPoint(x: x - width / 2, y: eyeY + height / 2))
+                p.addQuadCurve(to: CGPoint(x: x + width / 2, y: eyeY + height / 2), control: CGPoint(x: x, y: eyeY - height * 1.5))
+            }
+            ctx.stroke(p, with: .color(line), style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
+        }
+
+        func open(dx: CGFloat = 0, dy: CGFloat = 0, whites: Bool = false) {
+            for x in centres {
+                if Self.isDark(look.fur) {
+                    // On a dark coat the eyes need a light rim, or they disappear.
+                    ctx.fill(ellipse(x, eyeY, 5.8, 5.8), with: .color(Color(hex: 0x8A7D78)))
+                }
+                if whites { ctx.fill(ellipse(x, eyeY, 5.2, 5.2), with: .color(.white)) }
+                ctx.fill(ellipse(x + dx, eyeY + dy, 4.3, 4.3), with: .color(ink))
+                ctx.fill(ellipse(x + dx + 1.5, eyeY + dy - 1.4, 1.4, 1.4), with: .color(.white))
+            }
+        }
+
+        if blinks {
+            lines(dy: 0, sag: 0)
+            return
+        }
+        switch mood {
+        case .neutral:
+            open()
+        case .happy:
+            arcs(width: 9, height: 4, lineWidth: 2.6)
+        case .proud:
+            arcs(width: 10, height: 3.5, lineWidth: 2.4)
+        case .curious:
+            open(dy: -1)
+            var brow = Path()
+            let x = centres[0]
+            brow.move(to: CGPoint(x: x - 5, y: eyeY - 9))
+            brow.addQuadCurve(to: CGPoint(x: x + 5, y: eyeY - 10), control: CGPoint(x: x, y: eyeY - 15))
+            ctx.stroke(brow, with: .color(line), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+        case .calm:
+            open()
+            // Heavy lids: fur over the top half of each eye, and the lid's edge across the middle.
+            let lidColours = [fur, look.patch.map { Color(css: $0) } ?? fur]
+            var edge = Path()
+            for (x, colour) in zip(centres, lidColours) {
+                ctx.fill(Path(CGRect(x: x - 6.4, y: eyeY - 6.4, width: 12.8, height: 6.4)), with: .color(colour))
+                edge.move(to: CGPoint(x: x - 5, y: eyeY)); edge.addLine(to: CGPoint(x: x + 5, y: eyeY))
+            }
+            ctx.stroke(edge, with: .color(line), style: StrokeStyle(lineWidth: 2.2, lineCap: .round))
+        case .sleepy:
+            lines(dy: 1, sag: 1)
+        case .uneasy:
+            // Whale eye: the pupils look aside, so the white shows on the other side.
+            open(dx: -1.8, whites: true)
+            var brows = Path()
+            brows.move(to: CGPoint(x: centres[0] - 5, y: eyeY - 8)); brows.addLine(to: CGPoint(x: centres[0] + 3, y: eyeY - 11))
+            brows.move(to: CGPoint(x: centres[1] + 5, y: eyeY - 8)); brows.addLine(to: CGPoint(x: centres[1] - 3, y: eyeY - 11))
+            ctx.stroke(brows, with: .color(line), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+        }
+    }
 }
 
 /// A dog's portrait on its coloured tile, or its photo when it has one. Blinks now and then.
 struct DogPortrait: View {
     var look: DogLook
     var photoURL: URL? = nil
+    var mood: DogMood = .neutral
     var cornerRadius: CGFloat = 24
     /// Room around the illustrated face, as a share of the tile's shorter side.
     var inset: CGFloat = 0.07
@@ -170,11 +264,11 @@ struct DogPortrait: View {
                     if let image = phase.image {
                         image.resizable().scaledToFill()
                     } else {
-                        DogFace(look: look, blink: blink).padding(pad)
+                        DogFace(look: look, blink: blink, mood: mood).padding(pad)
                     }
                 }
             } else {
-                DogFace(look: look, blink: blink).padding(pad)
+                DogFace(look: look, blink: blink, mood: mood).padding(pad)
             }
         }
     }

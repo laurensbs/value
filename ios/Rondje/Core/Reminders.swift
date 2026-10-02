@@ -55,12 +55,25 @@ enum Reminders {
 final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unchecked Sendable {
     static let shared = NotificationRouter()
     var onOpen: (@MainActor (String) -> Void)?
+    /// For notifications that carry an "action" link (see CoachAction.init(link:)).
+    var onAction: (@MainActor (CoachAction) -> Void)?
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let info = response.notification.request.content.userInfo
         // Local reminders say which tab; pushes from the server carry the website path ("/chat/…", "/walk/…").
         let tab = info["tab"] as? String ?? Push.tab(forPath: info["url"] as? String ?? "")
-        await MainActor.run { onOpen?(tab) }
+        let link = info["action"] as? String
+        await MainActor.run {
+            if let action = link.flatMap(CoachAction.init(link:)) {
+                onAction?(action)
+            } else {
+                onOpen?(tab)
+            }
+        }
+        NotificationCenter.default.post(name: .rondjeNotificationOpened, object: nil, userInfo: [
+            "kind": info["kind"] as? String ?? "",
+            "actionIdentifier": response.actionIdentifier,
+        ])
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {

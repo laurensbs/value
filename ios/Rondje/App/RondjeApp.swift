@@ -15,6 +15,7 @@ struct RondjeApp: App {
                 .tint(Palette.grass)
                 .task { await model.bootstrap() }
                 .onChange(of: scenePhase) { _, phase in
+                    if phase == .active { Keepsakes.shared.recordVisit() }
                     if phase == .active, model.phase == .ready { Task { await model.refreshMe() } }
                 }
         }
@@ -47,6 +48,9 @@ struct RootView: View {
                         withAnimation(.easeOut) { model.banner = nil }
                     }
                     .zIndex(10)
+            }
+            if let event = model.celebration {
+                CelebrationOverlay(event: event).zIndex(11)
             }
         }
         .animation(.smooth(duration: 0.45), value: model.phase)
@@ -106,6 +110,7 @@ struct MainTabs: View {
         }
         .onChange(of: model.role) { fitTab() }
         .onChange(of: walk.isActive) { _, active in if active { showWalk = true } }
+        .coachRoutes(blocked: showWalk || progress.celebrate != nil)
     }
 
     /// Owners start at home, walkers at Discover; never on a tab that is not there.

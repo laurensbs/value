@@ -577,3 +577,9 @@ T = {
         "Pour voir les chiens près de chez toi, et pendant une balade le propriétaire peut suivre en direct. Ta position exacte n'apparaît jamais sur ton profil.",
         "Para ver perros cerca de ti, y durante un paseo el dueño puede seguirlo en directo. Tu ubicación exacta nunca aparece en tu perfil."),
 }
+
+# Each build unit adds its own keys in design/translations_<unit>.py (a dict T); they are merged here.
+import glob as _glob, importlib as _importlib, os as _os, sys as _sys
+_here = _os.path.dirname(_os.path.abspath(__file__))
+if _here not in _sys.path: _sys.path.insert(0, _here)
+for _p in sorted(_glob.glob(_os.path.join(_here, 'translations_*.py'))): T.update(_importlib.import_module(_os.path.basename(_p)[:-3]).T)
