@@ -257,7 +257,30 @@ struct LiveWalk: Codable, Sendable {
     var endedAt: Date?
     var lastAt: Date?
     var overdueMin: Int
+    var care: Care?
+    var photos: [WalkPhoto]?
     var points: [LivePoint]
+}
+
+/// The walk report: how often the dog peed, pooped and drank (0 to 20 each).
+struct Care: Codable, Hashable, Sendable {
+    var pee = 0
+    var poo = 0
+    var water = 0
+
+    subscript(kind: String) -> Int {
+        switch kind {
+        case "pee": pee
+        case "poo": poo
+        default: water
+        }
+    }
+}
+
+struct WalkPhoto: Codable, Identifiable, Hashable, Sendable {
+    var id: String
+    var url: String
+    var t: Double
 }
 
 struct WalkStarted: Codable, Sendable { var walkId: String }

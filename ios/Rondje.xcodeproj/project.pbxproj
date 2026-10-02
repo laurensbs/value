@@ -36,6 +36,7 @@
 		92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */; };
 		9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A13AA036854983EE311380 /* Reminders.swift */; };
+		9CDA95671502696AA356E081 /* WalkReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */; };
 		A5B062402B7D781A373CFD12 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
 		B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24382B16C639D32D509682 /* EditProfileView.swift */; };
 		BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96821FF9F74F149B48CEA05 /* DogFace.swift */; };
@@ -43,6 +44,7 @@
 		C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABF8650A285AB54D3700A6 /* QuizView.swift */; };
 		CCEFB44617D607D474DA62B3 /* RondjeWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */; };
 		D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
+		DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19F92B1AB52E54BEE189E52 /* ImageTools.swift */; };
 		E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38BF1BFD0974FB881BD72B /* Models.swift */; };
 		EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F8B3EE6862459619E1EDC /* Components.swift */; };
 		F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */; };
@@ -110,10 +112,12 @@
 		A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeWidgets.swift; sourceTree = "<group>"; };
 		A5CD5CF06280BE763D95E942 /* DogDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailView.swift; sourceTree = "<group>"; };
 		AB627D88D88D1EB0404E149F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkReport.swift; sourceTree = "<group>"; };
 		C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeApp.swift; sourceTree = "<group>"; };
 		C38AD4205552639E40224CBC /* RequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSheet.swift; sourceTree = "<group>"; };
 		CBB7E66E9A9FD4894A0298B5 /* RondjeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RondjeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE38BF1BFD0974FB881BD72B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D19F92B1AB52E54BEE189E52 /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
 		E05B78B489C3C4D7955EFF48 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 			children = (
 				847F8B3EE6862459619E1EDC /* Components.swift */,
 				F96821FF9F74F149B48CEA05 /* DogFace.swift */,
+				D19F92B1AB52E54BEE189E52 /* ImageTools.swift */,
 				FD670507F95B7E0867549B73 /* Theme.swift */,
 			);
 			path = UI;
@@ -213,6 +218,7 @@
 			children = (
 				1894A396998000A3824F47B3 /* ActiveWalkView.swift */,
 				83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */,
+				ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */,
 			);
 			path = Walk;
 			sourceTree = "<group>";
@@ -454,6 +460,7 @@
 				B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */,
 				3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */,
 				F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */,
+				DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */,
 				89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */,
 				4660BE55365FF96EE9B1FD6E /* LocationService.swift in Sources */,
 				50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */,
@@ -468,6 +475,7 @@
 				320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */,
 				D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */,
 				31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */,
+				9CDA95671502696AA356E081 /* WalkReport.swift in Sources */,
 				F5113606F3E26750DF757621 /* WalkTracker.swift in Sources */,
 				8FC260210FFB86EA81151AB5 /* WelcomeView.swift in Sources */,
 			);

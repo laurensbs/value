@@ -215,10 +215,14 @@ struct AppointmentCard: View {
             let started: WalkStarted = try await APIClient.shared.post("/api/v1/walks", ["requestId": item.id])
             // The vet's details come from the dog's page, which the walker may see after acceptance.
             let detail: DogDetail? = try? await APIClient.shared.get("/api/v1/dogs/\(item.dog.id)")
+            // When continuing a walk, the timer and planned end come from the server, not from now.
+            let live: LiveWalk? = item.walkStatus == "active"
+                ? try? await APIClient.shared.get("/api/walks/\(started.walkId)/live?after=999999999")
+                : nil
             Haptics.success()
             walk.start(.init(
-                walkId: started.walkId, dogName: item.dog.name, look: item.dog.look, startedAt: .now,
-                plannedEnd: .now.addingTimeInterval(Double(item.durationMin) * 60),
+                walkId: started.walkId, dogName: item.dog.name, look: item.dog.look, startedAt: live?.startedAt ?? .now,
+                plannedEnd: live?.plannedEndAt ?? .now.addingTimeInterval(Double(item.durationMin) * 60),
                 ownerName: item.host?.name, ownerPhone: item.host?.phone, vetInfo: detail?.dog.vetInfo
             ))
             await model.refreshAppointments()

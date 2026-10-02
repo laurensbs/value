@@ -10,6 +10,8 @@ struct ActiveWalkView: View {
     @State private var ending = false
     @State private var finished: (walkId: String, distance: Int, dog: String)?
     @State private var holdProgress: CGFloat = 0
+    @State private var care = Care()
+    @State private var photos: [WalkPhoto] = []
     @State private var error: String?
 
     var body: some View {
@@ -94,10 +96,20 @@ struct ActiveWalkView: View {
                     .font(.footnote).foregroundStyle(Palette.muted)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+            CareCounters(walkId: info.walkId, care: $care)
+            if !photos.isEmpty { PhotoStrip(photos: photos) }
+            SendPhotoButton(walkId: info.walkId) { photo in photos.append(photo) }
             ErrorText(message: error)
             holdToEnd
         }
         .padding(20)
+        .task(id: info.walkId) {
+            // After a restart mid-walk: pick up the report and photos so far.
+            if let live: LiveWalk = try? await APIClient.shared.get("/api/walks/\(info.walkId)/live?after=999999999") {
+                care = live.care ?? Care()
+                photos = live.photos ?? []
+            }
+        }
         .glassy(cornerRadius: 32)
         .padding(.horizontal, 12)
         .padding(.bottom, 8)

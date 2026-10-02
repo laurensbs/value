@@ -8,6 +8,7 @@ struct FollowWalkView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var live: LiveWalk?
     @State private var points: [LivePoint] = []
+    @State private var photos: [WalkPhoto] = []
     @State private var camera: MapCameraPosition = .automatic
     @State private var error: String?
 
@@ -41,6 +42,8 @@ struct FollowWalkView: View {
                                 Text("Laatste plek \(lastAt, style: .relative) geleden").font(.caption).foregroundStyle(Palette.muted)
                             }
                         }
+                        if let care = live.care { CareSummary(care: care) }
+                        if !photos.isEmpty { PhotoStrip(photos: photos) }
                         if live.overdueMin > 0 {
                             Label("\(live.overdueMin) minuten over tijd. Bel even als je je zorgen maakt.", systemImage: "clock.badge.exclamationmark")
                                 .font(.subheadline).foregroundStyle(Palette.warn)
@@ -69,8 +72,13 @@ struct FollowWalkView: View {
         while !Task.isCancelled {
             do {
                 let after = points.last?.id ?? 0
-                let update: LiveWalk = try await APIClient.shared.get("/api/walks/\(walkId)/live?after=\(after)")
+                let photosAfter = Int(photos.last?.t ?? 0)
+                let update: LiveWalk = try await APIClient.shared.get("/api/walks/\(walkId)/live?after=\(after)&photosAfter=\(photosAfter)")
                 live = update
+                if let new = update.photos, !new.isEmpty {
+                    if !photos.isEmpty { Haptics.soft() }
+                    withAnimation { photos.append(contentsOf: new.filter { p in !photos.contains { $0.id == p.id } }) }
+                }
                 if !update.points.isEmpty {
                     points.append(contentsOf: update.points)
                     if let last = coordinates.last { withAnimation { camera = .camera(MapCamera(centerCoordinate: last, distance: 1200)) } }

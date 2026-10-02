@@ -34,6 +34,8 @@
 	<string>Zo zie je honden bij jou in de buurt, en tijdens een rondje kan de eigenaar live meekijken. Je precieze plek wordt nooit op je profiel getoond.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Alleen tijdens een rondje: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Om tijdens een rondje een foto naar de eigenaar te sturen. Alleen de foto's die jij verstuurt, gaan naar de eigenaar.</string>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
 	<key>UIBackgroundModes</key>
