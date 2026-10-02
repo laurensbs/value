@@ -55,52 +55,75 @@ struct DiscoverView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    header
-                    FirstSteps { quiz = true }
-                    if let p = progress.progress, p.points > 0 {
-                        NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        header
+                        NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || (!loading && error == nil))
+                        FirstSteps { quiz = true }
+                        if let p = progress.progress, p.points > 0 {
+                            NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
+                        }
+                        if let c = progress.challenges { ChallengeCard(challenges: c) }
+                        DailyTip()
+                        filters
+                            .id("filters")
+                        if showMap {
+                            DogsMap(dogs: visible) { path.append($0) }
+                                .frame(height: 460)
+                                .clipShape(.rect(cornerRadius: 28, style: .continuous))
+                                .transition(.scale(scale: 0.96).combined(with: .opacity))
+                        } else {
+                            list
+                        }
+                        if !groupWalks.isEmpty { groupWalksSection }
                     }
-                    if let c = progress.challenges { ChallengeCard(challenges: c) }
-                    DailyTip()
-                    filters
-                    if showMap {
-                        DogsMap(dogs: visible) { path.append($0) }
-                            .frame(height: 460)
-                            .clipShape(.rect(cornerRadius: 28, style: .continuous))
-                            .transition(.scale(scale: 0.96).combined(with: .opacity))
-                    } else {
-                        list
-                    }
-                    if !groupWalks.isEmpty { groupWalksSection }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 32)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 32)
-            }
-            .screenBackground()
-            .refreshable { await load() }
-            .searchable(text: $query, prompt: L("Zoek op naam, ras of plaats"))
-            .navigationTitle("Ontdek")
-            .toolbarTitleDisplayMode(.inlineLarge)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        withAnimation(.snappy) { showMap.toggle() }
-                    } label: {
-                        Image(systemName: showMap ? "list.bullet" : "map")
-                            .contentTransition(.symbolEffect(.replace))
+                .screenBackground()
+                .refreshable { await load() }
+                .searchable(text: $query, prompt: L("Zoek op naam, ras of plaats"))
+                .navigationTitle("Ontdek")
+                .toolbarTitleDisplayMode(.inlineLarge)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            withAnimation(.snappy) { showMap.toggle() }
+                        } label: {
+                            Image(systemName: showMap ? "list.bullet" : "map")
+                                .contentTransition(.symbolEffect(.replace))
+                        }
+                        .accessibilityLabel(showMap ? L("Toon lijst") : L("Toon kaart"))
                     }
-                    .accessibilityLabel(showMap ? L("Toon lijst") : L("Toon kaart"))
                 }
-            }
-            .navigationDestination(for: DogCard.self) { dog in
-                DogDetailView(dogId: dog.id, preview: dog)
-                    .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
-            }
-            .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
-            .sheet(isPresented: $quiz, onDismiss: { Task { await model.refreshMe() } }) {
-                NavigationStack { QuizView() }
+                .navigationDestination(for: DogCard.self) { dog in
+                    DogDetailView(dogId: dog.id, preview: dog)
+                        .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
+                }
+                .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
+                .sheet(isPresented: $quiz, onDismiss: { Task { await model.refreshMe() } }) {
+                    NavigationStack { QuizView() }
+                }
+                .onChange(of: model.pendingAction, initial: true) {
+                    // Guus (or a notification) asked for calm dogs, or for one dog.
+                    if let calm = model.take({ action -> Bool? in
+                        if case .discover(let calm) = action { return calm }
+                        return nil
+                    }) {
+                        path = NavigationPath()
+                        withAnimation(.snappy) {
+                            showMap = false
+                            filter = calm ? .calm : .all
+                        }
+                        withAnimation(.snappy) { proxy.scrollTo("filters", anchor: .top) }
+                    } else if let id = model.take({ action -> String? in
+                        if case .dog(let id) = action { return id }
+                        return nil
+                    }) {
+                        path.append(id)
+                    }
+                }
             }
         }
         .task { await progress.load() }
