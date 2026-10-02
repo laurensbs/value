@@ -60,7 +60,7 @@ struct OnboardingView: View {
                 Button {
                     next()
                 } label: {
-                    if busy { ProgressView().tint(Palette.onGrass) } else { Text(step == steps - 1 ? "Klaar, laat me honden zien" : "Verder") }
+                    if busy { ProgressView().tint(Palette.onGrass) } else { Text(step == steps - 1 ? L("Klaar, laat me honden zien") : L("Verder")) }
                 }
                 .buttonStyle(.primary)
                 .disabled(!canContinue || busy)
@@ -86,8 +86,8 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Wat brengt je hier?").font(.display(30))
             Text("Je kunt allebei aanzetten.").foregroundStyle(Palette.muted)
-            choice("Ik wil wandelen", "Met een hond van iemand uit de buurt of uit de opvang.", "figure.walk", isOn: $wantsToWalk)
-            choice("Ik heb een hond", "Of ik regel het voor een buurvrouw, opa of oma.", "pawprint.fill", isOn: $hasDogs)
+            choice(L("Ik wil wandelen"), L("Met een hond van iemand uit de buurt of uit de opvang."), "figure.walk", isOn: $wantsToWalk)
+            choice(L("Ik heb een hond"), L("Of ik regel het voor een buurvrouw, opa of oma."), "pawprint.fill", isOn: $hasDogs)
         }
     }
 
@@ -100,12 +100,12 @@ struct OnboardingView: View {
                 .background(Palette.surface, in: .rect(cornerRadius: 16, style: .continuous))
             Card {
                 DatePicker("Geboortedatum", selection: $birthDate, in: ...Date.now, displayedComponents: .date)
-                    .environment(\.locale, Format.dutch)
+                    .environment(\.locale, Format.locale)
                 Text("Anderen zien alleen je leeftijdsgroep, nooit je geboortedatum.")
                     .font(.footnote).foregroundStyle(Palette.muted)
             }
             if birthDate > adultCutoff {
-                ErrorText(message: "\(Brand.name) is voor mensen van 18 jaar en ouder.")
+                ErrorText(message: L("\(Brand.name) is voor mensen van 18 jaar en ouder."))
             }
             Text("Hoeveel ervaring heb je met honden?").font(.headline).padding(.top, 4)
             Picker("Ervaring", selection: $experience) {
@@ -135,7 +135,7 @@ struct OnboardingView: View {
             Button {
                 Task { await locate() }
             } label: {
-                Label(position == nil ? "Gebruik mijn buurt" : "Buurt opgeslagen (afgerond op 1 km)", systemImage: position == nil ? "location.fill" : "checkmark.circle.fill")
+                Label(position == nil ? L("Gebruik mijn buurt") : L("Buurt opgeslagen (afgerond op 1 km)"), systemImage: position == nil ? "location.fill" : "checkmark.circle.fill")
             }
             .buttonStyle(.secondary)
             .disabled(locating)
@@ -146,11 +146,11 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Zo houden we het veilig").font(.display(30))
             Card {
-                rule("person.2.fill", "Eerst kennismaken, met de eigenaar of de opvang erbij.")
-                rule("person.text.rectangle", "De eigenaar ziet je ID in het echt. \(Brand.name) bewaart geen kopie.")
-                rule("link", "Altijd aan de lijn, tenzij de eigenaar het anders zegt.")
-                rule("eurosign.circle", "Geen geld: \(Brand.name) is gratis, voor iedereen.")
-                rule("exclamationmark.bubble.fill", "Gebeurt er iets? Meld het meteen in de app.")
+                rule("person.2.fill", L("Eerst kennismaken, met de eigenaar of de opvang erbij."))
+                rule("person.text.rectangle", L("De eigenaar ziet je ID in het echt. \(Brand.name) bewaart geen kopie."))
+                rule("link", L("Altijd aan de lijn, tenzij de eigenaar het anders zegt."))
+                rule("eurosign.circle", L("Geen geld: \(Brand.name) is gratis, voor iedereen."))
+                rule("exclamationmark.bubble.fill", L("Gebeurt er iets? Meld het meteen in de app."))
             }
             Toggle(isOn: $termsAccepted.animation(.snappy)) {
                 Text("Ik ga akkoord met de voorwaarden, de privacyverklaring en de gedragscode.")
@@ -207,7 +207,7 @@ struct OnboardingView: View {
             try? await Task.sleep(for: .milliseconds(300))
         }
         position = await LocationService.shared.roughPosition()
-        if position == nil { error = "Je locatie is niet beschikbaar. Vul je plaats in; dat is genoeg." }
+        if position == nil { error = L("Je locatie is niet beschikbaar. Vul je plaats in; dat is genoeg.") }
     }
 
     private func next() {

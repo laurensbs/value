@@ -93,11 +93,11 @@ struct NextWalkView: View {
 
     private func details(_ next: NextWalkSnapshot) -> some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(next.kind == "meet" ? "Kennismaken" : "Rondje").font(.caption.weight(.semibold)).foregroundStyle(Palette.grass)
+            Text(next.kind == "meet" ? L("Kennismaken") : L("Rondje")).font(.caption.weight(.semibold)).foregroundStyle(Palette.grass)
             Text(next.dogName).font(.system(.title3, design: .rounded).weight(.bold)).foregroundStyle(Palette.ink)
             Text(next.startsAt, format: .dateTime.weekday(.abbreviated).hour().minute())
                 .font(.caption).foregroundStyle(Palette.muted)
-                .environment(\.locale, Locale(identifier: "nl_NL"))
+                .environment(\.locale, Locale.autoupdatingCurrent)
         }
     }
 }
@@ -116,7 +116,7 @@ struct WalkLiveActivity: Widget {
                 .clipShape(.rect(cornerRadius: 16, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Rondje met \(context.attributes.dogName)").font(.headline)
-                    Text(context.state.overdue ? "Over tijd: laat even iets weten" : "De eigenaar kijkt mee")
+                    Text(context.state.overdue ? L("Over tijd: laat even iets weten") : L("De eigenaar kijkt mee"))
                         .font(.caption)
                         .foregroundStyle(context.state.overdue ? Palette.warn : .secondary)
                 }
@@ -139,7 +139,7 @@ struct WalkLiveActivity: Widget {
                     Text(context.attributes.startedAt, style: .timer).monospacedDigit().frame(width: 70)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text(distance(context.state.distanceM) + " gelopen").font(.caption)
+                    Text(distance(context.state.distanceM) + L(" gelopen")).font(.caption)
                 }
             } compactLeading: {
                 Image(systemName: "pawprint.fill").foregroundStyle(Palette.ball)
@@ -152,6 +152,6 @@ struct WalkLiveActivity: Widget {
     }
 
     private func distance(_ m: Int) -> String {
-        m < 1000 ? "\(m) m" : String(format: "%.1f km", Double(m) / 1000).replacingOccurrences(of: ".", with: ",")
+        m < 1000 ? L("\(m) m") : String(format: L("%.1f km"), Double(m) / 1000).replacingOccurrences(of: ".", with: ",")
     }
 }

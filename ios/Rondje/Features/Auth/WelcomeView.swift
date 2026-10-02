@@ -37,8 +37,8 @@ struct WelcomeView: View {
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Palette.ink)
                 HStack(spacing: 8) {
-                    Chip(text: "Gratis", symbol: "heart.fill")
-                    Chip(text: "Geen reclame", symbol: "hand.raised.fill", tint: Palette.calm, soft: Palette.calmSoft)
+                    Chip(text: L("Gratis"), symbol: "heart.fill")
+                    Chip(text: L("Geen reclame"), symbol: "hand.raised.fill", tint: Palette.calm, soft: Palette.calmSoft)
                     Chip(text: "18+", symbol: "checkmark.shield.fill", tint: Palette.warn, soft: Palette.warnSoft)
                 }
             }

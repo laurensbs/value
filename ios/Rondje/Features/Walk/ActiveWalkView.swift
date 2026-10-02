@@ -44,7 +44,7 @@ struct ActiveWalkView: View {
                             Button("Locatie staat uit. Zet hem aan") { openSettings() }
                                 .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
                         } else {
-                            Text(walk.signalWeak ? "Zwak GPS-signaal" : "De eigenaar kan live meekijken")
+                            Text(walk.signalWeak ? L("Zwak GPS-signaal") : L("De eigenaar kan live meekijken"))
                                 .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
                         }
                     }
@@ -92,7 +92,7 @@ struct ActiveWalkView: View {
                 Label("Je bent \(walk.overdueMin) minuten over tijd. De eigenaar heeft een melding gekregen.", systemImage: "clock.badge.exclamationmark")
                     .font(.footnote).foregroundStyle(Palette.warn)
             } else {
-                Label("Terug rond \(info.plannedEnd.formatted(.dateTime.hour().minute().locale(Format.dutch)))", systemImage: "clock")
+                Label("Terug rond \(info.plannedEnd.formatted(.dateTime.hour().minute().locale(Format.locale)))", systemImage: "clock")
                     .font(.footnote).foregroundStyle(Palette.muted)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -120,7 +120,7 @@ struct ActiveWalkView: View {
         ZStack(alignment: .leading) {
             Capsule().fill(Palette.grass)
             Capsule().fill(Palette.ball).frame(width: max(0, holdProgress) * 340).opacity(0.9)
-            Text(ending ? "Bezig met afronden…" : "Houd vast om af te ronden")
+            Text(ending ? L("Bezig met afronden…") : L("Houd vast om af te ronden"))
                 .font(.headline)
                 .foregroundStyle(holdProgress > 0.5 ? Palette.onBall : Palette.onGrass)
                 .frame(maxWidth: .infinity)
@@ -262,14 +262,14 @@ struct FeedbackSheet: View {
 
     private var options: [(String, String, String)] {
         role == .walker
-            ? [("easy", "Makkelijk", "face.smiling"), ("pulled", "Trok wat", "arrow.right"), ("reactive", "Reageerde op andere honden", "exclamationmark"), ("aggressive", "Agressief", "exclamationmark.triangle")]
-            : [("happy", "Blij", "face.smiling"), ("normal", "Gewoon", "circle"), ("stressed", "Gestrest", "exclamationmark"), ("injured", "Gewond", "bandage")]
+            ? [("easy", L("Makkelijk"), "face.smiling"), ("pulled", L("Trok wat"), "arrow.right"), ("reactive", L("Reageerde op andere honden"), "exclamationmark"), ("aggressive", L("Agressief"), "exclamationmark.triangle")]
+            : [("happy", L("Blij"), "face.smiling"), ("normal", L("Gewoon"), "circle"), ("stressed", L("Gestrest"), "exclamationmark"), ("injured", L("Gewond"), "bandage")]
     }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section(role == .walker ? "Hoe was \(dogName)?" : "Hoe was \(dogName) na het rondje?") {
+                Section(role == .walker ? L("Hoe was \(dogName)?") : L("Hoe was \(dogName) na het rondje?")) {
                     ForEach(options, id: \.0) { option in
                         Button {
                             choice = option.0
@@ -284,8 +284,8 @@ struct FeedbackSheet: View {
                     }
                 }
                 Section {
-                    Toggle(role == .walker ? "De overdracht ging goed" : "Op tijd terug", isOn: $yes1)
-                    Toggle(role == .walker ? "Ik voelde me veilig" : "Ik zou het weer doen", isOn: $yes2)
+                    Toggle(role == .walker ? L("De overdracht ging goed") : L("Op tijd terug"), isOn: $yes1)
+                    Toggle(role == .walker ? L("Ik voelde me veilig") : L("Ik zou het weer doen"), isOn: $yes2)
                 }
                 Section {
                     TextField("Nog iets? (optioneel)", text: $note, axis: .vertical).lineLimit(2...5)
@@ -318,7 +318,7 @@ struct FeedbackSheet: View {
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/walks/\(walkId)/feedback", body)
             Haptics.success()
-            model.show("Bedankt voor je antwoord")
+            model.show(L("Bedankt voor je antwoord"))
             close()
         } catch {
             self.error = error.localizedDescription

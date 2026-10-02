@@ -9,9 +9,9 @@ struct CareCounters: View {
     @State private var error: String?
 
     static let kinds: [(id: String, label: String, symbol: String)] = [
-        ("pee", "Plas", "drop.fill"),
-        ("poo", "Poep", "leaf.fill"),
-        ("water", "Gedronken", "cup.and.saucer.fill"),
+        ("pee", L("Plas"), "drop.fill"),
+        ("poo", L("Poep"), "leaf.fill"),
+        ("water", L("Gedronken"), "cup.and.saucer.fill"),
     ]
 
     var body: some View {
@@ -137,7 +137,7 @@ struct SendPhotoButton: View {
     }
 
     private var label: some View {
-        Label(busy ? "Versturen…" : "Stuur een foto", systemImage: "camera.fill")
+        Label(busy ? L("Versturen…") : L("Stuur een foto"), systemImage: "camera.fill")
             .font(.subheadline.weight(.semibold))
             .frame(maxWidth: .infinity, minHeight: 44)
             .foregroundStyle(Palette.ink)

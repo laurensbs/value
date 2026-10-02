@@ -25,9 +25,9 @@ struct AuthView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    Text(mode == .signIn ? "Welkom terug" : "Doe mee met \(Brand.name)")
+                    Text(mode == .signIn ? L("Welkom terug") : L("Doe mee met \(Brand.name)"))
                         .font(.display(30))
-                    Text(mode == .signIn ? "Log in met je e-mailadres." : "Een account is gratis en blijft gratis.")
+                    Text(mode == .signIn ? L("Log in met je e-mailadres.") : L("Een account is gratis en blijft gratis."))
                         .foregroundStyle(Palette.muted)
 
                     VStack(spacing: 12) {
@@ -62,7 +62,7 @@ struct AuthView: View {
                     Button {
                         Task { await submit() }
                     } label: {
-                        if busy { ProgressView().tint(Palette.onGrass) } else { Text(mode == .signIn ? "Inloggen" : "Account maken") }
+                        if busy { ProgressView().tint(Palette.onGrass) } else { Text(mode == .signIn ? L("Inloggen") : L("Account maken")) }
                     }
                     .buttonStyle(.primary)
                     .disabled(!valid || busy)
@@ -78,7 +78,7 @@ struct AuthView: View {
                     }
 
                     Divider().padding(.vertical, 4)
-                    Button(mode == .signIn ? "Nog geen account? Maak er een" : "Al een account? Log in") {
+                    Button(mode == .signIn ? L("Nog geen account? Maak er een") : L("Al een account? Log in")) {
                         withAnimation(.snappy) { mode = mode == .signIn ? .signUp : .signIn; error = nil }
                     }
                     .font(.subheadline.weight(.semibold))

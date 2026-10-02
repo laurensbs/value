@@ -161,27 +161,27 @@ struct BannerView: View {
 
 enum Labels {
     static func energy(_ v: String) -> String {
-        ["calm": "Rustig", "medium": "Gemiddeld", "high": "Energiek"][v] ?? v
+        ["calm": L("Rustig"), "medium": L("Gemiddeld"), "high": L("Energiek")][v] ?? v
     }
     static func size(_ v: String) -> String {
-        ["small": "Klein", "medium": "Middel", "large": "Groot"][v] ?? v
+        ["small": L("Klein"), "medium": L("Middel"), "large": L("Groot")][v] ?? v
     }
     static func level(_ v: String) -> String {
-        v == "experienced" ? "Met ervaring" : "Voor iedereen"
+        v == "experienced" ? L("Met ervaring") : L("Voor iedereen")
     }
-    static func sex(_ v: String) -> String { v == "male" ? "Reu" : "Teef" }
+    static func sex(_ v: String) -> String { v == "male" ? L("Reu") : L("Teef") }
     static func treats(_ v: String) -> String {
-        ["yes": "Koekjes mogen", "no": "Geen koekjes", "own": "Alleen koekjes van de eigenaar"][v] ?? v
+        ["yes": L("Koekjes mogen"), "no": L("Geen koekjes"), "own": L("Alleen koekjes van de eigenaar")][v] ?? v
     }
     static func provides(_ v: String) -> String {
-        ["bags": "Poepzakjes", "leash": "Riem", "water": "Water", "treats": "Koekjes", "harness": "Tuigje", "towel": "Handdoek", "light": "Lampje"][v] ?? v.capitalized
+        ["bags": L("Poepzakjes"), "leash": L("Riem"), "water": L("Water"), "treats": L("Koekjes"), "harness": L("Tuigje"), "towel": L("Handdoek"), "light": L("Lampje")][v] ?? v.capitalized
     }
     static func experience(_ v: String) -> String {
-        ["none": "Nog geen ervaring", "some": "Wat ervaring", "lots": "Veel ervaring"][v] ?? v
+        ["none": L("Nog geen ervaring"), "some": L("Wat ervaring"), "lots": L("Veel ervaring")][v] ?? v
     }
     static func status(_ v: String) -> (String, Color, Color) {
         switch v {
-        case "pending": ("Wacht op antwoord", Palette.warn, Palette.warnSoft)
+        case "pending": (L("Wacht op antwoord"), Palette.warn, Palette.warnSoft)
         case "accepted": ("Geaccepteerd", Palette.grass, Palette.grassSoft)
         case "declined": ("Afgewezen", Palette.danger, Palette.dangerSoft)
         case "completed": ("Gelopen", Palette.calm, Palette.calmSoft)
@@ -191,9 +191,9 @@ enum Labels {
     }
     static func badge(_ v: String) -> (String, String) {
         switch v {
-        case "id-seen": ("ID gezien", "person.text.rectangle.fill")
-        case "quiz": ("Quiz gehaald", "checkmark.seal.fill")
-        case "regular": ("Vaste wandelaar", "star.fill")
+        case "id-seen": (L("ID gezien"), "person.text.rectangle.fill")
+        case "quiz": (L("Quiz gehaald"), "checkmark.seal.fill")
+        case "regular": (L("Vaste wandelaar"), "star.fill")
         default: ("Nieuw", "leaf.fill")
         }
     }
@@ -205,7 +205,7 @@ enum Labels {
 enum Format {
     static func distance(_ meters: Int?) -> String? {
         guard let meters else { return nil }
-        if meters < 1000 { return "\(max(100, (meters / 100) * 100)) m" }
+        if meters < 1000 { return L("\(max(100, (meters / 100) * 100)) m") }
         return String(format: "%.1f km", Double(meters) / 1000).replacingOccurrences(of: ".", with: ",")
     }
 
@@ -213,15 +213,15 @@ enum Format {
         meters < 1000 ? "\(Int(meters)) m" : String(format: "%.2f km", meters / 1000).replacingOccurrences(of: ".", with: ",")
     }
 
-    static let dutch = Locale(identifier: "nl_NL")
+    static let dutch = Locale.autoupdatingCurrent
 
     static func when(_ date: Date) -> String {
         let cal = Calendar.current
         let time = date.formatted(.dateTime.hour().minute().locale(dutch))
-        if cal.isDateInToday(date) { return "Vandaag \(time)" }
-        if cal.isDateInTomorrow(date) { return "Morgen \(time)" }
+        if cal.isDateInToday(date) { return L("Vandaag \(time)") }
+        if cal.isDateInTomorrow(date) { return L("Morgen \(time)") }
         let day = date.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(dutch))
-        return day.prefix(1).uppercased() + day.dropFirst() + " · \(time)"
+        return day.prefix(1).uppercased() + day.dropFirst() + L(" · \(time)")
     }
 }
 

@@ -75,7 +75,7 @@ struct EditProfileView: View {
             ))
             Haptics.success()
             await model.refreshMe()
-            model.show("Profiel opgeslagen")
+            model.show(L("Profiel opgeslagen"))
             dismiss()
         } catch {
             self.error = error.localizedDescription

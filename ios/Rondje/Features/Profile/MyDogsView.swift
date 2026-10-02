@@ -11,7 +11,7 @@ struct MyDogsView: View {
         ScrollView {
             VStack(spacing: 14) {
                 if loaded && dogs.isEmpty {
-                    EmptyState(symbol: "pawprint", title: "Nog geen honden", text: "Zet je hond erop, of die van een buurvrouw, opa of oma die zelf niet ver meer kan lopen.")
+                    EmptyState(symbol: "pawprint", title: L("Nog geen honden"), text: L("Zet je hond erop, of die van een buurvrouw, opa of oma die zelf niet ver meer kan lopen."))
                 }
                 ForEach(dogs) { dog in
                     NavigationLink(value: dog.id) {
@@ -24,7 +24,7 @@ struct MyDogsView: View {
                                     .font(.subheadline).foregroundStyle(Palette.muted)
                             }
                             Spacer()
-                            if dog.status != "active" { Chip(text: "Gepauzeerd", tint: Palette.muted, soft: Palette.sunken) }
+                            if dog.status != "active" { Chip(text: L("Gepauzeerd"), tint: Palette.muted, soft: Palette.sunken) }
                             Image(systemName: "chevron.right").foregroundStyle(Palette.muted)
                         }
                         .padding(14)
@@ -96,7 +96,7 @@ struct AddDogView: View {
                                     .clipShape(.rect(cornerRadius: 18, style: .continuous))
                             }
                             PhotosPicker(selection: $pick, maxSelectionCount: 4, matching: .images) {
-                                Label(photos.isEmpty ? "Foto's" : "Wijzig", systemImage: "camera.fill")
+                                Label(photos.isEmpty ? L("Foto's") : L("Wijzig"), systemImage: "camera.fill")
                                     .font(.subheadline.weight(.semibold))
                                     .frame(width: 88, height: 88)
                                     .background(Palette.grassSoft, in: .rect(cornerRadius: 18, style: .continuous))
@@ -209,7 +209,7 @@ struct AddDogView: View {
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/my-dogs", body)
             Haptics.success()
-            model.show("\(name) staat erop!", symbol: "pawprint.fill")
+            model.show(L("\(name) staat erop!"), symbol: "pawprint.fill")
             await saved()
             dismiss()
         } catch {

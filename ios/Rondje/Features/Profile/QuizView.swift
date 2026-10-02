@@ -14,7 +14,7 @@ struct QuizView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 if passed || quiz?.passed == true {
-                    EmptyState(symbol: "checkmark.seal.fill", title: "Gehaald!", text: "Je kunt nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.")
+                    EmptyState(symbol: "checkmark.seal.fill", title: L("Gehaald!"), text: L("Je kunt nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan."))
                 } else if let quiz {
                     Text(quiz.lede).foregroundStyle(Palette.muted)
                     ProgressView(value: Double(index + 1), total: Double(quiz.questions.count)).tint(Palette.grass)
@@ -59,7 +59,7 @@ struct QuizView: View {
             .padding(20)
         }
         .screenBackground()
-        .navigationTitle(quiz?.title ?? "Veiligheidsquiz")
+        .navigationTitle(quiz?.title ?? L("Veiligheidsquiz"))
         .task { quiz = try? await APIClient.shared.get("/api/v1/quiz") }
     }
 

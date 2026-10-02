@@ -16,7 +16,16 @@ struct DiscoverView: View {
     @State private var path = NavigationPath()
 
     enum Filter: String, CaseIterable, Identifiable {
-        case all = "Alle honden", calm = "Rustig", high = "Energiek", owner = "Buurt", shelter = "Opvang"
+        case all, calm, high, owner, shelter
+        var title: String {
+            switch self {
+            case .all: L("Alle honden")
+            case .calm: L("Rustig")
+            case .high: L("Energiek")
+            case .owner: L("Buurt")
+            case .shelter: L("Opvang")
+            }
+        }
         var id: String { rawValue }
         var symbol: String {
             switch self {
@@ -63,7 +72,7 @@ struct DiscoverView: View {
             }
             .screenBackground()
             .refreshable { await load() }
-            .searchable(text: $query, prompt: "Zoek op naam, ras of plaats")
+            .searchable(text: $query, prompt: L("Zoek op naam, ras of plaats"))
             .navigationTitle("Ontdek")
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
@@ -74,7 +83,7 @@ struct DiscoverView: View {
                         Image(systemName: showMap ? "list.bullet" : "map")
                             .contentTransition(.symbolEffect(.replace))
                     }
-                    .accessibilityLabel(showMap ? "Toon lijst" : "Toon kaart")
+                    .accessibilityLabel(showMap ? L("Toon lijst") : L("Toon kaart"))
                 }
             }
             .navigationDestination(for: DogCard.self) { dog in
@@ -102,8 +111,8 @@ struct DiscoverView: View {
 
     private var greeting: String {
         let hour = Calendar.current.component(.hour, from: .now)
-        let part = hour < 12 ? "Goedemorgen" : hour < 18 ? "Goedemiddag" : "Goedenavond"
-        return model.firstName.isEmpty ? part : "\(part), \(model.firstName)"
+        let part = hour < 12 ? L("Goedemorgen") : hour < 18 ? L("Goedemiddag") : L("Goedenavond")
+        return model.firstName.isEmpty ? part : L("\(part), \(model.firstName)")
     }
 
     private var filters: some View {
@@ -113,7 +122,7 @@ struct DiscoverView: View {
                     Button {
                         withAnimation(.snappy) { filter = f }
                     } label: {
-                        Label(f.rawValue, systemImage: f.symbol)
+                        Label(f.title, systemImage: f.symbol)
                             .font(.subheadline.weight(.semibold))
                             .padding(.horizontal, 14)
                             .padding(.vertical, 9)
@@ -137,9 +146,9 @@ struct DiscoverView: View {
                     .redacted(reason: .placeholder)
             }
         } else if let error, dogs.isEmpty {
-            EmptyState(symbol: "wifi.exclamationmark", title: "Even geen verbinding", text: error)
+            EmptyState(symbol: "wifi.exclamationmark", title: L("Even geen verbinding"), text: error)
         } else if visible.isEmpty {
-            EmptyState(symbol: "pawprint", title: "Nog geen honden hier", text: "Er komen steeds meer honden bij. Kijk later nog eens, of tip een opvang op de website.")
+            EmptyState(symbol: "pawprint", title: L("Nog geen honden hier"), text: L("Er komen steeds meer honden bij. Kijk later nog eens, of tip een opvang op de website."))
         } else {
             LazyVStack(spacing: 18) {
                 ForEach(Array(visible.enumerated()), id: \.element.id) { index, dog in
@@ -156,7 +165,7 @@ struct DiscoverView: View {
 
     private var groupWalksSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionTitle(title: "Groepswandelingen", subtitle: "Begeleid, bij een opvang. Fijn om mee te beginnen.")
+            SectionTitle(title: L("Groepswandelingen"), subtitle: L("Begeleid, bij een opvang. Fijn om mee te beginnen."))
                 .padding(.top, 10)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
@@ -196,7 +205,7 @@ struct DogCardView: View {
                 DogPortrait(look: dog.look, photoURL: dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 0)
                     .frame(height: 220)
                 HStack {
-                    if dog.isDemo { Chip(text: "Voorbeeld", tint: Palette.warn, soft: Palette.warnSoft) }
+                    if dog.isDemo { Chip(text: L("Voorbeeld"), tint: Palette.warn, soft: Palette.warnSoft) }
                     Spacer()
                     if let d = Format.distance(dog.distanceM) {
                         Label(d, systemImage: "location.fill")
@@ -214,15 +223,15 @@ struct DogCardView: View {
                     Spacer()
                     Image(systemName: dog.host.isShelter ? "building.2.fill" : "house.fill")
                         .foregroundStyle(Palette.muted)
-                        .accessibilityLabel(dog.host.isShelter ? "Opvang" : "Eigenaar uit de buurt")
+                        .accessibilityLabel(dog.host.isShelter ? L("Opvang") : L("Eigenaar uit de buurt"))
                 }
                 if !dog.story.isEmpty {
                     Text(dog.story).font(.subheadline).foregroundStyle(Palette.muted).lineLimit(2)
                 }
                 HStack(spacing: 6) {
                     Chip(text: Labels.energy(dog.energy), symbol: "bolt.fill")
-                    Chip(text: "\(dog.walkMinutes) min", symbol: "timer", tint: Palette.calm, soft: Palette.calmSoft)
-                    if dog.level == "experienced" { Chip(text: "Ervaring", symbol: "star.fill", tint: Palette.warn, soft: Palette.warnSoft) }
+                    Chip(text: L("\(dog.walkMinutes) min"), symbol: "timer", tint: Palette.calm, soft: Palette.calmSoft)
+                    if dog.level == "experienced" { Chip(text: L("Ervaring"), symbol: "star.fill", tint: Palette.warn, soft: Palette.warnSoft) }
                 }
             }
             .padding(16)
@@ -279,18 +288,18 @@ struct GroupWalkCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: "figure.2.and.child.holdinghands").foregroundStyle(Palette.grass)
-                Text(walk.orgName ?? "Opvang").font(.headline).lineLimit(1)
+                Text(walk.orgName ?? L("Opvang")).font(.headline).lineLimit(1)
             }
             Text(Format.when(walk.startsAt)).font(.subheadline.weight(.semibold))
             Text(walk.meetingPoint).font(.footnote).foregroundStyle(Palette.muted).lineLimit(2)
             Spacer(minLength: 0)
             HStack {
-                Chip(text: walk.spotsLeft == 0 ? "Vol" : "\(walk.spotsLeft) plekken", tint: walk.spotsLeft == 0 ? Palette.danger : Palette.grass, soft: walk.spotsLeft == 0 ? Palette.dangerSoft : Palette.grassSoft)
+                Chip(text: walk.spotsLeft == 0 ? L("Vol") : L("\(walk.spotsLeft) plekken"), tint: walk.spotsLeft == 0 ? Palette.danger : Palette.grass, soft: walk.spotsLeft == 0 ? Palette.dangerSoft : Palette.grassSoft)
                 Spacer()
                 if walk.isDemo == true {
-                    Chip(text: "Voorbeeld", tint: Palette.warn, soft: Palette.warnSoft)
+                    Chip(text: L("Voorbeeld"), tint: Palette.warn, soft: Palette.warnSoft)
                 } else {
-                    Button(walk.mine == true ? "Afmelden" : "Doe mee") { Task { await toggle() } }
+                    Button(walk.mine == true ? L("Afmelden") : L("Doe mee")) { Task { await toggle() } }
                         .font(.subheadline.weight(.bold))
                         .buttonStyle(.borderedProminent)
                         .tint(walk.mine == true ? Palette.muted : Palette.grass)
@@ -309,11 +318,11 @@ struct GroupWalkCard: View {
         do {
             if walk.mine == true {
                 let _: OK = try await APIClient.shared.delete("/api/v1/group-walks/\(walk.id)", [String: String]())
-                model.show("Je bent afgemeld")
+                model.show(L("Je bent afgemeld"))
             } else {
                 let _: OK = try await APIClient.shared.post("/api/v1/group-walks/\(walk.id)", [String: String]())
                 Haptics.success()
-                model.show("Je doet mee! Neem je ID mee.")
+                model.show(L("Je doet mee! Neem je ID mee."))
             }
             await changed()
         } catch {

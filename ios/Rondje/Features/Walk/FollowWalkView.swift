@@ -36,7 +36,7 @@ struct FollowWalkView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     if let live {
                         HStack {
-                            Chip(text: live.status == "active" ? "Onderweg" : "Terug", symbol: live.status == "active" ? "figure.walk" : "house.fill")
+                            Chip(text: live.status == "active" ? L("Onderweg") : L("Terug"), symbol: live.status == "active" ? "figure.walk" : "house.fill")
                             Spacer()
                             if let lastAt = live.lastAt {
                                 Text("Laatste plek \(lastAt, style: .relative) geleden").font(.caption).foregroundStyle(Palette.muted)
@@ -48,7 +48,7 @@ struct FollowWalkView: View {
                             Label("\(live.overdueMin) minuten over tijd. Bel even als je je zorgen maakt.", systemImage: "clock.badge.exclamationmark")
                                 .font(.subheadline).foregroundStyle(Palette.warn)
                         } else {
-                            Label("Terug rond \(live.plannedEndAt.formatted(.dateTime.hour().minute().locale(Format.dutch)))", systemImage: "clock")
+                            Label("Terug rond \(live.plannedEndAt.formatted(.dateTime.hour().minute().locale(Format.locale)))", systemImage: "clock")
                                 .font(.subheadline)
                         }
                     } else if let error {

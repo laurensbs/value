@@ -9,9 +9,9 @@ enum APIError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .server(_, let message): message
-        case .unauthorized: "Log opnieuw in om verder te gaan."
-        case .offline: "Geen verbinding. Controleer je internet en probeer het opnieuw."
-        case .unexpected: "Er ging iets mis. Probeer het opnieuw."
+        case .unauthorized: L("Log opnieuw in om verder te gaan.")
+        case .offline: L("Geen verbinding. Controleer je internet en probeer het opnieuw.")
+        case .unexpected: L("Er ging iets mis. Probeer het opnieuw.")
         }
     }
 
@@ -90,14 +90,14 @@ final class APIClient: Sendable {
         struct BetterAuthError: Decodable { var code: String?; var message: String? }
         let err = try? JSONDecoder().decode(BetterAuthError.self, from: data)
         switch err?.code {
-        case "INVALID_EMAIL_OR_PASSWORD": return .server(code: "credentials", message: "Dit e-mailadres en wachtwoord passen niet bij elkaar.")
+        case "INVALID_EMAIL_OR_PASSWORD": return .server(code: "credentials", message: L("Dit e-mailadres en wachtwoord passen niet bij elkaar."))
         case "USER_ALREADY_EXISTS", "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL":
-            return .server(code: "exists", message: "Er is al een account met dit e-mailadres. Log in.")
-        case "PASSWORD_TOO_SHORT": return .server(code: "password", message: "Kies een wachtwoord van minstens 8 tekens.")
-        case "INVALID_EMAIL": return .server(code: "email", message: "Dit e-mailadres klopt niet.")
+            return .server(code: "exists", message: L("Er is al een account met dit e-mailadres. Log in."))
+        case "PASSWORD_TOO_SHORT": return .server(code: "password", message: L("Kies een wachtwoord van minstens 8 tekens."))
+        case "INVALID_EMAIL": return .server(code: "email", message: L("Dit e-mailadres klopt niet."))
         default:
-            if status == 429 { return .server(code: "rate", message: "Te veel pogingen. Wacht even en probeer het opnieuw.") }
-            return .server(code: err?.code ?? "auth", message: err?.message ?? "Inloggen lukte niet. Probeer het opnieuw.")
+            if status == 429 { return .server(code: "rate", message: L("Te veel pogingen. Wacht even en probeer het opnieuw.")) }
+            return .server(code: err?.code ?? "auth", message: err?.message ?? L("Inloggen lukte niet. Probeer het opnieuw."))
         }
     }
 
@@ -120,7 +120,7 @@ final class APIClient: Sendable {
         do {
             let (data, response) = try await session.data(for: request)
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
-            if status == 413 { throw APIError.server(code: "too-large", message: "Deze foto is te groot.") }
+            if status == 413 { throw APIError.server(code: "too-large", message: L("Deze foto is te groot.")) }
             guard status == 200, let uploaded = try? decoder.decode(Uploaded.self, from: data) else { throw APIError.unexpected }
             return uploaded.url
         } catch let error as URLError {

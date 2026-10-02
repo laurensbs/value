@@ -60,8 +60,8 @@ struct ProfileView: View {
     private func stats(_ t: Me.Trust) -> some View {
         HStack(spacing: 10) {
             stat("\(t.walks)", t.walks == 1 ? "rondje" : "rondjes", "figure.walk")
-            stat("\(t.idChecks)", "keer ID gezien", "person.text.rectangle")
-            stat("\(t.memberSinceYear)", "lid sinds", "calendar")
+            stat("\(t.idChecks)", L("keer ID gezien"), "person.text.rectangle")
+            stat("\(t.memberSinceYear)", L("lid sinds"), "calendar")
         }
     }
 
@@ -79,24 +79,24 @@ struct ProfileView: View {
     private var links: some View {
         VStack(spacing: 0) {
             NavigationLink { QuizView() } label: {
-                row("checkmark.seal.fill", "Veiligheidsquiz", model.me?.profile?.quizPassed == true ? "Gehaald" : "Nodig voor zelfstandige rondjes")
+                row("checkmark.seal.fill", L("Veiligheidsquiz"), model.me?.profile?.quizPassed == true ? L("Gehaald") : L("Nodig voor zelfstandige rondjes"))
             }
             Divider().padding(.leading, 56)
-            NavigationLink { MyDogsView() } label: { row("pawprint.fill", "Mijn honden", "Voor jezelf, de buren of opa en oma") }
+            NavigationLink { MyDogsView() } label: { row("pawprint.fill", L("Mijn honden"), L("Voor jezelf, de buren of opa en oma")) }
             Divider().padding(.leading, 56)
             NavigationLink { NotificationsView() } label: {
-                row("bell.fill", "Meldingen", (model.me?.unread ?? 0) > 0 ? "\(model.me!.unread) nieuw" : nil)
+                row("bell.fill", L("Meldingen"), (model.me?.unread ?? 0) > 0 ? L("\(model.me!.unread) nieuw") : nil)
             }
             Divider().padding(.leading, 56)
-            NavigationLink { EditProfileView() } label: { row("pencil", "Profiel bewerken", nil) }
+            NavigationLink { EditProfileView() } label: { row("pencil", L("Profiel bewerken"), nil) }
             Divider().padding(.leading, 56)
-            Button { openURL(Brand.web("/safety")) } label: { row("shield.lefthalf.filled", "Veiligheid", nil, external: true) }
+            Button { openURL(Brand.web("/safety")) } label: { row("shield.lefthalf.filled", L("Veiligheid"), nil, external: true) }
             Divider().padding(.leading, 56)
-            Button { openURL(Brand.web("/legal/privacy")) } label: { row("hand.raised.fill", "Privacy en voorwaarden", nil, external: true) }
+            Button { openURL(Brand.web("/legal/privacy")) } label: { row("hand.raised.fill", L("Privacy en voorwaarden"), nil, external: true) }
             Divider().padding(.leading, 56)
-            Button { confirmSignOut = true } label: { row("rectangle.portrait.and.arrow.right", "Uitloggen", nil) }
+            Button { confirmSignOut = true } label: { row("rectangle.portrait.and.arrow.right", L("Uitloggen"), nil) }
             Divider().padding(.leading, 56)
-            Button { deleting = true } label: { row("trash", "Account verwijderen", nil, tint: Palette.danger) }
+            Button { deleting = true } label: { row("trash", L("Account verwijderen"), nil, tint: Palette.danger) }
         }
         .buttonStyle(.plain)
         .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
@@ -168,7 +168,7 @@ struct NotificationsView: View {
     var body: some View {
         List {
             if loaded && items.isEmpty {
-                EmptyState(symbol: "bell", title: "Geen meldingen", text: "Hier zie je nieuwe aanvragen, antwoorden en rondjes.")
+                EmptyState(symbol: "bell", title: L("Geen meldingen"), text: L("Hier zie je nieuwe aanvragen, antwoorden en rondjes."))
                     .listRowBackground(Color.clear)
             }
             ForEach(items) { n in
@@ -211,16 +211,16 @@ struct NotificationsView: View {
     private func text(_ n: AppNotification) -> String {
         let dog = n.text("dogName"), walker = n.text("walkerName")
         switch n.kind {
-        case "request-new": return "\(walker) wil graag met \(dog) wandelen."
-        case "request-accepted": return "Je afspraak met \(dog) is geaccepteerd."
-        case "request-declined": return "Je aanvraag voor \(dog) is afgewezen."
-        case "request-cancelled": return "De afspraak met \(dog) is geannuleerd."
-        case "walk-started": return "\(walker) is op pad met \(dog). Kijk live mee."
-        case "walk-ended": return "\(dog) is weer thuis."
-        case "walk-overdue": return "Het rondje met \(dog) loopt uit."
-        case "trust-granted": return "Je mag nu zelfstandig met \(dog) wandelen."
-        case "group-walk-new": return "Er is een nieuwe groepswandeling bij een opvang."
-        default: return "Nieuwe melding"
+        case "request-new": return L("\(walker) wil graag met \(dog) wandelen.")
+        case "request-accepted": return L("Je afspraak met \(dog) is geaccepteerd.")
+        case "request-declined": return L("Je aanvraag voor \(dog) is afgewezen.")
+        case "request-cancelled": return L("De afspraak met \(dog) is geannuleerd.")
+        case "walk-started": return L("\(walker) is op pad met \(dog). Kijk live mee.")
+        case "walk-ended": return L("\(dog) is weer thuis.")
+        case "walk-overdue": return L("Het rondje met \(dog) loopt uit.")
+        case "trust-granted": return L("Je mag nu zelfstandig met \(dog) wandelen.")
+        case "group-walk-new": return L("Er is een nieuwe groepswandeling bij een opvang.")
+        default: return L("Nieuwe melding")
         }
     }
 }

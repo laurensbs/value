@@ -27,17 +27,17 @@ struct RequestSheet: View {
                         DogPortrait(look: dog.look, photoURL: dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 18)
                             .frame(width: 64, height: 64)
                         VStack(alignment: .leading) {
-                            Text(kind == .meet ? "Kennismaken met \(dog.name)" : "Rondje met \(dog.name)").font(.display(22))
-                            Text(kind == .meet ? "De eigenaar loopt mee en bekijkt je ID." : "Zelfstandig, want de eigenaar vertrouwt je.")
+                            Text(kind == .meet ? L("Kennismaken met \(dog.name)") : L("Rondje met \(dog.name)")).font(.display(22))
+                            Text(kind == .meet ? L("De eigenaar loopt mee en bekijkt je ID.") : L("Zelfstandig, want de eigenaar vertrouwt je."))
                                 .font(.subheadline).foregroundStyle(Palette.muted)
                         }
                     }
 
                     Card {
                         DatePicker("Wanneer", selection: $when, in: range)
-                            .environment(\.locale, Format.dutch)
+                            .environment(\.locale, Format.locale)
                         if !slots.isEmpty {
-                            Text("Vaste momenten: " + slots.map { "\(Labels.weekday($0.weekday)) \($0.time)" }.joined(separator: ", "))
+                            Text("Vaste momenten: \(slots.map { "\(Labels.weekday($0.weekday)) \($0.time)" }.joined(separator: ", "))")
                                 .font(.footnote).foregroundStyle(Palette.muted)
                         }
                         if kind == .solo {
@@ -99,7 +99,7 @@ struct RequestSheet: View {
         do {
             let result: Sent = try await APIClient.shared.post("/api/v1/requests", Payload(dogId: dog.id, kind: kind.rawValue, date: date, time: time, message: message, weekly: weekly))
             Haptics.success()
-            model.show(result.flagged ? "Verstuurd. Berichten over geld worden gecontroleerd." : "Aanvraag verstuurd! Je hoort het zodra er antwoord is.")
+            model.show(result.flagged ? L("Verstuurd. Berichten over geld worden gecontroleerd.") : L("Aanvraag verstuurd! Je hoort het zodra er antwoord is."))
             await model.refreshAppointments()
             await sent()
             dismiss()
@@ -125,7 +125,7 @@ struct ReportSheet: View {
     @State private var busy = false
     @State private var error: String?
 
-    private let categories = [("safety", "Onveilig"), ("abuse", "Mishandeling"), ("scam", "Oplichting of geld"), ("harassment", "Intimidatie"), ("fake", "Nep-profiel"), ("other", "Iets anders")]
+    private let categories = [("safety", L("Onveilig")), ("abuse", L("Mishandeling")), ("scam", L("Oplichting of geld")), ("harassment", L("Intimidatie")), ("fake", L("Nep-profiel")), ("other", L("Iets anders"))]
 
     var body: some View {
         NavigationStack {
@@ -166,7 +166,7 @@ struct ReportSheet: View {
                 let _: OK = try await APIClient.shared.post("/api/v1/blocks", ["userId": subjectUserId])
             }
             Haptics.success()
-            model.show("Bedankt. We kijken ernaar.", symbol: "shield.lefthalf.filled")
+            model.show(L("Bedankt. We kijken ernaar."), symbol: "shield.lefthalf.filled")
             dismiss()
         } catch {
             self.error = error.localizedDescription

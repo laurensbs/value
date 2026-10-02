@@ -27,10 +27,10 @@ enum Reminders {
             guard fireAt > .now else { continue }
             let content = UNMutableNotificationContent()
             let asOwner = appointments.incoming.contains { $0.id == item.id }
-            content.title = item.isMeeting ? "Zo meteen: kennismaken met \(item.dog.name)" : "Zo meteen: rondje met \(item.dog.name)"
+            content.title = item.isMeeting ? L("Zo meteen: kennismaken met \(item.dog.name)") : L("Zo meteen: rondje met \(item.dog.name)")
             content.body = asOwner
-                ? "Over een half uur komt \(item.walker?.firstName ?? "de wandelaar"). Fijne wandeling!"
-                : "Over een half uur. Neem je ID mee en vergeet de zakjes niet."
+                ? L("Over een half uur komt \(item.walker?.firstName ?? L("de wandelaar")). Fijne wandeling!")
+                : L("Over een half uur. Neem je ID mee en vergeet de zakjes niet.")
             content.sound = .default
             content.userInfo = ["tab": "appointments"]
             let parts = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fireAt)

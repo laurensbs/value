@@ -5,7 +5,11 @@ struct AppointmentsView: View {
     @Environment(AppModel.self) private var model
     @State private var side: Side = .walking
 
-    enum Side: String, CaseIterable, Identifiable { case walking = "Ik wandel", dogs = "Mijn honden"; var id: String { rawValue } }
+    enum Side: String, CaseIterable, Identifiable {
+        case walking, dogs
+        var id: String { rawValue }
+        var title: String { self == .walking ? L("Ik wandel") : L("Mijn honden") }
+    }
 
     private var items: [Appointment] {
         let list = side == .walking ? model.appointments.outgoing : model.appointments.incoming
@@ -21,15 +25,15 @@ struct AppointmentsView: View {
                 VStack(spacing: 16) {
                     if !model.appointments.incoming.isEmpty || model.me?.profile?.hasDogs == true {
                         Picker("Weergave", selection: $side) {
-                            ForEach(Side.allCases) { Text($0.rawValue).tag($0) }
+                            ForEach(Side.allCases) { Text($0.title).tag($0) }
                         }
                         .pickerStyle(.segmented)
                     }
                     if items.isEmpty {
                         EmptyState(
                             symbol: side == .walking ? "figure.walk" : "pawprint",
-                            title: side == .walking ? "Nog geen afspraken" : "Nog geen aanvragen",
-                            text: side == .walking ? "Kies een hond bij Ontdek en plan een kennismaking." : "Zodra iemand met je hond wil wandelen, zie je het hier."
+                            title: side == .walking ? L("Nog geen afspraken") : L("Nog geen aanvragen"),
+                            text: side == .walking ? L("Kies een hond bij Ontdek en plan een kennismaking.") : L("Zodra iemand met je hond wil wandelen, zie je het hier.")
                         )
                         if side == .walking {
                             Button("Naar Ontdek") { model.selectedTab = .discover }.buttonStyle(.primary).padding(.horizontal, 40)
@@ -76,9 +80,9 @@ struct AppointmentCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     let status = Labels.status(item.status)
                     Chip(text: status.0, tint: status.1, soft: status.2)
-                    Text(item.isMeeting ? "Kennismaking met \(item.dog.name)" : "Rondje met \(item.dog.name)")
+                    Text(item.isMeeting ? L("Kennismaking met \(item.dog.name)") : L("Rondje met \(item.dog.name)"))
                         .font(.headline)
-                    Label(Format.when(item.startsAt) + " · \(item.durationMin) min", systemImage: item.weekly ? "repeat" : "calendar")
+                    Label(Format.when(item.startsAt) + L(" · \(item.durationMin) min"), systemImage: item.weekly ? "repeat" : "calendar")
                         .font(.subheadline).foregroundStyle(Palette.muted)
                 }
             }
@@ -165,7 +169,7 @@ struct AppointmentCard: View {
                     Button {
                         Task { await start() }
                     } label: {
-                        Label(item.walkStatus == "active" ? "Ga verder met je rondje" : "Start het rondje", systemImage: "figure.walk")
+                        Label(item.walkStatus == "active" ? L("Ga verder met je rondje") : L("Start het rondje"), systemImage: "figure.walk")
                     }
                     .buttonStyle(.ball)
                     .disabled(busy || walk.isActive)
@@ -195,10 +199,10 @@ struct AppointmentCard: View {
             switch action {
             case "accept":
                 Haptics.success()
-                model.show("Geaccepteerd. Jullie zien elkaars contactgegevens nu.")
+                model.show(L("Geaccepteerd. Jullie zien elkaars contactgegevens nu."))
                 await Reminders.askIfNeeded()
-            case "decline": model.show("Afgewezen", symbol: "hand.raised.fill", tint: Palette.muted)
-            default: model.show("Geannuleerd", symbol: "xmark.circle.fill", tint: Palette.muted)
+            case "decline": model.show(L("Afgewezen"), symbol: "hand.raised.fill", tint: Palette.muted)
+            default: model.show(L("Geannuleerd"), symbol: "xmark.circle.fill", tint: Palette.muted)
             }
             await model.refreshAppointments()
         } catch {
@@ -277,7 +281,7 @@ struct TrustSheet: View {
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/requests/\(item.id)", Payload(dogId: item.dog.id, walkerId: walker.id, idSeen: idSeen, soloAllowed: solo))
             Haptics.success()
-            model.show("Opgeslagen")
+            model.show(L("Opgeslagen"))
             await model.refreshAppointments()
             dismiss()
         } catch {

@@ -8,7 +8,7 @@ enum Brand {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Rondje"
     }
 
-    static var tagline: String { "Samen een rondje met een hond die dat goed kan gebruiken." }
+    static var tagline: String { L("Samen een rondje met een hond die dat goed kan gebruiken.") }
 
     /// The website and API. Debug builds talk to the local server, release builds to production.
     static var baseURL: URL {
@@ -24,14 +24,14 @@ enum Brand {
     /// No agreement is signed yet, so the app speaks about them as intentions, never as partners.
     static let causes: [Cause] = [
         Cause(
-            name: "Depressie Vereniging",
+            name: L("Depressie Vereniging"),
             symbol: "sun.max.fill",
-            line: "Voor mensen met een depressie en hun naasten. Wandelen met een hond helpt tegen somberheid."
+            line: L("Voor mensen met een depressie en hun naasten. Wandelen met een hond helpt tegen somberheid.")
         ),
         Cause(
-            name: "Hulphond Nederland",
+            name: L("Hulphond Nederland"),
             symbol: "pawprint.fill",
-            line: "Leidt honden op die mensen met een beperking of trauma helpen zelfstandig te leven."
+            line: L("Leidt honden op die mensen met een beperking of trauma helpen zelfstandig te leven.")
         ),
     ]
 

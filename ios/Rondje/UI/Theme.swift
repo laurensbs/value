@@ -63,3 +63,9 @@ extension Font {
         .system(size: UIFontMetrics(forTextStyle: .title1).scaledValue(for: size), weight: weight, design: .rounded)
     }
 }
+
+/// A translated string from the string catalog (Localizable.xcstrings), for places that take a plain String.
+/// Literals in Text, Label, Button and friends are translated by SwiftUI already.
+func L(_ value: String.LocalizationValue) -> String {
+    String(localized: value)
+}

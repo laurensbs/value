@@ -53,10 +53,10 @@ struct MembershipView: View {
 
                     Card {
                         Text("Onze belofte").font(.headline)
-                        promise("Geen abonnement, geen betaalmuur, geen premiumversie.")
-                        promise("Geen advertenties in \(Brand.name).")
-                        promise("We verkopen nooit gegevens.")
-                        promise("Leden krijgen geen voorrang: iedereen gebruikt \(Brand.name) op dezelfde manier.")
+                        promise(L("Geen abonnement, geen betaalmuur, geen premiumversie."))
+                        promise(L("Geen advertenties in \(Brand.name)."))
+                        promise(L("We verkopen nooit gegevens."))
+                        promise(L("Leden krijgen geen voorrang: iedereen gebruikt \(Brand.name) op dezelfde manier."))
                     }
 
                     Card {

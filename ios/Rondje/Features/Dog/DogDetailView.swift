@@ -17,7 +17,7 @@ struct DogDetailView: View {
                 if let detail {
                     content(detail)
                 } else if let error {
-                    EmptyState(symbol: "exclamationmark.triangle", title: "Niet gelukt", text: error)
+                    EmptyState(symbol: "exclamationmark.triangle", title: L("Niet gelukt"), text: error)
                 } else {
                     ProgressView().frame(maxWidth: .infinity).padding(40)
                 }
@@ -62,7 +62,7 @@ struct DogDetailView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(name).font(.display(40, weight: .heavy))
                     if let d = detail?.dog {
-                        Text([d.breed, d.ageYears.map { "\($0) jaar" }, Labels.sex(d.sex)].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · "))
+                        Text([d.breed, d.ageYears.map { L("\($0) jaar") }, Labels.sex(d.sex)].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · "))
                             .font(.headline)
                     } else if let p = preview {
                         Text(p.breed).font(.headline)
@@ -85,10 +85,10 @@ struct DogDetailView: View {
             }
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
-                fact("bolt.fill", "Energie", Labels.energy(d.dog.energy))
-                fact("ruler", "Formaat", Labels.size(d.dog.size))
-                fact("timer", "Rondje", "\(d.dog.walkMinutes) minuten")
-                fact("star.fill", "Niveau", Labels.level(d.dog.level))
+                fact("bolt.fill", L("Energie"), Labels.energy(d.dog.energy))
+                fact("ruler", L("Formaat"), Labels.size(d.dog.size))
+                fact("timer", L("Rondje"), L("\(d.dog.walkMinutes) minuten"))
+                fact("star.fill", L("Niveau"), Labels.level(d.dog.level))
             }
 
             if !d.dog.story.isEmpty {
@@ -106,17 +106,17 @@ struct DogDetailView: View {
 
             Card {
                 Text("Goed om te weten").font(.headline)
-                info("fork.knife", Labels.treats(d.dog.treats) + (d.dog.treatsNote.isEmpty ? "" : ". \(d.dog.treatsNote)"))
-                info("link", d.dog.offLeash ? "Mag los waar het mag, als de eigenaar dat zegt" : "Altijd aan de lijn")
+                info("fork.knife", Labels.treats(d.dog.treats) + (d.dog.treatsNote.isEmpty ? "" : L(". \(d.dog.treatsNote)")))
+                info("link", d.dog.offLeash ? L("Mag los waar het mag, als de eigenaar dat zegt") : L("Altijd aan de lijn"))
                 if !d.dog.provides.isEmpty {
-                    info("bag.fill", "De eigenaar zorgt voor " + d.dog.provides.map { Labels.provides($0).lowercased() }.joined(separator: ", "))
+                    info("bag.fill", L("De eigenaar zorgt voor \(d.dog.provides.map { Labels.provides($0).lowercased() }.joined(separator: ", "))"))
                 }
                 if !d.dog.needs.isEmpty { info("heart.text.square", d.dog.needs) }
                 if d.dog.biteHistory {
-                    info("exclamationmark.triangle.fill", "Heeft ooit gebeten. \(d.dog.biteNote)", tint: Palette.warn)
+                    info("exclamationmark.triangle.fill", L("Heeft ooit gebeten. \(d.dog.biteNote)"), tint: Palette.warn)
                 }
                 if d.dog.ppp && d.dog.country == "ES" {
-                    info("doc.text.fill", "PPP-hond: in Spanje alleen met licentie", tint: Palette.warn)
+                    info("doc.text.fill", L("PPP-hond: in Spanje alleen met licentie"), tint: Palette.warn)
                 }
             }
 
@@ -126,7 +126,7 @@ struct DogDetailView: View {
                 Card {
                     Text("Vaste momenten").font(.headline)
                     ForEach(d.slots, id: \.self) { slot in
-                        info("clock", "\(Labels.weekday(slot.weekday).capitalized) om \(slot.time)")
+                        info("clock", L("\(Labels.weekday(slot.weekday).capitalized) om \(slot.time)"))
                     }
                 }
             }
@@ -140,7 +140,7 @@ struct DogDetailView: View {
             }
 
             if !d.groupWalks.isEmpty {
-                SectionTitle(title: "Groepswandelingen", subtitle: "Honden van de opvang loop je in een begeleide groep.")
+                SectionTitle(title: L("Groepswandelingen"), subtitle: L("Honden van de opvang loop je in een begeleide groep."))
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(d.groupWalks) { walk in GroupWalkCard(walk: walk) { await load() } }
@@ -163,7 +163,7 @@ struct DogDetailView: View {
                         Text(d.host.name).font(.headline)
                         if d.host.verified { Image(systemName: "checkmark.seal.fill").foregroundStyle(Palette.calm).accessibilityLabel("Geverifieerd") }
                     }
-                    Text(d.host.isShelter ? "Opvang in \(d.host.city)" : "Eigenaar in \(d.host.city)")
+                    Text(d.host.isShelter ? L("Opvang in \(d.host.city)") : L("Eigenaar in \(d.host.city)"))
                         .font(.subheadline).foregroundStyle(Palette.muted)
                 }
             }
@@ -186,7 +186,7 @@ struct DogDetailView: View {
                     if d.canRequest.solo == nil {
                         Button("Zelfstandig rondje") { requestKind = .solo }.buttonStyle(.ball)
                     }
-                    Button(d.canRequest.solo == nil ? "Kennismaken" : "Plan een kennismaking") { requestKind = .meet }
+                    Button(d.canRequest.solo == nil ? L("Kennismaken") : L("Plan een kennismaking")) { requestKind = .meet }
                         .buttonStyle(.primary)
                         .disabled(d.canRequest.meet != nil)
                 }
@@ -199,12 +199,12 @@ struct DogDetailView: View {
 
     private func reasonText(_ code: String) -> String {
         switch code {
-        case "demo-dog": "Dit is een voorbeeld; hiervoor kun je geen afspraak maken."
-        case "too-many-pending": "Je hebt al 5 open aanvragen. Wacht op antwoord of trek er een in."
-        case "own-dog": "Dit is je eigen hond."
-        case "blocked": "Je kunt geen afspraak maken met deze persoon."
-        case "ppp-licence": "In Spanje mag je een PPP-hond alleen uitlaten met een geldige licentie."
-        default: "Je kunt nu geen afspraak maken met deze hond."
+        case "demo-dog": L("Dit is een voorbeeld; hiervoor kun je geen afspraak maken.")
+        case "too-many-pending": L("Je hebt al 5 open aanvragen. Wacht op antwoord of trek er een in.")
+        case "own-dog": L("Dit is je eigen hond.")
+        case "blocked": L("Je kunt geen afspraak maken met deze persoon.")
+        case "ppp-licence": L("In Spanje mag je een PPP-hond alleen uitlaten met een geldige licentie.")
+        default: L("Je kunt nu geen afspraak maken met deze hond.")
         }
     }
 
