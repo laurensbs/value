@@ -30,6 +30,7 @@ De velden in `PROMPT.md` waren niet ingevuld, dus ik gebruik de voorbeeldwaarden
 | 10 | Het prototype is gepubliceerd als **privé-preview** (Claude Artifact) en niet op een publieke URL | Publiek online zetten op jouw naam vraagt jouw akkoord, zie hieronder. |
 | 11 | Hulplijnen in de app: 113 (0800-0113), Kindertelefoon (0800-0432), MIND Hulplijn (0900-1450), In je bol, 112 | **Controleer de nummers voor de lancering.** De sites van MIND en In je bol konden niet worden geopend. MIND Korrelatie heet nu MIND Hulplijn, en het nummer is overgenomen uit eerdere bekende gegevens. |
 | 12 | Opvanghonden zitten in het model als **begeleide wandelingen** | Nederlandse opvangen hebben minder honden dan gedacht, en die honden hebben vaak ervaren handen nodig. Vaste één-op-één koppels passen beter bij eigenaren in de buurt. |
+| 13 | **Dagelijkse verbetercyclus** ingepland als Routine "Rondje verbetercyclus", elke dag om 07:54 (Nederlandse tijd) | De prompt vraagt om continu verbeteren. Elke cyclus test, verbetert 1–3 dingen, en publiceert alleen als alles groen is. Stoppen kan door te vragen "stop de verbetercyclus", of in de Routines-lijst op claude.ai. |
 
 ## Wacht op jouw akkoord
 
