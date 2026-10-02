@@ -1,8 +1,13 @@
+import { appleNativeEnabled, enabledSocialProviders } from '@/lib/auth'
 import { json } from '@/server/api'
 
 /**
  * Public settings for the app. Giving money never happens inside the app (App Store rules, and
  * Rondje has no ANBI foundation yet): membership and donations open the website in Safari.
+ *
+ * `auth.providers` lists the sign-in buttons the server can handle right now (keys set in
+ * Vercel); `auth.appleNative` says the system Apple sheet works (identity token to
+ * /api/auth/sign-in/social). Google, and Apple without it, go through /api/auth/native/start.
  */
 export async function GET() {
   return json({
@@ -10,5 +15,6 @@ export async function GET() {
     membership: { inApp: false, path: '/support' },
     legal: { terms: '/legal/terms', privacy: '/legal/privacy', conduct: '/legal/conduct', safety: '/safety' },
     emergencyNumber: '112',
+    auth: { providers: enabledSocialProviders, appleNative: appleNativeEnabled },
   })
 }
