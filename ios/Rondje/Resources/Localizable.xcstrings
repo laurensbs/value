@@ -1015,6 +1015,50 @@
         }
       }
     },
+    "Adem in" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breathe in"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inspira"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inspire"
+          }
+        }
+      }
+    },
+    "Adem uit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breathe out"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espira"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expire"
+          }
+        }
+      }
+    },
     "Afgewezen" : {
       "localizations" : {
         "en" : {
@@ -3255,6 +3299,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas de connexion pour l'instant"
+          }
+        }
+      }
+    },
+    "Even landen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A moment to land"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un momento para aterrizar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un instant pour se poser"
           }
         }
       }
@@ -6185,6 +6251,28 @@
         }
       }
     },
+    "Klaar, op pad" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready, let's go"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo, en marcha"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prêt, en route"
+          }
+        }
+      }
+    },
     "Klein" : {
       "localizations" : {
         "en" : {
@@ -7351,6 +7439,28 @@
         }
       }
     },
+    "Niet meer tonen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't show again"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No volver a mostrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ne plus afficher"
+          }
+        }
+      }
+    },
     "Niet zo goed" : {
       "localizations" : {
         "en" : {
@@ -7457,6 +7567,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inviter des amis"
+          }
+        }
+      }
+    },
+    "Nog %lld seconden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld seconds left"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quedan %lld segundos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore %lld secondes"
           }
         }
       }
@@ -7633,6 +7765,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autre chose ? (facultatif)"
+          }
+        }
+      }
+    },
+    "Nu al op pad" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go now"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salir ya"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partir maintenant"
           }
         }
       }

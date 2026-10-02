@@ -538,6 +538,13 @@ T = {
     "rondje": ("walk", "balade", "paseo"),
     "rondjes": ("walks", "balades", "paseos"),
     "samen gelopen": ("walked together", "marchés ensemble", "caminados juntos"),
+    "Even landen": ("A moment to land", "Un instant pour se poser", "Un momento para aterrizar"),
+    "Adem in": ("Breathe in", "Inspire", "Inspira"),
+    "Adem uit": ("Breathe out", "Expire", "Espira"),
+    "Nog %lld seconden": ("%lld seconds left", "Encore %lld secondes", "Quedan %lld segundos"),
+    "Klaar, op pad": ("Ready, let's go", "Prêt, en route", "Listo, en marcha"),
+    "Nu al op pad": ("Go now", "Partir maintenant", "Salir ya"),
+    "Niet meer tonen": ("Don't show again", "Ne plus afficher", "No volver a mostrar"),
     # Info.plist
     "NSCameraUsageDescription": (
         "To send the owner a photo during a walk. Only the photos you send go to the owner.",

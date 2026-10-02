@@ -79,6 +79,9 @@ struct AppointmentCard: View {
     @State private var following: String?
     @State private var feedbackFor: String?
     @State private var chatting = false
+    @State private var breathing = false
+    /// Offer the breathing minute before a walk; switched off with "Niet meer tonen".
+    @AppStorage("offerBreathing") private var offerBreathing = true
 
     var body: some View {
         Card {
@@ -131,6 +134,17 @@ struct AppointmentCard: View {
             FeedbackSheet(walkId: f.id, role: asOwner ? .owner : .walker, dogName: item.dog.name)
                 .presentationDetents([.large])
                 .onDisappear { Task { await model.refreshAppointments() } }
+        }
+        .fullScreenCover(isPresented: $breathing) {
+            BreathingView {
+                breathing = false
+                Task { await start() }
+            }
+            .overlay(alignment: .bottom) {
+                Button("Niet meer tonen") { offerBreathing = false; breathing = false; Task { await start() } }
+                    .font(.footnote).foregroundStyle(Palette.onGrass.opacity(0.7))
+                    .padding(.bottom, 4)
+            }
         }
         .sheet(isPresented: $chatting) {
             ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name)
@@ -186,7 +200,7 @@ struct AppointmentCard: View {
             } else {
                 if item.canStart() && item.walkStatus != "ended" {
                     Button {
-                        Task { await start() }
+                        if item.walkStatus != "active" && offerBreathing { breathing = true } else { Task { await start() } }
                     } label: {
                         Label(item.walkStatus == "active" ? L("Ga verder met je rondje") : L("Start het rondje"), systemImage: "figure.walk")
                     }

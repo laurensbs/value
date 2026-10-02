@@ -59,6 +59,7 @@
 		E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38BF1BFD0974FB881BD72B /* Models.swift */; };
 		E81899E7FBE5C3A4F4D17164 /* DogFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */; };
 		EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F8B3EE6862459619E1EDC /* Components.swift */; };
+		EC0AE7C7D16615103E859B9D /* BreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF02E3AFFF3C3F5EAAC028C /* BreathingView.swift */; };
 		F1E78BE8FCA520FB54C3EABF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */; };
 		F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */; };
 		F5113606F3E26750DF757621 /* WalkTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26863FB98876ECFB2C52F0FF /* WalkTracker.swift */; };
@@ -97,6 +98,7 @@
 
 /* Begin PBXFileReference section */
 		0BDEFBB338DEF518134A6397 /* Rondje.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Rondje.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EF02E3AFFF3C3F5EAAC028C /* BreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingView.swift; sourceTree = "<group>"; };
 		0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFriendsView.swift; sourceTree = "<group>"; };
 		1894A396998000A3824F47B3 /* ActiveWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalkView.swift; sourceTree = "<group>"; };
 		18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCards.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		B4D6DC0035564556243D4B87 /* Wellbeing */ = {
 			isa = PBXGroup;
 			children = (
+				0EF02E3AFFF3C3F5EAAC028C /* BreathingView.swift */,
 				B400323AA6D6C3D1DF40D5A6 /* Mood.swift */,
 			);
 			path = Wellbeing;
@@ -538,6 +541,7 @@
 				7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */,
 				518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */,
 				4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */,
+				EC0AE7C7D16615103E859B9D /* BreathingView.swift in Sources */,
 				CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */,
 				8FC4508C7392A299F5B32ADA /* ChatView.swift in Sources */,
 				EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */,
