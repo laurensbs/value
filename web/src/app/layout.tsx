@@ -3,11 +3,13 @@ import '@fontsource-variable/figtree/wght.css'
 import '@fontsource/caveat/latin-600.css'
 import 'leaflet/dist/leaflet.css'
 import './globals.css'
+import './app-shell.css'
 import type { Metadata, Viewport } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { isDemoMode } from '@/db'
 import { Footer } from '@/components/Footer'
+import { FooterSwitch } from '@/components/shell/FooterSwitch'
 import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
 import { TabBar } from '@/components/TabBar'
@@ -47,14 +49,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const t = await getTranslations()
   const unread = viewer ? await unreadCount(viewer.userId) : 0
   const activeWalk = viewer?.profile ? await activeWalkFor(viewer) : null
+  // Signed in with a profile, the website works like the app: tab bar on phones, a short footer.
   const tabs = viewer?.profile
     ? [
-        { href: '/dogs', label: t('nav.dogs'), icon: 'paw' as const },
-        { href: '/requests', label: t('nav.requests'), icon: 'route' as const, badge: unread },
+        { href: '/dogs', label: t('shell.tabs.discover'), icon: 'paw' as const },
+        { href: '/requests', label: t('shell.tabs.requests'), icon: 'calendar' as const, badge: unread },
         viewer.orgs[0]
-          ? { href: `/shelter/${viewer.orgs[0].id}`, label: t('nav.shelter'), icon: 'building' as const }
-          : { href: '/my-dogs', label: t('nav.myDogs'), icon: 'home' as const },
-        { href: '/profile', label: t('nav.profile'), icon: 'user' as const },
+          ? { href: `/shelter/${viewer.orgs[0].id}`, label: t('shell.tabs.shelter'), icon: 'building' as const }
+          : { href: '/my-dogs', label: t('shell.tabs.myDogs'), icon: 'home' as const },
+        { href: '/profile', label: t('shell.tabs.me'), icon: 'user' as const },
       ]
     : null
 
@@ -62,7 +65,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale}>
       <body>
         <NextIntlClientProvider>
-          <div className={`shell${tabs ? ' has-tabbar' : ''}`}>
+          <div className={`shell${tabs ? ' has-tabbar app-mode' : ''}`}>
             <a href="#main" className="skip-link">
               {t('nav.skip')}
             </a>
@@ -72,8 +75,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <main className="main" id="main">
               {children}
             </main>
-            <Footer />
-            {tabs ? <TabBar tabs={tabs} /> : null}
+            {viewer ? <FooterSwitch full={<Footer />} compact={<Footer compact />} /> : <Footer />}
+            {tabs ? <TabBar tabs={tabs} label={t('shell.tabsLabel')} /> : null}
           </div>
         </NextIntlClientProvider>
       </body>

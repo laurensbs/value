@@ -1,12 +1,43 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import type { Locale } from '@/i18n/config'
+import { APP_NAME } from '@/lib/site'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
+import { LanguageSwitcher } from './LanguageSwitcher'
+import { Logo } from './Logo'
 
-export async function Footer() {
+/**
+ * The site footer. `compact` is the one line under the app pages for signed-in people
+ * (FooterSwitch picks it): the essentials and the language, without the big link list.
+ */
+export async function Footer({ compact = false }: { compact?: boolean }) {
   const t = await getTranslations('footer')
-  const tc = await getTranslations('cities')
   const native = await isNativeRequest()
+  if (compact) {
+    const ts = await getTranslations('shell')
+    const tn = await getTranslations('nav')
+    const locale = (await getLocale()) as Locale
+    return (
+      <footer className="footer compact">
+        <div className="footer-inner">
+          <span className="footer-brand">
+            <Logo size={18} />
+            {ts('footerLine', { name: APP_NAME })}
+          </span>
+          <nav className="footer-links" aria-label={t('more')}>
+            <Link href="/about">{t('about')}</Link>
+            <Link href="/help">{tn('help')}</Link>
+            <Link href="/legal/terms">{t('terms')}</Link>
+            <Link href="/legal/privacy">{t('privacy')}</Link>
+            {native ? null : <Link href="/support">{t('support')}</Link>}
+          </nav>
+          <LanguageSwitcher current={locale} label={tn('language')} compact />
+        </div>
+      </footer>
+    )
+  }
+  const tc = await getTranslations('cities')
   const { instagram } = supportConfig()
   return (
     <footer className="footer">

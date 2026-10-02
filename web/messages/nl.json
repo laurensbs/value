@@ -1861,5 +1861,31 @@
     "tipText": "Weet je een opvang of iemand met een hond die hulp kan gebruiken?",
     "shelterText": "Werk je bij een opvang? Zet jullie honden hier online.",
     "alerts": "Meldingen en geluid"
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Ontdek",
+      "requests": "Rondjes",
+      "myDogs": "Mijn honden",
+      "shelter": "Mijn opvang",
+      "me": "Jij"
+    },
+    "tabsLabel": "Hoofdmenu",
+    "footerLine": "{name} is gratis en zonder reclame"
+  },
+  "discover": {
+    "title": "Wie gaat er vandaag mee?",
+    "levelTop": "Hoogste level. Wat een rondjes!",
+    "badges": "{n, plural, =0 {Nog geen penningen} one {# penning} other {# penningen}}",
+    "together": "Samen deze maand",
+    "mine": "{n} van jou",
+    "filters": {
+      "owner": "Buurt",
+      "shelter": "Opvang"
+    },
+    "allCountries": "Alle landen",
+    "storyIn": "Verhaal in het {language}",
+    "groupWalksText": "Begeleid, bij een opvang. Fijn om mee te beginnen.",
+    "allGroupWalks": "Alle groepswandelingen"
   }
 }

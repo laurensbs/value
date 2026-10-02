@@ -1861,5 +1861,31 @@
     "tipText": "Vous connaissez un refuge ou quelqu'un avec un chien qui aurait besoin d'aide ?",
     "shelterText": "Vous travaillez dans un refuge ? Mettez vos chiens en ligne ici.",
     "alerts": "Notifications et son"
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Découvrir",
+      "requests": "Balades",
+      "myDogs": "Mes chiens",
+      "shelter": "Mon refuge",
+      "me": "Moi"
+    },
+    "tabsLabel": "Menu principal",
+    "footerLine": "{name} est gratuit et sans publicité"
+  },
+  "discover": {
+    "title": "Qui vient se balader aujourd’hui ?",
+    "levelTop": "Niveau maximum. Que de balades !",
+    "badges": "{n, plural, =0 {Pas encore de médailles} one {# médaille} other {# médailles}}",
+    "together": "Ensemble ce mois-ci",
+    "mine": "Vous : {n}",
+    "filters": {
+      "owner": "Quartier",
+      "shelter": "Refuge"
+    },
+    "allCountries": "Tous les pays",
+    "storyIn": "Histoire en {language}",
+    "groupWalksText": "Encadrée, dans un refuge. Idéal pour commencer.",
+    "allGroupWalks": "Toutes les balades en groupe"
   }
 }

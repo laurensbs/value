@@ -10,7 +10,7 @@ mkdirSync(out, { recursive: true })
 const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH || undefined })
 
 const publicPaths = ['/', '/dogs', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam']
-const privatePaths = ['/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
+const privatePaths = ['/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
 const viewports = { mobile: { viewport: { width: 375, height: 740 }, isMobile: true, hasTouch: true }, desktop: { viewport: { width: 1366, height: 900 } } }
 
 async function check(page, path, label) {
@@ -87,16 +87,25 @@ for (const [label, device] of Object.entries(viewports)) {
     await page.waitForTimeout(2500)
   }
   if (page.url().includes('/onboarding')) {
+    // Check the onboarding itself while it is still there: once the profile exists, /onboarding
+    // sends you on to Ontdek (/dogs), so checking it afterwards would only show the dogs list.
+    report[`${label} /onboarding (new account)`] = await check(page, '/onboarding', label)
+    // The onboarding screens, one question at a time (src/app/onboarding/OnboardingFlow.tsx).
+    const next = () => page.getByRole('button', { name: 'Verder' }).click()
+    await page.getByRole('button', { name: 'Laten we beginnen' }).click()
+    await page.getByRole('radio', { name: 'Allebei', exact: true }).check()
+    await next()
     await page.getByLabel('Geboortedatum').fill('1999-05-05')
-    const walk = page.getByLabel('Ik wil wandelen met honden')
-    if (!(await walk.isChecked())) await walk.click()
-    const dogs = page.getByLabel(/Ik heb een hond/)
-    if (!(await dogs.isChecked())) await dogs.click()
-    await page.getByLabel('Over jou').fill('Audit account')
+    await next()
     await page.getByLabel('Plaats').fill('Utrecht')
     await page.getByRole('button', { name: 'Gebruik mijn locatie' }).click()
+    await next()
+    await next()
+    await next()
+    await page.getByLabel('Over jou').fill('Audit account')
+    await next()
     await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
-    await page.getByRole('button', { name: 'Profiel opslaan' }).click()
+    await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
     await page.waitForTimeout(2500)
   }
   for (const p of privatePaths) report[`${label} ${p} (signed in)`] = await check(page, p, label)

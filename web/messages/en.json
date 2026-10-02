@@ -1861,5 +1861,31 @@
     "tipText": "Know a shelter or someone with a dog who could use help?",
     "shelterText": "Work at a shelter? Put your dogs online here.",
     "alerts": "Notifications and sound"
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Discover",
+      "requests": "Walks",
+      "myDogs": "My dogs",
+      "shelter": "My shelter",
+      "me": "You"
+    },
+    "tabsLabel": "Main menu",
+    "footerLine": "{name} is free and ad-free"
+  },
+  "discover": {
+    "title": "Who’s coming along today?",
+    "levelTop": "Top level. What a lot of walks!",
+    "badges": "{n, plural, =0 {No badges yet} one {# badge} other {# badges}}",
+    "together": "Together this month",
+    "mine": "{n} by you",
+    "filters": {
+      "owner": "Neighbourhood",
+      "shelter": "Shelter"
+    },
+    "allCountries": "All countries",
+    "storyIn": "Story in {language}",
+    "groupWalksText": "Guided, at a shelter. A nice way to start.",
+    "allGroupWalks": "All group walks"
   }
 }

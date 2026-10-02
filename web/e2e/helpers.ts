@@ -43,18 +43,32 @@ export async function signUp(page: Page, opts: { name: string; email: string; in
   await expect(page).toHaveURL(/\/onboarding/)
 }
 
+/** Walks through the onboarding screens (src/app/onboarding/OnboardingFlow.tsx), one question at a time. */
 export async function onboard(page: Page, opts: { birthDate: string; city: string; bio: string; phone: string; walker: boolean; owner: boolean }) {
+  const next = () => page.getByRole('button', { name: 'Verder' }).click()
+  await page.getByRole('button', { name: 'Laten we beginnen' }).click()
+  const role = opts.walker && opts.owner ? 'Allebei' : opts.walker ? 'Ik wil wandelen' : opts.owner ? 'Ik heb een hond' : 'Ik werk bij een opvang'
+  await page.getByRole('radio', { name: role, exact: true }).check()
+  await next()
   await page.getByLabel('Geboortedatum').fill(opts.birthDate)
-  const walk = page.getByLabel('Ik wil wandelen met honden')
-  if ((await walk.isChecked()) !== opts.walker) await walk.click()
-  const dogs = page.getByLabel(/Ik heb een hond/)
-  if ((await dogs.isChecked()) !== opts.owner) await dogs.click()
-  await page.getByLabel('Over jou').fill(opts.bio)
+  await next()
   await page.getByLabel('Plaats').fill(opts.city)
   await page.getByRole('button', { name: 'Gebruik mijn locatie' }).click()
-  await page.getByLabel(/Telefoonnummer/).fill(opts.phone)
+  await next()
+  if (opts.walker) {
+    // Experience ("Een beetje" is chosen) and how often (decide later).
+    await expect(page.getByRole('heading', { name: /ervaring/ })).toBeVisible()
+    await next()
+    await expect(page.getByRole('heading', { name: /Hoe vaak/ })).toBeVisible()
+    await next()
+  }
+  if (opts.walker || opts.owner) {
+    await page.getByLabel('Over jou').fill(opts.bio)
+    if (opts.phone) await page.getByLabel(/Telefoonnummer/).fill(opts.phone)
+    await next()
+  }
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
-  await page.getByRole('button', { name: 'Profiel opslaan' }).click()
+  await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
 }
 
 /** Signs in as the e2e admin (ADMIN_EMAILS in playwright.config.ts). On a reused server the account may already exist. */
