@@ -12,6 +12,7 @@ import { zonedToUtc } from '@/lib/time'
 import { challengesFor } from '@/server/challenges'
 import { dogFriendsFor, progressFor } from '@/server/progress'
 import { progressJson } from '@/server/progress-json'
+import { webPushKey } from '@/server/push'
 import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, type RequestRow } from '@/server/queries'
 import type { OnboardedViewer } from '@/server/session'
 import { Celebration } from './Celebration'
@@ -20,6 +21,7 @@ import { DogFace } from './DogFace'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
 import { Medal } from './Medal'
+import { PushAsk } from './PushAsk'
 import { WeekCard } from './WeekCard'
 
 const WALKER_TIPS = 10
@@ -57,6 +59,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const t = await getTranslations('today')
   const tp = await getTranslations('progress')
   const td = await getTranslations('dogs')
+  const tpa = await getTranslations('pushAsk')
   const format = await getFormatter()
   const locale = await getLocale()
   const p = viewer.profile
@@ -101,6 +104,8 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const tip = !walker || (owner && day % 2 === 1) ? t(`tips.owner.${(day % OWNER_TIPS) + 1}`) : t(`tips.walker.${(day % WALKER_TIPS) + 1}`)
 
   const celebrate = progress.levelUp || progress.newAwards.length > 0
+  const pushKey = webPushKey()
+  const pushText = owner && ownDogs[0] ? tpa('dog', { dog: ownDogs[0].name }) : walker ? tpa('walker') : tpa('general')
 
   return (
     <div className="today">
@@ -212,6 +217,8 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
         </section>
       ) : null}
 
+      {pushKey ? <PushAsk publicKey={pushKey} text={pushText} /> : null}
+
       <div className="today-grid">
         {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
         <ChallengeCard challenges={challenges} now={now} />
@@ -318,7 +325,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
         <p className="hand">{tip}</p>
       </section>
 
-      {impact.walks > 0 ? <p className="together muted small">{t('together', { walks: format.number(impact.walks), dogs: format.number(impact.dogs) })}</p> : null}
+      {impact.walks > 0 ? <p className="together muted small">{t('together', { walks: impact.walks, dogs: impact.dogs })}</p> : null}
 
       {celebrate ? (
         <Celebration

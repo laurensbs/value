@@ -440,7 +440,8 @@
     "cancelConfirm": "¿Cancelar este paseo?",
     "keep": "No, volver",
     "past": "Paseos anteriores ({n})",
-    "startHint": "Puedes empezar a partir de {n} minutos antes de la hora acordada."
+    "startHint": "Puedes empezar a partir de {n} minutos antes de la hora acordada.",
+    "calendar": "Añadir al calendario"
   },
   "walk": {
     "before": "Antes de salir",
@@ -541,7 +542,8 @@
     "carePoo": "Caca",
     "careWater": "Bebió",
     "careUndo": "Quitar uno de {kind}",
-    "careNone": "Aún nada anotado"
+    "careNone": "Aún nada anotado",
+    "careFailed": "No se ha guardado: no hay conexión. Toca otra vez cuando vuelvas a tener cobertura."
   },
   "myDogs": {
     "title": "Mis perros",
@@ -885,7 +887,7 @@
   },
   "help": {
     "title": "¿Un mal momento?",
-    "lede": "Pasear ayuda a mucha gente, pero no sustituye a la ayuda profesional. Aquí siempre puedes encontrar apoyo, gratis y de forma anónima.",
+    "lede": "Un paseo al aire libre puede alegrarte el día, pero no sustituye a la ayuda profesional. Aquí siempre puedes encontrar apoyo, gratis y de forma anónima.",
     "emergency": "Si hay un peligro inmediato, llama al {number}.",
     "lines": {
       "suicide": "¿Piensas en el suicidio? Disponible día y noche.",
@@ -1515,7 +1517,7 @@
     "badgesTitle": "Tus medallas",
     "badgesAll": "Todas las medallas",
     "badgesEmpty": "Conseguirás tu primera medalla con tu primer paseo.",
-    "together": "Juntos ya hemos dado {walks} paseos con {dogs} perros. Tú formas parte de ello.",
+    "together": "Juntos ya hemos dado {walks, plural, one {# paseo} other {# paseos}} con {dogs, plural, one {# perro} other {# perros}}. Tú formas parte de ello.",
     "tips": {
       "walker": {
         "1": "En días de calor lleva agua y comprueba con la mano que la acera no quema sus patas.",
@@ -1672,7 +1674,7 @@
     },
     "none": "Aún no tienes puntos. Tu primer paseo te da 25 de golpe.",
     "weekTitle": "Esta semana",
-    "weekGoal": "{done} de {goal} paseos",
+    "weekGoal": "{done} de {goal, plural, one {# paseo} other {# paseos}}",
     "weekDone": "¡Objetivo semanal conseguido!",
     "weekLeft": "{n, plural, one {Falta # paseo} other {Faltan # paseos}} para tu objetivo semanal",
     "weekNoGoal": "{n, plural, =0 {Aún ningún paseo esta semana} one {# paseo esta semana} other {# paseos esta semana}}",
@@ -1718,5 +1720,23 @@
     "stats": "{dogs, plural, one {# perro} other {# perros}} · {walkers, plural, one {# paseador} other {# paseadores}} · {km} km",
     "daysLeft": "{n, plural, one {Queda # día} other {Quedan # días}}",
     "private": "Solo contamos paseos, nunca quién los dio."
+  },
+  "pushAsk": {
+    "title": "¿Te aviso cuando haya novedades?",
+    "walker": "Así sabrás enseguida cuándo responde un dueño o te envía un mensaje.",
+    "dog": "Así sabrás enseguida cuándo alguien quiere pasear a {dog} o te envía un mensaje.",
+    "general": "Así sabrás enseguida cuándo hay algo nuevo, como una solicitud o un mensaje.",
+    "request": "Así sabrás enseguida cuándo haya respuesta sobre {dog}.",
+    "calm": "Recordatorios como mucho una vez cada tres días. Puedes desactivarlo cuando quieras en tu perfil.",
+    "yes": "Sí, por favor",
+    "later": "Más tarde",
+    "done": "¡Genial! Te avisaremos cuando haya algo."
+  },
+  "calendar": {
+    "meet": "Conocer a {dog}",
+    "walk": "Paseo con {dog}",
+    "with": "Con {name}.",
+    "open": "Todo sobre esta cita en Rondje: {link}",
+    "group": "Paseo en grupo con {org}"
   }
 }

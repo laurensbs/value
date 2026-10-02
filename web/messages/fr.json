@@ -440,7 +440,8 @@
     "cancelConfirm": "Annuler ce rendez-vous ?",
     "keep": "Non, retour",
     "past": "Rendez-vous passés ({n})",
-    "startHint": "Vous pouvez commencer à partir de {n} minutes avant le rendez-vous."
+    "startHint": "Vous pouvez commencer à partir de {n} minutes avant le rendez-vous.",
+    "calendar": "Ajouter à l'agenda"
   },
   "walk": {
     "before": "Avant de partir",
@@ -541,7 +542,8 @@
     "carePoo": "Caca",
     "careWater": "A bu",
     "careUndo": "En retirer un de {kind}",
-    "careNone": "Rien de noté pour l’instant"
+    "careNone": "Rien de noté pour l’instant",
+    "careFailed": "Non enregistré : pas de connexion. Touchez à nouveau quand vous avez du réseau."
   },
   "myDogs": {
     "title": "Mes chiens",
@@ -885,7 +887,7 @@
   },
   "help": {
     "title": "Ça ne va pas fort ?",
-    "lede": "Marcher aide beaucoup de gens, mais cela ne remplace pas une aide professionnelle. Ici, vous trouverez toujours du soutien, gratuitement et anonymement.",
+    "lede": "Une balade dehors peut faire du bien à votre journée, mais elle ne remplace pas une aide professionnelle. Ici, vous trouverez toujours du soutien, gratuitement et anonymement.",
     "emergency": "En cas de danger immédiat, appelez le {number}.",
     "lines": {
       "suicide": "Vous pensez au suicide ? Joignable jour et nuit.",
@@ -1515,7 +1517,7 @@
     "badgesTitle": "Vos médailles",
     "badgesAll": "Toutes les médailles",
     "badgesEmpty": "Vous gagnerez votre première médaille avec votre première balade.",
-    "together": "Ensemble, nous avons déjà fait {walks} balades avec {dogs} chiens. Vous en faites partie.",
+    "together": "Ensemble, nous avons déjà fait {walks, plural, one {# balade} other {# balades}} avec {dogs, plural, one {# chien} other {# chiens}}. Vous en faites partie.",
     "tips": {
       "walker": {
         "1": "Par temps chaud, emportez de l'eau et vérifiez avec la main que le trottoir n'est pas trop chaud pour ses pattes.",
@@ -1672,7 +1674,7 @@
     },
     "none": "Pas encore de points. Votre première balade en rapporte 25 d'un coup.",
     "weekTitle": "Cette semaine",
-    "weekGoal": "{done} sur {goal} balades",
+    "weekGoal": "{done} sur {goal, plural, one {# balade} other {# balades}}",
     "weekDone": "Objectif de la semaine atteint !",
     "weekLeft": "Encore {n, plural, one {# balade} other {# balades}} pour votre objectif",
     "weekNoGoal": "{n, plural, =0 {Pas encore de balade cette semaine} one {# balade cette semaine} other {# balades cette semaine}}",
@@ -1718,5 +1720,23 @@
     "stats": "{dogs, plural, one {# chien} other {# chiens}} · {walkers, plural, one {# promeneur} other {# promeneurs}} · {km} km",
     "daysLeft": "{n, plural, one {Encore # jour} other {Encore # jours}}",
     "private": "Nous comptons seulement les balades, jamais qui les a faites."
+  },
+  "pushAsk": {
+    "title": "Un petit signal quand il y a du nouveau ?",
+    "walker": "Vous saurez tout de suite quand un propriétaire répond ou vous envoie un message.",
+    "dog": "Vous saurez tout de suite quand quelqu'un veut promener {dog} ou vous envoie un message.",
+    "general": "Vous saurez tout de suite quand il y a du nouveau, comme une demande ou un message.",
+    "request": "Vous saurez tout de suite quand il y a une réponse pour {dog}.",
+    "calm": "Des rappels tous les trois jours au maximum. Vous pouvez désactiver tout cela dans votre profil.",
+    "yes": "Oui, volontiers",
+    "later": "Plus tard",
+    "done": "Parfait ! Vous recevrez un signal quand il y aura du nouveau."
+  },
+  "calendar": {
+    "meet": "Rencontre avec {dog}",
+    "walk": "Balade avec {dog}",
+    "with": "Avec {name}.",
+    "open": "Tout sur ce rendez-vous dans Rondje : {link}",
+    "group": "Balade en groupe avec {org}"
   }
 }

@@ -440,7 +440,8 @@
     "cancelConfirm": "Cancel this walk?",
     "keep": "No, go back",
     "past": "Past walks ({n})",
-    "startHint": "You can start from {n} minutes before the agreed time."
+    "startHint": "You can start from {n} minutes before the agreed time.",
+    "calendar": "Add to calendar"
   },
   "walk": {
     "before": "Before you set off",
@@ -541,7 +542,8 @@
     "carePoo": "Poo",
     "careWater": "Drank",
     "careUndo": "Take one back from {kind}",
-    "careNone": "Nothing noted yet"
+    "careNone": "Nothing noted yet",
+    "careFailed": "Not saved: no connection. Tap again when you're back in range."
   },
   "myDogs": {
     "title": "My dogs",
@@ -885,7 +887,7 @@
   },
   "help": {
     "title": "Not okay right now?",
-    "lede": "Walking helps lots of people, but it doesn't replace professional help. You can always reach out here, free and anonymously.",
+    "lede": "A walk outside can brighten your day, but it doesn't replace professional help. You can always reach out here, free and anonymously.",
     "emergency": "If you're in immediate danger, call {number}.",
     "lines": {
       "suicide": "Thinking about suicide? Available day and night.",
@@ -1515,7 +1517,7 @@
     "badgesTitle": "Your badges",
     "badgesAll": "All badges",
     "badgesEmpty": "You'll earn your first badge with your first walk.",
-    "together": "Together we've done {walks} walks with {dogs} dogs. You're part of it.",
+    "together": "Together we've done {walks, plural, one {# walk} other {# walks}} with {dogs, plural, one {# dog} other {# dogs}}. You're part of it.",
     "tips": {
       "walker": {
         "1": "On warm days bring water, and feel with your hand whether the pavement is too hot for their paws.",
@@ -1672,7 +1674,7 @@
     },
     "none": "No points yet. Your first walk earns 25 straight away.",
     "weekTitle": "This week",
-    "weekGoal": "{done} of {goal} walks",
+    "weekGoal": "{done} of {goal, plural, one {# walk} other {# walks}}",
     "weekDone": "Weekly goal reached!",
     "weekLeft": "{n, plural, one {# more walk} other {# more walks}} for your weekly goal",
     "weekNoGoal": "{n, plural, =0 {No walk yet this week} one {# walk this week} other {# walks this week}}",
@@ -1718,5 +1720,23 @@
     "stats": "{dogs, plural, one {# dog} other {# dogs}} · {walkers, plural, one {# walker} other {# walkers}} · {km} km",
     "daysLeft": "{n, plural, one {# day left} other {# days left}}",
     "private": "We only count walks, never who did them."
+  },
+  "pushAsk": {
+    "title": "Shall I give you a heads-up?",
+    "walker": "Then you'll know right away when an owner replies or sends you a message.",
+    "dog": "Then you'll know right away when someone wants to walk {dog} or sends you a message.",
+    "general": "Then you'll know right away when there's something new, like a request or a message.",
+    "request": "Then you'll know right away when there's an answer about {dog}.",
+    "calm": "Reminders once every three days at most. You can turn this off any time in your profile.",
+    "yes": "Yes, please",
+    "later": "Later",
+    "done": "Great! You'll get a heads-up when something comes up."
+  },
+  "calendar": {
+    "meet": "Meet {dog}",
+    "walk": "Walk with {dog}",
+    "with": "With {name}.",
+    "open": "Everything about this appointment in Rondje: {link}",
+    "group": "Group walk at {org}"
   }
 }

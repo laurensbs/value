@@ -440,7 +440,8 @@
     "cancelConfirm": "Afspraak intrekken?",
     "keep": "Nee, terug",
     "past": "Eerdere afspraken ({n})",
-    "startHint": "Starten kan vanaf {n} minuten voor de afspraak."
+    "startHint": "Starten kan vanaf {n} minuten voor de afspraak.",
+    "calendar": "Zet in je agenda"
   },
   "walk": {
     "before": "Voor je vertrekt",
@@ -541,7 +542,8 @@
     "carePoo": "Poep",
     "careWater": "Gedronken",
     "careUndo": "Eentje terug bij {kind}",
-    "careNone": "Nog niks genoteerd"
+    "careNone": "Nog niks genoteerd",
+    "careFailed": "Niet opgeslagen: geen verbinding. Tik nog een keer als je weer bereik hebt."
   },
   "myDogs": {
     "title": "Mijn honden",
@@ -885,7 +887,7 @@
   },
   "help": {
     "title": "Even niet oké?",
-    "lede": "Wandelen helpt veel mensen, maar het vervangt geen hulp. Hier kun je altijd terecht, gratis en anoniem.",
+    "lede": "Een rondje buiten kan je dag goed doen, maar het vervangt geen hulp. Hier kun je altijd terecht, gratis en anoniem.",
     "emergency": "Bij direct gevaar bel je {number}.",
     "lines": {
       "suicide": "Denk je aan zelfdoding? Dag en nacht bereikbaar.",
@@ -1515,7 +1517,7 @@
     "badgesTitle": "Jouw penningen",
     "badgesAll": "Alle penningen",
     "badgesEmpty": "Je eerste penning verdien je met je eerste rondje.",
-    "together": "Samen liepen we al {walks} rondjes met {dogs} honden. Jij hoort erbij.",
+    "together": "Samen liepen we al {walks, plural, one {# rondje} other {# rondjes}} met {dogs, plural, one {# hond} other {# honden}}. Jij hoort erbij.",
     "tips": {
       "walker": {
         "1": "Neem op warme dagen water mee, en voel met je hand of de stoep niet te heet is voor zijn pootjes.",
@@ -1672,7 +1674,7 @@
     },
     "none": "Nog geen punten. Je eerste rondje levert er meteen 25 op.",
     "weekTitle": "Deze week",
-    "weekGoal": "{done} van {goal} rondjes",
+    "weekGoal": "{done} van {goal, plural, one {# rondje} other {# rondjes}}",
     "weekDone": "Weekdoel gehaald!",
     "weekLeft": "{n, plural, one {Nog # rondje} other {Nog # rondjes}} voor je weekdoel",
     "weekNoGoal": "{n, plural, =0 {Nog geen rondje deze week} one {# rondje deze week} other {# rondjes deze week}}",
@@ -1718,5 +1720,23 @@
     "stats": "{dogs, plural, one {# hond} other {# honden}} · {walkers, plural, one {# wandelaar} other {# wandelaars}} · {km} km",
     "daysLeft": "{n, plural, one {Nog # dag} other {Nog # dagen}}",
     "private": "We tellen alleen rondjes, nooit wie ze liep."
+  },
+  "pushAsk": {
+    "title": "Zal ik je een seintje geven?",
+    "walker": "Dan weet je het meteen als een eigenaar antwoordt of je een berichtje stuurt.",
+    "dog": "Dan weet je het meteen als iemand met {dog} wil wandelen of je een berichtje stuurt.",
+    "general": "Dan weet je het meteen als er iets nieuws is, zoals een verzoek of een berichtje.",
+    "request": "Dan weet je het meteen als er antwoord is over {dog}.",
+    "calm": "Herinneringen hooguit één keer per drie dagen. Uitzetten kan altijd in je profiel.",
+    "yes": "Ja, graag",
+    "later": "Later",
+    "done": "Top! Je krijgt een seintje als er iets is."
+  },
+  "calendar": {
+    "meet": "Kennismaken met {dog}",
+    "walk": "Rondje met {dog}",
+    "with": "Met {name}.",
+    "open": "Alles over deze afspraak in Rondje: {link}",
+    "group": "Groepswandeling bij {org}"
   }
 }

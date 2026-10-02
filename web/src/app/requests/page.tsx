@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
+import { PushAsk } from '@/components/PushAsk'
 import { CancelButton, DecideButtons, StartButton, TrustForm } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { canStartWalk, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
@@ -15,6 +16,7 @@ import {
   type RequestRow,
 } from '@/server/queries'
 import { unreadChats } from '@/server/chat'
+import { webPushKey } from '@/server/push'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -34,6 +36,15 @@ function ChatLink({ requestId, label, unread }: { requestId: string; label: stri
       <Icon name="chat" size={16} /> {label}
       {unread ? <span className="unread-dot" aria-hidden="true" /> : null}
     </Link>
+  )
+}
+
+/** The appointment as a calendar file, with a reminder an hour before. */
+function CalendarLink({ requestId, label }: { requestId: string; label: string }) {
+  return (
+    <a href={`/requests/${requestId}/calendar.ics`} className="button ghost">
+      <Icon name="calendar" size={16} /> {label}
+    </a>
   )
 }
 
@@ -91,6 +102,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
   const minePast = outgoing.filter((r) => !OPEN.includes(r.request.status))
   const inOpen = incoming.filter((r) => OPEN.includes(r.request.status))
   const inPast = incoming.filter((r) => !OPEN.includes(r.request.status))
+  // Waiting for an answer is the moment a heads-up matters most.
+  const waitingFor = mineOpen.find((r) => r.request.status === 'pending')
+  const pushKey = webPushKey()
 
   return (
     <div className="stack-l">
@@ -111,6 +125,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
 
       {tab === 'mine' ? (
         <section className="stack">
+          {pushKey && waitingFor ? <PushAsk publicKey={pushKey} text={t('pushAsk.request', { dog: waitingFor.dog.name })} /> : null}
           {mineOpen.length === 0 ? (
             <div className="empty card flat stack-s">
               <p>{t('requests.empty')}</p>
@@ -168,6 +183,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             hint={t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })}
                           />
                         ) : null}
+                        {accepted && !active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
                         {!active ? <CancelButton requestId={r.request.id} /> : null}
                       </div>
                     </div>
@@ -261,6 +277,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                                 <span className="live-dot" aria-hidden="true" /> {t('requests.follow')}
                               </Link>
                             ) : null}
+                            {!active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
                             {!active ? <CancelButton requestId={r.request.id} /> : null}
                           </div>
                         </>

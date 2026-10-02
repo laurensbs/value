@@ -69,7 +69,8 @@ async function check(page, path, label, tag = '') {
 
 const report = {}
 for (const [label, device] of Object.entries(viewports)) {
-  const ctx = await browser.newContext({ ...device, locale: 'nl-NL', geolocation: { latitude: 52.09, longitude: 5.12 }, permissions: ['geolocation'], extraHTTPHeaders: { 'x-forwarded-for': `10.9.${label.length}.${Math.floor(Math.random() * 250)}` } })
+  // Headless browsers refuse notifications up front; allowing them shows the push question like a fresh browser does.
+  const ctx = await browser.newContext({ ...device, locale: 'nl-NL', geolocation: { latitude: 52.09, longitude: 5.12 }, permissions: ['geolocation', 'notifications'], extraHTTPHeaders: { 'x-forwarded-for': `10.9.${label.length}.${Math.floor(Math.random() * 250)}` } })
   const page = await ctx.newPage()
   for (const p of publicPaths) report[`${label} ${p}`] = await check(page, p, label)
   // Sign in (or up) as the audit account.

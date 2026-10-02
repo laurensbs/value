@@ -267,10 +267,24 @@ mark {
   right: 0;
   bottom: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Four or five tabs, depending on the role: always one row. */
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   background: var(--surface);
   border-top: 1px solid var(--line);
   padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.tab-label {
+  max-width: 100%;
+  padding: 0 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tabbar:has(> a:nth-child(5)) a {
+  font-size: 0.7rem;
 }
 
 .tabbar a {
@@ -3535,6 +3549,22 @@ legend {
 
 .back-card .button {
   align-self: flex-start;
+}
+
+.push-ask {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-color: color-mix(in srgb, var(--calm) 30%, var(--line));
+  animation: rise 0.4s ease both;
+}
+
+.push-ask .dog-face {
+  flex: none;
+}
+
+.push-ask-done {
+  animation: rise 0.4s ease both;
 }
 
 .pending-card {

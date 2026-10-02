@@ -11,23 +11,36 @@ const KINDS: { kind: CareKind; label: 'carePee' | 'carePoo' | 'careWater' }[] = 
   { kind: 'water', label: 'careWater' },
 ]
 
+const clamp = (n: number) => Math.min(20, Math.max(0, n))
+
 /** The walker's one-tap report: pee, poo, drink. A small minus takes one back after a mis-tap. */
 export function WalkCareButtons({ walkId, dogName, initial }: { walkId: string; dogName: string; initial: CareCounts }) {
   const t = useTranslations('walk')
   const [care, setCare] = useState(initial)
-  const [, start] = useTransition()
+  const [failed, setFailed] = useState(false)
+  const [saving, start] = useTransition()
 
   function log(kind: CareKind, delta: 1 | -1) {
     // Show the tap at once; the server's answer settles the real count.
-    setCare((c) => ({ ...c, [kind]: Math.min(20, Math.max(0, c[kind] + delta)) }))
+    const applied = clamp(care[kind] + delta) - care[kind]
+    setCare((c) => ({ ...c, [kind]: clamp(c[kind] + delta) }))
+    setFailed(false)
+    const takeBack = () => setCare((c) => ({ ...c, [kind]: clamp(c[kind] - applied) }))
     start(async () => {
-      const next = await logWalkCare(walkId, kind, delta)
-      if (next) setCare(next)
+      try {
+        const next = await logWalkCare(walkId, kind, delta)
+        if (next) setCare(next)
+        else takeBack()
+      } catch {
+        // Out of range: take the tap back, so the walker never sees more than the owner does.
+        takeBack()
+        setFailed(true)
+      }
     })
   }
 
   return (
-    <section className="stack-s" aria-label={t('careTitle')}>
+    <section className="stack-s" aria-label={t('careTitle')} aria-busy={saving}>
       <h2 className="small-title">{t('careTitle')}</h2>
       <div className="care-buttons">
         {KINDS.map(({ kind, label }) => (
@@ -44,6 +57,11 @@ export function WalkCareButtons({ walkId, dogName, initial }: { walkId: string; 
           </div>
         ))}
       </div>
+      {failed ? (
+        <p className="notice warn small" role="status">
+          {t('careFailed')}
+        </p>
+      ) : null}
       <p className="muted small">{t('careHint', { dogName })}</p>
     </section>
   )

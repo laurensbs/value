@@ -36,6 +36,7 @@ Las cookies técnicas no necesitan consentimiento. Por eso no verás un banner d
 Rondje guarda algunas cosas solo en tu propio dispositivo, en el navegador o en la app:
 
 - **Registros de ánimo.** Cómo te sientes antes y después de un paseo. Estos datos se quedan en tu dispositivo y nunca llegan a Rondje.
+- **Una pregunta para más tarde.** Si eliges «Más tarde» cuando te preguntamos por las notificaciones, tu navegador recuerda durante dos semanas no volver a preguntar todavía.
 - **Preferencias**, como la visualización o los ajustes que elijas [pendiente de verificar: cuáles].
 
 Puedes borrar estos datos tú mismo, por ejemplo eliminando los datos del sitio en tu navegador, o los datos de la app o la propia app. Ten en cuenta que tus registros de ánimo desaparecerán de verdad. Nosotros no tenemos ninguna copia.

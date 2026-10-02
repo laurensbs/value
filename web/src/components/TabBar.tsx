@@ -23,7 +23,7 @@ export function TabBar({ tabs }: { tabs: Tab[] }) {
         return (
           <Link key={tab.href} href={tab.href} aria-current={active ? 'page' : undefined}>
             <Icon name={tab.icon} size={24} />
-            <span>{tab.label}</span>
+            <span className="tab-label">{tab.label}</span>
             {tab.badge ? <span className="tab-dot">{tab.badge}</span> : null}
           </Link>
         )

@@ -73,7 +73,17 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
 
   await walker.page.goto('/notifications')
   await expect(walker.page.getByText('Ans stuurde een bericht over Bello.')).toBeVisible()
+  // Headless browsers refuse notifications up front, where a real browser has not asked yet. With
+  // permission but no subscription in this browser, the question shows the same way.
+  await walker.context.grantPermissions(['notifications'])
   await walker.page.goto('/requests')
+  // Waiting for an answer is when a heads-up matters: Rondje asks once, and "Later" keeps it away.
+  const ask = walker.page.getByRole('region', { name: 'Zal ik je een seintje geven?' })
+  await expect(ask).toContainText('Dan weet je het meteen als er antwoord is over Bello.')
+  await shot(walker.page, '05c-push-ask')
+  await ask.getByRole('button', { name: 'Later' }).click()
+  await expect(ask).toHaveCount(0)
+  expect(await walker.page.evaluate(() => Number(localStorage.getItem('rondje.pushAsk')) > Date.now())).toBe(true)
   await walker.page.getByRole('link', { name: 'Chat' }).click()
   await expect(walker.page.getByText('Heb je eerder met een jonge hond gelopen?')).toBeVisible()
   await walker.page.getByLabel('Typ een bericht').fill('Ja, met de pup van mijn buren!')
@@ -91,12 +101,27 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await owner.page.getByLabel(/mag zelfstandig met Bello wandelen/).check()
   await owner.page.getByRole('button', { name: 'Bevestigen' }).click()
   await expect(owner.page.getByText('Bijgewerkt.')).toBeVisible()
+  await expect(owner.page.getByRole('link', { name: 'Zet in je agenda' })).toBeVisible()
   await shot(owner.page, '06-requests-incoming')
 
   // --- Walker sees the owner's details and starts the walk ---
   await walker.page.goto('/requests')
   await expect(walker.page.getByText('06 1234 5678')).toBeVisible()
   await expect(walker.page.getByText(/Oudegracht 1/)).toBeVisible()
+
+  // The appointment goes into any calendar app, with a reminder an hour before, and only for the two of them.
+  const calendarUrl = `/requests/${requestId}/calendar.ics`
+  await expect(walker.page.getByRole('link', { name: 'Zet in je agenda' })).toHaveAttribute('href', calendarUrl)
+  const ics = await walker.page.request.get(calendarUrl)
+  expect(ics.headers()['content-type']).toContain('text/calendar')
+  const calendar = await ics.text()
+  expect(calendar).toContain('\r\nSUMMARY:Kennismaken met Bello\r\n')
+  expect(calendar).toContain('\r\nLOCATION:Aanbellen bij Ans\\, Oudegracht 1\r\n')
+  expect(calendar).toContain('DESCRIPTION:Met Ans.')
+  expect(calendar).toContain('\r\nTRIGGER:-PT60M\r\n')
+  const stranger = await request.newContext({ baseURL: new URL(walker.page.url()).origin })
+  expect((await stranger.get(calendarUrl, { maxRedirects: 0 })).status()).toBe(307)
+  await stranger.dispose()
   await walker.page.getByRole('button', { name: 'Start rondje' }).click()
   await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
   await walker.page.getByLabel('Ik heb poepzakjes bij me').check()
@@ -124,6 +149,14 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.getByRole('button', { name: /^Gedronken:/ }).click()
   await expect(walker.page.getByRole('button', { name: 'Gedronken: 1' })).toBeVisible()
   await expect(walker.page.getByRole('button', { name: 'Plas: 2' })).toBeVisible()
+  // The taps are saved one after the other: wait until the last one is in.
+  await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toHaveAttribute('aria-busy', 'false')
+  // Out of range, a tap is taken back with a short note, so the walker never sees more than the owner.
+  await walker.context.setOffline(true)
+  await walker.page.getByRole('button', { name: /^Poep:/ }).click()
+  await expect(walker.page.getByText(/Niet opgeslagen: geen verbinding/)).toBeVisible()
+  await expect(walker.page.getByRole('button', { name: 'Poep: 0' })).toBeVisible()
+  await walker.context.setOffline(false)
 
   // The native app reaches the same report through the bearer-only JSON API; a cookie alone is refused.
   const care = `/api/v1/walks/${walkId}/care`
@@ -225,7 +258,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(quizParty).toBeVisible()
   await expect(quizParty.getByText('Veiligheidsquiz gehaald')).toBeVisible()
   await quizParty.getByRole('button', { name: 'Top!' }).click()
-  await expect(walker.page.getByText('1 van 1 rondjes').or(walker.page.getByText('Weekdoel gehaald!'))).toBeVisible()
+  await expect(walker.page.getByText('1 van 1 rondje').or(walker.page.getByText('Weekdoel gehaald!'))).toBeVisible()
   await shot(walker.page, '11b-today-after-walk')
   await walker.page.goto('/progress')
   await expect(walker.page.getByRole('heading', { name: 'Snuffelaar' })).toBeVisible()

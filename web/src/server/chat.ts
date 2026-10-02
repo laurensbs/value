@@ -55,6 +55,19 @@ export async function chatAccess(requestId: string, viewer: Viewer): Promise<Cha
   return { ...row, isWalker, others, canSend }
 }
 
+/** Who the viewer deals with about a request: the owner or the shelter for a walker, else the walker. */
+export async function partnerOf(access: ChatAccess): Promise<{ name: string; userId: string | null; orgId: string | null }> {
+  const db = await getDb()
+  if (access.isWalker && access.dog.orgId) {
+    const [org] = await db.select({ name: s.organization.name }).from(s.organization).where(eq(s.organization.id, access.dog.orgId))
+    return { name: org?.name ?? '', userId: null, orgId: access.dog.orgId }
+  }
+  const userId = access.isWalker ? access.dog.ownerId : access.request.walkerId
+  if (!userId) return { name: '', userId: null, orgId: null }
+  const [p] = await db.select({ name: s.profile.firstName }).from(s.profile).where(eq(s.profile.userId, userId))
+  return { name: p?.name ?? '', userId, orgId: null }
+}
+
 /** Messages oldest first; `afterMs` returns only newer ones for polling. */
 export async function chatMessages(requestId: string, afterMs = 0, limit = 200): Promise<ChatMessage[]> {
   const db = await getDb()
