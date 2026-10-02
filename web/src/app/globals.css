@@ -2874,3 +2874,36 @@ legend {
     animation: none !important;
   }
 }
+
+/* ---------- Home: what we walked together ---------- */
+
+.impact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.impact > div {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+.impact dt {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.impact dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 760;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}

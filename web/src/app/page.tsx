@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getFormatter, getTranslations } from 'next-intl/server'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
 import { isNativeRequest } from '@/server/native'
-import { listDogs } from '@/server/queries'
+import { IMPACT_MIN_WALKS, impactTotals, listDogs } from '@/server/queries'
 import { getViewer } from '@/server/session'
 
 export default async function HomePage() {
@@ -11,6 +11,8 @@ export default async function HomePage() {
   const viewer = await getViewer()
   const native = await isNativeRequest()
   const dogs = (await listDogs({}, 8)).slice(0, 4)
+  const impact = await impactTotals()
+  const format = await getFormatter()
 
   return (
     <div className="stack-l">
@@ -89,6 +91,26 @@ export default async function HomePage() {
           {t('safetyMore')}
         </Link>
       </section>
+
+      {impact.walks >= IMPACT_MIN_WALKS ? (
+        <section className="stack-s" aria-labelledby="impact-title">
+          <h2 id="impact-title">{t('impactTitle')}</h2>
+          <dl className="impact">
+            <div>
+              <dt>{t('impactWalks')}</dt>
+              <dd>{format.number(impact.walks)}</dd>
+            </div>
+            <div>
+              <dt>{t('impactKm')}</dt>
+              <dd>{format.number(impact.km)}</dd>
+            </div>
+            <div>
+              <dt>{t('impactDogs')}</dt>
+              <dd>{format.number(impact.dogs)}</dd>
+            </div>
+          </dl>
+        </section>
+      ) : null}
 
       <section className="grid-2">
         <div className="card stack-s">

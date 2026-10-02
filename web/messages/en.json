@@ -120,7 +120,11 @@
     "freeText": "No ads, no subscription, and we never sell data. Rondje runs on voluntary support, and later on partners and funds that stick to our rules.",
     "exampleDogs": "A few dogs waiting for a walk",
     "freeLink": "How we stay free",
-    "freeLinkApp": "About Rondje"
+    "freeLinkApp": "About Rondje",
+    "impactTitle": "What we walked together",
+    "impactWalks": "Walks",
+    "impactKm": "Kilometres",
+    "impactDogs": "Dogs who got out"
   },
   "auth": {
     "loginTitle": "Welcome back",

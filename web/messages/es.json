@@ -120,7 +120,11 @@
     "freeText": "Sin anuncios, sin suscripción y nunca vendemos datos. Rondje funciona con apoyo voluntario y, más adelante, con socios y fundaciones que respeten nuestras reglas.",
     "exampleDogs": "Algunos perros que esperan un paseo",
     "freeLink": "Cómo seguimos siendo gratis",
-    "freeLinkApp": "Sobre Rondje"
+    "freeLinkApp": "Sobre Rondje",
+    "impactTitle": "Lo que caminamos juntos",
+    "impactWalks": "Paseos",
+    "impactKm": "Kilómetros",
+    "impactDogs": "Perros que salieron"
   },
   "auth": {
     "loginTitle": "Hola de nuevo",

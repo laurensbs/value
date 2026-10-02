@@ -120,7 +120,11 @@
     "freeText": "Geen advertenties, geen abonnement, en we verkopen nooit gegevens. Rondje draait op vrijwillige steun, en later op partners en fondsen die zich aan onze spelregels houden.",
     "exampleDogs": "Een paar honden die op een rondje wachten",
     "freeLink": "Hoe we gratis blijven",
-    "freeLinkApp": "Over Rondje"
+    "freeLinkApp": "Over Rondje",
+    "impactTitle": "Wat we samen liepen",
+    "impactWalks": "Rondjes gelopen",
+    "impactKm": "Kilometer",
+    "impactDogs": "Honden die naar buiten gingen"
   },
   "auth": {
     "loginTitle": "Welkom terug",

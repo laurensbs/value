@@ -436,3 +436,21 @@ export async function trustGrantsFor(dogIds: string[]): Promise<Map<string, { id
   for (const r of rows) result.set(`${r.dogId}:${r.walkerId}`, { idSeen: r.idSeen, soloAllowed: r.soloAllowed })
   return result
 }
+
+/** Totals for the home page, without example data: finished walks, kilometres and dogs that got out. */
+export async function impactTotals(): Promise<{ walks: number; km: number; dogs: number }> {
+  const db = await getDb()
+  const [row] = await db
+    .select({
+      walks: count(),
+      meters: sql<number>`coalesce(sum(${s.walk.distanceM}), 0)`.mapWith(Number),
+      dogs: sql<number>`count(distinct ${s.walk.dogId})`.mapWith(Number),
+    })
+    .from(s.walk)
+    .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+    .where(and(eq(s.walk.status, 'ended'), eq(s.dog.isDemo, false)))
+  return { walks: row?.walks ?? 0, km: Math.round((row?.meters ?? 0) / 1000), dogs: row?.dogs ?? 0 }
+}
+
+/** The home page shows its counters only once they say something: before that, a small number looks sad. */
+export const IMPACT_MIN_WALKS = 50
