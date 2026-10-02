@@ -466,7 +466,15 @@
     "activeBack": "Back to the walk",
     "watchBanner": "{dog} is out on a walk right now.",
     "startPoint": "Start",
-    "endPoint": "Finish"
+    "endPoint": "Finish",
+    "photoButton": "Send a photo",
+    "photoSending": "Sending photo…",
+    "photoSent": "Photo sent",
+    "photoError": "The photo could not be sent. Please try again.",
+    "photoTooMany": "You've reached the maximum of 12 photos.",
+    "photoHint": "The owner sees your photos right away. They are deleted after 30 days, like the route.",
+    "photosTitle": "Photos from the walk",
+    "photoAlt": "Photo of {dogName} during the walk"
   },
   "myDogs": {
     "title": "My dogs",
@@ -868,7 +876,8 @@
       "org-verified": "Your shelter has been verified. Your dogs are now visible.",
       "org-pending": "{orgName} signed up as a shelter. Please check the details.",
       "shelter-joined": "{orgName} is on Rondje now. Have a look at the dogs!",
-      "group-walk-new": "{orgName} has planned a group walk. Want to join?"
+      "group-walk-new": "{orgName} has planned a group walk. Want to join?",
+      "walk-photo": "New photo of {dogName} during the walk."
     }
   },
   "admin": {

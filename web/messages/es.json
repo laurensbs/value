@@ -466,7 +466,15 @@
     "activeBack": "Volver al paseo",
     "watchBanner": "{dog} está de paseo ahora mismo.",
     "startPoint": "Salida",
-    "endPoint": "Llegada"
+    "endPoint": "Llegada",
+    "photoButton": "Enviar una foto",
+    "photoSending": "Enviando foto…",
+    "photoSent": "Foto enviada",
+    "photoError": "No se pudo enviar la foto. Inténtalo de nuevo.",
+    "photoTooMany": "Has llegado al máximo de 12 fotos.",
+    "photoHint": "El dueño ve tus fotos al instante. Se borran a los 30 días, igual que la ruta.",
+    "photosTitle": "Fotos del paseo",
+    "photoAlt": "Foto de {dogName} durante el paseo"
   },
   "myDogs": {
     "title": "Mis perros",
@@ -868,7 +876,8 @@
       "org-verified": "Tu protectora ha sido verificada. Tus perros ya son visibles.",
       "org-pending": "{orgName} se ha registrado como protectora. Revisa los datos.",
       "shelter-joined": "{orgName} ya está en Rondje. ¡Echa un vistazo a los perros!",
-      "group-walk-new": "{orgName} ha organizado un paseo en grupo. ¿Te apuntas?"
+      "group-walk-new": "{orgName} ha organizado un paseo en grupo. ¿Te apuntas?",
+      "walk-photo": "Nueva foto de {dogName} durante el paseo."
     }
   },
   "admin": {

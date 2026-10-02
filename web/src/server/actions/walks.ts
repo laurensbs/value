@@ -1,15 +1,16 @@
 'use server'
 
-import { asc, eq } from 'drizzle-orm'
+import { asc, count, eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { routeLengthM } from '@/lib/geo'
+import { isAllowedPhotoUrl } from '@/lib/photos'
 import { canStartWalk, feedbackNeedsReview, type OwnerFeedback, type WalkerFeedback } from '@/lib/rules'
 import { audit, notify } from '../notify'
 import { actionViewer } from '../session'
-import { walkAccess, watchers } from '../walks'
+import { MAX_WALK_PHOTOS, walkAccess, watchers } from '../walks'
 import type { FormState } from './profile'
 
 export async function startWalk(requestId: string): Promise<FormState> {
@@ -73,6 +74,22 @@ export async function endWalk(walkId: string): Promise<FormState> {
   await notify(db, await watchers(access.dog), 'walk-ended', { walkId, dogName: access.dog.name })
   revalidatePath('/requests')
   redirect(`/walk/${walkId}?ended=1`)
+}
+
+/** The walker shares a photo during the walk; the owner sees it on the live page and after the walk. */
+export async function addWalkPhoto(walkId: string, url: string): Promise<FormState> {
+  const viewer = await actionViewer()
+  const access = await walkAccess(walkId, viewer)
+  if (!access?.isWalker) return { ok: false, error: 'forbidden' }
+  if (access.walk.status !== 'active') return { ok: false, error: 'not-now' }
+  if (typeof url !== 'string' || !isAllowedPhotoUrl(url)) return { ok: false, error: 'invalid' }
+  const db = await getDb()
+  const [{ n }] = await db.select({ n: count() }).from(s.walkPhoto).where(eq(s.walkPhoto.walkId, walkId))
+  if (n >= MAX_WALK_PHOTOS) return { ok: false, error: 'too-many' }
+  await db.insert(s.walkPhoto).values({ id: crypto.randomUUID(), walkId, url })
+  // One notification for the first photo; after that the live page shows them as they come.
+  if (n === 0) await notify(db, await watchers(access.dog), 'walk-photo', { walkId, dogName: access.dog.name })
+  return { ok: true }
 }
 
 export async function submitFeedback(_prev: FormState, form: FormData): Promise<FormState> {

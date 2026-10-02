@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { newPerson, onboard, shot, signUp, soonSlot, unique } from './helpers'
+import { newPerson, onboard, PNG_1X1, shot, signUp, soonSlot, unique } from './helpers'
 
 test('owner and walker: meet request, accept, trust, live walk with GPS, follow along, private feedback', async ({ browser }) => {
   const id = unique()
@@ -88,12 +88,18 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   }
   await walker.page.waitForTimeout(10_500) // the next upload
 
+  // The walker shares a photo along the way.
+  await walker.page.getByLabel('Stuur een foto').setInputFiles({ name: 'bello.png', mimeType: 'image/png', buffer: PNG_1X1 })
+  await expect(walker.page.getByText('Foto verstuurd')).toBeVisible()
+  await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
+
   // --- Owner follows along live ---
   await owner.page.goto(`/follow/${walkId}`)
   await expect(owner.page.getByText(/Je ziet waar Fleur met Bello loopt/)).toBeVisible()
   await expect(owner.page.getByText(/Laatste locatie/)).toBeVisible()
   await expect(owner.page.locator('path.route-line')).toHaveCount(1)
   await expect(owner.page.getByRole('link', { name: /Bel Fleur/ })).toBeVisible()
+  await expect(owner.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
   await shot(owner.page, '09-follow')
   await shot(walker.page, '08-walk')
   await walker.page.getByRole('button', { name: 'Hulp nodig' }).click()
@@ -106,6 +112,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page).toHaveURL(/ended=1/)
   await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
   await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
+  await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
   await shot(walker.page, '10-summary')
   await walker.page.getByRole('radio', { name: 'Top' }).click()
   await walker.page.getByLabel('Makkelijk').check()

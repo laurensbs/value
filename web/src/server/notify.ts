@@ -13,6 +13,7 @@ export type NotificationKind =
   | 'request-cancelled'
   | 'walk-started'
   | 'walk-ended'
+  | 'walk-photo'
   | 'walk-overdue'
   | 'trust-granted'
   | 'group-signup'

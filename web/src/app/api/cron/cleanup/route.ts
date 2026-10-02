@@ -27,7 +27,10 @@ export async function GET(request: Request) {
     .select({ id: s.walk.id })
     .from(s.walk)
     .where(keep.length ? and(lt(s.walk.startedAt, cutoff), notInArray(s.walk.id, keep)) : lt(s.walk.startedAt, cutoff))
-  if (oldWalks.length) await db.delete(s.walkPoint).where(inArray(s.walkPoint.walkId, oldWalks.map((w) => w.id)))
+  if (oldWalks.length) {
+    await db.delete(s.walkPoint).where(inArray(s.walkPoint.walkId, oldWalks.map((w) => w.id)))
+    await db.delete(s.walkPhoto).where(inArray(s.walkPhoto.walkId, oldWalks.map((w) => w.id)))
+  }
 
   const expired = await db
     .update(s.walkRequest)

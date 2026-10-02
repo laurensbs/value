@@ -466,7 +466,15 @@
     "activeBack": "Retour à la balade",
     "watchBanner": "{dog} est en balade en ce moment.",
     "startPoint": "Départ",
-    "endPoint": "Arrivée"
+    "endPoint": "Arrivée",
+    "photoButton": "Envoyer une photo",
+    "photoSending": "Envoi de la photo…",
+    "photoSent": "Photo envoyée",
+    "photoError": "La photo n'a pas pu être envoyée. Réessayez.",
+    "photoTooMany": "Vous avez atteint le maximum de 12 photos.",
+    "photoHint": "Le propriétaire voit vos photos tout de suite. Elles sont supprimées après 30 jours, comme le trajet.",
+    "photosTitle": "Photos de la promenade",
+    "photoAlt": "Photo de {dogName} pendant la promenade"
   },
   "myDogs": {
     "title": "Mes chiens",
@@ -868,7 +876,8 @@
       "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles.",
       "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
       "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
-      "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?"
+      "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?",
+      "walk-photo": "Nouvelle photo de {dogName} pendant la promenade."
     }
   },
   "admin": {

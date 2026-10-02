@@ -2907,3 +2907,32 @@ legend {
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
+
+.small-title {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.walk-photos {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 4px;
+}
+
+.walk-photos li {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.walk-photos img {
+  display: block;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: var(--sunken);
+}

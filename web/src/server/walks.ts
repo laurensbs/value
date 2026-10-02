@@ -41,6 +41,20 @@ export async function pointsSince(walkId: string, afterId = 0) {
     .limit(2000)
 }
 
+/** Photos shared during a walk, oldest first; `afterMs` lets the live page fetch only new ones. */
+export async function walkPhotos(walkId: string, afterMs = 0) {
+  const db = await getDb()
+  return db
+    .select({ id: s.walkPhoto.id, url: s.walkPhoto.url, t: s.walkPhoto.createdAt })
+    .from(s.walkPhoto)
+    .where(and(eq(s.walkPhoto.walkId, walkId), gt(s.walkPhoto.createdAt, new Date(afterMs))))
+    .orderBy(asc(s.walkPhoto.createdAt))
+    .limit(MAX_WALK_PHOTOS)
+}
+
+/** Enough for a few moments of a walk, not a photo album. */
+export const MAX_WALK_PHOTOS = 12
+
 /** People who should hear about this walk besides the walker. */
 export async function watchers(dog: typeof s.dog.$inferSelect): Promise<string[]> {
   if (dog.ownerId) return [dog.ownerId]

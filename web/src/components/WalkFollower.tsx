@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { formatWalkDistance, routeLengthM } from '@/lib/geo'
 import { Icon } from './Icon'
 import { Map, type MapMarker } from './map'
+import { WalkPhotoStrip, type WalkPhoto } from './WalkPhotos'
 
 interface Point {
   id: number
@@ -17,6 +18,7 @@ interface LiveResponse {
   status: string
   lastAt: string | null
   overdueMin: number
+  photos: WalkPhoto[]
   points: Point[]
 }
 
@@ -28,6 +30,7 @@ interface Props {
   startedAt: number
   plannedEndAt: number
   initialRoute: Point[]
+  initialPhotos: WalkPhoto[]
   fallbackCenter: { lat: number; lng: number }
   locale: string
 }
@@ -35,7 +38,9 @@ interface Props {
 const POLL_MS = 5_000
 
 /** The owner's live view: the route so far, where the walker is now, and when they were last seen. */
-export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, startedAt, plannedEndAt, initialRoute, fallbackCenter, locale }: Props) {
+export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, startedAt, plannedEndAt, initialRoute, initialPhotos, fallbackCenter, locale }: Props) {
+  const [photos, setPhotos] = useState<WalkPhoto[]>(initialPhotos)
+  const lastPhotoAt = useRef(initialPhotos.at(-1)?.t ?? 0)
   const t = useTranslations('walk')
   const format = useFormatter()
   const [route, setRoute] = useState<Point[]>(initialRoute)
@@ -48,12 +53,16 @@ export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, started
     let active = true
     async function poll() {
       try {
-        const res = await fetch(`/api/walks/${walkId}/live?after=${lastId.current}`, { cache: 'no-store' })
+        const res = await fetch(`/api/walks/${walkId}/live?after=${lastId.current}&photosAfter=${lastPhotoAt.current}`, { cache: 'no-store' })
         if (!res.ok || !active) return
         const data = (await res.json()) as LiveResponse
         if (data.points.length) {
           lastId.current = data.points[data.points.length - 1].id
           setRoute((r) => [...r, ...data.points])
+        }
+        if (data.photos.length) {
+          lastPhotoAt.current = data.photos[data.photos.length - 1].t
+          setPhotos((list) => [...list, ...data.photos.filter((p) => !list.some((q) => q.id === p.id))])
         }
         if (data.lastAt) setLastAt(new Date(data.lastAt).getTime())
         setOverdue(data.overdueMin)
@@ -112,6 +121,7 @@ export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, started
         ) : null}
       </section>
       <Map center={here ?? fallbackCenter} zoom={15} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
+      <WalkPhotoStrip photos={photos} dogName={dogName} />
       {phone ? (
         <a href={`tel:${phone}`} className="button secondary wide">
           <Icon name="phone" size={18} /> {t('callWalker', { name: walkerName })}

@@ -326,6 +326,20 @@ export const walkPoint = pgTable(
   (t) => [index('walk_point_walk_idx').on(t.walkId, t.id)],
 )
 
+/** A photo the walker shares during a walk, for the owner and their family. Deleted with the route after 30 days. */
+export const walkPhoto = pgTable(
+  'walk_photo',
+  {
+    id: text('id').primaryKey(),
+    walkId: text('walk_id')
+      .notNull()
+      .references(() => walk.id, { onDelete: 'cascade' }),
+    url: text('url').notNull(),
+    createdAt: created(),
+  },
+  (t) => [index('walk_photo_walk_idx').on(t.walkId, t.createdAt)],
+)
+
 /** Private feedback after a walk. Never shown to the other party; used for safety and moderation. */
 export const feedback = pgTable(
   'feedback',

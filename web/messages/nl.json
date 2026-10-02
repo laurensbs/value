@@ -466,7 +466,15 @@
     "activeBack": "Terug naar het rondje",
     "watchBanner": "{dog} is nu op stap.",
     "startPoint": "Start",
-    "endPoint": "Einde"
+    "endPoint": "Einde",
+    "photoButton": "Stuur een foto",
+    "photoSending": "Foto versturen…",
+    "photoSent": "Foto verstuurd",
+    "photoError": "De foto kon niet worden verstuurd. Probeer het nog eens.",
+    "photoTooMany": "Je hebt het maximum van 12 foto's bereikt.",
+    "photoHint": "De eigenaar ziet je foto's meteen. Ze worden na 30 dagen gewist, net als de route.",
+    "photosTitle": "Foto's van het rondje",
+    "photoAlt": "Foto van {dogName} tijdens het rondje"
   },
   "myDogs": {
     "title": "Mijn honden",
@@ -868,7 +876,8 @@
       "org-verified": "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.",
       "org-pending": "{orgName} heeft zich aangemeld als opvang. Controleer de gegevens.",
       "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!",
-      "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?"
+      "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?",
+      "walk-photo": "Nieuwe foto van {dogName} tijdens het rondje."
     }
   },
   "admin": {

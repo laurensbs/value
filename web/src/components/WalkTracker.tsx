@@ -7,6 +7,7 @@ import { endWalk } from '@/server/actions/walks'
 import { Icon } from './Icon'
 import { Map, type MapMarker } from './map'
 import { SosSheet } from './SosSheet'
+import { WalkPhotoButton, WalkPhotoStrip, type WalkPhoto } from './WalkPhotos'
 
 interface Point {
   lat: number
@@ -21,6 +22,7 @@ interface Props {
   startedAt: number
   plannedEndAt: number
   initialRoute: Point[]
+  initialPhotos: WalkPhoto[]
   fallbackCenter: { lat: number; lng: number }
   sos: React.ComponentProps<typeof SosSheet>
   locale: string
@@ -45,7 +47,8 @@ function clock(ms: number): string {
  * and sends new points to the server every ten seconds so the owner can follow along.
  * The screen is kept awake: web pages cannot track location while the phone is locked.
  */
-export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialRoute, fallbackCenter, sos, locale }: Props) {
+export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialRoute, initialPhotos, fallbackCenter, sos, locale }: Props) {
+  const [photos, setPhotos] = useState<WalkPhoto[]>(initialPhotos)
   const t = useTranslations('walk')
   const format = useFormatter()
   const [route, setRoute] = useState<Point[]>(initialRoute)
@@ -221,6 +224,9 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
       {offline ? <p className="notice warn small">{t('offline')}</p> : null}
 
       <Map center={here ?? fallbackCenter} zoom={16} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
+
+      <WalkPhotoButton walkId={walkId} onSent={(p) => setPhotos((list) => [...list, p])} />
+      <WalkPhotoStrip photos={photos} dogName={dogName} />
 
       <div className="walk-actions">
         <SosSheet {...sos} />
