@@ -12,7 +12,10 @@ npm run dev            # http://localhost:3000, data in .pglite/ (embedded Postg
 npm test               # unit tests (Vitest)
 npm run test:e2e       # Playwright: walk flow, shelters (with photo bulk add), tips, support/about pages (starts its own server)
 npm run lint && npm run typecheck
+npm run audit -- http://localhost:3100 audit   # mobile + desktop check of every page, signed out and in
 ```
+
+`npm run audit` needs a running server whose `ADMIN_EMAILS` includes `audit@rondje.test`. It reports horizontal overflow, page errors, tap targets under 44 px on a touch phone, unlabeled form fields and slow pages, and saves a screenshot per page.
 
 No database server is needed locally: without `DATABASE_URL` the app runs on PGlite (`.pglite/`, or in memory with `PGLITE_DIR=memory`). Migrations run automatically on the first request, and example dogs, owners and shelters are seeded into an empty database (marked as examples, removable in Admin). Set `SEED_DEMO=0` to skip them.
 

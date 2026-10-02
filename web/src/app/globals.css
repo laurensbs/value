@@ -339,7 +339,7 @@ mark {
 
 .footer {
   border-top: 1px solid var(--line);
-  padding: 28px 16px calc(28px + env(safe-area-inset-bottom, 0px));
+  padding: 28px 0 calc(28px + env(safe-area-inset-bottom, 0px));
   color: var(--muted);
   font-size: 0.875rem;
 }
@@ -351,6 +351,7 @@ mark {
 .footer-inner {
   max-width: 1120px;
   margin: 0 auto;
+  padding-inline: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px 22px;
@@ -2772,4 +2773,73 @@ legend {
   margin-top: 2px;
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+/* ---------- Touch: every tappable thing is at least 44 by 44 points (Apple HIG) ---------- */
+
+/* The small pin keeps its look; the area around it catches the tap. */
+.map-pin-hit {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+/* Buttons that span the width may wrap instead of pushing the page sideways. */
+.button.wide {
+  white-space: normal;
+  text-align: center;
+}
+
+.auth-card {
+  min-width: 0;
+}
+
+@media (pointer: coarse) {
+  .brand {
+    min-height: 44px;
+  }
+
+  .icon-link {
+    width: 44px;
+    height: 44px;
+  }
+
+  .help-pill {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .lang-select {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+
+  .footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .footer-inner,
+  .footer-row {
+    row-gap: 0;
+  }
+
+  .link-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  details > summary {
+    padding-block: 10px;
+  }
+
+  .leaflet-touch .leaflet-bar a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+  }
 }

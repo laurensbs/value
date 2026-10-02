@@ -33,14 +33,14 @@ const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">Op
 function icon(kind: MapMarker['kind'], label: string): L.DivIcon {
   const safe = label.replace(/[<>&"]/g, '')
   if (kind === 'me' || kind === 'walker' || kind === 'pin') {
-    return L.divIcon({ className: '', html: '<div class="map-pin"></div>', iconSize: [18, 18], iconAnchor: [9, 9] })
+    return L.divIcon({ className: '', html: '<div class="map-pin-hit"><div class="map-pin"></div></div>', iconSize: [44, 44], iconAnchor: [22, 22] })
   }
   const glyph = kind === 'shelter' ? '🏠' : '🐾'
   return L.divIcon({
     className: '',
-    html: `<div class="map-dog" title="${safe}"><span aria-hidden="true">${glyph}</span></div>`,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20],
+    html: `<div class="map-pin-hit"><div class="map-dog" title="${safe}"><span aria-hidden="true">${glyph}</span></div></div>`,
+    iconSize: [44, 44],
+    iconAnchor: [22, 22],
   })
 }
 
