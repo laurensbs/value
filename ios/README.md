@@ -19,6 +19,8 @@ Een echte iPhone-app in SwiftUI, naast de website. Hij praat met dezelfde server
 - **Pushmeldingen** voor aanvragen, chat en rondjes, zodra de Apple-pushsleutel op de server staat.
 - **Herinneringen** een half uur vóór elke geaccepteerde afspraak (lokaal op de telefoon, zonder server).
 - **Widget** "Volgende rondje" voor het beginscherm en het toegangsscherm.
+- **Geluidjes** bij belangrijke momenten: aanvraag of bericht verstuurd, geaccepteerd, rondje start en af ("Goed rondje!"), nieuw niveau of badge, de ademminuut en een zachte toon bij een fout. Niet bij elke tik. Ze volgen de stilteschakelaar, onderbreken nooit muziek en staan onder Jij uit te zetten. `design/sounds.py` maakt ze zelf (geen downloads); de website speelt dezelfde bestanden uit `web/public/sounds`.
+- **Apple Gezondheid** (staat nog uit, zie hieronder): als de gebruiker het aanzet, wordt een rondje een buitenwandeling met tijd, afstand en route (zonder de eerste en laatste 200 m, zodat het huis van de eigenaar er niet in staat) en de ademminuut een mindfulness-sessie. Met een aparte schakelaar ook de stemming na een rondje. Alles blijft op de iPhone; de app leest niets uit Gezondheid.
 
 ## Veiligheid en privacy
 
@@ -44,6 +46,17 @@ cd ios && ./build.sh
 Open daarna `ios/Rondje.xcodeproj` in Xcode en kies een iPhone-simulator. Debug-builds praten met `http://localhost:3100`, release-builds met `https://rondje-five.vercel.app`. De productie-API werkt pas als deze branch daar is uitgerold.
 
 Voor een echte iPhone of de App Store: zet je team bij `DEVELOPMENT_TEAM` in `project.yml` en zet de App Group `group.app.rondje.mobile` aan in het Apple Developer-portaal.
+
+## Apple Gezondheid aanzetten
+
+De code is klaar, maar staat uit (`RONDJE_FEATURE_HEALTH: NO` in `project.yml`, voor Debug en Release). Zolang het App ID geen HealthKit heeft, zou ondertekenen anders mislukken. Met de vlag uit is er onder Jij geen Gezondheid-onderdeel en roept de app HealthKit nergens aan.
+
+1. Zet in het Apple Developer-account bij Certificates, Identifiers & Profiles → Identifiers → `app.rondje.mobile` de capability **HealthKit** aan en bewaar.
+2. Zet in `project.yml`: `RONDJE_APP_ENTITLEMENTS: Rondje/Resources/Rondje.capabilities.entitlements` (dat is `Rondje.entitlements` plus de extra capabilities, waaronder HealthKit) en `RONDJE_FEATURE_HEALTH: YES`. Draai daarna `xcodegen generate`.
+3. Bouw en kijk onder Jij: "Apple Gezondheid" staat er, standaard uit voor de gebruiker.
+4. App Store Connect: de gezondheidsgegevens blijven op het toestel en gaan niet naar onze server, dus in het privacylabel tellen ze niet als "verzameld". Het privacybeleid moet wel noemen wat de app in Gezondheid bewaart (Apple vraagt dat voor HealthKit-apps), en vermeld bij de review waar de koppeling zit (Jij → Apple Gezondheid).
+
+Alleen in de simulator proberen kan zonder account: `xcodebuild … RONDJE_FEATURE_HEALTH=YES RONDJE_APP_ENTITLEMENTS=Rondje/Resources/Rondje.capabilities.entitlements CODE_SIGN_IDENTITY=-`. Met een gratis Apple ID (`device.sh`) blijft het uit.
 
 ## Talen
 

@@ -33,12 +33,18 @@
 	<false/>
 	<key>RondjeAPIBaseURL</key>
 	<string>$(RONDJE_API_BASE_URL)</string>
+	<key>RondjeFeatureHealth</key>
+	<string>$(RONDJE_FEATURE_HEALTH)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Zo zie je honden bij jou in de buurt, en tijdens een rondje kan de eigenaar live meekijken. Je precieze plek wordt nooit op je profiel getoond.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Alleen tijdens een rondje: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Om tijdens een rondje een foto naar de eigenaar te sturen. Alleen de foto's die jij verstuurt, gaan naar de eigenaar.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Alleen als jij het aanzet: dan worden je rondjes als wandeling bewaard, de ademminuut als mindfulness en, als je wilt, hoe je je na een rondje voelt. Dat blijft op deze iPhone en gaat nooit naar onze server.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>De app leest niets uit Apple Gezondheid. Hij bewaart er alleen iets in als jij dat aanzet.</string>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
 	<key>UIBackgroundModes</key>

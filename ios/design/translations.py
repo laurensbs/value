@@ -576,4 +576,43 @@ T = {
         "So you see dogs near you, and during a walk the owner can watch live. Your exact location is never shown on your profile.",
         "Pour voir les chiens près de chez toi, et pendant une balade le propriétaire peut suivre en direct. Ta position exacte n'apparaît jamais sur ton profil.",
         "Para ver perros cerca de ti, y durante un paseo el dueño puede seguirlo en directo. Tu ubicación exacta nunca aparece en tu perfil."),
+    # --- parity: geluid en gezondheid ---
+    "Geluidjes": ("Sounds", "Petits sons", "Sonidos"),
+    "Zachte geluidjes bij belangrijke momenten. Staat je iPhone op stil, dan hoor je niets.": (
+        "Soft little sounds at the moments that matter. With your iPhone on silent, you hear nothing.",
+        "De petits sons doux aux moments importants. Si ton iPhone est en mode silencieux, tu n'entends rien.",
+        "Sonidos suaves en los momentos importantes. Si tu iPhone está en silencio, no oyes nada."),
+    "Apple Gezondheid": ("Apple Health", "Apple Santé", "Apple Salud"),
+    "Rondjes bewaren in Apple Gezondheid": ("Save walks in Apple Health", "Enregistrer les balades dans Apple Santé", "Guardar paseos en Apple Salud"),
+    "Als buitenwandeling met tijd, afstand en route, en de ademminuut als mindfulness. Begin en eind van de route laten we weg, zodat niemands huis erin staat.": (
+        "As an outdoor walk with time, distance and route, and the breathing minute as mindfulness. We leave out the start and end of the route, so nobody's home is in it.",
+        "Comme marche en extérieur avec durée, distance et parcours, et la minute de respiration comme pleine conscience. Nous retirons le début et la fin du parcours, pour que le domicile de personne n'y figure.",
+        "Como caminata al aire libre con tiempo, distancia y ruta, y el minuto de respiración como mindfulness. Quitamos el inicio y el final de la ruta, para que no aparezca la casa de nadie."),
+    "Stemming na een rondje bewaren in Apple Gezondheid": ("Save your mood after a walk in Apple Health", "Enregistrer ton humeur après une balade dans Apple Santé", "Guardar tu estado de ánimo después de un paseo en Apple Salud"),
+    "Hoe je je na een rondje voelt, als gemoedstoestand.": ("How you feel after a walk, as a state of mind.", "Comment tu te sens après une balade, comme état d'esprit.", "Cómo te sientes después de un paseo, como estado de ánimo."),
+    "Niet beschikbaar op dit toestel": ("Not available on this device", "Non disponible sur cet appareil", "No disponible en este dispositivo"),
+    "Alleen op deze iPhone. %@ leest niets uit Gezondheid en stuurt er niets van naar de server.": (
+        "Only on this iPhone. %@ reads nothing from Health and sends none of it to the server.",
+        "Uniquement sur cet iPhone. %@ ne lit rien dans Santé et n'en envoie rien au serveur.",
+        "Solo en este iPhone. %@ no lee nada de Salud y no envía nada de ello al servidor."),
+    "Apple Gezondheid is niet beschikbaar op dit toestel.": ("Apple Health is not available on this device.", "Apple Santé n'est pas disponible sur cet appareil.", "Apple Salud no está disponible en este dispositivo."),
+    "Dat lukte even niet. Probeer het later nog eens.": ("That didn't work just now. Please try again later.", "Ça n'a pas marché. Réessaie plus tard.", "No ha funcionado. Inténtalo más tarde."),
+    "%@ mag nog niets bewaren in Gezondheid. Dat zet je aan in Instellingen > Privacy en beveiliging > Gezondheid.": (
+        "%@ may not save anything in Health yet. Turn it on in Settings > Privacy & Security > Health.",
+        "%@ n'a pas encore le droit d'enregistrer dans Santé. Active-le dans Réglages > Confidentialité et sécurité > Santé.",
+        "%@ aún no puede guardar nada en Salud. Actívalo en Ajustes > Privacidad y seguridad > Salud."),
+    "Niet bewaard in Apple Gezondheid: %@ heeft daar geen toestemming meer voor.": (
+        "Not saved in Apple Health: %@ no longer has permission for that.",
+        "Non enregistré dans Apple Santé : %@ n'en a plus l'autorisation.",
+        "No se guardó en Apple Salud: %@ ya no tiene permiso para ello."),
+    "Dit rondje kon niet in Apple Gezondheid worden bewaard.": ("This walk could not be saved in Apple Health.", "Cette balade n'a pas pu être enregistrée dans Apple Santé.", "No se pudo guardar este paseo en Apple Salud."),
+    # Info.plist
+    "NSHealthUpdateUsageDescription": (
+        "Only if you turn it on: your walks are saved as a walk, the breathing minute as mindfulness and, if you like, how you feel after a walk. It stays on this iPhone and never goes to our server.",
+        "Seulement si tu l'actives : tes balades sont enregistrées comme marche, la minute de respiration comme pleine conscience et, si tu le souhaites, comment tu te sens après une balade. Cela reste sur cet iPhone et ne va jamais sur notre serveur.",
+        "Solo si lo activas: tus paseos se guardan como caminata, el minuto de respiración como mindfulness y, si quieres, cómo te sientes después de un paseo. Se queda en este iPhone y nunca va a nuestro servidor."),
+    "NSHealthShareUsageDescription": (
+        "The app reads nothing from Apple Health. It only saves something there if you turn that on.",
+        "L'app ne lit rien dans Apple Santé. Elle n'y enregistre quelque chose que si tu l'actives.",
+        "La app no lee nada de Apple Salud. Solo guarda algo allí si tú lo activas."),
 }
