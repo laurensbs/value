@@ -97,6 +97,10 @@ struct ProfileView: View {
 
     private var links: some View {
         VStack(spacing: 0) {
+            NavigationLink { BadgesView() } label: {
+                row("rosette", L("Jouw niveau en badges"), ProgressStore.shared.progress.map { "\($0.level.name) · \($0.points) " + L("punten") })
+            }
+            Divider().padding(.leading, 56)
             NavigationLink { RoleView() } label: {
                 row("arrow.left.arrow.right", L("Wat doe je op Rondje?"), roleText)
             }

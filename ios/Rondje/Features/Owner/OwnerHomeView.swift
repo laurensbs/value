@@ -69,6 +69,7 @@ struct OwnerHomeView: View {
                     }
                     .scrollClipDisabled()
 
+                    if let c = ProgressStore.shared.challenges { ChallengeCard(challenges: c) }
                     OwnerTip()
                 }
                 .padding(20)
@@ -124,6 +125,7 @@ struct OwnerHomeView: View {
 
     private func load() async {
         await model.refreshAppointments()
+        await ProgressStore.shared.load()
         if let r: MyDogsResponse = try? await APIClient.shared.get("/api/v1/my-dogs") { withAnimation { dogs = r.dogs } }
         loaded = true
     }

@@ -68,6 +68,7 @@ struct MainTabs: View {
     @Environment(AppModel.self) private var model
     @Environment(WalkTracker.self) private var walk
     @State private var showWalk = false
+    @State private var progress = ProgressStore.shared
 
     var body: some View {
         @Bindable var model = model
@@ -93,7 +94,10 @@ struct MainTabs: View {
                 .tag(AppModel.Tab.profile)
         }
         .sensoryFeedback(.selection, trigger: model.selectedTab)
-        .fullScreenCover(isPresented: $showWalk) {
+        .fullScreenCover(isPresented: Binding(get: { progress.celebrate != nil && !showWalk }, set: { if !$0 { Task { await progress.seen() } } })) {
+            if let p = progress.celebrate { LevelUpView(progress: p) { Task { await progress.seen() } } }
+        }
+        .fullScreenCover(isPresented: $showWalk, onDismiss: { Task { await progress.load() } }) {
             ActiveWalkView()
         }
         .onAppear {

@@ -15,6 +15,7 @@ struct DiscoverView: View {
     @State private var query = ""
     @State private var path = NavigationPath()
     @State private var quiz = false
+    @State private var progress = ProgressStore.shared
 
     enum Filter: String, CaseIterable, Identifiable {
         case all, calm, high, owner, shelter
@@ -58,6 +59,10 @@ struct DiscoverView: View {
                 VStack(alignment: .leading, spacing: 18) {
                     header
                     FirstSteps { quiz = true }
+                    if let p = progress.progress, p.points > 0 {
+                        NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
+                    }
+                    if let c = progress.challenges { ChallengeCard(challenges: c) }
                     DailyTip()
                     filters
                     if showMap {
@@ -98,6 +103,7 @@ struct DiscoverView: View {
                 NavigationStack { QuizView() }
             }
         }
+        .task { await progress.load() }
         .task {
             // Ask once, with the purpose text from Info.plist; without it the list is sorted by your city.
             LocationService.shared.requestPermission()

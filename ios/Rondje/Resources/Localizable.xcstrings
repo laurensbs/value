@@ -607,6 +607,28 @@
         }
       }
     },
+    "%lld badges" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld badges"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld insignias"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld badges"
+          }
+        }
+      }
+    },
     "%lld jaar" : {
       "localizations" : {
         "en" : {
@@ -761,6 +783,34 @@
         }
       }
     },
+    "%lld van %lld deze week" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld of %lld this week"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld de %lld esta semana"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sur %lld cette semaine"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld van %2$lld deze week"
+          }
+        }
+      }
+    },
     "%lld van %lld gedaan" : {
       "localizations" : {
         "en" : {
@@ -785,6 +835,28 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld van %2$lld gedaan"
+          }
+        }
+      }
+    },
+    "%lld van jou" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld by you"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld tuyos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld de toi"
           }
         }
       }
@@ -835,6 +907,28 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld× %2$@"
+          }
+        }
+      }
+    },
+    "+%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld"
           }
         }
       }
@@ -1367,6 +1461,28 @@
         }
       }
     },
+    "Alleen voor jezelf. Ze geven geen voorrang." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Just for you. They give no priority."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo para ti. No dan prioridad."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien que pour toi. Ils ne donnent aucune priorité."
+          }
+        }
+      }
+    },
     "Alleen voor jou zichtbaar" : {
       "localizations" : {
         "en" : {
@@ -1539,6 +1655,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler le rendez-vous"
+          }
+        }
+      }
+    },
+    "Badges" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Badges"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insignias"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Badges"
           }
         }
       }
@@ -2863,6 +3001,28 @@
         }
       }
     },
+    "Een rustig doel voor jezelf. Haal je het een week niet, dan is er niets verloren." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A calm goal for yourself. Miss it one week and nothing is lost."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una meta tranquila para ti. Si no la cumples una semana, no pierdes nada."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un objectif tranquille pour toi. Si tu le rates une semaine, rien n'est perdu."
+          }
+        }
+      }
+    },
     "Eerlijk is veilig" : {
       "localizations" : {
         "en" : {
@@ -3919,6 +4079,28 @@
         }
       }
     },
+    "Gehaald! Dank je wel, allemaal." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done! Thank you, everyone."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Conseguido! Gracias a todos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réussi ! Merci à tous."
+          }
+        }
+      }
+    },
     "Gemiddeld" : {
       "localizations" : {
         "en" : {
@@ -4817,6 +4999,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Livre d'amis chiens"
+          }
+        }
+      }
+    },
+    "Hoogste niveau. Wat een rondjes!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Highest level. What a lot of walks!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel máximo. ¡Cuántos paseos!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau maximal. Quelle collection de balades !"
           }
         }
       }
@@ -5943,6 +6147,50 @@
         }
       }
     },
+    "Jouw niveau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your level"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu nivel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton niveau"
+          }
+        }
+      }
+    },
+    "Jouw niveau en badges" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your level and badges"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu nivel e insignias"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton niveau et tes badges"
+          }
+        }
+      }
+    },
     "keer ID gezien" : {
       "localizations" : {
         "en" : {
@@ -6379,6 +6627,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laisse un chien renifler ta main avant de le caresser. C'est ainsi que tu te présentes."
+          }
+        }
+      }
+    },
+    "Laatst verdiend" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recently earned"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ganado recientemente"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gagné récemment"
           }
         }
       }
@@ -7483,6 +7753,28 @@
         }
       }
     },
+    "Nieuw niveau!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New level!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Nuevo nivel!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau niveau !"
+          }
+        }
+      }
+    },
     "Nieuwe melding" : {
       "localizations" : {
         "en" : {
@@ -7567,6 +7859,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inviter des amis"
+          }
+        }
+      }
+    },
+    "Nog %lld dagen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld days left"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quedan %lld días"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore %lld jours"
+          }
+        }
+      }
+    },
+    "Nog %lld punten tot %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld points to %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld puntos para %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore %lld points avant %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Nog %1$lld punten tot %2$@"
           }
         }
       }
@@ -8451,6 +8793,28 @@
         }
       }
     },
+    "punten" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "points"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "puntos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "points"
+          }
+        }
+      }
+    },
     "Quiz gehaald" : {
       "localizations" : {
         "en" : {
@@ -8711,6 +9075,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Calme"
+          }
+        }
+      }
+    },
+    "Samen deze maand" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Together this month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Juntos este mes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensemble ce mois-ci"
           }
         }
       }
@@ -10691,6 +11077,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nous ne vendons jamais de données."
+          }
+        }
+      }
+    },
+    "Weekdoel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly goal"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meta semanal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objectif de la semaine"
           }
         }
       }

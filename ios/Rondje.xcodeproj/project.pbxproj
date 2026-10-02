@@ -33,6 +33,7 @@
 		50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2B1E42F731544CC1E42AAC /* MembershipView.swift */; };
 		518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89ADE16C47AB0E0761B7EF /* AuthView.swift */; };
 		53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A4BC365EFDB4E41F534AF /* MyDogsView.swift */; };
+		5A6E953AD397B6F468A9D37E /* ProgressViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5186B4F03524632EF6DE929 /* ProgressViews.swift */; };
 		76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD5CF06280BE763D95E942 /* DogDetailView.swift */; };
 		7AF0140755593E049FF0339D /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520CB0DEFF2BE0A69B58BCB8 /* IntroView.swift */; };
 		7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F500D8982F770787859D0608 /* OnboardingView.swift */; };
@@ -135,6 +136,7 @@
 		9C2B1E42F731544CC1E42AAC /* MembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipView.swift; sourceTree = "<group>"; };
 		9C56C585C3705ACBC5EBC617 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeWidgets.swift; sourceTree = "<group>"; };
+		A5186B4F03524632EF6DE929 /* ProgressViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViews.swift; sourceTree = "<group>"; };
 		A5CD5CF06280BE763D95E942 /* DogDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailView.swift; sourceTree = "<group>"; };
 		AB627D88D88D1EB0404E149F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkReport.swift; sourceTree = "<group>"; };
@@ -256,6 +258,14 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		92977604C0FF49578771FA17 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				A5186B4F03524632EF6DE929 /* ProgressViews.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
 		97EDF6BA00B8CE243A18FEE3 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +324,7 @@
 				97EDF6BA00B8CE243A18FEE3 /* Onboarding */,
 				7E9D6556E80BC5D094F3281B /* Owner */,
 				EFC38ED52995A5B1AC192CEA /* Profile */,
+				92977604C0FF49578771FA17 /* Progress */,
 				B52BEB8FC192755A9861AC4A /* Walk */,
 				B4D6DC0035564556243D4B87 /* Wellbeing */,
 			);
@@ -567,6 +578,7 @@
 				7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */,
 				18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */,
 				41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */,
+				5A6E953AD397B6F468A9D37E /* ProgressViews.swift in Sources */,
 				0815887EEFE6F55BD5813657 /* Push.swift in Sources */,
 				C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */,
 				9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */,
