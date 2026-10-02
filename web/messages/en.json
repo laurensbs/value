@@ -1677,5 +1677,31 @@
   "sounds": {
     "toggle": "Sounds",
     "hint": "Soft sounds at key moments, like a new walk or a new level. Only on this device."
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Discover",
+      "requests": "Walks",
+      "myDogs": "My dogs",
+      "shelter": "My shelter",
+      "me": "You"
+    },
+    "tabsLabel": "Main menu",
+    "footerLine": "{name} is free and ad-free"
+  },
+  "discover": {
+    "title": "Who’s coming along today?",
+    "levelTop": "Top level. What a lot of walks!",
+    "badges": "{n, plural, =0 {No badges yet} one {# badge} other {# badges}}",
+    "together": "Together this month",
+    "mine": "{n} by you",
+    "filters": {
+      "owner": "Neighbourhood",
+      "shelter": "Shelter"
+    },
+    "allCountries": "All countries",
+    "storyIn": "Story in {language}",
+    "groupWalksText": "Guided, at a shelter. A nice way to start.",
+    "allGroupWalks": "All group walks"
   }
 }

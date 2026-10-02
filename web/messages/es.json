@@ -1677,5 +1677,31 @@
   "sounds": {
     "toggle": "Sonidos",
     "hint": "Sonidos suaves en los momentos importantes, como un paseo nuevo o un nivel nuevo. Solo en este dispositivo."
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Descubre",
+      "requests": "Paseos",
+      "myDogs": "Mis perros",
+      "shelter": "Mi protectora",
+      "me": "Tú"
+    },
+    "tabsLabel": "Menú principal",
+    "footerLine": "{name} es gratis y sin publicidad"
+  },
+  "discover": {
+    "title": "¿Quién viene hoy de paseo?",
+    "levelTop": "Nivel máximo. ¡Cuántos paseos!",
+    "badges": "{n, plural, =0 {Aún sin medallas} one {# medalla} other {# medallas}}",
+    "together": "Juntos este mes",
+    "mine": "Tú: {n}",
+    "filters": {
+      "owner": "Barrio",
+      "shelter": "Protectora"
+    },
+    "allCountries": "Todos los países",
+    "storyIn": "Historia en {language}",
+    "groupWalksText": "Con guía, en una protectora. Ideal para empezar.",
+    "allGroupWalks": "Todos los paseos en grupo"
   }
 }

@@ -1677,5 +1677,31 @@
   "sounds": {
     "toggle": "Geluidjes",
     "hint": "Zachte geluidjes bij belangrijke momenten, zoals een nieuw rondje of een nieuw level. Alleen op dit apparaat."
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Ontdek",
+      "requests": "Rondjes",
+      "myDogs": "Mijn honden",
+      "shelter": "Mijn opvang",
+      "me": "Jij"
+    },
+    "tabsLabel": "Hoofdmenu",
+    "footerLine": "{name} is gratis en zonder reclame"
+  },
+  "discover": {
+    "title": "Wie gaat er vandaag mee?",
+    "levelTop": "Hoogste level. Wat een rondjes!",
+    "badges": "{n, plural, =0 {Nog geen penningen} one {# penning} other {# penningen}}",
+    "together": "Samen deze maand",
+    "mine": "{n} van jou",
+    "filters": {
+      "owner": "Buurt",
+      "shelter": "Opvang"
+    },
+    "allCountries": "Alle landen",
+    "storyIn": "Verhaal in het {language}",
+    "groupWalksText": "Begeleid, bij een opvang. Fijn om mee te beginnen.",
+    "allGroupWalks": "Alle groepswandelingen"
   }
 }
