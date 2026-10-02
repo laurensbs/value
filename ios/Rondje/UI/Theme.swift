@@ -58,7 +58,8 @@ extension Color {
 
 extension Font {
     /// Rounded, friendly display type for titles (the website uses Bricolage Grotesque).
+    /// Scales with the person's text size setting (Dynamic Type), like the system text styles.
     static func display(_ size: CGFloat, weight: Font.Weight = .bold) -> Font {
-        .system(size: size, weight: weight, design: .rounded)
+        .system(size: UIFontMetrics(forTextStyle: .title1).scaledValue(for: size), weight: weight, design: .rounded)
     }
 }

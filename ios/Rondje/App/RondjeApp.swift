@@ -14,7 +14,7 @@ struct RondjeApp: App {
                 .tint(Palette.grass)
                 .task { await model.bootstrap() }
                 .onChange(of: scenePhase) { _, phase in
-                    if phase == .active, model.phase == .ready { Task { await model.refreshAppointments() } }
+                    if phase == .active, model.phase == .ready { Task { await model.refreshMe() } }
                 }
         }
     }

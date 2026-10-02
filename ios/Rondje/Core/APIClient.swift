@@ -39,12 +39,18 @@ final class APIClient: Sendable {
         config.waitsForConnectivity = false
         session = URLSession(configuration: config)
 
-        decoder = JSONDecoder()
+        decoder = Self.makeDecoder()
+    }
+
+    /// The server sends ISO 8601 dates, with or without milliseconds.
+    static func makeDecoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom { decoder in
             let raw = try decoder.singleValueContainer().decode(String.self)
             if let date = APIClient.isoFractional.date(from: raw) ?? APIClient.iso.date(from: raw) { return date }
             throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Bad date \(raw)"))
         }
+        return decoder
     }
 
     nonisolated(unsafe) private static let isoFractional: ISO8601DateFormatter = {

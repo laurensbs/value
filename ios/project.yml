@@ -55,12 +55,28 @@ targets:
         INFOPLIST_FILE: RondjeWidgets/Info.plist
         CODE_SIGN_ENTITLEMENTS: RondjeWidgets/RondjeWidgets.entitlements
         TARGETED_DEVICE_FAMILY: "1"
+  RondjeTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: RondjeTests
+    dependencies:
+      - target: Rondje
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.rondje.mobile.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/Rondje.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rondje
+        BUNDLE_LOADER: $(TEST_HOST)
 schemes:
   Rondje:
     build:
       targets:
         Rondje: all
         RondjeWidgets: all
+    test:
+      targets:
+        - RondjeTests
     run:
       config: Debug
     archive:

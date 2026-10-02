@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UserNotifications
 import WidgetKit
 
 /// The app's session: who is signed in and the data most screens share.
@@ -26,6 +27,10 @@ final class AppModel {
     private let api = APIClient.shared
 
     init() {
+        UNUserNotificationCenter.current().delegate = NotificationRouter.shared
+        NotificationRouter.shared.onOpen = { [weak self] tab in
+            if tab == "appointments" { self?.selectedTab = .appointments }
+        }
         NotificationCenter.default.addObserver(forName: .rondjeSignedOut, object: nil, queue: .main) { [weak self] _ in
             MainActor.assumeIsolated { self?.reset() }
         }
@@ -62,6 +67,7 @@ final class AppModel {
         guard let result: AppointmentsResponse = try? await api.get("/api/v1/requests") else { return }
         appointments = result
         publishNextWalk()
+        await Reminders.sync(with: result)
     }
 
     func signedIn() async {
@@ -80,6 +86,7 @@ final class AppModel {
         me = nil
         appointments = AppointmentsResponse(outgoing: [], incoming: [])
         SharedStore.save(nil)
+        Reminders.clearAll()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut
     }

@@ -103,6 +103,7 @@ struct RequestSheet: View {
             await model.refreshAppointments()
             await sent()
             dismiss()
+            await Reminders.askIfNeeded()
         } catch {
             Haptics.error()
             self.error = error.localizedDescription

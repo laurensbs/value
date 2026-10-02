@@ -193,7 +193,10 @@ struct AppointmentCard: View {
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/requests/\(item.id)", ["action": action])
             switch action {
-            case "accept": Haptics.success(); model.show("Geaccepteerd. Jullie zien elkaars contactgegevens nu.")
+            case "accept":
+                Haptics.success()
+                model.show("Geaccepteerd. Jullie zien elkaars contactgegevens nu.")
+                await Reminders.askIfNeeded()
             case "decline": model.show("Afgewezen", symbol: "hand.raised.fill", tint: Palette.muted)
             default: model.show("Geannuleerd", symbol: "xmark.circle.fill", tint: Palette.muted)
             }

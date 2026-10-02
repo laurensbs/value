@@ -38,8 +38,13 @@ struct ActiveWalkView: View {
                     DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Rondje met \(info.dogName)").font(.headline)
-                        Text(walk.signalWeak ? "Zwak GPS-signaal" : "De eigenaar kan live meekijken")
-                            .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                        if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
+                            Button("Locatie staat uit. Zet hem aan") { openSettings() }
+                                .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
+                        } else {
+                            Text(walk.signalWeak ? "Zwak GPS-signaal" : "De eigenaar kan live meekijken")
+                                .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                        }
                     }
                     Spacer()
                     Button {
@@ -69,14 +74,14 @@ struct ActiveWalkView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Tijd").font(.caption).foregroundStyle(Palette.muted)
                     Text(info.startedAt, style: .timer)
-                        .font(.system(size: 40, weight: .bold, design: .rounded).monospacedDigit())
+                        .font(.display(40).monospacedDigit())
                         .contentTransition(.numericText())
                 }
                 Spacer()
                 VStack(alignment: .trailing, spacing: 2) {
                     Text("Afstand").font(.caption).foregroundStyle(Palette.muted)
                     Text(Format.distance(walk.distanceM))
-                        .font(.system(size: 32, weight: .bold, design: .rounded).monospacedDigit())
+                        .font(.display(32).monospacedDigit())
                         .contentTransition(.numericText(value: walk.distanceM))
                         .animation(.snappy, value: walk.distanceM)
                 }
@@ -120,6 +125,11 @@ struct ActiveWalkView: View {
         .accessibilityLabel("Rondje afronden")
         .accessibilityAction { Task { await end() } }
         .disabled(ending)
+    }
+
+    /// Without location the owner cannot watch along; the Settings app is where it is switched on.
+    private func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
     }
 
     private func end() async {
