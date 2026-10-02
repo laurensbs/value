@@ -13,6 +13,8 @@ Een echte iPhone-app in SwiftUI, naast de website. Hij praat met dezelfde server
 - **Meekijken** voor de eigenaar of opvang, live op de kaart.
 - **Jij**: kenmerken, veiligheidsquiz, eigen honden toevoegen (met foto's), meldingen, account verwijderen in de app.
 - **Lid worden**: de belofte (gratis, geen reclame) en de goede doelen. Geven gaat via de website in Safari, tot Rondje een stichting met ANBI-status is.
+- **Rondje-rapport**: tijdens het wandelen plas, poep en drinken aantikken en foto's sturen; de eigenaar ziet het live.
+- **Herinneringen** een half uur vóór elke geaccepteerde afspraak (lokaal op de telefoon, zonder server).
 - **Widget** "Volgende rondje" voor het beginscherm en het toegangsscherm.
 
 ## Veiligheid en privacy
@@ -39,6 +41,13 @@ cd ios && ./build.sh
 Open daarna `ios/Rondje.xcodeproj` in Xcode en kies een iPhone-simulator. Debug-builds praten met `http://localhost:3100`, release-builds met `https://rondje-five.vercel.app`. De productie-API werkt pas als deze branch daar is uitgerold.
 
 Voor een echte iPhone of de App Store: zet je team bij `DEVELOPMENT_TEAM` in `project.yml` en zet de App Group `group.app.rondje.mobile` aan in het Apple Developer-portaal.
+
+## Talen
+
+De app is er in het Nederlands (de brontaal), Engels, Frans en Spaans, net als de website. Alle teksten staan in `Rondje/Resources/Localizable.xcstrings`. Nieuwe of gewijzigde tekst vertalen gaat zo:
+
+1. Zet de Nederlandse tekst met de vertalingen in `design/translations.py`.
+2. Draai `python3 design/localize.py` in `ios/`. Het script meldt welke teksten nog geen vertaling hebben.
 
 ## De naam veranderen
 
