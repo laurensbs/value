@@ -26,9 +26,10 @@ Voor functionele cookies is geen toestemming nodig. Daarom zie je bij Rondje gee
 
 | Cookie | Waarvoor | Hoe lang |
 |---|---|---|
-| Sessiecookie [naam te controleren] | Je ingelogd houden en je account beveiligen | Tot je uitlogt, of maximaal [duur vast te stellen] |
-| Taalvoorkeur [naam te controleren] | Onthouden in welke taal je Rondje gebruikt | [bijv. 1 jaar] |
-| Beveiligingscookie [te controleren of die er is] | Misbruik voorkomen, zoals nagemaakte formulieren | Tot het einde van je sessie |
+| `__Secure-better-auth.session_token` | Je ingelogd houden en je account beveiligen | 7 dagen; wordt verlengd zolang je Rondje gebruikt, en verdwijnt als je uitlogt |
+| `better-auth.state`, `better-auth-passkey` | Beveiliging tijdens inloggen met Google, Apple of een passkey | Een paar minuten |
+| `NEXT_LOCALE` | Onthouden in welke taal je Rondje gebruikt | 1 jaar |
+| `rondje_ref` | Onthouden via wiens uitnodigingslink je kwam, zodat die persoon ziet dat je meedoet [te controleren: functioneel of toestemming nodig] | 30 dagen |
 
 ## 4. Lokale opslag op je apparaat
 

@@ -26,9 +26,10 @@ Les cookies fonctionnels ne nécessitent pas de consentement. C'est pourquoi vou
 
 | Cookie | Pour quoi | Durée |
 |---|---|---|
-| Cookie de session [nom à vérifier] | Vous garder connecté et sécuriser votre compte | Jusqu'à votre déconnexion, ou au maximum [durée à fixer] |
-| Préférence de langue [nom à vérifier] | Retenir la langue dans laquelle vous utilisez Rondje | [p. ex. 1 an] |
-| Cookie de sécurité [à vérifier s'il existe] | Empêcher les abus, comme les formulaires falsifiés | Jusqu'à la fin de votre session |
+| `__Secure-better-auth.session_token` | Vous garder connecté et sécuriser votre compte | 7 jours ; renouvelé tant que vous utilisez Rondje, supprimé à la déconnexion |
+| `better-auth.state`, `better-auth-passkey` | Sécurité lors de la connexion avec Google, Apple ou une clé d'accès | Quelques minutes |
+| `NEXT_LOCALE` | Retenir la langue dans laquelle vous utilisez Rondje | 1 an |
+| `rondje_ref` | Retenir le lien d'invitation que vous avez suivi, pour que la personne voie que vous nous avez rejoints [à vérifier : fonctionnel ou consentement requis] | 30 jours |
 
 ## 4. Stockage local sur votre appareil
 

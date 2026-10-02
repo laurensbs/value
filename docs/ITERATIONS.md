@@ -147,3 +147,48 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 - Lege staat en eerste gebruik nalopen zonder voorbeelddata.
 - Teksten laten nalezen door iemand van 113 of MIND, voordat er echte gebruikers komen.
 - Een herinnering voor het vaste rondje: in de pilot via sms of WhatsApp door de coördinator, niet via pushmeldingen.
+
+## Cyclus 5: van prototype naar echt platform (2 oktober 2026)
+
+**Gebouwd** in `web/`. Het is één app voor website, iPhone en Android:
+- Aanmelden met e-mail of passkey, en uitnodigingslinks.
+- Profiel met foto en een check of je 18 bent.
+- Honden aanmelden met foto's, vaste momenten, koekjes ja/nee en wat de eigenaar meegeeft.
+- Aanvragen met contactgegevens pas na acceptatie.
+- ID-check en toestemming per hond.
+- Live wandelen met GPS, SOS en kaart.
+- Meekijken voor de eigenaar.
+- Anonieme feedback.
+- Voor opvangen: CSV-import, groepswandelingen en aanwezigheid.
+- Beheer, juridische teksten en vertalingen in 4 talen.
+
+**Online:**
+- https://rondje-five.vercel.app, met een Neon-database en foto-opslag in Vercel Blob.
+- De volledige wandelflow is getest op de live site: aanmelden, hond toevoegen, aanvraag, accepteren, GPS-route, meekijken, feedback en quiz. Daarna zijn de testgegevens verwijderd.
+
+**Review:** schermafdrukken van alle schermen in licht en donker op mobiel. Verbeterd:
+- Tijdens een rondje verdwijnt de navigatiebalk. Wegtikken zou de GPS stoppen.
+- De hulp- en eindknop blijven binnen duimbereik.
+- Op elke andere pagina staat een balk "je rondje loopt nog".
+- De hulpknop bleef op telefoons onzichtbaar; nu is het een icoon.
+- De taalkeuze was afgekapt.
+- Meervoud bij minuten, de opmaak van maandnamen, en lange SOS-knoppen.
+
+**Gevonden bugs:**
+- Na het accepteren van een aanvraag sprong de pagina naar het verkeerde tabblad.
+- In ontwikkelmodus tekende de kaart de route op een oude kaart. React mount de kaart twee keer; de lagen worden nu opnieuw aangemaakt.
+- Formulieren werden leeggemaakt na een foutmelding. React reset formulieren standaard; dat is nu omzeild.
+- Zonder database onthoudt elke serverfunctie zijn eigen tijdelijke data, dus inloggen werkte op Vercel niet betrouwbaar. Opgelost door de database te koppelen.
+
+**Tests:**
+- 34 unit-tests.
+- 2 end-to-endtests: eigenaar en wandelaar, en opvang met beheer. Ze draaien lokaal en tegen een productie-build.
+- De wandelflow is ook getest tegen de live site.
+- GitHub Actions staat klaar. Het eerste CI-werk startte niet op het account, waarschijnlijk door een instelling bij GitHub Billing.
+
+**Volgende stap:**
+- Database claimen en naar de EU verhuizen.
+- Pushmeldingen voor nieuwe aanvragen en rondjes die uitlopen.
+- Locatie op de achtergrond in de iOS-app.
+- Een tegelserver met eigen sleutel voor de kaart, voordat het druk wordt.
+

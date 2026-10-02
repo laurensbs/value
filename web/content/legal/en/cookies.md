@@ -26,9 +26,10 @@ Functional cookies do not require consent. That is why you will not see a cookie
 
 | Cookie | Purpose | Duration |
 |---|---|---|
-| Session cookie [name to verify] | Keeping you signed in and securing your account | Until you sign out, or at most [duration to be decided] |
-| Language preference [name to verify] | Remembering which language you use Rondje in | [e.g. 1 year] |
-| Security cookie [to verify whether it exists] | Preventing misuse, such as forged forms | Until the end of your session |
+| `__Secure-better-auth.session_token` | Keeping you signed in and securing your account | 7 days; renewed while you use Rondje, and removed when you sign out |
+| `better-auth.state`, `better-auth-passkey` | Security while signing in with Google, Apple or a passkey | A few minutes |
+| `NEXT_LOCALE` | Remembering which language you use Rondje in | 1 year |
+| `rondje_ref` | Remembering whose invite link you followed, so that person can see you joined [to verify: functional or consent needed] | 30 days |
 
 ## 4. Local storage on your device
 

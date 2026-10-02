@@ -234,7 +234,17 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
 
 ## 9. Wat de app al technisch afdwingt
 
-**Let op:** deze lijst volgt de productbeschrijving van Rondje. Het huidige prototype in `app/` heeft geen server en dwingt dit nog niet af. Controleer vóór de lancering in de productiecode dat elke regel echt zo werkt. De juridische teksten beloven dit namelijk.
+**Status (2 oktober 2026):** de webapp in `web/` dwingt de regels hieronder af op de server, niet alleen in het scherm. De regels staan in `web/src/lib/rules.ts` met unit-tests, en twee end-to-endtests doorlopen de hele flow (`web/e2e/`). Nuances die de teksten moeten volgen:
+
+- **Leeftijd:** de volledige geboortedatum is verplicht, niet alleen het jaar. Onder de 18 kan het profiel niet worden afgerond, en een account zonder profiel kan niets aanvragen. Anderen zien alleen een leeftijdsgroep (18–24, 25–34 …).
+- **Opvangen:** een opvang kan alvast honden invoeren, maar die worden pas openbaar na verificatie door een beheerder. Het registratienummer wordt met de hand gecontroleerd, niet automatisch.
+- **Kennismaking:** een zelfstandig rondje kan technisch pas na een geaccepteerde kennismaking én expliciete toestemming van de eigenaar voor die hond. Of de eigenaar er bij de kennismaking echt bij is, berust op de afspraak.
+- **Opvanghonden:** alleen in begeleide groepswandelingen. Zelfstandig wandelen met een opvanghond is technisch uitgesloten.
+- **Ervaring:** honden met het niveau "met ervaring", waaronder alle honden met een bijtgeschiedenis, zijn niet te boeken voor wandelaars zonder ervaring.
+- **Te laat terug:** na 20 minuten boven de geplande tijd krijgen wandelaar en eigenaar een melding in de app. Er zijn nog geen sms- of pushmeldingen.
+- **Chipnummer:** wordt nooit aan wandelaars getoond, ook niet na acceptatie.
+- **Cookies:** de echte cookienamen staan nu in `cookies.md`. Beoordeel of `rondje_ref` (uitnodigingslink) functioneel is.
+- **Gegevens:** "Download mijn gegevens" (JSON) en "Account verwijderen" werken. Verwijderen wist ook honden, afspraken en routes. Meldingen blijven bewaard zonder koppeling aan het verwijderde account.
 
 **Toegang en accounts**
 

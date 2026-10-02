@@ -26,9 +26,10 @@ Las cookies técnicas no necesitan consentimiento. Por eso no verás un banner d
 
 | Cookie | Para qué | Duración |
 |---|---|---|
-| Cookie de sesión [nombre pendiente de verificar] | Mantener tu sesión iniciada y proteger tu cuenta | Hasta que cierres sesión, o como máximo [duración por determinar] |
-| Preferencia de idioma [nombre pendiente de verificar] | Recordar en qué idioma usas Rondje | [p. ej. 1 año] |
-| Cookie de seguridad [pendiente de verificar si existe] | Evitar abusos, como formularios falsificados | Hasta el final de tu sesión |
+| `__Secure-better-auth.session_token` | Mantener tu sesión iniciada y proteger tu cuenta | 7 días; se renueva mientras usas Rondje y se elimina al cerrar sesión |
+| `better-auth.state`, `better-auth-passkey` | Seguridad al iniciar sesión con Google, Apple o una passkey | Unos minutos |
+| `NEXT_LOCALE` | Recordar en qué idioma usas Rondje | 1 año |
+| `rondje_ref` | Recordar con qué enlace de invitación llegaste, para que esa persona vea que te has unido [pendiente de verificar: funcional o requiere consentimiento] | 30 días |
 
 ## 4. Almacenamiento local en tu dispositivo
 

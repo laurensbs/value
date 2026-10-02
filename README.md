@@ -2,7 +2,9 @@
 
 Rondje koppelt jongvolwassenen (18–30) aan honden die een extra wandeling goed kunnen gebruiken. Het gaat vooral om honden van oudere of zieke buurtgenoten die zelf niet ver meer kunnen lopen, en daarnaast om honden uit de opvang. Gratis, veilig, en goed voor allebei.
 
-**Prototype bekijken (privé):** https://claude.ai/artifact/V3UNzZhwMgq3rVwSJzZuFw
+**Live (website en app):** https://rondje-five.vercel.app · **Zo start je:** [`docs/LAUNCH.md`](docs/LAUNCH.md)
+
+Eerste prototype (privé): https://claude.ai/artifact/V3UNzZhwMgq3rVwSJzZuFw
 
 ## Waarom dit idee
 
@@ -22,52 +24,65 @@ Drie ideeën zijn onderzocht en gescoord: honden + jongeren, een mentale-gezondh
 | [`docs/ITERATIONS.md`](docs/ITERATIONS.md) | Logboek van verbeteringen aan het prototype |
 | [`docs/GROWTH.md`](docs/GROWTH.md) | Video-ideeën voor TikTok en Instagram die niet als reclame voelen |
 | [`docs/PARTNERS.md`](docs/PARTNERS.md) | Partners en concept-mails |
+| [`docs/LAUNCH.md`](docs/LAUNCH.md) | **Zo start je**: database claimen, beheerder worden, EU-database, Google/Apple-login, iOS en Android bouwen |
+| [`docs/OUTREACH.md`](docs/OUTREACH.md) en [`docs/SUPPLY.md`](docs/SUPPLY.md) | Opvangen en eigenaren werven: aanpak, mails in drie talen, plan voor 30 dagen |
+| [`docs/legal/REVIEW.md`](docs/legal/REVIEW.md) | Checklist voor de jurist per land; de juridische teksten zelf staan in `web/content/legal/` |
 
-## Wat het prototype doet
+## Wat het platform doet (`web/`)
 
-1. **Honden in de buurt ontdekken**: met verhaal, energie, niveau en waarom een rondje telt.
-2. **Kennismaking plannen**:
-   - drie veiligheidsafspraken
-   - vanaf 18 jaar
-   - de eerste keer altijd samen met de eigenaar of de opvang
-3. **Rondje lopen**:
-   - een optionele check-in voor en na
-   - kleine opdrachtjes om bewuster te wandelen
-   - bij een lage stemming verwijst de app door naar hulp
-4. **Mijn rondjes**: je maatjes, een logboek en wat het jou en de hond oplevert.
-5. **Hulp en aanmelden**: 113, MIND Hulplijn, In je bol en Kindertelefoon altijd één tik weg, en een hond aanmelden, ook voor een ander.
+Eén app voor website, iPhone en Android (Next.js met een Capacitor-schil), in het Nederlands, Engels, Spaans en Frans, voor Nederland, België en Spanje.
 
-Alle gegevens blijven in de browser. Er is geen server, geen account, geen tracking en geen AI-chat. Honden, mensen en opvangen in het prototype zijn verzonnen.
+1. **Snel aanmelden**: e-mail of passkey (Face ID of vingerafdruk). Google en Apple werken zodra de sleutels er zijn. Uitnodigingslinks laten zien wie meedeed via jou.
+2. **Vertrouwen opbouwen**:
+   - een profiel met foto en verhaal
+   - alleen 18+, en anderen zien alleen je leeftijdsgroep
+   - kenmerken die je verdient: ID gezien, quiz gehaald, aantal rondjes
+3. **Honden aanmelden**, ook voor een buurvrouw of opa:
+   - foto's, karakter en vaste momenten
+   - koekjes ja, nee of alleen die van de eigenaar
+   - wat de eigenaar meegeeft (zakjes, riem, water)
+   - een privé afspreekplek en de dierenarts
+   - een eerlijke vraag naar bijtgeschiedenis
+4. **Stap voor stap vertrouwen**:
+   1. eerst een kennismaking met de eigenaar erbij
+   2. de eigenaar ziet het ID in het echt (Rondje bewaart geen kopie)
+   3. de eigenaar geeft per hond toestemming voor zelfstandige rondjes
+   4. de wandelaar haalt de veiligheidsquiz
 
-## Zelf draaien
+   Contactgegevens zie je pas na acceptatie.
+5. **Live wandelen**:
+   - GPS-route op de kaart, waar de eigenaar live kan meekijken
+   - een melding als het rondje uitloopt
+   - een SOS-scherm met 112, de eigenaar, de dierenarts en wat te doen bij weglopen of een beet
+6. **Na afloop**: privé-feedback die de ander nooit ziet. Zorgelijke antwoorden gaan naar moderatie. De stemmingscheck blijft op je telefoon.
+7. **Opvangen**:
+   - aanmelden en verificatie
+   - alle honden in één keer importeren uit Excel/CSV
+   - groepswandelingen met maximaal aantal plekken, aanwezigheid en ID-check
+   - medewerkers toevoegen
+   - een lijst van 39 opvangen in NL, BE en ES om te benaderen
+8. **Veiligheid en beheer**:
+   - melden en blokkeren
+   - berichten over geld of IBAN worden gemarkeerd
+   - accounts blokkeren met reden (DSA)
+   - opvangen verifiëren
+   - voorbeelddata verwijderen
+   - gegevens downloaden of je account verwijderen (AVG)
+   - routes na 30 dagen automatisch weg
+9. **Juridisch**: voorwaarden (Rondje is tussenpersoon en geen partij bij de afspraak), privacy, gedragscode, veiligheidsbeleid, partnervoorwaarden voor opvangen en cookies, in 4 talen. Een jurist moet ze nog nakijken.
 
-Je hebt Node.js 20 of nieuwer nodig.
+### Zelf draaien
 
 ```bash
-cd app
+cd web
 npm install
-npm run dev          # ontwikkelserver op http://localhost:5173
-npm test             # unit- en integratietests (Vitest)
-npm run test:e2e     # browsertests op mobiel en desktop (Playwright)
-npm run build        # productieversie in app/dist
-npm run build:single # alles in één HTML-bestand voor de preview
-npm run screens      # screenshots van alle schermen in licht en donker (preview-server moet draaien)
-npm run assets       # app-iconen en linkvoorbeeld (og.png) opnieuw maken
+npm run dev        # http://localhost:3000, met een ingebouwde database (geen server nodig)
+npm test           # unit-tests
+npm run test:e2e   # end-to-end: eigenaar + wandelaar, en opvang + beheer
 ```
 
-Wordt Chromium niet gevonden bij de browsertests? Geef dan het pad mee met `PW_CHROMIUM_PATH=/pad/naar/chrome`.
+Meer: [`web/README.md`](web/README.md).
 
-## Online zetten (wacht op jouw akkoord)
+## Het eerste prototype (`app/`)
 
-De map `app/dist` is een statische site en draait gratis op Vercel, Netlify of Cloudflare Pages:
-
-- **Vercel:** importeer de repo en kies `app` als *Root Directory*. Framework: Vite, build command `npm run build`, output `dist`.
-- **Netlify:** base directory `app`, build command `npm run build`, publish directory `app/dist`.
-
-Dat zet het prototype publiek online onder jouw account. Daarom is het niet automatisch gedaan, zie [`docs/DECISIONS.md`](docs/DECISIONS.md).
-
-Heb je een eigen domein? Zet dan in `app/index.html` bij `og:image` de volledige URL van `og.png`, bijvoorbeeld `https://rondje.app/og.png`. Sommige apps tonen het linkvoorbeeld alleen met een volledige URL.
-
-## Techniek
-
-React 19, TypeScript, Vite, met gewone CSS en design tokens voor een lichte en een donkere modus. Lettertypes (Bricolage Grotesque, Figtree, Caveat) zitten in de bundle. De hondenillustraties zijn eigen SVG's.
+Het prototype was een statische app zonder server. Het blijft staan als ontwerpreferentie. Je draait het met `cd app && npm install && npm run dev`.
