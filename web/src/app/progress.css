@@ -1,0 +1,1098 @@
+/* Rondje — your own progress on the website, like the iPhone app: level ring and card, the
+   profile hub rows, the progress page (level path, weekly goal, challenge, badges), the
+   "hondenvriendenboek", the breathing minute, "Goed rondje!" after a walk and the level-up moment.
+   Only design tokens from globals.css, so light and dark mode both work. */
+
+/* ---------- Level ring and card ---------- */
+
+.level-ring {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.level-ring svg {
+  position: absolute;
+  inset: 0;
+}
+
+.level-ring-track {
+  stroke: color-mix(in oklab, var(--on-walk) 20%, transparent);
+}
+
+.level-ring-fill {
+  stroke: var(--ball);
+  animation: ring-fill 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+}
+
+@keyframes ring-fill {
+  from {
+    stroke-dashoffset: var(--dash);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.level-ring-number {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--on-walk);
+}
+
+.level-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 24px;
+  color: var(--on-walk);
+  background: linear-gradient(135deg, var(--walk-bg), color-mix(in oklab, var(--walk-bg) 72%, #4f9a6c));
+  text-decoration: none;
+  box-shadow: var(--shadow);
+}
+
+.level-card.is-hero {
+  padding: 22px;
+  gap: 20px;
+  border-radius: var(--radius-l);
+}
+
+.level-card.is-link {
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.level-card.is-link:hover {
+  filter: brightness(1.06);
+}
+
+.level-card.is-link:active {
+  transform: scale(0.99);
+}
+
+.level-card.is-link:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 3px;
+}
+
+.level-card-text {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.level-card-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.level-card-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 720;
+  line-height: 1.15;
+}
+
+.is-hero .level-card-name {
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
+}
+
+.level-card-next {
+  opacity: 0.88;
+}
+
+.level-card-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: var(--ball);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.level-card-chevron {
+  opacity: 0.7;
+  line-height: 0;
+}
+
+/* ---------- Profile hub: app-style rows ---------- */
+
+.hub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+
+.hub-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 12px 16px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* An inset separator, like the lists in the app. */
+.hub-list li + li .hub-row {
+  background: linear-gradient(var(--line), var(--line)) 68px 0 / calc(100% - 68px) 1px no-repeat;
+}
+
+.hub-row:hover {
+  background-color: color-mix(in oklab, var(--sunken) 55%, transparent);
+}
+
+.hub-row:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: -3px;
+}
+
+.hub-row-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hub-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.hub-icon.ball {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.hub-icon.calm {
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.hub-icon.warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.hub-row-text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.hub-row-text strong {
+  font-weight: 650;
+}
+
+.hub-row-text > span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.hub-chevron {
+  color: var(--muted);
+  line-height: 0;
+}
+
+.more-invite .input {
+  font-size: 0.85rem;
+}
+
+/* ---------- Progress page ---------- */
+
+.pill.private-pill {
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.private-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.private-note .icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.level-path {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0 0;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+/* The dashed walking route between the levels. */
+.level-path::before {
+  content: '';
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 19px;
+  border-top: 2px dashed var(--line);
+}
+
+.level-path li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.level-path-dot {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.level-path li.passed .level-path-dot {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.level-path li.here .level-path-dot {
+  background: var(--ball);
+  border-color: var(--ball);
+  color: var(--on-ball);
+  transform: scale(1.22);
+  box-shadow: 0 0 0 5px color-mix(in oklab, var(--ball) 30%, transparent);
+}
+
+.level-path-name {
+  display: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.level-path li.here .level-path-name {
+  display: block;
+}
+
+.level-path li:first-child .level-path-name {
+  justify-self: start;
+}
+
+.level-path li:last-child .level-path-name {
+  justify-self: end;
+}
+
+.progress-grid {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 760px) {
+  .progress-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.goal-picker {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--sunken);
+}
+
+.goal-picker button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 650;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.goal-picker button.on {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.goal-picker button:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 1px;
+}
+
+.goal-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.goal-dots span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+}
+
+.goal-dots span.done {
+  background: var(--grass);
+  border-color: var(--grass);
+}
+
+.week-status {
+  font-weight: 650;
+}
+
+.week-status.done {
+  color: var(--grass);
+}
+
+.bar {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--grass);
+  transform-origin: left center;
+  animation: bar-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+}
+
+.bar.big {
+  height: 10px;
+}
+
+.bar.big > span {
+  background: var(--calm);
+}
+
+.bar.big.done > span {
+  background: var(--grass);
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.challenge-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--calm);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.challenge-title {
+  font-size: 1.2rem;
+}
+
+.challenge-mine {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--grass);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.badge-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 560px) {
+  .badge-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .badge-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.badge {
+  --tier: var(--ball);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 18px 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  text-align: center;
+}
+
+.badge:not(.earned) {
+  border-style: dashed;
+  background: transparent;
+}
+
+.badge[data-color='bronze'] {
+  --tier: #d9a06b;
+}
+
+.badge[data-color='silver'] {
+  --tier: #c9ced3;
+}
+
+.badge[data-color='gold'] {
+  --tier: #f2c94c;
+}
+
+.badge[data-color='green'] {
+  --tier: #a9d8b8;
+}
+
+.badge[data-color='ball'] {
+  --tier: var(--ball);
+}
+
+.badge-medal {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  border: 2px dashed var(--line);
+  color: var(--muted);
+}
+
+.badge.earned .badge-medal {
+  border: 0;
+  background: var(--tier);
+  color: var(--on-ball);
+  box-shadow: inset 0 -4px 0 rgb(0 0 0 / 0.08), 0 6px 14px color-mix(in oklab, var(--tier) 45%, transparent);
+}
+
+.badge-new {
+  position: absolute;
+  top: -6px;
+  right: -16px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--danger);
+  color: var(--on-danger);
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+
+.badge-name {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge-title {
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.badge-hint {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+
+.badge-meta {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.badge-progress {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.badge-progress .bar {
+  width: 72%;
+  height: 6px;
+  margin-inline: auto;
+}
+
+.earn-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+
+.earn-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+
+.earn-list li:first-child {
+  border-top: 0;
+}
+
+.earn-list strong {
+  color: var(--grass);
+  white-space: nowrap;
+}
+
+/* ---------- Hondenvriendenboek ---------- */
+
+.stat-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.stat-tiles > div {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  text-align: center;
+}
+
+.stat-tiles dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 5vw, 1.6rem);
+  font-weight: 760;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.stat-tiles dt {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.friend-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .friend-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.friend-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  height: 100%;
+  padding: 8px 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.friend-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.friend-card:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+.friend-card > *:not(.friend-photo) {
+  padding-inline: 4px;
+}
+
+.friend-photo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 0.82;
+  margin-bottom: 8px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: color-mix(in oklab, var(--tile, #ecdcd0) var(--tile-mix), var(--surface));
+  line-height: 0;
+}
+
+.friend-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.friend-photo svg {
+  width: 72%;
+  height: auto;
+  max-height: 92%;
+}
+
+.friend-times {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.friend-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.friend-bond {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--grass);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.friend-bond .icon {
+  flex-shrink: 0;
+}
+
+.friends-empty {
+  align-items: center;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.friends-empty p {
+  max-width: 44ch;
+}
+
+.friends-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+/* ---------- Ademminuut ---------- */
+
+.breathe-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 20px 24px;
+  border-radius: var(--radius-l);
+  background: var(--walk-bg);
+  color: var(--on-walk);
+  text-align: center;
+  overflow: hidden;
+}
+
+.breathe-title {
+  color: var(--on-walk);
+  font-size: clamp(1.9rem, 7vw, 2.4rem);
+}
+
+.breathe-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(280px, 70vw);
+  aspect-ratio: 1;
+  margin: 10px 0;
+}
+
+.breathe-halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--ball) 18%, transparent);
+}
+
+.breathe-ball {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--ball);
+  transform: scale(0.86);
+  transition: transform 1.2s ease-in-out;
+}
+
+.breathe-ball.is-in {
+  transform: scale(1);
+  transition-duration: 4s;
+}
+
+.breathe-ball.is-out {
+  transform: scale(0.45);
+  transition-duration: 6s;
+}
+
+.breathe-dog {
+  position: relative;
+  display: grid;
+  place-items: center;
+  line-height: 0;
+}
+
+.breathe-phase {
+  min-height: 1.4em;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 720;
+}
+
+.breathe-count {
+  min-height: 1.5em;
+  opacity: 0.8;
+  font-variant-numeric: tabular-nums;
+}
+
+.breathe-actions {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  margin-top: 4px;
+}
+
+.button.ghost.breathe-stop {
+  border-color: color-mix(in oklab, var(--on-walk) 40%, transparent);
+  color: var(--on-walk);
+}
+
+/* ---------- Goed rondje! ---------- */
+
+.walk-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: color-mix(in oklab, var(--surface) 90%, var(--ball));
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.walk-done-paw {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--ball);
+  color: var(--on-ball);
+  animation: pop-in 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+.walk-done-paw path {
+  fill: currentColor;
+}
+
+.walk-done-title {
+  font-size: clamp(2rem, 8vw, 2.6rem);
+  font-weight: 780;
+}
+
+.walk-done-text {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.walk-done-mood {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  margin-top: 6px;
+  text-align: left;
+}
+
+.walk-done-mood .mood-reply {
+  text-align: center;
+}
+
+.walk-done-actions {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.walk-done-breathe {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--grass);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.walk-done-breathe:hover {
+  text-decoration: underline;
+}
+
+.mood-title {
+  font-weight: 650;
+}
+
+.mood-faces {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mood-faces button {
+  min-height: 56px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(22 32 26 / 0.08);
+  font-size: 1.9rem;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), background 0.2s ease;
+}
+
+.mood-faces button.on {
+  background: var(--ball);
+  transform: scale(1.08);
+}
+
+.mood-faces button:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+.mood-reply {
+  color: var(--grass);
+  font-weight: 650;
+}
+
+.feedback-anchor {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* ---------- New level ---------- */
+
+.level-up {
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--walk-bg);
+  color: var(--on-walk);
+}
+
+.level-up::backdrop {
+  background: var(--walk-bg);
+}
+
+.level-up-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 100%;
+  padding: max(24px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+.level-up-burst {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 280px;
+  height: 280px;
+}
+
+.level-up-ball {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-family: var(--font-display);
+  font-size: 4.4rem;
+  font-weight: 800;
+  animation: pop-in 0.9s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+.level-up-paw {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -9px 0 0 -9px;
+  color: var(--ball);
+  line-height: 0;
+  opacity: 0;
+  animation: paw-burst 1.2s ease-out 0.15s both;
+}
+
+.level-up-paw:nth-child(even) {
+  color: color-mix(in oklab, var(--on-walk) 60%, transparent);
+}
+
+.level-up-paw path {
+  fill: currentColor;
+}
+
+@keyframes paw-burst {
+  from {
+    transform: rotate(calc(var(--i) * 30deg)) translateY(-20px);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(calc(var(--i) * 30deg)) translateY(-135px);
+    opacity: 0;
+  }
+}
+
+.level-up-eyebrow {
+  font-size: 1.25rem;
+  font-weight: 600;
+  opacity: 0.88;
+}
+
+.level-up-name {
+  color: var(--on-walk);
+  font-size: clamp(2.3rem, 10vw, 3.2rem);
+}
+
+.level-up-awards {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  color: var(--ball);
+  font-size: 1.1rem;
+  font-weight: 650;
+}
+
+.level-up-awards li {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.level-up-button {
+  width: min(100%, 420px);
+  margin-top: 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .level-ring-fill,
+  .bar > span,
+  .walk-done-paw,
+  .level-up-ball {
+    animation: none;
+  }
+
+  .level-up-paw {
+    display: none;
+  }
+
+  /* No growing and shrinking: the circle only brightens and dims with the breath. */
+  .breathe-ball,
+  .breathe-ball.is-in,
+  .breathe-ball.is-out {
+    transform: scale(0.72);
+    transition: opacity 1.5s ease;
+  }
+
+  .breathe-ball.is-out {
+    opacity: 0.55;
+  }
+
+  .mood-faces button,
+  .friend-card {
+    transition: none;
+  }
+}

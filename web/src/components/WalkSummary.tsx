@@ -1,3 +1,4 @@
+import '@/app/progress.css'
 import { and, eq } from 'drizzle-orm'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -7,6 +8,9 @@ import { formatWalkDistance } from '@/lib/geo'
 import { walkPhotos, type Walk } from '@/server/walks'
 import { DogPortrait } from './DogPortrait'
 import { Map } from './map'
+import type { Celebration } from './progress/LevelUp'
+import { ProgressIcon } from './progress/ProgressIcon'
+import { WalkDone } from './progress/WalkDone'
 import { ReportButton } from './ReportButton'
 import { MoodCheck, WalkFeedback } from './WalkFeedback'
 import { WalkCareTally } from './WalkCare'
@@ -20,10 +24,12 @@ interface Props {
   viewerId: string
   otherUserId: string | null
   fallbackCenter: { lat: number; lng: number }
+  /** Right after the walker ended the walk: celebrate first ("Goed rondje!"), like the iPhone app. */
+  justEnded?: { points: number | null; celebration: Celebration | null } | null
 }
 
 /** After a walk: the route, private feedback from both sides, and (for walkers) a mood check. */
-export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserId, fallbackCenter }: Props) {
+export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserId, fallbackCenter, justEnded }: Props) {
   const t = await getTranslations()
   const locale = await getLocale()
   const db = await getDb()
@@ -33,16 +39,28 @@ export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserI
     .where(and(eq(s.feedback.walkId, walk.id), eq(s.feedback.fromUserId, viewerId)))
   const photos = (await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))
   const minutes = Math.max(1, Math.round(((walk.endedAt ?? new Date()).getTime() - walk.startedAt.getTime()) / 60_000))
+  const distance = formatWalkDistance(walk.distanceM ?? 0, locale)
+  const celebrate = role === 'walker' && justEnded
 
   return (
     <div className="narrow-page stack-l">
+      {celebrate ? (
+        <WalkDone
+          walkId={walk.id}
+          dogName={dog.name}
+          distance={distance}
+          points={justEnded.points}
+          feedbackGiven={Boolean(given)}
+          celebration={justEnded.celebration}
+        />
+      ) : null}
       <header className="summary-head">
         <DogPortrait dog={dog} size={88} />
         <div className="stack-s">
           <p className="eyebrow">{t('walk.ended')}</p>
           <h1>{t('walk.with', { name: dog.name })}</h1>
           <p className="lede">
-            {t('walk.endedText', { name: dog.name, distance: formatWalkDistance(walk.distanceM ?? 0, locale), minutes })}
+            {t('walk.endedText', { name: dog.name, distance, minutes })}
           </p>
         </div>
       </header>
@@ -61,12 +79,19 @@ export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserI
       ) : null}
       <WalkCareTally care={{ pee: walk.pee, poo: walk.poo, water: walk.water }} hideEmpty />
       <WalkPhotoStrip photos={photos} dogName={dog.name} />
-      {role === 'walker' ? <MoodCheck /> : null}
-      {given ? (
-        <p className="notice success">{t('walk.thanks')}</p>
-      ) : (
-        <WalkFeedback walkId={walk.id} role={role} dogName={dog.name} />
-      )}
+      {role === 'walker' && !celebrate ? <MoodCheck walkId={walk.id} /> : null}
+      <div id="feedback" className="feedback-anchor">
+        {given ? (
+          <p className="notice success">{t('walk.thanks')}</p>
+        ) : (
+          <WalkFeedback walkId={walk.id} role={role} dogName={dog.name} />
+        )}
+      </div>
+      {role === 'walker' && !celebrate ? (
+        <Link href={`/breathe?next=${encodeURIComponent(`/walk/${walk.id}`)}`} className="walk-done-breathe">
+          <ProgressIcon name="breathe" size={18} /> {t('walkDone.breathe')}
+        </Link>
+      ) : null}
       <div className="row">
         <Link href="/requests" className="button secondary">
           {t('nav.requests')}
