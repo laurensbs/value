@@ -26,6 +26,7 @@ export async function GET() {
       phone: p.phone,
       wantsToWalk: p.wantsToWalk,
       hasDogs: p.hasDogs,
+      weeklyGoal: p.weeklyGoal,
       quizPassed: Boolean(p.quizPassedAt),
       referralCode: p.referralCode,
       emailNotifications: p.emailNotifications,

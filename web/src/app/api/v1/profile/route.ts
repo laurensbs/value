@@ -46,6 +46,9 @@ export async function PATCH(request: Request) {
   if (body.wantsToWalk ?? p.wantsToWalk) form.set('wantsToWalk', 'on')
   if (body.hasDogs ?? p.hasDogs) form.set('hasDogs', 'on')
   if (body.pppLicense ?? p.pppLicense) form.set('pppLicense', 'on')
+  // Walks a week (1–7); null clears the goal, leaving it out keeps it.
+  const goal = 'weeklyGoal' in body ? body.weeklyGoal : p.weeklyGoal
+  form.set('weeklyGoal', typeof goal === 'number' ? String(goal) : '')
   // A new photo from the app (uploaded through /api/upload first); without one the photo stays as it is.
   if (typeof body.photoUrl === 'string') form.set('photoUrl', body.photoUrl)
   const result = await updateProfile({ ok: false }, form)

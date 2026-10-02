@@ -21,7 +21,8 @@
     "helpPill": "Even niet oké?",
     "language": "Taal",
     "menu": "Menu",
-    "skip": "Naar de inhoud"
+    "skip": "Naar de inhoud",
+    "today": "Vandaag"
   },
   "common": {
     "save": "Opslaan",
@@ -201,7 +202,63 @@
       "invalid": "Vul de verplichte velden in.",
       "not-signed-in": "Log eerst in."
     },
-    "step": "Laatste stap"
+    "step": "Laatste stap",
+    "flow": {
+      "progress": "Stap {n} van {total}",
+      "back": "Terug",
+      "next": "Verder",
+      "skip": "Sla over",
+      "welcomeTitle": "Hoi {name}, fijn dat je er bent!",
+      "welcomeText": "Een paar korte vragen, dan zetten we Rondje voor je klaar. Precies zoals jij het nodig hebt.",
+      "welcome1": "Je kiest wat je wilt: wandelen, een hond, of allebei.",
+      "welcome2": "We laten honden en mensen bij jou in de buurt zien.",
+      "welcome3": "Het kost een minuutje. Alles kun je later nog aanpassen.",
+      "welcomeStart": "Laten we beginnen",
+      "roleTitle": "Wat brengt je hier?",
+      "roleText": "De app past zich aan je keuze aan. Je kunt het altijd veranderen.",
+      "roleWalker": "Ik wil wandelen",
+      "roleWalkerText": "Met een hond uit de buurt of uit de opvang.",
+      "roleOwner": "Ik heb een hond",
+      "roleOwnerText": "Of ik regel het voor een buurvrouw, opa of oma.",
+      "roleBoth": "Allebei",
+      "roleBothText": "Ik heb een hond en wandel graag met andere honden.",
+      "roleShelter": "Ik werk bij een opvang",
+      "roleShelterText": "Zet de honden van jullie opvang op Rondje.",
+      "aboutTitle": "Hoe mogen we je noemen?",
+      "aboutText": "Rondje is voor mensen van 18 jaar en ouder. Anderen zien alleen je voornaam en leeftijdsgroep.",
+      "placeTitle": "Waar woon je ongeveer?",
+      "placeText": "Dan zie je honden en mensen bij jou in de buurt. We ronden je locatie af op zo'n 500 meter.",
+      "experienceTitle": "Hoeveel ervaring heb je met honden?",
+      "experienceText": "Zo laten we eerst honden zien die bij je passen.",
+      "experienceNoneText": "Ik leer het graag. Rustige honden passen goed bij me.",
+      "experienceSomeText": "Ik heb vaker met honden gewandeld.",
+      "experienceLotsText": "Ik ben opgegroeid met honden, ook met drukke.",
+      "goalTitle": "Hoe vaak wil je een rondje lopen?",
+      "goalText": "Een vast ritme is fijn voor een hond. Je kunt het altijd aanpassen, en een weekje overslaan mag.",
+      "goal1": "1 keer per week",
+      "goal1Text": "Rustig beginnen",
+      "goal2": "2 keer per week",
+      "goal2Text": "Een vast maatje voor een hond",
+      "goal3": "3 keer per week",
+      "goal3Text": "Echte wandelaar",
+      "goalRecommended": "Aanrader",
+      "goalLater": "Weet ik nog niet",
+      "profileTitle": "Laat zien wie je bent",
+      "profileText": "Eigenaren kiezen sneller iemand met een foto en een paar zinnen. Je kunt dit ook later doen.",
+      "profileOwnerText": "Wandelaars vinden het fijn om te weten bij wie ze aanbellen. Je kunt dit ook later doen.",
+      "promiseTitle": "Bijna klaar!",
+      "promiseText": "Zo houden we Rondje veilig en fijn, voor mensen en honden.",
+      "promise1": "De eerste keer loop je altijd samen met de eigenaar of de opvang.",
+      "promise2": "Je adres is nooit zichtbaar, en je telefoonnummer pas na een afspraak.",
+      "promise3": "Rondje is gratis en zonder reclame. Vraagt iemand om geld? Meld het.",
+      "finish": "Klaar, laten we gaan!",
+      "needRole": "Kies wat je wilt doen.",
+      "needName": "Vul je voornaam in.",
+      "needBirthDate": "Vul je geboortedatum in.",
+      "tooYoung": "Rondje is voor mensen van 18 jaar en ouder.",
+      "needCity": "Vul je woonplaats in.",
+      "needTerms": "Ga akkoord met de voorwaarden om verder te gaan."
+    }
   },
   "dogs": {
     "title": "Honden die op een rondje wachten",
@@ -544,7 +601,9 @@
     "tip1": "Zet er een foto bij van buiten, met oogcontact.",
     "tip2": "Kies een of twee vaste momenten in de week. Vaste rondjes houden mensen vol.",
     "tip3": "Spreek de eerste keer altijd samen af: zo leren jullie elkaar en je hond rustig kennen.",
-    "weekday": "Dag"
+    "weekday": "Dag",
+    "welcomeTitle": "Welkom, {name}! Vertel over je hond",
+    "welcomeLede": "Een foto, zijn karakter en wanneer hij een rondje kan. Daarna vindt iemand uit de buurt hem."
   },
   "profile": {
     "title": "Profiel",
@@ -584,7 +643,10 @@
     "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje.",
     "pushNotifications": "Pushmeldingen in deze browser",
     "pushHint": "Een seintje bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt. Op iPhone: zet Rondje eerst op je beginscherm.",
-    "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser."
+    "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser.",
+    "progressTitle": "Jouw voortgang",
+    "weeklyGoal": "Weekdoel",
+    "weeklyGoalHint": "Hoe vaak wil je een rondje lopen? Een week overslaan mag altijd."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -1347,6 +1409,269 @@
     "tooLong": "Dat bericht is te lang. Houd het onder de {max} tekens.",
     "safety": "Spreek de eerste keer altijd samen af, op een plek die jullie allebei kennen. Iets niet in orde? Meld het via het profiel.",
     "back": "Terug naar afspraken",
-    "label": "Berichten"
+    "label": "Berichten",
+    "flagged": "Let op: dit bericht gaat over geld of bevat een link. Rondje is gratis: maak nooit geld over en deel geen bankgegevens. Klopt er iets niet? Meld het."
+  },
+  "today": {
+    "metaTitle": "Vandaag",
+    "morning": "Goedemorgen, {name}",
+    "afternoon": "Goedemiddag, {name}",
+    "evening": "Goedenavond, {name}",
+    "night": "Hoi {name}",
+    "welcomeTitle": "Welkom bij Rondje, {name}!",
+    "welcomeText": "Je bent nu {level}, level 1. Hieronder staan je eerste stappen: elke stap brengt je dichter bij je eerste rondje.",
+    "stepsTitle": "Je eerste stappen",
+    "stepsCount": "{done} van {total} gedaan",
+    "start": "Start",
+    "steps": {
+      "account": {
+        "title": "Profiel gemaakt",
+        "hint": "Welkom bij Rondje!"
+      },
+      "about": {
+        "title": "Een foto en een paar zinnen over jou",
+        "hint": "Eigenaren kiezen sneller iemand die ze herkennen."
+      },
+      "dog": {
+        "title": "Zet je hond online",
+        "hint": "Een foto, zijn karakter en wanneer hij een rondje kan."
+      },
+      "quiz": {
+        "title": "Haal de veiligheidsquiz",
+        "hint": "Acht korte vragen. Nodig om zelfstandig te wandelen."
+      },
+      "meet": {
+        "title": "Plan een kennismaking",
+        "hint": "Kies een hond die je leuk lijkt. De eerste keer loop je samen met de eigenaar."
+      },
+      "walk": {
+        "title": "Loop je eerste rondje",
+        "hint": "Start het rondje op de dag zelf, bij Rondjes."
+      },
+      "dogMet": {
+        "title": "Ontmoet je eerste wandelaar",
+        "hint": "Vraagt iemand om kennis te maken? Dan zie je dat bij Rondjes, en kun je eerst chatten."
+      },
+      "dogWalk": {
+        "title": "Het eerste rondje van je hond",
+        "hint": "Je kijkt live mee en krijgt na afloop een verslag."
+      }
+    },
+    "next": "Je volgende afspraak",
+    "nextWalk": "{when} · rondje met {dog}",
+    "nextMeeting": "{when} · kennismaking met {dog}",
+    "nextOpen": "Bekijk",
+    "pending": "{n, plural, one {# nieuw verzoek wacht op je antwoord} other {# nieuwe verzoeken wachten op je antwoord}}",
+    "pendingOpen": "Bekijk verzoeken",
+    "nearTitle": "Honden bij jou in de buurt",
+    "nearEmpty": "Nog geen honden bij jou in de buurt. Ken je iemand met een hond? Nodig ze uit met je eigen link.",
+    "nearAll": "Alle honden",
+    "nearInvite": "Nodig iemand uit",
+    "myDogsTitle": "Jouw honden",
+    "dogWeek": "{n, plural, =0 {Deze week nog geen rondje} one {Deze week # rondje} other {Deze week # rondjes}}",
+    "dogFriends": "{n, plural, =0 {Nog geen wandelaars} one {# wandelaar} other {# wandelaars}}",
+    "addDog": "Hond toevoegen",
+    "tipTitle": "Tip van vandaag",
+    "badgesTitle": "Jouw penningen",
+    "badgesAll": "Alle penningen",
+    "badgesEmpty": "Je eerste penning verdien je met je eerste rondje.",
+    "together": "Samen liepen we al {walks} rondjes met {dogs} honden. Jij hoort erbij.",
+    "tips": {
+      "walker": {
+        "1": "Neem op warme dagen water mee, en voel met je hand of de stoep niet te heet is voor zijn pootjes.",
+        "2": "Laat een hond eerst aan je hand snuffelen voordat je hem aait. Zo stel je je voor.",
+        "3": "Snuffelen is voor een hond net zo vermoeiend als rennen. Een rustig snuffelrondje is een cadeau.",
+        "4": "Oren naar achteren en een lage staart? Geef de hond wat ruimte en praat rustig.",
+        "5": "In het donker? Een lampje aan de riem maakt jullie allebei beter zichtbaar.",
+        "6": "Loop in je eigen tempo. Een hond die aan de riem trekt, leert meer van stilstaan dan van trekken.",
+        "7": "Even samen op een bankje zitten telt ook. Rondjes hoeven niet snel of ver te zijn.",
+        "8": "Een andere hond komt eraan? Vraag de eigenaar eerst of ze kennis mogen maken.",
+        "9": "Wandelen in de ochtend? Dan is het rustiger en koeler, fijn voor oudere honden.",
+        "10": "Vertel de eigenaar na afloop iets leuks over het rondje. Dat maakt hun dag."
+      },
+      "owner": {
+        "1": "Schrijf bij je hond wat hij spannend vindt, zoals fietsen of andere honden. Dan weet een wandelaar waar hij op moet letten.",
+        "2": "Leg de riem, poepzakjes en een koekje klaar bij de deur. Dan kan het rondje meteen beginnen.",
+        "3": "Een vast moment in de week maakt het makkelijk, voor jou, je hond en de wandelaar.",
+        "4": "De eerste keer lopen jullie samen. Laat zien hoe je hond graag loopt en waar hij altijd even stopt.",
+        "5": "Een foto waarop je hond in de camera kijkt, trekt meer wandelaars dan een foto van achteren.",
+        "6": "Kijk live mee tijdens het rondje, of laat het los en lees na afloop het verslag.",
+        "7": "Laat de wandelaar na afloop weten dat je blij bent. Een bedankje houdt een vast maatje vast.",
+        "8": "Hangt er een prikbord in de supermarkt? Een flyer met jouw link brengt wandelaars uit je eigen buurt."
+      }
+    }
+  },
+  "progress": {
+    "title": "Jouw voortgang",
+    "points": "{n, plural, one {# punt} other {# punten}}",
+    "levelN": "Level {n}",
+    "toNext": "Nog {n, plural, one {# punt} other {# punten}} tot {name}",
+    "top": "Je hebt het hoogste level bereikt. Elk rondje blijft tellen.",
+    "private": "Alleen jij ziet je level en penningen. Ze geven geen voorrang: iedereen is even welkom.",
+    "levels": {
+      "puppy": "Puppy",
+      "sniffer": "Snuffelaar",
+      "tracker": "Speurneus",
+      "buddy": "Wandelmaatje",
+      "regular": "Parkganger",
+      "local": "Buurtbekende",
+      "leader": "Roedelleider",
+      "whisperer": "Hondenfluisteraar",
+      "hero": "Rondjesheld",
+      "legend": "Legende"
+    },
+    "pathTitle": "Je pad",
+    "pathHere": "Hier ben je",
+    "badgesTitle": "Penningen",
+    "badgesEarned": "{n} van {total} verdiend",
+    "badgeProgress": "{value} van {next}",
+    "badgeDone": "Alles verdiend",
+    "badges": {
+      "walks": {
+        "name": "Rondjes",
+        "tier": "{n, plural, one {Eerste rondje} other {# rondjes}}",
+        "hint": "Elk rondje telt, kort of lang."
+      },
+      "buddy": {
+        "name": "Vast maatje",
+        "tier": "{n} keer met dezelfde hond",
+        "hint": "Word goede vrienden met een hond: vijf rondjes samen."
+      },
+      "pack": {
+        "name": "Roedel",
+        "tier": "{n} verschillende honden",
+        "hint": "Leer meer honden kennen."
+      },
+      "early": {
+        "name": "Vroege vogel",
+        "tier": "{n, plural, one {Een rondje vóór 8 uur} other {# rondjes vóór 8 uur}}",
+        "hint": "Een ochtendrondje, als de stad nog slaapt."
+      },
+      "evening": {
+        "name": "Avondrondje",
+        "tier": "{n, plural, one {Een rondje na 20 uur} other {# rondjes na 20 uur}}",
+        "hint": "Neem een lampje mee in het donker."
+      },
+      "weekend": {
+        "name": "Weekendwandelaar",
+        "tier": "{n} rondjes in het weekend",
+        "hint": "Op zaterdag of zondag op pad."
+      },
+      "seasons": {
+        "name": "Vier seizoenen",
+        "tier": "Gewandeld in lente, zomer, herfst en winter",
+        "hint": "Elk seizoen een rondje."
+      },
+      "photos": {
+        "name": "Fotograaf",
+        "tier": "{n} rondjes met een foto voor de eigenaar",
+        "hint": "Een foto onderweg maakt de dag van de eigenaar."
+      },
+      "reports": {
+        "name": "Verslaggever",
+        "tier": "{n} rondjes met een plas-en-poepverslag",
+        "hint": "Tik bij elke plas, poep of slok water."
+      },
+      "shelter": {
+        "name": "Opvangheld",
+        "tier": "{n, plural, one {Een groepswandeling bij een opvang} other {# groepswandelingen bij een opvang}}",
+        "hint": "Loop mee met een groepswandeling van een opvang."
+      },
+      "quiz": {
+        "name": "Veilig op pad",
+        "tier": "Veiligheidsquiz gehaald",
+        "hint": "Acht korte vragen over veilig wandelen."
+      },
+      "host": {
+        "name": "Gastvrij",
+        "tier": "{n, plural, one {Je hond liep een rondje} other {Je hond liep # rondjes}}",
+        "hint": "Elk rondje van je hond telt."
+      },
+      "friends": {
+        "name": "Vriendenkring",
+        "tier": "{n} verschillende wandelaars voor je hond",
+        "hint": "Meer vrienden, meer rondjes."
+      },
+      "invite": {
+        "name": "Ambassadeur",
+        "tier": "{n, plural, one {Een vriend doet mee} other {# vrienden doen mee}}",
+        "hint": "Nodig iemand uit met je eigen link."
+      }
+    },
+    "earnTitle": "Zo verdien je punten",
+    "earn": {
+      "walk": "Een rondje lopen",
+      "walkCare": "Het plas-en-poepverslag bijhouden",
+      "walkPhoto": "Een foto delen met de eigenaar",
+      "feedback": "Je feedback na een rondje",
+      "dogWalked": "Je hond liep een rondje",
+      "groupWalk": "Meelopen met een groepswandeling van een opvang",
+      "quiz": "De veiligheidsquiz halen",
+      "profile": "Een foto en een paar zinnen over jezelf",
+      "firstDog": "Je hond op Rondje zetten",
+      "invite": "Een vriend die meedoet via jouw link"
+    },
+    "earnNote": "Elk rondje telt even zwaar, kort of lang. Ja zeggen op een verzoek levert nooit punten op: die keuze gaat alleen over veiligheid.",
+    "recentTitle": "Laatst verdiend",
+    "recent": {
+      "walk": "Rondje met {dog}",
+      "walkAnon": "Rondje",
+      "walkCare": "Verslag van het rondje",
+      "walkPhoto": "Foto voor de eigenaar",
+      "feedback": "Feedback na het rondje",
+      "dogWalked": "{dog} liep een rondje",
+      "dogWalkedAnon": "Je hond liep een rondje",
+      "groupWalk": "Groepswandeling bij een opvang",
+      "quiz": "Veiligheidsquiz gehaald",
+      "profile": "Profiel compleet",
+      "firstDog": "Je hond staat online",
+      "invite": "Een vriend doet mee"
+    },
+    "none": "Nog geen punten. Je eerste rondje levert er meteen 25 op.",
+    "weekTitle": "Deze week",
+    "weekGoal": "{done} van {goal} rondjes",
+    "weekDone": "Weekdoel gehaald!",
+    "weekLeft": "{n, plural, one {Nog # rondje} other {Nog # rondjes}} voor je weekdoel",
+    "weekNoGoal": "{n, plural, =0 {Nog geen rondje deze week} one {# rondje deze week} other {# rondjes deze week}}",
+    "weekSet": "Kies een weekdoel",
+    "weekChange": "Aanpassen",
+    "goalOption": "{n, plural, one {# keer per week} other {# keer per week}}",
+    "goalNone": "Geen weekdoel",
+    "activeWeeks": "{n, plural, one {# week} other {# weken}} met een rondje",
+    "activeWeeksHint": "Telt alleen op. Een rustige week neemt niets af.",
+    "celebrate": {
+      "levelUp": "Level omhoog!",
+      "levelUpText": "Je bent nu {name}, level {n}.",
+      "newBadge": "Nieuwe penning!",
+      "newBadges": "{n} nieuwe penningen!",
+      "close": "Top!",
+      "allBadges": "Bekijk je penningen"
+    },
+    "card": "Bekijk je voortgang",
+    "walkPoints": "+{n} punten",
+    "walkPointsText": "voor dit rondje. Dank je wel!",
+    "walkPointsOwner": "voor het rondje van {dog}",
+    "friends": {
+      "title": "Je hondenvrienden",
+      "empty": "Na je eerste rondje krijgt de hond hier een eigen plekje.",
+      "walks": "{n, plural, one {# rondje samen} other {# rondjes samen}}",
+      "bond": {
+        "met": "Net kennisgemaakt",
+        "buddies": "Wandelmaatjes",
+        "good": "Goede vrienden",
+        "best": "Beste vrienden"
+      }
+    }
+  },
+  "challenges": {
+    "title": "Uitdaging van de maand",
+    "city": "{city} loopt {goal} rondjes in {month}",
+    "all": "Samen {goal} rondjes in {month}",
+    "progress": "{walks} van {goal} rondjes",
+    "mine": "{n, plural, =0 {Loop jij er ook een?} one {Jij liep er # mee} other {Jij liep er # mee}}",
+    "done": "Gehaald! Dank je wel, iedereen.",
+    "stats": "{dogs, plural, one {# hond} other {# honden}} · {walkers, plural, one {# wandelaar} other {# wandelaars}} · {km} km",
+    "daysLeft": "{n, plural, one {Nog # dag} other {Nog # dagen}}",
+    "private": "We tellen alleen rondjes, nooit wie ze liep."
   }
 }

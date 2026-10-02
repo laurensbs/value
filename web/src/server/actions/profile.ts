@@ -33,6 +33,7 @@ function readProfile(form: FormData) {
     photoUrl: (form.get('photoUrl') as string) || undefined,
     wantsToWalk: form.get('wantsToWalk') === 'on',
     hasDogs: form.get('hasDogs') === 'on',
+    weeklyGoal: form.get('weeklyGoal') ? Number(form.get('weeklyGoal')) : null,
   })
 }
 
@@ -48,7 +49,9 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
   })
   if (!result.ok) return result
   const p = parsed.data
-  redirect(safeNext(form.get('next') || undefined, p.hasDogs && !p.wantsToWalk ? '/my-dogs/new' : '/dogs'))
+  // Where someone was going, or the first thing to do for the role they chose.
+  const start = form.get('intent') === 'shelter' ? '/shelter' : p.hasDogs && !p.wantsToWalk ? '/my-dogs/new?welcome=1' : '/?welcome=1'
+  redirect(safeNext(form.get('next') || undefined, start))
 }
 
 export async function updateProfile(_prev: FormState, form: FormData): Promise<FormState> {
@@ -74,6 +77,8 @@ export async function updateProfile(_prev: FormState, form: FormData): Promise<F
       photoUrl: form.get('photoUrl') === null ? viewer.profile.photoUrl : safePhoto(p.photoUrl, viewer),
       wantsToWalk: p.wantsToWalk,
       hasDogs: p.hasDogs,
+      // A form without the goal (an older app) keeps the one that was set.
+      weeklyGoal: !p.wantsToWalk ? null : form.has('weeklyGoal') ? p.weeklyGoal : viewer.profile.weeklyGoal,
       pppLicense: form.get('pppLicense') === 'on',
     })
     .where(eq(s.profile.userId, viewer.userId))

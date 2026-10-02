@@ -21,7 +21,8 @@
     "helpPill": "¿Un mal momento?",
     "language": "Idioma",
     "menu": "Menú",
-    "skip": "Saltar al contenido"
+    "skip": "Saltar al contenido",
+    "today": "Hoy"
   },
   "common": {
     "save": "Guardar",
@@ -201,7 +202,63 @@
       "invalid": "Rellena los campos obligatorios.",
       "not-signed-in": "Primero inicia sesión."
     },
-    "step": "Último paso"
+    "step": "Último paso",
+    "flow": {
+      "progress": "Paso {n} de {total}",
+      "back": "Atrás",
+      "next": "Continuar",
+      "skip": "Saltar",
+      "welcomeTitle": "¡Hola, {name}! Qué bien que estés aquí",
+      "welcomeText": "Unas preguntas rápidas y dejamos Rondje listo para ti. Justo como lo necesitas.",
+      "welcome1": "Tú eliges: pasear, un perro, o las dos cosas.",
+      "welcome2": "Te mostramos perros y personas cerca de ti.",
+      "welcome3": "Es un minuto. Puedes cambiarlo todo después.",
+      "welcomeStart": "Empecemos",
+      "roleTitle": "¿Qué te trae por aquí?",
+      "roleText": "La app se adapta a tu elección. Siempre puedes cambiarla.",
+      "roleWalker": "Quiero pasear",
+      "roleWalkerText": "Con un perro del barrio o de una protectora.",
+      "roleOwner": "Tengo un perro",
+      "roleOwnerText": "O lo organizo para una vecina, un abuelo o una abuela.",
+      "roleBoth": "Las dos cosas",
+      "roleBothText": "Tengo un perro y me encanta pasear a otros perros.",
+      "roleShelter": "Trabajo en una protectora",
+      "roleShelterText": "Pon los perros de vuestra protectora en Rondje.",
+      "aboutTitle": "¿Cómo te llamamos?",
+      "aboutText": "Rondje es para mayores de 18 años. Los demás solo ven tu nombre y tu franja de edad.",
+      "placeTitle": "¿Dónde vives, más o menos?",
+      "placeText": "Así verás perros y personas cerca de ti. Redondeamos tu ubicación a unos 500 metros.",
+      "experienceTitle": "¿Cuánta experiencia tienes con perros?",
+      "experienceText": "Así te mostramos primero perros que encajan contigo.",
+      "experienceNoneText": "Tengo ganas de aprender. Los perros tranquilos me van bien.",
+      "experienceSomeText": "He paseado perros bastantes veces.",
+      "experienceLotsText": "Crecí con perros, también con perros movidos.",
+      "goalTitle": "¿Con qué frecuencia quieres pasear?",
+      "goalText": "Un ritmo fijo es bueno para un perro. Siempre puedes cambiarlo, y saltarte una semana está bien.",
+      "goal1": "1 vez por semana",
+      "goal1Text": "Empezar con calma",
+      "goal2": "2 veces por semana",
+      "goal2Text": "Un compañero fijo para un perro",
+      "goal3": "3 veces por semana",
+      "goal3Text": "Paseante de verdad",
+      "goalRecommended": "Recomendado",
+      "goalLater": "Aún no lo sé",
+      "profileTitle": "Muestra quién eres",
+      "profileText": "Los dueños eligen antes a alguien con foto y unas frases. También puedes hacerlo más tarde.",
+      "profileOwnerText": "A quien pasea le gusta saber a qué puerta llama. También puedes hacerlo más tarde.",
+      "promiseTitle": "¡Casi listo!",
+      "promiseText": "Así mantenemos Rondje seguro y agradable, para personas y perros.",
+      "promise1": "La primera vez siempre paseas junto con el dueño o la protectora.",
+      "promise2": "Tu dirección nunca se ve, y tu teléfono solo después de una cita.",
+      "promise3": "Rondje es gratis y sin anuncios. ¿Alguien te pide dinero? Denúncialo.",
+      "finish": "¡Listo, vamos!",
+      "needRole": "Elige qué quieres hacer.",
+      "needName": "Escribe tu nombre.",
+      "needBirthDate": "Escribe tu fecha de nacimiento.",
+      "tooYoung": "Rondje es para mayores de 18 años.",
+      "needCity": "Escribe tu localidad.",
+      "needTerms": "Acepta las condiciones para continuar."
+    }
   },
   "dogs": {
     "title": "Perros que esperan un paseo",
@@ -544,7 +601,9 @@
     "tip1": "Añade una foto al aire libre en la que mire a la cámara.",
     "tip2": "Elige uno o dos horarios fijos a la semana. Los paseos fijos son más fáciles de mantener.",
     "tip3": "La primera vez, quedad siempre juntos: así os conoceréis con calma, con tu perro incluido.",
-    "weekday": "Día"
+    "weekday": "Día",
+    "welcomeTitle": "¡Hola, {name}! Háblanos de tu perro",
+    "welcomeLede": "Una foto, su carácter y cuándo puede salir a pasear. Así alguien del barrio lo encontrará."
   },
   "profile": {
     "title": "Perfil",
@@ -584,7 +643,10 @@
     "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje.",
     "pushNotifications": "Notificaciones push en este navegador",
     "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga. En iPhone: añade primero Rondje a la pantalla de inicio.",
-    "pushBlocked": "Tu navegador bloquea las notificaciones de Rondje. Actívalas en los ajustes del navegador."
+    "pushBlocked": "Tu navegador bloquea las notificaciones de Rondje. Actívalas en los ajustes del navegador.",
+    "progressTitle": "Tu progreso",
+    "weeklyGoal": "Objetivo semanal",
+    "weeklyGoalHint": "¿Con qué frecuencia quieres pasear? Saltarte una semana siempre está bien."
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -1347,6 +1409,269 @@
     "tooLong": "Ese mensaje es demasiado largo. Máximo {max} caracteres.",
     "safety": "La primera vez quedad siempre juntos, en un sitio que conozcáis los dos. ¿Algo no va bien? Denúncialo desde el perfil.",
     "back": "Volver a solicitudes",
-    "label": "Mensajes"
+    "label": "Mensajes",
+    "flagged": "Atención: este mensaje habla de dinero o contiene un enlace. Rondje es gratis: nunca envíes dinero ni compartas datos bancarios. ¿Algo no cuadra? Denúncialo."
+  },
+  "today": {
+    "metaTitle": "Hoy",
+    "morning": "Buenos días, {name}",
+    "afternoon": "Buenas tardes, {name}",
+    "evening": "Buenas noches, {name}",
+    "night": "Hola, {name}",
+    "welcomeTitle": "¡Te damos la bienvenida a Rondje, {name}!",
+    "welcomeText": "Ahora eres {level}, nivel 1. Abajo tienes tus primeros pasos: cada uno te acerca a tu primer paseo.",
+    "stepsTitle": "Tus primeros pasos",
+    "stepsCount": "{done} de {total} hechos",
+    "start": "Empezar",
+    "steps": {
+      "account": {
+        "title": "Perfil creado",
+        "hint": "¡Te damos la bienvenida a Rondje!"
+      },
+      "about": {
+        "title": "Una foto y unas frases sobre ti",
+        "hint": "Los dueños eligen antes a alguien a quien reconocen."
+      },
+      "dog": {
+        "title": "Pon a tu perro en línea",
+        "hint": "Una foto, su carácter y cuándo puede salir a pasear."
+      },
+      "quiz": {
+        "title": "Aprueba el test de seguridad",
+        "hint": "Ocho preguntas cortas. Necesario para pasear por tu cuenta."
+      },
+      "meet": {
+        "title": "Planea un primer encuentro",
+        "hint": "Elige un perro que te guste. La primera vez paseas junto con el dueño."
+      },
+      "walk": {
+        "title": "Da tu primer paseo",
+        "hint": "Empieza el paseo el mismo día, en Paseos."
+      },
+      "dogMet": {
+        "title": "Conoce a tu primer paseador",
+        "hint": "Cuando alguien pida conoceros, lo verás en Paseos, y podéis chatear primero."
+      },
+      "dogWalk": {
+        "title": "El primer paseo de tu perro",
+        "hint": "Lo sigues en directo y recibes un informe al final."
+      }
+    },
+    "next": "Tu próxima cita",
+    "nextWalk": "{when} · paseo con {dog}",
+    "nextMeeting": "{when} · primer encuentro con {dog}",
+    "nextOpen": "Ver",
+    "pending": "{n, plural, one {# solicitud nueva espera tu respuesta} other {# solicitudes nuevas esperan tu respuesta}}",
+    "pendingOpen": "Ver solicitudes",
+    "nearTitle": "Perros cerca de ti",
+    "nearEmpty": "Todavía no hay perros cerca de ti. ¿Conoces a alguien con perro? Invítale con tu propio enlace.",
+    "nearAll": "Todos los perros",
+    "nearInvite": "Invitar a alguien",
+    "myDogsTitle": "Tus perros",
+    "dogWeek": "{n, plural, =0 {Aún ningún paseo esta semana} one {# paseo esta semana} other {# paseos esta semana}}",
+    "dogFriends": "{n, plural, =0 {Aún sin paseadores} one {# paseador} other {# paseadores}}",
+    "addDog": "Añadir un perro",
+    "tipTitle": "Consejo del día",
+    "badgesTitle": "Tus medallas",
+    "badgesAll": "Todas las medallas",
+    "badgesEmpty": "Conseguirás tu primera medalla con tu primer paseo.",
+    "together": "Juntos ya hemos dado {walks} paseos con {dogs} perros. Tú formas parte de ello.",
+    "tips": {
+      "walker": {
+        "1": "En días de calor lleva agua y comprueba con la mano que la acera no quema sus patas.",
+        "2": "Deja que el perro huela tu mano antes de acariciarlo. Así te presentas.",
+        "3": "Olfatear cansa a un perro tanto como correr. Un paseo tranquilo olfateando es un regalo.",
+        "4": "¿Orejas hacia atrás y cola baja? Dale espacio al perro y habla con calma.",
+        "5": "¿De noche? Una luz en la correa os hace más visibles a los dos.",
+        "6": "Camina a tu ritmo. Un perro que tira aprende más si te paras que si tiras.",
+        "7": "Sentarse juntos en un banco también cuenta. Los paseos no tienen que ser rápidos ni largos.",
+        "8": "¿Viene otro perro? Pregunta primero al dueño si pueden saludarse.",
+        "9": "¿Pasear por la mañana? Hay más calma y fresco, ideal para perros mayores.",
+        "10": "Cuéntale al dueño algo bonito del paseo. Le alegra el día."
+      },
+      "owner": {
+        "1": "Anota lo que le da miedo a tu perro, como las bicis u otros perros. Así quien pasea sabe a qué prestar atención.",
+        "2": "Deja la correa, las bolsas y una golosina junto a la puerta. Así el paseo puede empezar enseguida.",
+        "3": "Un momento fijo cada semana lo hace fácil, para ti, tu perro y quien pasea.",
+        "4": "La primera vez paseáis juntos. Enseña cómo le gusta caminar a tu perro y dónde se para siempre.",
+        "5": "Una foto de tu perro mirando a la cámara atrae a más paseadores que una de espaldas.",
+        "6": "Sigue el paseo en directo, o despreocúpate y lee el informe al final.",
+        "7": "Dile a quien pasea que estás contento. Un gracias mantiene a un compañero fijo.",
+        "8": "¿Hay un tablón de anuncios en el súper? Un folleto con tu enlace trae paseadores de tu propio barrio."
+      }
+    }
+  },
+  "progress": {
+    "title": "Tu progreso",
+    "points": "{n, plural, one {# punto} other {# puntos}}",
+    "levelN": "Nivel {n}",
+    "toNext": "{n, plural, one {Falta # punto} other {Faltan # puntos}} para {name}",
+    "top": "Has llegado al nivel más alto. Cada paseo sigue contando.",
+    "private": "Solo tú ves tu nivel y tus medallas. Nunca dan prioridad: todo el mundo es igual de bienvenido.",
+    "levels": {
+      "puppy": "Cachorro",
+      "sniffer": "Olfateador",
+      "tracker": "Rastreador",
+      "buddy": "Compañero de paseo",
+      "regular": "Habitual del parque",
+      "local": "Conocido del barrio",
+      "leader": "Líder de la manada",
+      "whisperer": "Susurrador de perros",
+      "hero": "Héroe de los paseos",
+      "legend": "Leyenda"
+    },
+    "pathTitle": "Tu camino",
+    "pathHere": "Estás aquí",
+    "badgesTitle": "Medallas",
+    "badgesEarned": "{n} de {total} conseguidas",
+    "badgeProgress": "{value} de {next}",
+    "badgeDone": "Todas conseguidas",
+    "badges": {
+      "walks": {
+        "name": "Paseos",
+        "tier": "{n, plural, one {Primer paseo} other {# paseos}}",
+        "hint": "Cada paseo cuenta, corto o largo."
+      },
+      "buddy": {
+        "name": "Compañero fijo",
+        "tier": "{n} paseos con el mismo perro",
+        "hint": "Hazte buen amigo de un perro: cinco paseos juntos."
+      },
+      "pack": {
+        "name": "Manada",
+        "tier": "{n} perros distintos",
+        "hint": "Conoce a más perros."
+      },
+      "early": {
+        "name": "Madrugador",
+        "tier": "{n, plural, one {Un paseo antes de las 8} other {# paseos antes de las 8}}",
+        "hint": "Un paseo matutino mientras la ciudad aún duerme."
+      },
+      "evening": {
+        "name": "Paseo nocturno",
+        "tier": "{n, plural, one {Un paseo después de las 20 h} other {# paseos después de las 20 h}}",
+        "hint": "Lleva una luz cuando esté oscuro."
+      },
+      "weekend": {
+        "name": "Paseante de fin de semana",
+        "tier": "{n} paseos en fin de semana",
+        "hint": "De paseo un sábado o un domingo."
+      },
+      "seasons": {
+        "name": "Cuatro estaciones",
+        "tier": "Has paseado en primavera, verano, otoño e invierno",
+        "hint": "Un paseo en cada estación."
+      },
+      "photos": {
+        "name": "Fotógrafo",
+        "tier": "{n} paseos con una foto para el dueño",
+        "hint": "Una foto durante el paseo le alegra el día al dueño."
+      },
+      "reports": {
+        "name": "Reportero",
+        "tier": "{n} paseos con informe de pipí y caca",
+        "hint": "Toca por cada pipí, caca o sorbo de agua."
+      },
+      "shelter": {
+        "name": "Héroe de la protectora",
+        "tier": "{n, plural, one {Un paseo en grupo en una protectora} other {# paseos en grupo en una protectora}}",
+        "hint": "Únete a un paseo en grupo de una protectora."
+      },
+      "quiz": {
+        "name": "Seguro en el camino",
+        "tier": "Test de seguridad aprobado",
+        "hint": "Ocho preguntas cortas sobre pasear con seguridad."
+      },
+      "host": {
+        "name": "Hospitalario",
+        "tier": "{n, plural, one {Tu perro dio un paseo} other {Tu perro dio # paseos}}",
+        "hint": "Cada paseo de tu perro cuenta."
+      },
+      "friends": {
+        "name": "Círculo de amigos",
+        "tier": "{n} paseadores distintos para tu perro",
+        "hint": "Más amigos, más paseos."
+      },
+      "invite": {
+        "name": "Embajador",
+        "tier": "{n, plural, one {Un amigo se ha unido} other {# amigos se han unido}}",
+        "hint": "Invita a alguien con tu propio enlace."
+      }
+    },
+    "earnTitle": "Así ganas puntos",
+    "earn": {
+      "walk": "Dar un paseo",
+      "walkCare": "Llevar el informe de pipí y caca",
+      "walkPhoto": "Compartir una foto con el dueño",
+      "feedback": "Tu opinión después de un paseo",
+      "dogWalked": "Tu perro dio un paseo",
+      "groupWalk": "Unirte a un paseo en grupo de una protectora",
+      "quiz": "Aprobar el test de seguridad",
+      "profile": "Una foto y unas frases sobre ti",
+      "firstDog": "Poner a tu perro en Rondje",
+      "invite": "Un amigo que se une con tu enlace"
+    },
+    "earnNote": "Cada paseo cuenta igual, corto o largo. Aceptar una solicitud nunca da puntos: esa decisión es solo de seguridad.",
+    "recentTitle": "Lo último que has ganado",
+    "recent": {
+      "walk": "Paseo con {dog}",
+      "walkAnon": "Paseo",
+      "walkCare": "Informe del paseo",
+      "walkPhoto": "Foto para el dueño",
+      "feedback": "Opinión después del paseo",
+      "dogWalked": "{dog} dio un paseo",
+      "dogWalkedAnon": "Tu perro dio un paseo",
+      "groupWalk": "Paseo en grupo en una protectora",
+      "quiz": "Test de seguridad aprobado",
+      "profile": "Perfil completo",
+      "firstDog": "Tu perro está en línea",
+      "invite": "Un amigo se ha unido"
+    },
+    "none": "Aún no tienes puntos. Tu primer paseo te da 25 de golpe.",
+    "weekTitle": "Esta semana",
+    "weekGoal": "{done} de {goal} paseos",
+    "weekDone": "¡Objetivo semanal conseguido!",
+    "weekLeft": "{n, plural, one {Falta # paseo} other {Faltan # paseos}} para tu objetivo semanal",
+    "weekNoGoal": "{n, plural, =0 {Aún ningún paseo esta semana} one {# paseo esta semana} other {# paseos esta semana}}",
+    "weekSet": "Elige un objetivo semanal",
+    "weekChange": "Cambiar",
+    "goalOption": "{n, plural, one {# vez por semana} other {# veces por semana}}",
+    "goalNone": "Sin objetivo semanal",
+    "activeWeeks": "{n, plural, one {# semana} other {# semanas}} con un paseo",
+    "activeWeeksHint": "Solo suma. Una semana tranquila no resta nada.",
+    "celebrate": {
+      "levelUp": "¡Subes de nivel!",
+      "levelUpText": "Ahora eres {name}, nivel {n}.",
+      "newBadge": "¡Nueva medalla!",
+      "newBadges": "¡{n} medallas nuevas!",
+      "close": "¡Genial!",
+      "allBadges": "Ver tus medallas"
+    },
+    "card": "Ver tu progreso",
+    "walkPoints": "+{n} puntos",
+    "walkPointsText": "por este paseo. ¡Gracias!",
+    "walkPointsOwner": "por el paseo de {dog}",
+    "friends": {
+      "title": "Tus amigos perrunos",
+      "empty": "Después de tu primer paseo, el perro tendrá aquí su propio sitio.",
+      "walks": "{n, plural, one {# paseo juntos} other {# paseos juntos}}",
+      "bond": {
+        "met": "Recién conocidos",
+        "buddies": "Compañeros de paseo",
+        "good": "Buenos amigos",
+        "best": "Mejores amigos"
+      }
+    }
+  },
+  "challenges": {
+    "title": "Reto del mes",
+    "city": "{city} da {goal} paseos en {month}",
+    "all": "Juntos, {goal} paseos en {month}",
+    "progress": "{walks} de {goal} paseos",
+    "mine": "{n, plural, =0 {¿Te apuntas a uno?} one {Tú diste # de ellos} other {Tú diste # de ellos}}",
+    "done": "¡Conseguido! Gracias a todos.",
+    "stats": "{dogs, plural, one {# perro} other {# perros}} · {walkers, plural, one {# paseador} other {# paseadores}} · {km} km",
+    "daysLeft": "{n, plural, one {Queda # día} other {Quedan # días}}",
+    "private": "Solo contamos paseos, nunca quién los dio."
   }
 }
