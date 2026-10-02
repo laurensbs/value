@@ -72,9 +72,17 @@ struct MainTabs: View {
     var body: some View {
         @Bindable var model = model
         TabView(selection: $model.selectedTab) {
-            DiscoverView()
-                .tabItem { Label("Ontdek", systemImage: "pawprint.fill") }
-                .tag(AppModel.Tab.discover)
+            if model.role != .owner {
+                DiscoverView()
+                    .tabItem { Label("Ontdek", systemImage: "pawprint.fill") }
+                    .tag(AppModel.Tab.discover)
+            }
+            if model.role != .walker {
+                OwnerHomeView()
+                    .tabItem { Label(model.role == .owner ? L("Thuis") : L("Mijn honden"), systemImage: "house.fill") }
+                    .badge(model.role == .both ? model.pendingIncoming : 0)
+                    .tag(AppModel.Tab.home)
+            }
             AppointmentsView()
                 .tabItem { Label("Afspraken", systemImage: "calendar") }
                 .badge(model.pendingIncoming)
@@ -88,7 +96,20 @@ struct MainTabs: View {
         .fullScreenCover(isPresented: $showWalk) {
             ActiveWalkView()
         }
-        .onAppear { if walk.isActive { showWalk = true } }
+        .onAppear {
+            if walk.isActive { showWalk = true }
+            fitTab()
+        }
+        .onChange(of: model.role) { fitTab() }
         .onChange(of: walk.isActive) { _, active in if active { showWalk = true } }
+    }
+
+    /// Owners start at home, walkers at Discover; never on a tab that is not there.
+    private func fitTab() {
+        switch model.role {
+        case .owner: if model.selectedTab == .discover { model.selectedTab = .home }
+        case .walker: if model.selectedTab == .home { model.selectedTab = .discover }
+        case .both: break
+        }
     }
 }

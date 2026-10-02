@@ -17,7 +17,19 @@ final class AppModel {
     /// The last refresh failed: the screens show saved data.
     var offline = false
 
-    enum Tab: Hashable { case discover, appointments, profile }
+    enum Tab: Hashable { case discover, home, appointments, profile }
+
+    /// What someone does on Rondje, from their profile: it shapes the tabs and the home screen.
+    enum Role { case walker, owner, both }
+
+    var role: Role {
+        let p = me?.profile
+        switch (p?.wantsToWalk ?? true, p?.hasDogs ?? false) {
+        case (true, true): return .both
+        case (false, true): return .owner
+        default: return .walker
+        }
+    }
 
     struct Banner: Identifiable, Equatable {
         let id = UUID()

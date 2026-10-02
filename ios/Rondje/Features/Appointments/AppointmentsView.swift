@@ -30,7 +30,7 @@ struct AppointmentsView: View {
                             .padding(12)
                             .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
                     }
-                    if !model.appointments.incoming.isEmpty || model.me?.profile?.hasDogs == true {
+                    if model.role == .both || (model.role == .walker && !model.appointments.incoming.isEmpty) {
                         Picker("Weergave", selection: $side) {
                             ForEach(Side.allCases) { Text($0.title).tag($0) }
                         }
@@ -42,7 +42,7 @@ struct AppointmentsView: View {
                             title: side == .walking ? L("Nog geen afspraken") : L("Nog geen aanvragen"),
                             text: side == .walking ? L("Kies een hond bij Ontdek en plan een kennismaking.") : L("Zodra iemand met je hond wil wandelen, zie je het hier.")
                         )
-                        if side == .walking {
+                        if side == .walking && model.role != .owner {
                             Button("Naar Ontdek") { model.selectedTab = .discover }.buttonStyle(.primary).padding(.horizontal, 40)
                         }
                     }
@@ -58,7 +58,7 @@ struct AppointmentsView: View {
             .task { await model.refreshAppointments() }
             .onAppear {
                 // Owners who do not walk themselves, or who have someone waiting, start on their dogs.
-                if model.me?.profile?.wantsToWalk == false || (model.pendingIncoming > 0 && !model.appointments.outgoing.contains(where: \.isOpen)) {
+                if model.role == .owner || (model.pendingIncoming > 0 && !model.appointments.outgoing.contains(where: \.isOpen)) {
                     side = .dogs
                 }
             }

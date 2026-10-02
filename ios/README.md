@@ -5,6 +5,7 @@ Een echte iPhone-app in SwiftUI, naast de website. Hij praat met dezelfde server
 ## Wat de app doet
 
 - **Inloggen** met e-mail en wachtwoord. De sessie staat alleen in de Keychain van het toestel.
+- **Intro en rol**: bij de eerste start kies je "Ik wil wandelen", "Ik heb een hond" of "Allebei". De intro, de tabs en het beginscherm passen zich daarop aan; eigenaren krijgen een eigen Thuis-scherm. Wisselen kan altijd onder Jij.
 - **Profiel maken** in vier korte stappen, met de gedragscode en voorwaarden.
 - **Ontdekken**: honden in de buurt als lijst of op de kaart (op hun buurt, nooit op een adres), filters, zoeken en groepswandelingen bij opvangen.
 - **Hondpagina** met alles wat een wandelaar moet weten, een aanvraag voor een kennismaking of een zelfstandig rondje, en melden of blokkeren.

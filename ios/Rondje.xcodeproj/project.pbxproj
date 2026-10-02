@@ -11,9 +11,11 @@
 		0815887EEFE6F55BD5813657 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885A8805C0F35865B3C3FD85 /* Push.swift */; };
 		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
 		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
+		18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B076DE4C10D0103F33700 /* OwnerHomeView.swift */; };
 		2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EA1B62ECCEC400102F6036 /* APIClient.swift */; };
 		26EB9B4433C18066EA749D1A /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = B400323AA6D6C3D1DF40D5A6 /* Mood.swift */; };
 		2F60108EC649C7D6D370A542 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
+		30EB45270BACA1438E06CF3F /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2188FDF561F8FEBEFE3F473F /* RoleView.swift */; };
 		31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
 		320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
 		335853283270DFF0D690A32E /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
@@ -98,6 +100,7 @@
 		18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCards.swift; sourceTree = "<group>"; };
 		1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.entitlements; sourceTree = "<group>"; };
 		1F24382B16C639D32D509682 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		2188FDF561F8FEBEFE3F473F /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
 		265151C9DD7CB381C0CE8F78 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26863FB98876ECFB2C52F0FF /* WalkTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkTracker.swift; sourceTree = "<group>"; };
 		26926AF94C5CD2A73149D080 /* WalkActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkActivity.swift; sourceTree = "<group>"; };
@@ -114,6 +117,7 @@
 		6D4094F34979CE06F5674464 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		70E5204817845A7F3A04E605 /* RondjeWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RondjeWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7391B5B3612456961B4E3B8B /* DogLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogLook.swift; sourceTree = "<group>"; };
+		741B076DE4C10D0103F33700 /* OwnerHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerHomeView.swift; sourceTree = "<group>"; };
 		787E299C18C0D741D32C0544 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		80CB134CFF71E6AB85E8D340 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowWalkView.swift; sourceTree = "<group>"; };
@@ -229,6 +233,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7E9D6556E80BC5D094F3281B /* Owner */ = {
+			isa = PBXGroup;
+			children = (
+				741B076DE4C10D0103F33700 /* OwnerHomeView.swift */,
+			);
+			path = Owner;
+			sourceTree = "<group>";
+		};
 		8920EAEBDBB30C0E44894F32 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +305,7 @@
 				E47C270BD36C4CCD9FCC7246 /* Intro */,
 				426DB77FC1CFFA02380230ED /* Membership */,
 				97EDF6BA00B8CE243A18FEE3 /* Onboarding */,
+				7E9D6556E80BC5D094F3281B /* Owner */,
 				EFC38ED52995A5B1AC192CEA /* Profile */,
 				B52BEB8FC192755A9861AC4A /* Walk */,
 				B4D6DC0035564556243D4B87 /* Wellbeing */,
@@ -352,6 +365,7 @@
 				303A4BC365EFDB4E41F534AF /* MyDogsView.swift */,
 				265151C9DD7CB381C0CE8F78 /* ProfileView.swift */,
 				2CABF8650A285AB54D3700A6 /* QuizView.swift */,
+				2188FDF561F8FEBEFE3F473F /* RoleView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -541,11 +555,13 @@
 				26EB9B4433C18066EA749D1A /* Mood.swift in Sources */,
 				53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */,
 				7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */,
+				18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */,
 				41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */,
 				0815887EEFE6F55BD5813657 /* Push.swift in Sources */,
 				C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */,
 				9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */,
 				119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */,
+				30EB45270BACA1438E06CF3F /* RoleView.swift in Sources */,
 				92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */,
 				320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */,
 				D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */,

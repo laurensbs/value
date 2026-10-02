@@ -22,7 +22,7 @@ struct ProfileView: View {
                         }
                         .buttonStyle(.secondary)
                     }
-                    if let trust = model.me?.trust { stats(trust) }
+                    if model.role != .owner, let trust = model.me?.trust { stats(trust) }
                     if let lift = MoodStore.averageLift, lift > 0 {
                         Label(L("Na een rondje voel je je gemiddeld beter dan ervoor. Alleen jij ziet dit."), systemImage: "sun.max.fill")
                             .font(.subheadline)
@@ -87,12 +87,26 @@ struct ProfileView: View {
         .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
     }
 
+    private var roleText: String {
+        switch model.role {
+        case .walker: L("Ik wil wandelen")
+        case .owner: L("Ik heb een hond")
+        case .both: L("Allebei")
+        }
+    }
+
     private var links: some View {
         VStack(spacing: 0) {
+            NavigationLink { RoleView() } label: {
+                row("arrow.left.arrow.right", L("Wat doe je op Rondje?"), roleText)
+            }
+            Divider().padding(.leading, 56)
+            if model.role != .owner {
             NavigationLink { QuizView() } label: {
                 row("checkmark.seal.fill", L("Veiligheidsquiz"), model.me?.profile?.quizPassed == true ? L("Gehaald") : L("Nodig voor zelfstandige rondjes"))
             }
             Divider().padding(.leading, 56)
+            }
             NavigationLink { MyDogsView() } label: { row("pawprint.fill", L("Mijn honden"), L("Voor jezelf, de buren of opa en oma")) }
             Divider().padding(.leading, 56)
             NavigationLink { NotificationsView() } label: {

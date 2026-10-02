@@ -4,6 +4,7 @@ import SwiftUI
 struct WelcomeView: View {
     @State private var mode: AuthView.Mode?
     @State private var bounce = false
+    @AppStorage("introRole") private var role = ""
 
     private let looks: [DogLook] = [
         DogLook(fur: "#e2b45c", ears: "#c99540", muzzle: "#f2d79b", earStyle: "floppy", head: "round", tongue: true, collar: "#1f5a3d", tile: "#f6ebcf"),
@@ -32,7 +33,7 @@ struct WelcomeView: View {
                 Text(Brand.name)
                     .font(.display(46, weight: .heavy))
                     .foregroundStyle(Palette.grass)
-                Text("Wandel met een hond uit je buurt die een extra rondje goed kan gebruiken.")
+                Text(role == "owner" ? L("Iemand uit je buurt maakt graag een rondje met je hond. Gratis en veilig.") : L("Wandel met een hond uit je buurt die een extra rondje goed kan gebruiken."))
                     .font(.title3.weight(.medium))
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Palette.ink)
