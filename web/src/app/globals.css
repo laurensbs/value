@@ -2859,3 +2859,18 @@ legend {
   color: var(--grass);
   flex-shrink: 0;
 }
+
+/* ---------- Motion: a dog's portrait grows from the list into its page ---------- */
+
+::view-transition-group(*) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

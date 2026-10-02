@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- photos can be data URLs or Blob URLs */
 import Link from 'next/link'
+import { ViewTransition } from 'react'
 import { notFound } from 'next/navigation'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { Avatar } from '@/components/Avatar'
@@ -70,7 +71,9 @@ export default async function DogPage({
             {t('dog.saved', { name: dog.name })}
           </p>
         ) : null}
-        <DogPortrait dog={dog} large />
+        <ViewTransition name={`dog-${dog.id}`}>
+          <DogPortrait dog={dog} large />
+        </ViewTransition>
         {dog.photos.length > 1 ? (
           <div className="thumbs">
             {dog.photos.slice(1).map((src, i) => (
