@@ -47,8 +47,11 @@ export default async function ShelterDashboardPage({
         </p>
       </header>
 
-      {created ? <p className="notice success">{t('shelter.created')}</p> : null}
-      {org.status === 'pending' ? <p className="notice warn">{t('shelter.pending')}</p> : null}
+      {created ? (
+        <p className="notice success">{t('shelter.createdPending')}</p>
+      ) : org.status === 'pending' ? (
+        <p className="notice warn">{t('shelter.pending')}</p>
+      ) : null}
       {org.status === 'rejected' ? <p className="notice danger">{t('shelter.rejected')}</p> : null}
 
       <div className="dog-tag-stats">

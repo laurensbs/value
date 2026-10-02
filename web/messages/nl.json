@@ -375,7 +375,7 @@
     "waiting": "Wachten op de eerste locatie…",
     "overdue": "Dit rondje duurt {n} minuten langer dan gepland.",
     "ended": "Rondje klaar",
-    "endedText": "{name} liep {distance} in {minutes} minuten met je mee.",
+    "endedText": "{name} liep {distance} in {minutes, plural, one {# minuut} other {# minuten}} met je mee.",
     "feedbackTitle": "Hoe ging het?",
     "feedbackPrivate": "Alleen Rondje leest dit. De ander ziet je antwoorden niet.",
     "dogBehaviour": "Hoe was {name} tijdens het rondje?",
@@ -425,7 +425,12 @@
     "moodHelp": "Hier vind je hulp.",
     "moodLow": "Fijn dat je eerlijk bent. Praten helpt vaak.",
     "moodThanks": "Fijn! Tot het volgende rondje.",
-    "offline": "Even geen verbinding. Je route wordt bewaard en verstuurd zodra je weer bereik hebt."
+    "offline": "Even geen verbinding. Je route wordt bewaard en verstuurd zodra je weer bereik hebt.",
+    "activeBanner": "Je rondje met {dog} loopt nog.",
+    "activeBack": "Terug naar het rondje",
+    "watchBanner": "{dog} is nu op stap.",
+    "startPoint": "Start",
+    "endPoint": "Einde"
   },
   "myDogs": {
     "title": "Mijn honden",
@@ -646,7 +651,7 @@
       "verified": "Geverifieerd",
       "rejected": "Niet geverifieerd"
     },
-    "statDogs": "honden online",
+    "statDogs": "honden",
     "statWalks": "wandelingen gepland",
     "statSignups": "aanmeldingen",
     "noDogs": "Nog geen honden. Voeg er een toe of importeer ze in één keer.",
@@ -657,7 +662,8 @@
       "admin": "beheerder",
       "staff": "medewerker"
     },
-    "staffAdded": "Medewerker toegevoegd."
+    "staffAdded": "Medewerker toegevoegd.",
+    "createdPending": "Je opvang is aangemeld. We controleren hem binnen twee werkdagen. Voeg alvast honden toe: ze worden zichtbaar zodra de opvang is geverifieerd."
   },
   "groupWalks": {
     "title": "Groepswandelingen",

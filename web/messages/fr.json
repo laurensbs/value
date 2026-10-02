@@ -49,9 +49,29 @@
     "all": "Tous",
     "country": "Pays",
     "city": "Ville",
-    "countries": { "NL": "Pays-Bas", "BE": "Belgique", "ES": "Espagne" },
-    "weekdays": { "1": "lundi", "2": "mardi", "3": "mercredi", "4": "jeudi", "5": "vendredi", "6": "samedi", "7": "dimanche" },
-    "weekdaysShort": { "1": "lun", "2": "mar", "3": "mer", "4": "jeu", "5": "ven", "6": "sam", "7": "dim" }
+    "countries": {
+      "NL": "Pays-Bas",
+      "BE": "Belgique",
+      "ES": "Espagne"
+    },
+    "weekdays": {
+      "1": "lundi",
+      "2": "mardi",
+      "3": "mercredi",
+      "4": "jeudi",
+      "5": "vendredi",
+      "6": "samedi",
+      "7": "dimanche"
+    },
+    "weekdaysShort": {
+      "1": "lun",
+      "2": "mar",
+      "3": "mer",
+      "4": "jeu",
+      "5": "ven",
+      "6": "sam",
+      "7": "dim"
+    }
   },
   "footer": {
     "tagline": "Rondje est une plateforme gratuite qui met en relation promeneurs, propriétaires et refuges. Rondje n'est pas lui-même partie aux accords conclus.",
@@ -164,11 +184,29 @@
     "lede": "Ils vivent chez des voisins ou dans des refuges. Les positions sont arrondies à environ 500 mètres.",
     "filters": "Filtres",
     "search": "Rechercher par nom, race ou ville",
-    "host": { "all": "Tous les chiens", "owner": "Du quartier", "shelter": "De refuge" },
-    "energy": { "calm": "Calme", "medium": "Modéré", "high": "Énergique" },
-    "level": { "starter": "Pour tous", "experienced": "Expérience requise" },
-    "size": { "small": "Petit", "medium": "Moyen", "large": "Grand" },
-    "sex": { "male": "Mâle", "female": "Femelle" },
+    "host": {
+      "all": "Tous les chiens",
+      "owner": "Du quartier",
+      "shelter": "De refuge"
+    },
+    "energy": {
+      "calm": "Calme",
+      "medium": "Modéré",
+      "high": "Énergique"
+    },
+    "level": {
+      "starter": "Pour tous",
+      "experienced": "Expérience requise"
+    },
+    "size": {
+      "small": "Petit",
+      "medium": "Moyen",
+      "large": "Grand"
+    },
+    "sex": {
+      "male": "Mâle",
+      "female": "Femelle"
+    },
     "showMap": "Carte",
     "showList": "Liste",
     "away": "à {distance}",
@@ -190,9 +228,20 @@
     "levelLabel": "Niveau",
     "sizeLabel": "Taille",
     "treatsLabel": "Friandises",
-    "treats": { "yes": "Autorisées", "no": "De préférence non", "own": "Seulement celles du propriétaire" },
+    "treats": {
+      "yes": "Autorisées",
+      "no": "De préférence non",
+      "own": "Seulement celles du propriétaire"
+    },
     "providesLabel": "Le propriétaire fournit",
-    "provides": { "bags": "Sacs à crottes", "leash": "Laisse", "harness": "Harnais", "treats": "Friandises", "water": "Eau", "towel": "Serviette" },
+    "provides": {
+      "bags": "Sacs à crottes",
+      "leash": "Laisse",
+      "harness": "Harnais",
+      "treats": "Friandises",
+      "water": "Eau",
+      "towel": "Serviette"
+    },
     "offLeash": "Peut être lâché dans un espace canin (avec autorisation)",
     "onLeash": "Reste toujours en laisse",
     "slots": "Disponibilités",
@@ -326,15 +375,25 @@
     "waiting": "En attente de la première position…",
     "overdue": "Cette balade dure {n} min de plus que prévu.",
     "ended": "Balade terminée",
-    "endedText": "{name} a parcouru {distance} avec vous en {minutes} minutes.",
+    "endedText": "{name} a marché {distance} avec vous en {minutes, plural, one {# minute} other {# minutes}}.",
     "feedbackTitle": "Comment ça s'est passé ?",
     "feedbackPrivate": "Seul Rondje lit ceci. L'autre personne ne voit pas vos réponses.",
     "dogBehaviour": "Comment était {name} pendant la balade ?",
-    "behaviour": { "easy": "Facile", "pulled": "Tirait sur la laisse", "reactive": "Réagissait aux chiens ou aux personnes", "aggressive": "Agressif" },
+    "behaviour": {
+      "easy": "Facile",
+      "pulled": "Tirait sur la laisse",
+      "reactive": "Réagissait aux chiens ou aux personnes",
+      "aggressive": "Agressif"
+    },
     "handoverOk": "La prise en charge et le retour du chien se sont-ils bien passés ?",
     "feltSafe": "Vous sentiez-vous en sécurité ?",
     "dogCondition": "Comment était {name} après la balade ?",
-    "condition": { "happy": "Content et fatigué", "normal": "Normal", "stressed": "Stressé", "injured": "Blessé" },
+    "condition": {
+      "happy": "Content et fatigué",
+      "normal": "Normal",
+      "stressed": "Stressé",
+      "injured": "Blessé"
+    },
     "onTime": "La balade s'est-elle terminée à l'heure ?",
     "wouldAgain": "Souhaitez-vous planifier d'autres balades avec cette personne ?",
     "note": "Autre chose à ajouter ?",
@@ -342,7 +401,13 @@
     "thanks": "Merci. Si nécessaire, nous vous contacterons.",
     "moodTitle": "Comment vous sentez-vous maintenant ?",
     "moodPrivate": "Cela reste sur votre téléphone.",
-    "moods": { "1": "Difficile", "2": "Moyen", "3": "Ça va", "4": "Bien", "5": "Super" },
+    "moods": {
+      "1": "Difficile",
+      "2": "Moyen",
+      "3": "Ça va",
+      "4": "Bien",
+      "5": "Super"
+    },
     "follow": "Suivre en direct",
     "followLede": "Vous voyez où {walker} se promène avec {dog} tant que la balade dure.",
     "lastSeen": "Dernière position : {time}",
@@ -360,7 +425,12 @@
     "moodHelp": "Vous trouverez de l'aide ici.",
     "moodLow": "Merci pour votre honnêteté. En parler aide souvent.",
     "moodThanks": "Super ! À la prochaine balade.",
-    "offline": "Pas de connexion pour l'instant. Votre trajet est enregistré et sera envoyé dès que vous aurez à nouveau du réseau."
+    "offline": "Pas de connexion pour l'instant. Votre trajet est enregistré et sera envoyé dès que vous aurez à nouveau du réseau.",
+    "activeBanner": "Votre balade avec {dog} est toujours en cours.",
+    "activeBack": "Retour à la balade",
+    "watchBanner": "{dog} est en balade en ce moment.",
+    "startPoint": "Départ",
+    "endPoint": "Arrivée"
   },
   "myDogs": {
     "title": "Mes chiens",
@@ -369,7 +439,14 @@
     "newTitle": "Inscrire un chien",
     "editTitle": "Modifier {name}",
     "forSomeone": "Vous inscrivez le chien de quelqu'un d'autre ? Demandez d'abord son accord et indiquez ses coordonnées dans « Lieu de rendez-vous ».",
-    "sections": { "basics": "Le chien", "character": "Caractère", "walk": "La balade", "where": "Où", "private": "Privé", "safety": "Sécurité" },
+    "sections": {
+      "basics": "Le chien",
+      "character": "Caractère",
+      "walk": "La balade",
+      "where": "Où",
+      "private": "Privé",
+      "safety": "Sécurité"
+    },
     "photos": "Photos",
     "photosHint": "Une photo en extérieur, où le chien regarde l'objectif, fonctionne le mieux. 6 maximum.",
     "name": "Nom",
@@ -453,14 +530,54 @@
     "passed": "Réussi ! Vous pouvez maintenant demander des balades en autonomie aux propriétaires qui l'autorisent.",
     "failed": "Presque. Revoyez les questions en rouge.",
     "q": {
-      "heat": { "q": "Il fait 28 degrés. Que faites-vous ?", "a0": "Se promener normalement, les chiens supportent bien la chaleur", "a1": "Faire une courte balade à l'ombre, emporter de l'eau et vérifier de la main que le bitume n'est pas trop chaud", "a2": "Courir un bon coup, comme ça c'est plus vite fini" },
-      "leash": { "q": "Le chien peut-il être lâché ?", "a0": "Seulement si le propriétaire l'a expressément autorisé, et uniquement là où c'est permis", "a1": "Oui, si c'est calme", "a2": "Oui, si le chien obéit bien" },
-      "treats": { "q": "Vous avez une friandise dans votre poche. Pouvez-vous la donner ?", "a0": "Oui, les chiens adorent les friandises", "a1": "Seulement un petit morceau", "a2": "Seulement si le profil indique que c'est permis" },
-      "otherDogs": { "q": "Un autre chien vient vers vous. Que faites-vous ?", "a0": "Les laisser se renifler tranquillement", "a1": "Garder ses distances, demander d'abord à l'autre propriétaire et continuer calmement en cas de doute", "a2": "Prendre le chien dans ses bras" },
-      "escaped": { "q": "Le chien s'est échappé. Que faites-vous en premier ?", "a0": "Rester calme, ne pas courir après le chien en criant et appeler immédiatement le propriétaire", "a1": "Chercher d'abord soi-même, puis seulement appeler le propriétaire", "a2": "Rentrer chez soi et attendre" },
-      "bite": { "q": "Le chien mord un autre chien. Que faites-vous ?", "a0": "S'éloigner rapidement", "a1": "Rien, ça arrive", "a2": "S'assurer que tout le monde est en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler sur Rondje" },
-      "stress": { "q": "Le chien bâille beaucoup, se lèche les babines et s'éloigne. Qu'est-ce que cela veut dire ?", "a0": "Il a faim", "a1": "Il n'est pas à l'aise ; cherchez un endroit plus calme", "a2": "Il veut jouer" },
-      "overdue": { "q": "Vous rentrez plus tard que prévu. Que faites-vous ?", "a0": "Prévenir immédiatement le propriétaire", "a1": "Rien, l'appli l'affiche de toute façon", "a2": "Marcher plus vite" }
+      "heat": {
+        "q": "Il fait 28 degrés. Que faites-vous ?",
+        "a0": "Se promener normalement, les chiens supportent bien la chaleur",
+        "a1": "Faire une courte balade à l'ombre, emporter de l'eau et vérifier de la main que le bitume n'est pas trop chaud",
+        "a2": "Courir un bon coup, comme ça c'est plus vite fini"
+      },
+      "leash": {
+        "q": "Le chien peut-il être lâché ?",
+        "a0": "Seulement si le propriétaire l'a expressément autorisé, et uniquement là où c'est permis",
+        "a1": "Oui, si c'est calme",
+        "a2": "Oui, si le chien obéit bien"
+      },
+      "treats": {
+        "q": "Vous avez une friandise dans votre poche. Pouvez-vous la donner ?",
+        "a0": "Oui, les chiens adorent les friandises",
+        "a1": "Seulement un petit morceau",
+        "a2": "Seulement si le profil indique que c'est permis"
+      },
+      "otherDogs": {
+        "q": "Un autre chien vient vers vous. Que faites-vous ?",
+        "a0": "Les laisser se renifler tranquillement",
+        "a1": "Garder ses distances, demander d'abord à l'autre propriétaire et continuer calmement en cas de doute",
+        "a2": "Prendre le chien dans ses bras"
+      },
+      "escaped": {
+        "q": "Le chien s'est échappé. Que faites-vous en premier ?",
+        "a0": "Rester calme, ne pas courir après le chien en criant et appeler immédiatement le propriétaire",
+        "a1": "Chercher d'abord soi-même, puis seulement appeler le propriétaire",
+        "a2": "Rentrer chez soi et attendre"
+      },
+      "bite": {
+        "q": "Le chien mord un autre chien. Que faites-vous ?",
+        "a0": "S'éloigner rapidement",
+        "a1": "Rien, ça arrive",
+        "a2": "S'assurer que tout le monde est en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler sur Rondje"
+      },
+      "stress": {
+        "q": "Le chien bâille beaucoup, se lèche les babines et s'éloigne. Qu'est-ce que cela veut dire ?",
+        "a0": "Il a faim",
+        "a1": "Il n'est pas à l'aise ; cherchez un endroit plus calme",
+        "a2": "Il veut jouer"
+      },
+      "overdue": {
+        "q": "Vous rentrez plus tard que prévu. Que faites-vous ?",
+        "a0": "Prévenir immédiatement le propriétaire",
+        "a1": "Rien, l'appli l'affiche de toute façon",
+        "a2": "Marcher plus vite"
+      }
     },
     "alreadyPassed": "Vous avez déjà réussi le quiz. Vous pouvez le refaire quand vous voulez.",
     "toDogs": "Voir les chiens",
@@ -534,7 +651,7 @@
       "verified": "Vérifié",
       "rejected": "Non vérifié"
     },
-    "statDogs": "chiens en ligne",
+    "statDogs": "chiens",
     "statWalks": "balades prévues",
     "statSignups": "inscriptions",
     "noDogs": "Pas encore de chiens. Ajoutez-en un ou importez-les tous en une fois.",
@@ -545,7 +662,8 @@
       "admin": "admin",
       "staff": "membre de l'équipe"
     },
-    "staffAdded": "Membre de l'équipe ajouté."
+    "staffAdded": "Membre de l'équipe ajouté.",
+    "createdPending": "Votre refuge est inscrit. Nous le vérifions sous deux jours ouvrables. Ajoutez déjà vos chiens : ils seront visibles dès que le refuge sera vérifié."
   },
   "groupWalks": {
     "title": "Balades en groupe",
@@ -612,7 +730,14 @@
   "report": {
     "title": "Signaler",
     "category": "Que se passe-t-il ?",
-    "categories": { "abuse": "Maltraitance animale", "safety": "Situation dangereuse", "scam": "Arnaque ou demande d'argent", "harassment": "Harcèlement", "fake": "Faux profil", "other": "Autre chose" },
+    "categories": {
+      "abuse": "Maltraitance animale",
+      "safety": "Situation dangereuse",
+      "scam": "Arnaque ou demande d'argent",
+      "harassment": "Harcèlement",
+      "fake": "Faux profil",
+      "other": "Autre chose"
+    },
     "description": "Racontez-nous ce qui s'est passé",
     "submit": "Envoyer le signalement",
     "done": "Merci. Nous examinerons votre signalement sous 24 heures. En cas d'urgence, appelez le 112.",

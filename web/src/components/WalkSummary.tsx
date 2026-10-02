@@ -44,7 +44,17 @@ export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserI
         </div>
       </header>
       {route.length > 1 ? (
-        <Map center={route[0] ?? fallbackCenter} route={route} fitToRoute className="map" ariaLabel={t('walk.mapLabel')} />
+        <Map
+          center={route[0] ?? fallbackCenter}
+          route={route}
+          markers={[
+            { id: 'start', ...route[0], label: t('walk.startPoint'), kind: 'pin' },
+            { id: 'end', ...route[route.length - 1], label: t('walk.endPoint'), kind: 'walker' },
+          ]}
+          fitToRoute
+          className="map"
+          ariaLabel={t('walk.mapLabel')}
+        />
       ) : null}
       {role === 'walker' ? <MoodCheck /> : null}
       {given ? (

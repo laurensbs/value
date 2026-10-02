@@ -14,6 +14,8 @@ export interface Tab {
 /** App-style navigation for signed-in people on phones. */
 export function TabBar({ tabs }: { tabs: Tab[] }) {
   const pathname = usePathname()
+  // During a walk the screen is in focus mode: leaving the page would stop the GPS.
+  if (pathname.startsWith('/walk/') || pathname.startsWith('/follow/')) return null
   return (
     <nav className="tabbar" aria-label="App">
       {tabs.map((tab) => {

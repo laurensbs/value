@@ -49,9 +49,29 @@
     "all": "All",
     "country": "Country",
     "city": "Town or city",
-    "countries": { "NL": "Netherlands", "BE": "Belgium", "ES": "Spain" },
-    "weekdays": { "1": "Monday", "2": "Tuesday", "3": "Wednesday", "4": "Thursday", "5": "Friday", "6": "Saturday", "7": "Sunday" },
-    "weekdaysShort": { "1": "Mon", "2": "Tue", "3": "Wed", "4": "Thu", "5": "Fri", "6": "Sat", "7": "Sun" }
+    "countries": {
+      "NL": "Netherlands",
+      "BE": "Belgium",
+      "ES": "Spain"
+    },
+    "weekdays": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+    "weekdaysShort": {
+      "1": "Mon",
+      "2": "Tue",
+      "3": "Wed",
+      "4": "Thu",
+      "5": "Fri",
+      "6": "Sat",
+      "7": "Sun"
+    }
   },
   "footer": {
     "tagline": "Rondje is a free platform that puts walkers, owners and shelters in touch. Rondje itself is not a party to any arrangements made.",
@@ -164,11 +184,29 @@
     "lede": "From neighbours and shelters. Locations are rounded to about 500 metres.",
     "filters": "Filters",
     "search": "Search by name, breed or town",
-    "host": { "all": "All dogs", "owner": "Neighbourhood dogs", "shelter": "Shelter dogs" },
-    "energy": { "calm": "Calm", "medium": "Moderate", "high": "Energetic" },
-    "level": { "starter": "For everyone", "experienced": "Experience needed" },
-    "size": { "small": "Small", "medium": "Medium", "large": "Large" },
-    "sex": { "male": "Male", "female": "Female" },
+    "host": {
+      "all": "All dogs",
+      "owner": "Neighbourhood dogs",
+      "shelter": "Shelter dogs"
+    },
+    "energy": {
+      "calm": "Calm",
+      "medium": "Moderate",
+      "high": "Energetic"
+    },
+    "level": {
+      "starter": "For everyone",
+      "experienced": "Experience needed"
+    },
+    "size": {
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
+    },
+    "sex": {
+      "male": "Male",
+      "female": "Female"
+    },
     "showMap": "Map",
     "showList": "List",
     "away": "{distance} away",
@@ -190,9 +228,20 @@
     "levelLabel": "Level",
     "sizeLabel": "Size",
     "treatsLabel": "Treats",
-    "treats": { "yes": "Allowed", "no": "Preferably not", "own": "Only the owner's" },
+    "treats": {
+      "yes": "Allowed",
+      "no": "Preferably not",
+      "own": "Only the owner's"
+    },
     "providesLabel": "The owner provides",
-    "provides": { "bags": "Poo bags", "leash": "Leash", "harness": "Harness", "treats": "Treats", "water": "Water", "towel": "Towel" },
+    "provides": {
+      "bags": "Poo bags",
+      "leash": "Leash",
+      "harness": "Harness",
+      "treats": "Treats",
+      "water": "Water",
+      "towel": "Towel"
+    },
     "offLeash": "Can go off the leash in the dog park (with permission)",
     "onLeash": "Always stays on the leash",
     "slots": "Availability",
@@ -326,15 +375,25 @@
     "waiting": "Waiting for the first location…",
     "overdue": "This walk is taking {n} min longer than planned.",
     "ended": "Walk complete",
-    "endedText": "{name} walked {distance} with you in {minutes} minutes.",
+    "endedText": "{name} walked {distance} with you in {minutes, plural, one {# minute} other {# minutes}}.",
     "feedbackTitle": "How did it go?",
     "feedbackPrivate": "Only Rondje reads this. The other person won't see your answers.",
     "dogBehaviour": "How was {name} during the walk?",
-    "behaviour": { "easy": "Easy", "pulled": "Pulled on the leash", "reactive": "Reacted to dogs or people", "aggressive": "Aggressive" },
+    "behaviour": {
+      "easy": "Easy",
+      "pulled": "Pulled on the leash",
+      "reactive": "Reacted to dogs or people",
+      "aggressive": "Aggressive"
+    },
     "handoverOk": "Did pick-up and drop-off go well?",
     "feltSafe": "Did you feel safe?",
     "dogCondition": "How was {name} after the walk?",
-    "condition": { "happy": "Happy and tired", "normal": "Normal", "stressed": "Stressed", "injured": "Injured" },
+    "condition": {
+      "happy": "Happy and tired",
+      "normal": "Normal",
+      "stressed": "Stressed",
+      "injured": "Injured"
+    },
     "onTime": "Did the walk finish on time?",
     "wouldAgain": "Would you plan another walk with this walker?",
     "note": "Anything else to add?",
@@ -342,7 +401,13 @@
     "thanks": "Thank you. If anything needs following up, we'll be in touch.",
     "moodTitle": "How are you feeling now?",
     "moodPrivate": "This stays on your own phone.",
-    "moods": { "1": "Rough", "2": "So-so", "3": "Okay", "4": "Good", "5": "Great" },
+    "moods": {
+      "1": "Rough",
+      "2": "So-so",
+      "3": "Okay",
+      "4": "Good",
+      "5": "Great"
+    },
     "follow": "Follow live",
     "followLede": "You can see where {walker} is walking with {dog} for as long as the walk lasts.",
     "lastSeen": "Last location: {time}",
@@ -360,7 +425,12 @@
     "moodHelp": "You can find help here.",
     "moodLow": "Thanks for being honest. Talking often helps.",
     "moodThanks": "Great! See you on the next walk.",
-    "offline": "No connection right now. Your route is saved and will be sent as soon as you have signal again."
+    "offline": "No connection right now. Your route is saved and will be sent as soon as you have signal again.",
+    "activeBanner": "Your walk with {dog} is still running.",
+    "activeBack": "Back to the walk",
+    "watchBanner": "{dog} is out on a walk right now.",
+    "startPoint": "Start",
+    "endPoint": "Finish"
   },
   "myDogs": {
     "title": "My dogs",
@@ -369,7 +439,14 @@
     "newTitle": "Sign up a dog",
     "editTitle": "Edit {name}",
     "forSomeone": "Signing up a dog for someone else? Ask their permission first and add their details under ‘Where to meet’.",
-    "sections": { "basics": "The dog", "character": "Personality", "walk": "The walk", "where": "Where", "private": "Private", "safety": "Safety" },
+    "sections": {
+      "basics": "The dog",
+      "character": "Personality",
+      "walk": "The walk",
+      "where": "Where",
+      "private": "Private",
+      "safety": "Safety"
+    },
     "photos": "Photos",
     "photosHint": "An outdoor photo with eye contact works best. Up to 6.",
     "name": "Name",
@@ -453,14 +530,54 @@
     "passed": "Passed! You can now request solo walks with owners who allow them.",
     "failed": "Almost. Take another look at the questions in red.",
     "q": {
-      "heat": { "q": "It's 28 degrees. What do you do?", "a0": "Just walk as usual, dogs cope well with heat", "a1": "A short walk in the shade, bring water, and feel the pavement with your hand to check it isn't too hot", "a2": "Have a good run, so it's over sooner" },
-      "leash": { "q": "Can the dog go off the leash?", "a0": "Only if the owner has explicitly allowed it, and only where it's permitted", "a1": "Yes, if it's quiet", "a2": "Yes, if the dog listens well" },
-      "treats": { "q": "You have a treat in your pocket. Can you give it?", "a0": "Yes, dogs love treats", "a1": "Only a small piece", "a2": "Only if the profile says it's allowed" },
-      "otherDogs": { "q": "Another dog comes towards you. What do you do?", "a0": "Let them have a good sniff", "a1": "Keep your distance, ask the other owner first, and calmly walk on if you're unsure", "a2": "Pick the dog up" },
-      "escaped": { "q": "The dog has got loose. What do you do first?", "a0": "Stay calm, don't chase or shout after the dog, and call the owner straight away", "a1": "Search yourself first, and only then call the owner", "a2": "Go home and wait" },
-      "bite": { "q": "The dog bites another dog. What do you do?", "a0": "Walk on quickly", "a1": "Nothing, it happens", "a2": "Make sure everyone is safe, exchange details, call the owner and report it in Rondje" },
-      "stress": { "q": "The dog yawns a lot, licks its lips and pulls away. What does that mean?", "a0": "It's hungry", "a1": "It's not feeling at ease; find a quieter spot", "a2": "It wants to play" },
-      "overdue": { "q": "You're heading back later than agreed. What do you do?", "a0": "Let the owner know straight away", "a1": "Nothing, the app shows it anyway", "a2": "Walk faster" }
+      "heat": {
+        "q": "It's 28 degrees. What do you do?",
+        "a0": "Just walk as usual, dogs cope well with heat",
+        "a1": "A short walk in the shade, bring water, and feel the pavement with your hand to check it isn't too hot",
+        "a2": "Have a good run, so it's over sooner"
+      },
+      "leash": {
+        "q": "Can the dog go off the leash?",
+        "a0": "Only if the owner has explicitly allowed it, and only where it's permitted",
+        "a1": "Yes, if it's quiet",
+        "a2": "Yes, if the dog listens well"
+      },
+      "treats": {
+        "q": "You have a treat in your pocket. Can you give it?",
+        "a0": "Yes, dogs love treats",
+        "a1": "Only a small piece",
+        "a2": "Only if the profile says it's allowed"
+      },
+      "otherDogs": {
+        "q": "Another dog comes towards you. What do you do?",
+        "a0": "Let them have a good sniff",
+        "a1": "Keep your distance, ask the other owner first, and calmly walk on if you're unsure",
+        "a2": "Pick the dog up"
+      },
+      "escaped": {
+        "q": "The dog has got loose. What do you do first?",
+        "a0": "Stay calm, don't chase or shout after the dog, and call the owner straight away",
+        "a1": "Search yourself first, and only then call the owner",
+        "a2": "Go home and wait"
+      },
+      "bite": {
+        "q": "The dog bites another dog. What do you do?",
+        "a0": "Walk on quickly",
+        "a1": "Nothing, it happens",
+        "a2": "Make sure everyone is safe, exchange details, call the owner and report it in Rondje"
+      },
+      "stress": {
+        "q": "The dog yawns a lot, licks its lips and pulls away. What does that mean?",
+        "a0": "It's hungry",
+        "a1": "It's not feeling at ease; find a quieter spot",
+        "a2": "It wants to play"
+      },
+      "overdue": {
+        "q": "You're heading back later than agreed. What do you do?",
+        "a0": "Let the owner know straight away",
+        "a1": "Nothing, the app shows it anyway",
+        "a2": "Walk faster"
+      }
     },
     "alreadyPassed": "You've already passed the quiz. You can always take it again.",
     "toDogs": "See the dogs",
@@ -534,7 +651,7 @@
       "verified": "Verified",
       "rejected": "Not verified"
     },
-    "statDogs": "dogs online",
+    "statDogs": "dogs",
     "statWalks": "walks planned",
     "statSignups": "sign-ups",
     "noDogs": "No dogs yet. Add one, or import them all in one go.",
@@ -545,7 +662,8 @@
       "admin": "admin",
       "staff": "staff member"
     },
-    "staffAdded": "Staff member added."
+    "staffAdded": "Staff member added.",
+    "createdPending": "Your shelter is registered. We will check it within two working days. Add your dogs now: they become visible once the shelter is verified."
   },
   "groupWalks": {
     "title": "Group walks",
@@ -612,7 +730,14 @@
   "report": {
     "title": "Report",
     "category": "What's going on?",
-    "categories": { "abuse": "Animal abuse", "safety": "Unsafe situation", "scam": "Scam or money requests", "harassment": "Harassment", "fake": "Fake profile", "other": "Something else" },
+    "categories": {
+      "abuse": "Animal abuse",
+      "safety": "Unsafe situation",
+      "scam": "Scam or money requests",
+      "harassment": "Harassment",
+      "fake": "Fake profile",
+      "other": "Something else"
+    },
     "description": "Tell us what happened",
     "submit": "Send report",
     "done": "Thank you. We'll look into it within 24 hours. In an emergency, call 112.",

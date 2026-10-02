@@ -44,7 +44,7 @@ export function SosSheet({ emergency, animal, contactName, contactPhone, vetInfo
           ) : null}
           {animal?.phone ? (
             <a className="button ghost wide" href={tel(animal.phone)}>
-              {t('sosAnimal', { name: `${animal.name} (${animal.phone})` })}
+              {t('sosAnimal', { name: animal.name })}
             </a>
           ) : null}
           {vetInfo ? (

@@ -1,5 +1,12 @@
 import { expect, type Browser, type Page } from '@playwright/test'
 
+/** With SHOTS=1, saves a full-page screenshot per step for design review (shots/<name>.png). */
+export async function shot(page: Page, name: string) {
+  if (!process.env.SHOTS) return
+  await page.waitForTimeout(400)
+  await page.screenshot({ path: `shots/${process.env.SHOTS_PREFIX ?? ''}${name}.png`, fullPage: true })
+}
+
 export const unique = () => Math.random().toString(36).slice(2, 8)
 
 /** The first quarter hour at least 16 minutes from now, in Amsterdam time (the app's time zone). */
@@ -15,6 +22,7 @@ export function soonSlot(now = new Date()): { date: string; time: string } {
 
 export async function newPerson(browser: Browser, geo?: { latitude: number; longitude: number }) {
   const context = await browser.newContext({
+    colorScheme: process.env.SHOTS_DARK ? 'dark' : 'light',
     geolocation: geo ?? { latitude: 52.0907, longitude: 5.1214 },
     permissions: ['geolocation'],
   })

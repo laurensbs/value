@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { newPerson, onboard, signUp, soonSlot, unique } from './helpers'
+import { newPerson, onboard, shot, signUp, soonSlot, unique } from './helpers'
 
 test('owner and walker: meet request, accept, trust, live walk with GPS, follow along, private feedback', async ({ browser }) => {
   const id = unique()
@@ -7,6 +7,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // --- Owner signs up and adds a dog ---
   const owner = await newPerson(browser)
   await signUp(owner.page, { name: 'Ans', email: `ans-${id}@e2e.test`, intent: 'owner' })
+  await shot(owner.page, '02-onboarding')
   await onboard(owner.page, {
     birthDate: '1951-04-02',
     city: 'Utrecht',
@@ -16,6 +17,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
     owner: true,
   })
   await expect(owner.page).toHaveURL(/\/my-dogs\/new/)
+  await shot(owner.page, '03-dog-form')
   await owner.page.getByLabel('Naam', { exact: true }).fill('Bello')
   await owner.page.getByLabel('Ras').fill('Beagle')
   await owner.page.getByLabel('Het verhaal').fill('Bello snuffelt graag en is dol op kinderen.')
@@ -26,6 +28,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await owner.page.getByRole('button', { name: 'Zet online' }).click()
   await expect(owner.page).toHaveURL(/\/dogs\/.+\?saved=1/)
   await expect(owner.page.getByText('Opgeslagen. Bello staat online.')).toBeVisible()
+  await shot(owner.page, '04-dog-page-owner')
   const dogUrl = new URL(owner.page.url()).pathname
 
   // --- Walker signs up and asks to meet ---
@@ -50,6 +53,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
   await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
+  await shot(walker.page, '05-request-sent')
 
   // --- Owner accepts, sees contact details, records the ID check and allows solo walks ---
   await owner.page.goto('/requests')
@@ -61,6 +65,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await owner.page.getByLabel(/mag zelfstandig met Bello wandelen/).check()
   await owner.page.getByRole('button', { name: 'Bevestigen' }).click()
   await expect(owner.page.getByText('Bijgewerkt.')).toBeVisible()
+  await shot(owner.page, '06-requests-incoming')
 
   // --- Walker sees the owner's details and starts the walk ---
   await walker.page.goto('/requests')
@@ -70,6 +75,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
   await walker.page.getByLabel('Ik heb poepzakjes bij me').check()
   await walker.page.getByLabel('Mijn telefoon is opgeladen').check()
+  await shot(walker.page, '07-start-checklist')
   await walker.page.getByRole('button', { name: 'Start het rondje' }).click()
   await expect(walker.page).toHaveURL(/\/walk\/[^/?]+$/)
   const walkId = walker.page.url().split('/walk/')[1]
@@ -88,6 +94,11 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(owner.page.getByText(/Laatste locatie/)).toBeVisible()
   await expect(owner.page.locator('path.route-line')).toHaveCount(1)
   await expect(owner.page.getByRole('link', { name: /Bel Fleur/ })).toBeVisible()
+  await shot(owner.page, '09-follow')
+  await shot(walker.page, '08-walk')
+  await walker.page.getByRole('button', { name: 'Hulp nodig' }).click()
+  await shot(walker.page, '08b-sos')
+  await walker.page.keyboard.press('Escape')
 
   // --- Walker ends the walk and gives private feedback ---
   await walker.page.getByRole('button', { name: 'Rondje klaar' }).click()
@@ -95,6 +106,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page).toHaveURL(/ended=1/)
   await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
   await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
+  await shot(walker.page, '10-summary')
   await walker.page.getByRole('radio', { name: 'Top' }).click()
   await walker.page.getByLabel('Makkelijk').check()
   await walker.page.getByRole('group', { name: /ophalen en terugbrengen/ }).getByLabel('Ja').check()
@@ -116,6 +128,13 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   for (const [q, a] of Object.entries(answers)) await walker.page.locator(`input[name="q-${q}"][value="${a}"]`).check()
   await walker.page.getByRole('button', { name: 'Nakijken' }).click()
   await expect(walker.page.getByText(/Gehaald!/)).toBeVisible()
+  await shot(walker.page, '11-quiz')
+  await walker.page.goto('/profile')
+  await shot(walker.page, '12-profile')
+  await walker.page.goto('/requests')
+  await shot(walker.page, '13-requests-mine')
+  await walker.page.goto('/notifications')
+  await shot(walker.page, '14-notifications')
   await walker.page.goto(dogUrl)
   await walker.page.getByLabel('Zelfstandig rondje').check()
   await expect(walker.page.getByLabel(/Elke week op dit moment/)).toBeVisible()

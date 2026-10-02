@@ -1266,8 +1266,19 @@ fieldset.field {
   text-overflow: ellipsis;
 }
 
+.help-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* On phones the help pill shrinks to an icon, but never disappears. */
 @media (max-width: 520px) {
   .help-pill {
+    padding: 8px;
+  }
+
+  .help-pill .label {
     display: none;
   }
 }
@@ -1966,9 +1977,12 @@ fieldset.form-section {
   grid-template-columns: 20px auto;
 }
 
+.day-title::first-letter {
+  text-transform: uppercase;
+}
+
 .day-title {
   font-size: 1rem;
-  text-transform: capitalize;
   color: var(--muted);
   font-family: var(--font-body);
   font-weight: 700;
@@ -2236,4 +2250,56 @@ code {
 
 .disclosure[open] > summary {
   margin-bottom: 14px;
+}
+
+/* ---------- Review fixes ---------- */
+
+legend {
+  padding: 0;
+}
+
+.active-walk {
+  position: sticky;
+  top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--walk-bg);
+  color: var(--on-walk);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.active-walk .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.active-walk strong {
+  white-space: nowrap;
+}
+
+/* Walk screen: the two big buttons stay within thumb reach. */
+.walk-actions {
+  position: sticky;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  z-index: 10;
+  padding: 10px;
+  margin-inline: -10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.card .lang-select {
+  max-width: none;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+}
+
+.sheet .button {
+  white-space: normal;
+  text-align: center;
 }

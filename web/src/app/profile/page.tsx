@@ -74,7 +74,7 @@ export default async function ProfilePage() {
           <h2>{t('shelter.title')}</h2>
           <p className="muted">{t('profile.shelterCta')}</p>
           <div>
-            <Link href="/shelter" className="button secondary small">
+            <Link href="/shelter" className="button ghost small">
               <Icon name="building" size={16} /> {t('shelter.create')}
             </Link>
           </div>

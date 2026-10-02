@@ -9,6 +9,11 @@ import { siteUrl, trustedOrigins } from './site'
 
 const baseURL = siteUrl()
 
+// Never sign real sessions with the development fallback.
+if (process.env.VERCEL_ENV === 'production' && !process.env.BETTER_AUTH_SECRET) {
+  throw new Error('BETTER_AUTH_SECRET is not set for production')
+}
+
 const google =
   process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
     ? { google: { clientId: process.env.GOOGLE_CLIENT_ID, clientSecret: process.env.GOOGLE_CLIENT_SECRET } }

@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rondje — web app
 
-## Getting Started
+The website, which is also the iOS and Android app (Capacitor shells in `ios/` and `android/` load the live site). Next.js 16 App Router, React 19, Drizzle ORM, Better Auth, next-intl, Leaflet.
 
-First, run the development server:
+Live: https://rondje-five.vercel.app · Launch guide (Dutch): [`../docs/LAUNCH.md`](../docs/LAUNCH.md)
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev            # http://localhost:3000, data in .pglite/ (embedded Postgres)
+npm test               # unit tests (Vitest)
+npm run test:e2e       # Playwright: owner/walker walk flow and shelter flow (starts its own server)
+npm run lint && npm run typecheck
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No database server is needed locally: without `DATABASE_URL` the app runs on PGlite (`.pglite/`, or in memory with `PGLITE_DIR=memory`). Migrations run automatically on the first request, and example dogs, owners and shelters are seeded into an empty database (marked as examples, removable in Admin). Set `SEED_DEMO=0` to skip them.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set `E2E_SERVER_CMD="npx next start --port 3200"` to test a production build (`npx next build` first).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment
 
-## Learn More
+| Variable | Needed | What it does |
+|---|---|---|
+| `DATABASE_URL` or `POSTGRES_URL` | production | Postgres. Neon hosts use the Neon serverless driver, others use node-postgres. |
+| `BETTER_AUTH_SECRET` | production | Signs sessions. The app refuses to start in production without it. |
+| `ADMIN_EMAILS` | yes | Comma-separated emails that get `/admin`. |
+| `CRON_SECRET` | yes | Bearer token for `/api/cron/cleanup` (Vercel Cron sends it). |
+| `BLOB_READ_WRITE_TOKEN` | recommended | Vercel Blob for photos. Without it, photos are stored inline (max 450 KB). |
+| `GOOGLE_CLIENT_ID`/`_SECRET` | optional | Google sign-in. |
+| `APPLE_CLIENT_ID`/`_SECRET`/`APPLE_APP_BUNDLE_ID` | optional | Sign in with Apple. |
+| `BETTER_AUTH_URL` | optional | Canonical URL; defaults to the Vercel production domain. |
+| `NEXT_PUBLIC_TILE_URL` | optional | Map tiles; defaults to OpenStreetMap. Use a tile provider with an API key before heavy traffic. |
 
-To learn more about Next.js, take a look at the following resources:
+## Where things are
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/lib/rules.ts`: who may request, start and continue walks (18+, supervised first meeting, per-dog solo trust, safety quiz, Spanish PPP licence, overdue alerts, message scanning). Pure and unit-tested; enforced in server actions, not in the UI.
+- `src/server/actions/*`: every write, with zod validation and access checks.
+- `src/server/queries.ts`: reads. Private details (meeting place, vet, chip, contact) are blanked unless an appointment was accepted.
+- `src/app/api/walks/[id]/points|live`: live tracking. The walker posts GPS fixes every 10 s; watchers poll every 5 s. Routes are deleted after 30 days.
+- `src/db/schema.ts` and `drizzle/`: schema and SQL migrations. After a schema change run `npm run db:generate`; it also embeds the SQL into `src/db/migrations.json`, which the app applies at runtime under an advisory lock.
+- `messages/*.json`: interface text. `nl` is the source; missing keys fall back to it.
+- `content/legal/<locale>/*.md`: terms, privacy, conduct code, safety, shelter terms, cookies.
+- `content/shelters.json`: shelter directory for `/shelters` (public sources, unverified).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Native apps
 
-## Deploy on Vercel
+```bash
+npx cap sync           # after changing capacitor.config.ts or native-shell/
+npx cap open ios       # Xcode (macOS)
+npx cap open android   # Android Studio
+node scripts/native-assets.mjs && npx @capacitor/assets generate   # icons and splash screens
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The shells load `server.url` from `capacitor.config.ts` (set `CAP_SERVER_URL` to point at another deployment). They show `native-shell/offline.html` when there is no connection.

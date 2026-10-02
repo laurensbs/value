@@ -5,7 +5,7 @@ import { useTransition } from 'react'
 import { LOCALE_NAMES, LOCALES, type Locale } from '@/i18n/config'
 import { setLocale } from '@/server/actions/profile'
 
-export function LanguageSwitcher({ current, label }: { current: Locale; label: string }) {
+export function LanguageSwitcher({ current, label, compact = false }: { current: Locale; label: string; compact?: boolean }) {
   const router = useRouter()
   const [pending, start] = useTransition()
   return (
@@ -24,7 +24,7 @@ export function LanguageSwitcher({ current, label }: { current: Locale; label: s
       >
         {LOCALES.map((l: Locale) => (
           <option key={l} value={l}>
-            {l.toUpperCase()} · {LOCALE_NAMES[l]}
+            {compact ? l.toUpperCase() : LOCALE_NAMES[l]}
           </option>
         ))}
       </select>

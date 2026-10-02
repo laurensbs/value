@@ -30,10 +30,11 @@ export async function Header({ viewer }: { viewer: Viewer | null }) {
           {viewer?.isAdmin ? <Link href="/admin">{t('admin')}</Link> : null}
         </nav>
         <div className="header-actions">
-          <Link href="/help" className="help-pill">
-            {t('helpPill')}
+          <Link href="/help" className="help-pill" aria-label={t('helpPill')}>
+            <Icon name="help" size={16} />
+            <span className="label">{t('helpPill')}</span>
           </Link>
-          <LanguageSwitcher current={locale} label={t('language')} />
+          <LanguageSwitcher current={locale} label={t('language')} compact />
           {viewer ? (
             <>
               <Link href="/notifications" className="icon-link" aria-label={`${t('notifications')}${unread ? ` (${unread})` : ''}`}>

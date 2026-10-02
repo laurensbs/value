@@ -8,11 +8,13 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { isDemoMode } from '@/db'
 import { Footer } from '@/components/Footer'
+import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
 import { TabBar } from '@/components/TabBar'
 import { siteUrl } from '@/lib/site'
 import { unreadCount } from '@/server/queries'
 import { getViewer } from '@/server/session'
+import { activeWalkFor } from '@/server/walks'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta')
@@ -44,6 +46,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const viewer = await getViewer()
   const t = await getTranslations()
   const unread = viewer ? await unreadCount(viewer.userId) : 0
+  const activeWalk = viewer?.profile ? await activeWalkFor(viewer) : null
   const tabs = viewer?.profile
     ? [
         { href: '/dogs', label: t('nav.dogs'), icon: 'paw' as const },
@@ -65,6 +68,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </a>
             {isDemoMode() ? <div className="demo-banner">{t('footer.demo')}</div> : null}
             <Header viewer={viewer} />
+            {activeWalk ? <ActiveWalkBanner {...activeWalk} /> : null}
             <main className="main" id="main">
               {children}
             </main>

@@ -1,5 +1,5 @@
 import 'server-only'
-import { and, asc, eq, gt } from 'drizzle-orm'
+import { and, asc, eq, gt, inArray, or } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { overdueMinutes } from '@/lib/rules'
@@ -63,4 +63,35 @@ export async function checkOverdue(walk: Walk, dog: typeof s.dog.$inferSelect): 
     await notify(db, [walk.walkerId, ...(await watchers(dog))], 'walk-overdue', { walkId: walk.id, dogName: dog.name })
   }
   return over
+}
+
+export interface ActiveWalk {
+  walkId: string
+  dogName: string
+  role: 'walker' | 'watcher'
+}
+
+/** A walk in progress that this person is doing or following, for the "still walking" bar. */
+export async function activeWalkFor(viewer: Viewer): Promise<ActiveWalk | null> {
+  const db = await getDb()
+  const [mine] = await db
+    .select({ walkId: s.walk.id, dogName: s.dog.name })
+    .from(s.walk)
+    .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+    .where(and(eq(s.walk.walkerId, viewer.userId), eq(s.walk.status, 'active')))
+    .limit(1)
+  if (mine) return { ...mine, role: 'walker' }
+  const orgIds = viewer.orgs.map((o) => o.id)
+  const [theirs] = await db
+    .select({ walkId: s.walk.id, dogName: s.dog.name })
+    .from(s.walk)
+    .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+    .where(
+      and(
+        eq(s.walk.status, 'active'),
+        orgIds.length ? or(eq(s.dog.ownerId, viewer.userId), inArray(s.dog.orgId, orgIds)) : eq(s.dog.ownerId, viewer.userId),
+      ),
+    )
+    .limit(1)
+  return theirs ? { ...theirs, role: 'watcher' } : null
 }
