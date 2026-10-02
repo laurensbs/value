@@ -73,6 +73,11 @@ Questions about privacy? Email us at [e-mail: hallo@rondje.app]. [To verify: whe
 - a contact person for Rondje (name, email, phone). These details are not public: only Rondje's administrators see them, to check the shelter and for questions;
 - staff accounts.
 
+**Shelter suggestions**
+
+- which shelter you suggest or where you want to walk (name, town, website), your note, and that the suggestion came from you;
+- we never store details about private people you mention. Want to help someone with a dog? Ask them yourself, and they sign up themselves.
+
 **Health data.** Rondje does not ask about your health. Please do not include health information in your profile or in your dog's story, whether about yourself or others. For example, write "I can't walk far anymore" rather than naming a diagnosis.
 
 ## 4. Why do we use your data, and on what legal basis?
@@ -87,6 +92,7 @@ Questions about privacy? Email us at [e-mail: hallo@rondje.app]. [To verify: whe
 | Private feedback, reports, moderation, blocks and bans | Legitimate interest: safety and preventing misuse. Partly a legal obligation (DSA) |
 | Checking for payment requests, IBANs and links; limits on the number of requests | Legitimate interest: preventing scams and spam |
 | Verifying shelters | Contract with the shelter, and legitimate interest: preventing fake accounts |
+| Handling suggestions and votes for shelters: contacting shelters ourselves and telling you when they join | Legitimate interest: more shelters and dogs on Rondje. You can always object |
 | Security, troubleshooting, backups | Legitimate interest: a safe and working platform |
 | Service emails (for example about a new request or a change to the terms) | Contract |
 | Optional features, such as push notifications or signing in with Google or Apple | Consent (which you can withdraw at any time) or contract |
@@ -156,6 +162,7 @@ Would you like to know more about these safeguards? Email us.
 | Reports and related data | Up to 2 years after the report is closed [proposal] |
 | Data about a ban, to prevent someone from signing up again | [proposal: as short as possible, e.g. 2 years – to verify] |
 | Requests and messages | [retention period to be decided] |
+| Suggestions and votes for shelters | Up to a year after we handled them; suggestions nothing happened with after two years |
 | Security logs | [retention period to be decided, e.g. 90 days] |
 | Mood check-ins | Not with us. Only on your own device, until you delete them |
 

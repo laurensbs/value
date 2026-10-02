@@ -224,7 +224,8 @@
       "yes": "Vous pouvez apporter vos propres friandises.",
       "own": "N'apportez pas de friandises : le refuge en a.",
       "no": "Merci de ne pas donner de friandises."
-    }
+    },
+    "tipShelter": "Recommander un refuge"
   },
   "dog": {
     "story": "À propos de {name}",
@@ -533,7 +534,9 @@
     "invited": "{n, plural, =0 {Personne n'a encore rejoint Rondje grâce à votre lien.} one {# personne a rejoint Rondje grâce à votre lien. Merci !} other {# personnes ont rejoint Rondje grâce à votre lien. Merci !}}",
     "privacyText": "Vous pouvez télécharger toutes vos données ou supprimer votre compte avec tout ce qu'il contient. Nous conservons les trajets des balades pendant 30 jours.",
     "settings": "Paramètres",
-    "shelterCta": "Vous travaillez dans un refuge ? Mettez les chiens de votre refuge sur Rondje et organisez des balades en groupe encadrées."
+    "shelterCta": "Vous travaillez dans un refuge ? Mettez les chiens de votre refuge sur Rondje et organisez des balades en groupe encadrées.",
+    "tipTitle": "Recommander un refuge",
+    "tipText": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades, ou quelqu'un avec un chien qui aurait besoin d'aide ? Voici comment aider sans que nous contactions qui que ce soit sans y être invités."
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -755,7 +758,13 @@
     "claimShort": "C'est mon refuge",
     "dogs": "{n, plural, =0 {pas encore de chiens} one {# chien} other {# chiens}}",
     "noPartners": "Il n'y a pas encore de refuges sur Rondje ici. Vous travaillez dans un refuge ? Inscrivez-le ci-dessous.",
-    "seeDogs": "Voir les chiens"
+    "seeDogs": "Voir les chiens",
+    "vote": "Je veux promener ici",
+    "voted": "Votre voix compte",
+    "votesHint": "Plus il y a de personnes qui veulent promener dans un refuge, plus vite nous l'invitons. Nous contactons les refuges nous-mêmes, jamais en votre nom.",
+    "tipTitle": "Vous connaissez un refuge qui n'est pas dans la liste ?",
+    "tipText": "Recommandez-le. Nous contactons le refuge nous-mêmes, et vous prévenons quand il rejoint Rondje.",
+    "tipButton": "Recommander un refuge"
   },
   "help": {
     "title": "Ça ne va pas fort ?",
@@ -873,7 +882,23 @@
     "orgDogCount": "environ {n} chiens",
     "orgCoordinator": "Personne de contact",
     "orgLookup": "Chercher dans le registre",
-    "orgDomainMatch": "L'e-mail correspond au site web"
+    "orgDomainMatch": "L'e-mail correspond au site web",
+    "tips": "Recommandations et votes pour des refuges",
+    "tipsHint": "Les plus demandés en premier. Contactez les refuges vous-même, à la main (voir docs/OUTREACH.md), et envoyez-leur le lien d'inscription.",
+    "tipCount": "{n, plural, one {# recommandation ou vote} other {# recommandations et votes}}",
+    "tipClaimLink": "Lien d'inscription pour le refuge",
+    "tipStatus": {
+      "contacted": "déjà contacté"
+    },
+    "tipMark": {
+      "contacted": "Contacté",
+      "declined": "Pas (encore) intéressé",
+      "duplicate": "Doublon",
+      "spam": "Spam"
+    },
+    "referrals": "Inscriptions par code d'invitation",
+    "referralCampaign": "code de campagne",
+    "referralCount": "{n, plural, one {# inscription} other {# inscriptions}}"
   },
   "banned": {
     "title": "Votre compte a été bloqué",
@@ -935,5 +960,45 @@
     "publishAll": "Mettre {n, plural, one {# chien} other {# chiens}} en ligne",
     "done": "Terminé",
     "agePlaceholder": "Âge (ans)"
+  },
+  "suggest": {
+    "eyebrow": "Recommander",
+    "title": "Recommander un refuge",
+    "lede": "Vous connaissez un refuge où les chiens auraient bien besoin d'une promenade de plus ? Dites-le-nous. Nous contactons le refuge nous-mêmes, jamais en votre nom.",
+    "tabs": {
+      "shelter": "Un refuge",
+      "owner": "Quelqu'un avec un chien"
+    },
+    "name": "Nom du refuge",
+    "website": "Site web",
+    "note": "Pourquoi ce refuge ?",
+    "notePlaceholder": "Par exemple : ils cherchent des promeneurs, ou les chiens sortent peu.",
+    "noteHint": "N'indiquez pas de noms, numéros de téléphone ou adresses e-mail de personnes.",
+    "submit": "Envoyer la recommandation",
+    "done": {
+      "tipped": "Merci pour votre recommandation ! Nous contacterons {name} nous-mêmes. Si le refuge rejoint Rondje, nous vous préviendrons.",
+      "voted": "Merci ! {name} est déjà dans notre liste, et nous avons compté votre voix. Plus il y a de gens qui veulent y promener, plus vite nous invitons le refuge.",
+      "pending": "{name} s'est déjà inscrit et est en cours de vérification. Ses chiens seront bientôt en ligne."
+    },
+    "errors": {
+      "exists": "{name} est déjà sur Rondje.",
+      "contact": "Retirez les numéros de téléphone, adresses e-mail et numéros de compte. Nous ne gardons que des informations sur le refuge lui-même.",
+      "website": "Cette adresse web ne semble pas valide. Par exemple : www.refuge.be",
+      "too-many": "Vous avez déjà envoyé {max} recommandations aujourd'hui. Ce sera possible demain.",
+      "invalid": "Indiquez le nom du refuge et la ville."
+    },
+    "seeShelter": "Voir les chiens",
+    "loginTitle": "Connectez-vous pour recommander un refuge",
+    "loginText": "Cela évite le spam, et nous permet de vous prévenir quand le refuge rejoint Rondje.",
+    "privacy": "Nous gardons votre recommandation et qui l'a envoyée, et vous prévenons si le refuge nous rejoint. Les recommandations traitées sont supprimées après un an.",
+    "ownerTitle": "Vous connaissez quelqu'un avec un chien qui aurait besoin d'aide ?",
+    "ownerText": "Rondje ne contacte jamais des personnes qui ne se sont pas inscrites, et nous ne gardons rien sur elles ici. Voici comment aider :",
+    "ownerStep1": "Demandez-lui d'abord vous-même, par exemple autour d'un café. Dites que c'est gratuit et qu'on se rencontre toujours d'abord ensemble.",
+    "ownerStep2": "Aidez-la à s'inscrire : vous pouvez aussi ajouter un chien pour quelqu'un d'autre, avec son accord.",
+    "ownerAddDog": "Ajouter un chien pour quelqu'un d'autre",
+    "ownerStep3": "Ou envoyez votre propre lien d'invitation avec ce message :",
+    "ownerMessage": "Je connais une application gratuite où des jeunes du quartier promènent ton chien. On se rencontre toujours d'abord ensemble. Regarde : {url}",
+    "ownerSignup": "Créez un compte pour obtenir votre lien",
+    "ownerPrivacy": "Votre lien montre seulement que quelqu'un est venu par vous. Nous ne demandons jamais les données d'autres personnes."
   }
 }

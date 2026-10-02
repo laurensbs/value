@@ -224,7 +224,8 @@
       "yes": "You may bring your own dog treats.",
       "own": "Please don't bring your own treats: the shelter has them.",
       "no": "Please don't give treats."
-    }
+    },
+    "tipShelter": "Suggest a shelter"
   },
   "dog": {
     "story": "About {name}",
@@ -533,7 +534,9 @@
     "invited": "{n, plural, =0 {No one has joined through your link yet.} one {# person has joined through your link. Thanks!} other {# people have joined through your link. Thanks!}}",
     "privacyText": "You can download all your data or delete your account, along with everything in it. We keep walk routes for 30 days.",
     "settings": "Settings",
-    "shelterCta": "Do you work at an animal shelter? Put your shelter's dogs on Rondje and plan supervised group walks."
+    "shelterCta": "Do you work at an animal shelter? Put your shelter's dogs on Rondje and plan supervised group walks.",
+    "tipTitle": "Suggest a shelter",
+    "tipText": "Know a shelter where dogs could use more walks, or someone with a dog who could use help? This is how you help without us contacting anyone uninvited."
   },
   "quiz": {
     "title": "Safety quiz",
@@ -755,7 +758,13 @@
     "claimShort": "This is my shelter",
     "dogs": "{n, plural, =0 {no dogs yet} one {# dog} other {# dogs}}",
     "noPartners": "There are no shelters on Rondje here yet. Do you work at a shelter? Register it below.",
-    "seeDogs": "See dogs"
+    "seeDogs": "See dogs",
+    "vote": "I want to walk here",
+    "voted": "Your vote counts",
+    "votesHint": "The more people want to walk at a shelter, the sooner we invite it. We contact shelters ourselves, never in your name.",
+    "tipTitle": "Know a shelter that isn't listed?",
+    "tipText": "Suggest it. We contact the shelter ourselves, and let you know when it joins Rondje.",
+    "tipButton": "Suggest a shelter"
   },
   "help": {
     "title": "Not okay right now?",
@@ -873,7 +882,23 @@
     "orgDogCount": "about {n} dogs",
     "orgCoordinator": "Contact person",
     "orgLookup": "Look up in the register",
-    "orgDomainMatch": "Email matches the website"
+    "orgDomainMatch": "Email matches the website",
+    "tips": "Suggestions and votes for shelters",
+    "tipsHint": "Most requested first. Contact shelters yourself, by hand (see docs/OUTREACH.md), and send them the sign-up link.",
+    "tipCount": "{n, plural, one {# suggestion or vote} other {# suggestions and votes}}",
+    "tipClaimLink": "Sign-up link for the shelter",
+    "tipStatus": {
+      "contacted": "already contacted"
+    },
+    "tipMark": {
+      "contacted": "Contacted",
+      "declined": "Not (yet) interested",
+      "duplicate": "Duplicate",
+      "spam": "Spam"
+    },
+    "referrals": "Sign-ups per invite code",
+    "referralCampaign": "campaign code",
+    "referralCount": "{n, plural, one {# sign-up} other {# sign-ups}}"
   },
   "banned": {
     "title": "Your account has been blocked",
@@ -935,5 +960,45 @@
     "publishAll": "Put {n, plural, one {# dog} other {# dogs}} online",
     "done": "Done",
     "agePlaceholder": "Age (years)"
+  },
+  "suggest": {
+    "eyebrow": "Referrals",
+    "title": "Suggest a shelter",
+    "lede": "Know a shelter where dogs could use an extra walk? Let us know. We contact the shelter ourselves, never in your name.",
+    "tabs": {
+      "shelter": "A shelter",
+      "owner": "Someone with a dog"
+    },
+    "name": "Name of the shelter",
+    "website": "Website",
+    "note": "Why this shelter?",
+    "notePlaceholder": "For example: they are looking for walkers, or the dogs rarely get out.",
+    "noteHint": "Please don't include people's names, phone numbers or email addresses.",
+    "submit": "Send suggestion",
+    "done": {
+      "tipped": "Thanks for the suggestion! We will contact {name} ourselves. If the shelter joins Rondje, we'll let you know.",
+      "voted": "Thanks! {name} is already on our list, and we counted your vote. The more people want to walk there, the sooner we invite the shelter.",
+      "pending": "{name} has already signed up and is being checked. Their dogs will be on Rondje soon."
+    },
+    "errors": {
+      "exists": "{name} is already on Rondje.",
+      "contact": "Please leave out phone numbers, email addresses and bank details. We only keep details about the shelter itself.",
+      "website": "This does not look like a valid web address. For example: www.shelter.org",
+      "too-many": "You have already sent {max} suggestions today. You can send more tomorrow.",
+      "invalid": "Please fill in the shelter's name and town."
+    },
+    "seeShelter": "See the dogs",
+    "loginTitle": "Log in to suggest a shelter",
+    "loginText": "This keeps out spam, and lets us tell you when the shelter joins Rondje.",
+    "privacy": "We keep your suggestion and who sent it, and notify you if the shelter joins. Handled suggestions are deleted after a year.",
+    "ownerTitle": "Know someone with a dog who could use help?",
+    "ownerText": "Rondje never contacts people who haven't signed up, and we store nothing about them here. This is how you can help:",
+    "ownerStep1": "Ask them yourself first, for example over coffee. Tell them it is free and that you always meet together first.",
+    "ownerStep2": "Help them sign up: you can also add a dog for someone else, if they agree.",
+    "ownerAddDog": "Add a dog for someone else",
+    "ownerStep3": "Or send your own invite link with this message:",
+    "ownerMessage": "I know a free app where young people from the neighbourhood walk your dog. You always meet together first. Have a look: {url}",
+    "ownerSignup": "Create an account to get your link",
+    "ownerPrivacy": "Your link only shows that someone came through you. We never ask anyone for other people's details."
   }
 }

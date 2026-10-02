@@ -1308,6 +1308,7 @@ fieldset.field {
 .chip {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   padding: 7px 14px;
   border: 1.5px solid var(--line);
   border-radius: 999px;
@@ -2509,4 +2510,43 @@ legend {
 .bulk-actions .grow {
   flex: 1;
   justify-content: center;
+}
+
+/* ---------- Numbered list inside a card (tips, how-to) ---------- */
+
+.steps-list {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.steps-list li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.steps-list li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.directory-actions {
+  flex: none;
+  justify-items: end;
+  text-align: right;
 }

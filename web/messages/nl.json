@@ -224,7 +224,8 @@
       "yes": "Je mag zelf hondenkoekjes meenemen.",
       "own": "Neem geen eigen koekjes mee: de opvang heeft ze.",
       "no": "Liever geen koekjes geven."
-    }
+    },
+    "tipShelter": "Tip een opvang"
   },
   "dog": {
     "story": "Over {name}",
@@ -533,7 +534,9 @@
     "invited": "{n, plural, =0 {Nog niemand deed mee via jouw link.} one {# persoon deed mee via jouw link. Dank je!} other {# mensen deden mee via jouw link. Dank je!}}",
     "privacyText": "Je kunt al je gegevens downloaden of je account met alles erop en eraan verwijderen. Routes van rondjes bewaren we 30 dagen.",
     "settings": "Instellingen",
-    "shelterCta": "Werk je bij een dierenopvang? Zet de honden van jullie opvang op Rondje en plan begeleide groepswandelingen."
+    "shelterCta": "Werk je bij een dierenopvang? Zet de honden van jullie opvang op Rondje en plan begeleide groepswandelingen.",
+    "tipTitle": "Tip een opvang",
+    "tipText": "Ken je een opvang of asiel waar honden meer wandelingen kunnen gebruiken, of iemand met een hond die hulp kan gebruiken? Zo help je zonder dat wij iemand ongevraagd benaderen."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -755,7 +758,13 @@
     "claimShort": "Dit is mijn opvang",
     "dogs": "{n, plural, =0 {nog geen honden} one {# hond} other {# honden}}",
     "noPartners": "Hier zijn nog geen opvangen op Rondje. Werk je bij een opvang? Meld hem hieronder aan.",
-    "seeDogs": "Bekijk honden"
+    "seeDogs": "Bekijk honden",
+    "vote": "Ik wil hier wandelen",
+    "voted": "Je stem telt",
+    "votesHint": "Hoe meer mensen bij een opvang willen wandelen, hoe eerder we die opvang uitnodigen. We nemen zelf contact op, nooit namens jou.",
+    "tipTitle": "Ken je een opvang die hier niet staat?",
+    "tipText": "Tip hem. Wij nemen zelf contact op met de opvang, en laten het je weten als hij op Rondje komt.",
+    "tipButton": "Tip een opvang"
   },
   "help": {
     "title": "Even niet oké?",
@@ -873,7 +882,23 @@
     "orgDogCount": "ongeveer {n} honden",
     "orgCoordinator": "Contactpersoon",
     "orgLookup": "Opzoeken in het register",
-    "orgDomainMatch": "E-mail hoort bij de website"
+    "orgDomainMatch": "E-mail hoort bij de website",
+    "tips": "Tips en stemmen voor opvangen",
+    "tipsHint": "Meest gevraagd bovenaan. Benader opvangen zelf en met de hand (zie docs/OUTREACH.md); stuur ze de aanmeldlink.",
+    "tipCount": "{n, plural, one {# tip of stem} other {# tips en stemmen}}",
+    "tipClaimLink": "Aanmeldlink voor de opvang",
+    "tipStatus": {
+      "contacted": "al benaderd"
+    },
+    "tipMark": {
+      "contacted": "Benaderd",
+      "declined": "Wil (nog) niet",
+      "duplicate": "Dubbel",
+      "spam": "Spam"
+    },
+    "referrals": "Aanmeldingen per uitnodigingscode",
+    "referralCampaign": "campagnecode",
+    "referralCount": "{n, plural, one {# aanmelding} other {# aanmeldingen}}"
   },
   "banned": {
     "title": "Je account is geblokkeerd",
@@ -935,5 +960,45 @@
     "publishAll": "Zet {n, plural, one {# hond} other {# honden}} online",
     "done": "Klaar",
     "agePlaceholder": "Leeftijd (jaar)"
+  },
+  "suggest": {
+    "eyebrow": "Doorverwijzen",
+    "title": "Tip een opvang",
+    "lede": "Weet je een opvang of asiel waar honden wel een extra wandeling kunnen gebruiken? Laat het ons weten. Wij nemen zelf contact op met de opvang, nooit namens jou.",
+    "tabs": {
+      "shelter": "Een opvang",
+      "owner": "Iemand met een hond"
+    },
+    "name": "Naam van de opvang",
+    "website": "Website",
+    "note": "Waarom deze opvang?",
+    "notePlaceholder": "Bijvoorbeeld: ze zoeken wandelaars, of de honden komen weinig buiten.",
+    "noteHint": "Zet hier geen namen, telefoonnummers of e-mailadressen van mensen in.",
+    "submit": "Tip versturen",
+    "done": {
+      "tipped": "Bedankt voor je tip! We nemen zelf contact op met {name}. Komt de opvang op Rondje, dan laten we het je weten.",
+      "voted": "Bedankt! {name} staat al in onze lijst, en we hebben je stem geteld. Hoe meer mensen er willen wandelen, hoe eerder we de opvang uitnodigen.",
+      "pending": "{name} heeft zich al aangemeld en wordt nu gecontroleerd. Binnenkort staan de honden erop."
+    },
+    "errors": {
+      "exists": "{name} staat al op Rondje.",
+      "contact": "Laat telefoonnummers, e-mailadressen en rekeningnummers weg. We bewaren alleen gegevens over de opvang zelf.",
+      "website": "Dit lijkt geen geldig webadres. Bijvoorbeeld: www.opvang.nl",
+      "too-many": "Je hebt vandaag al {max} tips gegeven. Morgen kan het weer.",
+      "invalid": "Vul de naam van de opvang en de plaats in."
+    },
+    "seeShelter": "Bekijk de honden",
+    "loginTitle": "Log in om een opvang te tippen",
+    "loginText": "Zo houden we spam buiten, en kunnen we je laten weten wanneer de opvang op Rondje komt.",
+    "privacy": "We bewaren je tip en wie hem gaf, en sturen je een melding als de opvang aansluit. Afgehandelde tips verwijderen we na een jaar.",
+    "ownerTitle": "Ken je iemand met een hond die hulp kan gebruiken?",
+    "ownerText": "Rondje neemt nooit zelf contact op met mensen die zich niet hebben aangemeld, en we bewaren hier niets over hen. Zo help je wel:",
+    "ownerStep1": "Vraag het eerst zelf, bijvoorbeeld bij de koffie. Vertel dat het gratis is en dat jullie elkaar altijd eerst samen ontmoeten.",
+    "ownerStep2": "Help met aanmelden: je kunt een hond ook aanmelden voor iemand anders, als die dat goed vindt.",
+    "ownerAddDog": "Hond aanmelden voor iemand anders",
+    "ownerStep3": "Of stuur je eigen uitnodigingslink, met dit berichtje:",
+    "ownerMessage": "Ik ken een gratis app waarmee jonge mensen uit de buurt je hond uitlaten. Jullie maken altijd eerst samen kennis. Kijk maar: {url}",
+    "ownerSignup": "Maak een account om je link te krijgen",
+    "ownerPrivacy": "Je link laat alleen zien dat iemand via jou kwam. We vragen niemand om gegevens van anderen."
   }
 }

@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { useState, useTransition } from 'react'
 import { banUser, deleteDemoContent, hideDog, resolveReport, setOrganizationStatus, unbanUser } from '@/server/actions/admin'
+import { setTipStatus } from '@/server/actions/tips'
 
 export function ResolveReport({ reportId }: { reportId: string }) {
   const t = useTranslations('admin')
@@ -84,5 +85,20 @@ export function RemoveDemo() {
     <button type="button" className="button secondary small" onClick={() => setSure(true)}>
       {t('demoRemove')}
     </button>
+  )
+}
+
+/** Admin: what happened with a shelter that people tipped or voted for. Applies to every tip in the group. */
+export function TipActions({ ids, contacted = false }: { ids: string[]; contacted?: boolean }) {
+  const t = useTranslations('admin')
+  const [pending, start] = useTransition()
+  return (
+    <div className="row">
+      {(['contacted', 'declined', 'duplicate', 'spam'] as const).filter((status) => !(contacted && status === 'contacted')).map((status) => (
+        <button key={status} type="button" className="button ghost small" disabled={pending} onClick={() => start(() => setTipStatus(ids, status))}>
+          {t(`tipMark.${status}`)}
+        </button>
+      ))}
+    </div>
   )
 }

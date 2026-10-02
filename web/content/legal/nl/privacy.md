@@ -73,6 +73,11 @@ Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: o
 - een contactpersoon voor Rondje (naam, e-mailadres, telefoon). Die gegevens zijn niet openbaar: alleen beheerders van Rondje zien ze, voor de controle van de opvang en voor vragen;
 - accounts van medewerkers.
 
+**Tips voor opvangen**
+
+- welke opvang je tipt of waar je wilt wandelen (naam, plaats, website), je toelichting, en dat de tip van jou komt;
+- we bewaren nooit gegevens over particulieren die je noemt. Wil je iemand met een hond helpen? Dan vraag je het zelf, en meldt die persoon zich zelf aan.
+
 **Gezondheidsgegevens.** Rondje vraagt niet naar je gezondheid. Zet ook zelf geen gezondheidsgegevens in je profiel of in het verhaal van je hond, niet van jezelf en niet van anderen. Schrijf bijvoorbeeld "ik kan zelf niet ver meer lopen" in plaats van een diagnose.
 
 ## 4. Waarvoor gebruiken we je gegevens, en op welke grondslag?
@@ -87,6 +92,7 @@ Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: o
 | Privé-feedback, meldingen, moderatie, blokkades en uitsluitingen | Gerechtvaardigd belang: veiligheid en misbruik voorkomen. Deels wettelijke plicht (DSA) |
 | Controle op betaalverzoeken, IBAN's en links; limieten op het aantal verzoeken | Gerechtvaardigd belang: oplichting en spam voorkomen |
 | Opvangen verifiëren | Overeenkomst met de opvang, en gerechtvaardigd belang: nepaccounts voorkomen |
+| Tips en stemmen voor opvangen verwerken: opvangen zelf benaderen en je laten weten als ze aansluiten | Gerechtvaardigd belang: meer opvangen en honden op Rondje. Je kunt altijd bezwaar maken |
 | Beveiliging, foutoplossing, back-ups | Gerechtvaardigd belang: een veilig en werkend platform |
 | Service-e-mails (bijvoorbeeld bij een nieuw verzoek of een wijziging van de voorwaarden) | Overeenkomst |
 | Optionele functies, zoals pushmeldingen of inloggen met Google of Apple | Toestemming (die je altijd kunt intrekken) of overeenkomst |
@@ -156,6 +162,7 @@ Wil je meer weten over deze waarborgen? Mail ons.
 | Meldingen en de gegevens die erbij horen | Tot 2 jaar na afsluiten van de melding [voorstel] |
 | Gegevens over een uitsluiting, om te voorkomen dat iemand zich opnieuw aanmeldt | [voorstel: zo kort mogelijk, bijv. 2 jaar – te controleren] |
 | Verzoeken en berichten | [bewaartermijn vast te stellen] |
+| Tips en stemmen voor opvangen | Tot een jaar nadat we ze hebben afgehandeld; tips waar niets mee gebeurde na twee jaar |
 | Beveiligingslogs | [bewaartermijn vast te stellen, bijv. 90 dagen] |
 | Stemming-check-ins | Niet bij ons. Alleen op je eigen apparaat, tot je ze verwijdert |
 

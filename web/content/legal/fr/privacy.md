@@ -73,6 +73,11 @@ Des questions sur la vie privée ? Écrivez-nous à [e-mail: hallo@rondje.app]. 
 - une personne de contact pour Rondje (nom, e-mail, téléphone). Ces données ne sont pas publiques : seuls les administrateurs de Rondje les voient, pour vérifier le refuge et pour les questions ;
 - comptes du personnel.
 
+**Recommandations de refuges**
+
+- quel refuge vous recommandez ou où vous voulez promener (nom, ville, site web), votre commentaire, et que la recommandation vient de vous ;
+- nous ne gardons jamais de données sur des particuliers que vous mentionnez. Vous voulez aider quelqu'un avec un chien ? Demandez-lui vous-même, et cette personne s'inscrit elle-même.
+
 **Données de santé.** Rondje ne vous pose pas de questions sur votre santé. N'indiquez pas non plus de données de santé dans votre profil ou dans l'histoire de votre chien, ni sur vous, ni sur d'autres personnes. Écrivez par exemple « je ne peux plus marcher longtemps » plutôt que de mentionner un diagnostic.
 
 ## 4. Pourquoi utilisons-nous vos données, et sur quelle base légale ?
@@ -87,6 +92,7 @@ Des questions sur la vie privée ? Écrivez-nous à [e-mail: hallo@rondje.app]. 
 | Avis privés, signalements, modération, blocages et exclusions | Intérêt légitime : sécurité et prévention des abus. En partie obligation légale (DSA) |
 | Contrôle des demandes de paiement, IBAN et liens ; limites du nombre de demandes | Intérêt légitime : prévenir les arnaques et le spam |
 | Vérifier les refuges | Contrat avec le refuge, et intérêt légitime : éviter les faux comptes |
+| Traiter les recommandations et votes pour des refuges : contacter nous-mêmes les refuges et vous prévenir quand ils nous rejoignent | Intérêt légitime : plus de refuges et de chiens sur Rondje. Vous pouvez toujours vous y opposer |
 | Sécurité, correction d'erreurs, sauvegardes | Intérêt légitime : une plateforme sûre et fonctionnelle |
 | E-mails de service (par exemple pour une nouvelle demande ou une modification des conditions) | Exécution du contrat |
 | Fonctions facultatives, comme les notifications push ou la connexion avec Google ou Apple | Consentement (que vous pouvez retirer à tout moment) ou exécution du contrat |
@@ -156,6 +162,7 @@ Vous souhaitez en savoir plus sur ces garanties ? Écrivez-nous.
 | Signalements et données associées | Jusqu'à 2 ans après la clôture du signalement [proposition] |
 | Données liées à une exclusion, pour éviter une nouvelle inscription | [proposition : aussi courte que possible, p. ex. 2 ans – à vérifier] |
 | Demandes et messages | [durée à fixer] |
+| Recommandations et votes pour des refuges | Jusqu'à un an après leur traitement ; celles qui n'ont pas été traitées, après deux ans |
 | Journaux de sécurité | [durée à fixer, p. ex. 90 jours] |
 | Bilans d'humeur | Pas chez nous. Uniquement sur votre appareil, jusqu'à ce que vous les supprimiez |
 

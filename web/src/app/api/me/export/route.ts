@@ -22,6 +22,19 @@ export async function GET() {
     reportsMade: await db.select().from(s.report).where(eq(s.report.reporterId, id)),
     idChecks: await db.select().from(s.idCheck).where(or(eq(s.idCheck.walkerId, id), eq(s.idCheck.checkedBy, id))),
     notifications: await db.select().from(s.notification).where(eq(s.notification.userId, id)),
+    shelterTips: await db
+      .select({
+        kind: s.suggestion.kind,
+        name: s.suggestion.name,
+        country: s.suggestion.country,
+        city: s.suggestion.city,
+        website: s.suggestion.website,
+        note: s.suggestion.note,
+        status: s.suggestion.status,
+        createdAt: s.suggestion.createdAt,
+      })
+      .from(s.suggestion)
+      .where(eq(s.suggestion.suggestedBy, id)),
   }
   return new NextResponse(JSON.stringify(data, null, 2), {
     headers: {

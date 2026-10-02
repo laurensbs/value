@@ -20,11 +20,15 @@ export function soonSlot(now = new Date()): { date: string; time: string } {
   return { date: `${parts.year}-${parts.month}-${parts.day}`, time: `${parts.hour}:${parts.minute}` }
 }
 
+/** Each person gets their own (test) IP, as in real life: sign-in and sign-up are limited per IP address. */
+const randomIp = () => `10.${1 + Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${1 + Math.floor(Math.random() * 250)}`
+
 export async function newPerson(browser: Browser, geo?: { latitude: number; longitude: number }) {
   const context = await browser.newContext({
     colorScheme: process.env.SHOTS_DARK ? 'dark' : 'light',
     geolocation: geo ?? { latitude: 52.0907, longitude: 5.1214 },
     permissions: ['geolocation'],
+    extraHTTPHeaders: { 'x-forwarded-for': randomIp() },
   })
   const page = await context.newPage()
   return { context, page }
@@ -69,7 +73,8 @@ export async function signInAdmin(browser: Browser) {
     await page.getByLabel('E-mailadres').fill('admin@e2e.test')
     await page.getByLabel('Wachtwoord').fill('wandelen-123')
     await page.getByRole('button', { name: 'Inloggen', exact: true }).click()
-    await page.waitForURL(/\/admin/)
+    // Not /\/admin/: the login URL itself contains "next=/admin".
+    await page.waitForURL((url) => url.pathname === '/admin')
   } else {
     await onboard(page, { birthDate: '1990-01-01', city: 'Utrecht', bio: 'Beheer', phone: '', walker: false, owner: false })
   }

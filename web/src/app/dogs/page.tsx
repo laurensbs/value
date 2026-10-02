@@ -150,6 +150,9 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
             <Link href="/profile#invite" className="button ghost small">
               {t('dogs.inviteOwner')}
             </Link>
+            <Link href="/suggest?kind=shelter" className="button ghost small">
+              {t('dogs.tipShelter')}
+            </Link>
           </div>
         </div>
       ) : mapView ? (

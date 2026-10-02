@@ -1,10 +1,11 @@
 'use server'
 
-import { eq } from 'drizzle-orm'
+import { and, eq, inArray } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { removeDemoData } from '@/db/seed'
+import { tipKey } from '@/lib/tips'
 import { audit, notify } from '../notify'
 import { requireAdmin } from '../session'
 
@@ -49,6 +50,27 @@ export async function setOrganizationStatus(orgId: string, status: 'verified' | 
       .from(s.organizationMember)
       .where(eq(s.organizationMember.orgId, orgId))
     await notify(db, members.map((m) => m.id), 'org-verified', { orgId })
+
+    // Everyone who tipped or voted for this shelter hears that it joined.
+    const [org] = await db
+      .select({ name: s.organization.name, country: s.organization.country, directoryId: s.organization.directoryId })
+      .from(s.organization)
+      .where(eq(s.organization.id, orgId))
+    if (org) {
+      const open = await db
+        .select({ id: s.suggestion.id, by: s.suggestion.suggestedBy, name: s.suggestion.name, directoryId: s.suggestion.directoryId })
+        .from(s.suggestion)
+        .where(and(eq(s.suggestion.country, org.country), inArray(s.suggestion.status, ['new', 'contacted'])))
+      const key = tipKey(org.name)
+      const hits = open.filter((tip) => (org.directoryId && tip.directoryId === org.directoryId) || tipKey(tip.name) === key)
+      if (hits.length) {
+        await db
+          .update(s.suggestion)
+          .set({ status: 'joined', handledBy: admin.userId, handledAt: new Date() })
+          .where(inArray(s.suggestion.id, hits.map((tip) => tip.id)))
+        await notify(db, hits.map((tip) => tip.by), 'shelter-joined', { orgId, orgName: org.name })
+      }
+    }
   }
   await audit(db, admin.userId, `org.${status}`, 'organization', orgId)
   revalidatePath('/admin')

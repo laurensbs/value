@@ -73,6 +73,11 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 - una persona de contacto para Rondje (nombre, correo, teléfono). Estos datos no son públicos: solo los ven los administradores de Rondje, para verificar la protectora y para dudas;
 - cuentas del equipo.
 
+**Recomendaciones de protectoras**
+
+- qué protectora recomiendas o dónde quieres pasear (nombre, localidad, web), tu comentario y que la recomendación es tuya;
+- nunca guardamos datos de particulares que menciones. ¿Quieres ayudar a alguien con perro? Pregúntaselo tú, y que esa persona se registre por sí misma.
+
 **Datos de salud.** Rondje no te pregunta por tu salud. No incluyas datos de salud en tu perfil ni en la historia de tu perro, ni tuyos ni de otras personas. Por ejemplo, escribe «ya no puedo caminar mucho» en lugar de mencionar un diagnóstico.
 
 ## 4. ¿Para qué usamos tus datos y con qué base jurídica?
@@ -87,6 +92,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 | Valoraciones privadas, denuncias, moderación, bloqueos y expulsiones | Interés legítimo: seguridad y prevención de abusos. En parte, obligación legal (DSA) |
 | Revisión de peticiones de pago, IBAN y enlaces; límites al número de solicitudes | Interés legítimo: prevenir estafas y spam |
 | Verificar protectoras | Contrato con la protectora, e interés legítimo: evitar cuentas falsas |
+| Gestionar recomendaciones y votos de protectoras: contactar nosotros con ellas y avisarte cuando se unan | Interés legítimo: más protectoras y perros en Rondje. Puedes oponerte siempre |
 | Seguridad, resolución de errores, copias de seguridad | Interés legítimo: una plataforma segura y que funcione |
 | Correos de servicio (por ejemplo, una nueva solicitud o un cambio en las condiciones) | Ejecución del contrato |
 | Funciones opcionales, como notificaciones *push* o iniciar sesión con Google o Apple | Consentimiento (que puedes retirar en cualquier momento) o ejecución del contrato |
@@ -156,6 +162,7 @@ Para el Reino Unido existe una decisión de adecuación de la Comisión Europea 
 | Denuncias y datos relacionados | Hasta 2 años después de cerrar la denuncia [propuesta] |
 | Datos sobre una expulsión, para evitar que alguien vuelva a registrarse | [propuesta: lo más breve posible, p. ej. 2 años – pendiente de verificar] |
 | Solicitudes y mensajes | [plazo por determinar] |
+| Recomendaciones y votos de protectoras | Hasta un año después de gestionarlas; las que no se gestionaron, a los dos años |
 | Registros de seguridad | [plazo por determinar, p. ej. 90 días] |
 | Registros de ánimo | No los tenemos. Solo en tu dispositivo, hasta que los borres |
 

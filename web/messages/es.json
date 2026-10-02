@@ -224,7 +224,8 @@
       "yes": "Puedes traer tus propios premios para perros.",
       "own": "No traigas premios propios: la protectora los tiene.",
       "no": "Mejor no dar premios."
-    }
+    },
+    "tipShelter": "Recomendar una protectora"
   },
   "dog": {
     "story": "Sobre {name}",
@@ -533,7 +534,9 @@
     "invited": "{n, plural, =0 {Todavía no se ha unido nadie con tu enlace.} one {# persona se ha unido con tu enlace. ¡Gracias!} other {# personas se han unido con tu enlace. ¡Gracias!}}",
     "privacyText": "Puedes descargar todos tus datos o eliminar tu cuenta con todo lo que contiene. Guardamos las rutas de los paseos durante 30 días.",
     "settings": "Ajustes",
-    "shelterCta": "¿Trabajas en una protectora? Pon los perros de vuestra protectora en Rondje y organiza paseos en grupo acompañados."
+    "shelterCta": "¿Trabajas en una protectora? Pon los perros de vuestra protectora en Rondje y organiza paseos en grupo acompañados.",
+    "tipTitle": "Recomienda una protectora",
+    "tipText": "¿Conoces una protectora donde a los perros les vendrían bien más paseos, o a alguien con perro que necesite ayuda? Así ayudas sin que contactemos a nadie sin permiso."
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -755,7 +758,13 @@
     "claimShort": "Es mi protectora",
     "dogs": "{n, plural, =0 {aún sin perros} one {# perro} other {# perros}}",
     "noPartners": "Aquí todavía no hay protectoras en Rondje. ¿Trabajas en una protectora? Inscríbela aquí abajo.",
-    "seeDogs": "Ver perros"
+    "seeDogs": "Ver perros",
+    "vote": "Quiero pasear aquí",
+    "voted": "Tu voto cuenta",
+    "votesHint": "Cuanta más gente quiera pasear en una protectora, antes la invitaremos. Contactamos nosotros con las protectoras, nunca en tu nombre.",
+    "tipTitle": "¿Conoces una protectora que no aparece?",
+    "tipText": "Recomiéndala. Nosotros contactamos con la protectora y te avisamos cuando se una a Rondje.",
+    "tipButton": "Recomendar una protectora"
   },
   "help": {
     "title": "¿Un mal momento?",
@@ -873,7 +882,23 @@
     "orgDogCount": "unos {n} perros",
     "orgCoordinator": "Persona de contacto",
     "orgLookup": "Buscar en el registro",
-    "orgDomainMatch": "El correo coincide con la web"
+    "orgDomainMatch": "El correo coincide con la web",
+    "tips": "Recomendaciones y votos para protectoras",
+    "tipsHint": "Las más pedidas primero. Contacta tú con las protectoras, a mano (ver docs/OUTREACH.md), y envíales el enlace de registro.",
+    "tipCount": "{n, plural, one {# recomendación o voto} other {# recomendaciones y votos}}",
+    "tipClaimLink": "Enlace de registro para la protectora",
+    "tipStatus": {
+      "contacted": "ya contactada"
+    },
+    "tipMark": {
+      "contacted": "Contactada",
+      "declined": "No (aún) interesada",
+      "duplicate": "Duplicada",
+      "spam": "Spam"
+    },
+    "referrals": "Registros por código de invitación",
+    "referralCampaign": "código de campaña",
+    "referralCount": "{n, plural, one {# registro} other {# registros}}"
   },
   "banned": {
     "title": "Tu cuenta ha sido bloqueada",
@@ -935,5 +960,45 @@
     "publishAll": "Publicar {n, plural, one {# perro} other {# perros}}",
     "done": "Listo",
     "agePlaceholder": "Edad (años)"
+  },
+  "suggest": {
+    "eyebrow": "Recomendar",
+    "title": "Recomienda una protectora",
+    "lede": "¿Conoces una protectora donde a los perros les vendría bien un paseo más? Cuéntanoslo. Nosotros contactamos con la protectora, nunca en tu nombre.",
+    "tabs": {
+      "shelter": "Una protectora",
+      "owner": "Alguien con perro"
+    },
+    "name": "Nombre de la protectora",
+    "website": "Web",
+    "note": "¿Por qué esta protectora?",
+    "notePlaceholder": "Por ejemplo: buscan paseadores, o los perros salen poco.",
+    "noteHint": "No incluyas nombres, teléfonos ni correos de personas.",
+    "submit": "Enviar recomendación",
+    "done": {
+      "tipped": "¡Gracias por la recomendación! Contactaremos nosotros con {name}. Si se une a Rondje, te avisaremos.",
+      "voted": "¡Gracias! {name} ya está en nuestra lista y hemos contado tu voto. Cuanta más gente quiera pasear allí, antes invitaremos a la protectora.",
+      "pending": "{name} ya se ha registrado y la estamos verificando. Pronto estarán sus perros."
+    },
+    "errors": {
+      "exists": "{name} ya está en Rondje.",
+      "contact": "No incluyas teléfonos, correos ni números de cuenta. Solo guardamos datos de la propia protectora.",
+      "website": "No parece una dirección web válida. Por ejemplo: www.protectora.es",
+      "too-many": "Hoy ya has enviado {max} recomendaciones. Mañana podrás enviar más.",
+      "invalid": "Rellena el nombre de la protectora y la localidad."
+    },
+    "seeShelter": "Ver los perros",
+    "loginTitle": "Inicia sesión para recomendar una protectora",
+    "loginText": "Así evitamos el spam y podemos avisarte cuando la protectora se una a Rondje.",
+    "privacy": "Guardamos tu recomendación y quién la envió, y te avisamos si la protectora se une. Las recomendaciones gestionadas se borran al cabo de un año.",
+    "ownerTitle": "¿Conoces a alguien con perro que necesite ayuda?",
+    "ownerText": "Rondje nunca contacta con personas que no se han registrado, y aquí no guardamos nada sobre ellas. Así puedes ayudar:",
+    "ownerStep1": "Pregúntaselo tú primero, por ejemplo tomando un café. Cuéntale que es gratis y que siempre os conocéis antes en persona.",
+    "ownerStep2": "Ayúdale a registrarse: también puedes dar de alta un perro para otra persona, si está de acuerdo.",
+    "ownerAddDog": "Dar de alta un perro para otra persona",
+    "ownerStep3": "O envía tu propio enlace de invitación con este mensaje:",
+    "ownerMessage": "Conozco una app gratuita con la que gente joven del barrio pasea a tu perro. Siempre os conocéis antes en persona. Échale un vistazo: {url}",
+    "ownerSignup": "Crea una cuenta para obtener tu enlace",
+    "ownerPrivacy": "Tu enlace solo muestra que alguien llegó a través de ti. Nunca pedimos datos de otras personas."
   }
 }

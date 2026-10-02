@@ -1,12 +1,13 @@
-import { and, count, desc, eq, isNotNull, ne, sql } from 'drizzle-orm'
+import { and, count, desc, eq, inArray, isNotNull, ne, sql } from 'drizzle-orm'
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
-import { BanUser, HideDog, OrgDecision, RemoveDemo, ResolveReport } from '@/components/AdminTools'
+import { BanUser, HideDog, OrgDecision, RemoveDemo, ResolveReport, TipActions } from '@/components/AdminTools'
 import { dbMode, getDb } from '@/db'
 import * as s from '@/db/schema'
 import { enabledSocialProviders } from '@/lib/auth'
 import { emailMatchesWebsite, registryLookupUrl } from '@/lib/org-fields'
-import { adminEmails } from '@/lib/site'
+import { adminEmails, siteUrl } from '@/lib/site'
+import { tipKey } from '@/lib/tips'
 import { requireAdmin } from '@/server/session'
 
 export const metadata = { robots: { index: false } }
@@ -54,6 +55,42 @@ export default async function AdminPage() {
     .from(s.profile)
     .where(and(isNotNull(s.profile.bannedAt)))
     .limit(50)
+
+  // Tips and votes for shelters, grouped per shelter: most asked-for first.
+  const openTips = await db
+    .select()
+    .from(s.suggestion)
+    .where(inArray(s.suggestion.status, ['new', 'contacted']))
+    .orderBy(desc(s.suggestion.createdAt))
+    .limit(500)
+  const tipGroups = [
+    ...openTips
+      .reduce((groups, tip) => {
+        const key = tip.directoryId ?? `${tip.country}:${tipKey(tip.name)}`
+        const group = groups.get(key) ?? { key, first: tip, ids: [] as string[], notes: [] as string[], contacted: false }
+        group.ids.push(tip.id)
+        if (tip.note) group.notes.push(tip.note)
+        if (tip.status === 'contacted') group.contacted = true
+        return groups.set(key, group)
+      }, new globalThis.Map<string, { key: string; first: (typeof openTips)[number]; ids: string[]; notes: string[]; contacted: boolean }>())
+      .values(),
+  ]
+    .sort((a, b) => b.ids.length - a.ids.length)
+    .slice(0, 40)
+  const referrals = await db
+    .select({ code: s.profile.referredBy, n: count() })
+    .from(s.profile)
+    .where(isNotNull(s.profile.referredBy))
+    .groupBy(s.profile.referredBy)
+    .orderBy(desc(count()))
+    .limit(20)
+  const referrers = referrals.length
+    ? await db
+        .select({ code: s.profile.referralCode, firstName: s.profile.firstName })
+        .from(s.profile)
+        .where(inArray(s.profile.referralCode, referrals.map((r) => r.code ?? '')))
+    : []
+  const referrerName = Object.fromEntries(referrers.map((r) => [r.code, r.firstName]))
 
   const blob = Boolean(process.env.BLOB_READ_WRITE_TOKEN)
   const mode = dbMode()
@@ -233,6 +270,67 @@ export default async function AdminPage() {
                   <p className="muted small">{t('admin.verifyHint')}</p>
                   <OrgDecision orgId={o.id} />
                 </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="stack-s">
+        <h2>{t('admin.tips')}</h2>
+        <p className="muted small">{t('admin.tipsHint')}</p>
+        {tipGroups.length === 0 ? (
+          <p className="muted">{t('admin.none')}</p>
+        ) : (
+          <ul className="list">
+            {tipGroups.map(({ key, first, ids, notes, contacted }) => (
+              <li key={key} className="list-item">
+                <div className="grow stack-s">
+                  <div className="spread">
+                    <strong>{first.name}</strong>
+                    <span className="pill blue">{t('admin.tipCount', { n: ids.length })}</span>
+                  </div>
+                  <p className="muted small">
+                    {[first.city, first.country].filter(Boolean).join(', ')}
+                    {first.website ? (
+                      <>
+                        {' · '}
+                        <a href={first.website} target="_blank" rel="noopener noreferrer">
+                          {first.website}
+                        </a>
+                      </>
+                    ) : null}
+                    {contacted ? ` · ${t('admin.tipStatus.contacted')}` : ''}
+                  </p>
+                  {notes.slice(0, 3).map((note, i) => (
+                    <p key={i} className="small">
+                      “{note}”
+                    </p>
+                  ))}
+                  {first.directoryId ? (
+                    <p className="small">
+                      {t('admin.tipClaimLink')}: <code>{`${siteUrl()}/shelter?claim=${first.directoryId}`}</code>
+                    </p>
+                  ) : null}
+                  <TipActions ids={ids} contacted={contacted} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="stack-s">
+        <h2>{t('admin.referrals')}</h2>
+        {referrals.length === 0 ? (
+          <p className="muted">{t('admin.none')}</p>
+        ) : (
+          <ul className="list">
+            {referrals.map((r) => (
+              <li key={r.code} className="list-item compact">
+                <code>{r.code}</code>
+                <span className="grow muted small">{referrerName[r.code ?? ''] ?? t('admin.referralCampaign')}</span>
+                <span className="pill">{t('admin.referralCount', { n: r.n })}</span>
               </li>
             ))}
           </ul>

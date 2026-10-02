@@ -69,6 +69,19 @@ export default async function ProfilePage() {
         <p className="muted small">{t('profile.invited', { n: invited })}</p>
       </section>
 
+      <section className="card flat stack-s">
+        <h2>{t('profile.tipTitle')}</h2>
+        <p className="muted">{t('profile.tipText')}</p>
+        <div className="row">
+          <Link href="/suggest?kind=shelter" className="button ghost small">
+            <Icon name="heart" size={16} /> {t('suggest.tabs.shelter')}
+          </Link>
+          <Link href="/suggest?kind=owner" className="button ghost small">
+            <Icon name="home" size={16} /> {t('suggest.tabs.owner')}
+          </Link>
+        </div>
+      </section>
+
       {viewer.orgs.length === 0 ? (
         <section className="card flat stack-s">
           <h2>{t('shelter.title')}</h2>
