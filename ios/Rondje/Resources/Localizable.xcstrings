@@ -1659,6 +1659,28 @@
         }
       }
     },
+    "Apple is gekoppeld. Voortaan kun je ook met Apple inloggen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple is linked. From now on you can also log in with Apple."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple está vinculado. A partir de ahora también puedes iniciar sesión con Apple."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple est associé. Tu peux désormais aussi te connecter avec Apple."
+          }
+        }
+      }
+    },
     "Badges" : {
       "localizations" : {
         "en" : {
@@ -2561,6 +2583,28 @@
         }
       }
     },
+    "Deze inlogpoging is verlopen. Probeer het opnieuw." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This login attempt has expired. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este intento de inicio de sesión ha caducado. Inténtalo de nuevo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette tentative de connexion a expiré. Réessaie."
+          }
+        }
+      }
+    },
     "Dierenarts" : {
       "localizations" : {
         "en" : {
@@ -2821,6 +2865,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rejoins %@"
+          }
+        }
+      }
+    },
+    "Doorgaan met Google" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Google"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar con Google"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer avec Google"
           }
         }
       }
@@ -3265,6 +3331,50 @@
         }
       }
     },
+    "Er is al een account met dit e-mailadres. Log in met je e-mailadres en wachtwoord." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There's already an account with this email address. Log in with your email and password."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya existe una cuenta con este correo. Inicia sesión con tu correo y tu contraseña."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton e-mail et ton mot de passe."
+          }
+        }
+      }
+    },
+    "Er is al een account met dit e-mailadres. Log in met je wachtwoord om Apple te koppelen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There's already an account with this email address. Log in with your password to link Apple."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya existe una cuenta con este correo. Inicia sesión con tu contraseña para vincular Apple."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton mot de passe pour associer Apple."
+          }
+        }
+      }
+    },
     "Er is al een account met dit e-mailadres. Log in." : {
       "localizations" : {
         "en" : {
@@ -3591,6 +3701,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Photos"
+          }
+        }
+      }
+    },
+    "Ga door met Apple" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Apple"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar con Apple"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer avec Apple"
           }
         }
       }
@@ -5597,6 +5729,50 @@
         }
       }
     },
+    "Inloggen met %@ kan nu even niet. Log in met je e-mailadres." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logging in with %@ isn't available right now. Log in with your email address."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora mismo no se puede iniciar sesión con %@. Inicia sesión con tu correo electrónico."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connexion avec %@ n'est pas disponible pour le moment. Connecte-toi avec ton adresse e-mail."
+          }
+        }
+      }
+    },
+    "Inloggen met %@ lukte niet. Probeer het opnieuw." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logging in with %@ didn't work. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo iniciar sesión con %@. Inténtalo de nuevo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connexion avec %@ a échoué. Réessaie."
+          }
+        }
+      }
+    },
     "Intimidatie" : {
       "localizations" : {
         "en" : {
@@ -6385,6 +6561,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choisis ci-dessous un chien qui te plaît."
+          }
+        }
+      }
+    },
+    "Kies hoe je wilt inloggen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose how you want to log in."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige cómo quieres iniciar sesión."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisis comment te connecter."
           }
         }
       }
@@ -8129,6 +8327,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partir maintenant"
+          }
+        }
+      }
+    },
+    "of" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "or"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "o"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ou"
           }
         }
       }

@@ -14,6 +14,7 @@ struct AuthView: View {
     @State private var busy = false
     @State private var error: String?
     @FocusState private var focus: Field?
+    @State private var social = SocialSignIn.shared
 
     private enum Field { case name, email, password }
 
@@ -27,8 +28,12 @@ struct AuthView: View {
                 VStack(alignment: .leading, spacing: 18) {
                     Text(mode == .signIn ? L("Welkom terug") : L("Doe mee met \(Brand.name)"))
                         .font(.display(30))
-                    Text(mode == .signIn ? L("Log in met je e-mailadres.") : L("Een account is gratis en blijft gratis."))
+                    Text(mode == .signUp ? L("Een account is gratis en blijft gratis.") : social.options.any ? L("Kies hoe je wilt inloggen.") : L("Log in met je e-mailadres."))
                         .foregroundStyle(Palette.muted)
+
+                    if social.options.any {
+                        SocialSignInButtons(onError: { error = $0 }, onSuccess: { dismiss() })
+                    }
 
                     VStack(spacing: 12) {
                         if mode == .signUp {
@@ -93,7 +98,11 @@ struct AuthView: View {
                     Button("Sluit", systemImage: "xmark") { dismiss() }
                 }
             }
-            .onAppear { focus = mode == .signUp ? .name : .email }
+            .task { await social.load() }
+            .onAppear {
+                // With Apple or Google on offer, let the person choose before the keyboard covers it.
+                if !social.options.any { focus = mode == .signUp ? .name : .email }
+            }
         }
     }
 
@@ -122,6 +131,9 @@ struct AuthView: View {
             await model.signedIn()
             // Never bounce back to the welcome screen without a word.
             guard model.phase != .signedOut else { throw APIError.server(code: "auth", message: L("Inloggen lukte niet. Probeer het opnieuw.")) }
+            if mode == .signIn, await social.linkRememberedApple() {
+                model.show(L("Apple is gekoppeld. Voortaan kun je ook met Apple inloggen."), symbol: "apple.logo")
+            }
             dismiss()
         } catch {
             Haptics.error()
