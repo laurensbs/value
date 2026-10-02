@@ -147,6 +147,7 @@
 		CBB7E66E9A9FD4894A0298B5 /* RondjeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RondjeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE38BF1BFD0974FB881BD72B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D19F92B1AB52E54BEE189E52 /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
+		D54FE87577E74A459BC311FD /* RondjeWidgets.free.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.free.entitlements; sourceTree = "<group>"; };
 		E05B78B489C3C4D7955EFF48 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 				F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */,
 				80CB134CFF71E6AB85E8D340 /* Localizable.xcstrings */,
 				1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */,
+				D54FE87577E74A459BC311FD /* RondjeWidgets.free.entitlements */,
 				A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */,
 			);
 			path = RondjeWidgets;
@@ -626,7 +628,7 @@
 		361CABDDA539BA65E95F06B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_WIDGET_ENTITLEMENTS)";
 				INFOPLIST_FILE = RondjeWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -695,7 +697,9 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RONDJE_API_BASE_URL = "https:/$()/rondje-five.vercel.app";
+				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
 				RONDJE_BUNDLE_ID = app.rondje.mobile;
+				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -709,7 +713,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_APP_ENTITLEMENTS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Rondje/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -728,7 +732,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_APP_ENTITLEMENTS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Rondje/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -745,7 +749,7 @@
 		B64ED374481278F25EC6E0CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_WIDGET_ENTITLEMENTS)";
 				INFOPLIST_FILE = RondjeWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -821,7 +825,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RONDJE_API_BASE_URL = "http:/$()/localhost:3100";
+				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
 				RONDJE_BUNDLE_ID = app.rondje.mobile;
+				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;

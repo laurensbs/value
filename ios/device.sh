@@ -17,7 +17,7 @@ if [[ -z "$TEAM" ]]; then
   exit 1
 fi
 
-DEVICE=$(xcrun devicectl list devices 2>/dev/null | awk '/iPhone/ && /connected|available/ {print $3; exit}')
+DEVICE=$(xcrun devicectl list devices 2>/dev/null | grep -E 'iPhone.*(connected|available)' | grep -oE '[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}' | head -1)
 if [[ -z "$DEVICE" ]]; then
   echo "Geen iPhone gevonden. Sluit hem aan met een kabel, ontgrendel hem en tik op 'Vertrouw'."
   exit 1
@@ -26,7 +26,7 @@ fi
 extra=()
 if [[ "$1" != "--paid" ]]; then
   # A free Personal Team cannot use push or App Groups, and needs a bundle id of its own.
-  extra=(CODE_SIGN_ENTITLEMENTS=Rondje/Resources/Rondje.free.entitlements "RONDJE_BUNDLE_ID=app.rondje.mobile.${TEAM:l}")
+  extra=(RONDJE_APP_ENTITLEMENTS=Rondje/Resources/Rondje.free.entitlements RONDJE_WIDGET_ENTITLEMENTS=RondjeWidgets/RondjeWidgets.free.entitlements "RONDJE_BUNDLE_ID=app.rondje.mobile.${TEAM:l}")
 fi
 
 xcodegen generate --quiet

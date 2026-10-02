@@ -12,6 +12,9 @@ settings:
     APP_DISPLAY_NAME: Rondje
     # The app's bundle id; device.sh gives it a personal suffix for a free Apple account.
     RONDJE_BUNDLE_ID: app.rondje.mobile
+    # Entitlements per target; device.sh swaps in empty ones for a free Apple ID.
+    RONDJE_APP_ENTITLEMENTS: Rondje/Resources/Rondje.entitlements
+    RONDJE_WIDGET_ENTITLEMENTS: RondjeWidgets/RondjeWidgets.entitlements
     MARKETING_VERSION: "1.0"
     CURRENT_PROJECT_VERSION: "1"
     SWIFT_VERSION: "6.0"
@@ -36,7 +39,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(RONDJE_BUNDLE_ID)
         INFOPLIST_FILE: Rondje/Resources/Info.plist
-        CODE_SIGN_ENTITLEMENTS: Rondje/Resources/Rondje.entitlements
+        CODE_SIGN_ENTITLEMENTS: $(RONDJE_APP_ENTITLEMENTS)
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         TARGETED_DEVICE_FAMILY: "1"
@@ -55,7 +58,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(RONDJE_BUNDLE_ID).widgets
         INFOPLIST_FILE: RondjeWidgets/Info.plist
-        CODE_SIGN_ENTITLEMENTS: RondjeWidgets/RondjeWidgets.entitlements
+        CODE_SIGN_ENTITLEMENTS: $(RONDJE_WIDGET_ENTITLEMENTS)
         TARGETED_DEVICE_FAMILY: "1"
   RondjeTests:
     type: bundle.unit-test
