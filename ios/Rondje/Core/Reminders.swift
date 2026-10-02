@@ -63,8 +63,12 @@ final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unc
         // Local reminders say which tab; pushes from the server carry the website path ("/chat/…", "/walk/…").
         let tab = info["tab"] as? String ?? Push.tab(forPath: info["url"] as? String ?? "")
         let link = info["action"] as? String
+        // "Minder seintjes" (Nudges) is answered in the background: it opens nothing.
+        let opensApp = response.actionIdentifier != "fewer"
         await MainActor.run {
-            if let action = link.flatMap(CoachAction.init(link:)) {
+            if !opensApp {
+                return
+            } else if let action = link.flatMap(CoachAction.init(link:)) {
                 onAction?(action)
             } else {
                 onOpen?(tab)

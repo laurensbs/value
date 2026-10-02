@@ -121,6 +121,10 @@ struct ProfileView: View {
                 row("bell.fill", L("Meldingen"), (model.me?.unread ?? 0) > 0 ? L("\(model.me!.unread) nieuw") : nil)
             }
             Divider().padding(.leading, 56)
+            NavigationLink { NudgeSettingsView() } label: {
+                row("bell.badge.fill", L("Seintjes"), Nudges.settings.enabled ? L("Aan") : L("Uit"))
+            }
+            Divider().padding(.leading, 56)
             NavigationLink { EditProfileView() } label: { row("pencil", L("Profiel bewerken"), nil) }
             Divider().padding(.leading, 56)
             Toggle(isOn: Binding(get: { Keepsakes.shared.coachOn }, set: { Keepsakes.shared.coachOn = $0 })) {

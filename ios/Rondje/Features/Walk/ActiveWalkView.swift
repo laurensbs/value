@@ -159,6 +159,7 @@ struct ActiveWalkView: View {
         defer { ending = false }
         do {
             let distance = try await walk.finish()
+            WalkLog.record(WalkLogEntry(walkId: info.walkId, dogId: model.appointments.outgoing.first { $0.walkId == info.walkId }?.dog.id, dogName: info.dogName, look: info.look, side: "walker", person: nil, distanceM: distance, minutes: max(1, Int(Date.now.timeIntervalSince(info.startedAt) / 60)), photos: photos.count, date: info.startedAt))
             Haptics.success()
             finished = (info.walkId, distance, info.dogName)
             await model.refreshAppointments()
