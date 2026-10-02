@@ -59,7 +59,7 @@ struct MembershipView: View {
                         promise("Leden krijgen geen voorrang: iedereen gebruikt \(Brand.name) op dezelfde manier.")
                     }
 
-                    VStack(alignment: .leading, spacing: 10) {
+                    Card {
                         Text("Goede doelen die we willen steunen").font(.headline)
                         ForEach(Brand.causes) { cause in
                             HStack(alignment: .top, spacing: 12) {
@@ -77,8 +77,6 @@ struct MembershipView: View {
                         Text("We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies waar je bijdrage heen gaat.")
                             .font(.footnote).foregroundStyle(Palette.muted)
                     }
-                    .padding(18)
-                    .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
 
                     Card {
                         Label("Lid worden gaat via de website", systemImage: "safari")

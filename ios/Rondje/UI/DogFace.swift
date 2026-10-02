@@ -129,6 +129,7 @@ struct DogPortrait: View {
     var inset: CGFloat = 0.07
     @State private var blink = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         GeometryReader { geo in
@@ -150,7 +151,8 @@ struct DogPortrait: View {
 
     private func content(pad: CGFloat) -> some View {
         ZStack {
-            Color(css: look.tile ?? "#f6ebcf")
+            // Like the website: the pastel tiles are toned down in dark mode.
+            Color(css: look.tile ?? "#f6ebcf").mix(with: Palette.paper, by: colorScheme == .dark ? 0.3 : 0)
             if let photoURL {
                 AsyncImage(url: photoURL, transaction: Transaction(animation: .easeOut(duration: 0.25))) { phase in
                     if let image = phase.image {

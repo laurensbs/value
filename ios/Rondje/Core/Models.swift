@@ -153,6 +153,7 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
     var flags: [String]
     var walkId: String?
     var walkStatus: String?
+    var feedbackGiven: Bool?
     var dog: Dog
     var host: Contact?
     var walker: Walker?

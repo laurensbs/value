@@ -45,7 +45,12 @@ struct AppointmentsView: View {
             .navigationTitle("Afspraken")
             .refreshable { await model.refreshAppointments() }
             .task { await model.refreshAppointments() }
-            .onChange(of: model.pendingIncoming) { _, n in if n > 0 && model.appointments.outgoing.isEmpty { side = .dogs } }
+            .onAppear {
+                // Owners who do not walk themselves, or who have someone waiting, start on their dogs.
+                if model.me?.profile?.wantsToWalk == false || (model.pendingIncoming > 0 && !model.appointments.outgoing.contains(where: \.isOpen)) {
+                    side = .dogs
+                }
+            }
         }
     }
 }
@@ -110,6 +115,7 @@ struct AppointmentCard: View {
         .sheet(item: Binding(get: { feedbackFor.map(FollowID.init) }, set: { feedbackFor = $0?.id })) { f in
             FeedbackSheet(walkId: f.id, role: asOwner ? .owner : .walker, dogName: item.dog.name)
                 .presentationDetents([.large])
+                .onDisappear { Task { await model.refreshAppointments() } }
         }
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
             Button("Annuleer afspraak", role: .destructive) { Task { await act("cancel") } }
@@ -145,12 +151,13 @@ struct AppointmentCard: View {
                 if item.status == "pending" {
                     Button("Weiger") { Task { await act("decline") } }.buttonStyle(.secondary)
                     Button("Accepteer") { Task { await act("accept") } }.buttonStyle(.primary)
-                } else if item.status == "accepted" || item.status == "completed" {
+                } else if item.status == "completed" || (item.status == "accepted" && item.startsAt < .now) {
+                    // Only after meeting in person: ID seen, and maybe solo walks from now on.
                     Button("Vertrouwen", systemImage: "hand.thumbsup.fill") { trustSheet = true }.buttonStyle(.secondary)
                 }
                 if item.walkStatus == "active", let id = item.walkId {
                     Button("Kijk live mee", systemImage: "dot.radiowaves.left.and.right") { following = id }.buttonStyle(.ball)
-                } else if item.walkStatus == "ended", let id = item.walkId {
+                } else if item.walkStatus == "ended", item.feedbackGiven != true, let id = item.walkId {
                     Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
                 }
             } else {
@@ -162,7 +169,7 @@ struct AppointmentCard: View {
                     }
                     .buttonStyle(.ball)
                     .disabled(busy || walk.isActive)
-                } else if item.walkStatus == "ended", let id = item.walkId {
+                } else if item.walkStatus == "ended", item.feedbackGiven != true, let id = item.walkId {
                     Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
                 }
             }

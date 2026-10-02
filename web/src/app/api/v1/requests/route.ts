@@ -1,4 +1,7 @@
+import { and, eq, inArray } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
+import { getDb } from '@/db'
+import * as s from '@/db/schema'
 import { ageBand } from '@/lib/rules'
 import { apiMember, dogLook, fail, json } from '@/server/api'
 import { createRequest } from '@/server/actions/requests'
@@ -13,6 +16,19 @@ export async function GET() {
   const [outgoing, incoming] = await Promise.all([outgoingRequests(viewer.userId), incomingRequests(viewer)])
   const contacts = await hostContacts(outgoing.filter((r) => OPEN.includes(r.request.status)).map((r) => r.dog))
   const grants = await trustGrantsFor([...new Set(incoming.map((r) => r.dog.id))])
+  // Which walks this person already gave (private) feedback on, so the app stops asking.
+  const walkIds = [...outgoing, ...incoming].map((r) => r.walkId).filter((id): id is string => Boolean(id))
+  const db = await getDb()
+  const given = walkIds.length
+    ? new Set(
+        (
+          await db
+            .select({ walkId: s.feedback.walkId })
+            .from(s.feedback)
+            .where(and(eq(s.feedback.fromUserId, viewer.userId), inArray(s.feedback.walkId, walkIds)))
+        ).map((f) => f.walkId),
+      )
+    : new Set<string>()
 
   const base = (r: RequestRow) => {
     const accepted = OPEN.includes(r.request.status)
@@ -27,6 +43,7 @@ export async function GET() {
       flags: r.request.flags,
       walkId: r.walkId,
       walkStatus: r.walkStatus,
+      feedbackGiven: Boolean(r.walkId && given.has(r.walkId)),
       dog: {
         id: r.dog.id,
         name: r.dog.name,

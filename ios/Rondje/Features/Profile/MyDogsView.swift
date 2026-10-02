@@ -1,3 +1,4 @@
+import PhotosUI
 import SwiftUI
 
 /// Your own dogs (or the neighbour's). Shelters manage their dogs on the website.
@@ -78,12 +79,33 @@ struct AddDogView: View {
     @State private var biteNote = ""
     @State private var busy = false
     @State private var error: String?
+    @State private var pick: [PhotosPickerItem] = []
+    @State private var photos: [UIImage] = []
 
     private let provideOptions = ["bags", "leash", "harness", "treats", "water", "towel"]
 
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(Array(photos.enumerated()), id: \.offset) { _, image in
+                                Image(uiImage: image).resizable().scaledToFill()
+                                    .frame(width: 88, height: 88)
+                                    .clipShape(.rect(cornerRadius: 18, style: .continuous))
+                            }
+                            PhotosPicker(selection: $pick, maxSelectionCount: 4, matching: .images) {
+                                Label(photos.isEmpty ? "Foto's" : "Wijzig", systemImage: "camera.fill")
+                                    .font(.subheadline.weight(.semibold))
+                                    .frame(width: 88, height: 88)
+                                    .background(Palette.grassSoft, in: .rect(cornerRadius: 18, style: .continuous))
+                            }
+                        }
+                    }
+                } footer: {
+                    Text("Geen foto? Dan tekenen we een portret van je hond.")
+                }
                 Section("De hond") {
                     TextField("Naam", text: $name)
                     TextField("Ras (of 'kruising')", text: $breed)
@@ -132,6 +154,7 @@ struct AddDogView: View {
                 if let error { Text(error).foregroundStyle(Palette.danger) }
             }
             .tint(Palette.grass)
+            .onChange(of: pick) { _, items in Task { await loadPhotos(items) } }
             .navigationTitle("Hond toevoegen")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -149,18 +172,52 @@ struct AddDogView: View {
         var ageYears, walkMinutes: Int
         var traits, provides: [String]
         var offLeash, insuranceConfirmed, healthConfirmed, biteHistory: Bool
+        var photos: [String]
+    }
+
+    private func loadPhotos(_ items: [PhotosPickerItem]) async {
+        var images: [UIImage] = []
+        for item in items {
+            if let data = try? await item.loadTransferable(type: Data.self), let image = UIImage(data: data) { images.append(image) }
+        }
+        withAnimation { photos = images }
+    }
+
+    /// Shrinks to at most 1200 px and re-encodes as JPEG: smaller uploads, and no location in the file.
+    private func jpeg(_ image: UIImage, side: CGFloat = 1200, quality: CGFloat = 0.8) -> Data? {
+        let scale = min(1, side / max(image.size.width, image.size.height))
+        let size = CGSize(width: image.size.width * scale, height: image.size.height * scale)
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        let resized = UIGraphicsImageRenderer(size: size, format: format).image { _ in image.draw(in: CGRect(origin: .zero, size: size)) }
+        return resized.jpegData(compressionQuality: quality)
     }
 
     private func save() async {
         busy = true
         defer { busy = false }
         let p = model.me?.profile
+        var urls: [String] = []
+        for image in photos {
+            do {
+                // Like the website: a normal size first, a smaller one if the server says it is too large.
+                do {
+                    urls.append(try await APIClient.shared.uploadPhoto(jpeg(image) ?? Data()))
+                } catch APIError.server(code: "too-large", _) {
+                    urls.append(try await APIClient.shared.uploadPhoto(jpeg(image, side: 800, quality: 0.65) ?? Data()))
+                }
+            } catch {
+                self.error = error.localizedDescription
+                return
+            }
+        }
         let body = Payload(
             name: name, breed: breed, sex: sex, size: size, energy: energy, level: level, story: story, needs: needs,
             treats: treats, country: p?.country ?? "NL", city: p?.city ?? "", meetingInfo: meetingInfo, vetInfo: vetInfo,
             biteNote: biteNote, ageYears: age, walkMinutes: walkMinutes,
             traits: traits.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty },
-            provides: Array(provides), offLeash: offLeash, insuranceConfirmed: insurance, healthConfirmed: health, biteHistory: biteHistory
+            provides: Array(provides), offLeash: offLeash, insuranceConfirmed: insurance, healthConfirmed: health, biteHistory: biteHistory,
+            photos: urls
         )
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/my-dogs", body)

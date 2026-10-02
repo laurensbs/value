@@ -215,7 +215,8 @@ enum Format {
         let time = date.formatted(.dateTime.hour().minute().locale(dutch))
         if cal.isDateInToday(date) { return "Vandaag \(time)" }
         if cal.isDateInTomorrow(date) { return "Morgen \(time)" }
-        return date.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(dutch)).capitalized + " · \(time)"
+        let day = date.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(dutch))
+        return day.prefix(1).uppercased() + day.dropFirst() + " · \(time)"
     }
 }
 

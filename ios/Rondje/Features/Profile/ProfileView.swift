@@ -67,7 +67,7 @@ struct ProfileView: View {
 
     private func stat(_ value: String, _ label: String, _ symbol: String) -> some View {
         VStack(spacing: 4) {
-            Image(systemName: symbol).foregroundStyle(Palette.grass)
+            Image(systemName: symbol).foregroundStyle(Palette.grass).frame(height: 24)
             Text(value).font(.display(22)).contentTransition(.numericText())
             Text(label).font(.caption).foregroundStyle(Palette.muted)
         }

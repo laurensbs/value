@@ -95,6 +95,33 @@ final class APIClient: Sendable {
         }
     }
 
+    // MARK: Photos
+
+    /// Uploads a photo the app already shrank and re-encoded (which also drops EXIF and GPS data).
+    func uploadPhoto(_ jpeg: Data) async throws -> String {
+        let boundary = "rondje-\(UUID().uuidString)"
+        var body = Data()
+        body.append(Data("--\(boundary)\r\nContent-Disposition: form-data; name=\"file\"; filename=\"photo.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n".utf8))
+        body.append(jpeg)
+        body.append(Data("\r\n--\(boundary)--\r\n".utf8))
+        guard let url = URL(string: Brand.baseURL.absoluteString + "/api/upload"), let token = Keychain.load() else { throw APIError.unauthorized }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.httpBody = body
+        struct Uploaded: Decodable { var url: String }
+        do {
+            let (data, response) = try await session.data(for: request)
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            if status == 413 { throw APIError.server(code: "too-large", message: "Deze foto is te groot.") }
+            guard status == 200, let uploaded = try? decoder.decode(Uploaded.self, from: data) else { throw APIError.unexpected }
+            return uploaded.url
+        } catch let error as URLError {
+            throw error.code == .cancelled ? CancellationError() : APIError.offline
+        }
+    }
+
     // MARK: JSON calls
 
     func get<T: Decodable>(_ path: String, as type: T.Type = T.self) async throws -> T {

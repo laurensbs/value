@@ -35,6 +35,11 @@ final class AppModel {
     var pendingIncoming: Int { appointments.incoming.filter { $0.status == "pending" }.count }
 
     func bootstrap() async {
+        // Keychain items outlive an uninstall; a fresh install must never reuse an old session.
+        if !UserDefaults.standard.bool(forKey: "installed") {
+            Keychain.clear()
+            UserDefaults.standard.set(true, forKey: "installed")
+        }
         guard api.hasSession else { phase = .signedOut; return }
         await refreshMe()
     }

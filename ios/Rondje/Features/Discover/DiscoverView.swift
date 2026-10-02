@@ -83,7 +83,12 @@ struct DiscoverView: View {
             }
             .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
         }
-        .task { if dogs.isEmpty { await load() } }
+        .task {
+            // Ask once, with the purpose text from Info.plist; without it the list is sorted by your city.
+            LocationService.shared.requestPermission()
+            if dogs.isEmpty { await load() }
+        }
+        .onChange(of: LocationService.shared.allowed) { _, allowed in if allowed { Task { await load() } } }
         .sensoryFeedback(.selection, trigger: filter)
     }
 
