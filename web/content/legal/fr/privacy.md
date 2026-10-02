@@ -134,7 +134,7 @@ Nous travaillons avec les acteurs ci-dessous. Nous concluons un contrat de sous-
 | Neon Inc. | Base de données (Postgres) | Région UE [à vérifier : laquelle] |
 | Resend Inc. (dès que l'e-mail est activé) | Envoi des e-mails : un nouveau mot de passe, et des notifications comme une nouvelle demande ou une promenade qui dure (désactivables dans votre profil) | États-Unis ; transfert fondé sur des clauses contractuelles types [à vérifier] |
 | Google ou Apple | Connexion, uniquement si vous la choisissez | Sous la responsabilité de Google ou d'Apple |
-| Apple ou Google | Notifications push, uniquement si vous les activez [à vérifier] | Selon les conditions d'Apple ou de Google |
+| Apple, Google ou Mozilla | Notifications push via votre téléphone ou navigateur, uniquement si vous les activez. Ils reçoivent le texte de la notification, ni trajets ni messages | Selon les conditions d'Apple, de Google ou de Mozilla |
 | OpenStreetMap Foundation | Images de cartes (tuiles) | Royaume-Uni [à vérifier] |
 
 **Cartes.** Lorsque vous ouvrez une carte, votre appareil charge des images depuis les serveurs de l'OpenStreetMap Foundation. Ces serveurs reçoivent votre adresse IP et des données techniques sur votre appareil. L'OpenStreetMap Foundation en est elle-même responsable [à vérifier] et dispose de sa propre politique de confidentialité.

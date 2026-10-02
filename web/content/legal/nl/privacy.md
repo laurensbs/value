@@ -134,7 +134,7 @@ We werken met deze partijen. Met verwerkers sluiten we een verwerkersovereenkoms
 | Neon Inc. | Database (Postgres) | EU-regio [te controleren: welke] |
 | Resend Inc. (zodra e-mail aanstaat) | Versturen van e-mails: een nieuw wachtwoord, en meldingen zoals een nieuwe aanvraag of een rondje dat uitloopt (die zet je uit in je profiel) | VS; doorgifte op basis van standaardcontractbepalingen [te controleren] |
 | Google of Apple | Inloggen, alleen als je daarvoor kiest | Eigen verantwoordelijkheid van Google of Apple |
-| Apple of Google | Pushmeldingen, alleen als je die aanzet [te controleren] | Eigen voorwaarden van Apple of Google |
+| Apple, Google of Mozilla | Pushmeldingen via je telefoon of browser, alleen als je die aanzet. Ze krijgen de tekst van de melding, geen route of berichten | Eigen voorwaarden van Apple, Google of Mozilla |
 | OpenStreetMap Foundation | Kaartafbeeldingen (tiles) | Verenigd Koninkrijk [te controleren] |
 
 **Kaarten.** Als je een kaart opent, laadt je apparaat kaartafbeeldingen van de servers van de OpenStreetMap Foundation. Daarbij ontvangen die servers je IP-adres en technische gegevens over je apparaat. De OpenStreetMap Foundation is daarvoor zelf verantwoordelijk [te controleren] en heeft een eigen privacybeleid.
