@@ -293,13 +293,20 @@ export async function hubStats(yourReferralCode: string | null, now = new Date()
         from chat_message
       `),
       rows(sql`select kind, count(*) as n from push_device group by kind`),
+      // Each person once: the app if they used it at all, else the phone browser, else a computer.
       rows(sql`
         select
-          count(distinct user_id) filter (where user_agent ilike '%RondjeApp%') as app,
-          count(distinct user_id) filter (where user_agent not ilike '%RondjeApp%' and user_agent ~* '(iphone|android|mobile)') as mobile_web,
-          count(distinct user_id) filter (where coalesce(user_agent, '') not ilike '%RondjeApp%' and coalesce(user_agent, '') !~* '(iphone|android|mobile)') as desktop_web
-        from session
-        where updated_at >= ${monthAgo}
+          count(*) filter (where app) as app,
+          count(*) filter (where not app and phone) as mobile_web,
+          count(*) filter (where not app and not phone) as desktop_web
+        from (
+          select se.user_id,
+            bool_or(coalesce(se.user_agent, '') ilike '%RondjeApp%') as app,
+            bool_or(coalesce(se.user_agent, '') ~* '(iphone|android|mobile)') as phone
+          from session se join "user" u on u.id = se.user_id
+          where se.updated_at >= ${monthAgo} and u.email not like ${DEMO_EMAIL}
+          group by se.user_id
+        ) x
       `),
       rows(sql`
         select week, sum(signups) as signups, sum(walks) as walks from (
@@ -312,25 +319,48 @@ export async function hubStats(yourReferralCode: string | null, now = new Date()
           where w.status = 'ended' and w.ended_at >= ${twelveWeeksAgo}
         ) x group by week
       `),
+      // Funnels: every person gets the furthest step they reached, and each step counts everyone who
+      // got at least that far. So a step is never bigger than the one before, and someone who once
+      // walked still counts after switching walking off.
       rows(sql`
         select
-          count(*) filter (where p.wants_to_walk) as walkers,
-          count(*) filter (where p.wants_to_walk and p.quiz_passed_at is not null) as quiz,
-          (select count(distinct walker_id) from walk_request) as requested,
-          (select count(distinct walker_id) from walk_request where status in ('accepted', 'completed')) as met,
-          (select count(distinct walker_id) from walk where status = 'ended') as walked,
-          (select count(*) from (select walker_id from walk where status = 'ended' group by walker_id having count(*) >= 3) t) as regular
-        from profile p join "user" u on u.id = p.user_id
-        where u.email not like ${DEMO_EMAIL}
+          count(*) as walkers,
+          count(*) filter (where step >= 1) as quiz,
+          count(*) filter (where step >= 2) as requested,
+          count(*) filter (where step >= 3) as met,
+          count(*) filter (where step >= 4) as walked,
+          count(*) filter (where step >= 5) as regular
+        from (
+          select p.wants_to_walk, case
+              when (select count(*) from walk w where w.walker_id = p.user_id and w.status = 'ended') >= 3 then 5
+              when exists (select 1 from walk w where w.walker_id = p.user_id and w.status = 'ended') then 4
+              when exists (select 1 from walk_request r where r.walker_id = p.user_id and r.status in ('accepted', 'completed')) then 3
+              when exists (select 1 from walk_request r where r.walker_id = p.user_id) then 2
+              when p.quiz_passed_at is not null then 1
+              else 0
+            end as step
+          from profile p join "user" u on u.id = p.user_id
+          where u.email not like ${DEMO_EMAIL}
+        ) x
+        where wants_to_walk or step >= 2
       `),
       rows(sql`
         select
-          count(*) filter (where p.has_dogs) as owners,
-          (select count(distinct owner_id) from dog where owner_id is not null and not is_demo and status = 'active') as with_dog,
-          (select count(distinct d.owner_id) from walk_request r join dog d on d.id = r.dog_id where d.owner_id is not null and not d.is_demo) as asked,
-          (select count(distinct d.owner_id) from walk w join dog d on d.id = w.dog_id where w.status = 'ended' and d.owner_id is not null and not d.is_demo) as walked
-        from profile p join "user" u on u.id = p.user_id
-        where u.email not like ${DEMO_EMAIL}
+          count(*) as owners,
+          count(*) filter (where step >= 1) as with_dog,
+          count(*) filter (where step >= 2) as asked,
+          count(*) filter (where step >= 3) as walked
+        from (
+          select p.has_dogs, case
+              when exists (select 1 from walk w join dog d on d.id = w.dog_id where d.owner_id = p.user_id and not d.is_demo and w.status = 'ended') then 3
+              when exists (select 1 from walk_request r join dog d on d.id = r.dog_id where d.owner_id = p.user_id and not d.is_demo) then 2
+              when exists (select 1 from dog d where d.owner_id = p.user_id and not d.is_demo and d.status = 'active') then 1
+              else 0
+            end as step
+          from profile p join "user" u on u.id = p.user_id
+          where u.email not like ${DEMO_EMAIL}
+        ) x
+        where has_dogs or step >= 1
       `),
       rows(sql`
         select p.city, p.country, count(*) as people,

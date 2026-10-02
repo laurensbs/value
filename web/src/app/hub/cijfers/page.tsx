@@ -103,7 +103,7 @@ export default async function HubNumbers() {
       <div className="hub-two">
         <section className="card stack">
           <h3>App of website</h3>
-          <p className="muted small">Wie de laatste 30 dagen ingelogd was, en waarmee.</p>
+          <p className="muted small">Wie de laatste 30 dagen ingelogd was, en waarmee. Iedereen telt één keer: wie de app gebruikte, telt als app.</p>
           <Funnel
             steps={[
               { label: 'Alle actieve mensen', n: platformTotal },
