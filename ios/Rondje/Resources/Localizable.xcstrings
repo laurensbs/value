@@ -2517,28 +2517,6 @@
         }
       }
     },
-    "Depressie Vereniging" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depressie Vereniging (Dutch depression association)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depressie Vereniging (asociación neerlandesa de la depresión)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depressie Vereniging (association néerlandaise sur la dépression)"
-          }
-        }
-      }
-    },
     "Deze foto is te groot." : {
       "localizations" : {
         "en" : {
@@ -4343,28 +4321,6 @@
         }
       }
     },
-    "Goede doelen die we willen steunen" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Causes we want to support"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Causas que queremos apoyar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les causes que nous voulons soutenir"
-          }
-        }
-      }
-    },
     "Goede vrienden" : {
       "localizations" : {
         "en" : {
@@ -4559,6 +4515,94 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grand"
+          }
+        }
+      }
+    },
+    "Guus is de hond die je steeds de volgende stap laat zien." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus is the dog who always shows you the next step."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus es el perro que siempre te enseña el siguiente paso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus est le chien qui te montre toujours la prochaine étape."
+          }
+        }
+      }
+    },
+    "Guus legt het straks weer uit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus will explain it again"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus te lo volverá a explicar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus te réexpliquera tout"
+          }
+        }
+      }
+    },
+    "Guus mag tips geven" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus may give tips"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus puede dar consejos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus peut donner des conseils"
+          }
+        }
+      }
+    },
+    "Guus: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guus : %@"
           }
         }
       }
@@ -4893,6 +4937,28 @@
         }
       }
     },
+    "Honden die mensen met een beperking of trauma helpen zelfstandig te leven." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dogs that help people with a disability or trauma live independently."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perros que ayudan a personas con discapacidad o trauma a vivir de forma independiente."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des chiens qui aident les personnes en situation de handicap ou ayant vécu un traumatisme à vivre de façon autonome."
+          }
+        }
+      }
+    },
     "Honden staan op hun buurt, nooit op een adres." : {
       "localizations" : {
         "en" : {
@@ -5135,24 +5201,24 @@
         }
       }
     },
-    "Hulphond Nederland" : {
+    "Hulphonden" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hulphond Nederland (assistance dogs)"
+            "value" : "Assistance dogs"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hulphond Nederland (perros de asistencia)"
+            "value" : "Perros de asistencia"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hulphond Nederland (chiens d'assistance)"
+            "value" : "Chiens d'assistance"
           }
         }
       }
@@ -5747,6 +5813,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tu participes ! Apporte ta pièce d'identité."
+          }
+        }
+      }
+    },
+    "Je goed voelen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feeling good"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sentirse bien"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se sentir bien"
           }
         }
       }
@@ -6631,6 +6719,28 @@
         }
       }
     },
+    "Laat Guus alles opnieuw uitleggen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let Guus explain everything again"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Que Guus lo explique todo de nuevo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laisser Guus tout réexpliquer"
+          }
+        }
+      }
+    },
     "Laatst verdiend" : {
       "localizations" : {
         "en" : {
@@ -6803,28 +6913,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prépare sacs, laisse et une friandise près de la porte. La remise sera rapide."
-          }
-        }
-      }
-    },
-    "Leidt honden op die mensen met een beperking of trauma helpen zelfstandig te leven." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trains dogs that help people with a disability or trauma live independently."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entrena perros que ayudan a personas con discapacidad o trauma a vivir de forma independiente."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forme des chiens qui aident les personnes en situation de handicap ou de traumatisme à vivre de façon autonome."
           }
         }
       }
@@ -9211,6 +9299,28 @@
         }
       }
     },
+    "Snap ik" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got it"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entendido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compris"
+          }
+        }
+      }
+    },
     "Snuffelen is voor een hond net zo vermoeiend als rennen. Een rustig snuffelrondje is een cadeau." : {
       "localizations" : {
         "en" : {
@@ -10465,24 +10575,24 @@
         }
       }
     },
-    "Voor mensen met een depressie en hun naasten. Wandelen met een hond helpt tegen somberheid." : {
+    "Voor mensen die het even zwaar hebben. Een rondje buiten kan je dag goed doen." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "For people with depression and their loved ones. Walking with a dog helps against low mood."
+            "value" : "For people going through a hard time. A walk outside can do your day good."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Para personas con depresión y sus allegados. Pasear con un perro ayuda contra el desánimo."
+            "value" : "Para personas que lo están pasando mal. Un paseo al aire libre puede alegrarte el día."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pour les personnes souffrant de dépression et leurs proches. Promener un chien aide contre la morosité."
+            "value" : "Pour les personnes qui traversent une période difficile. Une balade dehors peut faire du bien à ta journée."
           }
         }
       }
@@ -10659,6 +10769,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "À quoi un promeneur doit-il faire attention ?"
+          }
+        }
+      }
+    },
+    "Waar we aan willen bijdragen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What we want to contribute to"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A qué queremos contribuir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce à quoi nous voulons contribuer"
           }
         }
       }
@@ -11037,24 +11169,24 @@
         }
       }
     },
-    "We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies waar je bijdrage heen gaat." : {
+    "We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies welke organisaties het zijn en waar je bijdrage heen gaat." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "We're still making arrangements about this. Once they're settled, you'll see here exactly where your contribution goes."
+            "value" : "We are still making arrangements. Once they are settled, you will see exactly which organisations they are and where your contribution goes."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Todavía lo estamos acordando. En cuanto esté cerrado, verás aquí exactamente adónde va tu aportación."
+            "value" : "Todavía estamos cerrando acuerdos. En cuanto estén listos, verás aquí exactamente qué organizaciones son y adónde va tu aportación."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nous sommes encore en train d'en discuter. Dès que ce sera conclu, tu verras ici exactement où va ta contribution."
+            "value" : "Nous sommes encore en train de nous organiser. Dès que ce sera réglé, tu verras ici précisément de quelles organisations il s'agit et où va ta contribution."
           }
         }
       }

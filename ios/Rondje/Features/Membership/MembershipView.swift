@@ -60,7 +60,7 @@ struct MembershipView: View {
                     }
 
                     Card {
-                        Text("Goede doelen die we willen steunen").font(.headline)
+                        Text("Waar we aan willen bijdragen").font(.headline)
                         ForEach(Brand.causes) { cause in
                             HStack(alignment: .top, spacing: 12) {
                                 Image(systemName: cause.symbol)
@@ -74,7 +74,7 @@ struct MembershipView: View {
                                 }
                             }
                         }
-                        Text("We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies waar je bijdrage heen gaat.")
+                        Text("We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies welke organisaties het zijn en waar je bijdrage heen gaat.")
                             .font(.footnote).foregroundStyle(Palette.muted)
                     }
 
