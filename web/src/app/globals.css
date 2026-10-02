@@ -2995,6 +2995,11 @@ legend {
   gap: 12px;
 }
 
+.chat-head .grow {
+  flex: 1;
+  min-width: 0;
+}
+
 .chat-title {
   font-size: 1.25rem;
   margin: 0;
