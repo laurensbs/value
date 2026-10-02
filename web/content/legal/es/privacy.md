@@ -93,7 +93,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 |---|---|
 | Crear y gestionar tu cuenta, iniciar sesión | Ejecución del contrato |
 | Mostrar perfiles y poner en contacto a paseantes y perros | Ejecución del contrato |
-| Gestionar solicitudes, primeros encuentros y paseos, y compartir los datos de contacto tras la aceptación | Ejecución del contrato |
+| Gestionar solicitudes, primeros encuentros y paseos, con un recordatorio previo (también para los paseos en grupo), y compartir los datos de contacto tras la aceptación | Ejecución del contrato |
 | Ubicación en tiempo real durante el paseo, aviso de retraso, pantalla SOS | Ejecución del contrato, e interés legítimo nuestro y de propietarios y paseantes en la seguridad |
 | Registrar la comprobación de identidad, test de seguridad, limitaciones de cuentas nuevas | Interés legítimo: la seguridad de personas y animales |
 | Valoraciones privadas, denuncias, moderación, bloqueos y expulsiones | Interés legítimo: seguridad y prevención de abusos. En parte, obligación legal (DSA) |

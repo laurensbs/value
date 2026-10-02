@@ -975,7 +975,9 @@
       "nudge-challenge": "New month, new challenge: {city} goes for {goal} walks together. Will you join in?",
       "challenge-done": "{city} made it: {goal} walks together! {mine, plural, one {One of them was yours.} other {# of them were yours.}} Thank you!",
       "nudge-back": "{variant, select, dog {Fancy a walk with {dogName}? Plan it whenever it suits you.} other {Fancy a walk? See which dogs near you are looking for a walking buddy.}}",
-      "nudge-owner": "{tip, select, photo {A photo helps walkers get to know {dogName}. Will you add one?} slots {Add regular walking times for {dogName}, so walkers see right away when it suits.} other {No requests for {dogName} yet? Share the page with neighbours and friends, it often helps.}}"
+      "nudge-owner": "{tip, select, photo {A photo helps walkers get to know {dogName}. Will you add one?} slots {Add regular walking times for {dogName}, so walkers see right away when it suits.} other {No requests for {dogName} yet? Share the page with neighbours and friends, it often helps.}}",
+      "request-reminder": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} other {a walk with {dogName}}}. Have fun!",
+      "group-walk-reminder": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: group walk at {orgName}. Have fun!"
     }
   },
   "admin": {
@@ -1415,6 +1417,14 @@
       "nudge-owner": {
         "subject": "A tip for {dogName}",
         "body": "{tip, select, photo {A photo helps walkers get to know {dogName}. A photo outside, with eye contact, works best.} slots {Add regular walking times for {dogName}, so walkers see right away when it suits.} other {No requests for {dogName} yet? Share the page with neighbours and friends, it often helps.}}"
+      },
+      "request-reminder": {
+        "subject": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} other {a walk with {dogName}}}",
+        "body": "Everything about the appointment, like where you meet and how to reach each other, is in Rondje. Can't make it after all? Let the other person know in time through the chat."
+      },
+      "group-walk-reminder": {
+        "subject": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: group walk at {orgName}",
+        "body": "Where you meet is in Rondje, under group walks. Can't make it after all? Cancel your sign-up so someone else can take your spot."
       }
     },
     "reminderFooter": "You get this reminder because reminders are on in your profile. We send one every few days at most. You can turn them off in your profile, under Settings."

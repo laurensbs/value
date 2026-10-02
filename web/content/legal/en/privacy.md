@@ -93,7 +93,7 @@ Questions about privacy? Email us at [e-mail: hallo@rondje.app]. [To verify: whe
 |---|---|
 | Creating and managing your account, signing in | Contract |
 | Showing profiles and matching walkers with dogs | Contract |
-| Handling requests, first meetings and walks, and sharing contact details after acceptance | Contract |
+| Handling requests, first meetings and walks, with a reminder beforehand (also for group walks), and sharing contact details after acceptance | Contract |
 | Live location during a walk, overdue alerts, SOS screen | Contract, and our legitimate interest and that of owners and walkers in safety |
 | Recording the ID check, safety quiz, restrictions for new accounts | Legitimate interest: the safety of people and animals |
 | Private feedback, reports, moderation, blocks and bans | Legitimate interest: safety and preventing misuse. Partly a legal obligation (DSA) |

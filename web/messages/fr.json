@@ -975,7 +975,9 @@
       "nudge-challenge": "Nouveau mois, nouveau défi : {city} fait {goal} balades ensemble. Vous en êtes ?",
       "challenge-done": "{city} a relevé le défi : {goal} balades ensemble ! {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci !",
       "nudge-back": "{variant, select, dog {Envie d'une balade avec {dogName} ? Planifiez-la quand cela vous convient.} other {Envie d'une balade ? Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}}",
-      "nudge-owner": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Vous en ajoutez une ?} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
+      "nudge-owner": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Vous en ajoutez une ?} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}",
+      "request-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}. Belle rencontre !} other {balade avec {dogName}. Bonne balade !}}",
+      "group-walk-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}. Bonne balade !"
     }
   },
   "admin": {
@@ -1415,6 +1417,14 @@
       "nudge-owner": {
         "subject": "Un conseil pour {dogName}",
         "body": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Une photo en extérieur, avec un contact visuel, fonctionne le mieux.} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
+      },
+      "request-reminder": {
+        "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}} other {balade avec {dogName}}}",
+        "body": "Tout sur le rendez-vous, comme le lieu de rencontre et la façon de vous joindre, se trouve dans Rondje. Finalement, vous ne pouvez pas ? Prévenez l'autre personne à temps via la discussion."
+      },
+      "group-walk-reminder": {
+        "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}",
+        "body": "Le point de rendez-vous se trouve dans Rondje, dans les balades en groupe. Finalement, vous ne pouvez pas venir ? Annulez votre inscription pour libérer votre place."
       }
     },
     "reminderFooter": "Vous recevez ce rappel parce que les rappels sont activés dans votre profil. Nous en envoyons un tous les quelques jours au maximum. Vous pouvez les désactiver dans votre profil, sous Réglages."

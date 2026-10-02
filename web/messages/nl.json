@@ -975,7 +975,9 @@
       "nudge-challenge": "Nieuwe maand, nieuwe uitdaging: {city} loopt samen {goal} rondjes. Loop je mee?",
       "challenge-done": "{city} heeft de uitdaging gehaald: {goal} rondjes samen! {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel!",
       "nudge-back": "{variant, select, dog {Zin in een rondje met {dogName}? Plan het wanneer het jou uitkomt.} other {Zin in een rondje? Kijk welke honden er bij jou in de buurt een wandelmaatje zoeken.}}",
-      "nudge-owner": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Voeg je er een toe?} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}"
+      "nudge-owner": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Voeg je er een toe?} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}",
+      "request-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} other {rondje met {dogName}}}. Veel plezier!",
+      "group-walk-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}. Veel plezier!"
     }
   },
   "admin": {
@@ -1415,6 +1417,14 @@
       "nudge-owner": {
         "subject": "Een tip voor {dogName}",
         "body": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Een foto buiten, met oogcontact, werkt het best.} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}"
+      },
+      "request-reminder": {
+        "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} other {rondje met {dogName}}}",
+        "body": "Alles over de afspraak, zoals waar jullie afspreken en hoe je elkaar bereikt, staat in Rondje. Lukt het toch niet? Laat het de ander dan op tijd weten via de chat."
+      },
+      "group-walk-reminder": {
+        "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}",
+        "body": "Waar jullie verzamelen staat in Rondje, bij de groepswandelingen. Kun je toch niet? Meld je dan af, dan komt je plek vrij voor een ander."
       }
     },
     "reminderFooter": "Je krijgt deze herinnering omdat herinneringen aanstaan in je profiel. We sturen er hooguit één per paar dagen. Uitzetten kan in je profiel, onder Instellingen."

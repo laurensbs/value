@@ -26,6 +26,9 @@ describe('push', () => {
     expect(m.body).toBe('kinds.chat-message|Ans|Bello')
     expect(m.url).toBe('/chat/r1')
     expect(m.tag).toBe('chat-message:r1')
+    const group = await pushMessage('group-walk-reminder', { groupWalkId: 'g1', orgName: 'Opvang', day: 'tomorrow', time: '10:00' }, 'nl')
+    expect(group.url).toBe('/group-walks')
+    expect(group.tag).toBe('group-walk-reminder:g1')
   })
 
   it('signs an APNs token Apple can verify (ES256, raw signature)', () => {

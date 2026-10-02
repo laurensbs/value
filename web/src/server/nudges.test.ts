@@ -65,6 +65,11 @@ afterAll(async () => {
 })
 
 describe('sendNudges', () => {
+  it('lets someone who just heard about an appointment wait a day', async () => {
+    const run = await sendNudges(now, new Set(['nieuw', 'fleur', 'tom', 'ans']))
+    expect(run).toMatchObject({ people: 5, sent: {}, pushed: 0, emailed: 0 })
+  })
+
   it('sends each person the one reminder that fits, by push or else by email', async () => {
     const run = await sendNudges(now)
     expect(run.people).toBe(5)

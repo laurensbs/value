@@ -7,6 +7,7 @@ export type NotificationData = {
   requestId?: string
   orgId?: string
   orgName?: string
+  groupWalkId?: string
   // Reminders (lib/nudges.ts)
   step?: string
   role?: string
@@ -16,6 +17,10 @@ export type NotificationData = {
   mine?: number
   variant?: string
   tip?: string
+  // Appointment reminders (server/reminders.ts): "today" or "tomorrow", the local time, and the start.
+  day?: string
+  time?: string
+  at?: string
 }
 
 /** Where each first-step reminder leads: the same pages as the first steps on the Today screen. */
@@ -29,6 +34,7 @@ export function notificationHref(kind: string, data: NotificationData): string {
   if (kind === 'trust-granted' && data.dogId) return `/dogs/${data.dogId}`
   if (kind === 'org-verified' && data.orgId) return `/shelter/${data.orgId}`
   if (kind === 'group-signup') return '/shelter'
+  if (kind === 'group-walk-reminder') return '/group-walks'
   if (kind === 'org-pending') return '/admin'
   if ((kind === 'shelter-joined' || kind === 'group-walk-new') && data.orgId) return `/dogs?org=${data.orgId}`
   if (kind === 'nudge-step') return STEP_HREFS[data.step ?? ''] ?? '/'
@@ -54,8 +60,14 @@ export function notificationValues(data: NotificationData): Record<string, strin
     role: data.role ?? 'other',
     variant: data.variant ?? 'other',
     tip: data.tip ?? 'other',
+    day: data.day ?? 'other',
+    time: data.time ?? '',
   }
 }
 
 /** Notifications that are also sent by email: someone is waiting for an answer, or it is about safety. */
 export const EMAIL_KINDS = ['request-new', 'request-accepted', 'walk-overdue', 'org-verified', 'org-pending', 'shelter-joined', 'chat-message'] as const
+
+/** A heads-up about an appointment (server/reminders.ts): sent once, as a push or else by email. */
+export const REMINDER_KINDS = ['request-reminder', 'group-walk-reminder'] as const
+export type ReminderKind = (typeof REMINDER_KINDS)[number]

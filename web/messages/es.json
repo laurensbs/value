@@ -975,7 +975,9 @@
       "nudge-challenge": "Nuevo mes, nuevo reto: {city} da {goal} paseos juntos. ¿Te apuntas?",
       "challenge-done": "¡{city} lo ha conseguido: {goal} paseos juntos! {mine, plural, one {Uno de ellos fue tuyo.} other {# de ellos fueron tuyos.}} ¡Gracias!",
       "nudge-back": "{variant, select, dog {¿Te apetece un paseo con {dogName}? Planéalo cuando te venga bien.} other {¿Te apetece un paseo? Mira qué perros cerca de ti buscan compañero de paseo.}}",
-      "nudge-owner": "{tip, select, photo {Una foto ayuda a los paseadores a conocer a {dogName}. ¿Añades una?} slots {Añade momentos fijos de paseo para {dogName}, así los paseadores ven enseguida cuándo encaja.} other {¿Aún sin solicitudes para {dogName}? Comparte la página con vecinos y amigos, suele ayudar.}}"
+      "nudge-owner": "{tip, select, photo {Una foto ayuda a los paseadores a conocer a {dogName}. ¿Añades una?} slots {Añade momentos fijos de paseo para {dogName}, así los paseadores ven enseguida cuándo encaja.} other {¿Aún sin solicitudes para {dogName}? Comparte la página con vecinos y amigos, suele ayudar.}}",
+      "request-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: {variant, select, meet {conocer a {dogName}} other {paseo con {dogName}}}. ¡Que vaya muy bien!",
+      "group-walk-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}. ¡Que vaya muy bien!"
     }
   },
   "admin": {
@@ -1415,6 +1417,14 @@
       "nudge-owner": {
         "subject": "Un consejo para {dogName}",
         "body": "{tip, select, photo {Una foto ayuda a los paseadores a conocer a {dogName}. Una foto al aire libre, mirando a la cámara, funciona mejor.} slots {Añade momentos fijos de paseo para {dogName}, así los paseadores ven enseguida cuándo encaja.} other {¿Aún sin solicitudes para {dogName}? Comparte la página con vecinos y amigos, suele ayudar.}}"
+      },
+      "request-reminder": {
+        "subject": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: {variant, select, meet {conocer a {dogName}} other {paseo con {dogName}}}",
+        "body": "Todo sobre la cita, como dónde quedáis y cómo contactar, está en Rondje. ¿Al final no puedes? Avisa a la otra persona a tiempo por el chat."
+      },
+      "group-walk-reminder": {
+        "subject": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}",
+        "body": "El punto de encuentro está en Rondje, en los paseos en grupo. ¿Al final no puedes? Cancela tu inscripción para que otra persona pueda ocupar tu plaza."
       }
     },
     "reminderFooter": "Recibes este recordatorio porque tienes los recordatorios activados en tu perfil. Enviamos uno cada pocos días como mucho. Puedes desactivarlos en tu perfil, en Ajustes."

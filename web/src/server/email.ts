@@ -3,7 +3,7 @@ import { after } from 'next/server'
 import { getTranslations } from 'next-intl/server'
 import { DEFAULT_LOCALE, isLocale, type Locale } from '@/i18n/config'
 import { renderEmail } from '@/lib/email-layout'
-import { EMAIL_KINDS, notificationHref, notificationValues, type NotificationData } from '@/lib/notification-links'
+import { EMAIL_KINDS, notificationHref, notificationValues, REMINDER_KINDS, type NotificationData } from '@/lib/notification-links'
 import { isNudgeKind } from '@/lib/nudges'
 import { siteUrl } from '@/lib/site'
 
@@ -52,10 +52,14 @@ export function sendEmailLater(email: Email): void {
 
 export const toLocale = (value: string | null | undefined): Locale => (isLocale(value) ? value : DEFAULT_LOCALE)
 
-/** The email for a notification worth an email, or for a reminder (which says how to turn reminders off). */
+/**
+ * The email for a notification worth an email, an appointment reminder, or a friendly reminder
+ * (which says how to turn friendly reminders off).
+ */
 export async function notificationEmail(kind: string, data: NotificationData, locale: Locale, to: string): Promise<Email | null> {
-  const reminder = isNudgeKind(kind)
-  if (!reminder && !(EMAIL_KINDS as readonly string[]).includes(kind)) return null
+  const nudge = isNudgeKind(kind)
+  const emailed: readonly string[] = [...EMAIL_KINDS, ...REMINDER_KINDS]
+  if (!nudge && !emailed.includes(kind)) return null
   const t = await getTranslations({ locale, namespace: 'email' })
   const values = notificationValues(data)
   const subject = t(`kinds.${kind}.subject`, values)
@@ -63,7 +67,7 @@ export async function notificationEmail(kind: string, data: NotificationData, lo
     heading: subject,
     paragraphs: [t(`kinds.${kind}.body`, values)],
     cta: { label: t('open'), url: `${siteUrl()}${notificationHref(kind, data)}` },
-    footer: t(reminder ? 'reminderFooter' : 'footer'),
+    footer: t(nudge ? 'reminderFooter' : 'footer'),
   })
   return { to, subject, html, text }
 }

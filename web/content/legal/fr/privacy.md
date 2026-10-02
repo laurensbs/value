@@ -93,7 +93,7 @@ Des questions sur la vie privée ? Écrivez-nous à [e-mail: hallo@rondje.app]. 
 |---|---|
 | Créer et gérer votre compte, vous connecter | Exécution du contrat |
 | Afficher les profils et mettre en relation promeneurs et chiens | Exécution du contrat |
-| Gérer les demandes, premières rencontres et promenades, et partager les coordonnées après acceptation | Exécution du contrat |
+| Gérer les demandes, premières rencontres et promenades, avec un rappel avant le rendez-vous (aussi pour les balades en groupe), et partager les coordonnées après acceptation | Exécution du contrat |
 | Localisation en direct pendant la promenade, alerte de retard, écran SOS | Exécution du contrat, et notre intérêt légitime ainsi que celui des propriétaires et des promeneurs à la sécurité |
 | Enregistrer la vérification d'identité, quiz de sécurité, limites des nouveaux comptes | Intérêt légitime : la sécurité des personnes et des animaux |
 | Avis privés, signalements, modération, blocages et exclusions | Intérêt légitime : sécurité et prévention des abus. En partie obligation légale (DSA) |

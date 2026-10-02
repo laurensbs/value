@@ -30,8 +30,11 @@ export interface NudgeRun {
 
 type Person = Awaited<ReturnType<typeof peopleWithReminders>>[number]
 
-/** One run: picks and sends today's reminders. Only during the day in the Netherlands, whoever starts it. */
-export async function sendNudges(now = new Date()): Promise<NudgeRun> {
+/**
+ * One run: picks and sends today's reminders. Only during the day in the Netherlands, whoever
+ * starts it. `skip` is who already heard about an appointment this morning: theirs can wait.
+ */
+export async function sendNudges(now = new Date(), skip: ReadonlySet<string> = new Set()): Promise<NudgeRun> {
   const run: NudgeRun = { people: 0, sent: {}, pushed: 0, emailed: 0 }
   const hour = localParts(now).hour
   if (hour < 8 || hour >= 21) return run
@@ -45,6 +48,7 @@ export async function sendNudges(now = new Date()): Promise<NudgeRun> {
     const chunk = people.slice(i, i + CHUNK)
     const facts = await factsFor(db, chunk, towns, now)
     const picks = chunk.flatMap((person) => {
+      if (skip.has(person.userId)) return []
       const f = facts.get(person.userId)!
       const nudge = pickNudge(f.facts, now)
       return nudge ? [{ person, nudge, pushable: f.pushable }] : []
