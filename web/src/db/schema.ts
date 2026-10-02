@@ -55,7 +55,11 @@ export const profile = pgTable(
     createdAt: created(),
     updatedAt: updated(),
   },
-  (t) => [uniqueIndex('profile_referral_idx').on(t.referralCode), index('profile_country_idx').on(t.country)],
+  (t) => [
+    uniqueIndex('profile_referral_idx').on(t.referralCode),
+    index('profile_country_idx').on(t.country),
+    index('profile_referred_by_idx').on(t.referredBy),
+  ],
 )
 
 /** Shelters and other organisations. Verified by an admin before their dogs go live. */
@@ -75,6 +79,20 @@ export const organization = pgTable(
     registrationNumber: text('registration_number').notNull().default(''),
     description: text('description').notNull().default(''),
     logoUrl: text('logo_url'),
+    coverUrl: text('cover_url'),
+    instagram: text('instagram'),
+    /** Roughly how many dogs the shelter has, from the sign-up form. */
+    dogCount: integer('dog_count'),
+    openingHours: text('opening_hours').notNull().default(''),
+    walkingTimes: text('walking_times').notNull().default(''),
+    /** Private: who Rondje contacts at the shelter. Never shown publicly. */
+    coordinatorName: text('coordinator_name').notNull().default(''),
+    coordinatorEmail: text('coordinator_email'),
+    coordinatorPhone: text('coordinator_phone'),
+    /** Defaults for the shelter's dogs: treats 'yes' | 'no' | 'own', what the shelter provides, walk length. */
+    treatsPolicy: text('treats_policy').notNull().default('own'),
+    provides: text('provides').array().notNull().default(emptyTextArray),
+    defaultWalkMinutes: integer('default_walk_minutes').notNull().default(45),
     status: text('status').notNull().default('pending'),
     directoryId: text('directory_id'),
     isDemo: boolean('is_demo').notNull().default(false),
@@ -382,3 +400,36 @@ export const auditLog = pgTable('audit_log', {
   data: jsonb('data'),
   createdAt: created(),
 })
+
+/**
+ * Tips from users about shelters that should be on Rondje: a free-form tip, or a vote
+ * ("I want to walk here") on a shelter from the directory. Rondje never contacts anyone
+ * automatically; an admin follows up by hand. Tips about private people are never stored.
+ */
+export const suggestion = pgTable(
+  'suggestion',
+  {
+    id: text('id').primaryKey(),
+    kind: text('kind').notNull(), // 'shelter' (free-form tip) | 'vote' (directory entry)
+    name: text('name').notNull(),
+    country: text('country').notNull(),
+    city: text('city').notNull(),
+    website: text('website'),
+    directoryId: text('directory_id'),
+    note: text('note').notNull().default(''),
+    suggestedBy: text('suggested_by')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    status: text('status').notNull().default('new'), // new | contacted | joined | declined | duplicate | spam
+    adminNote: text('admin_note').notNull().default(''),
+    handledBy: text('handled_by'),
+    handledAt: timestamp('handled_at'),
+    createdAt: created(),
+  },
+  (t) => [
+    index('suggestion_status_idx').on(t.status, t.createdAt),
+    index('suggestion_user_idx').on(t.suggestedBy, t.createdAt),
+    // One vote per person per directory shelter. Free-form tips have no directory id (NULLs never clash).
+    uniqueIndex('suggestion_vote_idx').on(t.suggestedBy, t.directoryId),
+  ],
+)

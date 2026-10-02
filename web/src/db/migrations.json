@@ -81,5 +81,28 @@
       "CREATE INDEX \"session_userId_idx\" ON \"session\" USING btree (\"user_id\");",
       "CREATE INDEX \"verification_identifier_idx\" ON \"verification\" USING btree (\"identifier\");"
     ]
+  },
+  {
+    "tag": "0001_intake_tips",
+    "statements": [
+      "CREATE TABLE \"suggestion\" (\n\t\"id\" text PRIMARY KEY NOT NULL,\n\t\"kind\" text NOT NULL,\n\t\"name\" text NOT NULL,\n\t\"country\" text NOT NULL,\n\t\"city\" text NOT NULL,\n\t\"website\" text,\n\t\"directory_id\" text,\n\t\"note\" text DEFAULT '' NOT NULL,\n\t\"suggested_by\" text NOT NULL,\n\t\"status\" text DEFAULT 'new' NOT NULL,\n\t\"admin_note\" text DEFAULT '' NOT NULL,\n\t\"handled_by\" text,\n\t\"handled_at\" timestamp,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL\n);",
+      "ALTER TABLE \"organization\" ADD COLUMN \"cover_url\" text;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"instagram\" text;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"dog_count\" integer;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"opening_hours\" text DEFAULT '' NOT NULL;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"walking_times\" text DEFAULT '' NOT NULL;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"coordinator_name\" text DEFAULT '' NOT NULL;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"coordinator_email\" text;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"coordinator_phone\" text;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"treats_policy\" text DEFAULT 'own' NOT NULL;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"provides\" text[] DEFAULT '{}'::text[] NOT NULL;",
+      "ALTER TABLE \"organization\" ADD COLUMN \"default_walk_minutes\" integer DEFAULT 45 NOT NULL;",
+      "ALTER TABLE \"suggestion\" ADD CONSTRAINT \"suggestion_suggested_by_user_id_fk\" FOREIGN KEY (\"suggested_by\") REFERENCES \"public\".\"user\"(\"id\") ON DELETE cascade ON UPDATE no action;",
+      "CREATE INDEX \"suggestion_status_idx\" ON \"suggestion\" USING btree (\"status\",\"created_at\");",
+      "CREATE INDEX \"suggestion_user_idx\" ON \"suggestion\" USING btree (\"suggested_by\",\"created_at\");",
+      "CREATE UNIQUE INDEX \"suggestion_vote_idx\" ON \"suggestion\" USING btree (\"suggested_by\",\"directory_id\");",
+      "CREATE INDEX \"profile_referred_by_idx\" ON \"profile\" USING btree (\"referred_by\");",
+      "UPDATE \"dog\" SET \"country\" = \"organization\".\"country\", \"city\" = \"organization\".\"city\", \"lat\" = \"organization\".\"lat\", \"lng\" = \"organization\".\"lng\" FROM \"organization\" WHERE \"dog\".\"org_id\" = \"organization\".\"id\";"
+    ]
   }
 ]
