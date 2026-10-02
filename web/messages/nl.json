@@ -127,6 +127,110 @@
     "impactKm": "Kilometer",
     "impactDogs": "Honden die naar buiten gingen"
   },
+  "landing": {
+    "pills": {
+      "free": "Gratis",
+      "noAds": "Geen reclame",
+      "adults": "18+"
+    },
+    "stage": {
+      "goodWalk": "Goed rondje!",
+      "calm": "Rustig · 40 min"
+    },
+    "hero": {
+      "shelterLink": "Werk je bij een opvang?"
+    },
+    "choose": {
+      "title": "Wat brengt je hier?",
+      "lede": "Kies wat bij je past, dan wijzen we je meteen de weg.",
+      "walk": {
+        "title": "Ik wil wandelen",
+        "text": "Met een hond uit de buurt of uit de opvang."
+      },
+      "owner": {
+        "title": "Ik heb een hond",
+        "text": "Of ik zoek hulp voor de hond van een buurvrouw, opa of oma."
+      },
+      "both": {
+        "title": "Allebei",
+        "text": "Zelf wandelen met andere honden, en hulp voor je eigen hond."
+      },
+      "shelter": {
+        "title": "Ik werk bij een opvang",
+        "text": "Zet je honden online en plan begeleide groepswandelingen."
+      }
+    },
+    "dogs": {
+      "title": "Wie gaat er vandaag mee?",
+      "lede": "Een paar honden die op een rondje wachten.",
+      "all": "Bekijk alle honden"
+    },
+    "how": {
+      "eyebrow": "In vier stappen",
+      "step": "Stap {n}",
+      "s1": "Vertel wie je bent",
+      "s2": "Kies een hond",
+      "s3": "Eerst samen kennismaken",
+      "s4": "Je vaste rondje"
+    },
+    "app": {
+      "eyebrow": "Op je telefoon",
+      "title": "Alles wat je nodig hebt, in je broekzak",
+      "lede": "Honden ontdekken, een kennismaking plannen en samen op pad, terwijl de eigenaar live meekijkt.",
+      "soon": "Binnenkort in de App Store",
+      "today": "Tot die tijd werkt {app} op elke telefoon, gewoon in je browser. Tip: zet {app} op je beginscherm, dan opent het als een app.",
+      "note": "Schermen uit de iPhone-app, met voorbeeldgegevens.",
+      "discover": {
+        "title": "Ontdek",
+        "text": "Honden in je buurt, met hun verhaal en hoe lang ze graag lopen.",
+        "alt": "Het scherm Ontdek in de iPhone-app, met Bobbie de beagle op 600 meter"
+      },
+      "owner": {
+        "title": "Jij kiest",
+        "text": "Als eigenaar zie je wie er wil wandelen, en kies je zelf een moment om kennis te maken.",
+        "alt": "Het thuisscherm voor eigenaren in de iPhone-app, met een aanvraag voor een kennismaking"
+      },
+      "walk": {
+        "title": "Live meekijken",
+        "text": "Tijdens het rondje kijkt de eigenaar mee op de kaart. De SOS-knop zit altijd binnen handbereik.",
+        "alt": "Een rondje met Bobbie in de iPhone-app: kaart, tijd, afstand en een SOS-knop"
+      }
+    },
+    "safety": {
+      "eyebrow": "Veilig, voor mens en hond",
+      "t1": "Eerst samen",
+      "t2": "ID in het echt",
+      "t3": "De eigenaar beslist",
+      "t4": "Live meekijken",
+      "t5": "Privé terugkoppeling",
+      "t6": "Melden kan altijd"
+    },
+    "community": {
+      "eyebrow": "Samen deze maand",
+      "first": "Nog geen rondjes in {month}. Loop jij de eerste?",
+      "join": "Doe mee"
+    },
+    "countries": {
+      "link": "Bekijk alle steden"
+    },
+    "free": {
+      "price": "€0",
+      "priceNote": "voor wandelaars, eigenaren en opvangen",
+      "ads": "Geen advertenties",
+      "subscription": "Geen abonnement",
+      "data": "We verkopen nooit gegevens"
+    },
+    "closing": {
+      "title": "Er wacht een hond op je",
+      "text": "Bij jou in de buurt wonen honden van mensen die zelf niet ver meer kunnen lopen. Een extra rondje maakt hun dag."
+    },
+    "pages": {
+      "safety": "Veiligheid",
+      "groupWalks": "Samen met een opvang",
+      "shelters": "Opvangen",
+      "cities": "Steden"
+    }
+  },
   "auth": {
     "loginTitle": "Welkom terug",
     "signupTitle": "Maak een account",

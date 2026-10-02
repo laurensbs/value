@@ -127,6 +127,110 @@
     "impactKm": "Kilometres",
     "impactDogs": "Dogs who got out"
   },
+  "landing": {
+    "pills": {
+      "free": "Free",
+      "noAds": "No ads",
+      "adults": "18+"
+    },
+    "stage": {
+      "goodWalk": "Good walk!",
+      "calm": "Calm · 40 min"
+    },
+    "hero": {
+      "shelterLink": "Do you work at a shelter?"
+    },
+    "choose": {
+      "title": "What brings you here?",
+      "lede": "Pick what fits you, and we'll point you the right way.",
+      "walk": {
+        "title": "I want to walk",
+        "text": "With a dog from the neighbourhood or from a shelter."
+      },
+      "owner": {
+        "title": "I have a dog",
+        "text": "Or I'm looking for help with the dog of a neighbour or a grandparent."
+      },
+      "both": {
+        "title": "Both",
+        "text": "Walking other dogs, and help with your own dog."
+      },
+      "shelter": {
+        "title": "I work at a shelter",
+        "text": "Put your dogs online and plan guided group walks."
+      }
+    },
+    "dogs": {
+      "title": "Who's coming along today?",
+      "lede": "A few dogs who are waiting for a walk.",
+      "all": "See all dogs"
+    },
+    "how": {
+      "eyebrow": "In four steps",
+      "step": "Step {n}",
+      "s1": "Tell us who you are",
+      "s2": "Pick a dog",
+      "s3": "Meet together first",
+      "s4": "Your regular walk"
+    },
+    "app": {
+      "eyebrow": "On your phone",
+      "title": "Everything you need, right in your pocket",
+      "lede": "Discover dogs, plan a first meeting and head out together, while the owner follows along live.",
+      "soon": "Coming soon to the App Store",
+      "today": "Until then, {app} works on every phone, right in your browser. Tip: add {app} to your home screen and it opens like an app.",
+      "note": "Screens from the iPhone app, with example data.",
+      "discover": {
+        "title": "Discover",
+        "text": "Dogs near you, with their story and how long they like to walk.",
+        "alt": "The Discover screen in the iPhone app, showing Bobbie the beagle 600 metres away"
+      },
+      "owner": {
+        "title": "You choose",
+        "text": "As an owner you see who would like to walk, and you pick a moment to meet.",
+        "alt": "The home screen for owners in the iPhone app, with a request for a first meeting"
+      },
+      "walk": {
+        "title": "Follow along live",
+        "text": "During the walk the owner can follow along on the map. The SOS button is always within reach.",
+        "alt": "A walk with Bobbie in the iPhone app: map, time, distance and an SOS button"
+      }
+    },
+    "safety": {
+      "eyebrow": "Safe for people and dogs",
+      "t1": "Together first",
+      "t2": "ID checked in person",
+      "t3": "The owner decides",
+      "t4": "Follow along live",
+      "t5": "Private feedback",
+      "t6": "Report any time"
+    },
+    "community": {
+      "eyebrow": "Together this month",
+      "first": "No walks yet in {month}. Will you walk the first one?",
+      "join": "Join in"
+    },
+    "countries": {
+      "link": "See all cities"
+    },
+    "free": {
+      "price": "€0",
+      "priceNote": "for walkers, owners and shelters",
+      "ads": "No ads",
+      "subscription": "No subscription",
+      "data": "We never sell data"
+    },
+    "closing": {
+      "title": "A dog is waiting for you",
+      "text": "Near you live dogs whose people can't walk far any more. One extra walk makes their day."
+    },
+    "pages": {
+      "safety": "Safety",
+      "groupWalks": "Together with a shelter",
+      "shelters": "Shelters",
+      "cities": "Cities"
+    }
+  },
   "auth": {
     "loginTitle": "Welcome back",
     "signupTitle": "Create an account",
