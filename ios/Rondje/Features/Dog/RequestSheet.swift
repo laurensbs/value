@@ -98,7 +98,7 @@ struct RequestSheet: View {
         struct Sent: Decodable { var ok: Bool; var flagged: Bool }
         do {
             let result: Sent = try await APIClient.shared.post("/api/v1/requests", Payload(dogId: dog.id, kind: kind.rawValue, date: date, time: time, message: message, weekly: weekly))
-            Haptics.success()
+            Haptics.success(.send)
             model.show(result.flagged ? L("Verstuurd. Berichten over geld worden gecontroleerd.") : L("Aanvraag verstuurd! Je hoort het zodra er antwoord is."))
             await model.refreshAppointments()
             await sent()
@@ -165,7 +165,7 @@ struct ReportSheet: View {
             if block, let subjectUserId {
                 let _: OK = try await APIClient.shared.post("/api/v1/blocks", ["userId": subjectUserId])
             }
-            Haptics.success()
+            Haptics.success(nil)
             model.show(L("Bedankt. We kijken ernaar."), symbol: "shield.lefthalf.filled")
             dismiss()
         } catch {
