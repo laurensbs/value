@@ -2143,29 +2143,6 @@
         }
       }
     },
-    "Buiten zijn met een hond helpt tegen stress en eenzaamheid. Het is gratis, zonder reclame, en veilig." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Being outside with a dog helps against stress and loneliness. It's free, without ads, and safe."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estar fuera con un perro ayuda contra el estrés y la soledad. Es gratis, sin anuncios y seguro."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Être dehors avec un chien aide contre le stress et la solitude. C'est gratuit, sans pub et sûr."
-          }
-        }
-      }
-    },
     "Buurt" : {
       "localizations" : {
         "en" : {
@@ -2668,29 +2645,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partager"
-          }
-        }
-      }
-    },
-    "Depressie Vereniging" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depressie Vereniging (Dutch depression association)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depressie Vereniging (asociación neerlandesa de la depresión)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depressie Vereniging (association néerlandaise sur la dépression)"
           }
         }
       }
@@ -5485,29 +5439,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De l'aide pour ton chien"
-          }
-        }
-      }
-    },
-    "Hulphond Nederland" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hulphond Nederland (assistance dogs)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hulphond Nederland (perros de asistencia)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hulphond Nederland (chiens d'assistance)"
           }
         }
       }
@@ -11081,29 +11012,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pour toi, les voisins ou les grands-parents"
-          }
-        }
-      }
-    },
-    "Voor mensen met een depressie en hun naasten. Wandelen met een hond helpt tegen somberheid." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For people with depression and their loved ones. Walking with a dog helps against low mood."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Para personas con depresión y sus allegados. Pasear con un perro ayuda contra el desánimo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pour les personnes souffrant de dépression et leurs proches. Promener un chien aide contre la morosité."
           }
         }
       }
