@@ -3,7 +3,9 @@ import { PGlite } from '@electric-sql/pglite'
 import { Pool } from '@neondatabase/serverless'
 import { sql } from 'drizzle-orm'
 import { drizzle as drizzleNeon } from 'drizzle-orm/neon-serverless'
+import { drizzle as drizzlePg } from 'drizzle-orm/node-postgres'
 import { drizzle as drizzlePglite } from 'drizzle-orm/pglite'
+import pg from 'pg'
 import migrations from './migrations.json'
 import * as schema from './schema'
 
@@ -11,7 +13,7 @@ export type Db = ReturnType<typeof drizzlePglite<typeof schema>>
 
 interface DbState {
   db: Db
-  mode: 'neon' | 'pglite'
+  mode: 'neon' | 'postgres' | 'pglite'
   ready?: Promise<void>
 }
 
@@ -21,11 +23,37 @@ function connectionString(): string | undefined {
   return process.env.DATABASE_URL || process.env.POSTGRES_URL || undefined
 }
 
+function isNeon(url: string): boolean {
+  try {
+    return new URL(url).hostname.endsWith('.neon.tech')
+  } catch {
+    return false
+  }
+}
+
+/** Plain Postgres (Supabase, Prisma Postgres, a local server) through node-postgres. */
+function plainPool(url: string): pg.Pool {
+  const parsed = new URL(url)
+  const local = ['localhost', '127.0.0.1'].includes(parsed.hostname)
+  // Hosted poolers often use their own certificate authority; encrypt, but do not pin it.
+  parsed.searchParams.delete('sslmode')
+  parsed.searchParams.delete('supa')
+  return new pg.Pool({
+    connectionString: parsed.toString(),
+    ssl: local ? undefined : { rejectUnauthorized: false },
+    max: 5,
+    idleTimeoutMillis: 10_000,
+  })
+}
+
 function create(): DbState {
   const url = connectionString()
-  if (url) {
+  if (url && isNeon(url)) {
     const pool = new Pool({ connectionString: url })
     return { db: drizzleNeon({ client: pool, schema }) as unknown as Db, mode: 'neon' }
+  }
+  if (url) {
+    return { db: drizzlePg({ client: plainPool(url), schema }) as unknown as Db, mode: 'postgres' }
   }
   // No database configured: run an embedded Postgres. Locally it persists in .pglite;
   // on a serverless host it lives in memory (demo mode, data is not kept).

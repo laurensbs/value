@@ -230,8 +230,8 @@ export default async function AdminPage() {
       <section className="card stack-s">
         <h2>{t('admin.setup')}</h2>
         <ul className="setup-list">
-          <li className={mode === 'neon' ? 'ok' : 'todo'}>
-            <strong>{t('admin.database')}:</strong> {mode === 'neon' ? 'Neon Postgres' : t('admin.databaseDemo')}
+          <li className={mode === 'pglite' ? 'todo' : 'ok'}>
+            <strong>{t('admin.database')}:</strong> {mode === 'neon' ? 'Neon Postgres' : mode === 'postgres' ? 'Postgres' : t('admin.databaseDemo')}
           </li>
           <li className={blob ? 'ok' : 'todo'}>
             <strong>{t('admin.photos')}:</strong> {blob ? 'Vercel Blob' : t('admin.photosInline')}
