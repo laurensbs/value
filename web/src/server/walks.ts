@@ -2,9 +2,11 @@ import 'server-only'
 import { and, asc, eq, gt, inArray, or } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
-import { overdueMinutes } from '@/lib/rules'
+import { routeLengthM } from '@/lib/geo'
+import { canStartWalk, overdueMinutes } from '@/lib/rules'
 import { notify } from './notify'
-import type { Viewer } from './session'
+import type { FormState } from './actions/profile'
+import type { OnboardedViewer, Viewer } from './session'
 
 export type Walk = typeof s.walk.$inferSelect
 
@@ -94,4 +96,67 @@ export async function activeWalkFor(viewer: Viewer): Promise<ActiveWalk | null> 
     )
     .limit(1)
   return theirs ? { ...theirs, role: 'watcher' } : null
+}
+
+/** Starts the walk for an accepted request, or returns the one already running. Shared with the app API. */
+export async function beginWalk(requestId: string, viewer: OnboardedViewer): Promise<FormState & { walkId?: string }> {
+  const db = await getDb()
+  const [row] = await db
+    .select({ request: s.walkRequest, dog: s.dog })
+    .from(s.walkRequest)
+    .innerJoin(s.dog, eq(s.dog.id, s.walkRequest.dogId))
+    .where(eq(s.walkRequest.id, requestId))
+  if (!row) return { ok: false, error: 'forbidden' }
+
+  const existing = await db.select().from(s.walk).where(eq(s.walk.requestId, requestId))
+  const active = existing.find((w) => w.status === 'active')
+  if (active && active.walkerId === viewer.userId) return { ok: true, walkId: active.id }
+  if (!canStartWalk(row.request, viewer.userId)) return { ok: false, error: 'not-now' }
+
+  const id = crypto.randomUUID()
+  const now = new Date()
+  await db.insert(s.walk).values({
+    id,
+    requestId,
+    dogId: row.dog.id,
+    walkerId: viewer.userId,
+    startedAt: now,
+    plannedEndAt: new Date(now.getTime() + row.request.durationMin * 60_000),
+  })
+  await notify(db, await watchers(row.dog), 'walk-started', { walkId: id, dogName: row.dog.name, walkerName: viewer.profile.firstName })
+  return { ok: true, walkId: id }
+}
+
+/** Ends an active walk: stores its length and rolls a weekly walk on. Shared with the app API. */
+export async function finishWalk(walkId: string, viewer: OnboardedViewer): Promise<FormState & { distanceM?: number }> {
+  const access = await walkAccess(walkId, viewer)
+  if (!access?.isWalker) return { ok: false, error: 'forbidden' }
+  if (access.walk.status !== 'active') return { ok: true, message: 'already-ended', distanceM: access.walk.distanceM }
+
+  const db = await getDb()
+  const points = await db
+    .select({ lat: s.walkPoint.lat, lng: s.walkPoint.lng })
+    .from(s.walkPoint)
+    .where(eq(s.walkPoint.walkId, walkId))
+    .orderBy(asc(s.walkPoint.id))
+  const distanceM = routeLengthM(points)
+  await db
+    .update(s.walk)
+    .set({ status: 'ended', endedAt: new Date(), distanceM })
+    .where(eq(s.walk.id, walkId))
+
+  if (access.walk.requestId) {
+    const [request] = await db.select().from(s.walkRequest).where(eq(s.walkRequest.id, access.walk.requestId))
+    if (request?.weekly && request.status === 'accepted') {
+      // A fixed weekly walk rolls on to next week, already accepted.
+      await db
+        .update(s.walkRequest)
+        .set({ startsAt: new Date(request.startsAt.getTime() + 7 * 24 * 60 * 60_000) })
+        .where(eq(s.walkRequest.id, request.id))
+    } else if (request) {
+      await db.update(s.walkRequest).set({ status: 'completed' }).where(eq(s.walkRequest.id, request.id))
+    }
+  }
+  await notify(db, await watchers(access.dog), 'walk-ended', { walkId, dogName: access.dog.name })
+  return { ok: true, distanceM }
 }

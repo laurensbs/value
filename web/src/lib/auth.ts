@@ -1,6 +1,7 @@
 import 'server-only'
 import { passkey } from '@better-auth/passkey'
 import { betterAuth } from 'better-auth'
+import { bearer } from 'better-auth/plugins/bearer'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { nextCookies } from 'better-auth/next-js'
 import { eq } from 'drizzle-orm'
@@ -61,6 +62,9 @@ export const auth = betterAuth({
   trustedOrigins: [...trustedOrigins(), ...(Object.keys(apple).length ? ['https://appleid.apple.com'] : [])],
   plugins: [
     passkey({ rpID: new URL(baseURL).hostname, rpName: 'Rondje', origin: baseURL }),
+    // The native iOS app signs in with email and password and keeps the session token in the
+    // Keychain; it sends it as "Authorization: Bearer …" instead of a cookie (src/server/api.ts).
+    bearer({ requireSignature: true }),
     nextCookies(),
   ],
 })

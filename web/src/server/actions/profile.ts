@@ -4,15 +4,12 @@ import { eq } from 'drizzle-orm'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getLocale } from 'next-intl/server'
-import { z } from 'zod'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
-import { isCountry } from '@/lib/countries'
-import { fuzzLatLng, isValidLatLng } from '@/lib/geo'
 import { scoreQuiz } from '@/lib/quiz'
-import { isAllowedPhotoUrl } from '@/lib/photos'
 import { isAdult } from '@/lib/rules'
-import { safeNext, TERMS_VERSION } from '@/lib/site'
+import { safeNext } from '@/lib/site'
+import { location, profileSchema, safePhoto, saveOnboarding } from '../profile-core'
 import { actionViewer, getViewer } from '../session'
 
 export interface FormState {
@@ -20,22 +17,6 @@ export interface FormState {
   error?: string
   message?: string
 }
-
-const profileSchema = z.object({
-  firstName: z.string().trim().min(1).max(40),
-  birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  country: z.string().refine(isCountry),
-  city: z.string().trim().min(1).max(60),
-  lat: z.coerce.number().optional(),
-  lng: z.coerce.number().optional(),
-  bio: z.string().trim().max(600).default(''),
-  experience: z.enum(['none', 'some', 'lots']),
-  phone: z.string().trim().max(30).default(''),
-  languages: z.array(z.enum(['nl', 'en', 'es', 'fr', 'de'])).default([]),
-  photoUrl: z.string().max(600_000).optional(),
-  wantsToWalk: z.boolean(),
-  hasDogs: z.boolean(),
-})
 
 function readProfile(form: FormData) {
   return profileSchema.safeParse({
@@ -55,56 +36,18 @@ function readProfile(form: FormData) {
   })
 }
 
-/** Our own uploads, or the picture from the person's Google/Apple account (or the one they already had). */
-function safePhoto(url: string | undefined, viewer: { image: string | null; profile: { photoUrl: string | null } | null }): string | null {
-  if (!url) return null
-  return isAllowedPhotoUrl(url) || url === viewer.image || url === viewer.profile?.photoUrl ? url : null
-}
-
-function location(lat?: number, lng?: number) {
-  return lat !== undefined && lng !== undefined && isValidLatLng(lat, lng) ? fuzzLatLng({ lat, lng }) : { lat: null, lng: null }
-}
-
-function referralCode(): string {
-  const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
-  return Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => alphabet[b % alphabet.length]).join('')
-}
-
 export async function completeOnboarding(_prev: FormState, form: FormData): Promise<FormState> {
   const viewer = await getViewer()
   if (!viewer) return { ok: false, error: 'not-signed-in' }
   const parsed = readProfile(form)
   if (!parsed.success) return { ok: false, error: 'invalid' }
-  const p = parsed.data
-  if (!isAdult(p.birthDate)) return { ok: false, error: 'too-young' }
-  if (form.get('terms') !== 'on') return { ok: false, error: 'terms' }
-
-  const db = await getDb()
-  const values = {
-    firstName: p.firstName,
-    birthDate: p.birthDate,
-    country: p.country,
-    city: p.city,
-    ...location(p.lat, p.lng),
-    bio: p.bio,
-    experience: p.experience,
-    phone: p.phone || null,
-    languages: p.languages,
-    photoUrl: safePhoto(p.photoUrl, viewer),
-    wantsToWalk: p.wantsToWalk,
-    hasDogs: p.hasDogs,
-    termsAcceptedAt: new Date(),
-    termsVersion: TERMS_VERSION,
+  const result = await saveOnboarding(viewer, parsed.data, {
+    termsAccepted: form.get('terms') === 'on',
     locale: await getLocale(),
-  }
-  const referredBy = (await cookies()).get('rondje_ref')?.value ?? null
-  if (viewer.profile) {
-    await db.update(s.profile).set(values).where(eq(s.profile.userId, viewer.userId))
-  } else {
-    await db.insert(s.profile).values({ userId: viewer.userId, ...values, referralCode: referralCode(), referredBy })
-  }
-  await db.update(s.user).set({ name: p.firstName }).where(eq(s.user.id, viewer.userId))
-
+    referredBy: (await cookies()).get('rondje_ref')?.value ?? null,
+  })
+  if (!result.ok) return result
+  const p = parsed.data
   redirect(safeNext(form.get('next') || undefined, p.hasDogs && !p.wantsToWalk ? '/my-dogs/new' : '/dogs'))
 }
 
