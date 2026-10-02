@@ -127,6 +127,110 @@
     "impactKm": "Kilómetros",
     "impactDogs": "Perros que salieron"
   },
+  "landing": {
+    "pills": {
+      "free": "Gratis",
+      "noAds": "Sin anuncios",
+      "adults": "18+"
+    },
+    "stage": {
+      "goodWalk": "¡Buen paseo!",
+      "calm": "Tranquilo · 40 min"
+    },
+    "hero": {
+      "shelterLink": "¿Trabajas en una protectora?"
+    },
+    "choose": {
+      "title": "¿Qué te trae por aquí?",
+      "lede": "Elige lo que encaja contigo y te enseñamos el camino.",
+      "walk": {
+        "title": "Quiero pasear",
+        "text": "Con un perro del barrio o de una protectora."
+      },
+      "owner": {
+        "title": "Tengo un perro",
+        "text": "O busco ayuda para el perro de una vecina, del abuelo o de la abuela."
+      },
+      "both": {
+        "title": "Las dos cosas",
+        "text": "Pasear a otros perros y tener ayuda con el tuyo."
+      },
+      "shelter": {
+        "title": "Trabajo en una protectora",
+        "text": "Publica tus perros y organiza paseos en grupo acompañados."
+      }
+    },
+    "dogs": {
+      "title": "¿Quién sale hoy contigo?",
+      "lede": "Algunos perros que esperan su paseo.",
+      "all": "Ver todos los perros"
+    },
+    "how": {
+      "eyebrow": "En cuatro pasos",
+      "step": "Paso {n}",
+      "s1": "Cuéntanos quién eres",
+      "s2": "Elige un perro",
+      "s3": "Primero, un encuentro juntos",
+      "s4": "Tu paseo fijo"
+    },
+    "app": {
+      "eyebrow": "En tu móvil",
+      "title": "Todo lo que necesitas, en el bolsillo",
+      "lede": "Descubre perros, planea un primer encuentro y salid juntos mientras el dueño lo sigue en directo.",
+      "soon": "Muy pronto en la App Store",
+      "today": "Mientras tanto, {app} funciona en cualquier móvil, directamente en el navegador. Consejo: añade {app} a tu pantalla de inicio y se abrirá como una app.",
+      "note": "Pantallas de la app para iPhone, con datos de ejemplo.",
+      "discover": {
+        "title": "Descubre",
+        "text": "Perros cerca de ti, con su historia y cuánto tiempo les gusta pasear.",
+        "alt": "La pantalla Descubre de la app para iPhone, con Bobbie, un beagle a 600 metros"
+      },
+      "owner": {
+        "title": "Tú eliges",
+        "text": "Como dueño ves quién quiere pasear y eliges tú el momento para conoceros.",
+        "alt": "La pantalla de inicio para dueños en la app para iPhone, con una solicitud de primer encuentro"
+      },
+      "walk": {
+        "title": "En directo",
+        "text": "Durante el paseo, el dueño lo sigue en el mapa. El botón SOS siempre está a mano.",
+        "alt": "Un paseo con Bobbie en la app para iPhone: mapa, tiempo, distancia y un botón SOS"
+      }
+    },
+    "safety": {
+      "eyebrow": "Seguro para personas y perros",
+      "t1": "Primero, juntos",
+      "t2": "Identificación en persona",
+      "t3": "El dueño decide",
+      "t4": "En directo",
+      "t5": "Opinión privada",
+      "t6": "Siempre puedes avisar"
+    },
+    "community": {
+      "eyebrow": "Juntos este mes",
+      "first": "Aún no hay paseos en {month}. ¿Das tú el primero?",
+      "join": "Apúntate"
+    },
+    "countries": {
+      "link": "Ver todas las ciudades"
+    },
+    "free": {
+      "price": "0 €",
+      "priceNote": "para paseadores, dueños y protectoras",
+      "ads": "Sin anuncios",
+      "subscription": "Sin suscripción",
+      "data": "Nunca vendemos datos"
+    },
+    "closing": {
+      "title": "Hay un perro esperándote",
+      "text": "Cerca de ti viven perros cuyas personas ya no pueden caminar mucho. Un paseo más les alegra el día."
+    },
+    "pages": {
+      "safety": "Seguridad",
+      "groupWalks": "Con una protectora",
+      "shelters": "Protectoras",
+      "cities": "Ciudades"
+    }
+  },
   "auth": {
     "loginTitle": "Hola de nuevo",
     "signupTitle": "Crea una cuenta",

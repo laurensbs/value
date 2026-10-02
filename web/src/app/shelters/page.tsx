@@ -2,6 +2,9 @@ import { and, count, eq, inArray, isNotNull, sql } from 'drizzle-orm'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
+import { Flag } from '@/components/landing/Flag'
+import { BROWN, COLLIE } from '@/components/landing/looks'
+import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { Map, type MapMarker } from '@/components/map'
 import { VoteButton } from '@/components/SuggestForm'
 import { getDb } from '@/db'
@@ -10,6 +13,7 @@ import { COUNTRIES, COUNTRY_INFO, isCountry } from '@/lib/countries'
 import { DIRECTORY } from '@/lib/directory'
 import { guessCountry } from '@/lib/guess-country'
 import { getViewer } from '@/server/session'
+import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('directory')
@@ -70,14 +74,16 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
 
   return (
     <div className="stack-l">
-      <header className="stack-s">
-        <h1>{t('directory.title')}</h1>
-        <p className="lede">{t('directory.lede')}</p>
-      </header>
-      <nav className="choices" aria-label={t('common.country')}>
+      <PageHero
+        eyebrow={t('landing.pages.shelters')}
+        title={t('directory.title')}
+        lede={t('directory.lede')}
+        art={{ dog: BROWN, friend: COLLIE, tone: 'blue', badge: <Icon name="building" /> }}
+      />
+      <nav className="choices lp-touch" aria-label={t('common.country')}>
         {COUNTRIES.map((c) => (
           <Link key={c} href={`/shelters?country=${c}`} className={`chip${c === country ? ' on' : ''}`}>
-            {COUNTRY_INFO[c].flag} {t(`common.countries.${c}`)}
+            <Flag country={c} /> {t(`common.countries.${c}`)}
           </Link>
         ))}
       </nav>
@@ -86,7 +92,7 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
       <section className="stack-s">
         <h2>{t('directory.partner')}</h2>
         {localPartners.length ? (
-          <ul className="list">
+          <ul className="list lp-touch">
             {localPartners.map((p) => (
               <li key={p.id} className="list-item">
                 <Icon name="building" />
@@ -116,7 +122,7 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
       <section className="stack-s">
         <h2>{t('directory.notPartner')}</h2>
         <p className="muted small">{t('directory.unverified')}</p>
-        <ul className="list">
+        <ul className="list lp-touch">
           {others.map((d) => (
             <li key={d.id} className="list-item">
               <div className="grow stack-s">
@@ -146,12 +152,15 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
         </p>
       </section>
 
-      <section className="card flat stack-s">
-        <h2>{t('directory.tipTitle')}</h2>
-        <p className="muted">{t('directory.tipText')}</p>
+      <section className="lp-card soft-green lp-tip">
+        <IconTile tone="ball">
+          <Icon name="heart" />
+        </IconTile>
         <div>
-          <Link href="/suggest?kind=shelter" className="button secondary">
-            <Icon name="heart" size={16} /> {t('directory.tipButton')}
+          <h2>{t('directory.tipTitle')}</h2>
+          <p className="muted">{t('directory.tipText')}</p>
+          <Link href="/suggest?kind=shelter" className="button primary">
+            {t('directory.tipButton')}
           </Link>
         </div>
       </section>

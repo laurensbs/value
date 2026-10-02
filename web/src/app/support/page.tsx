@@ -1,10 +1,13 @@
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
+import { COLLIE } from '@/components/landing/looks'
+import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { SupportButton } from '@/components/SupportButton'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
+import '../landing.css'
 
 type Cost = (typeof costs.items)[number]
 
@@ -27,14 +30,20 @@ export default async function SupportPage() {
 
   return (
     <div className="narrow-page stack-l">
-      <header className="stack-s">
-        <p className="eyebrow">{t('support.eyebrow')}</p>
-        <h1>{t('support.title')}</h1>
-        <p className="lede">{t('support.lede')}</p>
-      </header>
+      <PageHero
+        eyebrow={t('support.eyebrow')}
+        title={t('support.title')}
+        lede={t('support.lede')}
+        art={{ dog: COLLIE, tone: 'ball', badge: <Icon name="heart" /> }}
+      />
 
-      <section className="card stack-s">
-        <h2>{t('support.promiseTitle')}</h2>
+      <section className="lp-card pad soft-green stack-s">
+        <div className="lp-block-title">
+          <IconTile tone="ball" size="s">
+            <Icon name="shield" size={20} />
+          </IconTile>
+          <h2>{t('support.promiseTitle')}</h2>
+        </div>
         <ul className="check-list">
           {(['free', 'ads', 'data', 'sponsors', 'equal'] as const).map((k) => (
             <li key={k}>
@@ -45,7 +54,7 @@ export default async function SupportPage() {
       </section>
 
       {native ? null : (
-        <section className="stack-s">
+        <section className="lp-card pad stack-s">
           <h2>{t('support.costsTitle')}</h2>
           <p className="muted">{t('support.costsLede')}</p>
           <div className="table-wrap">
@@ -71,7 +80,7 @@ export default async function SupportPage() {
       )}
 
       {native ? null : cfg.url && cfg.operator ? (
-        <section className="card support-card stack-s" id="steun">
+        <section className="lp-card pad soft-blue stack-s" id="steun">
           <h2>{t('support.giveTitle')}</h2>
           <p>{t('support.giveText', { operator: cfg.operator })}</p>
           <div>
@@ -80,7 +89,7 @@ export default async function SupportPage() {
           <p className="muted small">{t('support.giveNote', { platform: cfg.platform ?? '' })}</p>
         </section>
       ) : (
-        <section className="card flat stack-s" id="steun">
+        <section className="lp-card pad soft-blue stack-s" id="steun">
           <h2>{t('support.giveTitle')}</h2>
           <p className="muted">{t('support.giveSoon')}</p>
         </section>
@@ -89,32 +98,40 @@ export default async function SupportPage() {
       <section className="stack">
         <h2>{t('support.helpTitle')}</h2>
         <ul className="benefits">
-          <li className="card">
-            <Icon name="building" />
+          <li className="lp-card pad">
+            <IconTile tone="blue" size="s">
+              <Icon name="building" size={20} />
+            </IconTile>
             <h3>{t('support.help.tipTitle')}</h3>
             <p className="muted small">{t('support.help.tip')}</p>
             <Link href="/suggest" className="link-button small">
               {t('support.help.tipLink')} →
             </Link>
           </li>
-          <li className="card">
-            <Icon name="users" />
+          <li className="lp-card pad">
+            <IconTile tone="green" size="s">
+              <Icon name="users" size={20} />
+            </IconTile>
             <h3>{t('support.help.inviteTitle')}</h3>
             <p className="muted small">{t('support.help.invite')}</p>
             <Link href="/profile#invite" className="link-button small">
               {t('support.help.inviteLink')} →
             </Link>
           </li>
-          <li className="card">
-            <Icon name="share" />
+          <li className="lp-card pad">
+            <IconTile tone="warm" size="s">
+              <Icon name="share" size={20} />
+            </IconTile>
             <h3>{t('support.help.shareTitle')}</h3>
             <p className="muted small">{cfg.instagram ? t('support.help.shareInstagram', { handle: cfg.instagram }) : t('support.help.share')}</p>
             <Link href="/about#delen" className="link-button small">
               {t('support.help.shareLink')} →
             </Link>
           </li>
-          <li className="card">
-            <Icon name="heart" />
+          <li className="lp-card pad">
+            <IconTile tone="rose" size="s">
+              <Icon name="heart" size={20} />
+            </IconTile>
             <h3>{t('support.help.partnerTitle')}</h3>
             <p className="muted small">{t('support.help.partner')}</p>
             {cfg.contactEmail ? (
@@ -126,10 +143,10 @@ export default async function SupportPage() {
         </ul>
       </section>
 
-      <section className="stack-s">
+      <section className="stack-s lp-faq">
         <h2>{t('support.faqTitle')}</h2>
         {(native ? (['free', 'sponsors'] as const) : (['free', 'where', 'tax', 'perks', 'sponsors'] as const)).map((k) => (
-          <details key={k} className="card disclosure">
+          <details key={k} className="lp-card disclosure">
             <summary>
               <strong>{t(`support.faq.${k}.q`)}</strong>
             </summary>

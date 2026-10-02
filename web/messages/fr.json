@@ -127,6 +127,110 @@
     "impactKm": "Kilomètres",
     "impactDogs": "Chiens sortis"
   },
+  "landing": {
+    "pills": {
+      "free": "Gratuit",
+      "noAds": "Sans publicité",
+      "adults": "18+"
+    },
+    "stage": {
+      "goodWalk": "Belle balade !",
+      "calm": "Calme · 40 min"
+    },
+    "hero": {
+      "shelterLink": "Vous travaillez dans un refuge ?"
+    },
+    "choose": {
+      "title": "Qu'est-ce qui vous amène ?",
+      "lede": "Choisissez ce qui vous correspond, et nous vous montrons le chemin.",
+      "walk": {
+        "title": "Je veux promener",
+        "text": "Un chien du quartier ou un chien de refuge."
+      },
+      "owner": {
+        "title": "J'ai un chien",
+        "text": "Ou je cherche de l'aide pour le chien d'une voisine, d'un grand-père ou d'une grand-mère."
+      },
+      "both": {
+        "title": "Les deux",
+        "text": "Promener d'autres chiens, et de l'aide pour le vôtre."
+      },
+      "shelter": {
+        "title": "Je travaille dans un refuge",
+        "text": "Mettez vos chiens en ligne et organisez des balades de groupe encadrées."
+      }
+    },
+    "dogs": {
+      "title": "Qui vient avec vous aujourd’hui ?",
+      "lede": "Quelques chiens qui attendent leur balade.",
+      "all": "Voir tous les chiens"
+    },
+    "how": {
+      "eyebrow": "En quatre étapes",
+      "step": "Étape {n}",
+      "s1": "Présentez-vous",
+      "s2": "Choisissez un chien",
+      "s3": "D'abord, une rencontre ensemble",
+      "s4": "Votre balade régulière"
+    },
+    "app": {
+      "eyebrow": "Sur votre téléphone",
+      "title": "Tout ce qu’il vous faut, dans votre poche",
+      "lede": "Découvrez des chiens, planifiez une première rencontre et partez ensemble, pendant que le propriétaire suit la balade en direct.",
+      "soon": "Bientôt sur l’App Store",
+      "today": "En attendant, {app} fonctionne sur tous les téléphones, directement dans le navigateur. Astuce : ajoutez {app} à votre écran d’accueil, il s’ouvrira comme une app.",
+      "note": "Écrans de l'app iPhone, avec des données d'exemple.",
+      "discover": {
+        "title": "Découvrir",
+        "text": "Des chiens près de chez vous, avec leur histoire et la durée de balade qu’ils aiment.",
+        "alt": "L'écran Découvrir de l'app iPhone, avec Bobbie le beagle à 600 mètres"
+      },
+      "owner": {
+        "title": "Vous choisissez",
+        "text": "En tant que propriétaire, vous voyez qui veut promener votre chien et vous choisissez le moment de la rencontre.",
+        "alt": "L'écran d'accueil des propriétaires dans l'app iPhone, avec une demande de première rencontre"
+      },
+      "walk": {
+        "title": "Suivi en direct",
+        "text": "Pendant la balade, le propriétaire suit sur la carte. Le bouton SOS est toujours à portée de main.",
+        "alt": "Une balade avec Bobbie dans l'app iPhone : carte, durée, distance et bouton SOS"
+      }
+    },
+    "safety": {
+      "eyebrow": "Sûr, pour les humains et les chiens",
+      "t1": "D'abord ensemble",
+      "t2": "Pièce d'identité en personne",
+      "t3": "Le propriétaire décide",
+      "t4": "Suivi en direct",
+      "t5": "Retour privé",
+      "t6": "Signaler à tout moment"
+    },
+    "community": {
+      "eyebrow": "Ensemble ce mois-ci",
+      "first": "Pas encore de balade en {month}. Vous faites la première ?",
+      "join": "Participer"
+    },
+    "countries": {
+      "link": "Voir toutes les villes"
+    },
+    "free": {
+      "price": "0 €",
+      "priceNote": "pour les promeneurs, les propriétaires et les refuges",
+      "ads": "Pas de publicité",
+      "subscription": "Pas d'abonnement",
+      "data": "Nous ne vendons jamais de données"
+    },
+    "closing": {
+      "title": "Un chien vous attend",
+      "text": "Près de chez vous vivent des chiens dont les maîtres ne peuvent plus marcher bien loin. Une balade de plus illumine leur journée."
+    },
+    "pages": {
+      "safety": "Sécurité",
+      "groupWalks": "Avec un refuge",
+      "shelters": "Refuges",
+      "cities": "Villes"
+    }
+  },
   "auth": {
     "loginTitle": "Bon retour parmi nous",
     "signupTitle": "Créez un compte",
