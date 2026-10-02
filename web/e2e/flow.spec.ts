@@ -156,7 +156,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // --- Walker ends the walk and gives private feedback ---
   await walker.page.getByRole('button', { name: 'Rondje klaar' }).click()
   await walker.page.getByRole('button', { name: 'Ja, rondje klaar' }).click()
-  await expect(walker.page).toHaveURL(/ended=1/)
+  // The celebration shows once; it then drops ?ended=1 from the address so a reload doesn't replay it.
+  await expect(walker.page.getByRole('heading', { name: 'Goed rondje!' })).toBeVisible()
   await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
   await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
   await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('1× Gedronken')
