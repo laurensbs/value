@@ -157,11 +157,12 @@ Para el Reino Unido existe una decisión de adecuación de la Comisión Europea 
 | Datos | Plazo de conservación |
 |---|---|
 | Datos de cuenta y perfil, perfiles de perros | Mientras exista tu cuenta. Tras eliminarla, hasta 30 días más (copias de seguridad) |
-| Puntos de recorrido de los paseos | 30 días. Más tiempo solo si hace falta para una denuncia abierta |
+| Puntos de recorrido y fotos de los paseos | 30 días. Más tiempo solo si hace falta para una denuncia abierta |
 | Valoraciones privadas | 1 año |
 | Denuncias y datos relacionados | Hasta 2 años después de cerrar la denuncia [propuesta] |
 | Datos sobre una expulsión, para evitar que alguien vuelva a registrarse | [propuesta: lo más breve posible, p. ej. 2 años – pendiente de verificar] |
-| Solicitudes y mensajes | [plazo por determinar] |
+| Solicitudes | [plazo por determinar] |
+| Mensajes de chat entre paseante y propietario o protectora | 1 año |
 | Recomendaciones y votos de protectoras | Hasta un año después de gestionarlas; las que no se gestionaron, a los dos años |
 | Registros de seguridad | [plazo por determinar, p. ej. 90 días] |
 | Registros de ánimo | No los tenemos. Solo en tu dispositivo, hasta que los borres |

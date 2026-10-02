@@ -21,6 +21,7 @@ export type NotificationKind =
   | 'org-pending'
   | 'shelter-joined'
   | 'group-walk-new'
+  | 'chat-message'
 
 export async function notify(
   db: Db,

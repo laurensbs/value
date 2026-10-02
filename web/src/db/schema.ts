@@ -214,6 +214,26 @@ export const walkRequest = pgTable(
   ],
 )
 
+/**
+ * Messages between a walker and a dog's owner (or shelter staff) about one request, so
+ * nobody has to hand out a phone number before they have met.
+ */
+export const chatMessage = pgTable(
+  'chat_message',
+  {
+    id: text('id').primaryKey(),
+    requestId: text('request_id')
+      .notNull()
+      .references(() => walkRequest.id, { onDelete: 'cascade' }),
+    senderId: text('sender_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    body: text('body').notNull(),
+    createdAt: created(),
+  },
+  (t) => [index('chat_message_request_idx').on(t.requestId, t.createdAt)],
+)
+
 /** Per dog and walker: the owner saw the walker's ID and/or allows solo walks. */
 export const trustGrant = pgTable(
   'trust_grant',

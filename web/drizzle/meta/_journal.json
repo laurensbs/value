@@ -36,6 +36,13 @@
       "when": 1790946719451,
       "tag": "0004_walk_report",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790958997301,
+      "tag": "0005_chat",
+      "breakpoints": true
     }
   ]
 }

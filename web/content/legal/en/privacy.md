@@ -157,11 +157,12 @@ Would you like to know more about these safeguards? Email us.
 | Data | Retention period |
 |---|---|
 | Account and profile data, dog profiles | As long as your account exists. After deletion, up to 30 more days (backups) |
-| Walk route points | 30 days. Longer only if needed for an open report |
+| Walk route points and photos | 30 days. Longer only if needed for an open report |
 | Private feedback | 1 year |
 | Reports and related data | Up to 2 years after the report is closed [proposal] |
 | Data about a ban, to prevent someone from signing up again | [proposal: as short as possible, e.g. 2 years – to verify] |
-| Requests and messages | [retention period to be decided] |
+| Requests | [retention period to be decided] |
+| Chat messages between walker and owner or shelter | 1 year |
 | Suggestions and votes for shelters | Up to a year after we handled them; suggestions nothing happened with after two years |
 | Security logs | [retention period to be decided, e.g. 90 days] |
 | Mood check-ins | Not with us. Only on your own device, until you delete them |

@@ -50,7 +50,7 @@ export default async function NotificationsPage() {
                   <span className="grow stack-s">
                     <span>
                       {t.has(`kinds.${n.kind}`)
-                        ? t(`kinds.${n.kind}`, { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '', orgName: data.orgName ?? '' })
+                        ? t(`kinds.${n.kind}`, { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '', orgName: data.orgName ?? '', senderName: data.senderName ?? '' })
                         : n.kind}
                     </span>
                     <span className="muted small">{format.relativeTime(n.createdAt)}</span>

@@ -4,6 +4,8 @@ export const MIN_AGE = 18
 export const MAX_PENDING_REQUESTS = 5
 export const OVERDUE_GRACE_MIN = 20
 export const ROUTE_RETENTION_DAYS = 30
+/** Chat messages are kept for a year, then deleted. */
+export const CHAT_RETENTION_DAYS = 365
 /** A walk can be started from this long before its planned start … */
 export const START_WINDOW_BEFORE_MIN = 30
 /** … until this long after it. */

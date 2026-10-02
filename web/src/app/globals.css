@@ -2982,3 +2982,127 @@ legend {
   margin: 0;
   padding: 0;
 }
+
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-title {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-empty {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.chat-bubble {
+  align-self: flex-start;
+  max-width: min(80%, 520px);
+  padding: 8px 12px;
+  border-radius: var(--radius-m) var(--radius-m) var(--radius-m) 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.chat-bubble.mine {
+  align-self: flex-end;
+  border-radius: var(--radius-m) var(--radius-m) 6px var(--radius-m);
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.chat-bubble p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.chat-name {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.chat-bubble time {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.chat-form {
+  position: sticky;
+  bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 8px;
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.chat-form textarea {
+  flex: 1;
+  min-height: 44px;
+  max-height: 160px;
+  field-sizing: content;
+  resize: none;
+  border: 0;
+  background: transparent;
+  padding: 10px 8px;
+  font: inherit;
+  color: inherit;
+}
+
+.chat-form textarea:focus {
+  outline: none;
+}
+
+.chat-form:focus-within {
+  outline: 2px solid var(--grass);
+  outline-offset: 2px;
+}
+
+.unread-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--danger);
+}
+
+/* Below 900px the tab bar covers the bottom of the screen; keep the chat box above it. */
+@media (max-width: 899px) {
+  .has-tabbar .chat-form {
+    bottom: calc(var(--tabbar-h) + 8px + env(safe-area-inset-bottom, 0px));
+  }
+}
