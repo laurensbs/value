@@ -1,0 +1,44 @@
+name: Live site
+
+# Checks the public site after every production deploy, every morning, and on demand.
+on:
+  deployment_status:
+  schedule:
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Base URL to check
+        default: https://rondje-five.vercel.app
+        required: true
+
+jobs:
+  smoke:
+    if: github.event_name != 'deployment_status' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BASE: ${{ inputs.url || 'https://rondje-five.vercel.app' }}
+    steps:
+      - name: Health
+        run: |
+          sleep 10
+          curl -fsS --retry 3 --retry-delay 5 "$BASE/api/health" | tee health.json
+          echo
+          grep -q '"ok":true' health.json
+      - name: Public pages answer 200
+        run: |
+          fail=0
+          for path in / /dogs '/dogs?view=map' /group-walks /shelters /shelter /help /safety /legal/terms /legal/privacy /login /signup; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --retry 2 "$BASE$path")
+            echo "$code $path"
+            [ "$code" = 200 ] || fail=1
+          done
+          exit $fail
+      - name: Protected pages ask for login
+        run: |
+          for path in /requests /profile /my-dogs; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$BASE$path")
+            echo "$code $path"
+            [ "$code" = 307 ] || exit 1
+          done

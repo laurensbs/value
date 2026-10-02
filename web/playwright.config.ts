@@ -21,7 +21,7 @@ export default defineConfig({
   webServer: process.env.E2E_BASE_URL
     ? undefined
     : {
-        command: `npx next dev --port ${PORT}`,
+        command: process.env.E2E_SERVER_CMD ?? `npx next dev --port ${PORT}`,
         url: `http://localhost:${PORT}/api/health`,
         reuseExistingServer: true,
         timeout: 180_000,
