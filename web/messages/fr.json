@@ -702,14 +702,16 @@
     "emailNotifications": "M'envoyer un e-mail pour les notifications importantes",
     "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje.",
     "pushNotifications": "Notifications push dans ce navigateur",
-    "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure. Sur iPhone : ajoutez d’abord Rondje à l’écran d’accueil.",
+    "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure.",
     "pushBlocked": "Votre navigateur bloque les notifications de Rondje. Activez-les dans les réglages du navigateur.",
     "progressTitle": "Votre progression",
     "weeklyGoal": "Objectif de la semaine",
     "weeklyGoalHint": "À quelle fréquence voulez-vous vous balader ? Sauter une semaine, c'est toujours permis.",
     "alerts": "Notifications",
     "reminders": "Rappels bienveillants",
-    "remindersHint": "Sur vos premières étapes, votre objectif de la semaine et le défi de votre ville. Un tous les quelques jours au maximum, en notification push ou sinon par e-mail."
+    "remindersHint": "Sur vos premières étapes, votre objectif de la semaine et le défi de votre ville. Un tous les quelques jours au maximum, en notification push ou sinon par e-mail.",
+    "pushIos": "Des alertes sur votre iPhone ? Elles fonctionnent dès que Rondje est sur votre écran d’accueil :",
+    "pushIosInApp": "Des alertes sur votre iPhone ? Ouvrez d’abord Rondje dans Safari et mettez-le sur votre écran d’accueil depuis là."
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -1866,5 +1868,30 @@
       "id": "Vérifiez en personne la pièce d'identité de {name}. Vous pourrez ensuite le confirmer ci-dessous.",
       "together": "Marchez un peu ensemble, pour que {dog} s'habitue à {name}."
     }
+  },
+  "installAsk": {
+    "title": "Vous mettez Rondje sur votre écran d’accueil ?",
+    "text": "Rondje s’ouvre alors d’une seule touche, comme une app.",
+    "textPush": "Rondje s’ouvre alors d’une seule touche, comme une app, et je peux vous prévenir quand il y a du nouveau.",
+    "inApp": "Vous êtes dans le navigateur d’une autre app, qui ne le permet pas. Ouvrez Rondje dans Safari via le menu ⋯, ou copiez le lien et collez-le dans Safari. Vous vous reconnecterez une fois là-bas.",
+    "steps": {
+      "share": "Touchez Partager",
+      "shareMore": "(vous ne le voyez pas ? Touchez d’abord ⋯)",
+      "add": "Choisissez « Sur l’écran d’accueil »",
+      "confirm": "Touchez « Ajouter »"
+    },
+    "install": "Oui, volontiers",
+    "later": "Plus tard",
+    "already": "C’est déjà fait",
+    "copy": "Copier le lien",
+    "copied": "Copié. Collez le lien dans Safari.",
+    "copyFailed": "La copie n’a pas fonctionné. Tapez dans Safari : {address}",
+    "done": "C’est fait ! Rondje est maintenant sur votre écran d’accueil."
+  },
+  "manifest": {
+    "description": "Une balade régulière avec un chien qui vous attend.",
+    "dogs": "Chiens à proximité",
+    "requests": "Mes balades",
+    "notifications": "Notifications"
   }
 }

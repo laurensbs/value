@@ -1,4 +1,5 @@
 import { deletePushSubscription, savePushSubscription } from '@/server/actions/push'
+import { isIos, isStandalone } from './install-client'
 import { isNativeApp } from './native'
 
 /** Push in this browser: not possible here, blocked by the person, or off or on. */
@@ -22,6 +23,8 @@ async function registration() {
  */
 export async function pushState(): Promise<PushState> {
   if (isNativeApp() || !('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) return 'unsupported'
+  // On iPhone and iPad it only works in Rondje on the home screen, whatever a browser there claims.
+  if (isIos(navigator.userAgent, navigator.maxTouchPoints) && !isStandalone()) return 'unsupported'
   if (Notification.permission === 'denied') return 'blocked'
   const reg = await navigator.serviceWorker.getRegistration('/')
   const sub = await reg?.pushManager.getSubscription()

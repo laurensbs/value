@@ -702,14 +702,16 @@
     "emailNotifications": "Enviarme un correo con los avisos importantes",
     "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje.",
     "pushNotifications": "Notificaciones push en este navegador",
-    "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga. En iPhone: añade primero Rondje a la pantalla de inicio.",
+    "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga.",
     "pushBlocked": "Tu navegador bloquea las notificaciones de Rondje. Actívalas en los ajustes del navegador.",
     "progressTitle": "Tu progreso",
     "weeklyGoal": "Objetivo semanal",
     "weeklyGoalHint": "¿Con qué frecuencia quieres pasear? Saltarte una semana siempre está bien.",
     "alerts": "Avisos",
     "reminders": "Recordatorios amables",
-    "remindersHint": "Sobre tus primeros pasos, tu objetivo semanal y el reto de tu ciudad. Uno cada pocos días como mucho, como notificación push o si no por correo."
+    "remindersHint": "Sobre tus primeros pasos, tu objetivo semanal y el reto de tu ciudad. Uno cada pocos días como mucho, como notificación push o si no por correo.",
+    "pushIos": "¿Avisos en tu iPhone? Funcionan en cuanto Rondje está en tu pantalla de inicio:",
+    "pushIosInApp": "¿Avisos en tu iPhone? Abre primero Rondje en Safari y ponlo desde allí en tu pantalla de inicio."
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -1866,5 +1868,30 @@
       "id": "Comprueba en persona el documento de identidad de {name}. Después puedes confirmarlo aquí abajo.",
       "together": "Caminad juntos un rato para que {dog} se acostumbre a {name}."
     }
+  },
+  "installAsk": {
+    "title": "¿Pones Rondje en tu pantalla de inicio?",
+    "text": "Así abres Rondje con un toque, como una app.",
+    "textPush": "Así abres Rondje con un toque, como una app, y puedo avisarte cuando haya novedades.",
+    "inApp": "Ahora estás en el navegador de otra app, y desde ahí no se puede. Abre Rondje en Safari desde el menú ⋯, o copia el enlace y pégalo en Safari. Allí vuelves a iniciar sesión una vez.",
+    "steps": {
+      "share": "Toca Compartir",
+      "shareMore": "(¿no lo ves? Toca primero ⋯)",
+      "add": "Elige «Añadir a pantalla de inicio»",
+      "confirm": "Toca «Añadir»"
+    },
+    "install": "Sí, por favor",
+    "later": "Más tarde",
+    "already": "Ya está",
+    "copy": "Copiar enlace",
+    "copied": "Copiado. Pega el enlace en Safari.",
+    "copyFailed": "No se pudo copiar. Escribe en Safari: {address}",
+    "done": "¡Listo! Ya tienes Rondje en tu pantalla de inicio."
+  },
+  "manifest": {
+    "description": "Un paseo fijo con un perro que te espera.",
+    "dogs": "Perros cerca",
+    "requests": "Mis paseos",
+    "notifications": "Notificaciones"
   }
 }

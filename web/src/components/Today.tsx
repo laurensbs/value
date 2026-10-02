@@ -20,6 +20,7 @@ import { ChallengeCard } from './ChallengeCard'
 import { DogFace } from './DogFace'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
+import { InstallAsk } from './InstallAsk'
 import { Medal } from './Medal'
 import { PushAsk } from './PushAsk'
 import { WeekCard } from './WeekCard'
@@ -218,6 +219,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
       ) : null}
 
       {pushKey ? <PushAsk publicKey={pushKey} text={pushText} /> : null}
+      <InstallAsk push={Boolean(pushKey)} />
 
       <div className="today-grid">
         {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}

@@ -3704,6 +3704,32 @@ legend {
   animation: rise 0.4s ease both;
 }
 
+/* The taps to put Rondje on the home screen, each with the icon to look for. */
+.install-steps {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.install-steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.install-step-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-s);
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
 .pending-card {
   align-items: center;
   color: var(--ink);

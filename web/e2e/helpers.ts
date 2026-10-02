@@ -1,4 +1,4 @@
-import { expect, type Browser, type Page } from '@playwright/test'
+import { expect, type Browser, type BrowserContextOptions, type Page } from '@playwright/test'
 
 /** With SHOTS=1, saves a full-page screenshot per step for design review (shots/<name>.png). */
 export async function shot(page: Page, name: string) {
@@ -23,12 +23,13 @@ export function soonSlot(now = new Date()): { date: string; time: string } {
 /** Each person gets their own (test) IP, as in real life: sign-in and sign-up are limited per IP address. */
 const randomIp = () => `10.${1 + Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${1 + Math.floor(Math.random() * 250)}`
 
-export async function newPerson(browser: Browser, geo?: { latitude: number; longitude: number }) {
+export async function newPerson(browser: Browser, geo?: { latitude: number; longitude: number }, options: BrowserContextOptions = {}) {
   const context = await browser.newContext({
     colorScheme: process.env.SHOTS_DARK ? 'dark' : 'light',
     geolocation: geo ?? { latitude: 52.0907, longitude: 5.1214 },
     permissions: ['geolocation'],
     extraHTTPHeaders: { 'x-forwarded-for': randomIp() },
+    ...options,
   })
   const page = await context.newPage()
   return { context, page }

@@ -702,14 +702,16 @@
     "emailNotifications": "Stuur me een e-mail bij belangrijke meldingen",
     "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje.",
     "pushNotifications": "Pushmeldingen in deze browser",
-    "pushHint": "Een seintje bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt. Op iPhone: zet Rondje eerst op je beginscherm.",
+    "pushHint": "Een seintje bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt.",
     "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser.",
     "progressTitle": "Jouw voortgang",
     "weeklyGoal": "Weekdoel",
     "weeklyGoalHint": "Hoe vaak wil je een rondje lopen? Een week overslaan mag altijd.",
     "alerts": "Meldingen",
     "reminders": "Vriendelijke herinneringen",
-    "remindersHint": "Over je eerste stappen, je weekdoel en de uitdaging in je stad. Hooguit één per paar dagen, als pushmelding of anders per e-mail."
+    "remindersHint": "Over je eerste stappen, je weekdoel en de uitdaging in je stad. Hooguit één per paar dagen, als pushmelding of anders per e-mail.",
+    "pushIos": "Seintjes op je iPhone? Die werken zodra Rondje op je beginscherm staat:",
+    "pushIosInApp": "Seintjes op je iPhone? Open Rondje eerst in Safari en zet het daar op je beginscherm."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -1866,5 +1868,30 @@
       "id": "Bekijk het ID van {name} in het echt. Daarna kun je dat hieronder bevestigen.",
       "together": "Loop samen een stukje, zodat {dog} aan {name} kan wennen."
     }
+  },
+  "installAsk": {
+    "title": "Zet je Rondje op je beginscherm?",
+    "text": "Dan open je Rondje met één tik, net als een app.",
+    "textPush": "Dan open je Rondje met één tik, net als een app, en kan ik je een seintje geven als er nieuws is.",
+    "inApp": "Je zit nu in de browser van een andere app, en daar kan dat niet. Open Rondje in Safari via het menu ⋯, of kopieer de link en plak hem in Safari. Daar log je één keer opnieuw in.",
+    "steps": {
+      "share": "Tik op Delen",
+      "shareMore": "(zie je dat niet, tik dan eerst op ⋯)",
+      "add": "Kies “Zet op beginscherm”",
+      "confirm": "Tik op “Voeg toe”"
+    },
+    "install": "Ja, graag",
+    "later": "Later",
+    "already": "Staat er al op",
+    "copy": "Kopieer link",
+    "copied": "Gekopieerd. Plak de link in Safari.",
+    "copyFailed": "Kopiëren lukte niet. Typ in Safari: {address}",
+    "done": "Gelukt! Je vindt Rondje nu op je beginscherm."
+  },
+  "manifest": {
+    "description": "Een vast rondje met een hond die op je wacht.",
+    "dogs": "Honden in de buurt",
+    "requests": "Mijn rondjes",
+    "notifications": "Meldingen"
   }
 }

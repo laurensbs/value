@@ -702,14 +702,16 @@
     "emailNotifications": "Email me about important notifications",
     "emailNotificationsHint": "A new request, an accepted appointment or a walk that runs late. Off: you only see notifications in Rondje.",
     "pushNotifications": "Push notifications in this browser",
-    "pushHint": "A heads-up for a new message, an accepted request or a walk that runs late. On iPhone: add Rondje to your home screen first.",
+    "pushHint": "A heads-up for a new message, an accepted request or a walk that runs late.",
     "pushBlocked": "Your browser blocks notifications from Rondje. Turn them on in your browser settings.",
     "progressTitle": "Your progress",
     "weeklyGoal": "Weekly goal",
     "weeklyGoalHint": "How often would you like to walk? Skipping a week is always fine.",
     "alerts": "Notifications",
     "reminders": "Friendly reminders",
-    "remindersHint": "About your first steps, your weekly goal and your town's challenge. One every few days at most, as a push notification or otherwise by email."
+    "remindersHint": "About your first steps, your weekly goal and your town's challenge. One every few days at most, as a push notification or otherwise by email.",
+    "pushIos": "Heads-ups on your iPhone? They work once Rondje is on your home screen:",
+    "pushIosInApp": "Heads-ups on your iPhone? First open Rondje in Safari and put it on your home screen from there."
   },
   "quiz": {
     "title": "Safety quiz",
@@ -1866,5 +1868,30 @@
       "id": "Check {name}'s ID in person. Then you can confirm it below.",
       "together": "Walk a little way together, so {dog} can get used to {name}."
     }
+  },
+  "installAsk": {
+    "title": "Shall we put Rondje on your home screen?",
+    "text": "Then Rondje opens with one tap, just like an app.",
+    "textPush": "Then Rondje opens with one tap, just like an app, and I can give you a heads-up when there is news.",
+    "inApp": "You're in another app's browser right now, and that can't do this. Open Rondje in Safari from the ⋯ menu, or copy the link and paste it in Safari. You'll sign in once more there.",
+    "steps": {
+      "share": "Tap Share",
+      "shareMore": "(don't see it? Tap ⋯ first)",
+      "add": "Choose “Add to Home Screen”",
+      "confirm": "Tap “Add”"
+    },
+    "install": "Yes, please",
+    "later": "Later",
+    "already": "It's already there",
+    "copy": "Copy link",
+    "copied": "Copied. Paste the link in Safari.",
+    "copyFailed": "Copying didn't work. Type this in Safari: {address}",
+    "done": "Done! You'll find Rondje on your home screen now."
+  },
+  "manifest": {
+    "description": "A regular walk with a dog who's waiting for you.",
+    "dogs": "Dogs nearby",
+    "requests": "My walks",
+    "notifications": "Notifications"
   }
 }

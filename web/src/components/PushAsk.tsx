@@ -3,27 +3,11 @@
 import { useTranslations } from 'next-intl'
 import { useEffect, useState, useTransition } from 'react'
 import { MASCOT } from '@/lib/avatar'
+import { askLater, PUSH_LATER, snoozed } from '@/lib/later'
 import { enablePush, pushState } from '@/lib/push-client'
 import { DogFace } from './DogFace'
 
-const LATER_KEY = 'rondje.pushAsk'
-const LATER_MS = 14 * 86_400_000
-
-function askLater() {
-  try {
-    localStorage.setItem(LATER_KEY, String(Date.now() + LATER_MS))
-  } catch {
-    // Without storage the card simply comes back on the next visit.
-  }
-}
-
-function waiting(): boolean {
-  try {
-    return Number(localStorage.getItem(LATER_KEY) ?? 0) > Date.now()
-  } catch {
-    return false
-  }
-}
+const later = () => askLater(PUSH_LATER, 14)
 
 /**
  * A friendly question at a moment it matters: may Rondje send a heads-up in this browser? Only
@@ -37,7 +21,7 @@ export function PushAsk({ publicKey, text }: { publicKey: string; text: string }
 
   useEffect(() => {
     let cancelled = false
-    if (!waiting()) {
+    if (!snoozed(PUSH_LATER)) {
       pushState()
         .then((s) => !cancelled && s === 'off' && setView('ask'))
         .catch(() => {})
@@ -60,17 +44,17 @@ export function PushAsk({ publicKey, text }: { publicKey: string; text: string }
     start(async () => {
       try {
         const state = await enablePush(publicKey)
-        if (state !== 'on') askLater()
+        if (state !== 'on') later()
         setView(state === 'on' ? 'done' : 'hidden')
       } catch {
-        askLater()
+        later()
         setView('hidden')
       }
     })
   }
 
-  function later() {
-    askLater()
+  function notNow() {
+    later()
     setView('hidden')
   }
 
@@ -87,7 +71,7 @@ export function PushAsk({ publicKey, text }: { publicKey: string; text: string }
           <button type="button" className="button primary small" onClick={yes} disabled={pending}>
             {t('yes')}
           </button>
-          <button type="button" className="button ghost small" onClick={later} disabled={pending}>
+          <button type="button" className="button ghost small" onClick={notNow} disabled={pending}>
             {t('later')}
           </button>
         </div>

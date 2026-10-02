@@ -46,6 +46,15 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/cities/amsterdam')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/support')
+
+  // The app on the home screen opens on Today, in the visitor's language, with shortcuts on Android.
+  const manifest = await (await page.request.get('/manifest.webmanifest', { headers: { 'accept-language': 'en' } })).json()
+  expect(manifest).toMatchObject({ id: '/dogs', start_url: '/', lang: 'en', description: "A regular walk with a dog who's waiting for you." })
+  expect(manifest.shortcuts.map((s: { name: string; url: string }) => [s.name, s.url])).toEqual([
+    ['Dogs nearby', '/dogs'],
+    ['My walks', '/requests'],
+    ['Notifications', '/notifications'],
+  ])
   await context.close()
 })
 
