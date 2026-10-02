@@ -35,6 +35,7 @@
 		92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */; };
 		9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A5B062402B7D781A373CFD12 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
+		B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24382B16C639D32D509682 /* EditProfileView.swift */; };
 		BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96821FF9F74F149B48CEA05 /* DogFace.swift */; };
 		BF938F9011478C1964370149 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
 		C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABF8650A285AB54D3700A6 /* QuizView.swift */; };
@@ -74,6 +75,7 @@
 		0BDEFBB338DEF518134A6397 /* Rondje.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Rondje.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1894A396998000A3824F47B3 /* ActiveWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalkView.swift; sourceTree = "<group>"; };
 		1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.entitlements; sourceTree = "<group>"; };
+		1F24382B16C639D32D509682 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		265151C9DD7CB381C0CE8F78 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26863FB98876ECFB2C52F0FF /* WalkTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkTracker.swift; sourceTree = "<group>"; };
 		26926AF94C5CD2A73149D080 /* WalkActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkActivity.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 		EFC38ED52995A5B1AC192CEA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				1F24382B16C639D32D509682 /* EditProfileView.swift */,
 				303A4BC365EFDB4E41F534AF /* MyDogsView.swift */,
 				265151C9DD7CB381C0CE8F78 /* ProfileView.swift */,
 				2CABF8650A285AB54D3700A6 /* QuizView.swift */,
@@ -395,6 +398,7 @@
 				76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */,
 				BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */,
 				0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */,
+				B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */,
 				3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */,
 				F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */,
 				89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */,

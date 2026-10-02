@@ -132,6 +132,10 @@ final class APIClient: Sendable {
         try await call("POST", path, body: body)
     }
 
+    func patch<T: Decodable, B: Encodable>(_ path: String, _ body: B, as type: T.Type = T.self) async throws -> T {
+        try await call("PATCH", path, body: body)
+    }
+
     func delete<T: Decodable, B: Encodable>(_ path: String, _ body: B, as type: T.Type = T.self) async throws -> T {
         try await call("DELETE", path, body: body)
     }

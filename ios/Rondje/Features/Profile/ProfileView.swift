@@ -88,7 +88,7 @@ struct ProfileView: View {
                 row("bell.fill", "Meldingen", (model.me?.unread ?? 0) > 0 ? "\(model.me!.unread) nieuw" : nil)
             }
             Divider().padding(.leading, 56)
-            Button { openURL(Brand.web("/profile/edit")) } label: { row("pencil", "Profiel bewerken", "Op de website", external: true) }
+            NavigationLink { EditProfileView() } label: { row("pencil", "Profiel bewerken", nil) }
             Divider().padding(.leading, 56)
             Button { openURL(Brand.web("/safety")) } label: { row("shield.lefthalf.filled", "Veiligheid", nil, external: true) }
             Divider().padding(.leading, 56)
@@ -142,6 +142,7 @@ struct DeleteAccountSheet: View {
                 Button("Verwijder mijn account", role: .destructive) { Task { await delete() } }
                     .disabled(confirm.trimmingCharacters(in: .whitespaces).uppercased() != "VERWIJDER")
             }
+            .rondjeForm()
             .navigationTitle("Account verwijderen")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Annuleer") { dismiss() } } }

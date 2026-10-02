@@ -273,6 +273,7 @@ struct FeedbackSheet: View {
                 if let error { Text(error).foregroundStyle(Palette.danger) }
             }
             .tint(Palette.grass)
+            .rondjeForm()
             .navigationTitle("Hoe ging het?")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

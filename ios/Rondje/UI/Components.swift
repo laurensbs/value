@@ -66,6 +66,11 @@ extension View {
         }
     }
 
+    /// Forms on Rondje's own paper colour instead of the system grey.
+    func rondjeForm() -> some View {
+        scrollContentBackground(.hidden).background(Palette.paper.ignoresSafeArea())
+    }
+
     func screenBackground() -> some View {
         background(Palette.paper.ignoresSafeArea())
     }

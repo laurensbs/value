@@ -250,6 +250,7 @@ struct TrustSheet: View {
                 if let error { Text(error).foregroundStyle(Palette.danger) }
             }
             .tint(Palette.grass)
+            .rondjeForm()
             .navigationTitle("Vertrouwen")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

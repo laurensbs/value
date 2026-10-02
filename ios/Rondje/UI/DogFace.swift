@@ -152,7 +152,7 @@ struct DogPortrait: View {
     private func content(pad: CGFloat) -> some View {
         ZStack {
             // Like the website: the pastel tiles are toned down in dark mode.
-            Color(css: look.tile ?? "#f6ebcf").mix(with: Palette.paper, by: colorScheme == .dark ? 0.3 : 0)
+            Color(css: look.tile ?? "#f6ebcf").mix(with: Palette.paper, by: colorScheme == .dark ? 0.18 : 0)
             if let photoURL {
                 AsyncImage(url: photoURL, transaction: Transaction(animation: .easeOut(duration: 0.25))) { phase in
                     if let image = phase.image {

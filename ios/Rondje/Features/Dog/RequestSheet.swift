@@ -142,6 +142,7 @@ struct ReportSheet: View {
                 }
                 if let error { Section { Text(error).foregroundStyle(Palette.danger) } }
             }
+            .rondjeForm()
             .navigationTitle("Melden")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

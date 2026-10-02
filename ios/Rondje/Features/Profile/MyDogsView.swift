@@ -155,6 +155,7 @@ struct AddDogView: View {
             }
             .tint(Palette.grass)
             .onChange(of: pick) { _, items in Task { await loadPhotos(items) } }
+            .rondjeForm()
             .navigationTitle("Hond toevoegen")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
