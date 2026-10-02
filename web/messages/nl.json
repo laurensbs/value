@@ -863,7 +863,8 @@
       "group-signup": "{walkerName} loopt mee met een groepswandeling.",
       "org-verified": "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.",
       "org-pending": "{orgName} heeft zich aangemeld als opvang. Controleer de gegevens.",
-      "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!"
+      "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!",
+      "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?"
     }
   },
   "admin": {

@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getFormatter, getTranslations } from 'next-intl/server'
 import { DogCard } from '@/components/DogCard'
 import { DogsMap } from '@/components/DogsMap'
+import { GroupWalkButton } from '@/components/GroupWalkButton'
 import { Icon } from '@/components/Icon'
 import { COUNTRIES, countryInfo, isCountry } from '@/lib/countries'
-import { listDogs, publicOrg } from '@/server/queries'
+import { listDogs, myGroupSignups, publicOrg, upcomingGroupWalks } from '@/server/queries'
 import { getViewer } from '@/server/session'
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<Search> }) {
@@ -33,6 +34,9 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
   const orgId = sp.org?.slice(0, 64) || undefined
   const items = await listDogs({ country: orgId ? undefined : country, near, host, energy, orgId, q: sp.q?.slice(0, 60) })
   const org = orgId ? await publicOrg(orgId) : null
+  const orgWalks = org ? await upcomingGroupWalks({ orgId: org.id }) : []
+  const joined = org && viewer ? await myGroupSignups(viewer.userId) : new Set<string>()
+  const format = await getFormatter()
   const mapView = sp.view === 'map'
 
   const query = (patch: Partial<Search>) => {
@@ -95,6 +99,33 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
               ) : null}
             </div>
           ) : null}
+          <div className="stack-s">
+            <h3>{t('dog.groupWalks', { name: org.name })}</h3>
+            {orgWalks.length ? (
+              <ul className="list">
+                {orgWalks.slice(0, 3).map((gw) => (
+                  <li key={gw.id} className="list-item">
+                    <div className="grow stack-s">
+                      <strong>{format.dateTime(gw.startsAt, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}</strong>
+                      <span className="muted small">
+                        {t('groupWalks.at', { place: gw.meetingPoint })} · {t('common.minutes', { n: gw.durationMin })} · {t(`dogs.level.${gw.level}`)}
+                      </span>
+                      <span className="small">{t('groupWalks.spots', { left: Math.max(0, gw.capacity - gw.booked) })}</span>
+                    </div>
+                    <GroupWalkButton
+                      id={gw.id}
+                      joined={joined.has(gw.id)}
+                      full={gw.booked >= gw.capacity}
+                      signedIn={Boolean(viewer?.profile)}
+                      next={`/dogs?org=${org.id}`}
+                    />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="muted small">{t('dog.noGroupWalks')}</p>
+            )}
+          </div>
         </section>
       ) : null}
 

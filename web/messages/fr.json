@@ -863,7 +863,8 @@
       "group-signup": "{walkerName} participe à une balade en groupe.",
       "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles.",
       "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
-      "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !"
+      "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
+      "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?"
     }
   },
   "admin": {

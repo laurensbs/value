@@ -863,7 +863,8 @@
       "group-signup": "{walkerName} se ha apuntado a un paseo en grupo.",
       "org-verified": "Tu protectora ha sido verificada. Tus perros ya son visibles.",
       "org-pending": "{orgName} se ha registrado como protectora. Revisa los datos.",
-      "shelter-joined": "{orgName} ya está en Rondje. ¡Echa un vistazo a los perros!"
+      "shelter-joined": "{orgName} ya está en Rondje. ¡Echa un vistazo a los perros!",
+      "group-walk-new": "{orgName} ha organizado un paseo en grupo. ¿Te apuntas?"
     }
   },
   "admin": {

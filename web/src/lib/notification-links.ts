@@ -16,7 +16,7 @@ export function notificationHref(kind: string, data: NotificationData): string {
   if (kind === 'org-verified' && data.orgId) return `/shelter/${data.orgId}`
   if (kind === 'group-signup') return '/shelter'
   if (kind === 'org-pending') return '/admin'
-  if (kind === 'shelter-joined' && data.orgId) return `/dogs?org=${data.orgId}`
+  if ((kind === 'shelter-joined' || kind === 'group-walk-new') && data.orgId) return `/dogs?org=${data.orgId}`
   return '/requests'
 }
 

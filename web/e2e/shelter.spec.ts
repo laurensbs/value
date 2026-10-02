@@ -91,6 +91,8 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await expect(visitor.page.getByText('Neem geen eigen koekjes mee: de opvang heeft ze.')).toBeVisible()
   await expect(visitor.page.getByRole('link', { name: '@opvang_test' })).toBeVisible()
   await expect(visitor.page.getByText('Marieke de Vries')).toHaveCount(0)
+  // The planned group walk is on the shelter's public page, with a button to join.
+  await expect(visitor.page.getByText('Verzamelen: Bij de hoofdingang').first()).toBeVisible()
   await shot(visitor.page, '22b-shelter-public')
 
   // --- A walker joins the group walk ---

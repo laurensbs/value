@@ -19,6 +19,7 @@ export type NotificationKind =
   | 'org-verified'
   | 'org-pending'
   | 'shelter-joined'
+  | 'group-walk-new'
 
 export async function notify(
   db: Db,

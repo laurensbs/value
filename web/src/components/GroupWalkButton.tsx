@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useState, useTransition } from 'react'
 import { joinGroupWalk, leaveGroupWalk } from '@/server/actions/shelters'
 
-export function GroupWalkButton({ id, joined, full, signedIn }: { id: string; joined: boolean; full: boolean; signedIn: boolean }) {
+export function GroupWalkButton({ id, joined, full, signedIn, next = '/group-walks' }: { id: string; joined: boolean; full: boolean; signedIn: boolean; next?: string }) {
   const t = useTranslations()
   const [pending, start] = useTransition()
   const [isJoined, setJoined] = useState(joined)
@@ -12,7 +12,7 @@ export function GroupWalkButton({ id, joined, full, signedIn }: { id: string; jo
 
   if (!signedIn) {
     return (
-      <a className="button secondary small" href={`/login?next=/group-walks`}>
+      <a className="button secondary small" href={`/login?next=${encodeURIComponent(next)}`}>
         {t('groupWalks.join')}
       </a>
     )

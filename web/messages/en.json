@@ -863,7 +863,8 @@
       "group-signup": "{walkerName} is joining a group walk.",
       "org-verified": "Your shelter has been verified. Your dogs are now visible.",
       "org-pending": "{orgName} signed up as a shelter. Please check the details.",
-      "shelter-joined": "{orgName} is on Rondje now. Have a look at the dogs!"
+      "shelter-joined": "{orgName} is on Rondje now. Have a look at the dogs!",
+      "group-walk-new": "{orgName} has planned a group walk. Want to join?"
     }
   },
   "admin": {

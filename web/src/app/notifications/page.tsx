@@ -22,6 +22,7 @@ const ICONS: Record<string, 'paw' | 'route' | 'alert' | 'shield' | 'users' | 'bu
   'org-verified': 'building',
   'org-pending': 'building',
   'shelter-joined': 'heart',
+  'group-walk-new': 'users',
 }
 
 export default async function NotificationsPage() {

@@ -1,6 +1,6 @@
 'use server'
 
-import { and, count, eq, inArray } from 'drizzle-orm'
+import { and, count, eq, gte, inArray, sql } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
@@ -175,8 +175,36 @@ export async function createGroupWalk(_prev: FormState, form: FormData): Promise
     notes: g.notes,
     createdBy: viewer.userId,
   })
+  await tellVoters(id, g.orgId)
   revalidatePath(`/shelter/${g.orgId}`)
   return { ok: true, message: 'created' }
+}
+
+/** People who asked for this shelter ("I want to walk here") hear about a new group walk, at most once a week. */
+async function tellVoters(groupWalkId: string, orgId: string) {
+  const db = await getDb()
+  const [org] = await db
+    .select({ name: s.organization.name, directoryId: s.organization.directoryId, status: s.organization.status })
+    .from(s.organization)
+    .where(eq(s.organization.id, orgId))
+  if (!org?.directoryId || org.status !== 'verified') return
+  const voters = await db
+    .select({ id: s.suggestion.suggestedBy })
+    .from(s.suggestion)
+    .where(and(eq(s.suggestion.directoryId, org.directoryId), inArray(s.suggestion.status, ['new', 'contacted', 'joined'])))
+  if (!voters.length) return
+  const recent = await db
+    .select({ userId: s.notification.userId })
+    .from(s.notification)
+    .where(
+      and(
+        eq(s.notification.kind, 'group-walk-new'),
+        gte(s.notification.createdAt, new Date(Date.now() - 7 * 24 * 60 * 60_000)),
+        sql`${s.notification.data}->>'orgId' = ${orgId}`,
+      ),
+    )
+  const told = new Set(recent.map((r) => r.userId))
+  await notify(db, voters.map((v) => v.id).filter((id) => !told.has(id)), 'group-walk-new', { orgId, orgName: org.name, groupWalkId })
 }
 
 export async function cancelGroupWalk(groupWalkId: string): Promise<void> {
