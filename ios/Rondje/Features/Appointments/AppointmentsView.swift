@@ -1,0 +1,272 @@
+import SwiftUI
+
+/// Your appointments as a walker, and the requests for your own dogs.
+struct AppointmentsView: View {
+    @Environment(AppModel.self) private var model
+    @State private var side: Side = .walking
+
+    enum Side: String, CaseIterable, Identifiable { case walking = "Ik wandel", dogs = "Mijn honden"; var id: String { rawValue } }
+
+    private var items: [Appointment] {
+        let list = side == .walking ? model.appointments.outgoing : model.appointments.incoming
+        // Open ones first (soonest first), then the rest (most recent first).
+        let open = list.filter(\.isOpen).sorted { $0.startsAt < $1.startsAt }
+        let done = list.filter { !$0.isOpen }.sorted { $0.startsAt > $1.startsAt }
+        return open + done
+    }
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 16) {
+                    if !model.appointments.incoming.isEmpty || model.me?.profile?.hasDogs == true {
+                        Picker("Weergave", selection: $side) {
+                            ForEach(Side.allCases) { Text($0.rawValue).tag($0) }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                    if items.isEmpty {
+                        EmptyState(
+                            symbol: side == .walking ? "figure.walk" : "pawprint",
+                            title: side == .walking ? "Nog geen afspraken" : "Nog geen aanvragen",
+                            text: side == .walking ? "Kies een hond bij Ontdek en plan een kennismaking." : "Zodra iemand met je hond wil wandelen, zie je het hier."
+                        )
+                        if side == .walking {
+                            Button("Naar Ontdek") { model.selectedTab = .discover }.buttonStyle(.primary).padding(.horizontal, 40)
+                        }
+                    }
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                        AppointmentCard(item: item, asOwner: side == .dogs).appear(index)
+                    }
+                }
+                .padding(20)
+            }
+            .screenBackground()
+            .navigationTitle("Afspraken")
+            .refreshable { await model.refreshAppointments() }
+            .task { await model.refreshAppointments() }
+            .onChange(of: model.pendingIncoming) { _, n in if n > 0 && model.appointments.outgoing.isEmpty { side = .dogs } }
+        }
+    }
+}
+
+struct AppointmentCard: View {
+    let item: Appointment
+    let asOwner: Bool
+
+    @Environment(AppModel.self) private var model
+    @Environment(WalkTracker.self) private var walk
+    @Environment(\.openURL) private var openURL
+    @State private var busy = false
+    @State private var confirmCancel = false
+    @State private var trustSheet = false
+    @State private var following: String?
+    @State private var feedbackFor: String?
+
+    var body: some View {
+        Card {
+            HStack(alignment: .top, spacing: 14) {
+                DogPortrait(look: item.dog.look, photoURL: item.dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 18)
+                    .frame(width: 64, height: 64)
+                VStack(alignment: .leading, spacing: 4) {
+                    let status = Labels.status(item.status)
+                    Chip(text: status.0, tint: status.1, soft: status.2)
+                    Text(item.isMeeting ? "Kennismaking met \(item.dog.name)" : "Rondje met \(item.dog.name)")
+                        .font(.headline)
+                    Label(Format.when(item.startsAt) + " · \(item.durationMin) min", systemImage: item.weekly ? "repeat" : "calendar")
+                        .font(.subheadline).foregroundStyle(Palette.muted)
+                }
+            }
+
+            if asOwner, let walker = item.walker {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("\(walker.firstName), \(walker.ageBand) jaar, \(walker.city)").font(.subheadline.weight(.semibold))
+                    Text(Labels.experience(walker.experience)).font(.footnote).foregroundStyle(Palette.muted)
+                    if !walker.bio.isEmpty { Text(walker.bio).font(.footnote).lineLimit(3) }
+                }
+            }
+            if !item.message.isEmpty {
+                Text("“\(item.message)”").font(.subheadline).italic().foregroundStyle(Palette.ink)
+                if item.flags.contains("money") || item.flags.contains("iban") {
+                    Label("Dit bericht gaat over geld. \(Brand.name) is gratis: betaal nooit iets.", systemImage: "exclamationmark.shield.fill")
+                        .font(.footnote).foregroundStyle(Palette.danger)
+                }
+            }
+            if item.status == "accepted", !item.dog.meetingInfo.isEmpty {
+                Label(item.dog.meetingInfo, systemImage: "mappin.and.ellipse").font(.subheadline)
+            }
+            contact
+            actions
+        }
+        .sheet(isPresented: $trustSheet) {
+            if let walker = item.walker {
+                TrustSheet(item: item, walker: walker)
+                    .presentationDetents([.medium])
+            }
+        }
+        .fullScreenCover(item: Binding(get: { following.map(FollowID.init) }, set: { following = $0?.id })) { f in
+            FollowWalkView(walkId: f.id, dogName: item.dog.name)
+        }
+        .sheet(item: Binding(get: { feedbackFor.map(FollowID.init) }, set: { feedbackFor = $0?.id })) { f in
+            FeedbackSheet(walkId: f.id, role: asOwner ? .owner : .walker, dogName: item.dog.name)
+                .presentationDetents([.large])
+        }
+        .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
+            Button("Annuleer afspraak", role: .destructive) { Task { await act("cancel") } }
+        } message: {
+            Text("De ander krijgt hier bericht van.")
+        }
+    }
+
+    private struct FollowID: Identifiable { let id: String }
+
+    @ViewBuilder
+    private var contact: some View {
+        let phone = asOwner ? item.walker?.phone : item.host?.phone
+        let email = asOwner ? item.walker?.email : item.host?.email
+        if item.status == "accepted", phone != nil || email != nil {
+            HStack(spacing: 10) {
+                if let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
+                    Button("Bel", systemImage: "phone.fill") { openURL(url) }.buttonStyle(.bordered)
+                }
+                if let email, let url = URL(string: "mailto:\(email)") {
+                    Button("Mail", systemImage: "envelope.fill") { openURL(url) }.buttonStyle(.bordered)
+                }
+            }
+            .tint(Palette.grass)
+            .font(.subheadline.weight(.semibold))
+        }
+    }
+
+    @ViewBuilder
+    private var actions: some View {
+        HStack(spacing: 10) {
+            if asOwner {
+                if item.status == "pending" {
+                    Button("Weiger") { Task { await act("decline") } }.buttonStyle(.secondary)
+                    Button("Accepteer") { Task { await act("accept") } }.buttonStyle(.primary)
+                } else if item.status == "accepted" || item.status == "completed" {
+                    Button("Vertrouwen", systemImage: "hand.thumbsup.fill") { trustSheet = true }.buttonStyle(.secondary)
+                }
+                if item.walkStatus == "active", let id = item.walkId {
+                    Button("Kijk live mee", systemImage: "dot.radiowaves.left.and.right") { following = id }.buttonStyle(.ball)
+                } else if item.walkStatus == "ended", let id = item.walkId {
+                    Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
+                }
+            } else {
+                if item.canStart() && item.walkStatus != "ended" {
+                    Button {
+                        Task { await start() }
+                    } label: {
+                        Label(item.walkStatus == "active" ? "Ga verder met je rondje" : "Start het rondje", systemImage: "figure.walk")
+                    }
+                    .buttonStyle(.ball)
+                    .disabled(busy || walk.isActive)
+                } else if item.walkStatus == "ended", let id = item.walkId {
+                    Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
+                }
+            }
+            if item.isOpen && item.walkStatus != "active" {
+                Button {
+                    confirmCancel = true
+                } label: {
+                    Image(systemName: "xmark")
+                }
+                .buttonStyle(.bordered)
+                .tint(Palette.muted)
+                .accessibilityLabel("Annuleer")
+            }
+        }
+        .disabled(busy)
+    }
+
+    private func act(_ action: String) async {
+        busy = true
+        defer { busy = false }
+        do {
+            let _: OK = try await APIClient.shared.post("/api/v1/requests/\(item.id)", ["action": action])
+            switch action {
+            case "accept": Haptics.success(); model.show("Geaccepteerd. Jullie zien elkaars contactgegevens nu.")
+            case "decline": model.show("Afgewezen", symbol: "hand.raised.fill", tint: Palette.muted)
+            default: model.show("Geannuleerd", symbol: "xmark.circle.fill", tint: Palette.muted)
+            }
+            await model.refreshAppointments()
+        } catch {
+            Haptics.error()
+            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+        }
+    }
+
+    private func start() async {
+        busy = true
+        defer { busy = false }
+        do {
+            LocationService.shared.requestPermission()
+            let started: WalkStarted = try await APIClient.shared.post("/api/v1/walks", ["requestId": item.id])
+            // The vet's details come from the dog's page, which the walker may see after acceptance.
+            let detail: DogDetail? = try? await APIClient.shared.get("/api/v1/dogs/\(item.dog.id)")
+            Haptics.success()
+            walk.start(.init(
+                walkId: started.walkId, dogName: item.dog.name, look: item.dog.look, startedAt: .now,
+                plannedEnd: .now.addingTimeInterval(Double(item.durationMin) * 60),
+                ownerName: item.host?.name, ownerPhone: item.host?.phone, vetInfo: detail?.dog.vetInfo
+            ))
+            await model.refreshAppointments()
+        } catch {
+            Haptics.error()
+            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+        }
+    }
+}
+
+/// After meeting: the owner records that they saw the walker's ID and may allow solo walks.
+struct TrustSheet: View {
+    let item: Appointment
+    let walker: Appointment.Walker
+    @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
+    @State private var idSeen = false
+    @State private var solo = false
+    @State private var error: String?
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    Toggle("Ik heb het ID van \(walker.firstName) in het echt gezien", isOn: $idSeen)
+                    if !item.dog.isShelter {
+                        Toggle("\(walker.firstName) mag zelfstandig met \(item.dog.name) wandelen", isOn: $solo)
+                    }
+                } footer: {
+                    Text("\(Brand.name) bewaart nooit een kopie van een ID. Zelfstandig wandelen kan pas als \(walker.firstName) ook de veiligheidsquiz heeft gehaald.")
+                }
+                if let error { Text(error).foregroundStyle(Palette.danger) }
+            }
+            .tint(Palette.grass)
+            .navigationTitle("Vertrouwen")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("Annuleer") { dismiss() } }
+                ToolbarItem(placement: .confirmationAction) { Button("Bewaar") { Task { await save() } } }
+            }
+            .onAppear {
+                idSeen = item.trust?.idSeen ?? false
+                solo = item.trust?.soloAllowed ?? false
+            }
+        }
+    }
+
+    private struct Payload: Encodable { var action = "trust"; var dogId, walkerId: String; var idSeen, soloAllowed: Bool }
+
+    private func save() async {
+        do {
+            let _: OK = try await APIClient.shared.post("/api/v1/requests/\(item.id)", Payload(dogId: item.dog.id, walkerId: walker.id, idSeen: idSeen, soloAllowed: solo))
+            Haptics.success()
+            model.show("Opgeslagen")
+            await model.refreshAppointments()
+            dismiss()
+        } catch {
+            self.error = error.localizedDescription
+        }
+    }
+}

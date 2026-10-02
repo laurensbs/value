@@ -1,0 +1,67 @@
+# Generates Rondje.xcodeproj: `brew install xcodegen && xcodegen` in this folder.
+# The app's name lives in one place: APP_DISPLAY_NAME below (and Brand.swift reads it at runtime).
+name: Rondje
+options:
+  bundleIdPrefix: app.rondje
+  deploymentTarget:
+    iOS: "18.0"
+  developmentLanguage: nl
+  createIntermediateGroups: true
+settings:
+  base:
+    APP_DISPLAY_NAME: Rondje
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "6.0"
+    DEVELOPMENT_TEAM: ""
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+  configs:
+    Debug:
+      # The simulator talks to `npm run dev` on this Mac (cd web && npx next dev -p 3100).
+      RONDJE_API_BASE_URL: http:/$()/localhost:3100
+    Release:
+      RONDJE_API_BASE_URL: https:/$()/rondje-five.vercel.app
+targets:
+  Rondje:
+    type: application
+    platform: iOS
+    sources:
+      - path: Rondje
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.rondje.mobile
+        INFOPLIST_FILE: Rondje/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Rondje/Resources/Rondje.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+    dependencies:
+      - target: RondjeWidgets
+  RondjeWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: RondjeWidgets
+      - path: Shared
+      - path: Rondje/UI/DogFace.swift
+      - path: Rondje/UI/Theme.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.rondje.mobile.widgets
+        INFOPLIST_FILE: RondjeWidgets/Info.plist
+        CODE_SIGN_ENTITLEMENTS: RondjeWidgets/RondjeWidgets.entitlements
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Rondje:
+    build:
+      targets:
+        Rondje: all
+        RondjeWidgets: all
+    run:
+      config: Debug
+    archive:
+      config: Release
