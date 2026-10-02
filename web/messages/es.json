@@ -581,7 +581,10 @@
     "flyer": "Imprime un folleto para tu barrio",
     "email": "Correo",
     "emailNotifications": "Enviarme un correo con los avisos importantes",
-    "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje."
+    "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje.",
+    "pushNotifications": "Notificaciones push en este navegador",
+    "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga. En iPhone: añade primero Rondje a la pantalla de inicio.",
+    "pushBlocked": "Tu navegador bloquea las notificaciones de Rondje. Actívalas en los ajustes del navegador."
   },
   "quiz": {
     "title": "Test de seguridad",

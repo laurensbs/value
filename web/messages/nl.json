@@ -581,7 +581,10 @@
     "flyer": "Print een flyer voor je buurt",
     "email": "E-mail",
     "emailNotifications": "Stuur me een e-mail bij belangrijke meldingen",
-    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje."
+    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje.",
+    "pushNotifications": "Pushmeldingen in deze browser",
+    "pushHint": "Een seintje bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt. Op iPhone: zet Rondje eerst op je beginscherm.",
+    "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser."
   },
   "quiz": {
     "title": "Veiligheidsquiz",

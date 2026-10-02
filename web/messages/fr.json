@@ -581,7 +581,10 @@
     "flyer": "Imprimer un flyer pour votre quartier",
     "email": "E-mail",
     "emailNotifications": "M'envoyer un e-mail pour les notifications importantes",
-    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje."
+    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje.",
+    "pushNotifications": "Notifications push dans ce navigateur",
+    "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure. Sur iPhone : ajoutez d’abord Rondje à l’écran d’accueil.",
+    "pushBlocked": "Votre navigateur bloque les notifications de Rondje. Activez-les dans les réglages du navigateur."
   },
   "quiz": {
     "title": "Quiz de sécurité",

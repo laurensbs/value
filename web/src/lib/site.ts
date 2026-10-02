@@ -38,3 +38,6 @@ export function safeNext(value: unknown, fallback = '/dogs'): string {
   if (typeof value !== 'string' || !value.startsWith('/') || value.startsWith('//') || value.startsWith('/\\')) return fallback
   return value
 }
+
+/** The app's name in one place, until the final name is chosen. */
+export const APP_NAME = 'Rondje'

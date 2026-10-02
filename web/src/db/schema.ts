@@ -433,6 +433,26 @@ export const notification = pgTable(
   (t) => [index('notification_user_idx').on(t.userId, t.createdAt)],
 )
 
+/**
+ * Where to send push notifications for someone: a browser push subscription (kind 'web',
+ * endpoint plus keys) or an iPhone's APNs device token (kind 'apns'). Removed when it stops working.
+ */
+export const pushDevice = pgTable(
+  'push_device',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    kind: text('kind').notNull(),
+    endpoint: text('endpoint').notNull().unique(),
+    keys: jsonb('keys'),
+    sandbox: boolean('sandbox').notNull().default(false),
+    createdAt: created(),
+  },
+  (t) => [index('push_device_user_idx').on(t.userId)],
+)
+
 export const auditLog = pgTable('audit_log', {
   id: text('id').primaryKey(),
   actorId: text('actor_id'),

@@ -581,7 +581,10 @@
     "flyer": "Print a flyer for your neighbourhood",
     "email": "Email",
     "emailNotifications": "Email me about important notifications",
-    "emailNotificationsHint": "A new request, an accepted appointment or a walk that runs late. Off: you only see notifications in Rondje."
+    "emailNotificationsHint": "A new request, an accepted appointment or a walk that runs late. Off: you only see notifications in Rondje.",
+    "pushNotifications": "Push notifications in this browser",
+    "pushHint": "A heads-up for a new message, an accepted request or a walk that runs late. On iPhone: add Rondje to your home screen first.",
+    "pushBlocked": "Your browser blocks notifications from Rondje. Turn them on in your browser settings."
   },
   "quiz": {
     "title": "Safety quiz",

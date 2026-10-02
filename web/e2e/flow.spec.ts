@@ -133,6 +133,9 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   const sent = await app.post(chatUrl, { data: { body: 'Bello doet het super!' }, headers: bearer })
   expect((await sent.json()).chat.body).toBe('Bello doet het super!')
   expect((await (await app.get(chatUrl, { headers: bearer })).json()).messages).toHaveLength(3)
+  // The iPhone app registers its push token; anything that isn't one is refused.
+  expect((await app.post('/api/v1/devices', { data: { token: 'a'.repeat(64), sandbox: true }, headers: bearer })).status()).toBe(200)
+  expect((await app.post('/api/v1/devices', { data: { token: 'not-a-token' }, headers: bearer })).status()).toBe(400)
   await app.dispose()
 
   // --- Owner follows along live ---

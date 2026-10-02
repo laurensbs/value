@@ -5,6 +5,7 @@ import * as s from '@/db/schema'
 import { adminEmails } from '@/lib/site'
 import { EMAIL_KINDS } from '@/lib/notification-links'
 import { emailEnabled, notificationEmail, sendEmailLater, toLocale } from './email'
+import { pushLater } from './push'
 
 export type NotificationKind =
   | 'request-new'
@@ -35,6 +36,7 @@ export async function notify(
     unique.map((userId) => ({ id: crypto.randomUUID(), userId, kind, data })),
   )
   if (emailEnabled() && (EMAIL_KINDS as readonly string[]).includes(kind)) await emailNotification(db, unique, kind, data)
+  pushLater(db, unique, kind, data)
 }
 
 /** The same notification by email, in each person's language, unless they turned it off. */

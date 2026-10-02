@@ -134,7 +134,7 @@ Trabajamos con las siguientes entidades. Con los encargados del tratamiento firm
 | Neon Inc. | Base de datos (Postgres) | Región de la UE [pendiente de verificar: cuál] |
 | Resend Inc. (cuando el correo esté activado) | Envío de correos: una contraseña nueva y avisos como una solicitud nueva o un paseo que se alarga (puedes desactivarlos en tu perfil) | EE. UU.; transferencia basada en cláusulas contractuales tipo [por verificar] |
 | Google o Apple | Inicio de sesión, solo si lo eliges | Bajo la responsabilidad de Google o Apple |
-| Apple o Google | Notificaciones *push*, solo si las activas [pendiente de verificar] | Según las condiciones de Apple o Google |
+| Apple, Google o Mozilla | Notificaciones *push* a través de tu teléfono o navegador, solo si las activas. Reciben el texto del aviso, no rutas ni mensajes | Según las condiciones de Apple, Google o Mozilla |
 | OpenStreetMap Foundation | Imágenes de mapas (teselas) | Reino Unido [pendiente de verificar] |
 
 **Mapas.** Al abrir un mapa, tu dispositivo carga imágenes de los servidores de la OpenStreetMap Foundation. Esos servidores reciben tu dirección IP y datos técnicos de tu dispositivo. La OpenStreetMap Foundation es responsable de ese tratamiento [pendiente de verificar] y tiene su propia política de privacidad.
