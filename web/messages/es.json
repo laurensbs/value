@@ -1673,5 +1673,9 @@
     "stats": "{dogs, plural, one {# perro} other {# perros}} · {walkers, plural, one {# paseador} other {# paseadores}} · {km} km",
     "daysLeft": "{n, plural, one {Queda # día} other {Quedan # días}}",
     "private": "Solo contamos paseos, nunca quién los dio."
+  },
+  "sounds": {
+    "toggle": "Sonidos",
+    "hint": "Sonidos suaves en los momentos importantes, como un paseo nuevo o un nivel nuevo. Solo en este dispositivo."
   }
 }

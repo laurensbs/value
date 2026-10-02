@@ -1673,5 +1673,9 @@
     "stats": "{dogs, plural, one {# hond} other {# honden}} · {walkers, plural, one {# wandelaar} other {# wandelaars}} · {km} km",
     "daysLeft": "{n, plural, one {Nog # dag} other {Nog # dagen}}",
     "private": "We tellen alleen rondjes, nooit wie ze liep."
+  },
+  "sounds": {
+    "toggle": "Geluidjes",
+    "hint": "Zachte geluidjes bij belangrijke momenten, zoals een nieuw rondje of een nieuw level. Alleen op dit apparaat."
   }
 }

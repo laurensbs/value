@@ -1673,5 +1673,9 @@
     "stats": "{dogs, plural, one {# chien} other {# chiens}} · {walkers, plural, one {# promeneur} other {# promeneurs}} · {km} km",
     "daysLeft": "{n, plural, one {Encore # jour} other {Encore # jours}}",
     "private": "Nous comptons seulement les balades, jamais qui les a faites."
+  },
+  "sounds": {
+    "toggle": "Petits sons",
+    "hint": "Des sons doux aux moments importants, comme une nouvelle balade ou un nouveau niveau. Uniquement sur cet appareil."
   }
 }
