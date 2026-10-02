@@ -110,6 +110,10 @@ struct ProfileView: View {
                 row("book.fill", L("Hondenvriendenboek"), L("Alle honden met wie je liep"))
             }
             Divider().padding(.leading, 56)
+            NavigationLink { LessonsView() } label: {
+                row("graduationcap.fill", L("Hondenschool"), L("\(Keepsakes.shared.lessonsDone.count) van 5 lessen"))
+            }
+            Divider().padding(.leading, 56)
             NavigationLink { QuizView() } label: {
                 row("checkmark.seal.fill", L("Veiligheidsquiz"), model.me?.profile?.quizPassed == true ? L("Gehaald") : L("Nodig voor zelfstandige rondjes"))
             }

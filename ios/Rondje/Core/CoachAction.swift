@@ -123,7 +123,7 @@ enum CoachRouter {
             NavigationStack { BadgesView() }
         case .prep: AppointmentsView() // fallback: prep-hints
         case .rebook(let id): RebookSheet(appointmentId: id).presentationDetents([.large])
-        case .lessons: NavigationStack { QuizView() } // fallback: lessons
+        case .lessons: NavigationStack { LessonsView() }
         case .nudgeSettings: NavigationStack { NudgeSettingsView() }
         case .appointments, .startWalk, .discover, .dog:
             EmptyView()
