@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/admin', '/api/', '/walk/', '/follow/', '/my-dogs', '/requests', '/notifications', '/profile', '/onboarding', '/shelter/', '/r/', '/banned'],
+      disallow: ['/admin', '/api/', '/walk/', '/follow/', '/chat/', '/my-dogs', '/requests', '/notifications', '/profile', '/onboarding', '/shelter/', '/r/', '/banned'],
     },
     sitemap: `${siteUrl()}/sitemap.xml`,
   }

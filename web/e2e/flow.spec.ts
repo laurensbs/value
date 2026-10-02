@@ -55,6 +55,26 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
   await shot(walker.page, '05-request-sent')
 
+  // --- Before deciding, the owner asks a question in the chat; no phone numbers needed yet ---
+  await owner.page.goto('/requests')
+  await owner.page.getByRole('link', { name: 'Chat' }).click()
+  await expect(owner.page).toHaveURL(/\/chat\/[^/?]+$/)
+  const requestId = owner.page.url().split('/chat/')[1]
+  await expect(owner.page.getByRole('heading', { name: 'Chat over Bello' })).toBeVisible()
+  await owner.page.getByLabel('Typ een bericht').fill('Hoi Fleur! Heb je eerder met een jonge hond gelopen?')
+  await owner.page.getByRole('button', { name: 'Verstuur' }).click()
+  await expect(owner.page.locator('.chat-bubble.mine')).toContainText('jonge hond')
+
+  await walker.page.goto('/notifications')
+  await expect(walker.page.getByText('Ans stuurde een bericht over Bello.')).toBeVisible()
+  await walker.page.goto('/requests')
+  await walker.page.getByRole('link', { name: 'Chat' }).click()
+  await expect(walker.page.getByText('Heb je eerder met een jonge hond gelopen?')).toBeVisible()
+  await walker.page.getByLabel('Typ een bericht').fill('Ja, met de pup van mijn buren!')
+  await walker.page.getByRole('button', { name: 'Verstuur' }).click()
+  await expect(owner.page.getByText('Ja, met de pup van mijn buren!')).toBeVisible({ timeout: 10_000 })
+  await shot(owner.page, '05b-chat')
+
   // --- Owner accepts, sees contact details, records the ID check and allows solo walks ---
   await owner.page.goto('/requests')
   await expect(owner.page.getByText('Fleur', { exact: true }).first()).toBeVisible()
@@ -109,6 +129,10 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   const bearer = { Authorization: `Bearer ${token}` }
   expect(await (await app.post(care, { data: { kind: 'poo', delta: 1 }, headers: bearer })).json()).toEqual({ pee: 2, poo: 1, water: 1 })
   expect((await (await app.get(`/api/v1/walks/${walkId}/photos`, { headers: bearer })).json()).photos).toHaveLength(1)
+  const chatUrl = `/api/v1/requests/${requestId}/messages`
+  const sent = await app.post(chatUrl, { data: { body: 'Bello doet het super!' }, headers: bearer })
+  expect((await sent.json()).chat.body).toBe('Bello doet het super!')
+  expect((await (await app.get(chatUrl, { headers: bearer })).json()).messages).toHaveLength(3)
   await app.dispose()
 
   // --- Owner follows along live ---

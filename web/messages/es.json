@@ -884,7 +884,8 @@
       "org-pending": "{orgName} se ha registrado como protectora. Revisa los datos.",
       "shelter-joined": "{orgName} ya está en Rondje. ¡Echa un vistazo a los perros!",
       "group-walk-new": "{orgName} ha organizado un paseo en grupo. ¿Te apuntas?",
-      "walk-photo": "Nueva foto de {dogName} durante el paseo."
+      "walk-photo": "Nueva foto de {dogName} durante el paseo.",
+      "chat-message": "{senderName} envió un mensaje sobre {dogName}."
     }
   },
   "admin": {
@@ -1293,6 +1294,10 @@
       "shelter-joined": {
         "subject": "{orgName} ya está en Rondje",
         "body": "Recomendaste o votaste esta protectora y ya se ha unido. Mira los perros y únete a un paseo en grupo."
+      },
+      "chat-message": {
+        "subject": "{senderName} te envió un mensaje sobre {dogName}",
+        "body": "Léelo y responde en Rondje. Así solo compartes tu teléfono cuando ya os conocéis."
       }
     }
   },
@@ -1322,5 +1327,23 @@
     "otherCities": "Otras ciudades",
     "all": "Todas las ciudades",
     "footerLink": "Ciudades"
+  },
+  "chat": {
+    "title": "Chat sobre {dogName}",
+    "button": "Chat",
+    "withOwner": "Con {name}",
+    "withWalker": "Con {name}",
+    "empty": "Aún no hay mensajes. Pregunta lo que quieras sobre {dogName}, el paseo o dónde quedar.",
+    "placeholder": "Escribe un mensaje",
+    "send": "Enviar",
+    "sending": "Enviando…",
+    "you": "Tú",
+    "closed": "Esta solicitud está cerrada. Puedes leer los mensajes, pero no enviar nuevos.",
+    "tooMany": "Con calma: has enviado muchos mensajes seguidos. Inténtalo de nuevo en un momento.",
+    "error": "No se pudo enviar. Inténtalo de nuevo.",
+    "tooLong": "Ese mensaje es demasiado largo. Máximo {max} caracteres.",
+    "safety": "La primera vez quedad siempre juntos, en un sitio que conozcáis los dos. ¿Algo no va bien? Denúncialo desde el perfil.",
+    "back": "Volver a solicitudes",
+    "label": "Mensajes"
   }
 }

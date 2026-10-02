@@ -884,7 +884,8 @@
       "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
       "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
       "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?",
-      "walk-photo": "Nouvelle photo de {dogName} pendant la promenade."
+      "walk-photo": "Nouvelle photo de {dogName} pendant la promenade.",
+      "chat-message": "{senderName} a envoyé un message à propos de {dogName}."
     }
   },
   "admin": {
@@ -1293,6 +1294,10 @@
       "shelter-joined": {
         "subject": "{orgName} est maintenant sur Rondje",
         "body": "Vous avez recommandé ce refuge ou voté pour lui, et il nous a rejoints. Découvrez les chiens et participez à une promenade en groupe."
+      },
+      "chat-message": {
+        "subject": "{senderName} vous a envoyé un message à propos de {dogName}",
+        "body": "Lisez-le et répondez dans Rondje. Ainsi, vous ne partagez votre numéro qu’une fois que vous vous connaissez."
       }
     }
   },
@@ -1322,5 +1327,23 @@
     "otherCities": "Autres villes",
     "all": "Toutes les villes",
     "footerLink": "Villes"
+  },
+  "chat": {
+    "title": "Discussion à propos de {dogName}",
+    "button": "Discuter",
+    "withOwner": "Avec {name}",
+    "withWalker": "Avec {name}",
+    "empty": "Pas encore de messages. Posez vos questions sur {dogName}, la balade ou le lieu de rendez-vous.",
+    "placeholder": "Écrivez un message",
+    "send": "Envoyer",
+    "sending": "Envoi…",
+    "you": "Vous",
+    "closed": "Cette demande est close. Vous pouvez encore lire les messages, mais plus en envoyer.",
+    "tooMany": "Doucement : vous avez envoyé beaucoup de messages en peu de temps. Réessayez dans un instant.",
+    "error": "L’envoi a échoué. Réessayez.",
+    "tooLong": "Ce message est trop long. Maximum {max} caractères.",
+    "safety": "La première fois, retrouvez-vous toujours ensemble, dans un lieu que vous connaissez tous les deux. Un souci ? Signalez-le depuis le profil.",
+    "back": "Retour aux demandes",
+    "label": "Messages"
   }
 }

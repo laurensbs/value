@@ -884,7 +884,8 @@
       "org-pending": "{orgName} signed up as a shelter. Please check the details.",
       "shelter-joined": "{orgName} is on Rondje now. Have a look at the dogs!",
       "group-walk-new": "{orgName} has planned a group walk. Want to join?",
-      "walk-photo": "New photo of {dogName} during the walk."
+      "walk-photo": "New photo of {dogName} during the walk.",
+      "chat-message": "{senderName} sent a message about {dogName}."
     }
   },
   "admin": {
@@ -1293,6 +1294,10 @@
       "shelter-joined": {
         "subject": "{orgName} is on Rondje now",
         "body": "You suggested or voted for this shelter, and it has joined. Have a look at the dogs and join a group walk."
+      },
+      "chat-message": {
+        "subject": "{senderName} sent you a message about {dogName}",
+        "body": "Read and reply in Rondje. That way you only share your phone number once you've met."
       }
     }
   },
@@ -1322,5 +1327,23 @@
     "otherCities": "Other cities",
     "all": "All cities",
     "footerLink": "Cities"
+  },
+  "chat": {
+    "title": "Chat about {dogName}",
+    "button": "Chat",
+    "withOwner": "With {name}",
+    "withWalker": "With {name}",
+    "empty": "No messages yet. Feel free to ask about {dogName}, the walk or where to meet.",
+    "placeholder": "Type a message",
+    "send": "Send",
+    "sending": "Sending…",
+    "you": "You",
+    "closed": "This request is closed. You can still read the messages, but not send new ones.",
+    "tooMany": "Easy now: you sent a lot of messages in a short time. Try again in a moment.",
+    "error": "Couldn't send. Please try again.",
+    "tooLong": "That message is too long. Keep it under {max} characters.",
+    "safety": "Always meet together the first time, somewhere you both know. Something not right? Report it from the profile.",
+    "back": "Back to requests",
+    "label": "Messages"
   }
 }

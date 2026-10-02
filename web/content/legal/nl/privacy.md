@@ -157,11 +157,12 @@ Wil je meer weten over deze waarborgen? Mail ons.
 | Gegevens | Bewaartermijn |
 |---|---|
 | Account- en profielgegevens, hondenprofielen | Zolang je account bestaat. Na verwijderen nog maximaal 30 dagen (back-ups) |
-| Routepunten van wandelingen | 30 dagen. Langer alleen als dat nodig is voor een open melding |
+| Routepunten en foto's van wandelingen | 30 dagen. Langer alleen als dat nodig is voor een open melding |
 | Privé-feedback | 1 jaar |
 | Meldingen en de gegevens die erbij horen | Tot 2 jaar na afsluiten van de melding [voorstel] |
 | Gegevens over een uitsluiting, om te voorkomen dat iemand zich opnieuw aanmeldt | [voorstel: zo kort mogelijk, bijv. 2 jaar – te controleren] |
-| Verzoeken en berichten | [bewaartermijn vast te stellen] |
+| Verzoeken | [bewaartermijn vast te stellen] |
+| Chatberichten tussen wandelaar en eigenaar of opvang | 1 jaar |
 | Tips en stemmen voor opvangen | Tot een jaar nadat we ze hebben afgehandeld; tips waar niets mee gebeurde na twee jaar |
 | Beveiligingslogs | [bewaartermijn vast te stellen, bijv. 90 dagen] |
 | Stemming-check-ins | Niet bij ons. Alleen op je eigen apparaat, tot je ze verwijdert |

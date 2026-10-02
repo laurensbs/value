@@ -157,11 +157,12 @@ Vous souhaitez en savoir plus sur ces garanties ? Écrivez-nous.
 | Données | Durée de conservation |
 |---|---|
 | Données de compte et de profil, profils des chiens | Tant que votre compte existe. Après suppression, jusqu'à 30 jours de plus (sauvegardes) |
-| Points de trajet des promenades | 30 jours. Plus longtemps uniquement si nécessaire pour un signalement en cours |
+| Points de trajet et photos des promenades | 30 jours. Plus longtemps uniquement si nécessaire pour un signalement en cours |
 | Avis privés | 1 an |
 | Signalements et données associées | Jusqu'à 2 ans après la clôture du signalement [proposition] |
 | Données liées à une exclusion, pour éviter une nouvelle inscription | [proposition : aussi courte que possible, p. ex. 2 ans – à vérifier] |
-| Demandes et messages | [durée à fixer] |
+| Demandes | [durée à fixer] |
+| Messages de discussion entre promeneur et propriétaire ou refuge | 1 an |
 | Recommandations et votes pour des refuges | Jusqu'à un an après leur traitement ; celles qui n'ont pas été traitées, après deux ans |
 | Journaux de sécurité | [durée à fixer, p. ex. 90 jours] |
 | Bilans d'humeur | Pas chez nous. Uniquement sur votre appareil, jusqu'à ce que vous les supprimiez |

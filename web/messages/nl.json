@@ -884,7 +884,8 @@
       "org-pending": "{orgName} heeft zich aangemeld als opvang. Controleer de gegevens.",
       "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!",
       "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?",
-      "walk-photo": "Nieuwe foto van {dogName} tijdens het rondje."
+      "walk-photo": "Nieuwe foto van {dogName} tijdens het rondje.",
+      "chat-message": "{senderName} stuurde een bericht over {dogName}."
     }
   },
   "admin": {
@@ -1293,6 +1294,10 @@
       "shelter-joined": {
         "subject": "{orgName} staat nu op Rondje",
         "body": "Je tipte of stemde op deze opvang, en hij doet nu mee. Bekijk de honden en loop mee met een groepswandeling."
+      },
+      "chat-message": {
+        "subject": "{senderName} stuurde je een bericht over {dogName}",
+        "body": "Lees en beantwoord het in Rondje. Zo hoef je je telefoonnummer pas te delen als jullie elkaar kennen."
       }
     }
   },
@@ -1322,5 +1327,23 @@
     "otherCities": "Andere steden",
     "all": "Alle steden",
     "footerLink": "Steden"
+  },
+  "chat": {
+    "title": "Chat over {dogName}",
+    "button": "Chat",
+    "withOwner": "Met {name}",
+    "withWalker": "Met {name}",
+    "empty": "Nog geen berichten. Stel gerust een vraag over {dogName}, de afspraak of waar jullie elkaar zien.",
+    "placeholder": "Typ een bericht",
+    "send": "Verstuur",
+    "sending": "Versturen…",
+    "you": "Jij",
+    "closed": "Deze afspraak is gesloten. Je kunt de berichten nog lezen, maar niet meer sturen.",
+    "tooMany": "Rustig aan: je hebt veel berichten kort na elkaar gestuurd. Probeer het zo weer.",
+    "error": "Versturen lukte niet. Probeer het opnieuw.",
+    "tooLong": "Dat bericht is te lang. Houd het onder de {max} tekens.",
+    "safety": "Spreek de eerste keer altijd samen af, op een plek die jullie allebei kennen. Iets niet in orde? Meld het via het profiel.",
+    "back": "Terug naar afspraken",
+    "label": "Berichten"
   }
 }

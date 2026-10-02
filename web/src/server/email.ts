@@ -54,7 +54,7 @@ export const toLocale = (value: string | null | undefined): Locale => (isLocale(
 export async function notificationEmail(kind: string, data: NotificationData, locale: Locale, to: string): Promise<Email | null> {
   if (!(EMAIL_KINDS as readonly string[]).includes(kind)) return null
   const t = await getTranslations({ locale, namespace: 'email' })
-  const values = { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '', orgName: data.orgName ?? '' }
+  const values = { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '', orgName: data.orgName ?? '', senderName: data.senderName ?? '' }
   const subject = t(`kinds.${kind}.subject`, values)
   const { html, text } = renderEmail({
     heading: subject,

@@ -2,13 +2,13 @@ import { and, eq, inArray, isNull, lt, notInArray, or, sql } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
-import { ROUTE_RETENTION_DAYS } from '@/lib/rules'
+import { CHAT_RETENTION_DAYS, ROUTE_RETENTION_DAYS } from '@/lib/rules'
 import { TIP_RETENTION_DAYS } from '@/lib/tips'
 
 /**
  * Daily housekeeping (Vercel Cron): delete walk routes after 30 days unless an open
  * report needs them, expire old pending requests, close walks left running, and
- * delete old shelter tips.
+ * delete old shelter tips and chat messages older than a year.
  */
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET
@@ -55,5 +55,16 @@ export async function GET(request: Request) {
     )
     .returning({ id: s.suggestion.id })
 
-  return NextResponse.json({ routesDeletedForWalks: oldWalks.length, requestsExpired: expired.length, walksClosed: stale.length, tipsDeleted: tips.length })
+  const chats = await db
+    .delete(s.chatMessage)
+    .where(lt(s.chatMessage.createdAt, new Date(Date.now() - CHAT_RETENTION_DAYS * 24 * 60 * 60_000)))
+    .returning({ id: s.chatMessage.id })
+
+  return NextResponse.json({
+    routesDeletedForWalks: oldWalks.length,
+    requestsExpired: expired.length,
+    walksClosed: stale.length,
+    tipsDeleted: tips.length,
+    chatMessagesDeleted: chats.length,
+  })
 }

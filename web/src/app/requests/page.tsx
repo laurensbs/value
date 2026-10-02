@@ -14,6 +14,7 @@ import {
   type HostContact,
   type RequestRow,
 } from '@/server/queries'
+import { unreadChats } from '@/server/chat'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -25,6 +26,15 @@ const OPEN = ['pending', 'accepted']
 
 function statusPill(status: string) {
   return status === 'accepted' ? 'green' : status === 'pending' ? 'warn' : status === 'completed' ? 'blue' : ''
+}
+
+function ChatLink({ requestId, label, unread }: { requestId: string; label: string; unread: boolean }) {
+  return (
+    <Link href={`/chat/${requestId}`} className="button secondary">
+      <Icon name="chat" size={16} /> {label}
+      {unread ? <span className="unread-dot" aria-hidden="true" /> : null}
+    </Link>
+  )
 }
 
 function Contact({ contact, label }: { contact: HostContact | { name: string; phone: string | null; email?: string | null }; label: string }) {
@@ -56,7 +66,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
   const format = await getFormatter()
   const now = new Date()
 
-  const [outgoing, incoming] = await Promise.all([outgoingRequests(viewer.userId), incomingRequests(viewer)])
+  const [outgoing, incoming, unread] = await Promise.all([outgoingRequests(viewer.userId), incomingRequests(viewer), unreadChats(viewer.userId)])
   const hasIncoming = incoming.length > 0 || viewer.profile.hasDogs || viewer.orgs.length > 0
   const pendingIncoming = incoming.filter((r) => r.request.status === 'pending').length
   const openIncoming = incoming.filter((r) => OPEN.includes(r.request.status)).length
@@ -146,6 +156,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         </>
                       ) : null}
                       <div className="row">
+                        <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
                         {active && r.walkId ? (
                           <Link href={`/walk/${r.walkId}`} className="button primary">
                             <span className="live-dot" aria-hidden="true" /> {t('requests.resume')}
@@ -224,6 +235,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                       </p>
                       <WalkerCard walker={r.walker} signals={signals.get(r.walker.id)!} />
                       {r.request.message ? <blockquote className="message">{r.request.message}</blockquote> : null}
+                      <div className="row">
+                        <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
+                      </div>
                       {r.request.flags.length ? (
                         <p className="notice warn small" role="note">
                           <Icon name="alert" size={16} /> {t('requests.flagged')}
