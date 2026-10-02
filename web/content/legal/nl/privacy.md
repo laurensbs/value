@@ -1,6 +1,6 @@
 ---
 title: Privacyverklaring
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
 ---
@@ -68,7 +68,9 @@ Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: o
 
 **Opvangen**
 
-- naam van de organisatie, KvK-, KBO- of CIF/NIF-nummer, adres en contactpersoon;
+- naam van de organisatie, KvK-, KBO- of CIF/NIF-nummer, adres, website, Instagram, logo en foto's;
+- openbare contactgegevens voor wandelaars (e-mailadres en telefoon) en praktische informatie zoals wandeltijden;
+- een contactpersoon voor Rondje (naam, e-mailadres, telefoon). Die gegevens zijn niet openbaar: alleen beheerders van Rondje zien ze, voor de controle van de opvang en voor vragen;
 - accounts van medewerkers.
 
 **Gezondheidsgegevens.** Rondje vraagt niet naar je gezondheid. Zet ook zelf geen gezondheidsgegevens in je profiel of in het verhaal van je hond, niet van jezelf en niet van anderen. Schrijf bijvoorbeeld "ik kan zelf niet ver meer lopen" in plaats van een diagnose.

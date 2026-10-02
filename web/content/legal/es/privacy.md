@@ -1,6 +1,6 @@
 ---
 title: Política de privacidad
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"
 ---
@@ -68,7 +68,9 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 
 **Protectoras**
 
-- nombre de la entidad, número KvK, KBO o NIF (antes CIF), dirección y persona de contacto;
+- nombre de la entidad, número KvK, KBO o NIF (antes CIF), dirección, web, Instagram, logo y fotos;
+- datos de contacto públicos para paseadores (correo y teléfono) e información práctica, como los horarios de paseo;
+- una persona de contacto para Rondje (nombre, correo, teléfono). Estos datos no son públicos: solo los ven los administradores de Rondje, para verificar la protectora y para dudas;
 - cuentas del equipo.
 
 **Datos de salud.** Rondje no te pregunta por tu salud. No incluyas datos de salud en tu perfil ni en la historia de tu perro, ni tuyos ni de otras personas. Por ejemplo, escribe «ya no puedo caminar mucho» en lugar de mencionar un diagnóstico.

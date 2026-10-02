@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -68,7 +68,9 @@ Questions about privacy? Email us at [e-mail: hallo@rondje.app]. [To verify: whe
 
 **Shelters**
 
-- name of the organisation, KvK, KBO or CIF/NIF number, address and contact person;
+- name of the organisation, KvK, KBO or CIF/NIF number, address, website, Instagram, logo and photos;
+- public contact details for walkers (email and phone) and practical information such as walking times;
+- a contact person for Rondje (name, email, phone). These details are not public: only Rondje's administrators see them, to check the shelter and for questions;
 - staff accounts.
 
 **Health data.** Rondje does not ask about your health. Please do not include health information in your profile or in your dog's story, whether about yourself or others. For example, write "I can't walk far anymore" rather than naming a diagnosis.

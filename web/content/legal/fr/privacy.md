@@ -1,6 +1,6 @@
 ---
 title: Politique de confidentialité
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -68,7 +68,9 @@ Des questions sur la vie privée ? Écrivez-nous à [e-mail: hallo@rondje.app]. 
 
 **Refuges**
 
-- nom de l'organisation, numéro KvK, BCE ou NIF (anciennement CIF), adresse et personne de contact ;
+- nom de l'organisation, numéro KvK, BCE ou NIF (anciennement CIF), adresse, site web, Instagram, logo et photos ;
+- coordonnées publiques pour les promeneurs (e-mail et téléphone) et informations pratiques, comme les horaires de promenade ;
+- une personne de contact pour Rondje (nom, e-mail, téléphone). Ces données ne sont pas publiques : seuls les administrateurs de Rondje les voient, pour vérifier le refuge et pour les questions ;
 - comptes du personnel.
 
 **Données de santé.** Rondje ne vous pose pas de questions sur votre santé. N'indiquez pas non plus de données de santé dans votre profil ou dans l'histoire de votre chien, ni sur vous, ni sur d'autres personnes. Écrivez par exemple « je ne peux plus marcher longtemps » plutôt que de mentionner un diagnostic.
