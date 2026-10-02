@@ -123,7 +123,7 @@ enum CoachRouter {
             NavigationStack { BadgesView() }
         case .prep: AppointmentsView() // fallback: prep-hints
         case .rebook: AppointmentsView() // fallback: request-flow
-        case .lessons: NavigationStack { QuizView() } // fallback: lessons
+        case .lessons: NavigationStack { LessonsView() }
         case .nudgeSettings: NavigationStack { NotificationsView() } // fallback: return-loops
         case .appointments, .startWalk, .discover, .dog:
             EmptyView()

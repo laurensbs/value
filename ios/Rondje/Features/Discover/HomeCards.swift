@@ -20,7 +20,7 @@ struct FirstSteps: View {
         let walked = (me?.trust?.walks ?? 0) > 0
         return [
             Step(id: 0, title: L("Profiel gemaakt"), hint: L("Eigenaren zien wie je bent."), done: me?.profile != nil, symbol: "person.fill"),
-            Step(id: 1, title: L("Haal de veiligheidsquiz"), hint: L("Acht korte vragen. Nodig voor zelfstandige rondjes."), done: me?.profile?.quizPassed == true, symbol: "checkmark.seal.fill"),
+            Step(id: 1, title: L("Hondenschool en quiz"), hint: Keepsakes.shared.lessonsDone.count < 5 ? L("Vijf mini-lessen van 2 minuten, dan de quiz.") : L("Acht korte vragen. Nodig voor zelfstandige rondjes."), done: me?.profile?.quizPassed == true, symbol: "checkmark.seal.fill"),
             Step(id: 2, title: L("Plan een kennismaking"), hint: L("Kies hieronder een hond die je leuk lijkt."), done: requested, symbol: "person.2.fill"),
             Step(id: 3, title: L("Loop je eerste rondje"), hint: L("Start het rondje bij Afspraken, op de dag zelf."), done: walked, symbol: "figure.walk"),
         ]

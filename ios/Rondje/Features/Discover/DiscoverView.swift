@@ -14,7 +14,6 @@ struct DiscoverView: View {
     @State private var filter: Filter = .all
     @State private var query = ""
     @State private var path = NavigationPath()
-    @State private var quiz = false
     @State private var progress = ProgressStore.shared
 
     enum Filter: String, CaseIterable, Identifiable {
@@ -58,7 +57,7 @@ struct DiscoverView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     header
-                    FirstSteps { quiz = true }
+                    FirstSteps { model.perform(Keepsakes.shared.lessonsDone.count < 5 ? .lessons : .quiz) }
                     if let p = progress.progress, p.points > 0 {
                         NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
                     }
@@ -99,9 +98,6 @@ struct DiscoverView: View {
                     .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
             }
             .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
-            .sheet(isPresented: $quiz, onDismiss: { Task { await model.refreshMe() } }) {
-                NavigationStack { QuizView() }
-            }
         }
         .task { await progress.load() }
         .task {
