@@ -32,3 +32,9 @@ export function adminEmails(): string[] {
 }
 
 export const TERMS_VERSION = '0.1'
+
+/** Only allow redirects to paths on this site ("/x", never "//evil" or "/\evil"). */
+export function safeNext(value: unknown, fallback = '/dogs'): string {
+  if (typeof value !== 'string' || !value.startsWith('/') || value.startsWith('//') || value.startsWith('/\\')) return fallback
+  return value
+}

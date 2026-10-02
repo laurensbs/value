@@ -31,6 +31,15 @@ const PATHS = {
   alert: 'M12 4 2.5 20h19L12 4ZM12 10v4M12 17h.01',
   key: 'M14 10a4 4 0 1 0-3.5 3.96L9 15.5H7V17.5H5V20H2.5v-2.5l7.04-7.04A4 4 0 0 0 14 10ZM16 8h.01',
   location: 'M12 2v3M12 19v3M2 12h3M19 12h3M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z',
+  heart: 'M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z',
+  share: 'M12 15V3M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7',
+  trash: 'M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3',
+  edit: 'M4 20h4L19 9l-4-4L4 16v4ZM13.5 6.5l4 4',
+  stop: 'M7 7h10v10H7z',
+  download: 'M12 3v12M8 11l4 4 4-4M5 21h14',
+  calendar: 'M4 6h16v15H4V6ZM4 10h16M8 3v4M16 3v4',
+  eye: 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z',
+  users: 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7.5M22 21v-1a6 6 0 0 0-4-5.6',
 } as const
 
 export type IconName = keyof typeof PATHS

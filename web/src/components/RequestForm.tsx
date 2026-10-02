@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useActionState, useState } from 'react'
+import { useState } from 'react'
+import { useForm } from '@/lib/use-form'
 import { createRequest } from '@/server/actions/requests'
 import type { FormState } from '@/server/actions/profile'
 import { SubmitButton } from './SubmitButton'
@@ -18,7 +19,7 @@ interface Props {
 
 export function RequestForm({ dogId, dogName, meetReason, soloReason, defaultDate, defaultTime }: Props) {
   const t = useTranslations('request')
-  const [state, action] = useActionState<FormState, FormData>(createRequest, { ok: false })
+  const { state, pending, onSubmit } = useForm<FormState>(createRequest, { ok: false })
   const [kind, setKind] = useState<'meet' | 'solo'>(soloReason ? 'meet' : 'solo')
   const reason = kind === 'solo' ? soloReason : meetReason
 
@@ -34,7 +35,7 @@ export function RequestForm({ dogId, dogName, meetReason, soloReason, defaultDat
   }
 
   return (
-    <form action={action} className="form card">
+    <form onSubmit={onSubmit} className="form card">
       <h2>{t('title')}</h2>
       <input type="hidden" name="dogId" value={dogId} />
       <fieldset className="field">
@@ -96,7 +97,9 @@ export function RequestForm({ dogId, dogName, meetReason, soloReason, defaultDat
               {t(`reasons.${state.error}`)}
             </p>
           ) : null}
-          <SubmitButton className="button primary wide">{t('submit')}</SubmitButton>
+          <SubmitButton className="button primary wide" pending={pending}>
+            {t('submit')}
+          </SubmitButton>
         </>
       )}
     </form>

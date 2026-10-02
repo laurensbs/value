@@ -51,3 +51,8 @@ export function nextWeekday(weekday: number, from = new Date()): string {
   base.setUTCDate(base.getUTCDate() + add)
   return base.toISOString().slice(0, 10)
 }
+
+/** A moment relative to now, for server components (keeps impure calls out of render). */
+export function fromNow(ms: number): Date {
+  return new Date(Date.now() + ms)
+}

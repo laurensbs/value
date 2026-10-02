@@ -20,6 +20,8 @@ export interface LeafletMapProps {
   /** Keep the view on the latest route point / marker. */
   follow?: boolean
   fitToMarkers?: boolean
+  /** Zoom to show the whole route (for summaries). */
+  fitToRoute?: boolean
   onPick?: (p: { lat: number; lng: number }) => void
   className?: string
   ariaLabel: string
@@ -49,6 +51,7 @@ export default function LeafletMap({
   route,
   follow = false,
   fitToMarkers = false,
+  fitToRoute = false,
   onPick,
   className = 'map',
   ariaLabel,
@@ -72,6 +75,9 @@ export default function LeafletMap({
     return () => {
       m.remove()
       map.current = null
+      // Layers belonged to the removed map; the next map (e.g. after a remount) needs new ones.
+      markerLayer.current = null
+      routeLine.current = null
     }
     // The map is created once; later prop changes are applied by the effects below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,16 +111,17 @@ export default function LeafletMap({
     if (!m || !route) return
     const latlngs = route.map((p) => [p.lat, p.lng] as [number, number])
     if (!routeLine.current) {
-      routeLine.current = L.polyline(latlngs, { color: '#1f5a3d', weight: 5, opacity: 0.85, dashArray: '1 10', lineCap: 'round' }).addTo(m)
+      routeLine.current = L.polyline(latlngs, { className: 'route-line', weight: 6, opacity: 0.9, lineCap: 'round', lineJoin: 'round' }).addTo(m)
     } else {
       routeLine.current.setLatLngs(latlngs)
     }
     if (follow && latlngs.length > 0) m.setView(latlngs[latlngs.length - 1], Math.max(m.getZoom(), 16))
-  }, [route, follow])
+    else if (fitToRoute && latlngs.length > 1) m.fitBounds(L.latLngBounds(latlngs), { padding: [36, 36], maxZoom: 17 })
+  }, [route, follow, fitToRoute])
 
   useEffect(() => {
-    if (!follow && !fitToMarkers) map.current?.setView([center.lat, center.lng])
-  }, [center.lat, center.lng, follow, fitToMarkers])
+    if (!follow && !fitToMarkers && !fitToRoute) map.current?.setView([center.lat, center.lng])
+  }, [center.lat, center.lng, follow, fitToMarkers, fitToRoute])
 
   return <div ref={el} className={className} role="region" aria-label={ariaLabel} />
 }

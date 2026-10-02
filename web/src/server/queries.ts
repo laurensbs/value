@@ -29,6 +29,7 @@ export interface DogFilters {
   energy?: string
   level?: string
   host?: 'owner' | 'shelter'
+  orgId?: string
   q?: string
 }
 
@@ -42,6 +43,7 @@ export async function listDogs(filters: DogFilters, limit = 60): Promise<DogList
   if (filters.level) where.push(eq(s.dog.level, filters.level))
   if (filters.host === 'owner') where.push(isNull(s.dog.orgId))
   if (filters.host === 'shelter') where.push(sql`${s.dog.orgId} is not null`)
+  if (filters.orgId) where.push(eq(s.dog.orgId, filters.orgId))
   if (filters.q) {
     const q = `%${filters.q.toLowerCase()}%`
     where.push(or(sql`lower(${s.dog.name}) like ${q}`, sql`lower(${s.dog.breed}) like ${q}`, sql`lower(${s.dog.city}) like ${q}`)!)
@@ -269,7 +271,17 @@ export async function myGroupSignups(userId: string): Promise<Set<string>> {
 export interface RequestRow {
   request: typeof s.walkRequest.$inferSelect
   dog: Pick<Dog, 'id' | 'name' | 'photos' | 'avatar' | 'city' | 'orgId' | 'ownerId' | 'meetingInfo' | 'walkMinutes' | 'isDemo'>
-  walker: { id: string; firstName: string; photoUrl: string | null; bio: string; experience: string; birthDate: string; city: string; phone: string | null }
+  walker: {
+    id: string
+    firstName: string
+    photoUrl: string | null
+    bio: string
+    experience: string
+    birthDate: string
+    city: string
+    phone: string | null
+    email: string
+  }
   walkId: string | null
   walkStatus: string | null
 }
@@ -286,11 +298,13 @@ async function requestRows(where: ReturnType<typeof and>): Promise<RequestRow[]>
       walker: {
         id: s.profile.userId, firstName: s.profile.firstName, photoUrl: s.profile.photoUrl, bio: s.profile.bio,
         experience: s.profile.experience, birthDate: s.profile.birthDate, city: s.profile.city, phone: s.profile.phone,
+        email: s.user.email,
       },
     })
     .from(s.walkRequest)
     .innerJoin(s.dog, eq(s.dog.id, s.walkRequest.dogId))
     .innerJoin(s.profile, eq(s.profile.userId, s.walkRequest.walkerId))
+    .innerJoin(s.user, eq(s.user.id, s.walkRequest.walkerId))
     .where(where)
     .orderBy(asc(s.walkRequest.startsAt))
     .limit(100)
@@ -342,4 +356,50 @@ export async function notificationsFor(userId: string) {
     .where(eq(s.notification.userId, userId))
     .orderBy(desc(s.notification.createdAt))
     .limit(50)
+}
+
+export interface HostContact {
+  kind: 'owner' | 'shelter'
+  name: string
+  phone: string | null
+  email: string | null
+}
+
+/** Contact details of the people behind these dogs. Only call this for accepted appointments. */
+export async function hostContacts(dogs: { id: string; ownerId: string | null; orgId: string | null }[]): Promise<Map<string, HostContact>> {
+  const result = new Map<string, HostContact>()
+  if (dogs.length === 0) return result
+  const db = await getDb()
+  const ownerIds = [...new Set(dogs.map((d) => d.ownerId).filter((x): x is string => Boolean(x)))]
+  const orgIds = [...new Set(dogs.map((d) => d.orgId).filter((x): x is string => Boolean(x)))]
+  const owners = ownerIds.length
+    ? await db
+        .select({ id: s.profile.userId, name: s.profile.firstName, phone: s.profile.phone, email: s.user.email })
+        .from(s.profile)
+        .innerJoin(s.user, eq(s.user.id, s.profile.userId))
+        .where(inArray(s.profile.userId, ownerIds))
+    : []
+  const orgs = orgIds.length
+    ? await db
+        .select({ id: s.organization.id, name: s.organization.name, phone: s.organization.phone, email: s.organization.email })
+        .from(s.organization)
+        .where(inArray(s.organization.id, orgIds))
+    : []
+  for (const dog of dogs) {
+    const owner = owners.find((o) => o.id === dog.ownerId)
+    const org = orgs.find((o) => o.id === dog.orgId)
+    if (owner) result.set(dog.id, { kind: 'owner', name: owner.name, phone: owner.phone, email: owner.email })
+    else if (org) result.set(dog.id, { kind: 'shelter', name: org.name, phone: org.phone || null, email: org.email || null })
+  }
+  return result
+}
+
+/** Existing trust grants, keyed "dogId:walkerId". */
+export async function trustGrantsFor(dogIds: string[]): Promise<Map<string, { idSeen: boolean; soloAllowed: boolean }>> {
+  const result = new Map<string, { idSeen: boolean; soloAllowed: boolean }>()
+  if (dogIds.length === 0) return result
+  const db = await getDb()
+  const rows = await db.select().from(s.trustGrant).where(inArray(s.trustGrant.dogId, dogIds))
+  for (const r of rows) result.set(`${r.dogId}:${r.walkerId}`, { idSeen: r.idSeen, soloAllowed: r.soloAllowed })
+  return result
 }

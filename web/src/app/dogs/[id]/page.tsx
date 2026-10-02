@@ -11,7 +11,7 @@ import { Icon } from '@/components/Icon'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
-import { nextWeekday, toZonedParts } from '@/lib/time'
+import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
 import { dogFacts, getDogDetail, myGroupSignups, relationFor, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
 
@@ -50,7 +50,7 @@ export default async function DogPage({
   const joined = viewer ? await myGroupSignups(viewer.userId) : new Set<string>()
 
   const firstSlot = slots[0]
-  const defaultDate = firstSlot ? nextWeekday(firstSlot.weekday) : toZonedParts(new Date(Date.now() + 24 * 3600_000)).date
+  const defaultDate = firstSlot ? nextWeekday(firstSlot.weekday) : toZonedParts(fromNow(24 * 3600_000)).date
   const defaultTime = firstSlot?.time ?? '10:00'
 
   return (

@@ -20,7 +20,8 @@
     "notifications": "Meldingen",
     "helpPill": "Even niet oké?",
     "language": "Taal",
-    "menu": "Menu"
+    "menu": "Menu",
+    "skip": "Naar de inhoud"
   },
   "common": {
     "save": "Opslaan",
@@ -48,9 +49,29 @@
     "all": "Alle",
     "country": "Land",
     "city": "Plaats",
-    "countries": { "NL": "Nederland", "BE": "België", "ES": "Spanje" },
-    "weekdays": { "1": "maandag", "2": "dinsdag", "3": "woensdag", "4": "donderdag", "5": "vrijdag", "6": "zaterdag", "7": "zondag" },
-    "weekdaysShort": { "1": "ma", "2": "di", "3": "wo", "4": "do", "5": "vr", "6": "za", "7": "zo" }
+    "countries": {
+      "NL": "Nederland",
+      "BE": "België",
+      "ES": "Spanje"
+    },
+    "weekdays": {
+      "1": "maandag",
+      "2": "dinsdag",
+      "3": "woensdag",
+      "4": "donderdag",
+      "5": "vrijdag",
+      "6": "zaterdag",
+      "7": "zondag"
+    },
+    "weekdaysShort": {
+      "1": "ma",
+      "2": "di",
+      "3": "wo",
+      "4": "do",
+      "5": "vr",
+      "6": "za",
+      "7": "zo"
+    }
   },
   "footer": {
     "tagline": "Rondje is een gratis platform dat wandelaars, eigenaren en opvangen met elkaar in contact brengt. Rondje is zelf geen partij bij de afspraken.",
@@ -115,7 +136,15 @@
     "errorPasskey": "Inloggen met een passkey lukte niet. Gebruik je wachtwoord, of voeg eerst een passkey toe in je profiel.",
     "addPasskey": "Passkey toevoegen",
     "passkeyAdded": "Passkey toegevoegd. Volgende keer log je in met Face ID of je vingerafdruk.",
-    "passkeyHint": "Sneller en veiliger inloggen, zonder wachtwoord."
+    "passkeyHint": "Sneller en veiliger inloggen, zonder wachtwoord.",
+    "intent": {
+      "walker": "Je gaat wandelen met honden uit de buurt of uit de opvang. Eerst even een account.",
+      "owner": "Je meldt een hond aan die wel een extra rondje kan gebruiken. Eerst even een account.",
+      "shelter": "Je zet de honden van je opvang op Rondje. Maak eerst je eigen account; daarna meld je de opvang aan."
+    },
+    "orEmail": "of met je e-mailadres",
+    "promiseFree": "Gratis, zonder advertenties.",
+    "promisePrivacy": "We verkopen je gegevens nooit. Je locatie wordt afgerond op ongeveer 500 meter."
   },
   "onboarding": {
     "title": "Vertel iets over jezelf",
@@ -147,18 +176,37 @@
       "terms": "Ga akkoord met de voorwaarden om verder te gaan.",
       "invalid": "Vul de verplichte velden in.",
       "not-signed-in": "Log eerst in."
-    }
+    },
+    "step": "Laatste stap"
   },
   "dogs": {
     "title": "Honden die op een rondje wachten",
     "lede": "Van buurtgenoten en uit de opvang. Locaties zijn afgerond op ongeveer 500 meter.",
     "filters": "Filters",
     "search": "Zoek op naam, ras of plaats",
-    "host": { "all": "Alle honden", "owner": "Uit de buurt", "shelter": "Uit de opvang" },
-    "energy": { "calm": "Rustig", "medium": "Gemiddeld", "high": "Energiek" },
-    "level": { "starter": "Voor iedereen", "experienced": "Met ervaring" },
-    "size": { "small": "Klein", "medium": "Middel", "large": "Groot" },
-    "sex": { "male": "Reu", "female": "Teef" },
+    "host": {
+      "all": "Alle honden",
+      "owner": "Uit de buurt",
+      "shelter": "Uit de opvang"
+    },
+    "energy": {
+      "calm": "Rustig",
+      "medium": "Gemiddeld",
+      "high": "Energiek"
+    },
+    "level": {
+      "starter": "Voor iedereen",
+      "experienced": "Met ervaring"
+    },
+    "size": {
+      "small": "Klein",
+      "medium": "Middel",
+      "large": "Groot"
+    },
+    "sex": {
+      "male": "Reu",
+      "female": "Teef"
+    },
     "showMap": "Kaart",
     "showList": "Lijst",
     "away": "{distance} van je",
@@ -180,9 +228,20 @@
     "levelLabel": "Niveau",
     "sizeLabel": "Formaat",
     "treatsLabel": "Koekjes",
-    "treats": { "yes": "Mogen mee", "no": "Liever niet", "own": "Alleen die van de eigenaar" },
+    "treats": {
+      "yes": "Mogen mee",
+      "no": "Liever niet",
+      "own": "Alleen die van de eigenaar"
+    },
     "providesLabel": "De eigenaar zorgt voor",
-    "provides": { "bags": "Poepzakjes", "leash": "Riem", "harness": "Tuig", "treats": "Koekjes", "water": "Water", "towel": "Handdoek" },
+    "provides": {
+      "bags": "Poepzakjes",
+      "leash": "Riem",
+      "harness": "Tuig",
+      "treats": "Koekjes",
+      "water": "Water",
+      "towel": "Handdoek"
+    },
     "offLeash": "Mag los op het hondenveld (met toestemming)",
     "onLeash": "Blijft altijd aan de lijn",
     "slots": "Wanneer kan het",
@@ -202,7 +261,9 @@
     "activate": "Weer zichtbaar maken",
     "adopted": "Geadopteerd",
     "paused": "Deze hond staat even op pauze.",
-    "saved": "Opgeslagen. {name} staat online."
+    "saved": "Opgeslagen. {name} staat online.",
+    "markAdopted": "Geadopteerd!",
+    "view": "Bekijk profiel"
   },
   "request": {
     "title": "Plan een afspraak",
@@ -279,7 +340,11 @@
     "saveTrust": "Bevestigen",
     "trustSaved": "Bijgewerkt.",
     "contact": "Contact",
-    "meeting": "Afspreken"
+    "meeting": "Afspreken",
+    "cancelConfirm": "Afspraak intrekken?",
+    "keep": "Nee, terug",
+    "past": "Eerdere afspraken ({n})",
+    "startHint": "Starten kan vanaf {n} minuten voor de afspraak."
   },
   "walk": {
     "before": "Voor je vertrekt",
@@ -314,11 +379,21 @@
     "feedbackTitle": "Hoe ging het?",
     "feedbackPrivate": "Alleen Rondje leest dit. De ander ziet je antwoorden niet.",
     "dogBehaviour": "Hoe was {name} tijdens het rondje?",
-    "behaviour": { "easy": "Makkelijk", "pulled": "Trok aan de lijn", "reactive": "Reageerde op honden of mensen", "aggressive": "Agressief" },
+    "behaviour": {
+      "easy": "Makkelijk",
+      "pulled": "Trok aan de lijn",
+      "reactive": "Reageerde op honden of mensen",
+      "aggressive": "Agressief"
+    },
     "handoverOk": "Ging het ophalen en terugbrengen goed?",
     "feltSafe": "Voelde je je veilig?",
     "dogCondition": "Hoe was {name} na het rondje?",
-    "condition": { "happy": "Blij en moe", "normal": "Normaal", "stressed": "Gestrest", "injured": "Gewond" },
+    "condition": {
+      "happy": "Blij en moe",
+      "normal": "Normaal",
+      "stressed": "Gestrest",
+      "injured": "Gewond"
+    },
     "onTime": "Was het rondje op tijd terug?",
     "wouldAgain": "Wil je weer met deze wandelaar plannen?",
     "note": "Nog iets kwijt?",
@@ -326,13 +401,31 @@
     "thanks": "Dank je. Als er iets is, nemen we contact op.",
     "moodTitle": "Hoe voel jij je nu?",
     "moodPrivate": "Dit blijft op je eigen telefoon.",
-    "moods": { "1": "Zwaar", "2": "Matig", "3": "Oké", "4": "Goed", "5": "Top" },
+    "moods": {
+      "1": "Zwaar",
+      "2": "Matig",
+      "3": "Oké",
+      "4": "Goed",
+      "5": "Top"
+    },
     "follow": "Live meekijken",
     "followLede": "Je ziet waar {walker} met {dog} loopt zolang het rondje duurt.",
     "lastSeen": "Laatste locatie {time}",
     "notStarted": "Het rondje is nog niet begonnen.",
     "callWalker": "Bel {name}",
-    "reportProblem": "Probleem melden"
+    "reportProblem": "Probleem melden",
+    "again": "Plan nog een rondje met {name}",
+    "backAt": "Terug om",
+    "endNo": "Nog niet",
+    "endYes": "Ja, rondje klaar",
+    "feedbackError": "Vul de vragen in.",
+    "justNow": "zojuist",
+    "mapLabel": "Kaart met de route",
+    "minutesAgo": "{n, plural, one {# minuut geleden} other {# minuten geleden}}",
+    "moodHelp": "Hier vind je hulp.",
+    "moodLow": "Fijn dat je eerlijk bent. Praten helpt vaak.",
+    "moodThanks": "Fijn! Tot het volgende rondje.",
+    "offline": "Even geen verbinding. Je route wordt bewaard en verstuurd zodra je weer bereik hebt."
   },
   "myDogs": {
     "title": "Mijn honden",
@@ -341,7 +434,14 @@
     "newTitle": "Hond aanmelden",
     "editTitle": "{name} bewerken",
     "forSomeone": "Meld je een hond aan voor iemand anders? Vraag eerst toestemming en zet hun gegevens bij ‘Afspreken’.",
-    "sections": { "basics": "De hond", "character": "Karakter", "walk": "Het rondje", "where": "Waar", "private": "Privé", "safety": "Veiligheid" },
+    "sections": {
+      "basics": "De hond",
+      "character": "Karakter",
+      "walk": "Het rondje",
+      "where": "Waar",
+      "private": "Privé",
+      "safety": "Veiligheid"
+    },
     "photos": "Foto's",
     "photosHint": "Een foto buiten, met oogcontact, werkt het best. Maximaal 6.",
     "name": "Naam",
@@ -371,7 +471,23 @@
       "bite-note": "Vertel kort wat er gebeurde.",
       "invalid": "Controleer de verplichte velden.",
       "forbidden": "Dit is niet jouw hond."
-    }
+    },
+    "newLede": "Een goed profiel maakt het verschil. Vertel eerlijk wie je hond is: dan vinden jullie sneller de juiste wandelaar.",
+    "privateHint": "Dit zien alleen wandelaars met wie je een afspraak hebt geaccepteerd.",
+    "providesHint": "Zakjes en koekjes regelt de eigenaar. Zo hoeft een wandelaar nergens voor te betalen.",
+    "publish": "Zet online",
+    "sex": "Reu of teef",
+    "status": {
+      "active": "Zichtbaar",
+      "paused": "Gepauzeerd",
+      "adopted": "Geadopteerd",
+      "hidden": "Verborgen"
+    },
+    "tipsTitle": "Zo vind je sneller een vaste wandelaar",
+    "tip1": "Zet er een foto bij van buiten, met oogcontact.",
+    "tip2": "Kies een of twee vaste momenten in de week. Vaste rondjes houden mensen vol.",
+    "tip3": "Spreek de eerste keer altijd samen af: zo leren jullie elkaar en je hond rustig kennen.",
+    "weekday": "Dag"
   },
   "profile": {
     "title": "Profiel",
@@ -394,7 +510,13 @@
     "deleteText": "Dit verwijdert je account, je honden en je afspraken. Typ VERWIJDER om te bevestigen.",
     "deleteButton": "Verwijder mijn account",
     "language": "Taal",
-    "passkeys": "Inloggen zonder wachtwoord"
+    "passkeys": "Inloggen zonder wachtwoord",
+    "deleteError": "Typ VERWIJDER om te bevestigen.",
+    "deleteWord": "VERWIJDER",
+    "invited": "{n, plural, =0 {Nog niemand deed mee via jouw link.} one {# persoon deed mee via jouw link. Dank je!} other {# mensen deden mee via jouw link. Dank je!}}",
+    "privacyText": "Je kunt al je gegevens downloaden of je account met alles erop en eraan verwijderen. Routes van rondjes bewaren we 30 dagen.",
+    "settings": "Instellingen",
+    "shelterCta": "Werk je bij een dierenopvang? Zet de honden van jullie opvang op Rondje en plan begeleide groepswandelingen."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -403,15 +525,58 @@
     "passed": "Gehaald! Je kunt nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.",
     "failed": "Bijna. Kijk de rode vragen nog eens na.",
     "q": {
-      "heat": { "q": "Het is 28 graden. Wat doe je?", "a0": "Gewoon lopen, honden kunnen goed tegen warmte", "a1": "Kort rondje in de schaduw, water mee, en voel met je hand of het asfalt te heet is", "a2": "Lekker rennen, dan is het sneller klaar" },
-      "leash": { "q": "Mag de hond los?", "a0": "Alleen als de eigenaar dat uitdrukkelijk heeft toegestaan, en alleen waar het mag", "a1": "Ja, als het rustig is", "a2": "Ja, als de hond goed luistert" },
-      "treats": { "q": "Je hebt een koekje in je zak. Mag je dat geven?", "a0": "Ja, honden houden van koekjes", "a1": "Alleen een klein stukje", "a2": "Alleen als het profiel zegt dat het mag" },
-      "otherDogs": { "q": "Een andere hond komt op jullie af. Wat doe je?", "a0": "Laat ze lekker snuffelen", "a1": "Houd afstand, vraag de andere eigenaar eerst, en loop rustig door als je twijfelt", "a2": "Til de hond op" },
-      "escaped": { "q": "De hond is losgeschoten. Wat eerst?", "a0": "Blijf rustig, roep niet achter de hond aan en bel direct de eigenaar", "a1": "Eerst zelf zoeken, dan pas de eigenaar bellen", "a2": "Naar huis gaan en wachten" },
-      "bite": { "q": "De hond bijt een andere hond. Wat doe je?", "a0": "Snel doorlopen", "a1": "Niets, het hoort erbij", "a2": "Zorg dat iedereen veilig is, wissel gegevens uit, bel de eigenaar en meld het in Rondje" },
-      "stress": { "q": "De hond gaapt veel, likt zijn lippen en trekt weg. Wat betekent dat?", "a0": "Hij heeft honger", "a1": "Hij voelt zich niet op zijn gemak; zoek een rustigere plek", "a2": "Hij wil spelen" },
-      "overdue": { "q": "Je loopt later terug dan afgesproken. Wat doe je?", "a0": "Laat het de eigenaar meteen weten", "a1": "Niets, de app laat het toch zien", "a2": "Sneller lopen" }
-    }
+      "heat": {
+        "q": "Het is 28 graden. Wat doe je?",
+        "a0": "Gewoon lopen, honden kunnen goed tegen warmte",
+        "a1": "Kort rondje in de schaduw, water mee, en voel met je hand of het asfalt te heet is",
+        "a2": "Lekker rennen, dan is het sneller klaar"
+      },
+      "leash": {
+        "q": "Mag de hond los?",
+        "a0": "Alleen als de eigenaar dat uitdrukkelijk heeft toegestaan, en alleen waar het mag",
+        "a1": "Ja, als het rustig is",
+        "a2": "Ja, als de hond goed luistert"
+      },
+      "treats": {
+        "q": "Je hebt een koekje in je zak. Mag je dat geven?",
+        "a0": "Ja, honden houden van koekjes",
+        "a1": "Alleen een klein stukje",
+        "a2": "Alleen als het profiel zegt dat het mag"
+      },
+      "otherDogs": {
+        "q": "Een andere hond komt op jullie af. Wat doe je?",
+        "a0": "Laat ze lekker snuffelen",
+        "a1": "Houd afstand, vraag de andere eigenaar eerst, en loop rustig door als je twijfelt",
+        "a2": "Til de hond op"
+      },
+      "escaped": {
+        "q": "De hond is losgeschoten. Wat eerst?",
+        "a0": "Blijf rustig, roep niet achter de hond aan en bel direct de eigenaar",
+        "a1": "Eerst zelf zoeken, dan pas de eigenaar bellen",
+        "a2": "Naar huis gaan en wachten"
+      },
+      "bite": {
+        "q": "De hond bijt een andere hond. Wat doe je?",
+        "a0": "Snel doorlopen",
+        "a1": "Niets, het hoort erbij",
+        "a2": "Zorg dat iedereen veilig is, wissel gegevens uit, bel de eigenaar en meld het in Rondje"
+      },
+      "stress": {
+        "q": "De hond gaapt veel, likt zijn lippen en trekt weg. Wat betekent dat?",
+        "a0": "Hij heeft honger",
+        "a1": "Hij voelt zich niet op zijn gemak; zoek een rustigere plek",
+        "a2": "Hij wil spelen"
+      },
+      "overdue": {
+        "q": "Je loopt later terug dan afgesproken. Wat doe je?",
+        "a0": "Laat het de eigenaar meteen weten",
+        "a1": "Niets, de app laat het toch zien",
+        "a2": "Sneller lopen"
+      }
+    },
+    "alreadyPassed": "Je hebt de quiz al gehaald. Opnieuw doen mag altijd.",
+    "toDogs": "Naar de honden",
+    "tryAgain": "Niet helemaal. Kijk nog eens."
   },
   "shelter": {
     "title": "Voor opvangen",
@@ -460,7 +625,39 @@
       "no-account": "Er is geen account met dit e-mailadres.",
       "no-rows": "We vonden geen honden in het bestand.",
       "too-large": "Het bestand is te groot."
-    }
+    },
+    "eyebrow": "Gratis voor dierenopvangen",
+    "yours": "Jouw opvang",
+    "open": "Openen",
+    "benefit1Title": "Alle honden in één keer online",
+    "benefit1": "Importeer je honden uit Excel of een CSV-bestand. Foto's en verhalen kun je later aanvullen.",
+    "benefit2Title": "Begeleide groepswandelingen",
+    "benefit2": "Plan wandelmomenten met een maximum aantal plekken. Vrijwilligers melden zich aan in de app.",
+    "benefit3Title": "Jij houdt de regie",
+    "benefit3": "Bij de wandeling bekijk je het ID van nieuwe vrijwilligers en noteer je wie er was en wie niet kwam.",
+    "benefit4Title": "Een vaste groep jonge wandelaars",
+    "benefit4": "Rondje vindt wandelaars van 18 tot 30 die graag vaker naar buiten willen. Gratis, zonder abonnement.",
+    "loginFirst": "Maak eerst je eigen account. Daarna meld je de opvang aan; dat duurt twee minuten.",
+    "finishProfile": "Maak eerst je profiel af",
+    "where": "Waar is de opvang?",
+    "created": "Je opvang is aangemeld. We nemen binnen twee werkdagen contact op om hem te controleren.",
+    "status": {
+      "pending": "Wordt gecontroleerd",
+      "verified": "Geverifieerd",
+      "rejected": "Niet geverifieerd"
+    },
+    "statDogs": "honden online",
+    "statWalks": "wandelingen gepland",
+    "statSignups": "aanmeldingen",
+    "noDogs": "Nog geen honden. Voeg er een toe of importeer ze in één keer.",
+    "noGroupWalks": "Nog geen groepswandelingen gepland.",
+    "groupWalkCreated": "Groepswandeling gepland.",
+    "idChecked": "ID eerder gezien",
+    "roles": {
+      "admin": "beheerder",
+      "staff": "medewerker"
+    },
+    "staffAdded": "Medewerker toegevoegd."
   },
   "groupWalks": {
     "title": "Groepswandelingen",
@@ -471,7 +668,9 @@
     "leave": "Afmelden",
     "empty": "Nog geen groepswandelingen in dit land. Bekijk de opvangen in de buurt.",
     "level": "Niveau: {level}",
-    "at": "Verzamelen: {place}"
+    "at": "Verzamelen: {place}",
+    "idNote": "Neem een geldig identiteitsbewijs mee. De begeleider bekijkt het; Rondje bewaart geen kopie.",
+    "meetDogs": "Bekijk de honden van deze opvang"
   },
   "directory": {
     "title": "Opvangen in Nederland, België en Spanje",
@@ -481,7 +680,11 @@
     "walking": "Heeft wandelvrijwilligers",
     "website": "Website",
     "claim": "Werk je hier? Zet je opvang op Rondje",
-    "unverified": "Gegevens uit openbare bronnen, nog niet gecontroleerd."
+    "unverified": "Gegevens uit openbare bronnen, nog niet gecontroleerd.",
+    "claimShort": "Dit is mijn opvang",
+    "dogs": "{n, plural, =0 {nog geen honden} one {# hond} other {# honden}}",
+    "noPartners": "Hier zijn nog geen opvangen op Rondje. Werk je bij een opvang? Meld hem hieronder aan.",
+    "seeDogs": "Bekijk honden"
   },
   "help": {
     "title": "Even niet oké?",
@@ -496,7 +699,9 @@
     "notTherapy": "Rondje is geen hulpverlening en stelt geen diagnoses. Gaat het langer niet goed? Je huisarts kan met je meedenken.",
     "dogTitle": "Iets met een hond?",
     "lostPets": "Vermiste of gevonden dieren: {name}",
-    "animalEmergency": "Dieren in nood: {name}"
+    "animalEmergency": "Dieren in nood: {name}",
+    "police": "Geen spoed, wel politie nodig? Bel {number}.",
+    "website": "Website"
   },
   "safety": {
     "title": "Hoe Rondje veiligheid regelt",
@@ -519,11 +724,21 @@
   "report": {
     "title": "Melden",
     "category": "Wat is er aan de hand?",
-    "categories": { "abuse": "Dierenmishandeling", "safety": "Onveilige situatie", "scam": "Oplichting of geld", "harassment": "Intimidatie", "fake": "Nepprofiel", "other": "Iets anders" },
+    "categories": {
+      "abuse": "Dierenmishandeling",
+      "safety": "Onveilige situatie",
+      "scam": "Oplichting of geld",
+      "harassment": "Intimidatie",
+      "fake": "Nepprofiel",
+      "other": "Iets anders"
+    },
     "description": "Vertel wat er gebeurde",
     "submit": "Melding versturen",
     "done": "Dank je. We kijken er binnen 24 uur naar. In een noodgeval bel je 112.",
-    "blockDone": "Geblokkeerd. Jullie zien elkaar niet meer in afspraken."
+    "blockDone": "Geblokkeerd. Jullie zien elkaar niet meer in afspraken.",
+    "error": "Vertel in minstens een paar woorden wat er gebeurde.",
+    "block": "Blokkeer deze persoon",
+    "blockConfirm": "Weet je het zeker? Open afspraken tussen jullie worden ingetrokken."
   },
   "notifications": {
     "title": "Meldingen",
@@ -567,16 +782,52 @@
     "setup": "Instellingen",
     "database": "Database",
     "photos": "Foto-opslag",
-    "social": "Inloggen met Google/Apple"
+    "social": "Inloggen met Google/Apple",
+    "about": "Over",
+    "banned": "Geblokkeerde accounts",
+    "databaseDemo": "demo (tijdelijk, in het geheugen). Koppel Neon in Vercel → Storage.",
+    "demoConfirm": "Ja, verwijder alle voorbeelddata",
+    "dog": "hond",
+    "fromOwner": "van de eigenaar",
+    "fromWalker": "van de wandelaar",
+    "hideDog": "Hond verbergen",
+    "none": "Niets om na te kijken.",
+    "onboarded": "met profiel",
+    "photosInline": "nog niet gekoppeld; foto's worden klein in de database bewaard",
+    "socialOff": "uit (zet de sleutels in Vercel om ze aan te zetten)",
+    "verifyHint": "Controleer het registratienummer in het openbare register (KvK, KBO of Registro de Asociaciones) en bel of mail de opvang via de gegevens op hun eigen website.",
+    "walk": "rondje"
   },
   "banned": {
     "title": "Je account is geblokkeerd",
     "text": "Je kunt Rondje niet meer gebruiken. Reden: {reason}. Ben je het hier niet mee eens? Mail ons, dan kijken we opnieuw.",
-    "noReason": "niet opgegeven"
+    "noReason": "niet opgegeven",
+    "contact": "Mail naar hallo@rondje.app met je naam en het e-mailadres van je account."
   },
   "errors": {
     "notFound": "Deze pagina bestaat niet (meer).",
     "generic": "Er ging iets mis. Probeer het opnieuw.",
-    "home": "Naar de homepage"
+    "home": "Naar de homepage",
+    "retry": "Probeer opnieuw"
+  },
+  "legal": {
+    "fallback": "Deze tekst is nog niet vertaald. Je leest de Nederlandse versie.",
+    "nav": "Juridische documenten",
+    "titles": {
+      "terms": "Gebruiksvoorwaarden",
+      "privacy": "Privacyverklaring",
+      "conduct": "Gedragscode",
+      "safety": "Veiligheidsbeleid",
+      "shelters": "Partnervoorwaarden voor opvangen",
+      "cookies": "Cookies"
+    }
+  },
+  "photos": {
+    "add": "Foto toevoegen",
+    "change": "Andere foto",
+    "error": "Uploaden lukte niet. Probeer een andere foto (jpg of png).",
+    "makeFirst": "Als eerste",
+    "remove": "Foto verwijderen",
+    "uploading": "Bezig met uploaden…"
   }
 }

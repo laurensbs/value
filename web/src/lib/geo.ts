@@ -51,3 +51,9 @@ export function formatDistance(m: number, locale: string): string {
   if (m < 1000) return `${Math.max(100, Math.round(m / 100) * 100).toLocaleString(locale)} m`
   return `${(m / 1000).toLocaleString(locale, { maximumFractionDigits: 1 })} km`
 }
+
+/** Distance walked, precise to 10 m (unlike formatDistance, which blurs locations). */
+export function formatWalkDistance(m: number, locale: string): string {
+  if (m < 1000) return `${(Math.round(m / 10) * 10).toLocaleString(locale)} m`
+  return `${(m / 1000).toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} km`
+}

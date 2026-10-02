@@ -60,6 +60,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <NextIntlClientProvider>
           <div className={`shell${tabs ? ' has-tabbar' : ''}`}>
+            <a href="#main" className="skip-link">
+              {t('nav.skip')}
+            </a>
             {isDemoMode() ? <div className="demo-banner">{t('footer.demo')}</div> : null}
             <Header viewer={viewer} />
             <main className="main" id="main">

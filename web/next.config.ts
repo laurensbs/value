@@ -6,6 +6,10 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 const nextConfig: NextConfig = {
   // PGlite ships WebAssembly and data files; load it from node_modules at runtime.
   serverExternalPackages: ['@electric-sql/pglite'],
+  // Legal texts are read from disk at request time; ship them with the function.
+  outputFileTracingIncludes: {
+    '/legal/*': ['./content/legal/**/*.md'],
+  },
   images: {
     remotePatterns: [{ protocol: 'https', hostname: '*.public.blob.vercel-storage.com' }],
   },

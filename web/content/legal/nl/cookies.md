@@ -1,0 +1,52 @@
+---
+title: Cookieverklaring
+version: "0.1"
+updated: "2026-10-02"
+status: "Concept – nog niet juridisch getoetst"
+---
+
+# Cookieverklaring van Rondje
+
+## 1. Wat zijn cookies?
+
+Cookies zijn kleine bestanden die een website op je apparaat zet. Apps en websites kunnen ook gegevens bewaren in de lokale opslag van je apparaat. In deze verklaring noemen we dat allemaal "cookies en lokale opslag".
+
+## 2. Alleen functionele cookies
+
+Rondje gebruikt **alleen cookies die nodig zijn om Rondje te laten werken**. We gebruiken geen cookies of technieken voor:
+
+- advertenties;
+- het volgen van je surfgedrag;
+- statistieken of analyse door andere bedrijven;
+- social-media-knoppen die je volgen.
+
+Voor functionele cookies is geen toestemming nodig. Daarom zie je bij Rondje geen cookiebanner. De wet staat dit toe in Nederland (art. 11.7a Telecommunicatiewet), België (art. 10/2 van de wet van 13 juni 2005 betreffende de elektronische communicatie [te controleren]) en Spanje (art. 22.2 LSSI). Gaan we ooit andere cookies gebruiken? Dan vragen we eerst je toestemming.
+
+## 3. Welke cookies gebruiken we?
+
+| Cookie | Waarvoor | Hoe lang |
+|---|---|---|
+| Sessiecookie [naam te controleren] | Je ingelogd houden en je account beveiligen | Tot je uitlogt, of maximaal [duur vast te stellen] |
+| Taalvoorkeur [naam te controleren] | Onthouden in welke taal je Rondje gebruikt | [bijv. 1 jaar] |
+| Beveiligingscookie [te controleren of die er is] | Misbruik voorkomen, zoals nagemaakte formulieren | Tot het einde van je sessie |
+
+## 4. Lokale opslag op je apparaat
+
+Rondje bewaart sommige dingen alleen op je eigen apparaat, in de browser of in de app:
+
+- **Stemming-check-ins.** Hoe je je voelt voor en na een wandeling. Deze gegevens blijven op je apparaat en komen nooit bij Rondje.
+- **Voorkeuren**, zoals de weergave of instellingen die je kiest [te controleren: welke].
+
+Je kunt deze gegevens zelf wissen, bijvoorbeeld door de websitegegevens in je browser te verwijderen, of de app-gegevens of de app zelf. Let op: je check-ins zijn dan ook echt weg. Wij hebben er geen kopie van.
+
+## 5. Kaarten van OpenStreetMap
+
+Voor de kaarten laadt je apparaat kaartafbeeldingen (tiles) van de servers van de OpenStreetMap Foundation. Je IP-adres en technische gegevens gaan dan naar die servers, net als bij elke website die je bezoekt. Volgens onze informatie zet OpenStreetMap daarbij geen trackingcookies [te controleren]. Meer hierover lees je in onze privacyverklaring en in het privacybeleid van de OpenStreetMap Foundation.
+
+## 6. Cookies verwijderen of blokkeren
+
+Je kunt cookies verwijderen of blokkeren in de instellingen van je browser. Blokkeer je de sessiecookie? Dan kun je niet inloggen en werkt Rondje niet goed.
+
+## 7. Vragen
+
+Vragen over cookies? Mail naar [e-mail: hallo@rondje.app].

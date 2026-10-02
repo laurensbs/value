@@ -1,8 +1,9 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useActionState } from 'react'
-import { createReport } from '@/server/actions/safety'
+import { useState, useTransition } from 'react'
+import { useForm } from '@/lib/use-form'
+import { blockUser, createReport } from '@/server/actions/safety'
 import type { FormState } from '@/server/actions/profile'
 import { Icon } from './Icon'
 import { SubmitButton } from './SubmitButton'
@@ -14,10 +15,44 @@ interface Props {
   orgId?: string | null
 }
 
-/** A small "report" disclosure that works the same on every page. */
+function BlockButton({ userId }: { userId: string }) {
+  const t = useTranslations('report')
+  const [pending, start] = useTransition()
+  const [stage, setStage] = useState<'idle' | 'confirm' | 'done'>('idle')
+  if (stage === 'done') return <p className="notice success small">{t('blockDone')}</p>
+  if (stage === 'idle') {
+    return (
+      <button type="button" className="link-button small" onClick={() => setStage('confirm')}>
+        {t('block')}
+      </button>
+    )
+  }
+  return (
+    <div className="stack-s">
+      <p className="small">{t('blockConfirm')}</p>
+      <div>
+        <button
+          type="button"
+          className="button danger small"
+          disabled={pending}
+          onClick={() =>
+            start(async () => {
+              const result = await blockUser(userId)
+              if (result.ok) setStage('done')
+            })
+          }
+        >
+          {t('block')}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+/** A small "report" disclosure that works the same on every page, with a block option for people. */
 export function ReportButton({ subjectUserId, dogId, walkId, orgId }: Props) {
   const t = useTranslations('report')
-  const [state, action] = useActionState<FormState, FormData>(createReport, { ok: false })
+  const { state, pending, onSubmit } = useForm<FormState>(createReport, { ok: false })
   return (
     <details className="report">
       <summary className="link-button">
@@ -28,7 +63,7 @@ export function ReportButton({ subjectUserId, dogId, walkId, orgId }: Props) {
           {t('done')}
         </p>
       ) : (
-        <form action={action} className="form card">
+        <form onSubmit={onSubmit} className="form card">
           {subjectUserId ? <input type="hidden" name="subjectUserId" value={subjectUserId} /> : null}
           {dogId ? <input type="hidden" name="dogId" value={dogId} /> : null}
           {walkId ? <input type="hidden" name="walkId" value={walkId} /> : null}
@@ -47,10 +82,11 @@ export function ReportButton({ subjectUserId, dogId, walkId, orgId }: Props) {
             <span>{t('description')}</span>
             <textarea className="textarea" name="description" minLength={10} maxLength={3000} required />
           </label>
-          {state.error ? <p className="error-text">{state.error}</p> : null}
-          <SubmitButton className="button secondary">{t('submit')}</SubmitButton>
+          {state.error ? <p className="error-text">{t('error')}</p> : null}
+          <SubmitButton className="button secondary" pending={pending}>{t('submit')}</SubmitButton>
         </form>
       )}
+      {subjectUserId ? <BlockButton userId={subjectUserId} /> : null}
     </details>
   )
 }

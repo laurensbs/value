@@ -7,9 +7,12 @@ import { COUNTRIES, countryInfo, isCountry } from '@/lib/countries'
 import { listDogs } from '@/server/queries'
 import { getViewer } from '@/server/session'
 
-export const metadata = { title: 'Honden' }
+export async function generateMetadata() {
+  const t = await getTranslations('dogs')
+  return { title: t('title'), description: t('lede') }
+}
 
-type Search = { country?: string; host?: string; energy?: string; level?: string; q?: string; view?: string }
+type Search = { country?: string; host?: string; energy?: string; level?: string; q?: string; view?: string; org?: string }
 
 export default async function DogsPage({ searchParams }: { searchParams: Promise<Search> }) {
   const sp = await searchParams
@@ -24,12 +27,13 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
         : null
   const host = sp.host === 'owner' || sp.host === 'shelter' ? sp.host : undefined
   const energy = ['calm', 'medium', 'high'].includes(sp.energy ?? '') ? sp.energy : undefined
-  const items = await listDogs({ country, near, host, energy, q: sp.q?.slice(0, 60) })
+  const orgId = sp.org?.slice(0, 64) || undefined
+  const items = await listDogs({ country: orgId ? undefined : country, near, host, energy, orgId, q: sp.q?.slice(0, 60) })
   const mapView = sp.view === 'map'
 
   const query = (patch: Partial<Search>) => {
     const next = new URLSearchParams()
-    const merged = { country: country ?? 'all', host, energy, q: sp.q, view: sp.view, ...patch }
+    const merged = { country: country ?? 'all', host, energy, q: sp.q, view: sp.view, org: orgId, ...patch }
     for (const [k, v] of Object.entries(merged)) if (v) next.set(k, v)
     return `/dogs?${next.toString()}`
   }
@@ -43,6 +47,7 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
 
       <form className="filters" action="/dogs" method="get">
         <input type="hidden" name="view" value={sp.view ?? ''} />
+        {orgId ? <input type="hidden" name="org" value={orgId} /> : null}
         <label className="field grow">
           <span className="visually-hidden">{t('dogs.search')}</span>
           <input className="input" name="q" defaultValue={sp.q ?? ''} placeholder={t('dogs.search')} />
