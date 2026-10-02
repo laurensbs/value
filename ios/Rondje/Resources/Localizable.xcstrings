@@ -367,6 +367,28 @@
         }
       }
     },
+    "%@ mag nog niets bewaren in Gezondheid. Dat zet je aan in Instellingen > Privacy en beveiliging > Gezondheid." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ may not save anything in Health yet. Turn it on in Settings > Privacy & Security > Health."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ aún no puede guardar nada en Salud. Actívalo en Ajustes > Privacidad y seguridad > Salud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ n'a pas encore le droit d'enregistrer dans Santé. Active-le dans Réglages > Confidentialité et sécurité > Santé."
+          }
+        }
+      }
+    },
     "%@ mag zelfstandig met %@ wandelen" : {
       "localizations" : {
         "en" : {
@@ -1439,6 +1461,28 @@
         }
       }
     },
+    "Alleen op deze iPhone. %@ leest niets uit Gezondheid en stuurt er niets van naar de server." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only on this iPhone. %@ reads nothing from Health and sends none of it to the server."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo en este iPhone. %@ no lee nada de Salud y no envía nada de ello al servidor."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uniquement sur cet iPhone. %@ ne lit rien dans Santé et n'en envoie rien au serveur."
+          }
+        }
+      }
+    },
     "Alleen van mij" : {
       "localizations" : {
         "en" : {
@@ -1549,6 +1593,28 @@
         }
       }
     },
+    "Als buitenwandeling met tijd, afstand en route, en de ademminuut als mindfulness. Begin en eind van de route laten we weg, zodat niemands huis erin staat." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As an outdoor walk with time, distance and route, and the breathing minute as mindfulness. We leave out the start and end of the route, so nobody's home is in it."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como caminata al aire libre con tiempo, distancia y ruta, y el minuto de respiración como mindfulness. Quitamos el inicio y el final de la ruta, para que no aparezca la casa de nadie."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comme marche en extérieur avec durée, distance et parcours, et la minute de respiration comme pleine conscience. Nous retirons le début et la fin du parcours, pour que le domicile de personne n'y figure."
+          }
+        }
+      }
+    },
     "Altijd aan de lijn" : {
       "localizations" : {
         "en" : {
@@ -1655,6 +1721,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler le rendez-vous"
+          }
+        }
+      }
+    },
+    "Apple Gezondheid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Health"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Salud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Santé"
+          }
+        }
+      }
+    },
+    "Apple Gezondheid is niet beschikbaar op dit toestel." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Health is not available on this device."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Salud no está disponible en este dispositivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Santé n'est pas disponible sur cet appareil."
           }
         }
       }
@@ -2183,6 +2293,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ainsi, nous te montrons exactement ce qui compte pour toi."
+          }
+        }
+      }
+    },
+    "Dat lukte even niet. Probeer het later nog eens." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That didn't work just now. Please try again later."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No ha funcionado. Inténtalo más tarde."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ça n'a pas marché. Réessaie plus tard."
           }
         }
       }
@@ -2755,6 +2887,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "C'est ton propre chien."
+          }
+        }
+      }
+    },
+    "Dit rondje kon niet in Apple Gezondheid worden bewaard." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This walk could not be saved in Apple Health."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo guardar este paseo en Apple Salud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette balade n'a pas pu être enregistrée dans Apple Santé."
           }
         }
       }
@@ -4101,6 +4255,28 @@
         }
       }
     },
+    "Geluidjes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sounds"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Petits sons"
+          }
+        }
+      }
+    },
     "Gemiddeld" : {
       "localizations" : {
         "en" : {
@@ -4757,6 +4933,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comment ça s'est passé ?"
+          }
+        }
+      }
+    },
+    "Hoe je je na een rondje voelt, als gemoedstoestand." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How you feel after a walk, as a state of mind."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cómo te sientes después de un paseo, como estado de ánimo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment tu te sens après une balade, comme état d'esprit."
           }
         }
       }
@@ -7687,6 +7885,50 @@
         }
       }
     },
+    "Niet beschikbaar op dit toestel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not available on this device"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No disponible en este dispositivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non disponible sur cet appareil"
+          }
+        }
+      }
+    },
+    "Niet bewaard in Apple Gezondheid: %@ heeft daar geen toestemming meer voor." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not saved in Apple Health: %@ no longer has permission for that."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se guardó en Apple Salud: %@ ya no tiene permiso para ello."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non enregistré dans Apple Santé : %@ n'en a plus l'autorisation."
+          }
+        }
+      }
+    },
     "Niet gelukt" : {
       "localizations" : {
         "en" : {
@@ -9057,6 +9299,28 @@
         }
       }
     },
+    "Rondjes bewaren in Apple Gezondheid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save walks in Apple Health"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar paseos en Apple Salud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer les balades dans Apple Santé"
+          }
+        }
+      }
+    },
     "Rustig" : {
       "localizations" : {
         "en" : {
@@ -9427,6 +9691,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Présente-toi ou organise la balade."
+          }
+        }
+      }
+    },
+    "Stemming na een rondje bewaren in Apple Gezondheid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save your mood after a walk in Apple Health"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar tu estado de ánimo después de un paseo en Apple Salud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer ton humeur après une balade dans Apple Santé"
           }
         }
       }
@@ -11276,6 +11562,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deviens membre de %@"
+          }
+        }
+      }
+    },
+    "Zachte geluidjes bij belangrijke momenten. Staat je iPhone op stil, dan hoor je niets." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soft little sounds at the moments that matter. With your iPhone on silent, you hear nothing."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonidos suaves en los momentos importantes. Si tu iPhone está en silencio, no oyes nada."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De petits sons doux aux moments importants. Si ton iPhone est en mode silencieux, tu n'entends rien."
           }
         }
       }

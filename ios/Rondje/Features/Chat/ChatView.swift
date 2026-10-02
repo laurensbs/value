@@ -146,7 +146,7 @@ struct ChatView: View {
             draft = ""
             focused = true
             error = nil
-            Haptics.tap()
+            Haptics.tap(.send)
             if !messages.contains(where: { $0.id == r.chat.id }) { withAnimation(.snappy) { messages.append(r.chat) } }
         } catch {
             Haptics.error()

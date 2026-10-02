@@ -159,8 +159,15 @@ struct ActiveWalkView: View {
         defer { ending = false }
         do {
             let distance = try await walk.finish()
-            Haptics.success()
+            let endedAt = Date.now
+            Haptics.success(.finish)
             finished = (info.walkId, distance, info.dogName)
+            let route = walk.locations
+            Task {
+                if let note = await HealthService.shared.saveWalk(start: info.startedAt, end: endedAt, distanceM: Double(distance), locations: route) {
+                    model.show(note, symbol: "heart.text.square", tint: Palette.muted)
+                }
+            }
             await model.refreshAppointments()
         } catch {
             Haptics.error()
@@ -212,6 +219,7 @@ struct WalkDoneView: View {
         .glassy(cornerRadius: 32)
         .padding(12)
         .onAppear { withAnimation(.spring(duration: 0.6, bounce: 0.5)) { pop = true } }
+        .onDisappear { if let moodAfter { HealthService.shared.saveMood(moodAfter) } }
         .sheet(isPresented: $feedback, onDismiss: { dismiss() }) {
             FeedbackSheet(walkId: walkId, role: .walker, dogName: dogName)
         }
@@ -340,7 +348,7 @@ struct FeedbackSheet: View {
         }
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/walks/\(walkId)/feedback", body)
-            Haptics.success()
+            Haptics.success(.send)
             model.show(L("Bedankt voor je antwoord"))
             close()
         } catch {

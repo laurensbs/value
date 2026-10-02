@@ -31,6 +31,7 @@ struct ProfileView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .background(Palette.grassSoft, in: .rect(cornerRadius: 18, style: .continuous))
                     }
+                    DeviceSettingsView()
                     links
                     Text("\(Brand.name) \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")
                         .font(.caption).foregroundStyle(Palette.muted)

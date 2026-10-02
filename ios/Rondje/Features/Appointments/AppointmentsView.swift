@@ -256,7 +256,7 @@ struct AppointmentCard: View {
             let live: LiveWalk? = item.walkStatus == "active"
                 ? try? await APIClient.shared.get("/api/walks/\(started.walkId)/live?after=999999999")
                 : nil
-            Haptics.success()
+            Haptics.success(.start)
             walk.start(.init(
                 walkId: started.walkId, dogName: item.dog.name, look: item.dog.look, startedAt: live?.startedAt ?? .now,
                 plannedEnd: live?.plannedEndAt ?? .now.addingTimeInterval(Double(item.durationMin) * 60),
