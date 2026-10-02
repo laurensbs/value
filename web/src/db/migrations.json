@@ -160,5 +160,11 @@
       "CREATE INDEX \"group_walk_signup_user_idx\" ON \"group_walk_signup\" USING btree (\"user_id\");",
       "CREATE INDEX \"walk_started_idx\" ON \"walk\" USING btree (\"started_at\");"
     ]
+  },
+  {
+    "tag": "0008_reminders",
+    "statements": [
+      "ALTER TABLE \"profile\" ADD COLUMN \"reminders\" boolean DEFAULT true NOT NULL;"
+    ]
   }
 ]

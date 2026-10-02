@@ -28,7 +28,7 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 | `DATABASE_URL` or `POSTGRES_URL` | production | Postgres. Neon hosts use the Neon serverless driver, others use node-postgres. |
 | `BETTER_AUTH_SECRET` | production | Signs sessions. The app refuses to start in production without it. |
 | `ADMIN_EMAILS` | yes | Comma-separated emails that get `/admin`. |
-| `CRON_SECRET` | yes | Bearer token for `/api/cron/cleanup` (Vercel Cron sends it). |
+| `CRON_SECRET` | yes | Bearer token for the daily jobs `/api/cron/cleanup` and `/api/cron/nudges` (friendly reminders; Vercel Cron sends it). |
 | `BLOB_READ_WRITE_TOKEN` | recommended | Vercel Blob for photos. Without it, photos are stored inline (max 450 KB). |
 | `GOOGLE_CLIENT_ID`/`_SECRET` | optional | Google sign-in. |
 | `APPLE_CLIENT_ID`/`_SECRET`/`APPLE_APP_BUNDLE_ID` | optional | Sign in with Apple. |

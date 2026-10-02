@@ -1,5 +1,8 @@
+import { eq } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 import { getLocale } from 'next-intl/server'
+import { getDb } from '@/db'
+import * as s from '@/db/schema'
 import { updateProfile } from '@/server/actions/profile'
 import { apiMember, apiViewer, fail, json } from '@/server/api'
 import { profileSchema, saveOnboarding } from '@/server/profile-core'
@@ -19,12 +22,22 @@ export async function POST(request: Request) {
   return result.ok ? json({ ok: true }) : fail(result.error ?? 'invalid')
 }
 
+// Switches that are saved as they are, without the profile checks.
+const SETTINGS = ['emailNotifications', 'reminders'] as const
+
 /** Editing the profile from the app. The photo stays as it is; the same checks as the website apply. */
 export async function PATCH(request: Request) {
   const viewer = await apiMember()
   if (viewer instanceof NextResponse) return viewer
   const body = (await request.json().catch(() => null)) as Record<string, unknown> | null
   if (!body) return fail('invalid')
+  const settings = Object.fromEntries(SETTINGS.filter((key) => typeof body[key] === 'boolean').map((key) => [key, body[key] as boolean]))
+  if (Object.keys(settings).length) {
+    const db = await getDb()
+    await db.update(s.profile).set(settings).where(eq(s.profile.userId, viewer.userId))
+  }
+  // Only switches: done.
+  if (Object.keys(body).every((key) => (SETTINGS as readonly string[]).includes(key))) return json({ ok: true })
   const p = viewer.profile
   const value = (key: string, fallback: string | number | null) => String(body[key] ?? fallback ?? '')
   const form = new FormData()

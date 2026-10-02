@@ -2,13 +2,26 @@ import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
+import { Today } from '@/components/Today'
 import { isNativeRequest } from '@/server/native'
 import { IMPACT_MIN_WALKS, impactTotals, listDogs } from '@/server/queries'
-import { getViewer } from '@/server/session'
+import { getViewer, type OnboardedViewer } from '@/server/session'
 
-export default async function HomePage() {
-  const t = await getTranslations('home')
+export async function generateMetadata() {
   const viewer = await getViewer()
+  if (!viewer?.profile) return {}
+  const t = await getTranslations('today')
+  return { title: t('metaTitle') }
+}
+
+export default async function HomePage({ searchParams }: { searchParams: Promise<{ welcome?: string }> }) {
+  const viewer = await getViewer()
+  // Members get their own home: what to do today. Everyone else sees what Rondje is.
+  if (viewer?.profile && !viewer.profile.bannedAt) {
+    const { welcome } = await searchParams
+    return <Today viewer={viewer as OnboardedViewer} welcome={welcome === '1'} />
+  }
+  const t = await getTranslations('home')
   const native = await isNativeRequest()
   const dogs = (await listDogs({}, 8)).slice(0, 4)
   const impact = await impactTotals()

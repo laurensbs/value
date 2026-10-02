@@ -30,6 +30,7 @@ export async function GET() {
       quizPassed: Boolean(p.quizPassedAt),
       referralCode: p.referralCode,
       emailNotifications: p.emailNotifications,
+      reminders: p.reminders,
       banned: Boolean(p.bannedAt),
     },
     trust: signals && { ...signals, badges: trustBadges(signals) },

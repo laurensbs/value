@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, SignOutButton } from '@/components/ProfileTools'
+import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, RemindersToggle, SignOutButton } from '@/components/ProfileTools'
 import { PushToggle } from '@/components/PushToggle'
 import { WalkerCard } from '@/components/WalkerCard'
 import { getDb } from '@/db'
@@ -11,6 +11,7 @@ import * as s from '@/db/schema'
 import type { Locale } from '@/i18n/config'
 import { siteUrl } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
+import { progressFor } from '@/server/progress'
 import { webPushKey } from '@/server/push'
 import { trustSignals } from '@/server/queries'
 import { requireOnboarded } from '@/server/session'
@@ -33,6 +34,8 @@ export default async function ProfilePage() {
     ? await db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode))
     : [{ n: 0 }]
   const inviteUrl = `${siteUrl()}/r/${p.referralCode ?? ''}`
+  const progress = await progressFor(viewer)
+  const level = progress.level
 
   return (
     <div className="narrow-page stack-l">
@@ -42,6 +45,19 @@ export default async function ProfilePage() {
           <Icon name="edit" size={16} /> {t('profile.edit')}
         </Link>
       </header>
+
+      <Link href="/progress" className="card progress-card">
+        <span className="level-badge" style={{ '--p': level.progress } as React.CSSProperties} aria-hidden="true">
+          {level.level}
+        </span>
+        <span className="stack-s">
+          <strong>{t('profile.progressTitle')}</strong>
+          <span className="muted small">
+            {t('progress.levelN', { n: level.level })} · {t(`progress.levels.${level.key}`)} · {t('progress.points', { n: progress.points })}
+          </span>
+        </span>
+        <Icon name="arrow" size={20} />
+      </Link>
 
       <section className="stack-s">
         <h2 className="eyebrow">{t('profile.public')}</h2>
@@ -128,9 +144,10 @@ export default async function ProfilePage() {
             <PasskeyButton />
           </div>
           <div className="stack-s">
-            <strong>{t('profile.email')}</strong>
+            <strong>{t('profile.alerts')}</strong>
             <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
             {pushKey ? <PushToggle publicKey={pushKey} /> : null}
+            <RemindersToggle on={viewer.profile.reminders} />
           </div>
         </div>
       </section>

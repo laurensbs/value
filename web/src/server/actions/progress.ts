@@ -21,4 +21,5 @@ export async function setWeeklyGoal(goal: number | null): Promise<void> {
   const db = await getDb()
   await db.update(s.profile).set({ weeklyGoal: goal }).where(eq(s.profile.userId, viewer.userId))
   revalidatePath('/')
+  revalidatePath('/progress')
 }

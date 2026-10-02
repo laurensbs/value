@@ -57,6 +57,13 @@
       "when": 1790963548106,
       "tag": "0007_progress",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790965993456,
+      "tag": "0008_reminders",
+      "breakpoints": true
     }
   ]
 }

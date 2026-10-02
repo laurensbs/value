@@ -12,6 +12,7 @@ import {
   POINTS,
   statsFrom,
   walksInWeek,
+  weekDays,
   type BadgeState,
   type LevelInfo,
   type PointEvent,
@@ -83,6 +84,8 @@ export interface Progress {
   roles: Roles
   weeklyGoal: number | null
   walksThisWeek: number
+  /** Walks per day this week, Monday first. */
+  weekDays: number[]
   /** Weeks with at least one walk, ever. */
   activeWeeks: number
   badges: BadgeState[]
@@ -160,6 +163,7 @@ export async function progressFor(viewer: OnboardedViewer, now = new Date()): Pr
     roles,
     weeklyGoal: p.weeklyGoal ?? null,
     walksThisWeek: walksInWeek(events, now),
+    weekDays: weekDays(events, now),
     activeWeeks: activeWeeks(events),
     badges,
     earnedAt: Object.fromEntries(allAwards.map((a) => [`${a.key}:${a.tier}`, a.earnedAt])),
@@ -195,4 +199,31 @@ export async function markProgressSeen(userId: string, level: number): Promise<v
     .update(s.award)
     .set({ seenAt: new Date() })
     .where(and(eq(s.award.userId, userId), isNull(s.award.seenAt)))
+}
+
+export interface DogFriend {
+  dog: { id: string; name: string; photos: string[]; avatar: unknown; status: string }
+  walks: number
+  lastAt: Date | null
+}
+
+/** The walker's dog friends: every dog they finished a walk with, closest friends first. */
+export async function dogFriendsFor(userId: string): Promise<DogFriend[]> {
+  const db = await getDb()
+  const rows = await db
+    .select({
+      id: s.dog.id,
+      name: s.dog.name,
+      photos: s.dog.photos,
+      avatar: s.dog.avatar,
+      status: s.dog.status,
+      walks: sql<number>`count(*)`.mapWith(Number),
+      lastAt: sql<Date | null>`max(${s.walk.startedAt})`.mapWith((v) => (v ? new Date(v) : null)),
+    })
+    .from(s.walk)
+    .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+    .where(and(eq(s.walk.walkerId, userId), eq(s.walk.status, 'ended')))
+    .groupBy(s.dog.id)
+    .orderBy(desc(sql`count(*)`), desc(sql`max(${s.walk.startedAt})`))
+  return rows.map(({ walks, lastAt, ...dog }) => ({ dog, walks, lastAt }))
 }

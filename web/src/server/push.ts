@@ -7,7 +7,8 @@ import { getTranslations } from 'next-intl/server'
 import webpush from 'web-push'
 import { getDb, type Db } from '@/db'
 import * as s from '@/db/schema'
-import { notificationHref, type NotificationData } from '@/lib/notification-links'
+import { notificationHref, notificationValues, type NotificationData } from '@/lib/notification-links'
+import { isNudgeKind } from '@/lib/nudges'
 import { APP_NAME } from '@/lib/site'
 import { toLocale } from './email'
 
@@ -22,6 +23,11 @@ export function webPushKey(): string | null {
 
 function apnsConfigured(): boolean {
   return Boolean(process.env.APNS_KEY_ID && process.env.APNS_TEAM_ID && process.env.APNS_PRIVATE_KEY && process.env.APNS_BUNDLE_ID)
+}
+
+/** Whether a device of this kind ('web' or 'apns') can get a push now, i.e. its keys are set. */
+export function canPush(kind: string): boolean {
+  return kind === 'apns' ? apnsConfigured() : Boolean(webPushKey())
 }
 
 export interface PushMessage {
@@ -62,7 +68,8 @@ export function pushLater(db: Db, userIds: string[], kind: string, data: Notific
   }
 }
 
-async function pushNow(db: Db, userIds: string[], kind: string, data: NotificationData): Promise<void> {
+/** Sends and waits until it is done: for scheduled jobs. Banned people and dead devices are skipped. */
+export async function pushNow(db: Db, userIds: string[], kind: string, data: NotificationData): Promise<void> {
   const rows = await db
     .select({ device: s.pushDevice, locale: s.profile.locale, bannedAt: s.profile.bannedAt })
     .from(s.pushDevice)
@@ -80,10 +87,9 @@ async function pushNow(db: Db, userIds: string[], kind: string, data: Notificati
 
 export async function pushMessage(kind: string, data: NotificationData, locale: ReturnType<typeof toLocale>): Promise<PushMessage> {
   const t = await getTranslations({ locale, namespace: 'notifications' })
-  const values = { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '', orgName: data.orgName ?? '', senderName: data.senderName ?? '' }
-  const body = t.has(`kinds.${kind}`) ? t(`kinds.${kind}`, values) : t('title')
-  // One visible notification per conversation or walk: a newer one replaces the older.
-  const tag = data.requestId ? `${kind}:${data.requestId}` : data.walkId ? `${kind}:${data.walkId}` : kind
+  const body = t.has(`kinds.${kind}`) ? t(`kinds.${kind}`, notificationValues(data)) : t('title')
+  // One visible notification per conversation or walk, and one reminder: a newer one replaces the older.
+  const tag = isNudgeKind(kind) ? 'nudge' : data.requestId ? `${kind}:${data.requestId}` : data.walkId ? `${kind}:${data.walkId}` : kind
   return { title: APP_NAME, body, url: notificationHref(kind, data), tag }
 }
 

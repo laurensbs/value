@@ -151,6 +151,9 @@ export function scanText(text: string): TextFlag[] {
   return [...flags]
 }
 
+/** Flags in a chat message that get a warning for the other person and a line in the audit log. */
+export const CHAT_WARN_FLAGS: readonly string[] = ['money', 'iban', 'link'] satisfies TextFlag[]
+
 // --- Private feedback after a walk ---
 
 export interface OwnerFeedback {

@@ -22,10 +22,11 @@ export async function Header({ viewer }: { viewer: Viewer | null }) {
           <span>Rondje</span>
         </Link>
         <nav className="nav" aria-label={t('menu')}>
+          {viewer?.profile ? <Link href="/">{t('today')}</Link> : null}
           <Link href="/dogs">{t('dogs')}</Link>
           <Link href="/group-walks">{t('groupWalks')}</Link>
           {viewer?.profile ? <Link href="/requests">{t('requests')}</Link> : <Link href="/shelters">{t('shelters')}</Link>}
-          {viewer?.profile ? <Link href="/my-dogs">{t('myDogs')}</Link> : <Link href="/safety">{t('safety')}</Link>}
+          {viewer?.profile ? (viewer.profile.hasDogs ? <Link href="/my-dogs">{t('myDogs')}</Link> : null) : <Link href="/safety">{t('safety')}</Link>}
           {firstOrg ? <Link href={`/shelter/${firstOrg.id}`}>{t('shelter')}</Link> : null}
           {viewer?.isAdmin ? <Link href="/admin">{t('admin')}</Link> : null}
         </nav>
