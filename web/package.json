@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "db:generate": "drizzle-kit generate && node scripts/embed-migrations.mjs",
-    "shots": "node scripts/shots.mjs"
+    "shots": "node scripts/shots.mjs",
+    "audit": "node scripts/audit.mjs"
   },
   "dependencies": {
     "@better-auth/passkey": "^1.7.7",
