@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { getTranslations } from 'next-intl/server'
+import { visitorCountry, visitorPosition } from '@/components/discover/visitor'
 import { Icon } from '@/components/Icon'
 import { Chooser } from '@/components/landing/Chooser'
 import { Community } from '@/components/landing/Community'
@@ -12,6 +13,7 @@ import { LandingIcon, PawMark } from '@/components/landing/LandingIcon'
 import { TRIO } from '@/components/landing/looks'
 import { IconTile, type Tone } from '@/components/landing/PageHero'
 import { PhoneShowcase } from '@/components/landing/PhoneShowcase'
+import { countryInfo, isCountry } from '@/lib/countries'
 import { isNativeRequest } from '@/server/native'
 import { listDogs } from '@/server/queries'
 import { getViewer } from '@/server/session'
@@ -30,7 +32,11 @@ export default async function HomePage() {
   const t = await getTranslations()
   const viewer = await getViewer()
   const native = await isNativeRequest()
-  const dogs = await listDogs({}, 4)
+  // Dogs from the visitor's own country first, nearest first (same rule as /dogs).
+  const country = viewer?.profile && isCountry(viewer.profile.country) ? viewer.profile.country : await visitorCountry()
+  const near = (await visitorPosition(country)) ?? countryInfo(country).center
+  const local = await listDogs({ country, near }, 4)
+  const dogs = local.length ? local : await listDogs({}, 4)
   const ownerHref = viewer?.profile ? '/my-dogs/new' : '/signup?intent=owner'
   const bothHref = viewer?.profile ? '/my-dogs/new' : `/signup?next=${encodeURIComponent('/my-dogs/new')}`
 
