@@ -14,6 +14,7 @@ struct DiscoverView: View {
     @State private var filter: Filter = .all
     @State private var query = ""
     @State private var path = NavigationPath()
+    @State private var quiz = false
 
     enum Filter: String, CaseIterable, Identifiable {
         case all, calm, high, owner, shelter
@@ -56,6 +57,8 @@ struct DiscoverView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     header
+                    FirstSteps { quiz = true }
+                    DailyTip()
                     filters
                     if showMap {
                         DogsMap(dogs: visible) { path.append($0) }
@@ -91,6 +94,9 @@ struct DiscoverView: View {
                     .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
             }
             .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
+            .sheet(isPresented: $quiz, onDismiss: { Task { await model.refreshMe() } }) {
+                NavigationStack { QuizView() }
+            }
         }
         .task {
             // Ask once, with the purpose text from Info.plist; without it the list is sorted by your city.

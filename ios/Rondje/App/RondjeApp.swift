@@ -23,12 +23,19 @@ struct RondjeApp: App {
 
 struct RootView: View {
     @Environment(AppModel.self) private var model
+    @AppStorage("seenIntro") private var seenIntro = false
 
     var body: some View {
         ZStack(alignment: .top) {
             switch model.phase {
             case .loading: SplashView()
-            case .signedOut: WelcomeView()
+            case .signedOut:
+                if seenIntro {
+                    WelcomeView()
+                } else {
+                    IntroView { withAnimation(.smooth) { seenIntro = true } }
+                        .transition(.opacity)
+                }
             case .onboarding: OnboardingView()
             case .ready: MainTabs()
             }

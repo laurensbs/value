@@ -12,6 +12,7 @@
 		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
 		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
 		2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EA1B62ECCEC400102F6036 /* APIClient.swift */; };
+		26EB9B4433C18066EA749D1A /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = B400323AA6D6C3D1DF40D5A6 /* Mood.swift */; };
 		2F60108EC649C7D6D370A542 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
 		31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
 		320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
@@ -31,6 +32,7 @@
 		518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89ADE16C47AB0E0761B7EF /* AuthView.swift */; };
 		53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A4BC365EFDB4E41F534AF /* MyDogsView.swift */; };
 		76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD5CF06280BE763D95E942 /* DogDetailView.swift */; };
+		7AF0140755593E049FF0339D /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520CB0DEFF2BE0A69B58BCB8 /* IntroView.swift */; };
 		7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F500D8982F770787859D0608 /* OnboardingView.swift */; };
 		7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4094F34979CE06F5674464 /* AppointmentsView.swift */; };
 		89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E03C393BF21260C48A977 /* Keychain.swift */; };
@@ -38,6 +40,7 @@
 		8FC260210FFB86EA81151AB5 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */; };
 		8FC4508C7392A299F5B32ADA /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2783A9F80D81377B5AC59E /* ChatView.swift */; };
 		92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */; };
+		93379E1DF8936C1A06A6AB36 /* HomeCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */; };
 		9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A13AA036854983EE311380 /* Reminders.swift */; };
 		9CDA95671502696AA356E081 /* WalkReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */; };
@@ -92,6 +95,7 @@
 /* Begin PBXFileReference section */
 		0BDEFBB338DEF518134A6397 /* Rondje.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Rondje.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1894A396998000A3824F47B3 /* ActiveWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalkView.swift; sourceTree = "<group>"; };
+		18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCards.swift; sourceTree = "<group>"; };
 		1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.entitlements; sourceTree = "<group>"; };
 		1F24382B16C639D32D509682 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		265151C9DD7CB381C0CE8F78 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 		303A4BC365EFDB4E41F534AF /* MyDogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
 		3DD05E7729A1853A5748BF1F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		50EA1B62ECCEC400102F6036 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		520CB0DEFF2BE0A69B58BCB8 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		54E359D37F55A06E65249298 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		630E03C393BF21260C48A977 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		67DED918E6B83E74ED1F0BF7 /* Rondje.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rondje.entitlements; sourceTree = "<group>"; };
@@ -125,6 +130,7 @@
 		A5CD5CF06280BE763D95E942 /* DogDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailView.swift; sourceTree = "<group>"; };
 		AB627D88D88D1EB0404E149F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkReport.swift; sourceTree = "<group>"; };
+		B400323AA6D6C3D1DF40D5A6 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
 		C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeApp.swift; sourceTree = "<group>"; };
 		C38AD4205552639E40224CBC /* RequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSheet.swift; sourceTree = "<group>"; };
 		CBB7E66E9A9FD4894A0298B5 /* RondjeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RondjeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				2AAF25DE5216EB791FAD7058 /* DiscoverView.swift */,
+				18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -237,6 +244,14 @@
 				F500D8982F770787859D0608 /* OnboardingView.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		B4D6DC0035564556243D4B87 /* Wellbeing */ = {
+			isa = PBXGroup;
+			children = (
+				B400323AA6D6C3D1DF40D5A6 /* Mood.swift */,
+			);
+			path = Wellbeing;
 			sourceTree = "<group>";
 		};
 		B52BEB8FC192755A9861AC4A /* Walk */ = {
@@ -275,10 +290,12 @@
 				149A1E124629011813222EC9 /* Chat */,
 				553D978CF87506047C11816A /* Discover */,
 				EAE74B5DF0748E9781D657A0 /* Dog */,
+				E47C270BD36C4CCD9FCC7246 /* Intro */,
 				426DB77FC1CFFA02380230ED /* Membership */,
 				97EDF6BA00B8CE243A18FEE3 /* Onboarding */,
 				EFC38ED52995A5B1AC192CEA /* Profile */,
 				B52BEB8FC192755A9861AC4A /* Walk */,
+				B4D6DC0035564556243D4B87 /* Wellbeing */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -309,6 +326,14 @@
 				7E28618485C7ABEC64928FB6 /* UI */,
 			);
 			path = Rondje;
+			sourceTree = "<group>";
+		};
+		E47C270BD36C4CCD9FCC7246 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				520CB0DEFF2BE0A69B58BCB8 /* IntroView.swift */,
+			);
+			path = Intro;
 			sourceTree = "<group>";
 		};
 		EAE74B5DF0748E9781D657A0 /* Dog */ = {
@@ -506,11 +531,14 @@
 				B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */,
 				3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */,
 				F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */,
+				93379E1DF8936C1A06A6AB36 /* HomeCards.swift in Sources */,
 				DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */,
+				7AF0140755593E049FF0339D /* IntroView.swift in Sources */,
 				89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */,
 				4660BE55365FF96EE9B1FD6E /* LocationService.swift in Sources */,
 				50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */,
 				E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */,
+				26EB9B4433C18066EA749D1A /* Mood.swift in Sources */,
 				53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */,
 				7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */,
 				41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */,
