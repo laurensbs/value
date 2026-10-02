@@ -17,7 +17,11 @@ export default defineConfig({
     trace: 'retain-on-failure',
     launchOptions: process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : undefined,
   },
-  projects: [{ name: 'mobile', use: { ...devices['Pixel 7'], browserName: 'chromium' } }],
+  projects: [
+    { name: 'mobile', use: { ...devices['Pixel 7'], browserName: 'chromium' } },
+    // Opt-in desktop pass (E2E_DESKTOP=1 npx playwright test --project desktop), so CI time stays the same.
+    ...(process.env.E2E_DESKTOP ? [{ name: 'desktop', use: { ...devices['Desktop Chrome'], browserName: 'chromium' as const } }] : []),
+  ],
   webServer: process.env.E2E_BASE_URL
     ? undefined
     : {

@@ -50,9 +50,10 @@ export function WalkCareButtons({ walkId, dogName, initial }: { walkId: string; 
 }
 
 /** The owner's view of the same report, live during the walk and in the summary afterwards. */
-export function WalkCareTally({ care }: { care: CareCounts }) {
+export function WalkCareTally({ care, hideEmpty = false }: { care: CareCounts; hideEmpty?: boolean }) {
   const t = useTranslations('walk')
   const any = care.pee + care.poo + care.water > 0
+  if (!any && hideEmpty) return null
   return (
     <section className="stack-s" aria-label={t('careTitle')}>
       <h2 className="small-title">{t('careTitle')}</h2>

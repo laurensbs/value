@@ -63,7 +63,9 @@ export default async function FollowPage({ params }: { params: Promise<{ id: str
         fallbackCenter={center}
         locale={await getLocale()}
       />
-      <ReportButton walkId={walk.id} subjectUserId={walk.walkerId} dogId={dog.id} />
+      <div className="walk-layout">
+        <ReportButton walkId={walk.id} subjectUserId={walk.walkerId} dogId={dog.id} />
+      </div>
     </div>
   )
 }

@@ -59,7 +59,7 @@ export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserI
           ariaLabel={t('walk.mapLabel')}
         />
       ) : null}
-      <WalkCareTally care={{ pee: walk.pee, poo: walk.poo, water: walk.water }} />
+      <WalkCareTally care={{ pee: walk.pee, poo: walk.poo, water: walk.water }} hideEmpty />
       <WalkPhotoStrip photos={photos} dogName={dog.name} />
       {role === 'walker' ? <MoodCheck /> : null}
       {given ? (
