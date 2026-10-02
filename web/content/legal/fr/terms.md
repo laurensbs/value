@@ -1,6 +1,6 @@
 ---
 title: Conditions d'utilisation
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -72,6 +72,7 @@ Rondje est gratuit pour tout le monde.
 - Les sacs à crottes, la laisse, le harnais, les friandises et l'eau sont fournis par le propriétaire ou le refuge, comme indiqué sur le profil du chien.
 - Si quelqu'un vous demande de l'argent, un numéro IBAN ou un paiement via un lien, ne répondez pas et signalez-le-nous.
 - Les messages joints aux demandes sont contrôlés automatiquement pour repérer les demandes de paiement, les numéros de compte et les liens. En cas de détection, vous recevez un avertissement et un membre de l'équipe examine le message.
+- **Soutien volontaire à Rondje.** Si notre site propose un moyen de soutenir Rondje (par exemple via Patreon), il s'agit d'une contribution volontaire sans contrepartie : vous n'obtenez ni priorité, ni fonctions supplémentaires, ni autre avantage, et cela n'a aucune influence sur les mises en relation, la visibilité ou la modération. Les conditions de cette plateforme s'appliquent aussi au paiement. Une contribution n'est pas déductible des impôts.
 
 ## 9. Ce que nous attendons de chacun
 

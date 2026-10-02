@@ -9,6 +9,8 @@ const config: CapacitorConfig = {
   appId: 'app.rondje.mobile',
   appName: 'Rondje',
   webDir: 'native-shell',
+  // Lets the website recognise the apps (src/server/native.ts): they never show ways to give money.
+  appendUserAgent: 'RondjeApp',
   server: {
     url: serverUrl,
     cleartext: false,

@@ -1,6 +1,6 @@
 ---
 title: Algemene voorwaarden
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
 ---
@@ -72,6 +72,7 @@ Rondje is gratis voor iedereen.
 - Poepzakjes, lijn, tuig, snoepjes en water komen van de eigenaar of opvang, zoals op het hondenprofiel staat.
 - Vraagt iemand om geld, een IBAN of een betaling via een link? Ga er niet op in en meld het ons.
 - Berichten bij verzoeken worden automatisch gecontroleerd op betaalverzoeken, rekeningnummers en links. Bij een treffer krijg je een waarschuwing en kijkt een medewerker mee.
+- **Vrijwillige steun aan Rondje.** Staat er op onze website een manier om Rondje te steunen (bijvoorbeeld via Patreon)? Dan is dat een vrijwillige bijdrage zonder tegenprestatie: je krijgt er geen voorrang, extra functies of andere voordelen voor, en het heeft geen invloed op koppelen, zichtbaarheid of moderatie. Voor de betaling gelden ook de voorwaarden van dat platform. Een bijdrage is niet fiscaal aftrekbaar.
 
 ## 9. Wat we van iedereen verwachten
 

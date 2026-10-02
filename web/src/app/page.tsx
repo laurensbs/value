@@ -2,12 +2,14 @@ import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
+import { isNativeRequest } from '@/server/native'
 import { listDogs } from '@/server/queries'
 import { getViewer } from '@/server/session'
 
 export default async function HomePage() {
   const t = await getTranslations('home')
   const viewer = await getViewer()
+  const native = await isNativeRequest()
   const dogs = (await listDogs({}, 8)).slice(0, 4)
 
   return (
@@ -99,6 +101,9 @@ export default async function HomePage() {
         <div className="card stack-s">
           <h2>{t('freeTitle')}</h2>
           <p className="muted">{t('freeText')}</p>
+          <Link href={native ? '/about' : '/support'} className="link-button small">
+            {native ? t('freeLinkApp') : t('freeLink')} →
+          </Link>
         </div>
       </section>
     </div>

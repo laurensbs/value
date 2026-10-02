@@ -81,7 +81,12 @@
     "safety": "Safety",
     "cookies": "Cookies",
     "shelterTerms": "For shelters",
-    "demo": "Demo mode: no database is connected yet. Data is not saved."
+    "demo": "Demo mode: no database is connected yet. Data is not saved.",
+    "more": "More about Rondje",
+    "about": "About Rondje",
+    "support": "Make Rondje possible",
+    "tip": "Suggest a shelter",
+    "forShelters": "For shelters"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -112,8 +117,10 @@
     "countriesTitle": "Now in three countries",
     "countriesText": "Rondje works in the Netherlands, Belgium and Spain, in Dutch, French, Spanish and English.",
     "freeTitle": "Free, and it'll stay that way",
-    "freeText": "No ads, no subscription, and we never sell data. Partners such as municipalities and foundations make Rondje possible.",
-    "exampleDogs": "A few dogs waiting for a walk"
+    "freeText": "No ads, no subscription, and we never sell data. Rondje runs on voluntary support, and later on partners and funds that stick to our rules.",
+    "exampleDogs": "A few dogs waiting for a walk",
+    "freeLink": "How we stay free",
+    "freeLinkApp": "About Rondje"
   },
   "auth": {
     "loginTitle": "Welcome back",
@@ -536,7 +543,9 @@
     "settings": "Settings",
     "shelterCta": "Do you work at an animal shelter? Put your shelter's dogs on Rondje and plan supervised group walks.",
     "tipTitle": "Suggest a shelter",
-    "tipText": "Know a shelter where dogs could use more walks, or someone with a dog who could use help? This is how you help without us contacting anyone uninvited."
+    "tipText": "Know a shelter where dogs could use more walks, or someone with a dog who could use help? This is how you help without us contacting anyone uninvited.",
+    "supportTitle": "Rondje stays free",
+    "supportText": "No ads and no subscription. Want to help keep Rondje online and safe? See how, with or without money."
   },
   "quiz": {
     "title": "Safety quiz",
@@ -1000,5 +1009,151 @@
     "ownerMessage": "I know a free app where young people from the neighbourhood walk your dog. You always meet together first. Have a look: {url}",
     "ownerSignup": "Create an account to get your link",
     "ownerPrivacy": "Your link only shows that someone came through you. We never ask anyone for other people's details."
+  },
+  "support": {
+    "eyebrow": "Free, and it stays that way",
+    "title": "Make Rondje possible",
+    "lede": "Rondje is free for walkers, owners and shelters, and it will stay that way. Still, keeping Rondje safe and online costs money. Here is how that works.",
+    "promiseTitle": "Our promise",
+    "promise": {
+      "free": "Rondje stays free for everyone: no subscription, no paywall, no premium version.",
+      "ads": "No ads in Rondje.",
+      "data": "We never sell data, and never share it for marketing.",
+      "sponsors": "A sponsor or partner never decides which dogs or people you see.",
+      "equal": "Supporters get no priority and no extras. Everyone uses Rondje the same way."
+    },
+    "costsTitle": "What Rondje costs",
+    "costsLede": "An honest estimate, from now to a bigger Rondje. The more people use Rondje, the more it costs.",
+    "costs": {
+      "hosting": {
+        "label": "Website and app",
+        "why": "Hosting, so Rondje runs fast and safely."
+      },
+      "database": {
+        "label": "Database",
+        "why": "Accounts, dogs and appointments, stored safely."
+      },
+      "photos": {
+        "label": "Photos",
+        "why": "Storage for photos of dogs and profiles."
+      },
+      "maps": {
+        "label": "Maps",
+        "why": "The map, and following a walk live."
+      },
+      "email": {
+        "label": "Email",
+        "why": "Messages, such as for a new request."
+      },
+      "domain": {
+        "label": "Domain name",
+        "why": "Our own, easy web address."
+      },
+      "apple": {
+        "label": "App Store",
+        "why": "Apple charges a yearly fee to offer the iPhone app."
+      },
+      "google": {
+        "label": "Google Play",
+        "why": "A one-off fee to offer the Android app."
+      },
+      "print": {
+        "label": "Flyers and posters",
+        "why": "For shelters, community centres and vets."
+      },
+      "legal": {
+        "label": "Legal check",
+        "why": "Having the terms and privacy policy reviewed by a lawyer."
+      }
+    },
+    "per": {
+      "month": "per month",
+      "year": "per year",
+      "once": "one-off"
+    },
+    "costsTotal": "Together about {min} to {max} per month, not counting one-off costs.",
+    "costsNote": "Estimate, updated on {date}. We keep costs as low as we can.",
+    "giveTitle": "Support Rondje",
+    "giveText": "A small monthly contribution helps cover the costs. Contributions go to {operator}, who builds and runs Rondje.",
+    "giveButton": "Support Rondje on {platform}",
+    "giveNote": "You pay through {platform}, under their terms. A contribution is voluntary, not tax-deductible, and gives no benefits in Rondje.",
+    "giveSoon": "Soon you will be able to support Rondje here with a small contribution. Until then, everything below helps a lot too.",
+    "helpTitle": "Helping without money",
+    "help": {
+      "tipTitle": "Suggest a shelter",
+      "tip": "Know a shelter where dogs could use more walks? Let us know.",
+      "tipLink": "Suggest a shelter",
+      "inviteTitle": "Invite someone",
+      "invite": "Know someone who would love to walk a dog, or a neighbour with a dog? Send your personal link.",
+      "inviteLink": "Go to your invite link",
+      "shareTitle": "Share your walk",
+      "share": "Share a photo of your walk on social media, with the owner's permission.",
+      "shareInstagram": "Share a photo of your walk and tag @{handle}, with the owner's permission.",
+      "shareLink": "How to share safely",
+      "partnerTitle": "Companies and partners",
+      "partner": "A pet shop, insurer, municipality or fund that wants to help? Great, with clear rules: no ads and no say in who you see."
+    },
+    "faqTitle": "Frequently asked questions",
+    "faq": {
+      "free": {
+        "q": "Why is Rondje free?",
+        "a": "Because money should never stop anyone from getting outside together, whether young people or older people with a dog. That is why nobody pays to use Rondje."
+      },
+      "where": {
+        "q": "Where does my contribution go?",
+        "a": "To {operator}, for the costs above: hosting, database, maps, the apps and materials for shelters. Anything left goes into building Rondje further and making it known."
+      },
+      "tax": {
+        "q": "Is a contribution tax-deductible?",
+        "a": "No. Rondje is not (yet) a registered charity, so you cannot deduct a contribution from your taxes."
+      },
+      "perks": {
+        "q": "Do I get anything in return?",
+        "a": "No, on purpose. Supporters get no priority, no extra features and no say in matching or moderation. You do get our thanks, and an update now and then."
+      },
+      "sponsors": {
+        "q": "Can companies sponsor Rondje?",
+        "a": "Yes, if they stick to our rules: no ads in Rondje, no data, and no say in which dogs or people are visible. A sponsor could, for example, pay for poo bags for shelters."
+      }
+    },
+    "operatorUnknown": "the makers of Rondje"
+  },
+  "about": {
+    "eyebrow": "About Rondje",
+    "title": "A walk together, good for you and for a dog",
+    "lede": "Rondje connects young adults with dogs that want to get out more: from neighbours who can no longer walk their dog well, and from shelters.",
+    "whyTitle": "Why Rondje",
+    "why1": "Many young people love being outside and love dogs, but cannot have one themselves. At the same time, older people and people who are ill cannot walk their dog as often as they would like. And in shelters, every dog is waiting for one more walk.",
+    "why2": "A regular walk with a dog is good for everyone: exercise, fresh air and a chat with a neighbour. Rondje makes that easy, safe and free.",
+    "why3": "Rondje is not care or therapy. Not feeling well? The help page shows where you can turn.",
+    "howTitle": "How it works",
+    "how": {
+      "meet": "The first time, you always meet the owner and the dog together. Only after that may you walk alone, if the owner agrees.",
+      "adults": "Everyone who walks is 18 or older and first takes a short safety quiz.",
+      "shelters": "At shelters you walk in supervised group walks, at times the shelter chooses.",
+      "free": "Rondje is free. Nobody asks for or pays money for a walk."
+    },
+    "safetyLink": "Read how we handle safety",
+    "whoTitle": "Who is behind it",
+    "who": "Rondje is a small, independent initiative from the Netherlands, made by people who love dogs and want to bring neighbours together.",
+    "whoOperator": "Rondje is a small, independent initiative from the Netherlands, built and run by {operator}.",
+    "draft": "Draft: only admins see this",
+    "storyFallback": "This story is only available in Dutch (for now).",
+    "helpLine": "Not feeling well? You don't have to deal with it alone.",
+    "helpLink": "See the helplines",
+    "shareTitle": "Share your walk",
+    "share": "Nice photo of your walk? Feel free to share it with #rondjeapp. Please stick to these rules:",
+    "shareInstagram": "Nice photo of your walk? Share it and tag @{handle}, or use #rondjeapp. Please stick to these rules:",
+    "shareRules": {
+      "askOwner": "Always ask the owner first whether you may share a photo of the dog.",
+      "people": "Only show people who are fine with it. Take extra care with older people and children.",
+      "noAddress": "Never show an address, house number, street sign or your route on the map. That keeps everyone safe.",
+      "shelterRules": "At a shelter, the shelter's rules for photos apply.",
+      "repost": "We always ask permission before we share a photo.",
+      "remove": "Is there something of you or your dog online that should go? Let us know and we will remove it."
+    },
+    "contactTitle": "Contact",
+    "contact": "Questions or ideas? The help page explains how to reach us. Is it about a person or a dog? Use the report button on their page.",
+    "contactEmail": "Questions, ideas or want to work together? Email us:"
   }
 }

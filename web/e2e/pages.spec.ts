@@ -1,0 +1,49 @@
+import { expect, test } from '@playwright/test'
+import { newPerson, shot } from './helpers'
+
+test('pages: support, about, robots, sitemap and short links', async ({ browser }) => {
+  const { context, page } = await newPerson(browser)
+  await page.goto('/support')
+  await expect(page.getByRole('heading', { name: 'Maak Rondje mogelijk', level: 1 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Onze belofte' })).toBeVisible()
+  await expect(page.getByText(/Samen ongeveer/)).toBeVisible()
+  await shot(page, '29-support')
+
+  await page.goto('/over-ons')
+  await expect(page).toHaveURL(/\/about$/)
+  await expect(page.getByRole('heading', { name: /Samen een rondje/, level: 1 })).toBeVisible()
+  // The founder's story is still a template: nothing of it is shown until it is published.
+  await expect(page.getByText(/Schrijfvraag/)).toHaveCount(0)
+  await shot(page, '30-about')
+
+  await page.goto('/tip')
+  await expect(page).toHaveURL(/\/suggest$/)
+
+  expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
+  expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/support')
+  await context.close()
+})
+
+test('support link: on the website when the recipient is named, never in the app', async ({ browser }) => {
+  const web = await newPerson(browser)
+  await web.page.goto('/support')
+  const link = web.page.getByRole('link', { name: /Steun Rondje via/ })
+  test.skip((await link.count()) === 0, 'Needs SUPPORT_URL and OPERATOR_NAME on the server (see playwright.config.ts)')
+  await expect(link).toHaveAttribute('href', /patreon\.com/)
+  await expect(web.page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje mogelijk' })).toBeVisible()
+
+  // The iOS and Android apps add "RondjeApp" to the user agent: no money anywhere.
+  const app = await browser.newContext({ userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp' })
+  const page = await app.newPage()
+  await page.goto('/support')
+  await expect(page.getByRole('heading', { name: 'Maak Rondje mogelijk', level: 1 })).toBeVisible()
+  await expect(page.getByRole('link', { name: /Steun Rondje via/ })).toHaveCount(0)
+  await expect(page.getByText(/Samen ongeveer/)).toHaveCount(0)
+  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje mogelijk' })).toHaveCount(0)
+  await page.goto('/')
+  await expect(page.getByRole('link', { name: /Hoe we gratis blijven/ })).toHaveCount(0)
+  await expect(page.getByRole('link', { name: /Over Rondje/ }).first()).toBeVisible()
+
+  await web.context.close()
+  await app.close()
+})

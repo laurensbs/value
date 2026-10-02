@@ -81,7 +81,12 @@
     "safety": "Sécurité",
     "cookies": "Cookies",
     "shelterTerms": "Pour les refuges",
-    "demo": "Mode démo : aucune base de données n'est encore connectée. Les données ne sont pas enregistrées."
+    "demo": "Mode démo : aucune base de données n'est encore connectée. Les données ne sont pas enregistrées.",
+    "more": "En savoir plus sur Rondje",
+    "about": "À propos de Rondje",
+    "support": "Rendre Rondje possible",
+    "tip": "Recommander un refuge",
+    "forShelters": "Pour les refuges"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -112,8 +117,10 @@
     "countriesTitle": "Déjà dans trois pays",
     "countriesText": "Rondje fonctionne aux Pays-Bas, en Belgique et en Espagne, en néerlandais, français, espagnol et anglais.",
     "freeTitle": "Gratuit, et ça le restera",
-    "freeText": "Pas de publicité, pas d'abonnement, et nous ne vendons jamais de données. Des partenaires tels que des communes et des fondations rendent Rondje possible.",
-    "exampleDogs": "Quelques chiens qui attendent une balade"
+    "freeText": "Pas de publicité, pas d'abonnement, et nous ne vendons jamais de données. Rondje vit du soutien volontaire, et plus tard de partenaires et de fonds qui respectent nos règles.",
+    "exampleDogs": "Quelques chiens qui attendent une balade",
+    "freeLink": "Comment nous restons gratuits",
+    "freeLinkApp": "À propos de Rondje"
   },
   "auth": {
     "loginTitle": "Bon retour parmi nous",
@@ -536,7 +543,9 @@
     "settings": "Paramètres",
     "shelterCta": "Vous travaillez dans un refuge ? Mettez les chiens de votre refuge sur Rondje et organisez des balades en groupe encadrées.",
     "tipTitle": "Recommander un refuge",
-    "tipText": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades, ou quelqu'un avec un chien qui aurait besoin d'aide ? Voici comment aider sans que nous contactions qui que ce soit sans y être invités."
+    "tipText": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades, ou quelqu'un avec un chien qui aurait besoin d'aide ? Voici comment aider sans que nous contactions qui que ce soit sans y être invités.",
+    "supportTitle": "Rondje reste gratuit",
+    "supportText": "Pas de publicité ni d'abonnement. Vous voulez aider à garder Rondje en ligne et sûr ? Voyez comment, avec ou sans argent."
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -1000,5 +1009,151 @@
     "ownerMessage": "Je connais une application gratuite où des jeunes du quartier promènent ton chien. On se rencontre toujours d'abord ensemble. Regarde : {url}",
     "ownerSignup": "Créez un compte pour obtenir votre lien",
     "ownerPrivacy": "Votre lien montre seulement que quelqu'un est venu par vous. Nous ne demandons jamais les données d'autres personnes."
+  },
+  "support": {
+    "eyebrow": "Gratuit, et ça le restera",
+    "title": "Rendre Rondje possible",
+    "lede": "Rondje est gratuit pour les promeneurs, les propriétaires et les refuges, et le restera. Pourtant, garder Rondje sûr et en ligne coûte de l'argent. Voici comment.",
+    "promiseTitle": "Notre promesse",
+    "promise": {
+      "free": "Rondje reste gratuit pour tout le monde : pas d'abonnement, pas de paywall, pas de version premium.",
+      "ads": "Pas de publicité dans Rondje.",
+      "data": "Nous ne vendons jamais de données, et ne les partageons pas à des fins marketing.",
+      "sponsors": "Un sponsor ou partenaire ne décide jamais quels chiens ou quelles personnes vous voyez.",
+      "equal": "Soutenir Rondje ne donne ni priorité ni avantages. Tout le monde utilise Rondje de la même façon."
+    },
+    "costsTitle": "Ce que coûte Rondje",
+    "costsLede": "Une estimation honnête, d'aujourd'hui à un Rondje plus grand. Plus il y a d'utilisateurs, plus cela coûte.",
+    "costs": {
+      "hosting": {
+        "label": "Site et application",
+        "why": "L'hébergement, pour que Rondje soit rapide et sûr."
+      },
+      "database": {
+        "label": "Base de données",
+        "why": "Comptes, chiens et rendez-vous, stockés en sécurité."
+      },
+      "photos": {
+        "label": "Photos",
+        "why": "Le stockage des photos des chiens et des profils."
+      },
+      "maps": {
+        "label": "Cartes",
+        "why": "La carte, et le suivi en direct d'une promenade."
+      },
+      "email": {
+        "label": "E-mail",
+        "why": "Les messages, par exemple pour une nouvelle demande."
+      },
+      "domain": {
+        "label": "Nom de domaine",
+        "why": "Une adresse web à nous, facile à retenir."
+      },
+      "apple": {
+        "label": "App Store",
+        "why": "Apple demande une cotisation annuelle pour proposer l'app iPhone."
+      },
+      "google": {
+        "label": "Google Play",
+        "why": "Une cotisation unique pour proposer l'app Android."
+      },
+      "print": {
+        "label": "Flyers et affiches",
+        "why": "Pour les refuges, les maisons de quartier et les vétérinaires."
+      },
+      "legal": {
+        "label": "Vérification juridique",
+        "why": "Faire relire les conditions et la politique de confidentialité par un juriste."
+      }
+    },
+    "per": {
+      "month": "par mois",
+      "year": "par an",
+      "once": "une fois"
+    },
+    "costsTotal": "Au total environ {min} à {max} par mois, hors frais uniques.",
+    "costsNote": "Estimation, mise à jour le {date}. Nous gardons les coûts aussi bas que possible.",
+    "giveTitle": "Soutenir Rondje",
+    "giveText": "Une petite contribution mensuelle aide à couvrir les coûts. Les contributions vont à {operator}, qui développe et fait tourner Rondje.",
+    "giveButton": "Soutenir Rondje sur {platform}",
+    "giveNote": "Vous payez via {platform}, selon leurs conditions. Une contribution est volontaire, non déductible des impôts, et ne donne aucun avantage dans Rondje.",
+    "giveSoon": "Bientôt, vous pourrez soutenir Rondje ici avec une petite contribution. En attendant, tout ce qui suit aide énormément aussi.",
+    "helpTitle": "Aider sans argent",
+    "help": {
+      "tipTitle": "Recommander un refuge",
+      "tip": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades ? Dites-le-nous.",
+      "tipLink": "Recommander un refuge",
+      "inviteTitle": "Inviter quelqu'un",
+      "invite": "Vous connaissez quelqu'un qui adorerait promener un chien, ou un voisin avec un chien ? Envoyez votre lien personnel.",
+      "inviteLink": "Vers votre lien d'invitation",
+      "shareTitle": "Partager votre promenade",
+      "share": "Partagez une photo de votre promenade sur les réseaux sociaux, avec l'accord du propriétaire.",
+      "shareInstagram": "Partagez une photo de votre promenade et identifiez @{handle}, avec l'accord du propriétaire.",
+      "shareLink": "Partager en toute sécurité",
+      "partnerTitle": "Entreprises et partenaires",
+      "partner": "Une animalerie, un assureur, une commune ou un fonds qui veut aider ? Avec plaisir, avec des règles claires : pas de publicité et aucune influence sur qui vous voyez."
+    },
+    "faqTitle": "Questions fréquentes",
+    "faq": {
+      "free": {
+        "q": "Pourquoi Rondje est-il gratuit ?",
+        "a": "Parce que l'argent ne doit jamais empêcher de sortir ensemble, ni les jeunes, ni les personnes âgées avec un chien. C'est pourquoi personne ne paie pour utiliser Rondje."
+      },
+      "where": {
+        "q": "Où va ma contribution ?",
+        "a": "À {operator}, pour les coûts ci-dessus : hébergement, base de données, cartes, les applications et du matériel pour les refuges. Le reste sert à développer et faire connaître Rondje."
+      },
+      "tax": {
+        "q": "Une contribution est-elle déductible des impôts ?",
+        "a": "Non. Rondje n'est pas (encore) une organisation caritative reconnue : vous ne pouvez donc pas déduire une contribution de vos impôts."
+      },
+      "perks": {
+        "q": "Est-ce que je reçois quelque chose en retour ?",
+        "a": "Non, et c'est voulu. Soutenir ne donne ni priorité, ni fonctions supplémentaires, ni influence sur les mises en relation ou la modération. Mais vous avez nos remerciements, et des nouvelles de temps en temps."
+      },
+      "sponsors": {
+        "q": "Des entreprises peuvent-elles sponsoriser Rondje ?",
+        "a": "Oui, si elles respectent nos règles : pas de publicité dans Rondje, pas de données, et aucune influence sur les chiens ou les personnes visibles. Un sponsor peut par exemple payer des sacs à crottes pour les refuges."
+      }
+    },
+    "operatorUnknown": "les créateurs de Rondje"
+  },
+  "about": {
+    "eyebrow": "À propos de Rondje",
+    "title": "Une promenade ensemble, bonne pour vous et pour un chien",
+    "lede": "Rondje met en relation de jeunes adultes avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
+    "whyTitle": "Pourquoi Rondje",
+    "why1": "Beaucoup de jeunes aiment sortir et adorent les chiens, mais ne peuvent pas en avoir un. En même temps, des personnes âgées ou malades ne peuvent plus promener leur chien aussi souvent qu'elles le voudraient. Et dans les refuges, chaque chien attend une promenade de plus.",
+    "why2": "Une promenade régulière avec un chien fait du bien à tout le monde : du mouvement, de l'air frais et un brin de causette avec un voisin. Rondje rend cela simple, sûr et gratuit.",
+    "why3": "Rondje n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
+    "howTitle": "Comment ça marche",
+    "how": {
+      "meet": "La première fois, vous rencontrez toujours le propriétaire et le chien ensemble. Ensuite seulement, vous pouvez promener seul, si le propriétaire le souhaite.",
+      "adults": "Toute personne qui promène a 18 ans ou plus et passe d'abord un court quiz de sécurité.",
+      "shelters": "Dans les refuges, on promène lors de promenades en groupe encadrées, aux moments choisis par le refuge.",
+      "free": "Rondje est gratuit. Personne ne demande ni ne paie d'argent pour une promenade."
+    },
+    "safetyLink": "Lire comment nous gérons la sécurité",
+    "whoTitle": "Qui est derrière Rondje",
+    "who": "Rondje est une petite initiative indépendante des Pays-Bas, créée par des personnes qui aiment les chiens et veulent rapprocher les voisins.",
+    "whoOperator": "Rondje est une petite initiative indépendante des Pays-Bas, développée et gérée par {operator}.",
+    "draft": "Brouillon : seuls les administrateurs le voient",
+    "storyFallback": "Cette histoire n'existe (pour l'instant) qu'en néerlandais.",
+    "helpLine": "Ça ne va pas ? Vous n'êtes pas obligé de faire face seul.",
+    "helpLink": "Voir les lignes d'écoute",
+    "shareTitle": "Partager votre promenade",
+    "share": "Une belle photo de votre promenade ? Partagez-la avec #rondjeapp, en respectant ces règles :",
+    "shareInstagram": "Une belle photo de votre promenade ? Partagez-la et identifiez @{handle}, ou utilisez #rondjeapp. En respectant ces règles :",
+    "shareRules": {
+      "askOwner": "Demandez toujours d'abord au propriétaire si vous pouvez partager une photo du chien.",
+      "people": "Ne montrez que des personnes d'accord. Soyez particulièrement prudent avec les personnes âgées et les enfants.",
+      "noAddress": "Jamais d'adresse, de numéro de maison, de plaque de rue ou d'itinéraire sur la carte. Ainsi tout le monde reste en sécurité.",
+      "shelterRules": "Dans un refuge, les règles du refuge pour les photos s'appliquent.",
+      "repost": "Nous demandons toujours l'autorisation avant de partager une photo.",
+      "remove": "Quelque chose de vous ou de votre chien est en ligne et doit disparaître ? Dites-le-nous, nous le retirerons."
+    },
+    "contactTitle": "Contact",
+    "contact": "Des questions ou des idées ? La page d'aide explique comment nous joindre. Il s'agit d'une personne ou d'un chien ? Utilisez le bouton de signalement sur sa page.",
+    "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :"
   }
 }

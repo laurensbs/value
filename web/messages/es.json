@@ -81,7 +81,12 @@
     "safety": "Seguridad",
     "cookies": "Cookies",
     "shelterTerms": "Para protectoras",
-    "demo": "Modo demo: todavía no hay ninguna base de datos conectada. Los datos no se guardan."
+    "demo": "Modo demo: todavía no hay ninguna base de datos conectada. Los datos no se guardan.",
+    "more": "Más sobre Rondje",
+    "about": "Sobre Rondje",
+    "support": "Haz posible Rondje",
+    "tip": "Recomienda una protectora",
+    "forShelters": "Para protectoras"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -112,8 +117,10 @@
     "countriesTitle": "Ya en tres países",
     "countriesText": "Rondje funciona en los Países Bajos, Bélgica y España, en neerlandés, francés, español e inglés.",
     "freeTitle": "Gratis, y así seguirá",
-    "freeText": "Sin anuncios, sin suscripción y nunca vendemos datos. Rondje es posible gracias a colaboradores como ayuntamientos y fundaciones.",
-    "exampleDogs": "Algunos perros que esperan un paseo"
+    "freeText": "Sin anuncios, sin suscripción y nunca vendemos datos. Rondje funciona con apoyo voluntario y, más adelante, con socios y fundaciones que respeten nuestras reglas.",
+    "exampleDogs": "Algunos perros que esperan un paseo",
+    "freeLink": "Cómo seguimos siendo gratis",
+    "freeLinkApp": "Sobre Rondje"
   },
   "auth": {
     "loginTitle": "Hola de nuevo",
@@ -536,7 +543,9 @@
     "settings": "Ajustes",
     "shelterCta": "¿Trabajas en una protectora? Pon los perros de vuestra protectora en Rondje y organiza paseos en grupo acompañados.",
     "tipTitle": "Recomienda una protectora",
-    "tipText": "¿Conoces una protectora donde a los perros les vendrían bien más paseos, o a alguien con perro que necesite ayuda? Así ayudas sin que contactemos a nadie sin permiso."
+    "tipText": "¿Conoces una protectora donde a los perros les vendrían bien más paseos, o a alguien con perro que necesite ayuda? Así ayudas sin que contactemos a nadie sin permiso.",
+    "supportTitle": "Rondje sigue siendo gratis",
+    "supportText": "Sin anuncios y sin suscripción. ¿Quieres ayudar a que Rondje siga en línea y sea seguro? Mira cómo, con o sin dinero."
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -1000,5 +1009,151 @@
     "ownerMessage": "Conozco una app gratuita con la que gente joven del barrio pasea a tu perro. Siempre os conocéis antes en persona. Échale un vistazo: {url}",
     "ownerSignup": "Crea una cuenta para obtener tu enlace",
     "ownerPrivacy": "Tu enlace solo muestra que alguien llegó a través de ti. Nunca pedimos datos de otras personas."
+  },
+  "support": {
+    "eyebrow": "Gratis, y así seguirá",
+    "title": "Haz posible Rondje",
+    "lede": "Rondje es gratis para paseadores, propietarios y protectoras, y así seguirá. Aun así, mantener Rondje seguro y en línea cuesta dinero. Te lo explicamos.",
+    "promiseTitle": "Nuestra promesa",
+    "promise": {
+      "free": "Rondje sigue siendo gratis para todos: sin suscripción, sin muro de pago, sin versión premium.",
+      "ads": "Sin anuncios en Rondje.",
+      "data": "Nunca vendemos datos ni los compartimos para marketing.",
+      "sponsors": "Un patrocinador o socio nunca decide qué perros o personas ves.",
+      "equal": "Quien apoya a Rondje no recibe prioridad ni extras. Todo el mundo usa Rondje igual."
+    },
+    "costsTitle": "Lo que cuesta Rondje",
+    "costsLede": "Una estimación honesta, desde ahora hasta un Rondje más grande. Cuanta más gente lo usa, más cuesta.",
+    "costs": {
+      "hosting": {
+        "label": "Web y app",
+        "why": "Alojamiento, para que Rondje funcione rápido y seguro."
+      },
+      "database": {
+        "label": "Base de datos",
+        "why": "Cuentas, perros y citas, guardados de forma segura."
+      },
+      "photos": {
+        "label": "Fotos",
+        "why": "Almacenamiento de fotos de perros y perfiles."
+      },
+      "maps": {
+        "label": "Mapas",
+        "why": "El mapa y seguir un paseo en directo."
+      },
+      "email": {
+        "label": "Correo",
+        "why": "Mensajes, por ejemplo con una nueva solicitud."
+      },
+      "domain": {
+        "label": "Dominio",
+        "why": "Una dirección web propia y fácil."
+      },
+      "apple": {
+        "label": "App Store",
+        "why": "Apple cobra una cuota anual para ofrecer la app de iPhone."
+      },
+      "google": {
+        "label": "Google Play",
+        "why": "Una cuota única para ofrecer la app de Android."
+      },
+      "print": {
+        "label": "Folletos y carteles",
+        "why": "Para protectoras, centros cívicos y veterinarios."
+      },
+      "legal": {
+        "label": "Revisión legal",
+        "why": "Que un abogado revise las condiciones y la privacidad."
+      }
+    },
+    "per": {
+      "month": "al mes",
+      "year": "al año",
+      "once": "pago único"
+    },
+    "costsTotal": "En total, entre {min} y {max} al mes, sin contar los pagos únicos.",
+    "costsNote": "Estimación, actualizada el {date}. Mantenemos los costes lo más bajos posible.",
+    "giveTitle": "Apoya a Rondje",
+    "giveText": "Con una pequeña aportación mensual ayudas a cubrir los costes. Las aportaciones van a {operator}, que desarrolla y mantiene Rondje.",
+    "giveButton": "Apoya a Rondje en {platform}",
+    "giveNote": "Pagas a través de {platform}, según sus condiciones. La aportación es voluntaria, no desgrava y no da ventajas en Rondje.",
+    "giveSoon": "Pronto podrás apoyar a Rondje aquí con una pequeña aportación. Mientras tanto, todo lo de abajo también ayuda muchísimo.",
+    "helpTitle": "Ayudar sin dinero",
+    "help": {
+      "tipTitle": "Recomienda una protectora",
+      "tip": "¿Conoces una protectora donde a los perros les vendrían bien más paseos? Cuéntanoslo.",
+      "tipLink": "Recomendar una protectora",
+      "inviteTitle": "Invita a alguien",
+      "invite": "¿Conoces a alguien a quien le encantaría pasear un perro, o a un vecino con perro? Envía tu enlace personal.",
+      "inviteLink": "Ir a tu enlace de invitación",
+      "shareTitle": "Comparte tu paseo",
+      "share": "Comparte una foto de tu paseo en redes sociales, con permiso del propietario.",
+      "shareInstagram": "Comparte una foto de tu paseo y etiqueta a @{handle}, con permiso del propietario.",
+      "shareLink": "Cómo compartir con seguridad",
+      "partnerTitle": "Empresas y socios",
+      "partner": "¿Una tienda de animales, aseguradora, ayuntamiento o fundación que quiere ayudar? Encantados, con reglas claras: sin anuncios y sin influir en a quién ves."
+    },
+    "faqTitle": "Preguntas frecuentes",
+    "faq": {
+      "free": {
+        "q": "¿Por qué es gratis Rondje?",
+        "a": "Porque el dinero nunca debe impedir salir juntos a la calle, ni a los jóvenes ni a las personas mayores con perro. Por eso nadie paga por usar Rondje."
+      },
+      "where": {
+        "q": "¿Adónde va mi aportación?",
+        "a": "A {operator}, para los costes de arriba: alojamiento, base de datos, mapas, las apps y material para protectoras. Lo que sobre se destina a seguir desarrollando y dando a conocer Rondje."
+      },
+      "tax": {
+        "q": "¿La aportación desgrava?",
+        "a": "No. Rondje (todavía) no es una entidad benéfica reconocida, así que no puedes deducir la aportación en tus impuestos."
+      },
+      "perks": {
+        "q": "¿Recibo algo a cambio?",
+        "a": "No, y es a propósito. Quien apoya no recibe prioridad, ni funciones extra, ni influye en los emparejamientos o la moderación. Eso sí, te damos las gracias y, de vez en cuando, novedades."
+      },
+      "sponsors": {
+        "q": "¿Pueden las empresas patrocinar Rondje?",
+        "a": "Sí, si respetan nuestras reglas: sin anuncios en Rondje, sin datos y sin influir en qué perros o personas se ven. Un patrocinador puede, por ejemplo, pagar bolsas para las protectoras."
+      }
+    },
+    "operatorUnknown": "los creadores de Rondje"
+  },
+  "about": {
+    "eyebrow": "Sobre Rondje",
+    "title": "Un paseo juntos, bueno para ti y para un perro",
+    "lede": "Rondje pone en contacto a jóvenes adultos con perros que quieren salir más: de vecinos que ya no pueden pasear bien a su perro, y de protectoras.",
+    "whyTitle": "Por qué Rondje",
+    "why1": "Muchos jóvenes quieren salir y adoran a los perros, pero no pueden tener uno. Al mismo tiempo, hay personas mayores o enfermas que no pueden pasear a su perro tanto como querrían. Y en las protectoras, cada perro espera un paseo más.",
+    "why2": "Un paseo fijo con un perro es bueno para todos: ejercicio, aire libre y una charla con un vecino. Rondje lo hace fácil, seguro y gratis.",
+    "why3": "Rondje no es asistencia ni terapia. ¿No te encuentras bien? En la página de ayuda verás adónde acudir.",
+    "howTitle": "Cómo funciona",
+    "how": {
+      "meet": "La primera vez siempre conoces al propietario y al perro juntos. Solo después puedes pasear a solas, si el propietario quiere.",
+      "adults": "Todas las personas que pasean tienen 18 años o más y primero hacen un breve test de seguridad.",
+      "shelters": "En las protectoras se pasea en paseos en grupo supervisados, en los horarios que elige la protectora.",
+      "free": "Rondje es gratis. Nadie pide ni paga dinero por un paseo."
+    },
+    "safetyLink": "Lee cómo cuidamos la seguridad",
+    "whoTitle": "Quién está detrás",
+    "who": "Rondje es una iniciativa pequeña e independiente de los Países Bajos, creada por personas a las que les encantan los perros y que quieren unir a los vecinos.",
+    "whoOperator": "Rondje es una iniciativa pequeña e independiente de los Países Bajos, desarrollada y mantenida por {operator}.",
+    "draft": "Borrador: solo lo ven los administradores",
+    "storyFallback": "Esta historia (de momento) solo está en neerlandés.",
+    "helpLine": "¿No te encuentras bien? No tienes por qué pasarlo solo.",
+    "helpLink": "Ver las líneas de ayuda",
+    "shareTitle": "Comparte tu paseo",
+    "share": "¿Una foto bonita de tu paseo? Compártela con #rondjeapp, pero respeta estas normas:",
+    "shareInstagram": "¿Una foto bonita de tu paseo? Compártela y etiqueta a @{handle}, o usa #rondjeapp. Respeta estas normas:",
+    "shareRules": {
+      "askOwner": "Pregunta siempre antes al propietario si puedes compartir una foto del perro.",
+      "people": "Solo aparecen personas que estén de acuerdo. Ten especial cuidado con personas mayores y niños.",
+      "noAddress": "Nunca muestres una dirección, número de casa, placa de calle ni tu ruta en el mapa. Así todos están seguros.",
+      "shelterRules": "En una protectora se aplican sus propias normas sobre fotos.",
+      "repost": "Siempre pedimos permiso antes de compartir una foto.",
+      "remove": "¿Hay algo tuyo o de tu perro en internet que deba desaparecer? Avísanos y lo retiramos."
+    },
+    "contactTitle": "Contacto",
+    "contact": "¿Preguntas o ideas? En la página de ayuda verás cómo contactarnos. ¿Se trata de una persona o un perro? Usa el botón de denuncia en su página.",
+    "contactEmail": "¿Preguntas, ideas o quieres colaborar? Escríbenos:"
   }
 }

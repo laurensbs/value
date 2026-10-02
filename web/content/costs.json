@@ -1,0 +1,15 @@
+{
+  "updated": "2026-10-02",
+  "items": [
+    { "key": "hosting", "min": 0, "max": 20, "per": "month" },
+    { "key": "database", "min": 0, "max": 20, "per": "month" },
+    { "key": "photos", "min": 0, "max": 5, "per": "month" },
+    { "key": "maps", "min": 0, "max": 25, "per": "month" },
+    { "key": "email", "min": 0, "max": 10, "per": "month" },
+    { "key": "domain", "min": 15, "max": 40, "per": "year" },
+    { "key": "apple", "min": 99, "max": 99, "per": "year" },
+    { "key": "google", "min": 25, "max": 25, "per": "once" },
+    { "key": "print", "min": 0, "max": 50, "per": "month" },
+    { "key": "legal", "min": 500, "max": 1500, "per": "once" }
+  ]
+}

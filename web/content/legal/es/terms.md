@@ -1,6 +1,6 @@
 ---
 title: Condiciones de uso
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"
 ---
@@ -72,6 +72,7 @@ Rondje es gratuito para todos.
 - Las bolsas para excrementos, la correa, el arnés, los premios y el agua los aporta el propietario o la protectora, según el perfil del perro.
 - Si alguien te pide dinero, un IBAN o un pago mediante un enlace, no respondas y denúncialo.
 - Los mensajes de las solicitudes se revisan automáticamente para detectar peticiones de pago, números de cuenta y enlaces. Si se detecta algo, verás un aviso y una persona del equipo lo revisará.
+- **Apoyo voluntario a Rondje.** Si nuestra web ofrece una forma de apoyar a Rondje (por ejemplo, a través de Patreon), se trata de una aportación voluntaria sin contraprestación: no recibes prioridad, funciones extra ni otras ventajas, y no influye en los emparejamientos, la visibilidad ni la moderación. Al pago se aplican también las condiciones de esa plataforma. La aportación no desgrava.
 
 ## 9. Qué esperamos de todos
 

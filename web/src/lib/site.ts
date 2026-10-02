@@ -31,7 +31,7 @@ export function adminEmails(): string[] {
     .filter(Boolean)
 }
 
-export const TERMS_VERSION = '0.1'
+export const TERMS_VERSION = '0.2'
 
 /** Only allow redirects to paths on this site ("/x", never "//evil" or "/\evil"). */
 export function safeNext(value: unknown, fallback = '/dogs'): string {

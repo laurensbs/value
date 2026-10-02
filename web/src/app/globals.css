@@ -2550,3 +2550,86 @@ legend {
   justify-items: end;
   text-align: right;
 }
+
+/* ---------- Footer: site links above the legal links ---------- */
+
+.footer-row {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer .footer-row a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.footer .footer-row a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Support and about ---------- */
+
+.check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.check-list li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.check-list .icon {
+  color: var(--grass);
+  margin-top: 2px;
+}
+
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.cost-table th,
+.cost-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  text-align: left;
+}
+
+.cost-table th {
+  font-weight: 650;
+  padding-right: 16px;
+}
+
+.cost-table th .small {
+  display: block;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.cost-table td {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.support-card {
+  background: var(--grass-soft);
+  border-color: transparent;
+}
+
+.about-story .prose {
+  font-size: 1.05rem;
+}

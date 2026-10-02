@@ -25,6 +25,13 @@ export default defineConfig({
         url: `http://localhost:${PORT}/api/health`,
         reuseExistingServer: true,
         timeout: 180_000,
-        env: { PGLITE_DIR: 'memory', SEED_DEMO: '1', ADMIN_EMAILS: 'admin@e2e.test' },
+        env: {
+          PGLITE_DIR: 'memory',
+          SEED_DEMO: '1',
+          ADMIN_EMAILS: 'admin@e2e.test',
+          // Fake values, only to test that the support link shows on the website and never in the apps.
+          SUPPORT_URL: 'https://www.patreon.com/example',
+          OPERATOR_NAME: 'Voorbeeld',
+        },
       },
 })

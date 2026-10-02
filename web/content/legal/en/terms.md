@@ -1,6 +1,6 @@
 ---
 title: Terms of Use
-version: "0.1"
+version: "0.2"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -72,6 +72,7 @@ Rondje is free for everyone.
 - Poop bags, leash, harness, treats and water are provided by the owner or shelter, as stated on the dog's profile.
 - If someone asks for money, bank details (IBAN) or a payment through a link, do not respond and report it to us.
 - Messages sent with requests are automatically checked for payment requests, bank account numbers and links. If something is found, you see a warning and a team member reviews it.
+- **Voluntary support for Rondje.** If our website offers a way to support Rondje (for example through Patreon), that is a voluntary contribution without anything in return: you get no priority, extra features or other benefits, and it has no influence on matching, visibility or moderation. The platform's own terms also apply to the payment. A contribution is not tax-deductible.
 
 ## 9. What we expect from everyone
 

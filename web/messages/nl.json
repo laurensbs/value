@@ -81,7 +81,12 @@
     "safety": "Veiligheid",
     "cookies": "Cookies",
     "shelterTerms": "Voor opvangen",
-    "demo": "Demo-modus: er is nog geen database gekoppeld. Gegevens worden niet bewaard."
+    "demo": "Demo-modus: er is nog geen database gekoppeld. Gegevens worden niet bewaard.",
+    "more": "Meer over Rondje",
+    "about": "Over Rondje",
+    "support": "Maak Rondje mogelijk",
+    "tip": "Tip een opvang",
+    "forShelters": "Voor opvangen"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -112,8 +117,10 @@
     "countriesTitle": "Nu in drie landen",
     "countriesText": "Rondje werkt in Nederland, België en Spanje, in het Nederlands, Frans, Spaans en Engels.",
     "freeTitle": "Gratis, en dat blijft zo",
-    "freeText": "Geen advertenties, geen abonnement, en we verkopen nooit gegevens. Partners zoals gemeenten en fondsen maken Rondje mogelijk.",
-    "exampleDogs": "Een paar honden die op een rondje wachten"
+    "freeText": "Geen advertenties, geen abonnement, en we verkopen nooit gegevens. Rondje draait op vrijwillige steun, en later op partners en fondsen die zich aan onze spelregels houden.",
+    "exampleDogs": "Een paar honden die op een rondje wachten",
+    "freeLink": "Hoe we gratis blijven",
+    "freeLinkApp": "Over Rondje"
   },
   "auth": {
     "loginTitle": "Welkom terug",
@@ -536,7 +543,9 @@
     "settings": "Instellingen",
     "shelterCta": "Werk je bij een dierenopvang? Zet de honden van jullie opvang op Rondje en plan begeleide groepswandelingen.",
     "tipTitle": "Tip een opvang",
-    "tipText": "Ken je een opvang of asiel waar honden meer wandelingen kunnen gebruiken, of iemand met een hond die hulp kan gebruiken? Zo help je zonder dat wij iemand ongevraagd benaderen."
+    "tipText": "Ken je een opvang of asiel waar honden meer wandelingen kunnen gebruiken, of iemand met een hond die hulp kan gebruiken? Zo help je zonder dat wij iemand ongevraagd benaderen.",
+    "supportTitle": "Rondje blijft gratis",
+    "supportText": "Geen advertenties en geen abonnement. Wil je helpen om Rondje online en veilig te houden? Kijk hoe, met of zonder geld."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -1000,5 +1009,151 @@
     "ownerMessage": "Ik ken een gratis app waarmee jonge mensen uit de buurt je hond uitlaten. Jullie maken altijd eerst samen kennis. Kijk maar: {url}",
     "ownerSignup": "Maak een account om je link te krijgen",
     "ownerPrivacy": "Je link laat alleen zien dat iemand via jou kwam. We vragen niemand om gegevens van anderen."
+  },
+  "support": {
+    "eyebrow": "Gratis, en dat blijft zo",
+    "title": "Maak Rondje mogelijk",
+    "lede": "Rondje is gratis voor wandelaars, eigenaren en opvangen, en dat blijft zo. Toch kost het geld om Rondje veilig en online te houden. Zo zit dat.",
+    "promiseTitle": "Onze belofte",
+    "promise": {
+      "free": "Rondje blijft gratis voor iedereen: geen abonnement, geen betaalmuur, geen premiumversie.",
+      "ads": "Geen advertenties in Rondje.",
+      "data": "We verkopen nooit gegevens, en delen ze niet voor marketing.",
+      "sponsors": "Een sponsor of partner bepaalt nooit welke honden of mensen je ziet.",
+      "equal": "Wie Rondje steunt, krijgt geen voorrang en geen extra's. Iedereen gebruikt Rondje op dezelfde manier."
+    },
+    "costsTitle": "Wat Rondje kost",
+    "costsLede": "Een eerlijke schatting, van nu tot een groter Rondje. Hoe meer mensen Rondje gebruiken, hoe meer het kost.",
+    "costs": {
+      "hosting": {
+        "label": "Website en app",
+        "why": "Hosting, zodat Rondje snel en veilig draait."
+      },
+      "database": {
+        "label": "Database",
+        "why": "Accounts, honden en afspraken, veilig opgeslagen."
+      },
+      "photos": {
+        "label": "Foto's",
+        "why": "Opslag van foto's van honden en profielen."
+      },
+      "maps": {
+        "label": "Kaarten",
+        "why": "De kaart, en live meekijken tijdens een rondje."
+      },
+      "email": {
+        "label": "E-mail",
+        "why": "Berichten, zoals bij een nieuw verzoek."
+      },
+      "domain": {
+        "label": "Domeinnaam",
+        "why": "Een eigen, makkelijk webadres."
+      },
+      "apple": {
+        "label": "App Store",
+        "why": "Apple vraagt elk jaar een bijdrage om de iPhone-app aan te bieden."
+      },
+      "google": {
+        "label": "Google Play",
+        "why": "Eenmalig, om de Android-app aan te bieden."
+      },
+      "print": {
+        "label": "Flyers en posters",
+        "why": "Voor opvangen, buurthuizen en dierenartsen."
+      },
+      "legal": {
+        "label": "Juridische check",
+        "why": "Voorwaarden en privacy laten toetsen door een jurist."
+      }
+    },
+    "per": {
+      "month": "per maand",
+      "year": "per jaar",
+      "once": "eenmalig"
+    },
+    "costsTotal": "Samen ongeveer {min} tot {max} per maand, zonder de eenmalige kosten.",
+    "costsNote": "Schatting, bijgewerkt op {date}. We houden de kosten zo laag mogelijk.",
+    "giveTitle": "Steun Rondje",
+    "giveText": "Met een kleine maandelijkse bijdrage help je de kosten te dekken. Bijdragen gaan naar {operator}, dat Rondje bouwt en onderhoudt.",
+    "giveButton": "Steun Rondje via {platform}",
+    "giveNote": "Je betaalt via {platform}, onder hun voorwaarden. Een bijdrage is vrijwillig, niet fiscaal aftrekbaar, en geeft geen voordelen in Rondje.",
+    "giveSoon": "Binnenkort kun je Rondje hier ook met een kleine bijdrage steunen. Tot die tijd helpt alles hieronder ook enorm.",
+    "helpTitle": "Helpen zonder geld",
+    "help": {
+      "tipTitle": "Tip een opvang",
+      "tip": "Ken je een opvang of asiel waar honden meer wandelingen kunnen gebruiken? Laat het ons weten.",
+      "tipLink": "Tip een opvang",
+      "inviteTitle": "Nodig iemand uit",
+      "invite": "Ken je iemand die graag met een hond wandelt, of een buur met een hond? Stuur je persoonlijke link.",
+      "inviteLink": "Naar je uitnodigingslink",
+      "shareTitle": "Deel je rondje",
+      "share": "Deel een foto van je rondje op social media, met toestemming van de eigenaar.",
+      "shareInstagram": "Deel een foto van je rondje en tag @{handle}, met toestemming van de eigenaar.",
+      "shareLink": "Zo deel je veilig",
+      "partnerTitle": "Bedrijven en partners",
+      "partner": "Een dierenwinkel, verzekeraar, gemeente of fonds dat wil helpen? Graag, met duidelijke spelregels: geen advertenties en geen invloed op wie je ziet."
+    },
+    "faqTitle": "Veelgestelde vragen",
+    "faq": {
+      "free": {
+        "q": "Waarom is Rondje gratis?",
+        "a": "Omdat geld geen drempel mag zijn om samen naar buiten te gaan, voor jongeren en voor ouderen met een hond. Daarom vragen we niemand te betalen om Rondje te gebruiken."
+      },
+      "where": {
+        "q": "Waar gaat mijn bijdrage naartoe?",
+        "a": "Naar {operator}, voor de kosten hierboven: hosting, database, kaarten, de apps en materiaal voor opvangen. Wat overblijft, gaat naar het verder bouwen en bekendmaken van Rondje."
+      },
+      "tax": {
+        "q": "Is een bijdrage fiscaal aftrekbaar?",
+        "a": "Nee. Rondje is (nog) geen goed doel met een ANBI-status. Je kunt een bijdrage dus niet aftrekken van de belasting."
+      },
+      "perks": {
+        "q": "Krijg ik er iets voor terug?",
+        "a": "Nee, en dat is bewust. Wie steunt, krijgt geen voorrang, geen extra functies en geen invloed op koppelen of moderatie. Wel onze dank, en af en toe een update."
+      },
+      "sponsors": {
+        "q": "Mogen bedrijven Rondje sponsoren?",
+        "a": "Ja, als ze zich aan onze spelregels houden: geen advertenties in Rondje, geen gegevens, en geen invloed op welke honden of mensen zichtbaar zijn. Een sponsor kan bijvoorbeeld poepzakjes voor opvangen betalen."
+      }
+    },
+    "operatorUnknown": "de makers van Rondje"
+  },
+  "about": {
+    "eyebrow": "Over Rondje",
+    "title": "Samen een rondje, goed voor jou en voor een hond",
+    "lede": "Rondje brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer goed kunnen uitlaten, en uit opvangen.",
+    "whyTitle": "Waarom Rondje",
+    "why1": "Veel jongeren willen graag naar buiten en houden van honden, maar kunnen er zelf geen hebben. Tegelijk zijn er ouderen en mensen die ziek zijn, die hun hond niet meer zo vaak kunnen uitlaten als ze zouden willen. En in opvangen wacht elke hond op een extra wandeling.",
+    "why2": "Een vast rondje met een hond is goed voor iedereen: beweging, buitenlucht en een praatje met een buurtgenoot. Rondje maakt dat makkelijk, veilig en gratis.",
+    "why3": "Rondje is geen hulpverlening of therapie. Gaat het niet goed met je? Op de hulppagina vind je waar je terechtkunt.",
+    "howTitle": "Hoe het werkt",
+    "how": {
+      "meet": "De eerste keer ontmoet je de eigenaar en de hond altijd samen. Pas daarna mag je alleen wandelen, als de eigenaar dat wil.",
+      "adults": "Iedereen die wandelt is 18 jaar of ouder en doet eerst een korte veiligheidsquiz.",
+      "shelters": "Bij opvangen wandel je in begeleide groepswandelingen, op momenten die de opvang kiest.",
+      "free": "Rondje is gratis. Niemand vraagt of betaalt geld voor een wandeling."
+    },
+    "safetyLink": "Lees hoe we veiligheid regelen",
+    "whoTitle": "Wie zit erachter",
+    "who": "Rondje is een klein, onafhankelijk initiatief uit Nederland, gemaakt door mensen die van honden houden en buurtgenoten met elkaar willen verbinden.",
+    "whoOperator": "Rondje is een klein, onafhankelijk initiatief uit Nederland, gebouwd en onderhouden door {operator}.",
+    "draft": "Concept: alleen beheerders zien dit",
+    "storyFallback": "Dit verhaal is (nog) alleen in het Nederlands.",
+    "helpLine": "Gaat het niet goed met je? Je hoeft het niet alleen te doen.",
+    "helpLink": "Bekijk de hulplijnen",
+    "shareTitle": "Deel je rondje",
+    "share": "Leuke foto van je rondje? Deel hem gerust, met #rondjeapp. Houd je wel aan deze afspraken:",
+    "shareInstagram": "Leuke foto van je rondje? Deel hem en tag @{handle}, of gebruik #rondjeapp. Houd je wel aan deze afspraken:",
+    "shareRules": {
+      "askOwner": "Vraag de eigenaar altijd eerst of je een foto van de hond mag delen.",
+      "people": "Mensen alleen in beeld als ze dat goed vinden. Wees extra voorzichtig met ouderen en kinderen.",
+      "noAddress": "Nooit een adres, huisnummer, straatnaambord of je route op de kaart. Zo blijft iedereen veilig.",
+      "shelterRules": "Bij een opvang gelden de regels van de opvang voor foto's.",
+      "repost": "Wij vragen altijd eerst toestemming voordat we een foto delen.",
+      "remove": "Staat er iets van jou of je hond online dat weg moet? Laat het ons weten, dan halen we het weg."
+    },
+    "contactTitle": "Contact",
+    "contact": "Vragen of ideeën? Op de hulppagina lees je hoe je ons bereikt. Gaat het om iemand of een hond? Gebruik het meldknopje op de pagina.",
+    "contactEmail": "Vragen, ideeën of samenwerken? Mail ons:"
   }
 }

@@ -9,6 +9,7 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import type { Locale } from '@/i18n/config'
 import { siteUrl } from '@/lib/site'
+import { isNativeRequest } from '@/server/native'
 import { trustSignals } from '@/server/queries'
 import { requireOnboarded } from '@/server/session'
 
@@ -19,6 +20,7 @@ export async function generateMetadata() {
 
 export default async function ProfilePage() {
   const viewer = await requireOnboarded('/profile')
+  const native = await isNativeRequest()
   const p = viewer.profile
   const t = await getTranslations()
   const locale = (await getLocale()) as Locale
@@ -68,6 +70,18 @@ export default async function ProfilePage() {
         <InviteLink url={inviteUrl} message={t('profile.inviteMessage', { url: inviteUrl })} />
         <p className="muted small">{t('profile.invited', { n: invited })}</p>
       </section>
+
+      {native ? null : (
+        <section className="card flat stack-s">
+          <h2>{t('profile.supportTitle')}</h2>
+          <p className="muted">{t('profile.supportText')}</p>
+          <div>
+            <Link href="/support" className="button ghost small">
+              <Icon name="heart" size={16} /> {t('support.title')}
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section className="card flat stack-s">
         <h2>{t('profile.tipTitle')}</h2>
