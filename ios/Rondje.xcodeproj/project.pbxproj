@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		069A4CEC550C6B8F9D7F31B6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */; };
+		0815887EEFE6F55BD5813657 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885A8805C0F35865B3C3FD85 /* Push.swift */; };
 		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
 		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
 		2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EA1B62ECCEC400102F6036 /* APIClient.swift */; };
@@ -113,6 +114,7 @@
 		83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowWalkView.swift; sourceTree = "<group>"; };
 		847F8B3EE6862459619E1EDC /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		88239320CAE586D79B3603F4 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		885A8805C0F35865B3C3FD85 /* Push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Push.swift; sourceTree = "<group>"; };
 		921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeTests.swift; sourceTree = "<group>"; };
 		9444E27E94A2B8808B22C5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				630E03C393BF21260C48A977 /* Keychain.swift */,
 				9C56C585C3705ACBC5EBC617 /* LocationService.swift */,
 				CE38BF1BFD0974FB881BD72B /* Models.swift */,
+				885A8805C0F35865B3C3FD85 /* Push.swift */,
 				F7A13AA036854983EE311380 /* Reminders.swift */,
 				26863FB98876ECFB2C52F0FF /* WalkTracker.swift */,
 			);
@@ -511,6 +514,7 @@
 				53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */,
 				7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */,
 				41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */,
+				0815887EEFE6F55BD5813657 /* Push.swift in Sources */,
 				C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */,
 				9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */,
 				119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */,

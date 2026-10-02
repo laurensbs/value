@@ -31,7 +31,12 @@ final class AppModel {
     init() {
         UNUserNotificationCenter.current().delegate = NotificationRouter.shared
         NotificationRouter.shared.onOpen = { [weak self] tab in
-            if tab == "appointments" { self?.selectedTab = .appointments }
+            switch tab {
+            case "appointments": self?.selectedTab = .appointments
+            case "discover": self?.selectedTab = .discover
+            case "profile": self?.selectedTab = .profile
+            default: break
+            }
         }
         NotificationCenter.default.addObserver(forName: .rondjeSignedOut, object: nil, queue: .main) { [weak self] _ in
             MainActor.assumeIsolated { self?.reset() }
@@ -63,7 +68,10 @@ final class AppModel {
             self.me = me
             Cache.save(me, as: "me")
             phase = me.profile == nil ? .onboarding : .ready
-            if phase == .ready { await refreshAppointments() }
+            if phase == .ready {
+                await refreshAppointments()
+                await Push.registerIfAllowed()
+            }
         } catch APIError.unauthorized {
             reset()
         } catch {
@@ -91,6 +99,7 @@ final class AppModel {
 
     func signOut() async {
         WalkTracker.shared.stop()
+        await Push.unregister()
         await api.signOut()
         reset()
     }

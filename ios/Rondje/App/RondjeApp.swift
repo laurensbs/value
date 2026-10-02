@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct RondjeApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var model = AppModel()
     @State private var walk = WalkTracker.shared
     @Environment(\.scenePhase) private var scenePhase

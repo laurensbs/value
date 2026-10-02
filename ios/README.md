@@ -14,6 +14,8 @@ Een echte iPhone-app in SwiftUI, naast de website. Hij praat met dezelfde server
 - **Jij**: kenmerken, veiligheidsquiz, eigen honden toevoegen (met foto's), meldingen, account verwijderen in de app.
 - **Lid worden**: de belofte (gratis, geen reclame) en de goede doelen. Geven gaat via de website in Safari, tot Rondje een stichting met ANBI-status is.
 - **Rondje-rapport**: tijdens het wandelen plas, poep en drinken aantikken en foto's sturen; de eigenaar ziet het live.
+- **Chat** per afspraak tussen wandelaar en eigenaar, met een waarschuwing bij berichten over geld.
+- **Pushmeldingen** voor aanvragen, chat en rondjes, zodra de Apple-pushsleutel op de server staat.
 - **Herinneringen** een half uur vóór elke geaccepteerde afspraak (lokaal op de telefoon, zonder server).
 - **Widget** "Volgende rondje" voor het beginscherm en het toegangsscherm.
 
@@ -59,6 +61,6 @@ Het app-icoon (licht, donker en getint) komt uit `design/icon.mjs`: het merkteke
 
 ## Nog te doen
 
-- Pushmeldingen (APNs): de server stuurt nu e-mail en meldingen in de app, nog geen push.
+- Pushmeldingen werken pas als APNS_KEY_ID, APNS_TEAM_ID, APNS_PRIVATE_KEY en APNS_BUNDLE_ID in Vercel staan (zie docs/LAUNCH.md). Daarvoor is een Apple Developer-account nodig.
 - Inloggen met Apple en passkeys in de app.
 - De app in App Store Connect zetten (wacht op jouw akkoord: dat is een account en een publicatie).

@@ -109,7 +109,7 @@ struct ChatView: View {
     }
 
     /// Same idea as the website's text scan: a warning, never a block.
-    static func mentionsMoney(_ text: String) -> Bool {
+    nonisolated static func mentionsMoney(_ text: String) -> Bool {
         let t = text.lowercased()
         let words = ["betaal", "geld", "tikkie", "voorschot", "iban", "paypal", "€", "euro", "pay ", "payment", "bizum", "pagar", "payer", "argent"]
         return words.contains { t.contains($0) }

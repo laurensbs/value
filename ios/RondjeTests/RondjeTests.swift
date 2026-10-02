@@ -25,6 +25,20 @@ struct RondjeTests {
         #expect(look.collar == "#1f5a3d")
     }
 
+    @Test func aPushOpensTheRightTab() {
+        #expect(Push.tab(forPath: "/chat/r1") == "appointments")
+        #expect(Push.tab(forPath: "/walk/w1") == "appointments")
+        #expect(Push.tab(forPath: "/requests") == "appointments")
+        #expect(Push.tab(forPath: "/dogs/d1") == "discover")
+        #expect(Push.tab(forPath: "/notifications") == "profile")
+    }
+
+    @Test func moneyTalkInChatGetsAWarning() {
+        #expect(ChatView.mentionsMoney("Kun je even een Tikkie sturen?"))
+        #expect(ChatView.mentionsMoney("Dat kost €10"))
+        #expect(!ChatView.mentionsMoney("Tot morgen om zes uur!"))
+    }
+
     @Test func decodesDatesWithAndWithoutMilliseconds() throws {
         struct Box: Decodable { var a: Date; var b: Date }
         let box = try APIClient.makeDecoder().decode(Box.self, from: Data(#"{"a":"2026-10-02T11:31:00.000Z","b":"2026-10-02T11:31:00Z"}"#.utf8))
