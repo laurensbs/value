@@ -26,6 +26,7 @@ struct OwnerHomeView: View {
                     }
 
                     ForEach(live) { item in liveCard(item) }
+                    ForEach(model.appointments.incoming.filter { HomecomingCard.shouldShow($0) }) { HomecomingCard(item: $0) }
 
                     OwnerSteps(hasDog: !dogs.isEmpty, loaded: loaded) { adding = true }
 

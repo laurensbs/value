@@ -7,7 +7,7 @@ struct DogDetailView: View {
     @Environment(AppModel.self) private var model
     @State private var detail: DogDetail?
     @State private var error: String?
-    @State private var requestKind: RequestSheet.Kind?
+    @State private var requestKind: RequestFlow.Kind?
     @State private var reporting = false
 
     var body: some View {
@@ -46,7 +46,7 @@ struct DogDetailView: View {
         .task { await load() }
         .sheet(item: $requestKind) { kind in
             if let detail {
-                RequestSheet(dog: detail.dog, slots: detail.slots, kind: kind) { await load() }
+                RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind) { await load() }
                     .presentationDetents([.large])
                     .presentationCornerRadius(32)
             }
