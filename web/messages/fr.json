@@ -400,6 +400,17 @@
       "not-now": "Vous pouvez commencer une balade à partir d'une demi-heure avant le rendez-vous.",
       "full": "Cette balade en groupe est complète.",
       "not-signed-in": "Connectez-vous d'abord."
+    },
+    "messagePlaceholder": "Bonjour ! Je suis … et j'aimerais beaucoup promener {dog}.",
+    "moments": "Moments qui conviennent à {dog}",
+    "blocksLabel": "Touchez pour ajouter une phrase",
+    "blocks": {
+      "helloMeet": "Bonjour ! Je m'appelle {name} et j'aimerais beaucoup rencontrer {dog}.",
+      "helloSolo": "Bonjour ! J'aimerais beaucoup promener {dog} à nouveau.",
+      "nearby": "J'habite tout près.",
+      "experience": "J'ai l'habitude des chiens.",
+      "flexible": "Mes horaires sont flexibles.",
+      "outdoors": "J'adore être dehors, même sous la pluie."
     }
   },
   "requests": {
@@ -1738,5 +1749,68 @@
     "with": "Avec {name}.",
     "open": "Tout sur ce rendez-vous dans Rondje : {link}",
     "group": "Balade en groupe avec {org}"
+  },
+  "chatQuick": {
+    "label": "Messages tout prêts",
+    "walker": {
+      "helloMeet": "Bonjour ! J'aimerais beaucoup rencontrer {dog}. Ce moment vous convient-il ?",
+      "helloSolo": "Bonjour ! J'aimerais beaucoup promener {dog} à nouveau. Ce moment vous convient-il ?",
+      "where": "Où nous retrouvons-nous ?",
+      "watchOut": "Y a-t-il quelque chose à savoir sur {dog} ?",
+      "handover": "Comment faisons-nous pour récupérer et ramener {dog} ?",
+      "excited": "Super, j'ai hâte !",
+      "bring": "Dois-je apporter quelque chose ?",
+      "treat": "Puis-je donner une friandise à {dog} ?",
+      "tenMinutes": "J'arrive dans 10 minutes.",
+      "here": "Je suis là !",
+      "late": "J'ai un peu de retard, toutes mes excuses. J'arrive.",
+      "allGood": "Nous sommes en balade, tout va bien.",
+      "sniffing": "{dog} renifle partout avec bonheur !",
+      "almostBack": "Nous sommes presque de retour.",
+      "thanks": "Merci, c'était une très belle balade !",
+      "again": "On remet ça bientôt ?",
+      "thanksMeet": "Merci, c'était un plaisir de faire connaissance !",
+      "soloNext": "Pourrais-je désormais promener {dog} sans vous ?"
+    },
+    "host": {
+      "helloMeet": "Quel plaisir que vous souhaitiez rencontrer {dog} !",
+      "helloSolo": "Quel plaisir que vous souhaitiez promener {dog} à nouveau !",
+      "otherTime": "Un autre moment vous conviendrait-il aussi ?",
+      "experience": "Avez-vous déjà promené des chiens ?",
+      "seeYouThen": "Super, à bientôt !",
+      "home": "Sonnez simplement, je serai à la maison.",
+      "nothingToBring": "Vous n'avez rien à apporter.",
+      "ready": "La laisse et les sacs sont prêts.",
+      "tellMe": "Pouvez-vous me dire comment ça s'est passé ?",
+      "seeYou": "À tout à l'heure !",
+      "excitedDog": "{dog} a déjà hâte !",
+      "lateHome": "Je rentrerai un peu plus tard. Est-ce que ça vous va ?",
+      "howIsIt": "Comment ça se passe ?",
+      "takeYourTime": "Prenez votre temps.",
+      "thanks": "Merci pour la balade !",
+      "weekly": "Envie de venir plus souvent ? Chaque semaine, ce serait super.",
+      "thanksMeet": "Merci pour cette rencontre !",
+      "againMeet": "On se revoit bientôt ?"
+    }
+  },
+  "meetCheck": {
+    "title": "Rencontre avec {dog}",
+    "intro": "De quoi parler ? Cochez ce que vous avez abordé.",
+    "count": "{done} sur {total}",
+    "done": "Tout est abordé. Belles balades à vous !",
+    "walker": {
+      "leash": "Comment se passe la marche en laisse avec {dog}, et qu'est-ce qui l'inquiète ?",
+      "rules": "Qu'est-ce qui est permis : sans laisse, friandises, jeux avec d'autres chiens ?",
+      "stuff": "Où sont la laisse et les sacs, et comment se passe la prise en charge ?",
+      "emergency": "Qui appeler en cas de problème pendant la balade ? Demandez aussi le vétérinaire.",
+      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à vous."
+    },
+    "host": {
+      "leash": "Montrez comment se passe la marche en laisse avec {dog}, et ce qui l'inquiète.",
+      "rules": "Dites ce qui est permis : sans laisse, friandises, jeux avec d'autres chiens.",
+      "stuff": "Montrez où sont la laisse et les sacs, et comment se passe la prise en charge.",
+      "id": "Vérifiez en personne la pièce d'identité de {name}. Vous pourrez ensuite le confirmer ci-dessous.",
+      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à {name}."
+    }
   }
 }

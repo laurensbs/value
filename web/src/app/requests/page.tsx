@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
+import { MeetChecklist } from '@/components/MeetChecklist'
 import { PushAsk } from '@/components/PushAsk'
 import { CancelButton, DecideButtons, StartButton, TrustForm } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
@@ -15,7 +16,7 @@ import {
   type HostContact,
   type RequestRow,
 } from '@/server/queries'
-import { unreadChats } from '@/server/chat'
+import { meetChecklist, unreadChats } from '@/server/chat'
 import { webPushKey } from '@/server/push'
 import { requireOnboarded } from '@/server/session'
 
@@ -102,6 +103,14 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
   const minePast = outgoing.filter((r) => !OPEN.includes(r.request.status))
   const inOpen = incoming.filter((r) => OPEN.includes(r.request.status))
   const inPast = incoming.filter((r) => !OPEN.includes(r.request.status))
+  // A first meeting gets a list of what to talk about, for each side.
+  const meetings = new Map(
+    await Promise.all(
+      [...mineOpen.map((r) => ['walker', r] as const), ...inOpen.map((r) => ['host', r] as const)]
+        .filter(([, r]) => r.request.kind === 'meet' && r.request.status === 'accepted' && r.walkStatus !== 'active')
+        .map(async ([side, r]) => [r.request.id, await meetChecklist(side, r.dog.name, r.walker.firstName)] as const),
+    ),
+  )
   // Waiting for an answer is the moment a heads-up matters most.
   const waitingFor = mineOpen.find((r) => r.request.status === 'pending')
   const pushKey = webPushKey()
@@ -186,6 +195,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         {accepted && !active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
                         {!active ? <CancelButton requestId={r.request.id} /> : null}
                       </div>
+                      {meetings.has(r.request.id) ? (
+                        <MeetChecklist requestId={r.request.id} title={t('meetCheck.title', { dog: r.dog.name })} items={meetings.get(r.request.id)!} />
+                      ) : null}
                     </div>
                   </li>
                 )
@@ -263,6 +275,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                       {accepted ? (
                         <>
                           <Contact contact={{ name: r.walker.firstName, phone: r.walker.phone, email: r.walker.email }} label={t('requests.contact')} />
+                          {meetings.has(r.request.id) ? (
+                            <MeetChecklist requestId={r.request.id} title={t('meetCheck.title', { dog: r.dog.name })} items={meetings.get(r.request.id)!} />
+                          ) : null}
                           <TrustForm
                             dogId={r.dog.id}
                             dogName={r.dog.name}

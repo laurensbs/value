@@ -400,6 +400,17 @@
       "not-now": "You can start a walk from half an hour before the agreed time.",
       "full": "This group walk is full.",
       "not-signed-in": "Please log in first."
+    },
+    "messagePlaceholder": "Hi! I'm … and I'd love to walk {dog}.",
+    "moments": "Times that suit {dog}",
+    "blocksLabel": "Tap to add a sentence",
+    "blocks": {
+      "helloMeet": "Hi! I'm {name} and I'd love to meet {dog}.",
+      "helloSolo": "Hi! I'd love to walk {dog} again.",
+      "nearby": "I live nearby.",
+      "experience": "I'm used to dogs.",
+      "flexible": "I'm flexible with times.",
+      "outdoors": "I love being outdoors, even in the rain."
     }
   },
   "requests": {
@@ -1738,5 +1749,68 @@
     "with": "With {name}.",
     "open": "Everything about this appointment in Rondje: {link}",
     "group": "Group walk at {org}"
+  },
+  "chatQuick": {
+    "label": "Ready-made messages",
+    "walker": {
+      "helloMeet": "Hi! I'd love to meet {dog}. Does this time work for you?",
+      "helloSolo": "Hi! I'd love to walk {dog} again. Does this time work for you?",
+      "where": "Where shall we meet?",
+      "watchOut": "Is there anything I should know about {dog}?",
+      "handover": "How shall we do pick-up and drop-off for {dog}?",
+      "excited": "Great, I'm looking forward to it!",
+      "bring": "Should I bring anything?",
+      "treat": "May I give {dog} a treat?",
+      "tenMinutes": "I'll be there in 10 minutes.",
+      "here": "I'm here!",
+      "late": "I'm running a little late, sorry. On my way.",
+      "allGood": "We're out walking, all is well.",
+      "sniffing": "{dog} is having a great sniff around!",
+      "almostBack": "We're almost back.",
+      "thanks": "Thank you, that was a lovely walk!",
+      "again": "Shall we go again sometime?",
+      "thanksMeet": "Thank you, it was lovely to meet you!",
+      "soloNext": "Would it be OK if I walked {dog} on my own from now on?"
+    },
+    "host": {
+      "helloMeet": "How nice that you'd like to meet {dog}!",
+      "helloSolo": "How nice that you'd like to walk {dog} again!",
+      "otherTime": "Would another time work for you too?",
+      "experience": "Have you walked dogs before?",
+      "seeYouThen": "Lovely, see you then!",
+      "home": "Just ring the bell, I'll be home.",
+      "nothingToBring": "You don't need to bring anything.",
+      "ready": "The leash and bags are ready.",
+      "tellMe": "Will you let me know how it went?",
+      "seeYou": "See you soon!",
+      "excitedDog": "{dog} can't wait!",
+      "lateHome": "I'll be home a little later. Is that OK?",
+      "howIsIt": "How's it going?",
+      "takeYourTime": "Take your time.",
+      "thanks": "Thank you for the walk!",
+      "weekly": "Fancy going more often? Every week would be lovely.",
+      "thanksMeet": "Thank you for coming to meet us!",
+      "againMeet": "Shall we meet again soon?"
+    }
+  },
+  "meetCheck": {
+    "title": "Meeting {dog}",
+    "intro": "What to talk about? Tick off what you've covered.",
+    "count": "{done} of {total}",
+    "done": "All covered. Enjoy your walks together!",
+    "walker": {
+      "leash": "How does {dog} walk on the leash, and what makes {dog} nervous?",
+      "rules": "What's allowed: off the leash, treats, playing with other dogs?",
+      "stuff": "Where are the leash and bags, and how does pick-up work?",
+      "emergency": "Who do you call if something happens on the way? Ask about the vet too.",
+      "together": "Walk a little way together, so {dog} can get used to you."
+    },
+    "host": {
+      "leash": "Show how {dog} walks on the leash, and say what makes {dog} nervous.",
+      "rules": "Say what's allowed: off the leash, treats, playing with other dogs.",
+      "stuff": "Show where the leash and bags are, and how pick-up works.",
+      "id": "Check {name}'s ID in person. Then you can confirm it below.",
+      "together": "Walk a little way together, so {dog} can get used to {name}."
+    }
   }
 }

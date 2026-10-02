@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server'
 import { apiMember, fail, json } from '@/server/api'
-import { chatAccess, chatMessages, markChatRead, sendChat } from '@/server/chat'
+import { chatAccess, chatMessages, chatSuggestions, markChatRead, sendChat } from '@/server/chat'
 
 /**
  * The chat about one request, oldest first. `?after=<ms>` returns only newer messages, for polling.
- * Reading marks the conversation's message notifications as read.
+ * Reading marks the conversation's message notifications as read. The first load (without `after`)
+ * also brings `suggestions`: ready messages for this moment, in the caller's language, minus the
+ * ones this person already sent. A tap should put one in the input, not send it.
  */
 export async function GET(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const viewer = await apiMember()
@@ -14,8 +16,9 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
   if (!access) return fail('forbidden', 403)
   const after = Number(new URL(request.url).searchParams.get('after') ?? 0) || 0
   const messages = await chatMessages(id, after)
+  const suggestions = after ? undefined : await chatSuggestions(access, messages, viewer.userId)
   await markChatRead(id, viewer.userId)
-  return json({ messages, canSend: access.canSend })
+  return json({ messages, canSend: access.canSend, suggestions })
 }
 
 /** Send { body } (1 to 1000 characters). Returns the stored message. */

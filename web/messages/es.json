@@ -400,6 +400,17 @@
       "not-now": "Puedes empezar un paseo a partir de media hora antes de la hora acordada.",
       "full": "Este paseo en grupo está completo.",
       "not-signed-in": "Primero inicia sesión."
+    },
+    "messagePlaceholder": "¡Hola! Soy … y me encantaría pasear a {dog}.",
+    "moments": "Momentos que le van bien a {dog}",
+    "blocksLabel": "Toca para añadir una frase",
+    "blocks": {
+      "helloMeet": "¡Hola! Soy {name} y me encantaría conocer a {dog}.",
+      "helloSolo": "¡Hola! Me encantaría volver a pasear a {dog}.",
+      "nearby": "Vivo cerca.",
+      "experience": "Tengo experiencia con perros.",
+      "flexible": "Tengo horarios flexibles.",
+      "outdoors": "Me encanta estar al aire libre, aunque llueva."
     }
   },
   "requests": {
@@ -1738,5 +1749,68 @@
     "with": "Con {name}.",
     "open": "Todo sobre esta cita en Rondje: {link}",
     "group": "Paseo en grupo con {org}"
+  },
+  "chatQuick": {
+    "label": "Mensajes listos",
+    "walker": {
+      "helloMeet": "¡Hola! Me encantaría conocer a {dog}. ¿Te va bien este momento?",
+      "helloSolo": "¡Hola! Me encantaría volver a pasear a {dog}. ¿Te va bien este momento?",
+      "where": "¿Dónde quedamos?",
+      "watchOut": "¿Hay algo que deba saber sobre {dog}?",
+      "handover": "¿Cómo hacemos para recoger y devolver a {dog}?",
+      "excited": "¡Genial, tengo muchas ganas!",
+      "bring": "¿Tengo que llevar algo?",
+      "treat": "¿Puedo darle un premio a {dog}?",
+      "tenMinutes": "Llego en 10 minutos.",
+      "here": "¡Ya estoy aquí!",
+      "late": "Llego un poco tarde, perdona. Ya voy.",
+      "allGood": "Estamos paseando, todo va bien.",
+      "sniffing": "¡{dog} lo está olfateando todo!",
+      "almostBack": "Ya casi estamos de vuelta.",
+      "thanks": "¡Gracias, ha sido un paseo estupendo!",
+      "again": "¿Repetimos otro día?",
+      "thanksMeet": "¡Gracias, ha sido un placer conocernos!",
+      "soloNext": "¿Podría pasear a {dog} por mi cuenta a partir de ahora?"
+    },
+    "host": {
+      "helloMeet": "¡Qué bien que quieras conocer a {dog}!",
+      "helloSolo": "¡Qué bien que quieras volver a pasear a {dog}!",
+      "otherTime": "¿Te iría bien otro momento?",
+      "experience": "¿Has paseado perros antes?",
+      "seeYouThen": "¡Genial, hasta entonces!",
+      "home": "Llama al timbre, estaré en casa.",
+      "nothingToBring": "No hace falta que traigas nada.",
+      "ready": "La correa y las bolsas están preparadas.",
+      "tellMe": "¿Me cuentas qué tal ha ido?",
+      "seeYou": "¡Hasta ahora!",
+      "excitedDog": "¡{dog} ya tiene ganas!",
+      "lateHome": "Llegaré a casa un poco más tarde. ¿Te va bien?",
+      "howIsIt": "¿Qué tal va?",
+      "takeYourTime": "Tómate tu tiempo.",
+      "thanks": "¡Gracias por el paseo!",
+      "weekly": "¿Te apetece venir más a menudo? Cada semana sería genial.",
+      "thanksMeet": "¡Gracias por venir a conocernos!",
+      "againMeet": "¿Quedamos pronto otra vez?"
+    }
+  },
+  "meetCheck": {
+    "title": "Conocer a {dog}",
+    "intro": "¿De qué habláis? Marca lo que ya hayáis comentado.",
+    "count": "{done} de {total}",
+    "done": "Todo hablado. ¡Que disfrutéis de los paseos!",
+    "walker": {
+      "leash": "¿Cómo va {dog} con la correa y qué le da miedo?",
+      "rules": "¿Qué se permite: ir sin correa, premios, jugar con otros perros?",
+      "stuff": "¿Dónde están la correa y las bolsas, y cómo se hace la recogida?",
+      "emergency": "¿A quién llamas si pasa algo durante el paseo? Pregunta también por el veterinario.",
+      "together": "Caminad juntos un rato para que {dog} se acostumbre a ti."
+    },
+    "host": {
+      "leash": "Enseña cómo va {dog} con la correa y cuenta qué le da miedo.",
+      "rules": "Explica qué se permite: ir sin correa, premios, jugar con otros perros.",
+      "stuff": "Enseña dónde están la correa y las bolsas, y cómo se hace la recogida.",
+      "id": "Comprueba en persona el documento de identidad de {name}. Después puedes confirmarlo aquí abajo.",
+      "together": "Caminad juntos un rato para que {dog} se acostumbre a {name}."
+    }
   }
 }

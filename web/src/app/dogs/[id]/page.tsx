@@ -56,9 +56,17 @@ export default async function DogPage({
   }
   const joined = viewer ? await myGroupSignups(viewer.userId) : new Set<string>()
 
-  const firstSlot = slots[0]
-  const defaultDate = firstSlot ? nextWeekday(firstSlot.weekday) : toZonedParts(fromNow(24 * 3600_000)).date
-  const defaultTime = firstSlot?.time ?? '10:00'
+  // The dog's weekly moments on their next dates, soonest first: one tap fills in the request.
+  const moments = slots
+    .map((slot) => ({ date: nextWeekday(slot.weekday), time: slot.time }))
+    .sort((a, b) => `${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`))
+    .slice(0, 4)
+    .map((m) => ({
+      ...m,
+      label: `${format.dateTime(new Date(`${m.date}T12:00:00Z`), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })} · ${m.time}`,
+    }))
+  const defaultDate = moments[0]?.date ?? toZonedParts(fromNow(24 * 3600_000)).date
+  const defaultTime = moments[0]?.time ?? '10:00'
 
   return (
     <div className="dog-page">
@@ -274,10 +282,12 @@ export default async function DogPage({
               <RequestForm
               dogId={dog.id}
               dogName={dog.name}
+              walkerName={viewer.profile?.firstName ?? ''}
               meetReason={meetReason}
               soloReason={soloReason}
               defaultDate={defaultDate}
               defaultTime={defaultTime}
+              moments={moments}
               />
             </div>
           ) : (

@@ -400,6 +400,17 @@
       "not-now": "Een rondje starten kan vanaf een half uur voor de afspraak.",
       "full": "Deze groepswandeling is vol.",
       "not-signed-in": "Log eerst in."
+    },
+    "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
+    "moments": "Momenten die {dog} goed uitkomen",
+    "blocksLabel": "Tik om een zin toe te voegen",
+    "blocks": {
+      "helloMeet": "Hoi! Ik ben {name} en ik maak graag kennis met {dog}.",
+      "helloSolo": "Hoi! Ik loop graag weer een rondje met {dog}.",
+      "nearby": "Ik woon in de buurt.",
+      "experience": "Ik ben gewend aan honden.",
+      "flexible": "Ik ben flexibel met tijden.",
+      "outdoors": "Ik ben graag buiten, ook als het regent."
     }
   },
   "requests": {
@@ -1738,5 +1749,68 @@
     "with": "Met {name}.",
     "open": "Alles over deze afspraak in Rondje: {link}",
     "group": "Groepswandeling bij {org}"
+  },
+  "chatQuick": {
+    "label": "Kant-en-klare berichten",
+    "walker": {
+      "helloMeet": "Hoi! Ik maak graag kennis met {dog}. Past dit moment jou?",
+      "helloSolo": "Hoi! Ik loop graag weer een rondje met {dog}. Past dit moment jou?",
+      "where": "Waar zullen we afspreken?",
+      "watchOut": "Is er iets waar ik op moet letten bij {dog}?",
+      "handover": "Hoe doen we het ophalen en terugbrengen van {dog}?",
+      "excited": "Leuk, ik heb er zin in!",
+      "bring": "Moet ik zelf iets meenemen?",
+      "treat": "Mag {dog} een snoepje van mij?",
+      "tenMinutes": "Ik ben er over 10 minuten.",
+      "here": "Ik ben er!",
+      "late": "Ik ben iets later, sorry. Ik kom eraan.",
+      "allGood": "We zijn onderweg, alles gaat goed.",
+      "sniffing": "{dog} snuffelt heerlijk rond!",
+      "almostBack": "We zijn bijna terug.",
+      "thanks": "Dank je wel, het was een fijn rondje!",
+      "again": "Zullen we nog eens gaan?",
+      "thanksMeet": "Dank je wel, het was een fijne kennismaking!",
+      "soloNext": "Zou ik voortaan zelf met {dog} mogen wandelen?"
+    },
+    "host": {
+      "helloMeet": "Wat leuk dat je kennis wilt maken met {dog}!",
+      "helloSolo": "Wat leuk dat je weer met {dog} wilt lopen!",
+      "otherTime": "Past een ander moment je ook?",
+      "experience": "Heb je al eerder met honden gewandeld?",
+      "seeYouThen": "Leuk, tot dan!",
+      "home": "Bel maar gewoon aan, ik ben dan thuis.",
+      "nothingToBring": "Je hoeft niets mee te nemen.",
+      "ready": "De riem en de zakjes liggen klaar.",
+      "tellMe": "Wil je laten weten hoe het ging?",
+      "seeYou": "Tot zo!",
+      "excitedDog": "{dog} heeft er al zin in!",
+      "lateHome": "Ik ben iets later thuis. Is dat goed?",
+      "howIsIt": "Hoe gaat het?",
+      "takeYourTime": "Neem gerust de tijd.",
+      "thanks": "Dank je wel voor het rondje!",
+      "weekly": "Zin om vaker te gaan? Elke week zou fijn zijn.",
+      "thanksMeet": "Dank je wel voor de kennismaking!",
+      "againMeet": "Zullen we snel weer afspreken?"
+    }
+  },
+  "meetCheck": {
+    "title": "Kennismaken met {dog}",
+    "intro": "Waar praten jullie over? Vink af wat jullie besproken hebben.",
+    "count": "{done} van {total}",
+    "done": "Alles besproken. Veel plezier samen!",
+    "walker": {
+      "leash": "Hoe loopt {dog} aan de lijn, en wat vindt {dog} spannend?",
+      "rules": "Wat mag wel en niet: loslopen, snoepjes, spelen met andere honden?",
+      "stuff": "Waar liggen de riem en de zakjes, en hoe gaat het ophalen?",
+      "emergency": "Wie bel je als er onderweg iets is? Vraag ook naar de dierenarts.",
+      "together": "Loop samen een stukje, zodat {dog} aan je kan wennen."
+    },
+    "host": {
+      "leash": "Laat zien hoe {dog} aan de lijn loopt, en vertel wat {dog} spannend vindt.",
+      "rules": "Vertel wat wel en niet mag: loslopen, snoepjes, spelen met andere honden.",
+      "stuff": "Laat zien waar de riem en de zakjes liggen, en hoe het ophalen gaat.",
+      "id": "Bekijk het ID van {name} in het echt. Daarna kun je dat hieronder bevestigen.",
+      "together": "Loop samen een stukje, zodat {dog} aan {name} kan wennen."
+    }
   }
 }

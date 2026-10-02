@@ -1334,6 +1334,20 @@ fieldset.field {
   text-decoration: none;
 }
 
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button.chip:hover {
+  border-color: var(--ink);
+}
+
+button.chip:active {
+  scale: 0.97;
+}
+
 .chip.on {
   background: var(--ink);
   border-color: var(--ink);
@@ -2522,6 +2536,59 @@ legend {
   text-decoration: line-through;
 }
 
+/* What to talk about when meeting: a list to tick off on the spot. */
+.meet-check {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in oklab, var(--grass) 40%, var(--line));
+  border-radius: var(--radius-m);
+  background: color-mix(in oklab, var(--grass) 6%, var(--surface));
+}
+
+.meet-check > summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+
+.meet-check > summary::-webkit-details-marker {
+  display: none;
+}
+
+.meet-check .checklist label {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+/* The whole line is the checkbox, as with .choice. */
+.meet-check .checklist input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.meet-check .checklist .tick {
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.meet-check .checklist li.done .tick {
+  animation: pop 0.3s ease;
+}
+
+.meet-check input:focus-visible + .tick {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
 .bulk-actions .grow {
   flex: 1;
   justify-content: center;
@@ -3094,10 +3161,51 @@ legend {
   opacity: 0.75;
 }
 
-.chat-form {
+/* The ready messages and the input stay together at the bottom while the conversation scrolls. */
+.chat-compose {
   position: sticky;
   bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   z-index: 2;
+  display: grid;
+  gap: 8px;
+}
+
+.chat-quick {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  /* Room for the chips' shadow inside the scrolling row. */
+  padding: 2px 2px 8px;
+  margin-bottom: -6px;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  animation: rise 0.3s ease-out both;
+}
+
+.chat-quick::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-quick .chip {
+  flex: none;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px color-mix(in oklab, var(--ink) 12%, transparent);
+}
+
+.chat-quick .chip:hover {
+  border-color: var(--ink);
+}
+
+@media (min-width: 720px) {
+  .chat-quick {
+    flex-wrap: wrap;
+  }
+}
+
+.chat-form {
   display: flex;
   align-items: flex-end;
   gap: 8px;

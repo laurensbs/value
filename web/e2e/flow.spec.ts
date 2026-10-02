@@ -54,11 +54,23 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.goto(dogUrl)
   // Contact details stay private until the appointment is accepted.
   await expect(walker.page.getByText('Oudegracht 1')).toHaveCount(0)
+  // One tap picks one of Bello's own moments. This walk has to start sooner, so it is typed in.
+  const moments = walker.page.getByRole('group', { name: 'Momenten die Bello goed uitkomen' })
+  await moments.getByRole('button').first().click()
+  await expect(moments.getByRole('button').first()).toHaveAttribute('aria-pressed', 'true')
+  await expect(walker.page.getByLabel('Datum')).toHaveValue(/^\d{4}-\d{2}-\d{2}$/)
   const slot = soonSlot()
   await walker.page.getByLabel('Datum').fill(slot.date)
   await walker.page.getByLabel('Tijd').fill(slot.time)
-  await walker.page.getByLabel('Bericht').fill('Hoi Ans! Ik ben Fleur en loop graag een rondje met Bello.')
+  await expect(moments.getByRole('button', { pressed: true })).toHaveCount(0)
+  // The message is built from ready sentences; each one is offered once and can still be edited.
+  const sentences = walker.page.getByRole('group', { name: 'Tik om een zin toe te voegen' })
+  await sentences.getByRole('button', { name: 'Hoi! Ik ben Fleur en ik maak graag kennis met Bello.' }).click()
+  await sentences.getByRole('button', { name: 'Ik woon in de buurt.' }).click()
+  await expect(walker.page.getByLabel('Bericht')).toHaveValue('Hoi! Ik ben Fleur en ik maak graag kennis met Bello. Ik woon in de buurt.')
+  await expect(sentences.getByRole('button', { name: 'Ik woon in de buurt.' })).toHaveCount(0)
   await walker.page.getByLabel(/Ik houd me aan de/).check()
+  await shot(walker.page, '05-request-form')
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
   await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
   await shot(walker.page, '05-request-sent')
@@ -69,9 +81,18 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(owner.page).toHaveURL(/\/chat\/[^/?]+$/)
   const requestId = owner.page.url().split('/chat/')[1]
   await expect(owner.page.getByRole('heading', { name: 'Chat over Bello' })).toBeVisible()
-  await owner.page.getByLabel('Typ een bericht').fill('Hoi Fleur! Heb je eerder met een jonge hond gelopen?')
+  // Ready messages fit the moment. A tap puts one in the box, to send as it is or to edit first.
+  const ownerQuick = owner.page.getByRole('group', { name: 'Kant-en-klare berichten' })
+  await expect(ownerQuick.getByRole('button', { name: 'Wat leuk dat je kennis wilt maken met Bello!' })).toBeVisible()
+  await shot(owner.page, '05a-chat-ready')
+  await ownerQuick.getByRole('button', { name: 'Heb je al eerder met honden gewandeld?' }).click()
+  await expect(owner.page.getByLabel('Typ een bericht')).toHaveValue('Heb je al eerder met honden gewandeld?')
+  await expect(ownerQuick).toHaveCount(0)
   await owner.page.getByRole('button', { name: 'Verstuur' }).click()
-  await expect(owner.page.locator('.chat-bubble.mine')).toContainText('jonge hond')
+  await expect(owner.page.locator('.chat-bubble.mine')).toContainText('eerder met honden')
+  // Sent once, it is not offered again.
+  await expect(ownerQuick.getByRole('button', { name: 'Past een ander moment je ook?' })).toBeVisible()
+  await expect(ownerQuick.getByRole('button', { name: 'Heb je al eerder met honden gewandeld?' })).toHaveCount(0)
 
   await walker.page.goto('/notifications')
   await expect(walker.page.getByText('Ans stuurde een bericht over Bello.')).toBeVisible()
@@ -87,7 +108,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(ask).toHaveCount(0)
   expect(await walker.page.evaluate(() => Number(localStorage.getItem('rondje.pushAsk')) > Date.now())).toBe(true)
   await walker.page.getByRole('link', { name: 'Chat' }).click()
-  await expect(walker.page.getByText('Heb je eerder met een jonge hond gelopen?')).toBeVisible()
+  await expect(walker.page.getByText('Heb je al eerder met honden gewandeld?')).toBeVisible()
+  await expect(walker.page.getByRole('group', { name: 'Kant-en-klare berichten' })).toContainText('Waar zullen we afspreken?')
   await walker.page.getByLabel('Typ een bericht').fill('Ja, met de pup van mijn buren!')
   await walker.page.getByRole('button', { name: 'Verstuur' }).click()
   await expect(owner.page.getByText('Ja, met de pup van mijn buren!')).toBeVisible({ timeout: 10_000 })
@@ -103,6 +125,15 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await owner.page.getByLabel(/mag zelfstandig met Bello wandelen/).check()
   await owner.page.getByRole('button', { name: 'Bevestigen' }).click()
   await expect(owner.page.getByText('Bijgewerkt.')).toBeVisible()
+  // A first meeting comes with what to talk about. The ticks stay on this device.
+  const ownerList = owner.page.locator('.meet-check')
+  await expect(ownerList).toContainText('Kennismaken met Bello')
+  await expect(ownerList).toContainText('0 van 5')
+  await ownerList.getByLabel(/Bekijk het ID van Fleur in het echt/).check()
+  await expect(ownerList).toContainText('1 van 5')
+  await owner.page.reload()
+  await expect(owner.page.locator('.meet-check')).toContainText('1 van 5')
+  await expect(owner.page.locator('.meet-check').getByLabel(/Bekijk het ID van Fleur/)).toBeChecked()
   await expect(owner.page.getByRole('link', { name: 'Zet in je agenda' })).toBeVisible()
   await shot(owner.page, '06-requests-incoming')
 
@@ -110,6 +141,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.goto('/requests')
   await expect(walker.page.getByText('06 1234 5678')).toBeVisible()
   await expect(walker.page.getByText(/Oudegracht 1/)).toBeVisible()
+  await expect(walker.page.locator('.meet-check')).toContainText('Hoe loopt Bello aan de lijn')
+  await shot(walker.page, '06b-meet-checklist')
 
   // The appointment goes into any calendar app, with a reminder an hour before, and only for the two of them.
   const calendarUrl = `/requests/${requestId}/calendar.ics`
@@ -194,7 +227,12 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // Talk of money is flagged, from the app too; the owner sees a warning under it.
   const money = await app.post(chatUrl, { data: { body: 'Zal ik €10 overmaken voor de koekjes?' }, headers: bearer })
   expect((await money.json()).chat.flags).toContain('money')
-  expect((await (await app.get(chatUrl, { headers: bearer })).json()).messages).toHaveLength(4)
+  const thread = await (await app.get(chatUrl, { headers: bearer })).json()
+  expect(thread.messages).toHaveLength(4)
+  // On a first meeting the owner walks along: no ready messages, and no meeting list during the walk.
+  expect(thread.suggestions).toEqual([])
+  expect((await (await app.get(`${chatUrl}?after=${Date.now() - 60_000}`, { headers: bearer })).json()).suggestions).toBeUndefined()
+  expect((await (await app.get('/api/v1/requests', { headers: bearer })).json()).outgoing[0].checklist).toBeNull()
   // Notifications come with a ready text and the page they lead to.
   const notes = (await (await app.get('/api/v1/notifications', { headers: bearer })).json()).notifications
   expect(notes[0]).toMatchObject({ text: expect.stringMatching(/\w/), href: expect.stringMatching(/^\//) })
@@ -288,11 +326,17 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await shot(walker.page, '12-profile')
   await walker.page.goto('/requests')
   await shot(walker.page, '13-requests-mine')
+  // After the meeting: a thank-you is ready. Bello's owner already lets Fleur walk alone, so no need to ask.
+  await walker.page.goto(`/chat/${requestId}`)
+  const afterQuick = walker.page.getByRole('group', { name: 'Kant-en-klare berichten' })
+  await expect(afterQuick.getByRole('button', { name: 'Dank je wel, het was een fijne kennismaking!' })).toBeVisible()
+  await expect(afterQuick.getByRole('button', { name: /zelf met Bello mogen wandelen/ })).toHaveCount(0)
   await walker.page.goto('/notifications')
   await shot(walker.page, '14-notifications')
   await walker.page.goto(dogUrl)
   await walker.page.getByLabel('Zelfstandig rondje').check()
   await expect(walker.page.getByLabel(/Elke week op dit moment/)).toBeVisible()
+  await expect(walker.page.getByRole('group', { name: 'Tik om een zin toe te voegen' })).toContainText('Hoi! Ik loop graag weer een rondje met Bello.')
 
   await owner.context.close()
   await walker.context.close()

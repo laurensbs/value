@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import { ChatThread } from '@/components/ChatThread'
 import { DogPortrait } from '@/components/DogPortrait'
 import { ReportButton } from '@/components/ReportButton'
-import { CHAT_MAX_LENGTH, chatAccess, chatMessages, markChatRead, partnerOf } from '@/server/chat'
+import { CHAT_MAX_LENGTH, chatAccess, chatMessages, chatSuggestions, markChatRead, partnerOf } from '@/server/chat'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -23,6 +23,7 @@ export default async function ChatPage({ params }: { params: Promise<{ id: strin
   // Who the viewer is talking to: the walker, or the owner, or the shelter.
   const { name: other, userId: otherId, orgId: shelter } = await partnerOf(access)
   const messages = await chatMessages(id)
+  const suggestions = await chatSuggestions(access, messages, viewer.userId)
   await markChatRead(id, viewer.userId)
 
   return (
@@ -46,6 +47,7 @@ export default async function ChatPage({ params }: { params: Promise<{ id: strin
         initial={messages}
         canSend={access.canSend}
         maxLength={CHAT_MAX_LENGTH}
+        suggestions={suggestions}
       />
       <ReportButton subjectUserId={otherId} dogId={dog.id} orgId={shelter} />
     </div>
