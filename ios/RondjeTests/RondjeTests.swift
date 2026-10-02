@@ -46,6 +46,12 @@ struct RondjeTests {
         #expect(DogFriendsView.bond(12).1 == "star.fill")
     }
 
+    @Test func darkCoatsGetVisibleEyes() {
+        #expect(DogFace.isDark("#20242a"))
+        #expect(!DogFace.isDark("#e2b45c"))
+        #expect(!DogFace.isDark("not a colour"))
+    }
+
     @Test func decodesDatesWithAndWithoutMilliseconds() throws {
         struct Box: Decodable { var a: Date; var b: Date }
         let box = try APIClient.makeDecoder().decode(Box.self, from: Data(#"{"a":"2026-10-02T11:31:00.000Z","b":"2026-10-02T11:31:00Z"}"#.utf8))
