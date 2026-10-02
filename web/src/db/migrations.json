@@ -119,5 +119,13 @@
       "ALTER TABLE \"walk_photo\" ADD CONSTRAINT \"walk_photo_walk_id_walk_id_fk\" FOREIGN KEY (\"walk_id\") REFERENCES \"public\".\"walk\"(\"id\") ON DELETE cascade ON UPDATE no action;",
       "CREATE INDEX \"walk_photo_walk_idx\" ON \"walk_photo\" USING btree (\"walk_id\",\"created_at\");"
     ]
+  },
+  {
+    "tag": "0004_walk_report",
+    "statements": [
+      "ALTER TABLE \"walk\" ADD COLUMN \"pee\" integer DEFAULT 0 NOT NULL;",
+      "ALTER TABLE \"walk\" ADD COLUMN \"poo\" integer DEFAULT 0 NOT NULL;",
+      "ALTER TABLE \"walk\" ADD COLUMN \"water\" integer DEFAULT 0 NOT NULL;"
+    ]
   }
 ]

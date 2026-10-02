@@ -474,7 +474,14 @@
     "photoTooMany": "You've reached the maximum of 12 photos.",
     "photoHint": "The owner sees your photos right away. They are deleted after 30 days, like the route.",
     "photosTitle": "Photos from the walk",
-    "photoAlt": "Photo of {dogName} during the walk"
+    "photoAlt": "Photo of {dogName} during the walk",
+    "careTitle": "Walk report",
+    "careHint": "Tap when {dogName} pees, poos or drinks. The owner sees it straight away.",
+    "carePee": "Pee",
+    "carePoo": "Poo",
+    "careWater": "Drank",
+    "careUndo": "Take one back from {kind}",
+    "careNone": "Nothing noted yet"
   },
   "myDogs": {
     "title": "My dogs",

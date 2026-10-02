@@ -474,7 +474,14 @@
     "photoTooMany": "Has llegado al máximo de 12 fotos.",
     "photoHint": "El dueño ve tus fotos al instante. Se borran a los 30 días, igual que la ruta.",
     "photosTitle": "Fotos del paseo",
-    "photoAlt": "Foto de {dogName} durante el paseo"
+    "photoAlt": "Foto de {dogName} durante el paseo",
+    "careTitle": "Informe del paseo",
+    "careHint": "Toca cuando {dogName} haga pis, caca o beba. El dueño lo ve al momento.",
+    "carePee": "Pis",
+    "carePoo": "Caca",
+    "careWater": "Bebió",
+    "careUndo": "Quitar uno de {kind}",
+    "careNone": "Aún nada anotado"
   },
   "myDogs": {
     "title": "Mis perros",

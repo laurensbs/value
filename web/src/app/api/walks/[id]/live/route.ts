@@ -24,6 +24,7 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
       endedAt: access.walk.endedAt,
       lastAt: access.walk.lastAt,
       overdueMin,
+      care: { pee: access.walk.pee, poo: access.walk.poo, water: access.walk.water },
       photos: photos.map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() })),
       points: points.map((p) => ({ id: p.id, lat: p.lat, lng: p.lng, t: p.t.getTime() })),
     },

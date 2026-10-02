@@ -306,6 +306,10 @@ export const walk = pgTable(
     lastLng: doublePrecision('last_lng'),
     lastAt: timestamp('last_at'),
     overdueNotifiedAt: timestamp('overdue_notified_at'),
+    // The little walk report owners ask for: how often the dog peed, pooped and drank.
+    pee: integer('pee').notNull().default(0),
+    poo: integer('poo').notNull().default(0),
+    water: integer('water').notNull().default(0),
     createdAt: created(),
   },
   (t) => [index('walk_dog_idx').on(t.dogId, t.status), index('walk_walker_idx').on(t.walkerId, t.status)],

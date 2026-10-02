@@ -2936,3 +2936,49 @@ legend {
   border-radius: 14px;
   background: var(--sunken);
 }
+
+.care-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.care-button {
+  position: relative;
+}
+
+.care-button > .button {
+  width: 100%;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 64px;
+}
+
+.care-button > .button strong {
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.care-undo {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.care-tally {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

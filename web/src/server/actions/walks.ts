@@ -1,6 +1,6 @@
 'use server'
 
-import { asc, count, eq } from 'drizzle-orm'
+import { asc, count, eq, sql } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { getDb } from '@/db'
@@ -90,6 +90,25 @@ export async function addWalkPhoto(walkId: string, url: string): Promise<FormSta
   // One notification for the first photo; after that the live page shows them as they come.
   if (n === 0) await notify(db, await watchers(access.dog), 'walk-photo', { walkId, dogName: access.dog.name })
   return { ok: true }
+}
+
+export type CareKind = 'pee' | 'poo' | 'water'
+export type CareCounts = Record<CareKind, number>
+
+/** The walker logs a pee, a poo or a drink with one tap (or takes one back); the owner sees the tally live. */
+export async function logWalkCare(walkId: string, kind: CareKind, delta: 1 | -1 = 1): Promise<CareCounts | null> {
+  const viewer = await actionViewer()
+  if (!['pee', 'poo', 'water'].includes(kind) || (delta !== 1 && delta !== -1)) return null
+  const access = await walkAccess(walkId, viewer)
+  if (!access?.isWalker || access.walk.status !== 'active') return null
+  const column = s.walk[kind]
+  const db = await getDb()
+  const [row] = await db
+    .update(s.walk)
+    .set({ [kind]: sql`least(greatest(${column} + ${delta}, 0), 20)` })
+    .where(eq(s.walk.id, walkId))
+    .returning({ pee: s.walk.pee, poo: s.walk.poo, water: s.walk.water })
+  return row ?? null
 }
 
 export async function submitFeedback(_prev: FormState, form: FormData): Promise<FormState> {

@@ -474,7 +474,14 @@
     "photoTooMany": "Je hebt het maximum van 12 foto's bereikt.",
     "photoHint": "De eigenaar ziet je foto's meteen. Ze worden na 30 dagen gewist, net als de route.",
     "photosTitle": "Foto's van het rondje",
-    "photoAlt": "Foto van {dogName} tijdens het rondje"
+    "photoAlt": "Foto van {dogName} tijdens het rondje",
+    "careTitle": "Rondje-rapport",
+    "careHint": "Tik als {dogName} plast, poept of drinkt. De eigenaar ziet het meteen.",
+    "carePee": "Plas",
+    "carePoo": "Poep",
+    "careWater": "Gedronken",
+    "careUndo": "Eentje terug bij {kind}",
+    "careNone": "Nog niks genoteerd"
   },
   "myDogs": {
     "title": "Mijn honden",

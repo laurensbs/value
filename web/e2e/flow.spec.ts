@@ -92,6 +92,12 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.getByLabel('Stuur een foto').setInputFiles({ name: 'bello.png', mimeType: 'image/png', buffer: PNG_1X1 })
   await expect(walker.page.getByText('Foto verstuurd')).toBeVisible()
   await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
+  // ...and a quick walk report: two pees (one mis-tap taken back) and a drink.
+  for (let i = 0; i < 3; i++) await walker.page.getByRole('button', { name: /^Plas:/ }).click()
+  await walker.page.getByRole('button', { name: 'Eentje terug bij Plas' }).click()
+  await walker.page.getByRole('button', { name: /^Gedronken:/ }).click()
+  await expect(walker.page.getByRole('button', { name: 'Gedronken: 1' })).toBeVisible()
+  await expect(walker.page.getByRole('button', { name: 'Plas: 2' })).toBeVisible()
 
   // --- Owner follows along live ---
   await owner.page.goto(`/follow/${walkId}`)
@@ -100,6 +106,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(owner.page.locator('path.route-line')).toHaveCount(1)
   await expect(owner.page.getByRole('link', { name: /Bel Fleur/ })).toBeVisible()
   await expect(owner.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
+  await expect(owner.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('2× Plas')
   await shot(owner.page, '09-follow')
   await shot(walker.page, '08-walk')
   await walker.page.getByRole('button', { name: 'Hulp nodig' }).click()
@@ -112,6 +119,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page).toHaveURL(/ended=1/)
   await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
   await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
+  await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('1× Gedronken')
   await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
   await shot(walker.page, '10-summary')
   await walker.page.getByRole('radio', { name: 'Top' }).click()

@@ -9,6 +9,7 @@ import { DogPortrait } from './DogPortrait'
 import { Map } from './map'
 import { ReportButton } from './ReportButton'
 import { MoodCheck, WalkFeedback } from './WalkFeedback'
+import { WalkCareTally } from './WalkCare'
 import { WalkPhotoStrip } from './WalkPhotos'
 
 interface Props {
@@ -58,6 +59,7 @@ export async function WalkSummary({ walk, dog, route, role, viewerId, otherUserI
           ariaLabel={t('walk.mapLabel')}
         />
       ) : null}
+      <WalkCareTally care={{ pee: walk.pee, poo: walk.poo, water: walk.water }} />
       <WalkPhotoStrip photos={photos} dogName={dog.name} />
       {role === 'walker' ? <MoodCheck /> : null}
       {given ? (

@@ -474,7 +474,14 @@
     "photoTooMany": "Vous avez atteint le maximum de 12 photos.",
     "photoHint": "Le propriétaire voit vos photos tout de suite. Elles sont supprimées après 30 jours, comme le trajet.",
     "photosTitle": "Photos de la promenade",
-    "photoAlt": "Photo de {dogName} pendant la promenade"
+    "photoAlt": "Photo de {dogName} pendant la promenade",
+    "careTitle": "Compte rendu de la balade",
+    "careHint": "Touchez quand {dogName} fait pipi, caca ou boit. Le propriétaire le voit tout de suite.",
+    "carePee": "Pipi",
+    "carePoo": "Caca",
+    "careWater": "A bu",
+    "careUndo": "En retirer un de {kind}",
+    "careNone": "Rien de noté pour l’instant"
   },
   "myDogs": {
     "title": "Mes chiens",

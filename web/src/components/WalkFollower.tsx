@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 import { formatWalkDistance, routeLengthM } from '@/lib/geo'
 import { Icon } from './Icon'
 import { Map, type MapMarker } from './map'
+import type { CareCounts } from '@/server/actions/walks'
+import { WalkCareTally } from './WalkCare'
 import { WalkPhotoStrip, type WalkPhoto } from './WalkPhotos'
 
 interface Point {
@@ -18,6 +20,7 @@ interface LiveResponse {
   status: string
   lastAt: string | null
   overdueMin: number
+  care: CareCounts
   photos: WalkPhoto[]
   points: Point[]
 }
@@ -31,6 +34,7 @@ interface Props {
   plannedEndAt: number
   initialRoute: Point[]
   initialPhotos: WalkPhoto[]
+  initialCare: CareCounts
   fallbackCenter: { lat: number; lng: number }
   locale: string
 }
@@ -38,7 +42,8 @@ interface Props {
 const POLL_MS = 5_000
 
 /** The owner's live view: the route so far, where the walker is now, and when they were last seen. */
-export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, startedAt, plannedEndAt, initialRoute, initialPhotos, fallbackCenter, locale }: Props) {
+export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, startedAt, plannedEndAt, initialRoute, initialPhotos, initialCare, fallbackCenter, locale }: Props) {
+  const [care, setCare] = useState<CareCounts>(initialCare)
   const [photos, setPhotos] = useState<WalkPhoto[]>(initialPhotos)
   const lastPhotoAt = useRef(initialPhotos.at(-1)?.t ?? 0)
   const t = useTranslations('walk')
@@ -64,6 +69,7 @@ export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, started
           lastPhotoAt.current = data.photos[data.photos.length - 1].t
           setPhotos((list) => [...list, ...data.photos.filter((p) => !list.some((q) => q.id === p.id))])
         }
+        if (data.care) setCare(data.care)
         if (data.lastAt) setLastAt(new Date(data.lastAt).getTime())
         setOverdue(data.overdueMin)
         if (data.status !== 'active') window.location.reload()
@@ -121,6 +127,7 @@ export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, started
         ) : null}
       </section>
       <Map center={here ?? fallbackCenter} zoom={15} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
+      <WalkCareTally care={care} />
       <WalkPhotoStrip photos={photos} dogName={dogName} />
       {phone ? (
         <a href={`tel:${phone}`} className="button secondary wide">
