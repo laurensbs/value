@@ -7,6 +7,7 @@ import HealthKit
 ///   and last 200 m, so nobody's front door ends up in Health), and the breathing minute a mindful session.
 /// - "Stemming bewaren", a separate switch: how you felt after a walk, as a State of Mind.
 /// Everything is written on this iPhone only. Rondje reads nothing from Health and sends none of it to the server.
+/// The whole feature sits behind the build flag RONDJE_FEATURE_HEALTH: with it off, nothing here touches HealthKit.
 @MainActor
 @Observable
 final class HealthService {
@@ -14,6 +15,8 @@ final class HealthService {
 
     enum Availability: Equatable {
         case available
+        /// The build flag is off: no section under Jij and no HealthKit calls at all.
+        case off
         /// No Health on this device (for example an iPad without the Health app).
         case noHealth
         /// This build was signed without the HealthKit capability (for example with a free Apple ID).
@@ -38,10 +41,11 @@ final class HealthService {
     nonisolated static var moodTypes: Set<HKSampleType> { [HKSampleType.stateOfMindType()] }
 
     init() {
-        let availability: Availability = !HKHealthStore.isHealthDataAvailable() ? .noHealth
+        let availability: Availability = !Self.isInThisBuild ? .off
+            : !HKHealthStore.isHealthDataAvailable() ? .noHealth
             : Self.profileLacksHealthKit() ? .notInThisBuild : .available
         self.availability = availability
-        store = availability == .noHealth ? nil : HKHealthStore()
+        store = availability == .available || availability == .notInThisBuild ? HKHealthStore() : nil
         savesWalks = availability == .available && UserDefaults.standard.bool(forKey: Key.walks)
         savesMood = availability == .available && UserDefaults.standard.bool(forKey: Key.mood)
     }
@@ -104,8 +108,9 @@ final class HealthService {
 
     /// After the breathing minute (or most of it).
     func saveMindfulMinute(start: Date, end: Date) {
+        guard savesWalks, let store, end.timeIntervalSince(start) >= 30 else { return }
         let type = HKCategoryType(.mindfulSession)
-        guard savesWalks, let store, end.timeIntervalSince(start) >= 30, store.authorizationStatus(for: type) == .sharingAuthorized else { return }
+        guard store.authorizationStatus(for: type) == .sharingAuthorized else { return }
         let session = HKCategorySample(type: type, value: HKCategoryValue.notApplicable.rawValue, start: start, end: end,
                                        metadata: [HKMetadataKeyWorkoutBrandName: Brand.name])
         Task { try? await store.save(session) }
@@ -138,6 +143,13 @@ final class HealthService {
     }
 
     // MARK: Is HealthKit in this build?
+
+    /// RONDJE_FEATURE_HEALTH from project.yml, through Info.plist ("YES"/"NO").
+    nonisolated static var isInThisBuild: Bool {
+        let value = Bundle.main.object(forInfoDictionaryKey: "RondjeFeatureHealth")
+        if let flag = value as? Bool { return flag }
+        return ["YES", "TRUE", "1"].contains((value as? String)?.uppercased() ?? "")
+    }
 
     /// Development and ad-hoc builds carry their provisioning profile: without HealthKit in it, asking would only fail.
     /// App Store builds have no embedded profile; there the capability is always in place.

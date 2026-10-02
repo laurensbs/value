@@ -5,6 +5,9 @@ struct DeviceSettingsView: View {
     @Environment(AppModel.self) private var model
     @State private var sounds = SoundFX.enabled
     @State private var health = HealthService.shared
+    /// While iOS asks for permission, the switch already shows what was chosen.
+    @State private var askingWalks: Bool?
+    @State private var askingMood: Bool?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -14,17 +17,23 @@ struct DeviceSettingsView: View {
             }
             .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
 
-            if health.availability != .noHealth {
+            if health.availability == .available || health.availability == .notInThisBuild {
                 Text("Apple Gezondheid").font(.headline).padding(.top, 8).padding(.horizontal, 4)
                 VStack(spacing: 0) {
                     if health.availability == .available {
                         toggle("figure.walk", L("Rondjes bewaren in Apple Gezondheid"),
                                L("Als buitenwandeling met tijd, afstand en route, en de ademminuut als mindfulness. Begin en eind van de route laten we weg, zodat niemands huis erin staat."),
-                               isOn: Binding(get: { health.savesWalks }, set: { on in Task { report(await health.setSavesWalks(on)) } }))
+                               isOn: Binding(get: { askingWalks ?? health.savesWalks }, set: { on in
+                                   askingWalks = on
+                                   Task { report(await health.setSavesWalks(on)); askingWalks = nil }
+                               }))
                         Divider().padding(.leading, 56)
                         toggle("face.smiling", L("Stemming na een rondje bewaren in Apple Gezondheid"),
                                L("Hoe je je na een rondje voelt, als gemoedstoestand."),
-                               isOn: Binding(get: { health.savesMood }, set: { on in Task { report(await health.setSavesMood(on)) } }))
+                               isOn: Binding(get: { askingMood ?? health.savesMood }, set: { on in
+                                   askingMood = on
+                                   Task { report(await health.setSavesMood(on)); askingMood = nil }
+                               }))
                     } else {
                         HStack(spacing: 14) {
                             Image(systemName: "heart.slash").frame(width: 28).foregroundStyle(Palette.muted)

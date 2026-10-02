@@ -127,6 +127,7 @@
 		2B89ADE16C47AB0E0761B7EF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		2CABF8650A285AB54D3700A6 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		303A4BC365EFDB4E41F534AF /* MyDogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
+		3D1CDBFD7D320C152487C262 /* Rondje.capabilities.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rondje.capabilities.entitlements; sourceTree = "<group>"; };
 		3DD05E7729A1853A5748BF1F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		4D775D41D52CB9BEA5E3FE33 /* select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = select.wav; sourceTree = "<group>"; };
 		4EEFEA994707D9EF187C405F /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 				787E299C18C0D741D32C0544 /* InfoPlist.xcstrings */,
 				954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */,
 				9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */,
+				3D1CDBFD7D320C152487C262 /* Rondje.capabilities.entitlements */,
 				67DED918E6B83E74ED1F0BF7 /* Rondje.entitlements */,
 				C63FA08A3879BB0A900D8F73 /* Rondje.free.entitlements */,
 				2F482A6AA80041AB31EF3049 /* Sounds */,
@@ -763,6 +765,7 @@
 				RONDJE_API_BASE_URL = "https:/$()/rondje-five.vercel.app";
 				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
 				RONDJE_BUNDLE_ID = app.rondje.mobile;
+				RONDJE_FEATURE_HEALTH = NO;
 				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -891,6 +894,7 @@
 				RONDJE_API_BASE_URL = "http:/$()/localhost:3100";
 				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
 				RONDJE_BUNDLE_ID = app.rondje.mobile;
+				RONDJE_FEATURE_HEALTH = NO;
 				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
