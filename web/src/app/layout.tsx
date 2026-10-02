@@ -9,6 +9,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { isDemoMode } from '@/db'
 import { Footer } from '@/components/Footer'
+import { Analytics } from '@/components/Analytics'
 import { FooterSwitch } from '@/components/shell/FooterSwitch'
 import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
@@ -79,6 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {tabs ? <TabBar tabs={tabs} label={t('shell.tabsLabel')} /> : null}
           </div>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   )
