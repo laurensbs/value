@@ -1,0 +1,857 @@
+/* The launch hub (/admin/launch): an app-like single column, mobile first (375 px), in the same
+   style language as the progress pages (progress.css: level card, bars, badges). Only design
+   tokens from globals.css, so light and dark mode both work. */
+
+.launch {
+  width: 100%;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.launch-anchor {
+  scroll-margin-top: calc(var(--header-h) + 76px);
+}
+
+.launch-level-chip {
+  text-decoration: none;
+}
+
+/* ---------- Sticky section switch ---------- */
+
+.launch-tabs {
+  position: sticky;
+  top: calc(var(--header-h) + 8px);
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.launch-tabs a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 650;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.launch-tabs a:hover {
+  background: var(--sunken);
+}
+
+.launch-tabs a:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 1px;
+}
+
+/* ---------- Tasks ---------- */
+
+.launch-waiting {
+  padding: 16px 14px;
+  border-radius: var(--radius-l);
+  background: color-mix(in oklab, var(--ball) 24%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--ball) 70%, var(--line));
+}
+
+@media (min-width: 560px) {
+  .launch-waiting {
+    padding: 18px;
+  }
+}
+
+.launch-tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.launch-task {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 14px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.launch-task-text {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.launch-task-text > strong {
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.launch-task.done .launch-task-text > strong {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--muted) 60%, transparent);
+}
+
+.launch-task-hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.launch-task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin-top: 2px;
+  font-size: 0.82rem;
+}
+
+.pill.owner-laurens {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.pill.owner-claude {
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.pill.owner-samen {
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.launch-link {
+  font-weight: 650;
+}
+
+.launch-check {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  color: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.launch-check:hover:not(:disabled) {
+  border-color: var(--grass);
+  color: color-mix(in oklab, var(--grass) 45%, transparent);
+}
+
+.launch-check[aria-pressed='true'] {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.launch-check:disabled {
+  cursor: default;
+}
+
+.launch-check:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+.launch-check.pop {
+  animation: launch-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1.4);
+}
+
+.launch-plus {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  translate: -50% 0;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-size: 0.75rem;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: launch-float 1.4s ease-out forwards;
+}
+
+@keyframes launch-pop {
+  40% {
+    transform: scale(1.18);
+  }
+}
+
+@keyframes launch-float {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-26px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-check.pop,
+  .launch-plus {
+    animation: none;
+  }
+
+  .launch-plus {
+    display: none;
+  }
+}
+
+.launch-note summary {
+  width: fit-content;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.launch-note[open] .inline-form {
+  margin-top: 6px;
+}
+
+.launch-done summary {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 6px 0 12px;
+  cursor: pointer;
+}
+
+/* ---------- Game: road to the first walk, 100 members ---------- */
+
+.launch-route {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* The dashed walking route between the steps. */
+.launch-route::before {
+  content: '';
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  top: 21px;
+  border-top: 2px dashed var(--line);
+}
+
+.launch-route li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.launch-route-dot {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.launch-route li.passed .launch-route-dot {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.launch-route li.here .launch-route-dot {
+  background: var(--ball);
+  border-color: var(--ball);
+  color: var(--on-ball);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 5px color-mix(in oklab, var(--ball) 30%, transparent);
+}
+
+.launch-route-name {
+  padding-inline: 2px;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+.launch-route li.passed .launch-route-name,
+.launch-route li.here .launch-route-name {
+  color: var(--ink);
+}
+
+@media (min-width: 560px) {
+  .launch-game .badge-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.launch-members {
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.launch-members-marks span {
+  position: absolute;
+  top: 16px;
+  translate: -50% 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.launch-members-marks span:last-child {
+  translate: -100% 0;
+}
+
+.launch-members-marks span.reached {
+  color: var(--grass);
+}
+
+/* ---------- Message bank ---------- */
+
+.launch-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.launch-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+
+.launch-chips.small .launch-chip {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.launch-chip[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.launch-chip:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+.launch-lang {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+/* Message type on the left, language (NL · FR · ES) as a small segmented switch on the right. */
+.launch-pickers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.launch-langs {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--sunken);
+}
+
+.launch-langs button {
+  min-width: 40px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.launch-langs button[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.launch-langs button:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 1px;
+}
+
+.launch-form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 560px) {
+  .launch-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.launch-preview {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px dashed var(--line);
+  background: var(--paper);
+}
+
+.launch-preview-subject {
+  font-weight: 700;
+}
+
+.launch-preview-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+mark.launch-gap {
+  padding: 0 3px;
+  border-radius: 4px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-weight: 650;
+}
+
+.launch-sent-ask {
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* ---------- Contacts ---------- */
+
+.launch-status-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.launch-status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.launch-status-dot strong {
+  color: var(--ink);
+}
+
+.launch-status-dot::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.launch-status-dot.s-sent::before {
+  background: var(--calm);
+}
+
+.launch-status-dot.s-replied::before {
+  background: var(--ball);
+}
+
+.launch-status-dot.s-meeting::before {
+  background: var(--grass);
+}
+
+.launch-contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.launch-contact {
+  display: grid;
+  gap: 10px;
+}
+
+.launch-contact-name {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.launch-contact-details {
+  overflow-wrap: anywhere;
+}
+
+.launch-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--sunken);
+}
+
+.launch-step {
+  min-height: 36px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 650;
+  line-height: 1.1;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.launch-step.passed {
+  color: var(--grass);
+}
+
+.launch-step[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.launch-step:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 1px;
+}
+
+.launch-contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.launch-contact-actions .launch-icon-button {
+  margin-left: auto;
+}
+
+.button.launch-icon-button {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+
+.launch-contact-form {
+  padding-top: 4px;
+}
+
+/* ---------- Numbers ---------- */
+
+.launch-now {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.launch-now.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.launch-now > div {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.card .launch-now.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.launch-now > div {
+  background: var(--paper);
+}
+
+.launch-now dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.launch-now dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 750;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.launch-now dd.launch-now-hint {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.launch-metrics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 700px) {
+  .launch-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.launch-metric {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.launch-metric-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.launch-metric-name {
+  font-weight: 700;
+}
+
+.launch-metric-now strong {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.launch-spark {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 6px;
+  height: 56px;
+  border-bottom: 1px solid var(--line);
+}
+
+.launch-spark-col {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.launch-spark-bar {
+  display: block;
+  width: 100%;
+  max-width: 22px;
+  border-radius: 4px 4px 0 0;
+  background: color-mix(in oklab, var(--grass) 42%, var(--surface));
+}
+
+.launch-spark-col.now .launch-spark-bar {
+  background: var(--grass);
+}
+
+.launch-spark-bar.zero {
+  height: 2px;
+  border-radius: 1px;
+  background: var(--line);
+}
+
+/* Hover: the exact number for that week. */
+.launch-spark-col::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 2;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.75rem;
+  font-weight: 650;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.launch-spark-col:first-child::after {
+  left: 0;
+  translate: 0 0;
+}
+
+.launch-spark-col:last-child::after {
+  left: auto;
+  right: 0;
+  translate: 0 0;
+}
+
+.launch-spark-col:hover::after {
+  opacity: 1;
+}
+
+.launch-spark-col:hover .launch-spark-bar:not(.zero) {
+  filter: brightness(1.1);
+}
+
+.launch-table-toggle summary {
+  width: fit-content;
+  color: var(--grass);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.launch-table-wrap {
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+.launch-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.launch-table th,
+.launch-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.launch-table th:first-child {
+  text-align: left;
+}
+
+.launch-table thead th {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+/* ---------- Costs ---------- */
+
+.launch-costs {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.launch-costs th,
+.launch-costs td {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.launch-costs th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.launch-costs td {
+  padding-left: 12px;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.launch-costs tr.inactive th {
+  color: var(--muted);
+}
+
+.launch-cost-when {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+.launch-costs tfoot th,
+.launch-costs tfoot td {
+  border-bottom: 0;
+  font-weight: 800;
+}
+
+.launch-install {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.launch-install .icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.launch-steps {
+  max-width: 520px;
+}
