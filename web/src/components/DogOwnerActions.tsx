@@ -29,7 +29,13 @@ export function DogOwnerActions({ dogId, status, editHref, viewHref, allowAdopte
           {t('view')}
         </Link>
       ) : null}
-      {status !== 'adopted' ? (
+      {status === 'hidden' ? (
+        <span className="pill danger">{t('hiddenByModerator')}</span>
+      ) : status === 'draft' ? (
+        <button type="button" className="button primary small" disabled={pending} onClick={() => start(() => setDogStatus(dogId, 'active'))}>
+          {t('publish')}
+        </button>
+      ) : status !== 'adopted' ? (
         <button
           type="button"
           className="button ghost small"
@@ -41,7 +47,7 @@ export function DogOwnerActions({ dogId, status, editHref, viewHref, allowAdopte
       ) : (
         <span className="pill blue">{t('adopted')}</span>
       )}
-      {allowAdopted && status !== 'adopted' ? (
+      {allowAdopted && (status === 'active' || status === 'paused') ? (
         <button type="button" className="button ghost small" disabled={pending} onClick={() => start(() => setDogStatus(dogId, 'adopted'))}>
           {t('markAdopted')}
         </button>

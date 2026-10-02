@@ -178,7 +178,14 @@ export async function relationFor(viewer: Viewer, dog: Dog): Promise<Relation & 
 
 export interface DogDetail {
   dog: Dog
-  host: HostPublic & { bio?: string; phone?: string | null; email?: string | null; website?: string | null }
+  host: HostPublic & {
+    bio?: string
+    phone?: string | null
+    email?: string | null
+    website?: string | null
+    instagram?: string | null
+    walkingTimes?: string
+  }
   slots: { weekday: number; time: string }[]
   groupWalks: { id: string; startsAt: Date; durationMin: number; capacity: number; booked: number; level: string; meetingPoint: string }[]
   /** The viewer may see meeting details, vet info and contact details. */
@@ -199,6 +206,7 @@ export async function getDogDetail(id: string, viewer: Viewer | null): Promise<D
     host = {
       kind: 'shelter', id: org.id, name: org.name, photoUrl: org.logoUrl, city: org.city, verified: org.status === 'verified',
       bio: org.description, phone: org.phone, email: org.email, website: org.website,
+      instagram: org.instagram, walkingTimes: org.walkingTimes,
     }
   } else {
     const [owner] = await db.select().from(s.profile).where(eq(s.profile.userId, dog.ownerId ?? ''))
@@ -229,6 +237,31 @@ export async function getDogDetail(id: string, viewer: Viewer | null): Promise<D
     host.email = null
   }
   return { dog, host, slots, groupWalks, canSeePrivate, isMine }
+}
+
+/** A verified shelter's public face, for its page of dogs. Never includes the private coordinator. */
+export async function publicOrg(orgId: string) {
+  const db = await getDb()
+  const [org] = await db
+    .select({
+      id: s.organization.id,
+      name: s.organization.name,
+      city: s.organization.city,
+      country: s.organization.country,
+      description: s.organization.description,
+      logoUrl: s.organization.logoUrl,
+      coverUrl: s.organization.coverUrl,
+      website: s.organization.website,
+      instagram: s.organization.instagram,
+      walkingTimes: s.organization.walkingTimes,
+      openingHours: s.organization.openingHours,
+      treatsPolicy: s.organization.treatsPolicy,
+      provides: s.organization.provides,
+      status: s.organization.status,
+    })
+    .from(s.organization)
+    .where(eq(s.organization.id, orgId))
+  return org && org.status === 'verified' ? org : null
 }
 
 export async function upcomingGroupWalks(filter: { orgId?: string; country?: string }) {

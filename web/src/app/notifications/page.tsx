@@ -10,7 +10,7 @@ export async function generateMetadata() {
   return { title: t('title') }
 }
 
-type Data = { walkId?: string; dogId?: string; dogName?: string; walkerName?: string; requestId?: string; orgId?: string }
+type Data = { walkId?: string; dogId?: string; dogName?: string; walkerName?: string; requestId?: string; orgId?: string; orgName?: string }
 
 function hrefFor(kind: string, data: Data): string {
   if (kind.startsWith('request-')) return '/requests'
@@ -18,10 +18,12 @@ function hrefFor(kind: string, data: Data): string {
   if (kind === 'trust-granted' && data.dogId) return `/dogs/${data.dogId}`
   if (kind === 'org-verified' && data.orgId) return `/shelter/${data.orgId}`
   if (kind === 'group-signup') return '/shelter'
+  if (kind === 'org-pending') return '/admin'
+  if (kind === 'shelter-joined' && data.orgId) return `/dogs?org=${data.orgId}`
   return '/requests'
 }
 
-const ICONS: Record<string, 'paw' | 'route' | 'alert' | 'shield' | 'users' | 'building' | 'bell'> = {
+const ICONS: Record<string, 'paw' | 'route' | 'alert' | 'shield' | 'users' | 'building' | 'bell' | 'heart'> = {
   'request-new': 'paw',
   'request-accepted': 'paw',
   'walk-started': 'route',
@@ -30,6 +32,8 @@ const ICONS: Record<string, 'paw' | 'route' | 'alert' | 'shield' | 'users' | 'bu
   'trust-granted': 'shield',
   'group-signup': 'users',
   'org-verified': 'building',
+  'org-pending': 'building',
+  'shelter-joined': 'heart',
 }
 
 export default async function NotificationsPage() {
@@ -57,7 +61,7 @@ export default async function NotificationsPage() {
                   <span className="grow stack-s">
                     <span>
                       {t.has(`kinds.${n.kind}`)
-                        ? t(`kinds.${n.kind}`, { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '' })
+                        ? t(`kinds.${n.kind}`, { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '', orgName: data.orgName ?? '' })
                         : n.kind}
                     </span>
                     <span className="muted small">{format.relativeTime(n.createdAt)}</span>

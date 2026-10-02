@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import { DogForm } from '@/components/DogForm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { shelterDogDefaults } from '@/lib/dog-options'
 import { emptyDog } from '@/server/dog-initial'
 import { isOrgMember, requireOnboarded } from '@/server/session'
 
@@ -21,7 +22,7 @@ export default async function NewShelterDogPage({ params }: { params: Promise<{ 
         <p className="eyebrow">{org.name}</p>
         <h1>{t('newTitle')}</h1>
       </header>
-      <DogForm initial={{ ...emptyDog(org), provides: ['bags', 'leash'] }} orgId={org.id} cancelHref={`/shelter/${org.id}`} />
+      <DogForm initial={{ ...emptyDog(org), ...shelterDogDefaults(org) }} orgId={org.id} cancelHref={`/shelter/${org.id}`} />
     </div>
   )
 }

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { COUNTRIES, COUNTRY_INFO, type Country } from '@/lib/countries'
+import { PROVIDES } from '@/lib/dog-options'
 import { useForm } from '@/lib/use-form'
 import { saveDog } from '@/server/actions/dogs'
 import type { FormState } from '@/server/actions/profile'
@@ -45,7 +46,6 @@ export interface DogInitial {
   slots: { weekday: number; time: string }[]
 }
 
-const PROVIDES = ['bags', 'leash', 'harness', 'treats', 'water', 'towel'] as const
 
 function Choices<T extends string>({ name, values, value, label, render }: { name: string; values: readonly T[]; value: T; label: string; render: (v: T) => string }) {
   return (

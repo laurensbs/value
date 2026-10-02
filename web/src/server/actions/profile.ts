@@ -9,8 +9,9 @@ import * as s from '@/db/schema'
 import { isCountry } from '@/lib/countries'
 import { fuzzLatLng, isValidLatLng } from '@/lib/geo'
 import { scoreQuiz } from '@/lib/quiz'
+import { isAllowedPhotoUrl } from '@/lib/photos'
 import { isAdult } from '@/lib/rules'
-import { TERMS_VERSION } from '@/lib/site'
+import { safeNext, TERMS_VERSION } from '@/lib/site'
 import { actionViewer, getViewer } from '../session'
 
 export interface FormState {
@@ -53,6 +54,12 @@ function readProfile(form: FormData) {
   })
 }
 
+/** Our own uploads, or the picture from the person's Google/Apple account (or the one they already had). */
+function safePhoto(url: string | undefined, viewer: { image: string | null; profile: { photoUrl: string | null } | null }): string | null {
+  if (!url) return null
+  return isAllowedPhotoUrl(url) || url === viewer.image || url === viewer.profile?.photoUrl ? url : null
+}
+
 function location(lat?: number, lng?: number) {
   return lat !== undefined && lng !== undefined && isValidLatLng(lat, lng) ? fuzzLatLng({ lat, lng }) : { lat: null, lng: null }
 }
@@ -82,7 +89,7 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
     experience: p.experience,
     phone: p.phone || null,
     languages: p.languages,
-    photoUrl: p.photoUrl ?? null,
+    photoUrl: safePhoto(p.photoUrl, viewer),
     wantsToWalk: p.wantsToWalk,
     hasDogs: p.hasDogs,
     termsAcceptedAt: new Date(),
@@ -96,9 +103,7 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
   }
   await db.update(s.user).set({ name: p.firstName }).where(eq(s.user.id, viewer.userId))
 
-  const next = String(form.get('next') || '')
-  if (next.startsWith('/') && !next.startsWith('//')) redirect(next)
-  redirect(p.hasDogs && !p.wantsToWalk ? '/my-dogs/new' : '/dogs')
+  redirect(safeNext(form.get('next') || undefined, p.hasDogs && !p.wantsToWalk ? '/my-dogs/new' : '/dogs'))
 }
 
 export async function updateProfile(_prev: FormState, form: FormData): Promise<FormState> {
@@ -120,7 +125,8 @@ export async function updateProfile(_prev: FormState, form: FormData): Promise<F
       experience: p.experience,
       phone: p.phone || null,
       languages: p.languages,
-      photoUrl: p.photoUrl ?? viewer.profile.photoUrl,
+      // An empty field means the photo was removed; a missing field leaves it as it was.
+      photoUrl: form.get('photoUrl') === null ? viewer.profile.photoUrl : safePhoto(p.photoUrl, viewer),
       wantsToWalk: p.wantsToWalk,
       hasDogs: p.hasDogs,
       pppLicense: form.get('pppLicense') === 'on',

@@ -1,10 +1,11 @@
-import { and, count, desc, eq, isNotNull, sql } from 'drizzle-orm'
+import { and, count, desc, eq, isNotNull, ne, sql } from 'drizzle-orm'
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { BanUser, HideDog, OrgDecision, RemoveDemo, ResolveReport } from '@/components/AdminTools'
 import { dbMode, getDb } from '@/db'
 import * as s from '@/db/schema'
 import { enabledSocialProviders } from '@/lib/auth'
+import { emailMatchesWebsite, registryLookupUrl } from '@/lib/org-fields'
 import { adminEmails } from '@/lib/site'
 import { requireAdmin } from '@/server/session'
 
@@ -19,7 +20,7 @@ export default async function AdminPage() {
   const [[users], [profiles], [dogs], [walks], [open]] = await Promise.all([
     db.select({ n: count() }).from(s.user),
     db.select({ n: count() }).from(s.profile),
-    db.select({ n: count() }).from(s.dog).where(eq(s.dog.isDemo, false)),
+    db.select({ n: count() }).from(s.dog).where(and(eq(s.dog.isDemo, false), ne(s.dog.status, 'draft'))),
     db.select({ n: count() }).from(s.walk).where(eq(s.walk.status, 'ended')),
     db.select({ n: count() }).from(s.report).where(eq(s.report.status, 'open')),
   ])
@@ -201,6 +202,34 @@ export default async function AdminPage() {
                     ) : null}
                   </p>
                   {o.description ? <p className="small">{o.description}</p> : null}
+                  <p className="small">
+                    {[
+                      o.dogCount != null ? t('admin.orgDogCount', { n: o.dogCount }) : null,
+                      o.instagram ? `@${o.instagram}` : null,
+                      o.phone || null,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')}
+                  </p>
+                  {o.coordinatorName || o.coordinatorEmail || o.coordinatorPhone ? (
+                    <p className="small">
+                      <strong>{t('admin.orgCoordinator')}:</strong>{' '}
+                      {[o.coordinatorName, o.coordinatorEmail, o.coordinatorPhone].filter(Boolean).join(' · ')}
+                    </p>
+                  ) : null}
+                  {o.walkingTimes ? (
+                    <p className="muted small">
+                      {t('dog.walkingTimes')}: {o.walkingTimes}
+                    </p>
+                  ) : null}
+                  <div className="row small">
+                    {registryLookupUrl(o.country, o.registrationNumber) ? (
+                      <a href={registryLookupUrl(o.country, o.registrationNumber)!} target="_blank" rel="noopener noreferrer">
+                        {t('admin.orgLookup')} ↗
+                      </a>
+                    ) : null}
+                    {emailMatchesWebsite(o.email, o.website) ? <span className="pill green">{t('admin.orgDomainMatch')}</span> : null}
+                  </div>
                   <p className="muted small">{t('admin.verifyHint')}</p>
                   <OrgDecision orgId={o.id} />
                 </div>

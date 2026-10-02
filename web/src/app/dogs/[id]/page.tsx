@@ -18,7 +18,13 @@ import { getViewer } from '@/server/session'
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const detail = await getDogDetail(id, null)
-  return detail ? { title: detail.dog.name, description: detail.dog.story.slice(0, 160) } : {}
+  if (!detail) return {}
+  // A private owner's dog page names a first name and a city: keep it out of search engines.
+  return {
+    title: detail.dog.name,
+    description: detail.dog.story.slice(0, 160),
+    ...(detail.host.kind === 'owner' ? { robots: { index: false, follow: false } } : {}),
+  }
 }
 
 export default async function DogPage({
@@ -83,7 +89,11 @@ export default async function DogPage({
             </span>
             {dog.level === 'experienced' ? <span className="pill">{t('dogs.level.experienced')}</span> : null}
             {dog.ppp && dog.country === 'ES' ? <span className="pill warn">{t('dogs.ppp')}</span> : null}
-            {dog.status !== 'active' ? <span className="pill warn">{t('dog.paused')}</span> : null}
+            {dog.status === 'draft' ? (
+              <span className="pill ball">{t('myDogs.status.draft')}</span>
+            ) : dog.status !== 'active' ? (
+              <span className="pill warn">{t('dog.paused')}</span>
+            ) : null}
           </div>
           <h1>{dog.name}</h1>
           <p className="muted">
@@ -110,6 +120,25 @@ export default async function DogPage({
               </span>
             ) : null}
             {host.bio ? <p className="muted small">{host.bio}</p> : null}
+            {host.walkingTimes ? (
+              <p className="small">
+                <strong>{t('dog.walkingTimes')}:</strong> {host.walkingTimes}
+              </p>
+            ) : null}
+            {host.website || host.instagram ? (
+              <div className="row">
+                {host.website ? (
+                  <a href={host.website} target="_blank" rel="noopener noreferrer" className="link-button small">
+                    <Icon name="globe" size={15} /> {t('dog.website')}
+                  </a>
+                ) : null}
+                {host.instagram ? (
+                  <a href={`https://www.instagram.com/${host.instagram}/`} target="_blank" rel="noopener noreferrer" className="link-button small">
+                    @{host.instagram}
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </div>
 

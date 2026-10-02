@@ -1,7 +1,62 @@
 import 'server-only'
 import { and, asc, desc, eq, gte, inArray } from 'drizzle-orm'
+import type { OrgInitial } from '@/components/ShelterTools'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { isCountry } from '@/lib/countries'
+import { TREATS, type Treats } from '@/lib/dog-options'
+import type { DraftDog } from '@/lib/draft-dogs'
+
+export type Organization = typeof s.organization.$inferSelect
+
+/** The shelter's saved details, in the shape the shelter forms use. */
+export function orgInitial(org: Organization): OrgInitial {
+  return {
+    name: org.name,
+    country: isCountry(org.country) ? org.country : 'NL',
+    city: org.city,
+    address: org.address,
+    registrationNumber: org.registrationNumber,
+    website: org.website ?? '',
+    instagram: org.instagram ?? '',
+    email: org.email ?? '',
+    phone: org.phone ?? '',
+    description: org.description,
+    dogCount: org.dogCount,
+    openingHours: org.openingHours,
+    walkingTimes: org.walkingTimes,
+    coordinatorName: org.coordinatorName,
+    coordinatorEmail: org.coordinatorEmail ?? '',
+    coordinatorPhone: org.coordinatorPhone ?? '',
+    treatsPolicy: (TREATS as readonly string[]).includes(org.treatsPolicy) ? (org.treatsPolicy as Treats) : 'own',
+    provides: org.provides,
+    defaultWalkMinutes: org.defaultWalkMinutes,
+    logoUrl: org.logoUrl ?? '',
+    coverUrl: org.coverUrl ?? '',
+    lat: org.lat,
+    lng: org.lng,
+  }
+}
+
+/** The shelter's draft dogs (photo-first bulk add), oldest first. */
+export async function draftDogs(orgId: string): Promise<DraftDog[]> {
+  const db = await getDb()
+  const rows = await db
+    .select()
+    .from(s.dog)
+    .where(and(eq(s.dog.orgId, orgId), eq(s.dog.status, 'draft')))
+    .orderBy(asc(s.dog.createdAt))
+  return rows.map((d) => ({
+    id: d.id,
+    name: d.name,
+    photo: d.photos[0] ?? '',
+    sex: d.sex === 'male' ? 'male' : 'female',
+    ageYears: d.ageYears,
+    size: d.size === 'small' || d.size === 'large' ? d.size : 'medium',
+    energy: d.energy === 'calm' || d.energy === 'high' ? d.energy : 'medium',
+    level: d.level === 'experienced' ? 'experienced' : 'starter',
+  }))
+}
 
 export async function shelterDashboard(orgId: string) {
   const db = await getDb()

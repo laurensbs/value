@@ -4,11 +4,14 @@ import { DogCard } from '@/components/DogCard'
 import { DogsMap } from '@/components/DogsMap'
 import { Icon } from '@/components/Icon'
 import { COUNTRIES, countryInfo, isCountry } from '@/lib/countries'
-import { listDogs } from '@/server/queries'
+import { listDogs, publicOrg } from '@/server/queries'
 import { getViewer } from '@/server/session'
 
-export async function generateMetadata() {
+export async function generateMetadata({ searchParams }: { searchParams: Promise<Search> }) {
   const t = await getTranslations('dogs')
+  const { org: orgId } = await searchParams
+  const org = orgId ? await publicOrg(orgId.slice(0, 64)) : null
+  if (org) return { title: t('orgTitle', { name: org.name }), description: org.description.slice(0, 160) || t('lede') }
   return { title: t('title'), description: t('lede') }
 }
 
@@ -29,6 +32,7 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
   const energy = ['calm', 'medium', 'high'].includes(sp.energy ?? '') ? sp.energy : undefined
   const orgId = sp.org?.slice(0, 64) || undefined
   const items = await listDogs({ country: orgId ? undefined : country, near, host, energy, orgId, q: sp.q?.slice(0, 60) })
+  const org = orgId ? await publicOrg(orgId) : null
   const mapView = sp.view === 'map'
 
   const query = (patch: Partial<Search>) => {
@@ -44,6 +48,55 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
         <h1>{t('dogs.title')}</h1>
         <p className="lede">{t('dogs.lede')}</p>
       </header>
+
+      {org ? (
+        <section className="card stack-s org-header">
+          {org.coverUrl ? (
+            <div className="shelter-cover">
+              {/* eslint-disable-next-line @next/next/no-img-element -- Blob URL or data URL */}
+              <img src={org.coverUrl} alt="" />
+            </div>
+          ) : null}
+          <div className="row" style={{ flexWrap: 'nowrap', alignItems: 'center' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- Blob URL or data URL */}
+            {org.logoUrl ? <img src={org.logoUrl} alt="" className="org-logo" /> : <Icon name="building" />}
+            <div style={{ minWidth: 0 }}>
+              <h2>{org.name}</h2>
+              <p className="muted small">
+                {org.city} · {t(`common.countries.${org.country}`)} · <Icon name="shield" size={13} /> {t('common.verified')}
+              </p>
+            </div>
+          </div>
+          {org.description ? <p className="small prose">{org.description}</p> : null}
+          {org.walkingTimes ? (
+            <p className="small">
+              <strong>{t('dog.walkingTimes')}:</strong> {org.walkingTimes}
+            </p>
+          ) : null}
+          {org.openingHours ? (
+            <p className="small">
+              <strong>{t('dogs.orgOpeningHours')}:</strong> {org.openingHours}
+            </p>
+          ) : null}
+          <p className="small">
+            <strong>{t('dog.treatsLabel')}:</strong> {t(`dogs.orgTreats.${org.treatsPolicy === 'yes' || org.treatsPolicy === 'no' ? org.treatsPolicy : 'own'}`)}
+          </p>
+          {org.website || org.instagram ? (
+            <div className="row">
+              {org.website ? (
+                <a href={org.website} target="_blank" rel="noopener noreferrer" className="link-button small">
+                  <Icon name="globe" size={15} /> {t('dog.website')}
+                </a>
+              ) : null}
+              {org.instagram ? (
+                <a href={`https://www.instagram.com/${org.instagram}/`} target="_blank" rel="noopener noreferrer" className="link-button small">
+                  @{org.instagram}
+                </a>
+              ) : null}
+            </div>
+          ) : null}
+        </section>
+      ) : null}
 
       <form className="filters" action="/dogs" method="get">
         <input type="hidden" name="view" value={sp.view ?? ''} />

@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
-import { newPerson, onboard, shot, signUp, unique } from './helpers'
+import { newPerson, onboard, PNG_1X1, shot, signInAdmin, signUp, unique } from './helpers'
 
 test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies, walker joins, staff checks ID', async ({ browser }) => {
   const id = unique()
@@ -15,6 +15,11 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await staff.page.getByLabel('Naam van de opvang').fill(orgName)
   await staff.page.getByLabel('Plaats').fill('Utrecht')
   await staff.page.getByLabel(/KvK-, KBO- of CIF-nummer/).fill('12345678')
+  await staff.page.getByLabel('Hoeveel honden hebben jullie ongeveer?').fill('40')
+  await staff.page.getByLabel('Instagram').fill('@opvang_test')
+  await staff.page.getByLabel('Wanneer kunnen vrijwilligers komen wandelen?').fill('Zaterdag en zondag 10:00–12:00')
+  await staff.page.getByLabel('Nee, wij hebben koekjes').check()
+  await staff.page.getByLabel('Naam contactpersoon').fill('Marieke de Vries')
   await staff.page.getByLabel(/Ik mag deze opvang vertegenwoordigen/).check()
   await staff.page.getByRole('button', { name: 'Opvang aanmelden' }).click()
   await expect(staff.page).toHaveURL(/\/shelter\/[^/]+\?created=1/)
@@ -28,6 +33,32 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await expect(staff.page.getByText('3 honden toegevoegd.')).toBeVisible()
   await expect(staff.page.getByText('Rocky', { exact: true })).toBeVisible()
 
+  // --- Quick add with photos: one photo per dog, names from the file names, then all online ---
+  await staff.page.getByRole('link', { name: "Snel toevoegen met foto's" }).first().click()
+  await expect(staff.page).toHaveURL(/\/dogs\/bulk$/)
+  await staff.page.locator('input[type=file]').setInputFiles([
+    { name: 'Saar.png', mimeType: 'image/png', buffer: PNG_1X1 },
+    { name: 'IMG_1234.png', mimeType: 'image/png', buffer: PNG_1X1 },
+  ])
+  await expect(staff.page.getByLabel('Naam van hond 2')).toBeVisible()
+  await expect(staff.page.getByLabel('Naam van hond 1')).toHaveValue('Saar')
+  await expect(staff.page.getByLabel('Naam van hond 2')).toHaveValue('')
+  await shot(staff.page, '20b-shelter-bulk')
+  await staff.page.getByRole('button', { name: 'Zet 1 hond online' }).click()
+  await expect(staff.page.getByText('1 hond staat nu online.')).toBeVisible()
+  await expect(staff.page.getByText(/1 hond heeft nog geen naam en blijft concept/)).toBeVisible()
+  await staff.page.getByLabel('Naam van hond 1').fill('Pip')
+  await staff.page.getByRole('button', { name: 'Zet 1 hond online' }).click()
+  await expect(staff.page.getByText('1 hond staat nu online.')).toBeVisible()
+  await staff.page.getByRole('link', { name: 'Klaar' }).click()
+  await expect(staff.page.getByText('Saar', { exact: true })).toBeVisible()
+  await expect(staff.page.getByText('Pip', { exact: true })).toBeVisible()
+  await expect(staff.page.getByText(/5 van ongeveer 40 honden staan online/)).toBeVisible()
+  await staff.page.goto(`${shelterPath}/edit`)
+  await expect(staff.page.getByLabel('Naam contactpersoon')).toHaveValue('Marieke de Vries')
+  await shot(staff.page, '20c-shelter-edit')
+  await staff.page.goto(shelterPath)
+
   // --- Plan a group walk ---
   await staff.page.getByLabel('Verzamelpunt').fill('Bij de hoofdingang')
   await staff.page.getByRole('button', { name: 'Groepswandeling plannen' }).click()
@@ -40,33 +71,24 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await expect(visitor.page.getByText('Bram')).toHaveCount(0)
 
   // --- Admin verifies the shelter ---
-  const admin = await newPerson(browser)
-  await admin.page.goto('/signup')
-  await admin.page.getByLabel('Voornaam').fill('Beheer')
-  await admin.page.getByLabel('E-mailadres').fill('admin@e2e.test')
-  await admin.page.getByLabel('Wachtwoord').fill('wandelen-123')
-  await admin.page.getByRole('button', { name: 'Account maken' }).click()
-  // On a reused test server the admin account may already exist.
-  const exists = admin.page.getByText(/Er bestaat al een account/)
-  await Promise.race([admin.page.waitForURL(/\/onboarding/), exists.waitFor()])
-  if (await exists.isVisible()) {
-    await admin.page.goto('/login?next=/admin')
-    await admin.page.getByLabel('E-mailadres').fill('admin@e2e.test')
-    await admin.page.getByLabel('Wachtwoord').fill('wandelen-123')
-    await admin.page.getByRole('button', { name: 'Inloggen', exact: true }).click()
-    await admin.page.waitForURL(/\/admin/)
-  } else {
-    await onboard(admin.page, { birthDate: '1990-01-01', city: 'Utrecht', bio: 'Beheer', phone: '', walker: false, owner: false })
-  }
+  const admin = await signInAdmin(browser)
   await admin.page.goto('/admin')
   await shot(admin.page, '22-admin')
   const row = admin.page.getByRole('listitem').filter({ hasText: orgName })
+  await expect(row.getByText('Marieke de Vries')).toBeVisible()
+  await expect(row.getByRole('link', { name: /Opzoeken in het register/ })).toHaveAttribute('href', /kvk\.nl/)
   await row.getByRole('button', { name: 'Verifiëren' }).click()
   await expect(admin.page.getByText(orgName)).toHaveCount(0)
 
-  // --- The dogs are public now ---
+  // --- The dogs are public now, with the shelter's details but never its private contact ---
   await visitor.page.goto(`/dogs?org=${orgId}`)
   await expect(visitor.page.getByText('Bram').first()).toBeVisible()
+  await expect(visitor.page.getByText('Saar').first()).toBeVisible()
+  await expect(visitor.page.getByText('Zaterdag en zondag 10:00–12:00')).toBeVisible()
+  await expect(visitor.page.getByText('Neem geen eigen koekjes mee: de opvang heeft ze.')).toBeVisible()
+  await expect(visitor.page.getByRole('link', { name: '@opvang_test' })).toBeVisible()
+  await expect(visitor.page.getByText('Marieke de Vries')).toHaveCount(0)
+  await shot(visitor.page, '22b-shelter-public')
 
   // --- A walker joins the group walk ---
   const walker = await newPerson(browser)

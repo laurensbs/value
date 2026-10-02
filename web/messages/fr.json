@@ -217,7 +217,14 @@
     "fromOwner": "Du quartier",
     "fromShelter": "De refuge",
     "demoNote": "Chien d'exemple : impossible de prendre rendez-vous pour lui.",
-    "ppp": "Chien PPP (licence requise)"
+    "ppp": "Chien PPP (licence requise)",
+    "orgTitle": "Les chiens de {name}",
+    "orgOpeningHours": "Heures d'ouverture",
+    "orgTreats": {
+      "yes": "Vous pouvez apporter vos propres friandises.",
+      "own": "N'apportez pas de friandises : le refuge en a.",
+      "no": "Merci de ne pas donner de friandises."
+    }
   },
   "dog": {
     "story": "À propos de {name}",
@@ -263,7 +270,11 @@
     "paused": "Ce chien est en pause pour le moment.",
     "saved": "Enregistré. {name} est maintenant en ligne.",
     "markAdopted": "Adopté !",
-    "view": "Voir le profil"
+    "view": "Voir le profil",
+    "publish": "Mettre en ligne",
+    "walkingTimes": "Horaires de promenade",
+    "website": "Site web",
+    "hiddenByModerator": "Masqué par Rondje"
   },
   "request": {
     "title": "Prendre rendez-vous",
@@ -486,7 +497,8 @@
       "active": "Visible",
       "paused": "En pause",
       "adopted": "Adopté",
-      "hidden": "Masqué"
+      "hidden": "Masqué",
+      "draft": "Brouillon"
     },
     "tipsTitle": "Comment trouver plus vite un promeneur régulier",
     "tip1": "Ajoutez une photo prise dehors, où le chien regarde l'objectif.",
@@ -592,8 +604,8 @@
     "registrationNumber": "Numéro d'entreprise (KvK, BCE/KBO ou CIF)",
     "address": "Adresse",
     "website": "Site web",
-    "email": "Adresse e-mail",
-    "phone": "Téléphone",
+    "email": "E-mail pour les promeneurs",
+    "phone": "Téléphone pour les promeneurs",
     "description": "À propos du refuge",
     "authorized": "J'ai le droit de représenter ce refuge et j'accepte les <terms>conditions de partenariat</terms>",
     "pending": "Nous vérifions votre refuge. Vous pouvez déjà ajouter des chiens ; ils seront visibles dès que le refuge sera vérifié.",
@@ -629,7 +641,9 @@
       "authorized": "Confirmez que vous pouvez représenter le refuge.",
       "no-account": "Aucun compte n'existe avec cette adresse e-mail.",
       "no-rows": "Nous n'avons trouvé aucun chien dans le fichier.",
-      "too-large": "Le fichier est trop volumineux."
+      "too-large": "Le fichier est trop volumineux.",
+      "website": "Cette adresse web ne semble pas valide. Par exemple : www.refuge.be",
+      "instagram": "Indiquez votre nom Instagram, par exemple @refuge."
     },
     "eyebrow": "Gratuit pour les refuges",
     "yours": "Votre refuge",
@@ -654,7 +668,7 @@
     "statDogs": "chiens",
     "statWalks": "balades prévues",
     "statSignups": "inscriptions",
-    "noDogs": "Pas encore de chiens. Ajoutez-en un ou importez-les tous en une fois.",
+    "noDogs": "Pas encore de chiens. Ajoutez-les vite avec des photos, ou importez un fichier.",
     "noGroupWalks": "Aucune balade en groupe n'est encore prévue.",
     "groupWalkCreated": "Balade en groupe planifiée.",
     "idChecked": "Identité déjà vérifiée",
@@ -663,7 +677,58 @@
       "staff": "membre de l'équipe"
     },
     "staffAdded": "Membre de l'équipe ajouté.",
-    "createdPending": "Votre refuge est inscrit. Nous le vérifions sous deux jours ouvrables. Ajoutez déjà vos chiens : ils seront visibles dès que le refuge sera vérifié."
+    "createdPending": "Votre refuge est inscrit. Nous le vérifions sous deux jours ouvrables. Ajoutez déjà vos chiens : ils seront visibles dès que le refuge sera vérifié.",
+    "sections": {
+      "about": "Le refuge",
+      "walking": "Promener chez vous",
+      "contact": "Contact"
+    },
+    "dogCount": "Combien de chiens avez-vous environ ?",
+    "dogCountHint": "Pour voir combien sont déjà en ligne.",
+    "descriptionHint": "Qui êtes-vous, quels chiens vivent chez vous, et que leur apporte une promenade de plus ?",
+    "instagram": "Instagram",
+    "logo": "Logo",
+    "cover": "Photo de couverture",
+    "coverHint": "Une photo large du refuge ou des chiens. Sans personnes qui n'ont pas donné leur accord.",
+    "walkingTimes": "Quand les bénévoles peuvent-ils venir promener ?",
+    "walkingTimesHint": "Par exemple : samedi et dimanche 10:00–12:00, mercredi après-midi sur rendez-vous",
+    "openingHours": "Heures d'ouverture",
+    "openingHoursHint": "Par exemple : du mardi au samedi 11:00–16:00",
+    "treatsLabel": "Apporter ses propres friandises ?",
+    "treats": {
+      "yes": "Oui, c'est permis",
+      "own": "Non, nous avons des friandises",
+      "no": "Plutôt pas de friandises du tout"
+    },
+    "providesLabel": "Que donnez-vous aux promeneurs ?",
+    "providesHint": "Ce sera la valeur par défaut des nouveaux chiens. Modifiable par chien.",
+    "defaultWalkMinutes": "Combien de temps dure une promenade en général ? (minutes)",
+    "coordinatorHint": "Personne de contact pour Rondje. Pas public : seul Rondje le voit, pour la vérification et les questions.",
+    "coordinatorName": "Nom de la personne de contact",
+    "coordinatorEmail": "E-mail de la personne de contact",
+    "coordinatorPhone": "Téléphone de la personne de contact",
+    "identityLocked": "Le nom, le numéro et le pays ont été vérifiés : vous ne pouvez donc pas les modifier vous-même. Une erreur ? Dites-le-nous.",
+    "detailsSaved": "Enregistré.",
+    "publicPage": "Voir votre page publique",
+    "checklistTitle": "En ligne en quelques étapes",
+    "checklist": {
+      "details": "Présentez votre refuge : logo, description et horaires de promenade",
+      "dogs": "Mettez vos chiens en ligne",
+      "walk": "Planifiez une première promenade en groupe",
+      "verified": "Rondje vérifie votre refuge (en général sous deux jours ouvrables)"
+    },
+    "checklistGo": "Y aller →",
+    "checklistDone": "fait",
+    "checklistTodo": "à faire",
+    "bulkAdd": "Ajout rapide avec des photos",
+    "progressLabel": "Chiens en ligne",
+    "progress": "{online} chiens sur environ {total} sont en ligne.",
+    "draftsWaiting": "{n, plural, one {# chien attend en brouillon.} other {# chiens attendent en brouillon.}}",
+    "draftsOpen": "Compléter et mettre en ligne",
+    "unnamed": "Pas encore de nom",
+    "details": "Informations du refuge",
+    "detailsLede": "Ce que les promeneurs voient de vous, et comment vous joindre. La personne de contact est seulement pour Rondje.",
+    "visibleAfterCheck": "Visible après la vérification"
   },
   "groupWalks": {
     "title": "Balades en groupe",
@@ -760,7 +825,9 @@
       "walk-overdue": "La balade avec {dogName} dure plus longtemps que prévu.",
       "trust-granted": "Vous pouvez désormais promener {dogName} en autonomie.",
       "group-signup": "{walkerName} participe à une balade en groupe.",
-      "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles."
+      "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles.",
+      "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
+      "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !"
     }
   },
   "admin": {
@@ -802,7 +869,11 @@
     "photosInline": "pas encore connecté ; les photos sont stockées en petit format dans la base de données",
     "socialOff": "désactivée (ajoutez les clés dans Vercel pour l'activer)",
     "verifyHint": "Vérifiez le numéro d'enregistrement dans le registre public (KvK, KBO ou Registro de Asociaciones) et appelez ou écrivez au refuge avec les coordonnées figurant sur son propre site web.",
-    "walk": "balade"
+    "walk": "balade",
+    "orgDogCount": "environ {n} chiens",
+    "orgCoordinator": "Personne de contact",
+    "orgLookup": "Chercher dans le registre",
+    "orgDomainMatch": "L'e-mail correspond au site web"
   },
   "banned": {
     "title": "Votre compte a été bloqué",
@@ -836,5 +907,33 @@
     "makeFirst": "Mettre en premier",
     "remove": "Supprimer la photo",
     "uploading": "Envoi en cours…"
+  },
+  "bulk": {
+    "title": "Ajouter des chiens rapidement",
+    "lede": "Choisissez une photo par chien. Remplissez ensuite l'essentiel pour chaque chien et mettez-les tous en ligne d'un coup. L'histoire et d'autres photos peuvent suivre plus tard.",
+    "pick": "Choisir des photos, une par chien",
+    "pickHint": "Ou glissez-les ici. La photo s'appelle « Bram.jpg » ? Nous remplissons le nom pour vous. Jusqu'à {max} chiens à la fois.",
+    "uploading": "Envoi en cours : {done} sur {total}",
+    "failed": "{n, plural, one {# photo n'a pas pu être envoyée.} other {# photos n'ont pas pu être envoyées.}} Réessayez-les.",
+    "errors": {
+      "too-many-drafts": "Jusqu'à {max} chiens peuvent attendre en brouillon. Mettez d'abord quelques chiens en ligne.",
+      "no-photos": "Choisissez des photos (jpg, png ou webp).",
+      "invalid": "Un problème est survenu avec les informations. Réessayez."
+    },
+    "notVerified": "Votre refuge est encore en cours de vérification. Les chiens mis en ligne seront visibles dès la fin de la vérification.",
+    "remove": "Retirer {name}",
+    "dogN": "chien {n}",
+    "namePlaceholder": "Nom",
+    "nameOf": "Nom du chien {n}",
+    "age": "Âge",
+    "more": "Histoire et autres photos →",
+    "empty": "Pas encore de chiens. Choisissez les photos ci-dessus.",
+    "published": "{n, plural, one {# chien est maintenant en ligne.} other {# chiens sont maintenant en ligne.}}",
+    "saved": "Enregistré en brouillon.",
+    "missingName": "{n, plural, one {# chien n'a pas encore de nom et reste en brouillon.} other {# chiens n'ont pas encore de nom et restent en brouillon.}}",
+    "save": "Enregistrer en brouillon",
+    "publishAll": "Mettre {n, plural, one {# chien} other {# chiens}} en ligne",
+    "done": "Terminé",
+    "agePlaceholder": "Âge (ans)"
   }
 }

@@ -8,8 +8,10 @@ import { Icon } from '@/components/Icon'
 import { AttendanceButtons, CancelGroupWalkButton, GroupWalkForm, ImportForm, StaffForm } from '@/components/ShelterTools'
 import { ageBand } from '@/lib/rules'
 import { fromNow, nextWeekday } from '@/lib/time'
-import { shelterDashboard } from '@/server/shelter'
 import { isOrgMember, requireOnboarded } from '@/server/session'
+import { shelterDashboard } from '@/server/shelter'
+
+const STATUS_PILL: Record<string, string> = { active: 'green', draft: 'ball', paused: 'warn', adopted: 'blue' }
 
 export default async function ShelterDashboardPage({
   params,
@@ -32,12 +34,31 @@ export default async function ShelterDashboardPage({
   const upcoming = walks.filter((w) => w.startsAt > cutoff)
   const booked = walks.reduce((n, w) => n + w.signups.filter((x) => x.status === 'booked').length, 0)
 
+  const drafts = dogs.filter((d) => d.status === 'draft')
+  const detailsDone = Boolean(org.logoUrl && org.walkingTimes.trim() && org.description.trim())
+  const steps = [
+    { key: 'details', done: detailsDone, href: `/shelter/${org.id}/edit` },
+    { key: 'dogs', done: active.length > 0, href: `/shelter/${org.id}/dogs/bulk` },
+    { key: 'walk', done: upcoming.length > 0, href: '#groepswandelingen' },
+    { key: 'verified', done: org.status === 'verified', href: null },
+  ]
+
   return (
     <div className="stack-l">
+      {org.coverUrl ? (
+        <div className="shelter-cover">
+          {/* eslint-disable-next-line @next/next/no-img-element -- Blob URL or data URL */}
+          <img src={org.coverUrl} alt="" />
+        </div>
+      ) : null}
       <header className="stack-s">
         <p className="eyebrow">{t('nav.shelter')}</p>
         <div className="spread">
-          <h1>{org.name}</h1>
+          <div className="row" style={{ flexWrap: 'nowrap' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- Blob URL or data URL */}
+            {org.logoUrl ? <img src={org.logoUrl} alt="" className="org-logo" /> : null}
+            <h1>{org.name}</h1>
+          </div>
           <span className={`pill ${org.status === 'verified' ? 'green' : org.status === 'rejected' ? 'danger' : 'warn'}`}>
             {t(`shelter.status.${org.status}`)}
           </span>
@@ -45,6 +66,16 @@ export default async function ShelterDashboardPage({
         <p className="muted">
           {org.city} · {t(`common.countries.${org.country}`)}
         </p>
+        <div className="row">
+          <Link href={`/shelter/${org.id}/edit`} className="button secondary small">
+            <Icon name="edit" size={16} /> {t('shelter.details')}
+          </Link>
+          {org.status === 'verified' ? (
+            <Link href={`/dogs?org=${org.id}`} className="button ghost small">
+              <Icon name="eye" size={16} /> {t('shelter.publicPage')}
+            </Link>
+          ) : null}
+        </div>
       </header>
 
       {created ? (
@@ -53,6 +84,33 @@ export default async function ShelterDashboardPage({
         <p className="notice warn">{t('shelter.pending')}</p>
       ) : null}
       {org.status === 'rejected' ? <p className="notice danger">{t('shelter.rejected')}</p> : null}
+
+      {steps.some((step) => !step.done) ? (
+        <section className="card stack-s">
+          <h2>{t('shelter.checklistTitle')}</h2>
+          <ul className="checklist">
+            {steps.map((step) => (
+              <li key={step.key} className={step.done ? 'done' : ''}>
+                <span className="tick" aria-hidden>
+                  <Icon name="check" size={14} />
+                </span>
+                <span className="grow">
+                  <span className="label">{t(`shelter.checklist.${step.key}`)}</span>
+                  {!step.done && step.href ? (
+                    <>
+                      {' '}
+                      <Link href={step.href} className="small">
+                        {t('shelter.checklistGo')}
+                      </Link>
+                    </>
+                  ) : null}
+                </span>
+                <span className="visually-hidden">{step.done ? t('shelter.checklistDone') : t('shelter.checklistTodo')}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <div className="dog-tag-stats">
         <div className="dog-tag">
@@ -69,24 +127,43 @@ export default async function ShelterDashboardPage({
         </div>
       </div>
 
-      <section className="stack">
+      <section className="stack" id="honden">
         <div className="spread">
           <h2>{t('shelter.dogs')}</h2>
-          <Link href={`/shelter/${org.id}/dogs/new`} className="button primary small">
-            <Icon name="plus" size={16} /> {t('shelter.addDog')}
-          </Link>
+          <div className="row">
+            <Link href={`/shelter/${org.id}/dogs/bulk`} className="button primary small">
+              <Icon name="camera" size={16} /> {t('shelter.bulkAdd')}
+            </Link>
+            <Link href={`/shelter/${org.id}/dogs/new`} className="button secondary small">
+              <Icon name="plus" size={16} /> {t('shelter.addDog')}
+            </Link>
+          </div>
         </div>
+        {org.dogCount ? (
+          <div className="dog-progress">
+            <progress max={org.dogCount} value={Math.min(active.length, org.dogCount)} aria-label={t('shelter.progressLabel')} />
+            <p className="muted small">{t('shelter.progress', { online: active.length, total: org.dogCount })}</p>
+          </div>
+        ) : null}
+        {drafts.length ? (
+          <p className="notice">
+            {t('shelter.draftsWaiting', { n: drafts.length })} <Link href={`/shelter/${org.id}/dogs/bulk`}>{t('shelter.draftsOpen')}</Link>
+          </p>
+        ) : null}
         {dogs.length ? (
           <ul className="list">
             {dogs.map((dog) => (
               <li key={dog.id} className="list-item compact">
                 <DogPortrait dog={dog} size={52} />
                 <div className="grow">
-                  <strong>{dog.name}</strong>
-                  <p className="muted small">
-                    {[dog.breed, t(`dogs.level.${dog.level}`), t(`myDogs.status.${dog.status}`)].filter(Boolean).join(' · ')}
-                  </p>
+                  <strong>{dog.name || t('shelter.unnamed')}</strong>
+                  <p className="muted small">{[dog.breed, t(`dogs.level.${dog.level}`)].filter(Boolean).join(' · ')}</p>
                 </div>
+                {dog.status === 'active' && org.status !== 'verified' ? (
+                  <span className="pill">{t('shelter.visibleAfterCheck')}</span>
+                ) : (
+                  <span className={`pill ${STATUS_PILL[dog.status] ?? ''}`}>{t(`myDogs.status.${dog.status}`)}</span>
+                )}
                 <Link href={`/shelter/${org.id}/dogs/${dog.id}`} className="button ghost small">
                   {t('common.edit')}
                 </Link>
@@ -101,7 +178,7 @@ export default async function ShelterDashboardPage({
         </Disclosure>
       </section>
 
-      <section className="stack">
+      <section className="stack" id="groepswandelingen">
         <h2>{t('shelter.groupWalks')}</h2>
         {upcoming.length ? (
           <ul className="list">

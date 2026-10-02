@@ -217,7 +217,14 @@
     "fromOwner": "Neighbourhood dog",
     "fromShelter": "Shelter dog",
     "demoNote": "Example dog: you can't plan a walk with this one.",
-    "ppp": "PPP dog (licence required)"
+    "ppp": "PPP dog (licence required)",
+    "orgTitle": "Dogs at {name}",
+    "orgOpeningHours": "Opening hours",
+    "orgTreats": {
+      "yes": "You may bring your own dog treats.",
+      "own": "Please don't bring your own treats: the shelter has them.",
+      "no": "Please don't give treats."
+    }
   },
   "dog": {
     "story": "About {name}",
@@ -263,7 +270,11 @@
     "paused": "This dog is paused for now.",
     "saved": "Saved. {name} is now online.",
     "markAdopted": "Adopted!",
-    "view": "View profile"
+    "view": "View profile",
+    "publish": "Put online",
+    "walkingTimes": "Walking times",
+    "website": "Website",
+    "hiddenByModerator": "Hidden by Rondje"
   },
   "request": {
     "title": "Plan a walk",
@@ -486,7 +497,8 @@
       "active": "Visible",
       "paused": "Paused",
       "adopted": "Adopted",
-      "hidden": "Hidden"
+      "hidden": "Hidden",
+      "draft": "Draft"
     },
     "tipsTitle": "How to find a regular walker sooner",
     "tip1": "Add an outdoor photo with eye contact.",
@@ -592,8 +604,8 @@
     "registrationNumber": "Chamber of Commerce number (KvK, KBO or CIF)",
     "address": "Address",
     "website": "Website",
-    "email": "Email address",
-    "phone": "Phone",
+    "email": "Email for walkers",
+    "phone": "Phone for walkers",
     "description": "About the shelter",
     "authorized": "I'm authorised to represent this shelter and agree to the <terms>partner terms</terms>",
     "pending": "We're checking your shelter. You can already add dogs; they'll become visible once the shelter has been verified.",
@@ -629,7 +641,9 @@
       "authorized": "Please confirm that you're allowed to represent the shelter.",
       "no-account": "There's no account with this email address.",
       "no-rows": "We couldn't find any dogs in the file.",
-      "too-large": "The file is too large."
+      "too-large": "The file is too large.",
+      "website": "This does not look like a valid web address. For example: www.shelter.org",
+      "instagram": "Enter your Instagram name, for example @shelter."
     },
     "eyebrow": "Free for animal shelters",
     "yours": "Your shelter",
@@ -654,7 +668,7 @@
     "statDogs": "dogs",
     "statWalks": "walks planned",
     "statSignups": "sign-ups",
-    "noDogs": "No dogs yet. Add one, or import them all in one go.",
+    "noDogs": "No dogs yet. Add them quickly with photos, or import a file.",
     "noGroupWalks": "No group walks planned yet.",
     "groupWalkCreated": "Group walk planned.",
     "idChecked": "ID seen before",
@@ -663,7 +677,58 @@
       "staff": "staff member"
     },
     "staffAdded": "Staff member added.",
-    "createdPending": "Your shelter is registered. We will check it within two working days. Add your dogs now: they become visible once the shelter is verified."
+    "createdPending": "Your shelter is registered. We will check it within two working days. Add your dogs now: they become visible once the shelter is verified.",
+    "sections": {
+      "about": "The shelter",
+      "walking": "Walking with you",
+      "contact": "Contact"
+    },
+    "dogCount": "Roughly how many dogs do you have?",
+    "dogCountHint": "So you can see how many are online already.",
+    "descriptionHint": "Who are you, what kind of dogs live with you, and what does an extra walk mean to them?",
+    "instagram": "Instagram",
+    "logo": "Logo",
+    "cover": "Cover photo",
+    "coverHint": "A wide photo of the shelter or the dogs. No people who did not give permission.",
+    "walkingTimes": "When can volunteers come and walk?",
+    "walkingTimesHint": "For example: Saturday and Sunday 10:00–12:00, Wednesday afternoon by appointment",
+    "openingHours": "Opening hours",
+    "openingHoursHint": "For example: Tue–Sat 11:00–16:00",
+    "treatsLabel": "Can walkers bring their own treats?",
+    "treats": {
+      "yes": "Yes, that's fine",
+      "own": "No, we have treats",
+      "no": "Rather no treats at all"
+    },
+    "providesLabel": "What do walkers get from you?",
+    "providesHint": "This becomes the default for new dogs. You can change it per dog.",
+    "defaultWalkMinutes": "How long is a walk usually? (minutes)",
+    "coordinatorHint": "Contact person for Rondje. Not public: only Rondje sees this, for the check and for questions.",
+    "coordinatorName": "Contact person's name",
+    "coordinatorEmail": "Contact person's email",
+    "coordinatorPhone": "Contact person's phone",
+    "identityLocked": "Name, number and country have been checked, so you cannot change them yourself. Something wrong? Let us know.",
+    "detailsSaved": "Saved.",
+    "publicPage": "See your public page",
+    "checklistTitle": "Get online quickly",
+    "checklist": {
+      "details": "Tell people about your shelter: logo, description and walking times",
+      "dogs": "Put your dogs online",
+      "walk": "Plan a first group walk",
+      "verified": "Rondje checks your shelter (usually within two working days)"
+    },
+    "checklistGo": "Do it →",
+    "checklistDone": "done",
+    "checklistTodo": "to do",
+    "bulkAdd": "Quick add with photos",
+    "progressLabel": "Dogs online",
+    "progress": "{online} of about {total} dogs are online.",
+    "draftsWaiting": "{n, plural, one {# dog is waiting as a draft.} other {# dogs are waiting as drafts.}}",
+    "draftsOpen": "Finish and put online",
+    "unnamed": "No name yet",
+    "details": "Shelter details",
+    "detailsLede": "What walkers see about you, and how they reach you. The contact person is only for Rondje.",
+    "visibleAfterCheck": "Visible after the check"
   },
   "groupWalks": {
     "title": "Group walks",
@@ -760,7 +825,9 @@
       "walk-overdue": "The walk with {dogName} is taking longer than planned.",
       "trust-granted": "You can now walk {dogName} on your own.",
       "group-signup": "{walkerName} is joining a group walk.",
-      "org-verified": "Your shelter has been verified. Your dogs are now visible."
+      "org-verified": "Your shelter has been verified. Your dogs are now visible.",
+      "org-pending": "{orgName} signed up as a shelter. Please check the details.",
+      "shelter-joined": "{orgName} is on Rondje now. Have a look at the dogs!"
     }
   },
   "admin": {
@@ -802,7 +869,11 @@
     "photosInline": "not connected yet; photos are stored at a small size in the database",
     "socialOff": "off (add the keys in Vercel to turn them on)",
     "verifyHint": "Check the registration number in the public register (KvK, KBO or Registro de Asociaciones) and call or email the shelter using the contact details on its own website.",
-    "walk": "walk"
+    "walk": "walk",
+    "orgDogCount": "about {n} dogs",
+    "orgCoordinator": "Contact person",
+    "orgLookup": "Look up in the register",
+    "orgDomainMatch": "Email matches the website"
   },
   "banned": {
     "title": "Your account has been blocked",
@@ -836,5 +907,33 @@
     "makeFirst": "Make first",
     "remove": "Remove photo",
     "uploading": "Uploading…"
+  },
+  "bulk": {
+    "title": "Quick add dogs",
+    "lede": "Pick one photo per dog. Then fill in the essentials for each dog and put them all online at once. You can add the story and more photos later.",
+    "pick": "Pick photos, one per dog",
+    "pickHint": "Or drag them here. Is a photo called \"Bram.jpg\"? Then we fill in the name for you. Up to {max} dogs at a time.",
+    "uploading": "Uploading: {done} of {total}",
+    "failed": "{n, plural, one {# photo did not work.} other {# photos did not work.}} Please try those again.",
+    "errors": {
+      "too-many-drafts": "Up to {max} dogs can wait as drafts at a time. Put a few dogs online first.",
+      "no-photos": "Pick photos (jpg, png or webp).",
+      "invalid": "Something went wrong with the details. Please try again."
+    },
+    "notVerified": "Your shelter is still being checked. Dogs you put online become visible once the check is done.",
+    "remove": "Remove {name}",
+    "dogN": "dog {n}",
+    "namePlaceholder": "Name",
+    "nameOf": "Name of dog {n}",
+    "age": "Age",
+    "more": "Story and more photos →",
+    "empty": "No dogs yet. Pick the photos above.",
+    "published": "{n, plural, one {# dog is online now.} other {# dogs are online now.}}",
+    "saved": "Saved as draft.",
+    "missingName": "{n, plural, one {# dog has no name yet and stays a draft.} other {# dogs have no name yet and stay drafts.}}",
+    "save": "Save as draft",
+    "publishAll": "Put {n, plural, one {# dog} other {# dogs}} online",
+    "done": "Done",
+    "agePlaceholder": "Age (years)"
   }
 }

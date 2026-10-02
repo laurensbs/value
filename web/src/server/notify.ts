@@ -1,6 +1,8 @@
 import 'server-only'
+import { inArray, sql } from 'drizzle-orm'
 import type { Db } from '@/db'
 import * as s from '@/db/schema'
+import { adminEmails } from '@/lib/site'
 
 export type NotificationKind =
   | 'request-new'
@@ -13,6 +15,8 @@ export type NotificationKind =
   | 'trust-granted'
   | 'group-signup'
   | 'org-verified'
+  | 'org-pending'
+  | 'shelter-joined'
 
 export async function notify(
   db: Db,
@@ -25,6 +29,14 @@ export async function notify(
   await db.insert(s.notification).values(
     unique.map((userId) => ({ id: crypto.randomUUID(), userId, kind, data })),
   )
+}
+
+/** Rondje's own admins (ADMIN_EMAILS), for things only they can act on, like checking a new shelter. */
+export async function notifyAdmins(db: Db, kind: NotificationKind, data: Record<string, string | number | null>): Promise<void> {
+  const emails = adminEmails()
+  if (emails.length === 0) return
+  const admins = await db.select({ id: s.user.id }).from(s.user).where(inArray(sql`lower(${s.user.email})`, emails))
+  await notify(db, admins.map((a) => a.id), kind, data)
 }
 
 export async function audit(

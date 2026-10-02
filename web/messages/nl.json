@@ -217,7 +217,14 @@
     "fromOwner": "Uit de buurt",
     "fromShelter": "Uit de opvang",
     "demoNote": "Voorbeeldhond: hiervoor kun je geen afspraak maken.",
-    "ppp": "PPP-hond (licentie nodig)"
+    "ppp": "PPP-hond (licentie nodig)",
+    "orgTitle": "Honden van {name}",
+    "orgOpeningHours": "Openingstijden",
+    "orgTreats": {
+      "yes": "Je mag zelf hondenkoekjes meenemen.",
+      "own": "Neem geen eigen koekjes mee: de opvang heeft ze.",
+      "no": "Liever geen koekjes geven."
+    }
   },
   "dog": {
     "story": "Over {name}",
@@ -263,7 +270,11 @@
     "paused": "Deze hond staat even op pauze.",
     "saved": "Opgeslagen. {name} staat online.",
     "markAdopted": "Geadopteerd!",
-    "view": "Bekijk profiel"
+    "view": "Bekijk profiel",
+    "publish": "Zet online",
+    "walkingTimes": "Wandeltijden",
+    "website": "Website",
+    "hiddenByModerator": "Verborgen door Rondje"
   },
   "request": {
     "title": "Plan een afspraak",
@@ -486,7 +497,8 @@
       "active": "Zichtbaar",
       "paused": "Gepauzeerd",
       "adopted": "Geadopteerd",
-      "hidden": "Verborgen"
+      "hidden": "Verborgen",
+      "draft": "Concept"
     },
     "tipsTitle": "Zo vind je sneller een vaste wandelaar",
     "tip1": "Zet er een foto bij van buiten, met oogcontact.",
@@ -592,8 +604,8 @@
     "registrationNumber": "KvK-, KBO- of CIF-nummer",
     "address": "Adres",
     "website": "Website",
-    "email": "E-mailadres",
-    "phone": "Telefoon",
+    "email": "E-mailadres voor wandelaars",
+    "phone": "Telefoon voor wandelaars",
     "description": "Over de opvang",
     "authorized": "Ik mag deze opvang vertegenwoordigen en ga akkoord met de <terms>partnervoorwaarden</terms>",
     "pending": "We controleren je opvang. Je kunt alvast honden toevoegen; ze worden zichtbaar zodra de opvang is geverifieerd.",
@@ -629,7 +641,9 @@
       "authorized": "Bevestig dat je de opvang mag vertegenwoordigen.",
       "no-account": "Er is geen account met dit e-mailadres.",
       "no-rows": "We vonden geen honden in het bestand.",
-      "too-large": "Het bestand is te groot."
+      "too-large": "Het bestand is te groot.",
+      "website": "Dit lijkt geen geldig webadres. Bijvoorbeeld: www.opvang.nl",
+      "instagram": "Vul je Instagram-naam in, bijvoorbeeld @opvang."
     },
     "eyebrow": "Gratis voor dierenopvangen",
     "yours": "Jouw opvang",
@@ -654,7 +668,7 @@
     "statDogs": "honden",
     "statWalks": "wandelingen gepland",
     "statSignups": "aanmeldingen",
-    "noDogs": "Nog geen honden. Voeg er een toe of importeer ze in één keer.",
+    "noDogs": "Nog geen honden. Voeg ze snel toe met foto's, of importeer een bestand.",
     "noGroupWalks": "Nog geen groepswandelingen gepland.",
     "groupWalkCreated": "Groepswandeling gepland.",
     "idChecked": "ID eerder gezien",
@@ -663,7 +677,58 @@
       "staff": "medewerker"
     },
     "staffAdded": "Medewerker toegevoegd.",
-    "createdPending": "Je opvang is aangemeld. We controleren hem binnen twee werkdagen. Voeg alvast honden toe: ze worden zichtbaar zodra de opvang is geverifieerd."
+    "createdPending": "Je opvang is aangemeld. We controleren hem binnen twee werkdagen. Voeg alvast honden toe: ze worden zichtbaar zodra de opvang is geverifieerd.",
+    "sections": {
+      "about": "De opvang",
+      "walking": "Wandelen bij jullie",
+      "contact": "Contact"
+    },
+    "dogCount": "Hoeveel honden hebben jullie ongeveer?",
+    "dogCountHint": "Zo zie je straks hoeveel er al online staan.",
+    "descriptionHint": "Wie zijn jullie, wat voor honden wonen er, en wat betekent een extra wandeling voor ze?",
+    "instagram": "Instagram",
+    "logo": "Logo",
+    "cover": "Omslagfoto",
+    "coverHint": "Een brede foto van de opvang of de honden. Zonder mensen die geen toestemming gaven.",
+    "walkingTimes": "Wanneer kunnen vrijwilligers komen wandelen?",
+    "walkingTimesHint": "Bijvoorbeeld: zaterdag en zondag 10:00–12:00, woensdagmiddag na afspraak",
+    "openingHours": "Openingstijden",
+    "openingHoursHint": "Bijvoorbeeld: di t/m za 11:00–16:00",
+    "treatsLabel": "Zelf koekjes meenemen?",
+    "treats": {
+      "yes": "Ja, dat mag",
+      "own": "Nee, wij hebben koekjes",
+      "no": "Liever helemaal geen koekjes"
+    },
+    "providesLabel": "Wat krijgen wandelaars van jullie mee?",
+    "providesHint": "Dit wordt de standaard voor nieuwe honden. Per hond kun je het aanpassen.",
+    "defaultWalkMinutes": "Hoe lang duurt een wandeling meestal? (minuten)",
+    "coordinatorHint": "Contactpersoon voor Rondje. Niet openbaar: alleen Rondje ziet dit, voor de controle en voor vragen.",
+    "coordinatorName": "Naam contactpersoon",
+    "coordinatorEmail": "E-mailadres contactpersoon",
+    "coordinatorPhone": "Telefoon contactpersoon",
+    "identityLocked": "Naam, nummer en land zijn gecontroleerd en kun je daarom niet zelf wijzigen. Klopt er iets niet? Laat het ons weten.",
+    "detailsSaved": "Opgeslagen.",
+    "publicPage": "Bekijk jullie openbare pagina",
+    "checklistTitle": "Zo staan jullie snel online",
+    "checklist": {
+      "details": "Vertel over jullie opvang: logo, beschrijving en wandeltijden",
+      "dogs": "Zet jullie honden online",
+      "walk": "Plan een eerste groepswandeling",
+      "verified": "Rondje controleert jullie opvang (meestal binnen twee werkdagen)"
+    },
+    "checklistGo": "Doen →",
+    "checklistDone": "klaar",
+    "checklistTodo": "nog te doen",
+    "bulkAdd": "Snel toevoegen met foto's",
+    "progressLabel": "Honden online",
+    "progress": "{online} van ongeveer {total} honden staan online.",
+    "draftsWaiting": "{n, plural, one {# hond staat klaar als concept.} other {# honden staan klaar als concept.}}",
+    "draftsOpen": "Afmaken en online zetten",
+    "unnamed": "Nog zonder naam",
+    "details": "Gegevens van de opvang",
+    "detailsLede": "Wat wandelaars over jullie zien, en hoe ze jullie bereiken. De contactpersoon is alleen voor Rondje.",
+    "visibleAfterCheck": "Zichtbaar na controle"
   },
   "groupWalks": {
     "title": "Groepswandelingen",
@@ -760,7 +825,9 @@
       "walk-overdue": "Het rondje met {dogName} duurt langer dan gepland.",
       "trust-granted": "Je mag nu zelfstandig met {dogName} wandelen.",
       "group-signup": "{walkerName} loopt mee met een groepswandeling.",
-      "org-verified": "Je opvang is geverifieerd. Je honden zijn nu zichtbaar."
+      "org-verified": "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.",
+      "org-pending": "{orgName} heeft zich aangemeld als opvang. Controleer de gegevens.",
+      "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!"
     }
   },
   "admin": {
@@ -802,7 +869,11 @@
     "photosInline": "nog niet gekoppeld; foto's worden klein in de database bewaard",
     "socialOff": "uit (zet de sleutels in Vercel om ze aan te zetten)",
     "verifyHint": "Controleer het registratienummer in het openbare register (KvK, KBO of Registro de Asociaciones) en bel of mail de opvang via de gegevens op hun eigen website.",
-    "walk": "rondje"
+    "walk": "rondje",
+    "orgDogCount": "ongeveer {n} honden",
+    "orgCoordinator": "Contactpersoon",
+    "orgLookup": "Opzoeken in het register",
+    "orgDomainMatch": "E-mail hoort bij de website"
   },
   "banned": {
     "title": "Je account is geblokkeerd",
@@ -836,5 +907,33 @@
     "makeFirst": "Als eerste",
     "remove": "Foto verwijderen",
     "uploading": "Bezig met uploaden…"
+  },
+  "bulk": {
+    "title": "Snel honden toevoegen",
+    "lede": "Kies een foto per hond. Daarna vul je per hond het belangrijkste in en zet je ze in één keer online. Het verhaal en extra foto's kun je later aanvullen.",
+    "pick": "Kies foto's, één per hond",
+    "pickHint": "Of sleep ze hierheen. Heet een foto al \"Bram.jpg\"? Dan vullen we de naam voor je in. Maximaal {max} honden tegelijk.",
+    "uploading": "Bezig met uploaden: {done} van {total}",
+    "failed": "{n, plural, one {# foto lukte niet.} other {# foto's lukten niet.}} Probeer die nog een keer.",
+    "errors": {
+      "too-many-drafts": "Er kunnen maximaal {max} honden tegelijk als concept klaarstaan. Zet eerst een paar honden online.",
+      "no-photos": "Kies foto's (jpg, png of webp).",
+      "invalid": "Er ging iets mis met de gegevens. Probeer het opnieuw."
+    },
+    "notVerified": "Jullie opvang wordt nog gecontroleerd. Honden die je online zet, worden zichtbaar zodra de controle klaar is.",
+    "remove": "{name} verwijderen",
+    "dogN": "hond {n}",
+    "namePlaceholder": "Naam",
+    "nameOf": "Naam van hond {n}",
+    "age": "Leeftijd",
+    "more": "Verhaal en meer foto's →",
+    "empty": "Nog geen honden. Kies hierboven de foto's.",
+    "published": "{n, plural, one {# hond staat nu online.} other {# honden staan nu online.}}",
+    "saved": "Opgeslagen als concept.",
+    "missingName": "{n, plural, one {# hond heeft nog geen naam en blijft concept.} other {# honden hebben nog geen naam en blijven concept.}}",
+    "save": "Opslaan als concept",
+    "publishAll": "Zet {n, plural, one {# hond} other {# honden}} online",
+    "done": "Klaar",
+    "agePlaceholder": "Leeftijd (jaar)"
   }
 }

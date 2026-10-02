@@ -217,7 +217,14 @@
     "fromOwner": "Del barrio",
     "fromShelter": "De protectora",
     "demoNote": "Perro de ejemplo: no puedes organizar paseos con él.",
-    "ppp": "Perro PPP (requiere licencia)"
+    "ppp": "Perro PPP (requiere licencia)",
+    "orgTitle": "Perros de {name}",
+    "orgOpeningHours": "Horario",
+    "orgTreats": {
+      "yes": "Puedes traer tus propios premios para perros.",
+      "own": "No traigas premios propios: la protectora los tiene.",
+      "no": "Mejor no dar premios."
+    }
   },
   "dog": {
     "story": "Sobre {name}",
@@ -263,7 +270,11 @@
     "paused": "Este perro está en pausa de momento.",
     "saved": "Guardado. {name} ya aparece en Rondje.",
     "markAdopted": "¡Adoptado!",
-    "view": "Ver perfil"
+    "view": "Ver perfil",
+    "publish": "Publicar",
+    "walkingTimes": "Horarios de paseo",
+    "website": "Web",
+    "hiddenByModerator": "Ocultado por Rondje"
   },
   "request": {
     "title": "Organiza un paseo",
@@ -486,7 +497,8 @@
       "active": "Visible",
       "paused": "En pausa",
       "adopted": "Adoptado",
-      "hidden": "Oculto"
+      "hidden": "Oculto",
+      "draft": "Borrador"
     },
     "tipsTitle": "Así encontrarás antes a un paseador fijo",
     "tip1": "Añade una foto al aire libre en la que mire a la cámara.",
@@ -592,8 +604,8 @@
     "registrationNumber": "Número de registro (KvK, KBO o CIF)",
     "address": "Dirección",
     "website": "Sitio web",
-    "email": "Correo electrónico",
-    "phone": "Teléfono",
+    "email": "Correo para paseadores",
+    "phone": "Teléfono para paseadores",
     "description": "Sobre la protectora",
     "authorized": "Tengo autorización para representar a esta protectora y acepto las <terms>condiciones de colaboración</terms>",
     "pending": "Estamos revisando tu protectora. Ya puedes añadir perros; serán visibles en cuanto se verifique la protectora.",
@@ -629,7 +641,9 @@
       "authorized": "Confirma que puedes representar a la protectora.",
       "no-account": "No hay ninguna cuenta con este correo electrónico.",
       "no-rows": "No hemos encontrado perros en el archivo.",
-      "too-large": "El archivo es demasiado grande."
+      "too-large": "El archivo es demasiado grande.",
+      "website": "No parece una dirección web válida. Por ejemplo: www.protectora.es",
+      "instagram": "Escribe vuestro nombre de Instagram, por ejemplo @protectora."
     },
     "eyebrow": "Gratis para protectoras",
     "yours": "Tu protectora",
@@ -654,7 +668,7 @@
     "statDogs": "perros",
     "statWalks": "paseos programados",
     "statSignups": "inscripciones",
-    "noDogs": "Todavía no hay perros. Añade uno o impórtalos todos de una vez.",
+    "noDogs": "Aún no hay perros. Añádelos rápido con fotos o importa un archivo.",
     "noGroupWalks": "Todavía no hay paseos en grupo programados.",
     "groupWalkCreated": "Paseo en grupo programado.",
     "idChecked": "Identidad ya comprobada",
@@ -663,7 +677,58 @@
       "staff": "miembro del equipo"
     },
     "staffAdded": "Persona añadida al equipo.",
-    "createdPending": "Tu protectora está registrada. La revisaremos en un plazo de dos días laborables. Añade ya tus perros: serán visibles en cuanto la protectora esté verificada."
+    "createdPending": "Tu protectora está registrada. La revisaremos en un plazo de dos días laborables. Añade ya tus perros: serán visibles en cuanto la protectora esté verificada.",
+    "sections": {
+      "about": "La protectora",
+      "walking": "Pasear con vosotros",
+      "contact": "Contacto"
+    },
+    "dogCount": "¿Cuántos perros tenéis más o menos?",
+    "dogCountHint": "Así veréis cuántos están ya publicados.",
+    "descriptionHint": "¿Quiénes sois, qué perros viven con vosotros y qué significa para ellos un paseo más?",
+    "instagram": "Instagram",
+    "logo": "Logo",
+    "cover": "Foto de portada",
+    "coverHint": "Una foto ancha de la protectora o de los perros. Sin personas que no hayan dado permiso.",
+    "walkingTimes": "¿Cuándo pueden venir a pasear los voluntarios?",
+    "walkingTimesHint": "Por ejemplo: sábado y domingo 10:00–12:00, miércoles por la tarde con cita",
+    "openingHours": "Horario",
+    "openingHoursHint": "Por ejemplo: de martes a sábado 11:00–16:00",
+    "treatsLabel": "¿Se pueden traer premios propios?",
+    "treats": {
+      "yes": "Sí, se puede",
+      "own": "No, nosotros tenemos premios",
+      "no": "Mejor ningún premio"
+    },
+    "providesLabel": "¿Qué dais a los paseadores?",
+    "providesHint": "Será lo predeterminado para los perros nuevos. Se puede cambiar por perro.",
+    "defaultWalkMinutes": "¿Cuánto dura normalmente un paseo? (minutos)",
+    "coordinatorHint": "Persona de contacto para Rondje. No es público: solo Rondje lo ve, para la verificación y para dudas.",
+    "coordinatorName": "Nombre de la persona de contacto",
+    "coordinatorEmail": "Correo de la persona de contacto",
+    "coordinatorPhone": "Teléfono de la persona de contacto",
+    "identityLocked": "El nombre, el número y el país están verificados, así que no podéis cambiarlos. ¿Hay algún error? Avisadnos.",
+    "detailsSaved": "Guardado.",
+    "publicPage": "Ver vuestra página pública",
+    "checklistTitle": "Así estaréis en línea enseguida",
+    "checklist": {
+      "details": "Contad algo de la protectora: logo, descripción y horarios de paseo",
+      "dogs": "Publicad vuestros perros",
+      "walk": "Planificad un primer paseo en grupo",
+      "verified": "Rondje verifica la protectora (normalmente en dos días laborables)"
+    },
+    "checklistGo": "Hacerlo →",
+    "checklistDone": "hecho",
+    "checklistTodo": "pendiente",
+    "bulkAdd": "Añadir rápido con fotos",
+    "progressLabel": "Perros publicados",
+    "progress": "{online} de unos {total} perros están publicados.",
+    "draftsWaiting": "{n, plural, one {# perro espera como borrador.} other {# perros esperan como borrador.}}",
+    "draftsOpen": "Completar y publicar",
+    "unnamed": "Aún sin nombre",
+    "details": "Datos de la protectora",
+    "detailsLede": "Lo que ven los paseadores de vosotros y cómo contactaros. La persona de contacto es solo para Rondje.",
+    "visibleAfterCheck": "Visible tras la verificación"
   },
   "groupWalks": {
     "title": "Paseos en grupo",
@@ -760,7 +825,9 @@
       "walk-overdue": "El paseo con {dogName} está durando más de lo previsto.",
       "trust-granted": "Ya puedes pasear a {dogName} por tu cuenta.",
       "group-signup": "{walkerName} se ha apuntado a un paseo en grupo.",
-      "org-verified": "Tu protectora ha sido verificada. Tus perros ya son visibles."
+      "org-verified": "Tu protectora ha sido verificada. Tus perros ya son visibles.",
+      "org-pending": "{orgName} se ha registrado como protectora. Revisa los datos.",
+      "shelter-joined": "{orgName} ya está en Rondje. ¡Echa un vistazo a los perros!"
     }
   },
   "admin": {
@@ -802,7 +869,11 @@
     "photosInline": "aún sin conectar; las fotos se guardan en tamaño reducido en la base de datos",
     "socialOff": "desactivado (añade las claves en Vercel para activarlo)",
     "verifyHint": "Comprueba el número de registro en el registro público (KvK, KBO o Registro de Asociaciones) y llama o escribe a la protectora con los datos de contacto de su propia web.",
-    "walk": "paseo"
+    "walk": "paseo",
+    "orgDogCount": "unos {n} perros",
+    "orgCoordinator": "Persona de contacto",
+    "orgLookup": "Buscar en el registro",
+    "orgDomainMatch": "El correo coincide con la web"
   },
   "banned": {
     "title": "Tu cuenta ha sido bloqueada",
@@ -836,5 +907,33 @@
     "makeFirst": "Poner la primera",
     "remove": "Eliminar foto",
     "uploading": "Subiendo…"
+  },
+  "bulk": {
+    "title": "Añadir perros rápido",
+    "lede": "Elige una foto por perro. Después rellena lo esencial de cada uno y publícalos todos a la vez. La historia y más fotos se pueden añadir luego.",
+    "pick": "Elige fotos, una por perro",
+    "pickHint": "O arrástralas aquí. ¿La foto se llama \"Bram.jpg\"? Entonces rellenamos el nombre. Hasta {max} perros a la vez.",
+    "uploading": "Subiendo: {done} de {total}",
+    "failed": "{n, plural, one {# foto no se ha podido subir.} other {# fotos no se han podido subir.}} Inténtalo de nuevo.",
+    "errors": {
+      "too-many-drafts": "Puede haber hasta {max} perros como borrador a la vez. Publica primero algunos.",
+      "no-photos": "Elige fotos (jpg, png o webp).",
+      "invalid": "Algo ha fallado con los datos. Inténtalo de nuevo."
+    },
+    "notVerified": "Todavía estamos verificando la protectora. Los perros que publiques serán visibles cuando termine la verificación.",
+    "remove": "Quitar a {name}",
+    "dogN": "perro {n}",
+    "namePlaceholder": "Nombre",
+    "nameOf": "Nombre del perro {n}",
+    "age": "Edad",
+    "more": "Historia y más fotos →",
+    "empty": "Aún no hay perros. Elige las fotos arriba.",
+    "published": "{n, plural, one {# perro ya está publicado.} other {# perros ya están publicados.}}",
+    "saved": "Guardado como borrador.",
+    "missingName": "{n, plural, one {# perro aún no tiene nombre y sigue como borrador.} other {# perros aún no tienen nombre y siguen como borrador.}}",
+    "save": "Guardar como borrador",
+    "publishAll": "Publicar {n, plural, one {# perro} other {# perros}}",
+    "done": "Listo",
+    "agePlaceholder": "Edad (años)"
   }
 }

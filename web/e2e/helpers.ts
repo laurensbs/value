@@ -52,3 +52,32 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
   await page.getByRole('button', { name: 'Profiel opslaan' }).click()
 }
+
+/** Signs in as the e2e admin (ADMIN_EMAILS in playwright.config.ts). On a reused server the account may already exist. */
+export async function signInAdmin(browser: Browser) {
+  const admin = await newPerson(browser)
+  const page = admin.page
+  await page.goto('/signup')
+  await page.getByLabel('Voornaam').fill('Beheer')
+  await page.getByLabel('E-mailadres').fill('admin@e2e.test')
+  await page.getByLabel('Wachtwoord').fill('wandelen-123')
+  await page.getByRole('button', { name: 'Account maken' }).click()
+  const exists = page.getByText(/Er bestaat al een account/)
+  await Promise.race([page.waitForURL(/\/onboarding/), exists.waitFor()])
+  if (await exists.isVisible()) {
+    await page.goto('/login?next=/admin')
+    await page.getByLabel('E-mailadres').fill('admin@e2e.test')
+    await page.getByLabel('Wachtwoord').fill('wandelen-123')
+    await page.getByRole('button', { name: 'Inloggen', exact: true }).click()
+    await page.waitForURL(/\/admin/)
+  } else {
+    await onboard(page, { birthDate: '1990-01-01', city: 'Utrecht', bio: 'Beheer', phone: '', walker: false, owner: false })
+  }
+  return admin
+}
+
+/** A tiny valid PNG (1×1, white), to upload as a photo without fixtures on disk. */
+export const PNG_1X1 = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4//8/AAX+Av4N70a4AAAAAElFTkSuQmCC',
+  'base64',
+)

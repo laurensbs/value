@@ -8,59 +8,60 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { isCountry } from '@/lib/countries'
 import { parseDogCsv } from '@/lib/dog-import'
+import { MAX_DRAFT_DOGS, shelterDogDefaults } from '@/lib/dog-options'
+import { draftRowSchema, type DraftDog } from '@/lib/draft-dogs'
 import { fuzzLatLng, isValidLatLng } from '@/lib/geo'
+import { normalizeInstagram, normalizeWebsite, readOrgForm, type OrgDetails } from '@/lib/org-fields'
+import { isAllowedPhotoUrl } from '@/lib/photos'
 import { isAdult } from '@/lib/rules'
 import { zonedToUtc } from '@/lib/time'
-import { audit, notify } from '../notify'
+import { audit, notify, notifyAdmins } from '../notify'
 import { actionViewer, isOrgMember } from '../session'
 import type { FormState } from './profile'
 
-const orgSchema = z.object({
-  name: z.string().trim().min(2).max(120),
-  country: z.string().refine(isCountry),
-  city: z.string().trim().min(1).max(60),
-  address: z.string().trim().max(200).default(''),
-  registrationNumber: z.string().trim().min(4).max(40),
-  website: z.string().trim().max(200).default(''),
-  email: z.string().trim().email().max(200),
-  phone: z.string().trim().max(30).default(''),
-  description: z.string().trim().max(1500).default(''),
-  lat: z.coerce.number().optional(),
-  lng: z.coerce.number().optional(),
-  directoryId: z.string().max(80).optional(),
-})
+/** Maps the checked form to organization columns, or says which field is wrong. */
+function orgColumns(d: OrgDetails) {
+  const website = d.website ? normalizeWebsite(d.website) : null
+  if (d.website && !website) return { error: 'website' as const }
+  const instagram = d.instagram ? normalizeInstagram(d.instagram) : null
+  if (d.instagram && !instagram) return { error: 'instagram' as const }
+  const { lat, lng, logoUrl, coverUrl, coordinatorEmail, coordinatorPhone, dogCount, ...rest } = d
+  // Only set when a shelter claims a directory entry at sign-up, never on later edits.
+  delete rest.directoryId
+  return {
+    values: {
+      ...rest,
+      website,
+      instagram,
+      logoUrl: logoUrl || null,
+      coverUrl: coverUrl || null,
+      coordinatorEmail: coordinatorEmail || null,
+      coordinatorPhone: coordinatorPhone || null,
+      dogCount: dogCount ?? null,
+      ...(lat !== undefined && lng !== undefined && isValidLatLng(lat, lng) ? { lat, lng } : {}),
+    },
+  }
+}
 
 export async function createOrganization(_prev: FormState, form: FormData): Promise<FormState> {
   const viewer = await actionViewer()
-  const parsed = orgSchema.safeParse({
-    name: form.get('name'),
-    country: form.get('country'),
-    city: form.get('city'),
-    address: form.get('address') ?? '',
-    registrationNumber: form.get('registrationNumber'),
-    website: form.get('website') ?? '',
-    email: form.get('email'),
-    phone: form.get('phone') ?? '',
-    description: form.get('description') ?? '',
-    lat: form.get('lat') || undefined,
-    lng: form.get('lng') || undefined,
-    directoryId: (form.get('directoryId') as string) || undefined,
-  })
+  const parsed = readOrgForm(form)
   if (!parsed.success) return { ok: false, error: 'invalid' }
   if (form.get('authorized') !== 'on') return { ok: false, error: 'authorized' }
-  const { lat, lng, website, ...o } = parsed.data
+  const mapped = orgColumns(parsed.data)
+  if ('error' in mapped) return { ok: false, error: mapped.error }
   const db = await getDb()
   const id = crypto.randomUUID()
   await db.insert(s.organization).values({
     id,
-    ...o,
-    website: website ? (website.startsWith('http') ? website : `https://${website}`) : null,
-    ...(lat !== undefined && lng !== undefined && isValidLatLng(lat, lng) ? { lat, lng } : {}),
+    ...mapped.values,
+    directoryId: parsed.data.directoryId ?? null,
     status: 'pending',
     createdBy: viewer.userId,
   })
   await db.insert(s.organizationMember).values({ orgId: id, userId: viewer.userId, role: 'admin' })
   await audit(db, viewer.userId, 'org.created', 'organization', id)
+  await notifyAdmins(db, 'org-pending', { orgId: id, orgName: mapped.values.name })
   redirect(`/shelter/${id}?created=1`)
 }
 
@@ -68,6 +69,36 @@ async function requireMember(orgId: string) {
   const viewer = await actionViewer()
   if (!isOrgMember(viewer, orgId) && !viewer.isAdmin) throw new Error('forbidden')
   return viewer
+}
+
+export async function updateOrganization(_prev: FormState, form: FormData): Promise<FormState> {
+  const orgId = String(form.get('orgId') ?? '')
+  const viewer = await requireMember(orgId)
+  const db = await getDb()
+  const [org] = await db.select().from(s.organization).where(eq(s.organization.id, orgId))
+  if (!org) return { ok: false, error: 'forbidden' }
+  const parsed = readOrgForm(form)
+  if (!parsed.success) return { ok: false, error: 'invalid' }
+  const mapped = orgColumns(parsed.data)
+  if ('error' in mapped) return { ok: false, error: mapped.error }
+  const values = { ...mapped.values }
+  // A verified shelter's name, number and country were checked by hand; only an admin can change them.
+  if (org.status === 'verified' && !viewer.isAdmin) {
+    values.name = org.name
+    values.registrationNumber = org.registrationNumber
+    if (isCountry(org.country)) values.country = org.country
+  }
+  await db.update(s.organization).set(values).where(eq(s.organization.id, orgId))
+
+  // Shelter dogs live at the shelter: keep their place in step with it.
+  const place = { country: values.country, city: values.city, lat: values.lat ?? org.lat, lng: values.lng ?? org.lng }
+  if (place.country !== org.country || place.city !== org.city || place.lat !== org.lat || place.lng !== org.lng) {
+    await db.update(s.dog).set(place).where(eq(s.dog.orgId, orgId))
+  }
+  await audit(db, viewer.userId, 'org.updated', 'organization', orgId)
+  revalidatePath(`/shelter/${orgId}`)
+  revalidatePath('/shelters')
+  return { ok: true, message: 'saved' }
 }
 
 export async function importDogs(_prev: FormState & { created?: number; errors?: { row: number; message: string }[] }, form: FormData) {
@@ -80,7 +111,8 @@ export async function importDogs(_prev: FormState & { created?: number; errors?:
   const file = form.get('file')
   const text = file instanceof File && file.size > 0 ? await file.text() : String(form.get('csv') ?? '')
   if (text.length > 1_000_000) return { ok: false, error: 'too-large' }
-  const { dogs, errors } = parseDogCsv(text)
+  const defaults = shelterDogDefaults(org)
+  const { dogs, errors } = parseDogCsv(text, defaults)
   if (dogs.length === 0) return { ok: false, error: 'no-rows', errors }
 
   await db.insert(s.dog).values(
@@ -88,7 +120,7 @@ export async function importDogs(_prev: FormState & { created?: number; errors?:
       id: crypto.randomUUID(),
       orgId,
       ...d,
-      provides: ['bags', 'leash'],
+      provides: defaults.provides,
       country: org.country,
       city: org.city,
       lat: org.lat,
@@ -240,4 +272,94 @@ export async function updateOrgLocation(orgId: string, lat: number, lng: number)
   if (!isValidLatLng(lat, lng)) return
   const db = await getDb()
   await db.update(s.organization).set(fuzzLatLng({ lat, lng })).where(eq(s.organization.id, orgId))
+}
+
+type DraftResult = { ok: true; dog: DraftDog } | { ok: false; error: string }
+
+/** Photo-first bulk add: every uploaded photo becomes a draft dog right away, so nothing is lost on a bad connection. */
+export async function createDraftDog(orgId: string, photoUrl: string, name: string): Promise<DraftResult> {
+  await requireMember(orgId)
+  if (typeof photoUrl !== 'string' || !isAllowedPhotoUrl(photoUrl)) return { ok: false, error: 'invalid' }
+  const db = await getDb()
+  const [org] = await db.select().from(s.organization).where(eq(s.organization.id, orgId))
+  if (!org) return { ok: false, error: 'forbidden' }
+  const [{ n }] = await db
+    .select({ n: count() })
+    .from(s.dog)
+    .where(and(eq(s.dog.orgId, orgId), eq(s.dog.status, 'draft')))
+  if (n >= MAX_DRAFT_DOGS) return { ok: false, error: 'too-many-drafts' }
+
+  const defaults = shelterDogDefaults(org)
+  const dog: DraftDog = {
+    id: crypto.randomUUID(),
+    name: String(name ?? '').trim().slice(0, 60),
+    photo: photoUrl,
+    sex: 'female',
+    ageYears: null,
+    size: 'medium',
+    energy: 'medium',
+    level: 'starter',
+  }
+  await db.insert(s.dog).values({
+    id: dog.id,
+    orgId,
+    name: dog.name,
+    photos: [photoUrl],
+    ...defaults,
+    country: org.country,
+    city: org.city,
+    lat: org.lat,
+    lng: org.lng,
+    // The shelter accepted the partner terms, which cover insurance and health.
+    insuranceConfirmed: true,
+    healthConfirmed: true,
+    status: 'draft',
+  })
+  return { ok: true, dog }
+}
+
+/** Saves the quick details of draft dogs; with publish, every draft with a name goes online. */
+export async function saveDraftDogs(
+  orgId: string,
+  rows: unknown,
+  publish: boolean,
+): Promise<{ ok: boolean; published: number; missingName: number; error?: string }> {
+  const viewer = await requireMember(orgId)
+  const parsed = z.array(draftRowSchema).max(MAX_DRAFT_DOGS).safeParse(rows)
+  if (!parsed.success) return { ok: false, published: 0, missingName: 0, error: 'invalid' }
+  const db = await getDb()
+  let published = 0
+  let missingName = 0
+  for (const row of parsed.data) {
+    const goOnline = publish && row.name.length > 0
+    if (publish && !goOnline) missingName++
+    const updated = await db
+      .update(s.dog)
+      .set({
+        name: row.name,
+        sex: row.sex,
+        ageYears: row.ageYears,
+        size: row.size,
+        energy: row.energy,
+        level: row.level,
+        ...(goOnline ? { status: 'active' } : {}),
+      })
+      .where(and(eq(s.dog.id, row.id), eq(s.dog.orgId, orgId), eq(s.dog.status, 'draft')))
+      .returning({ id: s.dog.id })
+    if (goOnline && updated.length) published++
+  }
+  if (published) {
+    await audit(db, viewer.userId, 'org.dogs-published', 'organization', orgId, { published })
+    revalidatePath('/dogs')
+  }
+  revalidatePath(`/shelter/${orgId}`)
+  return { ok: true, published, missingName }
+}
+
+export async function deleteDraftDog(dogId: string): Promise<void> {
+  const db = await getDb()
+  const [dog] = await db.select({ orgId: s.dog.orgId, status: s.dog.status }).from(s.dog).where(eq(s.dog.id, String(dogId)))
+  if (!dog?.orgId || dog.status !== 'draft') return
+  await requireMember(dog.orgId)
+  await db.delete(s.dog).where(and(eq(s.dog.id, String(dogId)), eq(s.dog.status, 'draft')))
 }
