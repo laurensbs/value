@@ -1,6 +1,7 @@
 # App Store-vermelding (concept)
 
-> Status: concept, 3 oktober 2026. Nog niet ingediend. Indienen doet Laurens zelf.
+> **Concept, nog naast de versie uit het claude.ai-project leggen** (`onderzoek/merk-en-app-store.md`).
+> Status: 3 oktober 2026. Nog niet ingediend. Indienen doet Laurens zelf.
 > Regels voor deze tekst: alleen functies die op het moment van indienen in de iOS-app zitten (zie de tabel onderaan), geen namen van organisaties waar geen afspraak mee is, en geen gezondheidsclaims. Wel: "samen wandelen kan je dag goed doen". Niet: "helpt tegen somberheid".
 
 ## Naam
@@ -24,12 +25,13 @@ Voordat de naam vastligt, doet Laurens twee checks:
 **Ondertitel (max. 30):** Wandel met een buurhond
 
 **Promotietekst (max. 170):**
-Een vast rondje met een hond die dat goed kan gebruiken. Van een buurvrouw die zelf niet meer ver kan lopen, of uit de opvang. Gratis, zonder reclame.
+Een vast rondje met een hond die dat goed kan gebruiken. Van een buurvrouw die zelf niet meer ver kan lopen, of uit de opvang. Altijd gratis, zonder advertenties.
 
 **Beschrijving:**
 Ken je dat gevoel na een wandeling? {{NAAM}} koppelt jongvolwassenen aan honden die een extra rondje goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in begeleide groepswandelingen. Samen buiten zijn kan je dag goed doen, en een hond is er altijd blij mee.
 
 ZO WERKT HET
+• Je Vandaag-scherm begroet je met je level, de uitdaging van je stad en een tip van de dag.
 • Ontdek honden in je buurt, met de afstand en of ze rustig of energiek zijn.
 • Vraag een kennismaking aan. De eerste keer loop je altijd samen met de eigenaar of de opvang.
 • Klikt het? Dan spreek je een vast rondje af, en houd je contact in de chat bij je afspraak.
@@ -49,11 +51,10 @@ VOOR EIGENAREN
 EN VERDER
 • Een vriendenboek met elke hond waarmee je liep.
 • Een ademminuut voor een rustig moment.
-• Een tip van de dag, en een uitdaging die je stad samen loopt.
-• Levels en badges, die alleen jij ziet. Geen streaks, geen druk.
+• Levels en badges, die alleen jij ziet. Geen streaks en geen druk: elk rondje telt, ook na een pauze.
 • Een widget en een Live Activity voor je volgende rondje.
 
-{{NAAM}} is gratis en blijft gratis. Geen reclame, en we verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
+{{NAAM}} is altijd gratis en zonder advertenties, gedragen door leden die het belangrijk vinden. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
 
 {{NAAM}} is geen hulpverlening en stelt geen diagnoses. Gaat het niet goed met je? In de app staat waar je terechtkunt.
 
@@ -75,12 +76,13 @@ De eerste versie. Ontdek honden in je buurt, maak kennis en loop je eerste rondj
 **Subtitle (max 30):** Walk a neighbour's dog
 
 **Promotional text (max 170):**
-A regular walk with a dog that could use one. From a neighbour who can't walk far anymore, or from the shelter. Free, no ads.
+A regular walk with a dog that could use one. From a neighbour who can't walk far anymore, or from the shelter. Always free, no ads.
 
 **Description:**
 You know that feeling after a walk? {{NAAM}} connects young adults with dogs that could use an extra walk: dogs of neighbours who can no longer walk far, and shelter dogs on guided group walks. Getting outside together can make your day, and a dog is always happy you came.
 
 HOW IT WORKS
+• Your Today screen greets you with your level, your city's challenge and a tip of the day.
 • Discover dogs near you, with the distance and whether they're calm or energetic.
 • Ask for an introduction. The first time, you always walk together with the owner or the shelter.
 • Got along? Agree on a regular walk and stay in touch in the chat for your appointment.
@@ -100,11 +102,10 @@ FOR OWNERS
 AND MORE
 • A friends book with every dog you walked.
 • A breathing minute for a calm moment.
-• A tip of the day, and a challenge your city walks together.
-• Levels and badges that only you can see. No streaks, no pressure.
+• Levels and badges that only you can see. No streaks and no pressure: every walk counts, even after a break.
 • A widget and a Live Activity for your next walk.
 
-{{NAAM}} is free and stays free. No ads, and we never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
+{{NAAM}} is always free and ad-free, carried by members who care. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
 
 {{NAAM}} is not a care service and makes no diagnoses. Not feeling well? The app shows where to get help.
 
@@ -127,13 +128,14 @@ The first version. Discover dogs near you, meet them and go on your first walk.
 | Na het rondje: afstand, feedback, stemming (alleen op het toestel) | ja (PR #3) | `Features/Walk` |
 | Voor eigenaren: honden aanmelden, verzoeken | ja (PR #3) | `Features/Owner`, `Features/Dog` |
 | Levels, badges, uitdaging van de stad | ja (PR #3) | `Features/Progress` |
-| Vriendenboek, ademminuut, tip van de dag | ja (PR #3) | `Features/Discover`, `Features/Wellbeing` |
+| Vandaag-scherm (begroeting, level, uitdaging, tip van de dag) | ja (PR #3) | `Features/Discover/HomeCards.swift` |
+| Vriendenboek, ademminuut | ja (PR #3) | `Features/Progress`, `Features/Wellbeing` |
 | Widget en Live Activity | ja (PR #3) | `RondjeWidgets` |
 | Inloggen met Apple of Google | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge en met sleutels |
 | Geluidjes | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 | Apple Gezondheid (rondjes en ademminuten bewaren) | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 
-Niet noemen: lidmaatschap of doneren (geld hoort niet in de app), en namen van organisaties.
+Wel noemen: "gedragen door leden" (zo betaalt Rondje zich; lid worden en geven gebeurt op de website, nooit in de app). Niet noemen: bedragen, doneren in de app, of namen van organisaties.
 
 ## Nog te beslissen door Laurens
 - De naam (zie boven).
