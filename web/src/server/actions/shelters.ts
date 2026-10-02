@@ -62,6 +62,8 @@ export async function createOrganization(_prev: FormState, form: FormData): Prom
   await db.insert(s.organizationMember).values({ orgId: id, userId: viewer.userId, role: 'admin' })
   await audit(db, viewer.userId, 'org.created', 'organization', id)
   await notifyAdmins(db, 'org-pending', { orgId: id, orgName: mapped.values.name })
+  // The tab bar gets the shelter's tab.
+  revalidatePath('/', 'layout')
   redirect(`/shelter/${id}?created=1`)
 }
 

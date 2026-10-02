@@ -1,6 +1,7 @@
 'use server'
 
 import { eq } from 'drizzle-orm'
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getLocale } from 'next-intl/server'
@@ -51,6 +52,8 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
   const p = parsed.data
   // Where someone was going, or the first thing to do for the role they chose.
   const start = form.get('intent') === 'shelter' ? '/shelter' : p.hasDogs && !p.wantsToWalk ? '/my-dogs/new?welcome=1' : '/?welcome=1'
+  // The header and tab bar were drawn for someone without a profile: draw them again.
+  revalidatePath('/', 'layout')
   redirect(safeNext(form.get('next') || undefined, start))
 }
 
@@ -83,6 +86,8 @@ export async function updateProfile(_prev: FormState, form: FormData): Promise<F
     })
     .where(eq(s.profile.userId, viewer.userId))
   await db.update(s.user).set({ name: p.firstName }).where(eq(s.user.id, viewer.userId))
+  // Walking or owning a dog decides the tabs, and the header shows the photo.
+  revalidatePath('/', 'layout')
   return { ok: true, message: 'saved' }
 }
 

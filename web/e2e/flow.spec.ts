@@ -46,6 +46,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   })
   // New walkers start on their own home: a welcome, the first steps and the dogs nearby.
   await expect(walker.page).toHaveURL(/\/\?welcome=1$/)
+  // With the app's tabs (shown on phones) straight away, not only after a reload.
+  await expect(walker.page.locator('nav[aria-label="App"]')).toBeAttached()
   await expect(walker.page.getByRole('heading', { name: 'Welkom bij Rondje, Fleur!' })).toBeVisible()
   await expect(walker.page.getByRole('link', { name: 'Start' })).toHaveAttribute('href', '/profile/edit')
   await shot(walker.page, '05-today-walker')
