@@ -12,6 +12,7 @@ struct ActiveWalkView: View {
     @State private var holdProgress: CGFloat = 0
     @State private var care = Care()
     @State private var photos: [WalkPhoto] = []
+    @State private var moodBefore: Int?
     @State private var error: String?
 
     var body: some View {
@@ -96,6 +97,13 @@ struct ActiveWalkView: View {
                     .font(.footnote).foregroundStyle(Palette.muted)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+            if moodBefore == nil {
+                MoodPicker(title: L("Even voor jezelf: hoe voel je je nu?"), selected: nil) { value in
+                    withAnimation(.snappy) { moodBefore = value }
+                    MoodStore.set(walkId: info.walkId, before: value)
+                }
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
             CareCounters(walkId: info.walkId, care: $care)
             if !photos.isEmpty { PhotoStrip(photos: photos) }
             SendPhotoButton(walkId: info.walkId) { photo in photos.append(photo) }
@@ -104,6 +112,7 @@ struct ActiveWalkView: View {
         }
         .padding(20)
         .task(id: info.walkId) {
+            moodBefore = MoodStore.entry(info.walkId)?.before
             // After a restart mid-walk: pick up the report and photos so far.
             if let live: LiveWalk = try? await APIClient.shared.get("/api/walks/\(info.walkId)/live?after=999999999") {
                 care = live.care ?? Care()
@@ -163,11 +172,20 @@ struct ActiveWalkView: View {
 
 /// Shown after ending: a small celebration and the private feedback.
 struct WalkDoneView: View {
+    /// A kind sentence comparing before and after, only when the walker answered both.
+    private var moodLine: String? {
+        guard let after = moodAfter, let before = MoodStore.entry(walkId)?.before else { return nil }
+        if after > before { return L("Je voelt je beter dan voor het rondje. Fijn!") }
+        if after == before { return L("Even buiten geweest. Dat telt ook.") }
+        return L("Zware dag? Fijn dat je toch bent gegaan.")
+    }
+
     let walkId: String
     let distance: Int
     let dogName: String
     @State private var feedback = false
     @State private var pop = false
+    @State private var moodAfter: Int?
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -182,6 +200,11 @@ struct WalkDoneView: View {
             Text("Goed rondje!").font(.display(30))
             Text("\(dogName) en jij liepen \(Format.distance(Double(distance))). Dank je wel.")
                 .multilineTextAlignment(.center).foregroundStyle(Palette.muted)
+            MoodPicker(title: L("En hoe voel je je nu?"), selected: moodAfter) { value in
+                moodAfter = value
+                MoodStore.set(walkId: walkId, after: value)
+            }
+            if let line = moodLine { Text(line).font(.subheadline.weight(.semibold)).foregroundStyle(Palette.grass).multilineTextAlignment(.center) }
             Button("Hoe ging het?") { feedback = true }.buttonStyle(.primary)
             Button("Klaar") { dismiss() }.buttonStyle(.secondary)
         }

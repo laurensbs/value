@@ -23,6 +23,14 @@ struct ProfileView: View {
                         .buttonStyle(.secondary)
                     }
                     if let trust = model.me?.trust { stats(trust) }
+                    if let lift = MoodStore.averageLift, lift > 0 {
+                        Label(L("Na een rondje voel je je gemiddeld beter dan ervoor. Alleen jij ziet dit."), systemImage: "sun.max.fill")
+                            .font(.subheadline)
+                            .foregroundStyle(Palette.ink)
+                            .padding(14)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Palette.grassSoft, in: .rect(cornerRadius: 18, style: .continuous))
+                    }
                     links
                     Text("\(Brand.name) \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")
                         .font(.caption).foregroundStyle(Palette.muted)

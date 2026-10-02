@@ -77,18 +77,18 @@ struct FirstSteps: View {
 
 /// One calm tip a day, like a small card from a friend who knows dogs.
 struct DailyTip: View {
-    private static let tips: [(String, String)] = [
-        ("drop.fill", "Neem op warme dagen water mee, en voel met je hand of de stoep niet te heet is voor zijn pootjes."),
-        ("hand.raised.fill", "Laat een hond eerst aan je hand snuffelen voordat je hem aait. Zo stel je je voor."),
-        ("leaf.fill", "Snuffelen is voor een hond net zo vermoeiend als rennen. Een rustig snuffelrondje is een cadeau."),
-        ("ear.fill", "Oren naar achteren en een lage staart? Geef de hond wat ruimte en praat rustig."),
-        ("moon.stars.fill", "In het donker? Een lampje aan de riem maakt jullie allebei beter zichtbaar."),
-        ("figure.walk", "Loop in je eigen tempo. Een hond die aan de riem trekt, leert meer van stilstaan dan van trekken."),
-        ("heart.fill", "Even samen op een bankje zitten telt ook. Rondjes hoeven niet snel of ver te zijn."),
-        ("pawprint.fill", "Een andere hond komt eraan? Vraag de eigenaar eerst of ze kennis mogen maken."),
-        ("sun.max.fill", "Wandelen in de ochtend? Dan is het rustiger en koeler, fijn voor oudere honden."),
-        ("bubble.left.fill", "Vertel de eigenaar na afloop iets leuks over het rondje. Dat maakt hun dag."),
-    ]
+    private static var tips: [(String, String)] { [
+        ("drop.fill", L("Neem op warme dagen water mee, en voel met je hand of de stoep niet te heet is voor zijn pootjes.")),
+        ("hand.raised.fill", L("Laat een hond eerst aan je hand snuffelen voordat je hem aait. Zo stel je je voor.")),
+        ("leaf.fill", L("Snuffelen is voor een hond net zo vermoeiend als rennen. Een rustig snuffelrondje is een cadeau.")),
+        ("ear.fill", L("Oren naar achteren en een lage staart? Geef de hond wat ruimte en praat rustig.")),
+        ("moon.stars.fill", L("In het donker? Een lampje aan de riem maakt jullie allebei beter zichtbaar.")),
+        ("figure.walk", L("Loop in je eigen tempo. Een hond die aan de riem trekt, leert meer van stilstaan dan van trekken.")),
+        ("heart.fill", L("Even samen op een bankje zitten telt ook. Rondjes hoeven niet snel of ver te zijn.")),
+        ("pawprint.fill", L("Een andere hond komt eraan? Vraag de eigenaar eerst of ze kennis mogen maken.")),
+        ("sun.max.fill", L("Wandelen in de ochtend? Dan is het rustiger en koeler, fijn voor oudere honden.")),
+        ("bubble.left.fill", L("Vertel de eigenaar na afloop iets leuks over het rondje. Dat maakt hun dag.")),
+    ] }
 
     var body: some View {
         let day = Calendar.current.ordinality(of: .day, in: .year, for: .now) ?? 0
@@ -101,7 +101,7 @@ struct DailyTip: View {
                 .background(Palette.ball, in: .rect(cornerRadius: 14, style: .continuous))
             VStack(alignment: .leading, spacing: 4) {
                 Text("Tip van vandaag").font(.caption.weight(.bold)).foregroundStyle(Palette.onGrass.opacity(0.8))
-                Text(LocalizedStringKey(tip.1)).font(.subheadline).foregroundStyle(Palette.onGrass)
+                Text(tip.1).font(.subheadline).foregroundStyle(Palette.onGrass)
             }
             Spacer(minLength: 0)
         }

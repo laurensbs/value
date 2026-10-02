@@ -110,6 +110,7 @@ final class AppModel {
         appointments = AppointmentsResponse(outgoing: [], incoming: [])
         SharedStore.save(nil)
         Cache.clear()
+        MoodStore.clear()
         Reminders.clearAll()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut
