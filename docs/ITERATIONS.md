@@ -125,3 +125,25 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 - Lettertypes beperken tot de Latijnse tekenset, zodat de app sneller laadt.
 - Lege staat en eerste gebruik nalopen zonder voorbeelddata.
 - Teksten laten nalezen door iemand van 113 of MIND, voordat er echte gebruikers komen.
+
+---
+
+## Cyclus 4: sneller laden op mobiel (2 oktober 2026)
+
+**Review:**
+- De bundel bevatte lettertypes voor Vietnamees en Latin Extended, en van Caveat ook een extra WOFF-kopie.
+- Nederlands gebruikt alleen de Latijnse tekenset (é, ë, ï, ’ inbegrepen).
+
+**Verbetering:**
+- Eigen `@font-face`-regels met alleen de Latijnse WOFF2-bestanden (`src/fonts.css`).
+- De preview ging van 574 KB naar 442 KB (−23%).
+- Gecontroleerd dat alle drie de lettertypes nog laden.
+
+**Tests:** 25 unit- en integratietests en 6 browsertests. Alles groen.
+
+**Resultaat:** preview bijgewerkt naar versie 5.
+
+**Volgende stap:**
+- Lege staat en eerste gebruik nalopen zonder voorbeelddata.
+- Teksten laten nalezen door iemand van 113 of MIND, voordat er echte gebruikers komen.
+- Een herinnering voor het vaste rondje: in de pilot via sms of WhatsApp door de coördinator, niet via pushmeldingen.
