@@ -60,6 +60,8 @@ struct DiscoverView: View {
                     VStack(alignment: .leading, spacing: 18) {
                         header
                         NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || (!loading && error == nil))
+                        NudgeOfferCard()
+                        WeekRecapCard(side: .walker)
                         FirstSteps { quiz = true }
                         if let p = progress.progress, p.points > 0 {
                             NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
@@ -225,6 +227,7 @@ struct DiscoverView: View {
                 groupWalks = gr.groupWalks
                 error = nil
             }
+            Cache.save(Array(dr.dogs.filter { !$0.isDemo && $0.energy == "calm" }.prefix(10)), as: "nearbyDogs")
         } catch {
             self.error = error.localizedDescription
         }

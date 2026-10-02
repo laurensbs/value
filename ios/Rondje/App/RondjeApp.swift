@@ -14,6 +14,7 @@ struct RondjeApp: App {
                 .environment(walk)
                 .tint(Palette.grass)
                 .task { await model.bootstrap() }
+                .task { Nudges.start() }
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active { Keepsakes.shared.recordVisit() }
                     if phase == .active, model.phase == .ready { Task { await model.refreshMe() } }

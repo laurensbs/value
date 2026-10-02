@@ -26,6 +26,7 @@ struct OwnerHomeView: View {
                     }
 
                     NextStepCard(placement: .home, myDogsCount: loaded ? dogs.count : nil, addDog: { adding = true })
+                    WeekRecapCard(side: .owner)
 
                     ForEach(live) { item in liveCard(item) }
 

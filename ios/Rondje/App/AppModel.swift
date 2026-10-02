@@ -105,8 +105,10 @@ final class AppModel {
         appointments = result
         offline = false
         Cache.save(result, as: "appointments")
+        WalkLog.syncFromAppointments(result)
         publishNextWalk()
         await Reminders.sync(with: result)
+        await Nudges.reschedule(appointments: result)
     }
 
     func signedIn() async {
@@ -130,6 +132,7 @@ final class AppModel {
         MoodStore.clear()
         Keepsakes.shared.clear()
         Reminders.clearAll()
+        Nudges.clear()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut
     }
