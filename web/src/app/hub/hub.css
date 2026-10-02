@@ -1,0 +1,1292 @@
+/* The founder's hub (/hub). Every rule is scoped to .hub-root, so nothing leaks into the app. */
+
+/* The hub is its own app: hide the site's header, footer, tab bar and walk banner around it. */
+.shell:has(.hub-root) > .header,
+.shell:has(.hub-root) > .footer,
+.shell:has(.hub-root) > .tabbar,
+.shell:has(.hub-root) > .active-walk {
+  display: none;
+}
+
+.shell:has(.hub-root) > .main {
+  max-width: none;
+  padding: 0;
+}
+
+.hub-root {
+  --hub-side: 248px;
+  --hub-tabs: 64px;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.hub-root .hub-body {
+  min-width: 0;
+  padding-bottom: calc(var(--hub-tabs) + 28px + env(safe-area-inset-bottom, 0px));
+}
+
+.hub-root .hub-page {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* ---------- Top bar (phone) ---------- */
+
+.hub-root .hub-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 10px;
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+}
+
+.hub-root .hub-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 760;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.hub-root .hub-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--grass);
+  color: var(--ball);
+}
+
+.hub-root .hub-brand small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 650;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+
+.hub-root .hub-top-level {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.hub-root .hub-top-level .level-badge {
+  width: 38px;
+  height: 38px;
+  font-size: 1rem;
+}
+
+/* ---------- Bottom tabs (phone) ---------- */
+
+.hub-root .hub-tabs {
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.hub-root .hub-tabs a {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 56px;
+  padding: 9px 0 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.hub-root .hub-tabs a::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 6px;
+  left: 50%;
+  width: 56px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--grass-soft);
+  transform: translateX(-50%) scaleX(0.4);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.hub-root .hub-tabs a[aria-current='page'] {
+  color: var(--grass);
+}
+
+.hub-root .hub-tabs a[aria-current='page']::before {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+.hub-root .hub-tab-dot {
+  position: absolute;
+  top: 5px;
+  left: calc(50% + 8px);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-size: 0.68rem;
+  font-weight: 760;
+  display: grid;
+  place-items: center;
+}
+
+/* ---------- Sidebar (desktop) ---------- */
+
+.hub-root .hub-side {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .hub-root {
+    grid-template-columns: var(--hub-side) 1fr;
+  }
+
+  .hub-root .hub-top,
+  .hub-root .hub-tabs {
+    display: none;
+  }
+
+  .hub-root .hub-body {
+    padding-bottom: 40px;
+  }
+
+  .hub-root .hub-page {
+    padding: 32px 32px 24px;
+    gap: 30px;
+  }
+
+  .hub-root .hub-side {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 22px 16px;
+    background: var(--walk-bg);
+    color: var(--on-walk);
+    overflow-y: auto;
+  }
+
+  .hub-root .hub-side .hub-brand {
+    color: inherit;
+    padding-inline: 8px;
+  }
+
+  .hub-root .hub-side .hub-brand small {
+    color: color-mix(in oklab, var(--on-walk) 70%, transparent);
+  }
+
+  .hub-root .hub-side .hub-brand-mark {
+    background: var(--ball);
+    color: #16201a;
+  }
+
+  .hub-root .hub-side-level {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: var(--radius-m);
+    background: rgb(255 255 255 / 0.08);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .hub-root .hub-side-level strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+
+  .hub-root .hub-side-level span.small {
+    color: color-mix(in oklab, var(--on-walk) 72%, transparent);
+  }
+
+  .hub-root .hub-side nav {
+    display: grid;
+    gap: 2px;
+  }
+
+  .hub-root .hub-side nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: color-mix(in oklab, var(--on-walk) 82%, transparent);
+    text-decoration: none;
+    font-weight: 650;
+  }
+
+  .hub-root .hub-side nav a:hover {
+    background: rgb(255 255 255 / 0.08);
+    color: var(--on-walk);
+  }
+
+  .hub-root .hub-side nav a[aria-current='page'] {
+    background: var(--ball);
+    color: #16201a;
+  }
+
+  .hub-root .hub-side nav .hub-tab-dot {
+    position: static;
+    margin-left: auto;
+  }
+
+  .hub-root .hub-side-foot {
+    margin-top: auto;
+    display: grid;
+    gap: 4px;
+    font-size: 0.85rem;
+  }
+
+  .hub-root .hub-side-foot a {
+    color: color-mix(in oklab, var(--on-walk) 75%, transparent);
+    padding: 6px 12px;
+  }
+
+  .hub-root .hub-more-tab {
+    display: none;
+  }
+}
+
+/* ---------- Page heads ---------- */
+
+.hub-root .hub-head {
+  display: grid;
+  gap: 6px;
+}
+
+.hub-root .hub-head h1 {
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+}
+
+.hub-root .hub-section {
+  display: grid;
+  gap: 12px;
+}
+
+.hub-root .hub-section > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hub-root .hub-section > header a {
+  font-weight: 650;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* ---------- Hero with level ---------- */
+
+.hub-root .hub-hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 20px;
+  border-radius: var(--radius-l);
+  background: var(--walk-bg);
+  color: var(--on-walk);
+  animation: rise 0.5s ease both;
+}
+
+.hub-root .hub-hero::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px dashed rgb(255 255 255 / 0.14);
+  pointer-events: none;
+}
+
+.hub-root .hub-hero .level-badge {
+  width: 86px;
+  height: 86px;
+  font-size: 2.3rem;
+  background:
+    radial-gradient(closest-side, var(--ball) 78%, transparent 80% 100%),
+    conic-gradient(#ffffff calc(var(--p) * 1turn), rgb(255 255 255 / 0.18) 0);
+}
+
+.hub-root .hub-hero h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.hub-root .hub-hero p {
+  color: color-mix(in oklab, var(--on-walk) 78%, transparent);
+}
+
+.hub-root .hub-hero .level-progress {
+  height: 10px;
+  background: rgb(255 255 255 / 0.16);
+  margin-top: 8px;
+}
+
+.hub-root .hub-hero .level-progress > span {
+  background: var(--ball);
+  transition: width 0.6s ease;
+}
+
+.hub-root .hub-xp-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.hub-root .hub-xp-parts span {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+/* ---------- Tasks ---------- */
+
+.hub-root .hub-tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.hub-root .hub-task {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.hub-root .hub-task.is-done {
+  background: color-mix(in oklab, var(--grass-soft) 60%, var(--surface));
+  border-color: transparent;
+}
+
+.hub-root .hub-task.is-done .hub-task-title {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: color-mix(in oklab, var(--grass) 50%, transparent);
+}
+
+.hub-root .hub-tick {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.hub-root .hub-tick:hover {
+  border-color: var(--grass);
+  color: color-mix(in oklab, var(--grass) 40%, transparent);
+}
+
+.hub-root .hub-tick:active {
+  transform: scale(0.92);
+}
+
+.hub-root .hub-tick[aria-pressed='true'] {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+  animation: pop 0.3s ease;
+}
+
+.hub-root .hub-task-main {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.hub-root .hub-task-title {
+  font-weight: 700;
+  font-size: 1.02rem;
+  line-height: 1.3;
+}
+
+.hub-root .hub-task-how {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  display: grid;
+  gap: 2px;
+}
+
+.hub-root .hub-task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.hub-root .hub-xp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ball) 55%, var(--surface));
+  color: var(--on-ball);
+  font-size: 0.75rem;
+  font-weight: 760;
+}
+
+.hub-root .hub-burst {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  translate: -50% 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: hub-float 1.1s ease-out forwards;
+}
+
+@keyframes hub-float {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.7);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-34px) scale(1);
+  }
+}
+
+/* ---------- Phases ---------- */
+
+.hub-root .hub-phase {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-radius: var(--radius-l);
+  background: var(--sunken);
+}
+
+.hub-root .hub-phase > summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.hub-root .hub-phase > summary::-webkit-details-marker {
+  display: none;
+}
+
+.hub-root .hub-phase-ring {
+  --p: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 760;
+  font-size: 0.85rem;
+  background:
+    radial-gradient(closest-side, var(--surface) 76%, transparent 78% 100%),
+    conic-gradient(var(--grass) calc(var(--p) * 1turn), var(--line) 0);
+}
+
+.hub-root .hub-phase-ring.is-complete {
+  background:
+    radial-gradient(closest-side, var(--ball) 76%, transparent 78% 100%),
+    conic-gradient(var(--grass) 1turn, var(--grass) 0);
+  color: var(--on-ball);
+}
+
+.hub-root .hub-phase-chevron {
+  transition: transform 0.2s ease;
+  color: var(--muted);
+}
+
+.hub-root .hub-phase[open] .hub-phase-chevron {
+  transform: rotate(90deg);
+}
+
+/* ---------- Tiles and numbers ---------- */
+
+.hub-root .hub-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (min-width: 700px) {
+  .hub-root .hub-tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.hub-root .hub-tile {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  min-width: 0;
+}
+
+.hub-root a.hub-tile:hover {
+  border-color: var(--grass);
+}
+
+.hub-root .hub-tile .hub-num {
+  font-family: var(--font-display);
+  font-weight: 760;
+  font-size: 1.9rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hub-root .hub-tile .hub-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.hub-root .hub-trend {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.hub-root .hub-trend.up {
+  color: var(--grass);
+}
+
+.hub-root .hub-tile.accent {
+  background: var(--ball);
+  border-color: transparent;
+  color: var(--on-ball);
+}
+
+.hub-root .hub-tile.accent .hub-label {
+  color: color-mix(in oklab, var(--on-ball) 70%, transparent);
+}
+
+.hub-root .hub-tile.wide {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Week rings ---------- */
+
+.hub-root .hub-rings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hub-root .hub-ring {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.hub-root .hub-ring-dial {
+  --p: 0;
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 760;
+  font-size: 1.15rem;
+  background:
+    radial-gradient(closest-side, var(--surface) 74%, transparent 76% 100%),
+    conic-gradient(var(--grass) calc(var(--p) * 1turn), var(--sunken) 0);
+}
+
+.hub-root .hub-ring-dial.is-full {
+  background:
+    radial-gradient(closest-side, var(--ball) 74%, transparent 76% 100%),
+    conic-gradient(var(--grass) 1turn, var(--grass) 0);
+  color: var(--on-ball);
+}
+
+.hub-root .hub-ring .small {
+  font-weight: 650;
+}
+
+/* ---------- Milestones ---------- */
+
+.hub-root .hub-medals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 10px;
+}
+
+.hub-root .hub-medal {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.hub-root .hub-medal.is-locked {
+  background: transparent;
+  border-style: dashed;
+}
+
+.hub-root .hub-medal strong {
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+.hub-root .hub-medal .small {
+  line-height: 1.3;
+}
+
+.hub-root .hub-medal .badge-bar {
+  margin-top: 2px;
+}
+
+/* ---------- Lists, partners, mails ---------- */
+
+.hub-root .hub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.hub-root .hub-item {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.hub-root .hub-item-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hub-root .hub-item-head h3 {
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.hub-root .hub-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.hub-root .hub-step {
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.hub-root .hub-step[aria-pressed='true'] {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.hub-root .hub-step.is-no[aria-pressed='true'] {
+  background: var(--sunken);
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.hub-root .hub-filter {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.hub-root .hub-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.hub-root .hub-filter .chip {
+  white-space: nowrap;
+}
+
+.hub-root .hub-pipeline {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.hub-root .hub-pipeline div {
+  display: grid;
+  gap: 2px;
+  padding: 10px 8px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.hub-root .hub-pipeline strong {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.hub-root .hub-pipeline span {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+@media (max-width: 520px) {
+  .hub-root .hub-pipeline {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.hub-root .hub-mail {
+  display: grid;
+  gap: 12px;
+}
+
+.hub-root .hub-mail .textarea {
+  min-height: 340px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.hub-root .hub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hub-root .hub-blanks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.hub-root .hub-template-list a {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.hub-root .hub-template-list a:hover {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.hub-root .hub-template-list a[aria-current='true'] {
+  background: var(--surface);
+  border-color: var(--grass);
+}
+
+.hub-root .hub-mail-layout {
+  display: grid;
+  gap: 18px;
+}
+
+/* On a phone the composer's own "Welke mail?" picker is enough. */
+.hub-root .hub-mail-layout > nav {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .hub-root .hub-mail-layout {
+    grid-template-columns: 300px 1fr;
+    align-items: start;
+  }
+
+  .hub-root .hub-mail-layout > nav {
+    display: flex;
+    position: sticky;
+    top: 24px;
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+  }
+}
+
+/* ---------- Charts ---------- */
+
+.hub-root .hub-bars {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hub-root .hub-bars rect.bar {
+  fill: var(--grass);
+}
+
+.hub-root .hub-bars rect.bar.alt {
+  fill: var(--calm);
+}
+
+.hub-root .hub-bars rect.bar.is-now {
+  fill: var(--ball);
+  stroke: var(--grass);
+  stroke-width: 1.5;
+}
+
+.hub-root .hub-bars text {
+  fill: var(--muted);
+  font-size: 11px;
+  font-family: var(--font-body);
+}
+
+.hub-root .hub-bars text.value {
+  fill: var(--ink);
+  font-weight: 700;
+}
+
+.hub-root .hub-funnel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.hub-root .hub-funnel li {
+  display: grid;
+  grid-template-columns: minmax(120px, 34%) 1fr auto;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.hub-root .hub-funnel .bar {
+  height: 22px;
+  border-radius: 8px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.hub-root .hub-funnel .bar > span {
+  display: block;
+  height: 100%;
+  min-width: 4px;
+  border-radius: inherit;
+  background: var(--grass);
+}
+
+.hub-root .hub-funnel .n {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  min-width: 70px;
+  text-align: right;
+}
+
+.hub-root .hub-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.hub-root .hub-table th,
+.hub-root .hub-table td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.hub-root .hub-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.hub-root .hub-table td.num,
+.hub-root .hub-table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.hub-root .hub-scroll {
+  overflow-x: auto;
+}
+
+/* ---------- Costs ---------- */
+
+.hub-root .hub-cost {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.hub-root .hub-cost.is-off {
+  background: transparent;
+  border-style: dashed;
+}
+
+.hub-root .hub-cost.is-off .hub-cost-fields {
+  opacity: 0.6;
+}
+
+.hub-root .hub-cost-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px 120px auto;
+  grid-template-areas: 'label amount period del';
+  gap: 8px;
+  align-items: center;
+}
+
+.hub-root .hub-cost-fields > :nth-child(1) {
+  grid-area: label;
+}
+
+.hub-root .hub-cost-fields > :nth-child(2) {
+  grid-area: amount;
+}
+
+.hub-root .hub-cost-fields > :nth-child(3) {
+  grid-area: period;
+}
+
+.hub-root .hub-cost-fields > :nth-child(4) {
+  grid-area: del;
+}
+
+.hub-root .hub-cost-fields .input,
+.hub-root .hub-cost-fields .select {
+  padding: 8px 10px;
+  font-size: 0.95rem;
+}
+
+.hub-root .hub-cost .note {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 640px) {
+  .hub-root .hub-cost-fields {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    grid-template-areas:
+      'label label del'
+      'amount period period';
+  }
+}
+
+.hub-root .hub-switch {
+  position: relative;
+  width: 46px;
+  height: 28px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--line);
+  transition: background 0.2s ease;
+  flex: none;
+}
+
+.hub-root .hub-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  transition: transform 0.2s ease;
+}
+
+.hub-root .hub-switch[aria-checked='true'] {
+  background: var(--grass);
+}
+
+.hub-root .hub-switch[aria-checked='true']::after {
+  transform: translateX(18px);
+}
+
+.hub-root .hub-sticky-save {
+  position: sticky;
+  bottom: calc(var(--hub-tabs) + 12px + env(safe-area-inset-bottom, 0px));
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-m);
+  background: var(--walk-bg);
+  color: var(--on-walk);
+  box-shadow: var(--shadow);
+}
+
+@media (min-width: 900px) {
+  .hub-root .hub-sticky-save {
+    bottom: 16px;
+  }
+}
+
+/* ---------- Toasts ---------- */
+
+.hub-root .hub-toasts {
+  position: fixed;
+  z-index: 80;
+  left: 50%;
+  bottom: calc(var(--hub-tabs) + 16px + env(safe-area-inset-bottom, 0px));
+  translate: -50% 0;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .hub-root .hub-toasts {
+    left: calc(50% + var(--hub-side) / 2);
+    bottom: 24px;
+  }
+}
+
+.hub-root .hub-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+  font-size: 0.92rem;
+  box-shadow: var(--shadow);
+  animation: hub-toast 2.6s ease forwards;
+}
+
+.hub-root .hub-toast .hub-xp {
+  background: var(--ball);
+}
+
+@keyframes hub-toast {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.9);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0) scale(1.04);
+  }
+  16% {
+    transform: scale(1);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* ---------- Install tip, empty states ---------- */
+
+.hub-root .hub-install {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--calm-soft);
+}
+
+.hub-root .hub-empty {
+  padding: 22px;
+  border-radius: var(--radius-m);
+  border: 1.5px dashed var(--line);
+  color: var(--muted);
+  text-align: center;
+}
+
+.hub-root .hub-more {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hub-root .hub-more a {
+  display: grid;
+  gap: 10px;
+  padding: 18px 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.hub-root .hub-more a .hub-more-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.hub-root .hub-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hub-root .hub-two {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 760px) {
+  .hub-root .hub-two {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.hub-root details.hub-more-info > summary {
+  cursor: pointer;
+  font-weight: 650;
+  color: var(--grass);
+}
+
+.hub-root .hub-dir > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hub-root .hub-dir > summary::-webkit-details-marker {
+  display: none;
+}
+
+.hub-root .hub-dir[open] > summary .hub-phase-chevron {
+  transform: rotate(90deg);
+}
+
+.hub-root .hub-dir > :not(summary) {
+  margin-top: 12px;
+}
+
+.hub-root .hub-chart-empty {
+  font-size: 0.85rem;
+  color: var(--muted);
+}

@@ -544,3 +544,21 @@ export const suggestion = pgTable(
     uniqueIndex('suggestion_vote_idx').on(t.suggestedBy, t.directoryId),
   ],
 )
+
+/**
+ * The founder's marketing hub (/hub, admins only): ticked checklist steps, the partner pipeline,
+ * the content plan, costs and settings. One row per item; `kind` says what `data` holds.
+ * It never holds data about Rondje's users.
+ */
+export const hubEntry = pgTable(
+  'hub_entry',
+  {
+    /** `${kind}:${key}`, for example `task:stichting` or `partner:nl-doa-amsterdam`. */
+    id: text('id').primaryKey(),
+    kind: text('kind').notNull(),
+    data: jsonb('data').notNull(),
+    createdAt: created(),
+    updatedAt: updated(),
+  },
+  (t) => [index('hub_entry_kind_idx').on(t.kind)],
+)

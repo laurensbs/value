@@ -166,5 +166,12 @@
     "statements": [
       "ALTER TABLE \"profile\" ADD COLUMN \"reminders\" boolean DEFAULT true NOT NULL;"
     ]
+  },
+  {
+    "tag": "0009_hub",
+    "statements": [
+      "CREATE TABLE \"hub_entry\" (\n\t\"id\" text PRIMARY KEY NOT NULL,\n\t\"kind\" text NOT NULL,\n\t\"data\" jsonb NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL,\n\t\"updated_at\" timestamp DEFAULT now() NOT NULL\n);",
+      "CREATE INDEX \"hub_entry_kind_idx\" ON \"hub_entry\" USING btree (\"kind\");"
+    ]
   }
 ]
