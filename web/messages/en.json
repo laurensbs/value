@@ -601,7 +601,6 @@
       "invalid": "Check the required fields.",
       "forbidden": "This isn't your dog."
     },
-    "newLede": "A good profile makes all the difference. Be honest about who your dog is: that way you'll find the right walker sooner.",
     "privateHint": "Only walkers whose walk you've accepted can see this.",
     "providesHint": "The owner takes care of bags and treats, so a walker never has to pay for anything.",
     "publish": "Put online",
@@ -619,7 +618,52 @@
     "tip3": "Always meet up together the first time, so you can get to know each other and your dog without any rush.",
     "weekday": "Day",
     "welcomeTitle": "Welcome, {name}! Tell us about your dog",
-    "welcomeLede": "A photo, their character and when they can go for a walk. Then someone from the neighbourhood can find them."
+    "steps": {
+      "yourDog": "your dog",
+      "basicsTitle": "Who is your dog?",
+      "basicsText": "Start with a name and a photo. We'll ask the rest step by step.",
+      "characterTitle": "What is {name} like?",
+      "characterText": "This helps walkers see if it's a match. Tap what fits, or write it yourself.",
+      "walkTitle": "What does a walk with {name} look like?",
+      "walkText": "How long, at which moments, and what is ready for the walker?",
+      "whereTitle": "Where does {name} live?",
+      "whereText": "Others only see roughly the neighbourhood. You share the address once you accept an appointment.",
+      "privateTitle": "Only for walkers you accept",
+      "safetyTitle": "Last step: safe on the way",
+      "safetyText": "A few more questions, then {name} is online.",
+      "publish": "Put {name} online",
+      "needName": "What is your dog's name?",
+      "needMinutes": "Choose how long a walk lasts, from 10 to 180 minutes.",
+      "needCity": "Which town does your dog live in?",
+      "traitsLabel": "Tap what fits",
+      "minutesLabel": "Often chosen",
+      "storyTitle": "What is {name}'s story?",
+      "storyText": "Who is {name}, and why would an extra walk be nice? Tap a sentence and change it as you like."
+    },
+    "traitChips": {
+      "playful": "Playful",
+      "listens": "Listens well",
+      "cuddly": "Cuddly",
+      "niceOnLeash": "Walks nicely on the lead",
+      "pulls": "Pulls on the lead",
+      "likesDogs": "Fine with other dogs",
+      "noDogs": "Prefers no other dogs",
+      "cats": "Fine with cats",
+      "kids": "Gentle with children",
+      "noises": "Scared of loud noises",
+      "sniffer": "Loves to sniff",
+      "swimmer": "Loves to swim"
+    },
+    "storyBlocks": {
+      "happy": "{name} is cheerful and loves to sniff around.",
+      "older": "{name} is a bit older and likes a calm walk.",
+      "young": "{name} is young and has lots of energy.",
+      "dogs": "{name} likes other dogs.",
+      "people": "{name} loves people.",
+      "work": "My work leaves me little time during the day, so an extra walk is welcome.",
+      "mobility": "I don't walk as easily myself, so an extra walk is welcome.",
+      "regular": "We're looking for a regular buddy a few times a week."
+    }
   },
   "profile": {
     "title": "Profile",

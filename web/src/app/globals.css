@@ -660,6 +660,7 @@ mark {
 }
 
 .field > span,
+.field > label[for],
 .field legend {
   font-weight: 650;
   font-size: 0.92rem;
@@ -1352,6 +1353,22 @@ button.chip:active {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--paper);
+}
+
+/* Ready sentences can run over two lines: then they read as a rounded box, starting on the left. */
+.chip-row.sentences .chip {
+  border-radius: 18px;
+  text-align: left;
+}
+
+button.chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  scale: 1;
+}
+
+.input.narrow {
+  max-width: 160px;
 }
 
 /* ---------- Dog page ---------- */
@@ -3531,6 +3548,18 @@ legend {
 .button.big {
   padding: 15px 22px;
   font-size: 1.05rem;
+}
+
+/* A new dog, one question at a time: the same steps as onboarding, above the tab bar on phones. */
+.dog-steps .card {
+  min-width: 0;
+}
+
+@media (max-width: 899px) {
+  .has-tabbar .dog-steps .onboarding-actions {
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 12px;
+  }
 }
 
 /* ---------- Today: the members' home ---------- */

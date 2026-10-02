@@ -133,7 +133,7 @@ export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason
           <div className="field">
             <label htmlFor="request-message">{t('message')}</label>
             {sentences.length ? (
-              <div className="chip-row" role="group" aria-label={t('blocksLabel')}>
+              <div className="chip-row sentences" role="group" aria-label={t('blocksLabel')}>
                 {sentences.map((sentence) => (
                   <button key={sentence} type="button" className="chip" onClick={() => add(sentence)}>
                     <Icon name="plus" size={14} /> {sentence}

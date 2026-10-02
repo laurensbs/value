@@ -601,7 +601,6 @@
       "invalid": "Revisa los campos obligatorios.",
       "forbidden": "Este perro no es tuyo."
     },
-    "newLede": "Un buen perfil marca la diferencia. Cuenta con sinceridad cómo es tu perro: así encontraréis antes a la persona adecuada para pasearlo.",
     "privateHint": "Solo lo ven las personas con las que hayas aceptado un paseo.",
     "providesHint": "El dueño se encarga de las bolsas y los premios. Así, quien pasea no tiene que pagar nada.",
     "publish": "Publicar",
@@ -619,7 +618,52 @@
     "tip3": "La primera vez, quedad siempre juntos: así os conoceréis con calma, con tu perro incluido.",
     "weekday": "Día",
     "welcomeTitle": "¡Hola, {name}! Háblanos de tu perro",
-    "welcomeLede": "Una foto, su carácter y cuándo puede salir a pasear. Así alguien del barrio lo encontrará."
+    "steps": {
+      "yourDog": "tu perro",
+      "basicsTitle": "¿Quién es tu perro?",
+      "basicsText": "Empieza con un nombre y una foto. Lo demás te lo preguntamos paso a paso.",
+      "characterTitle": "¿Cómo es {name}?",
+      "characterText": "Así quien pasea ve si hay química. Toca lo que encaje o escríbelo tú.",
+      "walkTitle": "¿Cómo es un paseo con {name}?",
+      "walkText": "Cuánto dura, en qué momentos y qué hay preparado para quien pasea.",
+      "whereTitle": "¿Dónde vive {name}?",
+      "whereText": "Los demás solo ven más o menos el barrio. La dirección la compartes cuando aceptas una cita.",
+      "privateTitle": "Solo para quien aceptes",
+      "safetyTitle": "Para terminar: seguridad",
+      "safetyText": "Unas preguntas más y {name} ya está publicado.",
+      "publish": "Publicar a {name}",
+      "needName": "¿Cómo se llama tu perro?",
+      "needMinutes": "Elige cuánto dura un paseo, de 10 a 180 minutos.",
+      "needCity": "¿En qué localidad vive tu perro?",
+      "traitsLabel": "Toca lo que encaje",
+      "minutesLabel": "Lo más elegido",
+      "storyTitle": "¿Cuál es la historia de {name}?",
+      "storyText": "¿Cómo es {name} y por qué le vendría bien un paseo extra? Toca una frase y cámbiala como quieras."
+    },
+    "traitChips": {
+      "playful": "Le encanta jugar",
+      "listens": "Obedece bien",
+      "cuddly": "Le encantan los mimos",
+      "niceOnLeash": "Camina bien con correa",
+      "pulls": "Tira de la correa",
+      "likesDogs": "Se lleva bien con otros perros",
+      "noDogs": "Mejor sin otros perros",
+      "cats": "Se lleva bien con gatos",
+      "kids": "Se lleva bien con niños",
+      "noises": "Le asustan los ruidos fuertes",
+      "sniffer": "Le encanta olfatear",
+      "swimmer": "Le encanta nadar"
+    },
+    "storyBlocks": {
+      "happy": "{name} es alegre y le encanta olfatear.",
+      "older": "{name} ya es mayor y prefiere pasear con calma.",
+      "young": "{name} es joven y tiene mucha energía.",
+      "dogs": "A {name} le gustan los otros perros.",
+      "people": "A {name} le encanta la gente.",
+      "work": "Por mi trabajo tengo poco tiempo durante el día, así que un paseo extra es bienvenido.",
+      "mobility": "A mí me cuesta más caminar, así que un paseo extra es bienvenido.",
+      "regular": "Buscamos a alguien fijo para unas cuantas veces por semana."
+    }
   },
   "profile": {
     "title": "Perfil",

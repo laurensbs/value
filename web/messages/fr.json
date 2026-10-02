@@ -601,7 +601,6 @@
       "invalid": "Vérifiez les champs obligatoires.",
       "forbidden": "Ce chien n'est pas le vôtre."
     },
-    "newLede": "Un bon profil fait toute la différence. Décrivez honnêtement votre chien : vous trouverez plus vite le bon promeneur.",
     "privateHint": "Visible uniquement par les promeneurs avec qui vous avez accepté un rendez-vous.",
     "providesHint": "Le propriétaire fournit les sacs et les friandises. Ainsi, le promeneur n'a rien à payer.",
     "publish": "Mettre en ligne",
@@ -619,7 +618,52 @@
     "tip3": "La première fois, prévoyez toujours une rencontre ensemble : vous ferez ainsi connaissance tranquillement, votre chien compris.",
     "weekday": "Jour",
     "welcomeTitle": "Bienvenue, {name} ! Parlez-nous de votre chien",
-    "welcomeLede": "Une photo, son caractère et quand il peut se balader. Ensuite, quelqu'un du quartier pourra le trouver."
+    "steps": {
+      "yourDog": "votre chien",
+      "basicsTitle": "Qui est votre chien ?",
+      "basicsText": "Commencez par un nom et une photo. Nous vous demandons le reste étape par étape.",
+      "characterTitle": "Comment est {name} ?",
+      "characterText": "Ainsi, les personnes qui promènent voient si le courant passe. Touchez ce qui correspond, ou écrivez-le vous-même.",
+      "walkTitle": "À quoi ressemble une balade avec {name} ?",
+      "walkText": "Combien de temps, à quels moments, et ce qui est prêt pour la personne qui promène.",
+      "whereTitle": "Où vit {name} ?",
+      "whereText": "Les autres ne voient que le quartier, à peu près. Vous partagez l'adresse quand vous acceptez un rendez-vous.",
+      "privateTitle": "Seulement pour les personnes que vous acceptez",
+      "safetyTitle": "Pour finir : la sécurité",
+      "safetyText": "Encore quelques questions, et {name} est en ligne.",
+      "publish": "Mettre {name} en ligne",
+      "needName": "Comment s'appelle votre chien ?",
+      "needMinutes": "Choisissez la durée d'une balade, de 10 à 180 minutes.",
+      "needCity": "Dans quelle ville vit votre chien ?",
+      "traitsLabel": "Touchez ce qui correspond",
+      "minutesLabel": "Souvent choisi",
+      "storyTitle": "Quelle est l'histoire de {name} ?",
+      "storyText": "Qui est {name}, et pourquoi une balade en plus lui ferait du bien ? Touchez une phrase et modifiez-la comme vous voulez."
+    },
+    "traitChips": {
+      "playful": "Adore jouer",
+      "listens": "Obéit bien",
+      "cuddly": "Adore les câlins",
+      "niceOnLeash": "Marche bien en laisse",
+      "pulls": "Tire en laisse",
+      "likesDogs": "S'entend avec les autres chiens",
+      "noDogs": "Préfère éviter les autres chiens",
+      "cats": "S'entend avec les chats",
+      "kids": "S'entend avec les enfants",
+      "noises": "A peur des bruits forts",
+      "sniffer": "Adore renifler",
+      "swimmer": "Adore nager"
+    },
+    "storyBlocks": {
+      "happy": "{name} a un caractère joyeux et adore renifler.",
+      "older": "{name} a un certain âge et aime marcher tranquillement.",
+      "young": "{name} est jeune et déborde d'énergie.",
+      "dogs": "{name} aime les autres chiens.",
+      "people": "{name} adore les gens.",
+      "work": "Mon travail me laisse peu de temps en journée, alors une balade en plus est la bienvenue.",
+      "mobility": "Je marche moins facilement moi-même, alors une balade en plus est la bienvenue.",
+      "regular": "Nous cherchons quelqu'un de régulier pour quelques fois par semaine."
+    }
   },
   "profile": {
     "title": "Profil",

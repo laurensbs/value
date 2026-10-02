@@ -601,7 +601,6 @@
       "invalid": "Controleer de verplichte velden.",
       "forbidden": "Dit is niet jouw hond."
     },
-    "newLede": "Een goed profiel maakt het verschil. Vertel eerlijk wie je hond is: dan vinden jullie sneller de juiste wandelaar.",
     "privateHint": "Dit zien alleen wandelaars met wie je een afspraak hebt geaccepteerd.",
     "providesHint": "Zakjes en koekjes regelt de eigenaar. Zo hoeft een wandelaar nergens voor te betalen.",
     "publish": "Zet online",
@@ -619,7 +618,52 @@
     "tip3": "Spreek de eerste keer altijd samen af: zo leren jullie elkaar en je hond rustig kennen.",
     "weekday": "Dag",
     "welcomeTitle": "Welkom, {name}! Vertel over je hond",
-    "welcomeLede": "Een foto, zijn karakter en wanneer hij een rondje kan. Daarna vindt iemand uit de buurt hem."
+    "steps": {
+      "yourDog": "je hond",
+      "basicsTitle": "Wie is je hond?",
+      "basicsText": "Begin met een naam en een foto. De rest vragen we stap voor stap.",
+      "characterTitle": "Hoe is {name}?",
+      "characterText": "Zo zien wandelaars of het klikt. Tik aan wat past, of schrijf het zelf.",
+      "walkTitle": "Hoe ziet een rondje met {name} eruit?",
+      "walkText": "Hoe lang, op welke momenten, en wat ligt er klaar voor de wandelaar?",
+      "whereTitle": "Waar woont {name}?",
+      "whereText": "Anderen zien alleen ongeveer de buurt. Het adres deel je pas als je een afspraak accepteert.",
+      "privateTitle": "Alleen voor wie je accepteert",
+      "safetyTitle": "Tot slot: veilig op pad",
+      "safetyText": "Nog een paar vragen, dan staat {name} online.",
+      "publish": "Zet {name} online",
+      "needName": "Hoe heet je hond?",
+      "needMinutes": "Kies hoe lang een rondje duurt, van 10 tot 180 minuten.",
+      "needCity": "In welke plaats woont je hond?",
+      "traitsLabel": "Tik aan wat past",
+      "minutesLabel": "Veel gekozen",
+      "storyTitle": "Wat is het verhaal van {name}?",
+      "storyText": "Wie is {name}, en waarom is een extra rondje fijn? Tik een zin aan en pas hem gerust aan."
+    },
+    "traitChips": {
+      "playful": "Speels",
+      "listens": "Luistert goed",
+      "cuddly": "Knuffelig",
+      "niceOnLeash": "Loopt netjes aan de lijn",
+      "pulls": "Trekt aan de lijn",
+      "likesDogs": "Kan met andere honden",
+      "noDogs": "Liever geen andere honden",
+      "cats": "Kan met katten",
+      "kids": "Lief voor kinderen",
+      "noises": "Bang voor harde geluiden",
+      "sniffer": "Snuffelt graag",
+      "swimmer": "Zwemt graag"
+    },
+    "storyBlocks": {
+      "happy": "{name} is vrolijk en snuffelt graag.",
+      "older": "{name} is wat ouder en loopt graag rustig.",
+      "young": "{name} is jong en heeft veel energie.",
+      "dogs": "{name} vindt andere honden leuk.",
+      "people": "{name} is dol op mensen.",
+      "work": "Door mijn werk heb ik overdag weinig tijd, dus een extra rondje is welkom.",
+      "mobility": "Zelf loop ik minder makkelijk, dus een extra rondje is welkom.",
+      "regular": "We zoeken een vast maatje voor een paar keer per week."
+    }
   },
   "profile": {
     "title": "Profiel",
