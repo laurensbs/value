@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { calendarFile, escapeText, foldLine, utcStamp } from './ics'
+import { calendarFile, escapeText, foldLine, localStamp, utcStamp } from './ics'
 
 describe('calendar file', () => {
   const event = {
@@ -27,8 +27,24 @@ describe('calendar file', () => {
     expect(lines.at(-1)).toBe('')
   })
 
-  it('repeats a fixed weekly walk', () => {
-    expect(calendarFile({ ...event, weekly: true })).toContain('\r\nRRULE:FREQ=WEEKLY\r\n')
+  it('repeats a fixed weekly walk at the same local time, also after the clocks change', () => {
+    const file = calendarFile({ ...event, weekly: true })
+    expect(file).toContain('\r\nRRULE:FREQ=WEEKLY\r\n')
+    // 08:30 UTC is 10:30 in Amsterdam in summer time; the repeats stay at 10:30 local time.
+    expect(file).toContain('\r\nDTSTART;TZID=Europe/Amsterdam:20261003T103000\r\n')
+    expect(file).toContain('\r\nDTEND;TZID=Europe/Amsterdam:20261003T111500\r\n')
+    // The zone is described in the file itself, with both clock changes.
+    expect(file).toContain('\r\nBEGIN:VTIMEZONE\r\nTZID:Europe/Amsterdam\r\n')
+    expect(file).toContain('\r\nRRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU\r\n')
+    expect(file).toContain('\r\nRRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU\r\n')
+    expect(file.indexOf('END:VTIMEZONE')).toBeLessThan(file.indexOf('BEGIN:VEVENT'))
+    // A single appointment stays in UTC, without a zone.
+    expect(calendarFile(event)).not.toContain('TZID')
+  })
+
+  it('formats local wall-clock time in summer and in winter', () => {
+    expect(localStamp(new Date('2026-07-01T07:00:00Z'), 'Europe/Amsterdam')).toBe('20260701T090000')
+    expect(localStamp(new Date('2026-12-01T07:00:00Z'), 'Europe/Amsterdam')).toBe('20261201T080000')
   })
 
   it('escapes text and leaves out what is missing', () => {

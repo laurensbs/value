@@ -151,6 +151,24 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page.getByRole('button', { name: 'Plas: 2' })).toBeVisible()
   // The taps are saved one after the other: wait until the last one is in.
   await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toHaveAttribute('aria-busy', 'false')
+  // Two quick taps where only the second one is lost: the first one stays, as it does for the owner.
+  let careTaps = 0
+  await walker.page.route(/\/walk\//, async (route) => {
+    const tap = route.request().method() === 'POST' && route.request().postData()?.includes('"pee"')
+    if (!tap) return route.continue()
+    careTaps += 1
+    if (careTaps === 2) return route.abort()
+    await new Promise((resolve) => setTimeout(resolve, 500)) // still on its way during the second tap
+    return route.continue()
+  })
+  await walker.page.getByRole('button', { name: /^Plas:/ }).click()
+  await walker.page.getByRole('button', { name: 'Eentje terug bij Plas' }).click()
+  await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toHaveAttribute('aria-busy', 'false')
+  await expect(walker.page.getByRole('button', { name: 'Plas: 3' })).toBeVisible()
+  await walker.page.unroute(/\/walk\//)
+  await walker.page.getByRole('button', { name: 'Eentje terug bij Plas' }).click()
+  await expect(walker.page.getByRole('button', { name: 'Plas: 2' })).toBeVisible()
+  await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toHaveAttribute('aria-busy', 'false')
   // Out of range, a tap is taken back with a short note, so the walker never sees more than the owner.
   await walker.context.setOffline(true)
   await walker.page.getByRole('button', { name: /^Poep:/ }).click()

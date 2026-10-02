@@ -1,3 +1,5 @@
+import { TIME_ZONE } from './time'
+
 /** One appointment as an iCalendar file (RFC 5545), so it lands in any calendar app. */
 export interface CalendarEvent {
   uid: string
@@ -17,6 +19,51 @@ export interface CalendarEvent {
 /** 2026-10-02T19:05:00.000Z → 20261002T190500Z */
 export function utcStamp(date: Date): string {
   return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')
+}
+
+/** Wall-clock time in a time zone: 2026-10-03T08:30:00Z in Europe/Amsterdam → 20261003T103000 */
+export function localStamp(date: Date, timeZone: string): string {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone,
+      hourCycle: 'h23',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    })
+      .formatToParts(date)
+      .map((p) => [p.type, p.value]),
+  )
+  return `${parts.year}${parts.month}${parts.day}T${parts.hour}${parts.minute}${parts.second}`
+}
+
+/**
+ * Central European Time with EU summer time (last Sunday of March to last Sunday of October), the
+ * zone of every appointment in Rondje (see TIME_ZONE).
+ */
+function centralEuropeanZone(tzid: string): string[] {
+  return [
+    'BEGIN:VTIMEZONE',
+    `TZID:${tzid}`,
+    'BEGIN:DAYLIGHT',
+    'TZOFFSETFROM:+0100',
+    'TZOFFSETTO:+0200',
+    'TZNAME:CEST',
+    'DTSTART:19700329T020000',
+    'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+    'END:DAYLIGHT',
+    'BEGIN:STANDARD',
+    'TZOFFSETFROM:+0200',
+    'TZOFFSETTO:+0100',
+    'TZNAME:CET',
+    'DTSTART:19701025T030000',
+    'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+    'END:STANDARD',
+    'END:VTIMEZONE',
+  ]
 }
 
 /** Backslashes, semicolons, commas and line breaks are escaped in text values. */
@@ -53,17 +100,22 @@ export function foldLine(line: string): string {
 
 export function calendarFile(event: CalendarEvent, product = 'Rondje'): string {
   const end = new Date(event.start.getTime() + event.minutes * 60_000)
+  // A weekly walk repeats at the same local time, also after summer or winter time starts. In UTC
+  // every repeat would keep the first one's UTC hour and move an hour on the local clock.
+  const zone = event.weekly ? TIME_ZONE : null
+  const at = (date: Date) => (zone ? `;TZID=${zone}:${localStamp(date, zone)}` : `:${utcStamp(date)}`)
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     `PRODID:-//${product}//NL`,
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
+    ...(zone ? centralEuropeanZone(zone) : []),
     'BEGIN:VEVENT',
     `UID:${event.uid}`,
     `DTSTAMP:${utcStamp(event.stamp ?? new Date())}`,
-    `DTSTART:${utcStamp(event.start)}`,
-    `DTEND:${utcStamp(end)}`,
+    `DTSTART${at(event.start)}`,
+    `DTEND${at(end)}`,
     ...(event.weekly ? ['RRULE:FREQ=WEEKLY'] : []),
     `SUMMARY:${escapeText(event.title)}`,
     ...(event.location ? [`LOCATION:${escapeText(event.location)}`] : []),
