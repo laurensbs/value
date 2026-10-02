@@ -424,6 +424,9 @@ T = {
     "lid sinds": ("member since", "membre depuis", "socio desde"),
     "“%@”": ("“%@”", "« %@ »", "«%@»"),
     "%.1f km": ("%.1f km", "%.1f km", "%.1f km"),
+    "Geen verbinding. Je ziet de afspraken van je laatste bezoek.": ("No connection. You're seeing the appointments from your last visit.", "Pas de connexion. Tu vois les rendez-vous de ta dernière visite.", "Sin conexión. Ves las citas de tu última visita."),
+    "Kies een foto": ("Choose a photo", "Choisir une photo", "Elegir una foto"),
+    "Een duidelijke foto van jezelf helpt eigenaren om je te vertrouwen.": ("A clear photo of yourself helps owners trust you.", "Une photo claire de toi aide les propriétaires à te faire confiance.", "Una foto clara tuya ayuda a los dueños a confiar en ti."),
     # Info.plist
     "NSCameraUsageDescription": (
         "To send the owner a photo during a walk. Only the photos you send go to the owner.",

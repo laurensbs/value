@@ -46,6 +46,8 @@ export async function PATCH(request: Request) {
   if (body.wantsToWalk ?? p.wantsToWalk) form.set('wantsToWalk', 'on')
   if (body.hasDogs ?? p.hasDogs) form.set('hasDogs', 'on')
   if (body.pppLicense ?? p.pppLicense) form.set('pppLicense', 'on')
+  // A new photo from the app (uploaded through /api/upload first); without one the photo stays as it is.
+  if (typeof body.photoUrl === 'string') form.set('photoUrl', body.photoUrl)
   const result = await updateProfile({ ok: false }, form)
   return result.ok ? json({ ok: true }) : fail(result.error ?? 'invalid')
 }

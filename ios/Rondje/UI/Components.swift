@@ -245,3 +245,25 @@ struct Appear: ViewModifier {
 extension View {
     func appear(_ index: Int) -> some View { modifier(Appear(index: index)) }
 }
+
+/// A person's photo, or their initial on Rondje green when there is none.
+struct Avatar: View {
+    var url: String?
+    var name: String
+    var size: CGFloat = 44
+
+    var body: some View {
+        ZStack {
+            LinearGradient(colors: [Palette.grass, Palette.grass.opacity(0.75)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            Text(String(name.prefix(1)).uppercased())
+                .font(.display(size * 0.45, weight: .heavy))
+                .foregroundStyle(Palette.onGrass)
+            if let url, let link = URL(string: url) {
+                AsyncImage(url: link) { image in image.resizable().scaledToFill() } placeholder: { Color.clear }
+            }
+        }
+        .frame(width: size, height: size)
+        .clipShape(.rect(cornerRadius: size * 0.32, style: .continuous))
+        .accessibilityHidden(true)
+    }
+}

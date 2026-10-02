@@ -46,6 +46,7 @@
 		BF938F9011478C1964370149 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
 		C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABF8650A285AB54D3700A6 /* QuizView.swift */; };
 		CCEFB44617D607D474DA62B3 /* RondjeWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */; };
+		CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD05E7729A1853A5748BF1F /* Cache.swift */; };
 		D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
 		DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19F92B1AB52E54BEE189E52 /* ImageTools.swift */; };
 		E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38BF1BFD0974FB881BD72B /* Models.swift */; };
@@ -98,6 +99,7 @@
 		2B89ADE16C47AB0E0761B7EF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		2CABF8650A285AB54D3700A6 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		303A4BC365EFDB4E41F534AF /* MyDogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
+		3DD05E7729A1853A5748BF1F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		50EA1B62ECCEC400102F6036 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		54E359D37F55A06E65249298 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		630E03C393BF21260C48A977 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				50EA1B62ECCEC400102F6036 /* APIClient.swift */,
+				3DD05E7729A1853A5748BF1F /* Cache.swift */,
 				EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */,
 				630E03C393BF21260C48A977 /* Keychain.swift */,
 				9C56C585C3705ACBC5EBC617 /* LocationService.swift */,
@@ -479,6 +482,7 @@
 				7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */,
 				518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */,
 				4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */,
+				CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */,
 				EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */,
 				4730F6F96A9FE6D28214E9D2 /* DiscoverView.swift in Sources */,
 				76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */,

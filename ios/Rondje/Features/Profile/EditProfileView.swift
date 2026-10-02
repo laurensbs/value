@@ -1,3 +1,4 @@
+import PhotosUI
 import SwiftUI
 
 /// Editing your own profile in the app. Your birth date cannot change here (it decides 18+).
@@ -14,10 +15,28 @@ struct EditProfileView: View {
     @State private var wantsToWalk = true
     @State private var hasDogs = false
     @State private var busy = false
+    @State private var pick: PhotosPickerItem?
+    @State private var photo: UIImage?
     @State private var error: String?
 
     var body: some View {
         Form {
+            Section {
+                HStack(spacing: 16) {
+                    if let photo {
+                        Image(uiImage: photo).resizable().scaledToFill()
+                            .frame(width: 72, height: 72)
+                            .clipShape(.rect(cornerRadius: 23, style: .continuous))
+                    } else {
+                        Avatar(url: model.me?.profile?.photoUrl, name: firstName, size: 72)
+                    }
+                    PhotosPicker(selection: $pick, matching: .images) {
+                        Label("Kies een foto", systemImage: "camera.fill")
+                    }
+                }
+            } footer: {
+                Text("Een duidelijke foto van jezelf helpt eigenaren om je te vertrouwen.")
+            }
             Section("Over jou") {
                 TextField("Voornaam", text: $firstName).textContentType(.givenName)
                 TextField("Vertel kort wie je bent", text: $bio, axis: .vertical).lineLimit(3...6)
@@ -52,6 +71,13 @@ struct EditProfileView: View {
             }
         }
         .onAppear(perform: fill)
+        .onChange(of: pick) { _, item in
+            Task {
+                if let data = try? await item?.loadTransferable(type: Data.self), let image = UIImage(data: data) {
+                    withAnimation { photo = image }
+                }
+            }
+        }
     }
 
     private func fill() {
@@ -63,15 +89,18 @@ struct EditProfileView: View {
     private struct Payload: Encodable {
         var firstName, city, country, bio, phone, experience: String
         var wantsToWalk, hasDogs: Bool
+        var photoUrl: String?
     }
 
     private func save() async {
         busy = true
         defer { busy = false }
         do {
+            var photoUrl: String?
+            if let photo { photoUrl = try await ImageTools.upload(photo) }
             let _: OK = try await APIClient.shared.patch("/api/v1/profile", Payload(
                 firstName: firstName.trimmingCharacters(in: .whitespaces), city: city.trimmingCharacters(in: .whitespaces),
-                country: country, bio: bio, phone: phone, experience: experience, wantsToWalk: wantsToWalk, hasDogs: hasDogs
+                country: country, bio: bio, phone: phone, experience: experience, wantsToWalk: wantsToWalk, hasDogs: hasDogs, photoUrl: photoUrl
             ))
             Haptics.success()
             await model.refreshMe()

@@ -2163,6 +2163,28 @@
         }
       }
     },
+    "Een duidelijke foto van jezelf helpt eigenaren om je te vertrouwen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A clear photo of yourself helps owners trust you."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una foto clara tuya ayuda a los dueños a confiar en ti."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une photo claire de toi aide les propriétaires à te faire confiance."
+          }
+        }
+      }
+    },
     "Eén eraf" : {
       "localizations" : {
         "en" : {
@@ -2973,6 +2995,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas de connexion. Vérifie ta connexion internet et réessaie."
+          }
+        }
+      }
+    },
+    "Geen verbinding. Je ziet de afspraken van je laatste bezoek." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No connection. You're seeing the appointments from your last visit."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin conexión. Ves las citas de tu última visita."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas de connexion. Tu vois les rendez-vous de ta dernière visite."
           }
         }
       }
@@ -4645,6 +4689,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rencontre avec %@"
+          }
+        }
+      }
+    },
+    "Kies een foto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir una foto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir une photo"
           }
         }
       }

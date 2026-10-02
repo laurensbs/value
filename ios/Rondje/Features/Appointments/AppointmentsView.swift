@@ -23,6 +23,13 @@ struct AppointmentsView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
+                    if model.offline {
+                        Label("Geen verbinding. Je ziet de afspraken van je laatste bezoek.", systemImage: "wifi.slash")
+                            .font(.footnote).foregroundStyle(Palette.warn)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(12)
+                            .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
+                    }
                     if !model.appointments.incoming.isEmpty || model.me?.profile?.hasDogs == true {
                         Picker("Weergave", selection: $side) {
                             ForEach(Side.allCases) { Text($0.title).tag($0) }
@@ -88,10 +95,13 @@ struct AppointmentCard: View {
             }
 
             if asOwner, let walker = item.walker {
+                HStack(alignment: .top, spacing: 12) {
+                Avatar(url: walker.photoUrl, name: walker.firstName, size: 44)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("\(walker.firstName), \(walker.ageBand) jaar, \(walker.city)").font(.subheadline.weight(.semibold))
                     Text(Labels.experience(walker.experience)).font(.footnote).foregroundStyle(Palette.muted)
                     if !walker.bio.isEmpty { Text(walker.bio).font(.footnote).lineLimit(3) }
+                }
                 }
             }
             if !item.message.isEmpty {

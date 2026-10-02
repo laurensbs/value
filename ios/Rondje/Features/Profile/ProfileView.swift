@@ -31,14 +31,7 @@ struct ProfileView: View {
 
     private var header: some View {
         HStack(spacing: 16) {
-            Text(String(model.firstName.prefix(1)).uppercased())
-                .font(.display(34, weight: .heavy))
-                .foregroundStyle(Palette.onGrass)
-                .frame(width: 76, height: 76)
-                .background(
-                    LinearGradient(colors: [Palette.grass, Palette.grass.opacity(0.75)], startPoint: .topLeading, endPoint: .bottomTrailing),
-                    in: .rect(cornerRadius: 24, style: .continuous)
-                )
+            Avatar(url: model.me?.profile?.photoUrl, name: model.firstName, size: 76)
             VStack(alignment: .leading, spacing: 6) {
                 Text(model.firstName).font(.display(26))
                 if let p = model.me?.profile {

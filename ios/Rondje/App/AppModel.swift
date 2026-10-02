@@ -14,6 +14,8 @@ final class AppModel {
     var appointments = AppointmentsResponse(outgoing: [], incoming: [])
     var selectedTab: Tab = .discover
     var banner: Banner?
+    /// The last refresh failed: the screens show saved data.
+    var offline = false
 
     enum Tab: Hashable { case discover, appointments, profile }
 
@@ -46,6 +48,12 @@ final class AppModel {
             UserDefaults.standard.set(true, forKey: "installed")
         }
         guard api.hasSession else { phase = .signedOut; return }
+        // Show what we had straight away (also without signal), then refresh.
+        if let cached = Cache.load(Me.self, from: "me"), cached.profile != nil {
+            me = cached
+            appointments = Cache.load(AppointmentsResponse.self, from: "appointments") ?? appointments
+            phase = .ready
+        }
         await refreshMe()
     }
 
@@ -53,6 +61,7 @@ final class AppModel {
         do {
             let me: Me = try await api.get("/api/v1/me")
             self.me = me
+            Cache.save(me, as: "me")
             phase = me.profile == nil ? .onboarding : .ready
             if phase == .ready { await refreshAppointments() }
         } catch APIError.unauthorized {
@@ -64,8 +73,13 @@ final class AppModel {
     }
 
     func refreshAppointments() async {
-        guard let result: AppointmentsResponse = try? await api.get("/api/v1/requests") else { return }
+        guard let result: AppointmentsResponse = try? await api.get("/api/v1/requests") else {
+            offline = true
+            return
+        }
         appointments = result
+        offline = false
+        Cache.save(result, as: "appointments")
         publishNextWalk()
         await Reminders.sync(with: result)
     }
@@ -86,6 +100,7 @@ final class AppModel {
         me = nil
         appointments = AppointmentsResponse(outgoing: [], incoming: [])
         SharedStore.save(nil)
+        Cache.clear()
         Reminders.clearAll()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut
