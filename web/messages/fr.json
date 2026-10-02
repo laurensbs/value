@@ -826,7 +826,8 @@
       "safety": "Politique de sécurité",
       "shelters": "Conditions de partenariat pour les refuges",
       "cookies": "Cookies"
-    }
+    },
+    "version": "Version {version}"
   },
   "photos": {
     "add": "Ajouter une photo",

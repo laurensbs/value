@@ -826,7 +826,8 @@
       "safety": "Veiligheidsbeleid",
       "shelters": "Partnervoorwaarden voor opvangen",
       "cookies": "Cookies"
-    }
+    },
+    "version": "Versie {version}"
   },
   "photos": {
     "add": "Foto toevoegen",

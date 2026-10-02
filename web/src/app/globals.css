@@ -2303,3 +2303,13 @@ legend {
   white-space: normal;
   text-align: center;
 }
+
+.uploader.logo .uploader-item {
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.uploader.logo .uploader-item img {
+  object-fit: contain;
+  padding: 8px;
+}

@@ -29,6 +29,13 @@ export default async function LegalPage({ params }: { params: Promise<{ doc: str
       </nav>
       <article className="prose legal stack">
         {content.locale !== locale ? <p className="notice small">{t('fallback')}</p> : null}
+        {content.data.status || content.data.version ? (
+          <p className="muted small">
+            {[content.data.status, content.data.version ? t('version', { version: content.data.version }) : null, content.data.updated]
+              .filter(Boolean)
+              .join(' · ')}
+          </p>
+        ) : null}
         <div dangerouslySetInnerHTML={{ __html: content.html }} />
       </article>
     </div>

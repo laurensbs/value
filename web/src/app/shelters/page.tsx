@@ -1,4 +1,4 @@
-import { count, eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
@@ -29,7 +29,8 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
       lng: s.organization.lng,
       directoryId: s.organization.directoryId,
       isDemo: s.organization.isDemo,
-      dogs: count(s.dog.id),
+      // Only dogs people can actually meet: not paused, adopted, hidden or drafts.
+      dogs: sql<number>`count(${s.dog.id}) filter (where ${s.dog.status} = 'active')`.mapWith(Number),
     })
     .from(s.organization)
     .leftJoin(s.dog, eq(s.dog.orgId, s.organization.id))

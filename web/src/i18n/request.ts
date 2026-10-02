@@ -26,8 +26,9 @@ export async function resolveLocale(): Promise<Locale> {
   return fromAcceptLanguage((await headers()).get('accept-language'))
 }
 
-export default getRequestConfig(async () => {
-  const locale = await resolveLocale()
+export default getRequestConfig(async ({ locale: explicit }) => {
+  // An explicit locale (getTranslations({ locale })) wins, e.g. for share images in the sharer's language.
+  const locale = isLocale(explicit) ? explicit : await resolveLocale()
   // Dutch is the source language; any key missing in a translation falls back to it.
   const messages = locale === 'nl' ? await load('nl') : merge(await load('nl'), await load(locale))
   return { locale, messages, timeZone: 'Europe/Amsterdam' }

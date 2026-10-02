@@ -3,54 +3,16 @@
 
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
+import { uploadPhoto } from '@/lib/photo-upload'
 import { Icon } from './Icon'
-
-/** Shrinks a photo in the browser so uploads stay small and fast on mobile data. */
-async function resize(file: File, maxSide: number, quality: number): Promise<Blob> {
-  const url = URL.createObjectURL(file)
-  try {
-    const img = new Image()
-    img.decoding = 'async'
-    img.src = url
-    await img.decode()
-    const scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight))
-    const canvas = document.createElement('canvas')
-    canvas.width = Math.round(img.naturalWidth * scale)
-    canvas.height = Math.round(img.naturalHeight * scale)
-    const ctx = canvas.getContext('2d')
-    if (!ctx) throw new Error('canvas')
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-    return await new Promise<Blob>((resolve, reject) =>
-      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('encode'))), 'image/jpeg', quality),
-    )
-  } finally {
-    URL.revokeObjectURL(url)
-  }
-}
-
-async function upload(file: File, maxSide: number): Promise<string> {
-  // Try a normal size first, then a smaller one if the server says it is too large.
-  for (const [side, quality] of [
-    [maxSide, 0.84],
-    [Math.round(maxSide * 0.66), 0.72],
-  ] as const) {
-    const blob = await resize(file, side, quality)
-    const body = new FormData()
-    body.append('file', new File([blob], 'photo.jpg', { type: 'image/jpeg' }))
-    const res = await fetch('/api/upload', { method: 'POST', body })
-    if (res.ok) return ((await res.json()) as { url: string }).url
-    if (res.status !== 413) throw new Error(`upload ${res.status}`)
-  }
-  throw new Error('too-large')
-}
 
 interface Props {
   /** Form field name. Single mode posts a URL; multiple mode posts a JSON array. */
   name: string
   initial?: string[]
   max?: number
-  /** Profile photos are round and smaller; dog photos are wide. */
-  variant?: 'person' | 'dog'
+  /** Profile photos are round and smaller; dog photos are wide; logos are shown whole. */
+  variant?: 'person' | 'dog' | 'logo'
 }
 
 export function PhotoUploader({ name, initial = [], max = 1, variant = 'dog' }: Props) {
@@ -69,7 +31,7 @@ export function PhotoUploader({ name, initial = [], max = 1, variant = 'dog' }: 
       const room = single ? 1 : max - photos.length
       const picked = Array.from(files).slice(0, Math.max(room, 0))
       const urls: string[] = []
-      for (const file of picked) urls.push(await upload(file, variant === 'person' ? 720 : 1280))
+      for (const file of picked) urls.push(await uploadPhoto(file, variant === 'person' ? 720 : variant === 'logo' ? 512 : 1280))
       setPhotos((prev) => (single ? urls.slice(0, 1) : [...prev, ...urls].slice(0, max)))
     } catch {
       setError(t('error'))
