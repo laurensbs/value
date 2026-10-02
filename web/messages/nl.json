@@ -138,8 +138,6 @@
     "login": "Inloggen",
     "signup": "Account maken",
     "withPasskey": "Inloggen met Face ID, vingerafdruk of passkey",
-    "withGoogle": "Doorgaan met Google",
-    "withApple": "Doorgaan met Apple",
     "noAccount": "Nog geen account?",
     "hasAccount": "Al een account?",
     "termsNote": "Door een account te maken ga je akkoord met de <terms>voorwaarden</terms> en de <privacy>privacyverklaring</privacy>.",
@@ -154,7 +152,6 @@
       "owner": "Je meldt een hond aan die wel een extra rondje kan gebruiken. Eerst even een account.",
       "shelter": "Je zet de honden van je opvang op Rondje. Maak eerst je eigen account; daarna meld je de opvang aan."
     },
-    "orEmail": "of met je e-mailadres",
     "promiseFree": "Gratis, zonder advertenties.",
     "promisePrivacy": "We verkopen je gegevens nooit. Je locatie wordt afgerond op ongeveer 500 meter.",
     "forgot": "Wachtwoord vergeten?",
@@ -170,6 +167,13 @@
     "resetDone": "Je wachtwoord is gewijzigd en je bent op andere apparaten uitgelogd. Log nu in met je nieuwe wachtwoord.",
     "resetInvalid": "Deze link is verlopen of al gebruikt.",
     "backToLogin": "Naar inloggen"
+  },
+  "social": {
+    "continueWithApple": "Doorgaan met Apple",
+    "continueWithGoogle": "Doorgaan met Google",
+    "or": "of met je e-mailadres",
+    "error": "Inloggen met {provider} lukte niet. Probeer het nog eens, of gebruik je e-mailadres.",
+    "linkNotice": "Er is al een Rondje-account met dit e-mailadres. Log hieronder één keer in met je wachtwoord, dan koppelen we {provider} eraan. Daarna kun je ook met {provider} inloggen."
   },
   "onboarding": {
     "title": "Vertel iets over jezelf",

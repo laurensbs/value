@@ -138,8 +138,6 @@
     "login": "Iniciar sesión",
     "signup": "Crear cuenta",
     "withPasskey": "Iniciar sesión con Face ID, huella dactilar o llave de acceso",
-    "withGoogle": "Continuar con Google",
-    "withApple": "Continuar con Apple",
     "noAccount": "¿Aún no tienes cuenta?",
     "hasAccount": "¿Ya tienes cuenta?",
     "termsNote": "Al crear una cuenta, aceptas las <terms>condiciones</terms> y la <privacy>política de privacidad</privacy>.",
@@ -154,7 +152,6 @@
       "owner": "Vas a inscribir un perro al que le vendría bien un paseo extra. Primero, crea tu cuenta.",
       "shelter": "Vas a poner los perros de tu protectora en Rondje. Primero crea tu propia cuenta; después inscribes la protectora."
     },
-    "orEmail": "o con tu correo electrónico",
     "promiseFree": "Gratis y sin anuncios.",
     "promisePrivacy": "Nunca vendemos tus datos. Tu ubicación se redondea a unos 500 metros.",
     "forgot": "¿Has olvidado tu contraseña?",
@@ -170,6 +167,13 @@
     "resetDone": "Tu contraseña se ha cambiado y se ha cerrado la sesión en otros dispositivos. Inicia sesión ahora con la contraseña nueva.",
     "resetInvalid": "Este enlace ha caducado o ya se ha usado.",
     "backToLogin": "Volver a iniciar sesión"
+  },
+  "social": {
+    "continueWithApple": "Continuar con Apple",
+    "continueWithGoogle": "Continuar con Google",
+    "or": "o con tu correo electrónico",
+    "error": "No se pudo iniciar sesión con {provider}. Inténtalo de nuevo o usa tu correo electrónico.",
+    "linkNotice": "Ya existe una cuenta de Rondje con este correo electrónico. Inicia sesión abajo una vez con tu contraseña y vincularemos {provider} a tu cuenta. Después también podrás entrar con {provider}."
   },
   "onboarding": {
     "title": "Cuéntanos algo sobre ti",
