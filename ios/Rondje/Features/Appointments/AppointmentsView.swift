@@ -182,7 +182,7 @@ struct AppointmentCard: View {
             }
         }
         .sheet(isPresented: $chatting) {
-            ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name)
+            ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name, suggestions: RequestSuggestions.chatReplies(for: item, asOwner: asOwner))
                 .presentationDetents([.large])
         }
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
