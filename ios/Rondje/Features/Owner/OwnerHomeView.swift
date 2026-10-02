@@ -25,6 +25,8 @@ struct OwnerHomeView: View {
                         Text(headline).font(.display(28))
                     }
 
+                    NextStepCard(placement: .home, myDogsCount: loaded ? dogs.count : nil, addDog: { adding = true })
+
                     ForEach(live) { item in liveCard(item) }
 
                     OwnerSteps(hasDog: !dogs.isEmpty, loaded: loaded) { adding = true }
