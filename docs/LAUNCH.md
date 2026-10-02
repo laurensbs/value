@@ -51,6 +51,15 @@ Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programme
 3. **Let op: Vercel-abonnement.** Het gratis Hobby-abonnement van Vercel is bedoeld voor niet-commercieel gebruik. Zodra je bijdragen vraagt, val je mogelijk daarbuiten. Controleer de voorwaarden van Vercel en neem zo nodig **Pro** (ongeveer $20 per maand) voordat je `SUPPORT_URL` zet.
 4. **In de apps verschijnt nooit iets over geld.** Apple en Google staan geen externe betaal- of donatielinks toe voor bedrijven. De apps sturen "RondjeApp" mee in hun user agent (na `npx cap sync`, zie stap 6 en 7); de site laat dan de kosten, de steunknop en de link in de footer weg.
 
+**E-mail (wachtwoord vergeten en meldingen).** Zonder e-mail kan niemand een nieuw wachtwoord aanvragen, en hoort een eigenaar alleen in de app over een nieuwe aanvraag of een rondje dat uitloopt. Zo zet je het aan:
+
+1. Maak een account bij [Resend](https://resend.com) (het gratis abonnement is genoeg om te beginnen) en voeg je domein toe. Zet de DNS-records die Resend geeft bij je domeinregistrar. Nog geen eigen domein? Begin met stap 8 (eigen domein).
+2. Maak in Resend een API-sleutel (alleen "Sending access").
+3. Zet in Vercel `RESEND_API_KEY` (de sleutel) en `EMAIL_FROM`, bijvoorbeeld `Rondje <hallo@jouwdomein.nl>`, en redeploy.
+4. Test op `/forgot-password` met je eigen adres.
+
+Mensen kiezen in hun profiel of ze e-mail willen bij meldingen; de taal volgt hun taalkeuze.
+
 **Je verhaal op Over ons.** Het sjabloon staat in `web/content/about/nl/story.md`, met schrijfvragen en de richtlijnen van 113 voor schrijven over somberheid. Vul het in, zet bovenaan `published: "true"` en commit: dan staat het op `/about`. Eerst bekijken kan als beheerder via `/about?preview=1`. Wil je een foto erbij? Zet die in `web/public/` en verwijs ernaar in het verhaal.
 
 ## 4. Vóór de echte lancering

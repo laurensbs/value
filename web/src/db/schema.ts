@@ -50,6 +50,10 @@ export const profile = pgTable(
     termsVersion: text('terms_version').notNull(),
     referralCode: text('referral_code').notNull(),
     referredBy: text('referred_by'),
+    /** Language for emails: the language the person last chose or signed up in. */
+    locale: text('locale'),
+    /** Service emails for important notifications (new request, overdue walk …). On by default. */
+    emailNotifications: boolean('email_notifications').notNull().default(true),
     bannedAt: timestamp('banned_at'),
     banReason: text('ban_reason'),
     createdAt: created(),

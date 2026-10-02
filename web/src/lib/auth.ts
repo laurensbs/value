@@ -3,8 +3,10 @@ import { passkey } from '@better-auth/passkey'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { nextCookies } from 'better-auth/next-js'
+import { eq } from 'drizzle-orm'
 import { db } from '@/db'
 import * as schema from '@/db/schema'
+import { passwordResetEmail, sendEmail, toLocale } from '@/server/email'
 import { siteUrl, trustedOrigins } from './site'
 
 const baseURL = siteUrl()
@@ -37,7 +39,18 @@ export const auth = betterAuth({
   baseURL,
   secret: process.env.BETTER_AUTH_SECRET ?? 'rondje-local-development-secret-change-me-0000',
   database: drizzleAdapter(db, { provider: 'pg', schema }),
-  emailAndPassword: { enabled: true, minPasswordLength: 8, autoSignIn: true },
+  emailAndPassword: {
+    enabled: true,
+    minPasswordLength: 8,
+    autoSignIn: true,
+    // "Forgot password": a link that works for one hour; resetting signs out every other device.
+    resetPasswordTokenExpiresIn: 60 * 60,
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async ({ user, url }) => {
+      const [profile] = await db.select({ locale: schema.profile.locale }).from(schema.profile).where(eq(schema.profile.userId, user.id))
+      await sendEmail(await passwordResetEmail(url, toLocale(profile?.locale), user.email))
+    },
+  },
   socialProviders: { ...google, ...apple },
   account: { accountLinking: { enabled: true, trustedProviders: ['google', 'apple'] } },
   user: {

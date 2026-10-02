@@ -35,6 +35,12 @@ describe('database migrations', () => {
     await expect(
       db.exec(`insert into suggestion (id, kind, name, country, city, suggested_by, directory_id) values ('s4', 'vote', 'Z', 'NL', 'Utrecht', 'u1', 'nl-z')`),
     ).rejects.toThrow()
+    // Email preferences: on by default, language unknown until someone picks one.
+    await db.exec(`insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code)
+      values ('u1', 'Ans', '1950-01-01', 'NL', 'Utrecht', now(), '0.1', 'ABC234')`)
+    const prefs = await db.query<{ locale: string | null; email_notifications: boolean }>('select locale, email_notifications from profile')
+    expect(prefs.rows[0]).toEqual({ locale: null, email_notifications: true })
+
     const tips = await db.query<{ status: string }>('select status from suggestion')
     expect(tips.rows.map((r) => r.status)).toEqual(['new', 'new', 'new'])
     await db.close()

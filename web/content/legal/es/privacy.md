@@ -132,7 +132,7 @@ Trabajamos con las siguientes entidades. Con los encargados del tratamiento firm
 |---|---|---|
 | Vercel Inc. | Alojamiento de la web, servidor de la app y almacenamiento de fotos (Vercel Blob) | Región de la UE cuando sea posible; Vercel es una empresa estadounidense [pendiente de verificar: regiones] |
 | Neon Inc. | Base de datos (Postgres) | Región de la UE [pendiente de verificar: cuál] |
-| [Nombre del proveedor de correo] | Envío de correos electrónicos | [país/región] |
+| Resend Inc. (cuando el correo esté activado) | Envío de correos: una contraseña nueva y avisos como una solicitud nueva o un paseo que se alarga (puedes desactivarlos en tu perfil) | EE. UU.; transferencia basada en cláusulas contractuales tipo [por verificar] |
 | Google o Apple | Inicio de sesión, solo si lo eliges | Bajo la responsabilidad de Google o Apple |
 | Apple o Google | Notificaciones *push*, solo si las activas [pendiente de verificar] | Según las condiciones de Apple o Google |
 | OpenStreetMap Foundation | Imágenes de mapas (teselas) | Reino Unido [pendiente de verificar] |

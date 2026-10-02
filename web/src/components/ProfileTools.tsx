@@ -2,11 +2,11 @@
 
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useState, useSyncExternalStore } from 'react'
+import { useState, useSyncExternalStore, useTransition } from 'react'
 import { useForm } from '@/lib/use-form'
 import { authClient } from '@/lib/auth-client'
 import { isNativeApp } from '@/lib/native'
-import { deleteAccount, type FormState } from '@/server/actions/profile'
+import { deleteAccount, setEmailNotifications, type FormState } from '@/server/actions/profile'
 import { Icon } from './Icon'
 import { SubmitButton } from './SubmitButton'
 
@@ -103,5 +103,30 @@ export function DeleteAccountForm() {
       {state.error ? <p className="error-text">{t('deleteError')}</p> : null}
       <SubmitButton className="button danger" pending={pending}>{t('deleteButton')}</SubmitButton>
     </form>
+  )
+}
+
+/** Emails for important notifications (new request, accepted, overdue walk): on or off. */
+export function EmailNotificationsToggle({ on }: { on: boolean }) {
+  const t = useTranslations('profile')
+  const [checked, setChecked] = useState(on)
+  const [pending, start] = useTransition()
+  return (
+    <label className="check">
+      <input
+        type="checkbox"
+        checked={checked}
+        disabled={pending}
+        onChange={(e) => {
+          const next = e.target.checked
+          setChecked(next)
+          start(() => setEmailNotifications(next))
+        }}
+      />
+      <span>
+        {t('emailNotifications')}
+        <span className="hint">{t('emailNotificationsHint')}</span>
+      </span>
+    </label>
   )
 }

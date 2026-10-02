@@ -151,7 +151,20 @@
     },
     "orEmail": "o con tu correo electrónico",
     "promiseFree": "Gratis y sin anuncios.",
-    "promisePrivacy": "Nunca vendemos tus datos. Tu ubicación se redondea a unos 500 metros."
+    "promisePrivacy": "Nunca vendemos tus datos. Tu ubicación se redondea a unos 500 metros.",
+    "forgot": "¿Has olvidado tu contraseña?",
+    "forgotTitle": "He olvidado mi contraseña",
+    "forgotLede": "Escribe tu correo. Si lo conocemos, te enviaremos un enlace para elegir una contraseña nueva.",
+    "forgotSubmit": "Enviar el enlace",
+    "forgotSent": "Si existe una cuenta con este correo, ya tienes un email con un enlace en tu bandeja de entrada. Mira también en spam. El enlace funciona durante una hora.",
+    "forgotUnavailable": "Todavía no se puede pedir una contraseña nueva por correo. ¿Tienes una passkey? Inicia sesión con ella. Si no puedes, ponte en contacto con nosotros.",
+    "forgotAgain": "Pide un enlace nuevo",
+    "resetTitle": "Elige una contraseña nueva",
+    "resetNew": "Contraseña nueva",
+    "resetSubmit": "Guardar contraseña",
+    "resetDone": "Tu contraseña se ha cambiado y se ha cerrado la sesión en otros dispositivos. Inicia sesión ahora con la contraseña nueva.",
+    "resetInvalid": "Este enlace ha caducado o ya se ha usado.",
+    "backToLogin": "Volver a iniciar sesión"
   },
   "onboarding": {
     "title": "Cuéntanos algo sobre ti",
@@ -546,7 +559,10 @@
     "tipText": "¿Conoces una protectora donde a los perros les vendrían bien más paseos, o a alguien con perro que necesite ayuda? Así ayudas sin que contactemos a nadie sin permiso.",
     "supportTitle": "Rondje sigue siendo gratis",
     "supportText": "Sin anuncios y sin suscripción. ¿Quieres ayudar a que Rondje siga en línea y sea seguro? Mira cómo, con o sin dinero.",
-    "flyer": "Imprime un folleto para tu barrio"
+    "flyer": "Imprime un folleto para tu barrio",
+    "email": "Correo",
+    "emailNotifications": "Enviarme un correo con los avisos importantes",
+    "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje."
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -1205,6 +1221,44 @@
         "four": "Gratis: nadie pide ni paga dinero"
       },
       "cta": "Escanea el código y encuentra un perro cerca de ti."
+    }
+  },
+  "email": {
+    "open": "Abrir Rondje",
+    "footer": "Recibes este correo porque tienes una cuenta en Rondje. Puedes desactivar los correos de avisos en tu perfil, en Ajustes.",
+    "resetFooter": "Recibes este correo porque alguien pidió una contraseña nueva para tu cuenta de Rondje.",
+    "reset": {
+      "subject": "Una contraseña nueva para Rondje",
+      "heading": "Elige una contraseña nueva",
+      "body": "Alguien (esperamos que tú) pidió una contraseña nueva para tu cuenta de Rondje. El enlace de abajo funciona durante una hora.",
+      "cta": "Elegir una contraseña nueva",
+      "ignore": "¿No lo has pedido tú? No tienes que hacer nada: tu contraseña sigue siendo la misma."
+    },
+    "kinds": {
+      "request-new": {
+        "subject": "{walkerName} quiere pasear a {dogName}",
+        "body": "Mira la solicitud en Rondje y dile si te viene bien. La primera vez siempre os conocéis en persona."
+      },
+      "request-accepted": {
+        "subject": "Tu cita con {dogName} ha sido aceptada",
+        "body": "En Rondje ya ves dónde quedáis y cómo contactar con el propietario. La primera vez paseáis juntos."
+      },
+      "walk-overdue": {
+        "subject": "El paseo con {dogName} dura más de lo previsto",
+        "body": "El paseo se está alargando. Mira en Rondje dónde están ahora o llama al paseador. En caso de emergencia, llama al 112."
+      },
+      "org-verified": {
+        "subject": "Tu protectora ya está en Rondje",
+        "body": "Hemos verificado tu protectora. Tus perros ya son visibles para los paseadores. Organiza un paseo en grupo para empezar."
+      },
+      "org-pending": {
+        "subject": "Nueva protectora para revisar: {orgName}",
+        "body": "{orgName} se ha registrado. Revisa los datos en la administración."
+      },
+      "shelter-joined": {
+        "subject": "{orgName} ya está en Rondje",
+        "body": "Recomendaste o votaste esta protectora y ya se ha unido. Mira los perros y únete a un paseo en grupo."
+      }
     }
   }
 }

@@ -15,6 +15,13 @@
       "when": 1790932110213,
       "tag": "0001_intake_tips",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790937091032,
+      "tag": "0002_email",
+      "breakpoints": true
     }
   ]
 }

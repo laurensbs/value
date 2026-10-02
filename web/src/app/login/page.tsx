@@ -32,6 +32,9 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           </p>
         ) : null}
         <AuthForm mode="login" next={next} providers={enabledSocialProviders} />
+        <p className="small">
+          <Link href="/forgot-password">{t('forgot')}</Link>
+        </p>
         <p className="muted">
           {t('noAccount')}{' '}
           <Link href={`/signup?next=${encodeURIComponent(next)}`}>{t('signup')}</Link>

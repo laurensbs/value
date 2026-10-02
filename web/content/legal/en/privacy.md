@@ -132,7 +132,7 @@ We work with the parties below. We sign a data processing agreement with our pro
 |---|---|---|
 | Vercel Inc. | Hosting of the website, app server and photo storage (Vercel Blob) | EU region where possible; Vercel is a US company [to verify: regions] |
 | Neon Inc. | Database (Postgres) | EU region [to verify: which] |
-| [Name of email provider] | Sending emails | [country/region] |
+| Resend Inc. (once email is switched on) | Sending emails: a new password, and notifications such as a new request or a walk that runs late (you can turn these off in your profile) | USA; transfer based on standard contractual clauses [to be checked] |
 | Google or Apple | Sign-in, only if you choose it | Google or Apple's own responsibility |
 | Apple or Google | Push notifications, only if you turn them on [to verify] | Apple or Google's own terms |
 | OpenStreetMap Foundation | Map images (tiles) | United Kingdom [to verify] |

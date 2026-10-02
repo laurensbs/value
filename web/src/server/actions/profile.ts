@@ -3,6 +3,7 @@
 import { eq } from 'drizzle-orm'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
 import { z } from 'zod'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
@@ -94,6 +95,7 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
     hasDogs: p.hasDogs,
     termsAcceptedAt: new Date(),
     termsVersion: TERMS_VERSION,
+    locale: await getLocale(),
   }
   const referredBy = (await cookies()).get('rondje_ref')?.value ?? null
   if (viewer.profile) {
@@ -167,6 +169,19 @@ export async function setLocale(locale: string): Promise<void> {
   const { isLocale, LOCALE_COOKIE } = await import('@/i18n/config')
   if (!isLocale(locale)) return
   ;(await cookies()).set(LOCALE_COOKIE, locale, { path: '/', maxAge: 60 * 60 * 24 * 365, sameSite: 'lax' })
+  // Emails follow the language someone chose.
+  const viewer = await getViewer()
+  if (viewer?.profile) {
+    const db = await getDb()
+    await db.update(s.profile).set({ locale }).where(eq(s.profile.userId, viewer.userId))
+  }
+}
+
+/** Email for important notifications (new request, overdue walk …): on or off. */
+export async function setEmailNotifications(on: boolean): Promise<void> {
+  const viewer = await actionViewer()
+  const db = await getDb()
+  await db.update(s.profile).set({ emailNotifications: Boolean(on) }).where(eq(s.profile.userId, viewer.userId))
 }
 
 export async function markNotificationsRead(): Promise<void> {

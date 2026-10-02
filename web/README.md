@@ -33,6 +33,7 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 | `NEXT_PUBLIC_TILE_URL` | optional | Map tiles; defaults to OpenStreetMap. Use a tile provider with an API key before heavy traffic. |
 | `SUPPORT_URL` + `OPERATOR_NAME` | optional | The support button on `/support` (https Patreon, Ko-fi, Open Collective or Buy Me a Coffee only). Shown only when both are set, and never in the apps. |
 | `INSTAGRAM_HANDLE`, `CONTACT_EMAIL` | optional | Instagram link (footer, about, support) and contact address. Hidden while empty. |
+| `RESEND_API_KEY` + `EMAIL_FROM` | recommended | Email through Resend: password reset, and notification emails (new request, accepted, overdue walk, shelter verified). Without them no email is sent and "forgot password" explains that. `EMAIL_FROM` like `Rondje <hallo@your-domain>` (a domain verified in Resend). |
 
 ## Where things are
 
@@ -43,6 +44,7 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 - `src/app/shelter/**`: shelter sign-up, dashboard, details (`/edit`), photo-first bulk add (`/dogs/bulk`, drafts named from file names by `nameFromFile` in `src/lib/dog-import.ts`) and the printable poster (`/poster`).
 - `src/server/actions/tips.ts` and `/suggest`: tips and "I want to walk here" votes for shelters (nothing is stored about private people); admins see them grouped on `/admin`.
 - `src/lib/support.ts`, `src/server/native.ts`: support/Instagram/contact settings from the environment, and recognising the apps (user agent "RondjeApp", set in `capacitor.config.ts`) so no money is shown there.
+- `src/server/email.ts`, `src/lib/email-layout.ts`: emails (Resend HTTP API, sent after the response with `after()`), in each person's language (`profile.locale`); people can switch notification emails off in their profile.
 - `content/about/nl/story.md`: the founder's story for `/about`, hidden until `published: "true"`; `content/costs.json`: the cost table on `/support`.
 - `src/db/schema.ts` and `drizzle/`: schema and SQL migrations. After a schema change run `npm run db:generate`; it also embeds the SQL into `src/db/migrations.json`, which the app applies at runtime under an advisory lock.
 - `messages/*.json`: interface text. `nl` is the source; missing keys fall back to it.

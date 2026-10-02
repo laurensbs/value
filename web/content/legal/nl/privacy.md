@@ -132,7 +132,7 @@ We werken met deze partijen. Met verwerkers sluiten we een verwerkersovereenkoms
 |---|---|---|
 | Vercel Inc. | Hosting van website, app-server en opslag van foto's (Vercel Blob) | EU-regio waar mogelijk; Vercel is een Amerikaans bedrijf [te controleren: regio's] |
 | Neon Inc. | Database (Postgres) | EU-regio [te controleren: welke] |
-| [Naam e-mailprovider] | Versturen van e-mails | [land/regio] |
+| Resend Inc. (zodra e-mail aanstaat) | Versturen van e-mails: een nieuw wachtwoord, en meldingen zoals een nieuwe aanvraag of een rondje dat uitloopt (die zet je uit in je profiel) | VS; doorgifte op basis van standaardcontractbepalingen [te controleren] |
 | Google of Apple | Inloggen, alleen als je daarvoor kiest | Eigen verantwoordelijkheid van Google of Apple |
 | Apple of Google | Pushmeldingen, alleen als je die aanzet [te controleren] | Eigen voorwaarden van Apple of Google |
 | OpenStreetMap Foundation | Kaartafbeeldingen (tiles) | Verenigd Koninkrijk [te controleren] |

@@ -151,7 +151,20 @@
     },
     "orEmail": "or with your email address",
     "promiseFree": "Free, with no ads.",
-    "promisePrivacy": "We never sell your data. Your location is rounded to about 500 metres."
+    "promisePrivacy": "We never sell your data. Your location is rounded to about 500 metres.",
+    "forgot": "Forgot your password?",
+    "forgotTitle": "Forgot your password",
+    "forgotLede": "Enter your email address. If we know it, we'll send you a link to choose a new password.",
+    "forgotSubmit": "Send the link",
+    "forgotSent": "If there is an account with this address, an email with a link is in your inbox now. Check your spam folder too. The link works for one hour.",
+    "forgotUnavailable": "Requesting a new password by email isn't available yet. Do you have a passkey? Sign in with it. Still stuck? Get in touch with us.",
+    "forgotAgain": "Request a new link",
+    "resetTitle": "Choose a new password",
+    "resetNew": "New password",
+    "resetSubmit": "Save password",
+    "resetDone": "Your password has been changed and you have been signed out on other devices. Sign in now with your new password.",
+    "resetInvalid": "This link has expired or was already used.",
+    "backToLogin": "Back to sign in"
   },
   "onboarding": {
     "title": "Tell us about yourself",
@@ -546,7 +559,10 @@
     "tipText": "Know a shelter where dogs could use more walks, or someone with a dog who could use help? This is how you help without us contacting anyone uninvited.",
     "supportTitle": "Rondje stays free",
     "supportText": "No ads and no subscription. Want to help keep Rondje online and safe? See how, with or without money.",
-    "flyer": "Print a flyer for your neighbourhood"
+    "flyer": "Print a flyer for your neighbourhood",
+    "email": "Email",
+    "emailNotifications": "Email me about important notifications",
+    "emailNotificationsHint": "A new request, an accepted appointment or a walk that runs late. Off: you only see notifications in Rondje."
   },
   "quiz": {
     "title": "Safety quiz",
@@ -1205,6 +1221,44 @@
         "four": "Free: nobody asks for or pays money"
       },
       "cta": "Scan the code and find a dog near you."
+    }
+  },
+  "email": {
+    "open": "Open Rondje",
+    "footer": "You get this email because you have an account with Rondje. You can turn off notification emails in your profile, under Settings.",
+    "resetFooter": "You get this email because someone asked for a new password for your Rondje account.",
+    "reset": {
+      "subject": "A new password for Rondje",
+      "heading": "Choose a new password",
+      "body": "Someone (hopefully you) asked for a new password for your Rondje account. The link below works for one hour.",
+      "cta": "Choose a new password",
+      "ignore": "Didn't ask for this? Then you don't need to do anything: your password stays the same."
+    },
+    "kinds": {
+      "request-new": {
+        "subject": "{walkerName} would like to walk {dogName}",
+        "body": "Look at the request in Rondje and let them know if it suits you. The first time, you always meet together."
+      },
+      "request-accepted": {
+        "subject": "Your appointment with {dogName} has been accepted",
+        "body": "In Rondje you can now see where you meet and how to reach the owner. The first time, you walk together."
+      },
+      "walk-overdue": {
+        "subject": "The walk with {dogName} is taking longer than planned",
+        "body": "The walk is running late. Check in Rondje where they are now, or call the walker. In an emergency, call 112."
+      },
+      "org-verified": {
+        "subject": "Your shelter is on Rondje",
+        "body": "We have checked your shelter. Your dogs are now visible to walkers. Plan a group walk to get started."
+      },
+      "org-pending": {
+        "subject": "New shelter to check: {orgName}",
+        "body": "{orgName} has signed up. Check the details in the admin area."
+      },
+      "shelter-joined": {
+        "subject": "{orgName} is on Rondje now",
+        "body": "You suggested or voted for this shelter, and it has joined. Have a look at the dogs and join a group walk."
+      }
     }
   }
 }

@@ -2,25 +2,13 @@ import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { MarkNotificationsRead } from '@/components/MarkNotificationsRead'
+import { notificationHref, type NotificationData } from '@/lib/notification-links'
 import { notificationsFor } from '@/server/queries'
 import { requireViewer } from '@/server/session'
 
 export async function generateMetadata() {
   const t = await getTranslations('notifications')
   return { title: t('title') }
-}
-
-type Data = { walkId?: string; dogId?: string; dogName?: string; walkerName?: string; requestId?: string; orgId?: string; orgName?: string }
-
-function hrefFor(kind: string, data: Data): string {
-  if (kind.startsWith('request-')) return '/requests'
-  if (kind === 'walk-started' || kind === 'walk-overdue' || kind === 'walk-ended') return data.walkId ? `/walk/${data.walkId}` : '/requests'
-  if (kind === 'trust-granted' && data.dogId) return `/dogs/${data.dogId}`
-  if (kind === 'org-verified' && data.orgId) return `/shelter/${data.orgId}`
-  if (kind === 'group-signup') return '/shelter'
-  if (kind === 'org-pending') return '/admin'
-  if (kind === 'shelter-joined' && data.orgId) return `/dogs?org=${data.orgId}`
-  return '/requests'
 }
 
 const ICONS: Record<string, 'paw' | 'route' | 'alert' | 'shield' | 'users' | 'building' | 'bell' | 'heart'> = {
@@ -51,10 +39,10 @@ export default async function NotificationsPage() {
       ) : (
         <ul className="list">
           {items.map((n) => {
-            const data = (n.data ?? {}) as Data
+            const data = (n.data ?? {}) as NotificationData
             return (
               <li key={n.id}>
-                <Link href={hrefFor(n.kind, data)} className={`list-item notification${n.readAt ? '' : ' unread'}`}>
+                <Link href={notificationHref(n.kind, data)} className={`list-item notification${n.readAt ? '' : ' unread'}`}>
                   <span className={`note-icon${n.kind === 'walk-overdue' ? ' warn' : ''}`}>
                     <Icon name={ICONS[n.kind] ?? 'bell'} size={18} />
                   </span>

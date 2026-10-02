@@ -1,8 +1,10 @@
 import 'server-only'
-import { inArray, sql } from 'drizzle-orm'
+import { eq, inArray, sql } from 'drizzle-orm'
 import type { Db } from '@/db'
 import * as s from '@/db/schema'
 import { adminEmails } from '@/lib/site'
+import { EMAIL_KINDS } from '@/lib/notification-links'
+import { emailEnabled, notificationEmail, sendEmailLater, toLocale } from './email'
 
 export type NotificationKind =
   | 'request-new'
@@ -29,6 +31,22 @@ export async function notify(
   await db.insert(s.notification).values(
     unique.map((userId) => ({ id: crypto.randomUUID(), userId, kind, data })),
   )
+  if (emailEnabled() && (EMAIL_KINDS as readonly string[]).includes(kind)) await emailNotification(db, unique, kind, data)
+}
+
+/** The same notification by email, in each person's language, unless they turned it off. */
+async function emailNotification(db: Db, userIds: string[], kind: NotificationKind, data: Record<string, string | number | null>) {
+  const people = await db
+    .select({ email: s.user.email, locale: s.profile.locale, wantsEmail: s.profile.emailNotifications, bannedAt: s.profile.bannedAt })
+    .from(s.user)
+    .leftJoin(s.profile, eq(s.profile.userId, s.user.id))
+    .where(inArray(s.user.id, userIds))
+  const text = Object.fromEntries(Object.entries(data).map(([k, v]) => [k, v == null ? undefined : String(v)]))
+  for (const person of people) {
+    if (person.wantsEmail === false || person.bannedAt) continue
+    const email = await notificationEmail(kind, text, toLocale(person.locale), person.email)
+    if (email) sendEmailLater(email)
+  }
 }
 
 /** Rondje's own admins (ADMIN_EMAILS), for things only they can act on, like checking a new shelter. */

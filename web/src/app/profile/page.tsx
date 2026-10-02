@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { DeleteAccountForm, InviteLink, PasskeyButton, SignOutButton } from '@/components/ProfileTools'
+import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, SignOutButton } from '@/components/ProfileTools'
 import { WalkerCard } from '@/components/WalkerCard'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
@@ -123,6 +123,10 @@ export default async function ProfilePage() {
           <div className="stack-s">
             <strong>{t('profile.passkeys')}</strong>
             <PasskeyButton />
+          </div>
+          <div className="stack-s">
+            <strong>{t('profile.email')}</strong>
+            <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
           </div>
         </div>
       </section>

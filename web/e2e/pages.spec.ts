@@ -24,6 +24,14 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await expect(page.getByRole('img', { name: 'QR-code naar Rondje' })).toBeVisible()
   await shot(page, '31-flyer')
 
+  // Forgot password: linked from the login page; without an email service it says so instead of pretending.
+  await page.goto('/login')
+  await page.getByRole('link', { name: 'Wachtwoord vergeten?' }).click()
+  await expect(page.getByRole('heading', { name: 'Wachtwoord vergeten', level: 1 })).toBeVisible()
+  await expect(page.getByText(/kan nog niet|staat er nu een e-mail/).or(page.getByRole('button', { name: 'Stuur de link' }))).toBeVisible()
+  await page.goto('/reset-password')
+  await expect(page.getByText('Deze link is verlopen of al gebruikt.')).toBeVisible()
+
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/support')
   await context.close()

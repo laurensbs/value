@@ -104,5 +104,12 @@
       "CREATE INDEX \"profile_referred_by_idx\" ON \"profile\" USING btree (\"referred_by\");",
       "UPDATE \"dog\" SET \"country\" = \"organization\".\"country\", \"city\" = \"organization\".\"city\", \"lat\" = \"organization\".\"lat\", \"lng\" = \"organization\".\"lng\" FROM \"organization\" WHERE \"dog\".\"org_id\" = \"organization\".\"id\";"
     ]
+  },
+  {
+    "tag": "0002_email",
+    "statements": [
+      "ALTER TABLE \"profile\" ADD COLUMN \"locale\" text;",
+      "ALTER TABLE \"profile\" ADD COLUMN \"email_notifications\" boolean DEFAULT true NOT NULL;"
+    ]
   }
 ]

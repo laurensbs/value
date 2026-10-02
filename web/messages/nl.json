@@ -151,7 +151,20 @@
     },
     "orEmail": "of met je e-mailadres",
     "promiseFree": "Gratis, zonder advertenties.",
-    "promisePrivacy": "We verkopen je gegevens nooit. Je locatie wordt afgerond op ongeveer 500 meter."
+    "promisePrivacy": "We verkopen je gegevens nooit. Je locatie wordt afgerond op ongeveer 500 meter.",
+    "forgot": "Wachtwoord vergeten?",
+    "forgotTitle": "Wachtwoord vergeten",
+    "forgotLede": "Vul je e-mailadres in. Is het bij ons bekend, dan sturen we je een link om een nieuw wachtwoord te kiezen.",
+    "forgotSubmit": "Stuur de link",
+    "forgotSent": "Als er een account met dit adres is, staat er nu een e-mail met een link in je inbox. Kijk ook even bij spam. De link werkt een uur.",
+    "forgotUnavailable": "Een nieuw wachtwoord per e-mail aanvragen kan nog niet. Heb je een passkey? Log daarmee in. Lukt het niet, neem dan contact met ons op.",
+    "forgotAgain": "Vraag een nieuwe link aan",
+    "resetTitle": "Nieuw wachtwoord kiezen",
+    "resetNew": "Nieuw wachtwoord",
+    "resetSubmit": "Wachtwoord opslaan",
+    "resetDone": "Je wachtwoord is gewijzigd en je bent op andere apparaten uitgelogd. Log nu in met je nieuwe wachtwoord.",
+    "resetInvalid": "Deze link is verlopen of al gebruikt.",
+    "backToLogin": "Naar inloggen"
   },
   "onboarding": {
     "title": "Vertel iets over jezelf",
@@ -546,7 +559,10 @@
     "tipText": "Ken je een opvang of asiel waar honden meer wandelingen kunnen gebruiken, of iemand met een hond die hulp kan gebruiken? Zo help je zonder dat wij iemand ongevraagd benaderen.",
     "supportTitle": "Rondje blijft gratis",
     "supportText": "Geen advertenties en geen abonnement. Wil je helpen om Rondje online en veilig te houden? Kijk hoe, met of zonder geld.",
-    "flyer": "Print een flyer voor je buurt"
+    "flyer": "Print een flyer voor je buurt",
+    "email": "E-mail",
+    "emailNotifications": "Stuur me een e-mail bij belangrijke meldingen",
+    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -1205,6 +1221,44 @@
         "four": "Gratis: niemand vraagt of betaalt geld"
       },
       "cta": "Scan de code en vind een hond bij jou in de buurt."
+    }
+  },
+  "email": {
+    "open": "Open Rondje",
+    "footer": "Je krijgt deze e-mail omdat je een account hebt bij Rondje. E-mails bij meldingen zet je uit in je profiel, onder Instellingen.",
+    "resetFooter": "Je krijgt deze e-mail omdat iemand een nieuw wachtwoord vroeg voor je account bij Rondje.",
+    "reset": {
+      "subject": "Een nieuw wachtwoord voor Rondje",
+      "heading": "Kies een nieuw wachtwoord",
+      "body": "Iemand (hopelijk jij) vroeg om een nieuw wachtwoord voor je account bij Rondje. De link hieronder werkt een uur.",
+      "cta": "Nieuw wachtwoord kiezen",
+      "ignore": "Heb jij dit niet gevraagd? Dan hoef je niets te doen: je wachtwoord blijft hetzelfde."
+    },
+    "kinds": {
+      "request-new": {
+        "subject": "{walkerName} wil met {dogName} wandelen",
+        "body": "Bekijk de aanvraag in Rondje en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen."
+      },
+      "request-accepted": {
+        "subject": "Je afspraak met {dogName} is geaccepteerd",
+        "body": "In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen."
+      },
+      "walk-overdue": {
+        "subject": "Het rondje met {dogName} duurt langer dan gepland",
+        "body": "Het rondje loopt uit. Kijk in Rondje waar ze nu zijn, of bel de wandelaar. Is er nood? Bel 112."
+      },
+      "org-verified": {
+        "subject": "Je opvang staat op Rondje",
+        "body": "We hebben je opvang gecontroleerd. Je honden zijn nu zichtbaar voor wandelaars. Plan een groepswandeling om te beginnen."
+      },
+      "org-pending": {
+        "subject": "Nieuwe opvang om te controleren: {orgName}",
+        "body": "{orgName} heeft zich aangemeld. Controleer de gegevens in Beheer."
+      },
+      "shelter-joined": {
+        "subject": "{orgName} staat nu op Rondje",
+        "body": "Je tipte of stemde op deze opvang, en hij doet nu mee. Bekijk de honden en loop mee met een groepswandeling."
+      }
     }
   }
 }

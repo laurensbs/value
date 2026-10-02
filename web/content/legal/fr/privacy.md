@@ -132,7 +132,7 @@ Nous travaillons avec les acteurs ci-dessous. Nous concluons un contrat de sous-
 |---|---|---|
 | Vercel Inc. | Hébergement du site, serveur de l'application et stockage des photos (Vercel Blob) | Région UE si possible ; Vercel est une société américaine [à vérifier : régions] |
 | Neon Inc. | Base de données (Postgres) | Région UE [à vérifier : laquelle] |
-| [Nom du fournisseur d'e-mail] | Envoi des e-mails | [pays/région] |
+| Resend Inc. (dès que l'e-mail est activé) | Envoi des e-mails : un nouveau mot de passe, et des notifications comme une nouvelle demande ou une promenade qui dure (désactivables dans votre profil) | États-Unis ; transfert fondé sur des clauses contractuelles types [à vérifier] |
 | Google ou Apple | Connexion, uniquement si vous la choisissez | Sous la responsabilité de Google ou d'Apple |
 | Apple ou Google | Notifications push, uniquement si vous les activez [à vérifier] | Selon les conditions d'Apple ou de Google |
 | OpenStreetMap Foundation | Images de cartes (tuiles) | Royaume-Uni [à vérifier] |

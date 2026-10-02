@@ -2766,3 +2766,10 @@ legend {
     -webkit-print-color-adjust: exact;
   }
 }
+
+.check .hint {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
