@@ -84,6 +84,9 @@ struct DogDetailView: View {
     @ViewBuilder
     private func content(_ d: DogDetail) -> some View {
         VStack(alignment: .leading, spacing: 20) {
+            if !d.isMine && !d.host.isShelter && d.canRequest.solo != nil {
+                GuusHint(id: "dog", text: L("Eerst maak je kennis. De eigenaar loopt mee en bekijkt je ID."))
+            }
             if d.dog.isDemo {
                 Label("Dit is een voorbeeldhond. Echte honden uit je buurt komen hier vanzelf bij.", systemImage: "info.circle.fill")
                     .font(.subheadline).foregroundStyle(Palette.warn)

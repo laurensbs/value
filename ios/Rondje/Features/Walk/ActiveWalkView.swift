@@ -37,31 +37,36 @@ struct ActiveWalkView: View {
         }
         .overlay(alignment: .top) {
             if finished == nil, let info = walk.info {
-                HStack {
-                    DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("Rondje met \(info.dogName)").font(.headline)
-                        if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
-                            Button("Locatie staat uit. Zet hem aan") { openSettings() }
-                                .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
-                        } else {
-                            Text(walk.signalWeak ? L("Zwak GPS-signaal") : L("De eigenaar kan live meekijken"))
-                                .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                VStack(spacing: 8) {
+                    HStack {
+                        DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("Rondje met \(info.dogName)").font(.headline)
+                            if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
+                                Button("Locatie staat uit. Zet hem aan") { openSettings() }
+                                    .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
+                            } else {
+                                Text(walk.signalWeak ? L("Zwak GPS-signaal") : L("De eigenaar kan live meekijken"))
+                                    .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                            }
                         }
+                        Spacer()
+                        Button {
+                            sos = true
+                        } label: {
+                            Text("SOS").font(.headline.weight(.heavy)).foregroundStyle(.white)
+                                .frame(width: 56, height: 44)
+                                .background(Palette.danger, in: .capsule)
+                        }
+                        .accessibilityLabel("Hulp nodig")
                     }
-                    Spacer()
-                    Button {
-                        sos = true
-                    } label: {
-                        Text("SOS").font(.headline.weight(.heavy)).foregroundStyle(.white)
-                            .frame(width: 56, height: 44)
-                            .background(Palette.danger, in: .capsule)
+                    .padding(12)
+                    .glassy(cornerRadius: 24)
+                    .padding(.horizontal)
+                    if walk.overdueMin == 0 {
+                        GuusHint(id: "walk.sos", text: L("Hulp nodig? SOS staat altijd hier rechtsboven.")).padding(.horizontal)
                     }
-                    .accessibilityLabel("Hulp nodig")
                 }
-                .padding(12)
-                .glassy(cornerRadius: 24)
-                .padding(.horizontal)
             }
         }
         .sheet(isPresented: $sos) {
@@ -103,6 +108,9 @@ struct ActiveWalkView: View {
                     MoodStore.set(walkId: info.walkId, before: value)
                 }
                 .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+            if walk.overdueMin == 0 {
+                GuusHint(id: "walk.care", text: L("Tik bij elke plas of poep. De eigenaar ziet het live."), after: "walk.sos")
             }
             CareCounters(walkId: info.walkId, care: $care)
             if !photos.isEmpty { PhotoStrip(photos: photos) }

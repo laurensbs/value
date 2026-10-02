@@ -28,6 +28,7 @@ struct OwnerHomeView: View {
                     ForEach(live) { item in liveCard(item) }
 
                     OwnerSteps(hasDog: !dogs.isEmpty, loaded: loaded) { adding = true }
+                    GuusHint(id: "owner", text: L("Hier zie je wie met je hond wil wandelen. Jij beslist altijd zelf."))
 
                     if !pending.isEmpty {
                         SectionTitle(title: L("Aanvragen"), subtitle: L("Kijk wie het is en kies een moment om kennis te maken."))

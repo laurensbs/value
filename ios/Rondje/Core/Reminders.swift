@@ -25,6 +25,19 @@ enum Reminders {
 
         var wanted: [String: UNNotificationRequest] = [:]
         for item in appointments.outgoing + appointments.incoming where item.status == "accepted" {
+            // The evening before a first meeting: one calm note to get ready (it opens the prep checklist).
+            if item.isMeeting, let evening = PrepReminder.fireDate(startsAt: item.startsAt, now: .now, calendar: .current) {
+                let asOwner = appointments.incoming.contains { $0.id == item.id }
+                let text = PrepReminder.text(for: item, asOwner: asOwner)
+                let content = UNMutableNotificationContent()
+                content.title = text.title
+                content.body = text.body
+                content.sound = .default
+                content.userInfo = ["tab": "appointments", "action": "prep:" + item.id]
+                let parts = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: evening)
+                let id = prefix + "eve-" + item.id
+                wanted[id] = UNNotificationRequest(identifier: id, content: content, trigger: UNCalendarNotificationTrigger(dateMatching: parts, repeats: false))
+            }
             let fireAt = item.startsAt.addingTimeInterval(-lead)
             guard fireAt > .now else { continue }
             let content = UNMutableNotificationContent()

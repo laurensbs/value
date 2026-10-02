@@ -121,7 +121,10 @@ enum CoachRouter {
             AddDogView { }
         case .badges:
             NavigationStack { BadgesView() }
-        case .prep: AppointmentsView() // fallback: prep-hints
+        case .prep(let id):
+            if let item = model.appointments.outgoing.first(where: { $0.id == id }) ?? model.appointments.incoming.first(where: { $0.id == id }) {
+                MeetingPrepView(item: item, asOwner: model.appointments.incoming.contains { $0.id == id })
+            }
         case .rebook: AppointmentsView() // fallback: request-flow
         case .lessons: NavigationStack { QuizView() } // fallback: lessons
         case .nudgeSettings: NavigationStack { NotificationsView() } // fallback: return-loops

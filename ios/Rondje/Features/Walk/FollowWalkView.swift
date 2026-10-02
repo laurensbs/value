@@ -35,6 +35,9 @@ struct FollowWalkView: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     if let live {
+                        if live.overdueMin == 0 {
+                            GuusHint(id: "follow", text: L("Je ziet live waar ze lopen. Foto's en plasjes komen hier vanzelf binnen."))
+                        }
                         HStack {
                             Chip(text: live.status == "active" ? L("Onderweg") : L("Terug"), symbol: live.status == "active" ? "figure.walk" : "house.fill")
                             Spacer()
