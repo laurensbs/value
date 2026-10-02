@@ -213,14 +213,15 @@ enum Format {
         meters < 1000 ? "\(Int(meters)) m" : String(format: "%.2f km", meters / 1000).replacingOccurrences(of: ".", with: ",")
     }
 
-    static let dutch = Locale.autoupdatingCurrent
+    /// Dates and times in the person's own language and region.
+    static let locale = Locale.autoupdatingCurrent
 
     static func when(_ date: Date) -> String {
         let cal = Calendar.current
-        let time = date.formatted(.dateTime.hour().minute().locale(dutch))
+        let time = date.formatted(.dateTime.hour().minute().locale(locale))
         if cal.isDateInToday(date) { return L("Vandaag \(time)") }
         if cal.isDateInTomorrow(date) { return L("Morgen \(time)") }
-        let day = date.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(dutch))
+        let day = date.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(locale))
         return day.prefix(1).uppercased() + day.dropFirst() + L(" · \(time)")
     }
 }
