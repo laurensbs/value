@@ -325,3 +325,19 @@ struct ChatResponse: Codable, Sendable {
     var messages: [ChatMessage]
     var canSend: Bool
 }
+
+/// A dog from the walker's "hondenvriendenboek".
+struct DogFriend: Codable, Identifiable, Hashable, Sendable {
+    var id: String
+    var name: String
+    var breed: String
+    var city: String
+    var photos: [String]
+    var look: DogLook
+    var walks: Int
+    var meters: Int
+    var lastAt: Date?
+    var firstAt: Date?
+}
+
+struct DogFriendsResponse: Codable, Sendable { var dogs: [DogFriend] }

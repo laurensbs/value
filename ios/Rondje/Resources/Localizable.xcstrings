@@ -789,6 +789,28 @@
         }
       }
     },
+    "%lld×" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld×"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld×"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld×"
+          }
+        }
+      }
+    },
     "%lld× %@" : {
       "localizations" : {
         "en" : {
@@ -1187,6 +1209,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tous les chiens"
+          }
+        }
+      }
+    },
+    "Alle honden met wie je liep" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every dog you walked with"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos los perros con los que paseaste"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tous les chiens avec qui tu as marché"
           }
         }
       }
@@ -1627,6 +1671,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Message"
+          }
+        }
+      }
+    },
+    "Beste vrienden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best friends"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejores amigos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meilleurs amis"
           }
         }
       }
@@ -4051,6 +4117,28 @@
         }
       }
     },
+    "Goede vrienden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good friends"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buenos amigos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bons amis"
+          }
+        }
+      }
+    },
     "Goedemiddag" : {
       "localizations" : {
         "en" : {
@@ -4597,6 +4685,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les chiens du refuge se promènent en groupe encadré."
+          }
+        }
+      }
+    },
+    "hondenvriend" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dog friend"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "amigo perruno"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ami chien"
+          }
+        }
+      }
+    },
+    "hondenvrienden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dog friends"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "amigos perrunos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "amis chiens"
+          }
+        }
+      }
+    },
+    "Hondenvriendenboek" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dog friendship book"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Libro de amigos perrunos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Livre d'amis chiens"
           }
         }
       }
@@ -5565,6 +5719,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tu te sens mieux qu'avant la balade. Super !"
+          }
+        }
+      }
+    },
+    "Je vriendenboek is nog leeg" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your friendship book is still empty"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu libro de amigos aún está vacío"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton livre d'amis est encore vide"
           }
         }
       }
@@ -6977,6 +7153,28 @@
         }
       }
     },
+    "Na je eerste rondje krijgt de hond hier een eigen pagina." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After your first walk the dog gets its own page here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tras tu primer paseo, el perro tendrá aquí su propia página."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Après ta première balade, le chien aura sa propre page ici."
+          }
+        }
+      }
+    },
     "Naam" : {
       "localizations" : {
         "en" : {
@@ -7105,6 +7303,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faux profil"
+          }
+        }
+      }
+    },
+    "Net kennisgemaakt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Just met"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recién conocidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout juste rencontrés"
           }
         }
       }
@@ -8187,6 +8407,28 @@
         }
       }
     },
+    "rondje" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "walk"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "paseo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "balade"
+          }
+        }
+      }
+    },
     "Rondje" : {
       "localizations" : {
         "en" : {
@@ -8275,6 +8517,28 @@
         }
       }
     },
+    "rondjes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "walks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "paseos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "balades"
+          }
+        }
+      }
+    },
     "Rustig" : {
       "localizations" : {
         "en" : {
@@ -8319,6 +8583,28 @@
         }
       }
     },
+    "samen gelopen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "walked together"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "caminados juntos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "marchés ensemble"
+          }
+        }
+      }
+    },
     "Samen op pad" : {
       "localizations" : {
         "en" : {
@@ -8337,6 +8623,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En route ensemble"
+          }
+        }
+      }
+    },
+    "Sinds %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Since %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desde %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depuis %@"
           }
         }
       }
@@ -9987,6 +10295,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Promener d'autres chiens, et de l'aide pour ton propre chien."
+          }
+        }
+      }
+    },
+    "Wandelmaatjes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walking buddies"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compañeros de paseo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copains de balade"
           }
         }
       }

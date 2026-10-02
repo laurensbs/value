@@ -39,6 +39,13 @@ struct RondjeTests {
         #expect(!ChatView.mentionsMoney("Tot morgen om zes uur!"))
     }
 
+    @Test func friendshipGrowsWithWalks() {
+        #expect(DogFriendsView.bond(1).1 == "hand.wave.fill")
+        #expect(DogFriendsView.bond(3).1 == "figure.walk")
+        #expect(DogFriendsView.bond(7).1 == "heart.fill")
+        #expect(DogFriendsView.bond(12).1 == "star.fill")
+    }
+
     @Test func decodesDatesWithAndWithoutMilliseconds() throws {
         struct Box: Decodable { var a: Date; var b: Date }
         let box = try APIClient.makeDecoder().decode(Box.self, from: Data(#"{"a":"2026-10-02T11:31:00.000Z","b":"2026-10-02T11:31:00Z"}"#.utf8))

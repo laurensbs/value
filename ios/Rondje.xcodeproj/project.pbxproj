@@ -57,6 +57,7 @@
 		D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
 		DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19F92B1AB52E54BEE189E52 /* ImageTools.swift */; };
 		E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38BF1BFD0974FB881BD72B /* Models.swift */; };
+		E81899E7FBE5C3A4F4D17164 /* DogFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */; };
 		EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F8B3EE6862459619E1EDC /* Components.swift */; };
 		F1E78BE8FCA520FB54C3EABF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */; };
 		F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */; };
@@ -96,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		0BDEFBB338DEF518134A6397 /* Rondje.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Rondje.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFriendsView.swift; sourceTree = "<group>"; };
 		1894A396998000A3824F47B3 /* ActiveWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalkView.swift; sourceTree = "<group>"; };
 		18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCards.swift; sourceTree = "<group>"; };
 		1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.entitlements; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 		EFC38ED52995A5B1AC192CEA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */,
 				1F24382B16C639D32D509682 /* EditProfileView.swift */,
 				303A4BC365EFDB4E41F534AF /* MyDogsView.swift */,
 				265151C9DD7CB381C0CE8F78 /* ProfileView.swift */,
@@ -541,6 +544,7 @@
 				4730F6F96A9FE6D28214E9D2 /* DiscoverView.swift in Sources */,
 				76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */,
 				BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */,
+				E81899E7FBE5C3A4F4D17164 /* DogFriendsView.swift in Sources */,
 				0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */,
 				B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */,
 				3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */,
