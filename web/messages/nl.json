@@ -545,7 +545,8 @@
     "tipTitle": "Tip een opvang",
     "tipText": "Ken je een opvang of asiel waar honden meer wandelingen kunnen gebruiken, of iemand met een hond die hulp kan gebruiken? Zo help je zonder dat wij iemand ongevraagd benaderen.",
     "supportTitle": "Rondje blijft gratis",
-    "supportText": "Geen advertenties en geen abonnement. Wil je helpen om Rondje online en veilig te houden? Kijk hoe, met of zonder geld."
+    "supportText": "Geen advertenties en geen abonnement. Wil je helpen om Rondje online en veilig te houden? Kijk hoe, met of zonder geld.",
+    "flyer": "Print een flyer voor je buurt"
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -740,7 +741,8 @@
     "unnamed": "Nog zonder naam",
     "details": "Gegevens van de opvang",
     "detailsLede": "Wat wandelaars over jullie zien, en hoe ze jullie bereiken. De contactpersoon is alleen voor Rondje.",
-    "visibleAfterCheck": "Zichtbaar na controle"
+    "visibleAfterCheck": "Zichtbaar na controle",
+    "poster": "Poster"
   },
   "groupWalks": {
     "title": "Groepswandelingen",
@@ -1008,7 +1010,8 @@
     "ownerStep3": "Of stuur je eigen uitnodigingslink, met dit berichtje:",
     "ownerMessage": "Ik ken een gratis app waarmee jonge mensen uit de buurt je hond uitlaten. Jullie maken altijd eerst samen kennis. Kijk maar: {url}",
     "ownerSignup": "Maak een account om je link te krijgen",
-    "ownerPrivacy": "Je link laat alleen zien dat iemand via jou kwam. We vragen niemand om gegevens van anderen."
+    "ownerPrivacy": "Je link laat alleen zien dat iemand via jou kwam. We vragen niemand om gegevens van anderen.",
+    "ownerFlyer": "Of hang een flyer op in je buurt, bij de supermarkt of de dierenarts"
   },
   "support": {
     "eyebrow": "Gratis, en dat blijft zo",
@@ -1155,5 +1158,53 @@
     "contactTitle": "Contact",
     "contact": "Vragen of ideeën? Op de hulppagina lees je hoe je ons bereikt. Gaat het om iemand of een hond? Gebruik het meldknopje op de pagina.",
     "contactEmail": "Vragen, ideeën of samenwerken? Mail ons:"
+  },
+  "poster": {
+    "title": "Poster voor jullie opvang",
+    "lede": "Print deze poster en hang hem op in de opvang, bij de ingang of in de wachtruimte. Bezoekers scannen de QR-code en zien meteen jullie honden.",
+    "notVerified": "Jullie opvang wordt nog gecontroleerd. De QR-code werkt zodra de controle klaar is; wacht daarom nog even met ophangen.",
+    "print": "Printen of opslaan als pdf",
+    "headline": "Wandel met onze honden",
+    "text": "Gratis, voor iedereen van 18 jaar en ouder. Je loopt mee in een begeleide groepswandeling en leert de honden rustig kennen.",
+    "when": "Wanneer",
+    "qrLabel": "QR-code naar de honden van de opvang op Rondje",
+    "cta": "Scan, kies een hond en meld je aan voor een groepswandeling.",
+    "footer": "Rondje: gratis samen wandelen met honden uit de buurt en de opvang."
+  },
+  "flyer": {
+    "title": "Flyer voor je buurt",
+    "lede": "Print een flyer en hang hem op waar mensen hem zien. Kies of hij voor hondeneigenaren is, of voor wandelaars.",
+    "tabs": {
+      "owner": "Voor hondeneigenaren",
+      "walker": "Voor wandelaars"
+    },
+    "where": "Goede plekken: de supermarkt, de bibliotheek, de huisarts, de dierenarts, het buurthuis of je portiek. Vraag wel even of het mag.",
+    "yourLink": "De QR-code bevat jouw persoonlijke uitnodigingslink. Zo zie je in je profiel hoeveel mensen via jou kwamen.",
+    "print": "Printen of opslaan als pdf",
+    "qrLabel": "QR-code naar Rondje",
+    "footer": "Rondje is gratis en blijft gratis. Rondje brengt mensen met elkaar in contact en is zelf geen partij bij de afspraken.",
+    "owner": {
+      "headline": "Kan uw hond wel een extra rondje gebruiken?",
+      "text": "Lukt het niet meer zo goed om de hond uit te laten? Een jongere uit de buurt loopt gratis een vast rondje met uw hond. U leert elkaar eerst samen kennen, en u bepaalt wat er mag.",
+      "points": {
+        "one": "Gratis, nu en later",
+        "two": "Altijd eerst samen kennismaken",
+        "three": "Wandelaars zijn 18 jaar of ouder en doen eerst een veiligheidsquiz",
+        "four": "Als u wilt, ziet u live waar uw hond loopt"
+      },
+      "family": "Geen smartphone? Een familielid of buur kan uw hond met uw toestemming voor u aanmelden.",
+      "cta": "Scan de code of ga naar de website om uw hond aan te melden."
+    },
+    "walker": {
+      "headline": "Hou je van honden, maar heb je er (nog) geen?",
+      "text": "Loop een vast rondje met een hond uit je buurt, of wandel mee bij een opvang. Gratis, en goed voor jou en voor de hond.",
+      "points": {
+        "one": "Voor iedereen van 18 jaar en ouder",
+        "two": "Altijd eerst samen kennismaken met de eigenaar",
+        "three": "Of loop mee met een begeleide groepswandeling bij een opvang",
+        "four": "Gratis: niemand vraagt of betaalt geld"
+      },
+      "cta": "Scan de code en vind een hond bij jou in de buurt."
+    }
   }
 }

@@ -545,7 +545,8 @@
     "tipTitle": "Recomienda una protectora",
     "tipText": "¿Conoces una protectora donde a los perros les vendrían bien más paseos, o a alguien con perro que necesite ayuda? Así ayudas sin que contactemos a nadie sin permiso.",
     "supportTitle": "Rondje sigue siendo gratis",
-    "supportText": "Sin anuncios y sin suscripción. ¿Quieres ayudar a que Rondje siga en línea y sea seguro? Mira cómo, con o sin dinero."
+    "supportText": "Sin anuncios y sin suscripción. ¿Quieres ayudar a que Rondje siga en línea y sea seguro? Mira cómo, con o sin dinero.",
+    "flyer": "Imprime un folleto para tu barrio"
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -740,7 +741,8 @@
     "unnamed": "Aún sin nombre",
     "details": "Datos de la protectora",
     "detailsLede": "Lo que ven los paseadores de vosotros y cómo contactaros. La persona de contacto es solo para Rondje.",
-    "visibleAfterCheck": "Visible tras la verificación"
+    "visibleAfterCheck": "Visible tras la verificación",
+    "poster": "Cartel"
   },
   "groupWalks": {
     "title": "Paseos en grupo",
@@ -1008,7 +1010,8 @@
     "ownerStep3": "O envía tu propio enlace de invitación con este mensaje:",
     "ownerMessage": "Conozco una app gratuita con la que gente joven del barrio pasea a tu perro. Siempre os conocéis antes en persona. Échale un vistazo: {url}",
     "ownerSignup": "Crea una cuenta para obtener tu enlace",
-    "ownerPrivacy": "Tu enlace solo muestra que alguien llegó a través de ti. Nunca pedimos datos de otras personas."
+    "ownerPrivacy": "Tu enlace solo muestra que alguien llegó a través de ti. Nunca pedimos datos de otras personas.",
+    "ownerFlyer": "O cuelga un folleto en tu barrio, en el súper o en el veterinario"
   },
   "support": {
     "eyebrow": "Gratis, y así seguirá",
@@ -1155,5 +1158,53 @@
     "contactTitle": "Contacto",
     "contact": "¿Preguntas o ideas? En la página de ayuda verás cómo contactarnos. ¿Se trata de una persona o un perro? Usa el botón de denuncia en su página.",
     "contactEmail": "¿Preguntas, ideas o quieres colaborar? Escríbenos:"
+  },
+  "poster": {
+    "title": "Cartel para vuestra protectora",
+    "lede": "Imprime este cartel y cuélgalo en la protectora, en la entrada o en la sala de espera. Quien lo vea escanea el código QR y ve vuestros perros al momento.",
+    "notVerified": "Todavía estamos verificando la protectora. El código QR funcionará cuando termine la verificación; espera un poco antes de colgarlo.",
+    "print": "Imprimir o guardar como PDF",
+    "headline": "Pasea con nuestros perros",
+    "text": "Gratis, para cualquier persona de 18 años o más. Te unes a un paseo en grupo supervisado y conoces a los perros con calma.",
+    "when": "Cuándo",
+    "qrLabel": "Código QR a los perros de la protectora en Rondje",
+    "cta": "Escanea, elige un perro y apúntate a un paseo en grupo.",
+    "footer": "Rondje: pasear juntos, gratis, con perros del barrio y de la protectora."
+  },
+  "flyer": {
+    "title": "Folleto para tu barrio",
+    "lede": "Imprime un folleto y cuélgalo donde la gente lo vea. Elige si es para propietarios de perros o para paseadores.",
+    "tabs": {
+      "owner": "Para propietarios",
+      "walker": "Para paseadores"
+    },
+    "where": "Buenos sitios: el supermercado, la biblioteca, el centro de salud, el veterinario, el centro cívico o tu portal. Pregunta antes si se puede.",
+    "yourLink": "El código QR lleva tu enlace de invitación personal, así en tu perfil verás cuántas personas llegaron a través de ti.",
+    "print": "Imprimir o guardar como PDF",
+    "qrLabel": "Código QR a Rondje",
+    "footer": "Rondje es gratis y lo seguirá siendo. Rondje pone en contacto a las personas y no es parte de sus acuerdos.",
+    "owner": {
+      "headline": "¿A su perro le vendría bien un paseo más?",
+      "text": "¿Le cuesta sacar al perro? Una persona joven del barrio pasea a su perro de forma regular y gratis. Siempre se conocen antes en persona, y usted decide lo que se permite.",
+      "points": {
+        "one": "Gratis, ahora y después",
+        "two": "Siempre se conocen antes en persona",
+        "three": "Quienes pasean tienen 18 años o más y hacen antes un test de seguridad",
+        "four": "Si quiere, puede ver en directo por dónde pasea su perro"
+      },
+      "family": "¿No tiene smartphone? Un familiar o vecino puede dar de alta a su perro, con su permiso.",
+      "cta": "Escanee el código o entre en la web para dar de alta a su perro."
+    },
+    "walker": {
+      "headline": "¿Te encantan los perros pero (aún) no tienes uno?",
+      "text": "Da un paseo fijo con un perro de tu barrio, o únete a un paseo en una protectora. Gratis, y bueno para ti y para el perro.",
+      "points": {
+        "one": "Para cualquier persona de 18 años o más",
+        "two": "Siempre conoces antes al propietario en persona",
+        "three": "O únete a un paseo en grupo supervisado en una protectora",
+        "four": "Gratis: nadie pide ni paga dinero"
+      },
+      "cta": "Escanea el código y encuentra un perro cerca de ti."
+    }
   }
 }

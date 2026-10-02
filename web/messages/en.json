@@ -545,7 +545,8 @@
     "tipTitle": "Suggest a shelter",
     "tipText": "Know a shelter where dogs could use more walks, or someone with a dog who could use help? This is how you help without us contacting anyone uninvited.",
     "supportTitle": "Rondje stays free",
-    "supportText": "No ads and no subscription. Want to help keep Rondje online and safe? See how, with or without money."
+    "supportText": "No ads and no subscription. Want to help keep Rondje online and safe? See how, with or without money.",
+    "flyer": "Print a flyer for your neighbourhood"
   },
   "quiz": {
     "title": "Safety quiz",
@@ -740,7 +741,8 @@
     "unnamed": "No name yet",
     "details": "Shelter details",
     "detailsLede": "What walkers see about you, and how they reach you. The contact person is only for Rondje.",
-    "visibleAfterCheck": "Visible after the check"
+    "visibleAfterCheck": "Visible after the check",
+    "poster": "Poster"
   },
   "groupWalks": {
     "title": "Group walks",
@@ -1008,7 +1010,8 @@
     "ownerStep3": "Or send your own invite link with this message:",
     "ownerMessage": "I know a free app where young people from the neighbourhood walk your dog. You always meet together first. Have a look: {url}",
     "ownerSignup": "Create an account to get your link",
-    "ownerPrivacy": "Your link only shows that someone came through you. We never ask anyone for other people's details."
+    "ownerPrivacy": "Your link only shows that someone came through you. We never ask anyone for other people's details.",
+    "ownerFlyer": "Or put up a flyer in your neighbourhood, at the supermarket or the vet"
   },
   "support": {
     "eyebrow": "Free, and it stays that way",
@@ -1155,5 +1158,53 @@
     "contactTitle": "Contact",
     "contact": "Questions or ideas? The help page explains how to reach us. Is it about a person or a dog? Use the report button on their page.",
     "contactEmail": "Questions, ideas or want to work together? Email us:"
+  },
+  "poster": {
+    "title": "Poster for your shelter",
+    "lede": "Print this poster and put it up at the shelter, at the entrance or in the waiting area. Visitors scan the QR code and see your dogs right away.",
+    "notVerified": "Your shelter is still being checked. The QR code works once the check is done, so wait a little before putting it up.",
+    "print": "Print or save as PDF",
+    "headline": "Walk with our dogs",
+    "text": "Free, for everyone aged 18 and over. You join a supervised group walk and get to know the dogs calmly.",
+    "when": "When",
+    "qrLabel": "QR code to the shelter's dogs on Rondje",
+    "cta": "Scan, pick a dog and sign up for a group walk.",
+    "footer": "Rondje: walking together, for free, with dogs from the neighbourhood and the shelter."
+  },
+  "flyer": {
+    "title": "Flyer for your neighbourhood",
+    "lede": "Print a flyer and put it up where people will see it. Choose whether it is for dog owners or for walkers.",
+    "tabs": {
+      "owner": "For dog owners",
+      "walker": "For walkers"
+    },
+    "where": "Good places: the supermarket, the library, the GP, the vet, the community centre or your building. Do ask whether it is allowed.",
+    "yourLink": "The QR code contains your personal invite link, so your profile shows how many people came through you.",
+    "print": "Print or save as PDF",
+    "qrLabel": "QR code to Rondje",
+    "footer": "Rondje is free and will stay free. Rondje connects people and is not a party to their arrangements.",
+    "owner": {
+      "headline": "Could your dog use an extra walk?",
+      "text": "Finding it harder to walk your dog? A young person from the neighbourhood walks your dog regularly, for free. You always meet first, and you decide what is allowed.",
+      "points": {
+        "one": "Free, now and later",
+        "two": "Always meet together first",
+        "three": "Walkers are 18 or older and take a safety quiz first",
+        "four": "If you like, you can see live where your dog is walking"
+      },
+      "family": "No smartphone? A family member or neighbour can sign up your dog for you, with your permission.",
+      "cta": "Scan the code or go to the website to sign up your dog."
+    },
+    "walker": {
+      "headline": "Love dogs, but don't have one (yet)?",
+      "text": "Take a regular walk with a dog from your neighbourhood, or join a walk at a shelter. Free, and good for you and for the dog.",
+      "points": {
+        "one": "For everyone aged 18 and over",
+        "two": "Always meet the owner together first",
+        "three": "Or join a supervised group walk at a shelter",
+        "four": "Free: nobody asks for or pays money"
+      },
+      "cta": "Scan the code and find a dog near you."
+    }
   }
 }

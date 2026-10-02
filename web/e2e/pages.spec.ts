@@ -19,6 +19,11 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await page.goto('/tip')
   await expect(page).toHaveURL(/\/suggest$/)
 
+  await page.goto('/flyer?for=owner')
+  await expect(page.getByRole('heading', { name: /Kan uw hond wel een extra rondje/ })).toBeVisible()
+  await expect(page.getByRole('img', { name: 'QR-code naar Rondje' })).toBeVisible()
+  await shot(page, '31-flyer')
+
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/support')
   await context.close()

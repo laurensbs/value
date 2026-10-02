@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { LEGAL_DOCS } from '@/lib/legal'
 import { siteUrl } from '@/lib/site'
 
-const PAGES = ['', '/dogs', '/shelters', '/group-walks', '/shelter', '/about', '/support', '/suggest', '/help', '/safety']
+const PAGES = ['', '/dogs', '/shelters', '/group-walks', '/shelter', '/about', '/support', '/suggest', '/flyer', '/help', '/safety']
 
 /** The public pages. Dog pages are left out on purpose: private owners' pages are not for search engines. */
 export default function sitemap(): MetadataRoute.Sitemap {

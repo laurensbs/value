@@ -69,6 +69,11 @@ export default async function ProfilePage() {
         <p>{t('profile.inviteText')}</p>
         <InviteLink url={inviteUrl} message={t('profile.inviteMessage', { url: inviteUrl })} />
         <p className="muted small">{t('profile.invited', { n: invited })}</p>
+        <div>
+          <Link href="/flyer" className="link-button small">
+            {t('profile.flyer')} →
+          </Link>
+        </div>
       </section>
 
       {native ? null : (

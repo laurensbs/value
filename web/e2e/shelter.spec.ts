@@ -57,6 +57,9 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await staff.page.goto(`${shelterPath}/edit`)
   await expect(staff.page.getByLabel('Naam contactpersoon')).toHaveValue('Marieke de Vries')
   await shot(staff.page, '20c-shelter-edit')
+  await staff.page.goto(`${shelterPath}/poster`)
+  await expect(staff.page.getByRole('img', { name: /QR-code naar de honden/ })).toBeVisible()
+  await shot(staff.page, '20d-shelter-poster')
   await staff.page.goto(shelterPath)
 
   // --- Plan a group walk ---

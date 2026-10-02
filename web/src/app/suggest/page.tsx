@@ -86,6 +86,9 @@ export default async function SuggestPage({ searchParams }: { searchParams: Prom
               </Link>
             </div>
           )}
+          <p className="small">
+            <Link href="/flyer?for=owner">{t('suggest.ownerFlyer')} →</Link>
+          </p>
           <p className="muted small">{t('suggest.ownerPrivacy')}</p>
         </section>
       )}

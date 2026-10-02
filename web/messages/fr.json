@@ -545,7 +545,8 @@
     "tipTitle": "Recommander un refuge",
     "tipText": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades, ou quelqu'un avec un chien qui aurait besoin d'aide ? Voici comment aider sans que nous contactions qui que ce soit sans y être invités.",
     "supportTitle": "Rondje reste gratuit",
-    "supportText": "Pas de publicité ni d'abonnement. Vous voulez aider à garder Rondje en ligne et sûr ? Voyez comment, avec ou sans argent."
+    "supportText": "Pas de publicité ni d'abonnement. Vous voulez aider à garder Rondje en ligne et sûr ? Voyez comment, avec ou sans argent.",
+    "flyer": "Imprimer un flyer pour votre quartier"
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -740,7 +741,8 @@
     "unnamed": "Pas encore de nom",
     "details": "Informations du refuge",
     "detailsLede": "Ce que les promeneurs voient de vous, et comment vous joindre. La personne de contact est seulement pour Rondje.",
-    "visibleAfterCheck": "Visible après la vérification"
+    "visibleAfterCheck": "Visible après la vérification",
+    "poster": "Affiche"
   },
   "groupWalks": {
     "title": "Balades en groupe",
@@ -1008,7 +1010,8 @@
     "ownerStep3": "Ou envoyez votre propre lien d'invitation avec ce message :",
     "ownerMessage": "Je connais une application gratuite où des jeunes du quartier promènent ton chien. On se rencontre toujours d'abord ensemble. Regarde : {url}",
     "ownerSignup": "Créez un compte pour obtenir votre lien",
-    "ownerPrivacy": "Votre lien montre seulement que quelqu'un est venu par vous. Nous ne demandons jamais les données d'autres personnes."
+    "ownerPrivacy": "Votre lien montre seulement que quelqu'un est venu par vous. Nous ne demandons jamais les données d'autres personnes.",
+    "ownerFlyer": "Ou affichez un flyer dans votre quartier, au supermarché ou chez le vétérinaire"
   },
   "support": {
     "eyebrow": "Gratuit, et ça le restera",
@@ -1155,5 +1158,53 @@
     "contactTitle": "Contact",
     "contact": "Des questions ou des idées ? La page d'aide explique comment nous joindre. Il s'agit d'une personne ou d'un chien ? Utilisez le bouton de signalement sur sa page.",
     "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :"
+  },
+  "poster": {
+    "title": "Affiche pour votre refuge",
+    "lede": "Imprimez cette affiche et accrochez-la au refuge, à l'entrée ou dans la salle d'attente. Les visiteurs scannent le QR code et voient tout de suite vos chiens.",
+    "notVerified": "Votre refuge est encore en cours de vérification. Le QR code fonctionnera une fois la vérification terminée : attendez un peu avant de l'afficher.",
+    "print": "Imprimer ou enregistrer en PDF",
+    "headline": "Promenez nos chiens",
+    "text": "Gratuit, pour toute personne de 18 ans ou plus. Vous participez à une promenade en groupe encadrée et faites connaissance avec les chiens en douceur.",
+    "when": "Quand",
+    "qrLabel": "QR code vers les chiens du refuge sur Rondje",
+    "cta": "Scannez, choisissez un chien et inscrivez-vous à une promenade en groupe.",
+    "footer": "Rondje : promener ensemble, gratuitement, des chiens du quartier et du refuge."
+  },
+  "flyer": {
+    "title": "Flyer pour votre quartier",
+    "lede": "Imprimez un flyer et affichez-le là où les gens le verront. Choisissez s'il est destiné aux propriétaires de chiens ou aux promeneurs.",
+    "tabs": {
+      "owner": "Pour les propriétaires",
+      "walker": "Pour les promeneurs"
+    },
+    "where": "Bons endroits : le supermarché, la bibliothèque, le médecin, le vétérinaire, la maison de quartier ou votre immeuble. Demandez d'abord si c'est permis.",
+    "yourLink": "Le QR code contient votre lien d'invitation personnel : votre profil indique combien de personnes sont venues grâce à vous.",
+    "print": "Imprimer ou enregistrer en PDF",
+    "qrLabel": "QR code vers Rondje",
+    "footer": "Rondje est gratuit et le restera. Rondje met les gens en relation et n'est pas partie à leurs arrangements.",
+    "owner": {
+      "headline": "Votre chien aurait-il besoin d'une promenade de plus ?",
+      "text": "Vous avez plus de mal à sortir votre chien ? Un jeune du quartier le promène régulièrement, gratuitement. Vous faites toujours connaissance d'abord, et c'est vous qui décidez de ce qui est permis.",
+      "points": {
+        "one": "Gratuit, maintenant et plus tard",
+        "two": "Toujours une première rencontre ensemble",
+        "three": "Les promeneurs ont 18 ans ou plus et passent d'abord un quiz de sécurité",
+        "four": "Si vous le souhaitez, vous voyez en direct où se promène votre chien"
+      },
+      "family": "Pas de smartphone ? Un proche ou un voisin peut inscrire votre chien pour vous, avec votre accord.",
+      "cta": "Scannez le code ou allez sur le site pour inscrire votre chien."
+    },
+    "walker": {
+      "headline": "Vous aimez les chiens, mais vous n'en avez pas (encore) ?",
+      "text": "Faites une promenade régulière avec un chien de votre quartier, ou participez à une promenade dans un refuge. Gratuit, et bon pour vous comme pour le chien.",
+      "points": {
+        "one": "Pour toute personne de 18 ans ou plus",
+        "two": "Toujours une première rencontre avec le propriétaire",
+        "three": "Ou participez à une promenade en groupe encadrée dans un refuge",
+        "four": "Gratuit : personne ne demande ni ne paie d'argent"
+      },
+      "cta": "Scannez le code et trouvez un chien près de chez vous."
+    }
   }
 }

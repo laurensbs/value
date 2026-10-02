@@ -70,6 +70,9 @@ export default async function ShelterDashboardPage({
           <Link href={`/shelter/${org.id}/edit`} className="button secondary small">
             <Icon name="edit" size={16} /> {t('shelter.details')}
           </Link>
+          <Link href={`/shelter/${org.id}/poster`} className="button ghost small">
+            <Icon name="download" size={16} /> {t('shelter.poster')}
+          </Link>
           {org.status === 'verified' ? (
             <Link href={`/dogs?org=${org.id}`} className="button ghost small">
               <Icon name="eye" size={16} /> {t('shelter.publicPage')}

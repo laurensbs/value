@@ -2633,3 +2633,136 @@ legend {
 .about-story .prose {
   font-size: 1.05rem;
 }
+
+/* ---------- Printable posters and flyers ---------- */
+
+.poster {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: #ffffff;
+  color: #16201a;
+  box-shadow: var(--shadow);
+}
+
+.poster-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.poster-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.poster-org {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #1f5a3d;
+}
+
+.poster-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  line-height: 1.02;
+  text-wrap: balance;
+  color: #16201a;
+}
+
+.poster-photo {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-m);
+}
+
+.poster-text {
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.poster-list {
+  font-size: 1.05rem;
+}
+
+.poster-qr {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  padding: 16px;
+  border-radius: var(--radius-m);
+  background: #dcebe0;
+}
+
+.poster-qr .qr {
+  flex: none;
+  max-width: 100%;
+  height: auto;
+}
+
+.poster-qr > div {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.poster-cta {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.poster-url {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow-wrap: anywhere;
+  color: #1f5a3d;
+}
+
+.poster-foot {
+  font-size: 0.85rem;
+  color: #55635a;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .header,
+  .footer,
+  .tabbar,
+  .skip-link,
+  .demo-banner,
+  .active-walk,
+  .no-print {
+    display: none !important;
+  }
+
+  .main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .poster {
+    max-width: none;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    break-inside: avoid;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
