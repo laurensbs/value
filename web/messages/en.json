@@ -1275,5 +1275,32 @@
         "body": "You suggested or voted for this shelter, and it has joined. Have a look at the dogs and join a group walk."
       }
     }
+  },
+  "cities": {
+    "title": "Dog walking by city",
+    "lede": "Rondje works in every city. For each city you see which shelters there are, when group walks take place and how many dogs are waiting for a walk.",
+    "metaTitle": "Dog walking in {city}",
+    "metaDescription": "Walk a dog in {city} for free, on a regular day: dogs of neighbours and from shelters, group walks and a safe first meeting. No ads, no subscription.",
+    "cityLede": "Walk a dog from {city} for free: from a neighbour who can no longer walk far, or from a shelter. You meet first, then you walk a regular round.",
+    "dogsWaiting": "{n, plural, =0 {No dogs in {city} online yet. Add the first one, or look nearby.} one {# dog in {city} is waiting for a walk.} other {# dogs in {city} are waiting for a walk.}}",
+    "seeDogs": "See dogs in {city}",
+    "addDog": "Add a dog",
+    "sheltersTitle": "Shelters in {city}",
+    "onRondje": "On Rondje",
+    "dogCount": "{n, plural, one {# dog} other {# dogs}}",
+    "notYet": "Not on Rondje yet",
+    "noShelters": "We don't know a shelter in {city} yet. Do you?",
+    "voteHint": "Would you like to walk at one of these shelters? Say so on the shelter list and we'll invite them.",
+    "toDirectory": "To the shelter list",
+    "tipShelter": "Suggest a shelter",
+    "walksTitle": "Group walks in {city}",
+    "noWalks": "No group walks are planned in {city} yet.",
+    "allWalks": "All group walks",
+    "freeTitle": "Always free, never ads",
+    "freeText": "Rondje costs nothing, for walkers, owners and shelters. There will be no ads and no paid version. Members and partners keep Rondje running, and support never buys priority.",
+    "howFree": "How Rondje stays free",
+    "otherCities": "Other cities",
+    "all": "All cities",
+    "footerLink": "Cities"
   }
 }

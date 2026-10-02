@@ -1275,5 +1275,32 @@
         "body": "Vous avez recommandé ce refuge ou voté pour lui, et il nous a rejoints. Découvrez les chiens et participez à une promenade en groupe."
       }
     }
+  },
+  "cities": {
+    "title": "Promener un chien par ville",
+    "lede": "Rondje fonctionne dans chaque ville. Pour chaque ville, vous voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent une promenade.",
+    "metaTitle": "Promener un chien à {city}",
+    "metaDescription": "Promenez gratuitement et régulièrement un chien à {city} : chiens de voisins et de refuges, promenades en groupe et première rencontre en sécurité. Sans publicité, sans abonnement.",
+    "cityLede": "Promenez gratuitement un chien de {city} : celui d'un voisin qui ne peut plus marcher loin, ou d'un refuge. D'abord une rencontre, ensuite une promenade régulière.",
+    "dogsWaiting": "{n, plural, =0 {Pas encore de chiens de {city} en ligne. Inscrivez le premier ou regardez aux alentours.} one {# chien de {city} attend une promenade.} other {# chiens de {city} attendent une promenade.}}",
+    "seeDogs": "Voir les chiens à {city}",
+    "addDog": "Inscrire un chien",
+    "sheltersTitle": "Refuges à {city}",
+    "onRondje": "Sur Rondje",
+    "dogCount": "{n, plural, one {# chien} other {# chiens}}",
+    "notYet": "Pas encore sur Rondje",
+    "noShelters": "Nous ne connaissons pas encore de refuge à {city}. Vous en connaissez un ?",
+    "voteHint": "Vous aimeriez promener des chiens dans l'un de ces refuges ? Dites-le sur la liste des refuges et nous les inviterons.",
+    "toDirectory": "Vers la liste des refuges",
+    "tipShelter": "Proposer un refuge",
+    "walksTitle": "Promenades en groupe à {city}",
+    "noWalks": "Aucune promenade en groupe n'est encore prévue à {city}.",
+    "allWalks": "Toutes les promenades en groupe",
+    "freeTitle": "Toujours gratuit, jamais de publicité",
+    "freeText": "Rondje ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n'y aura ni publicité ni version payante. Les membres et partenaires font vivre Rondje, et soutenir ne donne jamais de priorité.",
+    "howFree": "Comment Rondje reste gratuit",
+    "otherCities": "Autres villes",
+    "all": "Toutes les villes",
+    "footerLink": "Villes"
   }
 }

@@ -1275,5 +1275,32 @@
         "body": "Recomendaste o votaste esta protectora y ya se ha unido. Mira los perros y únete a un paseo en grupo."
       }
     }
+  },
+  "cities": {
+    "title": "Pasear perros por ciudad",
+    "lede": "Rondje funciona en todas las ciudades. En cada una ves qué protectoras hay, cuándo hay paseos en grupo y cuántos perros esperan un paseo.",
+    "metaTitle": "Pasear perros en {city}",
+    "metaDescription": "Pasea gratis y con regularidad a un perro en {city}: perros de vecinos y de protectoras, paseos en grupo y un primer encuentro seguro. Sin anuncios, sin suscripción.",
+    "cityLede": "Pasea gratis a un perro de {city}: de un vecino que ya no puede caminar lejos, o de una protectora. Primero os conocéis y después paseáis con regularidad.",
+    "dogsWaiting": "{n, plural, =0 {Todavía no hay perros de {city} en línea. Añade el primero o mira cerca.} one {# perro de {city} espera un paseo.} other {# perros de {city} esperan un paseo.}}",
+    "seeDogs": "Ver perros en {city}",
+    "addDog": "Añadir un perro",
+    "sheltersTitle": "Protectoras en {city}",
+    "onRondje": "En Rondje",
+    "dogCount": "{n, plural, one {# perro} other {# perros}}",
+    "notYet": "Aún no en Rondje",
+    "noShelters": "Aún no conocemos ninguna protectora en {city}. ¿Conoces alguna?",
+    "voteHint": "¿Te gustaría pasear en una de estas protectoras? Dilo en la lista de protectoras y las invitaremos.",
+    "toDirectory": "A la lista de protectoras",
+    "tipShelter": "Sugerir una protectora",
+    "walksTitle": "Paseos en grupo en {city}",
+    "noWalks": "Todavía no hay paseos en grupo previstos en {city}.",
+    "allWalks": "Todos los paseos en grupo",
+    "freeTitle": "Siempre gratis, nunca anuncios",
+    "freeText": "Rondje no cuesta nada, ni a paseadores, ni a dueños, ni a protectoras. No habrá anuncios ni versión de pago. Los socios y colaboradores mantienen Rondje, y apoyar nunca da prioridad.",
+    "howFree": "Cómo Rondje sigue gratis",
+    "otherCities": "Otras ciudades",
+    "all": "Todas las ciudades",
+    "footerLink": "Ciudades"
   }
 }

@@ -5,6 +5,7 @@ import { isNativeRequest } from '@/server/native'
 
 export async function Footer() {
   const t = await getTranslations('footer')
+  const tc = await getTranslations('cities')
   const native = await isNativeRequest()
   const { instagram } = supportConfig()
   return (
@@ -14,6 +15,7 @@ export async function Footer() {
           <Link href="/about">{t('about')}</Link>
           {native ? null : <Link href="/support">{t('support')}</Link>}
           <Link href="/suggest">{t('tip')}</Link>
+          <Link href="/cities">{tc('footerLink')}</Link>
           <Link href="/shelter">{t('forShelters')}</Link>
           {instagram ? (
             <a href={`https://www.instagram.com/${instagram}/`} target="_blank" rel="noopener noreferrer">

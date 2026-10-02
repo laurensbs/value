@@ -1275,5 +1275,32 @@
         "body": "Je tipte of stemde op deze opvang, en hij doet nu mee. Bekijk de honden en loop mee met een groepswandeling."
       }
     }
+  },
+  "cities": {
+    "title": "Honden uitlaten per stad",
+    "lede": "Rondje werkt in elke stad. Per stad zie je welke opvangen er zijn, wanneer er groepswandelingen zijn en hoeveel honden op een rondje wachten.",
+    "metaTitle": "Honden uitlaten in {city}",
+    "metaDescription": "Gratis een vast rondje lopen met een hond in {city}: honden van buurtgenoten en uit de opvang, groepswandelingen en een veilige kennismaking. Geen advertenties, geen abonnement.",
+    "cityLede": "Wandel gratis met een hond uit {city}: van een buurtgenoot die zelf niet ver meer kan lopen, of uit de opvang. Eerst maak je samen kennis, daarna loop je een vast rondje.",
+    "dogsWaiting": "{n, plural, =0 {Nog geen honden in {city} online. Meld de eerste aan, of kijk in de buurt.} one {# hond in {city} wacht op een rondje.} other {# honden in {city} wachten op een rondje.}}",
+    "seeDogs": "Bekijk honden in {city}",
+    "addDog": "Meld een hond aan",
+    "sheltersTitle": "Opvangen in {city}",
+    "onRondje": "Op Rondje",
+    "dogCount": "{n, plural, one {# hond} other {# honden}}",
+    "notYet": "Nog niet op Rondje",
+    "noShelters": "We kennen nog geen opvang in {city}. Weet jij er een?",
+    "voteHint": "Wil je bij een van deze opvangen wandelen? Laat het weten op de opvangenlijst, dan nodigen wij ze uit.",
+    "toDirectory": "Naar de opvangenlijst",
+    "tipShelter": "Tip een opvang",
+    "walksTitle": "Groepswandelingen in {city}",
+    "noWalks": "Er staan nog geen groepswandelingen gepland in {city}.",
+    "allWalks": "Alle groepswandelingen",
+    "freeTitle": "Altijd gratis, nooit advertenties",
+    "freeText": "Rondje kost niets, voor wandelaars, eigenaren en opvangen. Er komen geen advertenties en geen betaalde versie. Leden en partners houden Rondje in de lucht, en steunen geeft nooit voorrang.",
+    "howFree": "Zo blijft Rondje gratis",
+    "otherCities": "Andere steden",
+    "all": "Alle steden",
+    "footerLink": "Steden"
   }
 }

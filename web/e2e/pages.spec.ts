@@ -32,7 +32,19 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await page.goto('/reset-password')
   await expect(page.getByText('Deze link is verlopen of al gebruikt.')).toBeVisible()
 
+  // City pages for search engines: shelters from the directory, the free promise, and no private dogs.
+  await page.goto('/cities')
+  await expect(page.getByRole('heading', { name: 'Honden uitlaten per stad', level: 1 })).toBeVisible()
+  await page.getByRole('link', { name: 'Amsterdam', exact: true }).click()
+  await expect(page).toHaveURL(/\/cities\/amsterdam$/)
+  await expect(page.getByRole('heading', { name: 'Honden uitlaten in Amsterdam', level: 1 })).toBeVisible()
+  await expect(page.getByText('Dierenopvangcentrum Amsterdam (DOA)')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Altijd gratis, nooit advertenties' })).toBeVisible()
+  await shot(page, '32-city')
+  expect((await page.request.get('/cities/atlantis')).status()).toBe(404)
+
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
+  expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/cities/amsterdam')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/support')
   await context.close()
 })

@@ -52,6 +52,7 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 - `src/db/schema.ts` and `drizzle/`: schema and SQL migrations. After a schema change run `npm run db:generate`; it also embeds the SQL into `src/db/migrations.json`, which the app applies at runtime under an advisory lock.
 - `messages/*.json`: interface text. `nl` is the source; missing keys fall back to it.
 - `content/legal/<locale>/*.md`: terms, privacy, conduct code, safety, shelter terms, cookies.
+- `src/app/cities/**`, `src/lib/cities.ts`: a public page per city for search engines (cities from the shelter directory and verified shelters): shelters, group walks, a count of dogs waiting (never the dogs themselves) and the free promise. In the sitemap.
 - `content/shelters.json`: shelter directory for `/shelters` (public sources, unverified).
 
 ## Native apps
