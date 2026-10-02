@@ -117,8 +117,12 @@ struct AuthView: View {
                 try await APIClient.shared.signUp(name: name.trimmingCharacters(in: .whitespaces), email: mail, password: password)
             }
             password = ""
-            dismiss()
+            // Load the account while the sheet still shows the spinner, so the welcome screen
+            // never flashes in between: the next screen (onboarding or the app) replaces it.
             await model.signedIn()
+            // Never bounce back to the welcome screen without a word.
+            guard model.phase != .signedOut else { throw APIError.server(code: "auth", message: L("Inloggen lukte niet. Probeer het opnieuw.")) }
+            dismiss()
         } catch {
             Haptics.error()
             self.error = error.localizedDescription
