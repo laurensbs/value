@@ -27,18 +27,18 @@ enum Brand {
         baseURL.appending(path: path.hasPrefix("/") ? String(path.dropFirst()) : path)
     }
 
-    /// Charities Rondje wants to support with its membership (onderzoek/marktonderzoek-en-model.md).
-    /// No agreement is signed yet, so the app speaks about them as intentions, never as partners.
+    /// The kind of causes members' gifts should go to later. No agreement with any organisation
+    /// exists yet, so the app names kinds of causes, never organisations.
     static let causes: [Cause] = [
         Cause(
-            name: L("Depressie Vereniging"),
-            symbol: "sun.max.fill",
-            line: L("Voor mensen met een depressie en hun naasten. Wandelen met een hond helpt tegen somberheid.")
+            name: L("Dierenopvangen"),
+            symbol: "pawprint.fill",
+            line: L("Opvangen die honden een nieuwe kans geven, met eten, zorg en wandelingen.")
         ),
         Cause(
-            name: L("Hulphond Nederland"),
-            symbol: "pawprint.fill",
-            line: L("Leidt honden op die mensen met een beperking of trauma helpen zelfstandig te leven.")
+            name: L("Ouderen in de buurt"),
+            symbol: "house.fill",
+            line: L("Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven.")
         ),
     ]
 

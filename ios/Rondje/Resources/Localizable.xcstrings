@@ -2144,6 +2144,7 @@
       }
     },
     "Buiten zijn met een hond helpt tegen stress en eenzaamheid. Het is gratis, zonder reclame, en veilig." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2672,6 +2673,7 @@
       }
     },
     "Depressie Vereniging" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2777,6 +2779,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vétérinaire (nom et téléphone)"
+          }
+        }
+      }
+    },
+    "Dierenopvangen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animal shelters"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protectoras de animales"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refuges pour animaux"
           }
         }
       }
@@ -5466,6 +5490,7 @@
       }
     },
     "Hulphond Nederland" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5879,6 +5904,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En Espagne, tu ne peux promener un chien PPP qu'avec une licence valide."
+          }
+        }
+      }
+    },
+    "Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Initiatives that help older people with a dog stay independent for longer."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciativas que ayudan a las personas mayores con perro a seguir siendo independientes más tiempo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des initiatives qui aident les aînés avec un chien à rester autonomes plus longtemps."
           }
         }
       }
@@ -7204,6 +7251,7 @@
       }
     },
     "Leidt honden op die mensen met een beperking of trauma helpen zelfstandig te leven." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8837,6 +8885,28 @@
         }
       }
     },
+    "Opvangen die honden een nieuwe kans geven, met eten, zorg en wandelingen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shelters that give dogs a new chance, with food, care and walks."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protectoras que dan a los perros una nueva oportunidad, con comida, cuidados y paseos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des refuges qui donnent une nouvelle chance aux chiens : nourriture, soins et balades."
+          }
+        }
+      }
+    },
     "Oren naar achteren en een lage staart? Geef de hond wat ruimte en praat rustig." : {
       "localizations" : {
         "en" : {
@@ -8855,6 +8925,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oreilles en arrière et queue basse ? Laisse de l'espace au chien et parle calmement."
+          }
+        }
+      }
+    },
+    "Ouderen in de buurt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Older neighbours"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mayores del barrio"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les aînés du quartier"
           }
         }
       }
@@ -9559,6 +9651,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Calme"
+          }
+        }
+      }
+    },
+    "Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting outside together with a dog can make your day. It's free, without ads, and safe."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salir juntos con un perro puede alegrarte el día. Es gratis, sin anuncios y seguro."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sortir ensemble avec un chien peut embellir ta journée. C'est gratuit, sans pub et sûr."
           }
         }
       }
@@ -10972,6 +11086,7 @@
       }
     },
     "Voor mensen met een depressie en hun naasten. Wandelen met een hond helpt tegen somberheid." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

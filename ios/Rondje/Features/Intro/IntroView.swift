@@ -30,7 +30,7 @@ struct IntroView: View {
                  text: L("Daarna wandel je zelfstandig. De eigenaar kijkt live mee, en jij stuurt een foto of een plasje door."),
                  looks: [Self.brown], tint: Palette.warnSoft, symbol: "figure.walk"),
             Page(id: 4, title: L("Goed voor jullie allebei"),
-                 text: L("Buiten zijn met een hond helpt tegen stress en eenzaamheid. Het is gratis, zonder reclame, en veilig."),
+                 text: L("Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig."),
                  looks: [Self.golden, Self.brown], tint: Palette.grassSoft, symbol: "heart.fill"),
         ]
     }
