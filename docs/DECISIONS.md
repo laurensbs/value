@@ -41,6 +41,17 @@ De velden in `PROMPT.md` waren niet ingevuld, dus ik gebruik de voorbeeldwaarden
 | 21 | Opvanghonden **alleen in begeleide groepswandelingen**, met aanwezigheids- en ID-registratie door de opvang | Opvangen houden de regie. Zo kunnen veel honden tegelijk en veilig online. |
 | 22 | De database werd tijdelijk via **neon.new** aangemaakt (VS), met serverfuncties in Cleveland | De Neon-integratie was via de API niet te gebruiken. Zo werkt de app direct. **Jij moet hem binnen 72 uur claimen**, en vóór de echte lancering naar een EU-database verhuizen (zie `LAUNCH.md`). |
 | 23 | Talen: **Nederlands (bron), Engels, Spaans, Frans**; landen NL, BE en ES met eigen noodnummers, hulplijnen en regels (PPP-licentie in Spanje) | De eerste drie markten. Frans is nodig voor Wallonië en Brussel. |
+| 24 | Opvangen voegen honden toe met **foto's eerst**: elke foto wordt meteen een concept, de naam komt uit de bestandsnaam als die er een is | Opvangen hebben veel honden en weinig tijd. Twintig honden online in een kwartier; niets gaat verloren bij slecht bereik. Concepten zijn alleen zichtbaar voor de opvang. |
+| 25 | Een opvang heeft een **privé-contactpersoon** voor Rondje, apart van de openbare contactgegevens | Rondje moet een opvang kunnen bereiken zonder dat een medewerker privégegevens openbaar zet. |
+| 26 | Naam, nummer en land van een **geverifieerde opvang** kan alleen beheer wijzigen | Die zijn met de hand gecontroleerd; anders kan een account na verificatie een andere organisatie worden. |
+| 27 | **Tips gaan alleen over opvangen.** Over particulieren slaan we niets op: wie iemand met een hond kent, vraagt het zelf en stuurt zijn eigen uitnodigingslink | Gegevens over iemand die niets weet van Rondje (vaak een oudere, soms met gezondheidsinformatie) mogen we niet zomaar bewaren (AVG art. 14). Rondje benadert nooit zelf iemand. |
+| 28 | **"Ik wil hier wandelen"**: stemmen op opvangen uit de lijst, max. 10 tips of stemmen per dag; stemmers krijgen een melding als de opvang aansluit | De vraag van wandelaars wordt zichtbaar, zodat je weet welke opvang je eerst benadert, en het sluit de cirkel voor wie stemde. |
+| 29 | **Steun via Patreon aan Webstability**, alleen als `SUPPORT_URL` én `OPERATOR_NAME` zijn ingesteld; woorden "steun" en "bijdrage", niet "donatie" | Rondje is (nog) geen goed doel: een bijdrage is niet aftrekbaar. Wie geeft, moet weten aan wie. Steun geeft nooit voorrang of extra's. |
+| 30 | **Geen geld in de apps**: geen kosten, geen steunknop, geen link | Apple (3.1.1/3.2.2) en Google Play staan externe betaallinks alleen toe voor erkende goede doelen. De apps herkennen we aan "RondjeApp" in de user agent. |
+| 31 | **Deelkaarten na een wandeling** (zoals een Strava-plaatje) zijn bewust nog niet gebouwd | Ze zouden een route, plek of hond van iemand anders kunnen tonen. Eerst toestemming per eigenaar goed regelen; delen kan nu met de toestemmingsregels op Over ons. |
+| 32 | Het **verhaal van Laurens** op Over ons is een sjabloon met schrijfvragen, verborgen tot hij het zelf publiceert | Een persoonlijk verhaal over somberheid schrijft niemand anders. De repository is openbaar, dus ook een concept staat niet online. |
+| 33 | **Posters en flyers met QR-code**, met de eigen uitnodigingslink van wie print | Ouderen en opvangen bereik je beter op papier dan online. Via de code zie je in Beheer welke flyers werken. |
+| 34 | Hondenpagina's van **particuliere eigenaren worden niet geïndexeerd** door zoekmachines | Een voornaam, een stad en een hond samen hoeven niet in Google. Opvangpagina's wel. |
 
 ## Wacht op jouw akkoord
 
@@ -54,3 +65,6 @@ Deze stappen heb ik voorbereid maar niet uitgevoerd:
 - **Partners en opvangen benaderen** met de concept-mails in `PARTNERS.md` en `OUTREACH.md`.
 - **Video's posten** uit `GROWTH.md` op een eigen TikTok- of Instagram-account.
 - **Een stichting oprichten.** Pas nodig bij de eerste fondsaanvraag. Kosten bij de notaris: ongeveer €300–600.
+- **Steun via Patreon aanzetten**: `SUPPORT_URL` en `OPERATOR_NAME` in Vercel, en eerst het Vercel-abonnement controleren (zie `LAUNCH.md` stap 3).
+- **Instagram-account aanmaken** met het startpakket in `INSTAGRAM.md`. Ik maak geen accounts op jouw naam.
+- **Je verhaal schrijven** voor Over ons (`web/content/about/nl/story.md`).

@@ -214,6 +214,16 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
 - [ ] **M** **Rolverdeling met opvangen:** zelfstandig verantwoordelijke of verwerker voor de aanwezigheidsregistratie? Is een verwerkersovereenkomst nodig?
 - [ ] **L** Verwerkingsregister (art. 30), datalekprocedure, privacy by design. Pushmeldingen: welke dienst (APNs, FCM) en welke gegevens [te controleren].
 - [ ] **L** Lettertypes en andere externe bronnen: laad niets van derden (zoals Google Fonts) zonder noodzaak. Het prototype bundelt de lettertypes al.
+- [ ] **M** **Contactpersoon van een opvang** (naam, e-mail, telefoon): alleen zichtbaar voor beheerders. Grondslag: gerechtvaardigd belang (de opvang controleren en bereiken). Staat in de privacyverklaring (versie 0.2); controleer of de medewerker zelf geïnformeerd moet worden (art. 14 AVG) als een collega hem opgeeft.
+- [ ] **M** **Tips en stemmen voor opvangen:** alleen gegevens over de organisatie, plus wie de tip gaf. Grondslag: gerechtvaardigd belang. Bewaartermijn: een jaar na afhandeling, niet afgehandeld na twee jaar (automatisch). Over particulieren slaan we bewust niets op (art. 14 AVG): toets of het vrije toelichtingsveld met de automatische weigering van telefoonnummers en e-mailadressen genoeg is.
+
+### 6.1 Steun via Patreon (bijdragen aan de exploitant)
+
+- [ ] **H** **Wie is de exploitant?** Bijdragen gaan naar `OPERATOR_NAME` (nu bedoeld: Webstability). Is dat dezelfde rechtspersoon als de verantwoordelijke in de privacyverklaring en de partij in de voorwaarden? Zo niet: hoe verhouden ze zich?
+- [ ] **H** **Belasting en btw:** een bijdrage zonder tegenprestatie is voor een bv of eenmanszaak in beginsel omzet of winst. Patreon-beloningen (tiers met "perks") kunnen een tegenprestatie zijn, en dan is er mogelijk btw verschuldigd. Laat een boekhouder meekijken en geef op Patreon geen voordelen die een prestatie zijn [te controleren].
+- [ ] **M** **Wervingsregels:** Rondje noemt het "steun" of "bijdrage", niet "donatie" of "goed doel", en zegt dat het niet aftrekbaar is (geen ANBI). Controleer of dat volstaat tegen misleiding (oneerlijke handelspraktijken).
+- [ ] **M** **App Stores:** in de iOS- en Android-app staat geen geld, geen steunknop en geen link naar de steunpagina (Apple 3.1.1/3.2.2, Google Play-betalingsbeleid). Controleer dit bij elke inzending.
+- [ ] **L** **Stichting en ANBI** voor fondsen later: aparte geldstroom en administratie, zodat steun aan de bv en fondsgeld voor de stichting niet door elkaar lopen.
 
 ## 7. Leeftijd (18+)
 
@@ -222,7 +232,7 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
 
 ## 8. Openstaande placeholders
 
-- [ ] Naam rechtspersoon, KvK-nummer, adres, e-mailadres (ook als DSA-contactpunt).
+- [ ] Naam rechtspersoon, KvK-nummer, adres, e-mailadres (ook als DSA-contactpunt). Stem dit af op `OPERATOR_NAME` en `CONTACT_EMAIL` in Vercel (zie `LAUNCH.md` stap 3).
 - [ ] Maximum aansprakelijkheid `[bedrag]`, of schrappen (zie 3.1).
 - [ ] E-mailprovider (naam, land, verwerkersovereenkomst).
 - [ ] Regio's van Vercel, Vercel Blob en Neon.

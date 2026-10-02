@@ -192,3 +192,43 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 - Locatie op de achtergrond in de iOS-app.
 - Een tegelserver met eigen sleutel voor de kaart, voordat het druk wordt.
 
+
+## Cyclus 6: opvangen, tips, steun en drukwerk (2 oktober 2026)
+
+**Gevraagd:** een opvang-aanmeldpagina met alles erachter, zo snel mogelijk veel honden erop, doorverwijzen, steun via Patreon, een Over ons-pagina, Instagram en een marketingplan.
+
+**Gebouwd:**
+- **Opvang-aanmelding in drie delen.**
+  - De opvang: aantal honden, logo, Instagram en beschrijving.
+  - Wandelen bij jullie: wandeltijden, "Zelf koekjes mee?", wat wandelaars meekrijgen en de standaardduur.
+  - Contact: openbaar, plus een privé-contactpersoon voor Rondje.
+  - Gegevens aanpassen kan later op een eigen pagina.
+- **Snel toevoegen met foto's.** Kies een stapel foto's: elke foto wordt meteen een concepthond, en de naam komt uit de bestandsnaam ("Bram.jpg"). Vul per kaart het belangrijkste in en zet alles in één keer online.
+- **Dashboard** met een checklist, "x van ongeveer N honden online" en eerlijke labels: "zichtbaar na controle" zolang een opvang niet gecontroleerd is.
+- **Tips en stemmen.** Je kunt een opvang tippen (`/suggest`) of "Ik wil hier wandelen" aanklikken (`/shelters`). Beheer ziet het meest gevraagd bovenaan, en wie stemde krijgt een melding als de opvang aansluit. Over particulieren slaan we niets op.
+- **Maak Rondje mogelijk** (`/support`): de belofte, een kostentabel, de steunknop (pas na instellen) en een FAQ. In de apps staat nergens iets over geld.
+- **Over ons** (`/about`) en een footer met de belangrijkste links. Het persoonlijke verhaal is een sjabloon dat verborgen blijft tot Laurens het publiceert.
+- **Poster voor opvangen en een flyer voor de buurt**, met een QR-code (met de eigen uitnodigingslink).
+- **Beheer:**
+  - een melding bij elke nieuwe opvang
+  - een link naar KvK of KBO
+  - een check of het e-maildomein bij de website hoort
+  - aanmeldingen per uitnodigingscode
+- **Zoekmachines:** `robots.txt`, een sitemap en korte links (`/over-ons`, `/steun`, `/tip`).
+
+**Gevonden en opgelost:**
+- **Privacylek:** een hond die een opvang via het gewone formulier toevoegde, kreeg de woonlocatie van de medewerker op de kaart. Opvanghonden staan nu altijd op de plek van de opvang; bestaande honden zijn verplaatst.
+- Een eigenaar kon een hond die Rondje had verborgen, zelf weer online zetten.
+- Honden- en profielfoto's moesten van onze eigen upload komen, maar dat werd niet gecontroleerd. Een verwijderde profielfoto kwam terug.
+- Hondenpagina's van particulieren (voornaam en stad) konden in Google komen.
+- **In de tests:**
+  - het inloggen van de beheerder wachtte op de verkeerde pagina;
+  - aanmelden in productie is beperkt tot 3 keer per 10 seconden per IP, dus elke testpersoon krijgt nu een eigen test-IP.
+
+**Tests:** 72 unit-tests en 5 end-to-endtests (wandelflow, opvang met foto's, tips, steun en Over ons, en geen geld in de app), op een productie-build. De live site is gecontroleerd: alle pagina's werken en de app ziet geen geld.
+
+**Volgende stap:**
+- De database claimen en naar de EU verhuizen.
+- De Patreon-link en de ontvanger instellen in Vercel.
+- Opvangen benaderen volgens `MARKETING.md`.
+- Pushmeldingen.

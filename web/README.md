@@ -10,7 +10,7 @@ Live: https://rondje-five.vercel.app · Launch guide (Dutch): [`../docs/LAUNCH.m
 npm install
 npm run dev            # http://localhost:3000, data in .pglite/ (embedded Postgres)
 npm test               # unit tests (Vitest)
-npm run test:e2e       # Playwright: owner/walker walk flow and shelter flow (starts its own server)
+npm run test:e2e       # Playwright: walk flow, shelters (with photo bulk add), tips, support/about pages (starts its own server)
 npm run lint && npm run typecheck
 ```
 
@@ -31,6 +31,8 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 | `APPLE_CLIENT_ID`/`_SECRET`/`APPLE_APP_BUNDLE_ID` | optional | Sign in with Apple. |
 | `BETTER_AUTH_URL` | optional | Canonical URL; defaults to the Vercel production domain. |
 | `NEXT_PUBLIC_TILE_URL` | optional | Map tiles; defaults to OpenStreetMap. Use a tile provider with an API key before heavy traffic. |
+| `SUPPORT_URL` + `OPERATOR_NAME` | optional | The support button on `/support` (https Patreon, Ko-fi, Open Collective or Buy Me a Coffee only). Shown only when both are set, and never in the apps. |
+| `INSTAGRAM_HANDLE`, `CONTACT_EMAIL` | optional | Instagram link (footer, about, support) and contact address. Hidden while empty. |
 
 ## Where things are
 
@@ -38,6 +40,10 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 - `src/server/actions/*`: every write, with zod validation and access checks.
 - `src/server/queries.ts`: reads. Private details (meeting place, vet, chip, contact) are blanked unless an appointment was accepted.
 - `src/app/api/walks/[id]/points|live`: live tracking. The walker posts GPS fixes every 10 s; watchers poll every 5 s. Routes are deleted after 30 days.
+- `src/app/shelter/**`: shelter sign-up, dashboard, details (`/edit`), photo-first bulk add (`/dogs/bulk`, drafts named from file names by `nameFromFile` in `src/lib/dog-import.ts`) and the printable poster (`/poster`).
+- `src/server/actions/tips.ts` and `/suggest`: tips and "I want to walk here" votes for shelters (nothing is stored about private people); admins see them grouped on `/admin`.
+- `src/lib/support.ts`, `src/server/native.ts`: support/Instagram/contact settings from the environment, and recognising the apps (user agent "RondjeApp", set in `capacitor.config.ts`) so no money is shown there.
+- `content/about/nl/story.md`: the founder's story for `/about`, hidden until `published: "true"`; `content/costs.json`: the cost table on `/support`.
 - `src/db/schema.ts` and `drizzle/`: schema and SQL migrations. After a schema change run `npm run db:generate`; it also embeds the SQL into `src/db/migrations.json`, which the app applies at runtime under an advisory lock.
 - `messages/*.json`: interface text. `nl` is the source; missing keys fall back to it.
 - `content/legal/<locale>/*.md`: terms, privacy, conduct code, safety, shelter terms, cookies.

@@ -92,6 +92,8 @@ Stel: het is oktober 2027 en Rondje is mislukt. De meest waarschijnlijke oorzake
   - een verzekeraar betaalt de collectieve dekking
   - Oranje Fonds-cofinanciering (tot 50%) en ZonMw-onderzoek met de hogeschool
 
+**Update oktober 2026:** het complete marketing- en verdienplan staat in [`MARKETING.md`](MARKETING.md). Nu al live: "Maak Rondje mogelijk" (`/support`), met steun via Patreon aan de exploitant zodra `SUPPORT_URL` en `OPERATOR_NAME` zijn ingesteld. Steun geeft geen voordelen, staat nooit in de apps, en is gescheiden van later fondsgeld via een stichting.
+
 **Rode lijnen** (dit doe ik nooit voor geld)
 - Geen advertenties in de app.
 - Gegevens nooit verkopen of delen voor marketing.

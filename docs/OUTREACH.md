@@ -49,6 +49,13 @@ Begin bij particuliere opvangen en benader publieke centra tegelijk. Sommige Ned
 | 7. Content | Korte video, met schriftelijke toestemming van opvang en wandelaars | 1 per live opvang |
 | 8. Doorverwijzen | Vraag twee introducties bij andere opvangen (§4) | 1 op de 3 live opvangen |
 
+**Wat nu in de app staat (oktober 2026)** en de funnel sneller maakt:
+- **Wie eerst?** Kijk in **Beheer → Tips en stemmen**: opvangen waar mensen "Ik wil hier wandelen" klikten of die ze tipten, met het meest gevraagd bovenaan. Noem dat aantal in je eerste mail ("12 jongeren in jouw stad willen bij jullie wandelen").
+- **Aanmeldlink per opvang:** `/shelter?claim=<id>` vult de gegevens uit de lijst al in. De link staat in Beheer bij elke tip.
+- **Stap 5 in een kwartier:** met **Snel toevoegen met foto's** kiest de opvang één foto per hond. Elke foto wordt een concept, en heet de foto "Bram.jpg", dan staat de naam er al. CSV kan nog steeds.
+- **Poster met QR-code** (dashboard → Poster): ophangen bij de ingang en in de wachtruimte. Bezoekers zien zo meteen de honden van de opvang.
+- **Melding bij aansluiten:** wie op een opvang stemde, krijgt een melding zodra jij de opvang goedkeurt. Zo staan er bij de eerste groepswandeling al wandelaars klaar.
+
 Staan de opvangfuncties nog niet live? Doe stap 4 tot en met 6 met de hand (de concierge-aanpak uit [`STRATEGY.md`](STRATEGY.md)).
 
 **CSV-template** `web/public/rondje-honden-voorbeeld.csv`: één rij per hond, volgens de voorbeeldrij.
@@ -91,7 +98,7 @@ Alle doelen zijn aannames; de lijst moet ervoor groeien, vooral in Spanje. Stuur
 
 | Lus | Hoe |
 |---|---|
-| **Opvang → Rondje** | Opvangen verwijzen mensen op hun wachtlijst voor vrijwilligers naar Rondje, met een kant-en-klare tekst en een eigen code (`?ref=doa`). |
+| **Opvang → Rondje** | Opvangen verwijzen mensen op hun wachtlijst voor vrijwilligers naar Rondje, met een kant-en-klare tekst en een eigen uitnodigingscode (`/r/DOA`, aanmeldingen per code staan in Beheer). |
 | **Rondje → opvang** | Geen hond in de buurt? Dan toont de app de dichtstbijzijnde partneropvang met groepswandelingen. |
 | **Opvang → buren van adoptanten** | In het adoptiepakket zit een kaartje: "Kent u iemand in uw straat wiens hond vaker naar buiten wil?" (zie [`SUPPLY.md`](SUPPLY.md)). |
 | **Eigenaar → eigenaar** | Tevreden eigenaren geven een kaartje "Breng je buur" met hun code door. |

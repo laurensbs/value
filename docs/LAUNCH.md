@@ -13,6 +13,9 @@ De website en de app zijn één en dezelfde: **https://rondje-five.vercel.app**.
 | Beheer | Jouw e-mailadres staat in `ADMIN_EMAILS`. Maak een account met dat adres; dan zie je **Beheer** (`/admin`). |
 | Dagelijkse opschoning (Vercel Cron, 03:15 UTC) | Routes ouder dan 30 dagen weg, oude aanvragen verlopen, vergeten rondjes worden afgesloten. |
 | Talen | Nederlands, Engels, Spaans, Frans. De browser of de taalkeuze bepaalt welke. |
+| Opvangen | Aanmelden met alle gegevens (aantal honden, logo, wandeltijden, koekjes mee of niet, privé-contactpersoon), honden snel toevoegen met foto's of een CSV-bestand, groepswandelingen, een poster met QR-code. |
+| Tips en stemmen | Iedereen kan een opvang tippen (`/suggest`) of "Ik wil hier wandelen" aanklikken (`/shelters`). Jij ziet ze in **Beheer → Tips en stemmen**, meest gevraagd bovenaan. |
+| Maak Rondje mogelijk | `/support` staat online. De steunknop (Patreon) verschijnt pas als je hem instelt: zie stap 3. |
 
 ## 1. Eerst doen: database claimen (vóór zondag 5 oktober 2026, 03:28 Nederlandse tijd)
 
@@ -31,7 +34,26 @@ De database is aangemaakt via neon.new: een gratis Neon-database die na 72 uur w
 3. Bij **Beheer → Instellingen** zie je wat gekoppeld is.
 4. Zodra er echte honden zijn: **Beheer → Voorbeelddata → Verwijder voorbeelddata**. De voorbeeldhonden zijn gemarkeerd en kunnen niet geboekt worden.
 
-## 3. Vóór de echte lancering
+## 3. Patreon, Instagram, contact en je eigen verhaal
+
+Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programmeren kunt aanpassen. Zolang ze leeg zijn, laat de site er niets van zien.
+
+1. Vercel → project **rondje** → **Settings → Environment Variables** → voeg toe (omgeving **Production**):
+
+   | Naam | Voorbeeld | Wat het doet |
+   |---|---|---|
+   | `SUPPORT_URL` | `https://www.patreon.com/jouwnaam` | De knop "Steun Rondje via Patreon" op `/support`. Alleen https-links van Patreon, Ko-fi, Open Collective of Buy Me a Coffee werken. |
+   | `OPERATOR_NAME` | `Webstability` | Wie de bijdragen ontvangt en Rondje runt. **Zonder deze naam verschijnt de steunknop niet**: mensen moeten weten waar hun geld heen gaat. |
+   | `INSTAGRAM_HANDLE` | `rondjeapp` | Link in de footer, op Over ons en bij "Deel je rondje". |
+   | `CONTACT_EMAIL` | `hallo@jouwdomein.nl` | Contactadres op Over ons en voor partners. |
+
+2. **Deployments → Redeploy**, zodat de nieuwe waarden gelden.
+3. **Let op: Vercel-abonnement.** Het gratis Hobby-abonnement van Vercel is bedoeld voor niet-commercieel gebruik. Zodra je bijdragen vraagt, val je mogelijk daarbuiten. Controleer de voorwaarden van Vercel en neem zo nodig **Pro** (ongeveer $20 per maand) voordat je `SUPPORT_URL` zet.
+4. **In de apps verschijnt nooit iets over geld.** Apple en Google staan geen externe betaal- of donatielinks toe voor bedrijven. De apps sturen "RondjeApp" mee in hun user agent (na `npx cap sync`, zie stap 6 en 7); de site laat dan de kosten, de steunknop en de link in de footer weg.
+
+**Je verhaal op Over ons.** Het sjabloon staat in `web/content/about/nl/story.md`, met schrijfvragen en de richtlijnen van 113 voor schrijven over somberheid. Vul het in, zet bovenaan `published: "true"` en commit: dan staat het op `/about`. Eerst bekijken kan als beheerder via `/about?preview=1`. Wil je een foto erbij? Zet die in `web/public/` en verwijs ernaar in het verhaal.
+
+## 4. Vóór de echte lancering
 
 ### Database in de EU
 
@@ -55,9 +77,14 @@ Wil je de testgegevens meenemen? Vraag het Claude: dat is een `pg_dump` van de o
 
 ### Opvangen benaderen
 
-[`docs/OUTREACH.md`](OUTREACH.md) bevat de aanpak, mails in het Nederlands, Frans en Spaans, en een lijst met 39 opvangen (ook zichtbaar op `/shelters`). Opvangen melden zich aan via `/shelter`. Jij keurt ze goed bij **Beheer → Opvangen om te controleren**. Ze importeren hun honden met het voorbeeldbestand `web/public/rondje-honden-voorbeeld.csv`.
+- [`docs/OUTREACH.md`](OUTREACH.md) bevat de aanpak, mails in het Nederlands, Frans en Spaans, en een lijst met 39 opvangen (ook zichtbaar op `/shelters`).
+- [`docs/MARKETING.md`](MARKETING.md) is het complete marketingplan; [`docs/INSTAGRAM.md`](INSTAGRAM.md) het startpakket voor Instagram.
+- Begin bij **Beheer → Tips en stemmen**: daar zie je welke opvangen mensen het vaakst vragen. Stuur een opvang zijn eigen aanmeldlink (`/shelter?claim=…`, staat erbij).
+- Opvangen melden zich aan via `/shelter`. Jij krijgt een melding en keurt ze goed bij **Beheer → Opvangen om te controleren** (met een link naar KvK of KBO).
+- Honden toevoegen gaat het snelst met **Snel toevoegen met foto's**: één foto per hond kiezen, namen kloppen vaak al (uit de bestandsnaam), alles in één keer online. Een CSV-bestand kan ook (`web/public/rondje-honden-voorbeeld.csv`).
+- Elke opvang kan een **poster met QR-code** printen (dashboard → Poster). Iedereen kan een **flyer voor de buurt** printen (`/flyer`), met de eigen uitnodigingslink erin.
 
-## 4. Inloggen met Google en Apple (optioneel)
+## 5. Inloggen met Google en Apple (optioneel)
 
 Zonder deze sleutels zie je de knoppen gewoon niet; e-mail en passkeys werken altijd.
 
@@ -76,7 +103,7 @@ Zonder deze sleutels zie je de knoppen gewoon niet; e-mail en passkeys werken al
 
 In de iOS- en Android-app tonen we alleen e-mail en wachtwoord. Google blokkeert inloggen in app-webviews, en passkeys vragen in de app een "associated domain" (zie hieronder).
 
-## 5. De iPhone-app bouwen (Xcode)
+## 6. De iPhone-app bouwen (Xcode)
 
 Je hebt een Mac met Xcode 26 of nieuwer nodig. Voor de App Store heb je ook een Apple Developer-account nodig.
 
@@ -91,6 +118,7 @@ npx cap open ios
 1. Kies in Xcode bij het target **App → Signing & Capabilities** je Team. Pas de Bundle Identifier aan als `app.rondje.mobile` al bezet is; doe dat dan ook in `web/capacitor.config.ts`.
 2. Sluit je iPhone aan en druk op ▶︎.
 3. Wat al geregeld is:
+   - de app stuurt "RondjeApp" mee, zodat de site er geen geld laat zien (draai `npx cap sync` na elke wijziging in `capacitor.config.ts`)
    - toestemmingsteksten voor locatie, camera en foto's (Nederlands)
    - alleen staand scherm
    - app-icoon en opstartscherm
@@ -104,7 +132,7 @@ npx cap open ios
      - passkeys via associated domains
    - Sign in with Apple is pas verplicht als de app Google-login aanbiedt. Dat doet hij nu niet.
 
-## 6. De Android-app bouwen
+## 7. De Android-app bouwen
 
 ```bash
 cd value/web
@@ -114,7 +142,7 @@ npx cap open android
 
 Druk in Android Studio op ▶︎. Voor de Play Store heb je een Play Console-account nodig (eenmalig $25).
 
-## 7. Eigen domein (optioneel)
+## 8. Eigen domein (optioneel)
 
 Vercel → **Settings → Domains → Add** (bijvoorbeeld `rondje.app`, ongeveer €15 per jaar). Daarna:
 
@@ -122,6 +150,6 @@ Vercel → **Settings → Domains → Add** (bijvoorbeeld `rondje.app`, ongeveer
 - verwijzen de andere adressen door
 - pas je `server.url` in `web/capacitor.config.ts` en de knop in `web/native-shell/offline.html` aan, en voer je `npx cap sync` uit
 
-## 8. Lokaal ontwikkelen
+## 9. Lokaal ontwikkelen
 
 Zie [`web/README.md`](../web/README.md).
