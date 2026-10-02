@@ -54,6 +54,10 @@ export const profile = pgTable(
     locale: text('locale'),
     /** Service emails for important notifications (new request, overdue walk …). On by default. */
     emailNotifications: boolean('email_notifications').notNull().default(true),
+    /** How many walks a week someone wants to do (1–7), or null without a goal. Set in onboarding. */
+    weeklyGoal: integer('weekly_goal'),
+    /** The highest level this person has seen celebrated, so a level-up is shown once. */
+    seenLevel: integer('seen_level').notNull().default(1),
     bannedAt: timestamp('banned_at'),
     banReason: text('ban_reason'),
     createdAt: created(),
@@ -229,6 +233,8 @@ export const chatMessage = pgTable(
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
     body: text('body').notNull(),
+    /** Money, IBAN, link, phone or email found in the text (see scanText in lib/rules.ts). */
+    flags: text('flags').array().notNull().default(emptyTextArray),
     createdAt: created(),
   },
   (t) => [index('chat_message_request_idx').on(t.requestId, t.createdAt)],
@@ -302,7 +308,7 @@ export const groupWalkSignup = pgTable(
     status: text('status').notNull().default('booked'),
     createdAt: created(),
   },
-  (t) => [primaryKey({ columns: [t.groupWalkId, t.userId] })],
+  (t) => [primaryKey({ columns: [t.groupWalkId, t.userId] }), index('group_walk_signup_user_idx').on(t.userId)],
 )
 
 /** One actual walk. Location points are only stored while it is active. */
@@ -332,7 +338,12 @@ export const walk = pgTable(
     water: integer('water').notNull().default(0),
     createdAt: created(),
   },
-  (t) => [index('walk_dog_idx').on(t.dogId, t.status), index('walk_walker_idx').on(t.walkerId, t.status)],
+  (t) => [
+    index('walk_dog_idx').on(t.dogId, t.status),
+    index('walk_walker_idx').on(t.walkerId, t.status),
+    // Monthly challenges count walks by start time.
+    index('walk_started_idx').on(t.startedAt),
+  ],
 )
 
 export const walkPoint = pgTable(
@@ -381,7 +392,7 @@ export const feedback = pgTable(
     flagged: boolean('flagged').notNull().default(false),
     createdAt: created(),
   },
-  (t) => [uniqueIndex('feedback_walk_from_idx').on(t.walkId, t.fromUserId)],
+  (t) => [uniqueIndex('feedback_walk_from_idx').on(t.walkId, t.fromUserId), index('feedback_from_idx').on(t.fromUserId)],
 )
 
 export const report = pgTable(
@@ -431,6 +442,42 @@ export const notification = pgTable(
     createdAt: created(),
   },
   (t) => [index('notification_user_idx').on(t.userId, t.createdAt)],
+)
+
+/**
+ * Points someone earned: one row per thing they did (a walk, the quiz, a friend who joined …).
+ * Rows are only ever added, never taken away: a level stays even if a walk or dog is deleted later.
+ * `ref` is the walk, group walk or person it was for ('' for one-off points); `at` is when it happened.
+ */
+export const pointEvent = pgTable(
+  'point_event',
+  {
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    kind: text('kind').notNull(),
+    ref: text('ref').notNull().default(''),
+    points: integer('points').notNull(),
+    at: timestamp('at').notNull(),
+    /** For badges: { dogId } on walks, { dogId, walkerId } when your dog was walked. */
+    meta: jsonb('meta').notNull().default({}),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.kind, t.ref] }), index('point_event_user_at_idx').on(t.userId, t.at)],
+)
+
+/** Badges someone earned (one row per tier), and when they saw the celebration. Only for themselves. */
+export const award = pgTable(
+  'award',
+  {
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    key: text('key').notNull(),
+    tier: integer('tier').notNull(),
+    earnedAt: timestamp('earned_at').defaultNow().notNull(),
+    seenAt: timestamp('seen_at'),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.key, t.tier] })],
 )
 
 /**
