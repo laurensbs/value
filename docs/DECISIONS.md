@@ -23,8 +23,8 @@ De velden in `PROMPT.md` waren niet ingevuld, dus ik gebruik de voorbeeldwaarden
 | 3 | Wandelaars vanaf **18 jaar** | Alle vergelijkbare diensten werken met 18+ of met volwassen begeleiding. Onder de 18 verwijst de app door naar opvangen met jeugdplekken en naar de Kindertelefoon. |
 | 4 | **Eerste keer altijd samen** met de eigenaar of de opvang | Zo doen BorrowMyDoggy en OOPOEH het ook. Dit verlaagt het risico voor beide kanten. |
 | 5 | Check-ins blijven **alleen op het apparaat** | Stemming telt als gezondheidsgegeven. Zonder server is er geen datalek-risico, en een DPIA is pas nodig als data wél gedeeld wordt. |
-| 6 | **Geen chat en geen AI** | Chat vraagt moderatie. AI-chat over welzijn is riskant (onderzoek van de Autoriteit Persoonsgegevens, AI Act). |
-| 7 | **Geen streaks of badges** | Rode lijn: geen verslavend ontwerp. Motivatie komt uit de vaste afspraak met de hond. |
+| 6 | **Chat per aanvraag, geen AI** (eerst: geen chat) | Sinds oktober 2026 is er een chat per aanvraag, zodat niemand een telefoonnummer hoeft te delen vóór de kennismaking. Gaat een bericht over geld of staat er een link in, dan ziet de ontvanger een waarschuwing en kan die het melden. Beheer ziet alleen wie en hoe vaak, nooit de tekst. Chats gaan na een jaar weg. Geen AI-chat over welzijn (onderzoek van de Autoriteit Persoonsgegevens, AI Act). |
+| 7 | **Levels en penningen, maar geen streaks** (eerst: geen badges) | Laurens vroeg in oktober 2026 om meer speelsheid, zoals bij Duolingo. De rode lijn blijft: geen verslavend ontwerp. Punten komen alleen uit echte dingen voor een hond, elk rondje telt even zwaar, er gaat nooit iets verloren, alleen jij ziet je niveau en penningen, ze geven geen voorrang en ja zeggen op een aanvraag levert nooit punten op. De uitdaging van de maand telt alleen rondjes, nooit wie ze liep. Regels in `web/src/lib/progress.ts`. |
 | 8 | Prototype als **statische webapp** (React + Vite) | Gratis te hosten, werkt op elke telefoon, geen installatie nodig. Een PWA of native app kan later. |
 | 9 | Voorbeeldhonden, -personen en -opvangen in het prototype zijn **verzonnen** | Geen echte personen of organisaties nadoen. |
 | 10 | Het prototype is gepubliceerd als **privé-preview** (Claude Artifact) en niet op een publieke URL | Publiek online zetten op jouw naam vraagt jouw akkoord, zie hieronder. |
@@ -52,6 +52,8 @@ De velden in `PROMPT.md` waren niet ingevuld, dus ik gebruik de voorbeeldwaarden
 | 32 | Het **verhaal van Laurens** op Over ons is een sjabloon met schrijfvragen, verborgen tot hij het zelf publiceert | Een persoonlijk verhaal over somberheid schrijft niemand anders. De repository is openbaar, dus ook een concept staat niet online. |
 | 33 | **Posters en flyers met QR-code**, met de eigen uitnodigingslink van wie print | Ouderen en opvangen bereik je beter op papier dan online. Via de code zie je in Beheer welke flyers werken. |
 | 34 | Hondenpagina's van **particuliere eigenaren worden niet geïndexeerd** door zoekmachines | Een voornaam, een stad en een hond samen hoeven niet in Google. Opvangpagina's wel. |
+| 35 | **Rol bij de start** (wandelaar, eigenaar, allebei of opvang) bepaalt de app: tabs, eerste stappen, tips en het Vandaag-scherm | Laurens wilde dat de app alles voorkauwt, zoals Headspace en Duolingo. Iemand met een hond hoeft geen hondenlijst te zien, een wandelaar geen "Mijn honden". Kiezen kan later opnieuw in je profiel. |
+| 36 | **Vriendelijke herinneringen**: hooguit één per drie dagen, standaard aan, met één schakelaar uit | Terugkomen hoort bij een app die alles voorkauwt. Alleen over wat je zelf koos of begon (eerste stappen, weekdoel, de uitdaging in je stad, een hond die je kent), nooit met schuldgevoel, en elke soort stopt vanzelf: drie stapherinneringen in de eerste weken, twee keer "zin in een rondje?" na een stille periode. Push als dat kan, anders e-mail als je e-mail aan hebt. Regels in `web/src/lib/nudges.ts`. |
 
 ## Wacht op jouw akkoord
 

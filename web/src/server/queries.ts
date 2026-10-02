@@ -1,8 +1,9 @@
 import 'server-only'
-import { and, asc, count, desc, eq, gte, inArray, isNull, ne, or, sql } from 'drizzle-orm'
+import { and, asc, count, desc, eq, gte, inArray, isNull, ne, notInArray, or, sql } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { distanceM, type LatLng } from '@/lib/geo'
+import { NUDGE_KINDS } from '@/lib/nudges'
 import type { DogFacts, Relation, TrustSignals, WalkerFacts } from '@/lib/rules'
 import type { Viewer } from './session'
 
@@ -372,12 +373,19 @@ export async function myDogs(viewer: Viewer): Promise<Dog[]> {
   return db.select().from(s.dog).where(eq(s.dog.ownerId, viewer.userId)).orderBy(asc(s.dog.createdAt))
 }
 
-export async function unreadCount(userId: string): Promise<number> {
+/** Unread notifications. The Rondjes tab leaves reminders out: they are not about a walk. */
+export async function unreadCount(userId: string, { reminders = true } = {}): Promise<number> {
   const db = await getDb()
   const [r] = await db
     .select({ n: count() })
     .from(s.notification)
-    .where(and(eq(s.notification.userId, userId), isNull(s.notification.readAt)))
+    .where(
+      and(
+        eq(s.notification.userId, userId),
+        isNull(s.notification.readAt),
+        reminders ? undefined : notInArray(s.notification.kind, [...NUDGE_KINDS]),
+      ),
+    )
   return r.n
 }
 

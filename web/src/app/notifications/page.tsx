@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
-import { Icon } from '@/components/Icon'
+import { Icon, type IconName } from '@/components/Icon'
 import { MarkNotificationsRead } from '@/components/MarkNotificationsRead'
-import { notificationHref, type NotificationData } from '@/lib/notification-links'
+import { notificationHref, notificationValues, type NotificationData } from '@/lib/notification-links'
 import { notificationsFor } from '@/server/queries'
 import { requireViewer } from '@/server/session'
 
@@ -11,7 +11,7 @@ export async function generateMetadata() {
   return { title: t('title') }
 }
 
-const ICONS: Record<string, 'paw' | 'route' | 'alert' | 'shield' | 'users' | 'building' | 'bell' | 'heart'> = {
+const ICONS: Record<string, IconName> = {
   'request-new': 'paw',
   'request-accepted': 'paw',
   'walk-started': 'route',
@@ -23,6 +23,14 @@ const ICONS: Record<string, 'paw' | 'route' | 'alert' | 'shield' | 'users' | 'bu
   'org-pending': 'building',
   'shelter-joined': 'heart',
   'group-walk-new': 'users',
+  'chat-message': 'chat',
+  'walk-photo': 'camera',
+  'nudge-step': 'sparkle',
+  'nudge-week': 'calendar',
+  'nudge-challenge': 'trophy',
+  'challenge-done': 'trophy',
+  'nudge-back': 'paw',
+  'nudge-owner': 'home',
 }
 
 export default async function NotificationsPage() {
@@ -48,11 +56,7 @@ export default async function NotificationsPage() {
                     <Icon name={ICONS[n.kind] ?? 'bell'} size={18} />
                   </span>
                   <span className="grow stack-s">
-                    <span>
-                      {t.has(`kinds.${n.kind}`)
-                        ? t(`kinds.${n.kind}`, { dogName: data.dogName ?? '', walkerName: data.walkerName ?? '', orgName: data.orgName ?? '', senderName: data.senderName ?? '' })
-                        : n.kind}
-                    </span>
+                    <span>{t.has(`kinds.${n.kind}`) ? t(`kinds.${n.kind}`, notificationValues(data)) : n.kind}</span>
                     <span className="muted small">{format.relativeTime(n.createdAt)}</span>
                   </span>
                 </Link>

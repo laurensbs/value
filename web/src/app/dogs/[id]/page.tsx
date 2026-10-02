@@ -270,14 +270,16 @@ export default async function DogPage({
 
         {!isMine && host.kind === 'owner' ? (
           viewer ? (
-            <RequestForm
+            <div id="plan" className="plan-anchor">
+              <RequestForm
               dogId={dog.id}
               dogName={dog.name}
               meetReason={meetReason}
               soloReason={soloReason}
               defaultDate={defaultDate}
               defaultTime={defaultTime}
-            />
+              />
+            </div>
           ) : (
             <Link href={`/login?next=/dogs/${dog.id}`} className="button primary wide">
               {t('request.loginFirst')}

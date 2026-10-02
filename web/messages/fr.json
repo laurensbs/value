@@ -21,7 +21,8 @@
     "helpPill": "Ça ne va pas fort ?",
     "language": "Langue",
     "menu": "Menu",
-    "skip": "Aller au contenu"
+    "skip": "Aller au contenu",
+    "today": "Aujourd'hui"
   },
   "common": {
     "save": "Enregistrer",
@@ -201,7 +202,66 @@
       "invalid": "Remplissez les champs obligatoires.",
       "not-signed-in": "Connectez-vous d'abord."
     },
-    "step": "Dernière étape"
+    "step": "Dernière étape",
+    "flow": {
+      "progress": "Étape {n} sur {total}",
+      "back": "Retour",
+      "next": "Continuer",
+      "skip": "Passer",
+      "welcomeTitle": "Bonjour {name}, bienvenue !",
+      "welcomeText": "Quelques questions rapides, puis nous préparons Rondje pour vous. Exactement comme il vous faut.",
+      "welcome1": "Vous choisissez : vous balader, un chien, ou les deux.",
+      "welcome2": "Nous vous montrons des chiens et des gens près de chez vous.",
+      "welcome3": "Ça prend une minute. Vous pourrez tout changer plus tard.",
+      "welcomeStart": "C'est parti",
+      "roleTitle": "Qu'est-ce qui vous amène ?",
+      "roleText": "L'appli s'adapte à votre choix. Vous pouvez toujours le changer.",
+      "roleWalker": "Je veux me balader",
+      "roleWalkerText": "Avec un chien du quartier ou d'un refuge.",
+      "roleOwner": "J'ai un chien",
+      "roleOwnerText": "Ou je m'en occupe pour une voisine ou un grand-parent.",
+      "roleBoth": "Les deux",
+      "roleBothText": "J'ai un chien et j'aime aussi promener d'autres chiens.",
+      "roleShelter": "Je travaille dans un refuge",
+      "roleShelterText": "Mettez les chiens de votre refuge sur Rondje.",
+      "aboutTitle": "Comment doit-on vous appeler ?",
+      "aboutText": "Rondje est réservé aux personnes de 18 ans et plus. Les autres ne voient que votre prénom et votre tranche d'âge.",
+      "placeTitle": "Où habitez-vous, à peu près ?",
+      "placeText": "Vous verrez ainsi des chiens et des gens près de chez vous. Nous arrondissons votre position à environ 500 mètres.",
+      "experienceTitle": "Quelle expérience avez-vous avec les chiens ?",
+      "experienceText": "Pour vous montrer d'abord des chiens qui vous correspondent.",
+      "experienceNoneText": "J'ai envie d'apprendre. Les chiens calmes me conviennent bien.",
+      "experienceSomeText": "J'ai déjà souvent promené des chiens.",
+      "experienceLotsText": "J'ai grandi avec des chiens, même des chiens énergiques.",
+      "goalTitle": "À quelle fréquence voulez-vous vous balader ?",
+      "goalText": "Un rythme régulier, c'est bien pour un chien. Vous pouvez toujours le changer, et sauter une semaine, c'est permis.",
+      "goal1": "1 fois par semaine",
+      "goal1Text": "Commencer en douceur",
+      "goal2": "2 fois par semaine",
+      "goal2Text": "Un compagnon régulier pour un chien",
+      "goal3": "3 fois par semaine",
+      "goal3Text": "Un vrai marcheur",
+      "goalRecommended": "Conseillé",
+      "goalLater": "Je ne sais pas encore",
+      "profileTitle": "Montrez qui vous êtes",
+      "profileText": "Les propriétaires choisissent plus vite quelqu'un avec une photo et quelques phrases. Vous pouvez aussi le faire plus tard.",
+      "profileOwnerText": "Les promeneurs aiment savoir chez qui ils sonnent. Vous pouvez aussi le faire plus tard.",
+      "promiseTitle": "Presque fini !",
+      "promiseText": "Voici comment Rondje reste sûr et agréable, pour les gens et les chiens.",
+      "promise1": "La première fois, vous marchez toujours avec le propriétaire ou le refuge.",
+      "promise2": "Votre adresse n'est jamais visible, et votre numéro seulement après un rendez-vous.",
+      "promise3": "Rondje est gratuit et sans publicité. Quelqu'un vous demande de l'argent ? Signalez-le.",
+      "finish": "C'est fini, allons-y !",
+      "needRole": "Choisissez ce que vous voulez faire.",
+      "needName": "Indiquez votre prénom.",
+      "needBirthDate": "Indiquez votre date de naissance.",
+      "tooYoung": "Rondje est réservé aux personnes de 18 ans et plus.",
+      "needCity": "Indiquez votre ville.",
+      "needTerms": "Acceptez les conditions pour continuer.",
+      "welcomeTitleAnon": "Bonjour, bienvenue !",
+      "needExperience": "Choisissez ce qui vous correspond le mieux.",
+      "promise1Owner": "La première fois, le promeneur marche toujours avec vous."
+    }
   },
   "dogs": {
     "title": "Des chiens qui attendent leur balade",
@@ -544,7 +604,9 @@
     "tip1": "Ajoutez une photo prise dehors, où le chien regarde l'objectif.",
     "tip2": "Choisissez un ou deux créneaux fixes par semaine. Des balades régulières, c'est plus facile à tenir.",
     "tip3": "La première fois, prévoyez toujours une rencontre ensemble : vous ferez ainsi connaissance tranquillement, votre chien compris.",
-    "weekday": "Jour"
+    "weekday": "Jour",
+    "welcomeTitle": "Bienvenue, {name} ! Parlez-nous de votre chien",
+    "welcomeLede": "Une photo, son caractère et quand il peut se balader. Ensuite, quelqu'un du quartier pourra le trouver."
   },
   "profile": {
     "title": "Profil",
@@ -584,7 +646,13 @@
     "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje.",
     "pushNotifications": "Notifications push dans ce navigateur",
     "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure. Sur iPhone : ajoutez d’abord Rondje à l’écran d’accueil.",
-    "pushBlocked": "Votre navigateur bloque les notifications de Rondje. Activez-les dans les réglages du navigateur."
+    "pushBlocked": "Votre navigateur bloque les notifications de Rondje. Activez-les dans les réglages du navigateur.",
+    "progressTitle": "Votre progression",
+    "weeklyGoal": "Objectif de la semaine",
+    "weeklyGoalHint": "À quelle fréquence voulez-vous vous balader ? Sauter une semaine, c'est toujours permis.",
+    "alerts": "Notifications",
+    "reminders": "Rappels bienveillants",
+    "remindersHint": "Sur vos premières étapes, votre objectif de la semaine et le défi de votre ville. Un tous les quelques jours au maximum, en notification push ou sinon par e-mail."
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -888,7 +956,13 @@
       "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
       "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?",
       "walk-photo": "Nouvelle photo de {dogName} pendant la promenade.",
-      "chat-message": "{senderName} a envoyé un message à propos de {dogName}."
+      "chat-message": "{senderName} a envoyé un message à propos de {dogName}.",
+      "nudge-step": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Vous complétez votre profil ?} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade.} quiz {Votre prochaine étape : le quiz de sécurité. Quelques questions, et vous saurez à quoi faire attention.} meet {Envie d'une première rencontre ? Découvrez les chiens près de chez vous.} other {Votre prochaine étape sur Rondje vous attend.}}",
+      "nudge-week": "Le week-end arrive ! Plus que {left, plural, one {# balade} other {# balades}} pour votre objectif de la semaine. Pas possible ? Aucun souci, une nouvelle semaine arrive.",
+      "nudge-challenge": "Nouveau mois, nouveau défi : {city} fait {goal} balades ensemble. Vous en êtes ?",
+      "challenge-done": "{city} a relevé le défi : {goal} balades ensemble ! {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci !",
+      "nudge-back": "{variant, select, dog {Envie d'une balade avec {dogName} ? Planifiez-la quand cela vous convient.} other {Envie d'une balade ? Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}}",
+      "nudge-owner": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Vous en ajoutez une ?} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
     }
   },
   "admin": {
@@ -964,7 +1038,10 @@
       "groupSignupsWeek": "Inscriptions aux promenades en groupe, cette semaine",
       "groupFill": "{pct} % des places prises, 4 dernières semaines",
       "tipsWeek": "Recommandations et votes, cette semaine"
-    }
+    },
+    "flaggedChats": "Messages de chat sur l'argent ou avec un lien (30 jours)",
+    "flaggedChatsHint": "Seulement qui et combien de fois : nous ne lisons jamais les chats. Le destinataire voit un avertissement et peut signaler le message.",
+    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}"
   },
   "banned": {
     "title": "Votre compte a été bloqué",
@@ -1301,8 +1378,33 @@
       "chat-message": {
         "subject": "{senderName} vous a envoyé un message à propos de {dogName}",
         "body": "Lisez-le et répondez dans Rondje. Ainsi, vous ne partagez votre numéro qu’une fois que vous vous connaissez."
+      },
+      "nudge-step": {
+        "subject": "{step, select, about {Complétez votre profil} dog {Inscrivez votre chien sur Rondje} quiz {Votre prochaine étape : le quiz de sécurité} meet {Envie d'une première rencontre ?} other {Votre prochaine étape sur Rondje}}",
+        "body": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Cela ne prend qu'une minute.} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade. La première fois, vous vous rencontrez toujours ensemble.} quiz {Quelques questions sur la promenade en sécurité, et vous saurez à quoi faire attention. Ensuite, vous pourrez aussi promener le chien sans le propriétaire, s'il est d'accord.} meet {Découvrez les chiens près de chez vous et demandez une première rencontre. La première fois, vous marchez avec le propriétaire.} other {Votre prochaine étape sur Rondje vous attend.}}"
+      },
+      "nudge-week": {
+        "subject": "Plus que {left, plural, one {# balade} other {# balades}} pour votre objectif de la semaine",
+        "body": "Le week-end arrive. Chaque balade compte, même courte. Pas cette semaine ? Aucun souci : vous ne perdez rien."
+      },
+      "nudge-challenge": {
+        "subject": "{city} fait {goal} balades ensemble",
+        "body": "Nouveau mois, nouveau défi pour {city}. Chaque balade compte, même courte. Vous en êtes ?"
+      },
+      "challenge-done": {
+        "subject": "{city} a relevé le défi !",
+        "body": "{goal} balades ensemble ce mois-ci. {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci, de la part de tous les chiens."
+      },
+      "nudge-back": {
+        "subject": "{variant, select, dog {Envie d'une balade avec {dogName} ?} other {Envie d'une balade ?}}",
+        "body": "{variant, select, dog {Planifiez une balade avec {dogName} quand cela vous convient.} other {Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}} Pas le temps ? Aucun souci, Rondje est là quand vous en avez envie."
+      },
+      "nudge-owner": {
+        "subject": "Un conseil pour {dogName}",
+        "body": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Une photo en extérieur, avec un contact visuel, fonctionne le mieux.} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
       }
-    }
+    },
+    "reminderFooter": "Vous recevez ce rappel parce que les rappels sont activés dans votre profil. Nous en envoyons un tous les quelques jours au maximum. Vous pouvez les désactiver dans votre profil, sous Réglages."
   },
   "cities": {
     "title": "Promener un chien par ville",
@@ -1347,6 +1449,274 @@
     "tooLong": "Ce message est trop long. Maximum {max} caractères.",
     "safety": "La première fois, retrouvez-vous toujours ensemble, dans un lieu que vous connaissez tous les deux. Un souci ? Signalez-le depuis le profil.",
     "back": "Retour aux demandes",
-    "label": "Messages"
+    "label": "Messages",
+    "flagged": "Attention : ce message parle d'argent ou contient un lien. Rondje est gratuit : n'envoyez jamais d'argent et ne partagez pas vos coordonnées bancaires. Quelque chose ne va pas ? Signalez-le."
+  },
+  "today": {
+    "metaTitle": "Aujourd'hui",
+    "morning": "Bonjour, {name}",
+    "afternoon": "Bon après-midi, {name}",
+    "evening": "Bonsoir, {name}",
+    "night": "Salut, {name}",
+    "welcomeTitle": "Bienvenue sur Rondje, {name} !",
+    "welcomeText": "Vous êtes maintenant {level}, niveau 1. Voici vos premiers pas : chacun vous rapproche de votre première balade.",
+    "stepsTitle": "Vos premiers pas",
+    "stepsCount": "{done} sur {total} faits",
+    "start": "Commencer",
+    "steps": {
+      "account": {
+        "title": "Profil créé",
+        "hint": "Bienvenue sur Rondje !"
+      },
+      "about": {
+        "title": "Une photo et quelques phrases sur vous",
+        "hint": "Les propriétaires choisissent plus vite quelqu'un qu'ils reconnaissent."
+      },
+      "dog": {
+        "title": "Mettez votre chien en ligne",
+        "hint": "Une photo, son caractère et quand il peut se balader."
+      },
+      "quiz": {
+        "title": "Réussissez le quiz de sécurité",
+        "hint": "Huit questions courtes. Nécessaire pour se balader seul."
+      },
+      "meet": {
+        "title": "Planifiez une première rencontre",
+        "hint": "Choisissez un chien qui vous plaît. La première fois, vous marchez avec le propriétaire."
+      },
+      "walk": {
+        "title": "Faites votre première balade",
+        "hint": "Lancez la balade le jour même, dans Balades."
+      },
+      "dogMet": {
+        "title": "Rencontrez votre premier promeneur",
+        "hint": "Quand quelqu'un demande à faire connaissance, vous le verrez dans Balades, et vous pourrez d'abord discuter."
+      },
+      "dogWalk": {
+        "title": "La première balade de votre chien",
+        "hint": "Suivez-la en direct et recevez un compte rendu après."
+      }
+    },
+    "next": "Votre prochain rendez-vous",
+    "nextWalk": "{when} · balade avec {dog}",
+    "nextMeeting": "{when} · première rencontre avec {dog}",
+    "nextOpen": "Voir",
+    "pending": "{n, plural, one {# nouvelle demande attend votre réponse} other {# nouvelles demandes attendent votre réponse}}",
+    "pendingOpen": "Voir les demandes",
+    "nearTitle": "Chiens près de chez vous",
+    "nearEmpty": "Pas encore de chiens près de chez vous. Vous connaissez quelqu'un avec un chien ? Invitez-le avec votre propre lien.",
+    "nearAll": "Tous les chiens",
+    "nearInvite": "Inviter quelqu'un",
+    "myDogsTitle": "Vos chiens",
+    "dogWeek": "{n, plural, =0 {Pas encore de balade cette semaine} one {# balade cette semaine} other {# balades cette semaine}}",
+    "dogFriends": "{n, plural, =0 {Pas encore de promeneurs} one {# promeneur} other {# promeneurs}}",
+    "addDog": "Ajouter un chien",
+    "tipTitle": "Le conseil du jour",
+    "badgesTitle": "Vos médailles",
+    "badgesAll": "Toutes les médailles",
+    "badgesEmpty": "Vous gagnerez votre première médaille avec votre première balade.",
+    "together": "Ensemble, nous avons déjà fait {walks} balades avec {dogs} chiens. Vous en faites partie.",
+    "tips": {
+      "walker": {
+        "1": "Par temps chaud, emportez de l'eau et vérifiez avec la main que le trottoir n'est pas trop chaud pour ses pattes.",
+        "2": "Laissez un chien renifler votre main avant de le caresser. C'est ainsi que vous vous présentez.",
+        "3": "Renifler fatigue un chien autant que courir. Une balade tranquille à renifler est un cadeau.",
+        "4": "Oreilles en arrière et queue basse ? Laissez de l'espace au chien et parlez calmement.",
+        "5": "Dans le noir ? Une lampe sur la laisse vous rend tous les deux plus visibles.",
+        "6": "Marchez à votre rythme. Un chien qui tire apprend plus si vous vous arrêtez que si vous tirez.",
+        "7": "S'asseoir ensemble sur un banc compte aussi. Les balades n'ont pas besoin d'être rapides ou longues.",
+        "8": "Un autre chien arrive ? Demandez d'abord à son propriétaire s'ils peuvent se saluer.",
+        "9": "Balade le matin ? C'est plus calme et plus frais, agréable pour les chiens âgés.",
+        "10": "Racontez au propriétaire un joli moment de la balade. Ça illumine sa journée."
+      },
+      "owner": {
+        "1": "Notez ce qui fait peur à votre chien, comme les vélos ou d'autres chiens. Ainsi, le promeneur sait à quoi faire attention.",
+        "2": "Préparez la laisse, les sacs et une friandise près de la porte. La balade peut alors commencer tout de suite.",
+        "3": "Un moment fixe chaque semaine, c'est plus simple, pour vous, votre chien et le promeneur.",
+        "4": "La première fois, vous marchez ensemble. Montrez comment votre chien aime marcher et où il s'arrête toujours.",
+        "5": "Une photo de votre chien qui regarde l'objectif attire plus de promeneurs qu'une photo de dos.",
+        "6": "Suivez la balade en direct, ou lâchez prise et lisez le compte rendu après.",
+        "7": "Dites au promeneur que vous êtes content. Un merci garde un compagnon régulier.",
+        "8": "Il y a un panneau d'affichage au supermarché ? Un flyer avec votre lien amène des promeneurs de votre quartier."
+      }
+    },
+    "backTitle": "Bon retour sur Rondje !",
+    "backText": "{dog} et vous : {bond}. Envie d'une nouvelle balade ? Planifiez-la quand cela vous convient.",
+    "backPlan": "Planifier une balade avec {dog}"
+  },
+  "progress": {
+    "title": "Votre progression",
+    "points": "{n, plural, one {# point} other {# points}}",
+    "levelN": "Niveau {n}",
+    "toNext": "Encore {n, plural, one {# point} other {# points}} avant {name}",
+    "top": "Vous avez atteint le niveau le plus haut. Chaque balade continue de compter.",
+    "private": "Vous seul voyez votre niveau et vos médailles. Ils ne donnent jamais de priorité : tout le monde est le bienvenu.",
+    "levels": {
+      "puppy": "Chiot",
+      "sniffer": "Renifleur",
+      "tracker": "Fin limier",
+      "buddy": "Compagnon de balade",
+      "regular": "Habitué du parc",
+      "local": "Figure du quartier",
+      "leader": "Chef de meute",
+      "whisperer": "Chuchoteur",
+      "hero": "Héros des balades",
+      "legend": "Légende"
+    },
+    "pathTitle": "Votre parcours",
+    "pathHere": "Vous êtes ici",
+    "badgesTitle": "Médailles",
+    "badgesEarned": "{n} sur {total} obtenues",
+    "badgeProgress": "{value} sur {next}",
+    "badgeDone": "Toutes obtenues",
+    "badges": {
+      "walks": {
+        "name": "Balades",
+        "tier": "{n, plural, one {Première balade} other {# balades}}",
+        "hint": "Chaque balade compte, courte ou longue."
+      },
+      "buddy": {
+        "name": "Compagnon fidèle",
+        "tier": "{n} balades avec le même chien",
+        "hint": "Devenez bons amis avec un chien : cinq balades ensemble."
+      },
+      "pack": {
+        "name": "Meute",
+        "tier": "{n} chiens différents",
+        "hint": "Faites connaissance avec plus de chiens."
+      },
+      "early": {
+        "name": "Lève-tôt",
+        "tier": "{n, plural, one {Une balade avant 8 h} other {# balades avant 8 h}}",
+        "hint": "Une balade matinale quand la ville dort encore."
+      },
+      "evening": {
+        "name": "Balade du soir",
+        "tier": "{n, plural, one {Une balade après 20 h} other {# balades après 20 h}}",
+        "hint": "Prenez une lampe quand il fait nuit."
+      },
+      "weekend": {
+        "name": "Promeneur du week-end",
+        "tier": "{n} balades le week-end",
+        "hint": "En route un samedi ou un dimanche."
+      },
+      "seasons": {
+        "name": "Quatre saisons",
+        "tier": "Balades au printemps, en été, en automne et en hiver",
+        "hint": "Une balade à chaque saison."
+      },
+      "photos": {
+        "name": "Photographe",
+        "tier": "{n} balades avec une photo pour le propriétaire",
+        "hint": "Une photo en chemin illumine la journée du propriétaire."
+      },
+      "reports": {
+        "name": "Reporter",
+        "tier": "{n} balades avec un compte rendu pipi et caca",
+        "hint": "Touchez à chaque pipi, caca ou gorgée d'eau."
+      },
+      "shelter": {
+        "name": "Héros du refuge",
+        "tier": "{n, plural, one {Une balade de groupe dans un refuge} other {# balades de groupe dans un refuge}}",
+        "hint": "Participez à une balade de groupe d'un refuge."
+      },
+      "quiz": {
+        "name": "En route en sécurité",
+        "tier": "Quiz de sécurité réussi",
+        "hint": "Huit questions courtes pour se balader en sécurité."
+      },
+      "host": {
+        "name": "Accueillant",
+        "tier": "{n, plural, one {Votre chien a fait une balade} other {Votre chien a fait # balades}}",
+        "hint": "Chaque balade de votre chien compte."
+      },
+      "friends": {
+        "name": "Cercle d'amis",
+        "tier": "{n} promeneurs différents pour votre chien",
+        "hint": "Plus d'amis, plus de balades."
+      },
+      "invite": {
+        "name": "Ambassadeur",
+        "tier": "{n, plural, one {Un ami nous a rejoints} other {# amis nous ont rejoints}}",
+        "hint": "Invitez quelqu'un avec votre propre lien."
+      }
+    },
+    "earnTitle": "Comment gagner des points",
+    "earn": {
+      "walk": "Faire une balade",
+      "walkCare": "Tenir le compte rendu pipi et caca",
+      "walkPhoto": "Partager une photo avec le propriétaire",
+      "feedback": "Votre avis après une balade",
+      "dogWalked": "Votre chien a fait une balade",
+      "groupWalk": "Participer à une balade de groupe d'un refuge",
+      "quiz": "Réussir le quiz de sécurité",
+      "profile": "Une photo et quelques phrases sur vous",
+      "firstDog": "Mettre votre chien sur Rondje",
+      "invite": "Un ami qui nous rejoint grâce à votre lien"
+    },
+    "earnNote": "Chaque balade compte autant, courte ou longue. Accepter une demande ne rapporte jamais de points : ce choix ne concerne que la sécurité.",
+    "recentTitle": "Derniers points gagnés",
+    "recent": {
+      "walk": "Balade avec {dog}",
+      "walkAnon": "Balade",
+      "walkCare": "Compte rendu de la balade",
+      "walkPhoto": "Photo pour le propriétaire",
+      "feedback": "Avis après la balade",
+      "dogWalked": "{dog} a fait une balade",
+      "dogWalkedAnon": "Votre chien a fait une balade",
+      "groupWalk": "Balade de groupe dans un refuge",
+      "quiz": "Quiz de sécurité réussi",
+      "profile": "Profil complet",
+      "firstDog": "Votre chien est en ligne",
+      "invite": "Un ami nous a rejoints"
+    },
+    "none": "Pas encore de points. Votre première balade en rapporte 25 d'un coup.",
+    "weekTitle": "Cette semaine",
+    "weekGoal": "{done} sur {goal} balades",
+    "weekDone": "Objectif de la semaine atteint !",
+    "weekLeft": "Encore {n, plural, one {# balade} other {# balades}} pour votre objectif",
+    "weekNoGoal": "{n, plural, =0 {Pas encore de balade cette semaine} one {# balade cette semaine} other {# balades cette semaine}}",
+    "weekSet": "Choisissez un objectif",
+    "weekChange": "Modifier",
+    "goalOption": "{n, plural, one {# fois par semaine} other {# fois par semaine}}",
+    "goalNone": "Pas d'objectif",
+    "activeWeeks": "{n, plural, one {# semaine} other {# semaines}} avec une balade",
+    "activeWeeksHint": "Ça ne fait qu'augmenter. Une semaine calme ne retire rien.",
+    "celebrate": {
+      "levelUp": "Niveau supérieur !",
+      "levelUpText": "Vous êtes maintenant {name}, niveau {n}.",
+      "newBadge": "Nouvelle médaille !",
+      "newBadges": "{n} nouvelles médailles !",
+      "close": "Super !",
+      "allBadges": "Voir vos médailles"
+    },
+    "card": "Voir votre progression",
+    "walkPoints": "+{n} points",
+    "walkPointsText": "pour cette balade. Merci !",
+    "walkPointsOwner": "pour la balade de {dog}",
+    "friends": {
+      "title": "Vos amis chiens",
+      "empty": "Après votre première balade, le chien aura ici sa propre place.",
+      "walks": "{n, plural, one {# balade ensemble} other {# balades ensemble}}",
+      "bond": {
+        "met": "Tout juste rencontrés",
+        "buddies": "Compagnons de balade",
+        "good": "Bons amis",
+        "best": "Meilleurs amis"
+      },
+      "withDog": "{dog} et vous",
+      "newBond": "Nouveau : {dog} et vous êtes maintenant {bond} !"
+    }
+  },
+  "challenges": {
+    "title": "Le défi du mois",
+    "city": "{city} fait {goal} balades en {month}",
+    "all": "Ensemble, {goal} balades en {month}",
+    "progress": "{walks} sur {goal} balades",
+    "mine": "{n, plural, =0 {Vous en faites une ?} one {Vous en avez fait #} other {Vous en avez fait #}}",
+    "done": "Réussi ! Merci à tous.",
+    "stats": "{dogs, plural, one {# chien} other {# chiens}} · {walkers, plural, one {# promeneur} other {# promeneurs}} · {km} km",
+    "daysLeft": "{n, plural, one {Encore # jour} other {Encore # jours}}",
+    "private": "Nous comptons seulement les balades, jamais qui les a faites."
   }
 }

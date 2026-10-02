@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
-import { ProfileForm } from '@/components/ProfileForm'
+import { OnboardingFlow, type OnboardingRole } from '@/components/OnboardingFlow'
 import { adultBirthDateLimit, guessCountry } from '@/lib/guess-country'
 import { safeNext } from '@/lib/site'
 import { requireViewer } from '@/server/session'
@@ -10,42 +10,28 @@ export async function generateMetadata() {
   return { title: t('title') }
 }
 
+// Sign-up sends everyone here with a default destination. Those defaults are replaced by the
+// first screen that fits the role someone picks; a real destination (a dog they were looking
+// at, a page that asked them to sign in) is kept.
+const DEFAULT_DESTINATIONS = new Set(['/', '/dogs', '/my-dogs/new', '/shelter'])
+
+const ROLES: Record<string, OnboardingRole> = { walker: 'walker', owner: 'owner', both: 'both', shelter: 'shelter' }
+
 export default async function OnboardingPage({ searchParams }: { searchParams: Promise<{ next?: string; intent?: string }> }) {
   const params = await searchParams
   const viewer = await requireViewer('/onboarding')
-  const intent = params.intent
-  const next = safeNext(params.next, intent === 'owner' ? '/my-dogs/new' : intent === 'shelter' ? '/shelter' : '/dogs')
-  if (viewer.profile) redirect(viewer.profile.bannedAt ? '/banned' : next)
-  const t = await getTranslations('onboarding')
+  const asked = params.next ? safeNext(params.next, '/') : null
+  const next = asked && !DEFAULT_DESTINATIONS.has(asked) ? asked : undefined
+  if (viewer.profile) redirect(viewer.profile.bannedAt ? '/banned' : (asked ?? '/'))
 
   return (
-    <div className="narrow-page stack-l">
-      <header className="stack-s">
-        <p className="eyebrow">{t('step')}</p>
-        <h1>{t('title')}</h1>
-        <p className="lede">{t('lede')}</p>
-      </header>
-      <ProfileForm
-        mode="onboarding"
-        next={next}
-        maxBirthDate={adultBirthDateLimit()}
-        initial={{
-          firstName: viewer.name?.split(' ')[0] ?? '',
-          birthDate: '',
-          country: await guessCountry(),
-          city: '',
-          lat: null,
-          lng: null,
-          bio: '',
-          experience: 'some',
-          phone: '',
-          languages: [],
-          photoUrl: viewer.image,
-          wantsToWalk: intent !== 'owner',
-          hasDogs: intent === 'owner',
-          pppLicense: false,
-        }}
-      />
-    </div>
+    <OnboardingFlow
+      firstName={viewer.name?.trim().split(/\s+/)[0] ?? ''}
+      photoUrl={viewer.image}
+      country={await guessCountry()}
+      maxBirthDate={adultBirthDateLimit()}
+      role={params.intent && Object.hasOwn(ROLES, params.intent) ? ROLES[params.intent] : null}
+      next={next}
+    />
   )
 }

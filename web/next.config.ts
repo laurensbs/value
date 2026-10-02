@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
       { source: '/over-ons', destination: '/about', permanent: true },
       { source: '/steun', destination: '/support', permanent: true },
       { source: '/tip', destination: '/suggest', permanent: true },
+      // The links people (and app stores) expect for the legal texts.
+      { source: '/privacy', destination: '/legal/privacy', permanent: true },
+      { source: '/terms', destination: '/legal/terms', permanent: true },
+      { source: '/voorwaarden', destination: '/legal/terms', permanent: true },
     ]
   },
   async headers() {

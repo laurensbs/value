@@ -2,8 +2,10 @@
 
 import { useFormatter, useTranslations } from 'next-intl'
 import { useEffect, useRef, useState, useTransition } from 'react'
+import { CHAT_WARN_FLAGS } from '@/lib/rules'
 import { sendChatMessage } from '@/server/actions/chat'
 import type { ChatMessage } from '@/server/chat'
+import { Icon } from './Icon'
 
 const POLL_MS = 4_000
 
@@ -86,6 +88,11 @@ export function ChatThread({ requestId, viewerId, dogName, initial, canSend: ini
             <li key={m.id} className={`chat-bubble${mine ? ' mine' : ''}`}>
               {showName ? <span className="chat-name">{m.name}</span> : null}
               <p>{m.body}</p>
+              {!mine && m.flags?.some((f) => CHAT_WARN_FLAGS.includes(f)) ? (
+                <p className="chat-flag" role="note">
+                  <Icon name="alert" size={14} /> {t('flagged')}
+                </p>
+              ) : null}
               <time dateTime={new Date(m.t).toISOString()}>
                 {mine ? `${t('you')} · ` : ''}
                 {format.dateTime(new Date(m.t), { weekday: 'short', hour: '2-digit', minute: '2-digit' })}

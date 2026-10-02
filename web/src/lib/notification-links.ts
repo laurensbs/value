@@ -7,7 +7,19 @@ export type NotificationData = {
   requestId?: string
   orgId?: string
   orgName?: string
+  // Reminders (lib/nudges.ts)
+  step?: string
+  role?: string
+  city?: string
+  goal?: number
+  left?: number
+  mine?: number
+  variant?: string
+  tip?: string
 }
+
+/** Where each first-step reminder leads: the same pages as the first steps on the Today screen. */
+const STEP_HREFS: Record<string, string> = { about: '/profile/edit', dog: '/my-dogs/new', quiz: '/profile/quiz', meet: '/dogs' }
 
 /** Where a notification leads: in the app and in the email about it. */
 export function notificationHref(kind: string, data: NotificationData): string {
@@ -19,7 +31,30 @@ export function notificationHref(kind: string, data: NotificationData): string {
   if (kind === 'group-signup') return '/shelter'
   if (kind === 'org-pending') return '/admin'
   if ((kind === 'shelter-joined' || kind === 'group-walk-new') && data.orgId) return `/dogs?org=${data.orgId}`
+  if (kind === 'nudge-step') return STEP_HREFS[data.step ?? ''] ?? '/'
+  if (kind === 'nudge-week') return '/'
+  if (kind === 'nudge-challenge' || kind === 'challenge-done') return '/progress#challenge'
+  if (kind === 'nudge-back') return data.dogId ? `/dogs/${data.dogId}` : '/dogs'
+  if (kind === 'nudge-owner') return !data.dogId ? '/my-dogs' : data.tip === 'share' ? `/dogs/${data.dogId}` : `/my-dogs/${data.dogId}/edit`
   return '/requests'
+}
+
+/** The values notification texts may use. Counts stay numbers for plurals; a missing choice falls back to "other". */
+export function notificationValues(data: NotificationData): Record<string, string | number> {
+  return {
+    dogName: data.dogName ?? '',
+    walkerName: data.walkerName ?? '',
+    orgName: data.orgName ?? '',
+    senderName: data.senderName ?? '',
+    city: data.city ?? '',
+    goal: Number(data.goal ?? 0),
+    left: Number(data.left ?? 0),
+    mine: Number(data.mine ?? 0),
+    step: data.step ?? 'other',
+    role: data.role ?? 'other',
+    variant: data.variant ?? 'other',
+    tip: data.tip ?? 'other',
+  }
 }
 
 /** Notifications that are also sent by email: someone is waiting for an answer, or it is about safety. */

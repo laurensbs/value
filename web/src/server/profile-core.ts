@@ -27,6 +27,8 @@ export const profileSchema = z.object({
   photoUrl: z.string().max(600_000).optional(),
   wantsToWalk: z.boolean(),
   hasDogs: z.boolean(),
+  /** Walks a week someone aims for (walkers only), or null. */
+  weeklyGoal: z.number().int().min(1).max(7).nullable().default(null),
 })
 
 /** Our own uploads, or the picture from the person's Google/Apple account (or the one they already had). */
@@ -69,6 +71,7 @@ export async function saveOnboarding(
     photoUrl: safePhoto(p.photoUrl, viewer),
     wantsToWalk: p.wantsToWalk,
     hasDogs: p.hasDogs,
+    weeklyGoal: p.wantsToWalk ? p.weeklyGoal : null,
     termsAcceptedAt: new Date(),
     termsVersion: TERMS_VERSION,
     locale: opts.locale,

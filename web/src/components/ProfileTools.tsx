@@ -6,7 +6,7 @@ import { useState, useSyncExternalStore, useTransition } from 'react'
 import { useForm } from '@/lib/use-form'
 import { authClient } from '@/lib/auth-client'
 import { isNativeApp } from '@/lib/native'
-import { deleteAccount, setEmailNotifications, type FormState } from '@/server/actions/profile'
+import { deleteAccount, setEmailNotifications, setReminders, type FormState } from '@/server/actions/profile'
 import { Icon } from './Icon'
 import { SubmitButton } from './SubmitButton'
 
@@ -106,9 +106,7 @@ export function DeleteAccountForm() {
   )
 }
 
-/** Emails for important notifications (new request, accepted, overdue walk): on or off. */
-export function EmailNotificationsToggle({ on }: { on: boolean }) {
-  const t = useTranslations('profile')
+function SettingToggle({ on, save, label, hint }: { on: boolean; save: (on: boolean) => Promise<void>; label: string; hint: string }) {
   const [checked, setChecked] = useState(on)
   const [pending, start] = useTransition()
   return (
@@ -120,13 +118,25 @@ export function EmailNotificationsToggle({ on }: { on: boolean }) {
         onChange={(e) => {
           const next = e.target.checked
           setChecked(next)
-          start(() => setEmailNotifications(next))
+          start(() => save(next))
         }}
       />
       <span>
-        {t('emailNotifications')}
-        <span className="hint">{t('emailNotificationsHint')}</span>
+        {label}
+        <span className="hint">{hint}</span>
       </span>
     </label>
   )
+}
+
+/** Emails for important notifications (new request, accepted, overdue walk): on or off. */
+export function EmailNotificationsToggle({ on }: { on: boolean }) {
+  const t = useTranslations('profile')
+  return <SettingToggle on={on} save={setEmailNotifications} label={t('emailNotifications')} hint={t('emailNotificationsHint')} />
+}
+
+/** Friendly reminders, at most one every few days: on or off. */
+export function RemindersToggle({ on }: { on: boolean }) {
+  const t = useTranslations('profile')
+  return <SettingToggle on={on} save={setReminders} label={t('reminders')} hint={t('remindersHint')} />
 }

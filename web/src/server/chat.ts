@@ -2,8 +2,9 @@ import 'server-only'
 import { and, asc, count, eq, gt, inArray, isNull, sql } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { CHAT_WARN_FLAGS, scanText } from '@/lib/rules'
 import type { FormState } from './actions/profile'
-import { notify } from './notify'
+import { audit, notify } from './notify'
 import { isBlocked } from './queries'
 import type { Viewer } from './session'
 import { watchers } from './walks'
@@ -20,8 +21,11 @@ export interface ChatMessage {
   senderId: string
   name: string
   body: string
+  /** What scanText found (money, iban, link, phone, email). CHAT_WARN_FLAGS get a warning for the other person. */
+  flags: string[]
   t: number
 }
+
 
 export interface ChatAccess {
   request: typeof s.walkRequest.$inferSelect
@@ -55,7 +59,14 @@ export async function chatAccess(requestId: string, viewer: Viewer): Promise<Cha
 export async function chatMessages(requestId: string, afterMs = 0, limit = 200): Promise<ChatMessage[]> {
   const db = await getDb()
   const rows = await db
-    .select({ id: s.chatMessage.id, senderId: s.chatMessage.senderId, name: s.profile.firstName, body: s.chatMessage.body, t: s.chatMessage.createdAt })
+    .select({
+      id: s.chatMessage.id,
+      senderId: s.chatMessage.senderId,
+      name: s.profile.firstName,
+      body: s.chatMessage.body,
+      flags: s.chatMessage.flags,
+      t: s.chatMessage.createdAt,
+    })
     .from(s.chatMessage)
     .leftJoin(s.profile, eq(s.profile.userId, s.chatMessage.senderId))
     .where(and(eq(s.chatMessage.requestId, requestId), gt(s.chatMessage.createdAt, new Date(afterMs))))
@@ -81,7 +92,10 @@ export async function sendChat(requestId: string, viewer: Viewer, raw: unknown):
     .where(and(eq(s.chatMessage.requestId, requestId), eq(s.chatMessage.senderId, viewer.userId), gt(s.chatMessage.createdAt, since)))
   if (n >= CHAT_BURST.messages) return { ok: false, error: 'too-many' }
 
-  const [row] = await db.insert(s.chatMessage).values({ id: crypto.randomUUID(), requestId, senderId: viewer.userId, body }).returning()
+  // Rondje is free: talk of money, bank details or payment links is flagged, as in requests.
+  const flags = scanText(body)
+  const [row] = await db.insert(s.chatMessage).values({ id: crypto.randomUUID(), requestId, senderId: viewer.userId, body, flags }).returning()
+  if (flags.some((f) => CHAT_WARN_FLAGS.includes(f))) await audit(db, viewer.userId, 'chat.flagged', 'chat_message', row.id, { requestId, flags })
 
   // One unread notification per conversation is enough; more would only bury the rest.
   const waiting = await db
@@ -99,7 +113,7 @@ export async function sendChat(requestId: string, viewer: Viewer, raw: unknown):
   const fresh = access.others.filter((u) => !already.has(u))
   if (fresh.length) await notify(db, fresh, 'chat-message', { requestId, dogName: access.dog.name, senderName: viewer.profile.firstName })
 
-  return { ok: true, chat: { id: row.id, senderId: row.senderId, name: viewer.profile.firstName, body: row.body, t: row.createdAt.getTime() } }
+  return { ok: true, chat: { id: row.id, senderId: row.senderId, name: viewer.profile.firstName, body: row.body, flags: row.flags, t: row.createdAt.getTime() } }
 }
 
 /** Opening a conversation marks its message notifications as read. */

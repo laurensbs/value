@@ -30,7 +30,7 @@ export default async function WalkPage({ params }: { params: Promise<{ id: strin
         dog={dog}
         route={points}
         role="walker"
-        viewerId={viewer.userId}
+        viewer={viewer}
         otherUserId={dog.ownerId}
         fallbackCenter={center}
       />
