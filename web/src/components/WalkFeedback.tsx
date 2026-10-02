@@ -1,12 +1,15 @@
 'use client'
 
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import { useForm } from '@/lib/use-form'
 import type { FormState } from '@/server/actions/profile'
 import { submitFeedback } from '@/server/actions/walks'
+import { moodFor, saveMood } from './progress/mood'
+import { MoodPicker, MoodReply } from './progress/MoodPicker'
 import { SubmitButton } from './SubmitButton'
+
+const noop = () => () => undefined
 
 function YesNo({ name, label }: { name: string; label: string }) {
   const t = useTranslations('common')
@@ -92,47 +95,26 @@ export function WalkFeedback({ walkId, role, dogName }: { walkId: string; role: 
   )
 }
 
-const MOOD_KEY = 'rondje:moods'
-
-function saveMood(mood: number) {
-  try {
-    const list = JSON.parse(localStorage.getItem(MOOD_KEY) ?? '[]') as { t: number; mood: number }[]
-    list.push({ t: Date.now(), mood })
-    localStorage.setItem(MOOD_KEY, JSON.stringify(list.slice(-200)))
-  } catch {
-    // Storage can be unavailable (private mode); the check-in still helps in the moment.
-  }
-}
-
-/** A private check-in for the walker. It never leaves the phone. */
-export function MoodCheck() {
+/** A private check-in for the walker. It never leaves this browser (see progress/mood.ts). */
+export function MoodCheck({ walkId }: { walkId: string }) {
   const t = useTranslations('walk')
-  const [mood, setMood] = useState<number | null>(null)
-
-  function pick(value: number) {
-    setMood(value)
-    saveMood(value)
-  }
+  const stored = useSyncExternalStore(noop, () => moodFor(walkId), () => null)
+  const [picked, setPicked] = useState<number | null>(null)
+  const mood = picked ?? stored
 
   return (
     <section className="card flat stack-s mood">
-      <h2>{t('moodTitle')}</h2>
+      <MoodPicker
+        id="mood-check"
+        title={t('moodTitle')}
+        value={mood}
+        onPick={(value) => {
+          setPicked(value)
+          saveMood(value, walkId)
+        }}
+      />
       <p className="muted small">{t('moodPrivate')}</p>
-      <div className="mood-scale" role="radiogroup" aria-label={t('moodTitle')}>
-        {[1, 2, 3, 4, 5].map((v) => (
-          <button key={v} type="button" role="radio" aria-checked={mood === v} className={mood === v ? 'on' : ''} onClick={() => pick(v)}>
-            <span aria-hidden="true">{['😞', '😕', '🙂', '😊', '🤩'][v - 1]}</span>
-            <span>{t(`moods.${v}`)}</span>
-          </button>
-        ))}
-      </div>
-      {mood !== null && mood <= 2 ? (
-        <p className="notice small">
-          {t('moodLow')} <Link href="/help">{t('moodHelp')}</Link>
-        </p>
-      ) : mood !== null ? (
-        <p className="hand">{t('moodThanks')}</p>
-      ) : null}
+      <MoodReply mood={mood} />
     </section>
   )
 }
