@@ -138,8 +138,6 @@
     "login": "Log in",
     "signup": "Create account",
     "withPasskey": "Log in with Face ID, fingerprint or passkey",
-    "withGoogle": "Continue with Google",
-    "withApple": "Continue with Apple",
     "noAccount": "No account yet?",
     "hasAccount": "Already have an account?",
     "termsNote": "By creating an account, you agree to the <terms>terms</terms> and the <privacy>privacy policy</privacy>.",
@@ -154,7 +152,6 @@
       "owner": "You're signing up a dog who could use an extra walk. Let's set up your account first.",
       "shelter": "You're putting your shelter's dogs on Rondje. First create your own account; then you can register the shelter."
     },
-    "orEmail": "or with your email address",
     "promiseFree": "Free, with no ads.",
     "promisePrivacy": "We never sell your data. Your location is rounded to about 500 metres.",
     "forgot": "Forgot your password?",
@@ -170,6 +167,13 @@
     "resetDone": "Your password has been changed and you have been signed out on other devices. Sign in now with your new password.",
     "resetInvalid": "This link has expired or was already used.",
     "backToLogin": "Back to sign in"
+  },
+  "social": {
+    "continueWithApple": "Continue with Apple",
+    "continueWithGoogle": "Continue with Google",
+    "or": "or with your email address",
+    "error": "Signing in with {provider} didn't work. Try again, or use your email address.",
+    "linkNotice": "There's already a Rondje account with this email address. Log in below with your password once and we'll link {provider} to it. After that you can also log in with {provider}."
   },
   "onboarding": {
     "title": "Tell us about yourself",

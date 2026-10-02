@@ -138,8 +138,6 @@
     "login": "Se connecter",
     "signup": "Créer un compte",
     "withPasskey": "Se connecter avec Face ID, une empreinte digitale ou une clé d'accès",
-    "withGoogle": "Continuer avec Google",
-    "withApple": "Continuer avec Apple",
     "noAccount": "Pas encore de compte ?",
     "hasAccount": "Déjà un compte ?",
     "termsNote": "En créant un compte, vous acceptez les <terms>conditions</terms> et la <privacy>politique de confidentialité</privacy>.",
@@ -154,7 +152,6 @@
       "owner": "Vous inscrivez un chien à qui une balade de plus ferait du bien. Commençons par créer votre compte.",
       "shelter": "Vous mettez les chiens de votre refuge sur Rondje. Créez d'abord votre propre compte ; ensuite, vous inscrirez le refuge."
     },
-    "orEmail": "ou avec votre adresse e-mail",
     "promiseFree": "Gratuit, sans publicité.",
     "promisePrivacy": "Nous ne vendons jamais vos données. Votre position est arrondie à environ 500 mètres.",
     "forgot": "Mot de passe oublié ?",
@@ -170,6 +167,13 @@
     "resetDone": "Votre mot de passe a été modifié et vous avez été déconnecté de vos autres appareils. Connectez-vous maintenant avec le nouveau mot de passe.",
     "resetInvalid": "Ce lien a expiré ou a déjà été utilisé.",
     "backToLogin": "Retour à la connexion"
+  },
+  "social": {
+    "continueWithApple": "Continuer avec Apple",
+    "continueWithGoogle": "Continuer avec Google",
+    "or": "ou avec votre adresse e-mail",
+    "error": "La connexion avec {provider} n'a pas fonctionné. Réessayez ou utilisez votre adresse e-mail.",
+    "linkNotice": "Un compte Rondje existe déjà avec cette adresse e-mail. Connectez-vous une fois ci-dessous avec votre mot de passe et nous y associerons {provider}. Ensuite, vous pourrez aussi vous connecter avec {provider}."
   },
   "onboarding": {
     "title": "Parlez-nous de vous",

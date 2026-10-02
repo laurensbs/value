@@ -98,24 +98,61 @@ Wil je de testgegevens meenemen? Vraag het Claude: dat is een `pg_dump` van de o
 - Honden toevoegen gaat het snelst met **Snel toevoegen met foto's**: één foto per hond kiezen, namen kloppen vaak al (uit de bestandsnaam), alles in één keer online. Een CSV-bestand kan ook (`web/public/rondje-honden-voorbeeld.csv`).
 - Elke opvang kan een **poster met QR-code** printen (dashboard → Poster). Iedereen kan een **flyer voor de buurt** printen (`/flyer`), met de eigen uitnodigingslink erin.
 
-## 5. Inloggen met Google en Apple (optioneel)
+## 5. Inloggen met Apple en Google
 
-Zonder deze sleutels zie je de knoppen gewoon niet; e-mail en passkeys werken altijd.
+Eén account voor de website en de iPhone-app: wie op beide plekken met hetzelfde e-mailadres inlogt, komt in hetzelfde account. De knoppen "Doorgaan met Apple" en "Doorgaan met Google" verschijnen vanzelf op `/login` en `/signup` (en in de app, via `/api/v1/config`) zodra de sleutels in Vercel staan en er opnieuw is gedeployd. Zonder sleutels zie je ze niet; e-mail en passkeys werken altijd.
 
-**Google**
+**Wat je nodig hebt**
 
-1. Ga naar Google Cloud Console → APIs & Services → Credentials → **Create OAuth client ID** (type Web application).
-2. Authorized redirect URI: `https://rondje-five.vercel.app/api/auth/callback/google`
-3. Zet in Vercel `GOOGLE_CLIENT_ID` en `GOOGLE_CLIENT_SECRET` (Production) en redeploy.
+- [ ] **Apple Developer Program** (€99 per jaar), op je eigen naam of later op die van de stichting. Nodig voor Apple-login én voor de App Store.
+- [ ] Een **Google-account** voor Google Cloud (gratis).
 
-**Apple** (vereist een Apple Developer-account, $99 per jaar)
+**Apple** (developer.apple.com → Certificates, Identifiers & Profiles)
 
-1. Ga naar Certificates, Identifiers & Profiles → Identifiers → maak een **Services ID** (bijvoorbeeld `app.rondje.web`) en zet Sign in with Apple aan.
-2. Domein: `rondje-five.vercel.app`. Return URL: `https://rondje-five.vercel.app/api/auth/callback/apple`
-3. Maak onder Keys een sleutel met Sign in with Apple en maak daarmee een client secret (een JWT, maximaal 6 maanden geldig).
-4. Zet in Vercel `APPLE_CLIENT_ID` (de Services ID), `APPLE_CLIENT_SECRET` (de JWT) en `APPLE_APP_BUNDLE_ID` (`app.rondje.mobile`), en redeploy.
+1. [ ] **App ID** `app.rondje.mobile` (Identifiers → App IDs): zet **Sign in with Apple** aan. Dit is de iPhone-app; die logt in met het systeemscherm van Apple.
+2. [ ] **Services ID** (Identifiers → Services IDs), bijvoorbeeld `app.rondje.web`. Zet Sign in with Apple aan → Configure:
+   - Primary App ID: `app.rondje.mobile`
+   - Domain: `rondje-five.vercel.app`
+   - Return URL: `https://rondje-five.vercel.app/api/auth/callback/apple`
 
-In de iOS- en Android-app tonen we alleen e-mail en wachtwoord. Google blokkeert inloggen in app-webviews, en passkeys vragen in de app een "associated domain" (zie hieronder).
+   Deze Services ID is `APPLE_CLIENT_ID`. Hij is voor de website (en voor de app als het systeemscherm niet kan).
+3. [ ] **Sleutel** (Keys → +): vink Sign in with Apple aan, kies `app.rondje.mobile` als Primary App ID en download het `.p8`-bestand. Dat kan maar één keer: bewaar het in je wachtwoordkluis, **nooit in de repo**. Noteer de **Key ID** en je **Team ID** (rechtsboven op developer.apple.com).
+4. [ ] **Client secret maken** (op je eigen Mac, in `web/`):
+
+   ```bash
+   node scripts/apple-client-secret.mjs --team <Team ID> --key-id <Key ID> \
+     --client-id app.rondje.web --key ~/Downloads/AuthKey_<Key ID>.p8
+   ```
+
+   De regel die het script print is `APPLE_CLIENT_SECRET`. Apple laat hem **maximaal 6 maanden** werken: zet meteen een herinnering in je agenda om er vóór de vervaldatum (het script noemt hem) een nieuwe te maken en in Vercel te zetten. Verloopt hij, dan werkt Apple-login op de website niet meer (in de app blijft het systeemscherm werken).
+
+**Google** (console.cloud.google.com)
+
+1. [ ] Maak een project (bijvoorbeeld "Rondje") → APIs & Services → **OAuth consent screen**: app-naam Rondje, je support-e-mail, links naar `https://rondje-five.vercel.app/legal/privacy` en `/legal/terms`. Scopes: alleen e-mail, profiel en openid. Zet hem daarna op **In production** (anders kunnen alleen testgebruikers inloggen).
+2. [ ] Credentials → **Create OAuth client ID** → type **Web application**:
+   - Authorized JavaScript origin: `https://rondje-five.vercel.app`
+   - Authorized redirect URI: `https://rondje-five.vercel.app/api/auth/callback/google`
+3. [ ] Noteer Client ID en Client secret. De iPhone-app gebruikt dezelfde webclient (via de website), dus een aparte iOS-client is niet nodig.
+
+**In Vercel** (project `rondje` → Settings → Environment Variables, omgeving **Production**; voor previews alleen als je daar wilt testen)
+
+| Naam | Waarde |
+|---|---|
+| `GOOGLE_CLIENT_ID` | Client ID van de webclient |
+| `GOOGLE_CLIENT_SECRET` | Client secret van de webclient |
+| `APPLE_CLIENT_ID` | de Services ID, bijvoorbeeld `app.rondje.web` |
+| `APPLE_CLIENT_SECRET` | de uitvoer van het script |
+| `APPLE_APP_BUNDLE_ID` | `app.rondje.mobile` |
+
+Daarna **Redeploy** (Deployments → laatste productie-deploy → Redeploy). Controle: `https://rondje-five.vercel.app/api/v1/config` toont dan `"auth":{"providers":["google","apple"],"appleNative":true}`, en op `/login` staan de twee knoppen. Ook het beheerdersdashboard laat zien welke aanstaan.
+
+**Goed om te weten**
+
+- **Hetzelfde e-mailadres = hetzelfde account.** Wie eerst met Apple of Google begon en later met Google of Apple inlogt, komt vanzelf in hetzelfde account. Wie eerst met e-mail en wachtwoord een account maakte, krijgt bij de eerste keer Apple/Google de vraag om één keer met het wachtwoord in te loggen; daarna is Apple/Google gekoppeld en werkt allebei. Dat is bewust: we sturen nog geen bevestigingsmail, dus zonder die stap zou iemand een account op andermans adres kunnen klaarzetten en later meelezen. Andersom (eerst Apple/Google, later een wachtwoord) gaat via "Wachtwoord vergeten" zodra de e-mail (Resend) aanstaat.
+- **"Verberg mijn e-mail" bij Apple** geeft een doorstuuradres (`…@privaterelay.appleid.com`). Dat is een ander adres, dus dan ontstaat een apart, nieuw account, ook als iemand al een account met zijn echte adres had. Wie dat wil samenvoegen: inloggen met het oude account en daar Apple koppelen, of ons mailen.
+- **Mails via het doorstuuradres** komen alleen aan als je verzenddomein bij Apple geregistreerd is (Certificates, Identifiers & Profiles → Services → Sign in with Apple for Email Communication). Doe dat zodra Resend met een eigen domein werkt.
+- **App Store-regel 4.8:** een app die met Google laat inloggen, moet ook Sign in with Apple bieden. De native app doet allebei, dus dat klopt. De Capacitor-schil toont alleen e-mail en wachtwoord (Google weigert inloggen in webviews).
+- Google of Apple later weer uitzetten: de variabelen weghalen en redeployen. Accounts blijven bestaan; wie alleen via Google of Apple inlogde, kan dan via "Wachtwoord vergeten" een wachtwoord instellen.
 
 ## 6. De iPhone-app bouwen (Xcode)
 
