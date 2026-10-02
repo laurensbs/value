@@ -46,10 +46,10 @@ export async function signUp(page: Page, opts: { name: string; email: string; in
 
 /**
  * The step-by-step onboarding: role, name and age, place, (walkers) experience and weekly goal,
- * a few words about yourself, and the promises. Someone who neither walks nor has a dog is
- * treated as shelter staff.
+ * a few words about yourself (typed, or ready sentences tapped), and the promises. Someone who
+ * neither walks nor has a dog is treated as shelter staff.
  */
-export async function onboard(page: Page, opts: { birthDate: string; city: string; bio: string; phone: string; walker: boolean; owner: boolean }) {
+export async function onboard(page: Page, opts: { birthDate: string; city: string; bio: string | string[]; phone: string; walker: boolean; owner: boolean }) {
   const next = () => page.getByRole('button', { name: 'Verder' }).click()
   await page.getByRole('button', { name: 'Laten we beginnen' }).click()
   const role = opts.walker && opts.owner ? /^Allebei/ : opts.owner ? /^Ik heb een hond/ : opts.walker ? /^Ik wil wandelen/ : /^Ik werk bij een opvang/
@@ -67,7 +67,13 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
     await expect(page.getByRole('radio', { name: /^1 keer per week/ })).toBeChecked()
     await next()
   }
-  await page.getByLabel('Over jou').fill(opts.bio)
+  if (typeof opts.bio === 'string') {
+    await page.getByLabel('Over jou').fill(opts.bio)
+  } else {
+    const sentences = page.getByRole('group', { name: 'Tik om een zin toe te voegen' })
+    for (const sentence of opts.bio) await sentences.getByRole('button', { name: sentence }).click()
+    await expect(page.getByLabel('Over jou')).toHaveValue(opts.bio.join(' '))
+  }
   await page.getByLabel(/Telefoonnummer/).fill(opts.phone)
   await next()
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()

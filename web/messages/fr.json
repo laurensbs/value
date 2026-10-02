@@ -261,6 +261,24 @@
       "welcomeTitleAnon": "Bonjour, bienvenue !",
       "needExperience": "Choisissez ce qui vous correspond le mieux.",
       "promise1Owner": "La première fois, le promeneur marche toujours avec vous."
+    },
+    "bioBlocksLabel": "Touchez pour ajouter une phrase",
+    "bioBlocks": {
+      "hello": "Je m’appelle {name} et j’habite à {city}.",
+      "learning": "J’ai encore peu d’expérience avec les chiens, mais j’apprends volontiers.",
+      "walkedBefore": "J’ai souvent promené les chiens d’autres personnes.",
+      "grewUp": "J’ai grandi avec des chiens.",
+      "hadDog": "J’ai déjà eu un chien.",
+      "ownerHelp": "Parfois, un coup de main pour promener mon chien me serait utile.",
+      "student": "Je fais des études et j’ai souvent du temps en journée.",
+      "homeWork": "Je travaille à domicile et j’aime faire une balade à midi.",
+      "retired": "Je suis à la retraite et j’ai du temps en journée.",
+      "weekend": "Le week-end, j’ai le temps pour une longue balade.",
+      "outside": "J’adore être dehors, et avec un chien chaque balade est plus sympa.",
+      "missDog": "Un chien à la maison me manque.",
+      "neighbour": "J’aime rendre service aux gens du quartier.",
+      "ownerMeet": "J’aime rencontrer des gens du quartier.",
+      "reliable": "Quand je prends un engagement, vous pouvez compter sur moi."
     }
   },
   "dogs": {

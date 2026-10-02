@@ -1,3 +1,5 @@
+import { blocksLeft } from './sentences'
+
 /** What an owner or shelter can hand the walker. Shown as "De eigenaar zorgt voor …". */
 export const PROVIDES = ['bags', 'leash', 'harness', 'treats', 'water', 'towel'] as const
 export type Provide = (typeof PROVIDES)[number]
@@ -51,8 +53,7 @@ export function toggleTrait(value: string, trait: string): string {
 
 /** The ready sentences still worth offering: not the ones already in the story, nor the others of their group. */
 export function storyBlocksLeft(story: string, sentences: Record<StoryBlock, string>): StoryBlock[] {
-  const used = STORY_BLOCKS.filter((key) => story.includes(sentences[key]))
-  return STORY_BLOCKS.filter((key) => !used.includes(key) && !STORY_GROUPS.some((group) => group.includes(key) && group.some((other) => used.includes(other))))
+  return blocksLeft(story, STORY_BLOCKS, sentences, STORY_GROUPS)
 }
 
 

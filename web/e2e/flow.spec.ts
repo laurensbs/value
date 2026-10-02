@@ -78,7 +78,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await onboard(walker.page, {
     birthDate: '2003-06-15',
     city: 'Utrecht',
-    bio: 'Ik studeer in Utrecht en mis de hond van mijn ouders.',
+    // "About you" from ready sentences that fit her: her name and town, and some experience.
+    bio: ['Ik ben Fleur en ik woon in Utrecht.', 'Ik studeer en heb overdag vaak tijd.', 'Ik heb al vaker met honden van anderen gewandeld.'],
     phone: '06 8765 4321',
     walker: true,
     owner: false,
@@ -90,6 +91,13 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page.getByRole('heading', { name: 'Welkom bij Rondje, Fleur!' })).toBeVisible()
   await expect(walker.page.getByRole('link', { name: 'Start' })).toHaveAttribute('href', '/profile/edit')
   await shot(walker.page, '05-today-walker')
+  // Editing the profile offers the sentences that still fit; not another one about what she does.
+  await walker.page.goto('/profile/edit')
+  await expect(walker.page.getByLabel('Over jou')).toHaveValue('Ik ben Fleur en ik woon in Utrecht. Ik studeer en heb overdag vaak tijd. Ik heb al vaker met honden van anderen gewandeld.')
+  const bioSentences = walker.page.getByRole('group', { name: 'Tik om een zin toe te voegen' })
+  await expect(bioSentences.getByRole('button', { name: 'In het weekend heb ik tijd voor een lang rondje.' })).toBeVisible()
+  await expect(bioSentences.getByRole('button', { name: /pensioen|Ik studeer|weinig ervaring/ })).toHaveCount(0)
+  await shot(walker.page, '05b-profile-bio')
   await walker.page.goto(dogUrl)
   // Contact details stay private until the appointment is accepted.
   await expect(walker.page.getByText('Oudegracht 1')).toHaveCount(0)
@@ -287,6 +295,11 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   expect(dogForm.walkMinutes).toEqual([20, 30, 45, 60])
   expect(dogForm.traits).toContainEqual({ key: 'sniffer', text: 'Snuffelt graag' })
   expect(dogForm.storyBlocks).toContainEqual({ key: 'happy', text: 'Bello is vrolijk en snuffelt graag.' })
+  // And the same sentences for "About you".
+  const profileForm = await (await app.get('/api/v1/profile-form?name=Fleur&city=Utrecht&walker=1&experience=some', { headers: { ...bearer, 'Accept-Language': 'nl-NL' } })).json()
+  expect(profileForm.bioBlocks[0]).toEqual({ key: 'hello', text: 'Ik ben Fleur en ik woon in Utrecht.' })
+  expect(profileForm.bioBlocks.map((b: { key: string }) => b.key)).toEqual(expect.arrayContaining(['walkedBefore', 'student']))
+  expect(profileForm.bioBlocks.map((b: { key: string }) => b.key)).not.toContain('ownerHelp')
   await app.dispose()
   await owner.page.goto(`/chat/${requestId}`)
   await expect(owner.page.getByRole('note').filter({ hasText: 'Rondje is gratis' })).toBeVisible()

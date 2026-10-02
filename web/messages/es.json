@@ -261,6 +261,24 @@
       "welcomeTitleAnon": "¡Hola! Qué bien que estés aquí",
       "needExperience": "Elige lo que mejor te describa.",
       "promise1Owner": "La primera vez, quien pasea siempre va junto contigo."
+    },
+    "bioBlocksLabel": "Toca para añadir una frase",
+    "bioBlocks": {
+      "hello": "Soy {name} y vivo en {city}.",
+      "learning": "Todavía tengo poca experiencia con perros, pero me encanta aprender.",
+      "walkedBefore": "Ya he paseado a menudo perros de otras personas.",
+      "grewUp": "Crecí con perros.",
+      "hadDog": "He tenido perro.",
+      "ownerHelp": "A veces me vendría bien ayuda para pasear a mi perro.",
+      "student": "Estudio y suelo tener tiempo durante el día.",
+      "homeWork": "Trabajo desde casa y me gusta dar un paseo a mediodía.",
+      "retired": "Me he jubilado y tengo tiempo de sobra durante el día.",
+      "weekend": "Los fines de semana tengo tiempo para un paseo largo.",
+      "outside": "Me encanta estar al aire libre, y con un perro cada paseo es mejor.",
+      "missDog": "Echo de menos tener un perro en casa.",
+      "neighbour": "Me gusta echar una mano a la gente del barrio.",
+      "ownerMeet": "Me gusta conocer a gente del barrio.",
+      "reliable": "Si quedo en algo, puedes contar conmigo."
     }
   },
   "dogs": {

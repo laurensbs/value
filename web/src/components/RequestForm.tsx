@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { requestBlockKeys } from '@/lib/conversation'
+import { addSentence } from '@/lib/sentences'
 import { useForm } from '@/lib/use-form'
 import { createRequest } from '@/server/actions/requests'
 import type { FormState } from '@/server/actions/profile'
@@ -49,7 +50,7 @@ export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason
 
   function add(sentence: string) {
     setMessage((text) => {
-      const next = text.trim() ? `${text.trim()} ${sentence}` : sentence
+      const next = addSentence(text, sentence)
       return next.length > MESSAGE_MAX ? text : next
     })
   }

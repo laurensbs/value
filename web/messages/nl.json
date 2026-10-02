@@ -261,6 +261,24 @@
       "welcomeTitleAnon": "Hoi, fijn dat je er bent!",
       "needExperience": "Kies wat het beste bij je past.",
       "promise1Owner": "De eerste keer loopt een wandelaar altijd samen met jou."
+    },
+    "bioBlocksLabel": "Tik om een zin toe te voegen",
+    "bioBlocks": {
+      "hello": "Ik ben {name} en ik woon in {city}.",
+      "learning": "Ik heb nog weinig ervaring met honden, maar ik leer het graag.",
+      "walkedBefore": "Ik heb al vaker met honden van anderen gewandeld.",
+      "grewUp": "Ik ben opgegroeid met honden.",
+      "hadDog": "Ik heb zelf een hond gehad.",
+      "ownerHelp": "Soms kan ik wel wat hulp gebruiken bij het uitlaten van mijn hond.",
+      "student": "Ik studeer en heb overdag vaak tijd.",
+      "homeWork": "Ik werk thuis en loop graag tussen de middag een rondje.",
+      "retired": "Ik ben met pensioen en heb overdag alle tijd.",
+      "weekend": "In het weekend heb ik tijd voor een lang rondje.",
+      "outside": "Ik ben graag buiten, en met een hond is elk rondje leuker.",
+      "missDog": "Ik mis een hond in huis.",
+      "neighbour": "Ik vind het fijn om iets te doen voor mensen in de buurt.",
+      "ownerMeet": "Ik leer graag mensen uit de buurt kennen.",
+      "reliable": "Als ik iets afspreek, kun je op me rekenen."
     }
   },
   "dogs": {

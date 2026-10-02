@@ -261,6 +261,24 @@
       "welcomeTitleAnon": "Hi, great to have you!",
       "needExperience": "Pick what fits you best.",
       "promise1Owner": "The first time, a walker always walks together with you."
+    },
+    "bioBlocksLabel": "Tap to add a sentence",
+    "bioBlocks": {
+      "hello": "I'm {name} and I live in {city}.",
+      "learning": "I don't have much experience with dogs yet, but I'm keen to learn.",
+      "walkedBefore": "I've often walked other people's dogs.",
+      "grewUp": "I grew up with dogs.",
+      "hadDog": "I've had a dog of my own.",
+      "ownerHelp": "Sometimes I could use a hand walking my dog.",
+      "student": "I'm a student and often have time during the day.",
+      "homeWork": "I work from home and like a walk at lunchtime.",
+      "retired": "I'm retired and have plenty of time during the day.",
+      "weekend": "At the weekend I have time for a long walk.",
+      "outside": "I love being outdoors, and every walk is better with a dog.",
+      "missDog": "I miss having a dog around.",
+      "neighbour": "I like doing something for people in my neighbourhood.",
+      "ownerMeet": "I enjoy getting to know people from the neighbourhood.",
+      "reliable": "When I make a plan, you can count on me."
     }
   },
   "dogs": {

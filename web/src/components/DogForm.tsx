@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { MASCOT } from '@/lib/avatar'
 import { COUNTRIES, COUNTRY_INFO, type Country } from '@/lib/countries'
 import { hasTrait, MAX_TRAITS, PROVIDES, STORY_BLOCKS, storyBlocksLeft, toggleTrait, TRAIT_CHIPS, traitList, WALK_MINUTES, type StoryBlock } from '@/lib/dog-options'
+import { addSentence } from '@/lib/sentences'
 import { useForm } from '@/lib/use-form'
 import { saveDog } from '@/server/actions/dogs'
 import type { FormState } from '@/server/actions/profile'
@@ -114,9 +115,9 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
   const sentences = Object.fromEntries(STORY_BLOCKS.map((key) => [key, t(`myDogs.storyBlocks.${key}`, { name: name.trim() })])) as Record<StoryBlock, string>
   const blocks = name.trim() ? storyBlocksLeft(story, sentences) : []
 
-  function addSentence(sentence: string) {
+  function addToStory(sentence: string) {
     setStory((text) => {
-      const next = text.trim() ? `${text.trim()} ${sentence}` : sentence
+      const next = addSentence(text, sentence)
       return next.length > STORY_MAX ? text : next
     })
   }
@@ -220,7 +221,7 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
         {blocks.length ? (
           <div className="chip-row sentences" role="group" aria-label={t('request.blocksLabel')}>
             {blocks.map((key) => (
-              <button key={key} type="button" className="chip" onClick={() => addSentence(sentences[key])}>
+              <button key={key} type="button" className="chip" onClick={() => addToStory(sentences[key])}>
                 <Icon name="plus" size={14} /> {sentences[key]}
               </button>
             ))}
