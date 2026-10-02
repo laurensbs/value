@@ -33,6 +33,9 @@ struct AppointmentsView: View {
                                 .padding(12)
                                 .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
                         }
+                        if !items.isEmpty {
+                            GuusHint(id: "appointments", text: L("Op de dag zelf start je hier je rondje. Een half uur van tevoren mag het al."))
+                        }
                         if model.role == .both || (model.role == .walker && !model.appointments.incoming.isEmpty) {
                             Picker("Weergave", selection: $side) {
                                 ForEach(Side.allCases) { Text($0.title).tag($0) }
@@ -153,6 +156,7 @@ struct AppointmentCard: View {
                 Label(item.dog.meetingInfo, systemImage: "mappin.and.ellipse").font(.subheadline)
             }
             contact
+            PrepLink(item: item, asOwner: asOwner)
             actions
         }
         .overlay(RoundedRectangle(cornerRadius: 24, style: .continuous).strokeBorder(Palette.ball, lineWidth: highlighted ? 3 : 0).animation(.easeInOut, value: highlighted))

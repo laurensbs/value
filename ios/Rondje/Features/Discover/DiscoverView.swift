@@ -67,6 +67,7 @@ struct DiscoverView: View {
                         }
                         if let c = progress.challenges { ChallengeCard(challenges: c) }
                         DailyTip()
+                        GuusHint(id: "discover", text: L("Tik op een hond om zijn verhaal te lezen. Begin gerust met Rustig."))
                         filters
                             .id("filters")
                         if showMap {
