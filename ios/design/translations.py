@@ -615,4 +615,33 @@ T = {
         "The app reads nothing from Apple Health. It only saves something there if you turn that on.",
         "L'app ne lit rien dans Apple Santé. Elle n'y enregistre quelque chose que si tu l'actives.",
         "La app no lee nada de Apple Salud. Solo guarda algo allí si tú lo activas."),
+    # --- parity: inloggen ---
+    "Ga door met Apple": ("Continue with Apple", "Continuer avec Apple", "Continuar con Apple"),
+    "Doorgaan met Google": ("Continue with Google", "Continuer avec Google", "Continuar con Google"),
+    "of": ("or", "ou", "o"),
+    "Kies hoe je wilt inloggen.": ("Choose how you want to log in.", "Choisis comment te connecter.", "Elige cómo quieres iniciar sesión."),
+    "Inloggen met %@ lukte niet. Probeer het opnieuw.": (
+        "Logging in with %@ didn't work. Please try again.",
+        "La connexion avec %@ a échoué. Réessaie.",
+        "No se pudo iniciar sesión con %@. Inténtalo de nuevo."),
+    "Deze inlogpoging is verlopen. Probeer het opnieuw.": (
+        "This login attempt has expired. Please try again.",
+        "Cette tentative de connexion a expiré. Réessaie.",
+        "Este intento de inicio de sesión ha caducado. Inténtalo de nuevo."),
+    "Er is al een account met dit e-mailadres. Log in met je e-mailadres en wachtwoord.": (
+        "There's already an account with this email address. Log in with your email and password.",
+        "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton e-mail et ton mot de passe.",
+        "Ya existe una cuenta con este correo. Inicia sesión con tu correo y tu contraseña."),
+    "Er is al een account met dit e-mailadres. Log in met je wachtwoord om Apple te koppelen.": (
+        "There's already an account with this email address. Log in with your password to link Apple.",
+        "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton mot de passe pour associer Apple.",
+        "Ya existe una cuenta con este correo. Inicia sesión con tu contraseña para vincular Apple."),
+    "Inloggen met %@ kan nu even niet. Log in met je e-mailadres.": (
+        "Logging in with %@ isn't available right now. Log in with your email address.",
+        "La connexion avec %@ n'est pas disponible pour le moment. Connecte-toi avec ton adresse e-mail.",
+        "Ahora mismo no se puede iniciar sesión con %@. Inicia sesión con tu correo electrónico."),
+    "Apple is gekoppeld. Voortaan kun je ook met Apple inloggen.": (
+        "Apple is linked. From now on you can also log in with Apple.",
+        "Apple est associé. Tu peux désormais aussi te connecter avec Apple.",
+        "Apple está vinculado. A partir de ahora también puedes iniciar sesión con Apple."),
 }

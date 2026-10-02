@@ -12,6 +12,7 @@
 		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
 		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
 		18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B076DE4C10D0103F33700 /* OwnerHomeView.swift */; };
+		234630D5FA9E43FFC3168F9E /* SocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C528725BFBCA08FD25266 /* SocialAuth.swift */; };
 		2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EA1B62ECCEC400102F6036 /* APIClient.swift */; };
 		26EB9B4433C18066EA749D1A /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = B400323AA6D6C3D1DF40D5A6 /* Mood.swift */; };
 		27841FFFAF656709D17D9B32 /* finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0B9023C8D287C0B409C354 /* finish.wav */; };
@@ -34,11 +35,13 @@
 		4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88239320CAE586D79B3603F4 /* Brand.swift */; };
 		4D6F906AA9E5C57E4A01B461 /* SoundHealthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80C3DE0E1BB69AAEE2F57A /* SoundHealthTests.swift */; };
 		50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2B1E42F731544CC1E42AAC /* MembershipView.swift */; };
+		510EEAFA10836E93400A0BBF /* SocialSignInButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84B1FFC41C21F6195B618E1 /* SocialSignInButtons.swift */; };
 		518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89ADE16C47AB0E0761B7EF /* AuthView.swift */; };
 		5198C0AD339CAAF20B4E90B8 /* breathe-in.wav in Resources */ = {isa = PBXBuildFile; fileRef = C04CD2CA2FAAC2B7C5AFCA5D /* breathe-in.wav */; };
 		53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A4BC365EFDB4E41F534AF /* MyDogsView.swift */; };
 		5A6E953AD397B6F468A9D37E /* ProgressViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5186B4F03524632EF6DE929 /* ProgressViews.swift */; };
 		5B2B7A783C132F90E603AA54 /* levelup.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDD8C21D8BFC457E452B32E7 /* levelup.wav */; };
+		5EC6C25F274965F6B282AA41 /* SocialAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31152A3018077A50218B0B0 /* SocialAuthTests.swift */; };
 		6FE07F407894AD98538D3729 /* SoundFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D5F7B33E2B640AC7958CD5 /* SoundFX.swift */; };
 		734D38F8D37789B01464A0A8 /* start.wav in Resources */ = {isa = PBXBuildFile; fileRef = A809DA6616A886BEB7C7924E /* start.wav */; };
 		76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD5CF06280BE763D95E942 /* DogDetailView.swift */; };
@@ -129,6 +132,7 @@
 		303A4BC365EFDB4E41F534AF /* MyDogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
 		3D1CDBFD7D320C152487C262 /* Rondje.capabilities.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rondje.capabilities.entitlements; sourceTree = "<group>"; };
 		3DD05E7729A1853A5748BF1F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		455C528725BFBCA08FD25266 /* SocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuth.swift; sourceTree = "<group>"; };
 		4D775D41D52CB9BEA5E3FE33 /* select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = select.wav; sourceTree = "<group>"; };
 		4EEFEA994707D9EF187C405F /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		50EA1B62ECCEC400102F6036 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -155,7 +159,7 @@
 		921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeTests.swift; sourceTree = "<group>"; };
 		9444E27E94A2B8808B22C5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9C2B1E42F731544CC1E42AAC /* MembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipView.swift; sourceTree = "<group>"; };
 		9C56C585C3705ACBC5EBC617 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeWidgets.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		AAD11147FF36E602F8684366 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
 		AB627D88D88D1EB0404E149F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkReport.swift; sourceTree = "<group>"; };
+		B31152A3018077A50218B0B0 /* SocialAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthTests.swift; sourceTree = "<group>"; };
 		B400323AA6D6C3D1DF40D5A6 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
 		C04CD2CA2FAAC2B7C5AFCA5D /* breathe-in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "breathe-in.wav"; sourceTree = "<group>"; };
 		C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeApp.swift; sourceTree = "<group>"; };
@@ -177,6 +182,7 @@
 		D19F92B1AB52E54BEE189E52 /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
 		D54FE87577E74A459BC311FD /* RondjeWidgets.free.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.free.entitlements; sourceTree = "<group>"; };
 		E05B78B489C3C4D7955EFF48 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
+		E84B1FFC41C21F6195B618E1 /* SocialSignInButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButtons.swift; sourceTree = "<group>"; };
 		EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F43456FF9403F24AC05FF054 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -259,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */,
+				B31152A3018077A50218B0B0 /* SocialAuthTests.swift */,
 				FC80C3DE0E1BB69AAEE2F57A /* SoundHealthTests.swift */,
 			);
 			path = RondjeTests;
@@ -304,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				2B89ADE16C47AB0E0761B7EF /* AuthView.swift */,
+				E84B1FFC41C21F6195B618E1 /* SocialSignInButtons.swift */,
 				F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */,
 			);
 			path = Auth;
@@ -394,6 +402,7 @@
 				CE38BF1BFD0974FB881BD72B /* Models.swift */,
 				885A8805C0F35865B3C3FD85 /* Push.swift */,
 				F7A13AA036854983EE311380 /* Reminders.swift */,
+				455C528725BFBCA08FD25266 /* SocialAuth.swift */,
 				67D5F7B33E2B640AC7958CD5 /* SoundFX.swift */,
 				26863FB98876ECFB2C52F0FF /* WalkTracker.swift */,
 			);
@@ -605,6 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BE62065632AD4C2F8AE7309 /* RondjeTests.swift in Sources */,
+				5EC6C25F274965F6B282AA41 /* SocialAuthTests.swift in Sources */,
 				4D6F906AA9E5C57E4A01B461 /* SoundHealthTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,6 +663,8 @@
 				30EB45270BACA1438E06CF3F /* RoleView.swift in Sources */,
 				92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */,
 				320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */,
+				234630D5FA9E43FFC3168F9E /* SocialAuth.swift in Sources */,
+				510EEAFA10836E93400A0BBF /* SocialSignInButtons.swift in Sources */,
 				6FE07F407894AD98538D3729 /* SoundFX.swift in Sources */,
 				D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */,
 				31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */,
@@ -766,6 +778,7 @@
 				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
 				RONDJE_BUNDLE_ID = app.rondje.mobile;
 				RONDJE_FEATURE_HEALTH = NO;
+				RONDJE_FEATURE_SOCIAL_LOGIN = NO;
 				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -895,6 +908,7 @@
 				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
 				RONDJE_BUNDLE_ID = app.rondje.mobile;
 				RONDJE_FEATURE_HEALTH = NO;
+				RONDJE_FEATURE_SOCIAL_LOGIN = NO;
 				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;

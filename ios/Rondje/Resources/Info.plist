@@ -35,6 +35,8 @@
 	<string>$(RONDJE_API_BASE_URL)</string>
 	<key>RondjeFeatureHealth</key>
 	<string>$(RONDJE_FEATURE_HEALTH)</string>
+	<key>RondjeFeatureSocialLogin</key>
+	<string>$(RONDJE_FEATURE_SOCIAL_LOGIN)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Zo zie je honden bij jou in de buurt, en tijdens een rondje kan de eigenaar live meekijken. Je precieze plek wordt nooit op je profiel getoond.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
