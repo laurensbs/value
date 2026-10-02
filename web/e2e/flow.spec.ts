@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, request, test } from '@playwright/test'
 import { newPerson, onboard, PNG_1X1, shot, signUp, soonSlot, unique } from './helpers'
 
 test('owner and walker: meet request, accept, trust, live walk with GPS, follow along, private feedback', async ({ browser }) => {
@@ -99,6 +99,18 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page.getByRole('button', { name: 'Gedronken: 1' })).toBeVisible()
   await expect(walker.page.getByRole('button', { name: 'Plas: 2' })).toBeVisible()
 
+  // The native app reaches the same report through the bearer-only JSON API; a cookie alone is refused.
+  const care = `/api/v1/walks/${walkId}/care`
+  expect((await walker.page.request.post(care, { data: { kind: 'poo', delta: 1 } })).status()).toBe(401)
+  const app = await request.newContext({ baseURL: new URL(walker.page.url()).origin }) // no cookies, like the iOS app
+  const signIn = await app.post('/api/auth/sign-in/email', { data: { email: `fleur-${id}@e2e.test`, password: 'wandelen-123' } })
+  const token = signIn.headers()['set-auth-token']
+  expect(token).toBeTruthy()
+  const bearer = { Authorization: `Bearer ${token}` }
+  expect(await (await app.post(care, { data: { kind: 'poo', delta: 1 }, headers: bearer })).json()).toEqual({ pee: 2, poo: 1, water: 1 })
+  expect((await (await app.get(`/api/v1/walks/${walkId}/photos`, { headers: bearer })).json()).photos).toHaveLength(1)
+  await app.dispose()
+
   // --- Owner follows along live ---
   await owner.page.goto(`/follow/${walkId}`)
   await expect(owner.page.getByText(/Je ziet waar Fleur met Bello loopt/)).toBeVisible()
@@ -107,6 +119,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(owner.page.getByRole('link', { name: /Bel Fleur/ })).toBeVisible()
   await expect(owner.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
   await expect(owner.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('2× Plas')
+  await expect(owner.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('1× Poep')
   await shot(owner.page, '09-follow')
   await shot(walker.page, '08-walk')
   await walker.page.getByRole('button', { name: 'Hulp nodig' }).click()

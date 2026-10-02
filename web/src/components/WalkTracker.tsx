@@ -7,7 +7,7 @@ import { endWalk } from '@/server/actions/walks'
 import { Icon } from './Icon'
 import { Map, type MapMarker } from './map'
 import { SosSheet } from './SosSheet'
-import type { CareCounts } from '@/server/actions/walks'
+import type { CareCounts } from '@/server/walks'
 import { WalkCareButtons } from './WalkCare'
 import { WalkPhotoButton, WalkPhotoStrip, type WalkPhoto } from './WalkPhotos'
 

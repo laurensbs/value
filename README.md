@@ -26,6 +26,7 @@ Drie ideeën zijn onderzocht en gescoord: honden + jongeren, een mentale-gezondh
 | [`docs/PARTNERS.md`](docs/PARTNERS.md) | Partners en concept-mails |
 | [`docs/LAUNCH.md`](docs/LAUNCH.md) | **Zo start je**: database claimen, beheerder worden, EU-database, Google/Apple-login, iOS en Android bouwen |
 | [`docs/OUTREACH.md`](docs/OUTREACH.md) en [`docs/SUPPLY.md`](docs/SUPPLY.md) | Opvangen en eigenaren werven: aanpak, mails in drie talen, plan voor 30 dagen |
+| [`ios/README.md`](ios/README.md) | **De native iPhone-app** (SwiftUI): wat hij doet, veiligheid, zelf bouwen |
 | [`docs/legal/REVIEW.md`](docs/legal/REVIEW.md) | Checklist voor de jurist per land; de juridische teksten zelf staan in `web/content/legal/` |
 
 ## Wat het platform doet (`web/`)

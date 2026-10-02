@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { formatWalkDistance, routeLengthM } from '@/lib/geo'
 import { Icon } from './Icon'
 import { Map, type MapMarker } from './map'
-import type { CareCounts } from '@/server/actions/walks'
+import type { CareCounts } from '@/server/walks'
 import { WalkCareTally } from './WalkCare'
 import { WalkPhotoStrip, type WalkPhoto } from './WalkPhotos'
 

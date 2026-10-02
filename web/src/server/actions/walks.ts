@@ -1,114 +1,37 @@
 'use server'
 
-import { asc, count, eq, sql } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
-import { routeLengthM } from '@/lib/geo'
-import { isAllowedPhotoUrl } from '@/lib/photos'
-import { canStartWalk, feedbackNeedsReview, type OwnerFeedback, type WalkerFeedback } from '@/lib/rules'
-import { audit, notify } from '../notify'
+import { feedbackNeedsReview, type OwnerFeedback, type WalkerFeedback } from '@/lib/rules'
+import { audit } from '../notify'
 import { actionViewer } from '../session'
-import { MAX_WALK_PHOTOS, walkAccess, watchers } from '../walks'
+import { addPhoto, beginWalk, finishWalk, logCare, walkAccess, type CareCounts, type CareKind } from '../walks'
 import type { FormState } from './profile'
 
 export async function startWalk(requestId: string): Promise<FormState> {
-  const viewer = await actionViewer()
-  const db = await getDb()
-  const [row] = await db
-    .select({ request: s.walkRequest, dog: s.dog })
-    .from(s.walkRequest)
-    .innerJoin(s.dog, eq(s.dog.id, s.walkRequest.dogId))
-    .where(eq(s.walkRequest.id, requestId))
-  if (!row) return { ok: false, error: 'forbidden' }
-
-  const existing = await db.select().from(s.walk).where(eq(s.walk.requestId, requestId))
-  const active = existing.find((w) => w.status === 'active')
-  if (active) redirect(`/walk/${active.id}`)
-  if (!canStartWalk(row.request, viewer.userId)) return { ok: false, error: 'not-now' }
-
-  const id = crypto.randomUUID()
-  const now = new Date()
-  await db.insert(s.walk).values({
-    id,
-    requestId,
-    dogId: row.dog.id,
-    walkerId: viewer.userId,
-    startedAt: now,
-    plannedEndAt: new Date(now.getTime() + row.request.durationMin * 60_000),
-  })
-  await notify(db, await watchers(row.dog), 'walk-started', { walkId: id, dogName: row.dog.name, walkerName: viewer.profile.firstName })
-  redirect(`/walk/${id}`)
+  const result = await beginWalk(requestId, await actionViewer())
+  if (!result.ok) return result
+  redirect(`/walk/${result.walkId}`)
 }
 
 export async function endWalk(walkId: string): Promise<FormState> {
-  const viewer = await actionViewer()
-  const access = await walkAccess(walkId, viewer)
-  if (!access?.isWalker) return { ok: false, error: 'forbidden' }
-  if (access.walk.status !== 'active') redirect(`/walk/${walkId}`)
-
-  const db = await getDb()
-  const points = await db
-    .select({ lat: s.walkPoint.lat, lng: s.walkPoint.lng })
-    .from(s.walkPoint)
-    .where(eq(s.walkPoint.walkId, walkId))
-    .orderBy(asc(s.walkPoint.id))
-  await db
-    .update(s.walk)
-    .set({ status: 'ended', endedAt: new Date(), distanceM: routeLengthM(points) })
-    .where(eq(s.walk.id, walkId))
-
-  if (access.walk.requestId) {
-    const [request] = await db.select().from(s.walkRequest).where(eq(s.walkRequest.id, access.walk.requestId))
-    if (request?.weekly && request.status === 'accepted') {
-      // A fixed weekly walk rolls on to next week, already accepted.
-      await db
-        .update(s.walkRequest)
-        .set({ startsAt: new Date(request.startsAt.getTime() + 7 * 24 * 60 * 60_000) })
-        .where(eq(s.walkRequest.id, request.id))
-    } else if (request) {
-      await db.update(s.walkRequest).set({ status: 'completed' }).where(eq(s.walkRequest.id, request.id))
-    }
-  }
-  await notify(db, await watchers(access.dog), 'walk-ended', { walkId, dogName: access.dog.name })
+  const result = await finishWalk(walkId, await actionViewer())
+  if (!result.ok) return result
   revalidatePath('/requests')
-  redirect(`/walk/${walkId}?ended=1`)
+  redirect(result.message === 'already-ended' ? `/walk/${walkId}` : `/walk/${walkId}?ended=1`)
 }
 
 /** The walker shares a photo during the walk; the owner sees it on the live page and after the walk. */
 export async function addWalkPhoto(walkId: string, url: string): Promise<FormState> {
-  const viewer = await actionViewer()
-  const access = await walkAccess(walkId, viewer)
-  if (!access?.isWalker) return { ok: false, error: 'forbidden' }
-  if (access.walk.status !== 'active') return { ok: false, error: 'not-now' }
-  if (typeof url !== 'string' || !isAllowedPhotoUrl(url)) return { ok: false, error: 'invalid' }
-  const db = await getDb()
-  const [{ n }] = await db.select({ n: count() }).from(s.walkPhoto).where(eq(s.walkPhoto.walkId, walkId))
-  if (n >= MAX_WALK_PHOTOS) return { ok: false, error: 'too-many' }
-  await db.insert(s.walkPhoto).values({ id: crypto.randomUUID(), walkId, url })
-  // One notification for the first photo; after that the live page shows them as they come.
-  if (n === 0) await notify(db, await watchers(access.dog), 'walk-photo', { walkId, dogName: access.dog.name })
-  return { ok: true }
+  const result = await addPhoto(walkId, await actionViewer(), url)
+  return result.ok ? { ok: true } : result
 }
-
-export type CareKind = 'pee' | 'poo' | 'water'
-export type CareCounts = Record<CareKind, number>
 
 /** The walker logs a pee, a poo or a drink with one tap (or takes one back); the owner sees the tally live. */
 export async function logWalkCare(walkId: string, kind: CareKind, delta: 1 | -1 = 1): Promise<CareCounts | null> {
-  const viewer = await actionViewer()
-  if (!['pee', 'poo', 'water'].includes(kind) || (delta !== 1 && delta !== -1)) return null
-  const access = await walkAccess(walkId, viewer)
-  if (!access?.isWalker || access.walk.status !== 'active') return null
-  const column = s.walk[kind]
-  const db = await getDb()
-  const [row] = await db
-    .update(s.walk)
-    .set({ [kind]: sql`least(greatest(${column} + ${delta}, 0), 20)` })
-    .where(eq(s.walk.id, walkId))
-    .returning({ pee: s.walk.pee, poo: s.walk.poo, water: s.walk.water })
-  return row ?? null
+  return logCare(walkId, await actionViewer(), kind, delta)
 }
 
 export async function submitFeedback(_prev: FormState, form: FormData): Promise<FormState> {

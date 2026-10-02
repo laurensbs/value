@@ -2,7 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 import { useState, useTransition } from 'react'
-import { logWalkCare, type CareCounts, type CareKind } from '@/server/actions/walks'
+import { logWalkCare } from '@/server/actions/walks'
+import type { CareCounts, CareKind } from '@/server/walks'
 
 const KINDS: { kind: CareKind; label: 'carePee' | 'carePoo' | 'careWater' }[] = [
   { kind: 'pee', label: 'carePee' },
