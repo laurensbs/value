@@ -41,7 +41,7 @@ test('support page: monthly support, open about money, and an honest promise abo
   const { context, page } = await newPerson(browser)
   await page.goto('/support')
   await expect(page.getByRole('heading', { name: 'Eerlijk over geld' })).toBeVisible()
-  await expect(page.getByText(/Zodra er afspraken zijn, staat hier precies hoeveel en waarheen/).first()).toBeVisible()
+  await expect(page.getByText(/We geven 10% van alle bijdragen door aan goede doelen/).first()).toBeVisible()
   await expect(page.getByText(/nog geen stichting en geen goed doel met ANBI-status/).first()).toBeVisible()
   await expect(page.getByRole('link', { name: 'Lees waarom →' })).toHaveAttribute('href', '/waarom')
   await expect(page.getByText('Waarom kan ik niet steunen in de app?')).toBeVisible()
