@@ -7,7 +7,7 @@ import * as s from '@/db/schema'
 import { formatWalkDistance } from '@/lib/geo'
 import { bondFor } from '@/lib/progress'
 import { progressFor } from '@/server/progress'
-import { progressJson } from '@/server/progress-json'
+import { levelMoment, progressJson } from '@/server/progress-json'
 import type { OnboardedViewer } from '@/server/session'
 import { walkPhotos, type Walk } from '@/server/walks'
 import { DogPortrait } from './DogPortrait'
@@ -61,20 +61,12 @@ export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId,
   const walksTogether = together?.n ?? 0
   const bond = bondFor(walksTogether)
   const newBond = walksTogether > 1 && bondFor(walksTogether - 1) !== bond
-  const celebrate = progress.levelUp || progress.newAwards.length > 0
   const week = progress.weeklyGoal != null && role === 'walker'
   const distance = formatWalkDistance(walk.distanceM ?? 0, locale)
   // "Goed rondje!" right after ending. A new level or badge comes after it, once the walker moves on
   // (WalkDone shows it then), never on top of it. One party after a walk: LevelUp, with paws, like the app.
   const done = role === 'walker' && justEnded ? justEnded : null
-  const moment: LevelMoment | null = celebrate
-    ? {
-        level: json.level.number,
-        name: json.level.name,
-        levelUp: progress.levelUp,
-        awards: json.newAwards.map((a) => ({ key: a.key, title: a.title, color: a.color })),
-      }
-    : null
+  const moment = levelMoment(progress, json)
 
   return (
     <div className="narrow-page stack-l">

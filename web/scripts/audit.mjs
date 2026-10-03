@@ -79,16 +79,26 @@ async function check(page, path, label, tag = '') {
     const visible = (el) => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && !el.closest('[hidden],nextjs-portal') }
     const name = (el) => (el.getAttribute('aria-label') || el.textContent || el.getAttribute('title') || '').trim().replace(/\s+/g, ' ').slice(0, 40)
     if (mobile) {
+      const measured = new Set()
       for (const el of document.querySelectorAll('a, button, input:not([type=hidden]), select, [role=button], summary')) {
         if (!visible(el)) continue
-        const r = el.getBoundingClientRect()
-        // Inline links inside running text are exempt (WCAG 2.5.8).
-        if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li')) continue
+        // Inline links inside running text are exempt (WCAG 2.5.8), also in a consent sentence next to a box.
+        if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li, label')) continue
         // Map attribution is a legal credit, not a control.
         if (el.closest('.leaflet-control-attribution')) continue
-        if (el.type === 'checkbox' || el.type === 'radio') { if (el.closest('label')) continue }
+        // A radio or checkbox inside a label (a chip, a tick row) is tapped through the whole label: measure that.
+        let target = el
+        if (el.type === 'checkbox' || el.type === 'radio') {
+          const label = el.closest('label')
+          if (label) {
+            if (measured.has(label)) continue
+            measured.add(label)
+            target = label
+          }
+        }
+        const r = target.getBoundingClientRect()
         // Every tap target is at least 44px high (Apple HIG); a wide but low button is still hard to hit.
-        if (r.height < 44) issues.push(`small target ${Math.round(r.width)}x${Math.round(r.height)}: <${el.tagName.toLowerCase()}> "${name(el)}"`)
+        if (r.height < 44) issues.push(`small target ${Math.round(r.width)}x${Math.round(r.height)}: <${target.tagName.toLowerCase()}> "${name(target)}"`)
       }
     }
     for (const el of document.querySelectorAll('input:not([type=hidden]), select, textarea')) {

@@ -381,7 +381,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   const quizParty = walker.page.getByRole('dialog', { name: 'Nieuwe penning!' })
   await expect(quizParty).toBeVisible()
   await expect(quizParty.getByText('Veiligheidsquiz gehaald')).toBeVisible()
-  await quizParty.getByRole('button', { name: 'Top!' }).click()
+  await quizParty.getByRole('button', { name: 'Verder' }).click()
   await expect(walker.page.getByText('1 van 1 rondje').or(walker.page.getByText('Weekdoel gehaald!'))).toBeVisible()
   await shot(walker.page, '11b-today-after-walk')
   await walker.page.goto('/progress')

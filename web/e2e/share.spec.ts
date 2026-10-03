@@ -46,7 +46,7 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
   await owner.page.goto('/')
   // Her first dog and her profile bring her to level 2, celebrated once.
   const party = owner.page.getByRole('dialog', { name: 'Level omhoog!' })
-  await party.getByRole('button', { name: 'Top!' }).click()
+  await party.getByRole('button', { name: 'Verder' }).click()
   await expect(party).toBeHidden()
   const steps = owner.page.getByRole('region', { name: 'Je eerste stappen' })
   await expect(steps).toContainText('Wandelaars in de buurt kunnen Saar nu vinden. Vertel het ook zelf aan je buren, dan gaat het sneller.')

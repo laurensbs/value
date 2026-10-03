@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
-import { Celebration } from '@/components/Celebration'
 import { ChallengeCard } from '@/components/ChallengeCard'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
 import { Medal } from '@/components/Medal'
+import { LevelUp } from '@/components/progress/LevelUp'
 import { WeekCard } from '@/components/WeekCard'
 import { bondFor, KIND_KEYS, LEVEL_KEYS, LEVELS, POINTS, type PointKind } from '@/lib/progress'
 import { challengesFor } from '@/server/challenges'
 import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
-import { progressJson } from '@/server/progress-json'
+import { levelMoment, progressJson } from '@/server/progress-json'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -36,7 +36,7 @@ export default async function ProgressPage() {
   const json = await progressJson(progress)
   const earn = [...new Set([...(walker ? WALKER_EARN : []), ...(owner ? OWNER_EARN : [])])]
   const earned = json.badges.filter((b) => b.tier > 0).length
-  const celebrate = progress.levelUp || progress.newAwards.length > 0
+  const moment = levelMoment(progress, json)
 
   return (
     <div className="progress-page">
@@ -174,13 +174,7 @@ export default async function ProgressPage() {
         )}
       </section>
 
-      {celebrate ? (
-        <Celebration
-          level={json.level.number}
-          levelUp={progress.levelUp ? json.level.name : null}
-          awards={json.newAwards.map((a) => ({ key: a.key, tier: a.tier, icon: a.icon, title: a.title, color: a.color }))}
-        />
-      ) : null}
+      {moment ? <LevelUp celebration={moment} /> : null}
     </div>
   )
 }
