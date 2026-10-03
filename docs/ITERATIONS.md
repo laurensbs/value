@@ -258,6 +258,7 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 - Het chatvak zat achter de zwevende tabbalk.
 - Op een smalle telefoon duwde de kop in het Spaans en Frans de inlogknop van het scherm, en een stap in het welkomstgedeelte maakte de pagina even breder.
 - Oranje waarschuwingstekst had net te weinig contrast (4,49 : 1).
+- Op Vandaag lekten stijlen van de nieuwe startpagina door: de kaart met eerste stappen had geen marge meer, en de tip van de dag stond in donkere letters op donkergroen (2 : 1, bijna onleesbaar). Axe zag dat niet, omdat het contrast op een kleurverloop niet meet.
 
 **Tests:** 293 unit-tests, 15 end-to-endtests op een telefoon en 13 op desktop, een toegankelijkheidsaudit met axe (licht en donker) zonder fouten op 64 pagina's, geen verspringende lay-out op 12 pagina's, en `next build`.
 

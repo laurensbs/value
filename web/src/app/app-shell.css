@@ -331,7 +331,8 @@
   transition: stroke-dashoffset 0.8s ease;
 }
 
-.first-steps {
+/* Scoped to this card: Today has its own steps card (globals.css) with the same class names. */
+.steps-card .first-steps {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -339,14 +340,14 @@
   gap: 12px;
 }
 
-.first-steps li {
+.steps-card .first-steps li {
   display: grid;
   grid-template-columns: 34px 1fr auto;
   align-items: center;
   gap: 12px;
 }
 
-.step-dot {
+.steps-card .step-dot {
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -356,12 +357,12 @@
   color: var(--muted);
 }
 
-.first-steps li.done .step-dot {
+.steps-card .first-steps li.done .step-dot {
   background: var(--grass);
   color: var(--on-grass);
 }
 
-.first-steps li.next .step-dot {
+.steps-card .first-steps li.next .step-dot {
   background: var(--ball);
   color: var(--on-ball);
 }
@@ -373,11 +374,11 @@
   min-width: 0;
 }
 
-.step-title {
+.steps-card .step-title {
   font-weight: 650;
 }
 
-.first-steps li.done .step-title {
+.steps-card .first-steps li.done .step-title {
   color: var(--muted);
   text-decoration: line-through;
   text-decoration-color: var(--muted);
@@ -544,8 +545,8 @@
   font-weight: 700;
 }
 
-/* Tip of the day */
-.tip-card {
+/* Tip of the day. Scoped to the home cards: Today has its own tip card (globals.css) with the same class name. */
+.home-cards .tip-card {
   display: flex;
   align-items: flex-start;
   gap: 14px;
@@ -566,14 +567,14 @@
   color: var(--on-ball);
 }
 
-.tip-card .tip-title {
+.home-cards .tip-card .tip-title {
   font-size: 0.8rem;
   font-weight: 750;
   opacity: 0.82;
   margin-bottom: 3px;
 }
 
-.tip-card p {
+.home-cards .tip-card p {
   font-size: 1rem;
   line-height: 1.45;
 }
