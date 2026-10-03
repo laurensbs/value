@@ -16,8 +16,11 @@ test('hub: only for admins, a step earns points, a mail is filled in and the par
   const manifest = await (await page.request.get('/hub/manifest.webmanifest')).json()
   expect(manifest).toMatchObject({ name: 'Rondje Hub', start_url: '/hub', scope: '/hub' })
 
-  // The launch hub moved into this hub: the admin page and the old address both lead here.
-  await page.goto('/admin')
+  // The launch hub moved into this hub. On a phone the way in is the profile, then Beheer, then Hub;
+  // the old address leads here too.
+  await page.goto('/profile')
+  await page.getByRole('link', { name: /^Beheer .*Rondje Hub/ }).click()
+  await expect(page).toHaveURL(/\/admin$/)
   await page.getByRole('link', { name: /^Hub/ }).click()
   await expect(page).toHaveURL(/\/hub$/)
   await page.goto('/admin/launch')
