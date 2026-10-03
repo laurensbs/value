@@ -28,6 +28,12 @@ struct DogDetailView: View {
         .screenBackground()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
+                ShareLink(item: Brand.share("/dogs/\(dogId)"), message: Text("Wie wil er met \(name) wandelen?")) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .accessibilityLabel("Deel")
+            }
+            ToolbarItem(placement: .topBarTrailing) {
                 Menu {
                     Button("Meld deze hond of eigenaar", systemImage: "exclamationmark.bubble") { reporting = true }
                 } label: {

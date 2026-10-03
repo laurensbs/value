@@ -78,8 +78,8 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
   await next()
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
   await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
-  // Done once Rondje has left onboarding: going elsewhere sooner could cancel the last step.
-  await page.waitForURL((u) => !u.pathname.startsWith('/onboarding'))
+  // Wait until the profile is saved and we left onboarding, so the next step doesn't race the save.
+  await page.waitForURL((url) => !url.pathname.startsWith('/onboarding'))
 }
 
 /** A dog put online in the fewest taps: a name, the suggested walk and town, and the two safety promises. */

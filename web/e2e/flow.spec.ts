@@ -87,7 +87,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // New walkers start on their own home: a welcome, the first steps and the dogs nearby.
   await expect(walker.page).toHaveURL(/\/\?welcome=1$/)
   // With the app's tabs (shown on phones) straight away, not only after a reload.
-  await expect(walker.page.locator('nav[aria-label="App"]')).toBeAttached()
+  await expect(walker.page.locator('nav[aria-label="Hoofdmenu"]')).toBeAttached()
   await expect(walker.page.getByRole('heading', { name: 'Welkom bij Rondje, Fleur!' })).toBeVisible()
   await expect(walker.page.getByRole('link', { name: 'Start' })).toHaveAttribute('href', '/profile/edit')
   await shot(walker.page, '05-today-walker')
@@ -323,14 +323,15 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // --- Walker ends the walk and gives private feedback ---
   await walker.page.getByRole('button', { name: 'Rondje klaar' }).click()
   await walker.page.getByRole('button', { name: 'Ja, rondje klaar' }).click()
-  await expect(walker.page).toHaveURL(/ended=1/)
-  // The first walk: a level up and the first badge, celebrated once.
+  // First the level and badge moment (once), then "Goed rondje!" with the private mood check.
+  // The page drops ?ended=1 from the address straight away, so a reload doesn't replay it.
   const party = walker.page.getByRole('dialog', { name: 'Level omhoog!' })
   await expect(party).toBeVisible()
   await expect(party.getByText('Eerste rondje')).toBeVisible()
   await shot(walker.page, '10a-celebration')
   await party.getByRole('button', { name: 'Top!' }).click()
   await expect(party).toBeHidden()
+  await expect(walker.page.getByRole('heading', { name: 'Goed rondje!' })).toBeVisible()
   await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
   // A walk, the walk report and a photo for the owner.
   await expect(walker.page.getByText('+35 punten')).toBeVisible()

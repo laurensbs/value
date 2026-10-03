@@ -282,24 +282,10 @@ mark {
   right: 0;
   bottom: 0;
   display: grid;
-  /* Four or five tabs, depending on the role: always one row. */
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   background: var(--surface);
   border-top: 1px solid var(--line);
   padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-.tab-label {
-  max-width: 100%;
-  padding: 0 2px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.tabbar:has(> a:nth-child(5)) a {
-  font-size: 0.7rem;
 }
 
 .tabbar a {
@@ -833,9 +819,6 @@ fieldset.field {
 }
 
 .new-sticker {
-  position: absolute;
-  top: 6px;
-  left: 6px;
   padding: 1px 8px;
   border-radius: 999px;
   background: var(--ball);
@@ -846,6 +829,19 @@ fieldset.field {
   transform: rotate(-6deg);
   box-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
   pointer-events: none;
+}
+
+/* On a small portrait (Today's strip) the sticker sits on the photo's corner. */
+.portrait-wrap .new-sticker {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+}
+
+/* On a big dog card it takes the free corner of the row above the photo. */
+.dcard-float .new-sticker {
+  padding: 4px 10px;
+  font-size: 0.78rem;
 }
 
 .dog-card-body {

@@ -1,156 +1,211 @@
 {
-  "sourceLanguage" : "nl",
-  "strings" : {
-    "CFBundleDisplayName" : {
-      "comment" : "Bundle display name",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rondje"
+  "sourceLanguage": "nl",
+  "strings": {
+    "CFBundleDisplayName": {
+      "comment": "Bundle display name",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rondje"
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rondje"
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rondje"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rondje"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rondje"
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Rondje"
+        "nl": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Rondje"
           }
         }
       }
     },
-    "CFBundleName" : {
-      "comment" : "Bundle name",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rondje"
+    "CFBundleName": {
+      "comment": "Bundle name",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rondje"
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rondje"
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rondje"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rondje"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rondje"
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Rondje"
+        "nl": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Rondje"
           }
         }
       }
     },
-    "NSCameraUsageDescription" : {
-      "comment" : "Privacy - Camera Usage Description",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "To send the owner a photo during a walk. Only the photos you send go to the owner."
+    "NSCameraUsageDescription": {
+      "comment": "Privacy - Camera Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To send the owner a photo during a walk. Only the photos you send go to the owner."
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Para enviar una foto al dueño durante un paseo. Solo le llegan las fotos que tú envíes."
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para enviar una foto al dueño durante un paseo. Solo le llegan las fotos que tú envíes."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pour envoyer une photo au propriétaire pendant une balade. Seules les photos que tu envoies lui parviennent."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour envoyer une photo au propriétaire pendant une balade. Seules les photos que tu envoies lui parviennent."
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Om tijdens een rondje een foto naar de eigenaar te sturen. Alleen de foto's die jij verstuurt, gaan naar de eigenaar."
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Om tijdens een rondje een foto naar de eigenaar te sturen. Alleen de foto's die jij verstuurt, gaan naar de eigenaar."
           }
         }
       }
     },
-    "NSLocationAlwaysAndWhenInUseUsageDescription" : {
-      "comment" : "Privacy - Location Always and When In Use Usage Description",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only during a walk: so the route keeps going with your phone in your pocket, and the owner can watch along. It stops as soon as the walk ends."
+    "NSHealthShareUsageDescription": {
+      "comment": "Privacy - Health Share Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app reads nothing from Apple Health. It only saves something there if you turn that on."
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Solo durante un paseo: para que la ruta siga con el móvil en el bolsillo y el dueño pueda seguirla. Se detiene en cuanto termina el paseo."
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app no lee nada de Apple Salud. Solo guarda algo allí si tú lo activas."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uniquement pendant une balade : pour que le parcours continue avec ton téléphone dans la poche et que le propriétaire puisse suivre. Cela s'arrête dès la fin de la balade."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'app ne lit rien dans Apple Santé. Elle n'y enregistre quelque chose que si tu l'actives."
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Alleen tijdens een rondje: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen."
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De app leest niets uit Apple Gezondheid. Hij bewaart er alleen iets in als jij dat aanzet."
           }
         }
       }
     },
-    "NSLocationWhenInUseUsageDescription" : {
-      "comment" : "Privacy - Location When In Use Usage Description",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "So you see dogs near you, and during a walk the owner can watch live. Your exact location is never shown on your profile."
+    "NSHealthUpdateUsageDescription": {
+      "comment": "Privacy - Health Update Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only if you turn it on: your walks are saved as a walk, the breathing minute as mindfulness and, if you like, how you feel after a walk. It stays on this iPhone and never goes to our server."
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Para ver perros cerca de ti, y durante un paseo el dueño puede seguirlo en directo. Tu ubicación exacta nunca aparece en tu perfil."
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo si lo activas: tus paseos se guardan como caminata, el minuto de respiración como mindfulness y, si quieres, cómo te sientes después de un paseo. Se queda en este iPhone y nunca va a nuestro servidor."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pour voir les chiens près de chez toi, et pendant une balade le propriétaire peut suivre en direct. Ta position exacte n'apparaît jamais sur ton profil."
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seulement si tu l'actives : tes balades sont enregistrées comme marche, la minute de respiration comme pleine conscience et, si tu le souhaites, comment tu te sens après une balade. Cela reste sur cet iPhone et ne va jamais sur notre serveur."
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Zo zie je honden bij jou in de buurt, en tijdens een rondje kan de eigenaar live meekijken. Je precieze plek wordt nooit op je profiel getoond."
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen als jij het aanzet: dan worden je rondjes als wandeling bewaard, de ademminuut als mindfulness en, als je wilt, hoe je je na een rondje voelt. Dat blijft op deze iPhone en gaat nooit naar onze server."
+          }
+        }
+      }
+    },
+    "NSLocationAlwaysAndWhenInUseUsageDescription": {
+      "comment": "Privacy - Location Always and When In Use Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only during a walk: so the route keeps going with your phone in your pocket, and the owner can watch along. It stops as soon as the walk ends."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo durante un paseo: para que la ruta siga con el móvil en el bolsillo y el dueño pueda seguirla. Se detiene en cuanto termina el paseo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uniquement pendant une balade : pour que le parcours continue avec ton téléphone dans la poche et que le propriétaire puisse suivre. Cela s'arrête dès la fin de la balade."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen tijdens een rondje: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen."
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription": {
+      "comment": "Privacy - Location When In Use Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So you see dogs near you, and during a walk the owner can watch live. Your exact location is never shown on your profile."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para ver perros cerca de ti, y durante un paseo el dueño puede seguirlo en directo. Tu ubicación exacta nunca aparece en tu perfil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour voir les chiens près de chez toi, et pendant une balade le propriétaire peut suivre en direct. Ta position exacte n'apparaît jamais sur ton profil."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zo zie je honden bij jou in de buurt, en tijdens een rondje kan de eigenaar live meekijken. Je precieze plek wordt nooit op je profiel getoond."
           }
         }
       }
     }
   },
-  "version" : "1.2"
+  "version": "1.2"
 }

@@ -1,10 +1,13 @@
 import 'leaflet/dist/leaflet.css'
 import './globals.css'
+import './app-shell.css'
 import type { Metadata, Viewport } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { isDemoMode } from '@/db'
 import { Footer } from '@/components/Footer'
+import { Analytics } from '@/components/Analytics'
+import { FooterSwitch } from '@/components/shell/FooterSwitch'
 import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
 import { OfflineReady } from '@/components/OfflineReady'
@@ -72,7 +75,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} className={fontVariables}>
       <body>
         <NextIntlClientProvider>
-          <div className={`shell${tabs ? ' has-tabbar' : ''}`}>
+          <div className={`shell${tabs ? ' has-tabbar app-mode' : ''}`}>
             <a href="#main" className="skip-link">
               {t('nav.skip')}
             </a>
@@ -82,11 +85,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <main className="main" id="main">
               {children}
             </main>
-            <Footer />
-            {tabs ? <TabBar tabs={tabs} /> : null}
+            {viewer ? <FooterSwitch full={<Footer />} compact={<Footer compact />} /> : <Footer />}
+            {tabs ? <TabBar tabs={tabs} label={t('shell.tabsLabel')} /> : null}
           </div>
           <OfflineReady lang={locale} />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   )

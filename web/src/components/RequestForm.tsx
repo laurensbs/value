@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { requestBlockKeys } from '@/lib/conversation'
 import { addSentence } from '@/lib/sentences'
+import { playSound } from '@/lib/sounds'
 import { useForm } from '@/lib/use-form'
 import { createRequest } from '@/server/actions/requests'
 import type { FormState } from '@/server/actions/profile'
@@ -47,6 +48,11 @@ export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason
   const sentences = requestBlockKeys(kind)
     .map((key) => t(`blocks.${key}`, { dog: dogName, name: walkerName }))
     .filter((sentence) => !message.includes(sentence))
+  // A soft "send" when the request is on its way, a soft "error" when it is not.
+  useEffect(() => {
+    if (state.ok) playSound('send')
+    else if (state.error) playSound('error')
+  }, [state])
 
   function add(sentence: string) {
     setMessage((text) => {

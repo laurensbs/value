@@ -1,10 +1,14 @@
+import '../progress.css'
 import { count, eq } from 'drizzle-orm'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, RemindersToggle, SignOutButton } from '@/components/ProfileTools'
+import { LevelCard } from '@/components/progress/LevelCard'
+import { ProgressIcon, type ProgressIconName } from '@/components/progress/ProgressIcon'
 import { PushToggle } from '@/components/PushToggle'
+import { SoundToggle } from '@/components/SoundToggle'
 import { WalkerCard } from '@/components/WalkerCard'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
@@ -13,13 +17,35 @@ import { inviteUrl } from '@/lib/invite'
 import { siteUrl } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
 import { progressFor } from '@/server/progress'
+import { progressJson } from '@/server/progress-json'
 import { webPushKey } from '@/server/push'
 import { trustSignals } from '@/server/queries'
 import { requireOnboarded } from '@/server/session'
+import { dogFriendsOf } from './friends/dog-friends'
 
 export async function generateMetadata() {
   const t = await getTranslations('profile')
   return { title: t('title') }
+}
+
+/** A row in the app-style lists on the profile: icon, title, one line of context, chevron. */
+function HubRow({ href, icon, title, text, tone }: { href: string; icon: ProgressIconName; title: string; text: string; tone?: 'warn' | 'calm' | 'ball' }) {
+  return (
+    <li>
+      <Link href={href} className="hub-row">
+        <span className={`hub-icon${tone ? ` ${tone}` : ''}`} aria-hidden="true">
+          <ProgressIcon name={icon} size={20} />
+        </span>
+        <span className="hub-row-text">
+          <strong>{title}</strong>
+          <span>{text}</span>
+        </span>
+        <span className="hub-chevron" aria-hidden="true">
+          <ProgressIcon name="chevron" size={18} />
+        </span>
+      </Link>
+    </li>
+  )
 }
 
 export default async function ProfilePage() {
@@ -27,19 +53,20 @@ export default async function ProfilePage() {
   const pushKey = webPushKey()
   const p = viewer.profile
   const db = await getDb()
-  const [native, t, locale, signals, [{ n: invited }], progress] = await Promise.all([
+  const [native, t, locale, signals, progress, friends, [{ n: invited }]] = await Promise.all([
     isNativeRequest(),
     getTranslations(),
     getLocale() as Promise<Locale>,
     trustSignals(viewer.userId),
-    p.referralCode ? db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode)) : [{ n: 0 }],
-    progressFor(viewer),
+    progressFor(viewer).then(progressJson),
+    dogFriendsOf(viewer.userId),
+    p.referralCode ? db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode)) : Promise.resolve([{ n: 0 }]),
   ])
   const invite = inviteUrl(siteUrl(), p.referralCode ?? '')
-  const level = progress.level
+  const walksTogether = friends.reduce((n, f) => n + f.walks, 0)
 
   return (
-    <div className="narrow-page stack-l">
+    <div className="narrow-page stack-l profile-hub">
       <header className="spread">
         <h1>{t('profile.title')}</h1>
         <Link href="/profile/edit" className="button secondary small">
@@ -47,94 +74,64 @@ export default async function ProfilePage() {
         </Link>
       </header>
 
-      <Link href="/progress" className="card progress-card">
-        <span className="level-badge" style={{ '--p': level.progress } as React.CSSProperties} aria-hidden="true">
-          {level.level}
-        </span>
-        <span className="stack-s">
-          <strong>{t('profile.progressTitle')}</strong>
-          <span className="muted small">
-            {t('progress.levelN', { n: level.level })} · {t(`progress.levels.${level.key}`)} · {t('progress.points', { n: progress.points })}
-          </span>
-        </span>
-        <Icon name="arrow" size={20} />
-      </Link>
-
-      <section className="stack-s">
-        <h2 className="eyebrow">{t('profile.public')}</h2>
-        <div className="card">
-          <WalkerCard walker={p} signals={signals} />
-        </div>
-      </section>
-
-      <section className="card stack-s">
-        <div className="spread">
-          <h2>{t('profile.quiz')}</h2>
-          {p.quizPassedAt ? <span className="pill green">{t('profile.quizDone')}</span> : null}
-        </div>
-        {p.quizPassedAt ? null : (
-          <>
-            <p className="muted">{t('profile.quizTodo')}</p>
-            <div>
-              <Link href="/profile/quiz" className="button primary small">
-                {t('profile.quizStart')}
-              </Link>
-            </div>
-          </>
-        )}
-      </section>
-
-      <section id="invite" className="card stack-s invite-card">
-        <h2>{t('profile.invite')}</h2>
-        <p>{t('profile.inviteText')}</p>
-        <InviteLink url={invite} message={t('profile.inviteMessage', { url: invite })} />
-        <p className="muted small">{t('profile.invited', { n: invited })}</p>
-        <div>
-          <Link href="/flyer" className="link-button small">
-            {t('profile.flyer')} →
-          </Link>
-        </div>
-      </section>
-
-      {native ? null : (
-        <section className="card flat stack-s">
-          <h2>{t('profile.supportTitle')}</h2>
-          <p className="muted">{t('profile.supportText')}</p>
-          <div>
-            <Link href="/support" className="button ghost small">
-              <Icon name="heart" size={16} /> {t('support.title')}
-            </Link>
+      <section className="stack" aria-label={t('profile.public')}>
+        <div className="stack-s">
+          <h2 className="eyebrow">{t('profile.public')}</h2>
+          <div className="card">
+            <WalkerCard walker={p} signals={signals} />
           </div>
-        </section>
-      )}
-
-      <section className="card flat stack-s">
-        <h2>{t('profile.tipTitle')}</h2>
-        <p className="muted">{t('profile.tipText')}</p>
-        <div className="row">
-          <Link href="/suggest?kind=shelter" className="button ghost small">
-            <Icon name="heart" size={16} /> {t('suggest.tabs.shelter')}
-          </Link>
-          <Link href="/suggest?kind=owner" className="button ghost small">
-            <Icon name="home" size={16} /> {t('suggest.tabs.owner')}
-          </Link>
         </div>
+        <LevelCard progress={progress} link />
+        <ul className="hub-list">
+          {progress.roles.walker || friends.length ? (
+            <HubRow
+              href="/progress#friends-title"
+              icon="book"
+              title={t('profileHub.friendsTitle')}
+              text={friends.length ? t('profileHub.friendsCount', { dogs: friends.length, walks: walksTogether }) : t('profileHub.friendsEmpty')}
+              tone="ball"
+            />
+          ) : null}
+          <HubRow href="/breathe" icon="breathe" title={t('profileHub.breatheTitle')} text={t('profileHub.breatheText')} tone="calm" />
+          <HubRow
+            href="/profile/quiz"
+            icon="shield"
+            title={t('profile.quiz')}
+            text={p.quizPassedAt ? t('profile.quizDone') : t('profileHub.quizTodo')}
+            tone={p.quizPassedAt ? undefined : 'warn'}
+          />
+        </ul>
       </section>
 
-      {viewer.orgs.length === 0 ? (
-        <section className="card flat stack-s">
-          <h2>{t('shelter.title')}</h2>
-          <p className="muted">{t('profile.shelterCta')}</p>
-          <div>
-            <Link href="/shelter" className="button ghost small">
-              <Icon name="building" size={16} /> {t('shelter.create')}
-            </Link>
+      <section className="stack" aria-labelledby="more-title">
+        <h2 id="more-title">{t('profileHub.moreTitle')}</h2>
+        <div id="invite" className="card stack-s more-invite">
+          <div className="hub-row-head">
+            <span className="hub-icon ball" aria-hidden="true">
+              <ProgressIcon name="share" size={20} />
+            </span>
+            <span className="hub-row-text">
+              <strong>{t('profile.invite')}</strong>
+              <span>{t('profileHub.inviteShort')}</span>
+            </span>
           </div>
-        </section>
-      ) : null}
+          <InviteLink url={invite} message={t('profile.inviteMessage', { url: invite })} />
+          <p className="muted small">
+            {t('profile.invited', { n: invited })}{' '}
+            <Link href="/flyer" className="link-button small">
+              {t('profile.flyer')} →
+            </Link>
+          </p>
+        </div>
+        <ul className="hub-list">
+          {native ? null : <HubRow href="/support" icon="heart" title={t('profile.supportTitle')} text={t('profileHub.supportText')} />}
+          <HubRow href="/suggest" icon="sparkle" title={t('profile.tipTitle')} text={t('profileHub.tipText')} />
+          {viewer.orgs.length === 0 ? <HubRow href="/shelter" icon="building" title={t('shelter.title')} text={t('profileHub.shelterText')} /> : null}
+        </ul>
+      </section>
 
-      <section className="stack">
-        <h2>{t('profile.settings')}</h2>
+      <section className="stack" aria-labelledby="settings-title">
+        <h2 id="settings-title">{t('profile.settings')}</h2>
         <div className="card stack">
           <div className="spread">
             <strong>{t('profile.language')}</strong>
@@ -145,16 +142,17 @@ export default async function ProfilePage() {
             <PasskeyButton />
           </div>
           <div className="stack-s">
-            <strong>{t('profile.alerts')}</strong>
+            <strong>{t('profileHub.alerts')}</strong>
             <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
             {pushKey ? <PushToggle publicKey={pushKey} /> : null}
             <RemindersToggle on={viewer.profile.reminders} />
+            <SoundToggle />
           </div>
         </div>
       </section>
 
-      <section className="stack">
-        <h2>{t('profile.privacy')}</h2>
+      <section className="stack" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">{t('profile.privacy')}</h2>
         <div className="card stack">
           <p className="muted small">{t('profile.privacyText')}</p>
           <div className="row">

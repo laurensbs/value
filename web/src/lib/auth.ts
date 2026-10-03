@@ -5,6 +5,7 @@ import { bearer } from 'better-auth/plugins/bearer'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { nextCookies } from 'better-auth/next-js'
 import { eq } from 'drizzle-orm'
+import { nativeHandoff } from '@/app/api/auth/native/handoff'
 import { db } from '@/db'
 import * as schema from '@/db/schema'
 import { passwordResetEmail, sendEmail, toLocale, verifyEmail } from '@/server/email'
@@ -41,6 +42,12 @@ async function localeOf(userId: string) {
 
 export const enabledSocialProviders = [...Object.keys(google), ...Object.keys(apple)] as ('google' | 'apple')[]
 
+/**
+ * The iPhone app can use the system "Sign in with Apple" sheet: it posts Apple's identity token to
+ * /api/auth/sign-in/social. Better Auth then checks the token's audience against the bundle id.
+ */
+export const appleNativeEnabled = Boolean(Object.keys(apple).length && process.env.APPLE_APP_BUNDLE_ID)
+
 export const auth = betterAuth({
   appName: 'Rondje',
   baseURL,
@@ -74,7 +81,18 @@ export const auth = betterAuth({
     },
   },
   socialProviders: { ...google, ...apple },
-  account: { accountLinking: { enabled: true, trustedProviders: ['google', 'apple'] } },
+  account: {
+    // One person, one account: signing in with Google or Apple joins the existing account with the
+    // same e-mail address. Better Auth only does that on its own when both sides have proven the
+    // address: Google/Apple say it is verified (no "trustedProviders", so an unverified Google
+    // address can never take over an account) and the existing account is verified too (accounts
+    // made through Google/Apple are). Accounts made with e-mail + password only are once a link in
+    // their inbox was used (a password reset, or the admin confirmation on /admin); until then,
+    // /login asks for the password once and then links the provider (linkSocial), and the app does
+    // the same with /api/auth/link-social. Otherwise anyone could register someone else's address
+    // with a password first and wait for them to arrive.
+    accountLinking: { enabled: true },
+  },
   user: {
     additionalFields: {
       role: { type: 'string', defaultValue: 'user', input: false },
@@ -93,6 +111,8 @@ export const auth = betterAuth({
     // The native iOS app signs in with email and password and keeps the session token in the
     // Keychain; it sends it as "Authorization: Bearer …" instead of a cookie (src/server/api.ts).
     bearer({ requireSignature: true }),
+    // Google/Apple for the native app without SDKs: /api/auth/native/{start,finish,exchange}.
+    nativeHandoff(),
     nextCookies(),
   ],
 })

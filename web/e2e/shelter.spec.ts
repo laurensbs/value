@@ -27,7 +27,7 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   const shelterPath = new URL(staff.page.url()).pathname
   const orgId = shelterPath.split('/').pop()!
   // The tabs now lead to the shelter.
-  await expect(staff.page.locator(`nav[aria-label="App"] a[href="${shelterPath}"]`)).toBeAttached()
+  await expect(staff.page.locator(`nav[aria-label="Hoofdmenu"] a[href="${shelterPath}"]`)).toBeAttached()
 
   // --- Bulk import from the downloadable template ---
   await staff.page.getByLabel('Of plak de inhoud hier').fill(readFileSync('public/rondje-honden-voorbeeld.csv', 'utf8'))

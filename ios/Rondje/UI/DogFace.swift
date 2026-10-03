@@ -16,6 +16,13 @@ struct DogFace: View {
         .accessibilityHidden(true)
     }
 
+    /// True for coats so dark that black eyes would vanish into them.
+    nonisolated static func isDark(_ css: String) -> Bool {
+        guard css.hasPrefix("#"), let v = UInt32(css.dropFirst(), radix: 16) else { return false }
+        let r = Double((v >> 16) & 0xFF), g = Double((v >> 8) & 0xFF), b = Double(v & 0xFF)
+        return (0.299 * r + 0.587 * g + 0.114 * b) < 80
+    }
+
     private struct Head { let rx, ry, cy, mcy, mrx, mry: CGFloat }
 
     private var headShape: Head {
@@ -89,6 +96,11 @@ struct DogFace: View {
             lids.move(to: CGPoint(x: 60 + eyeDx - 4, y: eyeY)); lids.addLine(to: CGPoint(x: 60 + eyeDx + 4, y: eyeY))
             ctx.stroke(lids, with: .color(ink), style: StrokeStyle(lineWidth: 2.4, lineCap: .round))
         } else {
+            if Self.isDark(look.fur) {
+                // On a dark coat the eyes need a light rim, or they disappear.
+                ctx.fill(ellipse(60 - eyeDx, eyeY, 5.8, 5.8), with: .color(Color(hex: 0x8A7D78)))
+                ctx.fill(ellipse(60 + eyeDx, eyeY, 5.8, 5.8), with: .color(Color(hex: 0x8A7D78)))
+            }
             ctx.fill(ellipse(60 - eyeDx, eyeY, 4.3, 4.3), with: .color(ink))
             ctx.fill(ellipse(60 + eyeDx, eyeY, 4.3, 4.3), with: .color(ink))
             ctx.fill(ellipse(60 - eyeDx + 1.5, eyeY - 1.4, 1.4, 1.4), with: .color(.white))
