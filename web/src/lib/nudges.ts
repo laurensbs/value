@@ -3,14 +3,16 @@
 // The rules (docs/DECISIONS.md, decision 7):
 // - At most one reminder every few days, whatever the reason.
 // - Only about things the person chose or started: their first steps, their weekly goal, their
-//   town's challenge, walks they did before, a dog they put on Rondje.
+//   town's challenge, walks they did before, a dog they put on Rondje, and for walkers a dog that
+//   just came online near them (each dog once).
 // - Ignoring them costs nothing, and the text never pretends otherwise (no "you'll lose", no sad dog).
 // - Each kind stops by itself: a few first-step reminders, two "come back" reminders after a walk.
 // - One switch in the profile (and in the app) turns them all off.
 
+import { distanceM } from './geo'
 import { localParts, weekOf, type Roles } from './progress'
 
-export const NUDGE_KINDS = ['nudge-step', 'nudge-week', 'nudge-challenge', 'challenge-done', 'nudge-back', 'nudge-owner'] as const
+export const NUDGE_KINDS = ['nudge-step', 'nudge-week', 'nudge-challenge', 'challenge-done', 'nudge-new-dog', 'nudge-back', 'nudge-owner'] as const
 export type NudgeKind = (typeof NUDGE_KINDS)[number]
 
 export function isNudgeKind(kind: string): kind is NudgeKind {
@@ -25,13 +27,16 @@ export const STEP_NUDGE_MAX = 3
 /** "Zin in een rondje?" after this many quiet days, at most twice until the next walk. */
 export const BACK_AFTER_DAYS = 14
 export const BACK_MAX = 2
+/** A dog is new for this many days after it came online, and near within this distance. */
+export const NEW_DOG_DAYS = 7
+export const NEW_DOG_KM = 5
 
 export type NudgeStep = 'about' | 'dog' | 'quiz' | 'meet'
 
 export interface SentNudge {
   kind: string
   at: Date
-  data: { step?: string; tip?: string }
+  data: { step?: string; tip?: string; dogId?: string }
 }
 
 export interface NudgeFacts {
@@ -52,10 +57,65 @@ export interface NudgeFacts {
   challenge: { city: string; goal: number; walks: number; mine: number; done: boolean } | null
   /** The dog this walker walked most, if it can still be walked. */
   favouriteDog: { id: string; name: string } | null
+  /** Dogs of other owners that came online near this walker lately and that they have not asked about, nearest first. */
+  newDogs: { id: string; name: string }[]
   /** An owner's dog that has been on Rondje for a while without a single request. */
   quietDog: { id: string; name: string; since: Date; photos: number; slots: number } | null
   /** Reminders sent before. */
   sent: SentNudge[]
+}
+
+/** A private owner's dog that came online in the last NEW_DOG_DAYS days (server/nudges.ts). */
+export interface NewDog {
+  id: string
+  name: string
+  ownerId: string
+  country: string
+  /** citySlug of its town. */
+  town: string
+  lat: number | null
+  lng: number | null
+  ppp: boolean
+}
+
+/** A dog counts as new on Rondje for NEW_DOG_DAYS: in the reminder and as a sticker on its card. */
+export function isNewDog(dog: { createdAt: Date; isDemo: boolean }, now: Date): boolean {
+  return !dog.isDemo && now.getTime() - dog.createdAt.getTime() < NEW_DOG_DAYS * DAY
+}
+
+/** Where a walker lives, as far as Rondje knows. */
+export interface WalkerPlace {
+  userId: string
+  country: string
+  /** citySlug of their town. */
+  town: string
+  lat: number | null
+  lng: number | null
+  pppLicense: boolean
+}
+
+/**
+ * The new dogs near a walker, nearest first: within NEW_DOG_KM, or in the same town when one of
+ * them has no location. Never their own dogs, dogs they already asked about, owners they blocked
+ * or who blocked them, or a dog they could not ask about (a PPP dog in Spain without the licence).
+ */
+export function newDogsNear(
+  w: WalkerPlace,
+  dogs: NewDog[],
+  skip: { asked: ReadonlySet<string>; blocked: ReadonlySet<string> },
+): { id: string; name: string }[] {
+  const near: { dog: NewDog; m: number }[] = []
+  for (const dog of dogs) {
+    if (dog.ownerId === w.userId || skip.asked.has(dog.id) || skip.blocked.has(dog.ownerId)) continue
+    if (dog.country === 'ES' && dog.ppp && !w.pppLicense) continue
+    if (w.lat != null && w.lng != null && dog.lat != null && dog.lng != null) {
+      const m = distanceM({ lat: w.lat, lng: w.lng }, { lat: dog.lat, lng: dog.lng })
+      if (m <= NEW_DOG_KM * 1000) near.push({ dog, m })
+    } else if (w.town && dog.town === w.town && dog.country === w.country) {
+      near.push({ dog, m: NEW_DOG_KM * 1000 })
+    }
+  }
+  return near.sort((a, b) => a.m - b.m).map(({ dog }) => ({ id: dog.id, name: dog.name }))
 }
 
 export interface Nudge {
@@ -124,6 +184,14 @@ export function pickNudge(f: NudgeFacts, now: Date): Nudge | null {
     if (left > 0 && left <= daysLeft && !sentOf('nudge-week').some((s) => weekOf(s.at) === weekOf(now))) {
       return { kind: 'nudge-week', data: { left, goal: f.weeklyGoal } }
     }
+  }
+
+  // A dog that just came online nearby: each dog once, and at most one such message a week.
+  if (f.roles.walker && f.newDogs.length) {
+    const told = sentOf('nudge-new-dog')
+    const toldDogs = new Set(told.map((s) => s.data.dogId))
+    const dog = f.newDogs.find((d) => !toldDogs.has(d.id))
+    if (dog && told.every((s) => daysSince(s.at) >= 7)) return { kind: 'nudge-new-dog', data: { dogId: dog.id, dogName: dog.name } }
   }
 
   // Quiet for two weeks with nothing planned: an invitation, twice at most until the next walk.

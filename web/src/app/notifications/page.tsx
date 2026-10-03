@@ -31,6 +31,7 @@ const ICONS: Record<string, IconName> = {
   'nudge-week': 'calendar',
   'nudge-challenge': 'trophy',
   'challenge-done': 'trophy',
+  'nudge-new-dog': 'paw',
   'nudge-back': 'paw',
   'nudge-owner': 'home',
 }

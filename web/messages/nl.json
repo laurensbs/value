@@ -331,7 +331,8 @@
       "own": "Neem geen eigen koekjes mee: de opvang heeft ze.",
       "no": "Liever geen koekjes geven."
     },
-    "tipShelter": "Tip een opvang"
+    "tipShelter": "Tip een opvang",
+    "new": "Nieuw"
   },
   "dog": {
     "story": "Over {name}",
@@ -732,7 +733,7 @@
     "weeklyGoalHint": "Hoe vaak wil je een rondje lopen? Een week overslaan mag altijd.",
     "alerts": "Meldingen",
     "reminders": "Vriendelijke herinneringen",
-    "remindersHint": "Over je eerste stappen, je weekdoel en de uitdaging in je stad. Hooguit één per paar dagen, als pushmelding of anders per e-mail.",
+    "remindersHint": "Over je eerste stappen, je weekdoel, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per paar dagen, als pushmelding of anders per e-mail.",
     "pushIos": "Seintjes op je iPhone? Die werken zodra Rondje op je beginscherm staat:",
     "pushIosInApp": "Seintjes op je iPhone? Open Rondje eerst in Safari en zet het daar op je beginscherm."
   },
@@ -1046,7 +1047,8 @@
       "nudge-back": "{variant, select, dog {Zin in een rondje met {dogName}? Plan het wanneer het jou uitkomt.} other {Zin in een rondje? Kijk welke honden er bij jou in de buurt een wandelmaatje zoeken.}}",
       "nudge-owner": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Voeg je er een toe?} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}",
       "request-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} other {rondje met {dogName}}}. Veel plezier!",
-      "group-walk-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}. Veel plezier!"
+      "group-walk-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}. Veel plezier!",
+      "nudge-new-dog": "Nieuw bij jou in de buurt: {dogName} zoekt een wandelmaatje."
     }
   },
   "admin": {
@@ -1509,6 +1511,10 @@
       "group-walk-reminder": {
         "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}",
         "body": "Waar jullie verzamelen staat in Rondje, bij de groepswandelingen. Kun je toch niet? Meld je dan af, dan komt je plek vrij voor een ander."
+      },
+      "nudge-new-dog": {
+        "subject": "{dogName} zoekt een wandelmaatje bij jou in de buurt",
+        "body": "{dogName} staat sinds kort op Rondje, niet ver van jou. Kijk of jullie bij elkaar passen en plan een kennismaking wanneer het jou uitkomt."
       }
     },
     "reminderFooter": "Je krijgt deze herinnering omdat herinneringen aanstaan in je profiel. We sturen er hooguit één per paar dagen. Uitzetten kan in je profiel, onder Instellingen.",

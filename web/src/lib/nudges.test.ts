@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { pickNudge, type NudgeFacts, type SentNudge } from './nudges'
+import { isNewDog, newDogsNear, pickNudge, type NewDog, type NudgeFacts, type SentNudge } from './nudges'
 
 // The daily run is at 07:30 UTC (09:30 in Amsterdam). 1 October 2026 is a Thursday.
 const at = (date: string) => new Date(`${date}T07:30:00Z`)
@@ -20,6 +20,7 @@ function facts(over: Partial<NudgeFacts> = {}): NudgeFacts {
     steps: { about: true, dog: true, quiz: true, meet: true },
     challenge: null,
     favouriteDog: null,
+    newDogs: [],
     quietDog: null,
     sent: [],
     ...over,
@@ -131,6 +132,72 @@ describe('coming back', () => {
     expect(pickNudge({ ...f, sent: twice }, at('2026-12-01'))).toBeNull()
     // A new walk starts the count again.
     expect(pickNudge({ ...f, sent: twice, lastWalkAt: at('2026-11-10') }, at('2026-12-01'))?.kind).toBe('nudge-back')
+  })
+})
+
+describe('a new dog nearby', () => {
+  const bello = { id: 'bello', name: 'Bello' }
+  const max = { id: 'max', name: 'Max' }
+  const f = facts({ walks: 2, lastWalkAt: at('2026-10-01'), newDogs: [bello, max] })
+
+  it('tells walkers about the nearest new dog, each dog once', () => {
+    expect(pickNudge(f, at('2026-10-06'))).toEqual({ kind: 'nudge-new-dog', data: { dogId: 'bello', dogName: 'Bello' } })
+    const told = [sent('nudge-new-dog', '2026-10-06', { dogId: 'bello' })]
+    expect(pickNudge({ ...f, newDogs: [bello], sent: told }, at('2026-10-13'))).toBeNull()
+    expect(pickNudge({ ...f, sent: told }, at('2026-10-13'))?.data).toEqual({ dogId: 'max', dogName: 'Max' })
+  })
+
+  it('at most once a week, and not to owners who do not walk', () => {
+    const told = [sent('nudge-new-dog', '2026-10-06', { dogId: 'bello' })]
+    expect(pickNudge({ ...f, sent: told }, at('2026-10-12'))).toBeNull()
+    expect(pickNudge({ ...f, roles: owner }, at('2026-10-06'))).toBeNull()
+  })
+
+  it('comes after the weekly goal and before the invitation to come back', () => {
+    const week = { ...f, weeklyGoal: 2 }
+    expect(pickNudge(week, at('2026-10-08'))?.kind).toBe('nudge-week')
+    expect(pickNudge({ ...f, lastWalkAt: at('2026-09-01') }, at('2026-10-06'))?.kind).toBe('nudge-new-dog')
+  })
+})
+
+describe('a new dog', () => {
+  it('is new for a week after it came online, and an example dog never is', () => {
+    const dog = { createdAt: at('2026-10-01'), isDemo: false }
+    expect(isNewDog(dog, at('2026-10-07'))).toBe(true)
+    expect(isNewDog(dog, at('2026-10-08'))).toBe(false)
+    expect(isNewDog({ ...dog, isDemo: true }, at('2026-10-02'))).toBe(false)
+  })
+})
+
+describe('which new dogs are near', () => {
+  const utrecht = { lat: 52.09, lng: 5.12 }
+  const walker = { userId: 'w', country: 'NL', town: 'utrecht', ...utrecht, pppLicense: false }
+  const dog = (id: string, over: Partial<NewDog> = {}): NewDog => ({ id, name: id, ownerId: `o-${id}`, country: 'NL', town: 'utrecht', ...utrecht, ppp: false, ...over })
+  const none = { asked: new Set<string>(), blocked: new Set<string>() }
+  const ids = (dogs: { id: string }[]) => dogs.map((d) => d.id)
+
+  it('keeps dogs within 5 km, nearest first', () => {
+    // 0.01° latitude is about 1.1 km.
+    const dogs = [dog('far', { lat: 52.15 }), dog('near', { lat: 52.1 }), dog('here'), dog('amersfoort', { lat: 52.16, lng: 5.39, town: 'amersfoort' })]
+    expect(ids(newDogsNear(walker, dogs, none))).toEqual(['here', 'near'])
+  })
+
+  it('uses the town when a location is missing', () => {
+    const dogs = [dog('town', { lat: null, lng: null }), dog('other', { lat: null, lng: null, town: 'zeist' }), dog('es', { lat: null, lng: null, country: 'ES' })]
+    expect(ids(newDogsNear(walker, dogs, none))).toEqual(['town'])
+    expect(ids(newDogsNear({ ...walker, lat: null, lng: null }, [dog('here'), dog('zeist', { town: 'zeist' })], none))).toEqual(['here'])
+  })
+
+  it('leaves out their own dogs, dogs they asked about and blocked owners', () => {
+    const dogs = [dog('own', { ownerId: 'w' }), dog('asked'), dog('blocked'), dog('free')]
+    expect(ids(newDogsNear(walker, dogs, { asked: new Set(['asked']), blocked: new Set(['o-blocked']) }))).toEqual(['free'])
+  })
+
+  it('needs the licence for a PPP dog in Spain', () => {
+    const spain = { ...walker, country: 'ES' }
+    const dogs = [dog('ppp', { country: 'ES', ppp: true })]
+    expect(newDogsNear(spain, dogs, none)).toEqual([])
+    expect(ids(newDogsNear({ ...spain, pppLicense: true }, dogs, none))).toEqual(['ppp'])
   })
 })
 

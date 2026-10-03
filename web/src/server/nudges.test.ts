@@ -1,4 +1,5 @@
 import { PGlite } from '@electric-sql/pglite'
+import { eq } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/pglite'
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 import migrations from '@/db/migrations.json'
@@ -93,6 +94,20 @@ describe('sendNudges', () => {
   it('sends nothing more for a few days', async () => {
     const again = await sendNudges(new Date('2026-10-09T07:30:00Z'))
     expect(again.sent).toEqual({})
+  })
+
+  it('tells walkers once about a new dog in their town, unless they blocked its owner', async () => {
+    await client.exec(`
+      insert into dog (id, owner_id, name, country, city, created_at) values
+        ('luna', 'ans', 'Luna', 'NL', 'Utrecht', '2026-10-10 09:00'),
+        ('verre', 'ans', 'Verre', 'NL', 'Groningen', '2026-10-10 09:00');
+      insert into block (blocker_id, blocked_id) values ('tom', 'ans');
+    `)
+    const run = await sendNudges(new Date('2026-10-13T07:30:00Z'))
+    expect(run.sent).toEqual({ 'nudge-step': 1, 'nudge-new-dog': 1 })
+    const told = await db.select().from(schema.notification).where(eq(schema.notification.kind, 'nudge-new-dog'))
+    expect(told).toMatchObject([{ userId: 'fleur', data: { dogId: 'luna', dogName: 'Luna' } }])
+    expect((await sendNudges(new Date('2026-10-20T07:30:00Z'))).sent['nudge-new-dog']).toBeUndefined()
   })
 
   it('never at night', async () => {

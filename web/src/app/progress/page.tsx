@@ -107,7 +107,7 @@ export default async function ProgressPage() {
               {friends.map((f) => (
                 <li key={f.dog.id}>
                   <Link href={`/dogs/${f.dog.id}`} className="friend">
-                    <DogPortrait dog={f.dog} size={64} />
+                    <DogPortrait dog={f.dog} size={64} decorative />
                     <span className="stack-s">
                       <strong>{f.dog.name}</strong>
                       <span className={`pill ${bondFor(f.walks) === 'best' ? 'ball' : 'green'}`}>{t(`friends.bond.${bondFor(f.walks)}`)}</span>

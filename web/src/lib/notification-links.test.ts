@@ -41,6 +41,7 @@ describe('reminders', () => {
     ['challenge-done', { city: 'Utrecht', goal: 50, mine: 3 }],
     ['nudge-back', { variant: 'dog', dogId: 'b1', dogName: 'Bello' }],
     ['nudge-back', { variant: 'any' }],
+    ['nudge-new-dog', { dogId: 'b1', dogName: 'Bello' }],
     ['nudge-owner', { tip: 'photo', dogId: 'm1', dogName: 'Max' }],
     ['nudge-owner', { tip: 'slots', dogId: 'm1', dogName: 'Max' }],
     ['nudge-owner', { tip: 'share', dogId: 'm1', dogName: 'Max' }],
@@ -67,6 +68,8 @@ describe('reminders', () => {
       }
       expect(t('kinds.nudge-week', notificationValues({ left: 2 })), locale).toContain('2')
       expect(t('kinds.nudge-back', notificationValues({ variant: 'dog', dogName: 'Bello' })), locale).toContain('Bello')
+      expect(t('kinds.nudge-new-dog', notificationValues({ dogName: 'Bello' })), locale).toContain('Bello')
+      expect(e('kinds.nudge-new-dog.subject', notificationValues({ dogName: 'Bello' })), locale).toContain('Bello')
       expect(t('kinds.nudge-step', notificationValues({ step: 'about', role: 'owner' })), locale).not.toEqual(t('kinds.nudge-step', notificationValues({ step: 'about' })))
     }
   })
@@ -78,6 +81,7 @@ describe('reminders', () => {
     expect(notificationHref('nudge-challenge', {})).toBe('/progress#challenge')
     expect(notificationHref('nudge-back', { dogId: 'b1' })).toBe('/dogs/b1')
     expect(notificationHref('nudge-back', {})).toBe('/dogs')
+    expect(notificationHref('nudge-new-dog', { dogId: 'b1' })).toBe('/dogs/b1')
     expect(notificationHref('nudge-owner', { dogId: 'm1', tip: 'photo' })).toBe('/my-dogs/m1/edit')
     expect(notificationHref('nudge-owner', { dogId: 'm1', tip: 'share' })).toBe('/dogs/m1')
   })

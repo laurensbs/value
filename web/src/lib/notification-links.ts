@@ -40,7 +40,7 @@ export function notificationHref(kind: string, data: NotificationData): string {
   if (kind === 'nudge-step') return STEP_HREFS[data.step ?? ''] ?? '/'
   if (kind === 'nudge-week') return '/'
   if (kind === 'nudge-challenge' || kind === 'challenge-done') return '/progress#challenge'
-  if (kind === 'nudge-back') return data.dogId ? `/dogs/${data.dogId}` : '/dogs'
+  if (kind === 'nudge-back' || kind === 'nudge-new-dog') return data.dogId ? `/dogs/${data.dogId}` : '/dogs'
   if (kind === 'nudge-owner') return !data.dogId ? '/my-dogs' : data.tip === 'share' ? `/dogs/${data.dogId}` : `/my-dogs/${data.dogId}/edit`
   return '/requests'
 }

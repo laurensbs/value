@@ -331,7 +331,8 @@
       "own": "No traigas premios propios: la protectora los tiene.",
       "no": "Mejor no dar premios."
     },
-    "tipShelter": "Recomendar una protectora"
+    "tipShelter": "Recomendar una protectora",
+    "new": "Nuevo"
   },
   "dog": {
     "story": "Sobre {name}",
@@ -732,7 +733,7 @@
     "weeklyGoalHint": "¿Con qué frecuencia quieres pasear? Saltarte una semana siempre está bien.",
     "alerts": "Avisos",
     "reminders": "Recordatorios amables",
-    "remindersHint": "Sobre tus primeros pasos, tu objetivo semanal y el reto de tu ciudad. Uno cada pocos días como mucho, como notificación push o si no por correo.",
+    "remindersHint": "Sobre tus primeros pasos, tu objetivo semanal, el reto de tu ciudad y perros nuevos cerca de ti. Uno cada pocos días como mucho, como notificación push o si no por correo.",
     "pushIos": "¿Avisos en tu iPhone? Funcionan en cuanto Rondje está en tu pantalla de inicio:",
     "pushIosInApp": "¿Avisos en tu iPhone? Abre primero Rondje en Safari y ponlo desde allí en tu pantalla de inicio."
   },
@@ -1046,7 +1047,8 @@
       "nudge-back": "{variant, select, dog {¿Te apetece un paseo con {dogName}? Planéalo cuando te venga bien.} other {¿Te apetece un paseo? Mira qué perros cerca de ti buscan compañero de paseo.}}",
       "nudge-owner": "{tip, select, photo {Una foto ayuda a los paseadores a conocer a {dogName}. ¿Añades una?} slots {Añade momentos fijos de paseo para {dogName}, así los paseadores ven enseguida cuándo encaja.} other {¿Aún sin solicitudes para {dogName}? Comparte la página con vecinos y amigos, suele ayudar.}}",
       "request-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: {variant, select, meet {conocer a {dogName}} other {paseo con {dogName}}}. ¡Que vaya muy bien!",
-      "group-walk-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}. ¡Que vaya muy bien!"
+      "group-walk-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}. ¡Que vaya muy bien!",
+      "nudge-new-dog": "Cerca de ti: {dogName} acaba de llegar a Rondje y busca compañero de paseo."
     }
   },
   "admin": {
@@ -1509,6 +1511,10 @@
       "group-walk-reminder": {
         "subject": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}",
         "body": "El punto de encuentro está en Rondje, en los paseos en grupo. ¿Al final no puedes? Cancela tu inscripción para que otra persona pueda ocupar tu plaza."
+      },
+      "nudge-new-dog": {
+        "subject": "{dogName} busca compañero de paseo cerca de ti",
+        "body": "{dogName} acaba de llegar a Rondje, no muy lejos de ti. Mira si encajáis y planea un primer encuentro cuando te venga bien."
       }
     },
     "reminderFooter": "Recibes este recordatorio porque tienes los recordatorios activados en tu perfil. Enviamos uno cada pocos días como mucho. Puedes desactivarlos en tu perfil, en Ajustes.",

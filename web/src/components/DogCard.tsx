@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ViewTransition } from 'react'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { formatDistance } from '@/lib/geo'
+import { isNewDog } from '@/lib/nudges'
 import type { DogListItem } from '@/server/queries'
 import { DogPortrait } from './DogPortrait'
 import { EnergyDots } from './EnergyDots'
@@ -13,10 +14,13 @@ export async function DogCard({ item }: { item: DogListItem }) {
   const { dog, host } = item
   return (
     <Link href={`/dogs/${dog.id}`} className="dog-card">
-      {/* The same name on the dog page: the portrait grows into place when you open a dog. */}
-      <ViewTransition name={`dog-${dog.id}`}>
-        <DogPortrait dog={dog} />
-      </ViewTransition>
+      <span className="portrait-wrap">
+        {/* The same name on the dog page: the portrait grows into place when you open a dog. */}
+        <ViewTransition name={`dog-${dog.id}`}>
+          <DogPortrait dog={dog} decorative />
+        </ViewTransition>
+        {isNewDog(dog, new Date()) ? <span className="new-sticker">{t('dogs.new')}</span> : null}
+      </span>
       <span className="dog-card-body">
         <span className="spread">
           <span className="dog-name">{dog.name}</span>

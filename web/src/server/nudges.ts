@@ -5,7 +5,7 @@ import * as s from '@/db/schema'
 import { challengesFrom, monthBounds, type ChallengeWalk } from '@/lib/challenges'
 import { citySlug } from '@/lib/cities'
 import type { NotificationData } from '@/lib/notification-links'
-import { NUDGE_KINDS, pickNudge, type Nudge, type NudgeFacts, type NudgeKind } from '@/lib/nudges'
+import { NEW_DOG_DAYS, newDogsNear, NUDGE_KINDS, pickNudge, type NewDog, type Nudge, type NudgeFacts, type NudgeKind, type SentNudge } from '@/lib/nudges'
 import { ABOUT_MIN_LENGTH, localParts, weekOf } from '@/lib/progress'
 import { zonedToUtc } from '@/lib/time'
 import { emailEnabled, notificationEmail, sendEmail, toLocale } from './email'
@@ -42,11 +42,11 @@ export async function sendNudges(now = new Date(), skip: ReadonlySet<string> = n
   const db = await getDb()
   const people = await peopleWithReminders(db)
   run.people = people.length
-  const towns = await townWalks(db, now)
+  const [towns, fresh] = await Promise.all([townWalks(db, now), newDogs(db, now)])
 
   for (let i = 0; i < people.length; i += CHUNK) {
     const chunk = people.slice(i, i + CHUNK)
-    const facts = await factsFor(db, chunk, towns, now)
+    const facts = await factsFor(db, chunk, towns, fresh, now)
     const picks = chunk.flatMap((person) => {
       if (skip.has(person.userId)) return []
       const f = facts.get(person.userId)!
@@ -97,7 +97,11 @@ function peopleWithReminders(db: Db) {
       wantsToWalk: s.profile.wantsToWalk,
       hasDogs: s.profile.hasDogs,
       weeklyGoal: s.profile.weeklyGoal,
+      country: s.profile.country,
       city: s.profile.city,
+      lat: s.profile.lat,
+      lng: s.profile.lng,
+      pppLicense: s.profile.pppLicense,
       about: sql<boolean>`(${s.profile.photoUrl} is not null and length(trim(${s.profile.bio})) >= ${ABOUT_MIN_LENGTH})`,
       quiz: sql<boolean>`(${s.profile.quizPassedAt} is not null)`,
       staff: sql<boolean>`exists (select 1 from organization_member m where m.user_id = profile.user_id)`,
@@ -127,6 +131,26 @@ async function townWalks(db: Db, now: Date): Promise<Map<string, ChallengeWalk[]
   return towns
 }
 
+/** Private owners' dogs that came online in the last few days, newest first. */
+async function newDogs(db: Db, now: Date): Promise<NewDog[]> {
+  const rows = await db
+    .select({ id: s.dog.id, name: s.dog.name, ownerId: s.dog.ownerId, country: s.dog.country, city: s.dog.city, lat: s.dog.lat, lng: s.dog.lng, ppp: s.dog.ppp })
+    .from(s.dog)
+    .where(
+      and(
+        eq(s.dog.status, 'active'),
+        eq(s.dog.isDemo, false),
+        isNull(s.dog.orgId),
+        gt(s.dog.createdAt, new Date(now.getTime() - NEW_DOG_DAYS * DAY)),
+      ),
+    )
+    .orderBy(desc(s.dog.createdAt))
+    .limit(2000)
+  return rows.flatMap((d) =>
+    d.ownerId ? [{ id: d.id, name: d.name, ownerId: d.ownerId, country: d.country, town: citySlug(d.city), lat: d.lat, lng: d.lng, ppp: d.ppp }] : [],
+  )
+}
+
 /** The local start of this week (Monday) and of the next one. */
 function weekBounds(now: Date): { start: Date; end: Date } {
   const monday = weekOf(now)
@@ -134,10 +158,12 @@ function weekBounds(now: Date): { start: Date; end: Date } {
   return { start: zonedToUtc(monday, '00:00'), end: zonedToUtc(next, '00:00') }
 }
 
-async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWalk[]>, now: Date) {
+async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWalk[]>, fresh: NewDog[], now: Date) {
   const ids = people.map((p) => p.userId)
   const week = weekBounds(now)
-  const [walks, requests, dogs, favourites, sent, devices] = await Promise.all([
+  const freshIds = fresh.map((d) => d.id)
+  const freshOwners = [...new Set(fresh.map((d) => d.ownerId))]
+  const [walks, requests, dogs, favourites, sent, devices, asked, blocks] = await Promise.all([
     db
       .select({
         userId: s.walk.walkerId,
@@ -198,6 +224,24 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
         ),
       ),
     db.select({ userId: s.pushDevice.userId, kind: s.pushDevice.kind }).from(s.pushDevice).where(inArray(s.pushDevice.userId, ids)),
+    // For the new dogs: the ones these people asked about already, and blocks between them and the owners.
+    fresh.length
+      ? db
+          .select({ userId: s.walkRequest.walkerId, dogId: s.walkRequest.dogId })
+          .from(s.walkRequest)
+          .where(and(inArray(s.walkRequest.walkerId, ids), inArray(s.walkRequest.dogId, freshIds)))
+      : [],
+    fresh.length
+      ? db
+          .select({ blocker: s.block.blockerId, blocked: s.block.blockedId })
+          .from(s.block)
+          .where(
+            or(
+              and(inArray(s.block.blockerId, ids), inArray(s.block.blockedId, freshOwners)),
+              and(inArray(s.block.blockedId, ids), inArray(s.block.blockerId, freshOwners)),
+            ),
+          )
+      : [],
   ])
 
   const one = <T extends { userId: string | null }>(rows: T[]) => new Map(rows.map((r) => [r.userId!, r]))
@@ -216,6 +260,19 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
   const dogsOf = many(dogs)
   const sentOf = many(sent)
   const devicesOf = many(devices)
+  const askedOf = new Map<string, Set<string>>()
+  const blockedOf = new Map<string, Set<string>>()
+  const add = (map: Map<string, Set<string>>, key: string, value: string) => {
+    const set = map.get(key)
+    if (set) set.add(value)
+    else map.set(key, new Set([value]))
+  }
+  for (const r of asked) add(askedOf, r.userId, r.dogId)
+  for (const b of blocks) {
+    add(blockedOf, b.blocker, b.blocked)
+    add(blockedOf, b.blocked, b.blocker)
+  }
+  const none = new Set<string>()
 
   const result = new Map<string, { facts: NudgeFacts; pushable: boolean }>()
   for (const p of people) {
@@ -226,9 +283,11 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
     const fav = favouriteOf.get(p.userId)
     const slug = citySlug(p.city)
     const town = slug ? challengesFrom(towns.get(slug) ?? [], { userId: p.userId, city: p.city }, now).city : null
+    // Shelter staff are not asked to walk unless they said they want to.
+    const roles = { walker: p.wantsToWalk || (!p.hasDogs && !p.staff && own.length === 0), owner: p.hasDogs || own.length > 0 }
+    const place = { userId: p.userId, country: p.country, town: slug, lat: p.lat, lng: p.lng, pppLicense: p.pppLicense }
     const facts: NudgeFacts = {
-      // Shelter staff are not asked to walk unless they said they want to.
-      roles: { walker: p.wantsToWalk || (!p.hasDogs && !p.staff && own.length === 0), owner: p.hasDogs || own.length > 0 },
+      roles,
       joinedAt: p.joinedAt,
       weeklyGoal: p.weeklyGoal,
       walks: w?.walks ?? 0,
@@ -239,8 +298,9 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
       steps: { about: Boolean(p.about), dog: own.length > 0, quiz: Boolean(p.quiz), meet: Boolean(r) },
       challenge: town && { city: town.name, goal: town.goal, walks: town.walks, mine: town.mine, done: town.done },
       favouriteDog: fav ? { id: fav.id, name: fav.name } : null,
+      newDogs: roles.walker ? newDogsNear(place, fresh, { asked: askedOf.get(p.userId) ?? none, blocked: blockedOf.get(p.userId) ?? none }) : [],
       quietDog: quiet ? { id: quiet.id, name: quiet.name, since: quiet.since, photos: quiet.photos, slots: quiet.slots } : null,
-      sent: (sentOf.get(p.userId) ?? []).map((n) => ({ kind: n.kind, at: n.at, data: (n.data ?? {}) as { step?: string; tip?: string } })),
+      sent: (sentOf.get(p.userId) ?? []).map((n) => ({ kind: n.kind, at: n.at, data: (n.data ?? {}) as SentNudge['data'] })),
     }
     result.set(p.userId, { facts, pushable: (devicesOf.get(p.userId) ?? []).some((d) => canPush(d.kind)) })
   }

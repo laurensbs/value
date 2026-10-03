@@ -6,7 +6,7 @@ import * as s from '@/db/schema'
 import { MASCOT } from '@/lib/avatar'
 import { countryInfo, isCountry } from '@/lib/countries'
 import { formatDistance } from '@/lib/geo'
-import { BACK_AFTER_DAYS } from '@/lib/nudges'
+import { BACK_AFTER_DAYS, isNewDog } from '@/lib/nudges'
 import { BADGES, bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
 import { zonedToUtc } from '@/lib/time'
 import { challengesFor } from '@/server/challenges'
@@ -135,7 +135,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       {next ? (
         <Link href={next.request.kind === 'meet' || next.walkStatus !== 'active' ? '/requests' : `/walk/${next.walkId}`} className="next-card">
-          <DogPortrait dog={next.dog} size={56} />
+          <DogPortrait dog={next.dog} size={56} decorative />
           <span className="stack-s">
             <span className="eyebrow">{t('next')}</span>
             <strong>
@@ -151,7 +151,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       {backFriend ? (
         <section className="card back-card" aria-labelledby="back-title">
-          <DogPortrait dog={backFriend.dog} size={72} />
+          <DogPortrait dog={backFriend.dog} size={72} decorative />
           <div className="stack-s">
             <h2 id="back-title" className="small-title">
               {t('backTitle')}
@@ -236,7 +236,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               {ownDogs.map((dog) => (
                 <li key={dog.id}>
                   <Link href={`/dogs/${dog.id}`} className="mini-dog">
-                    <DogPortrait dog={dog} size={64} />
+                    <DogPortrait dog={dog} size={64} decorative />
                     <span className="stack-s">
                       <strong>{dog.name}</strong>
                       <span className="muted small">{t('dogWeek', { n: dogStats.get(dog.id)?.week ?? 0 })}</span>
@@ -273,7 +273,10 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               {nearbyDogs.map(({ dog, distanceM }) => (
                 <li key={dog.id}>
                   <Link href={`/dogs/${dog.id}`} className="strip-dog">
-                    <DogPortrait dog={dog} size={132} />
+                    <span className="portrait-wrap">
+                      <DogPortrait dog={dog} size={132} decorative />
+                      {isNewDog(dog, now) ? <span className="new-sticker">{td('new')}</span> : null}
+                    </span>
                     <strong>{dog.name}</strong>
                     <span className="muted small">{distanceM != null && !dog.isDemo ? td('away', { distance: formatDistance(distanceM, locale) }) : dog.city}</span>
                   </Link>
