@@ -306,7 +306,7 @@ T = {
     "Over %@": ("About %@", "À propos de %@", "Sobre %@"),
     "Over de hond": ("About the dog", "À propos du chien", "Sobre el perro"),
     "Over een half uur komt %@. Fijne wandeling!": ("%@ arrives in half an hour. Enjoy the walk!", "%@ arrive dans une demi-heure. Bonne balade !", "%@ llega en media hora. ¡Buen paseo!"),
-    "Over een half uur. Neem je ID mee en vergeet de zakjes niet.": ("In half an hour. Bring your ID and don't forget the bags.", "Dans une demi-heure. Prends ta pièce d'identité et n'oublie pas les sacs.", "En media hora. Lleva tu documento y no olvides las bolsas."),
+    "Over een half uur. Neem je ID mee.": ("In half an hour. Bring your ID.", "Dans une demi-heure. Prends ta pièce d'identité.", "En media hora. Lleva tu documento de identidad."),
     "Over jou": ("About you", "À propos de toi", "Sobre ti"),
     "Over tijd: laat even iets weten": ("Running late: let them know", "En retard : donne des nouvelles", "Con retraso: avisa"),
     "PPP-hond: in Spanje alleen met licentie": ("PPP dog: in Spain only with a licence", "Chien PPP : en Espagne uniquement avec licence", "Perro PPP: en España solo con licencia"),

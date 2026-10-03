@@ -14497,24 +14497,24 @@
         }
       }
     },
-    "Over een half uur. Neem je ID mee en vergeet de zakjes niet." : {
+    "Over een half uur. Neem je ID mee." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In half an hour. Bring your ID and don't forget the bags."
+            "value" : "In half an hour. Bring your ID."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En media hora. Lleva tu documento y no olvides las bolsas."
+            "value" : "En media hora. Lleva tu documento de identidad."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dans une demi-heure. Prends ta pièce d'identité et n'oublie pas les sacs."
+            "value" : "Dans une demi-heure. Prends ta pièce d'identité."
           }
         }
       }

@@ -45,7 +45,7 @@ enum Reminders {
             content.title = item.isMeeting ? L("Zo meteen: kennismaken met \(item.dog.name)") : L("Zo meteen: rondje met \(item.dog.name)")
             content.body = asOwner
                 ? L("Over een half uur komt \(item.walker?.firstName ?? L("de wandelaar")). Fijne wandeling!")
-                : L("Over een half uur. Neem je ID mee en vergeet de zakjes niet.")
+                : L("Over een half uur. Neem je ID mee.")
             content.sound = .default
             content.userInfo = ["tab": "appointments"]
             let parts = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fireAt)
