@@ -8,6 +8,7 @@ import { fuzzLatLng, isValidLatLng } from '@/lib/geo'
 import { isAllowedPhotoUrl, isProviderPhoto } from '@/lib/photos'
 import { isAdult } from '@/lib/rules'
 import { TERMS_VERSION } from '@/lib/site'
+import { deleteUnusedFilesLater } from './blob-cleanup'
 import type { FormState } from './actions/profile'
 import type { Viewer } from './session'
 
@@ -79,6 +80,8 @@ export async function saveOnboarding(
   }
   if (viewer.profile) {
     await db.update(s.profile).set(values).where(eq(s.profile.userId, viewer.userId))
+    const old = viewer.profile.photoUrl
+    if (old && old !== values.photoUrl) deleteUnusedFilesLater([old], 'a profile photo change')
   } else {
     await db.insert(s.profile).values({ userId: viewer.userId, ...values, referralCode: referralCode(), referredBy: opts.referredBy })
   }
