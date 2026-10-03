@@ -1,6 +1,3 @@
-import '@fontsource-variable/bricolage-grotesque/wght.css'
-import '@fontsource-variable/figtree/wght.css'
-import '@fontsource/caveat/latin-600.css'
 import 'leaflet/dist/leaflet.css'
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
@@ -12,6 +9,7 @@ import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
 import { TabBar, type Tab } from '@/components/TabBar'
 import { siteUrl } from '@/lib/site'
+import { fontVariables } from './fonts'
 import { unreadCounts } from '@/server/queries'
 import { rolesOf } from '@/server/progress'
 import { getSession, getViewer } from '@/server/session'
@@ -70,7 +68,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       : null
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={fontVariables}>
       <body>
         <NextIntlClientProvider>
           <div className={`shell${tabs ? ' has-tabbar' : ''}`}>

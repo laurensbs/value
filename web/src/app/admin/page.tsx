@@ -7,12 +7,14 @@ import { dbMode, getDb } from '@/db'
 import * as s from '@/db/schema'
 import { enabledSocialProviders } from '@/lib/auth'
 import { emailMatchesWebsite, registryLookupUrl } from '@/lib/org-fields'
+import { databaseRegion, regionFit, vercelRegionFor } from '@/lib/regions'
 import { CHAT_WARN_FLAGS } from '@/lib/rules'
 import { adminEmails, siteUrl } from '@/lib/site'
 import { fromNow } from '@/lib/time'
 import { tipKey } from '@/lib/tips'
 import { growthKpis } from '@/server/kpis'
 import { sendAdminConfirmation } from '@/server/actions/admin'
+import { emailEnabled } from '@/server/email'
 import { requireAdmin, requireViewer } from '@/server/session'
 
 export const metadata = { robots: { index: false } }
@@ -148,6 +150,12 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
   const blob = Boolean(process.env.BLOB_READ_WRITE_TOKEN)
   const mode = dbMode()
+  // Every database question travels between the app and the database: they belong close together.
+  const dbRegion = databaseRegion(process.env.DATABASE_URL || process.env.POSTGRES_URL)
+  const regions = {
+    fit: regionFit(process.env.VERCEL_REGION, dbRegion),
+    values: { app: process.env.VERCEL_REGION ?? '', db: dbRegion ?? '', suggest: dbRegion ? (vercelRegionFor(dbRegion) ?? '') : '' },
+  }
 
   return (
     <div className="stack-l">
@@ -492,6 +500,15 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <li className={process.env.CRON_SECRET ? 'ok' : 'todo'}>
             <strong>CRON_SECRET:</strong> {process.env.CRON_SECRET ? '✓' : '—'}
           </li>
+          <li className={emailEnabled() ? 'ok' : 'todo'}>
+            <strong>{t('admin.email')}:</strong> {emailEnabled() ? t('admin.emailOn') : t('admin.emailOff')}
+          </li>
+          {regions.fit ? (
+            <li className={regions.fit === 'far' ? 'todo' : 'ok'}>
+              <strong>{t('admin.region')}:</strong>{' '}
+              {t(regions.fit === 'same' ? 'admin.regionSame' : regions.fit === 'near' ? 'admin.regionNear' : 'admin.regionFar', regions.values)}
+            </li>
+          ) : null}
         </ul>
       </section>
 

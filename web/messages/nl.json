@@ -1129,7 +1129,14 @@
       "sent": "Verstuurd. Open de mail en tik op de knop, dan kom je hier terug.",
       "failed": "Versturen lukte niet. Probeer het zo nog eens.",
       "expired": "Die link werkt niet meer. Stuur hieronder een nieuwe mail."
-    }
+    },
+    "region": "Snelheid",
+    "regionSame": "app ({app}) en database ({db}) staan in dezelfde regio.",
+    "regionNear": "app ({app}) en database ({db}) staan dicht bij elkaar.",
+    "regionFar": "app ({app}) en database ({db}) staan ver uit elkaar: elke databasevraag duurt tot 100 ms langer. Kies in Vercel bij Settings → Functions de regio {suggest}.",
+    "email": "E-mail",
+    "emailOn": "aan, via Resend",
+    "emailOff": "uit: wachtwoord- en herinneringsmails gaan niet weg. Zet RESEND_API_KEY en EMAIL_FROM in Vercel."
   },
   "banned": {
     "title": "Je account is geblokkeerd",

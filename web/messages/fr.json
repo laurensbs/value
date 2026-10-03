@@ -1129,7 +1129,14 @@
       "sent": "Envoyé. Ouvrez l'e-mail et touchez le bouton : vous reviendrez ici.",
       "failed": "L'envoi n'a pas fonctionné. Réessayez dans un instant.",
       "expired": "Ce lien ne fonctionne plus. Envoyez un nouvel e-mail ci-dessous."
-    }
+    },
+    "region": "Rapidité",
+    "regionSame": "l'app ({app}) et la base de données ({db}) sont dans la même région.",
+    "regionNear": "l'app ({app}) et la base de données ({db}) sont proches.",
+    "regionFar": "l'app ({app}) et la base de données ({db}) sont loin l'une de l'autre : chaque requête à la base de données prend jusqu'à 100 ms de plus. Dans Vercel, choisissez la région {suggest} sous Settings → Functions.",
+    "email": "E-mail",
+    "emailOn": "activé, via Resend",
+    "emailOff": "désactivé : les e-mails de mot de passe et de rappel ne partent pas. Définissez RESEND_API_KEY et EMAIL_FROM dans Vercel."
   },
   "banned": {
     "title": "Votre compte a été bloqué",

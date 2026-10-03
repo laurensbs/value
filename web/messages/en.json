@@ -1129,7 +1129,14 @@
       "sent": "Sent. Open the email and tap the button, and you'll come back here.",
       "failed": "Sending didn't work. Try again in a moment.",
       "expired": "That link doesn't work anymore. Send a new email below."
-    }
+    },
+    "region": "Speed",
+    "regionSame": "app ({app}) and database ({db}) are in the same region.",
+    "regionNear": "app ({app}) and database ({db}) are close together.",
+    "regionFar": "app ({app}) and database ({db}) are far apart: every database question takes up to 100 ms longer. In Vercel, choose region {suggest} under Settings → Functions.",
+    "email": "Email",
+    "emailOn": "on, through Resend",
+    "emailOff": "off: password and reminder emails don't go out. Set RESEND_API_KEY and EMAIL_FROM in Vercel."
   },
   "banned": {
     "title": "Your account has been blocked",
