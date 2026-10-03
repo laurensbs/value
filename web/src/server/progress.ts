@@ -110,7 +110,7 @@ export async function progressFor(viewer: OnboardedViewer, now = new Date()): Pr
   await syncPoints(userId)
   const db = await getDb()
 
-  const [rows, awards, [facts]] = await Promise.all([
+  const [rows, awards, [facts], [shareDog]] = await Promise.all([
     db
       .select({ kind: s.pointEvent.kind, ref: s.pointEvent.ref, points: s.pointEvent.points, at: s.pointEvent.at, meta: s.pointEvent.meta })
       .from(s.pointEvent)
@@ -126,6 +126,18 @@ export async function progressFor(viewer: OnboardedViewer, now = new Date()): Pr
           where d.owner_id = ${userId} and r.status in ('accepted', 'completed')
         ) as dog_met
     `).then((r) => r.rows),
+    // An owner's dog online while no request waits for an answer: the next step is to tell the neighbours.
+    p.hasDogs
+      ? db.execute<{ id: string; name: string }>(sql`
+          select d.id, d.name from dog d
+          where d.owner_id = ${userId} and d.status = 'active' and not d.is_demo
+            and not exists (
+              select 1 from walk_request r join dog o on o.id = r.dog_id where o.owner_id = ${userId} and r.status = 'pending'
+            )
+          order by d.created_at
+          limit 1
+        `).then((r) => r.rows)
+      : [],
   ])
   const events: PointEvent[] = rows.map((r) => ({ ...r, meta: (r.meta ?? {}) as PointEvent['meta'] }))
 
@@ -181,6 +193,7 @@ export async function progressFor(viewer: OnboardedViewer, now = new Date()): Pr
         hasDog: Boolean(facts?.has_dog),
         dogMet: Boolean(facts?.dog_met),
         dogWalks: stats.dogWalks,
+        shareDog: shareDog ? { id: shareDog.id, name: shareDog.name } : null,
       },
       roles,
     ),

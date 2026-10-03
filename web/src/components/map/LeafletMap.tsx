@@ -1,7 +1,9 @@
 'use client'
 
 import L from 'leaflet'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
+import { groupByOverlap } from '@/lib/map-groups'
 
 export interface MapMarker {
   id: string
@@ -20,6 +22,8 @@ export interface LeafletMapProps {
   /** Keep the view on the latest route point / marker. */
   follow?: boolean
   fitToMarkers?: boolean
+  /** Markers that would overlap share one numbered marker (dogs in the same street, shelters in one town). */
+  cluster?: boolean
   /** Zoom to show the whole route (for summaries). */
   fitToRoute?: boolean
   onPick?: (p: { lat: number; lng: number }) => void
@@ -29,6 +33,33 @@ export interface LeafletMapProps {
 
 const TILE_URL = process.env.NEXT_PUBLIC_TILE_URL || 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
 const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+
+/** From this zoom on, a numbered marker lists its markers instead of zooming in further. */
+const LIST_ZOOM = 17
+
+function clusterIcon(count: number): L.DivIcon {
+  return L.divIcon({ className: '', html: `<div class="map-pin-hit"><div class="map-cluster" aria-hidden="true">${count}</div></div>`, iconSize: [44, 44], iconAnchor: [22, 22] })
+}
+
+/** A marker's link for its popup, or just its name when it has no page. */
+function markerLink(mk: MapMarker): HTMLElement {
+  const el = document.createElement(mk.href ? 'a' : 'span')
+  if (mk.href) el.setAttribute('href', mk.href)
+  el.textContent = mk.label
+  return el
+}
+
+/** The markers in one spot, for the popup of their numbered marker. */
+function markerList(items: MapMarker[]): HTMLElement {
+  const ul = document.createElement('ul')
+  ul.className = 'map-list'
+  for (const mk of items) {
+    const li = document.createElement('li')
+    li.append(markerLink(mk))
+    ul.append(li)
+  }
+  return ul
+}
 
 function icon(kind: MapMarker['kind'], label: string): L.DivIcon {
   const safe = label.replace(/[<>&"]/g, '')
@@ -51,11 +82,13 @@ export default function LeafletMap({
   route,
   follow = false,
   fitToMarkers = false,
+  cluster = false,
   fitToRoute = false,
   onPick,
   className = 'map',
   ariaLabel,
 }: LeafletMapProps) {
+  const t = useTranslations('common.map')
   const el = useRef<HTMLDivElement>(null)
   const map = useRef<L.Map | null>(null)
   const markerLayer = useRef<L.LayerGroup | null>(null)
@@ -91,24 +124,49 @@ export default function LeafletMap({
     const layer = markerLayer.current
     const m = map.current
     if (!layer || !m) return
-    layer.clearLayers()
-    for (const mk of markers) {
-      const marker = L.marker([mk.lat, mk.lng], { icon: icon(mk.kind, mk.label), title: mk.label, keyboard: true })
-      if (mk.href) {
-        const a = document.createElement('a')
-        a.href = mk.href
-        a.textContent = mk.label
-        marker.bindPopup(a)
-      }
-      marker.addTo(layer)
-    }
     if (fitToMarkers && markers.length > 1) {
       m.fitBounds(L.latLngBounds(markers.map((mk) => [mk.lat, mk.lng] as [number, number])), { padding: [40, 40], maxZoom: 15 })
     } else if (follow && markers.length > 0) {
       const last = markers[markers.length - 1]
       m.setView([last.lat, last.lng], Math.max(m.getZoom(), 15))
     }
-  }, [markers, fitToMarkers, follow])
+    const draw = () => {
+      layer.clearLayers()
+      // Which markers overlap depends on the zoom.
+      const groups = cluster ? groupByOverlap(markers, (mk) => m.latLngToLayerPoint([mk.lat, mk.lng])) : markers.map((mk) => [mk])
+      for (const items of groups) {
+        const [first] = items
+        if (items.length === 1) {
+          const marker = L.marker([first.lat, first.lng], { icon: icon(first.kind, first.label), title: first.label, keyboard: true })
+          if (first.href) marker.bindPopup(markerLink(first))
+          marker.addTo(layer)
+          continue
+        }
+        // Several in one spot: a tap zooms in until they come apart. When they share a place
+        // (locations are rounded to about 500 m, so neighbours can), or the map is close up
+        // already, it lists them instead.
+        const bounds = L.latLngBounds(items.map((mk) => [mk.lat, mk.lng] as [number, number]))
+        const marker = L.marker([first.lat, first.lng], { icon: clusterIcon(items.length), title: t('cluster', { count: items.length }), keyboard: true })
+        if (bounds.getNorthEast().equals(bounds.getSouthWest()) || m.getZoom() >= LIST_ZOOM) {
+          marker.bindPopup(markerList(items))
+        } else {
+          const zoomIn = () => m.fitBounds(bounds, { padding: [60, 60], maxZoom: LIST_ZOOM })
+          marker.on('click', zoomIn)
+          // Enter on a focused marker, as Leaflet does for popups.
+          marker.on('keypress', (e) => {
+            if ((e as L.LeafletKeyboardEvent).originalEvent.key === 'Enter') zoomIn()
+          })
+        }
+        marker.addTo(layer)
+      }
+    }
+    draw()
+    if (!cluster) return
+    m.on('zoomend', draw)
+    return () => {
+      m.off('zoomend', draw)
+    }
+  }, [markers, fitToMarkers, follow, cluster, t])
 
   useEffect(() => {
     const m = map.current

@@ -2,29 +2,46 @@
 import Link from 'next/link'
 import { ViewTransition } from 'react'
 import { notFound } from 'next/navigation'
-import { getFormatter, getTranslations } from 'next-intl/server'
+import { getFormatter, getLocale, getTranslations } from 'next-intl/server'
 import { Avatar } from '@/components/Avatar'
 import { DogOwnerActions } from '@/components/DogOwnerActions'
 import { DogPortrait } from '@/components/DogPortrait'
+import { DogShare } from '@/components/DogShare'
 import { EnergyDots } from '@/components/EnergyDots'
 import { GroupWalkButton } from '@/components/GroupWalkButton'
 import { Icon } from '@/components/Icon'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
+import { isNewDog } from '@/lib/nudges'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
-import { dogFacts, getDogDetail, myGroupSignups, relationFor, walkerFacts } from '@/server/queries'
+import { dogFacts, getDogDetail, myGroupSignups, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
+import { dogShareFor, localeOf } from '@/server/share'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const detail = await getDogDetail(id, null)
   if (!detail) return {}
-  // A private owner's dog page names a first name and a city: keep it out of search engines.
+  const { dog, host } = detail
+  // Owners share this page with their neighbours: the preview in a chat shows the dog and what it is
+  // looking for, in the owner's language like the message they sent (chat apps fetch it without one).
+  const owned = host.kind === 'owner'
+  const t = await getTranslations({ locale: owned ? await localeOf(host.id) : await getLocale(), namespace: 'dogShare' })
+  const description = (dog.story || (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : '')).slice(0, 160)
+  const photo = dog.photos.find((src) => src.startsWith('https://'))
   return {
-    title: detail.dog.name,
-    description: detail.dog.story.slice(0, 160),
-    ...(detail.host.kind === 'owner' ? { robots: { index: false, follow: false } } : {}),
+    title: dog.name,
+    description,
+    openGraph: {
+      title: owned ? t('posterHeadline', { name: dog.name }) : dog.name,
+      description,
+      images: [photo ?? '/og.png'],
+      siteName: 'Rondje',
+      type: 'website',
+    },
+    // A private owner's dog page names a first name and a city: keep it out of search engines.
+    ...(owned ? { robots: { index: false, follow: false } } : {}),
   }
 }
 
@@ -40,25 +57,36 @@ export default async function DogPage({
   const viewer = await getViewer()
   const detail = await getDogDetail(id, viewer)
   if (!detail) notFound()
-  const { dog, host, slots, groupWalks, canSeePrivate, isMine } = detail
-  const t = await getTranslations()
-  const format = await getFormatter()
+  const { dog, host, slots, groupWalks, canSeePrivate, isMine, relation } = detail
+  const [t, format, facts, joined, share] = await Promise.all([
+    getTranslations(),
+    getFormatter(),
+    viewer?.profile ? walkerFacts(viewer) : null,
+    viewer ? myGroupSignups(viewer.userId) : new Set<string>(),
+    dogShareFor(detail, viewer),
+  ])
 
   let meetReason: string | null = 'not-signed-in'
   let soloReason: string | null = 'not-signed-in'
-  if (viewer?.profile) {
-    const facts = await walkerFacts(viewer)
-    const relation = await relationFor(viewer, dog)
+  if (facts && relation) {
     meetReason = canRequestMeeting(facts, dogFacts(dog), relation)
     soloReason = canRequestSolo(facts, dogFacts(dog), relation)
   } else if (viewer) {
     meetReason = soloReason = 'not-onboarded'
   }
-  const joined = viewer ? await myGroupSignups(viewer.userId) : new Set<string>()
 
-  const firstSlot = slots[0]
-  const defaultDate = firstSlot ? nextWeekday(firstSlot.weekday) : toZonedParts(fromNow(24 * 3600_000)).date
-  const defaultTime = firstSlot?.time ?? '10:00'
+  // The dog's weekly moments on their next dates, soonest first: one tap fills in the request.
+  const moments = slots
+    .map((slot) => ({ date: nextWeekday(slot.weekday), time: slot.time }))
+    .sort((a, b) => `${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`))
+    .slice(0, 4)
+    .map((m) => ({
+      ...m,
+      label: `${format.dateTime(new Date(`${m.date}T12:00:00Z`), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })} · ${m.time}`,
+    }))
+  const defaultDate = moments[0]?.date ?? toZonedParts(fromNow(24 * 3600_000)).date
+  const defaultTime = moments[0]?.time ?? '10:00'
+  const plan = encodeURIComponent(`/dogs/${dog.id}#plan`)
 
   return (
     <div className="dog-page">
@@ -68,7 +96,15 @@ export default async function DogPage({
         </Link>
         {saved ? (
           <p className="notice success" role="status">
-            {t('dog.saved', { name: dog.name })}
+            <span>
+              {t('dog.saved', { name: dog.name })}{' '}
+              {/* What happens next: walkers nearby see the dog as new, or with few of them, the neighbours can be told. */}
+              {share?.walkersNearby != null
+                ? t('dog.savedWalkers', { n: share.walkersNearby, name: dog.name })
+                : share
+                  ? t.rich('dog.savedShare', { name: dog.name, link: (chunks) => <a href="#share">{chunks}</a> })
+                  : null}
+            </span>
           </p>
         ) : null}
         <ViewTransition name={`dog-${dog.id}`}>
@@ -87,6 +123,7 @@ export default async function DogPage({
         <header className="stack-s">
           <div className="row">
             {dog.isDemo ? <span className="pill ball">{t('common.example')}</span> : null}
+            {isNewDog(dog, new Date()) ? <span className="pill ball">{t('dogs.new')}</span> : null}
             <span className={`pill ${host.kind === 'shelter' ? 'blue' : 'green'}`}>
               {host.kind === 'shelter' ? t('dogs.fromShelter') : t('dogs.fromOwner')}
             </span>
@@ -108,6 +145,8 @@ export default async function DogPage({
             <DogOwnerActions dogId={dog.id} status={dog.status} editHref={dog.orgId ? `/shelter/${dog.orgId}/dogs/${dog.id}` : `/my-dogs/${dog.id}/edit`} />
           ) : null}
         </header>
+
+        {share ? <DogShare dogId={dog.id} name={dog.name} message={share.message} /> : null}
 
         <div className="host card row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
           <Avatar name={host.name} src={host.photoUrl} size="medium" />
@@ -270,20 +309,29 @@ export default async function DogPage({
 
         {!isMine && host.kind === 'owner' ? (
           viewer ? (
-            <div id="plan" className="plan-anchor">
+            <div id="plan">
               <RequestForm
               dogId={dog.id}
               dogName={dog.name}
+              walkerName={viewer.profile?.firstName ?? ''}
               meetReason={meetReason}
               soloReason={soloReason}
               defaultDate={defaultDate}
               defaultTime={defaultTime}
+              moments={moments}
               />
             </div>
           ) : (
-            <Link href={`/login?next=/dogs/${dog.id}`} className="button primary wide">
-              {t('request.loginFirst')}
-            </Link>
+            // Often someone the owner sent the link to: an account first, then straight back here to plan.
+            <div className="card flat stack-s">
+              <Link href={`/signup?intent=walker&next=${plan}`} className="button primary wide">
+                {t('request.signupFirst', { name: dog.name })}
+              </Link>
+              <p className="muted small">{t('request.signupFirstText')}</p>
+              <p className="small">
+                {t('auth.hasAccount')} <Link href={`/login?next=${plan}`}>{t('nav.login')}</Link>
+              </p>
+            </div>
           )
         ) : null}
 

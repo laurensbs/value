@@ -4,12 +4,12 @@ import { getLocale } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { updateProfile } from '@/server/actions/profile'
-import { apiMember, apiViewer, fail, json } from '@/server/api'
+import { apiActive, apiMember, fail, json } from '@/server/api'
 import { profileSchema, saveOnboarding } from '@/server/profile-core'
 
 /** Finishing the profile after sign-up, from the app. Same rules as the website: 18+, terms accepted. */
 export async function POST(request: Request) {
-  const viewer = await apiViewer()
+  const viewer = await apiActive()
   if (viewer instanceof NextResponse) return viewer
   const body = (await request.json().catch(() => null)) as Record<string, unknown> | null
   const parsed = profileSchema.safeParse({ ...body, photoUrl: undefined })

@@ -167,4 +167,13 @@ describe('first steps', () => {
     const steps = firstSteps({ ...none, quiz: true, walks: 1 }, { walker: true, owner: false })
     expect(steps.filter((s) => s.done).map((s) => s.key)).toEqual(['account', 'quiz', 'walk'])
   })
+
+  it('point an owner waiting for a first walker to the neighbours', () => {
+    const owner = { walker: false, owner: true }
+    const saar = { id: 'saar', name: 'Saar' }
+    expect(firstSteps({ ...none, hasDog: true, shareDog: saar }, owner)[3]).toEqual({ key: 'dogMet', done: false, href: '/dogs/saar#share', dog: saar })
+    // A request to answer, or a walker already met: the usual step.
+    expect(firstSteps({ ...none, hasDog: true, shareDog: null }, owner)[3]).toEqual({ key: 'dogMet', done: false, href: '/requests' })
+    expect(firstSteps({ ...none, hasDog: true, dogMet: true, shareDog: saar }, owner)[3]).toEqual({ key: 'dogMet', done: true, href: '/requests' })
+  })
 })

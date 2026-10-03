@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ViewTransition } from 'react'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { formatDistance } from '@/lib/geo'
+import { isNewDog } from '@/lib/nudges'
 import { storyLanguage } from '@/lib/story-language'
 import type { DogListItem } from '@/server/queries'
 import { Sym } from './discover/Sym'
@@ -27,10 +28,16 @@ export async function DogCard({ item, showDistance = true }: { item: DogListItem
       <span className="dcard-media">
         {/* The same name on the dog page: the portrait grows into place when you open a dog. */}
         <ViewTransition name={`dog-${dog.id}`}>
-          <DogPortrait dog={dog} cover />
+          <DogPortrait dog={dog} cover decorative />
         </ViewTransition>
         <span className="dcard-float">
-          {dog.isDemo ? <span className="dcard-tag">{t('common.example')}</span> : <span />}
+          {dog.isDemo ? (
+            <span className="dcard-tag">{t('common.example')}</span>
+          ) : isNewDog(dog, new Date()) ? (
+            <span className="new-sticker">{t('dogs.new')}</span>
+          ) : (
+            <span />
+          )}
           {distance ? (
             <span className="dcard-distance" aria-label={t('dogs.away', { distance })}>
               <Sym name="navigate" size={15} />

@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation'
 import { getLocale } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { INVITE_COOKIE } from '@/lib/invite'
 import { scoreQuiz } from '@/lib/quiz'
 import { isAdult } from '@/lib/rules'
 import { safeNext } from '@/lib/site'
@@ -41,12 +42,13 @@ function readProfile(form: FormData) {
 export async function completeOnboarding(_prev: FormState, form: FormData): Promise<FormState> {
   const viewer = await getViewer()
   if (!viewer) return { ok: false, error: 'not-signed-in' }
+  if (viewer.profile?.bannedAt) return { ok: false, error: 'banned' }
   const parsed = readProfile(form)
   if (!parsed.success) return { ok: false, error: 'invalid' }
   const result = await saveOnboarding(viewer, parsed.data, {
     termsAccepted: form.get('terms') === 'on',
     locale: await getLocale(),
-    referredBy: (await cookies()).get('rondje_ref')?.value ?? null,
+    referredBy: (await cookies()).get(INVITE_COOKIE)?.value ?? null,
   })
   if (!result.ok) return result
   const p = parsed.data
@@ -86,6 +88,8 @@ export async function updateProfile(_prev: FormState, form: FormData): Promise<F
     })
     .where(eq(s.profile.userId, viewer.userId))
   await db.update(s.user).set({ name: p.firstName }).where(eq(s.user.id, viewer.userId))
+  // Walking or owning a dog decides the tabs, and the header shows the photo.
+  revalidatePath('/', 'layout')
   return { ok: true, message: 'saved' }
 }
 

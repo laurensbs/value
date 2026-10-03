@@ -26,6 +26,8 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await expect(staff.page.getByText('Wordt gecontroleerd').first()).toBeVisible()
   const shelterPath = new URL(staff.page.url()).pathname
   const orgId = shelterPath.split('/').pop()!
+  // The tabs now lead to the shelter.
+  await expect(staff.page.locator(`nav[aria-label="Hoofdmenu"] a[href="${shelterPath}"]`)).toBeAttached()
 
   // --- Bulk import from the downloadable template ---
   await staff.page.getByLabel('Of plak de inhoud hier').fill(readFileSync('public/rondje-honden-voorbeeld.csv', 'utf8'))
@@ -103,6 +105,16 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   const walkItem = walker.page.getByRole('listitem').filter({ hasText: orgName })
   await walkItem.getByRole('button', { name: 'Ik loop mee' }).click()
   await expect(walkItem.getByText('Je bent aangemeld')).toBeVisible()
+  // Signed up: the walk goes into the calendar, with the ID note and a reminder an hour before.
+  const groupCalendar = await walkItem.getByRole('link', { name: 'Zet in je agenda' }).getAttribute('href')
+  const groupIcs = await walker.page.request.get(groupCalendar!)
+  expect(groupIcs.headers()['content-type']).toContain('text/calendar')
+  const groupFile = await groupIcs.text()
+  expect(groupFile).toContain(`\r\nSUMMARY:Groepswandeling bij ${orgName}\r\n`)
+  expect(groupFile).toContain('\r\nLOCATION:Bij de hoofdingang\\, Utrecht\r\n')
+  expect(groupFile).toContain('\r\nTRIGGER:-PT60M\r\n')
+  // Signed out, the file is not there: the link leads to the login.
+  expect((await visitor.page.request.get(groupCalendar!, { maxRedirects: 0 })).status()).toBe(307)
   await shot(walker.page, '23-group-walks')
   await walker.page.goto('/shelters?country=NL')
   await shot(walker.page, '24-directory')

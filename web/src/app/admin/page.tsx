@@ -2,63 +2,120 @@ import { and, arrayOverlaps, count, desc, eq, gt, inArray, isNotNull, ne, sql } 
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { BanUser, HideDog, OrgDecision, RemoveDemo, ResolveReport, TipActions } from '@/components/AdminTools'
+import { SubmitButton } from '@/components/SubmitButton'
 import { dbMode, getDb } from '@/db'
 import * as s from '@/db/schema'
 import { enabledSocialProviders } from '@/lib/auth'
 import { emailMatchesWebsite, registryLookupUrl } from '@/lib/org-fields'
+import { databaseRegion, regionFit, vercelRegionFor } from '@/lib/regions'
 import { CHAT_WARN_FLAGS } from '@/lib/rules'
 import { adminEmails, siteUrl } from '@/lib/site'
 import { fromNow } from '@/lib/time'
 import { tipKey } from '@/lib/tips'
 import { growthKpis } from '@/server/kpis'
-import { requireAdmin } from '@/server/session'
+import { sendAdminConfirmation } from '@/server/actions/admin'
+import { emailEnabled } from '@/server/email'
+import { requireAdmin, requireViewer } from '@/server/session'
 
 export const metadata = { robots: { index: false } }
 
-export default async function AdminPage() {
+type Params = { sent?: string; failed?: string; error?: string }
+
+/** On ADMIN_EMAILS, but the address is not confirmed yet: one email first, then this page opens. */
+async function ConfirmAddress({ email, params }: { email: string; params: Params }) {
+  const t = await getTranslations('admin.confirm')
+  return (
+    <div className="narrow-page stack">
+      <h1>{t('title')}</h1>
+      {params.error ? <p className="notice warn">{t('expired')}</p> : null}
+      <p>{t('text', { email })}</p>
+      {params.sent ? (
+        <p className="notice success" role="status">
+          {t('sent')}
+        </p>
+      ) : null}
+      {params.failed ? (
+        <p className="notice warn" role="alert">
+          {t('failed')}
+        </p>
+      ) : null}
+      <form action={sendAdminConfirmation}>
+        <SubmitButton className="button primary">{t('send')}</SubmitButton>
+      </form>
+    </div>
+  )
+}
+
+export default async function AdminPage({ searchParams }: { searchParams: Promise<Params> }) {
+  const viewer = await requireViewer('/admin')
+  if (viewer.adminUnconfirmed) return <ConfirmAddress email={viewer.email} params={await searchParams} />
   await requireAdmin()
-  const t = await getTranslations()
-  const format = await getFormatter()
   const db = await getDb()
 
-  const [[users], [profiles], [dogs], [walks], [open]] = await Promise.all([
-    db.select({ n: count() }).from(s.user),
-    db.select({ n: count() }).from(s.profile),
-    db.select({ n: count() }).from(s.dog).where(and(eq(s.dog.isDemo, false), ne(s.dog.status, 'draft'))),
-    db.select({ n: count() }).from(s.walk).where(eq(s.walk.status, 'ended')),
-    db.select({ n: count() }).from(s.report).where(eq(s.report.status, 'open')),
-  ])
-  const [demo] = await db.select({ n: count() }).from(s.dog).where(eq(s.dog.isDemo, true))
-
-  const reports = await db
-    .select({ report: s.report, subjectName: s.profile.firstName, subjectBanned: s.profile.bannedAt })
-    .from(s.report)
-    .leftJoin(s.profile, eq(s.profile.userId, s.report.subjectUserId))
-    .where(eq(s.report.status, 'open'))
-    .orderBy(desc(s.report.createdAt))
-    .limit(50)
-  const flaggedFeedback = await db
-    .select({ feedback: s.feedback, walk: s.walk, dogName: s.dog.name })
-    .from(s.feedback)
-    .innerJoin(s.walk, eq(s.walk.id, s.feedback.walkId))
-    .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
-    .where(eq(s.feedback.flagged, true))
-    .orderBy(desc(s.feedback.createdAt))
-    .limit(30)
-  const flaggedRequests = await db
-    .select({ request: s.walkRequest, walkerName: s.profile.firstName })
-    .from(s.walkRequest)
-    .innerJoin(s.profile, eq(s.profile.userId, s.walkRequest.walkerId))
-    .where(sql`cardinality(${s.walkRequest.flags}) > 0`)
-    .orderBy(desc(s.walkRequest.createdAt))
-    .limit(30)
-  // Chats stay private, also for admins: only who sent messages about money or with links, and how many.
-  const flaggedChatRows = await db
-    .select({ senderId: s.chatMessage.senderId, name: s.profile.firstName, flags: s.chatMessage.flags })
-    .from(s.chatMessage)
-    .innerJoin(s.profile, eq(s.profile.userId, s.chatMessage.senderId))
-    .where(and(arrayOverlaps(s.chatMessage.flags, [...CHAT_WARN_FLAGS]), gt(s.chatMessage.createdAt, fromNow(-30 * 24 * 60 * 60_000))))
-    .limit(500)
+  // Nothing here depends on anything else, so it is all asked at once.
+  const [t, format, [[users], [profiles], [dogs], [walks], [open], [demo]], reports, flaggedFeedback, flaggedRequests, flaggedChatRows, pendingOrgs, banned, openTips, referrals, kpi] =
+    await Promise.all([
+      getTranslations(),
+      getFormatter(),
+      Promise.all([
+        db.select({ n: count() }).from(s.user),
+        db.select({ n: count() }).from(s.profile),
+        db.select({ n: count() }).from(s.dog).where(and(eq(s.dog.isDemo, false), ne(s.dog.status, 'draft'))),
+        db.select({ n: count() }).from(s.walk).where(eq(s.walk.status, 'ended')),
+        db.select({ n: count() }).from(s.report).where(eq(s.report.status, 'open')),
+        db.select({ n: count() }).from(s.dog).where(eq(s.dog.isDemo, true)),
+      ]),
+      db
+        .select({ report: s.report, subjectName: s.profile.firstName, subjectBanned: s.profile.bannedAt })
+        .from(s.report)
+        .leftJoin(s.profile, eq(s.profile.userId, s.report.subjectUserId))
+        .where(eq(s.report.status, 'open'))
+        .orderBy(desc(s.report.createdAt))
+        .limit(50),
+      db
+        .select({ feedback: s.feedback, walk: s.walk, dogName: s.dog.name })
+        .from(s.feedback)
+        .innerJoin(s.walk, eq(s.walk.id, s.feedback.walkId))
+        .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+        .where(eq(s.feedback.flagged, true))
+        .orderBy(desc(s.feedback.createdAt))
+        .limit(30),
+      db
+        .select({ request: s.walkRequest, walkerName: s.profile.firstName })
+        .from(s.walkRequest)
+        .innerJoin(s.profile, eq(s.profile.userId, s.walkRequest.walkerId))
+        .where(sql`cardinality(${s.walkRequest.flags}) > 0`)
+        .orderBy(desc(s.walkRequest.createdAt))
+        .limit(30),
+      // Chats stay private, also for admins: only who sent messages about money or with links, and how many.
+      db
+        .select({ senderId: s.chatMessage.senderId, name: s.profile.firstName, flags: s.chatMessage.flags })
+        .from(s.chatMessage)
+        .innerJoin(s.profile, eq(s.profile.userId, s.chatMessage.senderId))
+        .where(and(arrayOverlaps(s.chatMessage.flags, [...CHAT_WARN_FLAGS]), gt(s.chatMessage.createdAt, fromNow(-30 * 24 * 60 * 60_000))))
+        .limit(500),
+      db.select().from(s.organization).where(eq(s.organization.status, 'pending')).orderBy(desc(s.organization.createdAt)),
+      db
+        .select({ userId: s.profile.userId, firstName: s.profile.firstName, reason: s.profile.banReason })
+        .from(s.profile)
+        .where(and(isNotNull(s.profile.bannedAt)))
+        .limit(50),
+      // Tips and votes for shelters, grouped per shelter below: most asked-for first.
+      db
+        .select()
+        .from(s.suggestion)
+        .where(inArray(s.suggestion.status, ['new', 'contacted']))
+        .orderBy(desc(s.suggestion.createdAt))
+        .limit(500),
+      db
+        .select({ code: s.profile.referredBy, n: count() })
+        .from(s.profile)
+        .where(isNotNull(s.profile.referredBy))
+        .groupBy(s.profile.referredBy)
+        .orderBy(desc(count()))
+        .limit(20),
+      growthKpis(),
+    ])
   const flaggedChats = [
     ...flaggedChatRows
       .reduce((map, r) => {
@@ -69,20 +126,6 @@ export default async function AdminPage() {
       }, new Map<string, { senderId: string; name: string; n: number; flags: Set<string> }>())
       .values(),
   ].sort((a, b) => b.n - a.n)
-  const pendingOrgs = await db.select().from(s.organization).where(eq(s.organization.status, 'pending')).orderBy(desc(s.organization.createdAt))
-  const banned = await db
-    .select({ userId: s.profile.userId, firstName: s.profile.firstName, reason: s.profile.banReason })
-    .from(s.profile)
-    .where(and(isNotNull(s.profile.bannedAt)))
-    .limit(50)
-
-  // Tips and votes for shelters, grouped per shelter: most asked-for first.
-  const openTips = await db
-    .select()
-    .from(s.suggestion)
-    .where(inArray(s.suggestion.status, ['new', 'contacted']))
-    .orderBy(desc(s.suggestion.createdAt))
-    .limit(500)
   const tipGroups = [
     ...openTips
       .reduce((groups, tip) => {
@@ -97,13 +140,6 @@ export default async function AdminPage() {
   ]
     .sort((a, b) => b.ids.length - a.ids.length)
     .slice(0, 40)
-  const referrals = await db
-    .select({ code: s.profile.referredBy, n: count() })
-    .from(s.profile)
-    .where(isNotNull(s.profile.referredBy))
-    .groupBy(s.profile.referredBy)
-    .orderBy(desc(count()))
-    .limit(20)
   const referrers = referrals.length
     ? await db
         .select({ code: s.profile.referralCode, firstName: s.profile.firstName })
@@ -112,10 +148,14 @@ export default async function AdminPage() {
     : []
   const referrerName = Object.fromEntries(referrers.map((r) => [r.code, r.firstName]))
 
-  const kpi = await growthKpis()
-
   const blob = Boolean(process.env.BLOB_READ_WRITE_TOKEN)
   const mode = dbMode()
+  // Every database question travels between the app and the database: they belong close together.
+  const dbRegion = databaseRegion(process.env.DATABASE_URL || process.env.POSTGRES_URL)
+  const regions = {
+    fit: regionFit(process.env.VERCEL_REGION, dbRegion),
+    values: { app: process.env.VERCEL_REGION ?? '', db: dbRegion ?? '', suggest: dbRegion ? (vercelRegionFor(dbRegion) ?? '') : '' },
+  }
 
   return (
     <div className="stack-l">
@@ -468,6 +508,15 @@ export default async function AdminPage() {
           <li className={process.env.CRON_SECRET ? 'ok' : 'todo'}>
             <strong>CRON_SECRET:</strong> {process.env.CRON_SECRET ? '✓' : '—'}
           </li>
+          <li className={emailEnabled() ? 'ok' : 'todo'}>
+            <strong>{t('admin.email')}:</strong> {emailEnabled() ? t('admin.emailOn') : t('admin.emailOff')}
+          </li>
+          {regions.fit ? (
+            <li className={regions.fit === 'far' ? 'todo' : 'ok'}>
+              <strong>{t('admin.region')}:</strong>{' '}
+              {t(regions.fit === 'same' ? 'admin.regionSame' : regions.fit === 'near' ? 'admin.regionNear' : 'admin.regionFar', regions.values)}
+            </li>
+          ) : null}
         </ul>
       </section>
 

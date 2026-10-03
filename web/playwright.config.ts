@@ -1,6 +1,9 @@
 import { defineConfig, devices } from '@playwright/test'
+import webpush from 'web-push'
 
 const PORT = Number(process.env.E2E_PORT ?? 3200)
+// Production sends web push, so the tests run with it too, on a throwaway key pair per run.
+const vapid = webpush.generateVAPIDKeys()
 
 export default defineConfig({
   testDir: './e2e',
@@ -36,6 +39,9 @@ export default defineConfig({
           // Fake values, only to test that the support link shows on the website and never in the apps.
           SUPPORT_URL: 'https://www.patreon.com/example',
           OPERATOR_NAME: 'Voorbeeld',
+          VAPID_PUBLIC_KEY: vapid.publicKey,
+          VAPID_PRIVATE_KEY: vapid.privateKey,
+          VAPID_SUBJECT: 'mailto:e2e@example.com',
         },
       },
 })

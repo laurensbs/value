@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useForm } from '@/lib/use-form'
 import { COUNTRIES, COUNTRY_INFO, type Country } from '@/lib/countries'
 import { completeOnboarding, updateProfile, type FormState } from '@/server/actions/profile'
+import { BioField } from './BioField'
 import { LocationPicker } from './LocationPicker'
 import { PhotoUploader } from './PhotoUploader'
 import { SubmitButton } from './SubmitButton'
@@ -116,10 +117,10 @@ export function ProfileForm({ mode, initial, next, maxBirthDate }: Props) {
       </fieldset>
 
       <section className="form-section">
-        <label className="field">
-          <span>{t('onboarding.bio')}</span>
-          <textarea className="textarea" name="bio" defaultValue={initial.bio} maxLength={600} placeholder={t('onboarding.bioHint')} />
-        </label>
+        <BioField
+          initial={initial.bio}
+          facts={{ name: initial.firstName, city: initial.city, walker: initial.wantsToWalk, owner: initial.hasDogs, experience: initial.experience }}
+        />
         <fieldset className="field">
           <legend>{t('onboarding.languages')}</legend>
           <div className="choices">

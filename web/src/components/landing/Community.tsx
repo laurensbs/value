@@ -36,6 +36,7 @@ export async function Community() {
         <div
           className="lp-progress"
           role="progressbar"
+          aria-labelledby="lp-community-title"
           aria-valuemin={0}
           aria-valuemax={c.goal}
           aria-valuenow={Math.min(c.walks, c.goal)}
