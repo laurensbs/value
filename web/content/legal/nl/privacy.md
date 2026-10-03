@@ -93,7 +93,7 @@ Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: o
 |---|---|
 | Je account maken en beheren, inloggen | Overeenkomst |
 | Profielen tonen en wandelaars en honden aan elkaar koppelen | Overeenkomst |
-| Verzoeken, kennismakingen en wandelingen regelen, en contactgegevens na acceptatie delen | Overeenkomst |
+| Verzoeken, kennismakingen en wandelingen regelen, met een herinnering vooraf (ook voor groepswandelingen), en contactgegevens na acceptatie delen | Overeenkomst |
 | Live locatie tijdens een wandeling, melding bij een te late wandeling, SOS-scherm | Overeenkomst, en ons gerechtvaardigd belang en dat van eigenaren en wandelaars bij veiligheid |
 | ID-check registreren, veiligheidsquiz, beperkingen voor nieuwe accounts | Gerechtvaardigd belang: veiligheid van mensen en dieren |
 | Privé-feedback, meldingen, moderatie, blokkades en uitsluitingen | Gerechtvaardigd belang: veiligheid en misbruik voorkomen. Deels wettelijke plicht (DSA) |

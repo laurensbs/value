@@ -1,7 +1,9 @@
 import 'server-only'
 import { and, asc, count, eq, gt, inArray, isNull, sql } from 'drizzle-orm'
+import { getTranslations } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { chatMoment, meetChecklistKeys, suggestionKeys, type ChatSide } from '@/lib/conversation'
 import { CHAT_WARN_FLAGS, scanText } from '@/lib/rules'
 import type { FormState } from './actions/profile'
 import { audit, notify } from './notify'
@@ -53,6 +55,59 @@ export async function chatAccess(requestId: string, viewer: Viewer): Promise<Cha
   const blocked = row.dog.ownerId ? await isBlocked(viewer.userId, isWalker ? row.dog.ownerId : row.request.walkerId) : false
   const canSend = OPEN_FOR_CHAT.includes(row.request.status) && !blocked && others.length > 0
   return { ...row, isWalker, others, canSend }
+}
+
+/** Who the viewer deals with about a request: the owner or the shelter for a walker, else the walker. */
+export async function partnerOf(access: ChatAccess): Promise<{ name: string; userId: string | null; orgId: string | null }> {
+  const db = await getDb()
+  if (access.isWalker && access.dog.orgId) {
+    const [org] = await db.select({ name: s.organization.name }).from(s.organization).where(eq(s.organization.id, access.dog.orgId))
+    return { name: org?.name ?? '', userId: null, orgId: access.dog.orgId }
+  }
+  const userId = access.isWalker ? access.dog.ownerId : access.request.walkerId
+  if (!userId) return { name: '', userId: null, orgId: null }
+  const [p] = await db.select({ name: s.profile.firstName }).from(s.profile).where(eq(s.profile.userId, userId))
+  return { name: p?.name ?? '', userId, orgId: null }
+}
+
+/**
+ * Ready messages for this moment of the appointment, in the viewer's language, minus the ones the
+ * viewer already sent. Empty when the conversation is closed.
+ */
+export async function chatSuggestions(access: ChatAccess, sent: ChatMessage[], viewerId: string, now = new Date()): Promise<string[]> {
+  if (!access.canSend) return []
+  const db = await getDb()
+  const [active] = await db
+    .select({ id: s.walk.id })
+    .from(s.walk)
+    .where(and(eq(s.walk.requestId, access.request.id), eq(s.walk.status, 'active')))
+    .limit(1)
+  const moment = chatMoment(access.request, now, Boolean(active))
+  if (!moment) return []
+  const side: ChatSide = access.isWalker ? 'walker' : 'host'
+  const [grant] =
+    side === 'walker' && moment === 'done'
+      ? await db
+          .select({ soloAllowed: s.trustGrant.soloAllowed })
+          .from(s.trustGrant)
+          .where(and(eq(s.trustGrant.dogId, access.dog.id), eq(s.trustGrant.walkerId, viewerId)))
+      : []
+  const t = await getTranslations('chatQuick')
+  const mine = new Set(sent.filter((m) => m.senderId === viewerId).map((m) => m.body))
+  return suggestionKeys(side, moment, {
+    kind: access.request.kind,
+    shelter: Boolean(access.dog.orgId),
+    weekly: access.request.weekly,
+    soloAllowed: grant?.soloAllowed ?? false,
+  })
+    .map((key) => t(`${side}.${key}`, { dog: access.dog.name }))
+    .filter((text) => !mine.has(text))
+}
+
+/** What to talk about when meeting, for one side: `name` is the walker's first name. */
+export async function meetChecklist(side: ChatSide, dog: string, name: string): Promise<{ key: string; text: string }[]> {
+  const t = await getTranslations('meetCheck')
+  return meetChecklistKeys(side).map((key) => ({ key, text: t(`${side}.${key}`, { dog, name }) }))
 }
 
 /** Messages oldest first; `afterMs` returns only newer ones for polling. */

@@ -26,7 +26,12 @@ export default async function SupportPage() {
   const cfg = supportConfig()
   const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const total = costs.items.reduce((sum, c) => ({ min: sum.min + perMonth(c, c.min), max: sum.max + perMonth(c, c.max) }), { min: 0, max: 0 })
-  const amount = (c: Cost) => `${c.min === c.max ? euro(c.min) : `${euro(c.min)}–${euro(c.max)}`} ${t(`support.per.${c.per}`)}`
+  // The amount stays on one line; "per maand" may move under it on a small phone.
+  const amount = (c: Cost) => (
+    <>
+      <span className="cost-amount">{c.min === c.max ? euro(c.min) : `${euro(c.min)}–${euro(c.max)}`}</span> {t(`support.per.${c.per}`)}
+    </>
+  )
 
   return (
     <div className="narrow-page stack-l">

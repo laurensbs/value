@@ -46,6 +46,15 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/cities/amsterdam')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/support')
+
+  // The app on the home screen opens on Today, in the visitor's language, with shortcuts on Android.
+  const manifest = await (await page.request.get('/manifest.webmanifest', { headers: { 'accept-language': 'en' } })).json()
+  expect(manifest).toMatchObject({ id: '/dogs', start_url: '/', lang: 'en', description: "A regular walk with a dog who's waiting for you." })
+  expect(manifest.shortcuts.map((s: { name: string; url: string }) => [s.name, s.url])).toEqual([
+    ['Dogs nearby', '/dogs'],
+    ['My walks', '/requests'],
+    ['Notifications', '/notifications'],
+  ])
   await context.close()
 })
 
@@ -73,11 +82,17 @@ test('support link: on the website when the recipient is named, never in the app
   await app.close()
 })
 
-test('daily jobs answer: housekeeping and friendly reminders', async ({ request }) => {
+test('daily jobs answer: housekeeping, appointment and friendly reminders', async ({ request }) => {
   // Without CRON_SECRET (as here) the jobs are open; Vercel Cron sends the secret in production.
   expect((await request.get('/api/cron/cleanup')).status()).toBe(200)
   const nudges = await request.get('/api/cron/nudges')
   expect(nudges.status()).toBe(200)
   // Outside the day in the Netherlands nobody is reminded, so only the shape is checked here.
-  expect(await nudges.json()).toMatchObject({ people: expect.any(Number), sent: expect.any(Object), pushed: 0, emailed: 0 })
+  expect(await nudges.json()).toMatchObject({
+    people: expect.any(Number),
+    sent: expect.any(Object),
+    pushed: 0,
+    emailed: 0,
+    reminders: { appointments: expect.any(Number), groupWalks: expect.any(Number), pushed: expect.any(Number), emailed: 0 },
+  })
 })

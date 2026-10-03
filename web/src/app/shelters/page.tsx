@@ -12,7 +12,7 @@ import * as s from '@/db/schema'
 import { COUNTRIES, COUNTRY_INFO, isCountry } from '@/lib/countries'
 import { DIRECTORY } from '@/lib/directory'
 import { guessCountry } from '@/lib/guess-country'
-import { getViewer } from '@/server/session'
+import { getSession, getViewer } from '@/server/session'
 import '../landing.css'
 
 export async function generateMetadata() {
@@ -23,47 +23,47 @@ export async function generateMetadata() {
 export default async function SheltersPage({ searchParams }: { searchParams: Promise<{ country?: string }> }) {
   const sp = await searchParams
   const country = isCountry(sp.country) ? sp.country : await guessCountry()
-  const t = await getTranslations()
   const db = await getDb()
-  const partners = await db
-    .select({
-      id: s.organization.id,
-      name: s.organization.name,
-      city: s.organization.city,
-      country: s.organization.country,
-      lat: s.organization.lat,
-      lng: s.organization.lng,
-      directoryId: s.organization.directoryId,
-      isDemo: s.organization.isDemo,
-      // Only dogs people can actually meet: not paused, adopted, hidden or drafts.
-      dogs: sql<number>`count(${s.dog.id}) filter (where ${s.dog.status} = 'active')`.mapWith(Number),
-    })
-    .from(s.organization)
-    .leftJoin(s.dog, eq(s.dog.orgId, s.organization.id))
-    .where(eq(s.organization.status, 'verified'))
-    .groupBy(s.organization.id)
+  const userId = (await getSession())?.user.id
+  // "I want to walk here": how many people asked for each shelter, and whether the viewer did.
+  const [t, viewer, partners, voteRows, myVotes] = await Promise.all([
+    getTranslations(),
+    getViewer(),
+    db
+      .select({
+        id: s.organization.id,
+        name: s.organization.name,
+        city: s.organization.city,
+        country: s.organization.country,
+        lat: s.organization.lat,
+        lng: s.organization.lng,
+        directoryId: s.organization.directoryId,
+        isDemo: s.organization.isDemo,
+        // Only dogs people can actually meet: not paused, adopted, hidden or drafts.
+        dogs: sql<number>`count(${s.dog.id}) filter (where ${s.dog.status} = 'active')`.mapWith(Number),
+      })
+      .from(s.organization)
+      .leftJoin(s.dog, eq(s.dog.orgId, s.organization.id))
+      .where(eq(s.organization.status, 'verified'))
+      .groupBy(s.organization.id),
+    db
+      .select({ directoryId: s.suggestion.directoryId, n: count() })
+      .from(s.suggestion)
+      .where(and(isNotNull(s.suggestion.directoryId), eq(s.suggestion.country, country), inArray(s.suggestion.status, ['new', 'contacted'])))
+      .groupBy(s.suggestion.directoryId),
+    userId
+      ? db
+          .select({ directoryId: s.suggestion.directoryId })
+          .from(s.suggestion)
+          .where(and(eq(s.suggestion.suggestedBy, userId), isNotNull(s.suggestion.directoryId)))
+      : [],
+  ])
   const localPartners = partners.filter((p) => p.country === country)
   const claimed = new Set(partners.map((p) => p.directoryId).filter(Boolean))
   const others = DIRECTORY.filter((d) => d.country === country && !claimed.has(d.id)).sort((a, b) => (a.city ?? '').localeCompare(b.city ?? ''))
 
-  // "I want to walk here": how many people asked for each shelter, and whether the viewer did.
-  const viewer = await getViewer()
-  const voteRows = await db
-    .select({ directoryId: s.suggestion.directoryId, n: count() })
-    .from(s.suggestion)
-    .where(and(isNotNull(s.suggestion.directoryId), eq(s.suggestion.country, country), inArray(s.suggestion.status, ['new', 'contacted'])))
-    .groupBy(s.suggestion.directoryId)
   const votes: Record<string, number> = Object.fromEntries(voteRows.map((r) => [r.directoryId ?? '', r.n]))
-  const mine = viewer?.profile
-    ? new Set(
-        (
-          await db
-            .select({ directoryId: s.suggestion.directoryId })
-            .from(s.suggestion)
-            .where(and(eq(s.suggestion.suggestedBy, viewer.userId), isNotNull(s.suggestion.directoryId)))
-        ).map((r) => r.directoryId),
-      )
-    : new Set<string | null>()
+  const mine = new Set<string | null>(viewer?.profile ? myVotes.map((r) => r.directoryId) : [])
   const here = `/shelters?country=${country}`
   const loginHref = viewer?.profile ? null : viewer ? `/onboarding?next=${encodeURIComponent(here)}` : `/login?next=${encodeURIComponent(here)}`
 
@@ -87,7 +87,7 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
           </Link>
         ))}
       </nav>
-      {markers.length ? <Map center={COUNTRY_INFO[country].center} zoom={7} markers={markers} fitToMarkers className="map" ariaLabel={t('directory.title')} /> : null}
+      {markers.length ? <Map center={COUNTRY_INFO[country].center} zoom={7} markers={markers} fitToMarkers cluster className="map" ariaLabel={t('directory.title')} /> : null}
 
       <section className="stack-s">
         <h2>{t('directory.partner')}</h2>

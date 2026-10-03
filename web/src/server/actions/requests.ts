@@ -37,6 +37,12 @@ function canDecide(viewer: OnboardedViewer, dog: typeof s.dog.$inferSelect): boo
   return dog.ownerId === viewer.userId || isOrgMember(viewer, dog.orgId)
 }
 
+async function orgVerified(orgId: string): Promise<boolean> {
+  const db = await getDb()
+  const [org] = await db.select({ status: s.organization.status }).from(s.organization).where(eq(s.organization.id, orgId))
+  return org?.status === 'verified'
+}
+
 export async function createRequest(_prev: FormState, form: FormData): Promise<FormState> {
   const viewer = await actionViewer()
   const parsed = requestSchema.safeParse({
@@ -53,6 +59,8 @@ export async function createRequest(_prev: FormState, form: FormData): Promise<F
   const db = await getDb()
   const [dog] = await db.select().from(s.dog).where(eq(s.dog.id, r.dogId))
   if (!dog) return { ok: false, error: 'dog-unavailable' }
+  // A shelter's dogs can be asked for once Rondje checked the shelter.
+  if (dog.orgId && !(await orgVerified(dog.orgId))) return { ok: false, error: 'dog-unavailable' }
 
   const startsAt = zonedToUtc(r.date, r.time)
   const inMs = startsAt.getTime() - Date.now()
@@ -96,6 +104,8 @@ export async function respondToRequest(requestId: string, decision: 'accept' | '
     .where(eq(s.walkRequest.id, requestId))
   if (!row || !canDecide(viewer, row.dog)) return { ok: false, error: 'forbidden' }
   if (row.request.status !== 'pending') return { ok: false, error: 'already-decided' }
+  // A dog a moderator took offline cannot get new appointments; saying no stays possible.
+  if (decision === 'accept' && row.dog.status === 'hidden') return { ok: false, error: 'dog-unavailable' }
 
   await db
     .update(s.walkRequest)

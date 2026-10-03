@@ -40,7 +40,7 @@ export default async function MyDogsPage() {
           {dogs.map((dog) => (
             <li key={dog.id}>
               <Link href={`/dogs/${dog.id}`} className="dog-card">
-                <DogPortrait dog={dog} />
+                <DogPortrait dog={dog} decorative />
                 <div className="dog-card-body">
                   <span className="dog-name">{dog.name}</span>
                   <span className="meta">

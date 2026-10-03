@@ -10,5 +10,7 @@ export async function GET() {
     demoMode: isDemoMode(),
     blob: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
     socialLogin: enabledSocialProviders,
+    // Where this function runs (also in Vercel's x-vercel-id header): to check it sits next to the database.
+    region: process.env.VERCEL_REGION ?? null,
   })
 }

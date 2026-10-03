@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useState, useTransition } from 'react'
+import { useRef, useState, useTransition } from 'react'
 import { logWalkCare } from '@/server/actions/walks'
 import type { CareCounts, CareKind } from '@/server/walks'
 
@@ -11,23 +11,52 @@ const KINDS: { kind: CareKind; label: 'carePee' | 'carePoo' | 'careWater' }[] = 
   { kind: 'water', label: 'careWater' },
 ]
 
+const clamp = (n: number) => Math.min(20, Math.max(0, n))
+
+interface Tap {
+  id: number
+  kind: CareKind
+  delta: 1 | -1
+}
+
+/** Taps still on their way, on top of the last counts the server confirmed, applied as the server does. */
+function withTaps(confirmed: CareCounts, taps: Tap[]): CareCounts {
+  return taps.reduce((care, tap) => ({ ...care, [tap.kind]: clamp(care[tap.kind] + tap.delta) }), confirmed)
+}
+
 /** The walker's one-tap report: pee, poo, drink. A small minus takes one back after a mis-tap. */
 export function WalkCareButtons({ walkId, dogName, initial }: { walkId: string; dogName: string; initial: CareCounts }) {
   const t = useTranslations('walk')
-  const [care, setCare] = useState(initial)
+  // A tap shows at once. Each answer from the server replaces the confirmed counts and settles its
+  // own tap; a tap that fails is simply dropped. Quick taps never undo one another that way, and
+  // the walker never sees more than the owner does.
+  const [confirmed, setConfirmed] = useState(initial)
+  const [taps, setTaps] = useState<Tap[]>([])
+  const [failed, setFailed] = useState(false)
   const [, start] = useTransition()
+  const nextTap = useRef(0)
+  const care = withTaps(confirmed, taps)
 
   function log(kind: CareKind, delta: 1 | -1) {
-    // Show the tap at once; the server's answer settles the real count.
-    setCare((c) => ({ ...c, [kind]: Math.min(20, Math.max(0, c[kind] + delta)) }))
+    const tap: Tap = { id: nextTap.current++, kind, delta }
+    setTaps((list) => [...list, tap])
+    setFailed(false)
+    const settle = () => setTaps((list) => list.filter((other) => other.id !== tap.id))
     start(async () => {
-      const next = await logWalkCare(walkId, kind, delta)
-      if (next) setCare(next)
+      try {
+        const next = await logWalkCare(walkId, kind, delta)
+        if (next) setConfirmed(next)
+        settle()
+      } catch {
+        // Out of range: the tap is dropped, and a short note says so.
+        settle()
+        setFailed(true)
+      }
     })
   }
 
   return (
-    <section className="stack-s" aria-label={t('careTitle')}>
+    <section className="stack-s" aria-label={t('careTitle')} aria-busy={taps.length > 0}>
       <h2 className="small-title">{t('careTitle')}</h2>
       <div className="care-buttons">
         {KINDS.map(({ kind, label }) => (
@@ -44,6 +73,11 @@ export function WalkCareButtons({ walkId, dogName, initial }: { walkId: string; 
           </div>
         ))}
       </div>
+      {failed ? (
+        <p className="notice warn small" role="status">
+          {t('careFailed')}
+        </p>
+      ) : null}
       <p className="muted small">{t('careHint', { dogName })}</p>
     </section>
   )

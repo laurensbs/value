@@ -16,7 +16,7 @@
   --on-ball: #16201a;
   --calm: #2d5d8a;
   --calm-soft: #e1ebf5;
-  --warn: #a35a00;
+  --warn: #9a5500;
   --warn-soft: #fbecd6;
   --danger: #b3261e;
   --danger-soft: #f9dedc;
@@ -28,9 +28,10 @@
   --tile-mix: 100%;
   --shadow: 0 1px 2px rgb(22 32 26 / 0.06), 0 8px 24px rgb(22 32 26 / 0.08);
 
-  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Figtree Variable', 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  /* The faces come from src/app/fonts.ts; each variable already ends in a fallback tuned to its size. */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-figtree), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-hand: var(--font-caveat), 'Segoe Print', 'Bradley Hand', cursive;
 
   --radius-s: 10px;
   --radius-m: 18px;
@@ -76,6 +77,20 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Keyboard focus and jumps to a section land clear of the sticky header and of the bars at the
+     bottom (form buttons, tab bar), never behind them (WCAG 2.4.11). */
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 12px);
+  scroll-padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+}
+
+html:has(.active-walk) {
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 72px);
+}
+
+@media (max-width: 899px) {
+  html:has(.has-tabbar) {
+    scroll-padding-bottom: calc(var(--tabbar-h) + 120px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 body {
@@ -96,6 +111,8 @@ h3 {
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-wrap: balance;
+  /* A name longer than the line (a dog's or a shelter's) breaks instead of running out. */
+  overflow-wrap: break-word;
   margin: 0;
 }
 
@@ -236,6 +253,18 @@ mark {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.header-actions > .button {
+  white-space: nowrap;
+}
+
+/* Signed out on a 320px phone: the logo without its name, so the language switch and "Se connecter"
+   fit next to it on one line (the link keeps "Rondje" as its name for screen readers). */
+@media (max-width: 359px) {
+  .header-inner:has(> .header-actions > .button) .brand > span {
+    display: none;
+  }
 }
 
 @media (min-width: 900px) {
@@ -480,6 +509,22 @@ mark {
   white-space: nowrap;
 }
 
+/* An icon keeps its size when the label is long; the label gives way instead. */
+.button > svg {
+  flex-shrink: 0;
+}
+
+/* On a phone, a label wider than the screen allows (a long French or Spanish one on a 320px phone)
+   wraps onto a second line instead of running out of its card. */
+@media (max-width: 480px) {
+  .button {
+    max-width: 100%;
+    white-space: normal;
+    text-wrap: balance;
+    text-align: center;
+  }
+}
+
 .button:active {
   transform: scale(0.98);
 }
@@ -646,6 +691,7 @@ mark {
 }
 
 .field > span,
+.field > label[for],
 .field legend {
   font-weight: 650;
   font-size: 0.92rem;
@@ -793,6 +839,39 @@ fieldset.field {
   height: auto;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-l);
+}
+
+/* A sticker on the photo of a dog that is new on Rondje. */
+.portrait-wrap {
+  position: relative;
+  display: block;
+  align-self: start;
+}
+
+.new-sticker {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1.5;
+  transform: rotate(-6deg);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
+  pointer-events: none;
+}
+
+/* On a small portrait (Today's strip) the sticker sits on the photo's corner. */
+.portrait-wrap .new-sticker {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+}
+
+/* On a big dog card it takes the free corner of the row above the photo. */
+.dcard-float .new-sticker {
+  padding: 4px 10px;
+  font-size: 0.78rem;
 }
 
 .dog-card-body {
@@ -964,6 +1043,92 @@ fieldset.field {
   box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
 }
 
+/* Several dogs or shelters in one spot: one marker with their number. */
+.map-cluster {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1f5a3d;
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 3px rgb(31 90 61 / 0.3), 0 2px 6px rgb(0 0 0 / 0.25);
+  font: 800 1rem/1 var(--font-body);
+}
+
+/* Popups and the map credit in the app's own colours, readable in dark mode too. */
+.leaflet-container .leaflet-popup-content-wrapper,
+.leaflet-container .leaflet-popup-tip {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.leaflet-container .leaflet-popup-content {
+  margin: 10px 44px 10px 16px;
+  font: 600 0.95rem/1.35 var(--font-body);
+}
+
+/* The popup's close button: a full tap target in the corner. */
+.leaflet-container a.leaflet-popup-close-button {
+  width: 44px;
+  height: 44px;
+  font: 400 1.5rem/44px var(--font-body);
+  color: var(--muted);
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus-visible {
+  color: var(--ink);
+}
+
+.leaflet-container .leaflet-popup-content a,
+.leaflet-container .leaflet-control-attribution a {
+  color: var(--grass);
+}
+
+.leaflet-container .leaflet-control-attribution {
+  background: color-mix(in oklab, var(--surface) 90%, transparent);
+  color: var(--muted);
+}
+
+.leaflet-container .leaflet-bar a {
+  background: var(--surface);
+  color: var(--ink);
+  border-bottom-color: var(--line);
+}
+
+.leaflet-container .leaflet-bar a:hover,
+.leaflet-container .leaflet-bar a:focus-visible {
+  background: var(--sunken);
+}
+
+.leaflet-container .leaflet-bar a.leaflet-disabled {
+  background: var(--sunken);
+  color: var(--muted);
+}
+
+.map-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.map-list li + li {
+  border-top: 1px solid var(--line);
+}
+
+.map-list a,
+.map-list span,
+.leaflet-popup-content > a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* ---------- Walk ---------- */
 
 .walk-screen {
@@ -1057,6 +1222,8 @@ fieldset.field {
 .list-item > .grow {
   flex: 1;
   min-width: 0;
+  /* A word longer than the line (a shelter's name, an email address) breaks instead of running out. */
+  overflow-wrap: break-word;
 }
 
 .timeline {
@@ -1320,10 +1487,40 @@ fieldset.field {
   text-decoration: none;
 }
 
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button.chip:hover {
+  border-color: var(--ink);
+}
+
+button.chip:active {
+  scale: 0.97;
+}
+
 .chip.on {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--paper);
+}
+
+/* Ready sentences can run over two lines: then they read as a rounded box, starting on the left. */
+.chip-row.sentences .chip {
+  border-radius: 18px;
+  text-align: left;
+}
+
+button.chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  scale: 1;
+}
+
+.input.narrow {
+  max-width: 160px;
 }
 
 /* ---------- Dog page ---------- */
@@ -1952,6 +2149,12 @@ fieldset.form-section {
   color: var(--grass);
 }
 
+/* A section heading on one page, a subheading on another: the same size either way. */
+.benefits :is(h2, h3) {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
 .signups {
   list-style: none;
   margin: 0;
@@ -2508,6 +2711,59 @@ legend {
   text-decoration: line-through;
 }
 
+/* What to talk about when meeting: a list to tick off on the spot. */
+.meet-check {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in oklab, var(--grass) 40%, var(--line));
+  border-radius: var(--radius-m);
+  background: color-mix(in oklab, var(--grass) 6%, var(--surface));
+}
+
+.meet-check > summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+
+.meet-check > summary::-webkit-details-marker {
+  display: none;
+}
+
+.meet-check .checklist label {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+/* The whole line is the checkbox, as with .choice. */
+.meet-check .checklist input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.meet-check .checklist .tick {
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.meet-check .checklist li.done .tick {
+  animation: pop 0.3s ease;
+}
+
+.meet-check input:focus-visible + .tick {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
 .bulk-actions .grow {
   flex: 1;
   justify-content: center;
@@ -2550,6 +2806,31 @@ legend {
   flex: none;
   justify-items: end;
   text-align: right;
+}
+
+/* On a phone the actions go under the shelter's name, so a long name keeps the full width. */
+@media (max-width: 559px) {
+  .list-item:has(> .directory-actions) {
+    flex-wrap: wrap;
+  }
+
+  /* A single button next to a name moves under it once the name would get less than 120px. */
+  .list-item:has(> .button) {
+    flex-wrap: wrap;
+  }
+
+  .list-item:has(> .button) > .grow {
+    flex-basis: 120px;
+  }
+
+  .directory-actions {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    text-align: left;
+  }
 }
 
 /* ---------- Footer: site links above the legal links ---------- */
@@ -2622,8 +2903,11 @@ legend {
 }
 
 .cost-table td {
-  white-space: nowrap;
   text-align: right;
+}
+
+.cost-amount {
+  white-space: nowrap;
 }
 
 .support-card {
@@ -3080,10 +3364,55 @@ legend {
   opacity: 0.75;
 }
 
-.chat-form {
+/* The ready messages and the input stay together at the bottom while the conversation scrolls. */
+.chat-compose {
   position: sticky;
   bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   z-index: 2;
+  display: grid;
+  gap: 8px;
+  /* Messages scrolling underneath fade out above it and stay hidden below it, instead of showing
+     between the ready messages or in the gap above the tab bar. */
+  background: var(--paper);
+  box-shadow: 0 -10px 10px var(--paper), 0 8px 0 var(--paper);
+}
+
+.chat-quick {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  /* Room for the chips' shadow inside the scrolling row. */
+  padding: 2px 2px 8px;
+  margin-bottom: -6px;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  animation: rise 0.3s ease-out both;
+}
+
+.chat-quick::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-quick .chip {
+  flex: none;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px color-mix(in oklab, var(--ink) 12%, transparent);
+}
+
+.chat-quick .chip:hover {
+  border-color: var(--ink);
+}
+
+@media (min-width: 720px) {
+  .chat-quick {
+    flex-wrap: wrap;
+  }
+}
+
+.chat-form {
   display: flex;
   align-items: flex-end;
   gap: 8px;
@@ -3125,7 +3454,7 @@ legend {
 
 /* Below 900px the tab bar covers the bottom of the screen; keep the chat box above it. */
 @media (max-width: 899px) {
-  .has-tabbar .chat-form {
+  .has-tabbar .chat-compose {
     bottom: calc(var(--tabbar-h) + 8px + env(safe-area-inset-bottom, 0px));
   }
 }
@@ -3133,11 +3462,14 @@ legend {
 /* ---------- Onboarding: one question at a time, with Rondje's dog asking ---------- */
 
 .onboarding {
-  max-width: 560px;
-  margin: 0 auto;
+  /* The steps get 560px, plus 6px on each side where a focus ring can show. A new step slides in
+     from the side; it is clipped to the form, so the page itself never moves sideways. */
+  max-width: 572px;
+  margin: 0 max(-6px, (100% - 572px) / 2);
+  padding: 4px 6px 8px;
+  overflow-x: clip;
   display: grid;
   gap: 20px;
-  padding-block: 4px 8px;
 }
 
 .onboarding-top {
@@ -3150,8 +3482,8 @@ legend {
 .icon-button {
   display: inline-grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1.5px solid var(--line);
   background: var(--surface);
@@ -3411,6 +3743,18 @@ legend {
   font-size: 1.05rem;
 }
 
+/* A new dog, one question at a time: the same steps as onboarding, above the tab bar on phones. */
+.dog-steps .card {
+  min-width: 0;
+}
+
+@media (max-width: 899px) {
+  .has-tabbar .dog-steps .onboarding-actions {
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 12px;
+  }
+}
+
 /* ---------- Today: the members' home ---------- */
 
 .today {
@@ -3535,6 +3879,76 @@ legend {
 
 .back-card .button {
   align-self: flex-start;
+}
+
+.push-ask {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-color: color-mix(in srgb, var(--calm) 30%, var(--line));
+  animation: rise 0.4s ease both;
+}
+
+.push-ask .dog-face {
+  flex: none;
+}
+
+.push-ask-done {
+  animation: rise 0.4s ease both;
+}
+
+/* The taps to put Rondje on the home screen, each with the icon to look for. */
+.install-steps {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.install-steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.install-step-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-s);
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+/* The owner's ready message for the neighbours, as it will arrive: a speech bubble. */
+.share-card {
+  border-color: color-mix(in srgb, var(--grass) 35%, var(--line));
+}
+
+.share-message {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-m) var(--radius-m) var(--radius-m) 4px;
+  background: var(--grass-soft);
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+/* A dog's own poster: the dog large, a line of facts under it. */
+.poster-dog .dog-photo.large {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-m);
+  /* Paper is white, also when the screen is dark. */
+  background: var(--tile, #ecdcd0);
+}
+
+.poster-facts {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1f5a3d;
 }
 
 .pending-card {
@@ -3749,8 +4163,9 @@ legend {
 }
 
 .week-days .dot {
-  width: 34px;
-  height: 34px;
+  /* Narrower on a small phone, so the seven days never overlap. */
+  width: min(34px, 100%);
+  aspect-ratio: 1;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -3818,6 +4233,19 @@ legend {
 
 .challenge-bar > span {
   background: linear-gradient(90deg, var(--grass), color-mix(in oklab, var(--grass) 60%, var(--ball)));
+}
+
+/* For owners on Today: how many walkers live nearby, or a nudge to tell the neighbours. */
+.walkers-near {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.walkers-near > svg {
+  flex: none;
+  margin-top: 2px;
 }
 
 .mini-dogs {
@@ -4178,11 +4606,6 @@ legend {
   font-weight: 650;
 }
 
-/* Links to the request form land below the sticky header. */
-.plan-anchor {
-  scroll-margin-top: calc(var(--header-h) + 16px);
-}
-
 /* ---------- Progress: levels, badges, dog friends ---------- */
 
 .progress-page {
@@ -4349,8 +4772,17 @@ legend {
   animation: glow 2.4s ease-in-out infinite;
 }
 
-.level-path li.later {
-  opacity: 0.75;
+/* Long level names ("Hondenfluisteraar") break inside their card instead of running out of it. */
+.level-path li > .stack-s {
+  min-width: 0;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+
+/* Levels still ahead: an open stone on the route, with text as readable as the rest. */
+.level-path li.later .level-stone {
+  background: transparent;
+  border: 1.5px dashed var(--muted);
 }
 
 .earn-list,

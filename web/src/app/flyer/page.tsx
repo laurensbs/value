@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { PrintButton } from '@/components/PrintButton'
 import { QrCode } from '@/components/QrCode'
+import { inviteUrl } from '@/lib/invite'
 import { siteUrl } from '@/lib/site'
 import { getViewer } from '@/server/session'
 
@@ -22,7 +23,7 @@ export default async function FlyerPage({ searchParams }: { searchParams: Promis
   const t = await getTranslations('flyer')
   const code = viewer?.profile?.referralCode
   const url = code
-    ? `${siteUrl()}/r/${code}${audience === 'owner' ? '?intent=owner' : ''}`
+    ? inviteUrl(siteUrl(), code, audience === 'owner' ? 'owner' : undefined)
     : `${siteUrl()}/signup${audience === 'owner' ? '?intent=owner' : ''}`
 
   return (

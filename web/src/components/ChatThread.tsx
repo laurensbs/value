@@ -16,11 +16,14 @@ interface Props {
   initial: ChatMessage[]
   canSend: boolean
   maxLength: number
+  /** Ready messages for this moment of the appointment; a tap puts one in the box to edit or send. */
+  suggestions?: string[]
 }
 
 /** A plain chat: newest at the bottom, polls while open, Enter sends on a keyboard (Shift+Enter for a new line). */
-export function ChatThread({ requestId, viewerId, dogName, initial, canSend: initialCanSend, maxLength }: Props) {
+export function ChatThread({ requestId, viewerId, dogName, initial, canSend: initialCanSend, maxLength, suggestions = [] }: Props) {
   const t = useTranslations('chat')
+  const tq = useTranslations('chatQuick')
   const format = useFormatter()
   const [messages, setMessages] = useState(initial)
   const [canSend, setCanSend] = useState(initialCanSend)
@@ -29,6 +32,19 @@ export function ChatThread({ requestId, viewerId, dogName, initial, canSend: ini
   const [pending, start] = useTransition()
   const lastAt = useRef(initial.at(-1)?.t ?? 0)
   const end = useRef<HTMLDivElement>(null)
+  const compose = useRef<HTMLDivElement>(null)
+  const input = useRef<HTMLTextAreaElement>(null)
+  // Once sent, a ready message is not offered again.
+  const offered = suggestions.filter((text) => !messages.some((m) => m.senderId === viewerId && m.body === text))
+
+  function use(text: string) {
+    setDraft(text)
+    setError(null)
+    requestAnimationFrame(() => {
+      input.current?.focus()
+      input.current?.setSelectionRange(text.length, text.length)
+    })
+  }
 
   function merge(incoming: ChatMessage[]) {
     if (!incoming.length) return
@@ -58,7 +74,13 @@ export function ChatThread({ requestId, viewerId, dogName, initial, canSend: ini
   }, [requestId])
 
   useEffect(() => {
-    end.current?.scrollIntoView({ block: 'end' })
+    const marker = end.current
+    if (!marker) return
+    marker.scrollIntoView({ block: 'end' })
+    // The ready messages and the box stick to the bottom of the screen: the newest message lands just above them.
+    const box = compose.current?.getBoundingClientRect()
+    const hidden = box ? marker.getBoundingClientRect().bottom + 16 - box.top : 0
+    if (hidden > 0) window.scrollBy(0, hidden)
   }, [messages.length])
 
   function send() {
@@ -103,34 +125,46 @@ export function ChatThread({ requestId, viewerId, dogName, initial, canSend: ini
       </ol>
       <div ref={end} />
       {canSend ? (
-        <form
-          className="chat-form"
-          onSubmit={(e) => {
-            e.preventDefault()
-            send()
-          }}
-        >
-          <label className="visually-hidden" htmlFor="chat-input">
-            {t('placeholder')}
-          </label>
-          <textarea
-            id="chat-input"
-            rows={1}
-            value={draft}
-            maxLength={maxLength}
-            placeholder={t('placeholder')}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing && window.matchMedia('(pointer: fine)').matches) {
-                e.preventDefault()
-                send()
-              }
+        <div className="chat-compose" ref={compose}>
+          {offered.length && !draft.trim() ? (
+            <div className="chat-quick" role="group" aria-label={tq('label')}>
+              {offered.map((text) => (
+                <button key={text} type="button" className="chip" title={text} onClick={() => use(text)}>
+                  {text}
+                </button>
+              ))}
+            </div>
+          ) : null}
+          <form
+            className="chat-form"
+            onSubmit={(e) => {
+              e.preventDefault()
+              send()
             }}
-          />
-          <button type="submit" className="button primary" disabled={pending || !draft.trim()}>
-            {pending ? t('sending') : t('send')}
-          </button>
-        </form>
+          >
+            <label className="visually-hidden" htmlFor="chat-input">
+              {t('placeholder')}
+            </label>
+            <textarea
+              ref={input}
+              id="chat-input"
+              rows={1}
+              value={draft}
+              maxLength={maxLength}
+              placeholder={t('placeholder')}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing && window.matchMedia('(pointer: fine)').matches) {
+                  e.preventDefault()
+                  send()
+                }
+              }}
+            />
+            <button type="submit" className="button primary" disabled={pending || !draft.trim()}>
+              {pending ? t('sending') : t('send')}
+            </button>
+          </form>
+        </div>
       ) : (
         <p className="notice small">{t('closed')}</p>
       )}

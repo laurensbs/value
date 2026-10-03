@@ -1,8 +1,11 @@
 import 'server-only'
-import { and, asc, count, desc, eq, gte, inArray, isNull, ne, notInArray, or, sql } from 'drizzle-orm'
+import { cache } from 'react'
+import { and, asc, between, count, desc, eq, gte, inArray, isNull, ne, notInArray, or, sql } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { citySlug } from '@/lib/cities'
 import { distanceM, type LatLng } from '@/lib/geo'
+import { NEAR_KM, nearness } from '@/lib/nearby'
 import { NUDGE_KINDS } from '@/lib/nudges'
 import type { DogFacts, Relation, TrustSignals, WalkerFacts } from '@/lib/rules'
 import type { Viewer } from './session'
@@ -90,17 +93,44 @@ export async function listDogs(filters: DogFilters, limit = 60): Promise<DogList
   return items.slice(0, limit)
 }
 
+/**
+ * How many people who want to walk live near a place (lib/nearby.ts), not counting `except`. Only
+ * a number: who they are stays private until they ask about a dog themselves.
+ */
+export async function walkersNear(place: { country: string; city: string; lat: number | null; lng: number | null }, except: string): Promise<number> {
+  const db = await getDb()
+  const sameTown = sql`lower(trim(${s.profile.city})) = ${place.city.trim().toLowerCase()}`
+  let where = sameTown
+  if (place.lat != null && place.lng != null) {
+    // A box around the place for the database; the exact distance is checked below.
+    const dLat = NEAR_KM / 110.5
+    const dLng = NEAR_KM / (111.3 * Math.cos((place.lat * Math.PI) / 180))
+    where = or(
+      and(between(s.profile.lat, place.lat - dLat, place.lat + dLat), between(s.profile.lng, place.lng - dLng, place.lng + dLng)),
+      and(isNull(s.profile.lat), sameTown),
+    )!
+  }
+  const rows = await db
+    .select({ city: s.profile.city, lat: s.profile.lat, lng: s.profile.lng })
+    .from(s.profile)
+    .where(and(eq(s.profile.country, place.country), eq(s.profile.wantsToWalk, true), isNull(s.profile.bannedAt), ne(s.profile.userId, except), where))
+  const here = { ...place, town: citySlug(place.city) }
+  return rows.filter((r) => nearness(here, { country: place.country, town: citySlug(r.city), lat: r.lat, lng: r.lng }) != null).length
+}
+
 export async function trustSignals(userId: string): Promise<TrustSignals> {
   const db = await getDb()
-  const [walks] = await db
-    .select({ n: count() })
-    .from(s.walk)
-    .where(and(eq(s.walk.walkerId, userId), eq(s.walk.status, 'ended')))
-  const [checks] = await db.select({ n: count() }).from(s.idCheck).where(eq(s.idCheck.walkerId, userId))
-  const [p] = await db
-    .select({ quiz: s.profile.quizPassedAt, created: s.profile.createdAt })
-    .from(s.profile)
-    .where(eq(s.profile.userId, userId))
+  const [[walks], [checks], [p]] = await Promise.all([
+    db
+      .select({ n: count() })
+      .from(s.walk)
+      .where(and(eq(s.walk.walkerId, userId), eq(s.walk.status, 'ended'))),
+    db.select({ n: count() }).from(s.idCheck).where(eq(s.idCheck.walkerId, userId)),
+    db
+      .select({ quiz: s.profile.quizPassedAt, created: s.profile.createdAt })
+      .from(s.profile)
+      .where(eq(s.profile.userId, userId)),
+  ])
   return {
     walks: walks.n,
     idChecks: checks.n,
@@ -140,6 +170,16 @@ export function dogFacts(dog: Dog): DogFacts {
   }
 }
 
+/** Everyone who blocked this person or was blocked by them. */
+export async function blockedPeers(userId: string): Promise<Set<string>> {
+  const db = await getDb()
+  const rows = await db
+    .select({ blocker: s.block.blockerId, blocked: s.block.blockedId })
+    .from(s.block)
+    .where(or(eq(s.block.blockerId, userId), eq(s.block.blockedId, userId)))
+  return new Set(rows.map((r) => (r.blocker === userId ? r.blocked : r.blocker)))
+}
+
 /** Is there a block in either direction between two people? */
 export async function isBlocked(a: string, b: string | null): Promise<boolean> {
   if (!b) return false
@@ -151,26 +191,31 @@ export async function isBlocked(a: string, b: string | null): Promise<boolean> {
   return rows.length > 0
 }
 
-export async function relationFor(viewer: Viewer, dog: Dog): Promise<Relation & { hasAccepted: boolean; idSeen: boolean }> {
+export type DogRelation = Relation & { hasAccepted: boolean; idSeen: boolean }
+
+export async function relationFor(viewer: Viewer, dog: Dog): Promise<DogRelation> {
   const db = await getDb()
-  const [grant] = await db
-    .select()
-    .from(s.trustGrant)
-    .where(and(eq(s.trustGrant.dogId, dog.id), eq(s.trustGrant.walkerId, viewer.userId)))
-  const accepted = await db
-    .select({ id: s.walkRequest.id })
-    .from(s.walkRequest)
-    .where(
-      and(
-        eq(s.walkRequest.dogId, dog.id),
-        eq(s.walkRequest.walkerId, viewer.userId),
-        inArray(s.walkRequest.status, ['accepted', 'completed']),
-      ),
-    )
-    .limit(1)
+  const [[grant], accepted, blocked] = await Promise.all([
+    db
+      .select()
+      .from(s.trustGrant)
+      .where(and(eq(s.trustGrant.dogId, dog.id), eq(s.trustGrant.walkerId, viewer.userId))),
+    db
+      .select({ id: s.walkRequest.id })
+      .from(s.walkRequest)
+      .where(
+        and(
+          eq(s.walkRequest.dogId, dog.id),
+          eq(s.walkRequest.walkerId, viewer.userId),
+          inArray(s.walkRequest.status, ['accepted', 'completed']),
+        ),
+      )
+      .limit(1),
+    isBlocked(viewer.userId, dog.ownerId),
+  ])
   return {
     isStaff: Boolean(dog.orgId && viewer.orgs.some((o) => o.id === dog.orgId)),
-    blocked: await isBlocked(viewer.userId, dog.ownerId),
+    blocked,
     soloAllowed: Boolean(grant?.soloAllowed),
     idSeen: Boolean(grant?.idSeen),
     hasAccepted: accepted.length > 0,
@@ -192,17 +237,47 @@ export interface DogDetail {
   /** The viewer may see meeting details, vet info and contact details. */
   canSeePrivate: boolean
   isMine: boolean
+  /** How the signed-in viewer relates to this dog (null when signed out). */
+  relation: DogRelation | null
 }
 
-export async function getDogDetail(id: string, viewer: Viewer | null): Promise<DogDetail | null> {
+/** One dog row, asked once per page load: the page and its link preview both need it. Never change it. */
+const dogRow = cache(async (id: string): Promise<Dog | null> => {
   const db = await getDb()
   const [dog] = await db.select().from(s.dog).where(eq(s.dog.id, id))
-  if (!dog) return null
+  return dog ?? null
+})
+
+export async function getDogDetail(id: string, viewer: Viewer | null): Promise<DogDetail | null> {
+  const row = await dogRow(id)
+  if (!row) return null
+  // A copy: private fields are emptied below for viewers who may not see them.
+  const dog = { ...row }
+  const db = await getDb()
+
+  // Everything else only needs the dog, so it is asked all at once.
+  const [org, owner, slots, groupWalks, relation] = await Promise.all([
+    dog.orgId ? db.select().from(s.organization).where(eq(s.organization.id, dog.orgId)).then(([o]) => o) : undefined,
+    dog.orgId
+      ? undefined
+      : db
+          .select({ profile: s.profile, email: s.user.email })
+          .from(s.user)
+          .leftJoin(s.profile, eq(s.profile.userId, s.user.id))
+          .where(eq(s.user.id, dog.ownerId ?? ''))
+          .then(([o]) => o),
+    db
+      .select({ weekday: s.dogSlot.weekday, time: s.dogSlot.time })
+      .from(s.dogSlot)
+      .where(eq(s.dogSlot.dogId, dog.id))
+      .orderBy(asc(s.dogSlot.weekday), asc(s.dogSlot.time)),
+    dog.orgId ? upcomingGroupWalks({ orgId: dog.orgId }) : [],
+    viewer ? relationFor(viewer, dog) : null,
+  ])
 
   const isMine = Boolean(viewer && (dog.ownerId === viewer.userId || (dog.orgId && viewer.orgs.some((o) => o.id === dog.orgId))))
   let host: DogDetail['host']
   if (dog.orgId) {
-    const [org] = await db.select().from(s.organization).where(eq(s.organization.id, dog.orgId))
     if (!org || (org.status !== 'verified' && !isMine && !viewer?.isAdmin)) return null
     host = {
       kind: 'shelter', id: org.id, name: org.name, photoUrl: org.logoUrl, city: org.city, verified: org.status === 'verified',
@@ -210,26 +285,16 @@ export async function getDogDetail(id: string, viewer: Viewer | null): Promise<D
       instagram: org.instagram, walkingTimes: org.walkingTimes,
     }
   } else {
-    const [owner] = await db.select().from(s.profile).where(eq(s.profile.userId, dog.ownerId ?? ''))
-    const [u] = await db.select({ email: s.user.email }).from(s.user).where(eq(s.user.id, dog.ownerId ?? ''))
+    const profile = owner?.profile
     host = {
-      kind: 'owner', id: dog.ownerId ?? '', name: owner?.firstName ?? '', photoUrl: owner?.photoUrl ?? null,
-      city: owner?.city ?? dog.city, verified: false, bio: owner?.bio, phone: owner?.phone, email: u?.email,
+      kind: 'owner', id: dog.ownerId ?? '', name: profile?.firstName ?? '', photoUrl: profile?.photoUrl ?? null,
+      city: profile?.city ?? dog.city, verified: false, bio: profile?.bio, phone: profile?.phone, email: owner?.email,
     }
   }
   if (dog.status !== 'active' && !isMine && !viewer?.isAdmin) return null
 
-  const slots = await db
-    .select({ weekday: s.dogSlot.weekday, time: s.dogSlot.time })
-    .from(s.dogSlot)
-    .where(eq(s.dogSlot.dogId, dog.id))
-    .orderBy(asc(s.dogSlot.weekday), asc(s.dogSlot.time))
-
-  const groupWalks = dog.orgId ? await upcomingGroupWalks({ orgId: dog.orgId }) : []
-
-  let canSeePrivate = isMine || Boolean(viewer?.isAdmin)
-  if (!canSeePrivate && viewer) canSeePrivate = (await relationFor(viewer, dog)).hasAccepted
-
+  // After a block, even an earlier walk no longer opens the meeting place and contact details.
+  const canSeePrivate = isMine || Boolean(viewer?.isAdmin) || Boolean(relation?.hasAccepted && !relation.blocked)
   if (!canSeePrivate) {
     dog.meetingInfo = ''
     dog.vetInfo = ''
@@ -237,7 +302,7 @@ export async function getDogDetail(id: string, viewer: Viewer | null): Promise<D
     host.phone = null
     host.email = null
   }
-  return { dog, host, slots, groupWalks, canSeePrivate, isMine }
+  return { dog, host, slots, groupWalks, canSeePrivate, isMine, relation }
 }
 
 /** A verified shelter's public face, for its page of dogs. Never includes the private coordinator. */
@@ -318,9 +383,11 @@ export interface RequestRow {
   }
   walkId: string | null
   walkStatus: string | null
+  /** The viewer and the other side blocked each other: contact details and the meeting place are left out. */
+  blocked: boolean
 }
 
-async function requestRows(where: ReturnType<typeof and>): Promise<RequestRow[]> {
+async function requestRows(viewerId: string, where: ReturnType<typeof and>): Promise<RequestRow[]> {
   const db = await getDb()
   const rows = await db
     .select({
@@ -343,21 +410,33 @@ async function requestRows(where: ReturnType<typeof and>): Promise<RequestRow[]>
     .orderBy(asc(s.walkRequest.startsAt))
     .limit(100)
   const ids = rows.map((r) => r.request.id)
-  const walks = ids.length
-    ? await db
-        .select({ id: s.walk.id, requestId: s.walk.requestId, status: s.walk.status })
-        .from(s.walk)
-        .where(inArray(s.walk.requestId, ids))
-        .orderBy(desc(s.walk.startedAt))
-    : []
+  const [walks, blocked] = await Promise.all([
+    ids.length
+      ? db
+          .select({ id: s.walk.id, requestId: s.walk.requestId, status: s.walk.status })
+          .from(s.walk)
+          .where(inArray(s.walk.requestId, ids))
+          .orderBy(desc(s.walk.startedAt))
+      : [],
+    rows.length ? blockedPeers(viewerId) : new Set<string>(),
+  ])
   return rows.map((r) => {
     const w = walks.find((x) => x.requestId === r.request.id)
-    return { ...r, walkId: w?.id ?? null, walkStatus: w?.status ?? null }
+    const other = r.request.walkerId === viewerId ? r.dog.ownerId : r.walker.id
+    const isBlocked = Boolean(other && blocked.has(other))
+    return {
+      ...r,
+      dog: isBlocked ? { ...r.dog, meetingInfo: '' } : r.dog,
+      walker: isBlocked && r.walker.id !== viewerId ? { ...r.walker, phone: null, email: '' } : r.walker,
+      walkId: w?.id ?? null,
+      walkStatus: w?.status ?? null,
+      blocked: isBlocked,
+    }
   })
 }
 
 export async function outgoingRequests(userId: string): Promise<RequestRow[]> {
-  return requestRows(and(eq(s.walkRequest.walkerId, userId), ne(s.walkRequest.status, 'cancelled')))
+  return requestRows(userId, and(eq(s.walkRequest.walkerId, userId), ne(s.walkRequest.status, 'cancelled')))
 }
 
 export async function incomingRequests(viewer: Viewer): Promise<RequestRow[]> {
@@ -365,12 +444,25 @@ export async function incomingRequests(viewer: Viewer): Promise<RequestRow[]> {
   const ownership = orgIds.length
     ? or(eq(s.dog.ownerId, viewer.userId), inArray(s.dog.orgId, orgIds))
     : eq(s.dog.ownerId, viewer.userId)
-  return requestRows(and(ownership, ne(s.walkRequest.status, 'cancelled')))
+  return requestRows(viewer.userId, and(ownership, ne(s.walkRequest.status, 'cancelled')))
 }
 
 export async function myDogs(viewer: Viewer): Promise<Dog[]> {
   const db = await getDb()
   return db.select().from(s.dog).where(eq(s.dog.ownerId, viewer.userId)).orderBy(asc(s.dog.createdAt))
+}
+
+/** Unread notifications, in one question: all of them for the bell, and those about walks for the Rondjes tab. */
+export async function unreadCounts(userId: string): Promise<{ all: number; walks: number }> {
+  const db = await getDb()
+  const [r] = await db
+    .select({
+      all: count(),
+      walks: sql<number>`count(*) filter (where ${notInArray(s.notification.kind, [...NUDGE_KINDS])})`.mapWith(Number),
+    })
+    .from(s.notification)
+    .where(and(eq(s.notification.userId, userId), isNull(s.notification.readAt)))
+  return r
 }
 
 /** Unread notifications. The Rondjes tab leaves reminders out: they are not about a walk. */
@@ -413,19 +505,21 @@ export async function hostContacts(dogs: { id: string; ownerId: string | null; o
   const db = await getDb()
   const ownerIds = [...new Set(dogs.map((d) => d.ownerId).filter((x): x is string => Boolean(x)))]
   const orgIds = [...new Set(dogs.map((d) => d.orgId).filter((x): x is string => Boolean(x)))]
-  const owners = ownerIds.length
-    ? await db
-        .select({ id: s.profile.userId, name: s.profile.firstName, phone: s.profile.phone, email: s.user.email })
-        .from(s.profile)
-        .innerJoin(s.user, eq(s.user.id, s.profile.userId))
-        .where(inArray(s.profile.userId, ownerIds))
-    : []
-  const orgs = orgIds.length
-    ? await db
-        .select({ id: s.organization.id, name: s.organization.name, phone: s.organization.phone, email: s.organization.email })
-        .from(s.organization)
-        .where(inArray(s.organization.id, orgIds))
-    : []
+  const [owners, orgs] = await Promise.all([
+    ownerIds.length
+      ? db
+          .select({ id: s.profile.userId, name: s.profile.firstName, phone: s.profile.phone, email: s.user.email })
+          .from(s.profile)
+          .innerJoin(s.user, eq(s.user.id, s.profile.userId))
+          .where(inArray(s.profile.userId, ownerIds))
+      : [],
+    orgIds.length
+      ? db
+          .select({ id: s.organization.id, name: s.organization.name, phone: s.organization.phone, email: s.organization.email })
+          .from(s.organization)
+          .where(inArray(s.organization.id, orgIds))
+      : [],
+  ])
   for (const dog of dogs) {
     const owner = owners.find((o) => o.id === dog.ownerId)
     const org = orgs.find((o) => o.id === dog.orgId)

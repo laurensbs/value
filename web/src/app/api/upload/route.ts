@@ -12,6 +12,7 @@ const TYPES: Record<string, string> = { 'image/jpeg': 'jpg', 'image/png': 'png',
 export async function POST(request: Request) {
   const viewer = await getViewer()
   if (!viewer) return NextResponse.json({ error: 'not-signed-in' }, { status: 401 })
+  if (viewer.profile?.bannedAt) return NextResponse.json({ error: 'banned' }, { status: 403 })
   const form = await request.formData().catch(() => null)
   const file = form?.get('file')
   if (!(file instanceof File)) return NextResponse.json({ error: 'invalid' }, { status: 400 })

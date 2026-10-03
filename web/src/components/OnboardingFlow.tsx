@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { MASCOT, WELCOME_DOGS } from '@/lib/avatar'
+import type { BioFacts } from '@/lib/bio'
 import { COUNTRIES, COUNTRY_INFO, type Country } from '@/lib/countries'
 import { useForm } from '@/lib/use-form'
 import { completeOnboarding, type FormState } from '@/server/actions/profile'
+import { BioField } from './BioField'
 import { DogFace } from './DogFace'
 import { Icon, type IconName } from './Icon'
 import { LocationPicker } from './LocationPicker'
@@ -63,6 +65,8 @@ export function OnboardingFlow({ firstName, photoUrl, country: initialCountry, m
   const [country, setCountry] = useState<Country>(initialCountry)
   // The map is created the first time its step is on screen (Leaflet needs a visible box).
   const [placeSeen, setPlaceSeen] = useState(false)
+  // What the ready sentences about someone are made of, read from the answers so far.
+  const [facts, setFacts] = useState<BioFacts>({ name: firstName, city: '', walker: walksDogs(initialRole), owner: false, experience: null })
   const form = useRef<HTMLFormElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const moved = useRef(false)
@@ -105,7 +109,19 @@ export function OnboardingFlow({ firstName, photoUrl, country: initialCountry, m
     moved.current = true
     setDirection(to < index ? 'back' : 'forward')
     setProblem(null)
-    setIndex(Math.max(0, Math.min(to, steps.length - 1)))
+    const target = Math.max(0, Math.min(to, steps.length - 1))
+    if (steps[target] === 'profile' && form.current) {
+      const data = new FormData(form.current)
+      const experience = data.get('experience')
+      setFacts({
+        name: String(data.get('firstName') ?? ''),
+        city: String(data.get('city') ?? ''),
+        walker: walksDogs(role),
+        owner: role === 'owner' || role === 'both',
+        experience: experience === 'none' || experience === 'some' || experience === 'lots' ? experience : null,
+      })
+    }
+    setIndex(target)
   }
 
   function onNext(event: React.FormEvent<HTMLFormElement>) {
@@ -174,6 +190,7 @@ export function OnboardingFlow({ firstName, photoUrl, country: initialCountry, m
           <div
             className="onboarding-bar"
             role="progressbar"
+            aria-label={t('flow.progressLabel')}
             aria-valuemin={1}
             aria-valuemax={total}
             aria-valuenow={number}
@@ -358,10 +375,7 @@ export function OnboardingFlow({ firstName, photoUrl, country: initialCountry, m
               <PhotoUploader name="photoUrl" initial={photoUrl ? [photoUrl] : []} variant="person" />
               <span className="hint">{t('photoHint')}</span>
             </div>
-            <label className="field">
-              <span>{t('bio')}</span>
-              <textarea className="textarea" name="bio" maxLength={600} placeholder={t('bioHint')} />
-            </label>
+            <BioField initial="" facts={facts} />
             <fieldset className="field">
               <legend>{t('languages')}</legend>
               <div className="choices">

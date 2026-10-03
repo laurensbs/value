@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server'
 import { getTranslations } from 'next-intl/server'
 import { notificationHref, notificationValues, type NotificationData } from '@/lib/notification-links'
 import { markNotificationsRead } from '@/server/actions/profile'
-import { apiViewer, json } from '@/server/api'
+import { apiActive, json } from '@/server/api'
 import { notificationsFor } from '@/server/queries'
 
 /** The latest notifications, with the text in the person's language and the page it leads to (a website path). */
 export async function GET() {
-  const viewer = await apiViewer()
+  const viewer = await apiActive()
   if (viewer instanceof NextResponse) return viewer
   const rows = await notificationsFor(viewer.userId)
   const t = await getTranslations('notifications')
@@ -29,7 +29,7 @@ export async function GET() {
 
 /** Mark everything as read. */
 export async function POST() {
-  const viewer = await apiViewer()
+  const viewer = await apiActive()
   if (viewer instanceof NextResponse) return viewer
   await markNotificationsRead()
   return json({ ok: true })

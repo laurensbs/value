@@ -14,6 +14,7 @@ export async function generateMetadata() {
 const ICONS: Record<string, IconName> = {
   'request-new': 'paw',
   'request-accepted': 'paw',
+  'request-reminder': 'calendar',
   'walk-started': 'route',
   'walk-ended': 'route',
   'walk-overdue': 'alert',
@@ -23,12 +24,14 @@ const ICONS: Record<string, IconName> = {
   'org-pending': 'building',
   'shelter-joined': 'heart',
   'group-walk-new': 'users',
+  'group-walk-reminder': 'calendar',
   'chat-message': 'chat',
   'walk-photo': 'camera',
   'nudge-step': 'sparkle',
   'nudge-week': 'calendar',
   'nudge-challenge': 'trophy',
   'challenge-done': 'trophy',
+  'nudge-new-dog': 'paw',
   'nudge-back': 'paw',
   'nudge-owner': 'home',
 }

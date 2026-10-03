@@ -72,6 +72,9 @@
       "5": "vie",
       "6": "sáb",
       "7": "dom"
+    },
+    "map": {
+      "cluster": "{count} en este lugar"
     }
   },
   "footer": {
@@ -368,7 +371,26 @@
       "needTerms": "Acepta las condiciones para continuar.",
       "welcomeTitleAnon": "¡Hola! Qué bien que estés aquí",
       "needExperience": "Elige lo que mejor te describa.",
-      "promise1Owner": "La primera vez, quien pasea siempre va junto contigo."
+      "promise1Owner": "La primera vez, quien pasea siempre va junto contigo.",
+      "progressLabel": "Progreso"
+    },
+    "bioBlocksLabel": "Toca para añadir una frase",
+    "bioBlocks": {
+      "hello": "Soy {name} y vivo en {city}.",
+      "learning": "Todavía tengo poca experiencia con perros, pero me encanta aprender.",
+      "walkedBefore": "Ya he paseado a menudo perros de otras personas.",
+      "grewUp": "Crecí con perros.",
+      "hadDog": "He tenido perro.",
+      "ownerHelp": "A veces me vendría bien ayuda para pasear a mi perro.",
+      "student": "Estudio y suelo tener tiempo durante el día.",
+      "homeWork": "Trabajo desde casa y me gusta dar un paseo a mediodía.",
+      "retired": "Me he jubilado y tengo tiempo de sobra durante el día.",
+      "weekend": "Los fines de semana tengo tiempo para un paseo largo.",
+      "outside": "Me encanta estar al aire libre, y con un perro cada paseo es mejor.",
+      "missDog": "Echo de menos tener un perro en casa.",
+      "neighbour": "Me gusta echar una mano a la gente del barrio.",
+      "ownerMeet": "Me gusta conocer a gente del barrio.",
+      "reliable": "Si quedo en algo, puedes contar conmigo."
     }
   },
   "dogs": {
@@ -417,7 +439,8 @@
       "own": "No traigas premios propios: la protectora los tiene.",
       "no": "Mejor no dar premios."
     },
-    "tipShelter": "Recomendar una protectora"
+    "tipShelter": "Recomendar una protectora",
+    "new": "Nuevo"
   },
   "dog": {
     "story": "Sobre {name}",
@@ -467,7 +490,9 @@
     "publish": "Publicar",
     "walkingTimes": "Horarios de paseo",
     "website": "Web",
-    "hiddenByModerator": "Ocultado por Rondje"
+    "hiddenByModerator": "Ocultado por Rondje",
+    "savedWalkers": "{n, plural, one {# paseador vive} other {# paseadores viven}} a menos de 5 km. Esta semana verán a {name} como perro nuevo.",
+    "savedShare": "Habla de {name} a tus vecinos: <link>aquí tienes un mensaje para compartir</link>."
   },
   "request": {
     "title": "Organiza un paseo",
@@ -484,7 +509,6 @@
     "submit": "Enviar solicitud",
     "sent": "Solicitud enviada. Te avisaremos en cuanto haya respuesta.",
     "sentFlagged": "Solicitud enviada. Ojo: los mensajes sobre dinero, enlaces de pago o números de cuenta no tienen cabida en Rondje y se revisan.",
-    "loginFirst": "Inicia sesión para organizar un paseo",
     "shelterNote": "Los perros de protectora se pasean en grupos acompañados. Elige un paseo en grupo aquí abajo.",
     "reasons": {
       "not-onboarded": "Primero completa tu perfil.",
@@ -508,7 +532,20 @@
       "not-now": "Puedes empezar un paseo a partir de media hora antes de la hora acordada.",
       "full": "Este paseo en grupo está completo.",
       "not-signed-in": "Primero inicia sesión."
-    }
+    },
+    "messagePlaceholder": "¡Hola! Soy … y me encantaría pasear a {dog}.",
+    "moments": "Momentos que le van bien a {dog}",
+    "blocksLabel": "Toca para añadir una frase",
+    "blocks": {
+      "helloMeet": "¡Hola! Soy {name} y me encantaría conocer a {dog}.",
+      "helloSolo": "¡Hola! Me encantaría volver a pasear a {dog}.",
+      "nearby": "Vivo cerca.",
+      "experience": "Tengo experiencia con perros.",
+      "flexible": "Tengo horarios flexibles.",
+      "outdoors": "Me encanta estar al aire libre, aunque llueva."
+    },
+    "signupFirst": "Conoce a {name}",
+    "signupFirstText": "Gratis. Primero creas una cuenta y después eliges un momento para conoceros."
   },
   "requests": {
     "title": "Paseos",
@@ -548,7 +585,8 @@
     "cancelConfirm": "¿Cancelar este paseo?",
     "keep": "No, volver",
     "past": "Paseos anteriores ({n})",
-    "startHint": "Puedes empezar a partir de {n} minutos antes de la hora acordada."
+    "startHint": "Puedes empezar a partir de {n} minutos antes de la hora acordada.",
+    "calendar": "Añadir al calendario"
   },
   "walk": {
     "before": "Antes de salir",
@@ -649,7 +687,8 @@
     "carePoo": "Caca",
     "careWater": "Bebió",
     "careUndo": "Quitar uno de {kind}",
-    "careNone": "Aún nada anotado"
+    "careNone": "Aún nada anotado",
+    "careFailed": "No se ha guardado: no hay conexión. Toca otra vez cuando vuelvas a tener cobertura."
   },
   "myDogs": {
     "title": "Mis perros",
@@ -696,7 +735,6 @@
       "invalid": "Revisa los campos obligatorios.",
       "forbidden": "Este perro no es tuyo."
     },
-    "newLede": "Un buen perfil marca la diferencia. Cuenta con sinceridad cómo es tu perro: así encontraréis antes a la persona adecuada para pasearlo.",
     "privateHint": "Solo lo ven las personas con las que hayas aceptado un paseo.",
     "providesHint": "El dueño se encarga de las bolsas y los premios. Así, quien pasea no tiene que pagar nada.",
     "publish": "Publicar",
@@ -714,7 +752,52 @@
     "tip3": "La primera vez, quedad siempre juntos: así os conoceréis con calma, con tu perro incluido.",
     "weekday": "Día",
     "welcomeTitle": "¡Hola, {name}! Háblanos de tu perro",
-    "welcomeLede": "Una foto, su carácter y cuándo puede salir a pasear. Así alguien del barrio lo encontrará."
+    "steps": {
+      "yourDog": "tu perro",
+      "basicsTitle": "¿Quién es tu perro?",
+      "basicsText": "Empieza con un nombre y una foto. Lo demás te lo preguntamos paso a paso.",
+      "characterTitle": "¿Cómo es {name}?",
+      "characterText": "Así quien pasea ve si hay química. Toca lo que encaje o escríbelo tú.",
+      "walkTitle": "¿Cómo es un paseo con {name}?",
+      "walkText": "Cuánto dura, en qué momentos y qué hay preparado para quien pasea.",
+      "whereTitle": "¿Dónde vive {name}?",
+      "whereText": "Los demás solo ven más o menos el barrio. La dirección la compartes cuando aceptas una cita.",
+      "privateTitle": "Solo para quien aceptes",
+      "safetyTitle": "Para terminar: seguridad",
+      "safetyText": "Unas preguntas más y {name} ya está publicado.",
+      "publish": "Publicar a {name}",
+      "needName": "¿Cómo se llama tu perro?",
+      "needMinutes": "Elige cuánto dura un paseo, de 10 a 180 minutos.",
+      "needCity": "¿En qué localidad vive tu perro?",
+      "traitsLabel": "Toca lo que encaje",
+      "minutesLabel": "Lo más elegido",
+      "storyTitle": "¿Cuál es la historia de {name}?",
+      "storyText": "¿Cómo es {name} y por qué le vendría bien un paseo extra? Toca una frase y cámbiala como quieras."
+    },
+    "traitChips": {
+      "playful": "Le encanta jugar",
+      "listens": "Obedece bien",
+      "cuddly": "Le encantan los mimos",
+      "niceOnLeash": "Camina bien con correa",
+      "pulls": "Tira de la correa",
+      "likesDogs": "Se lleva bien con otros perros",
+      "noDogs": "Mejor sin otros perros",
+      "cats": "Se lleva bien con gatos",
+      "kids": "Se lleva bien con niños",
+      "noises": "Le asustan los ruidos fuertes",
+      "sniffer": "Le encanta olfatear",
+      "swimmer": "Le encanta nadar"
+    },
+    "storyBlocks": {
+      "happy": "{name} es alegre y le encanta olfatear.",
+      "older": "{name} ya es mayor y prefiere pasear con calma.",
+      "young": "{name} es joven y tiene mucha energía.",
+      "dogs": "A {name} le gustan los otros perros.",
+      "people": "A {name} le encanta la gente.",
+      "work": "Por mi trabajo tengo poco tiempo durante el día, así que un paseo extra es bienvenido.",
+      "mobility": "A mí me cuesta más caminar, así que un paseo extra es bienvenido.",
+      "regular": "Buscamos a alguien fijo para unas cuantas veces por semana."
+    }
   },
   "profile": {
     "title": "Perfil",
@@ -753,14 +836,16 @@
     "emailNotifications": "Enviarme un correo con los avisos importantes",
     "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje.",
     "pushNotifications": "Notificaciones push en este navegador",
-    "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga. En iPhone: añade primero Rondje a la pantalla de inicio.",
+    "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga.",
     "pushBlocked": "Tu navegador bloquea las notificaciones de Rondje. Actívalas en los ajustes del navegador.",
     "progressTitle": "Tu progreso",
     "weeklyGoal": "Objetivo semanal",
     "weeklyGoalHint": "¿Con qué frecuencia quieres pasear? Saltarte una semana siempre está bien.",
     "alerts": "Avisos",
     "reminders": "Recordatorios amables",
-    "remindersHint": "Sobre tus primeros pasos, tu objetivo semanal y el reto de tu ciudad. Uno cada pocos días como mucho, como notificación push o si no por correo."
+    "remindersHint": "Sobre tus primeros pasos, tu objetivo semanal, el reto de tu ciudad y perros nuevos cerca de ti. Uno cada pocos días como mucho, como notificación push o si no por correo.",
+    "pushIos": "¿Avisos en tu iPhone? Funcionan en cuanto Rondje está en tu pantalla de inicio:",
+    "pushIosInApp": "¿Avisos en tu iPhone? Abre primero Rondje en Safari y ponlo desde allí en tu pantalla de inicio."
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -993,7 +1078,7 @@
   },
   "help": {
     "title": "¿Un mal momento?",
-    "lede": "Pasear ayuda a mucha gente, pero no sustituye a la ayuda profesional. Aquí siempre puedes encontrar apoyo, gratis y de forma anónima.",
+    "lede": "Un paseo al aire libre puede alegrarte el día, pero no sustituye a la ayuda profesional. Aquí siempre puedes encontrar apoyo, gratis y de forma anónima.",
     "emergency": "Si hay un peligro inmediato, llama al {number}.",
     "lines": {
       "suicide": "¿Piensas en el suicidio? Disponible día y noche.",
@@ -1070,7 +1155,10 @@
       "nudge-challenge": "Nuevo mes, nuevo reto: {city} da {goal} paseos juntos. ¿Te apuntas?",
       "challenge-done": "¡{city} lo ha conseguido: {goal} paseos juntos! {mine, plural, one {Uno de ellos fue tuyo.} other {# de ellos fueron tuyos.}} ¡Gracias!",
       "nudge-back": "{variant, select, dog {¿Te apetece un paseo con {dogName}? Planéalo cuando te venga bien.} other {¿Te apetece un paseo? Mira qué perros cerca de ti buscan compañero de paseo.}}",
-      "nudge-owner": "{tip, select, photo {Una foto ayuda a los paseadores a conocer a {dogName}. ¿Añades una?} slots {Añade momentos fijos de paseo para {dogName}, así los paseadores ven enseguida cuándo encaja.} other {¿Aún sin solicitudes para {dogName}? Comparte la página con vecinos y amigos, suele ayudar.}}"
+      "nudge-owner": "{tip, select, photo {Una foto ayuda a los paseadores a conocer a {dogName}. ¿Añades una?} slots {Añade momentos fijos de paseo para {dogName}, así los paseadores ven enseguida cuándo encaja.} other {¿Aún sin solicitudes para {dogName}? Comparte la página con vecinos y amigos, suele ayudar.}}",
+      "request-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: {variant, select, meet {conocer a {dogName}} other {paseo con {dogName}}}. ¡Que vaya muy bien!",
+      "group-walk-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}. ¡Que vaya muy bien!",
+      "nudge-new-dog": "Cerca de ti: {dogName} acaba de llegar a Rondje y busca compañero de paseo."
     }
   },
   "admin": {
@@ -1149,7 +1237,22 @@
     },
     "flaggedChats": "Mensajes de chat sobre dinero o con un enlace (30 días)",
     "flaggedChatsHint": "Solo quién y cuántas veces: nunca leemos los chats. Quien lo recibe ve un aviso y puede denunciar el mensaje.",
-    "flaggedChatCount": "{n, plural, one {# mensaje} other {# mensajes}}"
+    "flaggedChatCount": "{n, plural, one {# mensaje} other {# mensajes}}",
+    "confirm": {
+      "title": "Primero confirma tu correo electrónico",
+      "text": "Al gestionar Rondje puedes ver y cambiar muchas cosas. Por eso te pedimos una sola vez que confirmes que {email} es tuyo. Recibirás un correo con un botón.",
+      "send": "Enviar el correo",
+      "sent": "Enviado. Abre el correo y toca el botón; así volverás aquí.",
+      "failed": "No se pudo enviar. Inténtalo de nuevo en un momento.",
+      "expired": "Ese enlace ya no funciona. Envía un correo nuevo aquí abajo."
+    },
+    "region": "Velocidad",
+    "regionSame": "la app ({app}) y la base de datos ({db}) están en la misma región.",
+    "regionNear": "la app ({app}) y la base de datos ({db}) están cerca.",
+    "regionFar": "la app ({app}) y la base de datos ({db}) están lejos: cada consulta a la base de datos tarda hasta 100 ms más. En Vercel, elige la región {suggest} en Settings → Functions.",
+    "email": "Correo",
+    "emailOn": "activado, con Resend",
+    "emailOff": "desactivado: los correos de contraseña y de recordatorio no se envían. Configura RESEND_API_KEY y EMAIL_FROM en Vercel."
   },
   "banned": {
     "title": "Tu cuenta ha sido bloqueada",
@@ -1510,9 +1613,29 @@
       "nudge-owner": {
         "subject": "Un consejo para {dogName}",
         "body": "{tip, select, photo {Una foto ayuda a los paseadores a conocer a {dogName}. Una foto al aire libre, mirando a la cámara, funciona mejor.} slots {Añade momentos fijos de paseo para {dogName}, así los paseadores ven enseguida cuándo encaja.} other {¿Aún sin solicitudes para {dogName}? Comparte la página con vecinos y amigos, suele ayudar.}}"
+      },
+      "request-reminder": {
+        "subject": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: {variant, select, meet {conocer a {dogName}} other {paseo con {dogName}}}",
+        "body": "Todo sobre la cita, como dónde quedáis y cómo contactar, está en Rondje. ¿Al final no puedes? Avisa a la otra persona a tiempo por el chat."
+      },
+      "group-walk-reminder": {
+        "subject": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}",
+        "body": "El punto de encuentro está en Rondje, en los paseos en grupo. ¿Al final no puedes? Cancela tu inscripción para que otra persona pueda ocupar tu plaza."
+      },
+      "nudge-new-dog": {
+        "subject": "{dogName} busca compañero de paseo cerca de ti",
+        "body": "{dogName} acaba de llegar a Rondje, no muy lejos de ti. Mira si encajáis y planea un primer encuentro cuando te venga bien."
       }
     },
-    "reminderFooter": "Recibes este recordatorio porque tienes los recordatorios activados en tu perfil. Enviamos uno cada pocos días como mucho. Puedes desactivarlos en tu perfil, en Ajustes."
+    "reminderFooter": "Recibes este recordatorio porque tienes los recordatorios activados en tu perfil. Enviamos uno cada pocos días como mucho. Puedes desactivarlos en tu perfil, en Ajustes.",
+    "verify": {
+      "subject": "Confirma tu correo electrónico para Rondje",
+      "heading": "¿Es este tu correo electrónico?",
+      "body": "Alguien que ha iniciado sesión con este correo pide gestionar Rondje. ¿Has sido tú? Entonces toca el botón. El enlace funciona durante una hora.",
+      "cta": "Sí, es mi correo",
+      "ignore": "¿No lo has pedido tú? Entonces no toques el botón. No tienes que hacer nada más.",
+      "footer": "Recibes este correo porque alguien pidió confirmar esta dirección en Rondje."
+    }
   },
   "cities": {
     "title": "Pasear perros por ciudad",
@@ -1598,7 +1721,9 @@
       },
       "dogMet": {
         "title": "Conoce a tu primer paseador",
-        "hint": "Cuando alguien pida conoceros, lo verás en Paseos, y podéis chatear primero."
+        "hint": "Cuando alguien pida conoceros, lo verás en Paseos, y podéis chatear primero.",
+        "shareHint": "Quien pasee por tu zona ya puede encontrar a {dog}. Cuéntalo tú también en el barrio y irá más rápido.",
+        "shareStart": "Da a conocer a {dog} en tu barrio"
       },
       "dogWalk": {
         "title": "El primer paseo de tu perro",
@@ -1623,7 +1748,7 @@
     "badgesTitle": "Tus medallas",
     "badgesAll": "Todas las medallas",
     "badgesEmpty": "Conseguirás tu primera medalla con tu primer paseo.",
-    "together": "Juntos ya hemos dado {walks} paseos con {dogs} perros. Tú formas parte de ello.",
+    "together": "Juntos ya hemos dado {walks, plural, one {# paseo} other {# paseos}} con {dogs, plural, one {# perro} other {# perros}}. Tú formas parte de ello.",
     "tips": {
       "walker": {
         "1": "En días de calor lleva agua y comprueba con la mano que la acera no quema sus patas.",
@@ -1650,7 +1775,9 @@
     },
     "backTitle": "¡Qué bien verte de nuevo!",
     "backText": "{dog} y tú: {bond}. ¿Te apetece otro paseo? Planéalo cuando te venga bien.",
-    "backPlan": "Planea un paseo con {dog}"
+    "backPlan": "Planea un paseo con {dog}",
+    "walkersNear": "{n, plural, one {# paseador vive} other {# paseadores viven}} a menos de 5 km de ti.",
+    "walkersFew": "Todavía hay pocos paseadores cerca de ti. <link>Habla de {dog} a tus vecinos</link> para que encuentren Rondje."
   },
   "progress": {
     "title": "Tu progreso",
@@ -1780,7 +1907,7 @@
     },
     "none": "Aún no tienes puntos. Tu primer paseo te da 25 de golpe.",
     "weekTitle": "Esta semana",
-    "weekGoal": "{done} de {goal} paseos",
+    "weekGoal": "{done} de {goal, plural, one {# paseo} other {# paseos}}",
     "weekDone": "¡Objetivo semanal conseguido!",
     "weekLeft": "{n, plural, one {Falta # paseo} other {Faltan # paseos}} para tu objetivo semanal",
     "weekNoGoal": "{n, plural, =0 {Aún ningún paseo esta semana} one {# paseo esta semana} other {# paseos esta semana}}",
@@ -1826,6 +1953,132 @@
     "stats": "{dogs, plural, one {# perro} other {# perros}} · {walkers, plural, one {# paseador} other {# paseadores}} · {km} km",
     "daysLeft": "{n, plural, one {Queda # día} other {Quedan # días}}",
     "private": "Solo contamos paseos, nunca quién los dio."
+  },
+  "pushAsk": {
+    "title": "¿Te aviso cuando haya novedades?",
+    "walker": "Así sabrás enseguida cuándo responde un dueño o te envía un mensaje.",
+    "dog": "Así sabrás enseguida cuándo alguien quiere pasear a {dog} o te envía un mensaje.",
+    "general": "Así sabrás enseguida cuándo hay algo nuevo, como una solicitud o un mensaje.",
+    "request": "Así sabrás enseguida cuándo haya respuesta sobre {dog}.",
+    "calm": "Recordatorios como mucho una vez cada tres días. Puedes desactivarlo cuando quieras en tu perfil.",
+    "yes": "Sí, por favor",
+    "later": "Más tarde",
+    "done": "¡Genial! Te avisaremos cuando haya algo."
+  },
+  "calendar": {
+    "meet": "Conocer a {dog}",
+    "walk": "Paseo con {dog}",
+    "with": "Con {name}.",
+    "open": "Todo sobre esta cita en Rondje: {link}",
+    "group": "Paseo en grupo con {org}"
+  },
+  "chatQuick": {
+    "label": "Mensajes listos",
+    "walker": {
+      "helloMeet": "¡Hola! Me encantaría conocer a {dog}. ¿Te va bien este momento?",
+      "helloSolo": "¡Hola! Me encantaría volver a pasear a {dog}. ¿Te va bien este momento?",
+      "where": "¿Dónde quedamos?",
+      "watchOut": "¿Hay algo que deba saber sobre {dog}?",
+      "handover": "¿Cómo hacemos para recoger y devolver a {dog}?",
+      "excited": "¡Genial, tengo muchas ganas!",
+      "bring": "¿Tengo que llevar algo?",
+      "treat": "¿Puedo darle un premio a {dog}?",
+      "tenMinutes": "Llego en 10 minutos.",
+      "here": "¡Ya estoy aquí!",
+      "late": "Llego un poco tarde, perdona. Ya voy.",
+      "allGood": "Estamos paseando, todo va bien.",
+      "sniffing": "¡{dog} lo está olfateando todo!",
+      "almostBack": "Ya casi estamos de vuelta.",
+      "thanks": "¡Gracias, ha sido un paseo estupendo!",
+      "again": "¿Repetimos otro día?",
+      "thanksMeet": "¡Gracias, ha sido un placer conocernos!",
+      "soloNext": "¿Podría pasear a {dog} por mi cuenta a partir de ahora?"
+    },
+    "host": {
+      "helloMeet": "¡Qué bien que quieras conocer a {dog}!",
+      "helloSolo": "¡Qué bien que quieras volver a pasear a {dog}!",
+      "otherTime": "¿Te iría bien otro momento?",
+      "experience": "¿Has paseado perros antes?",
+      "seeYouThen": "¡Genial, hasta entonces!",
+      "home": "Llama al timbre, estaré en casa.",
+      "nothingToBring": "No hace falta que traigas nada.",
+      "ready": "La correa y las bolsas están preparadas.",
+      "tellMe": "¿Me cuentas qué tal ha ido?",
+      "seeYou": "¡Hasta ahora!",
+      "excitedDog": "¡{dog} ya tiene ganas!",
+      "lateHome": "Llegaré a casa un poco más tarde. ¿Te va bien?",
+      "howIsIt": "¿Qué tal va?",
+      "takeYourTime": "Tómate tu tiempo.",
+      "thanks": "¡Gracias por el paseo!",
+      "weekly": "¿Te apetece venir más a menudo? Cada semana sería genial.",
+      "thanksMeet": "¡Gracias por venir a conocernos!",
+      "againMeet": "¿Quedamos pronto otra vez?"
+    }
+  },
+  "meetCheck": {
+    "title": "Conocer a {dog}",
+    "intro": "¿De qué habláis? Marca lo que ya hayáis comentado.",
+    "count": "{done} de {total}",
+    "done": "Todo hablado. ¡Que disfrutéis de los paseos!",
+    "walker": {
+      "leash": "¿Cómo va {dog} con la correa y qué le da miedo?",
+      "rules": "¿Qué se permite: ir sin correa, premios, jugar con otros perros?",
+      "stuff": "¿Dónde están la correa y las bolsas, y cómo se hace la recogida?",
+      "emergency": "¿A quién llamas si pasa algo durante el paseo? Pregunta también por el veterinario.",
+      "together": "Caminad juntos un rato para que {dog} se acostumbre a ti."
+    },
+    "host": {
+      "leash": "Enseña cómo va {dog} con la correa y cuenta qué le da miedo.",
+      "rules": "Explica qué se permite: ir sin correa, premios, jugar con otros perros.",
+      "stuff": "Enseña dónde están la correa y las bolsas, y cómo se hace la recogida.",
+      "id": "Comprueba en persona el documento de identidad de {name}. Después puedes confirmarlo aquí abajo.",
+      "together": "Caminad juntos un rato para que {dog} se acostumbre a {name}."
+    }
+  },
+  "installAsk": {
+    "title": "¿Pones Rondje en tu pantalla de inicio?",
+    "text": "Así abres Rondje con un toque, como una app.",
+    "textPush": "Así abres Rondje con un toque, como una app, y puedo avisarte cuando haya novedades.",
+    "inApp": "Ahora estás en el navegador de otra app, y desde ahí no se puede. Abre Rondje en Safari desde el menú ⋯, o copia el enlace y pégalo en Safari. Allí vuelves a iniciar sesión una vez.",
+    "steps": {
+      "share": "Toca Compartir",
+      "shareMore": "(¿no lo ves? Toca primero ⋯)",
+      "add": "Elige «Añadir a pantalla de inicio»",
+      "confirm": "Toca «Añadir»"
+    },
+    "install": "Sí, por favor",
+    "later": "Más tarde",
+    "already": "Ya está",
+    "copy": "Copiar enlace",
+    "copied": "Copiado. Pega el enlace en Safari.",
+    "copyFailed": "No se pudo copiar. Escribe en Safari: {address}",
+    "done": "¡Listo! Ya tienes Rondje en tu pantalla de inicio."
+  },
+  "manifest": {
+    "description": "Un paseo fijo con un perro que te espera.",
+    "dogs": "Perros cerca",
+    "requests": "Mis paseos",
+    "notifications": "Notificaciones"
+  },
+  "dogShare": {
+    "title": "Da a conocer a {name} en tu barrio",
+    "text": "Quien pasee por tu zona ya puede encontrar a {name}. Irá más rápido si tú también lo cuentas: envía este mensaje a gente que conozcas o compártelo en un grupo del barrio.",
+    "message": "¡{name} busca compañía para pasear en {city}! ¿Te encantan los perros y tienes tiempo para un paseo de vez en cuando? En Rondje siempre os conocéis antes en persona. Gratis, para cualquier persona de 18 años o más: {url}",
+    "share": "Compartir",
+    "whatsapp": "WhatsApp",
+    "copy": "Copiar",
+    "copied": "Copiado. Pégalo donde quieras.",
+    "copyFailed": "No se pudo copiar. Selecciona el texto de arriba y cópialo tú.",
+    "poster": "¿Mejor en papel? Imprime un cartel",
+    "privacy": "Quien abra el enlace verá la misma página de {name} que ve todo el mundo en Rondje. Tu dirección y tu teléfono siguen siendo privados hasta que aceptes una cita.",
+    "posterMetaTitle": "Cartel para tu perro",
+    "posterTitle": "Cartel para {name}",
+    "posterLede": "Imprime el cartel y cuélgalo donde lo vean tus vecinos: en el supermercado, la biblioteca, el veterinario o tu portal. Pregunta antes si se puede.",
+    "posterOffline": "{name} no está en línea ahora. Vuelve a activar el perfil de {name} primero; si no, el código QR no funcionará.",
+    "posterHeadline": "{name} busca compañía para pasear",
+    "posterText": "¿Te encantan los perros y tienes algo de tiempo de vez en cuando? Busco a alguien en {city} para dar un paseo fijo de {minutes} minutos con {name}. Primero nos conocemos en persona.",
+    "posterQr": "Código QR a la página de {name} en Rondje",
+    "posterCta": "Escanea el código y conoce a {name}."
   },
   "sounds": {
     "toggle": "Sonidos",
@@ -1905,6 +2158,7 @@
     "supportText": "Gratis y sin anuncios. Mira cómo puedes ayudar.",
     "tipText": "¿Conoces una protectora o a alguien con perro que necesite ayuda?",
     "shelterText": "¿Trabajas en una protectora? Publica aquí vuestros perros.",
+    "adminText": "Denuncias, protectoras, cifras y el centro de lanzamiento",
     "alerts": "Avisos y sonido"
   },
   "shell": {

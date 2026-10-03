@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/i18n/config'
 import { APP_NAME } from '@/lib/site'
-import { unreadCount } from '@/server/queries'
 import type { Viewer } from '@/server/session'
 import { Avatar } from './Avatar'
 import { Icon } from './Icon'
@@ -15,10 +14,9 @@ import { NavLinks } from './shell/NavLinks'
  * bar: on phones only the logo, help and notifications (the tab bar does the rest); on wide
  * screens the same places as the tab bar, with the current one marked.
  */
-export async function Header({ viewer }: { viewer: Viewer | null }) {
+export async function Header({ viewer, unread }: { viewer: Viewer | null; unread: number }) {
   const t = await getTranslations('nav')
   const locale = (await getLocale()) as Locale
-  const unread = viewer ? await unreadCount(viewer.userId) : 0
   const firstOrg = viewer?.orgs[0]
 
   if (viewer?.profile) {
@@ -30,7 +28,7 @@ export async function Header({ viewer }: { viewer: Viewer | null }) {
       { href: '/requests', label: t('requests') },
       { href: '/my-dogs', label: t('myDogs') },
       ...(firstOrg ? [{ href: `/shelter/${firstOrg.id}`, label: t('shelter') }] : []),
-      ...(viewer.isAdmin ? [{ href: '/admin', label: t('admin') }] : []),
+      ...(viewer.isAdmin || viewer.adminUnconfirmed ? [{ href: '/admin', label: t('admin') }] : []),
     ]
     return (
       <header className="header app-header">

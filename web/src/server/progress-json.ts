@@ -55,7 +55,10 @@ export async function progressJson(p: Progress) {
       done: s.done,
       href: s.href,
       title: steps(`${s.key}.title`),
-      hint: steps(`${s.key}.hint`),
+      hint: s.dog ? steps(`${s.key}.shareHint`, { dog: s.dog.name }) : steps(`${s.key}.hint`),
+      /** The button, when it says more than "Start": tell the neighbours about the dog (dogId; its `share` is on GET /api/v1/dogs/:id). */
+      action: s.dog ? steps(`${s.key}.shareStart`, { dog: s.dog.name }) : null,
+      dogId: s.dog?.id ?? null,
       points: STEP_POINTS[s.key] ?? null,
     })),
   }
