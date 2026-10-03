@@ -1,6 +1,11 @@
 import { readFileSync } from 'node:fs'
 import { marked } from 'marked'
+import { createTranslator } from 'next-intl'
 import { describe, expect, it } from 'vitest'
+import en from '../../messages/en.json'
+import es from '../../messages/es.json'
+import fr from '../../messages/fr.json'
+import nl from '../../messages/nl.json'
 import { CONTACT_TOKEN, contactLinkHtml, fillContact } from './contact'
 import { parseFrontMatter } from './front-matter'
 import { supportConfig } from './support'
@@ -60,6 +65,23 @@ describe('fillContact', () => {
       for (const doc of ['terms', 'privacy', 'safety', 'shelters', 'cookies']) {
         expect(legal(locale, doc), `${locale}/${doc}`).toContain(CONTACT_TOKEN)
       }
+    }
+  })
+})
+
+describe('the ban page message', () => {
+  const MESSAGES = { nl, en, es, fr }
+  const email = 'contact@example.org'
+
+  // `{email}` used to be a plain placeholder fed a function, which crashed /banned (500) once CONTACT_EMAIL was set.
+  it('puts the address inside an <email> tag in every language', () => {
+    for (const [locale, messages] of Object.entries(MESSAGES)) {
+      const t = createTranslator({ locale, messages: messages as Record<string, unknown>, namespace: 'banned' }) as unknown as {
+        markup: (key: string, values: Record<string, string | ((chunks: string) => string)>) => string
+      }
+      const html = t.markup('contact', { address: email, email: (chunks) => `<a href="mailto:${email}">${chunks}</a>` })
+      expect(html, locale).toContain(`<a href="mailto:${email}">${email}</a>`)
+      expect(html, locale).not.toContain('rondje.app')
     }
   })
 })

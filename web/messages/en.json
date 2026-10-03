@@ -1132,6 +1132,7 @@
     "nowTitle": "What you can do now",
     "report": "Is it about a profile, a dog or a walk? Use the ‘Report’ button on that page. We look within 24 hours.",
     "help": "Not okay right now? The help page lists free and anonymous help lines.",
+    "helpLink": "Go to the help page",
     "suggest": "Want to suggest a shelter or share an idea? Use the tip form.",
     "moreTitle": "Read more"
   },
@@ -1300,7 +1301,7 @@
     "title": "Your account has been blocked",
     "text": "You can no longer use Rondje. Reason: {reason}. Don't agree? Email us and we'll take another look.",
     "noReason": "not specified",
-    "contact": "Email {email} with your name and your account's email address.",
+    "contact": "Email <email>{address}</email> with your name and your account's email address.",
     "contactPage": "The <link>contact page</link> explains how to reach us. Include your name and your account's email address."
   },
   "errors": {

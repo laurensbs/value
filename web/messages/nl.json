@@ -1132,6 +1132,7 @@
     "nowTitle": "Wat je nu al kunt doen",
     "report": "Gaat het om een profiel, hond of rondje? Gebruik de knop ‘Melden’ op die pagina. We kijken binnen 24 uur.",
     "help": "Gaat het even niet goed? Op de hulppagina vind je gratis en anonieme hulplijnen.",
+    "helpLink": "Naar de hulppagina",
     "suggest": "Een opvang tippen of een idee delen? Gebruik het tipformulier.",
     "moreTitle": "Meer lezen"
   },
@@ -1300,7 +1301,7 @@
     "title": "Je account is geblokkeerd",
     "text": "Je kunt Rondje niet meer gebruiken. Reden: {reason}. Ben je het hier niet mee eens? Mail ons, dan kijken we opnieuw.",
     "noReason": "niet opgegeven",
-    "contact": "Mail naar {email} met je naam en het e-mailadres van je account.",
+    "contact": "Mail naar <email>{address}</email> met je naam en het e-mailadres van je account.",
     "contactPage": "Op de <link>contactpagina</link> lees je hoe je ons bereikt. Vermeld je naam en het e-mailadres van je account."
   },
   "errors": {

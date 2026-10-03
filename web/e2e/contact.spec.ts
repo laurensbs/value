@@ -21,6 +21,13 @@ test('contact: one address from CONTACT_EMAIL, on /contact and in the legal text
     expect(await page.content(), doc).not.toContain('rondje.app')
   }
 
+  // The ban page (where every banned account lands) links the same address; the way to object must render.
+  const banned = await page.goto('/banned')
+  expect(banned?.status()).toBe(200)
+  await expect(page.getByRole('link', { name: EMAIL })).toHaveAttribute('href', `mailto:${EMAIL}`)
+  await expect(page.getByText(`Mail naar ${EMAIL} met je naam`)).toBeVisible()
+  expect(await page.content()).not.toContain('rondje.app')
+
   // Reachable from the help page and the footer, and listed for search engines.
   await page.goto('/help')
   await page.getByRole('link', { name: 'Zo bereik je ons' }).click()

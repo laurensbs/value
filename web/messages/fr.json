@@ -1132,6 +1132,7 @@
     "nowTitle": "Ce que vous pouvez déjà faire",
     "report": "Il s'agit d'un profil, d'un chien ou d'une promenade ? Utilisez le bouton « Signaler » sur cette page. Nous examinons chaque signalement sous 24 heures.",
     "help": "Ça ne va pas fort ? La page d’aide liste des lignes d’écoute gratuites et anonymes.",
+    "helpLink": "Aller à la page d'aide",
     "suggest": "Vous voulez recommander un refuge ou partager une idée ? Utilisez le formulaire de suggestion.",
     "moreTitle": "En savoir plus"
   },
@@ -1300,7 +1301,7 @@
     "title": "Votre compte a été bloqué",
     "text": "Vous ne pouvez plus utiliser Rondje. Motif : {reason}. Vous n'êtes pas d'accord ? Écrivez-nous et nous réexaminerons votre cas.",
     "noReason": "non précisé",
-    "contact": "Écrivez à {email} en indiquant votre nom et l'adresse e-mail de votre compte.",
+    "contact": "Écrivez à <email>{address}</email> en indiquant votre nom et l'adresse e-mail de votre compte.",
     "contactPage": "La <link>page de contact</link> explique comment nous joindre. Indiquez votre nom et l'adresse e-mail de votre compte."
   },
   "errors": {

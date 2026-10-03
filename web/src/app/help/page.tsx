@@ -82,9 +82,12 @@ export default async function HelpPage({ searchParams }: { searchParams: Promise
         </p>
         <p className="muted small">{t('help.police', { number: info.policeNonEmergency })}</p>
       </section>
-      <p className="muted small">
-        {t('help.contact')} <Link href={CONTACT_PATH}>{t('help.contactLink')}</Link>
-      </p>
+      <div className="tap-item">
+        <p className="muted small">{t('help.contact')}</p>
+        <Link href={CONTACT_PATH} className="button ghost small tap">
+          {t('help.contactLink')}
+        </Link>
+      </div>
     </div>
   )
 }

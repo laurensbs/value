@@ -42,7 +42,7 @@ export default async function ContactPage() {
             <h2>{t('contact.emailTitle')}</h2>
           </div>
           <p>
-            <a href={`mailto:${contactEmail}`} className="button secondary">
+            <a href={`mailto:${contactEmail}`} className="button secondary tap">
               {contactEmail}
             </a>
           </p>
@@ -65,20 +65,29 @@ export default async function ContactPage() {
         <ul className="check-list">
           <li>
             <Icon name="flag" size={18} />{' '}
-            <span>
-              {t('contact.report')} <Link href="/safety">{t('landing.pages.safety')}</Link>
+            <span className="tap-item">
+              {t('contact.report')}
+              <Link href="/safety" className="button ghost small tap">
+                {t('landing.pages.safety')}
+              </Link>
             </span>
           </li>
           <li>
             <Icon name="help" size={18} />{' '}
-            <span>
-              {t('contact.help')} <Link href="/help">{t('nav.helpPill')}</Link>
+            <span className="tap-item">
+              {t('contact.help')}
+              <Link href="/help" className="button ghost small tap">
+                {t('contact.helpLink')}
+              </Link>
             </span>
           </li>
           <li>
             <Icon name="building" size={18} />{' '}
-            <span>
-              {t('contact.suggest')} <Link href="/suggest">{t('suggest.title')}</Link>
+            <span className="tap-item">
+              {t('contact.suggest')}
+              <Link href="/suggest" className="button ghost small tap">
+                {t('suggest.title')}
+              </Link>
             </span>
           </li>
         </ul>

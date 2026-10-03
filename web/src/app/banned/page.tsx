@@ -14,7 +14,10 @@ export default async function BannedPage() {
       <p>{t('text', { reason: viewer?.profile?.banReason || t('noReason') })}</p>
       <p className="muted small">
         {contactEmail
-          ? t.rich('contact', { email: () => <a href={`mailto:${contactEmail}`}>{contactEmail}</a> })
+          ? t.rich('contact', {
+              address: contactEmail,
+              email: (chunks) => <a href={`mailto:${contactEmail}`}>{chunks}</a>,
+            })
           : t.rich('contactPage', { link: (chunks) => <Link href={CONTACT_PATH}>{chunks}</Link> })}
       </p>
     </div>
