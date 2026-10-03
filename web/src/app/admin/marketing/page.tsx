@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * that is ready. Admin only. Nothing is ever posted, published or sent from here.
  */
 export default async function MarketingPage() {
-  await requireAdmin() // integrator: requireAdmin('/admin/marketing')
+  await requireAdmin('/admin/marketing')
   const [t, locale, data] = await Promise.all([getTranslations('marketing'), getLocale(), marketingData()])
   const ui: Locale = isLocale(locale) ? locale : 'nl'
   const site = siteUrl()
