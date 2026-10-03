@@ -531,7 +531,9 @@
       "already-decided": "Hier is al een besluit over genomen.",
       "not-now": "Een rondje starten kan vanaf een half uur voor de afspraak.",
       "full": "Deze groepswandeling is vol.",
-      "not-signed-in": "Log eerst in."
+      "not-signed-in": "Log eerst in.",
+      "meet-via": "Deze manier van kennismaken kan hier niet. Kies samen wandelen.",
+      "needs-in-person": "Een gesprek telt niet als kennismaking in het echt. Dat kan pas als jullie elkaar ontmoet hebben."
     },
     "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
     "moments": "Momenten die {dog} goed uitkomen",
@@ -559,7 +561,8 @@
       "declined": "Afgewezen",
       "cancelled": "Ingetrokken",
       "completed": "Gelopen",
-      "expired": "Verlopen"
+      "expired": "Verlopen",
+      "talked": "Gesprek gehad"
     },
     "accept": "Accepteren",
     "decline": "Afwijzen",
@@ -587,6 +590,28 @@
     "past": "Eerdere afspraken ({n})",
     "startHint": "Starten kan vanaf {n} minuten voor de afspraak.",
     "calendar": "Zet in je agenda"
+  },
+  "meet": {
+    "legend": "Hoe maken jullie kennis?",
+    "via": {
+      "walk": "Samen wandelen",
+      "home": "Bij de eigenaar thuis",
+      "phone": "Eerst bellen",
+      "video": "Eerst videobellen"
+    },
+    "hint": {
+      "walk": "Jullie lopen samen een rondje. De eigenaar loopt mee en bekijkt je ID.",
+      "home": "Je komt langs bij de eigenaar en de hond. De eigenaar bekijkt je ID.",
+      "phone": "Eerst even kennismaken aan de telefoon. Daarna spreken jullie af in het echt, met de hond erbij.",
+      "video": "Eerst kennismaken in een videogesprek. Daarna spreken jullie af in het echt, met de hond erbij."
+    },
+    "remoteNote": "Een gesprek telt nog niet als kennismaking in het echt. Zelfstandig wandelen en de ID-check komen pas daarna.",
+    "phoneHow": "Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt.",
+    "videoHow": "Rondje heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Open alleen een link van een videodienst die je kent.",
+    "homeSafety": "Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie.",
+    "planInPerson": "Plan de kennismaking in het echt",
+    "afterCallWalker": "Na het gesprek is de volgende stap een kennismaking in het echt, met {dog} erbij.",
+    "afterCallHost": "Een gesprek telt nog niet als kennismaking in het echt. Het ID bekijken en zelfstandig wandelen toestaan kan pas als jullie elkaar met {dog} ontmoet hebben."
   },
   "walk": {
     "before": "Voor je vertrekt",
@@ -1135,8 +1160,8 @@
     "empty": "Nog geen meldingen.",
     "markRead": "Alles gelezen",
     "kinds": {
-      "request-new": "{walkerName} wil met {dogName} wandelen.",
-      "request-accepted": "Je afspraak met {dogName} is geaccepteerd.",
+      "request-new": "{via, select, walk {{walkerName} wil kennismaken met {dogName} tijdens een wandeling.} home {{walkerName} wil kennismaken met {dogName}, bij jou thuis.} phone {{walkerName} wil eerst bellen om kennis te maken met {dogName}.} video {{walkerName} wil eerst videobellen om kennis te maken met {dogName}.} other {{walkerName} wil met {dogName} wandelen.}}",
+      "request-accepted": "{via, select, phone {Je belafspraak over {dogName} is geaccepteerd.} video {Je videogesprek over {dogName} is geaccepteerd.} other {Je afspraak met {dogName} is geaccepteerd.}}",
       "request-declined": "Je afspraak met {dogName} is helaas afgewezen.",
       "request-cancelled": "Een afspraak is ingetrokken.",
       "walk-started": "{walkerName} is vertrokken met {dogName}. Kijk live mee.",
@@ -1156,7 +1181,7 @@
       "challenge-done": "{city} heeft de uitdaging gehaald: {goal} rondjes samen! {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel!",
       "nudge-back": "{variant, select, dog {Zin in een rondje met {dogName}? Plan het wanneer het jou uitkomt.} other {Zin in een rondje? Kijk welke honden er bij jou in de buurt een wandelmaatje zoeken.}}",
       "nudge-owner": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Voeg je er een toe?} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}",
-      "request-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} other {rondje met {dogName}}}. Veel plezier!",
+      "request-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} home {kennismaken met {dogName}, thuis} phone {eerst bellen over {dogName}} video {eerst videobellen over {dogName}} other {rondje met {dogName}}}. Veel plezier!",
       "group-walk-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}. Veel plezier!",
       "nudge-new-dog": "Nieuw bij jou in de buurt: {dogName} zoekt een wandelmaatje."
     }
@@ -1563,12 +1588,12 @@
     },
     "kinds": {
       "request-new": {
-        "subject": "{walkerName} wil met {dogName} wandelen",
-        "body": "Bekijk de aanvraag in Rondje en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen."
+        "subject": "{via, select, walk {{walkerName} wil kennismaken met {dogName} tijdens een wandeling} home {{walkerName} wil kennismaken met {dogName}, bij jou thuis} phone {{walkerName} wil eerst bellen om kennis te maken met {dogName}} video {{walkerName} wil eerst videobellen om kennis te maken met {dogName}} other {{walkerName} wil met {dogName} wandelen}}",
+        "body": "{via, select, home {Bekijk de aanvraag in Rondje en laat weten of het past. Spreek overdag af; familie of een buur mag er gerust bij zijn.} phone {Bekijk de aanvraag in Rondje en laat weten of het past. Een belletje telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} video {Bekijk de aanvraag in Rondje en laat weten of het past. Een videogesprek telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} other {Bekijk de aanvraag in Rondje en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen.}}"
       },
       "request-accepted": {
-        "subject": "Je afspraak met {dogName} is geaccepteerd",
-        "body": "In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen."
+        "subject": "{via, select, phone {Je belafspraak over {dogName} is geaccepteerd} video {Je videogesprek over {dogName} is geaccepteerd} other {Je afspraak met {dogName} is geaccepteerd}}",
+        "body": "{via, select, home {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. Spreek overdag af en laat iemand weten waar je bent.} phone {In Rondje zie je nu hoe je de eigenaar bereikt. Spreek in de chat af wie wie belt. Na het gesprek plan je de kennismaking in het echt.} video {Spreek in de chat van Rondje af hoe jullie videobellen. Na het gesprek plan je de kennismaking in het echt.} other {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen.}}"
       },
       "walk-overdue": {
         "subject": "Het rondje met {dogName} duurt langer dan gepland",
@@ -1615,7 +1640,7 @@
         "body": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Een foto buiten, met oogcontact, werkt het best.} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}"
       },
       "request-reminder": {
-        "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} other {rondje met {dogName}}}",
+        "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} home {kennismaken met {dogName}, thuis} phone {eerst bellen over {dogName}} video {eerst videobellen over {dogName}} other {rondje met {dogName}}}",
         "body": "Alles over de afspraak, zoals waar jullie afspreken en hoe je elkaar bereikt, staat in Rondje. Lukt het toch niet? Laat het de ander dan op tijd weten via de chat."
       },
       "group-walk-reminder": {
@@ -1732,7 +1757,7 @@
     },
     "next": "Je volgende afspraak",
     "nextWalk": "{when} · rondje met {dog}",
-    "nextMeeting": "{when} · kennismaking met {dog}",
+    "nextMeeting": "{when} · kennismaking met {dog}{via, select, home { (thuis)} phone { (eerst bellen)} video { (eerst videobellen)} other {}}",
     "nextOpen": "Bekijk",
     "pending": "{n, plural, one {# nieuw verzoek wacht op je antwoord} other {# nieuwe verzoeken wachten op je antwoord}}",
     "pendingOpen": "Bekijk verzoeken",
@@ -1966,7 +1991,7 @@
     "done": "Top! Je krijgt een seintje als er iets is."
   },
   "calendar": {
-    "meet": "Kennismaken met {dog}",
+    "meet": "{via, select, home {Kennismaken met {dog}, thuis bij de eigenaar} phone {Kennismaken met {dog}: eerst bellen} video {Kennismaken met {dog}: eerst videobellen} other {Kennismaken met {dog}}}",
     "walk": "Rondje met {dog}",
     "with": "Met {name}.",
     "open": "Alles over deze afspraak in Rondje: {link}",
@@ -1992,7 +2017,12 @@
       "thanks": "Dank je wel, het was een fijn rondje!",
       "again": "Zullen we nog eens gaan?",
       "thanksMeet": "Dank je wel, het was een fijne kennismaking!",
-      "soloNext": "Zou ik voortaan zelf met {dog} mogen wandelen?"
+      "soloNext": "Zou ik voortaan zelf met {dog} mogen wandelen?",
+      "whoCalls": "Bel jij mij, of zal ik jou bellen?",
+      "videoHow": "Hoe zullen we videobellen? Ik kan een link sturen.",
+      "readyCall": "Ik zit klaar voor ons gesprek.",
+      "thanksCall": "Dank je wel voor het fijne gesprek!",
+      "meetNext": "Zullen we nu afspreken om {dog} in het echt te ontmoeten?"
     },
     "host": {
       "helloMeet": "Wat leuk dat je kennis wilt maken met {dog}!",
@@ -2012,7 +2042,12 @@
       "thanks": "Dank je wel voor het rondje!",
       "weekly": "Zin om vaker te gaan? Elke week zou fijn zijn.",
       "thanksMeet": "Dank je wel voor de kennismaking!",
-      "againMeet": "Zullen we snel weer afspreken?"
+      "againMeet": "Zullen we snel weer afspreken?",
+      "whoCalls": "Ik bel je op het afgesproken moment.",
+      "videoHow": "Stuur maar een link voor het videogesprek, of zeg welke app je gebruikt.",
+      "readyCall": "Ik zit klaar, tot zo!",
+      "thanksCall": "Dank je wel voor het gesprek!",
+      "meetNext": "Kom gerust langs om {dog} in het echt te ontmoeten."
     }
   },
   "meetCheck": {
@@ -2025,14 +2060,17 @@
       "rules": "Wat mag wel en niet: loslopen, snoepjes, spelen met andere honden?",
       "stuff": "Waar liggen de riem en de zakjes, en hoe gaat het ophalen?",
       "emergency": "Wie bel je als er onderweg iets is? Vraag ook naar de dierenarts.",
-      "together": "Loop samen een stukje, zodat {dog} aan je kan wennen."
+      "together": "Loop samen een stukje, zodat {dog} aan je kan wennen.",
+      "inPerson": "Spreek af wanneer jullie elkaar in het echt ontmoeten, met {dog} erbij."
     },
     "host": {
       "leash": "Laat zien hoe {dog} aan de lijn loopt, en vertel wat {dog} spannend vindt.",
       "rules": "Vertel wat wel en niet mag: loslopen, snoepjes, spelen met andere honden.",
       "stuff": "Laat zien waar de riem en de zakjes liggen, en hoe het ophalen gaat.",
       "id": "Bekijk het ID van {name} in het echt. Daarna kun je dat hieronder bevestigen.",
-      "together": "Loop samen een stukje, zodat {dog} aan {name} kan wennen."
+      "together": "Loop samen een stukje, zodat {dog} aan {name} kan wennen.",
+      "callAbout": "Vertel hoe {dog} aan de lijn loopt en wat {dog} spannend vindt.",
+      "inPerson": "Spreek af wanneer jullie elkaar in het echt ontmoeten. Daar bekijk je het ID van {name}."
     }
   },
   "installAsk": {

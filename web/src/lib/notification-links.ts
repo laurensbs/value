@@ -5,6 +5,8 @@ export type NotificationData = {
   walkerName?: string
   senderName?: string
   requestId?: string
+  /** How a first meeting happens (walk, home, phone, video); left out for regular walks. */
+  meetVia?: string
   orgId?: string
   orgName?: string
   groupWalkId?: string
@@ -62,6 +64,7 @@ export function notificationValues(data: NotificationData): Record<string, strin
     tip: data.tip ?? 'other',
     day: data.day ?? 'other',
     time: data.time ?? '',
+    via: data.meetVia ?? 'other',
   }
 }
 

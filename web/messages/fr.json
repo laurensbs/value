@@ -531,7 +531,9 @@
       "already-decided": "Une décision a déjà été prise à ce sujet.",
       "not-now": "Vous pouvez commencer une balade à partir d'une demi-heure avant le rendez-vous.",
       "full": "Cette balade en groupe est complète.",
-      "not-signed-in": "Connectez-vous d'abord."
+      "not-signed-in": "Connectez-vous d'abord.",
+      "meet-via": "Ce mode de rencontre n'est pas possible ici. Choisissez la promenade ensemble.",
+      "needs-in-person": "Un appel ne compte pas comme une rencontre en vrai. Ce n'est possible qu'après vous être rencontrés."
     },
     "messagePlaceholder": "Bonjour ! Je suis … et j'aimerais beaucoup promener {dog}.",
     "moments": "Moments qui conviennent à {dog}",
@@ -559,7 +561,8 @@
       "declined": "Refusé",
       "cancelled": "Annulé",
       "completed": "Effectué",
-      "expired": "Expiré"
+      "expired": "Expiré",
+      "talked": "Appel effectué"
     },
     "accept": "Accepter",
     "decline": "Refuser",
@@ -587,6 +590,28 @@
     "past": "Rendez-vous passés ({n})",
     "startHint": "Vous pouvez commencer à partir de {n} minutes avant le rendez-vous.",
     "calendar": "Ajouter à l'agenda"
+  },
+  "meet": {
+    "legend": "Comment souhaitez-vous faire connaissance ?",
+    "via": {
+      "walk": "Promenade ensemble",
+      "home": "Chez le propriétaire",
+      "phone": "D'abord un appel",
+      "video": "D'abord un appel vidéo"
+    },
+    "hint": {
+      "walk": "Vous faites une balade ensemble. Le propriétaire vous accompagne et vérifie votre pièce d'identité.",
+      "home": "Vous rendez visite au propriétaire et au chien chez eux. Le propriétaire vérifie votre pièce d'identité.",
+      "phone": "Faites d'abord connaissance au téléphone. Ensuite, vous vous rencontrez en vrai, avec le chien.",
+      "video": "Faites d'abord connaissance par appel vidéo. Ensuite, vous vous rencontrez en vrai, avec le chien."
+    },
+    "remoteNote": "Un appel ne compte pas encore comme une rencontre en vrai. Les balades seul et la vérification de la pièce d'identité viennent ensuite.",
+    "phoneHow": "Une fois accepté, vous voyez le numéro de téléphone de l'autre, s'il est renseigné. Convenez dans la discussion de qui appelle qui.",
+    "videoHow": "Rondje n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien. N'ouvrez qu'un lien d'un service vidéo que vous connaissez.",
+    "homeSafety": "Une visite en toute sécurité : rencontrez-vous en journée, prévenez quelqu'un de l'endroit où vous êtes, et la famille ou un voisin peuvent être présents. Vous ne voyez l'adresse et le téléphone qu'une fois accepté.",
+    "planInPerson": "Planifier la rencontre en vrai",
+    "afterCallWalker": "Après l'appel, la prochaine étape est une rencontre en vrai, avec {dog}.",
+    "afterCallHost": "Un appel ne compte pas encore comme une rencontre en vrai. Vérifier la pièce d'identité et autoriser les balades seul n'est possible qu'après vous être rencontrés avec {dog}."
   },
   "walk": {
     "before": "Avant de partir",
@@ -1135,8 +1160,8 @@
     "empty": "Pas encore de notifications.",
     "markRead": "Tout marquer comme lu",
     "kinds": {
-      "request-new": "{walkerName} aimerait promener {dogName}.",
-      "request-accepted": "Votre rendez-vous avec {dogName} a été accepté.",
+      "request-new": "{via, select, walk {{walkerName} aimerait rencontrer {dogName} lors d'une balade.} home {{walkerName} aimerait rencontrer {dogName} chez vous.} phone {{walkerName} aimerait d'abord appeler pour faire connaissance avec {dogName}.} video {{walkerName} aimerait d'abord un appel vidéo pour faire connaissance avec {dogName}.} other {{walkerName} aimerait promener {dogName}.}}",
+      "request-accepted": "{via, select, phone {Votre appel au sujet de {dogName} a été accepté.} video {Votre appel vidéo au sujet de {dogName} a été accepté.} other {Votre rendez-vous avec {dogName} a été accepté.}}",
       "request-declined": "Malheureusement, votre rendez-vous avec {dogName} a été refusé.",
       "request-cancelled": "Un rendez-vous a été annulé.",
       "walk-started": "{walkerName} a commencé la balade avec {dogName}. Suivez-la en direct.",
@@ -1156,7 +1181,7 @@
       "challenge-done": "{city} a relevé le défi : {goal} balades ensemble ! {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci !",
       "nudge-back": "{variant, select, dog {Envie d'une balade avec {dogName} ? Planifiez-la quand cela vous convient.} other {Envie d'une balade ? Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}}",
       "nudge-owner": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Vous en ajoutez une ?} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}",
-      "request-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}. Belle rencontre !} other {balade avec {dogName}. Bonne balade !}}",
+      "request-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}. Belle rencontre !} home {rencontre avec {dogName}, à domicile. Belle rencontre !} phone {premier appel au sujet de {dogName}. Bon échange !} video {premier appel vidéo au sujet de {dogName}. Bon échange !} other {balade avec {dogName}. Bonne balade !}}",
       "group-walk-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}. Bonne balade !",
       "nudge-new-dog": "Près de chez vous : {dogName} vient d'arriver sur Rondje et cherche un compagnon de promenade."
     }
@@ -1563,12 +1588,12 @@
     },
     "kinds": {
       "request-new": {
-        "subject": "{walkerName} aimerait promener {dogName}",
-        "body": "Consultez la demande dans Rondje et dites si cela vous convient. La première fois, vous vous rencontrez toujours ensemble."
+        "subject": "{via, select, walk {{walkerName} aimerait rencontrer {dogName} lors d'une balade} home {{walkerName} aimerait rencontrer {dogName} chez vous} phone {{walkerName} aimerait d'abord appeler pour faire connaissance avec {dogName}} video {{walkerName} aimerait d'abord un appel vidéo pour faire connaissance avec {dogName}} other {{walkerName} aimerait promener {dogName}}}",
+        "body": "{via, select, home {Consultez la demande dans Rondje et dites si cela vous convient. Rencontrez-vous en journée ; la famille ou un voisin peuvent être présents.} phone {Consultez la demande dans Rondje et dites si cela vous convient. Un appel ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} video {Consultez la demande dans Rondje et dites si cela vous convient. Un appel vidéo ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} other {Consultez la demande dans Rondje et dites si cela vous convient. La première fois, vous vous rencontrez toujours ensemble.}}"
       },
       "request-accepted": {
-        "subject": "Votre rendez-vous avec {dogName} est accepté",
-        "body": "Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble."
+        "subject": "{via, select, phone {Votre appel au sujet de {dogName} est accepté} video {Votre appel vidéo au sujet de {dogName} est accepté} other {Votre rendez-vous avec {dogName} est accepté}}",
+        "body": "{via, select, home {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} other {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.}}"
       },
       "walk-overdue": {
         "subject": "La promenade avec {dogName} dure plus longtemps que prévu",
@@ -1615,7 +1640,7 @@
         "body": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Une photo en extérieur, avec un contact visuel, fonctionne le mieux.} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
       },
       "request-reminder": {
-        "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}} other {balade avec {dogName}}}",
+        "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}} home {rencontre avec {dogName}, à domicile} phone {premier appel au sujet de {dogName}} video {premier appel vidéo au sujet de {dogName}} other {balade avec {dogName}}}",
         "body": "Tout sur le rendez-vous, comme le lieu de rencontre et la façon de vous joindre, se trouve dans Rondje. Finalement, vous ne pouvez pas ? Prévenez l'autre personne à temps via la discussion."
       },
       "group-walk-reminder": {
@@ -1732,7 +1757,7 @@
     },
     "next": "Votre prochain rendez-vous",
     "nextWalk": "{when} · balade avec {dog}",
-    "nextMeeting": "{when} · première rencontre avec {dog}",
+    "nextMeeting": "{when} · première rencontre avec {dog}{via, select, home { (à domicile)} phone { (d'abord un appel)} video { (d'abord un appel vidéo)} other {}}",
     "nextOpen": "Voir",
     "pending": "{n, plural, one {# nouvelle demande attend votre réponse} other {# nouvelles demandes attendent votre réponse}}",
     "pendingOpen": "Voir les demandes",
@@ -1966,7 +1991,7 @@
     "done": "Parfait ! Vous recevrez un signal quand il y aura du nouveau."
   },
   "calendar": {
-    "meet": "Rencontre avec {dog}",
+    "meet": "{via, select, home {Rencontre avec {dog}, chez le propriétaire} phone {Rencontre avec {dog} : d'abord un appel} video {Rencontre avec {dog} : d'abord un appel vidéo} other {Rencontre avec {dog}}}",
     "walk": "Balade avec {dog}",
     "with": "Avec {name}.",
     "open": "Tout sur ce rendez-vous dans Rondje : {link}",
@@ -1992,7 +2017,12 @@
       "thanks": "Merci, c'était une très belle balade !",
       "again": "On remet ça bientôt ?",
       "thanksMeet": "Merci, c'était un plaisir de faire connaissance !",
-      "soloNext": "Pourrais-je désormais promener {dog} sans vous ?"
+      "soloNext": "Pourrais-je désormais promener {dog} sans vous ?",
+      "whoCalls": "Vous m'appelez, ou je vous appelle ?",
+      "videoHow": "Comment faisons-nous l'appel vidéo ? Je peux envoyer un lien.",
+      "readyCall": "Tout est prêt de mon côté pour notre appel.",
+      "thanksCall": "Merci pour cet échange agréable !",
+      "meetNext": "Pouvons-nous maintenant prévoir de rencontrer {dog} en vrai ?"
     },
     "host": {
       "helloMeet": "Quel plaisir que vous souhaitiez rencontrer {dog} !",
@@ -2012,7 +2042,12 @@
       "thanks": "Merci pour la balade !",
       "weekly": "Envie de venir plus souvent ? Chaque semaine, ce serait super.",
       "thanksMeet": "Merci pour cette rencontre !",
-      "againMeet": "On se revoit bientôt ?"
+      "againMeet": "On se revoit bientôt ?",
+      "whoCalls": "Je vous appelle à l'heure convenue.",
+      "videoHow": "Envoyez-moi un lien pour l'appel vidéo, ou dites-moi quelle application vous utilisez.",
+      "readyCall": "Tout est prêt, à tout de suite !",
+      "thanksCall": "Merci pour cet appel !",
+      "meetNext": "N'hésitez pas à venir rencontrer {dog} en vrai."
     }
   },
   "meetCheck": {
@@ -2025,14 +2060,17 @@
       "rules": "Qu'est-ce qui est permis : sans laisse, friandises, jeux avec d'autres chiens ?",
       "stuff": "Où sont la laisse et les sacs, et comment se passe la prise en charge ?",
       "emergency": "Qui appeler en cas de problème pendant la balade ? Demandez aussi le vétérinaire.",
-      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à vous."
+      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à vous.",
+      "inPerson": "Convenez du moment où vous vous rencontrerez en vrai, avec {dog}."
     },
     "host": {
       "leash": "Montrez comment se passe la marche en laisse avec {dog}, et ce qui l'inquiète.",
       "rules": "Dites ce qui est permis : sans laisse, friandises, jeux avec d'autres chiens.",
       "stuff": "Montrez où sont la laisse et les sacs, et comment se passe la prise en charge.",
       "id": "Vérifiez en personne la pièce d'identité de {name}. Vous pourrez ensuite le confirmer ci-dessous.",
-      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à {name}."
+      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à {name}.",
+      "callAbout": "Racontez comment se passe la marche en laisse avec {dog}, et ce qui l'inquiète.",
+      "inPerson": "Convenez du moment où vous vous rencontrerez en vrai. C'est là que vous vérifierez la pièce d'identité de {name}."
     }
   },
   "installAsk": {

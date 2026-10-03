@@ -531,7 +531,9 @@
       "already-decided": "A decision has already been made on this.",
       "not-now": "You can start a walk from half an hour before the agreed time.",
       "full": "This group walk is full.",
-      "not-signed-in": "Please log in first."
+      "not-signed-in": "Please log in first.",
+      "meet-via": "This way of meeting isn't possible here. Choose walk together.",
+      "needs-in-person": "A call doesn't count as meeting in person. That's only possible once you've met."
     },
     "messagePlaceholder": "Hi! I'm … and I'd love to walk {dog}.",
     "moments": "Times that suit {dog}",
@@ -559,7 +561,8 @@
       "declined": "Declined",
       "cancelled": "Cancelled",
       "completed": "Completed",
-      "expired": "Expired"
+      "expired": "Expired",
+      "talked": "Call done"
     },
     "accept": "Accept",
     "decline": "Decline",
@@ -587,6 +590,28 @@
     "past": "Past walks ({n})",
     "startHint": "You can start from {n} minutes before the agreed time.",
     "calendar": "Add to calendar"
+  },
+  "meet": {
+    "legend": "How would you like to meet?",
+    "via": {
+      "walk": "Walk together",
+      "home": "At the owner's home",
+      "phone": "Call first",
+      "video": "Video call first"
+    },
+    "hint": {
+      "walk": "You go for a walk together. The owner comes along and checks your ID.",
+      "home": "You visit the owner and the dog at home. The owner checks your ID.",
+      "phone": "Get to know each other on the phone first. Then you meet in person, with the dog.",
+      "video": "Get to know each other on a video call first. Then you meet in person, with the dog."
+    },
+    "remoteNote": "A call doesn't count as meeting in person yet. Walking alone and the ID check only come after that.",
+    "phoneHow": "Once accepted, you see each other's phone number, if filled in. Agree in the chat who calls whom.",
+    "videoHow": "Rondje has no video calling of its own. Agree in the chat which app you use and share the link there. Only open a link from a video service you know.",
+    "homeSafety": "Visiting safely: meet during the day, let someone know where you are, and family or a neighbour are welcome to join. You only see the address and phone number once accepted.",
+    "planInPerson": "Plan meeting in person",
+    "afterCallWalker": "After the call, the next step is meeting in person, with {dog}.",
+    "afterCallHost": "A call doesn't count as meeting in person yet. Checking the ID and allowing walks alone is only possible once you've met with {dog}."
   },
   "walk": {
     "before": "Before you set off",
@@ -1135,8 +1160,8 @@
     "empty": "No notifications yet.",
     "markRead": "Mark all as read",
     "kinds": {
-      "request-new": "{walkerName} would like to walk {dogName}.",
-      "request-accepted": "Your walk with {dogName} has been accepted.",
+      "request-new": "{via, select, walk {{walkerName} would like to meet {dogName} on a walk.} home {{walkerName} would like to meet {dogName} at your home.} phone {{walkerName} would like to call first to get to know {dogName}.} video {{walkerName} would like a video call first to get to know {dogName}.} other {{walkerName} would like to walk {dogName}.}}",
+      "request-accepted": "{via, select, phone {Your call about {dogName} has been accepted.} video {Your video call about {dogName} has been accepted.} other {Your walk with {dogName} has been accepted.}}",
       "request-declined": "Unfortunately, your walk with {dogName} was declined.",
       "request-cancelled": "A walk has been cancelled.",
       "walk-started": "{walkerName} has set off with {dogName}. Follow along live.",
@@ -1156,7 +1181,7 @@
       "challenge-done": "{city} made it: {goal} walks together! {mine, plural, one {One of them was yours.} other {# of them were yours.}} Thank you!",
       "nudge-back": "{variant, select, dog {Fancy a walk with {dogName}? Plan it whenever it suits you.} other {Fancy a walk? See which dogs near you are looking for a walking buddy.}}",
       "nudge-owner": "{tip, select, photo {A photo helps walkers get to know {dogName}. Will you add one?} slots {Add regular walking times for {dogName}, so walkers see right away when it suits.} other {No requests for {dogName} yet? Share the page with neighbours and friends, it often helps.}}",
-      "request-reminder": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} other {a walk with {dogName}}}. Have fun!",
+      "request-reminder": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} home {meeting {dogName}, at home} phone {a first call about {dogName}} video {a first video call about {dogName}} other {a walk with {dogName}}}. Have fun!",
       "group-walk-reminder": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: group walk at {orgName}. Have fun!",
       "nudge-new-dog": "New near you: {dogName} is looking for a walking buddy."
     }
@@ -1563,12 +1588,12 @@
     },
     "kinds": {
       "request-new": {
-        "subject": "{walkerName} would like to walk {dogName}",
-        "body": "Look at the request in Rondje and let them know if it suits you. The first time, you always meet together."
+        "subject": "{via, select, walk {{walkerName} would like to meet {dogName} on a walk} home {{walkerName} would like to meet {dogName} at your home} phone {{walkerName} would like to call first to get to know {dogName}} video {{walkerName} would like a video call first to get to know {dogName}} other {{walkerName} would like to walk {dogName}}}",
+        "body": "{via, select, home {Look at the request in Rondje and let them know if it suits you. Meet during the day; family or a neighbour are welcome to join.} phone {Look at the request in Rondje and let them know if it suits you. A call doesn't count as meeting in person yet: after it, you meet with {dogName}.} video {Look at the request in Rondje and let them know if it suits you. A video call doesn't count as meeting in person yet: after it, you meet with {dogName}.} other {Look at the request in Rondje and let them know if it suits you. The first time, you always meet together.}}"
       },
       "request-accepted": {
-        "subject": "Your appointment with {dogName} has been accepted",
-        "body": "In Rondje you can now see where you meet and how to reach the owner. The first time, you walk together."
+        "subject": "{via, select, phone {Your call about {dogName} has been accepted} video {Your video call about {dogName} has been accepted} other {Your appointment with {dogName} has been accepted}}",
+        "body": "{via, select, home {In Rondje you can now see where you meet and how to reach the owner. Meet during the day and let someone know where you are.} phone {In Rondje you can now see how to reach the owner. Agree in the chat who calls whom. After the call, you plan meeting in person.} video {Agree in Rondje's chat how you'll do the video call. After the call, you plan meeting in person.} other {In Rondje you can now see where you meet and how to reach the owner. The first time, you walk together.}}"
       },
       "walk-overdue": {
         "subject": "The walk with {dogName} is taking longer than planned",
@@ -1615,7 +1640,7 @@
         "body": "{tip, select, photo {A photo helps walkers get to know {dogName}. A photo outside, with eye contact, works best.} slots {Add regular walking times for {dogName}, so walkers see right away when it suits.} other {No requests for {dogName} yet? Share the page with neighbours and friends, it often helps.}}"
       },
       "request-reminder": {
-        "subject": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} other {a walk with {dogName}}}",
+        "subject": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} home {meeting {dogName}, at home} phone {a first call about {dogName}} video {a first video call about {dogName}} other {a walk with {dogName}}}",
         "body": "Everything about the appointment, like where you meet and how to reach each other, is in Rondje. Can't make it after all? Let the other person know in time through the chat."
       },
       "group-walk-reminder": {
@@ -1732,7 +1757,7 @@
     },
     "next": "Your next appointment",
     "nextWalk": "{when} · walk with {dog}",
-    "nextMeeting": "{when} · first meeting with {dog}",
+    "nextMeeting": "{when} · first meeting with {dog}{via, select, home { (at home)} phone { (call first)} video { (video call first)} other {}}",
     "nextOpen": "View",
     "pending": "{n, plural, one {# new request is waiting for your answer} other {# new requests are waiting for your answer}}",
     "pendingOpen": "View requests",
@@ -1966,7 +1991,7 @@
     "done": "Great! You'll get a heads-up when something comes up."
   },
   "calendar": {
-    "meet": "Meet {dog}",
+    "meet": "{via, select, home {Meet {dog}, at the owner's home} phone {Meet {dog}: phone call first} video {Meet {dog}: video call first} other {Meet {dog}}}",
     "walk": "Walk with {dog}",
     "with": "With {name}.",
     "open": "Everything about this appointment in Rondje: {link}",
@@ -1992,7 +2017,12 @@
       "thanks": "Thank you, that was a lovely walk!",
       "again": "Shall we go again sometime?",
       "thanksMeet": "Thank you, it was lovely to meet you!",
-      "soloNext": "Would it be OK if I walked {dog} on my own from now on?"
+      "soloNext": "Would it be OK if I walked {dog} on my own from now on?",
+      "whoCalls": "Will you call me, or shall I call you?",
+      "videoHow": "How shall we do the video call? I can send a link.",
+      "readyCall": "I'm ready for our call.",
+      "thanksCall": "Thank you, it was a lovely chat!",
+      "meetNext": "Shall we plan to meet {dog} in person now?"
     },
     "host": {
       "helloMeet": "How nice that you'd like to meet {dog}!",
@@ -2012,7 +2042,12 @@
       "thanks": "Thank you for the walk!",
       "weekly": "Fancy going more often? Every week would be lovely.",
       "thanksMeet": "Thank you for coming to meet us!",
-      "againMeet": "Shall we meet again soon?"
+      "againMeet": "Shall we meet again soon?",
+      "whoCalls": "I'll call you at the agreed time.",
+      "videoHow": "Feel free to send a link for the video call, or tell me which app you use.",
+      "readyCall": "I'm ready, talk soon!",
+      "thanksCall": "Thank you for the call!",
+      "meetNext": "You're welcome to come and meet {dog} in person."
     }
   },
   "meetCheck": {
@@ -2025,14 +2060,17 @@
       "rules": "What's allowed: off the leash, treats, playing with other dogs?",
       "stuff": "Where are the leash and bags, and how does pick-up work?",
       "emergency": "Who do you call if something happens on the way? Ask about the vet too.",
-      "together": "Walk a little way together, so {dog} can get used to you."
+      "together": "Walk a little way together, so {dog} can get used to you.",
+      "inPerson": "Agree when you'll meet in person, with {dog}."
     },
     "host": {
       "leash": "Show how {dog} walks on the leash, and say what makes {dog} nervous.",
       "rules": "Say what's allowed: off the leash, treats, playing with other dogs.",
       "stuff": "Show where the leash and bags are, and how pick-up works.",
       "id": "Check {name}'s ID in person. Then you can confirm it below.",
-      "together": "Walk a little way together, so {dog} can get used to {name}."
+      "together": "Walk a little way together, so {dog} can get used to {name}.",
+      "callAbout": "Say how {dog} walks on the leash and what makes {dog} nervous.",
+      "inPerson": "Agree when you'll meet in person. That's where you check {name}'s ID."
     }
   },
   "installAsk": {

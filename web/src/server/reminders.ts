@@ -111,7 +111,8 @@ async function requestReminders(db: Db, from: Date, to: Date, now: Date): Promis
       dogName: dog.name,
       day: moment.day,
       time: moment.time,
-      variant: request.kind === 'meet' ? 'meet' : 'walk',
+      // A first meeting by phone, video or at home says so; walking together stays "meet".
+      variant: request.kind !== 'meet' ? 'walk' : request.meetVia === 'walk' ? 'meet' : request.meetVia,
       at: request.startsAt.toISOString(),
     }
     for (const userId of new Set([request.walkerId, ...(await watchers(dog))])) {
