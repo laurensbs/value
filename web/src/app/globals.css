@@ -77,6 +77,20 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Keyboard focus and jumps to a section land clear of the sticky header and of the bars at the
+     bottom (form buttons, tab bar), never behind them (WCAG 2.4.11). */
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 12px);
+  scroll-padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+}
+
+html:has(.active-walk) {
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 72px);
+}
+
+@media (max-width: 899px) {
+  html:has(.has-tabbar) {
+    scroll-padding-bottom: calc(var(--tabbar-h) + 120px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 body {
@@ -980,6 +994,92 @@ fieldset.field {
   box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
 }
 
+/* Several dogs or shelters in one spot: one marker with their number. */
+.map-cluster {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1f5a3d;
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 3px rgb(31 90 61 / 0.3), 0 2px 6px rgb(0 0 0 / 0.25);
+  font: 800 1rem/1 var(--font-body);
+}
+
+/* Popups and the map credit in the app's own colours, readable in dark mode too. */
+.leaflet-container .leaflet-popup-content-wrapper,
+.leaflet-container .leaflet-popup-tip {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.leaflet-container .leaflet-popup-content {
+  margin: 10px 44px 10px 16px;
+  font: 600 0.95rem/1.35 var(--font-body);
+}
+
+/* The popup's close button: a full tap target in the corner. */
+.leaflet-container a.leaflet-popup-close-button {
+  width: 44px;
+  height: 44px;
+  font: 400 1.5rem/44px var(--font-body);
+  color: var(--muted);
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus-visible {
+  color: var(--ink);
+}
+
+.leaflet-container .leaflet-popup-content a,
+.leaflet-container .leaflet-control-attribution a {
+  color: var(--grass);
+}
+
+.leaflet-container .leaflet-control-attribution {
+  background: color-mix(in oklab, var(--surface) 90%, transparent);
+  color: var(--muted);
+}
+
+.leaflet-container .leaflet-bar a {
+  background: var(--surface);
+  color: var(--ink);
+  border-bottom-color: var(--line);
+}
+
+.leaflet-container .leaflet-bar a:hover,
+.leaflet-container .leaflet-bar a:focus-visible {
+  background: var(--sunken);
+}
+
+.leaflet-container .leaflet-bar a.leaflet-disabled {
+  background: var(--sunken);
+  color: var(--muted);
+}
+
+.map-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.map-list li + li {
+  border-top: 1px solid var(--line);
+}
+
+.map-list a,
+.map-list span,
+.leaflet-popup-content > a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* ---------- Walk ---------- */
 
 .walk-screen {
@@ -1073,6 +1173,8 @@ fieldset.field {
 .list-item > .grow {
   flex: 1;
   min-width: 0;
+  /* A word longer than the line (a shelter's name, an email address) breaks instead of running out. */
+  overflow-wrap: break-word;
 }
 
 .timeline {
@@ -1998,6 +2100,12 @@ fieldset.form-section {
   color: var(--grass);
 }
 
+/* A section heading on one page, a subheading on another: the same size either way. */
+.benefits :is(h2, h3) {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
 .signups {
   list-style: none;
   margin: 0;
@@ -2649,6 +2757,22 @@ legend {
   flex: none;
   justify-items: end;
   text-align: right;
+}
+
+/* On a phone the actions go under the shelter's name, so a long name keeps the full width. */
+@media (max-width: 559px) {
+  .list-item:has(> .directory-actions) {
+    flex-wrap: wrap;
+  }
+
+  .directory-actions {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    text-align: left;
+  }
 }
 
 /* ---------- Footer: site links above the legal links ---------- */
@@ -3734,7 +3858,6 @@ legend {
 /* The owner's ready message for the neighbours, as it will arrive: a speech bubble. */
 .share-card {
   border-color: color-mix(in srgb, var(--grass) 35%, var(--line));
-  scroll-margin-top: calc(var(--header-h) + 16px);
 }
 
 .share-message {
@@ -4401,11 +4524,6 @@ legend {
   font-weight: 650;
 }
 
-/* Links to the request form land below the sticky header. */
-.plan-anchor {
-  scroll-margin-top: calc(var(--header-h) + 16px);
-}
-
 /* ---------- Progress: levels, badges, dog friends ---------- */
 
 .progress-page {
@@ -4572,8 +4690,17 @@ legend {
   animation: glow 2.4s ease-in-out infinite;
 }
 
-.level-path li.later {
-  opacity: 0.75;
+/* Long level names ("Hondenfluisteraar") break inside their card instead of running out of it. */
+.level-path li > .stack-s {
+  min-width: 0;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+
+/* Levels still ahead: an open stone on the route, with text as readable as the rest. */
+.level-path li.later .level-stone {
+  background: transparent;
+  border: 1.5px dashed var(--muted);
 }
 
 .earn-list,

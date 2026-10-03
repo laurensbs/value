@@ -1,10 +1,12 @@
 // Mobile + desktop quality pass over the app's pages, signed out and signed in:
 // horizontal overflow, page errors, failed requests, anything the Content-Security-Policy
-// blocks, tap targets under 44px (mobile), unlabeled controls, images without alt, and slow
-// pages. Writes a screenshot per page.
+// blocks, tap targets under 44px (mobile), unlabeled controls, images without alt, slow pages,
+// and axe-core's WCAG 2.2 AA and best-practice rules in light and dark mode. Writes a
+// screenshot per page.
 // Usage: node scripts/audit.mjs <baseUrl> <outDir>   (server needs ADMIN_EMAILS to include audit@rondje.test)
 import { chromium } from '@playwright/test'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
 
 const [base = 'http://localhost:3100', out = 'audit'] = process.argv.slice(2)
 mkdirSync(out, { recursive: true })
@@ -12,6 +14,35 @@ const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_
 
 const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam']
 const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
+const axeSource = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8')
+// Bars that stay put while the page scrolls under them: a control behind one is reached by scrolling.
+const BARS = '.header, .tabbar, .active-walk, .form-actions, .onboarding-actions, .walk-actions, .bulk-actions, .chat-compose'
+
+/** axe-core in light and dark mode: names and roles for screen readers, contrast, target sizes. */
+async function axe(page) {
+  const found = []
+  // Evaluated by the browser's devtools channel, like the console, so the page policy allows it.
+  if (!(await page.evaluate(() => 'axe' in window))) await page.evaluate(axeSource)
+  for (const scheme of ['light', 'dark']) {
+    await page.emulateMedia({ colorScheme: scheme })
+    const violations = await page.evaluate(async (bars) => {
+      const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
+      const result = await window.axe.run(document, { runOnly: { type: 'tag', values: tags }, resultTypes: ['violations'] })
+      const checks = (n) => [...n.any, ...n.all, ...n.none]
+      const behindBar = (n) => {
+        const related = checks(n).flatMap((c) => c.relatedNodes ?? [])
+        return checks(n).some((c) => /obscured/i.test(c.message ?? '')) && related.length > 0 && related.every((r) => document.querySelector(r.target.join(' '))?.closest(bars))
+      }
+      return result.violations
+        .map((v) => ({ id: v.id, nodes: v.nodes.filter((n) => !(v.id === 'target-size' && behindBar(n))).map((n) => n.target.join(' ')) }))
+        .filter((v) => v.nodes.length)
+    }, BARS)
+    for (const v of violations) found.push(`axe ${v.id}${scheme === 'dark' ? ' (dark)' : ''}: ${v.nodes.slice(0, 3).join(', ')}${v.nodes.length > 3 ? ` and ${v.nodes.length - 3} more` : ''}`)
+  }
+  await page.emulateMedia({ colorScheme: null })
+  return found
+}
+
 const viewports = { mobile: { viewport: { width: 375, height: 740 }, isMobile: true, hasTouch: true }, desktop: { viewport: { width: 1366, height: 900 } } }
 
 async function check(page, path, label, tag = '') {
@@ -63,6 +94,7 @@ async function check(page, path, label, tag = '') {
     if (!document.querySelector('h1')) issues.push('no <h1>')
     return issues
   }, label === 'mobile')
+  found.push(...(await axe(page)))
   page.off('pageerror', onErr)
   page.off('response', onResp)
   page.off('console', onConsole)

@@ -72,6 +72,9 @@
       "5": "vr",
       "6": "za",
       "7": "zo"
+    },
+    "map": {
+      "cluster": "{count} op deze plek"
     }
   },
   "footer": {
@@ -260,7 +263,8 @@
       "needTerms": "Ga akkoord met de voorwaarden om verder te gaan.",
       "welcomeTitleAnon": "Hoi, fijn dat je er bent!",
       "needExperience": "Kies wat het beste bij je past.",
-      "promise1Owner": "De eerste keer loopt een wandelaar altijd samen met jou."
+      "promise1Owner": "De eerste keer loopt een wandelaar altijd samen met jou.",
+      "progressLabel": "Voortgang"
     },
     "bioBlocksLabel": "Tik om een zin toe te voegen",
     "bioBlocks": {

@@ -81,7 +81,7 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
           </Link>
         ))}
       </nav>
-      {markers.length ? <Map center={COUNTRY_INFO[country].center} zoom={7} markers={markers} fitToMarkers className="map" ariaLabel={t('directory.title')} /> : null}
+      {markers.length ? <Map center={COUNTRY_INFO[country].center} zoom={7} markers={markers} fitToMarkers cluster className="map" ariaLabel={t('directory.title')} /> : null}
 
       <section className="stack-s">
         <h2>{t('directory.partner')}</h2>

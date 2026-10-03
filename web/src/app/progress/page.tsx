@@ -50,10 +50,10 @@ export default async function ProgressPage() {
           </p>
           <h1>{json.level.name}</h1>
           <p className="lede">{t('points', { n: json.points })}</p>
-          <div className="level-progress" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(json.level.progress * 100)}>
+          <div className="level-progress" role="progressbar" aria-labelledby="level-next" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(json.level.progress * 100)}>
             <span style={{ width: `${json.level.progress * 100}%` }} />
           </div>
-          <p className="small">
+          <p className="small" id="level-next">
             {json.level.next != null && json.level.nextName ? t('toNext', { n: json.level.next - json.points, name: json.level.nextName }) : t('top')}
           </p>
         </div>

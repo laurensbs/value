@@ -72,6 +72,9 @@
       "5": "ven",
       "6": "sam",
       "7": "dim"
+    },
+    "map": {
+      "cluster": "{count} à cet endroit"
     }
   },
   "footer": {
@@ -260,7 +263,8 @@
       "needTerms": "Acceptez les conditions pour continuer.",
       "welcomeTitleAnon": "Bonjour, bienvenue !",
       "needExperience": "Choisissez ce qui vous correspond le mieux.",
-      "promise1Owner": "La première fois, le promeneur marche toujours avec vous."
+      "promise1Owner": "La première fois, le promeneur marche toujours avec vous.",
+      "progressLabel": "Progression"
     },
     "bioBlocksLabel": "Touchez pour ajouter une phrase",
     "bioBlocks": {

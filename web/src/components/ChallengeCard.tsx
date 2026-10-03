@@ -20,7 +20,7 @@ export async function ChallengeCard({ challenges, now = new Date() }: { challeng
         <span className="pill">{t('daysLeft', { n: c.daysLeft })}</span>
       </div>
       <h2 id="challenge-title">{main.title}</h2>
-      <div className="challenge-bar" role="progressbar" aria-valuemin={0} aria-valuemax={main.goal} aria-valuenow={Math.min(main.walks, main.goal)} aria-valuetext={main.progressText}>
+      <div className="challenge-bar" role="progressbar" aria-labelledby="challenge-title" aria-valuemin={0} aria-valuemax={main.goal} aria-valuenow={Math.min(main.walks, main.goal)} aria-valuetext={main.progressText}>
         <span style={{ width: `${Math.min(100, (main.walks / main.goal) * 100)}%` }} />
       </div>
       <div className="spread">

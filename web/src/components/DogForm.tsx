@@ -267,6 +267,7 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
           <div
             className="onboarding-bar"
             role="progressbar"
+            aria-label={t('onboarding.flow.progressLabel')}
             aria-valuemin={1}
             aria-valuemax={total}
             aria-valuenow={index + 1}

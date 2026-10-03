@@ -190,6 +190,7 @@ export function OnboardingFlow({ firstName, photoUrl, country: initialCountry, m
           <div
             className="onboarding-bar"
             role="progressbar"
+            aria-label={t('flow.progressLabel')}
             aria-valuemin={1}
             aria-valuemax={total}
             aria-valuenow={number}

@@ -72,6 +72,9 @@
       "5": "Fri",
       "6": "Sat",
       "7": "Sun"
+    },
+    "map": {
+      "cluster": "{count} in this spot"
     }
   },
   "footer": {
@@ -260,7 +263,8 @@
       "needTerms": "Accept the terms to continue.",
       "welcomeTitleAnon": "Hi, great to have you!",
       "needExperience": "Pick what fits you best.",
-      "promise1Owner": "The first time, a walker always walks together with you."
+      "promise1Owner": "The first time, a walker always walks together with you.",
+      "progressLabel": "Progress"
     },
     "bioBlocksLabel": "Tap to add a sentence",
     "bioBlocks": {

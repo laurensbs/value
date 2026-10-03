@@ -299,7 +299,7 @@ export default async function DogPage({
 
         {!isMine && host.kind === 'owner' ? (
           viewer ? (
-            <div id="plan" className="plan-anchor">
+            <div id="plan">
               <RequestForm
               dogId={dog.id}
               dogName={dog.name}

@@ -72,6 +72,9 @@
       "5": "vie",
       "6": "sáb",
       "7": "dom"
+    },
+    "map": {
+      "cluster": "{count} en este lugar"
     }
   },
   "footer": {
@@ -260,7 +263,8 @@
       "needTerms": "Acepta las condiciones para continuar.",
       "welcomeTitleAnon": "¡Hola! Qué bien que estés aquí",
       "needExperience": "Elige lo que mejor te describa.",
-      "promise1Owner": "La primera vez, quien pasea siempre va junto contigo."
+      "promise1Owner": "La primera vez, quien pasea siempre va junto contigo.",
+      "progressLabel": "Progreso"
     },
     "bioBlocksLabel": "Toca para añadir una frase",
     "bioBlocks": {
