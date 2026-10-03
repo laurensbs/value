@@ -2497,5 +2497,487 @@
         "domain": "once it is bought"
       }
     }
+  },
+  "marketing": {
+    "title": "Marketing hub",
+    "lede": "What to do this week, and material that is ready to use. Nothing is posted or sent from here: you always do that yourself.",
+    "nav": {
+      "label": "Parts of the marketing hub",
+      "questions": "Questions",
+      "interviews": "Interviews",
+      "posts": "Posts",
+      "links": "Links",
+      "material": "Material"
+    },
+    "week": {
+      "title": "This week",
+      "hint": "The first questions that need action, in order. Tap through for the why.",
+      "none": "Nothing urgent. Look at the questions marked ‘Watch’.",
+      "nextPost": "Next post: {title} (week {week}, {channel})",
+      "allPosted": "Every post in the planner is posted. Time for a new series."
+    },
+    "status": {
+      "good": "Good",
+      "watch": "Watch",
+      "act": "Act now",
+      "wait": "No data yet"
+    },
+    "labels": {
+      "step": {
+        "account": "account",
+        "profile": "profile done",
+        "firstStep": "first step",
+        "firstWalk": "first walk"
+      }
+    },
+    "funnelSteps": {
+      "visits": "Visits",
+      "visitsHint": "in Vercel Analytics",
+      "account": "Account",
+      "profile": "Profile done",
+      "firstStep": "First step",
+      "firstStepHint": "request, dog online or group walk",
+      "firstWalk": "First walk"
+    },
+    "questions": {
+      "title": "The best questions",
+      "lede": "The questions a good growth marketer would ask now, answered live from real data. Example data and admins never count, and you only see numbers, never names.",
+      "why": "Why",
+      "now": "What now",
+      "open": "Open",
+      "cols": {
+        "city": "City",
+        "demand": "Demand",
+        "supply": "Dogs",
+        "shelter": "Shelter",
+        "votes": "Votes",
+        "code": "Code",
+        "signups": "Sign-ups"
+      },
+      "funnel": {
+        "q": "Where do people drop off?",
+        "why": "Bringing in more people only helps if they move on: closing the biggest leak pays off most.",
+        "answer": {
+          "empty": "No real accounts yet. The funnel starts as soon as the first people sign up.",
+          "drop": "Biggest drop: from {from} to {to}. {pct}% move on there."
+        },
+        "action": {
+          "empty": "Bring in the first ten people: publish post 1 and leave flyers in two places.",
+          "profile": "People create an account but do not finish their profile. Go through the onboarding yourself on your phone and cut what is not needed.",
+          "firstStep": "Members do nothing after their profile. Do they see a dog near them? Check ‘Are walkers waiting for a dog?’.",
+          "firstWalk": "Requests do not turn into walks yet. Check that owners and shelters answer in time, and help with the first meeting."
+        }
+      },
+      "newMembers": {
+        "q": "How many new members this week, compared with last week?",
+        "why": "Growth at a steady pace shows whether what you did this week (a post, a flyer) worked.",
+        "answer": {
+          "none": "No new members in the last two weeks ({total} in total).",
+          "up": "{thisWeek} new in the last 7 days ({walkers, plural, one {# walker} other {# walkers}}, {owners, plural, one {# owner} other {# owners}}), against {lastWeek} the week before.",
+          "same": "{thisWeek} new in the last 7 days, the same as the week before ({walkers, plural, one {# walker} other {# walkers}}, {owners, plural, one {# owner} other {# owners}}).",
+          "down": "{thisWeek} new in the last 7 days, against {lastWeek} the week before."
+        },
+        "action": {
+          "start": "Nobody comes by themselves yet. Plan two posts from the post planner this week and leave flyers in two places.",
+          "repeat": "It is growing. Find out where it came from (‘Do invite links work?’) and do more of that.",
+          "push": "Publish the next post this week and ask three members to invite one neighbour with a dog."
+        }
+      },
+      "demand": {
+        "q": "Which city has the most demand and the least supply?",
+        "why": "A walker without a dog nearby drops off: find supply where the demand already is, not everywhere at once.",
+        "note": "Demand = walkers from the city plus people who voted for a shelter there (each counted once). Dogs = real dogs that can be booked now.",
+        "answer": {
+          "empty": "No demand measured yet: no walkers or votes with a city.",
+          "gap": "{city}: {demand, plural, one {# person wants} other {# people want}} to walk there, and {supply, plural, =0 {no dog is} one {# dog is} other {# dogs are}} online."
+        },
+        "action": {
+          "votes": "Share the shelter list in a local group: every vote for ‘I want to walk here’ counts as demand here.",
+          "supply": "Find supply in {city}: email the most requested shelter there and leave flyers for owners at a vet in {city}.",
+          "balanced": "Demand and supply keep pace. Now find walkers in {city}, so every dog gets a regular buddy."
+        }
+      },
+      "wantedShelter": {
+        "q": "Which shelter is asked for most?",
+        "why": "A shelter that hears people already want to walk there says yes faster: that number is your best opening line.",
+        "answer": {
+          "none": "No votes or tips for shelters yet.",
+          "top": "{name} ({city}): {n, plural, one {# vote} other {# votes}}."
+        },
+        "action": {
+          "share": "Share the shelter list (post 7): every shelter has the button ‘I want to walk here’.",
+          "mail": "Email {name} first and mention the number: ‘{n, plural, one {Someone already wants} other {# people already want}} to walk with you.’",
+          "follow": "You already contacted {name}. Call if there is no answer after two working days, and mention the number of votes."
+        }
+      },
+      "shelterPipeline": {
+        "q": "How is the shelter pipeline doing?",
+        "why": "One shelter brings many dogs and guides at once: the first shelter is the biggest jump in supply.",
+        "answer": {
+          "counts": "{sent} contacted, {replied} replied, {meeting} meeting, {live} live. {todo} ready to send."
+        },
+        "action": {
+          "review": "{pending, plural, one {# shelter sign-up is} other {# shelter sign-ups are}} waiting for your check in Admin. Do that first.",
+          "firstWalk": "A shelter is live. Plan the first guided group walk, then ask for two introductions to other shelters.",
+          "onboard": "You have a meeting. Help with the sign-up and add the first 3 to 5 starter dogs together (Quick add with photos).",
+          "send": "Send {missing} more shelter emails from the launch hub this week (goal: 10).",
+          "call": "The first ten emails are out. Call after two working days and ask for the volunteer coordinator."
+        }
+      },
+      "ownersDog": {
+        "q": "Do owners who sign up also put a dog online?",
+        "why": "Every dog is supply: an owner without a dog online is a missed match.",
+        "answer": {
+          "none": "No real owners signed up yet.",
+          "share": "{withDog} of the {owners} owners have a dog online ({pct}%)."
+        },
+        "action": {
+          "recruit": "Supply comes from owners and their families: leave flyers for owners at the vet and publish post 3 in a neighbourhood group.",
+          "help": "{without, plural, one {# owner has} other {# owners have}} not put a dog online yet. Go through ‘Add a dog’ yourself and see where it gets stuck.",
+          "keep": "Well done. Ask happy owners whether they know one neighbour with a dog."
+        }
+      },
+      "walkersWaiting": {
+        "q": "Are walkers waiting for a dog near them?",
+        "why": "Someone who sees nothing nearby does not come back: supply close by is what keeps a walker.",
+        "answer": {
+          "none": "No real walkers yet.",
+          "served": "All {walkers} walkers have a real dog within {km} km.",
+          "waiting": "{waiting} of the {walkers} walkers have no real dog within {km} km yet. Most are waiting in {city}."
+        },
+        "action": {
+          "recruit": "Recruit walkers where there are dogs already, or together with supply in the same city.",
+          "supply": "Ask waiting walkers to invite a neighbour with a dog (the tip page has a ready-made message) and find supply in {city}.",
+          "keep": "Keep it like this: only recruit new walkers in cities with dogs."
+        }
+      },
+      "requests": {
+        "q": "Do requests get an answer in time?",
+        "why": "A request without an answer is the fastest way to lose a walker.",
+        "answer": {
+          "none": "No real requests for a first meeting yet.",
+          "counts": "{total} requests: {accepted} accepted, {pending} open, of which {stale} for more than 2 days."
+        },
+        "action": {
+          "supplyFirst": "First supply near walkers (‘Are walkers waiting for a dog?’), then the requests will come.",
+          "chase": "{stale, plural, one {# request has} other {# requests have}} been waiting too long. Help the owner or shelter to answer.",
+          "keep": "Requests get answers. Watch the next step: the first meeting."
+        }
+      },
+      "returning": {
+        "q": "Do walkers come back after their first walk?",
+        "why": "A regular buddy is the engine of the idea: coming back is the proof, not the number of sign-ups.",
+        "answer": {
+          "none": "No real walk yet.",
+          "counts": "{once} walkers did a walk, {again} came back ({pct}%). {steady} steady pairs (3 times or more in 8 weeks)."
+        },
+        "action": {
+          "firstWalk": "Everything now is about the first real walk. Help the first pair in person with their first meeting.",
+          "ask": "Call those who walked once and ask what a second time would need (use the interview questions for walkers).",
+          "keep": "People come back. Ask the first steady pair whether they would like to be in a video, with consent."
+        }
+      },
+      "referrals": {
+        "q": "Do invite links work?",
+        "why": "Word of mouth is free growth: per link or code you see which channel really brings sign-ups.",
+        "answer": {
+          "none": "No real members yet, so nothing to count.",
+          "counts": "{referred} of the {members} members came through a link ({pct}%): {own} through your own link, {viaMembers} through other members, {viaCodes} through campaign codes."
+        },
+        "action": {
+          "codes": "Make a sign-up link of its own for every flyer spot and every channel (Links, below). In two weeks you will see here what works.",
+          "more": "Links work. Stop the weakest code and do more of the best one."
+        }
+      },
+      "traffic": {
+        "q": "Which pages and campaigns bring visitors?",
+        "why": "Without visitor numbers you cannot tell which post or flyer brought people to the site.",
+        "answer": {
+          "on": "Web Analytics is on (ticked off in the launch hub). Pages and referrers, such as instagram.com, are in Vercel. UTM tags from your campaign links only show there with the paid Web Analytics Plus.",
+          "off": "Not on yet: no visits are counted."
+        },
+        "action": {
+          "enable": "Switch it on: Vercel → the project → Analytics → Enable (free on Hobby). Then tick off ‘Turn on Vercel Web Analytics’ in the launch hub.",
+          "check": "Look at Pages and Referrers once a week. Sign-ups per code are counted here, for free (‘Do invite links work?’)."
+        }
+      }
+    },
+    "interviews": {
+      "title": "Interview questions",
+      "lede": "For calls and visits. The questions are about what people did, not about what they would do.",
+      "rules": "The rules: ask about the last time and about details, listen more than you talk, and only tell them about {app} at the end. A compliment is no proof; a meeting, an introduction or a dog online is.",
+      "language": "Language",
+      "listen": "What to listen for",
+      "copy": "Copy questions",
+      "copied": "Copied",
+      "shelter": {
+        "title": "Shelter",
+        "who": "The volunteer coordinator of a shelter",
+        "goal": "Goal: understand how walking is organised now and what is hardest. Listen first, {app} only at the end.",
+        "q1": "How is walking the dogs organised now? How did it go last week?",
+        "q2": "How many volunteers walked last month, and how did they find you?",
+        "q3": "When did a walk or a volunteer last go wrong? What happened?",
+        "q4": "How do you plan now who walks which dog when? Where is that written down?",
+        "q5": "Which dogs get out too little now? Why those?",
+        "q6": "Do you have a waiting list for new volunteers? What happens to those people?",
+        "q7": "What have you already tried to arrange more walks? What did not work?",
+        "q8": "Who decides about a new partnership, and what does that person need to see?",
+        "q9": "How are volunteers insured during a walk now?",
+        "listen": "A real problem is something they already spend time on, like a schedule or a waiting list. ‘Nice idea’ is not a yes; a date for a trial walk is. Write down the words they use themselves."
+      },
+      "owner": {
+        "title": "Owner",
+        "who": "An older neighbour with a dog, or a family member",
+        "goal": "Goal: understand how walking the dog goes now, without selling anything. With family, ask about what they see.",
+        "q1": "How did walking the dog go yesterday? Who walked, and for how long?",
+        "q2": "When did you first notice that walking the dog got harder? What changed then?",
+        "q3": "Who helps with the dog now and then? How did that come about?",
+        "q4": "How often does the dog get out now, and how often would it really like to?",
+        "q5": "Have you ever let someone else walk your dog? How did that go?",
+        "q6": "What would have to happen before you let a stranger walk your dog?",
+        "q7": "How do you make appointments now: phone, WhatsApp, a note? Who helps you with that?",
+        "q8": "What do you miss most since walking the dog got harder?",
+        "listen": "Trust is the whole story: notice what someone needs to say yes (meeting first, a familiar face, family there). Never ask about money or an address. A warm reaction is not a dog online yet; a date for a first meeting is."
+      },
+      "walker": {
+        "title": "Walker",
+        "who": "Someone aged 18 to 30 who loves dogs",
+        "goal": "Goal: understand what young people do now when they miss a dog, and what holds them back.",
+        "q1": "When did you last walk a dog? How did that come about?",
+        "q2": "Have you ever looked for a way to spend time with dogs without having one? What did you find, and why did you start or not?",
+        "q3": "What does a normal week look like? Where would a regular hour fit in?",
+        "q4": "What did you do the last time you wanted to go outside, away from your screen?",
+        "q5": "Have you ever volunteered? How did you start, and why did you stop or stay?",
+        "q6": "What would stop you from ringing a stranger’s doorbell for a dog?",
+        "q7": "Who around you has a dog that would like to go out more often?",
+        "q8": "How did you last hear about something new that you then actually started doing?",
+        "listen": "Notice the difference between ‘sounds fun’ and real behaviour (already searched, already helped). Question 7 often brings supply, question 8 tells you where to post."
+      },
+      "vet": {
+        "title": "Vet",
+        "who": "A vet or someone at the front desk",
+        "goal": "Goal: understand when the practice sees owners who can no longer walk their dog well, and whether a flyer at the desk fits.",
+        "q1": "How often last month did you see an owner who could no longer walk the dog well? What was going on?",
+        "q2": "What did you advise that owner? What did they do next?",
+        "q3": "Who or what do you refer to now when a dog gets too little exercise?",
+        "q4": "What do you see in dogs that get out too little?",
+        "q5": "What is at the desk now, and what do people really take with them?",
+        "q6": "When did you last pass on something from a local initiative to clients? How did that go?",
+        "q7": "What would you need to know before referring an owner to a walker?",
+        "listen": "The right moment (after surgery, with an older owner) is gold: write down when that is. Ask whether you may leave a flyer, never promise a health effect, and never call the practice a partner without an agreement."
+      },
+      "students": {
+        "title": "Student association",
+        "who": "Someone from the board or a committee",
+        "goal": "Goal: understand how members find activities and volunteering, and whether a group walk would fit.",
+        "q1": "What was the last activity many members came to? Why that one?",
+        "q2": "Do you do anything with volunteering or charities? How did it go last time?",
+        "q3": "How do you really reach members: group chat, Instagram, newsletter, drinks? What gets read?",
+        "q4": "Who decides about something new on the agenda, and when is it made?",
+        "q5": "How many members had a dog at home? How do you notice they miss it?",
+        "q6": "What went wrong the last time you worked with an outside party?",
+        "q7": "What do members do around exams to get away from the books for a while?",
+        "listen": "You are looking for one concrete next step: a message in the group chat, a spot in the newsletter, or a group walk at a shelter. Ask who arranges that and when the schedule is fixed."
+      }
+    },
+    "posts": {
+      "title": "Post planner",
+      "lede": "12 posts for the first 6 weeks, two a week. Pick the language, copy the text, download the image and post it yourself. Then tap ‘Posted’.",
+      "honest": "Stay honest: {app} is new, free and has no ads. No made-up experiences or numbers, nobody in a picture without consent, and never promise that walking helps against anything.",
+      "progress": "{posted} of {total} posted",
+      "week": "Week {week}",
+      "days": {
+        "tue": "Tuesday",
+        "thu": "Thursday",
+        "sun": "Sunday"
+      },
+      "channels": {
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Neighbourhood app"
+      },
+      "goal": "Goal",
+      "visual": "Visual",
+      "caption": "Text",
+      "link": "Link",
+      "linkBio": "Put this link in your bio (Instagram and TikTok do not make links in a caption clickable).",
+      "language": "Language of the text",
+      "copy": "Copy text",
+      "copied": "Copied",
+      "copyLink": "Copy link",
+      "download": "Download image",
+      "posted": "Posted",
+      "markPosted": "Mark as posted: {title}",
+      "markOpen": "Mark as not posted: {title}",
+      "fillIn": "Fill in the [brackets] with real numbers before you post. Now: {members} members, {dogs} dogs online, {walks} walks.",
+      "imageAlt": "Share image: {title}",
+      "p01": {
+        "title": "A dog is waiting for an extra walk",
+        "sub": "Walk a dog from your neighbourhood, for free",
+        "goal": "Announce: say honestly what you are building.",
+        "caption": "I am building {app}: a free way to take a regular walk with a dog from your neighbourhood. Often the dog of an older neighbour who can no longer walk far, sometimes a shelter dog.\n\nHow it works:\n• you are 18 or older\n• the first time, you always meet the owner together\n• after that you take a regular walk, at a time that suits you both\n\nNo ads, no subscription. {app} has just started, so you are early. Link in bio.\n\n#dogs #walking #neighbourhood #volunteering",
+        "visual": "The share image with three drawn dogs. As a carousel: add your own photo of a lead on a hook."
+      },
+      "p02": {
+        "title": "Week 1",
+        "sub": "I am building a free app so grandma’s dog can go out more often",
+        "goal": "First market test: building in public. Comments tell you whether there is demand.",
+        "caption": "Week 1: I am building a free app so grandma’s dog can go out more often.\n\nMany older people can no longer walk their dog themselves. Many young people love dogs but cannot have one (yet). {app} brings them together, and the first time the owner is always there.\n\nA question for you: do you know someone whose dog would like to go out more often? Tell me in the comments.\n\n#buildinpublic #dogs #walking",
+        "visual": "Screen recording of the app with a voice-over (script A in docs/GROWTH.md); the image as the cover. Pinned comment: ‘I am building this in public. An update every week. I am not selling anything.’"
+      },
+      "p03": {
+        "title": "Could your dog use an extra walk?",
+        "sub": "Free, with a young person from the neighbourhood. You meet first.",
+        "goal": "Supply: reach owners and their families in the neighbourhood.",
+        "caption": "Hello neighbours! Do you know someone whose dog could use an extra walk? For example because walking is a bit harder, after surgery, or because the days are long.\n\nThrough {app}, a young person (18+) from the neighbourhood takes the dog for a regular walk, for free. The first time you always meet together, and you decide what is allowed. {app} never asks for money.\n\nNo smartphone? A family member or neighbour can sign the dog up for you, with your consent: {link}",
+        "visual": "The image, or a photo of the printed flyer for owners. Ask the group admin first whether you may share this."
+      },
+      "p04": {
+        "title": "No dog of your own? Fancy going outside?",
+        "sub": "Take a regular walk with a dog from your neighbourhood, for free",
+        "goal": "Demand: recruit walkers aged 18 to 30, in a city that already has dogs.",
+        "caption": "Love dogs, but there is no room for one in your life (yet)? With {app} you take a regular walk with a dog from your neighbourhood for free, for example the dog of someone who can no longer walk far.\n\nHow it goes:\n1. You make a profile (18+) and do a short safety quiz\n2. You meet the owner together first\n3. After that it is your regular walk\n\nWalking together can do your day good, and for the dog it is a treat. Link in bio.\n\n#studentlife #dogs #walking #outdoors",
+        "visual": "The image as the first slide, then the three steps as separate slides."
+      },
+      "p05": {
+        "title": "Sniffing is work",
+        "sub": "Why 800 metres sometimes takes 45 minutes",
+        "goal": "Reach: a video that is fun on its own, also for people who will never walk.",
+        "caption": "45 minutes for 800 metres. Here is why: for a dog, sniffing is real work, and a walk where it may sniff is a good walk. Let them sniff. 🐾\n\n(I am building {app}: a free regular walk with a dog from your neighbourhood. Link in bio.)\n\n#dogs #sniffing #doglove",
+        "visual": "Film at dog height with the dog of a friend or relative (with consent), 4 or 5 sniffing moments with text (script B in docs/GROWTH.md). No street signs or house numbers in view."
+      },
+      "p06": {
+        "title": "Wanted: the first shelter",
+        "sub": "For guided group walks with young volunteers, for free",
+        "goal": "Partners: find a shelter, welfare organisation or university for the first pilot.",
+        "caption": "I am building {app}: a free platform that connects young adults (18–30) with dogs that could use an extra walk. Dogs of older or ill neighbours, and shelter dogs in guided group walks.\n\nWhere it stands, honestly: the platform is live and the safety steps are in place (meeting together first, ID seen in person, consent per dog, a short quiz). There are no real pairs walking yet.\n\nWhat I am looking for:\n• an animal shelter that wants to try it with a few starter dogs\n• a welfare organisation or neighbourhood team that knows older dog owners\n• a lecturer or researcher who wants to help think about a simple measurement\n\nDo you know someone? An introduction or a comment helps a lot. {link}\n\n#volunteering #animalwelfare #community #socialimpact",
+        "visual": "The image with the post. Do not tag organisations without them knowing."
+      },
+      "p07": {
+        "title": "Where do you want to walk?",
+        "sub": "Vote for a shelter in your city. I will contact the most requested one first.",
+        "goal": "Measure demand: which shelter first. Every vote counts in ‘Which shelter is asked for most?’.",
+        "caption": "Where do you want to walk? {app} lists shelters in the Netherlands, Belgium and Spain, and every shelter has a button ‘I want to walk here’. I will contact the shelter with the most votes first, and you get a message as soon as it joins. Vote here: {link}",
+        "visual": "A story with a link sticker to the link below, with the image as the background."
+      },
+      "p08": {
+        "title": "For the dog of your grandma, your neighbour or your mum",
+        "sub": "Sign up a dog, also for someone else (with consent)",
+        "goal": "Supply through family: people who do not use the app themselves can still join.",
+        "caption": "Does your mum, grandma or neighbour have a dog that would like to go out more often? With {app}, a young person from the neighbourhood takes that dog for a regular walk, for free.\n\nThe owner does not need to use an app: you can sign the dog up, with consent. The first meeting is always together, and {app} never asks for money. {link}",
+        "visual": "The image with two drawn dogs. Ask the group admin first whether you may share this."
+      },
+      "p09": {
+        "title": "Guess the breed",
+        "sub": "I drew four dogs. Which breed is which?",
+        "goal": "Interaction: people guess in the comments, which helps the reach.",
+        "caption": "I drew four dogs for {app}. Which breed is which? Put your guess in the comments, the answer is on the last slide. 🐶\n\n#guessthebreed #dogs #drawing",
+        "visual": "The image, then a slide with the answer: 1 labrador, 2 dachshund, 3 French bulldog, 4 border collie."
+      },
+      "p10": {
+        "title": "How we keep it safe",
+        "sub": "18 or older · Meet together first · ID seen in person · Consent per dog · Short safety quiz",
+        "goal": "Trust: show owners and families how it goes, step by step.",
+        "caption": "Letting a stranger walk your dog? Of course you think about that first. That is why {app} goes step by step:\n\n1. Walkers are 18 or older and do a short safety quiz\n2. The first time, you always meet together\n3. The owner or shelter sees the ID in person (no copy is kept)\n4. Only with consent per dog does someone walk on their own\n5. During a walk the owner can follow along live, if they want\n\n{app} never asks for money. Questions? Ask them below.",
+        "visual": "Carousel: the image, then one slide per step."
+      },
+      "p11": {
+        "title": "6 weeks of {app}",
+        "sub": "What worked, what did not, and what I will do next",
+        "goal": "Building in public: an honest update after 6 weeks.",
+        "caption": "6 weeks of {app}, the honest update.\n\nWhere it stands: [number] people signed up, [number] dogs are online, [number] walks done.\nWhat worked: [fill in, for example the channel with the most sign-ups].\nWhat did not work: [fill in].\nWhat I will do next: [fill in].\n\nNo ads, just building and asking people what they need. Want to think along? Comment or send a message. {link}",
+        "visual": "The image, or your own photo of your workplace. Only use real numbers from ‘The best questions’."
+      },
+      "p12": {
+        "title": "30 minutes without a screen",
+        "sub": "But a dog, fresh air and a small task on the way",
+        "goal": "Walkers: around exams, a calm moment without preaching.",
+        "caption": "Exam week? 30 minutes without a screen. But a dog, fresh air and a small task on the way: find three yellow things.\n\nWalking together can do your day good. With {app} you take a regular walk with a dog from your neighbourhood, for free. Link in bio.\n\n#examweek #studentlife #walking",
+        "visual": "A phone disappearing into a bag, then walking shots (no faces without consent). In a pinned comment, say where to get help if things are not going well (in the Netherlands 113, 0800-0113)."
+      }
+    },
+    "card": {
+      "free": "free · no ads"
+    },
+    "links": {
+      "title": "Campaign links",
+      "lede": "A link of its own per place and channel, with UTM tags and a QR code. So you can see later what works.",
+      "page": "Page",
+      "pages": {
+        "home": "Home",
+        "dogs": "Dogs",
+        "shelter": "Shelter sign-up",
+        "cities": "All cities",
+        "suggest": "Tip a shelter or dog",
+        "safety": "Safety"
+      },
+      "cityGroup": "City pages",
+      "source": "Source",
+      "sources": {
+        "flyer": "Flyer or poster",
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Neighbourhood app or group",
+        "opvang": "Shelter",
+        "partner": "Partner",
+        "mail": "Email"
+      },
+      "detail": "Name or place",
+      "detailHint": "For example ‘library east’ or the name of the shelter. May be empty.",
+      "campaign": "Campaign",
+      "campaignHint": "For example ‘start october’ or ‘exam week’.",
+      "result": "Campaign link",
+      "copy": "Copy link",
+      "copied": "Copied",
+      "qrFor": "QR code for",
+      "qrCampaign": "Campaign link",
+      "qrCode": "Sign-up link",
+      "qrLabel": "QR code for {url}",
+      "downloadQr": "Download QR code (SVG)",
+      "utmNote": "Note: Vercel only shows UTM tags with the paid Web Analytics Plus. On the free plan you do see the page and the referrer. Want to count for free? Use the sign-up link.",
+      "codeTitle": "Count sign-ups, for free",
+      "codeText": "A sign-up link with a code of its own opens the sign-up screen and remembers the code for 30 days. Sign-ups per code are shown above under ‘Do invite links work?’.",
+      "code": "Code",
+      "codeHint": "Letters and digits, 7 to 12 characters.",
+      "owner": "Start at ‘add a dog’ (for owners)",
+      "codeLink": "Sign-up link"
+    },
+    "material": {
+      "title": "Material",
+      "lede": "What is ready already, and how to use it.",
+      "open": "Open",
+      "flyerOwner": {
+        "title": "Flyer for owners",
+        "how": "Print it and leave it at the vet, the pharmacy, the library or the community centre (ask first). When you are signed in, your own link is in the QR code."
+      },
+      "flyerWalker": {
+        "title": "Flyer for walkers",
+        "how": "Put it up at the university, the library or in a student house, preferably in a city that already has dogs. It works best around exams."
+      },
+      "poster": {
+        "title": "Poster for a shelter",
+        "how": "Once a shelter has joined: hang it at the entrance and in the waiting area. Visitors scan the code and see that shelter’s dogs.",
+        "none": "Available as soon as the first real shelter is live (in the shelter dashboard → Poster)."
+      },
+      "cities": {
+        "title": "City pages",
+        "how": "Share a city’s page in a local group. People see the dogs, shelters and group walks there, and through the shelter list they vote with ‘I want to walk here’.",
+        "top": "Most demand now:"
+      },
+      "shelters": {
+        "title": "Shelter overview",
+        "how": "Handy in a conversation: show that the shelter is already listed as ‘Not on {app} yet’, and that people can vote for it."
+      },
+      "suggest": {
+        "title": "Tip page",
+        "how": "For walkers without a dog nearby: it has a ready-made message to invite a neighbour with a dog."
+      },
+      "messages": {
+        "title": "Message bank in the launch hub",
+        "how": "Emails and call scripts for shelters, vets, associations and the local press. You send them yourself, from your own email."
+      }
+    }
   }
 }
