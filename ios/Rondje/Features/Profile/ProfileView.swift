@@ -111,6 +111,10 @@ struct ProfileView: View {
                 row("book.fill", L("Hondenvriendenboek"), L("Alle honden met wie je liep"))
             }
             Divider().padding(.leading, 56)
+            NavigationLink { LessonsView() } label: {
+                row("graduationcap.fill", L("Hondenschool"), L("\(Keepsakes.shared.lessonsDone.count) van 5 lessen"))
+            }
+            Divider().padding(.leading, 56)
             NavigationLink { QuizView() } label: {
                 row("checkmark.seal.fill", L("Veiligheidsquiz"), model.me?.profile?.quizPassed == true ? L("Gehaald") : L("Nodig voor zelfstandige rondjes"))
             }
@@ -122,7 +126,36 @@ struct ProfileView: View {
                 row("bell.fill", L("Meldingen"), (model.me?.unread ?? 0) > 0 ? L("\(model.me!.unread) nieuw") : nil)
             }
             Divider().padding(.leading, 56)
+            // Seintjes are about walking other people's dogs, so only for people who walk.
+            if model.role != .owner {
+                NavigationLink { NudgeSettingsView() } label: {
+                    row("bell.badge.fill", L("Seintjes"), Nudges.settings.enabled ? L("Aan") : L("Uit"))
+                }
+                Divider().padding(.leading, 56)
+            }
             NavigationLink { EditProfileView() } label: { row("pencil", L("Profiel bewerken"), nil) }
+            Divider().padding(.leading, 56)
+            Toggle(isOn: Binding(get: { Keepsakes.shared.coachOn }, set: { Keepsakes.shared.coachOn = $0 })) {
+                HStack(spacing: 14) {
+                    Image(systemName: "pawprint.circle.fill")
+                        .frame(width: 28)
+                        .foregroundStyle(Palette.grass)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text("Guus mag tips geven").foregroundStyle(Palette.ink)
+                        Text("Guus is de hond die je steeds de volgende stap laat zien.").font(.caption).foregroundStyle(Palette.muted)
+                    }
+                }
+            }
+            .tint(Palette.grass)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            Divider().padding(.leading, 56)
+            Button {
+                Keepsakes.shared.resetHints()
+                model.show(L("Guus legt het straks weer uit"))
+            } label: {
+                row("arrow.counterclockwise", L("Laat Guus alles opnieuw uitleggen"), nil)
+            }
             Divider().padding(.leading, 56)
             Button { openURL(Brand.web("/safety")) } label: { row("shield.lefthalf.filled", L("Veiligheid"), nil, external: true) }
             Divider().padding(.leading, 56)

@@ -8,7 +8,7 @@ struct ActiveWalkView: View {
     @State private var camera: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
     @State private var sos = false
     @State private var ending = false
-    @State private var finished: (walkId: String, distance: Int, dog: String)?
+    @State private var finished: (info: WalkTracker.Info, distance: Int)?
     @State private var holdProgress: CGFloat = 0
     @State private var care = Care()
     @State private var photos: [WalkPhoto] = []
@@ -29,7 +29,7 @@ struct ActiveWalkView: View {
             .ignoresSafeArea()
 
             if let finished {
-                WalkDoneView(walkId: finished.walkId, distance: finished.distance, dogName: finished.dog)
+                WalkDoneFlow(info: finished.info, distance: finished.distance, care: care, photoCount: photos.count)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             } else if let info = walk.info {
                 panel(info)
@@ -37,37 +37,42 @@ struct ActiveWalkView: View {
         }
         .overlay(alignment: .top) {
             if finished == nil, let info = walk.info {
-                HStack {
-                    DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("Rondje met \(info.dogName)").font(.headline)
-                        if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
-                            Button("Locatie staat uit. Zet hem aan") { openSettings() }
-                                .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
-                        } else {
-                            Text(walk.signalWeak ? L("Zwak GPS-signaal") : L("De eigenaar kan live meekijken"))
-                                .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                VStack(spacing: 8) {
+                    HStack {
+                        DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("Rondje met \(info.dogName)").font(.headline)
+                            if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
+                                Button("Locatie staat uit. Zet hem aan") { openSettings() }
+                                    .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
+                            } else {
+                                Text(walk.signalWeak ? L("Zwak GPS-signaal") : L("De eigenaar kan live meekijken"))
+                                    .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                            }
                         }
+                        Spacer()
+                        Button {
+                            sos = true
+                        } label: {
+                            Text("SOS").font(.headline.weight(.heavy)).foregroundStyle(.white)
+                                .frame(width: 56, height: 44)
+                                .background(Palette.danger, in: .capsule)
+                        }
+                        .accessibilityLabel("Hulp nodig")
                     }
-                    Spacer()
-                    Button {
-                        sos = true
-                    } label: {
-                        Text("SOS").font(.headline.weight(.heavy)).foregroundStyle(.white)
-                            .frame(width: 56, height: 44)
-                            .background(Palette.danger, in: .capsule)
+                    .padding(12)
+                    .glassy(cornerRadius: 24)
+                    .padding(.horizontal)
+                    if walk.overdueMin == 0 {
+                        GuusHint(id: "walk.sos", text: L("Hulp nodig? SOS staat altijd hier rechtsboven.")).padding(.horizontal)
                     }
-                    .accessibilityLabel("Hulp nodig")
                 }
-                .padding(12)
-                .glassy(cornerRadius: 24)
-                .padding(.horizontal)
             }
         }
         .sheet(isPresented: $sos) {
             if let info = walk.info { SOSSheet(info: info).presentationDetents([.large]) }
         }
-        .animation(.spring(duration: 0.5), value: finished?.walkId)
+        .animation(.spring(duration: 0.5), value: finished?.info.walkId)
         .interactiveDismissDisabled()
     }
 
@@ -103,6 +108,9 @@ struct ActiveWalkView: View {
                     MoodStore.set(walkId: info.walkId, before: value)
                 }
                 .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+            if walk.overdueMin == 0 {
+                GuusHint(id: "walk.care", text: L("Tik bij elke plas of poep. De eigenaar ziet het live."), after: "walk.sos")
             }
             CareCounters(walkId: info.walkId, care: $care)
             if !photos.isEmpty { PhotoStrip(photos: photos) }
@@ -159,9 +167,10 @@ struct ActiveWalkView: View {
         defer { ending = false }
         do {
             let distance = try await walk.finish()
+            WalkLog.record(WalkLogEntry(walkId: info.walkId, dogId: model.appointments.outgoing.first { $0.walkId == info.walkId }?.dog.id, dogName: info.dogName, look: info.look, side: "walker", person: nil, distanceM: distance, minutes: max(1, Int(Date.now.timeIntervalSince(info.startedAt) / 60)), photos: photos.count, date: info.startedAt))
             let endedAt = Date.now
             Haptics.success(.finish)
-            finished = (info.walkId, distance, info.dogName)
+            finished = (info, distance)
             let route = walk.locations
             Task {
                 if let note = await HealthService.shared.saveWalk(start: info.startedAt, end: endedAt, distanceM: Double(distance), locations: route) {
@@ -173,55 +182,6 @@ struct ActiveWalkView: View {
             Haptics.error()
             self.error = error.localizedDescription
             holdProgress = 0
-        }
-    }
-}
-
-/// Shown after ending: a small celebration and the private feedback.
-struct WalkDoneView: View {
-    /// A kind sentence comparing before and after, only when the walker answered both.
-    private var moodLine: String? {
-        guard let after = moodAfter, let before = MoodStore.entry(walkId)?.before else { return nil }
-        if after > before { return L("Je voelt je beter dan voor het rondje. Fijn!") }
-        if after == before { return L("Even buiten geweest. Dat telt ook.") }
-        return L("Zware dag? Fijn dat je toch bent gegaan.")
-    }
-
-    let walkId: String
-    let distance: Int
-    let dogName: String
-    @State private var feedback = false
-    @State private var pop = false
-    @State private var moodAfter: Int?
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        VStack(spacing: 14) {
-            Image(systemName: "pawprint.fill")
-                .font(.system(size: 44))
-                .foregroundStyle(Palette.onBall)
-                .frame(width: 92, height: 92)
-                .background(Palette.ball, in: .circle)
-                .scaleEffect(pop ? 1 : 0.4)
-                .symbolEffect(.bounce, value: pop)
-            Text("Goed rondje!").font(.display(30))
-            Text("\(dogName) en jij liepen \(Format.distance(Double(distance))). Dank je wel.")
-                .multilineTextAlignment(.center).foregroundStyle(Palette.muted)
-            MoodPicker(title: L("En hoe voel je je nu?"), selected: moodAfter) { value in
-                moodAfter = value
-                MoodStore.set(walkId: walkId, after: value)
-            }
-            if let line = moodLine { Text(line).font(.subheadline.weight(.semibold)).foregroundStyle(Palette.grass).multilineTextAlignment(.center) }
-            Button("Hoe ging het?") { feedback = true }.buttonStyle(.primary)
-            Button("Klaar") { dismiss() }.buttonStyle(.secondary)
-        }
-        .padding(24)
-        .glassy(cornerRadius: 32)
-        .padding(12)
-        .onAppear { withAnimation(.spring(duration: 0.6, bounce: 0.5)) { pop = true } }
-        .onDisappear { if let moodAfter { HealthService.shared.saveMood(moodAfter) } }
-        .sheet(isPresented: $feedback, onDismiss: { dismiss() }) {
-            FeedbackSheet(walkId: walkId, role: .walker, dogName: dogName)
         }
     }
 }
@@ -348,9 +308,13 @@ struct FeedbackSheet: View {
         }
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/walks/\(walkId)/feedback", body)
+            if role == .walker, let dogId = model.appointments.outgoing.first(where: { $0.walkId == walkId })?.dog.id {
+                Keepsakes.shared.recordWalkFeedback(dogId: dogId, behaviour: choice, feltSafe: yes2)
+            }
             Haptics.success(.send)
             model.show(L("Bedankt voor je antwoord"))
             close()
+            Task { await model.refreshAppointments() }
         } catch {
             self.error = error.localizedDescription
         }

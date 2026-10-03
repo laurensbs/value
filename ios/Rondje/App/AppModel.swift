@@ -16,6 +16,12 @@ final class AppModel {
     var banner: Banner?
     /// The last refresh failed: the screens show saved data.
     var offline = false
+    /// A step Guus or a notification asked for; the screen that handles it takes it (see CoachAction).
+    var pendingAction: CoachAction?
+    /// The celebration on screen right now, if any (see Celebration.swift).
+    var celebration: CelebrationEvent?
+    /// A Guus sheet (CoachRoutes) is up: the level-up cover waits until it closes.
+    var coachSheetOpen = false
 
     enum Tab: Hashable { case discover, home, appointments, profile }
 
@@ -39,6 +45,9 @@ final class AppModel {
     }
 
     private let api = APIClient.shared
+    /// Bumped by `reset()`. A refresh that was sent for the old session checks it after every await,
+    /// so a late answer never writes the old account's data, reminders or walk log back to the phone.
+    @ObservationIgnored private var session = 0
 
     init() {
         UNUserNotificationCenter.current().delegate = NotificationRouter.shared
@@ -50,6 +59,12 @@ final class AppModel {
             default: break
             }
         }
+        NotificationRouter.shared.onAction = { [weak self] action in
+            // A notification of an account that signed out leads nowhere.
+            guard let self, self.phase != .signedOut else { return }
+            self.perform(action)
+        }
+        Nudges.start()
         NotificationCenter.default.addObserver(forName: .rondjeSignedOut, object: nil, queue: .main) { [weak self] _ in
             MainActor.assumeIsolated { self?.reset() }
         }
@@ -75,8 +90,10 @@ final class AppModel {
     }
 
     func refreshMe() async {
+        let mine = session
         do {
             let me: Me = try await api.get("/api/v1/me")
+            guard mine == session else { return }
             self.me = me
             Cache.save(me, as: "me")
             phase = me.profile == nil ? .onboarding : .ready
@@ -85,23 +102,34 @@ final class AppModel {
                 await Push.registerIfAllowed()
             }
         } catch APIError.unauthorized {
-            reset()
+            if mine == session { reset() }
         } catch {
+            guard mine == session else { return }
             // Offline at launch: keep the last state if there is one, otherwise show sign-in.
             if me == nil { phase = api.hasSession ? .ready : .signedOut }
         }
     }
 
     func refreshAppointments() async {
-        guard let result: AppointmentsResponse = try? await api.get("/api/v1/requests") else {
+        let mine = session
+        let loaded: AppointmentsResponse? = try? await api.get("/api/v1/requests")
+        guard mine == session, phase != .signedOut else { return }
+        guard let result = loaded else {
             offline = true
             return
         }
         appointments = result
         offline = false
         Cache.save(result, as: "appointments")
+        WalkLog.syncFromAppointments(result)
         publishNextWalk()
         await Reminders.sync(with: result)
+        guard mine == session else {
+            // Signed out while the reminders were being planned: take them away again.
+            Reminders.clearAll()
+            return
+        }
+        await Nudges.reschedule(appointments: result, allowed: role != .owner)
     }
 
     func signedIn() async {
@@ -117,13 +145,17 @@ final class AppModel {
     }
 
     func reset() {
+        session += 1
         Keychain.clear()
         me = nil
         appointments = AppointmentsResponse(outgoing: [], incoming: [])
         SharedStore.save(nil)
         Cache.clear()
         MoodStore.clear()
+        Keepsakes.shared.clear()
         Reminders.clearAll()
+        Nudges.clear()
+        ProgressStore.shared.reset()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut
     }

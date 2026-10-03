@@ -112,12 +112,13 @@ struct EmptyState: View {
     var symbol: String
     var title: String
     var text: String
+    var actionTitle: String? = nil
+    var action: (() -> Void)? = nil
 
     var body: some View {
         VStack(spacing: 10) {
             ZStack(alignment: .bottomTrailing) {
-                DogPortrait(look: DogLook(fur: "#e2b45c", ears: "#c99540", muzzle: "#f2d79b", earStyle: "floppy", head: "round", tongue: true, collar: "#1f5a3d", tile: "#f6ebcf"), cornerRadius: 30)
-                    .frame(width: 104, height: 104)
+                Guus(mood: .calm, size: 104, hop: false)
                     .rotationEffect(.degrees(-4))
                 Image(systemName: symbol)
                     .font(.subheadline.weight(.bold))
@@ -130,6 +131,11 @@ struct EmptyState: View {
             .padding(.bottom, 6)
             Text(title).font(.headline)
             Text(text).font(.subheadline).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+            if let actionTitle, let action {
+                Button(actionTitle) { action() }
+                    .buttonStyle(.primary)
+                    .padding(.top, 6)
+            }
         }
         .padding(28)
         .frame(maxWidth: .infinity)

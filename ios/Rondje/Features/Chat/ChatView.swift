@@ -5,6 +5,8 @@ import SwiftUI
 struct ChatView: View {
     let requestId: String
     let title: String
+    /// Ready-made replies, shown while the field is empty. Tapping one only fills the field.
+    var suggestions: [String] = []
 
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -77,6 +79,9 @@ struct ChatView: View {
         if canSend {
             VStack(spacing: 6) {
                 if let error { Text(error).font(.caption).foregroundStyle(Palette.danger) }
+                if draft.isEmpty && !suggestions.isEmpty {
+                    replies
+                }
                 HStack(alignment: .bottom, spacing: 10) {
                     // A single-line field: the multi-line variant did not always pass fast typing on to
                     // the draft in testing, which could send half a message.
@@ -106,6 +111,33 @@ struct ChatView: View {
                 .font(.footnote).foregroundStyle(Palette.muted)
                 .frame(maxWidth: .infinity).padding(14).background(.bar)
         }
+    }
+
+    /// A row of ready-made replies. A chip never sends by itself: it fills the field, so nothing goes out by accident.
+    private var replies: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(suggestions, id: \.self) { line in
+                    Button {
+                        Haptics.tap()
+                        draft = line
+                        focused = true
+                    } label: {
+                        Text(line)
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Palette.grass)
+                            .padding(.horizontal, 14)
+                            .frame(minHeight: 36)
+                            .background(Palette.grassSoft, in: .capsule)
+                            // Looks 36pt tall, taps as 44pt.
+                            .frame(minHeight: 44)
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .transition(.opacity)
     }
 
     /// Same idea as the website's text scan: a warning, never a block.

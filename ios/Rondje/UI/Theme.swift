@@ -21,6 +21,8 @@ enum Palette {
     static let dangerSoft = Color(light: 0xF9DEDC, dark: 0x3D1715)
     static let route = Color(light: 0x1F5A3D, dark: 0xD9F05A)
     static let walkBackground = Color(light: 0x1F5A3D, dark: 0x143A2A)
+    /// Text and icons on walkBackground: stays light in both modes (onGrass turns dark in dark mode).
+    static let onWalk = Color(light: 0xFFFFFF, dark: 0xE7EEE8)
 }
 
 extension Color {

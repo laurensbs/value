@@ -14,7 +14,6 @@ struct DiscoverView: View {
     @State private var filter: Filter = .all
     @State private var query = ""
     @State private var path = NavigationPath()
-    @State private var quiz = false
     @State private var progress = ProgressStore.shared
 
     enum Filter: String, CaseIterable, Identifiable {
@@ -55,52 +54,75 @@ struct DiscoverView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    header
-                    FirstSteps { quiz = true }
-                    if let p = progress.progress, p.points > 0 {
-                        NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        header
+                        NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || !loading, nearbyFailed: error != nil)
+                        NudgeOfferCard()
+                        WeekRecapCard(side: .walker)
+                        FirstSteps { model.perform(Keepsakes.shared.lessonsDone.count < 5 ? .lessons : .quiz) }
+                        if let p = progress.progress, p.points > 0 {
+                            NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
+                        }
+                        if let c = progress.challenges { ChallengeCard(challenges: c) }
+                        DailyTip()
+                        GuusHint(id: "discover", text: L("Tik op een hond om zijn verhaal te lezen. Begin gerust met Rustig."))
+                        filters
+                            .id("filters")
+                        if showMap {
+                            DogsMap(dogs: visible) { path.append($0) }
+                                .frame(height: 460)
+                                .clipShape(.rect(cornerRadius: 28, style: .continuous))
+                                .transition(.scale(scale: 0.96).combined(with: .opacity))
+                        } else {
+                            list
+                        }
+                        if !groupWalks.isEmpty { groupWalksSection }
                     }
-                    if let c = progress.challenges { ChallengeCard(challenges: c) }
-                    DailyTip()
-                    filters
-                    if showMap {
-                        DogsMap(dogs: visible) { path.append($0) }
-                            .frame(height: 460)
-                            .clipShape(.rect(cornerRadius: 28, style: .continuous))
-                            .transition(.scale(scale: 0.96).combined(with: .opacity))
-                    } else {
-                        list
-                    }
-                    if !groupWalks.isEmpty { groupWalksSection }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 32)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 32)
-            }
-            .screenBackground()
-            .refreshable { await load() }
-            .searchable(text: $query, prompt: L("Zoek op naam, ras of plaats"))
-            .navigationTitle("Ontdek")
-            .toolbarTitleDisplayMode(.inlineLarge)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        withAnimation(.snappy) { showMap.toggle() }
-                    } label: {
-                        Image(systemName: showMap ? "list.bullet" : "map")
-                            .contentTransition(.symbolEffect(.replace))
+                .screenBackground()
+                .refreshable { await load() }
+                .searchable(text: $query, prompt: L("Zoek op naam, ras of plaats"))
+                .navigationTitle("Ontdek")
+                .toolbarTitleDisplayMode(.inlineLarge)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            withAnimation(.snappy) { showMap.toggle() }
+                        } label: {
+                            Image(systemName: showMap ? "list.bullet" : "map")
+                                .contentTransition(.symbolEffect(.replace))
+                        }
+                        .accessibilityLabel(showMap ? L("Toon lijst") : L("Toon kaart"))
                     }
-                    .accessibilityLabel(showMap ? L("Toon lijst") : L("Toon kaart"))
                 }
-            }
-            .navigationDestination(for: DogCard.self) { dog in
-                DogDetailView(dogId: dog.id, preview: dog)
-                    .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
-            }
-            .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
-            .sheet(isPresented: $quiz, onDismiss: { Task { await model.refreshMe() } }) {
-                NavigationStack { QuizView() }
+                .navigationDestination(for: DogCard.self) { dog in
+                    DogDetailView(dogId: dog.id, preview: dog)
+                        .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
+                }
+                .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
+                .onChange(of: model.pendingAction, initial: true) {
+                    // Guus (or a notification) asked for calm dogs, or for one dog.
+                    if let calm = model.take({ action -> Bool? in
+                        if case .discover(let calm) = action { return calm }
+                        return nil
+                    }) {
+                        path = NavigationPath()
+                        withAnimation(.snappy) {
+                            showMap = false
+                            filter = calm ? .calm : .all
+                        }
+                        withAnimation(.snappy) { proxy.scrollTo("filters", anchor: .top) }
+                    } else if let id = model.take({ action -> String? in
+                        if case .dog(let id) = action { return id }
+                        return nil
+                    }) {
+                        path.append(id)
+                    }
+                }
             }
         }
         .task { await progress.load() }
@@ -194,17 +216,21 @@ struct DiscoverView: View {
         defer { loading = false }
         var path = "/api/v1/dogs"
         if let p = await LocationService.shared.roughPosition() { path += "?lat=\(p.lat)&lng=\(p.lng)" }
+        // Dogs and group walks load independently, so a failing group-walks call never empties the dogs.
+        async let d: DogsResponse = APIClient.shared.get(path)
+        async let g: GroupWalksResponse = APIClient.shared.get("/api/v1/group-walks")
         do {
-            async let d: DogsResponse = APIClient.shared.get(path)
-            async let g: GroupWalksResponse = APIClient.shared.get("/api/v1/group-walks")
-            let (dr, gr) = try await (d, g)
+            let dr = try await d
             withAnimation(.smooth) {
                 dogs = dr.dogs
-                groupWalks = gr.groupWalks
                 error = nil
             }
+            Cache.save(Array(dr.dogs.filter { !$0.isDemo && $0.energy == "calm" }.prefix(10)), as: "nearbyDogs")
         } catch {
             self.error = error.localizedDescription
+        }
+        if let gr = try? await g {
+            withAnimation(.smooth) { groupWalks = gr.groupWalks }
         }
     }
 }
@@ -334,8 +360,7 @@ struct GroupWalkCard: View {
                 model.show(L("Je bent afgemeld"))
             } else {
                 let _: OK = try await APIClient.shared.post("/api/v1/group-walks/\(walk.id)", [String: String]())
-                Haptics.success()
-                model.show(L("Je doet mee! Neem je ID mee."))
+                model.celebrate(.wag(L("Je doet mee! Neem je ID mee.")))
             }
             await changed()
         } catch {

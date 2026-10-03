@@ -25,6 +25,19 @@ enum Reminders {
 
         var wanted: [String: UNNotificationRequest] = [:]
         for item in appointments.outgoing + appointments.incoming where item.status == "accepted" {
+            // The evening before a first meeting: one calm note to get ready (it opens the prep checklist).
+            if item.isMeeting, let evening = PrepReminder.fireDate(startsAt: item.startsAt, now: .now, calendar: .current) {
+                let asOwner = appointments.incoming.contains { $0.id == item.id }
+                let text = PrepReminder.text(for: item, asOwner: asOwner)
+                let content = UNMutableNotificationContent()
+                content.title = text.title
+                content.body = text.body
+                content.sound = .default
+                content.userInfo = ["tab": "appointments", "action": "prep:" + item.id]
+                let parts = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: evening)
+                let id = prefix + "eve-" + item.id
+                wanted[id] = UNNotificationRequest(identifier: id, content: content, trigger: UNCalendarNotificationTrigger(dateMatching: parts, repeats: false))
+            }
             let fireAt = item.startsAt.addingTimeInterval(-lead)
             guard fireAt > .now else { continue }
             let content = UNMutableNotificationContent()
@@ -32,7 +45,7 @@ enum Reminders {
             content.title = item.isMeeting ? L("Zo meteen: kennismaken met \(item.dog.name)") : L("Zo meteen: rondje met \(item.dog.name)")
             content.body = asOwner
                 ? L("Over een half uur komt \(item.walker?.firstName ?? L("de wandelaar")). Fijne wandeling!")
-                : L("Over een half uur. Neem je ID mee en vergeet de zakjes niet.")
+                : L("Over een half uur. Neem je ID mee.")
             content.sound = .default
             content.userInfo = ["tab": "appointments"]
             let parts = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fireAt)
@@ -46,8 +59,12 @@ enum Reminders {
         for request in wanted.values { try? await center.add(request) }
     }
 
+    /// On sign-out and account deletion: the planned ones and the ones already in Notification Center,
+    /// which name dogs and people of this account.
     static func clearAll() {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        center.removeAllDeliveredNotifications()
     }
 }
 
@@ -55,12 +72,34 @@ enum Reminders {
 final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unchecked Sendable {
     static let shared = NotificationRouter()
     var onOpen: (@MainActor (String) -> Void)?
+    /// For notifications that carry an "action" link (see CoachAction.init(link:)).
+    var onAction: (@MainActor (CoachAction) -> Void)?
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let info = response.notification.request.content.userInfo
         // Local reminders say which tab; pushes from the server carry the website path ("/chat/…", "/walk/…").
         let tab = info["tab"] as? String ?? Push.tab(forPath: info["url"] as? String ?? "")
-        await MainActor.run { onOpen?(tab) }
+        let link = info["action"] as? String
+        // "Minder seintjes" (Nudges) is answered in the background: it opens nothing.
+        let opensApp = response.actionIdentifier != "fewer"
+        await MainActor.run {
+            if !opensApp {
+                return
+            } else if let action = link.flatMap(CoachAction.init(link:)) {
+                onAction?(action)
+            } else {
+                onOpen?(tab)
+            }
+        }
+        // Handled here and awaited, not through an observer: after "Minder seintjes" iOS may have launched
+        // the app in the background without any screen, and may suspend it as soon as this returns.
+        let kind = info["kind"] as? String ?? ""
+        let actionIdentifier = response.actionIdentifier
+        await Nudges.opened(kind: kind, action: actionIdentifier)
+        NotificationCenter.default.post(name: .rondjeNotificationOpened, object: nil, userInfo: [
+            "kind": kind,
+            "actionIdentifier": actionIdentifier,
+        ])
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {

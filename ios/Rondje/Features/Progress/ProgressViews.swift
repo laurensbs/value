@@ -10,14 +10,26 @@ final class ProgressStore {
     /// Set when the server says there is a new level to celebrate.
     var celebrate: Progress?
 
+    /// Bumped by `reset()`, so a load that was already on its way for the old account is dropped.
+    @ObservationIgnored private var generation = 0
+
     func load() async {
-        if let p: Progress = try? await APIClient.shared.get("/api/v1/progress") {
+        let mine = generation
+        if let p: Progress = try? await APIClient.shared.get("/api/v1/progress"), mine == generation {
             withAnimation(.smooth) { progress = p }
             if p.levelUp || !(p.newAwards ?? []).isEmpty { celebrate = p }
         }
-        if let c: Challenges = try? await APIClient.shared.get("/api/v1/challenges") {
+        if let c: Challenges = try? await APIClient.shared.get("/api/v1/challenges"), mine == generation {
             withAnimation(.smooth) { challenges = c }
         }
+    }
+
+    /// Forgets the progress of the account that signed out, so the next account never sees it.
+    func reset() {
+        generation += 1
+        progress = nil
+        challenges = nil
+        celebrate = nil
     }
 
     func seen() async {
@@ -222,18 +234,15 @@ struct LevelUpView: View {
     let progress: Progress
     var close: () -> Void
     @State private var pop = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: 18) {
             Spacer()
             ZStack {
-                ForEach(0..<12, id: \.self) { i in
-                    Image(systemName: "pawprint.fill")
-                        .font(.caption)
-                        .foregroundStyle(i.isMultiple(of: 2) ? Palette.ball : Palette.onGrass.opacity(0.6))
-                        .offset(y: pop ? -130 : -20)
-                        .rotationEffect(.degrees(Double(i) * 30))
-                        .opacity(pop ? 0 : 1)
+                if !reduceMotion {
+                    // Taller than the ring, so the confetti falls over the level from above.
+                    Confetti(count: 48, duration: 1.8).frame(height: 560)
                 }
                 Text("\(progress.level.number)")
                     .font(.display(64, weight: .heavy))
@@ -243,9 +252,10 @@ struct LevelUpView: View {
                     .scaleEffect(pop ? 1 : 0.3)
             }
             .frame(height: 280)
+            Guus(mood: .proud, size: 72)
             if progress.levelUp {
-                Text("Nieuw niveau!").font(.title3.weight(.semibold)).foregroundStyle(Palette.onGrass.opacity(0.85))
-                Text(progress.level.name).font(.display(36)).foregroundStyle(Palette.onGrass)
+                Text("Nieuw niveau!").font(.title3.weight(.semibold)).foregroundStyle(Palette.onWalk.opacity(0.85))
+                Text(progress.level.name).font(.display(36)).foregroundStyle(Palette.onWalk)
             }
             ForEach(progress.newAwards ?? [], id: \.self) { a in
                 Label(a.title ?? a.name, systemImage: "rosette").font(.headline).foregroundStyle(Palette.ball)

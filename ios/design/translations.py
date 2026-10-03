@@ -3,6 +3,8 @@
 # Keep placeholders (%@, %lld) in the same order as the Dutch key.
 
 T = {
+    "Waar we aan willen bijdragen": ("What we want to contribute to", "Ce à quoi nous voulons contribuer", "A qué queremos contribuir"),
+    "We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies welke organisaties het zijn en waar je bijdrage heen gaat.": ("We are still making arrangements. Once they are settled, you will see exactly which organisations they are and where your contribution goes.", "Nous sommes encore en train de nous organiser. Dès que ce sera réglé, tu verras ici précisément de quelles organisations il s'agit et où va ta contribution.", "Todavía estamos cerrando acuerdos. En cuanto estén listos, verás aquí exactamente qué organizaciones son y adónde va tu aportación."),
     " gelopen": (" walked", " parcourus", " recorridos"),
     " · %@": (" · %@", " · %@", " · %@"),
     " · %lld min": (" · %lld min", " · %lld min", " · %lld min"),
@@ -157,7 +159,6 @@ T = {
     "Gewoon": ("Normal", "Normal", "Normal"),
     "Goed om te weten": ("Good to know", "Bon à savoir", "Bueno saberlo"),
     "Goed rondje!": ("Good walk!", "Belle balade !", "¡Buen paseo!"),
-    "Goede doelen die we willen steunen": ("Causes we want to support", "Les causes que nous voulons soutenir", "Causas que queremos apoyar"),
     "Goedemiddag": ("Good afternoon", "Bon après-midi", "Buenas tardes"),
     "Goedemorgen": ("Good morning", "Bonjour", "Buenos días"),
     "Goedenavond": ("Good evening", "Bonsoir", "Buenas noches"),
@@ -244,7 +245,6 @@ T = {
     "Later": ("Later", "Plus tard", "Más tarde"),
     "Leden krijgen geen voorrang: iedereen gebruikt %@ op dezelfde manier.": ("Members get no priority: everyone uses %@ the same way.", "Les membres n'ont aucune priorité : tout le monde utilise %@ de la même façon.", "Los socios no tienen prioridad: todos usan %@ igual."),
     "Leeftijd: %lld jaar": ("Age: %lld years", "Âge : %lld ans", "Edad: %lld años"),
-    "Leidt honden op die mensen met een beperking of trauma helpen zelfstandig te leven.": ("Trains dogs that help people with a disability or trauma live independently.", "Forme des chiens qui aident les personnes en situation de handicap ou de traumatisme à vivre de façon autonome.", "Entrena perros que ayudan a personas con discapacidad o trauma a vivir de forma independiente."),
     "Lid worden gaat via de website": ("Becoming a member happens on the website", "L'adhésion se fait sur le site web", "Hacerse socio se hace en la web"),
     "Liever niet": ("Rather not", "Plutôt pas", "Mejor no"),
     "Locatie staat uit. Zet hem aan": ("Location is off. Turn it on", "La localisation est désactivée. Active-la", "La ubicación está desactivada. Actívala"),
@@ -302,7 +302,7 @@ T = {
     "Over %@": ("About %@", "À propos de %@", "Sobre %@"),
     "Over de hond": ("About the dog", "À propos du chien", "Sobre el perro"),
     "Over een half uur komt %@. Fijne wandeling!": ("%@ arrives in half an hour. Enjoy the walk!", "%@ arrive dans une demi-heure. Bonne balade !", "%@ llega en media hora. ¡Buen paseo!"),
-    "Over een half uur. Neem je ID mee en vergeet de zakjes niet.": ("In half an hour. Bring your ID and don't forget the bags.", "Dans une demi-heure. Prends ta pièce d'identité et n'oublie pas les sacs.", "En media hora. Lleva tu documento y no olvides las bolsas."),
+    "Over een half uur. Neem je ID mee.": ("In half an hour. Bring your ID.", "Dans une demi-heure. Prends ta pièce d'identité.", "En media hora. Lleva tu documento de identidad."),
     "Over jou": ("About you", "À propos de toi", "Sobre ti"),
     "Over tijd: laat even iets weten": ("Running late: let them know", "En retard : donne des nouvelles", "Con retraso: avisa"),
     "PPP-hond: in Spanje alleen met licentie": ("PPP dog: in Spain only with a licence", "Chien PPP : en Espagne uniquement avec licence", "Perro PPP: en España solo con licencia"),
@@ -390,10 +390,6 @@ T = {
     "Wat gebeurde er?": ("What happened?", "Que s'est-il passé ?", "¿Qué pasó?"),
     "Wat is er aan de hand?": ("What's going on?", "Que se passe-t-il ?", "¿Qué ocurre?"),
     "Water": ("Water", "Eau", "Agua"),
-    "We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies waar je bijdrage heen gaat.": (
-        "We're still making arrangements about this. Once they're settled, you'll see here exactly where your contribution goes.",
-        "Nous sommes encore en train d'en discuter. Dès que ce sera conclu, tu verras ici exactement où va ta contribution.",
-        "Todavía lo estamos acordando. En cuanto esté cerrado, verás aquí exactamente adónde va tu aportación."),
     "We verkopen nooit gegevens.": ("We never sell data.", "Nous ne vendons jamais de données.", "Nunca vendemos datos."),
     "Weergave": ("View", "Affichage", "Vista"),
     "Weiger": ("Decline", "Refuser", "Rechazar"),
@@ -647,3 +643,9 @@ T = {
     "Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven.": ("Initiatives that help older people with a dog stay independent for longer.", "Des initiatives qui aident les aînés avec un chien à rester autonomes plus longtemps.", "Iniciativas que ayudan a las personas mayores con perro a seguir siendo independientes más tiempo."),
     "Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig.": ("Getting outside together with a dog can make your day. It's free, without ads, and safe.", "Sortir ensemble avec un chien peut embellir ta journée. C'est gratuit, sans pub et sûr.", "Salir juntos con un perro puede alegrarte el día. Es gratis, sin anuncios y seguro."),
 }
+
+# Each build unit adds its own keys in design/translations_<unit>.py (a dict T); they are merged here.
+import glob as _glob, importlib as _importlib, os as _os, sys as _sys
+_here = _os.path.dirname(_os.path.abspath(__file__))
+if _here not in _sys.path: _sys.path.insert(0, _here)
+for _p in sorted(_glob.glob(_os.path.join(_here, 'translations_*.py'))): T.update(_importlib.import_module(_os.path.basename(_p)[:-3]).T)

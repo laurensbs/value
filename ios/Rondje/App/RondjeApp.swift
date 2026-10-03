@@ -15,6 +15,7 @@ struct RondjeApp: App {
                 .tint(Palette.grass)
                 .task { await model.bootstrap() }
                 .onChange(of: scenePhase) { _, phase in
+                    if phase == .active { Keepsakes.shared.recordVisit() }
                     if phase == .active, model.phase == .ready { Task { await model.refreshMe() } }
                 }
         }
@@ -50,6 +51,8 @@ struct RootView: View {
             }
         }
         .animation(.smooth(duration: 0.45), value: model.phase)
+        // Drawn in a window of its own, so it also shows over sheets (see CelebrationWindow).
+        .onChange(of: model.celebration) { CelebrationWindow.shared.update(model: model) }
     }
 }
 
@@ -72,6 +75,8 @@ struct MainTabs: View {
 
     var body: some View {
         @Bindable var model = model
+        // Never over a Guus sheet (a passed quiz loads progress while that sheet is still up): it comes after.
+        let showLevelUp = progress.celebrate != nil && !showWalk && !model.coachSheetOpen
         TabView(selection: $model.selectedTab) {
             if model.role != .owner {
                 DiscoverView()
@@ -94,7 +99,7 @@ struct MainTabs: View {
                 .tag(AppModel.Tab.profile)
         }
         .sensoryFeedback(.selection, trigger: model.selectedTab)
-        .fullScreenCover(isPresented: Binding(get: { progress.celebrate != nil && !showWalk }, set: { if !$0 { Task { await progress.seen() } } })) {
+        .fullScreenCover(isPresented: Binding(get: { showLevelUp }, set: { if !$0 { Task { await progress.seen() } } })) {
             if let p = progress.celebrate { LevelUpView(progress: p) { Task { await progress.seen() } } }
         }
         .fullScreenCover(isPresented: $showWalk, onDismiss: { Task { await progress.load() } }) {
@@ -106,6 +111,7 @@ struct MainTabs: View {
         }
         .onChange(of: model.role) { fitTab() }
         .onChange(of: walk.isActive) { _, active in if active { showWalk = true } }
+        .coachRoutes(blocked: showWalk || progress.celebrate != nil)
     }
 
     /// Owners start at home, walkers at Discover; never on a tab that is not there.

@@ -4,6 +4,8 @@ import SwiftUI
 struct AppointmentsView: View {
     @Environment(AppModel.self) private var model
     @State private var side: Side = .walking
+    /// The appointment Guus (or a notification) pointed at, outlined for a moment.
+    @State private var highlight: String?
 
     enum Side: String, CaseIterable, Identifiable {
         case walking, dogs
@@ -21,45 +23,79 @@ struct AppointmentsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    if model.offline {
-                        Label("Geen verbinding. Je ziet de afspraken van je laatste bezoek.", systemImage: "wifi.slash")
-                            .font(.footnote).foregroundStyle(Palette.warn)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(12)
-                            .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
-                    }
-                    if model.role == .both || (model.role == .walker && !model.appointments.incoming.isEmpty) {
-                        Picker("Weergave", selection: $side) {
-                            ForEach(Side.allCases) { Text($0.title).tag($0) }
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 16) {
+                        if model.offline {
+                            Label("Geen verbinding. Je ziet de afspraken van je laatste bezoek.", systemImage: "wifi.slash")
+                                .font(.footnote).foregroundStyle(Palette.warn)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(12)
+                                .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
                         }
-                        .pickerStyle(.segmented)
-                    }
-                    if items.isEmpty {
-                        EmptyState(
-                            symbol: side == .walking ? "figure.walk" : "pawprint",
-                            title: side == .walking ? L("Nog geen afspraken") : L("Nog geen aanvragen"),
-                            text: side == .walking ? L("Kies een hond bij Ontdek en plan een kennismaking.") : L("Zodra iemand met je hond wil wandelen, zie je het hier.")
-                        )
-                        if side == .walking && model.role != .owner {
-                            Button("Naar Ontdek") { model.selectedTab = .discover }.buttonStyle(.primary).padding(.horizontal, 40)
+                        if !items.isEmpty {
+                            GuusHint(id: "appointments", text: L("Op de dag zelf start je hier je rondje. Een half uur van tevoren mag het al."))
+                        }
+                        if model.role == .both || (model.role == .walker && !model.appointments.incoming.isEmpty) {
+                            Picker("Weergave", selection: $side) {
+                                ForEach(Side.allCases) { Text($0.title).tag($0) }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                        if items.isEmpty {
+                            if side == .walking && model.role != .owner {
+                                EmptyState(
+                                    symbol: "figure.walk", title: L("Nog geen afspraken"),
+                                    text: L("Kies een hond bij Ontdek en plan een kennismaking."),
+                                    actionTitle: L("Kies samen met Guus een hond"),
+                                    action: { model.perform(.discover(calm: true)) }
+                                )
+                            } else {
+                                EmptyState(
+                                    symbol: side == .walking ? "figure.walk" : "pawprint",
+                                    title: side == .walking ? L("Nog geen afspraken") : L("Nog geen aanvragen"),
+                                    text: side == .walking ? L("Kies een hond bij Ontdek en plan een kennismaking.") : L("Zodra iemand met je hond wil wandelen, zie je het hier.")
+                                )
+                            }
+                        }
+                        ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                            AppointmentCard(item: item, asOwner: side == .dogs, highlighted: highlight == item.id)
+                                .id(item.id)
+                                .appear(index)
                         }
                     }
-                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                        AppointmentCard(item: item, asOwner: side == .dogs).appear(index)
+                    .padding(20)
+                }
+                .screenBackground()
+                .navigationTitle("Afspraken")
+                .refreshable { await model.refreshAppointments() }
+                .task { await model.refreshAppointments() }
+                .onAppear {
+                    // Owners who do not walk themselves, or who have someone waiting, start on their dogs.
+                    // Not when Guus just pointed at one appointment: then that side is already chosen.
+                    guard highlight == nil else { return }
+                    if model.role == .owner || (model.pendingIncoming > 0 && !model.appointments.outgoing.contains(where: \.isOpen)) {
+                        side = .dogs
                     }
                 }
-                .padding(20)
-            }
-            .screenBackground()
-            .navigationTitle("Afspraken")
-            .refreshable { await model.refreshAppointments() }
-            .task { await model.refreshAppointments() }
-            .onAppear {
-                // Owners who do not walk themselves, or who have someone waiting, start on their dogs.
-                if model.role == .owner || (model.pendingIncoming > 0 && !model.appointments.outgoing.contains(where: \.isOpen)) {
-                    side = .dogs
+                .onChange(of: model.pendingAction, initial: true) {
+                    guard let picked = model.take({ action -> String?? in
+                        if case .appointments(let id) = action { return .some(id) }
+                        return nil
+                    }), let id = picked else { return }
+                    if model.appointments.incoming.contains(where: { $0.id == id }) {
+                        side = .dogs
+                    } else if model.appointments.outgoing.contains(where: { $0.id == id }) {
+                        side = .walking
+                    }
+                    highlight = id
+                    Task {
+                        // Let the chosen side lay out first, then scroll to the card and outline it for a moment.
+                        try? await Task.sleep(for: .milliseconds(80))
+                        withAnimation { proxy.scrollTo(id, anchor: .center) }
+                        try? await Task.sleep(for: .seconds(1.6))
+                        if highlight == id { highlight = nil }
+                    }
                 }
             }
         }
@@ -69,6 +105,7 @@ struct AppointmentsView: View {
 struct AppointmentCard: View {
     let item: Appointment
     let asOwner: Bool
+    var highlighted = false
 
     @Environment(AppModel.self) private var model
     @Environment(WalkTracker.self) private var walk
@@ -119,8 +156,10 @@ struct AppointmentCard: View {
                 Label(item.dog.meetingInfo, systemImage: "mappin.and.ellipse").font(.subheadline)
             }
             contact
+            PrepLink(item: item, asOwner: asOwner)
             actions
         }
+        .overlay(RoundedRectangle(cornerRadius: 24, style: .continuous).strokeBorder(Palette.ball, lineWidth: highlighted ? 3 : 0).animation(.easeInOut, value: highlighted))
         .sheet(isPresented: $trustSheet) {
             if let walker = item.walker {
                 TrustSheet(item: item, walker: walker)
@@ -136,18 +175,13 @@ struct AppointmentCard: View {
                 .onDisappear { Task { await model.refreshAppointments() } }
         }
         .fullScreenCover(isPresented: $breathing) {
-            BreathingView {
+            BreathingView(stopOffering: { offerBreathing = false; breathing = false; Task { await start() } }) {
                 breathing = false
                 Task { await start() }
             }
-            .overlay(alignment: .bottom) {
-                Button("Niet meer tonen") { offerBreathing = false; breathing = false; Task { await start() } }
-                    .font(.footnote).foregroundStyle(Palette.onGrass.opacity(0.7))
-                    .padding(.bottom, 4)
-            }
         }
         .sheet(isPresented: $chatting) {
-            ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name)
+            ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name, suggestions: RequestSuggestions.chatReplies(for: item, asOwner: asOwner))
                 .presentationDetents([.large])
         }
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
@@ -248,21 +282,8 @@ struct AppointmentCard: View {
         busy = true
         defer { busy = false }
         do {
-            LocationService.shared.requestPermission()
-            let started: WalkStarted = try await APIClient.shared.post("/api/v1/walks", ["requestId": item.id])
-            // The vet's details come from the dog's page, which the walker may see after acceptance.
-            let detail: DogDetail? = try? await APIClient.shared.get("/api/v1/dogs/\(item.dog.id)")
-            // When continuing a walk, the timer and planned end come from the server, not from now.
-            let live: LiveWalk? = item.walkStatus == "active"
-                ? try? await APIClient.shared.get("/api/walks/\(started.walkId)/live?after=999999999")
-                : nil
+            try await WalkStarter.start(item, model: model, walk: walk)
             Haptics.success(.start)
-            walk.start(.init(
-                walkId: started.walkId, dogName: item.dog.name, look: item.dog.look, startedAt: live?.startedAt ?? .now,
-                plannedEnd: live?.plannedEndAt ?? .now.addingTimeInterval(Double(item.durationMin) * 60),
-                ownerName: item.host?.name, ownerPhone: item.host?.phone, vetInfo: detail?.dog.vetInfo
-            ))
-            await model.refreshAppointments()
         } catch {
             Haptics.error()
             model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)

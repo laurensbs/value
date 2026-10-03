@@ -25,9 +25,14 @@ struct OwnerHomeView: View {
                         Text(headline).font(.display(28))
                     }
 
+                    NextStepCard(placement: .home, myDogsCount: loaded ? dogs.count : nil, addDog: { adding = true })
+                    WeekRecapCard(side: .owner)
+
                     ForEach(live) { item in liveCard(item) }
+                    ForEach(model.appointments.incoming.filter { HomecomingCard.shouldShow($0) }) { HomecomingCard(item: $0) }
 
                     OwnerSteps(hasDog: !dogs.isEmpty, loaded: loaded) { adding = true }
+                    GuusHint(id: "owner", text: L("Hier zie je wie met je hond wil wandelen. Jij beslist altijd zelf."))
 
                     if !pending.isEmpty {
                         SectionTitle(title: L("Aanvragen"), subtitle: L("Kijk wie het is en kies een moment om kennis te maken."))
