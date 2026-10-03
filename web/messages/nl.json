@@ -2333,8 +2333,8 @@
     },
     "tasks": {
       "name": {
-        "title": "De naam kiezen: Woofmigo ja of nee",
-        "hint": "Check eerst in App Store Connect of de naam vrij is (Apps → + → Nieuwe app), en zoek in TMview op WOOF en MIGO in klasse 9, 42 en 45. Tot dan blijft alles via Brand.name en APP_NAME."
+        "title": "Naam: nieuwe ronde, Woofmigo vervalt (Guaumigo)",
+        "hint": "Guaumigo, een Spaanse uitlaatapp die ook in NL en BE actief is, lijkt te veel op Woofmigo. Kies uit de nieuwe naamronde (_werk/naam/). Tot dan blijft alles via APP_NAME en Brand.name."
       },
       "goLive": {
         "title": "Live zetten: mergen naar productie",
@@ -2354,7 +2354,7 @@
       },
       "trademark": {
         "title": "Merkcheck op TMview",
-        "hint": "Zoek op “rondje” of op de nieuwe naam, in klasse 9, 42 en 45."
+        "hint": "Zoek de nieuwe naam (exact én gelijkend) in TMview, BOIP en OEPM (Spanje), in klasse 9, 42 en 45. Let op Guaumigo en de EU-aanvraag PawAmigo."
       },
       "appleAccount": {
         "title": "Apple Developer-account",
@@ -2362,7 +2362,7 @@
       },
       "domain": {
         "title": "Domein kopen en koppelen",
-        "hint": "Na de naamkeuze, ongeveer € 12 per jaar. Daarna Vercel → Settings → Domains (docs/LAUNCH.md §8). Telt mee bij de kosten zodra je dit afvinkt."
+        "hint": "Koop pas als de naam alle checks doorstaat: merken, App Store, domeinen en handles. Ongeveer € 12 per jaar. Daarna Vercel → Settings → Domains (docs/LAUNCH.md §8). Telt mee bij de kosten zodra je dit afvinkt."
       },
       "socialKeys": {
         "title": "Sleutels voor Inloggen met Apple en Google",
