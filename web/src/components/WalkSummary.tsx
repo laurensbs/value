@@ -71,7 +71,7 @@ export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId,
   return (
     <div className="narrow-page stack-l">
       {done ? (
-        <WalkDone walkId={walk.id} dogName={dog.name} distance={distance} points={done.points} feedbackGiven={Boolean(given)} celebration={null} />
+        <WalkDone walkId={walk.id} dogName={dog.name} distance={distance} points={null} feedbackGiven={Boolean(given)} celebration={null} />
       ) : null}
       <header className="summary-head">
         <DogPortrait dog={dog} size={88} />
