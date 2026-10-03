@@ -68,6 +68,23 @@ struct RondjeTests {
         #expect(!appointment(status: "pending", startsAt: start).canStart(now: start))
     }
 
+    @Test func aFirstCallNeverStartsAWalkOrCountsAsMeetingInPerson() {
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        for via in ["phone", "video"] {
+            let call = appointment(status: "accepted", startsAt: start, kind: "meet", meetVia: via)
+            #expect(call.isCall)
+            #expect(!call.via.inPerson)
+            #expect(!call.canStart(now: start))
+        }
+        let home = appointment(status: "accepted", startsAt: start, kind: "meet", meetVia: "home")
+        #expect(!home.isCall)
+        #expect(home.canStart(now: start))
+        // Older servers send no meetVia: a first meeting is then a walk together, as before.
+        let old = appointment(status: "accepted", startsAt: start, kind: "meet", meetVia: nil)
+        #expect(old.via == .walk)
+        #expect(old.canStart(now: start))
+    }
+
     @Test func distancesReadNaturallyInDutch() {
         #expect(Format.distance(Optional(881)) == "800 m")
         #expect(Format.distance(Optional(40)) == "100 m")
@@ -82,9 +99,9 @@ struct RondjeTests {
         #expect(Color(css: nil) == Color.gray)
     }
 
-    private func appointment(status: String, startsAt: Date) -> Appointment {
+    private func appointment(status: String, startsAt: Date, kind: String = "solo", meetVia: String? = "walk") -> Appointment {
         Appointment(
-            id: "r1", kind: "solo", status: status, startsAt: startsAt, durationMin: 30, weekly: false, message: "", flags: [],
+            id: "r1", kind: kind, meetVia: meetVia, status: status, startsAt: startsAt, durationMin: 30, weekly: false, message: "", flags: [],
             walkId: nil, walkStatus: nil, feedbackGiven: nil,
             dog: .init(id: "d1", name: "Bobbie", photos: [], look: .sample, city: "Utrecht", isShelter: false, meetingInfo: ""),
             host: nil, walker: nil, trust: nil
