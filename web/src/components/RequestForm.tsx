@@ -4,12 +4,14 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { requestBlockKeys } from '@/lib/conversation'
+import { MEET_VIAS, type MeetVia } from '@/lib/rules'
 import { addSentence } from '@/lib/sentences'
 import { playSound } from '@/lib/sounds'
 import { useForm } from '@/lib/use-form'
 import { createRequest } from '@/server/actions/requests'
 import type { FormState } from '@/server/actions/profile'
 import { Icon } from './Icon'
+import { MEET_VIA_ICONS } from './MeetVia'
 import { SubmitButton } from './SubmitButton'
 
 const MESSAGE_MAX = 800
@@ -33,13 +35,16 @@ interface Props {
 }
 
 /**
- * Asking to meet or walk a dog in a few taps: one of the dog's own moments, and a message built from
- * ready sentences (each one can still be edited).
+ * Asking to meet or walk a dog in a few taps: how to meet the first time (walking together, at the
+ * owner's home, or a first call), one of the dog's own moments, and a message built from ready
+ * sentences (each one can still be edited).
  */
 export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason, defaultDate, defaultTime, moments }: Props) {
   const t = useTranslations('request')
+  const tm = useTranslations('meet')
   const { state, pending, onSubmit } = useForm<FormState>(createRequest, { ok: false })
   const [kind, setKind] = useState<'meet' | 'solo'>(soloReason ? 'meet' : 'solo')
+  const [meetVia, setMeetVia] = useState<MeetVia>('walk')
   const [date, setDate] = useState(defaultDate)
   const [time, setTime] = useState(defaultTime)
   const [message, setMessage] = useState('')
@@ -88,7 +93,7 @@ export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason
             <span>{t('kindSolo')}</span>
           </label>
         </div>
-        <p className="hint">{kind === 'meet' ? t('kindMeetHint') : t('kindSoloHint')}</p>
+        {kind === 'solo' ? <p className="hint">{t('kindSoloHint')}</p> : null}
       </fieldset>
 
       {reason ? (
@@ -97,6 +102,41 @@ export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason
         </div>
       ) : (
         <>
+          {kind === 'meet' ? (
+            <fieldset className="field meet-via-field">
+              <legend>{tm('legend')}</legend>
+              <div className="option-cards compact">
+                {MEET_VIAS.map((via) => (
+                  <label key={via} className="option-card">
+                    <input type="radio" name="meetVia" value={via} checked={meetVia === via} onChange={() => setMeetVia(via)} />
+                    <span className="option-icon" aria-hidden="true">
+                      <Icon name={MEET_VIA_ICONS[via]} size={20} />
+                    </span>
+                    <span>
+                      <strong>{tm(`via.${via}`)}</strong>
+                      <span className="muted">{tm(`hint.${via}`)}</span>
+                    </span>
+                    <span className="option-radio" aria-hidden="true">
+                      <Icon name="check" size={14} />
+                    </span>
+                  </label>
+                ))}
+              </div>
+              {/* A visit at home and a first call each come with what to know beforehand. */}
+              {meetVia === 'home' ? (
+                <p className="notice small" role="note">
+                  <Icon name="shield" size={18} /> <span>{tm('homeSafety')}</span>
+                </p>
+              ) : meetVia === 'phone' || meetVia === 'video' ? (
+                <div className="notice small" role="note">
+                  <Icon name={MEET_VIA_ICONS[meetVia]} size={18} />
+                  <span>
+                    {tm(meetVia === 'phone' ? 'phoneHow' : 'videoHow')} {tm('remoteNote')}
+                  </span>
+                </div>
+              ) : null}
+            </fieldset>
+          ) : null}
           {moments.length ? (
             <div className="field">
               <span id="request-moments">{t('moments', { dog: dogName })}</span>

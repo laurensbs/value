@@ -208,6 +208,9 @@ export async function relationFor(viewer: Viewer, dog: Dog): Promise<DogRelation
           eq(s.walkRequest.dogId, dog.id),
           eq(s.walkRequest.walkerId, viewer.userId),
           inArray(s.walkRequest.status, ['accepted', 'completed']),
+          // The meeting place and vet details are for meeting in person; a first call shows the
+          // phone number on the appointment itself (hostContacts), not the address.
+          inArray(s.walkRequest.meetVia, ['walk', 'home']),
         ),
       )
       .limit(1),

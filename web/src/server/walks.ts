@@ -4,7 +4,7 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { routeLengthM } from '@/lib/geo'
 import { isAllowedPhotoUrl } from '@/lib/photos'
-import { canStartWalk, overdueMinutes } from '@/lib/rules'
+import { canStartWalk, isInPerson, overdueMinutes } from '@/lib/rules'
 import { notify } from './notify'
 import type { FormState } from './actions/profile'
 import type { OnboardedViewer, Viewer } from './session'
@@ -162,6 +162,8 @@ export async function beginWalk(requestId: string, viewer: OnboardedViewer): Pro
   const existing = await db.select().from(s.walk).where(eq(s.walk.requestId, requestId))
   const active = existing.find((w) => w.status === 'active')
   if (active && active.walkerId === viewer.userId) return { ok: true, walkId: active.id }
+  // A first call is not a walk: no live location, ever (lib/rules.ts).
+  if (!isInPerson(row.request.meetVia)) return { ok: false, error: 'needs-in-person' }
   if (!canStartWalk(row.request, viewer.userId)) return { ok: false, error: 'not-now' }
 
   const id = crypto.randomUUID()

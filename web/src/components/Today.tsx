@@ -147,6 +147,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               {t(next.request.kind === 'meet' ? 'nextMeeting' : 'nextWalk', {
                 when: format.dateTime(next.request.startsAt, { weekday: 'long', hour: '2-digit', minute: '2-digit' }),
                 dog: next.dog.name,
+                via: next.request.meetVia,
               })}
             </strong>
           </span>

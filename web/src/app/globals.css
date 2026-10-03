@@ -4821,3 +4821,64 @@ legend {
   color: var(--ink);
   text-decoration: none;
 }
+
+/* How a first meeting happens (RequestForm): four compact cards, two columns where there is room. */
+.option-cards.compact {
+  gap: 8px;
+}
+
+.option-cards.compact .option-card {
+  padding: 10px 12px;
+  gap: 12px;
+}
+
+.option-cards.compact .option-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+/* In the app shell the card is a flex row: the text takes the room, the round check keeps its shape. */
+.option-cards.compact .option-card > span:nth-child(3) {
+  flex: 1;
+  min-width: 0;
+}
+
+.option-cards.compact .option-icon,
+.option-cards.compact .option-radio {
+  flex: none;
+}
+
+.option-cards.compact .muted {
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 640px) {
+  .option-cards.compact {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.meet-via-field .notice {
+  margin: 4px 0 0;
+}
+
+/* An icon in a notice keeps its size next to a long text (the notice is a flex row). */
+.notice > .icon {
+  flex: none;
+  margin-top: 1px;
+}
+
+/* The way of meeting on an appointment: a call stands out, it is not yet meeting in person. */
+.pill.meet-via {
+  align-self: flex-start;
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+.pill.meet-via.phone,
+.pill.meet-via.video {
+  background: var(--calm-soft);
+  color: var(--calm);
+}

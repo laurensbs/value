@@ -25,13 +25,28 @@ describe('chat moment', () => {
     expect(chatMoment(request('accepted'), new Date(now + 90 * 60_000))).toBe('soon')
     expect(chatMoment(request('accepted'), new Date(now + 91 * 60_000))).toBe('planned')
   })
+
+  it('ends a first call once its time has passed, but not a walk that never started', () => {
+    const later = new Date(at.getTime() + 91 * 60_000)
+    expect(chatMoment({ ...request('accepted'), kind: 'meet', meetVia: 'phone' }, later)).toBe('done')
+    expect(chatMoment({ ...request('accepted'), kind: 'meet', meetVia: 'video' }, later)).toBe('done')
+    expect(chatMoment({ ...request('accepted'), kind: 'meet', meetVia: 'phone' }, at)).toBe('soon')
+    expect(chatMoment({ ...request('accepted'), kind: 'meet', meetVia: 'home' }, later)).toBe('planned')
+    expect(chatMoment({ ...request('accepted'), kind: 'meet', meetVia: 'walk' }, later)).toBe('planned')
+  })
 })
 
 describe('ready messages', () => {
   const sides: ChatSide[] = ['walker', 'host']
   const moments: ChatMoment[] = ['pending', 'planned', 'soon', 'walking', 'done']
   const situations = ['meet', 'solo'].flatMap((kind) =>
-    [false, true].flatMap((shelter) => [false, true].flatMap((weekly) => [false, true].map((soloAllowed) => ({ kind, shelter, weekly, soloAllowed })))),
+    [false, true].flatMap((shelter) =>
+      [false, true].flatMap((weekly) =>
+        [false, true].flatMap((soloAllowed) =>
+          (kind === 'meet' ? ['walk', 'home', 'phone', 'video'] : ['walk']).map((meetVia) => ({ kind, shelter, weekly, soloAllowed, meetVia })),
+        ),
+      ),
+    ),
   )
 
   it('offer at most three, never twice the same', () => {
@@ -68,10 +83,11 @@ describe('ready messages', () => {
               const text = t(`chatQuick.${side}.${key}` as never, { dog: 'Bello' } as never)
               expect(text, `${locale} chatQuick.${side}.${key}`).not.toMatch(/chatQuick|[{}]/)
             }
-        for (const key of meetChecklistKeys(side)) {
-          const text = t(`meetCheck.${side}.${key}` as never, { dog: 'Bello', name: 'Fleur' } as never)
-          expect(text, `${locale} meetCheck.${side}.${key}`).not.toMatch(/meetCheck|[{}]/)
-        }
+        for (const via of ['walk', 'home', 'phone', 'video'])
+          for (const key of meetChecklistKeys(side, via)) {
+            const text = t(`meetCheck.${side}.${key}` as never, { dog: 'Bello', name: 'Fleur' } as never)
+            expect(text, `${locale} meetCheck.${side}.${key}`).not.toMatch(/meetCheck|[{}]/)
+          }
       }
       for (const kind of ['meet', 'solo'])
         for (const key of requestBlockKeys(kind)) {
@@ -83,6 +99,27 @@ describe('ready messages', () => {
 
   it('ask the host to check the ID, not the walker', () => {
     expect(meetChecklistKeys('host')).toContain('id')
+    expect(meetChecklistKeys('host', 'home')).toContain('id')
     expect(meetChecklistKeys('walker')).not.toContain('id')
+  })
+
+  it('never ask for an ID check or a walk together in a call, and end it with meeting in person', () => {
+    for (const via of ['phone', 'video'])
+      for (const side of sides) {
+        expect(meetChecklistKeys(side, via)).not.toContain('id')
+        expect(meetChecklistKeys(side, via)).not.toContain('together')
+        expect(meetChecklistKeys(side, via)).toContain('inPerson')
+      }
+  })
+
+  it('fit a first call: how to call, and after it no question about walking alone', () => {
+    const call = { kind: 'meet', shelter: false, weekly: false, meetVia: 'phone' }
+    expect(suggestionKeys('walker', 'pending', call)).toContain('whoCalls')
+    expect(suggestionKeys('walker', 'pending', call)).not.toContain('where')
+    expect(suggestionKeys('host', 'planned', { ...call, meetVia: 'video' })).toContain('videoHow')
+    expect(suggestionKeys('host', 'planned', call)).not.toContain('home')
+    expect(suggestionKeys('walker', 'soon', call)).not.toContain('here')
+    expect(suggestionKeys('walker', 'done', call)).toEqual(['thanksCall', 'meetNext'])
+    expect(suggestionKeys('walker', 'done', call)).not.toContain('soloNext')
   })
 })

@@ -123,6 +123,9 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
         var city: String
         var isShelter: Bool
         var meetingInfo: String
+        /// The owner (a person) or the shelter, to report or block from the chat. Missing from older servers.
+        var ownerId: String?
+        var orgId: String?
     }
     struct Contact: Codable, Hashable, Sendable {
         var kind: String
@@ -145,6 +148,8 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
 
     var id: String
     var kind: String
+    /// How a first meeting happens: walk, home, phone or video. Missing from older servers: then a walk.
+    var meetVia: String?
     var status: String
     var startsAt: Date
     var durationMin: Int
@@ -161,12 +166,48 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
 
     var isMeeting: Bool { kind == "meet" }
     var isOpen: Bool { status == "pending" || status == "accepted" }
+    var via: MeetVia { MeetVia(rawValue: meetVia ?? "walk") ?? .walk }
+    /// A first call (phone or video): never counts as meeting in person (lib/rules.ts).
+    var isCall: Bool { isMeeting && !via.inPerson }
 
-    /// A walk can be started from 30 minutes before until 2 hours after the appointment (lib/rules.ts).
+    /// A walk can be started from 30 minutes before until 2 hours after the appointment (lib/rules.ts),
+    /// and never from a first call.
     func canStart(now: Date = .now) -> Bool {
-        guard status == "accepted" else { return false }
+        guard status == "accepted", !isCall else { return false }
         let diff = now.timeIntervalSince(startsAt) / 60
         return diff >= -30 && diff <= 120
+    }
+}
+
+/// How a first meeting happens, as on the website (lib/rules.ts: MEET_VIAS). Only walking together
+/// and a visit at home are in person; after a call, the next step is meeting in person.
+enum MeetVia: String, CaseIterable, Identifiable, Codable, Sendable {
+    case walk, home, phone, video
+    var id: String { rawValue }
+    var inPerson: Bool { self == .walk || self == .home }
+    var symbol: String {
+        switch self {
+        case .walk: "figure.walk"
+        case .home: "house.fill"
+        case .phone: "phone.fill"
+        case .video: "video.fill"
+        }
+    }
+    var title: String {
+        switch self {
+        case .walk: L("Samen wandelen")
+        case .home: L("Bij de eigenaar thuis")
+        case .phone: L("Eerst bellen")
+        case .video: L("Eerst videobellen")
+        }
+    }
+    var hint: String {
+        switch self {
+        case .walk: L("Jullie lopen samen een rondje. De eigenaar loopt mee en bekijkt je ID.")
+        case .home: L("Je komt langs bij de eigenaar en de hond. De eigenaar bekijkt je ID.")
+        case .phone: L("Eerst even kennismaken aan de telefoon. Daarna spreken jullie af in het echt, met de hond erbij.")
+        case .video: L("Eerst kennismaken in een videogesprek. Daarna spreken jullie af in het echt, met de hond erbij.")
+        }
     }
 }
 

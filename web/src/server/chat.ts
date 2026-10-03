@@ -99,15 +99,16 @@ export async function chatSuggestions(access: ChatAccess, sent: ChatMessage[], v
     shelter: Boolean(access.dog.orgId),
     weekly: access.request.weekly,
     soloAllowed: grant?.soloAllowed ?? false,
+    meetVia: access.request.meetVia,
   })
     .map((key) => t(`${side}.${key}`, { dog: access.dog.name }))
     .filter((text) => !mine.has(text))
 }
 
-/** What to talk about when meeting, for one side: `name` is the walker's first name. */
-export async function meetChecklist(side: ChatSide, dog: string, name: string): Promise<{ key: string; text: string }[]> {
+/** What to talk about when meeting (in person or in a first call), for one side: `name` is the walker's first name. */
+export async function meetChecklist(side: ChatSide, dog: string, name: string, meetVia = 'walk'): Promise<{ key: string; text: string }[]> {
   const t = await getTranslations('meetCheck')
-  return meetChecklistKeys(side).map((key) => ({ key, text: t(`${side}.${key}`, { dog, name }) }))
+  return meetChecklistKeys(side, meetVia).map((key) => ({ key, text: t(`${side}.${key}`, { dog, name }) }))
 }
 
 /** Messages oldest first; `afterMs` returns only newer ones for polling. */

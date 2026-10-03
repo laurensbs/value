@@ -2,7 +2,7 @@ import { and, eq, inArray } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
-import { ageBand } from '@/lib/rules'
+import { ageBand, isInPerson } from '@/lib/rules'
 import { apiMember, dogLook, fail, json } from '@/server/api'
 import { createRequest } from '@/server/actions/requests'
 import { meetChecklist } from '@/server/chat'
@@ -41,7 +41,7 @@ export async function GET() {
     await Promise.all(
       sides
         .filter(([, r]) => r.request.kind === 'meet' && r.request.status === 'accepted' && r.walkStatus !== 'active')
-        .map(async ([side, r]) => [`${side}:${r.request.id}`, await meetChecklist(side, r.dog.name, r.walker.firstName)] as const),
+        .map(async ([side, r]) => [`${side}:${r.request.id}`, await meetChecklist(side, r.dog.name, r.walker.firstName, r.request.meetVia)] as const),
     ),
   )
 
@@ -50,6 +50,8 @@ export async function GET() {
     return {
       id: r.request.id,
       kind: r.request.kind,
+      // How a first meeting happens: walk, home, phone or video. Always "walk" for a regular walk.
+      meetVia: r.request.meetVia,
       status: r.request.status,
       startsAt: r.request.startsAt,
       durationMin: r.request.durationMin,
@@ -66,8 +68,11 @@ export async function GET() {
         look: dogLook(r.dog),
         city: r.dog.city,
         isShelter: Boolean(r.dog.orgId),
-        // Where to meet: only once the appointment is accepted.
-        meetingInfo: accepted ? r.dog.meetingInfo : '',
+        // Who is behind the dog, for reporting or blocking from the chat (the same ids as on dog cards).
+        ownerId: r.dog.ownerId,
+        orgId: r.dog.orgId,
+        // Where to meet: only once the appointment is accepted, and not for a first call.
+        meetingInfo: accepted && isInPerson(r.request.meetVia) ? r.dog.meetingInfo : '',
       },
     }
   }
@@ -96,7 +101,11 @@ export async function GET() {
   })
 }
 
-/** Ask to meet or walk a dog. All rules (age, quiz, trust, limits) are checked by createRequest. */
+/**
+ * Ask to meet or walk a dog. All rules (age, quiz, trust, limits, how to meet) are checked by
+ * createRequest. `meetVia` (walk, home, phone, video) is optional: older apps leave it out, and then
+ * a first meeting is a walk together, as before.
+ */
 export async function POST(request: Request) {
   const viewer = await apiMember()
   if (viewer instanceof NextResponse) return viewer
@@ -105,6 +114,7 @@ export async function POST(request: Request) {
   const form = new FormData()
   for (const key of ['dogId', 'kind', 'date', 'time', 'message']) form.set(key, String(body[key] ?? ''))
   if (body.weekly === true) form.set('weekly', 'on')
+  if (typeof body.meetVia === 'string' && body.meetVia) form.set('meetVia', body.meetVia)
   const result = await createRequest({ ok: false }, form)
   if (!result.ok) return fail(result.error ?? 'invalid')
   return json({ ok: true, flagged: result.message === 'sent-flagged' }, 201)

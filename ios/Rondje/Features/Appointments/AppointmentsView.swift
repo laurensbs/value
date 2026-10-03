@@ -80,6 +80,8 @@ struct AppointmentCard: View {
     @State private var feedbackFor: String?
     @State private var chatting = false
     @State private var breathing = false
+    /// After a first call: the dog's details, to plan meeting in person in the request sheet.
+    @State private var planInPerson: DogDetail?
     /// Offer the breathing minute before a walk; switched off with "Niet meer tonen".
     @AppStorage("offerBreathing") private var offerBreathing = true
 
@@ -89,10 +91,16 @@ struct AppointmentCard: View {
                 DogPortrait(look: item.dog.look, photoURL: item.dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 18)
                     .frame(width: 64, height: 64)
                 VStack(alignment: .leading, spacing: 4) {
-                    let status = Labels.status(item.status)
+                    let status = item.isCall && item.status == "completed" ? (L("Gesprek gehad"), Palette.calm, Palette.calmSoft) : Labels.status(item.status)
                     Chip(text: status.0, tint: status.1, soft: status.2)
                     Text(item.isMeeting ? L("Kennismaking met \(item.dog.name)") : L("Rondje met \(item.dog.name)"))
                         .font(.headline)
+                    if item.isMeeting {
+                        // How they meet: a call is never mistaken for meeting in person.
+                        Label(item.via.title, systemImage: item.via.symbol)
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(item.isCall ? Palette.calm : Palette.grass)
+                    }
                     Label(Format.when(item.startsAt) + L(" · \(item.durationMin) min"), systemImage: item.weekly ? "repeat" : "calendar")
                         .font(.subheadline).foregroundStyle(Palette.muted)
                 }
@@ -115,11 +123,17 @@ struct AppointmentCard: View {
                         .font(.footnote).foregroundStyle(Palette.danger)
                 }
             }
-            if item.status == "accepted", !item.dog.meetingInfo.isEmpty {
+            if item.status == "accepted", !item.dog.meetingInfo.isEmpty, !item.isCall {
                 Label(item.dog.meetingInfo, systemImage: "mappin.and.ellipse").font(.subheadline)
             }
+            meetNote
             contact
             actions
+        }
+        .sheet(item: $planInPerson) { detail in
+            RequestSheet(dog: detail.dog, slots: detail.slots, kind: .meet, isShelter: detail.host.isShelter, via: .walk) {}
+                .presentationDetents([.large])
+                .presentationCornerRadius(32)
         }
         .sheet(isPresented: $trustSheet) {
             if let walker = item.walker {
@@ -147,7 +161,12 @@ struct AppointmentCard: View {
             }
         }
         .sheet(isPresented: $chatting) {
-            ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name)
+            ChatView(
+                requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name,
+                // Whom a report or block is about: the walker for an owner, else the owner or the shelter.
+                otherUserId: asOwner ? item.walker?.id : item.dog.ownerId,
+                dogId: item.dog.id, orgId: asOwner ? nil : item.dog.orgId
+            )
                 .presentationDetents([.large])
         }
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
@@ -158,6 +177,36 @@ struct AppointmentCard: View {
     }
 
     private struct FollowID: Identifiable { let id: String }
+
+    /// What to know about this way of meeting: safety for a visit at home; for a call, how to reach
+    /// each other and that it does not count as meeting in person.
+    @ViewBuilder
+    private var meetNote: some View {
+        if item.isMeeting && item.isOpen {
+            switch item.via {
+            case .home:
+                Label("Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn.", systemImage: "shield.lefthalf.filled")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .phone, .video:
+                VStack(alignment: .leading, spacing: 4) {
+                    if item.status == "accepted" {
+                        Text(item.via == .video
+                             ? L("\(Brand.name) heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link.")
+                             : L("Spreek in de chat af wie wie belt."))
+                    }
+                    Text(asOwner
+                         ? L("Een gesprek telt nog niet als kennismaking in het echt. Het ID bekijken en zelfstandig wandelen toestaan kan pas als jullie elkaar met \(item.dog.name) ontmoet hebben.")
+                         : L("Na het gesprek is de volgende stap een kennismaking in het echt, met \(item.dog.name) erbij."))
+                }
+                .font(.footnote).foregroundStyle(Palette.muted)
+                .padding(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Palette.calmSoft, in: .rect(cornerRadius: 14, style: .continuous))
+            case .walk:
+                EmptyView()
+            }
+        }
+    }
 
     @ViewBuilder
     private var contact: some View {
@@ -188,8 +237,8 @@ struct AppointmentCard: View {
                 if item.status == "pending" {
                     Button("Weiger") { Task { await act("decline") } }.buttonStyle(.secondary)
                     Button("Accepteer") { Task { await act("accept") } }.buttonStyle(.primary)
-                } else if item.status == "completed" || (item.status == "accepted" && item.startsAt < .now) {
-                    // Only after meeting in person: ID seen, and maybe solo walks from now on.
+                } else if !item.isCall, item.status == "completed" || (item.status == "accepted" && item.startsAt < .now) {
+                    // Only after meeting in person: ID seen, and maybe solo walks from now on. Never after a call.
                     Button("Vertrouwen", systemImage: "hand.thumbsup.fill") { trustSheet = true }.buttonStyle(.secondary)
                 }
                 if item.walkStatus == "active", let id = item.walkId {
@@ -198,7 +247,15 @@ struct AppointmentCard: View {
                     Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
                 }
             } else {
-                if item.canStart() && item.walkStatus != "ended" {
+                if item.isCall && item.status == "accepted" {
+                    // After a first call, meeting in person comes next: walking together is already chosen.
+                    Button {
+                        Task { await openPlanInPerson() }
+                    } label: {
+                        Label("Plan de kennismaking in het echt", systemImage: "figure.walk")
+                    }
+                    .buttonStyle(.primary)
+                } else if item.canStart() && item.walkStatus != "ended" {
                     Button {
                         if item.walkStatus != "active" && offerBreathing { breathing = true } else { Task { await start() } }
                     } label: {
@@ -238,6 +295,17 @@ struct AppointmentCard: View {
             default: model.show(L("Geannuleerd"), symbol: "xmark.circle.fill", tint: Palette.muted)
             }
             await model.refreshAppointments()
+        } catch {
+            Haptics.error()
+            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+        }
+    }
+
+    private func openPlanInPerson() async {
+        busy = true
+        defer { busy = false }
+        do {
+            planInPerson = try await APIClient.shared.get("/api/v1/dogs/\(item.dog.id)")
         } catch {
             Haptics.error()
             model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
@@ -321,4 +389,9 @@ struct TrustSheet: View {
             self.error = error.localizedDescription
         }
     }
+}
+
+/// The dog's details open the request sheet after a first call.
+extension DogDetail: Identifiable {
+    var id: String { dog.id }
 }

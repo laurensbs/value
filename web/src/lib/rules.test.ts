@@ -2,10 +2,15 @@ import { describe, expect, it } from 'vitest'
 import {
   ageBand,
   canRequestMeeting,
+  canRecordTrust,
   canRequestSolo,
   canStartWalk,
+  checkMeetVia,
   feedbackNeedsReview,
   isAdult,
+  isInPerson,
+  isMeetVia,
+  meetViaOptions,
   overdueMinutes,
   scanText,
   trustBadges,
@@ -99,7 +104,7 @@ describe('solo walk', () => {
 })
 
 describe('starting a walk', () => {
-  const req = { status: 'accepted', startsAt: new Date('2026-10-02T12:00:00'), walkerId: 'w1' }
+  const req = { status: 'accepted', startsAt: new Date('2026-10-02T12:00:00'), walkerId: 'w1', meetVia: 'walk' }
 
   it('works from 30 min before until 2 h after the start', () => {
     expect(canStartWalk(req, 'w1', new Date('2026-10-02T11:35:00'))).toBe(true)
@@ -110,6 +115,60 @@ describe('starting a walk', () => {
   it('only for the walker of an accepted request', () => {
     expect(canStartWalk(req, 'someone-else', now)).toBe(false)
     expect(canStartWalk({ ...req, status: 'pending' }, 'w1', now)).toBe(false)
+  })
+})
+
+describe('how a first meeting happens', () => {
+  const shelterDog = { ...dog, ownerId: null, orgId: 'org' }
+
+  it('knows the four ways, and only walking and a home visit are in person', () => {
+    expect(isMeetVia('phone')).toBe(true)
+    expect(isMeetVia('skype')).toBe(false)
+    expect(isMeetVia(undefined)).toBe(false)
+    expect(['walk', 'home'].every(isInPerson)).toBe(true)
+    expect(['phone', 'video', '', 'unknown'].some(isInPerson)).toBe(false)
+  })
+
+  it('lets an owner choose a walk, a home visit, a call or a video call for a first meeting', () => {
+    expect(meetViaOptions('meet', dog)).toEqual(['walk', 'home', 'phone', 'video'])
+    for (const via of ['walk', 'home', 'phone', 'video']) expect(checkMeetVia('meet', via, dog)).toBeNull()
+    expect(checkMeetVia('meet', 'skype', dog)).toBe('meet-via')
+  })
+
+  it('keeps a regular walk a walk', () => {
+    expect(meetViaOptions('solo', dog)).toEqual(['walk'])
+    expect(checkMeetVia('solo', 'walk', dog)).toBeNull()
+    for (const via of ['home', 'phone', 'video']) expect(checkMeetVia('solo', via, dog)).toBe('meet-via')
+  })
+
+  it('keeps meeting a shelter dog on location, walking', () => {
+    expect(meetViaOptions('meet', shelterDog)).toEqual(['walk'])
+    for (const via of ['home', 'phone', 'video']) expect(checkMeetVia('meet', via, shelterDog)).toBe('meet-via')
+  })
+
+  it('never lets a call count as meeting in person: no ID check and no solo walks after it', () => {
+    expect(canRecordTrust([], 0)).toBe('needs-meeting')
+    expect(canRecordTrust([{ status: 'pending', meetVia: 'walk' }], 0)).toBe('needs-meeting')
+    expect(canRecordTrust([{ status: 'accepted', meetVia: 'phone' }], 0)).toBe('needs-in-person')
+    expect(canRecordTrust([{ status: 'completed', meetVia: 'video' }, { status: 'accepted', meetVia: 'phone' }], 0)).toBe('needs-in-person')
+    // Asked for, but not yet accepted: the call still does not count.
+    expect(canRecordTrust([{ status: 'accepted', meetVia: 'phone' }, { status: 'pending', meetVia: 'walk' }], 0)).toBe('needs-in-person')
+  })
+
+  it('counts an accepted walk or home visit, or a walk together, as meeting in person', () => {
+    expect(canRecordTrust([{ status: 'accepted', meetVia: 'walk' }], 0)).toBeNull()
+    expect(canRecordTrust([{ status: 'accepted', meetVia: 'home' }], 0)).toBeNull()
+    expect(canRecordTrust([{ status: 'accepted', meetVia: 'phone' }, { status: 'completed', meetVia: 'walk' }], 0)).toBeNull()
+    expect(canRecordTrust([{ status: 'accepted', meetVia: 'phone' }], 1)).toBeNull()
+  })
+
+  it('never starts a walk with live location from a call', () => {
+    const at = new Date('2026-10-02T12:00:00')
+    const base = { status: 'accepted', startsAt: at, walkerId: 'w1' }
+    expect(canStartWalk({ ...base, meetVia: 'walk' }, 'w1', at)).toBe(true)
+    expect(canStartWalk({ ...base, meetVia: 'home' }, 'w1', at)).toBe(true)
+    expect(canStartWalk({ ...base, meetVia: 'phone' }, 'w1', at)).toBe(false)
+    expect(canStartWalk({ ...base, meetVia: 'video' }, 'w1', at)).toBe(false)
   })
 })
 

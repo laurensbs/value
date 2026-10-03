@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { calendarFile, calendarResponse } from '@/lib/ics'
+import { isInPerson } from '@/lib/rules'
 import { APP_NAME, siteUrl } from '@/lib/site'
 import { chatAccess, partnerOf } from '@/server/chat'
 import { requireOnboarded } from '@/server/session'
@@ -23,8 +24,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
       uid: `${request.id}@rondje`,
       start: request.startsAt,
       minutes: request.durationMin,
-      title: t(request.kind === 'meet' ? 'meet' : 'walk', { dog: dog.name }),
-      location: dog.meetingInfo || dog.city || undefined,
+      title: request.kind === 'meet' ? t('meet', { dog: dog.name, via: request.meetVia }) : t('walk', { dog: dog.name }),
+      // A first call has no place to meet.
+      location: isInPerson(request.meetVia) ? dog.meetingInfo || dog.city || undefined : undefined,
       description: [partner.name ? t('with', { name: partner.name }) : null, t('open', { link })].filter(Boolean).join('\n'),
       url: link,
       weekly: request.weekly,
