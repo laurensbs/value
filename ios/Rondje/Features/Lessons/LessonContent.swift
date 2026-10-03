@@ -104,7 +104,7 @@ enum Lessons {
                 .wrong(L("Een zak koekjes"), why: L("Koekjes alleen als de eigenaar zegt dat het mag.")),
             ], explain: L("Ja. Zo weet de eigenaar wie er met de hond loopt.")),
             .choice(question: L("Na de kennismaking. Wanneer mag je zelfstandig met de hond?"), options: [
-                .right(L("Als de eigenaar je vertrouwen geeft en je de quiz haalde")),
+                .right(L("Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald")),
                 .wrong(L("Meteen, je kent hem nu"), why: L("De eigenaar beslist. Dat gaat per hond.")),
             ], explain: L("Klopt. Stap voor stap, voor iedereen veilig.")),
         ])
@@ -112,7 +112,7 @@ enum Lessons {
 
     private static var weather: Lesson {
         Lesson(id: "weather", title: L("Warm, koud en water"), symbol: "thermometer.sun.fill", cards: [
-            .hold(L("Leg je hand plat op de stoep. Houd hem 7 seconden vast."), seconds: 7,
+            .hold(L("Leg je hand plat op de stoep. Houd hem er 7 seconden op."), seconds: 7,
                   after: L("Te heet voor je hand? Dan ook voor zijn pootjes. Loop dan in het gras of in de schaduw.")),
             .choice(question: L("Het is 28 graden. Wat past?"), options: [
                 .right(L("Kort rondje in de schaduw, met water")),

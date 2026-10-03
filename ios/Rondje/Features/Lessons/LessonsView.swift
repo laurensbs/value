@@ -8,6 +8,7 @@ struct LessonsView: View {
 
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dynamicTypeSize) private var typeSize
     @State private var playing: Lesson?
     @State private var quizAfterLesson = false
     @State private var showQuiz = false
@@ -96,7 +97,8 @@ struct LessonsView: View {
                       label: String, action: @escaping () -> Void) -> some View {
         let background = state == .done ? Palette.grass : state == .next ? Palette.ball : Palette.surface
         let foreground = state == .done ? Palette.onGrass : state == .next ? Palette.onBall : Palette.muted
-        let offset = Self.offsets[min(index, Self.offsets.count - 1)]
+        // At the largest text sizes the stops stand in one straight line, so the titles keep room to wrap.
+        let offset = typeSize.isAccessibilitySize ? 0 : Self.offsets[min(index, Self.offsets.count - 1)]
         return Button {
             Haptics.tap()
             action()
@@ -129,7 +131,8 @@ struct LessonsView: View {
                     }
                 }
                 .multilineTextAlignment(.center)
-                .fixedSize()
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: 200)
             }
             .contentShape(.rect)
         }

@@ -72,12 +72,12 @@ struct CelebrationOverlay: View {
                     Guus(mood: .proud, size: 140)
                     Text(title)
                         .font(.display(32))
-                        .foregroundStyle(Palette.onGrass)
+                        .foregroundStyle(Palette.onWalk)
                         .multilineTextAlignment(.center)
                     if let text {
                         Text(text)
                             .font(.body)
-                            .foregroundStyle(Palette.onGrass.opacity(0.85))
+                            .foregroundStyle(Palette.onWalk.opacity(0.85))
                             .multilineTextAlignment(.center)
                     }
                 }

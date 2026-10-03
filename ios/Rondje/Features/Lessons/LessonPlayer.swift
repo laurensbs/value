@@ -282,6 +282,9 @@ struct LessonPlayer: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(held ? Text("Klaar") : Text("Houd vast"))
         .accessibilityAddTraits(.isButton)
+        .accessibilityHint(Text("Doe het echt, buiten. Tik als je klaar bent."))
+        // VoiceOver double-tap, Voice Control and Switch Control cannot hold for seconds: a tap completes it.
+        .accessibilityAction { completeHold() }
         .accessibilityAction(named: Text("Klaar")) { completeHold() }
     }
 

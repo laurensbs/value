@@ -127,7 +127,7 @@ struct WalkDoneFlow: View {
             .transition(reduceMotion ? .opacity : .push(from: .trailing))
             bottomBar
         }
-        .foregroundStyle(Palette.onGrass)
+        .foregroundStyle(Palette.onWalk)
         .background(Palette.walkBackground.ignoresSafeArea())
         .sensoryFeedback(.selection, trigger: behaviour)
         .task { await start() }
@@ -147,7 +147,7 @@ struct WalkDoneFlow: View {
             HStack(spacing: 6) {
                 ForEach(steps.indices, id: \.self) { i in
                     Capsule()
-                        .fill(i <= index ? Palette.ball : Palette.onGrass.opacity(0.25))
+                        .fill(i <= index ? Palette.ball : Palette.onWalk.opacity(0.25))
                         .frame(height: 5)
                 }
             }
@@ -157,7 +157,7 @@ struct WalkDoneFlow: View {
             Button { dismiss() } label: {
                 Text("Klaar")
                     .font(.headline)
-                    .foregroundStyle(Palette.onGrass)
+                    .foregroundStyle(Palette.onWalk)
                     .frame(minWidth: 44, minHeight: 44)
                     .contentShape(.rect)
             }
@@ -182,7 +182,7 @@ struct WalkDoneFlow: View {
                 Button { next() } label: {
                     Text("Sla over")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Palette.onGrass.opacity(0.85))
+                        .foregroundStyle(Palette.onWalk.opacity(0.85))
                         .frame(maxWidth: .infinity, minHeight: 44)
                         .contentShape(.rect)
                 }
@@ -230,7 +230,7 @@ struct WalkDoneFlow: View {
                 .accessibilityAddTraits(.isHeader)
             Text(L("\(dogName) en jij liepen \(Format.distance(Double(distance))) in \(minutes) minuten."))
                 .multilineTextAlignment(.center)
-                .foregroundStyle(Palette.onGrass.opacity(0.9))
+                .foregroundStyle(Palette.onWalk.opacity(0.9))
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 96), spacing: 10)], spacing: 10) {
                 tile(L("Tijd"), value: minutes) { L("\($0) min") }
                 tile(L("Afstand"), value: distance) { Format.distance(Double($0)) }
@@ -262,7 +262,7 @@ struct WalkDoneFlow: View {
                 .minimumScaleFactor(0.6)
             Text(title)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(Palette.onGrass.opacity(0.8))
+                .foregroundStyle(Palette.onWalk.opacity(0.8))
         }
         .frame(maxWidth: .infinity, minHeight: 76)
         .padding(.horizontal, 8)
@@ -291,13 +291,13 @@ struct WalkDoneFlow: View {
                 .font(.display(30))
                 .accessibilityAddTraits(.isHeader)
             if !progressLoaded {
-                ProgressView().tint(Palette.onGrass).padding(30)
+                ProgressView().tint(Palette.onWalk).padding(30)
             } else if model.offline || rows.isEmpty {
                 VStack(spacing: 12) {
                     Guus(mood: .calm, size: 72, hop: false)
                     Text("Je punten tellen we zodra je weer verbinding hebt.")
                         .multilineTextAlignment(.center)
-                        .foregroundStyle(Palette.onGrass.opacity(0.9))
+                        .foregroundStyle(Palette.onWalk.opacity(0.9))
                 }
                 .padding(.vertical, 12)
             } else {
@@ -357,7 +357,7 @@ struct WalkDoneFlow: View {
     private func levelRing(_ after: Progress) -> some View {
         VStack(spacing: 10) {
             ZStack {
-                Circle().stroke(Palette.onGrass.opacity(0.2), lineWidth: 10)
+                Circle().stroke(Palette.onWalk.opacity(0.2), lineWidth: 10)
                 Circle().trim(from: 0, to: max(0.02, ring))
                     .stroke(Palette.ball, style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .rotationEffect(.degrees(-90))
@@ -384,7 +384,7 @@ struct WalkDoneFlow: View {
                 }
             }
             .font(.subheadline)
-            .foregroundStyle(Palette.onGrass.opacity(0.85))
+            .foregroundStyle(Palette.onWalk.opacity(0.85))
         }
         .padding(.top, 8)
         .accessibilityElement(children: .combine)
@@ -457,7 +457,7 @@ struct WalkDoneFlow: View {
                     .accessibilityAddTraits(.isHeader)
                 Text("Alleen \(Brand.name) ziet dit, nooit de eigenaar.")
                     .font(.subheadline)
-                    .foregroundStyle(Palette.onGrass.opacity(0.85))
+                    .foregroundStyle(Palette.onWalk.opacity(0.85))
             }
             if let sent {
                 feedbackDone(sent)
@@ -475,7 +475,7 @@ struct WalkDoneFlow: View {
                                     .multilineTextAlignment(.center)
                                     .fixedSize(horizontal: false, vertical: true)
                             }
-                            .foregroundStyle(chosen ? Palette.onBall : Palette.onGrass)
+                            .foregroundStyle(chosen ? Palette.onBall : Palette.onWalk)
                             .frame(maxWidth: .infinity, minHeight: 104)
                             .padding(.horizontal, 8)
                             .background(chosen ? Palette.ball : Palette.surface.opacity(0.12), in: .rect(cornerRadius: 18, style: .continuous))
@@ -500,7 +500,7 @@ struct WalkDoneFlow: View {
                     Button { withAnimation(.smooth) { noteOpen = true } } label: {
                         Label("Nog iets?", systemImage: "plus.bubble")
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(Palette.onGrass)
+                            .foregroundStyle(Palette.onWalk)
                             .frame(minHeight: 44)
                     }
                     .buttonStyle(.plain)
@@ -535,7 +535,7 @@ struct WalkDoneFlow: View {
         } label: {
             Text(title)
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(on ? Palette.onBall : Palette.onGrass)
+                .foregroundStyle(on ? Palette.onBall : Palette.onWalk)
                 .frame(minWidth: 52, minHeight: 40)
                 .background(on ? Palette.ball : .clear, in: .capsule)
                 .contentShape(.capsule)
@@ -577,7 +577,10 @@ struct WalkDoneFlow: View {
         ]
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/walks/\(info.walkId)/feedback", body)
-            let worrying = behaviour == "aggressive" || !feltSafe
+            let worrying = Keepsakes.worrying(behaviour: behaviour, feltSafe: feltSafe)
+            if let dogId = appointment?.dog.id {
+                Keepsakes.shared.recordWalkFeedback(dogId: dogId, behaviour: behaviour, feltSafe: feltSafe)
+            }
             if worrying {
                 Haptics.tap()
             } else {
@@ -585,6 +588,8 @@ struct WalkDoneFlow: View {
             }
             withAnimation(.spring(duration: 0.45, bounce: 0.5)) { sent = worrying ? .calm : .thanks }
             feedbackError = nil
+            // So the 'Vertel het' step for this walk goes away.
+            Task { await model.refreshAppointments() }
         } catch {
             Haptics.error()
             withAnimation(.snappy) { feedbackError = error.localizedDescription }
@@ -598,15 +603,38 @@ struct WalkDoneFlow: View {
         return friends?.first { $0.id == id }
     }
 
+    /// The walker reported an aggressive dog or did not feel safe, now or earlier: no celebration of
+    /// the friendship and no offer to walk this dog again, just a calm close.
+    private var worrying: Bool {
+        if sent == .calm { return true }
+        guard let id = appointment?.dog.id else { return false }
+        return Keepsakes.shared.noRebook(id)
+    }
+
+    @ViewBuilder
     private var friendshipStep: some View {
-        VStack(spacing: 18) {
-            Text("Jullie vriendschap")
-                .font(.display(30))
-                .accessibilityAddTraits(.isHeader)
-            if let friend { friendCard(friend) }
-            nextStep
-            CoachBubble(mood: .happy, text: L("Dank je wel namens \(dogName)."), guusSize: 56)
-                .foregroundStyle(Palette.ink)
+        if worrying {
+            VStack(spacing: 18) {
+                Text("Tot slot")
+                    .font(.display(30))
+                    .accessibilityAddTraits(.isHeader)
+                nextCard {
+                    Text("Je melding is binnen. Iemand van Rondje neemt contact op als dat nodig is.")
+                        .font(.body.weight(.semibold))
+                }
+                CoachBubble(mood: .calm, text: L("Rust lekker uit. Je hebt het goed gedaan."), guusSize: 56)
+                    .foregroundStyle(Palette.ink)
+            }
+        } else {
+            VStack(spacing: 18) {
+                Text("Jullie vriendschap")
+                    .font(.display(30))
+                    .accessibilityAddTraits(.isHeader)
+                if let friend { friendCard(friend) }
+                nextStep
+                CoachBubble(mood: .happy, text: L("Dank je wel namens \(dogName)."), guusSize: 56)
+                    .foregroundStyle(Palette.ink)
+            }
         }
     }
 
@@ -650,7 +678,7 @@ struct WalkDoneFlow: View {
             if let nextName = bond.nextName {
                 Text(bond.toGo == 1 ? L("Nog 1 rondje tot \(nextName)") : L("Nog \(bond.toGo) rondjes tot \(nextName)"))
                     .font(.subheadline)
-                    .foregroundStyle(Palette.onGrass.opacity(0.85))
+                    .foregroundStyle(Palette.onWalk.opacity(0.85))
             }
         }
     }
@@ -667,7 +695,7 @@ struct WalkDoneFlow: View {
                 .multilineTextAlignment(.center)
             Text(L("\(friend.walks)× samen"))
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(Palette.onGrass.opacity(0.85))
+                .foregroundStyle(Palette.onWalk.opacity(0.85))
         }
     }
 
@@ -700,7 +728,8 @@ struct WalkDoneFlow: View {
                     Label("Aangevraagd. De eigenaar beslist.", systemImage: "paperplane.fill")
                         .font(.body.weight(.semibold))
                 }
-            } else if let detail, !offerHidden, !Keepsakes.shared.isSnoozed("rebook." + detail.dog.id) {
+            } else if let detail, !offerHidden, !Keepsakes.shared.isSnoozed("rebook." + detail.dog.id),
+                      !Keepsakes.shared.noRebook(detail.dog.id) {
                 rebookOffer(appointment, detail: detail)
             }
         }

@@ -9,6 +9,8 @@ struct NudgeSettingsView: View {
     @State private var settings = Nudges.settings
     @State private var denied = false
     @State private var customTime = false
+    /// The plan waits a moment after the last change, so dragging the time plans only once.
+    @State private var planning: Task<Void, Never>?
 
     private struct Preset: Identifiable {
         var title: String
@@ -81,7 +83,12 @@ struct NudgeSettingsView: View {
                 stored = new
                 stored.delivered = delivered
             }
-            Task { await Nudges.reschedule(appointments: model.appointments) }
+            planning?.cancel()
+            planning = Task {
+                try? await Task.sleep(for: .milliseconds(400))
+                guard !Task.isCancelled else { return }
+                await Nudges.reschedule(appointments: model.appointments, allowed: model.role != .owner)
+            }
         }
         .onChange(of: Nudges.settings) { _, stored in
             // A notification action ("Minder seintjes") or the back-off changed them meanwhile.
@@ -202,6 +209,7 @@ struct NudgeSettingsView: View {
         let next = Nudges.plan(settings, outgoing: model.appointments.outgoing, now: .now, calendar: .current).first
         guard let next, !settings.isPaused() else {
             if settings.enabled, settings.days.isEmpty { return L("Kies een dag, dan plant Guus een seintje.") }
+            if settings.enabled, settings.isPaused() { return L("Je seintjes staan even op pauze.") }
             return L("Er staat geen seintje gepland. Je hebt al een afspraak deze week, of je seintjes staan uit.")
         }
         let day = next.formatted(.dateTime.weekday(.wide).locale(Format.locale))
@@ -243,7 +251,7 @@ struct NudgeSettingsView: View {
                 await Reminders.askIfNeeded()
                 await checkPermission()
                 // Permission may have just been given: plan again now that it is allowed.
-                await Nudges.reschedule(appointments: model.appointments)
+                await Nudges.reschedule(appointments: model.appointments, allowed: model.role != .owner)
             }
         }
     }

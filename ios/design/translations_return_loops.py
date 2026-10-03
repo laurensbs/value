@@ -111,4 +111,5 @@ T = {
         "%@ salió %lld veces más esta semana."),
     "Volgende week weer met %@?": ("Again with %@ next week?", "À nouveau avec %@ la semaine prochaine ?", "¿Otra vez con %@ la semana que viene?"),
     "Fijn": ("Lovely", "Super", "Genial"),
+    "Je seintjes staan even op pauze.": ("Your nudges are paused for now.", "Tes petits rappels sont en pause pour l'instant.", "Tus avisos están en pausa por ahora."),
 }

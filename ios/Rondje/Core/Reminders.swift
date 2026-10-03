@@ -59,8 +59,12 @@ enum Reminders {
         for request in wanted.values { try? await center.add(request) }
     }
 
+    /// On sign-out and account deletion: the planned ones and the ones already in Notification Center,
+    /// which name dogs and people of this account.
     static func clearAll() {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        center.removeAllDeliveredNotifications()
     }
 }
 
@@ -87,9 +91,14 @@ final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unc
                 onOpen?(tab)
             }
         }
+        // Handled here and awaited, not through an observer: after "Minder seintjes" iOS may have launched
+        // the app in the background without any screen, and may suspend it as soon as this returns.
+        let kind = info["kind"] as? String ?? ""
+        let actionIdentifier = response.actionIdentifier
+        await Nudges.opened(kind: kind, action: actionIdentifier)
         NotificationCenter.default.post(name: .rondjeNotificationOpened, object: nil, userInfo: [
-            "kind": info["kind"] as? String ?? "",
-            "actionIdentifier": response.actionIdentifier,
+            "kind": kind,
+            "actionIdentifier": actionIdentifier,
         ])
     }
 

@@ -62,7 +62,7 @@ struct WeekRecapCard: View {
         guard side == .walker else { return nil }
         let outgoing = model.appointments.outgoing
         for dog in recap.dogs {
-            guard let id = dog.id, !outgoing.contains(where: { $0.dog.id == id && $0.isOpen }),
+            guard let id = dog.id, !Keepsakes.shared.noRebook(id), !outgoing.contains(where: { $0.dog.id == id && $0.isOpen }),
                   let latest = outgoing.filter({ $0.dog.id == id }).max(by: { $0.startsAt < $1.startsAt }) else { continue }
             return CoachButton(L("Volgende week weer met \(dog.name)?")) {
                 Haptics.tap()

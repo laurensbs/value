@@ -52,7 +52,7 @@ enum MeetingPrep {
             return [
                 PrepItem(id: "ready", title: L("Riem en zakjes klaar"), detail: nil, symbol: "bag.fill"),
                 PrepItem(id: "id", title: L("Vraag naar het ID"),
-                         detail: L("Bekijk het even. Een kopie maken hoeft niet."), symbol: "person.text.rectangle.fill"),
+                         detail: L("Bekijk het even. Maak geen kopie of foto."), symbol: "person.text.rectangle.fill"),
                 PrepItem(id: "walk", title: L("Loop samen een rondje"),
                          detail: L("Zo zie je hoe \(walker) met \(dog) omgaat."), symbol: "figure.2"),
                 PrepItem(id: "trust", title: L("Na afloop: Vertrouwen"),

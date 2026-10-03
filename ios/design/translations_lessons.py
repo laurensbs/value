@@ -44,6 +44,7 @@ T = {
         "Hiciste las cinco lecciones. Ya te lo sabes."),
     "Begin": ("Start", "Commencer", "Empezar"),
     "Eerst de Hondenschool?": ("Dog school first?", "D'abord l'école des chiens ?", "¿Primero la escuela canina?"),
+    "Bijna! Kijk vraag %lld nog even na.": ("Almost! Have another look at question %lld.", "Presque ! Regarde encore la question %lld.", "¡Casi! Revisa otra vez la pregunta %lld."),
     "Bijna! Kijk deze nog even na.": ("Almost! Have another look at this one.", "Presque ! Regarde encore celle-ci.", "¡Casi! Revisa esta otra vez."),
     "Vraag %lld van %lld": ("Question %lld of %lld", "Question %lld sur %lld", "Pregunta %lld de %lld"),
     "%lld beantwoord": ("%lld answered", "%lld répondues", "%lld respondidas"),
@@ -163,7 +164,7 @@ T = {
         "After the first meeting. When may you walk the dog on your own?",
         "Après la rencontre. Quand peux-tu promener le chien seul ?",
         "Después del primer encuentro. ¿Cuándo puedes pasear al perro solo?"),
-    "Als de eigenaar je vertrouwen geeft en je de quiz haalde": (
+    "Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald": (
         "When the owner trusts you and you passed the quiz",
         "Quand le propriétaire te fait confiance et que tu as réussi le quiz",
         "Cuando el dueño confía en ti y aprobaste el test"),
@@ -173,7 +174,7 @@ T = {
 
     # Lesson: weather
     "Warm, koud en water": ("Warm, cold and water", "Chaud, froid et eau", "Calor, frío y agua"),
-    "Leg je hand plat op de stoep. Houd hem 7 seconden vast.": (
+    "Leg je hand plat op de stoep. Houd hem er 7 seconden op.": (
         "Put your hand flat on the pavement. Hold it there for 7 seconds.",
         "Pose ta main à plat sur le trottoir. Garde-la 7 secondes.",
         "Pon la mano plana sobre la acera. Mantenla 7 segundos."),
@@ -220,4 +221,5 @@ T = {
     "Niets, de app laat het toch zien": ("Nothing, the app shows it anyway", "Rien, l'appli le montre de toute façon", "Nada, la app ya lo muestra"),
     "Een kort berichtje voorkomt zorgen.": ("A short message saves worry.", "Un petit message évite les inquiétudes.", "Un mensaje corto evita preocupaciones."),
     "Precies. Even laten weten is altijd goed.": ("Exactly. Letting them know is always good.", "Exactement. Prévenir, c'est toujours bien.", "Exacto. Avisar siempre está bien."),
+    "Doe het echt, buiten. Tik als je klaar bent.": ("Do it for real, outside. Tap when you're done.", "Fais-le pour de vrai, dehors. Touche quand tu as fini.", "Hazlo de verdad, fuera. Toca cuando termines."),
 }

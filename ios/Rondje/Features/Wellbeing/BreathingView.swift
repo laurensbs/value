@@ -3,6 +3,8 @@ import SwiftUI
 /// One calm minute before a walk: breathe in for 4 seconds, out for 6, with a circle that grows and shrinks
 /// and a soft haptic at each turn. Optional, skippable, and nothing is stored.
 struct BreathingView: View {
+    /// When set, a 'Niet meer tonen' button sits under the main button.
+    var stopOffering: (() -> Void)? = nil
     var done: () -> Void
     @State private var expanded = false
     @State private var secondsLeft = 60
@@ -18,10 +20,10 @@ struct BreathingView: View {
                 Spacer()
                 Button("Overslaan") { done() }
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Palette.onGrass.opacity(0.8))
+                    .foregroundStyle(Palette.onWalk.opacity(0.8))
             }
             Spacer()
-            Text("Even landen").font(.display(30)).foregroundStyle(Palette.onGrass)
+            Text("Even landen").font(.display(30)).foregroundStyle(Palette.onWalk)
             ZStack {
                 Circle().fill(Palette.ball.opacity(0.18)).frame(width: 280, height: 280)
                 Circle()
@@ -32,17 +34,28 @@ struct BreathingView: View {
             }
             Text(inhale ? L("Adem in") : L("Adem uit"))
                 .font(.title2.weight(.semibold))
-                .foregroundStyle(Palette.onGrass)
+                .foregroundStyle(Palette.onWalk)
                 .contentTransition(.opacity)
                 .accessibilityAddTraits(.updatesFrequently)
             Text(L("Nog \(secondsLeft) seconden"))
                 .contentTransition(.numericText(countsDown: true))
                 .animation(.snappy, value: secondsLeft)
                 .font(.subheadline.monospacedDigit())
-                .foregroundStyle(Palette.onGrass.opacity(0.75))
+                .foregroundStyle(Palette.onWalk.opacity(0.75))
             Spacer()
             Button(secondsLeft == 0 ? L("Klaar, op pad") : L("Nu al op pad")) { done() }
                 .buttonStyle(.ball)
+            if let stopOffering {
+                Button { stopOffering() } label: {
+                    Text("Niet meer tonen")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Palette.onWalk.opacity(0.85))
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .contentShape(.rect)
+                }
+                .buttonStyle(.plain)
+                .padding(.top, -16)
+            }
         }
         .padding(24)
         .background(Palette.walkBackground.ignoresSafeArea())

@@ -301,9 +301,13 @@ struct FeedbackSheet: View {
         }
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/walks/\(walkId)/feedback", body)
+            if role == .walker, let dogId = model.appointments.outgoing.first(where: { $0.walkId == walkId })?.dog.id {
+                Keepsakes.shared.recordWalkFeedback(dogId: dogId, behaviour: choice, feltSafe: yes2)
+            }
             Haptics.success()
             model.show(L("Bedankt voor je antwoord"))
             close()
+            Task { await model.refreshAppointments() }
         } catch {
             self.error = error.localizedDescription
         }

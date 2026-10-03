@@ -96,6 +96,31 @@ final class Keepsakes {
     /// Whether the meeting prep for this appointment was done.
     func prepDone(_ appointmentId: String) -> Bool { has("prepDone." + appointmentId) }
 
+    private static let noRebookPrefix = "noRebook."
+
+    /// The walker said the dog was aggressive or they did not feel safe: Guus stops suggesting
+    /// another walk with this dog. A later walk that went fine lifts it again.
+    func setNoRebook(_ dogId: String, _ on: Bool) {
+        if on { mark(Self.noRebookPrefix + dogId) } else { unmark(Self.noRebookPrefix + dogId) }
+    }
+
+    func noRebook(_ dogId: String) -> Bool { has(Self.noRebookPrefix + dogId) }
+
+    /// The dog ids Guus should not suggest walking again.
+    var noRebookDogs: Set<String> {
+        Set(keys(withPrefix: Self.noRebookPrefix).map { String($0.dropFirst(Self.noRebookPrefix.count)) })
+    }
+
+    /// Records the walker's feedback about a dog, for the rebook suggestions.
+    func recordWalkFeedback(dogId: String, behaviour: String, feltSafe: Bool) {
+        setNoRebook(dogId, Self.worrying(behaviour: behaviour, feltSafe: feltSafe))
+    }
+
+    /// Whether walker feedback is worrying: an aggressive dog or a walker who did not feel safe.
+    nonisolated static func worrying(behaviour: String, feltSafe: Bool) -> Bool {
+        behaviour == "aggressive" || !feltSafe
+    }
+
     // MARK: Guus
 
     /// Whether Guus shows himself and his tips. The guidance stays either way.

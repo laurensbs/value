@@ -59,8 +59,12 @@ enum Nudges {
     /// Quiet hours run from 21:30 to 08:30: a seintje is always between 08:30 and 21:00.
     nonisolated static let earliest = 8 * 60 + 30
     nonisolated static let latest = 21 * 60
-    private static let maxPending = 6
+    /// After this many ignored seintjes in a row, Guus stops them.
+    nonisolated static let ignoredLimit = 3
     private static var started = false
+    /// The reschedule that runs now; a new one waits for it, so two never interleave.
+    private static var running: Task<Void, Never>?
+    private static var generation = 0
 
     static var settings: NudgeSettings {
         get { NudgeStore.shared.value }
@@ -143,14 +147,35 @@ enum Nudges {
             }
             s.delivered[id] = nil
         }
-        if s.ignored >= 3, s.enabled {
+        if s.ignored >= ignoredLimit, s.enabled {
             s.enabled = false
             s.stoppedByGuus = true
         }
     }
 
+    /// How many seintjes may be planned ahead: never more than can go unopened before Guus stops them,
+    /// so after three ignored ones nothing else fires, even when the app is not opened again.
+    nonisolated static func pendingLimit(_ s: NudgeSettings) -> Int {
+        max(0, ignoredLimit - s.ignored)
+    }
+
     /// Brings the scheduled seintjes in line with the settings and the appointments.
-    static func reschedule(appointments: AppointmentsResponse, now: Date = .now) async {
+    /// Calls run one after the other; when several are waiting, only the newest one plans.
+    /// `allowed` is false for people who only have a dog: seintjes are about walking other dogs.
+    static func reschedule(appointments: AppointmentsResponse, allowed: Bool = true, now: Date = .now) async {
+        generation += 1
+        let mine = generation
+        let previous = running
+        let task = Task { @MainActor in
+            await previous?.value
+            guard mine == generation else { return }
+            await apply(appointments: appointments, allowed: allowed, now: now)
+        }
+        running = task
+        await task.value
+    }
+
+    private static func apply(appointments: AppointmentsResponse, allowed: Bool, now: Date) async {
         var s = settings
         backOff(&s, now: now)
         // The ones still to come are planned again below.
@@ -161,13 +186,17 @@ enum Nudges {
         let pending = await center.pendingNotificationRequests().map(\.identifier).filter { $0.hasPrefix(prefix) }
         if !pending.isEmpty { center.removePendingNotificationRequests(withIdentifiers: pending) }
 
-        guard s.enabled, !s.isPaused(now: now) else { return }
+        guard allowed, s.enabled, !s.isPaused(now: now) else { return }
         let status = await center.notificationSettings().authorizationStatus
         guard status == .authorized || status == .provisional else { return }
 
         let calendar = Calendar.current
-        let dates = plan(s, outgoing: appointments.outgoing, now: now, calendar: calendar).prefix(maxPending)
-        let buddy = appointments.outgoing.filter { $0.walkStatus == "ended" }.max { $0.startsAt < $1.startsAt }
+        let dates = plan(s, outgoing: appointments.outgoing, now: now, calendar: calendar).prefix(pendingLimit(s))
+        // Never a dog the walker reported as aggressive or unsafe.
+        let blocked = Keepsakes.shared.noRebookDogs
+        let buddy = appointments.outgoing
+            .filter { $0.walkStatus == "ended" && !blocked.contains($0.dog.id) }
+            .max { $0.startsAt < $1.startsAt }
         let nearby = Cache.load([DogCard].self, from: "nearbyDogs") ?? []
         let ids = DateFormatter()
         ids.locale = Locale(identifier: "en_US_POSIX")
@@ -196,7 +225,9 @@ enum Nudges {
 
     // MARK: Lifecycle
 
-    /// Registers the "Minder seintjes" action and listens for opened seintjes.
+    /// Registers the "Minder seintjes" action. Called from AppModel.init, so it also runs when iOS
+    /// launches the app in the background for that action. Opened seintjes come in through
+    /// NotificationRouter, which calls `opened(kind:action:)` directly.
     static func start() {
         guard !started else { return }
         started = true
@@ -208,14 +239,11 @@ enum Nudges {
             categories.insert(nudge)
             center.setNotificationCategories(categories)
         }
-        NotificationCenter.default.addObserver(forName: .rondjeNotificationOpened, object: nil, queue: .main) { note in
-            let kind = note.userInfo?["kind"] as? String ?? ""
-            let action = note.userInfo?["actionIdentifier"] as? String ?? ""
-            MainActor.assumeIsolated { opened(kind: kind, action: action) }
-        }
     }
 
-    static func opened(kind: String, action: String) {
+    /// A seintje was opened, or "Minder seintjes" was tapped. Awaits the new plan, so the
+    /// notification delegate can return only when the extra seintjes are gone.
+    static func opened(kind: String, action: String) async {
         guard kind == "nudge" || action == fewerAction else { return }
         update { s in
             if kind == "nudge" { s.ignored = 0 }
@@ -227,15 +255,23 @@ enum Nudges {
                 }
             }
         }
-        if action == fewerAction, let cached = Cache.load(AppointmentsResponse.self, from: "appointments") {
-            Task { await reschedule(appointments: cached) }
+        if action == fewerAction {
+            let cached = Cache.load(AppointmentsResponse.self, from: "appointments") ?? AppointmentsResponse(outgoing: [], incoming: [])
+            await reschedule(appointments: cached)
         }
     }
 
     /// Forgets the settings and removes any planned seintjes (on sign-out).
     static func clear() {
+        generation += 1
         let ids = Array(settings.delivered.keys)
-        if !ids.isEmpty { UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids) }
+        let center = UNUserNotificationCenter.current()
+        if !ids.isEmpty { center.removePendingNotificationRequests(withIdentifiers: ids) }
+        // Also the ones a reschedule may not have recorded yet.
+        Task {
+            let pending = await center.pendingNotificationRequests().map(\.identifier).filter { $0.hasPrefix(prefix) }
+            if !pending.isEmpty { center.removePendingNotificationRequests(withIdentifiers: pending) }
+        }
         NudgeStore.shared.value = NudgeSettings()
         UserDefaults.standard.removeObject(forKey: NudgeStore.key)
     }

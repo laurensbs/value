@@ -9,6 +9,7 @@ struct QuizGameView: View {
 
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private enum Stage { case intro, questions, checking, passed }
 
@@ -149,7 +150,7 @@ struct QuizGameView: View {
                 }
                 .padding(24)
                 .id(q.id)
-                .transition(.push(from: .trailing))
+                .transition(reduceMotion ? .opacity : .push(from: .trailing))
             }
             HStack(spacing: 12) {
                 if index > 0 {
@@ -283,6 +284,8 @@ struct QuizGameView: View {
                     almost = true
                     stage = .questions
                 }
+                // The check button is gone and Guus's 'Bijna!' is only shown: say where to look.
+                AccessibilityNotification.Announcement(L("Bijna! Kijk vraag \(first + 1) nog even na.")).post()
             }
         } catch {
             self.error = error.localizedDescription

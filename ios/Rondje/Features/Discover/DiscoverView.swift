@@ -58,7 +58,7 @@ struct DiscoverView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 18) {
                         header
-                        NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || (!loading && error == nil))
+                        NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || !loading, nearbyFailed: error != nil)
                         NudgeOfferCard()
                         WeekRecapCard(side: .walker)
                         FirstSteps { model.perform(Keepsakes.shared.lessonsDone.count < 5 ? .lessons : .quiz) }
@@ -215,18 +215,21 @@ struct DiscoverView: View {
         defer { loading = false }
         var path = "/api/v1/dogs"
         if let p = await LocationService.shared.roughPosition() { path += "?lat=\(p.lat)&lng=\(p.lng)" }
+        // Dogs and group walks load independently, so a failing group-walks call never empties the dogs.
+        async let d: DogsResponse = APIClient.shared.get(path)
+        async let g: GroupWalksResponse = APIClient.shared.get("/api/v1/group-walks")
         do {
-            async let d: DogsResponse = APIClient.shared.get(path)
-            async let g: GroupWalksResponse = APIClient.shared.get("/api/v1/group-walks")
-            let (dr, gr) = try await (d, g)
+            let dr = try await d
             withAnimation(.smooth) {
                 dogs = dr.dogs
-                groupWalks = gr.groupWalks
                 error = nil
             }
             Cache.save(Array(dr.dogs.filter { !$0.isDemo && $0.energy == "calm" }.prefix(10)), as: "nearbyDogs")
         } catch {
             self.error = error.localizedDescription
+        }
+        if let gr = try? await g {
+            withAnimation(.smooth) { groupWalks = gr.groupWalks }
         }
     }
 }

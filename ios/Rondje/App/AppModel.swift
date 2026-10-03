@@ -20,6 +20,8 @@ final class AppModel {
     var pendingAction: CoachAction?
     /// The celebration on screen right now, if any (see Celebration.swift).
     var celebration: CelebrationEvent?
+    /// A Guus sheet (CoachRoutes) is up: the level-up cover waits until it closes.
+    var coachSheetOpen = false
 
     enum Tab: Hashable { case discover, home, appointments, profile }
 
@@ -54,7 +56,12 @@ final class AppModel {
             default: break
             }
         }
-        NotificationRouter.shared.onAction = { [weak self] action in self?.perform(action) }
+        NotificationRouter.shared.onAction = { [weak self] action in
+            // A notification of an account that signed out leads nowhere.
+            guard let self, self.phase != .signedOut else { return }
+            self.perform(action)
+        }
+        Nudges.start()
         NotificationCenter.default.addObserver(forName: .rondjeSignedOut, object: nil, queue: .main) { [weak self] _ in
             MainActor.assumeIsolated { self?.reset() }
         }
@@ -108,7 +115,7 @@ final class AppModel {
         WalkLog.syncFromAppointments(result)
         publishNextWalk()
         await Reminders.sync(with: result)
-        await Nudges.reschedule(appointments: result)
+        await Nudges.reschedule(appointments: result, allowed: role != .owner)
     }
 
     func signedIn() async {

@@ -65,4 +65,10 @@ T = {
     "Nu niet": ("Not now", "Pas maintenant", "Ahora no"),
     "Aangevraagd. De eigenaar beslist.": ("Requested. The owner decides.", "Demandé. Le propriétaire décide.", "Solicitado. El dueño decide."),
     "Dank je wel namens %@.": ("Thank you from %@.", "Merci de la part de %@.", "Gracias de parte de %@."),
+    "Tot slot": ("Finally", "Pour finir", "Para terminar"),
+    "Je melding is binnen. Iemand van Rondje neemt contact op als dat nodig is.": (
+        "Your report is in. Someone from Rondje will get in touch if needed.",
+        "Ton signalement est bien arrivé. Quelqu'un de Rondje te contactera si nécessaire.",
+        "Tu aviso ha llegado. Alguien de Rondje se pondrá en contacto si hace falta."),
+    "Rust lekker uit. Je hebt het goed gedaan.": ("Have a good rest. You did well.", "Repose-toi bien. Tu as bien fait.", "Descansa bien. Lo has hecho bien."),
 }

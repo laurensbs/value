@@ -43,10 +43,10 @@ T = {
     # Checklist: owner, first meeting
     "Riem en zakjes klaar": ("Leash and bags ready", "Laisse et sacs prêts", "Correa y bolsas preparadas"),
     "Vraag naar het ID": ("Ask to see the ID", "Demande la pièce d'identité", "Pide el documento"),
-    "Bekijk het even. Een kopie maken hoeft niet.": (
-        "Take a quick look. No need to make a copy.",
-        "Jette un œil. Pas besoin d'en faire une copie.",
-        "Échale un vistazo. No hace falta hacer una copia."),
+    "Bekijk het even. Maak geen kopie of foto.": (
+        "Take a quick look. Don't make a copy or photo.",
+        "Jette un œil. Ne fais ni copie ni photo.",
+        "Échale un vistazo. No hagas copia ni foto."),
     "Loop samen een rondje": ("Walk together", "Faites une balade ensemble", "Dad un paseo juntos"),
     "Zo zie je hoe %@ met %@ omgaat.": (
         "That way you see how %@ gets on with %@.",

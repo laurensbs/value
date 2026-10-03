@@ -134,25 +134,65 @@ enum CoachRouter {
     }
 }
 
+/// Whether any sheet or full-screen cover is up (or still animating away) in the app's windows.
+/// SwiftUI cannot present a second modal over one that is already there, so routes wait for this.
+@MainActor
+enum Presentation {
+    static var isActive: Bool {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .contains { $0.rootViewController?.presentedViewController != nil }
+    }
+}
+
 /// Presents the sheet-type actions from `model.pendingAction`, unless something full screen is open.
+/// It waits while any other sheet or cover is up or closing, so an action is never lost on the way.
 struct CoachRoutes: ViewModifier {
     var blocked: Bool
     @Environment(AppModel.self) private var model
     @State private var route: CoachAction?
+    @State private var waiting: Task<Void, Never>?
 
     func body(content: Content) -> some View {
         content
             .onAppear { pick() }
             .onChange(of: model.pendingAction) { pick() }
             .onChange(of: blocked) { pick() }
-            .onChange(of: route) { pick() }
-            .sheet(item: $route) { CoachRouter.destination($0, model: model) }
+            .onChange(of: route) {
+                if route != nil { model.coachSheetOpen = true }
+                pick()
+            }
+            // Only once the sheet is fully gone may the level-up cover come.
+            .sheet(item: $route, onDismiss: { model.coachSheetOpen = false }) { CoachRouter.destination($0, model: model) }
     }
 
     private func pick() {
         guard !blocked, route == nil, let action = model.pendingAction, action.isSheet else { return }
+        // Another sheet or cover is still up, or still closing: keep the action and look again shortly.
+        guard !Presentation.isActive else {
+            retrySoon()
+            return
+        }
         model.pendingAction = nil
         route = action
+        // If the sheet did not come up after all, free the route so later actions still open.
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(1.5))
+            if route == action, !Presentation.isActive {
+                route = nil
+                model.coachSheetOpen = false
+            }
+        }
+    }
+
+    private func retrySoon() {
+        guard waiting == nil else { return }
+        waiting = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(450))
+            waiting = nil
+            pick()
+        }
     }
 }
 

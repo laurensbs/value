@@ -293,7 +293,9 @@ struct GuusHint: View {
                             .padding(.horizontal, 14)
                             .padding(.vertical, 7)
                             .background(Palette.ball, in: .capsule)
-                            .contentShape(.capsule)
+                            // The capsule stays small; the tap area is a full 44 points high.
+                            .frame(minHeight: 44)
+                            .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
                 }

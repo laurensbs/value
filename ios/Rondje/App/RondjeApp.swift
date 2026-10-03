@@ -14,7 +14,6 @@ struct RondjeApp: App {
                 .environment(walk)
                 .tint(Palette.grass)
                 .task { await model.bootstrap() }
-                .task { Nudges.start() }
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active { Keepsakes.shared.recordVisit() }
                     if phase == .active, model.phase == .ready { Task { await model.refreshMe() } }
@@ -77,6 +76,8 @@ struct MainTabs: View {
 
     var body: some View {
         @Bindable var model = model
+        // Never over a Guus sheet (a passed quiz loads progress while that sheet is still up): it comes after.
+        let showLevelUp = progress.celebrate != nil && !showWalk && !model.coachSheetOpen
         TabView(selection: $model.selectedTab) {
             if model.role != .owner {
                 DiscoverView()
@@ -99,7 +100,7 @@ struct MainTabs: View {
                 .tag(AppModel.Tab.profile)
         }
         .sensoryFeedback(.selection, trigger: model.selectedTab)
-        .fullScreenCover(isPresented: Binding(get: { progress.celebrate != nil && !showWalk }, set: { if !$0 { Task { await progress.seen() } } })) {
+        .fullScreenCover(isPresented: Binding(get: { showLevelUp }, set: { if !$0 { Task { await progress.seen() } } })) {
             if let p = progress.celebrate { LevelUpView(progress: p) { Task { await progress.seen() } } }
         }
         .fullScreenCover(isPresented: $showWalk, onDismiss: { Task { await progress.load() } }) {

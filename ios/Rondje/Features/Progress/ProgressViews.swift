@@ -242,8 +242,8 @@ struct LevelUpView: View {
             .frame(height: 280)
             Guus(mood: .proud, size: 72)
             if progress.levelUp {
-                Text("Nieuw niveau!").font(.title3.weight(.semibold)).foregroundStyle(Palette.onGrass.opacity(0.85))
-                Text(progress.level.name).font(.display(36)).foregroundStyle(Palette.onGrass)
+                Text("Nieuw niveau!").font(.title3.weight(.semibold)).foregroundStyle(Palette.onWalk.opacity(0.85))
+                Text(progress.level.name).font(.display(36)).foregroundStyle(Palette.onWalk)
             }
             ForEach(progress.newAwards ?? [], id: \.self) { a in
                 Label(a.title ?? a.name, systemImage: "rosette").font(.headline).foregroundStyle(Palette.ball)

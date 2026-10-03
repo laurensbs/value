@@ -175,14 +175,9 @@ struct AppointmentCard: View {
                 .onDisappear { Task { await model.refreshAppointments() } }
         }
         .fullScreenCover(isPresented: $breathing) {
-            BreathingView {
+            BreathingView(stopOffering: { offerBreathing = false; breathing = false; Task { await start() } }) {
                 breathing = false
                 Task { await start() }
-            }
-            .overlay(alignment: .bottom) {
-                Button("Niet meer tonen") { offerBreathing = false; breathing = false; Task { await start() } }
-                    .font(.footnote).foregroundStyle(Palette.onGrass.opacity(0.7))
-                    .padding(.bottom, 4)
             }
         }
         .sheet(isPresented: $chatting) {

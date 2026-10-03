@@ -7,6 +7,8 @@ struct NextStepCard: View {
     var nearbyDogs: [DogCard] = []
     /// False while the dogs nearby are still loading.
     var nearbyLoaded = true
+    /// True when loading the dogs nearby failed.
+    var nearbyFailed = false
     /// The owner's number of dogs; nil while loading.
     var myDogsCount: Int? = nil
     /// Opens the screen's own "add a dog" sheet, so the screen can reload its dogs afterwards.
@@ -49,14 +51,9 @@ struct NextStepCard: View {
         .onChange(of: model.appointments.outgoing) { now = .now }
         .onChange(of: model.appointments.incoming) { now = .now }
         .fullScreenCover(item: $breathing) { item in
-            BreathingView {
+            BreathingView(stopOffering: { offerBreathing = false; breathing = nil; Task { await start(item) } }) {
                 breathing = nil
                 Task { await start(item) }
-            }
-            .overlay(alignment: .bottom) {
-                Button("Niet meer tonen") { offerBreathing = false; breathing = nil; Task { await start(item) } }
-                    .font(.footnote).foregroundStyle(Palette.onGrass.opacity(0.7))
-                    .padding(.bottom, 4)
             }
         }
     }
@@ -104,6 +101,8 @@ struct NextStepCard: View {
             lessonsDone: keepsakes.lessonsDone.count,
             nearbyDogs: nearbyDogs,
             nearbyLoaded: nearbyLoaded,
+            nearbyFailed: nearbyFailed,
+            noRebook: keepsakes.noRebookDogs,
             snoozed: keepsakes.activeSnoozes(now: now),
             prepDone: Set(keepsakes.keys(withPrefix: "prepDone.").map { String($0.dropFirst("prepDone.".count)) })
         )

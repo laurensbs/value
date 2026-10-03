@@ -41,6 +41,10 @@ struct NextStepContext: Sendable {
     var nearbyDogs: [DogCard] = []
     /// False while the dogs nearby are still loading, so Guus never says there are none before he looked.
     var nearbyLoaded = true
+    /// True when loading the dogs nearby failed (offline, for example): Guus then skips the picks.
+    var nearbyFailed = false
+    /// Dogs the walker reported as aggressive or unsafe: never suggested again.
+    var noRebook: Set<String> = []
     /// Active snoozes from Keepsakes, without the "snooze." prefix (like "next.picks").
     var snoozed: Set<String> = []
     /// Appointment ids whose meeting prep is done.
@@ -144,8 +148,9 @@ extension NextStep {
             )))
         }
 
-        // e. Nothing planned yet: three dogs to start with.
-        if outgoing.isEmpty {
+        // e. Nothing planned yet: three dogs to start with. Skipped when they could not be loaded,
+        // so the next step (the Hondenschool) comes through instead of a 'still looking' that never ends.
+        if outgoing.isEmpty && !(c.nearbyFailed && c.nearbyDogs.isEmpty) {
             list.append(Candidate(step: picks(c), suggestion: true))
         }
 
@@ -181,7 +186,7 @@ extension NextStep {
         let walked = outgoing
             .filter { ($0.status == "completed" || $0.walkStatus == "ended") && !$0.weekly }
             .sorted { $0.startsAt > $1.startsAt }
-        for item in walked where !open.contains(item.dog.id) && !c.snoozed.contains("rebook.\(item.dog.id)") {
+        for item in walked where !open.contains(item.dog.id) && !c.snoozed.contains("rebook.\(item.dog.id)") && !c.noRebook.contains(item.dog.id) {
             guard offered.insert(item.dog.id).inserted else { continue }
             list.append(Candidate(step: NextStep(
                 id: "rebook.\(item.dog.id)", mood: .happy,
@@ -204,7 +209,7 @@ extension NextStep {
 
     /// Up to three calm dogs for beginners, nearest first; any real dogs when there are no calm ones.
     private static func picks(_ c: NextStepContext) -> NextStep {
-        guard c.nearbyLoaded else {
+        guard c.nearbyLoaded || !c.nearbyDogs.isEmpty else {
             return NextStep(id: "picks", mood: .curious, text: L("Ik zoek een paar honden voor je uit."), snoozable: false)
         }
         let real = c.nearbyDogs.filter { !$0.isDemo }.sorted { ($0.distanceM ?? .max) < ($1.distanceM ?? .max) }
