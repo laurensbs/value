@@ -130,6 +130,13 @@ export default async function ProfilePage() {
         </ul>
       </section>
 
+      {/* On a phone the header has no menu: this is the way into Beheer and the launch hub. */}
+      {viewer.isAdmin || viewer.adminUnconfirmed ? (
+        <ul className="hub-list">
+          <HubRow href="/admin" icon="key" title={t('nav.admin')} text={t('profileHub.adminText')} tone="calm" />
+        </ul>
+      ) : null}
+
       <section className="stack" aria-labelledby="settings-title">
         <h2 id="settings-title">{t('profile.settings')}</h2>
         <div className="card stack">

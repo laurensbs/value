@@ -5,7 +5,10 @@ test('admin: launch hub with the waiting tasks, a ticked-off task, a contact and
   const admin = await signInAdmin(browser)
   const page = admin.page
 
-  await page.goto('/admin')
+  // On a phone the header has no menu: the profile leads to Beheer.
+  await page.goto('/profile')
+  await page.getByRole('link', { name: /^Beheer Meldingen/ }).click()
+  await expect(page).toHaveURL(/\/admin$/)
   await page.getByRole('link', { name: /Lanceerhub/ }).click()
   await expect(page).toHaveURL(/\/admin\/launch$/)
   await expect(page.getByRole('heading', { name: 'Lanceerhub', level: 1 })).toBeVisible()
