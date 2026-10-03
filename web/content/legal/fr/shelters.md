@@ -100,4 +100,4 @@ Ces conditions s'appliquent aux refuges, asiles et autres organisations qui publ
 
 ## 13. Contact
 
-Des questions sur ces conditions partenaires ? Écrivez à [e-mail: hallo@rondje.app].
+Des questions sur ces conditions partenaires ? Écrivez à {{contact}}.

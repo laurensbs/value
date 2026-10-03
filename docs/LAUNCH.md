@@ -45,7 +45,7 @@ Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programme
    | `SUPPORT_URL` | `https://www.patreon.com/jouwnaam` | De knop "Steun Rondje via Patreon" op `/support`. Alleen https-links van Patreon, Ko-fi, Open Collective of Buy Me a Coffee werken. |
    | `OPERATOR_NAME` | `Webstability` | Wie de bijdragen ontvangt en Rondje runt. **Zonder deze naam verschijnt de steunknop niet**: mensen moeten weten waar hun geld heen gaat. |
    | `INSTAGRAM_HANDLE` | `rondjeapp` | Link in de footer, op Over ons en bij "Deel je rondje". |
-   | `CONTACT_EMAIL` | `hallo@jouwdomein.nl` | Contactadres op Over ons en voor partners. |
+   | `CONTACT_EMAIL` | een adres op een eigen domein (bijv. woofmigo.nl) | **Nodig vóór de lancering.** Het enige contactadres van Rondje: op `/contact` (de support-URL voor de App Store), in de juridische teksten (privacyverzoeken, klachten, DSA-contactpunt, onveilige situaties), op `/banned`, Over ons en Wachtwoord vergeten. Zonder deze variabele verwijzen die plekken naar `/contact`, waar staat dat het adres binnenkort komt. Zet hier nooit een adres op een domein dat niet van ons is. |
 
 2. **Deployments → Redeploy**, zodat de nieuwe waarden gelden.
 3. **Let op: Vercel-abonnement.** Het gratis Hobby-abonnement van Vercel is bedoeld voor niet-commercieel gebruik. Zodra je bijdragen vraagt, val je mogelijk daarbuiten. Controleer de voorwaarden van Vercel en neem zo nodig **Pro** (ongeveer $20 per maand) voordat je `SUPPORT_URL` zet.
@@ -195,7 +195,7 @@ Druk in Android Studio op ▶︎. Voor de Play Store heb je een Play Console-acc
 
 ## 8. Eigen domein (optioneel)
 
-Vercel → **Settings → Domains → Add** (bijvoorbeeld `rondje.app`, ongeveer €15 per jaar). Daarna:
+Vercel → **Settings → Domains → Add** (een domein dat je zelf bezit, ongeveer €15 per jaar; let op: het .app-domein met de naam Rondje is van een ander bedrijf). Daarna:
 
 - wordt alles automatisch het nieuwe domein (inloggen, links, passkeys)
 - verwijzen de andere adressen door

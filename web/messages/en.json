@@ -90,7 +90,8 @@
     "about": "About Rondje",
     "support": "Make Rondje possible",
     "tip": "Suggest a shelter",
-    "forShelters": "For shelters"
+    "forShelters": "For shelters",
+    "contact": "Contact"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -1116,7 +1117,23 @@
     "lostPets": "Lost or found animals: {name}",
     "animalEmergency": "Animals in need: {name}",
     "police": "Not an emergency, but need the police? Call {number}.",
-    "website": "Website"
+    "website": "Website",
+    "contact": "A question for Rondje itself, for example about your account or your privacy?",
+    "contactLink": "How to reach us"
+  },
+  "contact": {
+    "title": "Contact",
+    "heading": "How to reach us",
+    "lede": "A question, a privacy request, a complaint or an idea? Here is how to reach Rondje.",
+    "emailTitle": "Email us",
+    "emailText": "For questions, privacy requests, complaints and working together. You can write to us in Dutch, English, Spanish or French.",
+    "soonTitle": "Our email address will be here soon",
+    "soonText": "We're still setting up our contact address. Until then, here is what you can already do:",
+    "nowTitle": "What you can do now",
+    "report": "Is it about a profile, a dog or a walk? Use the ‘Report’ button on that page. We look within 24 hours.",
+    "help": "Not okay right now? The help page lists free and anonymous help lines.",
+    "suggest": "Want to suggest a shelter or share an idea? Use the tip form.",
+    "moreTitle": "Read more"
   },
   "safety": {
     "title": "How Rondje handles safety",
@@ -1283,7 +1300,8 @@
     "title": "Your account has been blocked",
     "text": "You can no longer use Rondje. Reason: {reason}. Don't agree? Email us and we'll take another look.",
     "noReason": "not specified",
-    "contact": "Email hallo@rondje.app with your name and your account's email address."
+    "contact": "Email {email} with your name and your account's email address.",
+    "contactPage": "The <link>contact page</link> explains how to reach us. Include your name and your account's email address."
   },
   "errors": {
     "notFound": "This page doesn't exist (any more).",
@@ -1302,7 +1320,8 @@
       "shelters": "Partner terms for shelters",
       "cookies": "Cookies"
     },
-    "version": "Version {version}"
+    "version": "Version {version}",
+    "contactFallback": "our contact address"
   },
   "photos": {
     "add": "Add photo",

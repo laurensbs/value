@@ -11,7 +11,7 @@ Rondje wil graag laten zien wat een rondje met een hond betekent, met echte verh
 
 ## 1. Wie vraagt dit?
 
-[Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], KvK-nummer [KvK-nummer]. Contact: [e-mail: hallo@rondje.app].
+[Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], KvK-nummer [KvK-nummer]. Contact: [e-mail: het contactadres uit `CONTACT_EMAIL`, ook te zien op /contact].
 
 ## 2. Over wie en wat gaat het?
 
@@ -62,7 +62,7 @@ Kruis per regel aan wat je goed vindt. Wat je niet aankruist, doen we niet.
 
 ## 6. Toestemming intrekken
 
-Je kunt je toestemming altijd intrekken, zonder reden. Mail naar [e-mail: hallo@rondje.app]. We gebruiken de beelden daarna niet meer voor nieuwe berichten. Berichten op onze eigen kanalen halen we binnen [7 dagen – voorstel] weg. Wat al gedrukt of uitgezonden is, kunnen we niet terugdraaien.
+Je kunt je toestemming altijd intrekken, zonder reden. Mail naar [e-mail: het contactadres uit `CONTACT_EMAIL`, ook te zien op /contact]. We gebruiken de beelden daarna niet meer voor nieuwe berichten. Berichten op onze eigen kanalen halen we binnen [7 dagen – voorstel] weg. Wat al gedrukt of uitgezonden is, kunnen we niet terugdraaien.
 
 ## 7. Privacy
 

@@ -100,4 +100,4 @@ Estas condiciones se aplican a las protectoras, refugios y otras entidades que p
 
 ## 13. Contacto
 
-¿Preguntas sobre estas condiciones? Escribe a [e-mail: hallo@rondje.app].
+¿Preguntas sobre estas condiciones? Escribe a {{contact}}.

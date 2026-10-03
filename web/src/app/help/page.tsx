@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
+import { CONTACT_PATH } from '@/lib/contact'
 import { COUNTRIES, COUNTRY_INFO, isCountry } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { getViewer } from '@/server/session'
@@ -81,6 +82,9 @@ export default async function HelpPage({ searchParams }: { searchParams: Promise
         </p>
         <p className="muted small">{t('help.police', { number: info.policeNonEmergency })}</p>
       </section>
+      <p className="muted small">
+        {t('help.contact')} <Link href={CONTACT_PATH}>{t('help.contactLink')}</Link>
+      </p>
     </div>
   )
 }

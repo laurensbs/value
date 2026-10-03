@@ -13,7 +13,7 @@ Ces conditions s'appliquent à toute personne qui utilise Rondje : le site web e
 
 Rondje est proposé par [Naam rechtspersoon, bijv. Stichting Rondje i.o.], inscrite à la Chambre de commerce néerlandaise (KvK) sous le numéro [KvK-nummer], dont le siège est situé [adres] (« Rondje » ou « nous »).
 
-Vous pouvez nous joindre à l'adresse [e-mail: hallo@rondje.app]. C'est aussi notre point de contact pour les utilisateurs et les autorités au sens du règlement sur les services numériques (DSA). Vous pouvez nous écrire en néerlandais, en anglais, en espagnol ou en français.
+Vous pouvez nous joindre à {{contact}}. C'est aussi notre point de contact pour les utilisateurs et les autorités au sens du règlement sur les services numériques (DSA). Vous pouvez nous écrire en néerlandais, en anglais, en espagnol ou en français.
 
 ## 2. Ce qu'est Rondje, et ce qu'il n'est pas
 
@@ -186,7 +186,7 @@ Soyons honnêtes : promener des chiens comporte des risques. Un chien peut mordr
 
 ## 18. Plaintes et recours
 
-- Une plainte au sujet de Rondje ? Écrivez à [e-mail: hallo@rondje.app]. Nous répondons dans les 14 jours [proposition].
+- Une plainte au sujet de Rondje ? Écrivez à {{contact}}. Nous répondons dans les 14 jours [proposition].
 - Vous n'êtes pas d'accord avec une décision concernant votre contenu, votre compte ou votre signalement ? Introduisez un recours dans les **6 mois**, via l'application ou par e-mail. Une personne qui n'a pas participé à la première décision la réexamine.
 - Vous pouvez aussi vous adresser à un organisme de règlement extrajudiciaire des litiges certifié selon le DSA, ou saisir le juge.
 - La plateforme européenne de règlement en ligne des litiges (RLL) n'existe plus depuis juillet 2025.

@@ -13,7 +13,7 @@ This policy explains which personal data Rondje processes, why, for how long, an
 
 [Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], Chamber of Commerce (KvK) number [KvK-nummer], is the controller of your data on Rondje.
 
-Questions about privacy? Email us at [e-mail: hallo@rondje.app]. [To verify: whether a data protection officer is required. If so, add their contact details here.]
+Questions about privacy? Email us at {{contact}}. [To verify: whether a data protection officer is required. If so, add their contact details here.]
 
 ## 2. In short
 
@@ -206,7 +206,7 @@ You have the right to:
 - **object** to processing based on legitimate interest;
 - withdraw your consent, where we process data based on consent.
 
-Send your request through the app or to [e-mail: hallo@rondje.app]. We will respond within one month. Sometimes we will first ask you to show that the account is yours.
+Send your request through the app or to {{contact}}. We will respond within one month. Sometimes we will first ask you to show that the account is yours.
 
 Some data cannot be deleted immediately, for example if it is needed for an open report about the safety of others. If so, we will explain why.
 

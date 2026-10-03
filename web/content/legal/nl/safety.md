@@ -146,7 +146,7 @@ Rondje kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten een
 
 ## 6. Melden bij Rondje
 
-Meld elk incident en elke onveilige situatie via de knop **Melden** in de app, of mail naar [e-mail: hallo@rondje.app]. Vertel daarbij:
+Meld elk incident en elke onveilige situatie via de knop **Melden** in de app, of mail naar {{contact}}. Vertel daarbij:
 
 - wat er gebeurde, en wanneer en waar;
 - wie erbij betrokken waren;

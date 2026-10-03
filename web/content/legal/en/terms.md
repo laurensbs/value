@@ -13,7 +13,7 @@ These terms apply to everyone who uses Rondje: the website and the iOS and Andro
 
 Rondje is provided by [Naam rechtspersoon, bijv. Stichting Rondje i.o.], registered with the Dutch Chamber of Commerce (KvK) under number [KvK-nummer], with its address at [adres] ("Rondje", "we" or "us").
 
-You can reach us at [e-mail: hallo@rondje.app]. This is also our point of contact for users and public authorities under the Digital Services Act (DSA). You can write to us in Dutch, English, Spanish or French.
+You can reach us at {{contact}}. This is also our point of contact for users and public authorities under the Digital Services Act (DSA). You can write to us in Dutch, English, Spanish or French.
 
 ## 2. What Rondje is, and what it is not
 
@@ -186,7 +186,7 @@ Let's be honest: walking dogs involves risks. A dog can bite, run away or knock 
 
 ## 18. Complaints and appeals
 
-- A complaint about Rondje? Email [e-mail: hallo@rondje.app]. We will respond within 14 days [proposal].
+- A complaint about Rondje? Email {{contact}}. We will respond within 14 days [proposal].
 - Disagree with a decision about your content, your account or your report? Appeal within **6 months** through the app or by email. Someone who was not involved in the original decision will review it.
 - You can also use a certified out-of-court dispute settlement body under the DSA, or go to court.
 - The European ODR platform for online disputes was discontinued in July 2025.

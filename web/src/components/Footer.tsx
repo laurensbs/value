@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/i18n/config'
+import { CONTACT_PATH } from '@/lib/contact'
 import { APP_NAME } from '@/lib/site'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
@@ -28,6 +29,7 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
           <nav className="footer-links" aria-label={t('more')}>
             <Link href="/about">{t('about')}</Link>
             <Link href="/help">{tn('help')}</Link>
+            <Link href={CONTACT_PATH}>{t('contact')}</Link>
             <Link href="/legal/terms">{t('terms')}</Link>
             <Link href="/legal/privacy">{t('privacy')}</Link>
             {native ? null : <Link href="/support">{t('support')}</Link>}
@@ -48,6 +50,7 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
           <Link href="/suggest">{t('tip')}</Link>
           <Link href="/cities">{tc('footerLink')}</Link>
           <Link href="/shelter">{t('forShelters')}</Link>
+          <Link href={CONTACT_PATH}>{t('contact')}</Link>
           {instagram ? (
             <a href={`https://www.instagram.com/${instagram}/`} target="_blank" rel="noopener noreferrer">
               Instagram

@@ -51,4 +51,4 @@ Je kunt cookies verwijderen of blokkeren in de instellingen van je browser. Blok
 
 ## 7. Vragen
 
-Vragen over cookies? Mail naar [e-mail: hallo@rondje.app].
+Vragen over cookies? Mail naar {{contact}}.

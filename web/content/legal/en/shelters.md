@@ -100,4 +100,4 @@ These terms apply to animal shelters and other organisations that list dogs on R
 
 ## 13. Contact
 
-Questions about these partner terms? Email [e-mail: hallo@rondje.app].
+Questions about these partner terms? Email {{contact}}.
