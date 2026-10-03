@@ -111,6 +111,8 @@ h3 {
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-wrap: balance;
+  /* A name longer than the line (a dog's or a shelter's) breaks instead of running out. */
+  overflow-wrap: break-word;
   margin: 0;
 }
 
@@ -251,6 +253,18 @@ mark {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.header-actions > .button {
+  white-space: nowrap;
+}
+
+/* Signed out on a 320px phone: the logo without its name, so the language switch and "Se connecter"
+   fit next to it on one line (the link keeps "Rondje" as its name for screen readers). */
+@media (max-width: 359px) {
+  .header-inner:has(> .header-actions > .button) .brand > span {
+    display: none;
+  }
 }
 
 @media (min-width: 900px) {
@@ -493,6 +507,22 @@ mark {
   text-decoration: none;
   transition: transform 0.15s ease, filter 0.15s ease;
   white-space: nowrap;
+}
+
+/* An icon keeps its size when the label is long; the label gives way instead. */
+.button > svg {
+  flex-shrink: 0;
+}
+
+/* On a phone, a label wider than the screen allows (a long French or Spanish one on a 320px phone)
+   wraps onto a second line instead of running out of its card. */
+@media (max-width: 480px) {
+  .button {
+    max-width: 100%;
+    white-space: normal;
+    text-wrap: balance;
+    text-align: center;
+  }
 }
 
 .button:active {
@@ -2784,6 +2814,15 @@ legend {
     flex-wrap: wrap;
   }
 
+  /* A single button next to a name moves under it once the name would get less than 120px. */
+  .list-item:has(> .button) {
+    flex-wrap: wrap;
+  }
+
+  .list-item:has(> .button) > .grow {
+    flex-basis: 120px;
+  }
+
   .directory-actions {
     flex-basis: 100%;
     display: flex;
@@ -3423,11 +3462,14 @@ legend {
 /* ---------- Onboarding: one question at a time, with Rondje's dog asking ---------- */
 
 .onboarding {
-  max-width: 560px;
-  margin: 0 auto;
+  /* The steps get 560px, plus 6px on each side where a focus ring can show. A new step slides in
+     from the side; it is clipped to the form, so the page itself never moves sideways. */
+  max-width: 572px;
+  margin: 0 max(-6px, (100% - 572px) / 2);
+  padding: 4px 6px 8px;
+  overflow-x: clip;
   display: grid;
   gap: 20px;
-  padding-block: 4px 8px;
 }
 
 .onboarding-top {
@@ -4121,8 +4163,9 @@ legend {
 }
 
 .week-days .dot {
-  width: 34px;
-  height: 34px;
+  /* Narrower on a small phone, so the seven days never overlap. */
+  width: min(34px, 100%);
+  aspect-ratio: 1;
   border-radius: 50%;
   display: grid;
   place-items: center;

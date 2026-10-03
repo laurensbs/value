@@ -1730,6 +1730,13 @@
   letter-spacing: -0.035em;
 }
 
+/* "Groepswandelingen" is one word: on a 320px phone it only fits a size smaller. */
+@media (max-width: 359px) {
+  .lp-page-hero h1 {
+    font-size: 1.75rem;
+  }
+}
+
 @media (min-width: 720px) {
   .lp-page-hero {
     grid-template-columns: minmax(0, 1fr) auto;
