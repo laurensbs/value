@@ -16,7 +16,8 @@ import { PhoneShowcase } from '@/components/landing/PhoneShowcase'
 import { countryInfo, isCountry } from '@/lib/countries'
 import { isNativeRequest } from '@/server/native'
 import { listDogs } from '@/server/queries'
-import { getViewer } from '@/server/session'
+import { Today } from '@/components/Today'
+import { getViewer, type OnboardedViewer } from '@/server/session'
 import './landing.css'
 
 const SAFETY: { key: 1 | 2 | 3 | 4 | 5 | 6; icon: ReactNode; tone: Tone }[] = [
@@ -28,9 +29,21 @@ const SAFETY: { key: 1 | 2 | 3 | 4 | 5 | 6; icon: ReactNode; tone: Tone }[] = [
   { key: 6, icon: <Icon name="flag" />, tone: 'rose' },
 ]
 
-export default async function HomePage() {
-  const t = await getTranslations()
+export async function generateMetadata() {
   const viewer = await getViewer()
+  if (!viewer?.profile) return {}
+  const t = await getTranslations('today')
+  return { title: t('metaTitle') }
+}
+
+export default async function HomePage({ searchParams }: { searchParams: Promise<{ welcome?: string }> }) {
+  const viewer = await getViewer()
+  // Members get their own home: what to do today. Everyone else sees what Rondje is.
+  if (viewer?.profile && !viewer.profile.bannedAt) {
+    const { welcome } = await searchParams
+    return <Today viewer={viewer as OnboardedViewer} welcome={welcome === '1'} />
+  }
+  const t = await getTranslations()
   const native = await isNativeRequest()
   // Dogs from the visitor's own country first, nearest first (same rule as /dogs).
   const country = viewer?.profile && isCountry(viewer.profile.country) ? viewer.profile.country : await visitorCountry()

@@ -10,10 +10,10 @@ mkdirSync(out, { recursive: true })
 const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH || undefined })
 
 const publicPaths = ['/', '/dogs', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam']
-const privatePaths = ['/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
+const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
 const viewports = { mobile: { viewport: { width: 375, height: 740 }, isMobile: true, hasTouch: true }, desktop: { viewport: { width: 1366, height: 900 } } }
 
-async function check(page, path, label) {
+async function check(page, path, label, tag = '') {
   const errors = []
   const onErr = (e) => errors.push(`pageerror: ${e.message.slice(0, 160)}`)
   const onResp = (r) => { if (r.status() >= 500) errors.push(`HTTP ${r.status()} ${r.url().replace(base, '')}`) }
@@ -62,7 +62,7 @@ async function check(page, path, label) {
   page.off('pageerror', onErr)
   page.off('response', onResp)
   if (ms > 4000) errors.push(`slow: ${ms} ms`)
-  const file = `${(path === '/' ? 'home' : path.replace(/\//g, '_').replace(/^_/, ''))}-${label}`
+  const file = `${tag}${(path === '/' ? 'home' : path.replace(/[/?=]/g, '_').replace(/^_/, ''))}-${label}`
   await page.screenshot({ path: `${out}/${file}.png`, fullPage: label === 'desktop' })
   return [...errors, ...new Set(found)]
 }
@@ -87,19 +87,17 @@ for (const [label, device] of Object.entries(viewports)) {
     await page.waitForTimeout(2500)
   }
   if (page.url().includes('/onboarding')) {
-    // Check the onboarding itself while it is still there: once the profile exists, /onboarding
-    // sends you on to Ontdek (/dogs), so checking it afterwards would only show the dogs list.
-    report[`${label} /onboarding (new account)`] = await check(page, '/onboarding', label)
-    // The onboarding screens, one question at a time (src/app/onboarding/OnboardingFlow.tsx).
+    // The step-by-step start, as both walker and owner so every screen has something to show.
     const next = () => page.getByRole('button', { name: 'Verder' }).click()
     await page.getByRole('button', { name: 'Laten we beginnen' }).click()
-    await page.getByRole('radio', { name: 'Allebei', exact: true }).check()
+    await page.getByRole('radio', { name: /^Allebei/ }).check()
     await next()
     await page.getByLabel('Geboortedatum').fill('1999-05-05')
     await next()
     await page.getByLabel('Plaats').fill('Utrecht')
     await page.getByRole('button', { name: 'Gebruik mijn locatie' }).click()
     await next()
+    await page.getByRole('radio', { name: /^Een beetje/ }).check()
     await next()
     await next()
     await page.getByLabel('Over jou').fill('Audit account')
@@ -108,7 +106,7 @@ for (const [label, device] of Object.entries(viewports)) {
     await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
     await page.waitForTimeout(2500)
   }
-  for (const p of privatePaths) report[`${label} ${p} (signed in)`] = await check(page, p, label)
+  for (const p of privatePaths) report[`${label} ${p} (signed in)`] = await check(page, p, label, 'in-')
   await ctx.close()
 }
 await browser.close()

@@ -24,6 +24,7 @@ export async function Header({ viewer }: { viewer: Viewer | null }) {
   if (viewer?.profile) {
     const ts = await getTranslations('shell')
     const links = [
+      { href: '/', label: t('today') },
       { href: '/dogs', label: ts('tabs.discover') },
       { href: '/group-walks', label: t('groupWalks') },
       { href: '/requests', label: t('requests') },
@@ -34,7 +35,7 @@ export async function Header({ viewer }: { viewer: Viewer | null }) {
     return (
       <header className="header app-header">
         <div className="header-inner">
-          <Link href="/dogs" className="brand" aria-label={`${APP_NAME} · ${ts('tabs.discover')}`}>
+          <Link href="/" className="brand" aria-label={APP_NAME}>
             <Logo />
             <span>{APP_NAME}</span>
           </Link>
@@ -68,6 +69,7 @@ export async function Header({ viewer }: { viewer: Viewer | null }) {
           <span>{APP_NAME}</span>
         </Link>
         <nav className="nav" aria-label={t('menu')}>
+          {viewer?.profile ? <Link href="/">{t('today')}</Link> : null}
           <Link href="/dogs">{t('dogs')}</Link>
           <Link href="/group-walks">{t('groupWalks')}</Link>
           <Link href="/shelters">{t('shelters')}</Link>

@@ -52,7 +52,7 @@ export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, cel
 
   function go(action: 'feedback' | 'done') {
     if (action === 'done') {
-      router.push('/requests')
+      router.push('/')
       return
     }
     const form = document.getElementById('feedback')

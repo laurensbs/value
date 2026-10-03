@@ -5,6 +5,7 @@ import { useMemo, useOptimistic, useRef, useState, useTransition } from 'react'
 import { Icon } from '@/components/Icon'
 import { deleteContact, setContactStatus } from '@/server/actions/launch'
 import { ContactForm } from './ContactForm'
+import { PrepareShelters } from './PrepareShelters'
 import { clipboardText, fillTemplate, isEmail, mailtoHref, placeholdersIn, segments, type Placeholder, type Values } from './mail'
 import { AUDIENCES, CONTACT_STATUSES, type Audience, type ContactJson, type ContactStatus } from './audiences'
 import { MAIL_KINDS, templatesFor, type Template } from './templates'
@@ -274,6 +275,7 @@ function Contacts({ contacts, onWrite }: { contacts: ContactJson[]; onWrite: (c:
           </button>
         </div>
         <p className="muted small">{t('contacts.hint')}</p>
+        <PrepareShelters />
         <p className="launch-status-counts small">
           {CONTACT_STATUSES.map((s) => (
             <span key={s} className={`launch-status-dot s-${s}`}>

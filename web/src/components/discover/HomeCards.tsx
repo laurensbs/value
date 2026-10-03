@@ -109,7 +109,7 @@ export async function LevelCard({ progress }: { progress: ProgressView }) {
   const c = 2 * Math.PI * r
   const earned = progress.badges.filter((b) => b.tier > 0).length
   return (
-    <Link href="/profile/progress" className="level-card">
+    <Link href="/progress" className="level-card">
       <span className="level-ring" aria-hidden="true">
         <svg className="ring" viewBox="0 0 68 68" width="68" height="68">
           <circle cx="34" cy="34" r={r} className="ring-track" />

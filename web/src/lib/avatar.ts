@@ -42,3 +42,13 @@ export function lookFor(dog: { id: string; avatar?: unknown }): DogLook {
 export function tileFor(id: string): string {
   return TILES[hash(id) % TILES.length]
 }
+
+/** Rondje's own dog: guides people through onboarding and cheers at celebrations. */
+export const MASCOT: DogLook = { fur: '#e2b45c', ears: '#c99540', muzzle: '#f2d79b', earStyle: 'floppy', head: 'round', tongue: true, collar: '#1f5a3d' }
+
+/** Three friendly faces for welcome screens. */
+export const WELCOME_DOGS: { look: DogLook; tile: string }[] = [
+  { look: { fur: '#20242a', ears: '#20242a', muzzle: '#ffffff', earStyle: 'pointy', head: 'narrow', blaze: '#ffffff', collar: '#2d5d8a' }, tile: TILES[3] },
+  { look: MASCOT, tile: TILES[0] },
+  { look: { fur: '#c47c3e', ears: '#6b3f1f', muzzle: '#ffffff', earStyle: 'fold', head: 'wide', tongue: true, collar: '#c0392b' }, tile: TILES[5] },
+]

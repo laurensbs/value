@@ -365,7 +365,10 @@
       "needBirthDate": "Vul je geboortedatum in.",
       "tooYoung": "Rondje is voor mensen van 18 jaar en ouder.",
       "needCity": "Vul je woonplaats in.",
-      "needTerms": "Ga akkoord met de voorwaarden om verder te gaan."
+      "needTerms": "Ga akkoord met de voorwaarden om verder te gaan.",
+      "welcomeTitleAnon": "Hoi, fijn dat je er bent!",
+      "needExperience": "Kies wat het beste bij je past.",
+      "promise1Owner": "De eerste keer loopt een wandelaar altijd samen met jou."
     }
   },
   "dogs": {
@@ -754,7 +757,10 @@
     "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser.",
     "progressTitle": "Jouw voortgang",
     "weeklyGoal": "Weekdoel",
-    "weeklyGoalHint": "Hoe vaak wil je een rondje lopen? Een week overslaan mag altijd."
+    "weeklyGoalHint": "Hoe vaak wil je een rondje lopen? Een week overslaan mag altijd.",
+    "alerts": "Meldingen",
+    "reminders": "Vriendelijke herinneringen",
+    "remindersHint": "Over je eerste stappen, je weekdoel en de uitdaging in je stad. Hooguit één per paar dagen, als pushmelding of anders per e-mail."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -1058,7 +1064,13 @@
       "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!",
       "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?",
       "walk-photo": "Nieuwe foto van {dogName} tijdens het rondje.",
-      "chat-message": "{senderName} stuurde een bericht over {dogName}."
+      "chat-message": "{senderName} stuurde een bericht over {dogName}.",
+      "nudge-step": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Maak je je profiel af?} dog {Zet je hond op Rondje, dan kunnen wandelaars uit je buurt een rondje aanbieden.} quiz {Je volgende stap: de veiligheidsquiz. Een paar vragen, en je weet waar je op let.} meet {Zin in een eerste kennismaking? Kijk welke honden er bij jou in de buurt wonen.} other {Je volgende stap op Rondje staat klaar.}}",
+      "nudge-week": "Het weekend komt eraan! Nog {left, plural, one {# rondje} other {# rondjes}} voor je weekdoel. Lukt het niet? Ook goed, volgende week is er weer een.",
+      "nudge-challenge": "Nieuwe maand, nieuwe uitdaging: {city} loopt samen {goal} rondjes. Loop je mee?",
+      "challenge-done": "{city} heeft de uitdaging gehaald: {goal} rondjes samen! {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel!",
+      "nudge-back": "{variant, select, dog {Zin in een rondje met {dogName}? Plan het wanneer het jou uitkomt.} other {Zin in een rondje? Kijk welke honden er bij jou in de buurt een wandelmaatje zoeken.}}",
+      "nudge-owner": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Voeg je er een toe?} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}"
     }
   },
   "admin": {
@@ -1134,7 +1146,10 @@
       "groupSignupsWeek": "Aanmeldingen groepswandelingen, deze week",
       "groupFill": "{pct}% van de plekken bezet, laatste 4 weken",
       "tipsWeek": "Tips en stemmen, deze week"
-    }
+    },
+    "flaggedChats": "Chatberichten over geld of met een link (30 dagen)",
+    "flaggedChatsHint": "Alleen wie en hoe vaak: chats zelf lezen we niet. De ontvanger ziet een waarschuwing en kan het bericht melden.",
+    "flaggedChatCount": "{n, plural, one {# bericht} other {# berichten}}"
   },
   "banned": {
     "title": "Je account is geblokkeerd",
@@ -1471,8 +1486,33 @@
       "chat-message": {
         "subject": "{senderName} stuurde je een bericht over {dogName}",
         "body": "Lees en beantwoord het in Rondje. Zo hoef je je telefoonnummer pas te delen als jullie elkaar kennen."
+      },
+      "nudge-step": {
+        "subject": "{step, select, about {Maak je profiel af} dog {Zet je hond op Rondje} quiz {Je volgende stap: de veiligheidsquiz} meet {Zin in een eerste kennismaking?} other {Je volgende stap op Rondje}}",
+        "body": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Het kost maar een minuutje.} dog {Zet je hond op Rondje, dan kunnen wandelaars uit je buurt een rondje aanbieden. De eerste keer ontmoeten jullie elkaar altijd samen.} quiz {Een paar vragen over veilig wandelen, en je weet waar je op let. Daarna mag je ook alleen op pad, als de eigenaar dat goed vindt.} meet {Kijk welke honden er bij jou in de buurt wonen en vraag een kennismaking aan. De eerste keer loop je samen met de eigenaar.} other {Je volgende stap op Rondje staat klaar.}}"
+      },
+      "nudge-week": {
+        "subject": "Nog {left, plural, one {# rondje} other {# rondjes}} voor je weekdoel",
+        "body": "Het weekend komt eraan. Elk rondje telt, hoe kort ook. Lukt het deze week niet? Ook goed: er gaat niets verloren."
+      },
+      "nudge-challenge": {
+        "subject": "{city} loopt samen {goal} rondjes",
+        "body": "Nieuwe maand, nieuwe uitdaging voor {city}. Elk rondje telt mee, hoe kort ook. Loop je mee?"
+      },
+      "challenge-done": {
+        "subject": "{city} heeft de uitdaging gehaald!",
+        "body": "{goal} rondjes samen deze maand. {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel, namens alle honden."
+      },
+      "nudge-back": {
+        "subject": "{variant, select, dog {Zin in een rondje met {dogName}?} other {Zin in een rondje?}}",
+        "body": "{variant, select, dog {Plan een rondje met {dogName} wanneer het jou uitkomt.} other {Kijk welke honden er bij jou in de buurt een wandelmaatje zoeken.}} Geen tijd? Ook goed, Rondje is er als jij zin hebt."
+      },
+      "nudge-owner": {
+        "subject": "Een tip voor {dogName}",
+        "body": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Een foto buiten, met oogcontact, werkt het best.} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}"
       }
-    }
+    },
+    "reminderFooter": "Je krijgt deze herinnering omdat herinneringen aanstaan in je profiel. We sturen er hooguit één per paar dagen. Uitzetten kan in je profiel, onder Instellingen."
   },
   "cities": {
     "title": "Honden uitlaten per stad",
@@ -1607,7 +1647,10 @@
         "7": "Laat de wandelaar na afloop weten dat je blij bent. Een bedankje houdt een vast maatje vast.",
         "8": "Hangt er een prikbord in de supermarkt? Een flyer met jouw link brengt wandelaars uit je eigen buurt."
       }
-    }
+    },
+    "backTitle": "Fijn dat je er weer bent!",
+    "backText": "{dog} en jij: {bond}. Zin in een nieuw rondje? Plan het wanneer het jou uitkomt.",
+    "backPlan": "Plan een rondje met {dog}"
   },
   "progress": {
     "title": "Jouw voortgang",
@@ -1768,7 +1811,9 @@
         "buddies": "Wandelmaatjes",
         "good": "Goede vrienden",
         "best": "Beste vrienden"
-      }
+      },
+      "withDog": "{dog} en jij",
+      "newBond": "Nieuw: {dog} en jij zijn nu {bond}!"
     }
   },
   "challenges": {
@@ -1957,6 +2002,10 @@
         "title": "Alles wat geld kost",
         "hint": "Apple Developer (€ 99 per jaar) en het domein. Jouw akkoord en jouw betaling: Claude koopt niets."
       },
+      "sendThree": {
+        "title": "Verstuur je eerste 3 mails",
+        "hint": "Kies 3 opvangen bij Contacten, vul het e-mailadres in, tik op \"Open in mail\" en verstuur vanuit je eigen mail. Zet ze daarna op \"verstuurd\"."
+      },
       "trademark": {
         "title": "Merkcheck op TMview",
         "hint": "Zoek op “rondje” of op de nieuwe naam, in klasse 9, 42 en 45."
@@ -2144,7 +2193,10 @@
       "errors": {
         "invalid": "Vul minstens een naam of een organisatie in.",
         "email": "Dit e-mailadres klopt niet."
-      }
+      },
+      "prepare": "Zet 10 opvangen klaar",
+      "prepareHint": "De dichtstbijzijnde opvangen uit de opvanglijst, met hun website in de notitie. Vul zelf het e-mailadres in; er wordt niets verstuurd.",
+      "prepared": "{n, plural, =0 {Geen nieuwe opvangen gevonden: ze staan er al.} one {# opvang klaargezet. Vul het e-mailadres in en schrijf je bericht.} other {# opvangen klaargezet. Vul de e-mailadressen in en schrijf je berichten.}}"
     },
     "numbers": {
       "title": "Cijfers per week",

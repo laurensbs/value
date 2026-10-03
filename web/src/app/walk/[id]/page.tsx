@@ -50,7 +50,7 @@ export default async function WalkPage({
         dog={dog}
         route={points}
         role="walker"
-        viewerId={viewer.userId}
+        viewer={viewer}
         otherUserId={dog.ownerId}
         fallbackCenter={center}
         justEnded={ended === '1' ? await celebrationFor(viewer, walk.id) : null}

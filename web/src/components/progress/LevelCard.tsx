@@ -30,7 +30,7 @@ export async function LevelCard({ progress: p, link = false }: { progress: Progr
   )
   if (link) {
     return (
-      <Link href="/profile/progress" className="level-card is-link" aria-label={`${t('progress.card')}: ${p.level.name}. ${toNext}`}>
+      <Link href="/progress" className="level-card is-link" aria-label={`${t('progress.card')}: ${p.level.name}. ${toNext}`}>
         {body}
         <span className="level-card-chevron">
           <ProgressIcon name="chevron" size={20} />

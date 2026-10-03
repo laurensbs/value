@@ -365,7 +365,10 @@
       "needBirthDate": "Fill in your date of birth.",
       "tooYoung": "Rondje is for people aged 18 and over.",
       "needCity": "Fill in your town or city.",
-      "needTerms": "Accept the terms to continue."
+      "needTerms": "Accept the terms to continue.",
+      "welcomeTitleAnon": "Hi, great to have you!",
+      "needExperience": "Pick what fits you best.",
+      "promise1Owner": "The first time, a walker always walks together with you."
     }
   },
   "dogs": {
@@ -754,7 +757,10 @@
     "pushBlocked": "Your browser blocks notifications from Rondje. Turn them on in your browser settings.",
     "progressTitle": "Your progress",
     "weeklyGoal": "Weekly goal",
-    "weeklyGoalHint": "How often would you like to walk? Skipping a week is always fine."
+    "weeklyGoalHint": "How often would you like to walk? Skipping a week is always fine.",
+    "alerts": "Notifications",
+    "reminders": "Friendly reminders",
+    "remindersHint": "About your first steps, your weekly goal and your town's challenge. One every few days at most, as a push notification or otherwise by email."
   },
   "quiz": {
     "title": "Safety quiz",
@@ -1058,7 +1064,13 @@
       "shelter-joined": "{orgName} is on Rondje now. Have a look at the dogs!",
       "group-walk-new": "{orgName} has planned a group walk. Want to join?",
       "walk-photo": "New photo of {dogName} during the walk.",
-      "chat-message": "{senderName} sent a message about {dogName}."
+      "chat-message": "{senderName} sent a message about {dogName}.",
+      "nudge-step": "{step, select, about {A photo and a few lines about yourself help {role, select, owner {walkers} other {owners}} get to know you. Finish your profile?} dog {Put your dog on Rondje so walkers nearby can offer a walk.} quiz {Your next step: the safety quiz. A few questions, and you'll know what to look out for.} meet {Up for a first meeting? See which dogs live near you.} other {Your next step on Rondje is ready.}}",
+      "nudge-week": "The weekend is coming! {left, plural, one {# more walk} other {# more walks}} for your weekly goal. Can't make it? That's fine, there's another week coming.",
+      "nudge-challenge": "New month, new challenge: {city} goes for {goal} walks together. Will you join in?",
+      "challenge-done": "{city} made it: {goal} walks together! {mine, plural, one {One of them was yours.} other {# of them were yours.}} Thank you!",
+      "nudge-back": "{variant, select, dog {Fancy a walk with {dogName}? Plan it whenever it suits you.} other {Fancy a walk? See which dogs near you are looking for a walking buddy.}}",
+      "nudge-owner": "{tip, select, photo {A photo helps walkers get to know {dogName}. Will you add one?} slots {Add regular walking times for {dogName}, so walkers see right away when it suits.} other {No requests for {dogName} yet? Share the page with neighbours and friends, it often helps.}}"
     }
   },
   "admin": {
@@ -1134,7 +1146,10 @@
       "groupSignupsWeek": "Group walk sign-ups, this week",
       "groupFill": "{pct}% of places taken, last 4 weeks",
       "tipsWeek": "Suggestions and votes, this week"
-    }
+    },
+    "flaggedChats": "Chat messages about money or with a link (30 days)",
+    "flaggedChatsHint": "Only who and how often: we never read the chats themselves. The receiver sees a warning and can report the message.",
+    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}"
   },
   "banned": {
     "title": "Your account has been blocked",
@@ -1471,8 +1486,33 @@
       "chat-message": {
         "subject": "{senderName} sent you a message about {dogName}",
         "body": "Read and reply in Rondje. That way you only share your phone number once you've met."
+      },
+      "nudge-step": {
+        "subject": "{step, select, about {Finish your profile} dog {Put your dog on Rondje} quiz {Your next step: the safety quiz} meet {Up for a first meeting?} other {Your next step on Rondje}}",
+        "body": "{step, select, about {A photo and a few lines about yourself help {role, select, owner {walkers} other {owners}} get to know you. It only takes a minute.} dog {Put your dog on Rondje so walkers nearby can offer a walk. The first time, you always meet together.} quiz {A few questions about walking safely, and you'll know what to look out for. After that you can also go out alone, if the owner agrees.} meet {See which dogs live near you and ask for a first meeting. The first time, you walk together with the owner.} other {Your next step on Rondje is ready.}}"
+      },
+      "nudge-week": {
+        "subject": "{left, plural, one {# more walk} other {# more walks}} for your weekly goal",
+        "body": "The weekend is coming. Every walk counts, however short. Not this week? That's fine: you lose nothing."
+      },
+      "nudge-challenge": {
+        "subject": "{city} goes for {goal} walks together",
+        "body": "New month, new challenge for {city}. Every walk counts, however short. Will you join in?"
+      },
+      "challenge-done": {
+        "subject": "{city} made it!",
+        "body": "{goal} walks together this month. {mine, plural, one {One of them was yours.} other {# of them were yours.}} Thank you, from all the dogs."
+      },
+      "nudge-back": {
+        "subject": "{variant, select, dog {Fancy a walk with {dogName}?} other {Fancy a walk?}}",
+        "body": "{variant, select, dog {Plan a walk with {dogName} whenever it suits you.} other {See which dogs near you are looking for a walking buddy.}} No time? That's fine, Rondje is here whenever you feel like it."
+      },
+      "nudge-owner": {
+        "subject": "A tip for {dogName}",
+        "body": "{tip, select, photo {A photo helps walkers get to know {dogName}. A photo outside, with eye contact, works best.} slots {Add regular walking times for {dogName}, so walkers see right away when it suits.} other {No requests for {dogName} yet? Share the page with neighbours and friends, it often helps.}}"
       }
-    }
+    },
+    "reminderFooter": "You get this reminder because reminders are on in your profile. We send one every few days at most. You can turn them off in your profile, under Settings."
   },
   "cities": {
     "title": "Dog walking by city",
@@ -1607,7 +1647,10 @@
         "7": "Let the walker know you're happy afterwards. A thank-you keeps a regular buddy.",
         "8": "Is there a notice board at the supermarket? A flyer with your link brings walkers from your own neighbourhood."
       }
-    }
+    },
+    "backTitle": "Good to see you again!",
+    "backText": "{dog} and you: {bond}. Fancy another walk? Plan it whenever it suits you.",
+    "backPlan": "Plan a walk with {dog}"
   },
   "progress": {
     "title": "Your progress",
@@ -1768,7 +1811,9 @@
         "buddies": "Walking buddies",
         "good": "Good friends",
         "best": "Best friends"
-      }
+      },
+      "withDog": "{dog} and you",
+      "newBond": "New: {dog} and you are now {bond}!"
     }
   },
   "challenges": {
@@ -1957,6 +2002,10 @@
         "title": "Everything that costs money",
         "hint": "Apple Developer (€99 a year) and the domain. Your approval and your payment: Claude buys nothing."
       },
+      "sendThree": {
+        "title": "Send your first 3 e-mails",
+        "hint": "Pick 3 shelters under Contacts, add the e-mail address, tap \"Open in mail\" and send from your own mail. Then mark them \"sent\"."
+      },
       "trademark": {
         "title": "Trademark check on TMview",
         "hint": "Search for “rondje” or the new name, in classes 9, 42 and 45."
@@ -2144,7 +2193,10 @@
       "errors": {
         "invalid": "Fill in at least a name or an organisation.",
         "email": "This email address is not right."
-      }
+      },
+      "prepare": "Prepare 10 shelters",
+      "prepareHint": "The nearest shelters from the shelter list, with their website in the note. Fill in the e-mail address yourself; nothing is sent.",
+      "prepared": "{n, plural, =0 {No new shelters found: they are already here.} one {# shelter ready. Add the e-mail address and write your message.} other {# shelters ready. Add the e-mail addresses and write your messages.}}"
     },
     "numbers": {
       "title": "Numbers per week",

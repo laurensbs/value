@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-version: "0.2"
+version: "0.3"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -47,7 +47,14 @@ Questions about privacy? Email us at [e-mail: hallo@rondje.app]. [To verify: whe
 
 - requests, messages sent with a request, acceptances and cancellations;
 - planned and completed walks, recurring walks, solo trust per dog;
-- attendance at shelter group walks.
+- attendance at shelter group walks;
+- chat messages between walker and owner or shelter about a request.
+
+**Progress and reminders**
+
+- your points, level and badges, worked out from what you did on Rondje (such as walks, the safety quiz or a photo for the owner). Only you can see them;
+- your weekly goal, if you choose one, and whether you want friendly reminders;
+- which reminders we sent you and when, so we never send too many.
 
 **Safety**
 
@@ -91,6 +98,8 @@ Questions about privacy? Email us at [e-mail: hallo@rondje.app]. [To verify: whe
 | Recording the ID check, safety quiz, restrictions for new accounts | Legitimate interest: the safety of people and animals |
 | Private feedback, reports, moderation, blocks and bans | Legitimate interest: safety and preventing misuse. Partly a legal obligation (DSA) |
 | Checking for payment requests, IBANs and links; limits on the number of requests | Legitimate interest: preventing scams and spam |
+| Showing points, level, badges and your weekly goal | Contract |
+| Friendly reminders (one every three days at most) about your first steps, your weekly goal and your town's challenge | Legitimate interest: helping you keep up your walks. You can turn them off in your profile at any time |
 | Verifying shelters | Contract with the shelter, and legitimate interest: preventing fake accounts |
 | Handling suggestions and votes for shelters: contacting shelters ourselves and telling you when they join | Legitimate interest: more shelters and dogs on Rondje. You can always object |
 | Security, troubleshooting, backups | Legitimate interest: a safe and working platform |
@@ -114,6 +123,8 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 - We do **not keep a copy or photo of your identity document**. At the first meeting, the owner or shelter looks at your ID. In the app, they only tick a box to confirm that the check was done.
 - Your **mood check-ins** (how you feel before and after a walk) are only stored on your own device. They never reach our servers. If you delete the app or its data, they are gone.
 - No ads, no tracking cookies, no third-party analytics, no selling of data.
+- **No streaks or addictive tricks.** Only you can see your points and badges. They are never lost and never give priority. Reminders never threaten you with losing anything.
+- We **don't read your chats**. If a message is about money or contains a link, the receiver automatically sees a warning. Admins only see that it happened and how often, not the text.
 - No decisions about you made solely by a computer. Our automated checks show a warning or flag a message. A person decides.
 
 ## 7. Who can see your data?
@@ -163,6 +174,8 @@ Would you like to know more about these safeguards? Email us.
 | Data about a ban, to prevent someone from signing up again | [proposal: as short as possible, e.g. 2 years – to verify] |
 | Requests | [retention period to be decided] |
 | Chat messages between walker and owner or shelter | 1 year |
+| Points, level, badges and weekly goal | As long as your account exists |
+| Reminders we sent | As a notification in your account for as long as it exists. To avoid sending too many, we only look at the last year |
 | Suggestions and votes for shelters | Up to a year after we handled them; suggestions nothing happened with after two years |
 | Security logs | [retention period to be decided, e.g. 90 days] |
 | Mood check-ins | Not with us. Only on your own device, until you delete them |

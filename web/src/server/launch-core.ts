@@ -32,6 +32,7 @@ export const TASKS: readonly TaskDef[] = [
   { key: 'submit', owner: 'laurens', points: 40, waiting: true, href: 'https://appstoreconnect.apple.com/apps' },
   { key: 'money', owner: 'laurens', points: 20, waiting: true },
   // Laurens' other tasks.
+  { key: 'sendThree', owner: 'laurens', points: 15 },
   { key: 'trademark', owner: 'laurens', points: 15, href: 'https://www.tmdn.org/tmview/' },
   { key: 'appleAccount', owner: 'laurens', points: 20, href: 'https://developer.apple.com/programs/enroll/' },
   { key: 'domain', owner: 'laurens', points: 10, href: `${REPO}/blob/HEAD/docs/LAUNCH.md` },

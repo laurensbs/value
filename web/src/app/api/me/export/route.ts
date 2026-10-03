@@ -23,6 +23,8 @@ export async function GET() {
     reportsMade: await db.select().from(s.report).where(eq(s.report.reporterId, id)),
     idChecks: await db.select().from(s.idCheck).where(or(eq(s.idCheck.walkerId, id), eq(s.idCheck.checkedBy, id))),
     notifications: await db.select().from(s.notification).where(eq(s.notification.userId, id)),
+    points: await db.select().from(s.pointEvent).where(eq(s.pointEvent.userId, id)),
+    badges: await db.select().from(s.award).where(eq(s.award.userId, id)),
     shelterTips: await db
       .select({
         kind: s.suggestion.kind,

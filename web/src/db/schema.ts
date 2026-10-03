@@ -58,6 +58,8 @@ export const profile = pgTable(
     weeklyGoal: integer('weekly_goal'),
     /** The highest level this person has seen celebrated, so a level-up is shown once. */
     seenLevel: integer('seen_level').notNull().default(1),
+    /** Friendly reminders (weekly goal, the town's challenge, first steps). Never more than one every few days. */
+    reminders: boolean('reminders').notNull().default(true),
     bannedAt: timestamp('banned_at'),
     banReason: text('ban_reason'),
     createdAt: created(),

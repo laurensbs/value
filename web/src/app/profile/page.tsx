@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, SignOutButton } from '@/components/ProfileTools'
+import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, RemindersToggle, SignOutButton } from '@/components/ProfileTools'
 import { LevelCard } from '@/components/progress/LevelCard'
 import { ProgressIcon, type ProgressIconName } from '@/components/progress/ProgressIcon'
 import { PushToggle } from '@/components/PushToggle'
@@ -84,7 +84,7 @@ export default async function ProfilePage() {
         <ul className="hub-list">
           {progress.roles.walker || friends.length ? (
             <HubRow
-              href="/profile/friends"
+              href="/progress#friends-title"
               icon="book"
               title={t('profileHub.friendsTitle')}
               text={friends.length ? t('profileHub.friendsCount', { dogs: friends.length, walks: walksTogether }) : t('profileHub.friendsEmpty')}
@@ -144,6 +144,7 @@ export default async function ProfilePage() {
             <strong>{t('profileHub.alerts')}</strong>
             <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
             {pushKey ? <PushToggle publicKey={pushKey} /> : null}
+            <RemindersToggle on={viewer.profile.reminders} />
             <SoundToggle />
           </div>
         </div>

@@ -1,6 +1,6 @@
 ---
 title: Politique de confidentialité
-version: "0.2"
+version: "0.3"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -47,7 +47,14 @@ Des questions sur la vie privée ? Écrivez-nous à [e-mail: hallo@rondje.app]. 
 
 - demandes, messages joints à une demande, acceptations et annulations ;
 - promenades prévues et effectuées, promenades régulières, confiance solo par chien ;
-- présences aux promenades de groupe des refuges.
+- présences aux promenades de groupe des refuges ;
+- messages de discussion entre promeneur et propriétaire ou refuge au sujet d'une demande.
+
+**Progression et rappels**
+
+- vos points, votre niveau et vos médailles, calculés à partir de ce que vous avez fait sur Rondje (balades, quiz de sécurité ou photo pour le propriétaire, par exemple). Vous seul(e) les voyez ;
+- votre objectif de la semaine, si vous en choisissez un, et si vous souhaitez des rappels bienveillants ;
+- les rappels que nous vous avons envoyés et quand, pour ne jamais en envoyer trop.
 
 **Sécurité**
 
@@ -91,6 +98,8 @@ Des questions sur la vie privée ? Écrivez-nous à [e-mail: hallo@rondje.app]. 
 | Enregistrer la vérification d'identité, quiz de sécurité, limites des nouveaux comptes | Intérêt légitime : la sécurité des personnes et des animaux |
 | Avis privés, signalements, modération, blocages et exclusions | Intérêt légitime : sécurité et prévention des abus. En partie obligation légale (DSA) |
 | Contrôle des demandes de paiement, IBAN et liens ; limites du nombre de demandes | Intérêt légitime : prévenir les arnaques et le spam |
+| Afficher les points, le niveau, les médailles et l'objectif de la semaine | Contrat |
+| Rappels bienveillants (un tous les trois jours au maximum) sur vos premières étapes, votre objectif de la semaine et le défi de votre ville | Intérêt légitime : vous aider à garder vos balades. Vous pouvez les désactiver à tout moment dans votre profil |
 | Vérifier les refuges | Contrat avec le refuge, et intérêt légitime : éviter les faux comptes |
 | Traiter les recommandations et votes pour des refuges : contacter nous-mêmes les refuges et vous prévenir quand ils nous rejoignent | Intérêt légitime : plus de refuges et de chiens sur Rondje. Vous pouvez toujours vous y opposer |
 | Sécurité, correction d'erreurs, sauvegardes | Intérêt légitime : une plateforme sûre et fonctionnelle |
@@ -114,6 +123,8 @@ Lorsque nous nous fondons sur l'intérêt légitime, nous avons vérifié que ce
 - Nous ne conservons **aucune copie ni photo de votre pièce d'identité**. Lors de la première rencontre, le propriétaire ou le refuge regarde votre pièce d'identité. Dans l'application, il coche seulement que la vérification a été faite.
 - Vos **bilans d'humeur** (comment vous vous sentez avant et après la promenade) sont enregistrés uniquement sur votre propre appareil. Ils n'arrivent jamais sur nos serveurs. Si vous supprimez l'application ou ses données, ils disparaissent.
 - Pas de publicité, pas de cookies de traçage, pas d'analyses par des tiers, pas de vente de données.
+- **Pas de séries ni d'astuces addictives.** Vous seul(e) voyez vos points et médailles. Ils ne se perdent jamais et ne donnent aucune priorité. Les rappels ne vous menacent jamais de perdre quoi que ce soit.
+- Nous **ne lisons pas vos discussions**. Si un message parle d'argent ou contient un lien, le destinataire voit automatiquement un avertissement. Les administrateurs voient seulement que c'est arrivé et combien de fois, pas le texte.
 - Aucune décision vous concernant n'est prise uniquement par un ordinateur. Nos contrôles automatiques affichent un avertissement ou signalent un message. C'est une personne qui décide.
 
 ## 7. Qui voit vos données ?
@@ -163,6 +174,8 @@ Vous souhaitez en savoir plus sur ces garanties ? Écrivez-nous.
 | Données liées à une exclusion, pour éviter une nouvelle inscription | [proposition : aussi courte que possible, p. ex. 2 ans – à vérifier] |
 | Demandes | [durée à fixer] |
 | Messages de discussion entre promeneur et propriétaire ou refuge | 1 an |
+| Points, niveau, médailles et objectif de la semaine | Tant que votre compte existe |
+| Rappels envoyés | Comme notification dans votre compte tant qu'il existe. Pour ne pas en envoyer trop, nous ne regardons que la dernière année |
 | Recommandations et votes pour des refuges | Jusqu'à un an après leur traitement ; celles qui n'ont pas été traitées, après deux ans |
 | Journaux de sécurité | [durée à fixer, p. ex. 90 jours] |
 | Bilans d'humeur | Pas chez nous. Uniquement sur votre appareil, jusqu'à ce que vous les supprimiez |

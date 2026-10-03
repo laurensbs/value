@@ -13,9 +13,10 @@ import { Analytics } from '@/components/Analytics'
 import { FooterSwitch } from '@/components/shell/FooterSwitch'
 import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
-import { TabBar } from '@/components/TabBar'
+import { TabBar, type Tab } from '@/components/TabBar'
 import { siteUrl } from '@/lib/site'
 import { unreadCount } from '@/server/queries'
+import { rolesOf } from '@/server/progress'
 import { getViewer } from '@/server/session'
 import { activeWalkFor } from '@/server/walks'
 
@@ -48,19 +49,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = await getLocale()
   const viewer = await getViewer()
   const t = await getTranslations()
-  const unread = viewer ? await unreadCount(viewer.userId) : 0
+  const unread = viewer ? await unreadCount(viewer.userId, { reminders: false }) : 0
   const activeWalk = viewer?.profile ? await activeWalkFor(viewer) : null
-  // Signed in with a profile, the website works like the app: tab bar on phones, a short footer.
-  const tabs = viewer?.profile
-    ? [
-        { href: '/dogs', label: t('shell.tabs.discover'), icon: 'paw' as const },
-        { href: '/requests', label: t('shell.tabs.requests'), icon: 'calendar' as const, badge: unread },
-        viewer.orgs[0]
-          ? { href: `/shelter/${viewer.orgs[0].id}`, label: t('shell.tabs.shelter'), icon: 'building' as const }
-          : { href: '/my-dogs', label: t('shell.tabs.myDogs'), icon: 'home' as const },
-        { href: '/profile', label: t('shell.tabs.me'), icon: 'user' as const },
-      ]
-    : null
+  // The tabs follow why someone is here: walkers find dogs, owners see their own dogs, both get both.
+  const roles = viewer?.profile ? rolesOf(viewer.profile) : null
+  const tabs: Tab[] | null =
+    viewer?.profile && roles
+      ? [
+          { href: '/', label: t('nav.today'), icon: 'sun' },
+          ...(roles.walker ? [{ href: '/dogs', label: t('nav.dogs'), icon: 'paw' as const }] : []),
+          { href: '/requests', label: t('nav.requests'), icon: 'route', badge: unread },
+          ...(viewer.orgs[0]
+            ? [{ href: `/shelter/${viewer.orgs[0].id}`, label: t('nav.shelter'), icon: 'building' as const }]
+            : roles.owner
+              ? [{ href: '/my-dogs', label: t('nav.myDogs'), icon: 'home' as const }]
+              : []),
+          { href: '/profile', label: t('nav.profile'), icon: 'user' },
+        ]
+      : null
 
   return (
     <html lang={locale}>

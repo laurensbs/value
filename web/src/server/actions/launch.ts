@@ -1,14 +1,16 @@
 'use server'
 
-import { eq } from 'drizzle-orm'
+import { eq, isNotNull } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { AUDIENCES, CONTACT_STATUSES } from '@/components/launch/audiences'
 import { isEmail } from '@/components/launch/mail'
+import { DIRECTORY } from '@/lib/directory'
 import { audit } from '../notify'
 import { isTaskKey } from '../launch-core'
+import { nearestShelters, normaliseName } from '../launch-shelters'
 import { requireAdmin } from '../session'
 
 // The launch hub (/admin/launch): admin only. These actions only change the admin's own lists;
@@ -123,4 +125,35 @@ export async function deleteContact(id: string): Promise<void> {
   await db.delete(s.outreachContact).where(eq(s.outreachContact.id, parsed.data))
   await audit(db, admin.userId, 'outreach.contact.deleted', 'outreach_contact', parsed.data)
   revalidatePath(PATH)
+}
+
+/**
+ * "Zet 10 opvangen klaar": the nearest Dutch shelters from the public directory become contacts
+ * with status "te sturen". Only public business details (name, town, website); the e-mail address
+ * is filled in by the admin from the shelter's own website. Nothing is sent.
+ */
+export async function prepareShelterContacts(): Promise<{ added: number }> {
+  const admin = await requireAdmin()
+  const db = await getDb()
+  const [contacts, partners] = await Promise.all([
+    db.select({ organisation: s.outreachContact.organisation }).from(s.outreachContact),
+    db.select({ directoryId: s.organization.directoryId }).from(s.organization).where(isNotNull(s.organization.directoryId)),
+  ])
+  const picks = nearestShelters(DIRECTORY, {
+    names: new Set(contacts.map((c) => normaliseName(c.organisation))),
+    ids: new Set(partners.map((p) => p.directoryId ?? '')),
+  })
+  for (const shelter of picks) {
+    const id = crypto.randomUUID()
+    await db.insert(s.outreachContact).values({
+      id,
+      audience: 'shelter',
+      organisation: shelter.name,
+      city: shelter.city ?? '',
+      note: shelter.website ? `Website: ${shelter.website}` : '',
+    })
+    await audit(db, admin.userId, 'outreach.contact.prepared', 'outreach_contact', id)
+  }
+  revalidatePath(PATH)
+  return { added: picks.length }
 }

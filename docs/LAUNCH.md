@@ -204,3 +204,12 @@ Vercel → **Settings → Domains → Add** (bijvoorbeeld `rondje.app`, ongeveer
 ## 9. Lokaal ontwikkelen
 
 Zie [`web/README.md`](../web/README.md).
+
+## Previews en de database
+
+Vercel-previews gebruiken nu dezelfde database als productie (`DATABASE_URL` staat voor alle omgevingen). Daarom voert een preview **geen migraties** uit (`web/src/db/preview.ts`): een PR kan het schema van productie nooit meer veranderen. Productie, lokaal en de tests migreren gewoon.
+
+Een eigen database per preview (gratis bij Neon):
+1. Vercel → project **rondje** → Integrations → **Neon** → Manage → zet **"Create a database branch for each preview deployment"** aan (Neon maakt per preview een kopie van `rondje-db` en zet `DATABASE_URL` voor die preview).
+2. Vercel → Settings → Environment Variables → nieuwe variabele `PREVIEW_MIGRATIONS` = `1`, alleen voor **Preview**.
+3. Daarna draait elke preview zijn eigen migraties op zijn eigen kopie, zonder productie te raken.

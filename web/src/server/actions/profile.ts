@@ -135,6 +135,13 @@ export async function setEmailNotifications(on: boolean): Promise<void> {
   await db.update(s.profile).set({ emailNotifications: Boolean(on) }).where(eq(s.profile.userId, viewer.userId))
 }
 
+/** Friendly reminders (first steps, weekly goal, the town's challenge): on or off. */
+export async function setReminders(on: boolean): Promise<void> {
+  const viewer = await actionViewer()
+  const db = await getDb()
+  await db.update(s.profile).set({ reminders: Boolean(on) }).where(eq(s.profile.userId, viewer.userId))
+}
+
 export async function markNotificationsRead(): Promise<void> {
   const viewer = await getViewer()
   if (!viewer) return
