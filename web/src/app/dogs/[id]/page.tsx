@@ -6,12 +6,15 @@ import { getFormatter, getTranslations } from 'next-intl/server'
 import { Avatar } from '@/components/Avatar'
 import { DogOwnerActions } from '@/components/DogOwnerActions'
 import { DogPortrait } from '@/components/DogPortrait'
+import { DogShare } from '@/components/DogShare'
 import { EnergyDots } from '@/components/EnergyDots'
 import { GroupWalkButton } from '@/components/GroupWalkButton'
 import { Icon } from '@/components/Icon'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
+import { dogShareUrl } from '@/lib/invite'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
+import { siteUrl } from '@/lib/site'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
 import { dogFacts, getDogDetail, myGroupSignups, relationFor, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
@@ -20,11 +23,24 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params
   const detail = await getDogDetail(id, null)
   if (!detail) return {}
-  // A private owner's dog page names a first name and a city: keep it out of search engines.
+  const { dog, host } = detail
+  const t = await getTranslations('dogShare')
+  // Owners share this page with their neighbours: the preview in a chat shows the dog and what it is looking for.
+  const owned = host.kind === 'owner'
+  const description = (dog.story || (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : '')).slice(0, 160)
+  const photo = dog.photos.find((src) => src.startsWith('https://'))
   return {
-    title: detail.dog.name,
-    description: detail.dog.story.slice(0, 160),
-    ...(detail.host.kind === 'owner' ? { robots: { index: false, follow: false } } : {}),
+    title: dog.name,
+    description,
+    openGraph: {
+      title: owned ? t('posterHeadline', { name: dog.name }) : dog.name,
+      description,
+      images: [photo ?? '/og.png'],
+      siteName: 'Rondje',
+      type: 'website',
+    },
+    // A private owner's dog page names a first name and a city: keep it out of search engines.
+    ...(owned ? { robots: { index: false, follow: false } } : {}),
   }
 }
 
@@ -67,6 +83,12 @@ export default async function DogPage({
     }))
   const defaultDate = moments[0]?.date ?? toZonedParts(fromNow(24 * 3600_000)).date
   const defaultTime = moments[0]?.time ?? '10:00'
+  // The owner's own dog, online: a ready message for the neighbours, with a link that counts as their invite.
+  const shareMessage =
+    isMine && host.kind === 'owner' && dog.status === 'active' && !dog.isDemo && viewer?.profile
+      ? t('dogShare.message', { name: dog.name, city: dog.city, url: dogShareUrl(siteUrl(), viewer.profile.referralCode, dog.id) })
+      : null
+  const plan = encodeURIComponent(`/dogs/${dog.id}#plan`)
 
   return (
     <div className="dog-page">
@@ -116,6 +138,8 @@ export default async function DogPage({
             <DogOwnerActions dogId={dog.id} status={dog.status} editHref={dog.orgId ? `/shelter/${dog.orgId}/dogs/${dog.id}` : `/my-dogs/${dog.id}/edit`} />
           ) : null}
         </header>
+
+        {shareMessage ? <DogShare dogId={dog.id} name={dog.name} message={shareMessage} /> : null}
 
         <div className="host card row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
           <Avatar name={host.name} src={host.photoUrl} size="medium" />
@@ -291,9 +315,16 @@ export default async function DogPage({
               />
             </div>
           ) : (
-            <Link href={`/login?next=/dogs/${dog.id}`} className="button primary wide">
-              {t('request.loginFirst')}
-            </Link>
+            // Often someone the owner sent the link to: an account first, then straight back here to plan.
+            <div className="card flat stack-s">
+              <Link href={`/signup?intent=walker&next=${plan}`} className="button primary wide">
+                {t('request.signupFirst', { name: dog.name })}
+              </Link>
+              <p className="muted small">{t('request.signupFirstText')}</p>
+              <p className="small">
+                {t('auth.hasAccount')} <Link href={`/login?next=${plan}`}>{t('nav.login')}</Link>
+              </p>
+            </div>
           )
         ) : null}
 

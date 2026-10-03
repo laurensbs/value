@@ -394,7 +394,6 @@
     "submit": "Enviar solicitud",
     "sent": "Solicitud enviada. Te avisaremos en cuanto haya respuesta.",
     "sentFlagged": "Solicitud enviada. Ojo: los mensajes sobre dinero, enlaces de pago o números de cuenta no tienen cabida en Rondje y se revisan.",
-    "loginFirst": "Inicia sesión para organizar un paseo",
     "shelterNote": "Los perros de protectora se pasean en grupos acompañados. Elige un paseo en grupo aquí abajo.",
     "reasons": {
       "not-onboarded": "Primero completa tu perfil.",
@@ -429,7 +428,9 @@
       "experience": "Tengo experiencia con perros.",
       "flexible": "Tengo horarios flexibles.",
       "outdoors": "Me encanta estar al aire libre, aunque llueva."
-    }
+    },
+    "signupFirst": "Conoce a {name}",
+    "signupFirstText": "Gratis. Primero creas una cuenta y después eliges un momento para conoceros."
   },
   "requests": {
     "title": "Paseos",
@@ -1629,7 +1630,9 @@
     },
     "backTitle": "¡Qué bien verte de nuevo!",
     "backText": "{dog} y tú: {bond}. ¿Te apetece otro paseo? Planéalo cuando te venga bien.",
-    "backPlan": "Planea un paseo con {dog}"
+    "backPlan": "Planea un paseo con {dog}",
+    "shareHint": "Quien pasee por tu zona ya puede encontrar a {dog}. Cuéntalo tú también en el barrio y irá más rápido.",
+    "shareStart": "Da a conocer a {dog} en tu barrio"
   },
   "progress": {
     "title": "Tu progreso",
@@ -1911,5 +1914,25 @@
     "dogs": "Perros cerca",
     "requests": "Mis paseos",
     "notifications": "Notificaciones"
+  },
+  "dogShare": {
+    "title": "Da a conocer a {name} en tu barrio",
+    "text": "Quien pasee por tu zona ya puede encontrar a {name}. Irá más rápido si tú también lo cuentas: envía este mensaje a gente que conozcas o compártelo en un grupo del barrio.",
+    "message": "¡{name} busca compañía para pasear en {city}! ¿Te encantan los perros y tienes tiempo para un paseo de vez en cuando? En Rondje siempre os conocéis antes en persona. Gratis, para cualquier persona de 18 años o más: {url}",
+    "share": "Compartir",
+    "whatsapp": "WhatsApp",
+    "copy": "Copiar",
+    "copied": "Copiado. Pégalo donde quieras.",
+    "copyFailed": "No se pudo copiar. Selecciona el texto de arriba y cópialo tú.",
+    "poster": "¿Mejor en papel? Imprime un cartel",
+    "privacy": "Quien abra el enlace verá la misma página de {name} que ve todo el mundo en Rondje. Tu dirección y tu teléfono siguen siendo privados hasta que aceptes una cita.",
+    "posterMetaTitle": "Cartel para tu perro",
+    "posterTitle": "Cartel para {name}",
+    "posterLede": "Imprime el cartel y cuélgalo donde lo vean tus vecinos: en el supermercado, la biblioteca, el veterinario o tu portal. Pregunta antes si se puede.",
+    "posterOffline": "{name} no está en línea ahora. Vuelve a activar el perfil de {name} primero; si no, el código QR no funcionará.",
+    "posterHeadline": "{name} busca compañía para pasear",
+    "posterText": "¿Te encantan los perros y tienes algo de tiempo de vez en cuando? Busco a alguien en {city} para dar un paseo fijo de {minutes} minutos con {name}. Primero nos conocemos en persona.",
+    "posterQr": "Código QR a la página de {name} en Rondje",
+    "posterCta": "Escanea el código y conoce a {name}."
   }
 }

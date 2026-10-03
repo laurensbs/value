@@ -3730,6 +3730,35 @@ legend {
   color: var(--calm);
 }
 
+/* The owner's ready message for the neighbours, as it will arrive: a speech bubble. */
+.share-card {
+  border-color: color-mix(in srgb, var(--grass) 35%, var(--line));
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.share-message {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-m) var(--radius-m) var(--radius-m) 4px;
+  background: var(--grass-soft);
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+/* A dog's own poster: the dog large, a line of facts under it. */
+.poster-dog .dog-photo.large {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-m);
+  /* Paper is white, also when the screen is dark. */
+  background: var(--tile, #ecdcd0);
+}
+
+.poster-facts {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1f5a3d;
+}
+
 .pending-card {
   align-items: center;
   color: var(--ink);

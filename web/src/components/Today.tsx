@@ -99,6 +99,8 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const hour = localParts(now).hour
   const stepsLeft = json.steps.filter((step) => !step.done)
   const nextStep = stepsLeft[0] ?? null
+  // Waiting for a first walker, with nothing to answer yet: telling the neighbours is what helps now.
+  const shareDog = nextStep?.key === 'dogMet' && pending === 0 ? (ownDogs.find((d) => d.status === 'active') ?? null) : null
   const earned = json.badges.filter((b) => b.tier > 0)
   const recentBadges = [...earned].sort((a, b) => String(b.earnedAt ?? '').localeCompare(String(a.earnedAt ?? ''))).slice(0, 4)
   const day = dayOfYear(now)
@@ -203,10 +205,10 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
                       {step.title}
                       {!step.done && STEP_POINTS[step.key] ? <span className="pill ball">+{STEP_POINTS[step.key]}</span> : null}
                     </span>
-                    {current ? <span className="muted small">{step.hint}</span> : null}
+                    {current ? <span className="muted small">{shareDog ? t('shareHint', { dog: shareDog.name }) : step.hint}</span> : null}
                     {current ? (
-                      <Link href={step.href} className="button primary small">
-                        {t('start')}
+                      <Link href={shareDog ? `/dogs/${shareDog.id}#share` : step.href} className="button primary small">
+                        {shareDog ? t('shareStart', { dog: shareDog.name }) : t('start')}
                         <Icon name="arrow" size={16} />
                       </Link>
                     ) : null}

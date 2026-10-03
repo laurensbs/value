@@ -394,7 +394,6 @@
     "submit": "Envoyer la demande",
     "sent": "Demande envoyée. Vous recevrez une notification dès qu'il y aura une réponse.",
     "sentFlagged": "Demande envoyée. Attention : les messages concernant de l'argent, des liens de paiement ou des numéros de compte n'ont pas leur place sur Rondje et sont vérifiés.",
-    "loginFirst": "Connectez-vous pour prendre rendez-vous",
     "shelterNote": "Les chiens de refuge sont promenés en groupe encadré. Choisissez une balade en groupe ci-dessous.",
     "reasons": {
       "not-onboarded": "Complétez d'abord votre profil.",
@@ -429,7 +428,9 @@
       "experience": "J'ai l'habitude des chiens.",
       "flexible": "Mes horaires sont flexibles.",
       "outdoors": "J'adore être dehors, même sous la pluie."
-    }
+    },
+    "signupFirst": "Faire connaissance avec {name}",
+    "signupFirstText": "Gratuit. Vous créez d'abord un compte, puis vous choisissez un moment pour faire connaissance."
   },
   "requests": {
     "title": "Balades",
@@ -1629,7 +1630,9 @@
     },
     "backTitle": "Bon retour sur Rondje !",
     "backText": "{dog} et vous : {bond}. Envie d'une nouvelle balade ? Planifiez-la quand cela vous convient.",
-    "backPlan": "Planifier une balade avec {dog}"
+    "backPlan": "Planifier une balade avec {dog}",
+    "shareHint": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {dog}. Parlez-en aussi à vos voisins, ça ira plus vite.",
+    "shareStart": "Parlez de {dog} à vos voisins"
   },
   "progress": {
     "title": "Votre progression",
@@ -1911,5 +1914,25 @@
     "dogs": "Chiens à proximité",
     "requests": "Mes balades",
     "notifications": "Notifications"
+  },
+  "dogShare": {
+    "title": "Parlez de {name} à vos voisins",
+    "text": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {name}. Ça ira plus vite si vous en parlez aussi : envoyez ce message à des gens que vous connaissez, ou publiez-le dans un groupe du quartier.",
+    "message": "{name} cherche quelqu'un pour se promener à {city} ! Vous aimez les chiens et vous avez parfois le temps pour une balade ? Sur Rondje, on se rencontre toujours d'abord. Gratuit, pour toute personne de 18 ans ou plus : {url}",
+    "share": "Partager",
+    "whatsapp": "WhatsApp",
+    "copy": "Copier",
+    "copied": "Copié. Collez-le où vous voulez.",
+    "copyFailed": "La copie n'a pas fonctionné. Sélectionnez le texte ci-dessus et copiez-le vous-même.",
+    "poster": "Plutôt sur papier ? Imprimez une affiche",
+    "privacy": "Les personnes qui ouvrent le lien voient la même page de {name} que tout le monde sur Rondje. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
+    "posterMetaTitle": "Affiche pour votre chien",
+    "posterTitle": "Affiche pour {name}",
+    "posterLede": "Imprimez l'affiche et accrochez-la là où vos voisins la verront : au supermarché, à la bibliothèque, chez le vétérinaire ou dans votre hall d'immeuble. Demandez d'abord si c'est permis.",
+    "posterOffline": "{name} n'est pas en ligne pour le moment. Remettez d'abord {name} en ligne, sinon le QR code ne fonctionnera pas.",
+    "posterHeadline": "{name} cherche quelqu'un pour se promener",
+    "posterText": "Vous aimez les chiens et vous avez parfois un peu de temps ? Je cherche quelqu'un à {city} pour une balade régulière de {minutes} minutes avec {name}. On se rencontre d'abord.",
+    "posterQr": "QR code vers la page de {name} sur Rondje",
+    "posterCta": "Scannez le code et faites connaissance avec {name}."
   }
 }

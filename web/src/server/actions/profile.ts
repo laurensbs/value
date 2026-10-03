@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation'
 import { getLocale } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { INVITE_COOKIE } from '@/lib/invite'
 import { scoreQuiz } from '@/lib/quiz'
 import { isAdult } from '@/lib/rules'
 import { safeNext } from '@/lib/site'
@@ -46,7 +47,7 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
   const result = await saveOnboarding(viewer, parsed.data, {
     termsAccepted: form.get('terms') === 'on',
     locale: await getLocale(),
-    referredBy: (await cookies()).get('rondje_ref')?.value ?? null,
+    referredBy: (await cookies()).get(INVITE_COOKIE)?.value ?? null,
   })
   if (!result.ok) return result
   const p = parsed.data

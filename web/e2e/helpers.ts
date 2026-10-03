@@ -80,6 +80,19 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
   await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
 }
 
+/** A dog put online in the fewest taps: a name, the suggested walk and town, and the two safety promises. */
+export async function addDog(page: Page, name: string) {
+  await page.goto('/my-dogs/new')
+  await page.getByLabel('Naam', { exact: true }).fill(name)
+  const next = page.getByRole('button', { name: 'Verder' })
+  // On past the name, the character, the story, the walk, where, and what only accepted walkers see.
+  for (let step = 0; step < 6; step++) await next.click()
+  await page.getByLabel(/Ik ben verzekerd/).check()
+  await page.getByLabel(/gechipt en gevaccineerd/).check()
+  await page.getByRole('button', { name: `Zet ${name} online` }).click()
+  await expect(page).toHaveURL(/\/dogs\/[^/?]+\?saved=1$/)
+}
+
 /** Signs in as the e2e admin (ADMIN_EMAILS in playwright.config.ts). On a reused server the account may already exist. */
 export async function signInAdmin(browser: Browser) {
   const admin = await newPerson(browser)

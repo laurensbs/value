@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
+import { getTranslations } from 'next-intl/server'
+import { dogShareUrl } from '@/lib/invite'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
+import { siteUrl } from '@/lib/site'
 import { apiViewer, dogLook, fail, json } from '@/server/api'
 import { dogFacts, getDogDetail, myGroupSignups, relationFor, walkerFacts } from '@/server/queries'
 
@@ -21,6 +24,13 @@ export async function GET(_request: Request, ctx: { params: Promise<{ id: string
     canSolo = canRequestSolo(facts, dogFacts(d), relation)
   }
   const booked = await myGroupSignups(viewer.userId)
+  // The owner's own dog, online: the same ready message for the neighbours as on the website.
+  let share: { url: string; message: string } | null = null
+  if (detail.isMine && detail.host.kind === 'owner' && d.status === 'active' && !d.isDemo && viewer.profile) {
+    const t = await getTranslations('dogShare')
+    const url = dogShareUrl(siteUrl(), viewer.profile.referralCode, d.id)
+    share = { url, message: t('message', { name: d.name, city: d.city, url }) }
+  }
 
   return json({
     dog: {
@@ -60,5 +70,6 @@ export async function GET(_request: Request, ctx: { params: Promise<{ id: string
     canSeePrivate: detail.canSeePrivate,
     isMine: detail.isMine,
     canRequest: { meet: canMeet, solo: canSolo },
+    share,
   })
 }

@@ -108,6 +108,20 @@ for (const [label, device] of Object.entries(viewports)) {
     await page.waitForTimeout(2500)
   }
   for (const p of privatePaths) report[`${label} ${p} (signed in)`] = await check(page, p, label, 'in-')
+  // Their own dog, online: its page with the message for the neighbours, and its poster.
+  await page.goto(base + '/my-dogs')
+  let dogPath = (await page.locator('.dog-card').count()) ? await page.locator('.dog-card').first().getAttribute('href') : null
+  if (!dogPath) {
+    await page.goto(base + '/my-dogs/new')
+    await page.getByLabel('Naam', { exact: true }).fill('Bo')
+    for (let step = 0; step < 6; step++) await page.getByRole('button', { name: 'Verder' }).click()
+    await page.getByLabel(/Ik ben verzekerd/).check()
+    await page.getByLabel(/gechipt en gevaccineerd/).check()
+    await page.getByRole('button', { name: 'Zet Bo online' }).click()
+    await page.waitForURL(/\/dogs\/[^/?]+\?saved=1$/)
+    dogPath = new URL(page.url()).pathname
+  }
+  for (const p of [dogPath, `/my-dogs/${dogPath.split('/').pop()}/poster`]) report[`${label} ${p} (signed in)`] = await check(page, p, label, 'in-')
   await ctx.close()
 }
 await browser.close()

@@ -394,7 +394,6 @@
     "submit": "Send request",
     "sent": "Request sent. You'll get a notification as soon as there's a reply.",
     "sentFlagged": "Request sent. Please note: messages about money, payment links or bank account numbers don't belong on Rondje and are checked.",
-    "loginFirst": "Log in to plan a walk",
     "shelterNote": "Shelter dogs are walked in a supervised group. Choose a group walk below.",
     "reasons": {
       "not-onboarded": "Finish your profile first.",
@@ -429,7 +428,9 @@
       "experience": "I'm used to dogs.",
       "flexible": "I'm flexible with times.",
       "outdoors": "I love being outdoors, even in the rain."
-    }
+    },
+    "signupFirst": "Meet {name}",
+    "signupFirstText": "Free. First you create an account, then you pick a moment to meet."
   },
   "requests": {
     "title": "Walks",
@@ -1629,7 +1630,9 @@
     },
     "backTitle": "Good to see you again!",
     "backText": "{dog} and you: {bond}. Fancy another walk? Plan it whenever it suits you.",
-    "backPlan": "Plan a walk with {dog}"
+    "backPlan": "Plan a walk with {dog}",
+    "shareHint": "Walkers nearby can find {dog} now. Tell your neighbours too, and it'll go faster.",
+    "shareStart": "Tell your neighbours about {dog}"
   },
   "progress": {
     "title": "Your progress",
@@ -1911,5 +1914,25 @@
     "dogs": "Dogs nearby",
     "requests": "My walks",
     "notifications": "Notifications"
+  },
+  "dogShare": {
+    "title": "Tell your neighbours about {name}",
+    "text": "Walkers nearby can find {name} now. It goes faster if you spread the word yourself: send this message to people you know, or post it in a neighbourhood group.",
+    "message": "{name} is looking for a walking buddy in {city}! Love dogs and have time for a walk now and then? On Rondje you always meet first. Free, for everyone aged 18 and over: {url}",
+    "share": "Share",
+    "whatsapp": "WhatsApp",
+    "copy": "Copy",
+    "copied": "Copied. Paste it wherever you like.",
+    "copyFailed": "Copying didn't work. Select the text above and copy it yourself.",
+    "poster": "Prefer paper? Print a poster",
+    "privacy": "Anyone who opens the link sees the same page for {name} as everyone on Rondje. Your address and phone number stay private until you accept an appointment.",
+    "posterMetaTitle": "Poster for your dog",
+    "posterTitle": "Poster for {name}",
+    "posterLede": "Print the poster and put it up where neighbours will see it: at the supermarket, the library, the vet or in your building's entrance. Do ask first whether that's okay.",
+    "posterOffline": "{name} isn't online right now. Put {name} back online first, or the QR code won't work.",
+    "posterHeadline": "{name} is looking for a walking buddy",
+    "posterText": "Love dogs and have some time now and then? I'm looking for someone in {city} to take {name} on a regular walk of {minutes} minutes. We'll meet first.",
+    "posterQr": "QR code to {name}'s page on Rondje",
+    "posterCta": "Scan the code and meet {name}."
   }
 }
