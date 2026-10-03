@@ -4189,6 +4189,19 @@ legend {
   background: linear-gradient(90deg, var(--grass), color-mix(in oklab, var(--grass) 60%, var(--ball)));
 }
 
+/* For owners on Today: how many walkers live nearby, or a nudge to tell the neighbours. */
+.walkers-near {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.walkers-near > svg {
+  flex: none;
+  margin-top: 2px;
+}
+
 .mini-dogs {
   list-style: none;
   margin: 0;

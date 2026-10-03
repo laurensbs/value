@@ -382,7 +382,9 @@
     "publish": "Put online",
     "walkingTimes": "Walking times",
     "website": "Website",
-    "hiddenByModerator": "Hidden by Rondje"
+    "hiddenByModerator": "Hidden by Rondje",
+    "savedWalkers": "{n, plural, one {# walker lives} other {# walkers live}} within 5 km. This week they'll see {name} as a new dog.",
+    "savedShare": "Tell your neighbours about {name}: <link>here's a message to share</link>."
   },
   "request": {
     "title": "Plan a walk",
@@ -1665,7 +1667,9 @@
     },
     "backTitle": "Good to see you again!",
     "backText": "{dog} and you: {bond}. Fancy another walk? Plan it whenever it suits you.",
-    "backPlan": "Plan a walk with {dog}"
+    "backPlan": "Plan a walk with {dog}",
+    "walkersNear": "{n, plural, one {# walker lives} other {# walkers live}} within 5 km of you.",
+    "walkersFew": "Only a few walkers near you so far. <link>Tell your neighbours about {dog}</link>, so they find Rondje."
   },
   "progress": {
     "title": "Your progress",

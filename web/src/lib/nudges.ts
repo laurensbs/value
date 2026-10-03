@@ -9,7 +9,7 @@
 // - Each kind stops by itself: a few first-step reminders, two "come back" reminders after a walk.
 // - One switch in the profile (and in the app) turns them all off.
 
-import { distanceM } from './geo'
+import { nearness, type Place } from './nearby'
 import { localParts, weekOf, type Roles } from './progress'
 
 export const NUDGE_KINDS = ['nudge-step', 'nudge-week', 'nudge-challenge', 'challenge-done', 'nudge-new-dog', 'nudge-back', 'nudge-owner'] as const
@@ -27,9 +27,8 @@ export const STEP_NUDGE_MAX = 3
 /** "Zin in een rondje?" after this many quiet days, at most twice until the next walk. */
 export const BACK_AFTER_DAYS = 14
 export const BACK_MAX = 2
-/** A dog is new for this many days after it came online, and near within this distance. */
+/** A dog is new for this many days after it came online. */
 export const NEW_DOG_DAYS = 7
-export const NEW_DOG_KM = 5
 
 export type NudgeStep = 'about' | 'dog' | 'quiz' | 'meet'
 
@@ -66,15 +65,10 @@ export interface NudgeFacts {
 }
 
 /** A private owner's dog that came online in the last NEW_DOG_DAYS days (server/nudges.ts). */
-export interface NewDog {
+export interface NewDog extends Place {
   id: string
   name: string
   ownerId: string
-  country: string
-  /** citySlug of its town. */
-  town: string
-  lat: number | null
-  lng: number | null
   ppp: boolean
 }
 
@@ -84,20 +78,15 @@ export function isNewDog(dog: { createdAt: Date; isDemo: boolean }, now: Date): 
 }
 
 /** Where a walker lives, as far as Rondje knows. */
-export interface WalkerPlace {
+export interface WalkerPlace extends Place {
   userId: string
-  country: string
-  /** citySlug of their town. */
-  town: string
-  lat: number | null
-  lng: number | null
   pppLicense: boolean
 }
 
 /**
- * The new dogs near a walker, nearest first: within NEW_DOG_KM, or in the same town when one of
- * them has no location. Never their own dogs, dogs they already asked about, owners they blocked
- * or who blocked them, or a dog they could not ask about (a PPP dog in Spain without the licence).
+ * The new dogs near a walker (see lib/nearby.ts), nearest first. Never their own dogs, dogs they
+ * already asked about, owners they blocked or who blocked them, or a dog they could not ask about
+ * (a PPP dog in Spain without the licence).
  */
 export function newDogsNear(
   w: WalkerPlace,
@@ -108,12 +97,8 @@ export function newDogsNear(
   for (const dog of dogs) {
     if (dog.ownerId === w.userId || skip.asked.has(dog.id) || skip.blocked.has(dog.ownerId)) continue
     if (dog.country === 'ES' && dog.ppp && !w.pppLicense) continue
-    if (w.lat != null && w.lng != null && dog.lat != null && dog.lng != null) {
-      const m = distanceM({ lat: w.lat, lng: w.lng }, { lat: dog.lat, lng: dog.lng })
-      if (m <= NEW_DOG_KM * 1000) near.push({ dog, m })
-    } else if (w.town && dog.town === w.town && dog.country === w.country) {
-      near.push({ dog, m: NEW_DOG_KM * 1000 })
-    }
+    const m = nearness(w, dog)
+    if (m != null) near.push({ dog, m })
   }
   return near.sort((a, b) => a.m - b.m).map(({ dog }) => ({ id: dog.id, name: dog.name }))
 }

@@ -10,7 +10,7 @@ const db = drizzle({ client, schema })
 vi.mock('server-only', () => ({}))
 vi.mock('@/db', () => ({ getDb: async () => db }))
 
-const { getDogDetail, incomingRequests, outgoingRequests } = await import('./queries')
+const { getDogDetail, incomingRequests, outgoingRequests, walkersNear } = await import('./queries')
 
 async function viewer(userId: string) {
   const p = await db.query.profile.findFirst({ where: (t, { eq }) => eq(t.userId, userId) })
@@ -70,5 +70,37 @@ describe('a block after a walk', () => {
     expect(incoming.blocked).toBe(true)
     expect(incoming.walker.phone).toBeNull()
     expect(incoming.walker.email).toBe('')
+  })
+})
+
+describe('walkers near a place', () => {
+  beforeAll(async () => {
+    await client.exec(`
+      insert into "user" (id, name, email, email_verified, created_at, updated_at) values
+        ('w1', 'W1', 'w1@example.org', false, now(), now()), ('w2', 'W2', 'w2@example.org', false, now(), now()),
+        ('w3', 'W3', 'w3@example.org', false, now(), now()), ('w4', 'W4', 'w4@example.org', false, now(), now()),
+        ('w5', 'W5', 'w5@example.org', false, now(), now()), ('w6', 'W6', 'w6@example.org', false, now(), now()),
+        ('w7', 'W7', 'w7@example.org', false, now(), now());
+      insert into profile (user_id, first_name, birth_date, country, city, lat, lng, wants_to_walk, banned_at, terms_accepted_at, terms_version, referral_code)
+      values
+        ('w1', 'W1', '1990-01-01', 'NL', 'Utrecht', 52.09, 5.12, true, null, now(), '1', 'WAA001'),
+        ('w2', 'W2', '1990-01-01', 'NL', 'Utrecht', 52.1, 5.12, true, null, now(), '1', 'WAA002'),
+        ('w3', 'W3', '1990-01-01', 'NL', 'Utrecht', 52.2, 5.12, true, null, now(), '1', 'WAA003'),
+        ('w4', 'W4', '1990-01-01', 'NL', ' utrecht', null, null, true, null, now(), '1', 'WAA004'),
+        ('w5', 'W5', '1990-01-01', 'NL', 'Zeist', null, null, true, null, now(), '1', 'WAA005'),
+        ('w6', 'W6', '1990-01-01', 'NL', 'Utrecht', 52.09, 5.12, false, null, now(), '1', 'WAA006'),
+        ('w7', 'W7', '1990-01-01', 'NL', 'Utrecht', 52.09, 5.12, true, now(), now(), '1', 'WAA007');
+    `)
+  })
+
+  it('counts those within 5 km, and those in the same town without a location', async () => {
+    // Fleur lives in Utrecht without a location; W3 is 12 km away; W5 lives in Zeist; W6 does not walk; W7 is banned.
+    expect(await walkersNear({ country: 'NL', city: 'Utrecht', lat: 52.09, lng: 5.12 }, 'ans')).toBe(4)
+    expect(await walkersNear({ country: 'NL', city: 'Utrecht', lat: 52.09, lng: 5.12 }, 'w1')).toBe(4)
+  })
+
+  it('goes by the town when the place itself has no location', async () => {
+    expect(await walkersNear({ country: 'NL', city: 'Utrecht', lat: null, lng: null }, 'ans')).toBe(5)
+    expect(await walkersNear({ country: 'BE', city: 'Utrecht', lat: null, lng: null }, 'ans')).toBe(0)
   })
 })

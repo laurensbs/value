@@ -50,6 +50,8 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
   await expect(party).toBeHidden()
   const steps = owner.page.getByRole('region', { name: 'Je eerste stappen' })
   await expect(steps).toContainText('Wandelaars in de buurt kunnen Saar nu vinden. Vertel het ook zelf aan je buren, dan gaat het sneller.')
+  // Above her dogs: how many walkers live nearby, or with only a few, a link to tell the neighbours.
+  await expect(owner.page.getByRole('region', { name: 'Jouw honden' }).locator('.walkers-near')).toBeVisible()
   await shot(owner.page, 'share-03-today')
   await steps.getByRole('link', { name: 'Vertel je buren over Saar' }).click()
   await expect(owner.page).toHaveURL(new RegExp(`${dogPath}#share$`))
@@ -91,7 +93,10 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
     await app.dispose()
     return body
   }
-  expect((await fromApp(`ans-${id}@e2e.test`, `/api/v1/dogs/${dogId}`)).share).toEqual({ url: link, message })
+  const appShare = (await fromApp(`ans-${id}@e2e.test`, `/api/v1/dogs/${dogId}`)).share
+  expect(appShare).toMatchObject({ url: link, message })
+  // How many walkers live nearby: a number from three on (other tests add walkers), otherwise null.
+  expect(appShare.walkersNearby === null || appShare.walkersNearby >= 3).toBe(true)
   expect((await fromApp(`noor-${id}@e2e.test`, `/api/v1/dogs/${dogId}`)).share).toBeNull()
   // And the same next step as on Today.
   const { steps: appSteps } = await fromApp(`ans-${id}@e2e.test`, '/api/v1/progress')

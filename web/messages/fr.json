@@ -382,7 +382,9 @@
     "publish": "Mettre en ligne",
     "walkingTimes": "Horaires de promenade",
     "website": "Site web",
-    "hiddenByModerator": "Masqué par Rondje"
+    "hiddenByModerator": "Masqué par Rondje",
+    "savedWalkers": "{n, plural, one {# promeneur habite} other {# promeneurs habitent}} à moins de 5 km. Cette semaine, ils verront {name} parmi les nouveaux chiens.",
+    "savedShare": "Parlez de {name} à vos voisins : <link>voici un message à partager</link>."
   },
   "request": {
     "title": "Prendre rendez-vous",
@@ -1665,7 +1667,9 @@
     },
     "backTitle": "Bon retour sur Rondje !",
     "backText": "{dog} et vous : {bond}. Envie d'une nouvelle balade ? Planifiez-la quand cela vous convient.",
-    "backPlan": "Planifier une balade avec {dog}"
+    "backPlan": "Planifier une balade avec {dog}",
+    "walkersNear": "{n, plural, one {# promeneur habite} other {# promeneurs habitent}} à moins de 5 km de chez vous.",
+    "walkersFew": "Encore peu de promeneurs près de chez vous. <link>Parlez de {dog} à vos voisins</link> pour qu'ils découvrent Rondje."
   },
   "progress": {
     "title": "Votre progression",

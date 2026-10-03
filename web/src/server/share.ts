@@ -5,20 +5,28 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { DEFAULT_LOCALE, isLocale, type Locale } from '@/i18n/config'
 import { dogShareUrl } from '@/lib/invite'
+import { shownCount } from '@/lib/nearby'
 import { siteUrl } from '@/lib/site'
-import type { DogDetail } from './queries'
+import { walkersNear, type DogDetail } from './queries'
 import type { Viewer } from './session'
+
+export interface DogShare {
+  url: string
+  message: string
+  /** How many walkers live within 5 km of the dog, or null when fewer than three (lib/nearby.ts). */
+  walkersNearby: number | null
+}
 
 /**
  * The ready message an owner sends the neighbours about their own dog while it is online, with
  * a link that counts as their invite. The same for the website and the iPhone app; null for anyone else.
  */
-export async function dogShareFor(detail: DogDetail, viewer: Viewer | null): Promise<{ url: string; message: string } | null> {
+export async function dogShareFor(detail: DogDetail, viewer: Viewer | null): Promise<DogShare | null> {
   const { dog, host, isMine } = detail
   if (!isMine || host.kind !== 'owner' || dog.status !== 'active' || dog.isDemo || !viewer?.profile) return null
-  const t = await getTranslations('dogShare')
+  const [t, walkers] = await Promise.all([getTranslations('dogShare'), walkersNear(dog, viewer.userId)])
   const url = dogShareUrl(siteUrl(), viewer.profile.referralCode, dog.id)
-  return { url, message: t('message', { name: dog.name, city: dog.city, url }) }
+  return { url, message: t('message', { name: dog.name, city: dog.city, url }), walkersNearby: shownCount(walkers) }
 }
 
 /** The language someone uses Rondje in; the visitor's own when it is not known. */

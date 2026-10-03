@@ -6,6 +6,7 @@ import * as s from '@/db/schema'
 import { MASCOT } from '@/lib/avatar'
 import { countryInfo, isCountry } from '@/lib/countries'
 import { formatDistance } from '@/lib/geo'
+import { shownCount } from '@/lib/nearby'
 import { BACK_AFTER_DAYS, isNewDog } from '@/lib/nudges'
 import { BADGES, bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
 import { zonedToUtc } from '@/lib/time'
@@ -13,7 +14,7 @@ import { challengesFor } from '@/server/challenges'
 import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
 import { progressJson } from '@/server/progress-json'
 import { webPushKey } from '@/server/push'
-import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, type RequestRow } from '@/server/queries'
+import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, walkersNear, type RequestRow } from '@/server/queries'
 import type { OnboardedViewer } from '@/server/session'
 import { Celebration } from './Celebration'
 import { ChallengeCard } from './ChallengeCard'
@@ -64,7 +65,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const near = p.lat != null && p.lng != null ? { lat: p.lat, lng: p.lng } : country ? countryInfo(country).center : null
 
   // The first screen after opening the app: everything is asked at the same time.
-  const [t, tp, td, tpa, format, locale, progress, challenges, outgoing, incoming, dogs, nearby, impact, friends, dogStats] = await Promise.all([
+  const [t, tp, td, tpa, format, locale, progress, challenges, outgoing, incoming, dogs, nearby, impact, friends, dogStats, walkers] = await Promise.all([
     getTranslations('today'),
     getTranslations('progress'),
     getTranslations('dogs'),
@@ -80,10 +81,14 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     impactTotals(),
     walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
     owner ? dogWeekStats(viewer.userId, now) : new Map<string, { week: number; walkers: number }>(),
+    owner ? walkersNear(p, viewer.userId) : 0,
   ])
   const json = await progressJson(progress)
 
   const ownDogs = dogs.filter((d) => !d.isDemo)
+  // Owners see how many walkers live nearby; with only a few, a nudge to tell the neighbours instead.
+  const walkersNearby = shownCount(walkers)
+  const shareDog = ownDogs.find((d) => d.status === 'active' && !d.orgId) ?? null
   const nearbyDogs = nearby.filter((item) => item.dog.ownerId !== viewer.userId).slice(0, 6)
   const next = nextAppointment([...outgoing, ...incoming], now)
   const pending = incoming.filter((r) => r.request.status === 'pending').length
@@ -231,6 +236,19 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               <Icon name="plus" size={16} /> {t('addDog')}
             </Link>
           </div>
+          {walkersNearby != null ? (
+            <p className="walkers-near muted small">
+              <Icon name="users" size={16} />
+              {t('walkersNear', { n: walkersNearby })}
+            </p>
+          ) : shareDog ? (
+            <p className="walkers-near muted small">
+              <Icon name="users" size={16} />
+              <span>
+                {t.rich('walkersFew', { dog: shareDog.name, link: (chunks) => <Link href={`/dogs/${shareDog.id}#share`}>{chunks}</Link> })}
+              </span>
+            </p>
+          ) : null}
           {ownDogs.length ? (
             <ul className="mini-dogs">
               {ownDogs.map((dog) => (

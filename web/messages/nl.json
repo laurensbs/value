@@ -382,7 +382,9 @@
     "publish": "Zet online",
     "walkingTimes": "Wandeltijden",
     "website": "Website",
-    "hiddenByModerator": "Verborgen door Rondje"
+    "hiddenByModerator": "Verborgen door Rondje",
+    "savedWalkers": "{n, plural, one {# wandelaar woont} other {# wandelaars wonen}} binnen 5 km. Deze week zien ze {name} als nieuwe hond.",
+    "savedShare": "Vertel je buren over {name}: <link>hier staat een bericht om te delen</link>."
   },
   "request": {
     "title": "Plan een afspraak",
@@ -1665,7 +1667,9 @@
     },
     "backTitle": "Fijn dat je er weer bent!",
     "backText": "{dog} en jij: {bond}. Zin in een nieuw rondje? Plan het wanneer het jou uitkomt.",
-    "backPlan": "Plan een rondje met {dog}"
+    "backPlan": "Plan een rondje met {dog}",
+    "walkersNear": "{n, plural, one {# wandelaar woont} other {# wandelaars wonen}} binnen 5 km van jou.",
+    "walkersFew": "Nog maar weinig wandelaars bij jou in de buurt. <link>Vertel je buren over {dog}</link>, dan vinden ze Rondje."
   },
   "progress": {
     "title": "Jouw voortgang",

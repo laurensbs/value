@@ -1,9 +1,11 @@
 import 'server-only'
 import { cache } from 'react'
-import { and, asc, count, desc, eq, gte, inArray, isNull, ne, notInArray, or, sql } from 'drizzle-orm'
+import { and, asc, between, count, desc, eq, gte, inArray, isNull, ne, notInArray, or, sql } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { citySlug } from '@/lib/cities'
 import { distanceM, type LatLng } from '@/lib/geo'
+import { NEAR_KM, nearness } from '@/lib/nearby'
 import { NUDGE_KINDS } from '@/lib/nudges'
 import type { DogFacts, Relation, TrustSignals, WalkerFacts } from '@/lib/rules'
 import type { Viewer } from './session'
@@ -89,6 +91,31 @@ export async function listDogs(filters: DogFilters, limit = 60): Promise<DogList
     return 0
   })
   return items.slice(0, limit)
+}
+
+/**
+ * How many people who want to walk live near a place (lib/nearby.ts), not counting `except`. Only
+ * a number: who they are stays private until they ask about a dog themselves.
+ */
+export async function walkersNear(place: { country: string; city: string; lat: number | null; lng: number | null }, except: string): Promise<number> {
+  const db = await getDb()
+  const sameTown = sql`lower(trim(${s.profile.city})) = ${place.city.trim().toLowerCase()}`
+  let where = sameTown
+  if (place.lat != null && place.lng != null) {
+    // A box around the place for the database; the exact distance is checked below.
+    const dLat = NEAR_KM / 110.5
+    const dLng = NEAR_KM / (111.3 * Math.cos((place.lat * Math.PI) / 180))
+    where = or(
+      and(between(s.profile.lat, place.lat - dLat, place.lat + dLat), between(s.profile.lng, place.lng - dLng, place.lng + dLng)),
+      and(isNull(s.profile.lat), sameTown),
+    )!
+  }
+  const rows = await db
+    .select({ city: s.profile.city, lat: s.profile.lat, lng: s.profile.lng })
+    .from(s.profile)
+    .where(and(eq(s.profile.country, place.country), eq(s.profile.wantsToWalk, true), isNull(s.profile.bannedAt), ne(s.profile.userId, except), where))
+  const here = { ...place, town: citySlug(place.city) }
+  return rows.filter((r) => nearness(here, { country: place.country, town: citySlug(r.city), lat: r.lat, lng: r.lng }) != null).length
 }
 
 export async function trustSignals(userId: string): Promise<TrustSignals> {

@@ -12,6 +12,7 @@ import { GroupWalkButton } from '@/components/GroupWalkButton'
 import { Icon } from '@/components/Icon'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
+import { isNewDog } from '@/lib/nudges'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
 import { dogFacts, getDogDetail, myGroupSignups, walkerFacts } from '@/server/queries'
@@ -95,7 +96,15 @@ export default async function DogPage({
         </Link>
         {saved ? (
           <p className="notice success" role="status">
-            {t('dog.saved', { name: dog.name })}
+            <span>
+              {t('dog.saved', { name: dog.name })}{' '}
+              {/* What happens next: walkers nearby see the dog as new, or with few of them, the neighbours can be told. */}
+              {share?.walkersNearby != null
+                ? t('dog.savedWalkers', { n: share.walkersNearby, name: dog.name })
+                : share
+                  ? t.rich('dog.savedShare', { name: dog.name, link: (chunks) => <a href="#share">{chunks}</a> })
+                  : null}
+            </span>
           </p>
         ) : null}
         <ViewTransition name={`dog-${dog.id}`}>
@@ -114,6 +123,7 @@ export default async function DogPage({
         <header className="stack-s">
           <div className="row">
             {dog.isDemo ? <span className="pill ball">{t('common.example')}</span> : null}
+            {isNewDog(dog, new Date()) ? <span className="pill ball">{t('dogs.new')}</span> : null}
             <span className={`pill ${host.kind === 'shelter' ? 'blue' : 'green'}`}>
               {host.kind === 'shelter' ? t('dogs.fromShelter') : t('dogs.fromOwner')}
             </span>
