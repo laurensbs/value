@@ -5,7 +5,7 @@ import { Analytics as VercelAnalytics, type BeforeSendEvent } from '@vercel/anal
 const ID = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi
 
 /**
- * What Vercel Web Analytics may see of a page view: never admin pages, never query strings
+ * What Vercel Web Analytics may see of a page view: never admin pages or the founder's hub, never query strings
  * (claim links, invite codes, ?next=…), and ids in paths replaced by ":id". Returns null to skip.
  */
 export function scrubEvent(event: BeforeSendEvent): BeforeSendEvent | null {
@@ -15,7 +15,7 @@ export function scrubEvent(event: BeforeSendEvent): BeforeSendEvent | null {
   } catch {
     return null
   }
-  if (url.pathname === '/admin' || url.pathname.startsWith('/admin/')) return null
+  if (/^\/(admin|hub)(\/|$)/.test(url.pathname)) return null
   url.search = ''
   url.hash = ''
   url.pathname = url.pathname.replace(ID, ':id')
