@@ -13,7 +13,7 @@ Cette politique explique quelles données personnelles Rondje traite, pourquoi, 
 
 Le responsable du traitement de vos données sur Rondje est [Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], numéro d'inscription à la Chambre de commerce néerlandaise (KvK) [KvK-nummer].
 
-Des questions sur la vie privée ? Écrivez-nous à [e-mail: hallo@rondje.app]. [À vérifier : si la désignation d'un délégué à la protection des données est obligatoire. Si oui, indiquer ici ses coordonnées.]
+Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier : si la désignation d'un délégué à la protection des données est obligatoire. Si oui, indiquer ici ses coordonnées.]
 
 ## 2. En bref
 
@@ -206,7 +206,7 @@ Vous avez le droit :
 - de **vous opposer** au traitement fondé sur l'intérêt légitime ;
 - de retirer votre consentement, lorsque le traitement repose sur celui-ci.
 
-Envoyez votre demande via l'application ou à [e-mail: hallo@rondje.app]. Nous répondons dans un délai d'un mois. Il se peut que nous vous demandions d'abord de prouver que le compte est bien le vôtre.
+Envoyez votre demande via l'application ou à {{contact}}. Nous répondons dans un délai d'un mois. Il se peut que nous vous demandions d'abord de prouver que le compte est bien le vôtre.
 
 Certaines données ne peuvent pas être supprimées immédiatement, par exemple si elles sont nécessaires pour un signalement en cours concernant la sécurité d'autres personnes. Nous vous l'expliquerons alors.
 

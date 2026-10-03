@@ -13,7 +13,7 @@ Deze voorwaarden gelden voor iedereen die Rondje gebruikt: de website en de app 
 
 Rondje wordt aangeboden door [Naam rechtspersoon, bijv. Stichting Rondje i.o.], ingeschreven bij de KvK onder nummer [KvK-nummer], gevestigd op [adres] ("Rondje", "wij" of "we").
 
-Je bereikt ons via [e-mail: hallo@rondje.app]. Dit is ook ons contactpunt voor gebruikers en overheidsinstanties onder de Digital Services Act (DSA). Je kunt ons schrijven in het Nederlands, Engels, Spaans of Frans.
+Je bereikt ons via {{contact}}. Dit is ook ons contactpunt voor gebruikers en overheidsinstanties onder de Digital Services Act (DSA). Je kunt ons schrijven in het Nederlands, Engels, Spaans of Frans.
 
 ## 2. Wat Rondje is, en wat niet
 
@@ -186,7 +186,7 @@ Eerlijk is eerlijk: met honden wandelen heeft risico's. Een hond kan bijten, ont
 
 ## 18. Klachten en bezwaar
 
-- Een klacht over Rondje? Mail naar [e-mail: hallo@rondje.app]. We reageren binnen 14 dagen [voorstel].
+- Een klacht over Rondje? Mail naar {{contact}}. We reageren binnen 14 dagen [voorstel].
 - Oneens met een besluit over je inhoud, je account of je melding? Maak binnen **6 maanden** bezwaar via de app of per e-mail. Iemand die niet bij het eerste besluit betrokken was, bekijkt het opnieuw.
 - Je kunt ook naar een gecertificeerde instantie voor buitengerechtelijke geschilbeslechting volgens de DSA, of naar de rechter.
 - Het Europese ODR-platform voor online geschillen bestaat sinds juli 2025 niet meer.

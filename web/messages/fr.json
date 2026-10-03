@@ -90,7 +90,8 @@
     "about": "À propos de Rondje",
     "support": "Rendre Rondje possible",
     "tip": "Recommander un refuge",
-    "forShelters": "Pour les refuges"
+    "forShelters": "Pour les refuges",
+    "contact": "Contact"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -1116,7 +1117,24 @@
     "lostPets": "Animaux perdus ou trouvés : {name}",
     "animalEmergency": "Animaux en détresse : {name}",
     "police": "Pas d'urgence, mais besoin de la police ? Appelez le {number}.",
-    "website": "Site web"
+    "website": "Site web",
+    "contact": "Une question pour Rondje, par exemple sur votre compte ou votre vie privée ?",
+    "contactLink": "Comment nous joindre"
+  },
+  "contact": {
+    "title": "Contact",
+    "heading": "Comment nous joindre",
+    "lede": "Une question, une demande liée à la vie privée, une plainte ou une idée ? Voici comment joindre Rondje.",
+    "emailTitle": "Écrivez-nous",
+    "emailText": "Pour les questions, les demandes liées à la vie privée, les plaintes et les collaborations. Vous pouvez nous écrire en néerlandais, en anglais, en espagnol ou en français.",
+    "soonTitle": "Notre adresse e-mail sera bientôt ici",
+    "soonText": "Nous mettons encore en place notre adresse de contact. En attendant, voici ce que vous pouvez déjà faire :",
+    "nowTitle": "Ce que vous pouvez déjà faire",
+    "report": "Il s'agit d'un profil, d'un chien ou d'une promenade ? Utilisez le bouton « Signaler » sur cette page. Nous examinons chaque signalement sous 24 heures.",
+    "help": "Ça ne va pas fort ? La page d’aide liste des lignes d’écoute gratuites et anonymes.",
+    "helpLink": "Aller à la page d'aide",
+    "suggest": "Vous voulez recommander un refuge ou partager une idée ? Utilisez le formulaire de suggestion.",
+    "moreTitle": "En savoir plus"
   },
   "safety": {
     "title": "Comment Rondje assure la sécurité",
@@ -1283,7 +1301,8 @@
     "title": "Votre compte a été bloqué",
     "text": "Vous ne pouvez plus utiliser Rondje. Motif : {reason}. Vous n'êtes pas d'accord ? Écrivez-nous et nous réexaminerons votre cas.",
     "noReason": "non précisé",
-    "contact": "Écrivez à hallo@rondje.app en indiquant votre nom et l'adresse e-mail de votre compte."
+    "contact": "Écrivez à <email>{address}</email> en indiquant votre nom et l'adresse e-mail de votre compte.",
+    "contactPage": "La <link>page de contact</link> explique comment nous joindre. Indiquez votre nom et l'adresse e-mail de votre compte."
   },
   "errors": {
     "notFound": "Cette page n'existe pas (ou plus).",
@@ -1302,7 +1321,8 @@
       "shelters": "Conditions de partenariat pour les refuges",
       "cookies": "Cookies"
     },
-    "version": "Version {version}"
+    "version": "Version {version}",
+    "contactFallback": "notre adresse de contact"
   },
   "photos": {
     "add": "Ajouter une photo",

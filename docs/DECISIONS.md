@@ -65,7 +65,7 @@ Deze stappen heb ik voorbereid maar niet uitgevoerd:
 - **EU-database** en serverregio Frankfurt vóór echte gebruikers (kosten: Neon Launch op gebruik, of het gratis Neon-plan).
 - **Google- en Apple-login**: sleutels aanmaken (Apple: Developer-account, $99 per jaar).
 - **App Store en Play Store**: ontwikkelaarsaccounts en de inzending zelf (zie `LAUNCH.md`).
-- **Domeinnaam** registreren, bijvoorbeeld rondje.app of rondjelopen.nl. Kost ongeveer €10–20 per jaar.
+- **Domeinnaam** registreren, bijvoorbeeld rondjelopen.nl (het .app-domein met de naam Rondje is al van een ander bedrijf). Kost ongeveer €10–20 per jaar. Zet daarna `CONTACT_EMAIL` op een adres van dat (of een ander eigen) domein.
 - **Partners en opvangen benaderen** met de concept-mails in `PARTNERS.md` en `OUTREACH.md`.
 - **Video's posten** uit `GROWTH.md` op een eigen TikTok- of Instagram-account.
 - **Een stichting oprichten.** Pas nodig bij de eerste fondsaanvraag. Kosten bij de notaris: ongeveer €300–600.

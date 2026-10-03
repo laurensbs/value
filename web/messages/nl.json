@@ -90,7 +90,8 @@
     "about": "Over Rondje",
     "support": "Maak Rondje mogelijk",
     "tip": "Tip een opvang",
-    "forShelters": "Voor opvangen"
+    "forShelters": "Voor opvangen",
+    "contact": "Contact"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -1116,7 +1117,24 @@
     "lostPets": "Vermiste of gevonden dieren: {name}",
     "animalEmergency": "Dieren in nood: {name}",
     "police": "Geen spoed, wel politie nodig? Bel {number}.",
-    "website": "Website"
+    "website": "Website",
+    "contact": "Een vraag voor Rondje zelf, bijvoorbeeld over je account of je privacy?",
+    "contactLink": "Zo bereik je ons"
+  },
+  "contact": {
+    "title": "Contact",
+    "heading": "Zo bereik je ons",
+    "lede": "Een vraag, een privacyverzoek, een klacht of een idee? Hier lees je hoe je Rondje bereikt.",
+    "emailTitle": "Mail ons",
+    "emailText": "Voor vragen, privacyverzoeken, klachten en samenwerken. Je kunt ons schrijven in het Nederlands, Engels, Spaans of Frans.",
+    "soonTitle": "Ons e-mailadres staat hier binnenkort",
+    "soonText": "We regelen ons contactadres nog. Tot die tijd kun je dit al doen:",
+    "nowTitle": "Wat je nu al kunt doen",
+    "report": "Gaat het om een profiel, hond of rondje? Gebruik de knop ‘Melden’ op die pagina. We kijken binnen 24 uur.",
+    "help": "Gaat het even niet goed? Op de hulppagina vind je gratis en anonieme hulplijnen.",
+    "helpLink": "Naar de hulppagina",
+    "suggest": "Een opvang tippen of een idee delen? Gebruik het tipformulier.",
+    "moreTitle": "Meer lezen"
   },
   "safety": {
     "title": "Hoe Rondje veiligheid regelt",
@@ -1283,7 +1301,8 @@
     "title": "Je account is geblokkeerd",
     "text": "Je kunt Rondje niet meer gebruiken. Reden: {reason}. Ben je het hier niet mee eens? Mail ons, dan kijken we opnieuw.",
     "noReason": "niet opgegeven",
-    "contact": "Mail naar hallo@rondje.app met je naam en het e-mailadres van je account."
+    "contact": "Mail naar <email>{address}</email> met je naam en het e-mailadres van je account.",
+    "contactPage": "Op de <link>contactpagina</link> lees je hoe je ons bereikt. Vermeld je naam en het e-mailadres van je account."
   },
   "errors": {
     "notFound": "Deze pagina bestaat niet (meer).",
@@ -1302,7 +1321,8 @@
       "shelters": "Partnervoorwaarden voor opvangen",
       "cookies": "Cookies"
     },
-    "version": "Versie {version}"
+    "version": "Versie {version}",
+    "contactFallback": "ons contactadres"
   },
   "photos": {
     "add": "Foto toevoegen",

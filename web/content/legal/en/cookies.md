@@ -51,4 +51,4 @@ You can delete or block cookies in your browser settings. If you block the sessi
 
 ## 7. Questions
 
-Questions about cookies? Email [e-mail: hallo@rondje.app].
+Questions about cookies? Email {{contact}}.

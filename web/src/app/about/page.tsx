@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { BROWN, GOLDEN } from '@/components/landing/looks'
 import { IconTile, PageHero, type Tone } from '@/components/landing/PageHero'
+import { CONTACT_PATH } from '@/lib/contact'
 import { loadMarkdown } from '@/lib/content'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
@@ -137,6 +138,9 @@ export default async function AboutPage({ searchParams }: { searchParams: Promis
           )}
         </p>
         <div className="row lp-touch">
+          <Link href={CONTACT_PATH} className="button ghost small">
+            <Icon name="chat" size={16} /> {t('footer.contact')}
+          </Link>
           {native ? null : (
             <Link href="/support" className="button ghost small">
               <Icon name="heart" size={16} /> {t('support.title')}

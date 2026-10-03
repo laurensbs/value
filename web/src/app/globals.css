@@ -2877,6 +2877,18 @@ legend {
   margin-top: 2px;
 }
 
+/* Text with its own action below it; the action is a full 44px tap target (used on /contact and /help). */
+.tap-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.button.tap {
+  min-height: 44px;
+}
+
 .cost-table {
   width: 100%;
   border-collapse: collapse;

@@ -146,7 +146,7 @@ Rondje can only see someone's location during an active walk. Outside a walk, we
 
 ## 6. Reporting to Rondje
 
-Report every incident and every unsafe situation using the **Report** button in the app, or email [e-mail: hallo@rondje.app]. Please tell us:
+Report every incident and every unsafe situation using the **Report** button in the app, or email {{contact}}. Please tell us:
 
 - what happened, when and where;
 - who was involved;

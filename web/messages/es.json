@@ -90,7 +90,8 @@
     "about": "Sobre Rondje",
     "support": "Haz posible Rondje",
     "tip": "Recomienda una protectora",
-    "forShelters": "Para protectoras"
+    "forShelters": "Para protectoras",
+    "contact": "Contacto"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -1116,7 +1117,24 @@
     "lostPets": "Animales perdidos o encontrados: {name}",
     "animalEmergency": "Animales en apuros: {name}",
     "police": "¿No es urgente, pero necesitas a la policía? Llama al {number}.",
-    "website": "Sitio web"
+    "website": "Sitio web",
+    "contact": "¿Una pregunta para Rondje, por ejemplo sobre tu cuenta o tu privacidad?",
+    "contactLink": "Cómo contactarnos"
+  },
+  "contact": {
+    "title": "Contacto",
+    "heading": "Cómo contactarnos",
+    "lede": "¿Una pregunta, una solicitud de privacidad, una queja o una idea? Aquí te contamos cómo contactar con Rondje.",
+    "emailTitle": "Escríbenos",
+    "emailText": "Para preguntas, solicitudes de privacidad, quejas y colaboraciones. Puedes escribirnos en neerlandés, inglés, español o francés.",
+    "soonTitle": "Nuestro correo electrónico estará aquí pronto",
+    "soonText": "Todavía estamos preparando nuestra dirección de contacto. Mientras tanto, ya puedes hacer esto:",
+    "nowTitle": "Lo que ya puedes hacer",
+    "report": "¿Se trata de un perfil, un perro o un paseo? Usa el botón «Denunciar» de esa página. Lo revisamos en menos de 24 horas.",
+    "help": "¿Un mal momento? En la página de ayuda encontrarás líneas de ayuda gratuitas y anónimas.",
+    "helpLink": "Ir a la página de ayuda",
+    "suggest": "¿Quieres recomendar una protectora o compartir una idea? Usa el formulario de sugerencias.",
+    "moreTitle": "Más información"
   },
   "safety": {
     "title": "Cómo gestiona Rondje la seguridad",
@@ -1283,7 +1301,8 @@
     "title": "Tu cuenta ha sido bloqueada",
     "text": "Ya no puedes usar Rondje. Motivo: {reason}. ¿No estás de acuerdo? Escríbenos y lo revisaremos.",
     "noReason": "no especificado",
-    "contact": "Escribe a hallo@rondje.app con tu nombre y el correo electrónico de tu cuenta."
+    "contact": "Escribe a <email>{address}</email> con tu nombre y el correo electrónico de tu cuenta.",
+    "contactPage": "En la <link>página de contacto</link> te explicamos cómo escribirnos. Indica tu nombre y el correo electrónico de tu cuenta."
   },
   "errors": {
     "notFound": "Esta página no existe (o ya no existe).",
@@ -1302,7 +1321,8 @@
       "shelters": "Condiciones para protectoras colaboradoras",
       "cookies": "Cookies"
     },
-    "version": "Versión {version}"
+    "version": "Versión {version}",
+    "contactFallback": "nuestra dirección de contacto"
   },
   "photos": {
     "add": "Añadir foto",

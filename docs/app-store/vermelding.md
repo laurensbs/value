@@ -66,7 +66,7 @@ De eerste versie. Ontdek honden in je buurt, maak kennis en loop je eerste rondj
 
 **Categorie:** Levensstijl (secundair: Sociaal netwerken)
 
-**Ondersteunings-URL:** https://rondje-five.vercel.app/help
+**Ondersteunings-URL:** https://rondje-five.vercel.app/contact
 **Privacybeleid-URL:** https://rondje-five.vercel.app/legal/privacy
 
 ## English

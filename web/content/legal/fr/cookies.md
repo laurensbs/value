@@ -51,4 +51,4 @@ Vous pouvez supprimer ou bloquer les cookies dans les réglages de votre navigat
 
 ## 7. Questions
 
-Des questions sur les cookies ? Écrivez à [e-mail: hallo@rondje.app].
+Des questions sur les cookies ? Écrivez à {{contact}}.
