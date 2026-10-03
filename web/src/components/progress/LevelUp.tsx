@@ -34,8 +34,9 @@ export function LevelUp({ celebration: c, onDone }: { celebration: Celebration; 
     if (closed.current) return
     closed.current = true
     ref.current?.close()
-    void celebrationSeen(c.level).catch(() => undefined)
-    onDone?.()
+    const seen = celebrationSeen(c.level).catch(() => undefined)
+    // Move on once it is saved as seen, so the next page (home, after "Klaar") doesn't celebrate it again.
+    if (onDone) void seen.then(onDone)
   }
 
   const heading = c.levelUp ? t('levelUp') : c.awards.length > 1 ? t('newBadges', { n: c.awards.length }) : t('newBadge')

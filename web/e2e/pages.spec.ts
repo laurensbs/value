@@ -42,6 +42,14 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await expect(page.getByRole('heading', { name: 'Altijd gratis, nooit advertenties' })).toBeVisible()
   await shot(page, '32-city')
   expect((await page.request.get('/cities/atlantis')).status()).toBe(404)
+  // Pages with a loading screen still answer with a real status: 404 for a dog that isn't there, and a
+  // redirect to the login page for a visitor.
+  expect((await page.request.get('/dogs/bestaat-niet')).status()).toBe(404)
+  for (const path of ['/requests', '/progress']) {
+    const response = await page.request.get(path, { maxRedirects: 0 })
+    expect(response.status()).toBe(307)
+    expect(response.headers().location).toContain('/login')
+  }
 
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/cities/amsterdam')

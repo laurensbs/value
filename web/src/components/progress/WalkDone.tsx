@@ -15,7 +15,8 @@ const noop = () => () => undefined
 interface Props {
   walkId: string
   dogName: string
-  distance: string
+  /** The distance walked, or null under 50 m: then the sentence thanks without a number (never "0 m"). */
+  distance: string | null
   /** Points this walk earned so far (the walk, report, photo). */
   points: number | null
   feedbackGiven: boolean
@@ -25,7 +26,9 @@ interface Props {
 
 /**
  * Right after "Rondje klaar": a small celebration, the private mood check and the way to the feedback.
- * The same moment as the iPhone app's "Goed rondje!" sheet.
+ * The same moment as the iPhone app's "Goed rondje!" sheet: no confetti, it is about the dog. A new
+ * level or badge waits until the walker taps "Klaar" or "Hoe ging het?", like the app does after
+ * this screen. The timing (0.9 s, as long as the finish sound) lives in progress.css.
  */
 export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, celebration }: Props) {
   const t = useTranslations('walkDone')
@@ -75,10 +78,10 @@ export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, cel
       <span className="walk-done-paw" aria-hidden="true">
         <ProgressIcon name="paw" size={46} />
       </span>
-      <h2 id="walk-done-title" className="walk-done-title">
+      <h1 id="walk-done-title" className="walk-done-title">
         {t('title')}
-      </h2>
-      <p className="walk-done-text">{t('text', { dog: dogName, distance })}</p>
+      </h1>
+      <p className="walk-done-text">{distance ? t('text', { dog: dogName, distance }) : t('textShort', { dog: dogName })}</p>
       {points ? <span className="pill ball">{tp('walkPoints', { n: points })}</span> : null}
       <div className="walk-done-mood">
         <MoodPicker

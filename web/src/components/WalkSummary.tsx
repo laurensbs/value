@@ -10,11 +10,10 @@ import { progressFor } from '@/server/progress'
 import { progressJson } from '@/server/progress-json'
 import type { OnboardedViewer } from '@/server/session'
 import { walkPhotos, type Walk } from '@/server/walks'
-import { Celebration } from './Celebration'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
 import { Map } from './map'
-import type { Celebration as LevelMoment } from './progress/LevelUp'
+import { LevelUp, type Celebration as LevelMoment } from './progress/LevelUp'
 import { ProgressIcon } from './progress/ProgressIcon'
 import { WalkDone } from './progress/WalkDone'
 import { ReportButton } from './ReportButton'
@@ -65,24 +64,43 @@ export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId,
   const celebrate = progress.levelUp || progress.newAwards.length > 0
   const week = progress.weeklyGoal != null && role === 'walker'
   const distance = formatWalkDistance(walk.distanceM ?? 0, locale)
-  // "Goed rondje!" right after ending; the level/badge moment is left to <Celebration> below, so it never shows twice.
+  // "Goed rondje!" right after ending. A new level or badge comes after it, once the walker moves on
+  // (WalkDone shows it then), never on top of it. One party after a walk: LevelUp, with paws, like the app.
   const done = role === 'walker' && justEnded ? justEnded : null
+  const moment: LevelMoment | null = celebrate
+    ? {
+        level: json.level.number,
+        name: json.level.name,
+        levelUp: progress.levelUp,
+        awards: json.newAwards.map((a) => ({ key: a.key, title: a.title, color: a.color })),
+      }
+    : null
 
   return (
     <div className="narrow-page stack-l">
       {done ? (
-        <WalkDone walkId={walk.id} dogName={dog.name} distance={distance} points={null} feedbackGiven={Boolean(given)} celebration={null} />
-      ) : null}
-      <header className="summary-head">
-        <DogPortrait dog={dog} size={88} />
-        <div className="stack-s">
-          <p className="eyebrow">{t('walk.ended')}</p>
-          <h1>{t('walk.with', { name: dog.name })}</h1>
-          <p className="lede">
-            {t('walk.endedText', { name: dog.name, distance, minutes })}
-          </p>
-        </div>
-      </header>
+        <WalkDone
+          walkId={walk.id}
+          dogName={dog.name}
+          distance={(walk.distanceM ?? 0) < SHORT_WALK_M ? null : distance}
+          points={null}
+          feedbackGiven={Boolean(given)}
+          celebration={done.celebration ?? moment}
+        />
+      ) : (
+        // Right after the walk "Goed rondje!" tells the moment, so this head (saying the same) is only
+        // for coming back to the walk later.
+        <header className="summary-head">
+          <DogPortrait dog={dog} size={88} />
+          <div className="stack-s">
+            <p className="eyebrow">{t('walk.ended')}</p>
+            <h1>{t('walk.with', { name: dog.name })}</h1>
+            <p className="lede">
+              {t('walk.endedText', { name: dog.name, distance, minutes })}
+            </p>
+          </div>
+        </header>
+      )}
       {earned > 0 ? (
         <section className="points-card" aria-labelledby="points-title">
           <span className="points-burst" aria-hidden="true">
@@ -173,16 +191,13 @@ export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId,
         </Link>
       </div>
       <ReportButton walkId={walk.id} subjectUserId={otherUserId} dogId={dog.id} />
-      {celebrate ? (
-        <Celebration
-          level={json.level.number}
-          levelUp={progress.levelUp ? json.level.name : null}
-          awards={json.newAwards.map((a) => ({ key: a.key, tier: a.tier, icon: a.icon, title: a.title, color: a.color }))}
-        />
-      ) : null}
+      {moment && !done ? <LevelUp celebration={moment} /> : null}
     </div>
   )
 }
+
+/** Under this, "Goed rondje!" thanks without a distance: "0 m" reads like the walk didn't count. */
+const SHORT_WALK_M = 50
 
 /** "Wandelmaatjes" as a label, "wandelmaatjes" in the middle of a sentence. */
 function lowerFirst(text: string, locale: string): string {

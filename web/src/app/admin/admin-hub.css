@@ -54,7 +54,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 14px;
   border-radius: 999px;
   border: 1px solid var(--line);
@@ -352,6 +352,9 @@
 
 .admin-q-act {
   justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   margin-top: 2px;
   color: var(--grass);
   font-weight: 700;

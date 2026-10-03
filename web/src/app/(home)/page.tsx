@@ -19,7 +19,7 @@ import { isNativeRequest } from '@/server/native'
 import { listDogs } from '@/server/queries'
 import { Today } from '@/components/Today'
 import { getViewer, type OnboardedViewer } from '@/server/session'
-import './landing.css'
+import '../landing.css'
 
 const SAFETY: { key: 1 | 2 | 3 | 4 | 5 | 6; icon: ReactNode; tone: Tone }[] = [
   { key: 1, icon: <Icon name="users" />, tone: 'green' },

@@ -1308,7 +1308,9 @@
     "notFound": "Deze pagina bestaat niet (meer).",
     "generic": "Er ging iets mis. Probeer het opnieuw.",
     "home": "Naar de homepage",
-    "retry": "Probeer opnieuw"
+    "retry": "Probeer opnieuw",
+    "server": "Er ging iets mis aan onze kant. Probeer het zo nog eens.",
+    "offline": "Dat lukte even niet. Controleer je verbinding en probeer het opnieuw."
   },
   "legal": {
     "fallback": "Deze tekst is nog niet vertaald. Je leest de Nederlandse versie.",
@@ -2236,7 +2238,8 @@
     "feedback": "Hoe ging het?",
     "done": "Klaar",
     "points": "+{n} punten",
-    "breathe": "Nog even landen? Doe de ademminuut"
+    "breathe": "Nog even landen? Doe de ademminuut",
+    "textShort": "{dog} en jij zijn samen op pad geweest. Dank je wel."
   },
   "profileHub": {
     "levelBadges": "{n, plural, =0 {Nog geen penningen} one {# penning} other {# penningen}}",
@@ -3321,5 +3324,9 @@
         "how": "Mails en belscripts voor opvangen, dierenartsen, verenigingen en de lokale pers. Je verstuurt ze zelf, vanuit je eigen mail."
       }
     }
+  },
+  "loading": {
+    "label": "Even laden…",
+    "slow": "Dit duurt langer dan normaal."
   }
 }
