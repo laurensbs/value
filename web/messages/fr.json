@@ -2333,8 +2333,8 @@
     },
     "tasks": {
       "name": {
-        "title": "Choisir le nom : Woofmigo, oui ou non",
-        "hint": "Vérifiez d’abord dans App Store Connect si le nom est libre (Apps → + → Nouvelle app), et cherchez WOOF et MIGO dans TMview, classes 9, 42 et 45. D’ici là, tout reste sur Brand.name et APP_NAME."
+        "title": "Nom : nouveau tour, Woofmigo est abandonné (Guaumigo)",
+        "hint": "Guaumigo, une app espagnole de promenade de chiens aussi active aux Pays-Bas et en Belgique, ressemble trop à Woofmigo. Choisissez dans le nouveau tour de noms (_werk/naam/). D’ici là, tout reste sur APP_NAME et Brand.name."
       },
       "goLive": {
         "title": "Mettre en ligne : fusionner en production",
@@ -2354,7 +2354,7 @@
       },
       "trademark": {
         "title": "Vérifier la marque sur TMview",
-        "hint": "Cherchez « rondje » ou le nouveau nom, dans les classes 9, 42 et 45."
+        "hint": "Cherchez le nouveau nom (exact et similaire) dans TMview, BOIP et OEPM (Espagne), dans les classes 9, 42 et 45. Attention à Guaumigo et à la demande européenne PawAmigo."
       },
       "appleAccount": {
         "title": "Compte Apple Developer",
@@ -2362,7 +2362,7 @@
       },
       "domain": {
         "title": "Acheter et relier un domaine",
-        "hint": "Après le choix du nom, environ 12 € par an. Ensuite Vercel → Settings → Domains (docs/LAUNCH.md §8). Compté dans les coûts dès que vous cochez."
+        "hint": "N’achetez que lorsque le nom passe toutes les vérifications : marques, App Store, domaines et comptes. Environ 12 € par an. Ensuite Vercel → Settings → Domains (docs/LAUNCH.md §8). Compté dans les coûts dès que vous cochez."
       },
       "socialKeys": {
         "title": "Clés pour Se connecter avec Apple et Google",

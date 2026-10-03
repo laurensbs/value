@@ -2333,8 +2333,8 @@
     },
     "tasks": {
       "name": {
-        "title": "Choose the name: Woofmigo, yes or no",
-        "hint": "First check in App Store Connect whether the name is free (Apps → + → New App), and search TMview for WOOF and MIGO in classes 9, 42 and 45. Until then everything stays on Brand.name and APP_NAME."
+        "title": "Name: new round, Woofmigo is dropped (Guaumigo)",
+        "hint": "Guaumigo, a Spanish dog-walking app that is also active in NL and BE, is too close to Woofmigo. Choose from the new name round (_werk/naam/). Until then everything stays on APP_NAME and Brand.name."
       },
       "goLive": {
         "title": "Go live: merge to production",
@@ -2354,7 +2354,7 @@
       },
       "trademark": {
         "title": "Trademark check on TMview",
-        "hint": "Search for “rondje” or the new name, in classes 9, 42 and 45."
+        "hint": "Search the new name (exact and similar) in TMview, BOIP and OEPM (Spain), in classes 9, 42 and 45. Watch out for Guaumigo and the EU application PawAmigo."
       },
       "appleAccount": {
         "title": "Apple Developer account",
@@ -2362,7 +2362,7 @@
       },
       "domain": {
         "title": "Buy and connect a domain",
-        "hint": "After choosing the name, about €12 a year. Then Vercel → Settings → Domains (docs/LAUNCH.md §8). Counts in the costs once you tick it off."
+        "hint": "Only buy once the name passes every check: trademarks, App Store, domains and handles. About €12 a year. Then Vercel → Settings → Domains (docs/LAUNCH.md §8). Counts in the costs once you tick it off."
       },
       "socialKeys": {
         "title": "Keys for Sign in with Apple and Google",
