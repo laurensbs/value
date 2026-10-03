@@ -126,7 +126,7 @@
 
 /* Below 900px the floating tab bar sits over the bottom of the screen; keep the chat box above it. */
 @media (max-width: 899px) {
-  .app-mode .chat-form {
+  .app-mode .chat-compose {
     bottom: calc(84px + env(safe-area-inset-bottom, 0px));
   }
 }

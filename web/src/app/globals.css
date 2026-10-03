@@ -3332,6 +3332,10 @@ legend {
   z-index: 2;
   display: grid;
   gap: 8px;
+  /* Messages scrolling underneath fade out above it and stay hidden below it, instead of showing
+     between the ready messages or in the gap above the tab bar. */
+  background: var(--paper);
+  box-shadow: 0 -10px 10px var(--paper), 0 8px 0 var(--paper);
 }
 
 .chat-quick {
@@ -3411,7 +3415,7 @@ legend {
 
 /* Below 900px the tab bar covers the bottom of the screen; keep the chat box above it. */
 @media (max-width: 899px) {
-  .has-tabbar .chat-form {
+  .has-tabbar .chat-compose {
     bottom: calc(var(--tabbar-h) + 8px + env(safe-area-inset-bottom, 0px));
   }
 }
