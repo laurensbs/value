@@ -2193,7 +2193,6 @@
     "lede": "Todo para el lanzamiento en un solo lugar: lo que falta, quién hace qué, tus mensajes y cómo crece. A tu ritmo.",
     "levelChip": "{level} · {points} puntos",
     "pointsShort": "+{n}",
-    "install": "Consejo: abre esta página en tu iPhone con Safari y elige Compartir → Añadir a pantalla de inicio. El centro de lanzamiento se abrirá como una app propia.",
     "entry": {
       "title": "Centro de lanzamiento",
       "text": "Lista de lanzamiento, banco de mensajes para protectoras y otros, cifras semanales y costes."
@@ -2495,6 +2494,194 @@
       "when": {
         "apple": "cuando te des de alta",
         "domain": "cuando esté comprado"
+      }
+    },
+    "import": {
+      "button": "Importar CSV",
+      "title": "Importar contactos",
+      "hint": "Pega un CSV o elige un archivo. La primera línea nombra las columnas:",
+      "rules": "Público (audience): shelter, vet, student, neighbourhood o press. Basta con un nombre o una organización. Como máximo {max} contactos a la vez. Todo entra como ‘por enviar’ y no se envía nada.",
+      "paste": "Pegar CSV",
+      "file": "O elige un archivo",
+      "preview": "Ver vista previa",
+      "rowsLabel": "Contactos del archivo",
+      "line": "línea {n}",
+      "counts": {
+        "new": "{n} nuevos",
+        "duplicate": "{n} duplicados",
+        "invalid": "{n} con error"
+      },
+      "status": {
+        "new": "Nuevo",
+        "existing": "Ya está en la lista",
+        "duplicate": "Duplicado en el archivo"
+      },
+      "problems": {
+        "audience": "Público desconocido",
+        "missingName": "Falta nombre u organización",
+        "email": "El correo no es correcto",
+        "tooLong": "Un campo es demasiado largo"
+      },
+      "confirm": "{n, plural, one {Importar # contacto} other {Importar # contactos}}",
+      "nothing": "Nada nuevo que importar",
+      "done": "{added, plural, =0 {No se añadieron contactos nuevos.} one {# contacto añadido como ‘por enviar’.} other {# contactos añadidos como ‘por enviar’.}}",
+      "skipped": "Omitidos: {duplicate} duplicados y {invalid} con error.",
+      "errors": {
+        "empty": "No hay contactos. Pon los nombres de las columnas en la primera línea y debajo un contacto por línea.",
+        "header": "La primera línea debe tener los nombres de las columnas, con al menos audience y organisation o name.",
+        "tooMany": "Son {rows} contactos. Importa como máximo {max} a la vez.",
+        "tooBig": "Este archivo es demasiado grande para una lista de contactos.",
+        "invalid": "Algo salió mal. Inténtalo de nuevo.",
+        "read": "No se pudo leer este archivo. Elige un archivo .csv."
+      }
+    }
+  },
+  "adminHub": {
+    "title": "Gestión",
+    "hello": "Hola {name}, esto es lo que pasa.",
+    "signIn": "Inicia sesión para abrir Gestión",
+    "open": "Ver",
+    "nav": {
+      "label": "Secciones de Gestión",
+      "overview": "Resumen",
+      "launch": "Lanzamiento",
+      "marketing": "Marketing",
+      "moderation": "Moderación",
+      "shelters": "Protectoras",
+      "tips": "Sugerencias",
+      "numbers": "Cifras"
+    },
+    "tiles": {
+      "label": "Ir a una sección",
+      "launch": {
+        "title": "Lanzamiento",
+        "open": "{open} de {total} te esperan",
+        "done": "Todo lo tuyo está hecho"
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Visibilidad y crecimiento"
+      },
+      "moderation": {
+        "title": "Moderación",
+        "text": "{reports, plural, =0 {Sin denuncias abiertas} one {# denuncia abierta} other {# denuncias abiertas}} · {signals, plural, =0 {sin señales} one {# señal} other {# señales}}"
+      },
+      "shelters": {
+        "title": "Protectoras",
+        "text": "{n, plural, =0 {Nadie espera verificación} one {# espera verificación} other {# esperan verificación}}"
+      },
+      "tips": {
+        "title": "Sugerencias y votos",
+        "text": "{n, plural, =0 {Nada nuevo} one {# protectora pedida} other {# protectoras pedidas}}"
+      },
+      "numbers": {
+        "title": "Cifras",
+        "text": "{n, plural, one {# paseo} other {# paseos}} esta semana{running, plural, =0 {} other {, # en curso}}"
+      }
+    },
+    "questionsTitle": "Las mejores preguntas",
+    "questionsHint": "Lo que una responsable experimentada de seguridad y operaciones revisa cada día. En directo desde la base de datos, lo más urgente primero.",
+    "status": {
+      "calm": "Todo tranquilo. Nada te espera.",
+      "attention": "{n, plural, one {Una cosa necesita tu atención hoy.} other {# cosas necesitan tu atención hoy.}}",
+      "urgent": "{n, plural, one {Una cosa necesita tu atención ahora.} other {# cosas necesitan tu atención, y una de ellas ahora mismo.}}"
+    },
+    "level": {
+      "urgent": "Ahora",
+      "attention": "Hoy",
+      "calm": "Tranquilo"
+    },
+    "questions": {
+      "walks": {
+        "q": "¿Hay paseos ahora, y alguno va con retraso?",
+        "overdue": "{overdue, plural, one {# paseo va} other {# paseos van}} con retraso, de los {running} {running, plural, one {paseo en curso} other {paseos en curso}}. Síguelo y contacta si hace falta.",
+        "running": "{running, plural, one {Hay # paseo en curso} other {Hay # paseos en curso}}, todos a tiempo.",
+        "none": "Ahora no hay ningún paseo en curso.",
+        "act": "Seguir el paseo"
+      },
+      "reports": {
+        "q": "¿Hay denuncias que me esperan?",
+        "serious": "{n, plural, one {# denuncia abierta} other {# denuncias abiertas}}, de las que {serious} sobre seguridad o abuso. La más antigua espera {days, plural, =0 {desde hoy} one {desde hace # día} other {desde hace # días}}.",
+        "open": "{n, plural, one {# denuncia abierta} other {# denuncias abiertas}}. La más antigua espera {days, plural, =0 {desde hoy} one {desde hace # día} other {desde hace # días}}.",
+        "none": "No hay denuncias abiertas.",
+        "act": "Gestionar denuncias"
+      },
+      "signals": {
+        "q": "¿Algo trata de dinero, enlaces o una mala experiencia?",
+        "some": "Esta semana: {feedback} opiniones por revisar, {requests} solicitudes marcadas y {chats} mensajes de chat sobre dinero o con un enlace.",
+        "none": "Esta semana no hay opiniones, solicitudes ni mensajes marcados.",
+        "act": "Ver las señales"
+      },
+      "intros": {
+        "q": "¿Hay comprobaciones de DNI o primeros encuentros atascados?",
+        "stuck": "{unanswered, plural, =0 {} one {# primer encuentro espera demasiado al dueño.} other {# primeros encuentros esperan demasiado al dueño.}} {idPending, plural, =0 {} one {Tras # primer encuentro el DNI aún no está confirmado.} other {Tras # primeros encuentros el DNI aún no está confirmado.}}",
+        "none": "Nada está atascado. {waiting, plural, =0 {Ningún primer encuentro espera respuesta.} one {# primer encuentro espera respuesta, aún a tiempo.} other {# primeros encuentros esperan respuesta, aún a tiempo.}}",
+        "act": "Ver el perro"
+      },
+      "shelters": {
+        "q": "¿Qué protectoras esperan verificación?",
+        "waiting": "{n, plural, one {# protectora espera} other {# protectoras esperan}} verificación, la más antigua {days, plural, =0 {desde hoy} one {desde hace # día} other {desde hace # días}}.",
+        "none": "Ninguna protectora espera verificación.",
+        "act": "Verificar protectoras"
+      },
+      "safety": {
+        "q": "¿A quién se bloqueó o expulsó esta semana?",
+        "repeat": "{repeat, plural, one {# persona fue bloqueada} other {# personas fueron bloqueadas}} por dos o más personas en 30 días: mira si también hay denuncias. Esta semana {banned, plural, =0 {nadie expulsado} other {# expulsados ({names})}}.",
+        "banned": "Expulsados esta semana: {names}. {blocks, plural, =0 {Sin bloqueos de usuarios.} one {# bloqueo de usuarios.} other {# bloqueos de usuarios.}}",
+        "quiet": "Nadie expulsado esta semana. {blocks, plural, =0 {Sin bloqueos de usuarios.} one {# bloqueo de usuarios.} other {# bloqueos de usuarios.}}",
+        "act": "Ver moderación"
+      },
+      "groupWalks": {
+        "q": "¿Se llenan los paseos en grupo de los próximos dos días?",
+        "empty": "{empty, plural, one {# paseo en grupo no tiene} other {# paseos en grupo no tienen}} inscripciones aún, de los {n} previstos. Compártelos o pregunta a la protectora si siguen en pie.",
+        "filled": "{n, plural, one {# paseo en grupo previsto, con inscripciones.} other {# paseos en grupo previstos, todos con inscripciones.}}",
+        "none": "No hay paseos en grupo en los próximos dos días.",
+        "act": "Abrir la protectora"
+      },
+      "tips": {
+        "q": "¿Qué sugerencias y votos piden seguimiento?",
+        "open": "{n, plural, one {# protectora pedida} other {# protectoras pedidas}}, la que más {top} ({votes, plural, one {# voto} other {# votos}}). {followUp, plural, =0 {} one {Con # protectora contactada no hay noticias desde hace dos semanas.} other {Con # protectoras contactadas no hay noticias desde hace dos semanas.}}",
+        "followUp": "{followUp, plural, one {Con # protectora contactada no hay noticias desde hace dos semanas.} other {Con # protectoras contactadas no hay noticias desde hace dos semanas.}} Pregunta cómo va.",
+        "none": "No hay sugerencias ni votos nuevos, y nada que seguir.",
+        "act": "Seguir sugerencias"
+      },
+      "system": {
+        "q": "¿Están sanas la base de datos y la limpieza diaria?",
+        "healthy": "La base de datos ({database}) responde en {ms} ms y la limpieza está al día.",
+        "slow": "La base de datos ({database}) tardó {ms} ms en una pregunta sencilla. Comprueba que la app y la base de datos estén en la misma región.",
+        "cronLate": "La limpieza va atrasada: {requests} solicitudes caducadas, {walks} paseos aún abiertos y {routes} rutas de más de 30 días. Mira en Vercel, en Cron Jobs, si /api/cron/cleanup se ejecuta.",
+        "demoDatabase": "No hay una base de datos real conectada: todo está en memoria y se pierde en el próximo despliegue. Conecta Neon en Vercel.",
+        "act": "Ver ajustes"
+      }
+    },
+    "items": {
+      "overdue": "{minutes} min de retraso",
+      "unanswered": "espera {days, plural, =0 {desde hoy} one {# día} other {# días}} · encuentro {startsAt}",
+      "idPending": "encuentro hace {days, plural, one {# día} other {# días}}, DNI aún sin confirmar",
+      "emptyWalk": "{startsAt} · aún sin inscripciones"
+    },
+    "install": {
+      "title": "Gestión como app en tu iPhone",
+      "text": "Abre Gestión en Safari, toca Compartir y elige Añadir a pantalla de inicio. Así Gestión se abre como una app propia, con todas las secciones de arriba."
+    },
+    "pages": {
+      "moderation": {
+        "title": "Moderación",
+        "lede": "Denuncias, señales sobre dinero y enlaces, y cuentas bloqueadas. Lo más urgente primero.",
+        "noBans": "Nadie bloqueado."
+      },
+      "shelters": {
+        "title": "Protectoras",
+        "lede": "Protectoras que se han registrado, la más antigua primero. Sus perros solo salen en línea cuando las verificas.",
+        "since": "registrada el {date}"
+      },
+      "tips": {
+        "title": "Sugerencias y votos"
+      },
+      "numbers": {
+        "title": "Cifras",
+        "lede": "Cómo crece Rondje, de dónde viene la gente nueva y cómo está configurado todo.",
+        "weekly": "Cifras por semana en el centro de lanzamiento"
       }
     }
   }

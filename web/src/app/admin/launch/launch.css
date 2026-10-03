@@ -841,17 +841,6 @@ mark.launch-gap {
   font-weight: 800;
 }
 
-.launch-install {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.launch-install .icon {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
 .launch-steps {
   max-width: 520px;
 }

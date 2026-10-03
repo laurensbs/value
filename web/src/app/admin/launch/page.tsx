@@ -17,14 +17,8 @@ import { requireAdmin } from '@/server/session'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('launch')
-  return {
-    title: t('title'),
-    robots: { index: false },
-    // Its own manifest and home-screen name: "Zet op beginscherm" opens the hub as an app.
-    manifest: '/admin/launch/manifest.webmanifest',
-    icons: { icon: '/favicon.svg', apple: '/apple-touch-icon.png' },
-    appleWebApp: { capable: true, title: t('title'), statusBarStyle: 'default' },
-  }
+  // The home-screen app (manifest, appleWebApp) is all of Beheer, from the admin layout.
+  return { title: t('title'), robots: { index: false } }
 }
 
 const json = (tasks: TaskState[]): TaskJson[] =>
@@ -42,7 +36,7 @@ const json = (tasks: TaskState[]): TaskJson[] =>
 
 /** The launch hub: what is left to do and who does it, the message bank, and the numbers. Admin only. */
 export default async function LaunchPage() {
-  const viewer = await requireAdmin()
+  const viewer = await requireAdmin('/admin/launch')
   const [t, data, native] = await Promise.all([getTranslations('launch'), launchData(), isNativeRequest()])
   const { waiting, mine, others, done } = data.tasks
   const waitingOpen = waiting.filter((task) => !task.done).length
@@ -127,10 +121,6 @@ export default async function LaunchPage() {
         {/* The app shells never show anything about money (App Store and Play rules). */}
         {native ? null : <CostsCard costs={data.costs} members={data.members} />}
       </section>
-
-      <p className="muted small launch-install">
-        <Icon name="home" size={16} /> {t('install')}
-      </p>
     </div>
   )
 }

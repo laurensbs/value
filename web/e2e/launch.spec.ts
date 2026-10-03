@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { signInAdmin, unique } from './helpers'
+import { newPerson, signInAdmin, unique } from './helpers'
 
 test('admin: launch hub with the waiting tasks, a ticked-off task, a contact and a mail ready to send', async ({ browser }) => {
   const admin = await signInAdmin(browser)
@@ -9,7 +9,7 @@ test('admin: launch hub with the waiting tasks, a ticked-off task, a contact and
   await page.goto('/profile')
   await page.getByRole('link', { name: /^Beheer Meldingen/ }).click()
   await expect(page).toHaveURL(/\/admin$/)
-  await page.getByRole('link', { name: /Lanceerhub/ }).click()
+  await page.locator('.admin-tiles').getByRole('link', { name: /^Lancering/ }).click()
   await expect(page).toHaveURL(/\/admin\/launch$/)
   await expect(page.getByRole('heading', { name: 'Lanceerhub', level: 1 })).toBeVisible()
 
@@ -57,15 +57,67 @@ test('admin: launch hub with the waiting tasks, a ticked-off task, a contact and
   await page.reload()
   await expect(page.locator('.launch-contact').filter({ hasText: org }).getByRole('button', { name: 'Verstuurd' })).toHaveAttribute('aria-pressed', 'true')
 
-  // Its own manifest, so "Zet op beginscherm" opens the hub as an app.
-  await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/admin/launch/manifest.webmanifest')
-  const manifest = await (await page.request.get('/admin/launch/manifest.webmanifest')).json()
-  expect(manifest).toMatchObject({ name: 'Lanceerhub', start_url: '/admin/launch', scope: '/admin/launch', display: 'standalone' })
+  // No manifest of its own any more: the whole of Beheer is one home-screen app.
+  await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/admin/manifest.webmanifest')
+  expect((await page.request.get('/admin/launch/manifest.webmanifest')).status()).toBe(404)
 
   await admin.context.close()
 })
 
-test('the launch hub is for admins only', async ({ page }) => {
+test('launch hub: import contacts from a CSV, with a preview that skips duplicates and mistakes', async ({ browser }) => {
+  const admin = await signInAdmin(browser)
+  const page = admin.page
+  const id = unique()
   await page.goto('/admin/launch')
-  await expect(page).toHaveURL(/\/login\?next=%2Fadmin/)
+  await page.getByRole('button', { name: 'Importeer CSV' }).click()
+  const panel = page.locator('.launch-import')
+  await panel.getByLabel('CSV plakken').fill(
+    [
+      'audience,organisation,name,email,phone,city,note',
+      `shelter,Opvang Import ${id},Sanne,sanne-${id}@rondje.test,,Utrecht,`,
+      `dierenarts,Kliniek Import ${id},,kliniek-${id}@rondje.test,,Zeist,`,
+      `shelter,opvang import ${id},Sanne,SANNE-${id}@rondje.test,,Utrecht,dubbel`,
+      `bakker,Bakkerij ${id},,,,Zeist,`,
+      `press,Krant ${id},,geen-adres,,Utrecht,`,
+    ].join('\n'),
+  )
+  await panel.getByRole('button', { name: 'Bekijk voorbeeld' }).click()
+  await expect(panel.getByText('2 nieuw')).toBeVisible()
+  await expect(panel.getByText('1 dubbel')).toBeVisible()
+  await expect(panel.getByText('2 met een fout')).toBeVisible()
+  const rows = panel.getByRole('list', { name: 'Contacten in het bestand' }).getByRole('listitem')
+  await expect(rows).toHaveCount(5)
+  await expect(rows.nth(2)).toContainText('Dubbel in bestand')
+  await expect(rows.nth(3)).toContainText('Onbekende doelgroep')
+  await expect(rows.nth(4)).toContainText('E-mailadres klopt niet')
+
+  await panel.getByRole('button', { name: 'Importeer 2 contacten' }).click()
+  await expect(panel.getByText(/2 contacten toegevoegd als ‘te sturen’/)).toBeVisible()
+  const card = page.locator('.launch-contact').filter({ hasText: `Kliniek Import ${id}` })
+  await expect(card).toBeVisible()
+  await expect(card.getByRole('button', { name: 'Te sturen' })).toHaveAttribute('aria-pressed', 'true')
+
+  // The same file again: everything is already there.
+  await panel.getByLabel('CSV plakken').fill(`audience,organisation,email\nshelter,Opvang Import ${id},sanne-${id}@rondje.test`)
+  await panel.getByRole('button', { name: 'Bekijk voorbeeld' }).click()
+  await expect(panel.getByText('Staat er al')).toBeVisible()
+  await expect(panel.getByRole('button', { name: 'Niets nieuws om te importeren' })).toBeDisabled()
+
+  await admin.context.close()
+})
+
+test('the launch hub is for admins only, and signing in leads back to it', async ({ browser }) => {
+  // Make sure the admin account exists (also when this test runs on its own).
+  const admin = await signInAdmin(browser)
+  await admin.context.close()
+
+  const visitor = await newPerson(browser)
+  await visitor.page.goto('/admin/launch')
+  await expect(visitor.page).toHaveURL(/\/login\?next=%2Fadmin%2Flaunch$/)
+  await visitor.page.getByLabel('E-mailadres').fill('admin@e2e.test')
+  await visitor.page.getByLabel('Wachtwoord').fill('wandelen-123')
+  await visitor.page.getByRole('button', { name: 'Inloggen', exact: true }).click()
+  await visitor.page.waitForURL((url) => url.pathname === '/admin/launch')
+  await expect(visitor.page.getByRole('heading', { name: 'Lanceerhub', level: 1 })).toBeVisible()
+  await visitor.context.close()
 })

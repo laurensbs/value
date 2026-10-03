@@ -6,7 +6,7 @@ import { cache } from 'react'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { auth } from '@/lib/auth'
-import { adminAccess } from '@/lib/site'
+import { adminAccess, safeNext } from '@/lib/site'
 import { emailEnabled } from './email'
 
 export type Profile = typeof s.profile.$inferSelect
@@ -83,8 +83,14 @@ export async function requireOnboarded(next = '/dogs'): Promise<OnboardedViewer>
   return viewer as OnboardedViewer
 }
 
-export async function requireAdmin(): Promise<Viewer> {
-  const viewer = await requireViewer('/admin')
+/**
+ * For admin pages. `next` is the page itself (e.g. '/admin/launch'), so signing in leads back to
+ * it instead of to /admin. Only a path on this site counts; anything else becomes '/admin'.
+ * Someone on ADMIN_EMAILS who has not confirmed the address yet goes to /admin, which asks for that.
+ */
+export async function requireAdmin(next = '/admin'): Promise<Viewer> {
+  const viewer = await requireViewer(safeNext(next, '/admin'))
+  if (viewer.adminUnconfirmed) redirect('/admin')
   if (!viewer.isAdmin) redirect('/')
   return viewer
 }

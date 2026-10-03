@@ -2193,7 +2193,6 @@
     "lede": "Tout pour le lancement au même endroit : ce qui reste à faire, qui fait quoi, vos messages et la croissance. À votre rythme.",
     "levelChip": "{level} · {points} points",
     "pointsShort": "+{n}",
-    "install": "Astuce : ouvrez cette page sur votre iPhone dans Safari et choisissez Partager → Sur l’écran d’accueil. Le centre de lancement s’ouvre alors comme une app.",
     "entry": {
       "title": "Centre de lancement",
       "text": "Liste de lancement, banque de messages pour les refuges et d’autres, chiffres par semaine et coûts."
@@ -2495,6 +2494,194 @@
       "when": {
         "apple": "dès votre inscription",
         "domain": "dès l’achat"
+      }
+    },
+    "import": {
+      "button": "Importer un CSV",
+      "title": "Importer des contacts",
+      "hint": "Colle un CSV ou choisis un fichier. La première ligne nomme les colonnes :",
+      "rules": "Public (audience) : shelter, vet, student, neighbourhood ou press. Un nom ou une organisation suffit. Au maximum {max} contacts à la fois. Tout arrive en ‘à envoyer’ et rien n’est envoyé.",
+      "paste": "Coller le CSV",
+      "file": "Ou choisis un fichier",
+      "preview": "Aperçu",
+      "rowsLabel": "Contacts du fichier",
+      "line": "ligne {n}",
+      "counts": {
+        "new": "{n} nouveaux",
+        "duplicate": "{n} en double",
+        "invalid": "{n} avec une erreur"
+      },
+      "status": {
+        "new": "Nouveau",
+        "existing": "Déjà dans la liste",
+        "duplicate": "En double dans le fichier"
+      },
+      "problems": {
+        "audience": "Public inconnu",
+        "missingName": "Nom ou organisation manquant",
+        "email": "Adresse e-mail incorrecte",
+        "tooLong": "Un champ est trop long"
+      },
+      "confirm": "{n, plural, one {Importer # contact} other {Importer # contacts}}",
+      "nothing": "Rien de nouveau à importer",
+      "done": "{added, plural, =0 {Aucun nouveau contact ajouté.} one {# contact ajouté en ‘à envoyer’.} other {# contacts ajoutés en ‘à envoyer’.}}",
+      "skipped": "Ignorés : {duplicate} en double et {invalid} avec une erreur.",
+      "errors": {
+        "empty": "Il n’y a aucun contact. Mets les noms des colonnes sur la première ligne et un contact par ligne en dessous.",
+        "header": "La première ligne doit contenir les noms des colonnes, avec au moins audience et organisation ou name.",
+        "tooMany": "Il y a {rows} contacts. Importe-en au maximum {max} à la fois.",
+        "tooBig": "Ce fichier est trop gros pour une liste de contacts.",
+        "invalid": "Une erreur s’est produite. Réessaie.",
+        "read": "Ce fichier n’a pas pu être lu. Choisis un fichier .csv."
+      }
+    }
+  },
+  "adminHub": {
+    "title": "Gestion",
+    "hello": "Bonjour {name}, voici ce qui se passe.",
+    "signIn": "Connecte-toi pour ouvrir Gestion",
+    "open": "Voir",
+    "nav": {
+      "label": "Rubriques de Gestion",
+      "overview": "Aperçu",
+      "launch": "Lancement",
+      "marketing": "Marketing",
+      "moderation": "Modération",
+      "shelters": "Refuges",
+      "tips": "Suggestions",
+      "numbers": "Chiffres"
+    },
+    "tiles": {
+      "label": "Aller à une rubrique",
+      "launch": {
+        "title": "Lancement",
+        "open": "{open} sur {total} t’attendent",
+        "done": "Tout ce qui te revient est fait"
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Visibilité et croissance"
+      },
+      "moderation": {
+        "title": "Modération",
+        "text": "{reports, plural, =0 {Aucun signalement ouvert} one {# signalement ouvert} other {# signalements ouverts}} · {signals, plural, =0 {aucune alerte} one {# alerte} other {# alertes}}"
+      },
+      "shelters": {
+        "title": "Refuges",
+        "text": "{n, plural, =0 {Personne n’attend la vérification} one {# attend la vérification} other {# attendent la vérification}}"
+      },
+      "tips": {
+        "title": "Suggestions et votes",
+        "text": "{n, plural, =0 {Rien de nouveau} one {# refuge demandé} other {# refuges demandés}}"
+      },
+      "numbers": {
+        "title": "Chiffres",
+        "text": "{n, plural, one {# balade} other {# balades}} cette semaine{running, plural, =0 {} other {, # en cours}}"
+      }
+    },
+    "questionsTitle": "Les meilleures questions",
+    "questionsHint": "Ce qu’une responsable expérimentée de la sécurité et des opérations vérifie chaque jour. En direct depuis la base de données, le plus urgent en premier.",
+    "status": {
+      "calm": "Tout est calme. Rien ne t’attend.",
+      "attention": "{n, plural, one {Une chose demande ton attention aujourd’hui.} other {# choses demandent ton attention aujourd’hui.}}",
+      "urgent": "{n, plural, one {Une chose demande ton attention maintenant.} other {# choses demandent ton attention, dont une tout de suite.}}"
+    },
+    "level": {
+      "urgent": "Maintenant",
+      "attention": "Aujourd’hui",
+      "calm": "Calme"
+    },
+    "questions": {
+      "walks": {
+        "q": "Des balades ont-elles lieu, et l’une est-elle en retard ?",
+        "overdue": "{overdue, plural, one {# balade est} other {# balades sont}} en retard, sur {running} {running, plural, one {balade en cours} other {balades en cours}}. Suis-la et prends contact si besoin.",
+        "running": "{running, plural, one {# balade est en cours} other {# balades sont en cours}}, toutes à l’heure.",
+        "none": "Aucune balade n’est en cours.",
+        "act": "Suivre la balade"
+      },
+      "reports": {
+        "q": "Des signalements m’attendent-ils ?",
+        "serious": "{n, plural, one {# signalement ouvert} other {# signalements ouverts}}, dont {serious} sur la sécurité ou un abus. Le plus ancien attend {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}}.",
+        "open": "{n, plural, one {# signalement ouvert} other {# signalements ouverts}}. Le plus ancien attend {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}}.",
+        "none": "Aucun signalement ouvert.",
+        "act": "Traiter les signalements"
+      },
+      "signals": {
+        "q": "Est-il question d’argent, de liens ou d’une mauvaise expérience ?",
+        "some": "Cette semaine : {feedback} avis à vérifier, {requests} demandes signalées et {chats} messages de chat sur l’argent ou avec un lien.",
+        "none": "Cette semaine, aucun avis, demande ou message signalé.",
+        "act": "Voir les alertes"
+      },
+      "intros": {
+        "q": "Des vérifications d’identité ou des premières rencontres sont-elles bloquées ?",
+        "stuck": "{unanswered, plural, =0 {} one {# première rencontre attend trop longtemps le propriétaire.} other {# premières rencontres attendent trop longtemps le propriétaire.}} {idPending, plural, =0 {} one {Après # première rencontre, la pièce d’identité n’est pas encore confirmée.} other {Après # premières rencontres, la pièce d’identité n’est pas encore confirmée.}}",
+        "none": "Rien n’est bloqué. {waiting, plural, =0 {Aucune première rencontre n’attend de réponse.} one {# première rencontre attend une réponse, encore dans les temps.} other {# premières rencontres attendent une réponse, encore dans les temps.}}",
+        "act": "Voir le chien"
+      },
+      "shelters": {
+        "q": "Quels refuges attendent la vérification ?",
+        "waiting": "{n, plural, one {# refuge attend} other {# refuges attendent}} la vérification, le plus ancien {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}}.",
+        "none": "Aucun refuge n’attend la vérification.",
+        "act": "Vérifier les refuges"
+      },
+      "safety": {
+        "q": "Qui a été bloqué ou exclu cette semaine ?",
+        "repeat": "{repeat, plural, one {# personne a été bloquée} other {# personnes ont été bloquées}} par deux autres ou plus en 30 jours : vérifie s’il y a aussi des signalements. Cette semaine {banned, plural, =0 {personne n’a été exclu} other {# exclus ({names})}}.",
+        "banned": "Exclus cette semaine : {names}. {blocks, plural, =0 {Aucun blocage par les membres.} one {# blocage par les membres.} other {# blocages par les membres.}}",
+        "quiet": "Personne n’a été exclu cette semaine. {blocks, plural, =0 {Aucun blocage par les membres.} one {# blocage par les membres.} other {# blocages par les membres.}}",
+        "act": "Voir la modération"
+      },
+      "groupWalks": {
+        "q": "Les balades en groupe des deux prochains jours se remplissent-elles ?",
+        "empty": "{empty, plural, one {# balade en groupe n’a} other {# balades en groupe n’ont}} encore aucune inscription, sur les {n} prévues. Partage-les, ou demande au refuge si elles sont maintenues.",
+        "filled": "{n, plural, one {# balade en groupe prévue, avec des inscriptions.} other {# balades en groupe prévues, toutes avec des inscriptions.}}",
+        "none": "Aucune balade en groupe dans les deux prochains jours.",
+        "act": "Ouvrir le refuge"
+      },
+      "tips": {
+        "q": "Quelles suggestions et quels votes demandent un suivi ?",
+        "open": "{n, plural, one {# refuge demandé} other {# refuges demandés}}, surtout {top} ({votes, plural, one {# vote} other {# votes}}). {followUp, plural, =0 {} one {# refuge contacté est silencieux depuis deux semaines.} other {# refuges contactés sont silencieux depuis deux semaines.}}",
+        "followUp": "{followUp, plural, one {# refuge contacté est silencieux depuis deux semaines.} other {# refuges contactés sont silencieux depuis deux semaines.}} Demande où ils en sont.",
+        "none": "Aucune nouvelle suggestion ni vote, et rien à relancer.",
+        "act": "Suivre les suggestions"
+      },
+      "system": {
+        "q": "La base de données et le nettoyage quotidien vont-ils bien ?",
+        "healthy": "La base de données ({database}) répond en {ms} ms et le nettoyage est à jour.",
+        "slow": "La base de données ({database}) a mis {ms} ms pour une question simple. Vérifie que l’app et la base de données sont dans la même région.",
+        "cronLate": "Le nettoyage est en retard : {requests} demandes expirées, {walks} balades encore ouvertes et {routes} trajets de plus de 30 jours. Vérifie dans Vercel, sous Cron Jobs, si /api/cron/cleanup tourne.",
+        "demoDatabase": "Aucune vraie base de données n’est connectée : tout est en mémoire et disparaît au prochain déploiement. Connecte Neon dans Vercel.",
+        "act": "Voir les réglages"
+      }
+    },
+    "items": {
+      "overdue": "{minutes} min de retard",
+      "unanswered": "attend {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}} · rencontre {startsAt}",
+      "idPending": "rencontre il y a {days, plural, one {# jour} other {# jours}}, identité pas encore confirmée",
+      "emptyWalk": "{startsAt} · encore aucune inscription"
+    },
+    "install": {
+      "title": "Gestion comme app sur ton iPhone",
+      "text": "Ouvre Gestion dans Safari, touche Partager et choisis Sur l’écran d’accueil. Gestion s’ouvre alors comme une app à part, avec toutes les rubriques ci-dessus."
+    },
+    "pages": {
+      "moderation": {
+        "title": "Modération",
+        "lede": "Signalements, alertes sur l’argent et les liens, et comptes bloqués. Le plus urgent en premier.",
+        "noBans": "Personne n’est bloqué."
+      },
+      "shelters": {
+        "title": "Refuges",
+        "lede": "Les refuges inscrits, le plus ancien en premier. Leurs chiens ne sont en ligne qu’après ta vérification.",
+        "since": "inscrit le {date}"
+      },
+      "tips": {
+        "title": "Suggestions et votes"
+      },
+      "numbers": {
+        "title": "Chiffres",
+        "lede": "Comment Rondje grandit, d’où viennent les nouveaux et comment tout est configuré.",
+        "weekly": "Chiffres par semaine dans le centre de lancement"
       }
     }
   }
