@@ -7,6 +7,7 @@ import { isDemoMode } from '@/db'
 import { Footer } from '@/components/Footer'
 import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
+import { OfflineReady } from '@/components/OfflineReady'
 import { TabBar, type Tab } from '@/components/TabBar'
 import { siteUrl } from '@/lib/site'
 import { fontVariables } from './fonts'
@@ -84,6 +85,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <Footer />
             {tabs ? <TabBar tabs={tabs} /> : null}
           </div>
+          <OfflineReady lang={locale} />
         </NextIntlClientProvider>
       </body>
     </html>
