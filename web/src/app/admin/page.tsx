@@ -121,10 +121,10 @@ export default async function AdminPage() {
     <div className="stack-l">
       <h1>{t('admin.title')}</h1>
 
-      <Link href="/admin/launch" className="card spread" style={{ color: 'inherit', textDecoration: 'none', flexWrap: 'nowrap' }}>
+      <Link href="/hub" className="card spread" style={{ color: 'inherit', textDecoration: 'none', flexWrap: 'nowrap' }}>
         <span className="stack-s">
-          <strong>{t('launch.entry.title')}</strong>
-          <span className="muted small">{t('launch.entry.text')}</span>
+          <strong>{t('admin.hub.title')}</strong>
+          <span className="muted small">{t('admin.hub.text')}</span>
         </span>
         <span aria-hidden="true">→</span>
       </Link>

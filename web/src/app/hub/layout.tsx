@@ -7,6 +7,7 @@ import { HubSideNav, HubTabs } from '@/components/hub/HubNav'
 import { HubToasts } from '@/components/hub/HubToasts'
 import { followUpsDue, partnerList } from '@/lib/hub/game'
 import { getHub } from '@/server/hub'
+import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
 import './hub.css'
 
@@ -35,7 +36,7 @@ export default async function HubLayout({ children }: { children: React.ReactNod
   if (!viewer) redirect('/login?next=/hub')
   if (!viewer.isAdmin) notFound()
 
-  const hub = await getHub()
+  const [hub, native] = await Promise.all([getHub(), isNativeRequest()])
   const now = new Date()
   const followUps = followUpsDue(partnerList(hub.state, now), now).length
   const celebrate = hub.levelUp || hub.fresh.length > 0
@@ -61,7 +62,7 @@ export default async function HubLayout({ children }: { children: React.ReactNod
             <span className="small">{hub.xp.total} punten</span>
           </span>
         </Link>
-        <HubSideNav followUps={followUps} />
+        <HubSideNav followUps={followUps} native={native} />
         <div className="hub-side-foot">
           <Link href="/">Naar de app</Link>
           <Link href="/admin">Beheer</Link>

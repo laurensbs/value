@@ -6,10 +6,11 @@ import { isCountry } from '@/lib/countries'
 import { directoryEntry } from '@/lib/directory'
 import { ALL_TASKS, PARTNER_STATUSES, PARTNER_TARGETS, PARTNER_TYPES, VIDEO_STATUSES, VIDEOS, type PartnerType } from '@/lib/hub/content'
 import { followedUp, moveContent, movePartner, type HubState } from '@/lib/hub/game'
-import { deleteEntry, loadHubState, putEntry } from '../hub'
+import { deleteEntry, deleteLaunchContact, loadHubState, putEntry, putLaunchTask } from '../hub'
 import { getViewer } from '../session'
 
-// Everything here changes only the founder's own notes in hub_entry. Nothing is ever sent.
+// Everything here changes only the founder's own notes: hub_entry, and the checklist and contacts
+// of the former launch hub (launch_task, outreach_contact). Nothing is ever sent.
 
 async function admin() {
   const viewer = await getViewer()
@@ -55,13 +56,17 @@ export async function setTask(id: string, isDone: boolean): Promise<HubResult> {
   const task = ALL_TASKS.find((t) => t.id === id)!
   const state = await current()
   const now = new Date()
+  // A step that ticked itself off stays done for as long as its check holds.
+  if (state.tasks[id]?.auto) return { ok: true, xp: 0 }
   if (!isDone) {
-    await deleteEntry('task', id)
+    if (task.launchKey) await putLaunchTask(task.launchKey, false, now)
+    else await deleteEntry('task', id)
     done()
     return { ok: true, xp: 0 }
   }
   if (state.tasks[id]) return { ok: true, xp: 0 }
-  await putEntry('task', id, { doneAt: now.toISOString() })
+  if (task.launchKey) await putLaunchTask(task.launchKey, true, now)
+  else await putEntry('task', id, { doneAt: now.toISOString() })
   let xp = task.xp
   // A step that is a mail to a partner moves that partner along too.
   if (task.partner && (state.partners[task.partner]?.status ?? 'doel') === 'doel') {
@@ -103,6 +108,12 @@ export async function markFollowedUp(id: string): Promise<HubResult> {
 const detailsSchema = z.object({
   contact: z.string().trim().max(120).default(''),
   email: optionalEmail,
+  phone: z
+    .string()
+    .trim()
+    .max(40)
+    .refine((v) => v === '' || /^[+\d][\d\s().-]{5,}$/.test(v))
+    .default(''),
   note: z.string().trim().max(2000).default(''),
 })
 
@@ -112,9 +123,10 @@ export async function savePartnerDetails(id: string, form: FormData): Promise<Hu
   const parsed = detailsSchema.safeParse({
     contact: form.get('contact') ?? '',
     email: form.get('email') ?? '',
+    phone: form.get('phone') ?? '',
     note: form.get('note') ?? '',
   })
-  if (!parsed.success) return { ok: false, error: 'email' }
+  if (!parsed.success) return { ok: false, error: parsed.error.issues[0]?.path[0] === 'phone' ? 'phone' : 'email' }
   const state = await current()
   const prev = state.partners[id]
   if (!prev && !PARTNER_TARGETS.some((t) => t.id === id)) return { ok: false, error: 'unknown' }
@@ -202,6 +214,7 @@ export async function removePartner(id: string): Promise<HubResult> {
   // Built-in targets stay on the list; only your own can go.
   if (PARTNER_TARGETS.some((t) => t.id === id)) return { ok: false, error: 'built-in' }
   await deleteEntry('partner', id)
+  if (id.startsWith('contact-')) await deleteLaunchContact(id.slice('contact-'.length))
   done()
   return { ok: true }
 }

@@ -7,13 +7,19 @@ import { setTask } from '@/server/actions/hub'
 import { HubIcon } from './HubIcon'
 import { toast } from './HubToasts'
 
-/** One step of the plan, with a big round tick. Ticking it gives its points right away. */
-export function TaskCard({ task, done, showHow = true }: { task: HubTask; done: boolean; showHow?: boolean }) {
+const OWNER_LABEL = { claude: 'Claude doet dit', samen: 'Samen' } as const
+
+/**
+ * One step of the plan, with a big round tick. Ticking it gives its points right away. A step that
+ * ticked itself off (`auto`) cannot be ticked back while its check holds.
+ */
+export function TaskCard({ task, done, auto = false, showHow = true }: { task: HubTask; done: boolean; auto?: boolean; showHow?: boolean }) {
   const [optimistic, setOptimistic] = useOptimistic(done)
   const [pending, start] = useTransition()
   const [burst, setBurst] = useState(0)
 
   function toggle() {
+    if (auto) return
     const next = !optimistic
     start(async () => {
       setOptimistic(next)
@@ -35,9 +41,11 @@ export function TaskCard({ task, done, showHow = true }: { task: HubTask; done: 
         type="button"
         className="hub-tick"
         aria-pressed={optimistic}
-        aria-label={optimistic ? `${task.title}: gedaan. Tik om terug te zetten.` : `${task.title}: afvinken`}
+        aria-label={
+          auto ? `${task.title}: vanzelf afgevinkt` : optimistic ? `${task.title}: gedaan. Tik om terug te zetten.` : `${task.title}: afvinken`
+        }
         onClick={toggle}
-        disabled={pending}
+        disabled={pending || auto}
       >
         <HubIcon name="check" size={22} />
         {burst > 0 && optimistic ? (
@@ -59,6 +67,12 @@ export function TaskCard({ task, done, showHow = true }: { task: HubTask; done: 
           <span className="hub-xp">
             <HubIcon name="star" size={12} /> {task.xp}
           </span>
+          {task.owner ? <span className={`pill${task.owner === 'claude' ? ' blue' : ''}`}>{OWNER_LABEL[task.owner]}</span> : null}
+          {task.auto ? (
+            <span className="pill green" title="Dit vinkt zichzelf af zodra de cijfers of de live site het laten zien.">
+              {auto ? 'Vanzelf afgevinkt' : 'Vinkt vanzelf af'}
+            </span>
+          ) : null}
           {task.yours ? (
             <span className="pill warn" title="Kost geld, staat op jouw naam of is niet terug te draaien: dit doe je zelf, bewust.">
               Doe je zelf

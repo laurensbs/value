@@ -13,6 +13,8 @@ export type PartnerType =
   | 'verzekering'
   | 'dierenarts'
   | 'pers'
+  | 'studenten'
+  | 'buurt'
 
 export const PARTNER_TYPES: Record<PartnerType, string> = {
   welzijn: 'Welzijn en ouderen',
@@ -25,6 +27,8 @@ export const PARTNER_TYPES: Record<PartnerType, string> = {
   verzekering: 'Verzekering',
   dierenarts: 'Dierenarts',
   pers: 'Pers',
+  studenten: 'Studentenvereniging',
+  buurt: 'Buurtgroep',
 }
 
 /** Where a conversation with a partner stands. Every step forward earns points. */
@@ -224,6 +228,8 @@ export type TemplateId =
   | 'dierenarts'
   | 'kbo'
   | 'pers'
+  | 'studenten'
+  | 'buurtgroep'
   | 'opvolgen'
 
 export interface MailTemplate {
@@ -235,6 +241,8 @@ export interface MailTemplate {
   body: string
   /** A short version for WhatsApp or a DM, when that fits better than a mail. */
   short?: string
+  /** What to say on the phone, when calling works better than a mail. */
+  call?: string
 }
 
 const SIGN = `Met vriendelijke groet,
@@ -281,6 +289,14 @@ Het is gratis. Heeft u 20 minuten voor een kort gesprek? Dan laat ik zien hoe he
 ${SIGN}`,
     short:
       'Hoi! Ik ben {jouwNaam} van Rondje, een gratis platform voor begeleide groepswandelingen met opvanghonden. U kiest de honden en de wandelaars, elke wandeling is begeleid. Mag ik u 20 minuten bellen om te horen of het bij {organisatie} past?',
+    call: `"Goedemorgen, u spreekt met {jouwNaam} van Rondje. Spreek ik met wie de vrijwilligers coördineert? Heeft u één minuut?
+
+Rondje is een gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling kunnen gebruiken. Bij opvangen gaat dat in kleine groepen, altijd onder begeleiding, op momenten die u kiest. U bepaalt welke honden meedoen en wie er mag komen. Uw begeleider controleert bij het eerste bezoek het ID en ziet tijdens de wandeling de route live. Inschrijven en aanwezigheid regelen wij.
+
+Ik bel om te horen of dit bij {organisatie} past. Heeft u twintig minuten voor een gesprek, bijvoorbeeld [twee dagen]?"
+
+- "Stuur maar een mail." Doe ik. Naar welk adres? Mag ik volgende week nabellen?
+- "Nee, dank u." Dank u voor uw tijd. Mag ik vragen waarom? Dan weet ik of het later wel past.`,
   },
   {
     id: 'opvang-fr',
@@ -301,6 +317,14 @@ C'est gratuit. Auriez-vous 20 minutes pour un appel ? Je vous montre comment cel
 Bien cordialement,
 {jouwNaam}, Rondje
 {telefoon} · {website}`,
+    call: `« Bonjour, {jouwNaam}, de Rondje. Je parle bien à la personne responsable des bénévoles ? Vous avez une minute ?
+
+Rondje est une plateforme gratuite qui met en relation des jeunes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. Avec les refuges, cela se fait en petits groupes, toujours encadrés, aux moments que vous choisissez. Vous décidez quels chiens participent et qui peut venir. Votre encadrant vérifie la pièce d'identité à la première visite et voit l'itinéraire en direct pendant la promenade. Nous gérons les inscriptions et les présences.
+
+Je vous appelle pour savoir si cela pourrait convenir à {organisatie}. Auriez-vous 20 minutes pour en parler, par exemple [deux jours] ? »
+
+- « Envoyez-moi un e-mail. » Avec plaisir. À quelle adresse ? Je peux vous rappeler la semaine prochaine ?
+- « Non, merci. » Merci pour votre temps. Puis-je vous demander pourquoi ? Cela m'aide pour plus tard.`,
   },
   {
     id: 'opvang-es',
@@ -322,6 +346,14 @@ Es gratis. ¿Tendríais 20 minutos para una llamada? Os enseño cómo funciona y
 Un saludo,
 {jouwNaam}, Rondje
 {telefoon} · {website}`,
+    call: `«Hola, buenos días. Soy {jouwNaam}, de Rondje. ¿Hablo con quien coordina el voluntariado? ¿Tienes un minuto?
+
+Rondje es una plataforma gratuita que pone en contacto a jóvenes mayores de 18 años con perros que necesitan un paseo más. Con las protectoras funciona con paseos en grupos pequeños, siempre supervisados, en los horarios que elijáis. Vosotros decidís qué perros participan y quién viene. Vuestro responsable comprueba el DNI o NIE en la primera visita y ve la ruta en directo durante el paseo. Nosotros nos encargamos de las inscripciones y la asistencia.
+
+Te llamo para saber si podría encajar con {organisatie}. ¿Tendrías 20 minutos para hablarlo, por ejemplo [dos días]?»
+
+- «Mándame un correo.» Perfecto. ¿A qué dirección? ¿Te llamo la semana que viene?
+- «No, gracias.» Gracias por tu tiempo. ¿Puedo preguntarte por qué? Así sé si podría encajar más adelante.`,
   },
   {
     id: 'vrijwilligersnet',
@@ -552,6 +584,51 @@ Ik breng u graag in contact met een eigenaar en een wandelaar die er iets over w
 ${SIGN}`,
   },
   {
+    id: 'studenten',
+    title: 'Studentenvereniging: deel Rondje met je leden',
+    audience: 'Studentenvereniging, studievereniging of studentenhuis',
+    subject: 'Voor jullie leden: gratis een vast rondje met een hond uit de buurt',
+    body: `{aanhef},
+
+Ik ben {jouwNaam} en ik ben net begonnen met Rondje: een nieuw, gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in {stad}.
+
+Veel studenten missen de hond van thuis. Misschien is dit iets voor de leden van {organisatie}: een vast rondje in de week, gratis, met een hond die er blij mee is.
+
+- Je kiest zelf een hond in de buurt en spreekt een moment af.
+- De eerste keer loop je altijd samen met de eigenaar of met de opvang.
+- Pas als de eigenaar het goed vindt, en na een korte veiligheidsquiz, loop je alleen.
+
+Zouden jullie dit willen delen in de groepsapp of de nieuwsbrief? Ik stuur graag een korte tekst en een afbeelding mee. Vragen kan altijd.
+
+${SIGN}`,
+    short: `Mis je de hond van thuis? Met Rondje loop je gratis een vast rondje met een hond uit de buurt, van iemand die zelf niet meer ver kan lopen, of uit de opvang. De eerste keer loop je samen met de eigenaar. Nieuw, gratis en vanaf 18 jaar: {website}`,
+  },
+  {
+    id: 'buurtgroep',
+    title: 'Buurtgroep: bericht voor de buurtapp of Nextdoor',
+    audience: 'WhatsApp-buurtgroep, Nextdoor of het wijkplatform',
+    subject: 'Gezocht: honden die een extra rondje kunnen gebruiken (gratis)',
+    body: `Hallo allemaal,
+
+Ik ben {jouwNaam} en woon in {stad}. Ik ben net begonnen met Rondje: een gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden van buurtgenoten die zelf niet meer zo ver kunnen lopen.
+
+Zo gaat het:
+- De eigenaar bepaalt wie er wandelt, hoe lang en wanneer.
+- De eerste keer lopen wandelaar en eigenaar samen; het ID wordt dan in het echt bekeken.
+- Daarna kan de wandelaar alleen, als de eigenaar dat wil. Tijdens het rondje ziet de eigenaar live waar de hond is.
+
+Het is gratis en zonder advertenties. Kent u iemand voor wie dit fijn zou zijn, of wilt u zelf wandelen? Kijk op {website} of stuur me een bericht.
+
+Groet,
+{jouwNaam}`,
+    short: `Hoi buren! Ik ben {jouwNaam} uit {stad}. Kent u iemand in de buurt wiens hond vaker naar buiten wil, maar die zelf niet meer zo ver kan lopen? Of wilt u zelf graag een vast rondje met een hond?
+
+Daarvoor is Rondje: een nieuw, gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden van buurtgenoten. De eigenaar bepaalt wie er wandelt, en de eerste keer loop je altijd samen.
+
+Kijk gerust: {website}
+Vragen mag altijd, hier of als u me tegenkomt.`,
+  },
+  {
     id: 'opvolgen',
     title: 'Vriendelijk opvolgen',
     audience: 'Na een week zonder antwoord',
@@ -585,7 +662,21 @@ export interface HubTask {
   partner?: string
   /** Costs money or is a step that cannot be undone: do it yourself, deliberately. */
   yours?: boolean
+  /** Who does it, when it is not you. */
+  owner?: 'claude' | 'samen'
+  /** One of the few things everything else waits for: shown on top of Vandaag, in this order. */
+  waiting?: number
+  /** Ticks itself off when the data or the deployment says so. */
+  auto?: AutoCheck
+  /**
+   * Its key in launch_task, the checklist of the former launch hub (/admin/launch). These steps
+   * are stored there, so what was ticked off there stays ticked off here.
+   */
+  launchKey?: string
 }
+
+/** Checks that tick a step off by themselves. */
+export type AutoCheck = 'production' | 'socialLogin' | 'shelterMails' | 'shelterMeeting' | 'realDog'
 
 export interface HubPhase {
   id: string
@@ -596,6 +687,81 @@ export interface HubPhase {
 
 export const PHASES: HubPhase[] = [
   {
+    id: 'lancering',
+    title: 'Live en lancering',
+    why: 'Wat nog openstaat voordat iedereen Rondje kan gebruiken, op de site en in de App Store.',
+    tasks: [
+      {
+        id: 'live-zetten',
+        title: 'Zet de nieuwe versie live',
+        how: ['Na jouw keuze op de kaart in de projectchat', 'Vinkt vanzelf af zodra de hub in productie draait'],
+        xp: 40,
+        link: { href: 'https://github.com/laurensbs/value/pulls', label: 'Open de PR’s' },
+        waiting: 2,
+        auto: 'production',
+        launchKey: 'goLive',
+      },
+      {
+        id: 'geld',
+        title: 'Betaal wat geld kost',
+        how: ['Apple Developer (€ 99 per jaar) en het domein', 'Jouw akkoord en jouw betaling: Claude koopt niets'],
+        xp: 20,
+        link: { href: '/hub/kosten', label: 'Naar Kosten' },
+        yours: true,
+        waiting: 4,
+        launchKey: 'money',
+      },
+      {
+        id: 'social-login',
+        title: 'Zet Inloggen met Apple en Google aan',
+        how: ['Volg docs/LAUNCH.md §5 en zet de sleutels in Vercel', 'Vinkt vanzelf af zodra beide aanstaan'],
+        xp: 20,
+        link: { href: 'https://github.com/laurensbs/value/blob/HEAD/docs/LAUNCH.md', label: 'Open LAUNCH.md' },
+        auto: 'socialLogin',
+        launchKey: 'socialKeys',
+      },
+      {
+        id: 'analytics',
+        title: 'Zet Vercel Web Analytics aan',
+        how: ['Vercel-dashboard: project rondje, Analytics, Enable', 'Gratis op het Hobby-plan, zonder cookies'],
+        xp: 10,
+        link: { href: 'https://vercel.com/dashboard', label: 'Open Vercel' },
+        launchKey: 'analytics',
+      },
+      {
+        id: 'healthkit',
+        title: 'Zet de HealthKit-capability aan',
+        how: ['Bij de App ID app.rondje.mobile op developer.apple.com', 'En in Xcode onder Signing & Capabilities'],
+        xp: 10,
+        link: { href: 'https://developer.apple.com/account/resources/identifiers/list', label: 'Open Apple Developer' },
+        launchKey: 'healthkit',
+      },
+      {
+        id: 'privacy',
+        title: 'Vul het privacybeleid aan',
+        how: ['Apple Gezondheid (HealthKit) en de websitestatistieken', 'Laat de jurist meekijken'],
+        xp: 15,
+        launchKey: 'privacy',
+      },
+      {
+        id: 'blob-wissen',
+        title: 'Wis foto’s en routes na 30 dagen ook uit Vercel Blob',
+        how: ['Zodat de privacybelofte ook daar klopt'],
+        xp: 15,
+        owner: 'claude',
+        launchKey: 'blobCleanup',
+      },
+      {
+        id: 'store-teksten',
+        title: 'Zet de gekozen naam in de App Store-tekst en screenshots',
+        how: ['Na de naamkeuze', 'In docs/app-store/vermelding.md'],
+        xp: 10,
+        owner: 'claude',
+        launchKey: 'storeTexts',
+      },
+    ],
+  },
+  {
     id: 'fundament',
     title: 'Fundament',
     why: 'Naam, stichting en verzekering: dan kun je eerlijk vertellen wie Rondje is en waar giften heen gaan.',
@@ -603,22 +769,31 @@ export const PHASES: HubPhase[] = [
       {
         id: 'merkcheck',
         title: 'Doe de merkcheck op TMview',
-        how: ['Zoek op "rondje" en op "goedrondje"', 'Filter op klasse 9, 42 en 45', 'Kijk alleen naar geregistreerde en aangevraagde merken'],
+        how: ['Zoek op "rondje", "goedrondje" en de andere naam die je overweegt', 'Filter op klasse 9, 42 en 45', 'Kijk alleen naar geregistreerde en aangevraagde merken'],
         xp: 20,
         link: { href: 'https://www.tmdn.org/tmview/', label: 'Open TMview' },
+        launchKey: 'trademark',
       },
       {
         id: 'naam',
         title: 'Kies de naam definitief',
-        how: ['Advies: Goed Rondje', 'Zet de naam in project.yml (iOS) en laat de site volgen'],
-        xp: 15,
+        how: [
+          'Kandidaten: Goed Rondje (advies uit het onderzoek) en Woofmigo',
+          'Kijk in App Store Connect of de naam vrij is (Apps, +, Nieuwe app)',
+          'Tot dan blijft alles Rondje: de site en de app volgen APP_NAME',
+        ],
+        xp: 30,
+        link: { href: 'https://appstoreconnect.apple.com/apps', label: 'Open App Store Connect' },
+        waiting: 1,
+        launchKey: 'name',
       },
       {
         id: 'domein',
         title: 'Registreer het domein',
-        how: ['goedrondje.nl en goedrondje.app waren op 2 oktober vrij', 'Koppel het in Vercel onder Settings, Domains'],
+        how: ['Na de naamkeuze; goedrondje.nl en goedrondje.app waren op 2 oktober vrij', 'Koppel het in Vercel onder Settings, Domains (docs/LAUNCH.md §8)'],
         xp: 15,
         yours: true,
+        launchKey: 'domain',
       },
       {
         id: 'stichting',
@@ -653,8 +828,9 @@ export const PHASES: HubPhase[] = [
       {
         id: 'jurist',
         title: 'Laat de juridische teksten nakijken',
-        how: ['Gebruik de checklist in docs/legal/REVIEW.md', 'Een rechtswinkel of studentenjuristen kan gratis'],
+        how: ['Gebruik de checklist in docs/legal/REVIEW.md', 'Een rechtswinkel of studentenjuristen kan gratis', 'Lanceer pas als de stichting er is'],
         xp: 40,
+        launchKey: 'legal',
       },
       {
         id: 'eu-database',
@@ -685,7 +861,10 @@ export const PHASES: HubPhase[] = [
         template: 'welzijn',
         partner: 'welzijn-wijk',
       },
-      { id: 'opvang-1', title: 'Mail de eerste opvang', how: ['Kies een opvang in je stad bij Partners', 'Bel na 5 werkdagen als je niets hoort'], xp: 30, template: 'opvang', link: { href: '/hub/partners?type=opvang', label: 'Opvangen' } },
+      { id: 'opvang-1', title: 'Mail je eerste 3 opvangen', how: ['Kies 3 opvangen bij Partners en zet ze op je lijst', 'Mail vanuit je eigen mail en zet ze daarna op Gemaild', 'Bel na 5 werkdagen als je niets hoort'], xp: 30, template: 'opvang', link: { href: '/hub/partners?type=opvang', label: 'Opvangen' }, launchKey: 'sendThree' },
+      { id: 'tien-opvangen', title: 'Mail 10 opvangen', how: ['Vinkt vanzelf af bij 10 opvangen op Gemaild of verder'], xp: 25, owner: 'samen', auto: 'shelterMails', launchKey: 'firstMails', link: { href: '/hub/partners?type=opvang', label: 'Opvangen' } },
+      { id: 'gesprek-opvang', title: 'Voer het eerste gesprek met een opvang', how: ['Laat zien hoe het werkt, en vraag vooral wat bij hun honden past', 'Vinkt vanzelf af zodra een opvang op Gesprek gepland staat'], xp: 20, owner: 'samen', auto: 'shelterMeeting', launchKey: 'firstDemo' },
+      { id: 'eerste-hond', title: 'Krijg de eerste echte hond online', how: ['Van een opvang of een eigenaar, zonder het label Voorbeeld', 'Vinkt vanzelf af'], xp: 25, owner: 'samen', auto: 'realDog', launchKey: 'firstDog' },
       { id: 'flyers', title: 'Print 150 flyers met QR-code', how: ['Open /flyer en kies eigenaren of wandelaars', 'Ingelogd staat jouw uitnodigingslink in de QR-code, zo zie je aanmeldingen via flyers bij Cijfers'], xp: 20, link: { href: '/flyer', label: 'Naar de flyer' } },
       { id: 'flyerplekken', title: 'Leg flyers op 10 plekken', how: ['Dierenarts, apotheek, bibliotheek, buurthuis, supermarkt', 'Vraag eerst toestemming'], xp: 25 },
       { id: 'dierenwinkel', title: 'Vraag een dierenwinkel om flyers en pakketjes', how: ['Langsgaan werkt beter dan mailen', 'Gebruik de korte tekst als DM'], xp: 20, template: 'dierenwinkel', partner: 'dierenwinkel' },
@@ -741,11 +920,11 @@ export const PHASES: HubPhase[] = [
     title: 'App Store',
     why: 'De iPhone-app in de winkel, met een eerlijke tekst.',
     tasks: [
-      { id: 'apple-account', title: 'Maak een Apple Developer-account', how: ['$99 per jaar', 'Bij voorkeur op naam van de stichting'], xp: 20, yours: true },
+      { id: 'apple-account', title: 'Maak een Apple Developer-account', how: ['$99 per jaar', 'Nodig om in te dienen, voor Inloggen met Apple en voor HealthKit', 'Bij voorkeur op naam van de stichting'], xp: 20, yours: true, link: { href: 'https://developer.apple.com/programs/enroll/', label: 'Aanmelden' }, launchKey: 'appleAccount' },
       { id: 'apns', title: 'Zet de APNs-sleutel op Vercel', how: ['Maak de sleutel in het Apple Developer-portaal', 'APNS_KEY_ID, APNS_TEAM_ID, APNS_PRIVATE_KEY, APNS_BUNDLE_ID'], xp: 20 },
       { id: 'testflight', title: 'Test de app via TestFlight', how: ['Met 5 echte wandelaars', 'Vraag wat onduidelijk was'], xp: 30 },
       { id: 'screenshots', title: 'Maak 5 screenshots', how: ['Kaart, kennismaking, live meekijken, Vandaag, de belofte'], xp: 20 },
-      { id: 'indienen', title: 'Dien de app in bij Apple', how: ['Met de App Store-tekst en de reviewnotities', 'Leeftijd 18+'], xp: 50, yours: true },
+      { id: 'indienen', title: 'Dien de app in bij Apple', how: ['Met de tekst uit docs/app-store/vermelding.md en een testaccount voor de review', 'Leeftijd 18+'], xp: 50, yours: true, link: { href: 'https://appstoreconnect.apple.com/apps', label: 'Open App Store Connect' }, waiting: 3, launchKey: 'submit' },
     ],
   },
 ]

@@ -17,6 +17,7 @@ import {
   type HubSettings,
   type HubTask,
   type PartnerStatus,
+  type AutoCheck,
   type PartnerType,
   type VideoStatus,
 } from './content'
@@ -27,6 +28,8 @@ const DAY = 24 * 60 * 60_000
 
 export interface TaskState {
   doneAt: string
+  /** Done because the data or the deployment says so: it cannot be ticked back. */
+  auto?: boolean
 }
 
 export interface PartnerState {
@@ -40,6 +43,7 @@ export interface PartnerState {
   country?: string
   region?: string
   email?: string
+  phone?: string
   website?: string
   contact?: string
   note?: string
@@ -155,7 +159,9 @@ export function phaseProgress(state: HubState) {
  * it, so there is always something that can move today while the slow things (a notary) wait.
  */
 export function nextTasks(state: HubState, n = 3): HubTask[] {
-  const open = PHASES.map((p) => p.tasks.filter((t) => !state.tasks[t.id])).filter((tasks) => tasks.length > 0)
+  // Claude's steps are not yours, and the ones everything waits for have their own place on top.
+  const yours = (t: HubTask) => !state.tasks[t.id] && t.owner !== 'claude' && !t.waiting
+  const open = PHASES.map((p) => p.tasks.filter(yours)).filter((tasks) => tasks.length > 0)
   const [current = [], after = []] = open
   const picked = current.slice(0, after.length > 0 ? n - 1 : n)
   for (const t of after) {
@@ -163,6 +169,93 @@ export function nextTasks(state: HubState, n = 3): HubTask[] {
     picked.push(t)
   }
   return picked
+}
+
+/** The few steps everything else waits for, in their own order. Done ones stay, ticked off. */
+export function waitingTasks(): HubTask[] {
+  return ALL_TASKS.filter((t) => t.waiting).sort((a, b) => (a.waiting ?? 0) - (b.waiting ?? 0))
+}
+
+/** Which automatic checks hold: shelters from your own list, the rest from the deployment and the app. */
+export function autoChecks(
+  state: HubState,
+  facts: { production: boolean; socialLogin: boolean; realDogs: number },
+  now: Date,
+): Record<AutoCheck, boolean> {
+  const shelters = partnerList(state, now).filter((p) => p.type === 'opvang')
+  return {
+    production: facts.production,
+    socialLogin: facts.socialLogin,
+    shelterMails: shelters.filter((p) => p.state.status !== 'doel').length >= 10,
+    shelterMeeting: shelters.some((p) => p.state.status === 'gesprek' || p.state.status === 'partner'),
+    realDog: facts.realDogs > 0,
+  }
+}
+
+/** Ticks off the steps whose automatic check holds. They stay done for as long as it holds. */
+export function applyAutoChecks(state: HubState, checks: Record<AutoCheck, boolean>, now: Date): void {
+  for (const t of ALL_TASKS) {
+    if (t.auto && checks[t.auto]) state.tasks[t.id] = { doneAt: state.tasks[t.id]?.doneAt ?? now.toISOString(), auto: true }
+  }
+}
+
+// ---------- Contacts from the former launch hub ----------
+
+/** A row of outreach_contact, the contact list of the former launch hub (/admin/launch). */
+export interface LaunchContact {
+  id: string
+  audience: string
+  name: string
+  organisation: string
+  email: string | null
+  phone: string | null
+  city: string
+  status: string
+  lastContactAt: Date | null
+  note: string
+  createdAt: Date
+}
+
+const AUDIENCE_TYPE: Record<string, PartnerType> = {
+  shelter: 'opvang',
+  vet: 'dierenarts',
+  student: 'studenten',
+  neighbourhood: 'buurt',
+  press: 'pers',
+}
+
+const CONTACT_STATUS: Record<string, PartnerStatus> = {
+  todo: 'doel',
+  sent: 'gemaild',
+  replied: 'reactie',
+  meeting: 'gesprek',
+}
+
+/** Partner ids for those contacts. */
+export const contactPartnerId = (contactId: string) => `contact-${contactId}`
+
+/**
+ * A contact from the launch hub as one of your partners, with the same stage and the points for it.
+ * Once you change it here, the hub keeps its own copy and this is no longer used.
+ */
+export function partnerFromContact(c: LaunchContact): PartnerState {
+  const status = CONTACT_STATUS[c.status] ?? 'doel'
+  const at = (c.lastContactAt ?? c.createdAt).toISOString()
+  const organisation = c.organisation.trim()
+  const person = c.name.trim()
+  return {
+    status,
+    xp: STATUS_XP[status],
+    name: organisation || person,
+    type: AUDIENCE_TYPE[c.audience] ?? 'opvang',
+    contact: organisation && person ? person : undefined,
+    email: c.email ?? undefined,
+    phone: c.phone ?? undefined,
+    city: c.city || undefined,
+    note: c.note || undefined,
+    ...(status === 'doel' ? {} : { mailedAt: at, lastContactAt: at }),
+    updatedAt: at,
+  }
 }
 
 // ---------- Partners ----------
@@ -242,6 +335,8 @@ const TYPE_TEMPLATE: Record<PartnerType, string> = {
   verzekering: 'verzekeraar',
   dierenarts: 'dierenarts',
   pers: 'pers',
+  studenten: 'studenten',
+  buurt: 'buurtgroep',
 }
 
 /** You sent a friendly follow-up: the week starts again. */
@@ -283,7 +378,7 @@ export function weekRhythm(state: HubState, now: Date): WeekRhythm {
   const inWeek = (iso?: string) => Boolean(iso && weekOf(new Date(iso)) === week)
   const mails = Object.values(state.partners).filter((p) => inWeek(p.mailedAt) || inWeek(p.lastContactAt)).length
   const videos = Object.values(state.content).filter((c) => inWeek(c.postedAt)).length
-  const tasks = Object.values(state.tasks).filter((t) => inWeek(t.doneAt)).length
+  const tasks = Object.values(state.tasks).filter((t) => !t.auto && inWeek(t.doneAt)).length
   return {
     week,
     mails,

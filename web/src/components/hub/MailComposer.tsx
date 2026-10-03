@@ -13,6 +13,7 @@ export interface ComposerPartner {
   generic: boolean
   email: string
   contact: string
+  phone: string
   template: string
   status: PartnerStatus
 }
@@ -72,6 +73,7 @@ export function MailComposer({ templates, partners, settings, initialTemplate, i
   const subject = edit?.key === key ? edit.subject : filled.subject
   const body = edit?.key === key ? edit.body : filled.body
   const blanks = blanksIn(`${subject}\n${body}`)
+  const call = template.call ? fillTemplate(template.call, vars) : null
 
   function pickPartner(id: string) {
     const p = partners.find((x) => x.id === id) ?? null
@@ -225,6 +227,25 @@ export function MailComposer({ templates, partners, settings, initialTemplate, i
           <HubIcon name="share" size={18} /> Deel
         </button>
       </div>
+
+      {call ? (
+        <details className="card hub-call">
+          <summary>
+            <b>Liever bellen?</b> Zo kun je het zeggen
+          </summary>
+          <p className="hub-call-text">{call}</p>
+          <div className="hub-actions">
+            {partner?.phone ? (
+              <a className="button secondary small" href={`tel:${partner.phone.replace(/[^\d+]/g, '')}`}>
+                Bel {partner.phone}
+              </a>
+            ) : null}
+            <button type="button" className="button ghost small" onClick={() => copy(call, 'Belscript')}>
+              <HubIcon name="copy" size={16} /> Kopieer
+            </button>
+          </div>
+        </details>
+      ) : null}
 
       {partner ? (
         <div className="notice success">

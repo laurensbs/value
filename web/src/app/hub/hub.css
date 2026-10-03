@@ -4,6 +4,7 @@
 .shell:has(.hub-root) > .header,
 .shell:has(.hub-root) > .footer,
 .shell:has(.hub-root) > .tabbar,
+.shell:has(.hub-root) > .app-tabs,
 .shell:has(.hub-root) > .active-walk {
   display: none;
 }
@@ -317,6 +318,18 @@
   font-weight: 650;
   font-size: 0.9rem;
   white-space: nowrap;
+}
+
+/* What waits on the founder: a warm card on top of Vandaag. */
+.hub-root .hub-waiting {
+  padding: 16px;
+  border-radius: var(--radius-l);
+  background: color-mix(in oklab, var(--ball) 16%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--ball) 50%, var(--line));
+}
+
+.hub-root .hub-waiting > header {
+  align-items: center;
 }
 
 /* ---------- Hero with level ---------- */
@@ -1289,4 +1302,19 @@
 .hub-root .hub-chart-empty {
   font-size: 0.85rem;
   color: var(--muted);
+}
+
+/* A call script under the mail. */
+.hub-root .hub-call {
+  display: grid;
+  gap: 10px;
+}
+
+.hub-root .hub-call summary {
+  cursor: pointer;
+}
+
+.hub-root .hub-call-text {
+  white-space: pre-line;
+  font-size: 0.95rem;
 }

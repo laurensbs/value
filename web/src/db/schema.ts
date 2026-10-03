@@ -546,9 +546,9 @@ export const suggestion = pgTable(
 )
 
 /**
- * The admin's launch hub (/admin/launch): one row per launch task, by the stable key from
- * src/server/launch-core.ts. Milestones that were reached are stored here too (key
- * 'milestone:<id>'), so a badge stays even if the data behind it is deleted later.
+ * Steps of the launch checklist, one row per step by the stable `launchKey` of a step in
+ * src/lib/hub/content.ts (the founder's hub at /hub; this was the launch hub at /admin/launch).
+ * Rows with keys 'milestone:<id>' are from that launch hub and are no longer read.
  */
 export const launchTask = pgTable('launch_task', {
   key: text('key').primaryKey(),
@@ -558,10 +558,10 @@ export const launchTask = pgTable('launch_task', {
 })
 
 /**
- * People and organisations the admin wants to approach for the launch (shelters, vets, student
- * associations, neighbourhood groups, local press). Business contact details only, entered by hand,
- * and only here in the database. Rondje never sends anything itself: the admin mails from their own
- * mail app and marks the status by hand (todo → sent → replied → meeting).
+ * People and organisations the admin wanted to approach for the launch (shelters, vets, student
+ * associations, neighbourhood groups, local press), entered in the former launch hub. The founder's
+ * hub (/hub) shows them as partners; once one is changed there, the hub keeps its own copy in
+ * hub_entry. Business contact details only. Rondje never sends anything itself.
  */
 export const outreachContact = pgTable(
   'outreach_contact',

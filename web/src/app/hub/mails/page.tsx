@@ -17,6 +17,7 @@ export default async function HubMails({ searchParams }: { searchParams: Promise
     generic: p.generic,
     email: p.state.email || p.email || '',
     contact: p.state.contact ?? '',
+    phone: p.state.phone ?? '',
     template: p.template,
     status: p.state.status,
   }))

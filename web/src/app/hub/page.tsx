@@ -5,8 +5,9 @@ import { InstallTip } from '@/components/hub/InstallTip'
 import { TaskCard } from '@/components/hub/TaskCard'
 import { fmt, MedalGrid, Ring, SectionHead, Tile } from '@/components/hub/bits'
 import { localParts } from '@/lib/progress'
-import { daysSince, followUpsDue, milestoneViews, moneyPicture, nextMilestone, nextTasks, partnerList, phaseProgress, weekRhythm, euro } from '@/lib/hub/game'
+import { daysSince, followUpsDue, milestoneViews, moneyPicture, nextMilestone, nextTasks, partnerList, phaseProgress, waitingTasks, weekRhythm, euro } from '@/lib/hub/game'
 import { getHub, hubStats } from '@/server/hub'
+import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
 
 export const metadata = { title: 'Vandaag' }
@@ -21,8 +22,10 @@ function greeting(hour: number): string {
 export default async function HubToday() {
   const now = new Date()
   const viewer = await getViewer()
-  const [hub, stats] = await Promise.all([getHub(), hubStats(viewer?.profile?.referralCode ?? null, now)])
+  const [hub, stats, native] = await Promise.all([getHub(), hubStats(viewer?.profile?.referralCode ?? null, now), isNativeRequest()])
   const { state, level, xp } = hub
+  const waiting = waitingTasks()
+  const waitingOpen = waiting.filter((t) => !state.tasks[t.id]).length
   const partners = partnerList(state, now)
   const due = followUpsDue(partners, now)
   const steps = nextTasks(state, 3)
@@ -70,6 +73,21 @@ export default async function HubToday() {
 
       <InstallTip />
 
+      <section className="hub-section hub-waiting" aria-labelledby="hub-waiting-title">
+        <header>
+          <h2 id="hub-waiting-title">Wacht op jou</h2>
+          <span className="pill">{waitingOpen ? `${waitingOpen} van ${waiting.length} open` : 'Alles gedaan'}</span>
+        </header>
+        <p className="muted small">
+          {waitingOpen ? 'Hier wacht de rest op. Alleen jij kunt ze doen: ze kosten geld, staan op jouw naam, of het is jouw keuze.' : 'Alles wat op jou wachtte is gedaan.'}
+        </p>
+        <ul className="hub-tasks" aria-label="Wacht op jou">
+          {waiting.map((t) => (
+            <TaskCard key={t.id} task={t} done={Boolean(state.tasks[t.id])} auto={Boolean(state.tasks[t.id]?.auto)} />
+          ))}
+        </ul>
+      </section>
+
       <section className="hub-section">
         <SectionHead title="Jouw volgende stappen" href="/hub/plan" linkLabel="Heel het plan" />
         {current ? (
@@ -80,7 +98,7 @@ export default async function HubToday() {
         {steps.length ? (
           <ul className="hub-tasks">
             {steps.map((t) => (
-              <TaskCard key={t.id} task={t} done={Boolean(state.tasks[t.id])} />
+              <TaskCard key={t.id} task={t} done={Boolean(state.tasks[t.id])} auto={Boolean(state.tasks[t.id]?.auto)} />
             ))}
           </ul>
         ) : (
@@ -135,12 +153,15 @@ export default async function HubToday() {
       </section>
 
       <section className="hub-section">
-        <SectionHead title="Partners en geld" />
+        <SectionHead title={native ? 'Partners' : 'Partners en geld'} />
         <div className="hub-tiles">
           <Tile value={`${pipeline.mailed}/${partners.length}`} label="Partners gemaild" href="/hub/partners" />
           <Tile value={fmt(pipeline.talking)} label="In gesprek" href="/hub/partners" />
           <Tile value={fmt(pipeline.yes)} label="Doen mee" sub={pipeline.yes ? undefined : 'Nog niemand: alles is nog een doel'} href="/hub/partners" />
-          <Tile value={euro(money.costPerMonth)} label="Kosten per maand" sub={money.costPerMonth > 0 ? `${money.membersNeeded} leden nodig om dit te dekken` : undefined} href="/hub/kosten" />
+          {/* The app shells never show anything about money (App Store and Play rules). */}
+          {native ? null : (
+            <Tile value={euro(money.costPerMonth)} label="Kosten per maand" sub={money.costPerMonth > 0 ? `${money.membersNeeded} leden nodig om dit te dekken` : undefined} href="/hub/kosten" />
+          )}
         </div>
       </section>
 

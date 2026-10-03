@@ -5,6 +5,8 @@ import { PHASES } from '@/lib/hub/content'
 import { milestoneViews, phaseProgress } from '@/lib/hub/game'
 import { getHub } from '@/server/hub'
 
+const PHASE_WORDS: Record<number, string> = { 5: 'Vijf', 6: 'Zes', 7: 'Zeven', 8: 'Acht' }
+
 export const metadata = { title: 'Plan' }
 
 /** The whole launch plan in six phases, and every milestone on the way. */
@@ -25,7 +27,7 @@ export default async function HubPlan() {
         <p className="eyebrow">Het plan</p>
         <h1>Van idee naar beweging</h1>
         <p className="lede">
-          Zes fases, {total} stappen. Je hebt er {doneCount} gedaan. Het werkt het best op volgorde, maar de dingen die wachten (een notaris, een
+          {PHASE_WORDS[PHASES.length] ?? PHASES.length} fases, {total} stappen. Je hebt er {doneCount} gedaan. Het werkt het best op volgorde, maar de dingen die wachten (een notaris, een
           antwoord) houden niets tegen: begin gerust alvast aan de volgende fase.
         </p>
       </div>
@@ -49,7 +51,7 @@ export default async function HubPlan() {
             </summary>
             <ul className="hub-tasks">
               {phase.tasks.map((t) => (
-                <TaskCard key={t.id} task={t} done={Boolean(state.tasks[t.id])} />
+                <TaskCard key={t.id} task={t} done={Boolean(state.tasks[t.id])} auto={Boolean(state.tasks[t.id]?.auto)} />
               ))}
             </ul>
           </details>

@@ -86,6 +86,11 @@ export function PartnerCard({ partner, lastContact, followUpDue }: Props) {
         <Link href={`/hub/mails?p=${partner.id}${followUpDue ? '&t=opvolgen' : ''}`} className="button primary small">
           <HubIcon name="mail" size={16} /> {followUpDue ? 'Opvolgmail' : 'Mail klaarzetten'}
         </Link>
+        {partner.state.phone ? (
+          <a href={`tel:${partner.state.phone.replace(/[^\d+]/g, '')}`} className="button ghost small">
+            Bel {partner.state.phone}
+          </a>
+        ) : null}
         {partner.website ? (
           <a href={partner.website} target="_blank" rel="noopener noreferrer" className="button ghost small">
             Website <HubIcon name="arrow" size={14} />
@@ -106,7 +111,7 @@ export function PartnerCard({ partner, lastContact, followUpDue }: Props) {
                 setError(null)
                 setOpen(false)
                 toast('Opgeslagen')
-              } else setError(r.error === 'email' ? 'Dat e-mailadres klopt niet.' : 'Opslaan lukte niet.')
+              } else setError(r.error === 'email' ? 'Dat e-mailadres klopt niet.' : r.error === 'phone' ? 'Dat telefoonnummer klopt niet.' : 'Opslaan lukte niet.')
             })
           }
         >
@@ -118,6 +123,10 @@ export function PartnerCard({ partner, lastContact, followUpDue }: Props) {
             <label className="field">
               <span>E-mailadres</span>
               <input className="input" name="email" type="email" defaultValue={partner.state.email ?? partner.email ?? ''} maxLength={200} />
+            </label>
+            <label className="field">
+              <span>Telefoon</span>
+              <input className="input" name="phone" type="tel" defaultValue={partner.state.phone ?? ''} maxLength={40} />
             </label>
           </div>
           <label className="field">

@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { ALL_TASKS, DEFAULT_COSTS, DEFAULT_INCOME, DEFAULT_SETTINGS, PHASES, TEMPLATES } from './content'
+import { ALL_TASKS, DEFAULT_COSTS, DEFAULT_INCOME, DEFAULT_SETTINGS, PHASES, TEMPLATES, type HubTask } from './content'
 import {
+  applyAutoChecks,
+  autoChecks,
   blanksIn,
   costSummary,
   fillTemplate,
@@ -13,8 +15,10 @@ import {
   movePartner,
   newMilestones,
   nextTasks,
+  partnerFromContact,
   partnerList,
   templateFor,
+  waitingTasks,
   weekRhythm,
   xpOf,
   type HubState,
@@ -67,20 +71,115 @@ describe('points', () => {
 })
 
 describe('next steps', () => {
+  // Claude's steps and the ones waiting on top of Vandaag are never in "your next steps".
+  const yours = (tasks: HubTask[]) => tasks.filter((t) => t.owner !== 'claude' && !t.waiting)
+  const [first, second] = [yours(PHASES[0].tasks), yours(PHASES[1].tasks)]
+
   it('mix the current phase with one step from the next', () => {
     const steps = nextTasks(state())
-    expect(steps.map((t) => t.id)).toEqual([PHASES[0].tasks[0].id, PHASES[0].tasks[1].id, PHASES[1].tasks[0].id])
+    expect(steps.map((t) => t.id)).toEqual([first[0].id, first[1].id, second[0].id])
   })
 
   it('fill up from the next phase when the current one is nearly done', () => {
-    const done = Object.fromEntries(PHASES[0].tasks.slice(0, -1).map((t) => [t.id, { doneAt: NOW.toISOString() }]))
+    const done = Object.fromEntries(first.slice(0, -1).map((t) => [t.id, { doneAt: NOW.toISOString() }]))
     const steps = nextTasks(state({ tasks: done }))
-    expect(steps.map((t) => t.id)).toEqual([PHASES[0].tasks.at(-1)!.id, PHASES[1].tasks[0].id, PHASES[1].tasks[1].id])
+    expect(steps.map((t) => t.id)).toEqual([first.at(-1)!.id, second[0].id, second[1].id])
+  })
+
+  it('leave out what Claude does and what waits on top', () => {
+    const ids = new Set(nextTasks(state(), 50).map((t) => t.id))
+    for (const t of ALL_TASKS.filter((t) => t.owner === 'claude' || t.waiting)) expect(ids.has(t.id)).toBe(false)
   })
 
   it('are empty when everything is done', () => {
     const done = Object.fromEntries(ALL_TASKS.map((t) => [t.id, { doneAt: NOW.toISOString() }]))
     expect(nextTasks(state({ tasks: done }))).toEqual([])
+  })
+})
+
+describe('what waits on you', () => {
+  it('is four steps: the name, going live, the App Store and what costs money', () => {
+    expect(waitingTasks().map((t) => t.id)).toEqual(['naam', 'live-zetten', 'indienen', 'geld'])
+  })
+
+  it('every step from the launch hub has its own key, once', () => {
+    const keys = ALL_TASKS.flatMap((t) => (t.launchKey ? [t.launchKey] : []))
+    expect(new Set(keys).size).toBe(keys.length)
+    expect(keys).toEqual(expect.arrayContaining(['name', 'goLive', 'submit', 'money', 'trademark', 'firstMails', 'firstDog']))
+  })
+})
+
+describe('steps that tick themselves off', () => {
+  const facts = { production: false, socialLogin: false, realDogs: 0 }
+
+  it('follow the live site, the shelters you mailed and the first real dog', () => {
+    const shelters = Object.fromEntries(
+      Array.from({ length: 10 }, (_, i) => [`opvang-${i}`, { ...movePartner(undefined, 'gemaild', NOW), name: `Opvang ${i}`, type: 'opvang' as const }]),
+    )
+    const s = state({ partners: shelters })
+    const checks = autoChecks(s, { production: true, socialLogin: false, realDogs: 1 }, NOW)
+    expect(checks).toEqual({ production: true, socialLogin: false, shelterMails: true, shelterMeeting: false, realDog: true })
+    applyAutoChecks(s, checks, NOW)
+    expect(s.tasks['live-zetten']).toEqual({ doneAt: NOW.toISOString(), auto: true })
+    expect(s.tasks['tien-opvangen']?.auto).toBe(true)
+    expect(s.tasks['eerste-hond']?.auto).toBe(true)
+    expect(s.tasks['social-login']).toBeUndefined()
+  })
+
+  it('need ten shelters for "Mail 10 opvangen", and a planned talk for the first meeting', () => {
+    const nine = Object.fromEntries(
+      Array.from({ length: 9 }, (_, i) => [`opvang-${i}`, { ...movePartner(undefined, 'gemaild', NOW), name: `Opvang ${i}`, type: 'opvang' as const }]),
+    )
+    expect(autoChecks(state({ partners: nine }), facts, NOW).shelterMails).toBe(false)
+    const talking = { a: { ...movePartner(undefined, 'gesprek', NOW), name: 'Asiel A', type: 'opvang' as const } }
+    expect(autoChecks(state({ partners: talking }), facts, NOW).shelterMeeting).toBe(true)
+  })
+
+  it('do not count as steps you took this week', () => {
+    const s = state()
+    applyAutoChecks(s, { production: true, socialLogin: true, shelterMails: false, shelterMeeting: false, realDog: false }, NOW)
+    expect(weekRhythm(s, NOW).tasks).toBe(0)
+  })
+})
+
+describe('contacts from the launch hub', () => {
+  const contact = {
+    id: 'c1',
+    audience: 'shelter',
+    name: 'Sanne',
+    organisation: 'Dierenasiel Utrecht',
+    email: 'info@asiel.test',
+    phone: '030 123 45 67',
+    city: 'Utrecht',
+    status: 'sent',
+    lastContactAt: new Date('2026-10-01T09:00:00Z'),
+    note: '',
+    createdAt: new Date('2026-09-30T09:00:00Z'),
+  }
+
+  it('become partners with the same stage and its points', () => {
+    expect(partnerFromContact(contact)).toEqual({
+      status: 'gemaild',
+      xp: 10,
+      name: 'Dierenasiel Utrecht',
+      type: 'opvang',
+      contact: 'Sanne',
+      email: 'info@asiel.test',
+      phone: '030 123 45 67',
+      city: 'Utrecht',
+      note: undefined,
+      mailedAt: '2026-10-01T09:00:00.000Z',
+      lastContactAt: '2026-10-01T09:00:00.000Z',
+      updatedAt: '2026-10-01T09:00:00.000Z',
+    })
+  })
+
+  it('keep their kind: a student association gets the student mail, a buurtgroep the post', () => {
+    const student = partnerFromContact({ ...contact, audience: 'student', status: 'todo', organisation: '', lastContactAt: null })
+    expect(student).toMatchObject({ status: 'doel', xp: 0, name: 'Sanne', type: 'studenten', contact: undefined })
+    expect(student.mailedAt).toBeUndefined()
+    expect(templateFor('studenten')).toBe('studenten')
+    expect(templateFor(partnerFromContact({ ...contact, audience: 'neighbourhood' }).type!)).toBe('buurtgroep')
   })
 })
 

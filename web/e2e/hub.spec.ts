@@ -16,10 +16,19 @@ test('hub: only for admins, a step earns points, a mail is filled in and the par
   const manifest = await (await page.request.get('/hub/manifest.webmanifest')).json()
   expect(manifest).toMatchObject({ name: 'Rondje Hub', start_url: '/hub', scope: '/hub' })
 
-  // Today: the founder level and the next steps. The site's own header is hidden.
-  await page.goto('/hub')
+  // The launch hub moved into this hub: the admin page and the old address both lead here.
+  await page.goto('/admin')
+  await page.getByRole('link', { name: /^Hub/ }).click()
+  await expect(page).toHaveURL(/\/hub$/)
+  await page.goto('/admin/launch')
+  await expect(page).toHaveURL(/\/hub$/)
+
+  // Today: the founder level, the four things that wait on you, and the next steps. The site's own header is hidden.
   await expect(page.getByRole('heading', { name: /^Niveau \d+:/ })).toBeVisible()
   await expect(page.locator('.header')).toBeHidden()
+  const waiting = page.getByRole('list', { name: 'Wacht op jou' })
+  await expect(waiting.locator(':scope > li')).toHaveCount(4)
+  await expect(waiting.locator(':scope > li').first()).toContainText('Kies de naam definitief')
   await expect(page.getByRole('heading', { name: 'Jouw volgende stappen' })).toBeVisible()
   await shot(page, 'hub-01-vandaag')
 
@@ -32,11 +41,16 @@ test('hub: only for admins, a step earns points, a mail is filled in and the par
 
   // Ticking a step of the plan gives its points straight away.
   await page.goto('/hub/plan')
+  await page.locator('summary').filter({ hasText: 'Fundament' }).click()
   const step = page.getByRole('button', { name: 'Doe de merkcheck op TMview: afvinken' })
   await step.click()
   await expect(page.getByRole('button', { name: /Doe de merkcheck op TMview: gedaan/ })).toBeVisible()
   await expect(page.locator('.hub-toast').filter({ hasText: '+20' })).toBeVisible()
   await shot(page, 'hub-02-plan')
+
+  // Claude's steps say so, and a step that ticks itself off says that too.
+  await expect(page.locator('.hub-task').filter({ hasText: 'Vercel Blob' }).getByText('Claude doet dit')).toBeVisible()
+  await expect(page.locator('.hub-task').filter({ hasText: 'Zet de nieuwe versie live' }).getByText('Vinkt vanzelf af', { exact: true })).toBeVisible()
 
   // A mail for Hulphond Nederland: filled in, nothing sent by the hub; you mark it as sent.
   await page.goto('/hub/mails?p=hulphond')
@@ -69,6 +83,11 @@ test('hub: only for admins, a step earns points, a mail is filled in and the par
   await page.getByText('Opvangen uit de lijst').click()
   await page.getByRole('button', { name: /Op mijn lijst/ }).first().click()
   await expect(page.locator('.hub-toast').filter({ hasText: /staat op je lijst/ })).toBeVisible()
+
+  // A shelter mail comes with a call script, for when calling works better.
+  await page.goto('/hub/mails?t=opvang')
+  await page.getByText('Liever bellen?').click()
+  await expect(page.locator('.hub-call-text')).toContainText('Spreek ik met wie de vrijwilligers coördineert?')
 
   // Numbers and costs render from the database.
   await page.goto('/hub/cijfers')

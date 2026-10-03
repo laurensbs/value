@@ -1,13 +1,17 @@
+import { notFound } from 'next/navigation'
 import { CostEditor, IncomeForm } from '@/components/hub/CostEditor'
 import { Tile } from '@/components/hub/bits'
 import { euro, moneyPicture } from '@/lib/hub/game'
 import { getHub, hubStats } from '@/server/hub'
+import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
 
 export const metadata = { title: 'Kosten' }
 
 /** What Rondje costs, what comes in, and what that means per walk. */
 export default async function HubCosts() {
+  // The app shells never show anything about money (App Store and Play rules).
+  if (await isNativeRequest()) notFound()
   const viewer = await getViewer()
   const [{ state }, stats] = await Promise.all([getHub(), hubStats(viewer?.profile?.referralCode ?? null)])
   const money = moneyPicture(state.costs, state.income, stats.walks.month, stats.walks.walkersMonth)

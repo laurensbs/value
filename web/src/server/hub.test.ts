@@ -9,8 +9,9 @@ const db = drizzle({ client, schema })
 
 vi.mock('server-only', () => ({}))
 vi.mock('@/db', () => ({ getDb: async () => db, dbMode: () => 'pglite' }))
+vi.mock('@/lib/auth', () => ({ enabledSocialProviders: ['google'] }))
 
-const { hubStats } = await import('./hub')
+const { hubStats, loadHubState } = await import('./hub')
 
 const NOW = new Date('2026-10-04T12:00:00Z')
 
@@ -44,6 +45,16 @@ beforeAll(async () => {
       ('w3', null, 'bello', 'fleur', '2026-09-28 10:00', '2026-09-28 10:30', '2026-09-28 10:30', 'ended'),
       ('w4', 'r2', 'bello', 'tom', '2026-09-25 10:00', '2026-09-25 10:30', '2026-09-25 10:30', 'ended');
     -- Fleur uses the app and a computer, Sem a phone browser and a computer, the demo account the app.
+    -- What was done in the launch hub before it moved into this hub.
+    insert into launch_task (key, status, done_at) values
+      ('trademark', 'done', '2026-10-03 01:00'),
+      ('analytics', 'open', null),
+      ('milestone:firstWalk', 'done', '2026-09-24 10:30');
+    insert into outreach_contact (id, audience, name, organisation, email, city, status, last_contact_at, created_at) values
+      ('c1', 'shelter', 'Sanne', 'Dierenasiel Utrecht', 'info@asiel.test', 'Utrecht', 'sent', '2026-10-03 01:30', '2026-10-03 01:20');
+    insert into hub_entry (id, kind, data) values
+      ('task:jurist', 'task', '{"doneAt": "2026-10-02T10:00:00.000Z"}'),
+      ('task:stichting', 'task', '{"doneAt": "2026-10-02T11:00:00.000Z"}');
     insert into session (id, expires_at, token, created_at, updated_at, user_agent, user_id) values
       ('s1', '2026-11-01', 't1', '2026-10-01', '2026-10-03', 'Mozilla/5.0 (iPhone) RondjeApp/1.0', 'fleur'),
       ('s2', '2026-11-01', 't2', '2026-10-01', '2026-10-02', 'Mozilla/5.0 (Macintosh)', 'fleur'),
@@ -60,6 +71,27 @@ afterAll(async () => {
 })
 
 const counts = (steps: { n: number }[]) => steps.map((s) => s.n)
+
+describe('the hub state', () => {
+  it('keeps what was ticked off and the contacts from the launch hub', async () => {
+    const state = await loadHubState()
+    // The trademark check was ticked off in the launch hub; it is the same step here.
+    expect(state.tasks.merkcheck).toEqual({ doneAt: '2026-10-03T01:00:00.000Z' })
+    expect(state.tasks.analytics).toBeUndefined()
+    // A linked step is stored in launch_task only: an old hub_entry for it does not count.
+    expect(state.tasks.jurist).toBeUndefined()
+    expect(state.tasks.stichting).toEqual({ doneAt: '2026-10-02T11:00:00.000Z' })
+    expect(state.partners['contact-c1']).toMatchObject({ name: 'Dierenasiel Utrecht', type: 'opvang', status: 'gemaild', contact: 'Sanne' })
+  })
+
+  it('ticks off what the data shows', async () => {
+    const state = await loadHubState()
+    // Bello is a real dog online. Only Google is set up, so the social login step stays open.
+    expect(state.tasks['eerste-hond']?.auto).toBe(true)
+    expect(state.tasks['social-login']).toBeUndefined()
+    expect(state.tasks['live-zetten']).toBeUndefined()
+  })
+})
 
 describe('hub numbers', () => {
   it('counts each active person once, by the furthest way they used Rondje', async () => {

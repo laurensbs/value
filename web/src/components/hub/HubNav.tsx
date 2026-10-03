@@ -10,6 +10,8 @@ interface Item {
   icon: HubIconName
   /** Shown in the bottom tabs on a phone; the rest live under "Meer". */
   tab?: boolean
+  /** About money: never shown inside the iPhone and Android apps (App Store and Play rules). */
+  money?: boolean
 }
 
 const ITEMS: Item[] = [
@@ -19,7 +21,7 @@ const ITEMS: Item[] = [
   { href: '/hub/mails', label: 'Mails', icon: 'mail', tab: true },
   { href: '/hub/content', label: 'Content', icon: 'video' },
   { href: '/hub/cijfers', label: 'Cijfers', icon: 'chart' },
-  { href: '/hub/kosten', label: 'Kosten', icon: 'euro' },
+  { href: '/hub/kosten', label: 'Kosten', icon: 'euro', money: true },
   { href: '/hub/jij', label: 'Jij', icon: 'user' },
 ]
 
@@ -29,12 +31,12 @@ function isCurrent(pathname: string, href: string): boolean {
   return href === '/hub' ? pathname === '/hub' : pathname === href || pathname.startsWith(`${href}/`)
 }
 
-/** Badges: open follow-ups on Partners. */
-export function HubSideNav({ followUps }: { followUps: number }) {
+/** Badges: open follow-ups on Partners. `native`: inside the app shell, so nothing about money. */
+export function HubSideNav({ followUps, native }: { followUps: number; native: boolean }) {
   const pathname = usePathname()
   return (
     <nav aria-label="Hub">
-      {ITEMS.map((item) => (
+      {ITEMS.filter((i) => !(native && i.money)).map((item) => (
         <Link key={item.href} href={item.href} aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}>
           <HubIcon name={item.icon} size={20} />
           {item.label}

@@ -4,11 +4,16 @@ import { cache } from 'react'
 import { dbMode, getDb } from '@/db'
 import * as s from '@/db/schema'
 import { DIRECTORY } from '@/lib/directory'
-import { DEFAULT_COSTS, DEFAULT_INCOME, DEFAULT_SETTINGS, type CostLine, type HubIncome, type HubSettings } from '@/lib/hub/content'
+import { enabledSocialProviders } from '@/lib/auth'
+import { ALL_TASKS, DEFAULT_COSTS, DEFAULT_INCOME, DEFAULT_SETTINGS, type CostLine, type HubIncome, type HubSettings } from '@/lib/hub/content'
 import {
+  applyAutoChecks,
+  autoChecks,
+  contactPartnerId,
   levelFor,
   MILESTONES,
   newMilestones,
+  partnerFromContact,
   xpOf,
   type ContentState,
   type FounderLevel,
@@ -23,7 +28,8 @@ import { weekOf } from '@/lib/progress'
 import { growthKpis } from './kpis'
 
 // The founder's hub keeps its own notes in hub_entry, one row per item. It reads the app's tables
-// only to count: no names, no messages, no locations.
+// only to count: no names, no messages, no locations. The former launch hub (/admin/launch) lives on
+// here: its checklist stays in launch_task and its contacts in outreach_contact.
 
 const DAY = 24 * 60 * 60_000
 const DEMO_EMAIL = '%@demo.example.org'
@@ -45,9 +51,14 @@ export async function loadHubState(): Promise<HubState> {
   return (await loadHub()).state
 }
 
-async function loadHub(): Promise<Loaded> {
+async function loadHub(now = new Date()): Promise<Loaded> {
   const db = await getDb()
-  const rows = await db.select().from(s.hubEntry)
+  const [rows, launchRows, contacts, [dogs]] = await Promise.all([
+    db.select().from(s.hubEntry),
+    db.select().from(s.launchTask),
+    db.select().from(s.outreachContact),
+    db.execute<Row>(sql`select count(*) as n from dog where status = 'active' and not is_demo`).then((r) => r.rows),
+  ])
   let seenLevel: number | null = null
   const state: HubState = {
     tasks: {},
@@ -88,7 +99,45 @@ async function loadHub(): Promise<Loaded> {
         break
     }
   }
+
+  // Steps that came from the launch hub are stored in launch_task, so what was ticked there stays ticked.
+  const launch = new Map(launchRows.map((r) => [r.key, r]))
+  for (const t of ALL_TASKS) {
+    if (!t.launchKey) continue
+    delete state.tasks[t.id]
+    const row = launch.get(t.launchKey)
+    if (row?.status === 'done') state.tasks[t.id] = { doneAt: (row.doneAt ?? new Date(0)).toISOString() }
+  }
+  // Its contacts are partners here, until you change one and the hub keeps its own copy.
+  for (const c of contacts) state.partners[contactPartnerId(c.id)] ??= partnerFromContact(c)
+
+  const checks = autoChecks(
+    state,
+    {
+      production: process.env.VERCEL_ENV === 'production',
+      socialLogin: enabledSocialProviders.includes('google') && enabledSocialProviders.includes('apple'),
+      realDogs: num(dogs?.n),
+    },
+    now,
+  )
+  applyAutoChecks(state, checks, now)
   return { state, seenLevel }
+}
+
+/** Ticks a step off (or back) in launch_task, where the steps from the launch hub are kept. */
+export async function putLaunchTask(key: string, isDone: boolean, now = new Date()): Promise<void> {
+  const db = await getDb()
+  const values = { status: isDone ? 'done' : 'open', doneAt: isDone ? now : null }
+  await db
+    .insert(s.launchTask)
+    .values({ key, ...values })
+    .onConflictDoUpdate({ target: s.launchTask.key, set: values })
+}
+
+/** Removes a contact that came from the launch hub, so it does not come back. */
+export async function deleteLaunchContact(id: string): Promise<void> {
+  const db = await getDb()
+  await db.delete(s.outreachContact).where(eq(s.outreachContact.id, id))
 }
 
 export async function putEntry(kind: HubKind, key: string, data: object): Promise<void> {
@@ -136,7 +185,7 @@ export interface Hub {
  */
 export const getHub = cache(async (): Promise<Hub> => {
   const now = new Date()
-  const [{ state, seenLevel }, counts] = await Promise.all([loadHub(), milestoneCounts(now)])
+  const [{ state, seenLevel }, counts] = await Promise.all([loadHub(now), milestoneCounts(now)])
   const freshIds = await recordMilestones(state, counts, now)
   const xp = xpOf(state)
   const level = levelFor(xp.total)

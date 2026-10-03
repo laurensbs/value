@@ -3,7 +3,7 @@ import { HubIcon } from '@/components/hub/HubIcon'
 import { Bars, fmt, Funnel, Tile } from '@/components/hub/bits'
 import { COUNTRY_NAMES } from '@/components/hub/countries'
 import { pct } from '@/lib/hub/game'
-import { hubStats } from '@/server/hub'
+import { getHub, hubStats } from '@/server/hub'
 import { getViewer } from '@/server/session'
 
 export const metadata = { title: 'Cijfers' }
@@ -12,11 +12,12 @@ const DEVICE_LABELS: Record<string, string> = { web: 'Browser', apns: 'iPhone-ap
 
 /**
  * Everything the app's database can tell, as totals only: no names, no messages, no routes.
- * Demo accounts never count. Website visits live in Vercel Analytics, not here.
+ * Demo accounts never count. Website visits live in Vercel Web Analytics, not here.
  */
 export default async function HubNumbers() {
   const viewer = await getViewer()
-  const s = await hubStats(viewer?.profile?.referralCode ?? null)
+  const [s, hub] = await Promise.all([hubStats(viewer?.profile?.referralCode ?? null), getHub()])
+  const analyticsOn = Boolean(hub.state.tasks.analytics)
   const platformTotal = s.platform.app + s.platform.mobileWeb + s.platform.desktopWeb
   const decided = s.requests.accepted + s.requests.declined
 
@@ -130,9 +131,14 @@ export default async function HubNumbers() {
         <section className="card stack">
           <h3>Bezoekers van de website</h3>
           <p className="small">
-            Bezoekers en paginaweergaven staan niet in de database. Die zie je in Vercel onder <b>Analytics</b>. Zet Web Analytics daar aan voor het project
-            rondje; daarna kan de hub er een link naar tonen.
+            De site telt bezoekers zonder cookies met Vercel Web Analytics. Beheer, deze hub en de iPhone-app tellen niet mee. De cijfers staan in Vercel
+            onder <b>Analytics</b>.
           </p>
+          {analyticsOn ? null : (
+            <p className="small muted">
+              Staat het nog niet aan? Vercel-dashboard, project rondje, Analytics, Enable. Vink daarna de stap af in je <Link href="/hub/plan">plan</Link>.
+            </p>
+          )}
           <a className="button ghost small" href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer" style={{ justifySelf: 'start' }}>
             Open Vercel <HubIcon name="arrow" size={14} />
           </a>

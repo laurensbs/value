@@ -4,9 +4,12 @@ import { scrubEvent } from './Analytics'
 const view = (url: string) => scrubEvent({ type: 'pageview', url })
 
 describe('what Web Analytics may see', () => {
-  it('never counts admin pages', () => {
+  it('never counts admin pages or the hub', () => {
     expect(view('https://rondje.test/admin')).toBeNull()
     expect(view('https://rondje.test/admin/launch#cijfers')).toBeNull()
+    expect(view('https://rondje.test/hub')).toBeNull()
+    expect(view('https://rondje.test/hub/partners?type=opvang')).toBeNull()
+    expect(view('https://rondje.test/hubble')?.url).toBe('https://rondje.test/hubble')
   })
 
   it('drops query strings and hashes (claim links, invite codes, next=)', () => {
