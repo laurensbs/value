@@ -8,7 +8,7 @@ import { Medal } from '@/components/Medal'
 import { WeekCard } from '@/components/WeekCard'
 import { bondFor, KIND_KEYS, LEVEL_KEYS, LEVELS, POINTS, type PointKind } from '@/lib/progress'
 import { challengesFor } from '@/server/challenges'
-import { dogFriendsFor, progressFor } from '@/server/progress'
+import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
 import { progressJson } from '@/server/progress-json'
 import { requireOnboarded } from '@/server/session'
 
@@ -25,15 +25,15 @@ const OWNER_EARN: PointKind[] = ['dog-walked', 'first-dog', 'profile', 'invite']
 export default async function ProgressPage() {
   const viewer = await requireOnboarded('/progress')
   const now = new Date()
-  const t = await getTranslations('progress')
-  const format = await getFormatter()
-  const progress = await progressFor(viewer, now)
-  const [json, challenges, friends] = await Promise.all([
-    progressJson(progress),
+  const { walker, owner } = rolesOf(viewer.profile)
+  const [t, format, progress, challenges, friends] = await Promise.all([
+    getTranslations('progress'),
+    getFormatter(),
+    progressFor(viewer, now),
     challengesFor(viewer, now),
-    progress.roles.walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
+    walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
   ])
-  const { walker, owner } = progress.roles
+  const json = await progressJson(progress)
   const earn = [...new Set([...(walker ? WALKER_EARN : []), ...(owner ? OWNER_EARN : [])])]
   const earned = json.badges.filter((b) => b.tier > 0).length
   const celebrate = progress.levelUp || progress.newAwards.length > 0

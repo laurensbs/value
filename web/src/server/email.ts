@@ -82,3 +82,15 @@ export async function passwordResetEmail(url: string, locale: Locale, to: string
   })
   return { to, subject: t('reset.subject'), html, text }
 }
+
+/** Confirms that an address belongs to the person signed in with it (asked for before admin rights are given by address). */
+export async function verifyEmail(url: string, locale: Locale, to: string): Promise<Email> {
+  const t = await getTranslations({ locale, namespace: 'email' })
+  const { html, text } = renderEmail({
+    heading: t('verify.heading'),
+    paragraphs: [t('verify.body'), t('verify.ignore')],
+    cta: { label: t('verify.cta'), url },
+    footer: t('verify.footer'),
+  })
+  return { to, subject: t('verify.subject'), html, text }
+}

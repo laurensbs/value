@@ -1,6 +1,7 @@
 // Mobile + desktop quality pass over the app's pages, signed out and signed in:
-// horizontal overflow, page errors, failed requests, tap targets under 44px (mobile),
-// unlabeled controls, images without alt, and slow pages. Writes a screenshot per page.
+// horizontal overflow, page errors, failed requests, anything the Content-Security-Policy
+// blocks, tap targets under 44px (mobile), unlabeled controls, images without alt, and slow
+// pages. Writes a screenshot per page.
 // Usage: node scripts/audit.mjs <baseUrl> <outDir>   (server needs ADMIN_EMAILS to include audit@rondje.test)
 import { chromium } from '@playwright/test'
 import { mkdirSync, writeFileSync } from 'node:fs'
@@ -9,7 +10,7 @@ const [base = 'http://localhost:3100', out = 'audit'] = process.argv.slice(2)
 mkdirSync(out, { recursive: true })
 const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH || undefined })
 
-const publicPaths = ['/', '/dogs', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam']
+const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam']
 const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
 const viewports = { mobile: { viewport: { width: 375, height: 740 }, isMobile: true, hasTouch: true }, desktop: { viewport: { width: 1366, height: 900 } } }
 
@@ -17,8 +18,11 @@ async function check(page, path, label, tag = '') {
   const errors = []
   const onErr = (e) => errors.push(`pageerror: ${e.message.slice(0, 160)}`)
   const onResp = (r) => { if (r.status() >= 500) errors.push(`HTTP ${r.status()} ${r.url().replace(base, '')}`) }
+  // Anything the Content-Security-Policy blocks shows up as a console error.
+  const onConsole = (m) => { if (m.type() === 'error' && /Content Security Policy/i.test(m.text())) errors.push(`csp: ${m.text().slice(0, 200)}`) }
   page.on('pageerror', onErr)
   page.on('response', onResp)
+  page.on('console', onConsole)
   const t0 = Date.now()
   await page.goto(base + path, { waitUntil: 'networkidle' })
   const ms = Date.now() - t0
@@ -61,6 +65,7 @@ async function check(page, path, label, tag = '') {
   }, label === 'mobile')
   page.off('pageerror', onErr)
   page.off('response', onResp)
+  page.off('console', onConsole)
   if (ms > 4000) errors.push(`slow: ${ms} ms`)
   const file = `${tag}${(path === '/' ? 'home' : path.replace(/[/?=]/g, '_').replace(/^_/, ''))}-${label}`
   await page.screenshot({ path: `${out}/${file}.png`, fullPage: label === 'desktop' })

@@ -19,7 +19,7 @@ export async function GET() {
   const viewer = await apiMember()
   if (viewer instanceof NextResponse) return viewer
   const [outgoing, incoming] = await Promise.all([outgoingRequests(viewer.userId), incomingRequests(viewer)])
-  const contacts = await hostContacts(outgoing.filter((r) => OPEN.includes(r.request.status)).map((r) => r.dog))
+  const contacts = await hostContacts(outgoing.filter((r) => OPEN.includes(r.request.status) && !r.blocked).map((r) => r.dog))
   const grants = await trustGrantsFor([...new Set(incoming.map((r) => r.dog.id))])
   // Which walks this person already gave (private) feedback on, so the app stops asking.
   const walkIds = [...outgoing, ...incoming].map((r) => r.walkId).filter((id): id is string => Boolean(id))
@@ -87,7 +87,7 @@ export async function GET() {
           ageBand: ageBand(r.walker.birthDate),
           city: r.walker.city,
           phone: accepted ? r.walker.phone : null,
-          email: accepted ? r.walker.email : null,
+          email: accepted && r.walker.email ? r.walker.email : null,
         },
         trust: grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false },
         checklist: checklists.get(`host:${r.request.id}`) ?? null,

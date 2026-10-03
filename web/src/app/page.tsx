@@ -21,11 +21,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     const { welcome } = await searchParams
     return <Today viewer={viewer as OnboardedViewer} welcome={welcome === '1'} />
   }
-  const t = await getTranslations('home')
-  const native = await isNativeRequest()
-  const dogs = (await listDogs({}, 8)).slice(0, 4)
-  const impact = await impactTotals()
-  const format = await getFormatter()
+  const [t, native, someDogs, impact, format] = await Promise.all([getTranslations('home'), isNativeRequest(), listDogs({}, 8), impactTotals(), getFormatter()])
+  const dogs = someDogs.slice(0, 4)
 
   return (
     <div className="stack-l">

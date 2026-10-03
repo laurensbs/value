@@ -14,7 +14,7 @@ import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
-import { dogFacts, getDogDetail, myGroupSignups, relationFor, walkerFacts } from '@/server/queries'
+import { dogFacts, getDogDetail, myGroupSignups, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
 import { dogShareFor, localeOf } from '@/server/share'
 
@@ -56,21 +56,23 @@ export default async function DogPage({
   const viewer = await getViewer()
   const detail = await getDogDetail(id, viewer)
   if (!detail) notFound()
-  const { dog, host, slots, groupWalks, canSeePrivate, isMine } = detail
-  const t = await getTranslations()
-  const format = await getFormatter()
+  const { dog, host, slots, groupWalks, canSeePrivate, isMine, relation } = detail
+  const [t, format, facts, joined, share] = await Promise.all([
+    getTranslations(),
+    getFormatter(),
+    viewer?.profile ? walkerFacts(viewer) : null,
+    viewer ? myGroupSignups(viewer.userId) : new Set<string>(),
+    dogShareFor(detail, viewer),
+  ])
 
   let meetReason: string | null = 'not-signed-in'
   let soloReason: string | null = 'not-signed-in'
-  if (viewer?.profile) {
-    const facts = await walkerFacts(viewer)
-    const relation = await relationFor(viewer, dog)
+  if (facts && relation) {
     meetReason = canRequestMeeting(facts, dogFacts(dog), relation)
     soloReason = canRequestSolo(facts, dogFacts(dog), relation)
   } else if (viewer) {
     meetReason = soloReason = 'not-onboarded'
   }
-  const joined = viewer ? await myGroupSignups(viewer.userId) : new Set<string>()
 
   // The dog's weekly moments on their next dates, soonest first: one tap fills in the request.
   const moments = slots
@@ -83,7 +85,6 @@ export default async function DogPage({
     }))
   const defaultDate = moments[0]?.date ?? toZonedParts(fromNow(24 * 3600_000)).date
   const defaultTime = moments[0]?.time ?? '10:00'
-  const share = await dogShareFor(detail, viewer)
   const plan = encodeURIComponent(`/dogs/${dog.id}#plan`)
 
   return (

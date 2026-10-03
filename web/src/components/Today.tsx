@@ -10,7 +10,7 @@ import { BACK_AFTER_DAYS } from '@/lib/nudges'
 import { BADGES, bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
 import { zonedToUtc } from '@/lib/time'
 import { challengesFor } from '@/server/challenges'
-import { dogFriendsFor, progressFor } from '@/server/progress'
+import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
 import { progressJson } from '@/server/progress-json'
 import { webPushKey } from '@/server/push'
 import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, type RequestRow } from '@/server/queries'
@@ -57,22 +57,21 @@ function nextAppointment(rows: RequestRow[], now: Date): RequestRow | null {
  */
 export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welcome: boolean }) {
   const now = new Date()
-  const t = await getTranslations('today')
-  const tp = await getTranslations('progress')
-  const td = await getTranslations('dogs')
-  const tpa = await getTranslations('pushAsk')
-  const format = await getFormatter()
-  const locale = await getLocale()
   const p = viewer.profile
   const hasOrg = viewer.orgs.length > 0
-
-  const progress = await progressFor(viewer, now)
-  const { walker, owner } = progress.roles
+  const { walker, owner } = rolesOf(p)
   const country = isCountry(p.country) ? p.country : undefined
   const near = p.lat != null && p.lng != null ? { lat: p.lat, lng: p.lng } : country ? countryInfo(country).center : null
 
-  const [json, challenges, outgoing, incoming, dogs, nearby, impact, friends] = await Promise.all([
-    progressJson(progress),
+  // The first screen after opening the app: everything is asked at the same time.
+  const [t, tp, td, tpa, format, locale, progress, challenges, outgoing, incoming, dogs, nearby, impact, friends, dogStats] = await Promise.all([
+    getTranslations('today'),
+    getTranslations('progress'),
+    getTranslations('dogs'),
+    getTranslations('pushAsk'),
+    getFormatter(),
+    getLocale(),
+    progressFor(viewer, now),
     challengesFor(viewer, now),
     walker ? outgoingRequests(viewer.userId) : Promise.resolve([]),
     owner || hasOrg ? incomingRequests(viewer) : Promise.resolve([]),
@@ -80,13 +79,11 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     walker ? listDogs({ country, near }, 8) : Promise.resolve([]),
     impactTotals(),
     walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
+    owner ? dogWeekStats(viewer.userId, now) : new Map<string, { week: number; walkers: number }>(),
   ])
+  const json = await progressJson(progress)
 
   const ownDogs = dogs.filter((d) => !d.isDemo)
-  const dogStats = await dogWeekStats(
-    ownDogs.map((d) => d.id),
-    now,
-  )
   const nearbyDogs = nearby.filter((item) => item.dog.ownerId !== viewer.userId).slice(0, 6)
   const next = nextAppointment([...outgoing, ...incoming], now)
   const pending = incoming.filter((r) => r.request.status === 'pending').length
@@ -340,11 +337,11 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   )
 }
 
-/** For each of your dogs: walks this week and how many different people ever walked it. */
-async function dogWeekStats(dogIds: string[], now: Date): Promise<Map<string, { week: number; walkers: number }>> {
-  if (dogIds.length === 0) return new Map()
+/** For each of your own dogs: walks this week and how many different people ever walked it. */
+async function dogWeekStats(ownerId: string, now: Date): Promise<Map<string, { week: number; walkers: number }>> {
   const db = await getDb()
   const monday = zonedToUtc(weekOf(now), '00:00')
+  const ownDogs = db.select({ id: s.dog.id }).from(s.dog).where(and(eq(s.dog.ownerId, ownerId), eq(s.dog.isDemo, false)))
   const rows = await db
     .select({
       dogId: s.walk.dogId,
@@ -352,7 +349,7 @@ async function dogWeekStats(dogIds: string[], now: Date): Promise<Map<string, { 
       walkers: sql<number>`count(distinct ${s.walk.walkerId})`.mapWith(Number),
     })
     .from(s.walk)
-    .where(and(inArray(s.walk.dogId, dogIds), eq(s.walk.status, 'ended')))
+    .where(and(inArray(s.walk.dogId, ownDogs), eq(s.walk.status, 'ended')))
     .groupBy(s.walk.dogId)
   return new Map(rows.map((r) => [r.dogId, { week: r.week, walkers: r.walkers }]))
 }

@@ -1,17 +1,15 @@
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/i18n/config'
-import { unreadCount } from '@/server/queries'
 import type { Viewer } from '@/server/session'
 import { Avatar } from './Avatar'
 import { Icon } from './Icon'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { Logo } from './Logo'
 
-export async function Header({ viewer }: { viewer: Viewer | null }) {
+export async function Header({ viewer, unread }: { viewer: Viewer | null; unread: number }) {
   const t = await getTranslations('nav')
   const locale = (await getLocale()) as Locale
-  const unread = viewer ? await unreadCount(viewer.userId) : 0
   const firstOrg = viewer?.orgs[0]
 
   return (
@@ -28,7 +26,7 @@ export async function Header({ viewer }: { viewer: Viewer | null }) {
           {viewer?.profile ? <Link href="/requests">{t('requests')}</Link> : <Link href="/shelters">{t('shelters')}</Link>}
           {viewer?.profile ? (viewer.profile.hasDogs ? <Link href="/my-dogs">{t('myDogs')}</Link> : null) : <Link href="/safety">{t('safety')}</Link>}
           {firstOrg ? <Link href={`/shelter/${firstOrg.id}`}>{t('shelter')}</Link> : null}
-          {viewer?.isAdmin ? <Link href="/admin">{t('admin')}</Link> : null}
+          {viewer?.isAdmin || viewer?.adminUnconfirmed ? <Link href="/admin">{t('admin')}</Link> : null}
         </nav>
         <div className="header-actions">
           <Link href="/help" className="help-pill" aria-label={t('helpPill')}>

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { isCountry } from '@/lib/countries'
 import { isValidLatLng } from '@/lib/geo'
-import { apiViewer, dogCard, json } from '@/server/api'
+import { apiActive, dogCard, json } from '@/server/api'
 import { listDogs } from '@/server/queries'
 
 /**
@@ -9,7 +9,7 @@ import { listDogs } from '@/server/queries'
  * it is only used to sort by distance and is never stored.
  */
 export async function GET(request: Request) {
-  const viewer = await apiViewer()
+  const viewer = await apiActive()
   if (viewer instanceof NextResponse) return viewer
   const q = new URL(request.url).searchParams
   const lat = Number(q.get('lat'))

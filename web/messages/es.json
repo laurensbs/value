@@ -1121,7 +1121,15 @@
     },
     "flaggedChats": "Mensajes de chat sobre dinero o con un enlace (30 días)",
     "flaggedChatsHint": "Solo quién y cuántas veces: nunca leemos los chats. Quien lo recibe ve un aviso y puede denunciar el mensaje.",
-    "flaggedChatCount": "{n, plural, one {# mensaje} other {# mensajes}}"
+    "flaggedChatCount": "{n, plural, one {# mensaje} other {# mensajes}}",
+    "confirm": {
+      "title": "Primero confirma tu correo electrónico",
+      "text": "Al gestionar Rondje puedes ver y cambiar muchas cosas. Por eso te pedimos una sola vez que confirmes que {email} es tuyo. Recibirás un correo con un botón.",
+      "send": "Enviar el correo",
+      "sent": "Enviado. Abre el correo y toca el botón; así volverás aquí.",
+      "failed": "No se pudo enviar. Inténtalo de nuevo en un momento.",
+      "expired": "Ese enlace ya no funciona. Envía un correo nuevo aquí abajo."
+    }
   },
   "banned": {
     "title": "Tu cuenta ha sido bloqueada",
@@ -1492,7 +1500,15 @@
         "body": "El punto de encuentro está en Rondje, en los paseos en grupo. ¿Al final no puedes? Cancela tu inscripción para que otra persona pueda ocupar tu plaza."
       }
     },
-    "reminderFooter": "Recibes este recordatorio porque tienes los recordatorios activados en tu perfil. Enviamos uno cada pocos días como mucho. Puedes desactivarlos en tu perfil, en Ajustes."
+    "reminderFooter": "Recibes este recordatorio porque tienes los recordatorios activados en tu perfil. Enviamos uno cada pocos días como mucho. Puedes desactivarlos en tu perfil, en Ajustes.",
+    "verify": {
+      "subject": "Confirma tu correo electrónico para Rondje",
+      "heading": "¿Es este tu correo electrónico?",
+      "body": "Alguien que ha iniciado sesión con este correo pide gestionar Rondje. ¿Has sido tú? Entonces toca el botón. El enlace funciona durante una hora.",
+      "cta": "Sí, es mi correo",
+      "ignore": "¿No lo has pedido tú? Entonces no toques el botón. No tienes que hacer nada más.",
+      "footer": "Recibes este correo porque alguien pidió confirmar esta dirección en Rondje."
+    }
   },
   "cities": {
     "title": "Pasear perros por ciudad",

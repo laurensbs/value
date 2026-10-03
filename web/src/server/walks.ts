@@ -122,28 +122,28 @@ export interface ActiveWalk {
   role: 'walker' | 'watcher'
 }
 
-/** A walk in progress that this person is doing or following, for the "still walking" bar. */
-export async function activeWalkFor(viewer: Viewer): Promise<ActiveWalk | null> {
+/**
+ * A walk in progress that this person is doing or following, for the "still walking" bar. Needs only
+ * their id, so every page can ask it at the same time as the rest of who is signed in.
+ */
+export async function activeWalkFor(userId: string): Promise<ActiveWalk | null> {
   const db = await getDb()
-  const [mine] = await db
-    .select({ walkId: s.walk.id, dogName: s.dog.name })
-    .from(s.walk)
-    .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
-    .where(and(eq(s.walk.walkerId, viewer.userId), eq(s.walk.status, 'active')))
-    .limit(1)
+  const myOrgs = db.select({ id: s.organizationMember.orgId }).from(s.organizationMember).where(eq(s.organizationMember.userId, userId))
+  const [[mine], [theirs]] = await Promise.all([
+    db
+      .select({ walkId: s.walk.id, dogName: s.dog.name })
+      .from(s.walk)
+      .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+      .where(and(eq(s.walk.walkerId, userId), eq(s.walk.status, 'active')))
+      .limit(1),
+    db
+      .select({ walkId: s.walk.id, dogName: s.dog.name })
+      .from(s.walk)
+      .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+      .where(and(eq(s.walk.status, 'active'), or(eq(s.dog.ownerId, userId), inArray(s.dog.orgId, myOrgs))))
+      .limit(1),
+  ])
   if (mine) return { ...mine, role: 'walker' }
-  const orgIds = viewer.orgs.map((o) => o.id)
-  const [theirs] = await db
-    .select({ walkId: s.walk.id, dogName: s.dog.name })
-    .from(s.walk)
-    .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
-    .where(
-      and(
-        eq(s.walk.status, 'active'),
-        orgIds.length ? or(eq(s.dog.ownerId, viewer.userId), inArray(s.dog.orgId, orgIds)) : eq(s.dog.ownerId, viewer.userId),
-      ),
-    )
-    .limit(1)
   return theirs ? { ...theirs, role: 'watcher' } : null
 }
 
@@ -156,6 +156,8 @@ export async function beginWalk(requestId: string, viewer: OnboardedViewer): Pro
     .innerJoin(s.dog, eq(s.dog.id, s.walkRequest.dogId))
     .where(eq(s.walkRequest.id, requestId))
   if (!row) return { ok: false, error: 'forbidden' }
+  // A dog a moderator took offline is not walked.
+  if (row.dog.status === 'hidden') return { ok: false, error: 'dog-unavailable' }
 
   const existing = await db.select().from(s.walk).where(eq(s.walk.requestId, requestId))
   const active = existing.find((w) => w.status === 'active')

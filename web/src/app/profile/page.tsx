@@ -25,17 +25,17 @@ export async function generateMetadata() {
 export default async function ProfilePage() {
   const viewer = await requireOnboarded('/profile')
   const pushKey = webPushKey()
-  const native = await isNativeRequest()
   const p = viewer.profile
-  const t = await getTranslations()
-  const locale = (await getLocale()) as Locale
-  const signals = await trustSignals(viewer.userId)
   const db = await getDb()
-  const [{ n: invited }] = p.referralCode
-    ? await db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode))
-    : [{ n: 0 }]
+  const [native, t, locale, signals, [{ n: invited }], progress] = await Promise.all([
+    isNativeRequest(),
+    getTranslations(),
+    getLocale() as Promise<Locale>,
+    trustSignals(viewer.userId),
+    p.referralCode ? db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode)) : [{ n: 0 }],
+    progressFor(viewer),
+  ])
   const invite = inviteUrl(siteUrl(), p.referralCode ?? '')
-  const progress = await progressFor(viewer)
   const level = progress.level
 
   return (

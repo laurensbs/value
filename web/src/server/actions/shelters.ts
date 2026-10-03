@@ -272,11 +272,13 @@ export async function markAttendance(groupWalkId: string, userId: string, attend
   const [gw] = await db.select().from(s.groupWalk).where(eq(s.groupWalk.id, groupWalkId))
   if (!gw) return
   const viewer = await requireMember(gw.orgId)
-  await db
+  const marked = await db
     .update(s.groupWalkSignup)
     .set({ status: attended ? 'attended' : 'no_show' })
     .where(and(eq(s.groupWalkSignup.groupWalkId, groupWalkId), eq(s.groupWalkSignup.userId, userId)))
-  if (attended && idSeen) {
+    .returning({ userId: s.groupWalkSignup.userId })
+  // An ID check only counts for someone who signed up for this walk, and never for yourself.
+  if (attended && idSeen && marked.length > 0 && userId !== viewer.userId) {
     await db
       .insert(s.idCheck)
       .values({ id: crypto.randomUUID(), walkerId: userId, checkedBy: viewer.userId, orgId: gw.orgId })

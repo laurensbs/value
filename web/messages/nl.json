@@ -1121,7 +1121,15 @@
     },
     "flaggedChats": "Chatberichten over geld of met een link (30 dagen)",
     "flaggedChatsHint": "Alleen wie en hoe vaak: chats zelf lezen we niet. De ontvanger ziet een waarschuwing en kan het bericht melden.",
-    "flaggedChatCount": "{n, plural, one {# bericht} other {# berichten}}"
+    "flaggedChatCount": "{n, plural, one {# bericht} other {# berichten}}",
+    "confirm": {
+      "title": "Bevestig eerst je e-mailadres",
+      "text": "Met beheer kun je veel zien en aanpassen. Daarom vragen we je één keer te bevestigen dat {email} van jou is. Je krijgt een mail met een knop.",
+      "send": "Stuur de mail",
+      "sent": "Verstuurd. Open de mail en tik op de knop, dan kom je hier terug.",
+      "failed": "Versturen lukte niet. Probeer het zo nog eens.",
+      "expired": "Die link werkt niet meer. Stuur hieronder een nieuwe mail."
+    }
   },
   "banned": {
     "title": "Je account is geblokkeerd",
@@ -1492,7 +1500,15 @@
         "body": "Waar jullie verzamelen staat in Rondje, bij de groepswandelingen. Kun je toch niet? Meld je dan af, dan komt je plek vrij voor een ander."
       }
     },
-    "reminderFooter": "Je krijgt deze herinnering omdat herinneringen aanstaan in je profiel. We sturen er hooguit één per paar dagen. Uitzetten kan in je profiel, onder Instellingen."
+    "reminderFooter": "Je krijgt deze herinnering omdat herinneringen aanstaan in je profiel. We sturen er hooguit één per paar dagen. Uitzetten kan in je profiel, onder Instellingen.",
+    "verify": {
+      "subject": "Bevestig je e-mailadres voor Rondje",
+      "heading": "Is dit jouw e-mailadres?",
+      "body": "Iemand die met dit e-mailadres is ingelogd, vraagt om beheer van Rondje. Was jij dat? Tik dan op de knop. De link werkt een uur.",
+      "cta": "Ja, dit is mijn adres",
+      "ignore": "Heb jij dit niet gevraagd? Tik dan niet op de knop. Verder hoef je niets te doen.",
+      "footer": "Je krijgt deze e-mail omdat iemand vroeg om dit e-mailadres te bevestigen bij Rondje."
+    }
   },
   "cities": {
     "title": "Honden uitlaten per stad",

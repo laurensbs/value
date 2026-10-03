@@ -91,10 +91,12 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         ? 'incoming'
         : 'mine'
 
-  const contacts = await hostContacts(outgoing.filter((r) => OPEN.includes(r.request.status) || r.request.status === 'completed').map((r) => r.dog))
-  const grants = await trustGrantsFor([...new Set(incoming.map((r) => r.dog.id))])
   const walkerIds = [...new Set(incoming.map((r) => r.walker.id))]
-  const signals = new Map(await Promise.all(walkerIds.map(async (id) => [id, await trustSignals(id)] as const)))
+  const [contacts, grants, signals] = await Promise.all([
+    hostContacts(outgoing.filter((r) => (OPEN.includes(r.request.status) || r.request.status === 'completed') && !r.blocked).map((r) => r.dog)),
+    trustGrantsFor([...new Set(incoming.map((r) => r.dog.id))]),
+    Promise.all(walkerIds.map(async (id) => [id, await trustSignals(id)] as const)).then((entries) => new Map(entries)),
+  ])
 
   const when = (r: RequestRow) =>
     format.dateTime(r.request.startsAt, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })

@@ -14,7 +14,7 @@ const { markProgressSeen, progressFor, syncPoints } = await import('./progress')
 
 async function viewer(userId: string) {
   const p = await db.query.profile.findFirst({ where: (t, { eq }) => eq(t.userId, userId) })
-  return { userId, email: `${userId}@example.org`, name: userId, image: null, isAdmin: false, orgs: [], profile: p! }
+  return { userId, email: `${userId}@example.org`, name: userId, image: null, isAdmin: false, adminUnconfirmed: false, orgs: [], profile: p! }
 }
 
 beforeAll(async () => {

@@ -1121,7 +1121,15 @@
     },
     "flaggedChats": "Chat messages about money or with a link (30 days)",
     "flaggedChatsHint": "Only who and how often: we never read the chats themselves. The receiver sees a warning and can report the message.",
-    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}"
+    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}",
+    "confirm": {
+      "title": "Confirm your email address first",
+      "text": "Managing Rondje lets you see and change a lot. That's why we ask you once to confirm that {email} is yours. You'll get an email with a button.",
+      "send": "Send the email",
+      "sent": "Sent. Open the email and tap the button, and you'll come back here.",
+      "failed": "Sending didn't work. Try again in a moment.",
+      "expired": "That link doesn't work anymore. Send a new email below."
+    }
   },
   "banned": {
     "title": "Your account has been blocked",
@@ -1492,7 +1500,15 @@
         "body": "Where you meet is in Rondje, under group walks. Can't make it after all? Cancel your sign-up so someone else can take your spot."
       }
     },
-    "reminderFooter": "You get this reminder because reminders are on in your profile. We send one every few days at most. You can turn them off in your profile, under Settings."
+    "reminderFooter": "You get this reminder because reminders are on in your profile. We send one every few days at most. You can turn them off in your profile, under Settings.",
+    "verify": {
+      "subject": "Confirm your email address for Rondje",
+      "heading": "Is this your email address?",
+      "body": "Someone signed in with this email address is asking to manage Rondje. Was that you? Then tap the button. The link works for one hour.",
+      "cta": "Yes, this is my address",
+      "ignore": "Didn't ask for this? Then don't tap the button. You don't need to do anything else.",
+      "footer": "You get this email because someone asked to confirm this email address on Rondje."
+    }
   },
   "cities": {
     "title": "Dog walking by city",

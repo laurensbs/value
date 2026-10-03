@@ -1121,7 +1121,15 @@
     },
     "flaggedChats": "Messages de chat sur l'argent ou avec un lien (30 jours)",
     "flaggedChatsHint": "Seulement qui et combien de fois : nous ne lisons jamais les chats. Le destinataire voit un avertissement et peut signaler le message.",
-    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}"
+    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}",
+    "confirm": {
+      "title": "Confirmez d'abord votre adresse e-mail",
+      "text": "Gérer Rondje permet de voir et de modifier beaucoup de choses. C'est pourquoi nous vous demandons une seule fois de confirmer que {email} est bien à vous. Vous recevrez un e-mail avec un bouton.",
+      "send": "Envoyer l'e-mail",
+      "sent": "Envoyé. Ouvrez l'e-mail et touchez le bouton : vous reviendrez ici.",
+      "failed": "L'envoi n'a pas fonctionné. Réessayez dans un instant.",
+      "expired": "Ce lien ne fonctionne plus. Envoyez un nouvel e-mail ci-dessous."
+    }
   },
   "banned": {
     "title": "Votre compte a été bloqué",
@@ -1492,7 +1500,15 @@
         "body": "Le point de rendez-vous se trouve dans Rondje, dans les balades en groupe. Finalement, vous ne pouvez pas venir ? Annulez votre inscription pour libérer votre place."
       }
     },
-    "reminderFooter": "Vous recevez ce rappel parce que les rappels sont activés dans votre profil. Nous en envoyons un tous les quelques jours au maximum. Vous pouvez les désactiver dans votre profil, sous Réglages."
+    "reminderFooter": "Vous recevez ce rappel parce que les rappels sont activés dans votre profil. Nous en envoyons un tous les quelques jours au maximum. Vous pouvez les désactiver dans votre profil, sous Réglages.",
+    "verify": {
+      "subject": "Confirmez votre adresse e-mail pour Rondje",
+      "heading": "Est-ce bien votre adresse e-mail ?",
+      "body": "Une personne connectée avec cette adresse e-mail demande à gérer Rondje. Était-ce vous ? Touchez alors le bouton. Le lien est valable une heure.",
+      "cta": "Oui, c'est mon adresse",
+      "ignore": "Ce n'est pas vous ? Ne touchez pas le bouton. Vous n'avez rien d'autre à faire.",
+      "footer": "Vous recevez cet e-mail parce que quelqu'un a demandé à confirmer cette adresse sur Rondje."
+    }
   },
   "cities": {
     "title": "Promener un chien par ville",

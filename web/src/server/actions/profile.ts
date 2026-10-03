@@ -42,6 +42,7 @@ function readProfile(form: FormData) {
 export async function completeOnboarding(_prev: FormState, form: FormData): Promise<FormState> {
   const viewer = await getViewer()
   if (!viewer) return { ok: false, error: 'not-signed-in' }
+  if (viewer.profile?.bannedAt) return { ok: false, error: 'banned' }
   const parsed = readProfile(form)
   if (!parsed.success) return { ok: false, error: 'invalid' }
   const result = await saveOnboarding(viewer, parsed.data, {

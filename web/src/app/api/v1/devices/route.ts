@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { apiViewer, fail, json } from '@/server/api'
+import { apiActive, apiViewer, fail, json } from '@/server/api'
 import { registerDevice, removeDevice } from '@/server/push'
 
 const TOKEN = /^[0-9a-f]{64,200}$/i
@@ -9,7 +9,7 @@ const TOKEN = /^[0-9a-f]{64,200}$/i
  * { token: "<hex>", sandbox: true } for development builds, sandbox false (or left out) for the App Store.
  */
 export async function POST(request: Request) {
-  const viewer = await apiViewer()
+  const viewer = await apiActive()
   if (viewer instanceof NextResponse) return viewer
   const body = (await request.json().catch(() => null)) as { token?: unknown; sandbox?: unknown } | null
   if (typeof body?.token !== 'string' || !TOKEN.test(body.token)) return fail('invalid')
