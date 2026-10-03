@@ -71,4 +71,12 @@ T = {
         "Ton signalement est bien arrivé. Quelqu'un de Rondje te contactera si nécessaire.",
         "Tu aviso ha llegado. Alguien de Rondje se pondrá en contacto si hace falta."),
     "Rust lekker uit. Je hebt het goed gedaan.": ("Have a good rest. You did well.", "Repose-toi bien. Tu as bien fait.", "Descansa bien. Lo has hecho bien."),
+    "Het rondje is klaar": (
+        "The walk is done",
+        "La balade est terminée",
+        "El paseo ha terminado"),
+    "Tot %@!": (
+        "See you %@!",
+        "À %@ !",
+        "¡Hasta el %@!"),
 }

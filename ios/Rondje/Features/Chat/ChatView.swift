@@ -129,7 +129,9 @@ struct ChatView: View {
                             .padding(.horizontal, 14)
                             .frame(minHeight: 36)
                             .background(Palette.grassSoft, in: .capsule)
-                            .contentShape(.capsule)
+                            // Looks 36pt tall, taps as 44pt.
+                            .frame(minHeight: 44)
+                            .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
                 }

@@ -40,7 +40,9 @@ enum MeetingPrep {
             let end = item.startsAt.addingTimeInterval(Double(item.durationMin) * 60)
             let time = end.formatted(.dateTime.hour().minute().locale(Format.locale))
             return [
-                PrepItem(id: "bags", title: L("Zakjes en telefoon mee"), detail: nil, symbol: "bag.fill"),
+                // The owner provides the bags (see the request flow); extra ones are only a backup.
+                PrepItem(id: "phone", title: L("Telefoon opgeladen"),
+                         detail: L("De eigenaar legt zakjes klaar. Neem er gerust een paar extra mee."), symbol: "iphone"),
                 PrepItem(id: "water", title: L("Water als het warm is"),
                          detail: L("Voel met je hand of de stoep niet te heet is."), symbol: "drop.fill"),
                 PrepItem(id: "sos", title: L("Weet waar SOS zit"),

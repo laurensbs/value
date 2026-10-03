@@ -11,6 +11,7 @@
 		06C5111F4E9CBBE25555ACA8 /* MeetingPrepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB532A370DB01F18BDC7A90 /* MeetingPrepView.swift */; };
 		0815887EEFE6F55BD5813657 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885A8805C0F35865B3C3FD85 /* Push.swift */; };
 		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
+		0FEF775DD9FC044B2D891DDE /* ReviewFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95201D289CF712EF870552C2 /* ReviewFixTests.swift */; };
 		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
 		175F77F5196A62C1655569B1 /* MeetingPrepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C2CD13BF1767A8EEEEBF85 /* MeetingPrepTests.swift */; };
 		18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B076DE4C10D0103F33700 /* OwnerHomeView.swift */; };
@@ -176,6 +177,7 @@
 		921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeTests.swift; sourceTree = "<group>"; };
 		9444E27E94A2B8808B22C5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9453D44FC5D569CD7B2D4CF4 /* LessonPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlayer.swift; sourceTree = "<group>"; };
+		95201D289CF712EF870552C2 /* ReviewFixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFixTests.swift; sourceTree = "<group>"; };
 		954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		98DC3CE7E55F9A227036065D /* NudgeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NudgeSettingsView.swift; sourceTree = "<group>"; };
 		9A2389F79FFC9CDADA7EF5C2 /* NextStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextStepTests.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				9A2389F79FFC9CDADA7EF5C2 /* NextStepTests.swift */,
 				36254E922FAA854755D88686 /* RequestSuggestionsTests.swift */,
 				2572111EE40098F6B691E105 /* ReturnLoopTests.swift */,
+				95201D289CF712EF870552C2 /* ReviewFixTests.swift */,
 				921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */,
 				9A8791251489F6F3EB478AEA /* WalkDoneTests.swift */,
 			);
@@ -659,6 +662,7 @@
 				D7129D1AC2B00C9F0743761C /* NextStepTests.swift in Sources */,
 				47B8CC62CC524AA871FEAE2B /* RequestSuggestionsTests.swift in Sources */,
 				A70DBDA4F10F64A73027C61C /* ReturnLoopTests.swift in Sources */,
+				0FEF775DD9FC044B2D891DDE /* ReviewFixTests.swift in Sources */,
 				3BE62065632AD4C2F8AE7309 /* RondjeTests.swift in Sources */,
 				79B8053E4650CE766B4A42A8 /* WalkDoneTests.swift in Sources */,
 			);

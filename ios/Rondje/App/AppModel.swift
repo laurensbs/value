@@ -45,6 +45,9 @@ final class AppModel {
     }
 
     private let api = APIClient.shared
+    /// Bumped by `reset()`. A refresh that was sent for the old session checks it after every await,
+    /// so a late answer never writes the old account's data, reminders or walk log back to the phone.
+    @ObservationIgnored private var session = 0
 
     init() {
         UNUserNotificationCenter.current().delegate = NotificationRouter.shared
@@ -87,8 +90,10 @@ final class AppModel {
     }
 
     func refreshMe() async {
+        let mine = session
         do {
             let me: Me = try await api.get("/api/v1/me")
+            guard mine == session else { return }
             self.me = me
             Cache.save(me, as: "me")
             phase = me.profile == nil ? .onboarding : .ready
@@ -97,15 +102,19 @@ final class AppModel {
                 await Push.registerIfAllowed()
             }
         } catch APIError.unauthorized {
-            reset()
+            if mine == session { reset() }
         } catch {
+            guard mine == session else { return }
             // Offline at launch: keep the last state if there is one, otherwise show sign-in.
             if me == nil { phase = api.hasSession ? .ready : .signedOut }
         }
     }
 
     func refreshAppointments() async {
-        guard let result: AppointmentsResponse = try? await api.get("/api/v1/requests") else {
+        let mine = session
+        let loaded: AppointmentsResponse? = try? await api.get("/api/v1/requests")
+        guard mine == session, phase != .signedOut else { return }
+        guard let result = loaded else {
             offline = true
             return
         }
@@ -115,6 +124,11 @@ final class AppModel {
         WalkLog.syncFromAppointments(result)
         publishNextWalk()
         await Reminders.sync(with: result)
+        guard mine == session else {
+            // Signed out while the reminders were being planned: take them away again.
+            Reminders.clearAll()
+            return
+        }
         await Nudges.reschedule(appointments: result, allowed: role != .owner)
     }
 
@@ -131,6 +145,7 @@ final class AppModel {
     }
 
     func reset() {
+        session += 1
         Keychain.clear()
         me = nil
         appointments = AppointmentsResponse(outgoing: [], incoming: [])
@@ -140,6 +155,7 @@ final class AppModel {
         Keepsakes.shared.clear()
         Reminders.clearAll()
         Nudges.clear()
+        ProgressStore.shared.reset()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut
     }

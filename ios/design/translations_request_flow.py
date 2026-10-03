@@ -35,10 +35,10 @@ T = {
     "Daar knapt %@ van op.": ("%@ really enjoyed that.", "Ça a fait du bien à %@.", "A %@ le ha sentado de maravilla."),
 
     # Rebook
-    "Zin om weer samen te gaan! Zelfde tijd volgende week?": (
-        "Fancy going again? Same time next week?",
-        "Envie de repartir ensemble ? Même heure la semaine prochaine ?",
-        "¿Te apetece repetir? ¿A la misma hora la semana que viene?"),
+    "Zin om vaker samen te gaan? Elke %@ om %@?": (
+        "Fancy walking together more often? Every %@ at %@?",
+        "Envie de vous promener plus souvent ensemble ? Chaque %@ à %@ ?",
+        "¿Te apetece pasear juntos más a menudo? ¿Cada %@ a las %@?"),
     "Je kunt nu geen nieuwe afspraak maken met %@.": ("You can't make a new appointment with %@ right now.", "Tu ne peux pas prendre de nouveau rendez-vous avec %@ pour le moment.", "Ahora no puedes hacer una nueva cita con %@."),
     "Je kunt nu geen nieuwe afspraak maken.": ("You can't make a new appointment right now.", "Tu ne peux pas prendre de nouveau rendez-vous pour le moment.", "Ahora no puedes hacer una nueva cita."),
 

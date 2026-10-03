@@ -23,6 +23,7 @@ struct RequestFlow: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     @State private var step: Int
     @State private var moments: [RequestSuggestions.Moment] = []
@@ -271,12 +272,15 @@ struct RequestFlow: View {
         message.split(whereSeparator: \.isNewline).first.map { String($0).trimmingCharacters(in: .whitespaces) } ?? ""
     }
 
+    /// Side by side, or stacked at accessibility text sizes so the promise is never cut off.
     private var bottomBar: some View {
-        HStack(spacing: 12) {
+        let stacked = typeSize.isAccessibilitySize
+        let layout = stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 12))
+        return layout {
             if step > 0 {
                 Button("Terug") { go(to: step - 1) }
                     .buttonStyle(.secondary)
-                    .frame(width: 120)
+                    .frame(maxWidth: stacked ? .infinity : 120)
                     .disabled(busy)
             }
             if step < Self.steps - 1 {
@@ -290,7 +294,10 @@ struct RequestFlow: View {
                     if busy {
                         ProgressView().tint(Palette.onGrass)
                     } else {
-                        Text("Ik beloof het, verstuur").lineLimit(1).minimumScaleFactor(0.7)
+                        Text("Ik beloof het, verstuur")
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                            .minimumScaleFactor(0.85)
                     }
                 }
                 .buttonStyle(.primary)
@@ -307,12 +314,36 @@ struct RequestFlow: View {
         kind == .meet && model.me?.profile?.quizPassed != true && Keepsakes.shared.lessonsDone.count < 5
     }
 
-    /// The sheet itself is the confirmation: no banner on top of it.
+    /// The sheet itself is the confirmation: no banner on top of it. The text scrolls at large text
+    /// sizes; "Klaar" stays pinned below it.
     private func done(_ outcome: Outcome) -> some View {
         ZStack(alignment: .top) {
             VStack(spacing: 16) {
-                Spacer(minLength: 24)
-                Guus(mood: .happy, size: 120)
+                ScrollView {
+                    doneText(outcome)
+                        .padding(.vertical, 16)
+                        .frame(maxWidth: .infinity)
+                }
+                .scrollBounceBehavior(.basedOnSize)
+                .defaultScrollAnchor(.center, for: .alignment)
+                Button("Klaar") { dismiss() }
+                    .buttonStyle(.primary)
+            }
+            .padding(24)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            if !reduceMotion {
+                Confetti(count: 24, duration: 1.6)
+                    .frame(height: 360)
+                    .frame(maxWidth: .infinity)
+                    .allowsHitTesting(false)
+            }
+        }
+    }
+
+    private func doneText(_ outcome: Outcome) -> some View {
+            VStack(spacing: 16) {
+                Guus(mood: .happy, size: typeSize.isAccessibilitySize ? 72 : 120)
                 Text("Verstuurd!")
                     .font(.display(32))
                     .foregroundStyle(Palette.ink)
@@ -339,19 +370,7 @@ struct RequestFlow: View {
                     .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
                     .padding(.top, 8)
                 }
-                Spacer()
-                Button("Klaar") { dismiss() }
-                    .buttonStyle(.primary)
             }
-            .padding(24)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            if !reduceMotion {
-                Confetti(count: 24, duration: 1.6)
-                    .frame(height: 360)
-                    .frame(maxWidth: .infinity)
-            }
-        }
     }
 
     // MARK: Pieces
@@ -401,7 +420,9 @@ struct RequestFlow: View {
             .frame(minHeight: 36)
             .foregroundStyle(used ? Palette.onGrass : Palette.grass)
             .background(used ? Palette.grass : Palette.grassSoft, in: .capsule)
-            .contentShape(.capsule)
+            // The chip looks 36pt tall, but the tap area is 44pt.
+            .frame(minHeight: 44)
+            .contentShape(.rect)
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(used ? .isSelected : [])

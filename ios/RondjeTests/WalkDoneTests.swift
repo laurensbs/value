@@ -75,7 +75,7 @@ struct WalkDoneTests {
             "Doe alvast de Hondenschool",
             "Zin om dit vaker te doen? Vaste momenten werken het best.",
             "Ja, elke vrijdag om 18:00",
-            "Zin om weer samen te gaan! Zelfde tijd volgende week?",
+            "Zin om vaker samen te gaan? Elke dinsdag om 18:00?",
             "Weer samen met de eigenaar?",
             "Nu niet",
             "Aangevraagd. De eigenaar beslist.",

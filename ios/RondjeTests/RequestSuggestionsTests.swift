@@ -118,7 +118,7 @@ struct RequestSuggestionsTests {
             "Kies een moment dat je vaak kunt. Vaste momenten werken het best.",
             "Ik laat het je weten zodra de eigenaar van Bobbie antwoordt.",
             "Intussen kun je de Hondenschool doen. Vijf lessen van 2 minuten.",
-            "Zin om weer samen te gaan! Zelfde tijd volgende week?",
+            "Zin om vaker samen te gaan? Elke dinsdag om 18:00?",
             "Je kunt nu geen nieuwe afspraak maken met Bobbie.",
             "Je kunt nu geen nieuwe afspraak maken.",
             "Bobbie is weer thuis!",

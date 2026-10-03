@@ -10,14 +10,26 @@ final class ProgressStore {
     /// Set when the server says there is a new level to celebrate.
     var celebrate: Progress?
 
+    /// Bumped by `reset()`, so a load that was already on its way for the old account is dropped.
+    @ObservationIgnored private var generation = 0
+
     func load() async {
-        if let p: Progress = try? await APIClient.shared.get("/api/v1/progress") {
+        let mine = generation
+        if let p: Progress = try? await APIClient.shared.get("/api/v1/progress"), mine == generation {
             withAnimation(.smooth) { progress = p }
             if p.levelUp || !(p.newAwards ?? []).isEmpty { celebrate = p }
         }
-        if let c: Challenges = try? await APIClient.shared.get("/api/v1/challenges") {
+        if let c: Challenges = try? await APIClient.shared.get("/api/v1/challenges"), mine == generation {
             withAnimation(.smooth) { challenges = c }
         }
+    }
+
+    /// Forgets the progress of the account that signed out, so the next account never sees it.
+    func reset() {
+        generation += 1
+        progress = nil
+        challenges = nil
+        celebrate = nil
     }
 
     func seen() async {

@@ -49,11 +49,10 @@ struct RootView: View {
                     }
                     .zIndex(10)
             }
-            if let event = model.celebration {
-                CelebrationOverlay(event: event).zIndex(11)
-            }
         }
         .animation(.smooth(duration: 0.45), value: model.phase)
+        // Drawn in a window of its own, so it also shows over sheets (see CelebrationWindow).
+        .onChange(of: model.celebration) { CelebrationWindow.shared.update(model: model) }
     }
 }
 

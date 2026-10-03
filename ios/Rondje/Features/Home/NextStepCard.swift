@@ -167,7 +167,8 @@ struct NextStepCard: View {
 
     private func later(_ step: NextStep) {
         Haptics.tap()
-        Keepsakes.shared.snooze("next." + step.id, until: Keepsakes.nextMorning(after: .now))
+        let snooze = NextStep.snooze(for: step, now: .now)
+        Keepsakes.shared.snooze(snooze.key, until: snooze.until)
         now = .now
     }
 

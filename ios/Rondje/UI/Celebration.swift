@@ -36,6 +36,63 @@ extension AppModel {
     }
 }
 
+/// Celebrations live in their own window above the app's window, so they also show over sheets and
+/// full-screen covers (meeting prep ready, quiz passed in a Guus sheet, a dog added from a sheet).
+/// The window only takes touches for the full-screen moment; otherwise every touch goes through.
+@MainActor
+final class CelebrationWindow {
+    static let shared = CelebrationWindow()
+    private var window: UIWindow?
+    private var hiding: Task<Void, Never>?
+
+    /// Follows `model.celebration`: shows the window for an event and hides it after the fade-out.
+    func update(model: AppModel) {
+        guard let window = window ?? make(model: model) else { return }
+        hiding?.cancel()
+        if let event = model.celebration {
+            if case .big = event.delight { window.isUserInteractionEnabled = true } else { window.isUserInteractionEnabled = false }
+            window.isHidden = false
+        } else {
+            window.isUserInteractionEnabled = false
+            hiding = Task { @MainActor [weak window] in
+                try? await Task.sleep(for: .seconds(0.4))
+                guard !Task.isCancelled, model.celebration == nil else { return }
+                window?.isHidden = true
+            }
+        }
+    }
+
+    private func make(model: AppModel) -> UIWindow? {
+        let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+        guard let scene = scenes.first(where: { $0.activationState == .foregroundActive }) ?? scenes.first else { return nil }
+        let host = UIHostingController(rootView: CelebrationLayer().environment(model))
+        host.view.backgroundColor = .clear
+        let window = UIWindow(windowScene: scene)
+        window.windowLevel = .alert + 1
+        window.backgroundColor = .clear
+        window.rootViewController = host
+        window.isUserInteractionEnabled = false
+        window.isHidden = true
+        self.window = window
+        return window
+    }
+}
+
+/// The content of the celebration window.
+private struct CelebrationLayer: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        ZStack {
+            if let event = model.celebration {
+                CelebrationOverlay(event: event)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .tint(Palette.grass)
+    }
+}
+
 /// Shows `model.celebration` over everything and clears it when done.
 struct CelebrationOverlay: View {
     let event: CelebrationEvent

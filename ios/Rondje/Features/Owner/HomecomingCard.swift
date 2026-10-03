@@ -95,7 +95,7 @@ struct HomecomingCard: View {
                     .font(.caption.weight(.bold))
                     .foregroundStyle(Palette.onBall.opacity(0.75))
                 FlowLayout(spacing: 8) {
-                    ForEach(RequestSuggestions.thanks(dogName: item.dog.name), id: \.self) { line in
+                    ForEach(RequestSuggestions.thanks(dogName: item.dog.name, weekly: item.weekly), id: \.self) { line in
                         Button { Task { await thank(line) } } label: {
                             Text(line)
                                 .font(.subheadline.weight(.semibold))

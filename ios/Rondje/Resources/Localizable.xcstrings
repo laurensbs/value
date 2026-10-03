@@ -201,58 +201,58 @@
         }
       }
     },
-    "%@ ging deze week %lld keer extra naar buiten, met %@." : {
+    "%@ ging %lld keer extra naar buiten, met %@." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ got out %lld extra times this week, with %@."
+            "value" : "%@ got out %lld extra times, with %@."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ salió %lld veces más esta semana, con %@."
+            "value" : "%@ salió %lld veces más, con %@."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ est sorti %lld fois de plus cette semaine, avec %@."
+            "value" : "%@ est sorti %lld fois de plus, avec %@."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ ging deze week %2$lld keer extra naar buiten, met %3$@."
+            "value" : "%1$@ ging %2$lld keer extra naar buiten, met %3$@."
           }
         }
       }
     },
-    "%@ ging deze week %lld keer extra naar buiten." : {
+    "%@ ging %lld keer extra naar buiten." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ got out %lld extra times this week."
+            "value" : "%@ got out %lld extra times."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ salió %lld veces más esta semana."
+            "value" : "%@ salió %lld veces más."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ est sorti %lld fois de plus cette semaine."
+            "value" : "%@ est sorti %lld fois de plus."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ ging deze week %2$lld keer extra naar buiten."
+            "value" : "%1$@ ging %2$lld keer extra naar buiten."
           }
         }
       }
@@ -1705,6 +1705,28 @@
         }
       }
     },
+    "Aan een hond stel je je voor met je hand. Laat hem eerst rustig snuffelen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You introduce yourself to a dog with your hand. Let him sniff calmly first."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A un perro te presentas con la mano. Deja que olfatee tranquilo primero."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On se présente à un chien avec la main. Laisse-le d'abord renifler calmement."
+          }
+        }
+      }
+    },
     "Aangevraagd. De eigenaar beslist." : {
       "localizations" : {
         "en" : {
@@ -2295,6 +2317,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seul %@ voit ta réponse."
+          }
+        }
+      }
+    },
+    "Alleen als de eigenaar het uitdrukkelijk zegt, en alleen waar het mag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only if the owner explicitly says so, and only where it's allowed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo si el dueño lo dice claramente, y solo donde está permitido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seulement si le propriétaire le dit clairement, et seulement là où c'est permis"
           }
         }
       }
@@ -2933,6 +2977,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Appeler le 112"
+          }
+        }
+      }
+    },
+    "Bel de eigenaar meteen. Samen vind je hem sneller." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Call the owner right away. Together you'll find him faster."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llama enseguida al dueño. Juntos lo encontraréis antes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appelle tout de suite le propriétaire. À deux, vous le retrouverez plus vite."
           }
         }
       }
@@ -3751,6 +3817,28 @@
         }
       }
     },
+    "De eigenaar legt zakjes klaar. Neem er gerust een paar extra mee." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The owner has bags ready. Feel free to bring a few extra."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El dueño tiene bolsas preparadas. Puedes llevar alguna de más."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le propriétaire prépare des sacs. N'hésite pas à en prendre quelques-uns en plus."
+          }
+        }
+      }
+    },
     "De eigenaar meteen laten weten" : {
       "localizations" : {
         "en" : {
@@ -3857,6 +3945,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le chien"
+          }
+        }
+      }
+    },
+    "De hond bijt een andere hond. Wat doe je?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The dog bites another dog. What do you do?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El perro muerde a otro perro. ¿Qué haces?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le chien mord un autre chien. Que fais-tu ?"
           }
         }
       }
@@ -4719,28 +4829,6 @@
         }
       }
     },
-    "Een hond stel je je voor met je hand. Laat hem eerst rustig snuffelen." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You introduce yourself to a dog with your hand. Let him sniff calmly first."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A un perro te presentas con la mano. Deja que olfatee tranquilo primero."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On se présente à un chien avec la main. Laisse-le d'abord renifler calmement."
-          }
-        }
-      }
-    },
     "Een kort berichtje voorkomt zorgen." : {
       "localizations" : {
         "en" : {
@@ -5001,6 +5089,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "D'abord, vous faites connaissance. Le propriétaire marche avec toi et regarde ta pièce d'identité."
+          }
+        }
+      }
+    },
+    "Eerst zelf zoeken, dan pas de eigenaar bellen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search yourself first, then call the owner"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar primero tú, y luego llamar al dueño"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher d'abord soi-même, puis appeler le propriétaire"
           }
         }
       }
@@ -5797,7 +5907,7 @@
         }
       }
     },
-    "Gapen, lippen likken en wegkijken betekent vaak: ik voel me niet op mijn gemak." : {
+    "Gapen, lippen likken en wegkijken betekenen vaak: ik voel me niet op mijn gemak." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6655,6 +6765,28 @@
         }
       }
     },
+    "Goed. Melden kan via SOS, met 'Meld wat er gebeurde'." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good. You can report it through SOS, with 'Report what happened'."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bien. Puedes avisarlo en SOS, con «Cuenta lo que pasó»."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bien. Tu peux le signaler via SOS, avec « Signale ce qui s'est passé »."
+          }
+        }
+      }
+    },
     "Goede vrienden" : {
       "localizations" : {
         "en" : {
@@ -7179,6 +7311,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "C'est la Journée des animaux. Une caresse en plus compte aussi."
+          }
+        }
+      }
+    },
+    "Het rondje is klaar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The walk is done"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El paseo ha terminado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La balade est terminée"
           }
         }
       }
@@ -8159,6 +8313,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ta pièce d'identité dans ton sac"
+          }
+        }
+      }
+    },
+    "Iedereen in veiligheid, gegevens uitwisselen, de eigenaar bellen en het melden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get everyone safe, exchange details, call the owner and report it"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poner a todos a salvo, intercambiar datos, llamar al dueño y avisarlo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre tout le monde en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler"
           }
         }
       }
@@ -9175,6 +9351,28 @@
         }
       }
     },
+    "Ja, als hij goed luistert" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, if he listens well"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sí, si obedece bien"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui, s'il obéit bien"
+          }
+        }
+      }
+    },
     "Ja, elke %@ om %@" : {
       "localizations" : {
         "en" : {
@@ -9203,24 +9401,24 @@
         }
       }
     },
-    "Ja. En bel daarna meteen de eigenaar." : {
+    "Ja. Door je knieën en vrolijk zijn naam roepen helpt ook." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes. And then call the owner right away."
+            "value" : "Yes. Crouching down and cheerfully calling his name helps too."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sí. Y después llama enseguida al dueño."
+            "value" : "Sí. Agacharte y llamarlo alegremente también ayuda."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oui. Et ensuite, appelle tout de suite le propriétaire."
+            "value" : "Oui. S'accroupir et l'appeler joyeusement aide aussi."
           }
         }
       }
@@ -9401,24 +9599,24 @@
         }
       }
     },
-    "Je deed alle vijf de lessen. Je weet het al." : {
+    "Je deed alle vijf de lessen. Je bent goed voorbereid." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You did all five lessons. You already know it."
+            "value" : "You did all five lessons. You're well prepared."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hiciste las cinco lecciones. Ya te lo sabes."
+            "value" : "Hiciste las cinco lecciones. Estás bien preparado."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu as fait les cinq leçons. Tu sais déjà tout."
+            "value" : "Tu as fait les cinq leçons. Tu es bien préparé."
           }
         }
       }
@@ -10237,6 +10435,62 @@
         }
       }
     },
+    "Jouw week: %@ ging %lld keer extra naar buiten, met %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your week: %@ got out %lld extra times, with %@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu semana: %@ salió %lld veces más, con %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta semaine : %@ est sorti %lld fois de plus, avec %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Jouw week: %1$@ ging %2$lld keer extra naar buiten, met %3$@."
+          }
+        }
+      }
+    },
+    "Jouw week: %@ ging %lld keer extra naar buiten." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your week: %@ got out %lld extra times."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu semana: %@ salió %lld veces más."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta semaine : %@ est sorti %lld fois de plus."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Jouw week: %1$@ ging %2$lld keer extra naar buiten."
+          }
+        }
+      }
+    },
     "Jouw week: %lld rondjes met %@." : {
       "localizations" : {
         "en" : {
@@ -10843,46 +11097,46 @@
         }
       }
     },
-    "Klaar voor de quiz? Acht vragen, ongeveer 3 minuten. Je weet het al." : {
+    "Klaar voor de quiz? Acht vragen, geen tijdsdruk." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ready for the quiz? Eight questions, about 3 minutes. You already know this."
+            "value" : "Ready for the quiz? Eight questions, no time pressure."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Listo para el test? Ocho preguntas, unos 3 minutos. Ya lo sabes."
+            "value" : "¿Listo para el test? Ocho preguntas, sin prisas."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prêt pour le quiz ? Huit questions, environ 3 minutes. Tu sais déjà tout."
+            "value" : "Prêt pour le quiz ? Huit questions, sans pression."
           }
         }
       }
     },
-    "Klaar voor de quiz? Je weet het al." : {
+    "Klaar voor de quiz? Je bent goed voorbereid." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ready for the quiz? You already know it."
+            "value" : "Ready for the quiz? You're well prepared."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Listo para el test? Ya te lo sabes."
+            "value" : "¿Listo para el test? Estás bien preparado."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prêt pour le quiz ? Tu sais déjà tout."
+            "value" : "Prêt pour le quiz ? Tu es bien préparé."
           }
         }
       }
@@ -11917,6 +12171,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faites connaissance, ensemble"
+          }
+        }
+      }
+    },
+    "Mag de hond los?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "May the dog go off the lead?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Puede ir el perro suelto?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le chien peut-il être lâché ?"
           }
         }
       }
@@ -13913,6 +14189,28 @@
         }
       }
     },
+    "Ook een hond die goed luistert blijft aan de lijn, tenzij de eigenaar iets anders zegt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Even a dog that listens well stays on the lead, unless the owner says otherwise."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incluso un perro que obedece bien va con correa, salvo que el dueño diga otra cosa."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Même un chien qui obéit bien reste en laisse, sauf si le propriétaire dit autre chose."
+          }
+        }
+      }
+    },
     "Op de dag zelf start je hier je rondje. Een half uur van tevoren mag het al." : {
       "localizations" : {
         "en" : {
@@ -14503,6 +14801,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exactement ! Comme ça, il sait qui tu es."
+          }
+        }
+      }
+    },
+    "Precies. Bij twijfel blijft hij aan de lijn." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exactly. When in doubt, he stays on the lead."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exacto. Si dudas, sigue con correa."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exactement. En cas de doute, il reste en laisse."
           }
         }
       }
@@ -15145,24 +15465,24 @@
         }
       }
     },
-    "Rustig blijven, door je knieën en vrolijk zijn naam roepen" : {
+    "Rustig blijven, niet achter de hond aan rennen en meteen de eigenaar bellen" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stay calm, crouch down and call his name cheerfully"
+            "value" : "Stay calm, don't run after the dog and call the owner right away"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mantener la calma, agacharte y llamarlo alegremente"
+            "value" : "Mantener la calma, no correr tras el perro y llamar enseguida al dueño"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rester calme, s'accroupir et l'appeler joyeusement"
+            "value" : "Rester calme, ne pas courir après le chien et appeler tout de suite le propriétaire"
           }
         }
       }
@@ -15427,6 +15747,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compris"
+          }
+        }
+      }
+    },
+    "Snel doorlopen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quickly walk on"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguir andando rápido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer vite son chemin"
           }
         }
       }
@@ -15877,6 +16219,28 @@
         }
       }
     },
+    "Telefoon opgeladen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone charged"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Móvil cargado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléphone chargé"
+          }
+        }
+      }
+    },
     "Terug" : {
       "localizations" : {
         "en" : {
@@ -16291,6 +16655,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Super"
+          }
+        }
+      }
+    },
+    "Tot %@!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See you %@!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Hasta el %@!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À %@ !"
           }
         }
       }
@@ -17197,24 +17583,24 @@
         }
       }
     },
-    "Vijf mini-lessen van 2 minuten. Daarna is de quiz een makkie." : {
+    "Vijf mini-lessen van 2 minuten. Daarna ben je goed voorbereid op de quiz." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Five 2-minute mini lessons. After that the quiz is a breeze."
+            "value" : "Five 2-minute mini lessons. After that you're well prepared for the quiz."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cinco minilecciones de 2 minutos. Después el test es pan comido."
+            "value" : "Cinco minilecciones de 2 minutos. Después estarás bien preparado para el test."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cinq mini-leçons de 2 minutes. Ensuite le quiz est un jeu d'enfant."
+            "value" : "Cinq mini-leçons de 2 minutes. Ensuite tu seras bien préparé pour le quiz."
           }
         }
       }
@@ -18469,6 +18855,28 @@
         }
       }
     },
+    "Weglopen helpt niemand. De andere eigenaar heeft je gegevens nodig." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walking away helps no one. The other owner needs your details."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irte no ayuda a nadie. El otro dueño necesita tus datos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partir n'aide personne. L'autre propriétaire a besoin de tes coordonnées."
+          }
+        }
+      }
+    },
     "Weiger" : {
       "localizations" : {
         "en" : {
@@ -18689,28 +19097,6 @@
         }
       }
     },
-    "Zakjes en telefoon mee" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bags and phone with you"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bolsas y móvil contigo"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sacs et téléphone avec toi"
-          }
-        }
-      }
-    },
     "Zelf iets schrijven" : {
       "localizations" : {
         "en" : {
@@ -18865,6 +19251,34 @@
         }
       }
     },
+    "Zin om vaker samen te gaan? Elke %@ om %@?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fancy walking together more often? Every %@ at %@?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Te apetece pasear juntos más a menudo? ¿Cada %@ a las %@?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envie de vous promener plus souvent ensemble ? Chaque %@ à %@ ?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Zin om vaker samen te gaan? Elke %1$@ om %2$@?"
+          }
+        }
+      }
+    },
     "Zin om weer samen op pad te gaan!" : {
       "localizations" : {
         "en" : {
@@ -18883,28 +19297,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "J'ai hâte de repartir ensemble !"
-          }
-        }
-      }
-    },
-    "Zin om weer samen te gaan! Zelfde tijd volgende week?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fancy going again? Same time next week?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Te apetece repetir? ¿A la misma hora la semana que viene?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Envie de repartir ensemble ? Même heure la semaine prochaine ?"
           }
         }
       }

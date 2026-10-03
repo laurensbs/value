@@ -111,6 +111,12 @@ final class Keepsakes {
         Set(keys(withPrefix: Self.noRebookPrefix).map { String($0.dropFirst(Self.noRebookPrefix.count)) })
     }
 
+    /// Something was reported through SOS during this walk. The lesson-complete flow then skips the
+    /// confetti and points and closes calmly, without offering this dog again.
+    func markReported(walkId: String) { mark("reported." + walkId) }
+
+    func reported(walkId: String) -> Bool { has("reported." + walkId) }
+
     /// Records the walker's feedback about a dog, for the rebook suggestions.
     func recordWalkFeedback(dogId: String, behaviour: String, feltSafe: Bool) {
         setNoRebook(dogId, Self.worrying(behaviour: behaviour, feltSafe: feltSafe))

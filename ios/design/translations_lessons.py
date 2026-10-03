@@ -29,7 +29,10 @@ T = {
     "Klaar": ("Done", "Terminé", "Listo"),
     "Les klaar!": ("Lesson done!", "Leçon terminée !", "¡Lección hecha!"),
     "%lld van 5 lessen klaar": ("%lld of 5 lessons done", "%lld leçons sur 5 terminées", "%lld de 5 lecciones hechas"),
-    "Klaar voor de quiz? Je weet het al.": ("Ready for the quiz? You already know it.", "Prêt pour le quiz ? Tu sais déjà tout.", "¿Listo para el test? Ya te lo sabes."),
+    "Klaar voor de quiz? Je bent goed voorbereid.": (
+        "Ready for the quiz? You're well prepared.",
+        "Prêt pour le quiz ? Tu es bien préparé.",
+        "¿Listo para el test? Estás bien preparado."),
     "Naar de quiz": ("To the quiz", "Vers le quiz", "Al test"),
     "Later": ("Later", "Plus tard", "Más tarde"),
 
@@ -38,10 +41,10 @@ T = {
         "Eight questions, about 3 minutes. No time pressure.",
         "Huit questions, environ 3 minutes. Sans pression.",
         "Ocho preguntas, unos 3 minutos. Sin prisas."),
-    "Je deed alle vijf de lessen. Je weet het al.": (
-        "You did all five lessons. You already know it.",
-        "Tu as fait les cinq leçons. Tu sais déjà tout.",
-        "Hiciste las cinco lecciones. Ya te lo sabes."),
+    "Je deed alle vijf de lessen. Je bent goed voorbereid.": (
+        "You did all five lessons. You're well prepared.",
+        "Tu as fait les cinq leçons. Tu es bien préparé.",
+        "Hiciste las cinco lecciones. Estás bien preparado."),
     "Begin": ("Start", "Commencer", "Empezar"),
     "Eerst de Hondenschool?": ("Dog school first?", "D'abord l'école des chiens ?", "¿Primero la escuela canina?"),
     "Bijna! Kijk vraag %lld nog even na.": ("Almost! Have another look at question %lld.", "Presque ! Regarde encore la question %lld.", "¡Casi! Revisa otra vez la pregunta %lld."),
@@ -61,7 +64,7 @@ T = {
 
     # Lesson: hello
     "Hoi zeggen": ("Saying hello", "Dire bonjour", "Saludar"),
-    "Een hond stel je je voor met je hand. Laat hem eerst rustig snuffelen.": (
+    "Aan een hond stel je je voor met je hand. Laat hem eerst rustig snuffelen.": (
         "You introduce yourself to a dog with your hand. Let him sniff calmly first.",
         "On se présente à un chien avec la main. Laisse-le d'abord renifler calmement.",
         "A un perro te presentas con la mano. Deja que olfatee tranquilo primero."),
@@ -102,7 +105,7 @@ T = {
 
     # Lesson: body
     "Lichaamstaal": ("Body language", "Langage corporel", "Lenguaje corporal"),
-    "Gapen, lippen likken en wegkijken betekent vaak: ik voel me niet op mijn gemak.": (
+    "Gapen, lippen likken en wegkijken betekenen vaak: ik voel me niet op mijn gemak.": (
         "Yawning, licking lips and looking away often mean: I don't feel at ease.",
         "Bâiller, se lécher les babines et détourner le regard veulent souvent dire : je ne suis pas à l'aise.",
         "Bostezar, lamerse los labios y apartar la mirada suele significar: no estoy a gusto."),
@@ -201,16 +204,19 @@ T = {
         "Pendant la balade, SOS est toujours en haut à droite. Tu y trouves le 112, le propriétaire et le vétérinaire.",
         "Durante el paseo, SOS está siempre arriba a la derecha. Ahí encuentras el 112, el dueño y el veterinario."),
     "De hond is losgeschoten. Wat doe je eerst?": ("The dog has slipped away. What do you do first?", "Le chien s'est échappé. Que fais-tu d'abord ?", "El perro se ha soltado. ¿Qué haces primero?"),
-    "Rustig blijven, door je knieën en vrolijk zijn naam roepen": (
-        "Stay calm, crouch down and call his name cheerfully",
-        "Rester calme, s'accroupir et l'appeler joyeusement",
-        "Mantener la calma, agacharte y llamarlo alegremente"),
+    "Rustig blijven, niet achter de hond aan rennen en meteen de eigenaar bellen": (
+        "Stay calm, don't run after the dog and call the owner right away",
+        "Rester calme, ne pas courir après le chien et appeler tout de suite le propriétaire",
+        "Mantener la calma, no correr tras el perro y llamar enseguida al dueño"),
     "Er hard achteraan rennen": ("Run after him fast", "Courir vite après lui", "Correr rápido tras él"),
     "Rennen maakt er een spelletje van. Dan rent hij harder weg.": (
         "Running turns it into a game. Then he runs away faster.",
         "Courir en fait un jeu. Alors il s'enfuit plus vite.",
         "Correr lo convierte en un juego. Entonces huye más rápido."),
-    "Ja. En bel daarna meteen de eigenaar.": ("Yes. And then call the owner right away.", "Oui. Et ensuite, appelle tout de suite le propriétaire.", "Sí. Y después llama enseguida al dueño."),
+    "Ja. Door je knieën en vrolijk zijn naam roepen helpt ook.": (
+        "Yes. Crouching down and cheerfully calling his name helps too.",
+        "Oui. S'accroupir et l'appeler joyeusement aide aussi.",
+        "Sí. Agacharte y llamarlo alegremente también ayuda."),
     "Een andere hond komt op jullie af. Wat doe je?": ("Another dog comes towards you. What do you do?", "Un autre chien vient vers vous. Que fais-tu ?", "Otro perro viene hacia vosotros. ¿Qué haces?"),
     "Afstand houden en eerst de andere eigenaar vragen": ("Keep your distance and ask the other owner first", "Garder ses distances et demander d'abord à l'autre propriétaire", "Mantener la distancia y preguntar primero al otro dueño"),
     "Laat ze maar snuffelen": ("Just let them sniff", "Les laisser renifler", "Dejar que se huelan"),
@@ -222,4 +228,52 @@ T = {
     "Een kort berichtje voorkomt zorgen.": ("A short message saves worry.", "Un petit message évite les inquiétudes.", "Un mensaje corto evita preocupaciones."),
     "Precies. Even laten weten is altijd goed.": ("Exactly. Letting them know is always good.", "Exactement. Prévenir, c'est toujours bien.", "Exacto. Avisar siempre está bien."),
     "Doe het echt, buiten. Tik als je klaar bent.": ("Do it for real, outside. Tap when you're done.", "Fais-le pour de vrai, dehors. Touche quand tu as fini.", "Hazlo de verdad, fuera. Toca cuando termines."),
+    "Eerst zelf zoeken, dan pas de eigenaar bellen": (
+        "Search yourself first, then call the owner",
+        "Chercher d'abord soi-même, puis appeler le propriétaire",
+        "Buscar primero tú, y luego llamar al dueño"),
+    "Bel de eigenaar meteen. Samen vind je hem sneller.": (
+        "Call the owner right away. Together you'll find him faster.",
+        "Appelle tout de suite le propriétaire. À deux, vous le retrouverez plus vite.",
+        "Llama enseguida al dueño. Juntos lo encontraréis antes."),
+    "De hond bijt een andere hond. Wat doe je?": (
+        "The dog bites another dog. What do you do?",
+        "Le chien mord un autre chien. Que fais-tu ?",
+        "El perro muerde a otro perro. ¿Qué haces?"),
+    "Iedereen in veiligheid, gegevens uitwisselen, de eigenaar bellen en het melden": (
+        "Get everyone safe, exchange details, call the owner and report it",
+        "Mettre tout le monde en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler",
+        "Poner a todos a salvo, intercambiar datos, llamar al dueño y avisarlo"),
+    "Snel doorlopen": (
+        "Quickly walk on",
+        "Continuer vite son chemin",
+        "Seguir andando rápido"),
+    "Weglopen helpt niemand. De andere eigenaar heeft je gegevens nodig.": (
+        "Walking away helps no one. The other owner needs your details.",
+        "Partir n'aide personne. L'autre propriétaire a besoin de tes coordonnées.",
+        "Irte no ayuda a nadie. El otro dueño necesita tus datos."),
+    "Goed. Melden kan via SOS, met 'Meld wat er gebeurde'.": (
+        "Good. You can report it through SOS, with 'Report what happened'.",
+        "Bien. Tu peux le signaler via SOS, avec « Signale ce qui s'est passé ».",
+        "Bien. Puedes avisarlo en SOS, con «Cuenta lo que pasó»."),
+    "Mag de hond los?": (
+        "May the dog go off the lead?",
+        "Le chien peut-il être lâché ?",
+        "¿Puede ir el perro suelto?"),
+    "Alleen als de eigenaar het uitdrukkelijk zegt, en alleen waar het mag": (
+        "Only if the owner explicitly says so, and only where it's allowed",
+        "Seulement si le propriétaire le dit clairement, et seulement là où c'est permis",
+        "Solo si el dueño lo dice claramente, y solo donde está permitido"),
+    "Ja, als hij goed luistert": (
+        "Yes, if he listens well",
+        "Oui, s'il obéit bien",
+        "Sí, si obedece bien"),
+    "Ook een hond die goed luistert blijft aan de lijn, tenzij de eigenaar iets anders zegt.": (
+        "Even a dog that listens well stays on the lead, unless the owner says otherwise.",
+        "Même un chien qui obéit bien reste en laisse, sauf si le propriétaire dit autre chose.",
+        "Incluso un perro que obedece bien va con correa, salvo que el dueño diga otra cosa."),
+    "Precies. Bij twijfel blijft hij aan de lijn.": (
+        "Exactly. When in doubt, he stays on the lead.",
+        "Exactement. En cas de doute, il reste en laisse.",
+        "Exacto. Si dudas, sigue con correa."),
 }

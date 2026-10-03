@@ -46,6 +46,19 @@ struct ReportSheet: View {
 
     private struct Payload: Encodable { var category, description: String; var dogId, subjectUserId, walkId: String? }
 
+    /// After a report Guus never suggests this dog again, and a walk with a report ends calmly
+    /// (no confetti, no rebook offer). Kept on this phone only.
+    private func remember() {
+        let keepsakes = Keepsakes.shared
+        if let walkId {
+            keepsakes.markReported(walkId: walkId)
+            if let dog = (model.appointments.outgoing + model.appointments.incoming).first(where: { $0.walkId == walkId })?.dog.id {
+                keepsakes.setNoRebook(dog, true)
+            }
+        }
+        if let dogId { keepsakes.setNoRebook(dogId, true) }
+    }
+
     private func send() async {
         busy = true
         defer { busy = false }
@@ -54,6 +67,7 @@ struct ReportSheet: View {
             if block, let subjectUserId {
                 let _: OK = try await APIClient.shared.post("/api/v1/blocks", ["userId": subjectUserId])
             }
+            remember()
             Haptics.success()
             model.show(L("Bedankt. We kijken ernaar."), symbol: "shield.lefthalf.filled")
             dismiss()

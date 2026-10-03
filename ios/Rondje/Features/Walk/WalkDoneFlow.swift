@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 // MARK: Math
 
@@ -102,10 +103,20 @@ struct WalkDoneFlow: View {
     @State private var offer: Offer?
     @State private var requested = false
     @State private var offerHidden = false
+    /// Whether the 30-minute reminder of a weekly walk can really come (notifications allowed).
+    @State private var remindersAllowed = false
 
     private enum FeedbackOutcome { case thanks, calm }
 
-    private var steps: [Step] { skipFeedback ? [.done, .points, .friendship] : [.done, .points, .feedback, .friendship] }
+    /// Something was reported through SOS during this walk: no confetti, no points or level-up and
+    /// no offer to walk this dog again, just a calm close.
+    private var reported: Bool { Keepsakes.shared.reported(walkId: info.walkId) }
+    private var steps: [Step] {
+        var list: [Step] = reported ? [.done] : [.done, .points]
+        if !skipFeedback { list.append(.feedback) }
+        list.append(.friendship)
+        return list
+    }
     private var step: Step { steps[min(index, steps.count - 1)] }
     private var isLast: Bool { index >= steps.count - 1 }
     private var dogName: String { appointment?.dog.name ?? info.dogName }
@@ -218,15 +229,16 @@ struct WalkDoneFlow: View {
     private var doneStep: some View {
         VStack(spacing: 18) {
             ZStack {
-                Guus(mood: .proud, size: 120)
-                if !reduceMotion {
+                Guus(mood: reported ? .calm : .proud, size: 120)
+                if !reduceMotion && !reported {
                     Confetti(count: 40, duration: 1.8)
                         .frame(width: 320, height: 260)
                 }
             }
             .frame(height: 140)
-            Text("Rondje klaar!")
+            Text(reported ? L("Het rondje is klaar") : L("Rondje klaar!"))
                 .font(.display(34))
+                .multilineTextAlignment(.center)
                 .accessibilityAddTraits(.isHeader)
             Text(L("\(dogName) en jij liepen \(Format.distance(Double(distance))) in \(minutes) minuten."))
                 .multilineTextAlignment(.center)
@@ -327,9 +339,15 @@ struct WalkDoneFlow: View {
                     Text(verbatim: "+5").foregroundStyle(Palette.ball)
                 }
                 .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Palette.onWalk.opacity(0.85))
                 .padding(14)
+                // A preview of the next step: shown as secondary with a dashed outline, not by fading
+                // the text, so it keeps a contrast of at least 4.5:1.
                 .background(Palette.surface.opacity(0.08), in: .rect(cornerRadius: 16, style: .continuous))
-                .opacity(0.55)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .strokeBorder(Palette.onWalk.opacity(0.35), style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
+                )
                 .accessibilityElement(children: .combine)
             }
         }
@@ -580,6 +598,8 @@ struct WalkDoneFlow: View {
             let worrying = Keepsakes.worrying(behaviour: behaviour, feltSafe: feltSafe)
             if let dogId = appointment?.dog.id {
                 Keepsakes.shared.recordWalkFeedback(dogId: dogId, behaviour: behaviour, feltSafe: feltSafe)
+                // Calm feedback never lifts what was reported through SOS on this same walk.
+                if reported { Keepsakes.shared.setNoRebook(dogId, true) }
             }
             if worrying {
                 Haptics.tap()
@@ -603,10 +623,11 @@ struct WalkDoneFlow: View {
         return friends?.first { $0.id == id }
     }
 
-    /// The walker reported an aggressive dog or did not feel safe, now or earlier: no celebration of
+    /// The walker reported an aggressive dog or did not feel safe, now, earlier or through SOS during
+    /// this walk: no celebration of
     /// the friendship and no offer to walk this dog again, just a calm close.
     private var worrying: Bool {
-        if sent == .calm { return true }
+        if sent == .calm || reported { return true }
         guard let id = appointment?.dog.id else { return false }
         return Keepsakes.shared.noRebook(id)
     }
@@ -718,8 +739,12 @@ struct WalkDoneFlow: View {
                     }
                 }
             } else if appointment.weekly {
+                let day = weekday(appointment.startsAt.addingTimeInterval(7 * 86_400))
                 nextCard {
-                    Label(L("Tot \(weekday(appointment.startsAt.addingTimeInterval(7 * 86_400)))! Je krijgt een seintje een half uur van tevoren."),
+                    // Only promise the reminder when it can really come: notifications allowed and the walk accepted.
+                    Label(remindersAllowed && appointment.status == "accepted"
+                          ? L("Tot \(day)! Je krijgt een seintje een half uur van tevoren.")
+                          : L("Tot \(day)!"),
                           systemImage: "calendar")
                         .font(.body.weight(.semibold))
                 }
@@ -743,7 +768,7 @@ struct WalkDoneFlow: View {
                 Text("Zin om dit vaker te doen? Vaste momenten werken het best.").font(.headline)
                 Button(L("Ja, elke \(weekday(date)) om \(Self.clock.string(from: date))")) {
                     offer = Offer(kind: .solo, prefill: RequestPrefill(
-                        date: date, weekly: true, message: L("Zin om weer samen te gaan! Zelfde tijd volgende week?")))
+                        date: date, weekly: true, message: RequestSuggestions.rebookMessage(date: date, calendar: .current)))
                 }
                 .buttonStyle(.primary)
                 Button("Ander moment") { offer = Offer(kind: .solo, prefill: nil) }
@@ -801,12 +826,25 @@ struct WalkDoneFlow: View {
         guard !started else { return }
         started = true
         before = ProgressStore.shared.progress
-        Haptics.success()
+        if reported { Haptics.tap() } else { Haptics.success() }
         appointment = lookup()
+        markReportedDog()
         if appointment?.feedbackGiven == true { skipFeedback = true }
+        Task { await loadReminderPermission() }
         Task { await loadProgress() }
         Task { await loadFriends() }
         Task { await loadDetail() }
+    }
+
+    /// A report sent through SOS during this walk also stops Guus from suggesting this dog again.
+    private func markReportedDog() {
+        guard reported, let dogId = appointment?.dog.id else { return }
+        Keepsakes.shared.setNoRebook(dogId, true)
+    }
+
+    private func loadReminderPermission() async {
+        let status = await UNUserNotificationCenter.current().notificationSettings().authorizationStatus
+        remindersAllowed = status == .authorized || status == .provisional
     }
 
     private func lookup() -> Appointment? {
@@ -829,8 +867,9 @@ struct WalkDoneFlow: View {
         if appointment == nil {
             await model.refreshAppointments()
             appointment = lookup()
+            markReportedDog()
             // Only change the steps while the walker has not reached the feedback step yet.
-            if appointment?.feedbackGiven == true, index < 2 { skipFeedback = true }
+            if appointment?.feedbackGiven == true, let at = steps.firstIndex(of: .feedback), index < at { skipFeedback = true }
         }
         guard let appointment, !appointment.isMeeting, !appointment.weekly else { return }
         if let loaded: DogDetail = try? await APIClient.shared.get("/api/v1/dogs/\(appointment.dog.id)") {

@@ -35,15 +35,15 @@ T = {
         "While you wait: a 2-minute mini lesson?",
         "En attendant : une mini-leçon de 2 minutes ?",
         "Mientras esperas: ¿una minilección de 2 minutos?"),
-    "Vijf mini-lessen van 2 minuten. Daarna is de quiz een makkie.": (
-        "Five 2-minute mini lessons. After that the quiz is a breeze.",
-        "Cinq mini-leçons de 2 minutes. Ensuite le quiz est un jeu d'enfant.",
-        "Cinco minilecciones de 2 minutos. Después el test es pan comido."),
+    "Vijf mini-lessen van 2 minuten. Daarna ben je goed voorbereid op de quiz.": (
+        "Five 2-minute mini lessons. After that you're well prepared for the quiz.",
+        "Cinq mini-leçons de 2 minutes. Ensuite tu seras bien préparé pour le quiz.",
+        "Cinco minilecciones de 2 minutos. Después estarás bien preparado para el test."),
     "Naar de Hondenschool": ("To the Dog School", "Vers l'école des chiens", "A la Escuela de perros"),
-    "Klaar voor de quiz? Acht vragen, ongeveer 3 minuten. Je weet het al.": (
-        "Ready for the quiz? Eight questions, about 3 minutes. You already know this.",
-        "Prêt pour le quiz ? Huit questions, environ 3 minutes. Tu sais déjà tout.",
-        "¿Listo para el test? Ocho preguntas, unos 3 minutos. Ya lo sabes."),
+    "Klaar voor de quiz? Acht vragen, geen tijdsdruk.": (
+        "Ready for the quiz? Eight questions, no time pressure.",
+        "Prêt pour le quiz ? Huit questions, sans pression.",
+        "¿Listo para el test? Ocho preguntas, sin prisas."),
     "Start de quiz": ("Start the quiz", "Commencer le quiz", "Empezar el test"),
     "De eigenaar van %@ kijkt nog naar je aanvraag. Ik laat het je weten.": (
         "%@'s owner is still looking at your request. I'll let you know.",

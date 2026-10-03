@@ -131,14 +131,20 @@ struct WeekRecapCard: View {
                 lines.append(L("Je wandelde al in \(activeWeeks) verschillende weken."))
             }
         case .owner:
-            for dog in dogs.prefix(2) {
+            // No "deze week": on Monday the card looks back at the week before.
+            for (index, dog) in dogs.prefix(2).enumerated() {
                 let mine = walks.filter { same(dog, $0) }
                 var people: [String] = []
                 for person in mine.compactMap(\.person) where !people.contains(person) { people.append(person) }
-                if people.isEmpty {
-                    lines.append(L("\(dog.name) ging deze week \(mine.count) keer extra naar buiten."))
-                } else {
-                    lines.append(L("\(dog.name) ging deze week \(mine.count) keer extra naar buiten, met \(list(people))."))
+                switch (index == 0, people.isEmpty) {
+                case (true, true):
+                    lines.append(L("Jouw week: \(dog.name) ging \(mine.count) keer extra naar buiten."))
+                case (true, false):
+                    lines.append(L("Jouw week: \(dog.name) ging \(mine.count) keer extra naar buiten, met \(list(people))."))
+                case (false, true):
+                    lines.append(L("\(dog.name) ging \(mine.count) keer extra naar buiten."))
+                case (false, false):
+                    lines.append(L("\(dog.name) ging \(mine.count) keer extra naar buiten, met \(list(people))."))
                 }
             }
         }

@@ -77,6 +77,14 @@ extension NextStep {
         )
     }
 
+    /// What "Later" puts away and until when. "Later" on a rebook suggestion puts all of them away for
+    /// 14 days (the key "rebook"), so the next dog does not take its place; everything else comes back
+    /// the next morning.
+    static func snooze(for step: NextStep, now: Date, calendar: Calendar = .current) -> (key: String, until: Date) {
+        if step.id.hasPrefix("rebook.") { return ("rebook", now.addingTimeInterval(14 * day)) }
+        return ("next." + step.id, Keepsakes.nextMorning(after: now, calendar: calendar))
+    }
+
     /// Between 23:00 and 06:00 suggestions wait until tomorrow.
     static func isNight(_ date: Date, calendar: Calendar) -> Bool {
         let hour = calendar.component(.hour, from: date)
@@ -160,13 +168,13 @@ extension NextStep {
             if c.lessonsDone < 5 {
                 list.append(Candidate(step: NextStep(
                     id: "lessons", mood: .curious,
-                    text: waiting.isEmpty ? L("Vijf mini-lessen van 2 minuten. Daarna is de quiz een makkie.") : L("Terwijl je wacht: een mini-les van 2 minuten?"),
+                    text: waiting.isEmpty ? L("Vijf mini-lessen van 2 minuten. Daarna ben je goed voorbereid op de quiz.") : L("Terwijl je wacht: een mini-les van 2 minuten?"),
                     button: L("Naar de Hondenschool"), action: .lessons
                 ), suggestion: true))
             } else {
                 list.append(Candidate(step: NextStep(
                     id: "quiz", mood: .curious,
-                    text: L("Klaar voor de quiz? Acht vragen, ongeveer 3 minuten. Je weet het al."),
+                    text: L("Klaar voor de quiz? Acht vragen, geen tijdsdruk."),
                     button: L("Start de quiz"), action: .quiz
                 ), suggestion: true))
             }
@@ -180,14 +188,16 @@ extension NextStep {
             )))
         }
 
-        // h. Another walk with a dog you walked before; the server decides whether that can be solo.
+        // h. Another walk with a dog you walked in the last 14 days; the server decides whether that can be solo.
+        // At most one at a time, and "Later" on it backs off for 14 days (see `snooze(for:now:)`), so it never nags.
         let open = Set(outgoing.filter { $0.status == "pending" || ($0.status == "accepted" && $0.startsAt > c.now) }.map(\.dog.id))
-        var offered = Set<String>()
         let walked = outgoing
-            .filter { ($0.status == "completed" || $0.walkStatus == "ended") && !$0.weekly }
+            .filter { ($0.status == "completed" || $0.walkStatus == "ended") && !$0.weekly && recent($0, c) }
             .sorted { $0.startsAt > $1.startsAt }
-        for item in walked where !open.contains(item.dog.id) && !c.snoozed.contains("rebook.\(item.dog.id)") && !c.noRebook.contains(item.dog.id) {
-            guard offered.insert(item.dog.id).inserted else { continue }
+        if !c.snoozed.contains("rebook"), let item = walked.first(where: {
+            !open.contains($0.dog.id) && !c.snoozed.contains("rebook.\($0.dog.id)")
+                && !c.snoozed.contains("next.rebook.\($0.dog.id)") && !c.noRebook.contains($0.dog.id)
+        }) {
             list.append(Candidate(step: NextStep(
                 id: "rebook.\(item.dog.id)", mood: .happy,
                 text: L("Nog een rondje met \(item.dog.name) plannen? Een vast moment werkt het best."),

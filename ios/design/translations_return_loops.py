@@ -101,15 +101,23 @@ T = {
         "You've walked in %lld different weeks.",
         "Tu as déjà marché pendant %lld semaines différentes.",
         "Ya has paseado en %lld semanas distintas."),
-    "%@ ging deze week %lld keer extra naar buiten, met %@.": (
-        "%@ got out %lld extra times this week, with %@.",
-        "%@ est sorti %lld fois de plus cette semaine, avec %@.",
-        "%@ salió %lld veces más esta semana, con %@."),
-    "%@ ging deze week %lld keer extra naar buiten.": (
-        "%@ got out %lld extra times this week.",
-        "%@ est sorti %lld fois de plus cette semaine.",
-        "%@ salió %lld veces más esta semana."),
+    "%@ ging %lld keer extra naar buiten, met %@.": (
+        "%@ got out %lld extra times, with %@.",
+        "%@ est sorti %lld fois de plus, avec %@.",
+        "%@ salió %lld veces más, con %@."),
+    "%@ ging %lld keer extra naar buiten.": (
+        "%@ got out %lld extra times.",
+        "%@ est sorti %lld fois de plus.",
+        "%@ salió %lld veces más."),
     "Volgende week weer met %@?": ("Again with %@ next week?", "À nouveau avec %@ la semaine prochaine ?", "¿Otra vez con %@ la semana que viene?"),
     "Fijn": ("Lovely", "Super", "Genial"),
     "Je seintjes staan even op pauze.": ("Your nudges are paused for now.", "Tes petits rappels sont en pause pour l'instant.", "Tus avisos están en pausa por ahora."),
+    "Jouw week: %@ ging %lld keer extra naar buiten, met %@.": (
+        "Your week: %@ got out %lld extra times, with %@.",
+        "Ta semaine : %@ est sorti %lld fois de plus, avec %@.",
+        "Tu semana: %@ salió %lld veces más, con %@."),
+    "Jouw week: %@ ging %lld keer extra naar buiten.": (
+        "Your week: %@ got out %lld extra times.",
+        "Ta semaine : %@ est sorti %lld fois de plus.",
+        "Tu semana: %@ salió %lld veces más."),
 }

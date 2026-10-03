@@ -10,6 +10,7 @@ struct LessonPlayer: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     @State private var index = 0
     /// The option picked on the current choice card.
@@ -151,9 +152,13 @@ struct LessonPlayer: View {
 
     // MARK: Choice
 
+    /// Picture answers sit side by side only while their labels fit on one line in a third of the
+    /// screen; at larger text sizes they become rows with the picture on the left.
+    private var pictureGrid: Bool { typeSize < .xxLarge }
+
     @ViewBuilder
     private func choices(_ options: [LessonOption]) -> some View {
-        if options.allSatisfy({ $0.art != nil }) {
+        if options.allSatisfy({ $0.art != nil }) && pictureGrid {
             HStack(alignment: .top, spacing: 10) {
                 ForEach(Array(options.enumerated()), id: \.offset) { i, option in tile(i, option) }
             }
@@ -170,23 +175,30 @@ struct LessonPlayer: View {
         let edge = chosen ? (option.correct ? Palette.grass : Palette.warn) : Palette.line.opacity(0.7)
         return Button { pick(i, option) } label: {
             Group {
-                if let art = option.art {
+                if let art = option.art, pictureGrid {
                     VStack(spacing: 8) {
-                        if case let .dog(look, mood) = art {
-                            DogPortrait(look: look, mood: mood, cornerRadius: 20)
-                                .aspectRatio(1, contentMode: .fit)
-                        } else if case .symbol(let name) = art {
-                            Image(systemName: name).font(.system(size: 36, weight: .semibold)).foregroundStyle(Palette.grass)
-                                .frame(maxWidth: .infinity, minHeight: 64)
-                        } else if case .guus(let mood) = art {
-                            Guus(mood: mood, size: 64, hop: false)
-                        }
-                        HStack(spacing: 4) {
-                            if chosen { mark(option.correct) }
-                            Text(option.text).font(.subheadline.weight(.semibold))
-                        }
+                        picture(art)
+                            // The mark sits on the picture, so the label keeps the full width.
+                            .overlay(alignment: .topTrailing) {
+                                if chosen { mark(option.correct).background(Palette.surface, in: .circle).padding(4) }
+                            }
+                        Text(option.text)
+                            .font(.subheadline.weight(.semibold))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.6)
                     }
                     .padding(8)
+                } else if let art = option.art {
+                    HStack(spacing: 12) {
+                        picture(art)
+                            .frame(width: 72, height: 72)
+                        Text(option.text)
+                            .font(.body.weight(.semibold))
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        if chosen { mark(option.correct) }
+                    }
+                    .padding(10)
                 } else {
                     HStack(spacing: 12) {
                         Text(option.text)
@@ -209,6 +221,20 @@ struct LessonPlayer: View {
         .modifier(Shake(trigger: shakes[i, default: 0]))
         .allowsHitTesting(picked == nil)
         .accessibilityAddTraits(chosen ? .isSelected : [])
+    }
+
+    @ViewBuilder
+    private func picture(_ art: LessonArt) -> some View {
+        switch art {
+        case let .dog(look, mood):
+            DogPortrait(look: look, mood: mood, cornerRadius: 20)
+                .aspectRatio(1, contentMode: .fit)
+        case .symbol(let name):
+            Image(systemName: name).font(.system(size: 36, weight: .semibold)).foregroundStyle(Palette.grass)
+                .frame(maxWidth: .infinity, minHeight: 64)
+        case .guus(let mood):
+            Guus(mood: mood, size: 64, hop: false)
+        }
     }
 
     private func mark(_ correct: Bool) -> some View {
@@ -370,7 +396,8 @@ struct LessonPlayer: View {
 
     private func finish() {
         Keepsakes.shared.lessonsDone.insert(lesson.id)
-        model.celebrate(.party(nil))
+        // The player draws its own confetti on the done screen; the shared overlay would add a second burst.
+        if WalkTracker.shared.isActive { Haptics.pop() } else { Haptics.success() }
         withAnimation(.spring(duration: 0.45)) { finished = true }
     }
 
@@ -381,26 +408,35 @@ struct LessonPlayer: View {
         let offerQuiz = Lessons.allDone() && model.me?.profile?.quizPassed != true
         return ZStack(alignment: .top) {
             VStack(spacing: 16) {
-                Spacer()
-                if Keepsakes.shared.coachOn {
-                    Guus(mood: .proud, size: 120)
-                } else {
-                    symbolTile("checkmark")
+                // Centered while it fits, scrolling at large text sizes; the buttons stay pinned below.
+                ScrollView {
+                    VStack(spacing: 16) {
+                        if Keepsakes.shared.coachOn {
+                            Guus(mood: .proud, size: typeSize.isAccessibilitySize ? 72 : 120)
+                        } else {
+                            symbolTile("checkmark")
+                        }
+                        Text("Les klaar!")
+                            .font(.display(32))
+                            .foregroundStyle(Palette.ink)
+                            .multilineTextAlignment(.center)
+                        if offerQuiz {
+                            Text("Klaar voor de quiz? Je bent goed voorbereid.")
+                                .font(.title3)
+                                .foregroundStyle(Palette.muted)
+                                .multilineTextAlignment(.center)
+                        } else {
+                            Text("\(count) van 5 lessen klaar")
+                                .font(.title3)
+                                .foregroundStyle(Palette.muted)
+                                .multilineTextAlignment(.center)
+                        }
+                    }
+                    .padding(.vertical, 16)
+                    .frame(maxWidth: .infinity)
                 }
-                Text("Les klaar!")
-                    .font(.display(32))
-                    .foregroundStyle(Palette.ink)
-                if offerQuiz {
-                    Text("Klaar voor de quiz? Je weet het al.")
-                        .font(.title3)
-                        .foregroundStyle(Palette.muted)
-                        .multilineTextAlignment(.center)
-                } else {
-                    Text("\(count) van 5 lessen klaar")
-                        .font(.title3)
-                        .foregroundStyle(Palette.muted)
-                }
-                Spacer()
+                .scrollBounceBehavior(.basedOnSize)
+                .defaultScrollAnchor(.center, for: .alignment)
                 if offerQuiz {
                     Button("Naar de quiz") {
                         onQuiz()
@@ -423,7 +459,7 @@ struct LessonPlayer: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 12)
             .frame(maxWidth: .infinity)
-            // The celebration overlay sits under this full-screen player, so the confetti is drawn here too.
+            // The lesson-complete confetti belongs to this screen, so it is drawn here (not through model.celebrate).
             if !reduceMotion && !WalkTracker.shared.isActive {
                 Confetti(count: 48, duration: 1.8)
                     .ignoresSafeArea()

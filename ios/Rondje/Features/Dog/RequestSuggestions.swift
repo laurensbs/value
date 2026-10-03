@@ -62,6 +62,16 @@ enum RequestSuggestions {
 
     // MARK: Words
 
+    /// The prefilled message for a weekly rebook: it names the weekday and time of the series, so the
+    /// owner reads what they are asked ("every Tuesday at 18:00"), not a single walk "next week".
+    static func rebookMessage(date: Date, calendar: Calendar, locale: Locale = Format.locale) -> String {
+        let style = Date.FormatStyle(locale: locale, calendar: calendar, timeZone: calendar.timeZone)
+        var day = date.formatted(style.weekday(.wide))
+        if locale.language.languageCode != .english { day = day.lowercased() }
+        let time = date.formatted(style.hour(.twoDigits(amPM: .omitted)).minute(.twoDigits))
+        return L("Zin om vaker samen te gaan? Elke \(day) om \(time)?")
+    }
+
     /// A short hello for the request, written in the walker's own words as far as we know them.
     static func intro(firstName: String, city: String, experience: String, dogName: String, kind: RequestFlow.Kind) -> String {
         let name = firstName.trimmingCharacters(in: .whitespaces)
@@ -95,7 +105,8 @@ enum RequestSuggestions {
         let dog = item.dog.name
         let walked = item.status == "completed" || item.walkStatus == "ended"
         if asOwner {
-            if walked { return [L("Dank je wel!"), L("\(dog) ligt heerlijk te slapen."), L("Tot volgende week!")] }
+            // "Tot volgende week!" only for a weekly walk: otherwise it reads as a commitment nobody made.
+            if walked { return [L("Dank je wel!"), L("\(dog) ligt heerlijk te slapen.")] + (item.weekly ? [L("Tot volgende week!")] : []) }
             switch item.status {
             case "pending":
                 return [L("Leuk! Wanneer kun je kennismaken?"), L("Dank je! Ik kijk even in mijn agenda.")]
@@ -116,9 +127,11 @@ enum RequestSuggestions {
         }
     }
 
-    /// One-tap thanks from the owner when the dog is home again.
-    static func thanks(dogName: String) -> [String] {
-        [L("Dank je wel!"), L("\(dogName) ligt heerlijk te slapen."), L("Tot volgende week!"), L("Daar knapt \(dogName) van op.")]
+    /// One-tap thanks from the owner when the dog is home again. A tap sends at once, so nothing in here
+    /// may promise anything; "Tot volgende week!" only appears for a weekly walk.
+    static func thanks(dogName: String, weekly: Bool = false) -> [String] {
+        [L("Dank je wel!"), L("\(dogName) ligt heerlijk te slapen."), L("Daar knapt \(dogName) van op.")]
+            + (weekly ? [L("Tot volgende week!")] : [])
     }
 
     // MARK: Helpers

@@ -10,6 +10,7 @@ struct QuizGameView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     private enum Stage { case intro, questions, checking, passed }
 
@@ -80,7 +81,7 @@ struct QuizGameView: View {
                         .foregroundStyle(Palette.muted)
                         .multilineTextAlignment(.center)
                     if lessonsDone {
-                        Label("Je deed alle vijf de lessen. Je weet het al.", systemImage: "graduationcap.fill")
+                        Label("Je deed alle vijf de lessen. Je bent goed voorbereid.", systemImage: "graduationcap.fill")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(Palette.grass)
                             .padding(.horizontal, 14)
@@ -297,25 +298,32 @@ struct QuizGameView: View {
 
     private func passedView(fresh: Bool) -> some View {
         VStack(spacing: 16) {
-            Spacer()
-            if Keepsakes.shared.coachOn {
-                Guus(mood: .proud, size: 120)
-            } else {
-                Image(systemName: "checkmark.seal.fill")
-                    .font(.system(size: 64))
-                    .foregroundStyle(Palette.grass)
-                    .accessibilityHidden(true)
+            // Centered while it fits, scrolling at large text sizes; "Klaar" stays pinned below.
+            ScrollView {
+                VStack(spacing: 16) {
+                    if Keepsakes.shared.coachOn {
+                        Guus(mood: .proud, size: typeSize.isAccessibilitySize ? 72 : 120)
+                    } else {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.system(size: 64))
+                            .foregroundStyle(Palette.grass)
+                            .accessibilityHidden(true)
+                    }
+                    Text("Gehaald!")
+                        .font(.display(32))
+                    Text("Je kunt nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.")
+                        .font(.title3)
+                        .foregroundStyle(Palette.muted)
+                        .multilineTextAlignment(.center)
+                    if fresh {
+                        Chip(text: L("+\(Self.points) punten"), symbol: "star.fill")
+                    }
+                }
+                .padding(.vertical, 16)
+                .frame(maxWidth: .infinity)
             }
-            Text("Gehaald!")
-                .font(.display(32))
-            Text("Je kunt nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.")
-                .font(.title3)
-                .foregroundStyle(Palette.muted)
-                .multilineTextAlignment(.center)
-            if fresh {
-                Chip(text: L("+\(Self.points) punten"), symbol: "star.fill")
-            }
-            Spacer()
+            .scrollBounceBehavior(.basedOnSize)
+            .defaultScrollAnchor(.center, for: .alignment)
             if fresh {
                 Button("Klaar") { dismiss() }
                     .buttonStyle(.primary)

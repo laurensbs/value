@@ -80,7 +80,10 @@ enum Nudges {
     // MARK: Planning
 
     /// The moments a seintje would go off, from the chosen days and time over the next 14 days.
-    nonisolated static func plan(_ s: NudgeSettings, outgoing: [Appointment], now: Date, calendar: Calendar) -> [Date] {
+    /// A week with a walk planned or already walked is left alone, and so is this week once the
+    /// weekly goal is met (`weekGoalMet`).
+    nonisolated static func plan(_ s: NudgeSettings, outgoing: [Appointment], now: Date, calendar: Calendar,
+                                 weekGoalMet: Bool = false) -> [Date] {
         guard s.enabled, !s.days.isEmpty else { return [] }
         let time = min(max(s.hour * 60 + s.minute, earliest), latest)
         var weeks = calendar
@@ -91,7 +94,11 @@ enum Nudges {
             return "\(c.yearForWeekOfYear ?? 0)-\(c.weekOfYear ?? 0)"
         }
         let planned = outgoing.filter { $0.status == "pending" || $0.status == "accepted" }.map(\.startsAt)
-        let busyWeeks = Set(planned.map(week))
+        let walked = outgoing
+            .filter { $0.status == "completed" || $0.walkStatus == "ended" || $0.walkStatus == "active" }
+            .map(\.startsAt)
+        var busyWeeks = Set((planned + walked).map(week))
+        if weekGoalMet { busyWeeks.insert(week(now)) }
         let horizon = now.addingTimeInterval(14 * 86_400)
         let days = Set(s.days.prefix(3))
 
@@ -120,12 +127,14 @@ enum Nudges {
     }
 
     /// The text of one seintje. Rotates by `index` over the options that really exist; names a dog, never a person.
-    nonisolated static func content(for date: Date, buddy: Appointment?, nearby: [DogCard], index: Int) -> (title: String, body: String, link: String) {
+    /// Dogs in `blocked` (reported as aggressive or unsafe) are never named.
+    nonisolated static func content(for date: Date, buddy: Appointment?, nearby: [DogCard], index: Int,
+                                    blocked: Set<String> = []) -> (title: String, body: String, link: String) {
         var options: [(title: String, body: String, link: String)] = []
-        if let buddy {
+        if let buddy, !blocked.contains(buddy.dog.id) {
             options.append((L("Een rondje deze week?"), L("Zin in een rondje met \(buddy.dog.name)? Je kunt het de eigenaar vragen."), "rebook:" + buddy.id))
         }
-        let calm = nearby.filter { !$0.isDemo && $0.energy == "calm" }
+        let calm = nearby.filter { !$0.isDemo && $0.energy == "calm" && !blocked.contains($0.id) }
         if !calm.isEmpty {
             let dog = calm[abs(index) % calm.count]
             options.append((L("Even naar buiten?"),
@@ -169,13 +178,16 @@ enum Nudges {
         let task = Task { @MainActor in
             await previous?.value
             guard mine == generation else { return }
-            await apply(appointments: appointments, allowed: allowed, now: now)
+            await apply(appointments: appointments, allowed: allowed, now: now, generation: mine)
         }
         running = task
         await task.value
     }
 
-    private static func apply(appointments: AppointmentsResponse, allowed: Bool, now: Date) async {
+    /// `mine` is the generation this run belongs to. `clear()` (sign-out) or a newer reschedule bumps
+    /// it, and then this run stops after its next await, so nothing of the old account is planned
+    /// or written back after a sign-out.
+    private static func apply(appointments: AppointmentsResponse, allowed: Bool, now: Date, generation mine: Int) async {
         var s = settings
         backOff(&s, now: now)
         // The ones still to come are planned again below.
@@ -184,14 +196,17 @@ enum Nudges {
 
         let center = UNUserNotificationCenter.current()
         let pending = await center.pendingNotificationRequests().map(\.identifier).filter { $0.hasPrefix(prefix) }
+        guard mine == generation else { return }
         if !pending.isEmpty { center.removePendingNotificationRequests(withIdentifiers: pending) }
 
         guard allowed, s.enabled, !s.isPaused(now: now) else { return }
         let status = await center.notificationSettings().authorizationStatus
-        guard status == .authorized || status == .provisional else { return }
+        guard mine == generation, status == .authorized || status == .provisional else { return }
 
         let calendar = Calendar.current
-        let dates = plan(s, outgoing: appointments.outgoing, now: now, calendar: calendar).prefix(pendingLimit(s))
+        let goalMet = ProgressStore.shared.progress?.week.flatMap { week in week.goal.map { week.walks >= $0 } } ?? false
+        let dates = plan(s, outgoing: appointments.outgoing, now: now, calendar: calendar, weekGoalMet: goalMet)
+            .prefix(pendingLimit(s))
         // Never a dog the walker reported as aggressive or unsafe.
         let blocked = Keepsakes.shared.noRebookDogs
         let buddy = appointments.outgoing
@@ -205,7 +220,9 @@ enum Nudges {
 
         var delivered: [String: Date] = [:]
         for date in dates {
-            let text = content(for: date, buddy: buddy, nearby: nearby, index: calendar.component(.weekOfYear, from: date) + calendar.component(.weekday, from: date))
+            let text = content(for: date, buddy: buddy, nearby: nearby,
+                               index: calendar.component(.weekOfYear, from: date) + calendar.component(.weekday, from: date),
+                               blocked: blocked)
             let body = UNMutableNotificationContent()
             body.title = text.title
             body.body = text.body
@@ -217,9 +234,15 @@ enum Nudges {
             let request = UNNotificationRequest(identifier: id, content: body, trigger: UNCalendarNotificationTrigger(dateMatching: parts, repeats: false))
             do {
                 try await center.add(request)
+                guard mine == generation else {
+                    // Signed out (or replanned) while this one was being added: take it away again.
+                    center.removePendingNotificationRequests(withIdentifiers: [id])
+                    return
+                }
                 delivered[id] = date
             } catch {}
         }
+        guard mine == generation else { return }
         update { $0.delivered = delivered }
     }
 

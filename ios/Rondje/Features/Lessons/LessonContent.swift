@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// One Hondenschool lesson: a handful of small cards that teach one safety habit.
-/// The lessons teach the same rules as the SOS sheet and the quiz. They unlock nothing by themselves:
+/// The lessons teach the same rules as the SOS sheet and the quiz, and cover every quiz question. They unlock nothing by themselves:
 /// the server-checked quiz stays the gate for solo walks, and meeting first stays mandatory.
 struct Lesson: Identifiable {
     let id: String
@@ -60,7 +60,7 @@ enum Lessons {
 
     private static var hello: Lesson {
         Lesson(id: "hello", title: L("Hoi zeggen"), symbol: "hand.wave.fill", cards: [
-            .info(L("Een hond stel je je voor met je hand. Laat hem eerst rustig snuffelen."), .guus(.happy)),
+            .info(L("Aan een hond stel je je voor met je hand. Laat hem eerst rustig snuffelen."), .guus(.happy)),
             .choice(question: L("Je ziet Bobbie voor het eerst. Wat doe je?"), options: [
                 .right(L("Hand laag houden en laten snuffelen")),
                 .wrong(L("Meteen over zijn kop aaien"),
@@ -78,7 +78,7 @@ enum Lessons {
 
     private static var bodyLanguage: Lesson {
         Lesson(id: "body", title: L("Lichaamstaal"), symbol: "ear.fill", cards: [
-            .info(L("Gapen, lippen likken en wegkijken betekent vaak: ik voel me niet op mijn gemak."), .dog(IntroView.border, .uneasy)),
+            .info(L("Gapen, lippen likken en wegkijken betekenen vaak: ik voel me niet op mijn gemak."), .dog(IntroView.border, .uneasy)),
             .choice(question: L("Welke hond wil wat ruimte?"), options: [
                 .wrong(L("Blij"), art: .dog(IntroView.golden, .happy),
                        why: L("Deze hond is blij. Kijk naar de ogen en de mond.")),
@@ -107,6 +107,10 @@ enum Lessons {
                 .right(L("Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald")),
                 .wrong(L("Meteen, je kent hem nu"), why: L("De eigenaar beslist. Dat gaat per hond.")),
             ], explain: L("Klopt. Stap voor stap, voor iedereen veilig.")),
+            .choice(question: L("Mag de hond los?"), options: [
+                .right(L("Alleen als de eigenaar het uitdrukkelijk zegt, en alleen waar het mag")),
+                .wrong(L("Ja, als hij goed luistert"), why: L("Ook een hond die goed luistert blijft aan de lijn, tenzij de eigenaar iets anders zegt.")),
+            ], explain: L("Precies. Bij twijfel blijft hij aan de lijn.")),
         ])
     }
 
@@ -128,9 +132,14 @@ enum Lessons {
         Lesson(id: "help", title: L("Als er iets gebeurt"), symbol: "cross.case.fill", cards: [
             .info(L("Tijdens het rondje staat SOS altijd rechtsboven. Daar vind je 112, de eigenaar en de dierenarts."), .symbol("sos")),
             .choice(question: L("De hond is losgeschoten. Wat doe je eerst?"), options: [
-                .right(L("Rustig blijven, door je knieën en vrolijk zijn naam roepen")),
+                .right(L("Rustig blijven, niet achter de hond aan rennen en meteen de eigenaar bellen")),
                 .wrong(L("Er hard achteraan rennen"), why: L("Rennen maakt er een spelletje van. Dan rent hij harder weg.")),
-            ], explain: L("Ja. En bel daarna meteen de eigenaar.")),
+                .wrong(L("Eerst zelf zoeken, dan pas de eigenaar bellen"), why: L("Bel de eigenaar meteen. Samen vind je hem sneller.")),
+            ], explain: L("Ja. Door je knieën en vrolijk zijn naam roepen helpt ook.")),
+            .choice(question: L("De hond bijt een andere hond. Wat doe je?"), options: [
+                .right(L("Iedereen in veiligheid, gegevens uitwisselen, de eigenaar bellen en het melden")),
+                .wrong(L("Snel doorlopen"), why: L("Weglopen helpt niemand. De andere eigenaar heeft je gegevens nodig.")),
+            ], explain: L("Goed. Melden kan via SOS, met 'Meld wat er gebeurde'.")),
             .choice(question: L("Een andere hond komt op jullie af. Wat doe je?"), options: [
                 .right(L("Afstand houden en eerst de andere eigenaar vragen")),
                 .wrong(L("Laat ze maar snuffelen"), why: L("Niet elke hond vindt een onbekende hond fijn.")),

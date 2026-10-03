@@ -24,7 +24,6 @@ T = {
         "Paseáis juntos. Después, el dueño decide si puedes pasear a %@ por tu cuenta."),
 
     # Checklist: walker, walk on your own
-    "Zakjes en telefoon mee": ("Bags and phone with you", "Sacs et téléphone avec toi", "Bolsas y móvil contigo"),
     "Water als het warm is": ("Water when it's warm", "De l'eau s'il fait chaud", "Agua si hace calor"),
     "Voel met je hand of de stoep niet te heet is.": (
         "Feel with your hand whether the pavement isn't too hot.",
@@ -133,4 +132,12 @@ T = {
         "You see live where they're walking. Photos and pees show up here by themselves.",
         "Tu vois en direct où ils marchent. Les photos et les pipis arrivent ici tout seuls.",
         "Ves en directo por dónde van. Las fotos y los pis llegan aquí solos."),
+    "Telefoon opgeladen": (
+        "Phone charged",
+        "Téléphone chargé",
+        "Móvil cargado"),
+    "De eigenaar legt zakjes klaar. Neem er gerust een paar extra mee.": (
+        "The owner has bags ready. Feel free to bring a few extra.",
+        "Le propriétaire prépare des sacs. N'hésite pas à en prendre quelques-uns en plus.",
+        "El dueño tiene bolsas preparadas. Puedes llevar alguna de más."),
 }

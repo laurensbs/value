@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// "Same time next week?": a new request for the dog of an earlier appointment, filled in up front.
+/// "Every Tuesday at 18:00?": a new weekly request for the dog of an earlier appointment, filled in up front.
 /// The server keeps deciding: a solo walk only when the owner gave trust and the quiz is passed,
 /// otherwise a new meeting, and nothing at all when neither is possible right now.
 struct RebookSheet: View {
@@ -20,7 +20,7 @@ struct RebookSheet: View {
             if let detail, let date {
                 if detail.canRequest.solo == nil {
                     RequestFlow(dog: detail.dog, slots: detail.slots, kind: .solo, prefill: RequestPrefill(
-                        date: date, weekly: true, message: L("Zin om weer samen te gaan! Zelfde tijd volgende week?")
+                        date: date, weekly: true, message: RequestSuggestions.rebookMessage(date: date, calendar: .current)
                     )) {}
                 } else if detail.canRequest.meet == nil {
                     RequestFlow(dog: detail.dog, slots: detail.slots, kind: .meet, prefill: RequestPrefill(date: date, weekly: false, message: nil)) {}
