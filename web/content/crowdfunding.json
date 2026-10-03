@@ -1,6 +1,6 @@
 {
   "goal": null,
   "raised": null,
-  "shareToCausesPercent": null,
+  "shareToCausesPercent": 10,
   "updated": "2026-10-03"
 }
