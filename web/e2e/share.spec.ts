@@ -61,8 +61,10 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
   await expect(neighbour.page).toHaveURL(new RegExp(`${dogPath}$`))
   await expect(neighbour.page.getByRole('heading', { name: 'Saar', exact: true })).toBeVisible()
   expect((await neighbour.context.cookies()).find((c) => c.name === 'rondje_ref')?.value).toBe(code)
-  // In a chat, the link's preview says what Saar is looking for.
+  // In a chat, the link's preview says what Saar is looking for, in Ans's language whoever fetches it.
   await expect(neighbour.page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'Saar zoekt een wandelmaatje')
+  const preview = await (await neighbour.page.request.get(dogPath, { headers: { 'Accept-Language': 'es-ES' } })).text()
+  expect(preview).toMatch(/<meta property="og:title" content="Saar zoekt een wandelmaatje"/)
   await shot(neighbour.page, 'share-04-visitor')
   await neighbour.page.getByRole('link', { name: 'Maak kennis met Saar' }).click()
   await expect(neighbour.page).toHaveURL(/\/signup\?intent=walker&next=/)
@@ -81,16 +83,19 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
 
   // The iPhone app gets the same ready message for the owner, and none for anyone else.
   const origin = new URL(owner.page.url()).origin
-  const dogFromApp = async (email: string) => {
+  const fromApp = async (email: string, path: string) => {
     const app = await request.newContext({ baseURL: origin, extraHTTPHeaders: { 'x-forwarded-for': `10.251.${Math.floor(Math.random() * 250)}.1` } })
     const signIn = await app.post('/api/auth/sign-in/email', { data: { email, password: 'wandelen-123' } })
     const headers = { Authorization: `Bearer ${signIn.headers()['set-auth-token']}`, 'Accept-Language': 'nl-NL' }
-    const body = await (await app.get(`/api/v1/dogs/${dogId}`, { headers })).json()
+    const body = await (await app.get(path, { headers })).json()
     await app.dispose()
     return body
   }
-  expect((await dogFromApp(`ans-${id}@e2e.test`)).share).toEqual({ url: link, message })
-  expect((await dogFromApp(`noor-${id}@e2e.test`)).share).toBeNull()
+  expect((await fromApp(`ans-${id}@e2e.test`, `/api/v1/dogs/${dogId}`)).share).toEqual({ url: link, message })
+  expect((await fromApp(`noor-${id}@e2e.test`, `/api/v1/dogs/${dogId}`)).share).toBeNull()
+  // And the same next step as on Today.
+  const { steps: appSteps } = await fromApp(`ans-${id}@e2e.test`, '/api/v1/progress')
+  expect(appSteps.find((s: { key: string }) => s.key === 'dogMet')).toMatchObject({ href: `${dogPath}#share`, dogId, action: 'Vertel je buren over Saar' })
 
   // Someone else's dog has no message to share, and its poster is not theirs to print.
   await neighbour.page.goto(dogPath)

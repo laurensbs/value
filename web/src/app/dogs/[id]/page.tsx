@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { ViewTransition } from 'react'
 import { notFound } from 'next/navigation'
-import { getFormatter, getTranslations } from 'next-intl/server'
+import { getFormatter, getLocale, getTranslations } from 'next-intl/server'
 import { Avatar } from '@/components/Avatar'
 import { DogOwnerActions } from '@/components/DogOwnerActions'
 import { DogPortrait } from '@/components/DogPortrait'
@@ -12,21 +12,21 @@ import { GroupWalkButton } from '@/components/GroupWalkButton'
 import { Icon } from '@/components/Icon'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
-import { dogShareUrl } from '@/lib/invite'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
-import { siteUrl } from '@/lib/site'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
 import { dogFacts, getDogDetail, myGroupSignups, relationFor, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
+import { dogShareFor, localeOf } from '@/server/share'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const detail = await getDogDetail(id, null)
   if (!detail) return {}
   const { dog, host } = detail
-  const t = await getTranslations('dogShare')
-  // Owners share this page with their neighbours: the preview in a chat shows the dog and what it is looking for.
+  // Owners share this page with their neighbours: the preview in a chat shows the dog and what it is
+  // looking for, in the owner's language like the message they sent (chat apps fetch it without one).
   const owned = host.kind === 'owner'
+  const t = await getTranslations({ locale: owned ? await localeOf(host.id) : await getLocale(), namespace: 'dogShare' })
   const description = (dog.story || (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : '')).slice(0, 160)
   const photo = dog.photos.find((src) => src.startsWith('https://'))
   return {
@@ -83,11 +83,7 @@ export default async function DogPage({
     }))
   const defaultDate = moments[0]?.date ?? toZonedParts(fromNow(24 * 3600_000)).date
   const defaultTime = moments[0]?.time ?? '10:00'
-  // The owner's own dog, online: a ready message for the neighbours, with a link that counts as their invite.
-  const shareMessage =
-    isMine && host.kind === 'owner' && dog.status === 'active' && !dog.isDemo && viewer?.profile
-      ? t('dogShare.message', { name: dog.name, city: dog.city, url: dogShareUrl(siteUrl(), viewer.profile.referralCode, dog.id) })
-      : null
+  const share = await dogShareFor(detail, viewer)
   const plan = encodeURIComponent(`/dogs/${dog.id}#plan`)
 
   return (
@@ -139,7 +135,7 @@ export default async function DogPage({
           ) : null}
         </header>
 
-        {shareMessage ? <DogShare dogId={dog.id} name={dog.name} message={shareMessage} /> : null}
+        {share ? <DogShare dogId={dog.id} name={dog.name} message={share.message} /> : null}
 
         <div className="host card row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
           <Avatar name={host.name} src={host.photoUrl} size="medium" />

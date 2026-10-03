@@ -1578,7 +1578,9 @@
       },
       "dogMet": {
         "title": "Meet your first walker",
-        "hint": "When someone asks to meet, you'll see it under Walks, and you can chat first."
+        "hint": "When someone asks to meet, you'll see it under Walks, and you can chat first.",
+        "shareHint": "Walkers nearby can find {dog} now. Tell your neighbours too, and it'll go faster.",
+        "shareStart": "Tell your neighbours about {dog}"
       },
       "dogWalk": {
         "title": "Your dog's first walk",
@@ -1630,9 +1632,7 @@
     },
     "backTitle": "Good to see you again!",
     "backText": "{dog} and you: {bond}. Fancy another walk? Plan it whenever it suits you.",
-    "backPlan": "Plan a walk with {dog}",
-    "shareHint": "Walkers nearby can find {dog} now. Tell your neighbours too, and it'll go faster.",
-    "shareStart": "Tell your neighbours about {dog}"
+    "backPlan": "Plan a walk with {dog}"
   },
   "progress": {
     "title": "Your progress",

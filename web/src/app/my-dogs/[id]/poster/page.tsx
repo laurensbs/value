@@ -26,7 +26,8 @@ export default async function DogPosterPage({ params }: { params: Promise<{ id: 
   const viewer = await requireOnboarded(`/my-dogs/${id}/poster`)
   const db = await getDb()
   const [dog] = await db.select().from(s.dog).where(eq(s.dog.id, id))
-  if (!dog || dog.ownerId !== viewer.userId || dog.isDemo) notFound()
+  // A dog hidden by Rondje can't be put back online by its owner: no poster for it.
+  if (!dog || dog.ownerId !== viewer.userId || dog.isDemo || dog.status === 'hidden') notFound()
   const t = await getTranslations()
   const url = dogShareUrl(siteUrl(), viewer.profile.referralCode, dog.id)
   const facts = [dog.breed, dog.ageYears != null ? t('dogs.years', { n: dog.ageYears }) : null, dog.city].filter(Boolean).join(' · ')

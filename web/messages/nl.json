@@ -1578,7 +1578,9 @@
       },
       "dogMet": {
         "title": "Ontmoet je eerste wandelaar",
-        "hint": "Vraagt iemand om kennis te maken? Dan zie je dat bij Rondjes, en kun je eerst chatten."
+        "hint": "Vraagt iemand om kennis te maken? Dan zie je dat bij Rondjes, en kun je eerst chatten.",
+        "shareHint": "Wandelaars in de buurt kunnen {dog} nu vinden. Vertel het ook zelf aan je buren, dan gaat het sneller.",
+        "shareStart": "Vertel je buren over {dog}"
       },
       "dogWalk": {
         "title": "Het eerste rondje van je hond",
@@ -1630,9 +1632,7 @@
     },
     "backTitle": "Fijn dat je er weer bent!",
     "backText": "{dog} en jij: {bond}. Zin in een nieuw rondje? Plan het wanneer het jou uitkomt.",
-    "backPlan": "Plan een rondje met {dog}",
-    "shareHint": "Wandelaars in de buurt kunnen {dog} nu vinden. Vertel het ook zelf aan je buren, dan gaat het sneller.",
-    "shareStart": "Vertel je buren over {dog}"
+    "backPlan": "Plan een rondje met {dog}"
   },
   "progress": {
     "title": "Jouw voortgang",

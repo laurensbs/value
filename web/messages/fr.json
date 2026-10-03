@@ -1578,7 +1578,9 @@
       },
       "dogMet": {
         "title": "Rencontrez votre premier promeneur",
-        "hint": "Quand quelqu'un demande à faire connaissance, vous le verrez dans Balades, et vous pourrez d'abord discuter."
+        "hint": "Quand quelqu'un demande à faire connaissance, vous le verrez dans Balades, et vous pourrez d'abord discuter.",
+        "shareHint": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {dog}. Parlez-en aussi à vos voisins, ça ira plus vite.",
+        "shareStart": "Parlez de {dog} à vos voisins"
       },
       "dogWalk": {
         "title": "La première balade de votre chien",
@@ -1630,9 +1632,7 @@
     },
     "backTitle": "Bon retour sur Rondje !",
     "backText": "{dog} et vous : {bond}. Envie d'une nouvelle balade ? Planifiez-la quand cela vous convient.",
-    "backPlan": "Planifier une balade avec {dog}",
-    "shareHint": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {dog}. Parlez-en aussi à vos voisins, ça ira plus vite.",
-    "shareStart": "Parlez de {dog} à vos voisins"
+    "backPlan": "Planifier une balade avec {dog}"
   },
   "progress": {
     "title": "Votre progression",

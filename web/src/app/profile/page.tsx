@@ -9,6 +9,7 @@ import { WalkerCard } from '@/components/WalkerCard'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import type { Locale } from '@/i18n/config'
+import { inviteUrl } from '@/lib/invite'
 import { siteUrl } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
 import { progressFor } from '@/server/progress'
@@ -33,7 +34,7 @@ export default async function ProfilePage() {
   const [{ n: invited }] = p.referralCode
     ? await db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode))
     : [{ n: 0 }]
-  const inviteUrl = `${siteUrl()}/r/${p.referralCode ?? ''}`
+  const invite = inviteUrl(siteUrl(), p.referralCode ?? '')
   const progress = await progressFor(viewer)
   const level = progress.level
 
@@ -86,7 +87,7 @@ export default async function ProfilePage() {
       <section id="invite" className="card stack-s invite-card">
         <h2>{t('profile.invite')}</h2>
         <p>{t('profile.inviteText')}</p>
-        <InviteLink url={inviteUrl} message={t('profile.inviteMessage', { url: inviteUrl })} />
+        <InviteLink url={invite} message={t('profile.inviteMessage', { url: invite })} />
         <p className="muted small">{t('profile.invited', { n: invited })}</p>
         <div>
           <Link href="/flyer" className="link-button small">

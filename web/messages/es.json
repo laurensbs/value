@@ -1578,7 +1578,9 @@
       },
       "dogMet": {
         "title": "Conoce a tu primer paseador",
-        "hint": "Cuando alguien pida conoceros, lo verás en Paseos, y podéis chatear primero."
+        "hint": "Cuando alguien pida conoceros, lo verás en Paseos, y podéis chatear primero.",
+        "shareHint": "Quien pasee por tu zona ya puede encontrar a {dog}. Cuéntalo tú también en el barrio y irá más rápido.",
+        "shareStart": "Da a conocer a {dog} en tu barrio"
       },
       "dogWalk": {
         "title": "El primer paseo de tu perro",
@@ -1630,9 +1632,7 @@
     },
     "backTitle": "¡Qué bien verte de nuevo!",
     "backText": "{dog} y tú: {bond}. ¿Te apetece otro paseo? Planéalo cuando te venga bien.",
-    "backPlan": "Planea un paseo con {dog}",
-    "shareHint": "Quien pasee por tu zona ya puede encontrar a {dog}. Cuéntalo tú también en el barrio y irá más rápido.",
-    "shareStart": "Da a conocer a {dog} en tu barrio"
+    "backPlan": "Planea un paseo con {dog}"
   },
   "progress": {
     "title": "Tu progreso",
