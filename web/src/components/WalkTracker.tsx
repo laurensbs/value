@@ -3,6 +3,7 @@
 import { useFormatter, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, useTransition } from 'react'
 import { distanceM, formatWalkDistance, routeLengthM } from '@/lib/geo'
+import { playSound } from '@/lib/sounds'
 import { endWalk } from '@/server/actions/walks'
 import { Icon } from './Icon'
 import { Map, type MapMarker } from './map'
@@ -96,6 +97,11 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
     },
     [walkId],
   )
+
+  // A gentle "start" when the walk has just begun (not when you come back to it later).
+  useEffect(() => {
+    if (initialRoute.length === 0 && Date.now() - startedAt < 60_000) playSound('start')
+  }, [initialRoute.length, startedAt])
 
   // GPS
   useEffect(() => {

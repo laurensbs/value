@@ -310,3 +310,99 @@ enum JSONValue: Codable, Hashable, Sendable {
         }
     }
 }
+
+struct ChatMessage: Codable, Identifiable, Hashable, Sendable {
+    var id: String
+    var senderId: String
+    var name: String
+    var body: String
+    var t: Double
+
+    var date: Date { Date(timeIntervalSince1970: t / 1000) }
+}
+
+struct ChatResponse: Codable, Sendable {
+    var messages: [ChatMessage]
+    var canSend: Bool
+}
+
+/// A dog from the walker's "hondenvriendenboek".
+struct DogFriend: Codable, Identifiable, Hashable, Sendable {
+    var id: String
+    var name: String
+    var breed: String
+    var city: String
+    var photos: [String]
+    var look: DogLook
+    var walks: Int
+    var meters: Int
+    var lastAt: Date?
+    var firstAt: Date?
+}
+
+struct DogFriendsResponse: Codable, Sendable { var dogs: [DogFriend] }
+
+// Levels, badges and monthly challenges (GET /api/v1/progress and /api/v1/challenges).
+// Points only come from real things; nothing is ever lost, and levels are private.
+
+struct Progress: Codable, Sendable {
+    struct Level: Codable, Sendable {
+        var number: Int
+        var key: String
+        var name: String
+        var floor: Int
+        var next: Int?
+        var nextName: String?
+        var progress: Double
+    }
+    struct Roles: Codable, Sendable { var walker: Bool; var owner: Bool }
+    struct Week: Codable, Sendable { var goal: Int?; var walks: Int; var activeWeeks: Int }
+    struct Badge: Codable, Identifiable, Hashable, Sendable {
+        var key: String
+        var icon: String?
+        var name: String
+        var hint: String?
+        var title: String?
+        var nextTitle: String?
+        var tier: Int
+        var tiers: [Int]
+        var value: Int
+        var next: Int?
+        var color: String?
+        var earnedAt: Date?
+        var new: Bool?
+        var id: String { key }
+    }
+    struct Award: Codable, Hashable, Sendable { var key: String; var tier: Int; var name: String; var title: String?; var color: String? }
+    struct Recent: Codable, Hashable, Sendable { var kind: String; var points: Int; var at: Date; var label: String }
+
+    var points: Int
+    var level: Level
+    var levelUp: Bool
+    var roles: Roles?
+    var week: Week?
+    var badges: [Badge]
+    var newAwards: [Award]?
+    var recent: [Recent]?
+}
+
+struct Challenges: Codable, Sendable {
+    struct Goal: Codable, Sendable {
+        var name: String?
+        var walks: Int
+        var km: Double?
+        var dogs: Int?
+        var walkers: Int?
+        var mine: Int?
+        var goal: Int
+        var done: Bool
+        var title: String
+        var progressText: String?
+        var statsText: String?
+    }
+    var month: String
+    var season: String?
+    var daysLeft: Int?
+    var city: Goal?
+    var all: Goal
+}

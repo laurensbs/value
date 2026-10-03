@@ -127,6 +127,110 @@
     "impactKm": "Kilomètres",
     "impactDogs": "Chiens sortis"
   },
+  "landing": {
+    "pills": {
+      "free": "Gratuit",
+      "noAds": "Sans publicité",
+      "adults": "18+"
+    },
+    "stage": {
+      "goodWalk": "Belle balade !",
+      "calm": "Calme · 40 min"
+    },
+    "hero": {
+      "shelterLink": "Vous travaillez dans un refuge ?"
+    },
+    "choose": {
+      "title": "Qu'est-ce qui vous amène ?",
+      "lede": "Choisissez ce qui vous correspond, et nous vous montrons le chemin.",
+      "walk": {
+        "title": "Je veux promener",
+        "text": "Un chien du quartier ou un chien de refuge."
+      },
+      "owner": {
+        "title": "J'ai un chien",
+        "text": "Ou je cherche de l'aide pour le chien d'une voisine, d'un grand-père ou d'une grand-mère."
+      },
+      "both": {
+        "title": "Les deux",
+        "text": "Promener d'autres chiens, et de l'aide pour le vôtre."
+      },
+      "shelter": {
+        "title": "Je travaille dans un refuge",
+        "text": "Mettez vos chiens en ligne et organisez des balades de groupe encadrées."
+      }
+    },
+    "dogs": {
+      "title": "Qui vient avec vous aujourd’hui ?",
+      "lede": "Quelques chiens qui attendent leur balade.",
+      "all": "Voir tous les chiens"
+    },
+    "how": {
+      "eyebrow": "En quatre étapes",
+      "step": "Étape {n}",
+      "s1": "Présentez-vous",
+      "s2": "Choisissez un chien",
+      "s3": "D'abord, une rencontre ensemble",
+      "s4": "Votre balade régulière"
+    },
+    "app": {
+      "eyebrow": "Sur votre téléphone",
+      "title": "Tout ce qu’il vous faut, dans votre poche",
+      "lede": "Découvrez des chiens, planifiez une première rencontre et partez ensemble, pendant que le propriétaire suit la balade en direct.",
+      "soon": "Bientôt sur l’App Store",
+      "today": "En attendant, {app} fonctionne sur tous les téléphones, directement dans le navigateur. Astuce : ajoutez {app} à votre écran d’accueil, il s’ouvrira comme une app.",
+      "note": "Écrans de l'app iPhone, avec des données d'exemple.",
+      "discover": {
+        "title": "Découvrir",
+        "text": "Des chiens près de chez vous, avec leur histoire et la durée de balade qu’ils aiment.",
+        "alt": "L'écran Découvrir de l'app iPhone, avec Bobbie le beagle à 600 mètres"
+      },
+      "owner": {
+        "title": "Vous choisissez",
+        "text": "En tant que propriétaire, vous voyez qui veut promener votre chien et vous choisissez le moment de la rencontre.",
+        "alt": "L'écran d'accueil des propriétaires dans l'app iPhone, avec une demande de première rencontre"
+      },
+      "walk": {
+        "title": "Suivi en direct",
+        "text": "Pendant la balade, le propriétaire suit sur la carte. Le bouton SOS est toujours à portée de main.",
+        "alt": "Une balade avec Bobbie dans l'app iPhone : carte, durée, distance et bouton SOS"
+      }
+    },
+    "safety": {
+      "eyebrow": "Sûr, pour les humains et les chiens",
+      "t1": "D'abord ensemble",
+      "t2": "Pièce d'identité en personne",
+      "t3": "Le propriétaire décide",
+      "t4": "Suivi en direct",
+      "t5": "Retour privé",
+      "t6": "Signaler à tout moment"
+    },
+    "community": {
+      "eyebrow": "Ensemble ce mois-ci",
+      "first": "Pas encore de balade en {month}. Vous faites la première ?",
+      "join": "Participer"
+    },
+    "countries": {
+      "link": "Voir toutes les villes"
+    },
+    "free": {
+      "price": "0 €",
+      "priceNote": "pour les promeneurs, les propriétaires et les refuges",
+      "ads": "Pas de publicité",
+      "subscription": "Pas d'abonnement",
+      "data": "Nous ne vendons jamais de données"
+    },
+    "closing": {
+      "title": "Un chien vous attend",
+      "text": "Près de chez vous vivent des chiens dont les maîtres ne peuvent plus marcher bien loin. Une balade de plus illumine leur journée."
+    },
+    "pages": {
+      "safety": "Sécurité",
+      "groupWalks": "Avec un refuge",
+      "shelters": "Refuges",
+      "cities": "Villes"
+    }
+  },
   "auth": {
     "loginTitle": "Bon retour parmi nous",
     "signupTitle": "Créez un compte",
@@ -138,8 +242,6 @@
     "login": "Se connecter",
     "signup": "Créer un compte",
     "withPasskey": "Se connecter avec Face ID, une empreinte digitale ou une clé d'accès",
-    "withGoogle": "Continuer avec Google",
-    "withApple": "Continuer avec Apple",
     "noAccount": "Pas encore de compte ?",
     "hasAccount": "Déjà un compte ?",
     "termsNote": "En créant un compte, vous acceptez les <terms>conditions</terms> et la <privacy>politique de confidentialité</privacy>.",
@@ -154,7 +256,6 @@
       "owner": "Vous inscrivez un chien à qui une balade de plus ferait du bien. Commençons par créer votre compte.",
       "shelter": "Vous mettez les chiens de votre refuge sur Rondje. Créez d'abord votre propre compte ; ensuite, vous inscrirez le refuge."
     },
-    "orEmail": "ou avec votre adresse e-mail",
     "promiseFree": "Gratuit, sans publicité.",
     "promisePrivacy": "Nous ne vendons jamais vos données. Votre position est arrondie à environ 500 mètres.",
     "forgot": "Mot de passe oublié ?",
@@ -170,6 +271,13 @@
     "resetDone": "Votre mot de passe a été modifié et vous avez été déconnecté de vos autres appareils. Connectez-vous maintenant avec le nouveau mot de passe.",
     "resetInvalid": "Ce lien a expiré ou a déjà été utilisé.",
     "backToLogin": "Retour à la connexion"
+  },
+  "social": {
+    "continueWithApple": "Continuer avec Apple",
+    "continueWithGoogle": "Continuer avec Google",
+    "or": "ou avec votre adresse e-mail",
+    "error": "La connexion avec {provider} n'a pas fonctionné. Réessayez ou utilisez votre adresse e-mail.",
+    "linkNotice": "Un compte Rondje existe déjà avec cette adresse e-mail. Connectez-vous une fois ci-dessous avec votre mot de passe et nous y associerons {provider}. Ensuite, vous pourrez aussi vous connecter avec {provider}."
   },
   "onboarding": {
     "title": "Parlez-nous de vous",
@@ -1718,5 +1826,422 @@
     "stats": "{dogs, plural, one {# chien} other {# chiens}} · {walkers, plural, one {# promeneur} other {# promeneurs}} · {km} km",
     "daysLeft": "{n, plural, one {Encore # jour} other {Encore # jours}}",
     "private": "Nous comptons seulement les balades, jamais qui les a faites."
+  },
+  "sounds": {
+    "toggle": "Petits sons",
+    "hint": "Des sons doux aux moments importants, comme une nouvelle balade ou un nouveau niveau. Uniquement sur cet appareil."
+  },
+  "progressPage": {
+    "lede": "Ce que vous avez fait jusqu'ici : votre niveau, vos médailles et ce que nous marchons ensemble.",
+    "privateTag": "Vous seul le voyez",
+    "levelLine": "Niveau {n} · {points, plural, one {# point} other {# points}}",
+    "ringLabel": "Niveau {n} : {name}",
+    "badgesLede": "Rien que pour vous. Elles ne donnent jamais de priorité.",
+    "badgeEarned": "Obtenue",
+    "badgeEarnedOn": "Obtenue le {date}",
+    "badgeNext": "Prochaine : {title}",
+    "badgeNew": "Nouveau",
+    "weekLede": "Un objectif tranquille pour vous. Une semaine sans, et rien n'est perdu.",
+    "goalNone": "Aucun",
+    "goalTimes": "{n}×",
+    "challengeEyebrow": "Ensemble ce mois-ci",
+    "challengeEveryone": "Tous ensemble : {walks} balades sur {goal}",
+    "mineShort": "{n} de vous",
+    "earnPoints": "+{n}",
+    "recentEmpty": "Rien gagné pour l'instant. Votre première balade rapporte tout de suite 25 points.",
+    "findDog": "Trouver un chien"
+  },
+  "friends": {
+    "title": "Livre d'amis à quatre pattes",
+    "lede": "Chaque chien avec qui vous avez fait une balade a ici sa propre page.",
+    "statFriends": "{n, plural, one {ami à quatre pattes} other {amis à quatre pattes}}",
+    "statWalks": "{n, plural, one {balade} other {balades}}",
+    "statDistance": "marchés ensemble",
+    "times": "{n}×",
+    "since": "Depuis {date}",
+    "last": "Dernière balade le {date}",
+    "emptyTitle": "Votre livre d'amis est encore vide",
+    "emptyText": "Après votre première balade, le chien aura ici sa propre page. Découvrez les chiens près de chez vous qui apprécieraient une balade de plus.",
+    "emptyCta": "Découvrir des chiens",
+    "private": "Vous seul voyez votre livre d'amis."
+  },
+  "breathe": {
+    "title": "Minute de respiration",
+    "heading": "Prendre un moment",
+    "lede": "Une minute calme, avant ou après une balade. Inspirez sur quatre temps, expirez sur six.",
+    "ready": "Prêt pour une minute de calme ?",
+    "in": "Inspirez",
+    "out": "Expirez",
+    "secondsLeft": "{n, plural, one {Encore # seconde} other {Encore # secondes}}",
+    "start": "Commencer",
+    "stop": "Arrêter",
+    "again": "Encore une minute",
+    "done": "Très bien. Vous êtes de retour.",
+    "back": "Terminé",
+    "note": "Rien n'est enregistré. Activez ou coupez les sons dans votre profil.",
+    "help": "Quelque chose vous pèse ? En parler aide.",
+    "helpLink": "Trouver de l'aide ici"
+  },
+  "walkDone": {
+    "title": "Belle balade !",
+    "text": "{dog} et vous avez marché {distance}. Merci beaucoup.",
+    "moodTitle": "Et comment vous sentez-vous maintenant ?",
+    "moodPrivate": "Cela reste sur cet appareil. Nous ne le voyons pas.",
+    "feedback": "Comment ça s'est passé ?",
+    "done": "Terminé",
+    "points": "+{n} points",
+    "breathe": "Envie d'un moment de calme ? Faites la minute de respiration"
+  },
+  "profileHub": {
+    "levelBadges": "{n, plural, =0 {Pas encore de médailles} one {# médaille} other {# médailles}}",
+    "friendsTitle": "Livre d'amis à quatre pattes",
+    "friendsEmpty": "Tout commence ici après votre première balade",
+    "friendsCount": "{dogs, plural, one {# ami à quatre pattes} other {# amis à quatre pattes}} · {walks, plural, one {# balade} other {# balades}}",
+    "breatheTitle": "Minute de respiration",
+    "breatheText": "Une minute calme, avant ou après une balade",
+    "quizTodo": "Pas encore fait, nécessaire pour vous balader seul",
+    "moreTitle": "Donner un coup de main",
+    "inviteShort": "Vous connaissez quelqu'un qui aime marcher, ou quelqu'un avec un chien ? Partagez votre lien.",
+    "supportText": "Gratuit et sans publicité. Découvrez comment aider.",
+    "tipText": "Vous connaissez un refuge ou quelqu'un avec un chien qui aurait besoin d'aide ?",
+    "shelterText": "Vous travaillez dans un refuge ? Mettez vos chiens en ligne ici.",
+    "alerts": "Notifications et son"
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Découvrir",
+      "requests": "Balades",
+      "myDogs": "Mes chiens",
+      "shelter": "Mon refuge",
+      "me": "Moi"
+    },
+    "tabsLabel": "Menu principal",
+    "footerLine": "{name} est gratuit et sans publicité"
+  },
+  "discover": {
+    "title": "Qui vient se balader aujourd’hui ?",
+    "levelTop": "Niveau maximum. Que de balades !",
+    "badges": "{n, plural, =0 {Pas encore de médailles} one {# médaille} other {# médailles}}",
+    "together": "Ensemble ce mois-ci",
+    "mine": "Vous : {n}",
+    "filters": {
+      "owner": "Quartier",
+      "shelter": "Refuge"
+    },
+    "allCountries": "Tous les pays",
+    "storyIn": "Histoire en {language}",
+    "groupWalksText": "Encadrée, dans un refuge. Idéal pour commencer.",
+    "allGroupWalks": "Toutes les balades en groupe"
+  },
+  "launch": {
+    "title": "Centre de lancement",
+    "back": "Gestion",
+    "lede": "Tout pour le lancement au même endroit : ce qui reste à faire, qui fait quoi, vos messages et la croissance. À votre rythme.",
+    "levelChip": "{level} · {points} points",
+    "pointsShort": "+{n}",
+    "install": "Astuce : ouvrez cette page sur votre iPhone dans Safari et choisissez Partager → Sur l’écran d’accueil. Le centre de lancement s’ouvre alors comme une app.",
+    "entry": {
+      "title": "Centre de lancement",
+      "text": "Liste de lancement, banque de messages pour les refuges et d’autres, chiffres par semaine et coûts."
+    },
+    "nav": {
+      "label": "Sections",
+      "tasks": "Tâches",
+      "messages": "Messages",
+      "numbers": "Chiffres"
+    },
+    "owner": {
+      "laurens": "Laurens",
+      "claude": "Claude",
+      "samen": "Ensemble"
+    },
+    "waiting": {
+      "title": "En attente de Laurens",
+      "count": "{open} sur {total} ouvertes",
+      "hint": "Vous seul pouvez faire ces quatre-là. Ensuite, le reste avance plus vite.",
+      "allDone": "Les quatre sont faites. Beau travail."
+    },
+    "mine": {
+      "title": "Vos autres tâches",
+      "empty": "Plus rien d’ouvert pour vous."
+    },
+    "others": {
+      "title": "Claude et ensemble",
+      "empty": "Plus rien d’ouvert ici."
+    },
+    "done": {
+      "title": "Terminées ({n})",
+      "label": "Tâches terminées"
+    },
+    "task": {
+      "markDone": "Marquer comme faite",
+      "markOpen": "Rouvrir",
+      "auto": "automatique",
+      "autoHint": "Se coche toute seule dès que les vraies données le montrent.",
+      "open": "Ouvrir",
+      "note": "Note",
+      "notePlaceholder": "Où en est-on ?",
+      "saveNote": "Enregistrer",
+      "saved": "Enregistré",
+      "doneOn": "faite le {date}"
+    },
+    "tasks": {
+      "name": {
+        "title": "Choisir le nom : Woofmigo, oui ou non",
+        "hint": "Vérifiez d’abord dans App Store Connect si le nom est libre (Apps → + → Nouvelle app), et cherchez WOOF et MIGO dans TMview, classes 9, 42 et 45. D’ici là, tout reste sur Brand.name et APP_NAME."
+      },
+      "goLive": {
+        "title": "Mettre en ligne : fusionner en production",
+        "hint": "La PR #3 et la PR de parité, avec les migrations 0007 et 0008. Suivez « Live zetten » dans CLAUDE.md : contrôles locaux au vert, preview Vercel Ready, puis squash-merge. Se coche toute seule quand ce centre tourne en production."
+      },
+      "submit": {
+        "title": "Soumettre à Apple",
+        "hint": "Dans App Store Connect, avec le texte de docs/app-store/vermelding.md et un compte de test pour la revue. Vous soumettez vous-même."
+      },
+      "money": {
+        "title": "Tout ce qui coûte de l’argent",
+        "hint": "Apple Developer (99 € par an) et le domaine. Votre accord et votre paiement : Claude n’achète rien."
+      },
+      "sendThree": {
+        "title": "Envoie tes 3 premiers e-mails",
+        "hint": "Choisis 3 refuges dans Contacts, ajoute l’adresse e-mail, touche « Ouvrir dans la messagerie » et envoie depuis ta propre messagerie. Puis marque-les « envoyé »."
+      },
+      "trademark": {
+        "title": "Vérifier la marque sur TMview",
+        "hint": "Cherchez « rondje » ou le nouveau nom, dans les classes 9, 42 et 45."
+      },
+      "appleAccount": {
+        "title": "Compte Apple Developer",
+        "hint": "Nécessaire pour soumettre, pour Se connecter avec Apple et pour HealthKit. 99 € par an ; compté dans les coûts dès que vous cochez."
+      },
+      "domain": {
+        "title": "Acheter et relier un domaine",
+        "hint": "Après le choix du nom, environ 12 € par an. Ensuite Vercel → Settings → Domains (docs/LAUNCH.md §8). Compté dans les coûts dès que vous cochez."
+      },
+      "socialKeys": {
+        "title": "Clés pour Se connecter avec Apple et Google",
+        "hint": "Suivez docs/LAUNCH.md §5 et ajoutez-les dans Vercel. Se coche toute seule quand les deux sont actives."
+      },
+      "healthkit": {
+        "title": "Activer la capacité HealthKit",
+        "hint": "Pour l’App ID app.rondje.mobile sur developer.apple.com, et dans Xcode sous Signing & Capabilities."
+      },
+      "legal": {
+        "title": "Vérification juridique",
+        "hint": "Faites relire docs/legal/REVIEW.md par un juriste. Ne lancez qu’après la création de la structure juridique."
+      },
+      "analytics": {
+        "title": "Activer Vercel Web Analytics",
+        "hint": "Dans le tableau de bord Vercel : projet rondje → Analytics → Enable. Gratuit avec l’offre Hobby, dans ses limites."
+      },
+      "privacy": {
+        "title": "Compléter la politique de confidentialité",
+        "hint": "Ajouter Apple Santé (HealthKit) et les statistiques du site, avec le juriste."
+      },
+      "firstMails": {
+        "title": "Écrire aux 10 premiers refuges",
+        "hint": "Avec la banque de messages ci-dessous. Se coche toute seule à 10 refuges sur « envoyé » ou plus."
+      },
+      "firstDemo": {
+        "title": "Premier appel avec un refuge",
+        "hint": "Se coche toute seule dès qu’un refuge de vos contacts est sur « rendez-vous »."
+      },
+      "firstDog": {
+        "title": "Premier vrai chien en ligne",
+        "hint": "D’un vrai refuge ou propriétaire, sans l’étiquette Exemple. Se coche toute seule."
+      },
+      "blobCleanup": {
+        "title": "Effacer aussi de Blob les photos et parcours après 30 jours",
+        "hint": "Pour que la promesse de confidentialité vaille aussi pour Vercel Blob (voir STAND.md)."
+      },
+      "storeTexts": {
+        "title": "Texte et captures App Store avec le nom choisi",
+        "hint": "Après le choix du nom : le reporter dans docs/app-store/vermelding.md et faire de nouvelles captures."
+      },
+      "mountAnalytics": {
+        "title": "Ajouter le compteur de visites au site",
+        "hint": "Le composant Analytics est prêt et doit encore aller dans le layout. Sans cookies ; les pages de gestion ne comptent pas."
+      }
+    },
+    "game": {
+      "title": "Progression",
+      "ring": "Niveau {n} : {name}",
+      "points": "{n} points",
+      "toNext": "Encore {n} points jusqu’à {name}",
+      "top": "Niveau le plus haut. Chaque pas compte toujours.",
+      "levels": {
+        "pup": "Chiot",
+        "walker": "Promeneur",
+        "packLeader": "Chef de meute"
+      },
+      "routeTitle": "En route vers la première vraie promenade",
+      "routeCount": "{done} sur {total}",
+      "routeSteps": {
+        "live": "En ligne",
+        "supply": "Premier chien ou refuge",
+        "intro": "Première rencontre",
+        "walk": "Promenade"
+      },
+      "membersTitle": "En route vers 100 membres",
+      "membersCount": "{n, plural, one {# membre} other {# membres}}",
+      "badgesTitle": "Badges",
+      "noPressure": "Pas de séries et pas de pression : les points viennent seulement de ce qui est fait, et rien n’est jamais retiré."
+    },
+    "milestones": {
+      "firstShelter": {
+        "title": "Premier refuge en ligne",
+        "badge": "Ami des refuges"
+      },
+      "firstIntro": {
+        "title": "Première rencontre",
+        "badge": "Premier reniflement"
+      },
+      "firstWalk": {
+        "title": "Première vraie promenade",
+        "badge": "Boucle bouclée"
+      },
+      "members10": {
+        "title": "10 membres",
+        "badge": "Petite meute"
+      },
+      "members50": {
+        "title": "50 membres",
+        "badge": "Toute la rue"
+      },
+      "members100": {
+        "title": "100 membres",
+        "badge": "Tout le quartier"
+      },
+      "reachedOn": "atteint le {date}",
+      "reached": "atteint",
+      "notYet": "pas encore",
+      "progress": "{current} sur {target}"
+    },
+    "audience": {
+      "shelter": "Refuges",
+      "vet": "Vétérinaires",
+      "student": "Associations étudiantes",
+      "neighbourhood": "Apps de quartier",
+      "press": "Presse locale"
+    },
+    "status": {
+      "todo": "À envoyer",
+      "sent": "Envoyé",
+      "replied": "Réponse",
+      "meeting": "Rendez-vous"
+    },
+    "templateKind": {
+      "mail": "Premier e-mail",
+      "followup": "Relance",
+      "call": "Script d’appel",
+      "post": "Message"
+    },
+    "composer": {
+      "title": "Banque de messages",
+      "hint": "Choisissez un message, remplissez les champs et ouvrez-le dans votre propre app de mail, ou copiez le texte. Rondje n’envoie rien lui-même.",
+      "audience": "Pour",
+      "template": "Message",
+      "language": "Langue",
+      "to": "À",
+      "toNone": "Personne pour l’instant (texte seul)",
+      "noEmailShort": "sans e-mail",
+      "fields": {
+        "naam": "Nom",
+        "organisatie": "Organisation",
+        "stad": "Ville",
+        "link": "Lien",
+        "afzender": "Votre nom",
+        "telefoon": "Votre téléphone",
+        "datum": "Semaine du",
+        "dagen": "Deux jours (p. ex. mardi ou jeudi)"
+      },
+      "preview": "Aperçu",
+      "toLabel": "À :",
+      "missing": "Encore à remplir : {fields}",
+      "noEmail": "Ce contact n’a pas d’adresse e-mail valide : votre app de mail s’ouvre sans destinataire.",
+      "openMail": "Ouvrir dans le mail",
+      "copy": "Copier",
+      "copied": "Copié",
+      "sentAsk": "L’avez-vous envoyé ?",
+      "markSent": "Marquer comme envoyé"
+    },
+    "contacts": {
+      "title": "Contacts",
+      "add": "Ajouter un contact",
+      "close": "Fermer",
+      "hint": "Seulement des coordonnées professionnelles, et seulement ici dans la base de données. Ne changez le statut qu’après avoir vous-même envoyé ou entendu quelque chose. Supprimez un contact quand vous n’en avez plus besoin.",
+      "filter": "Filtrer par public",
+      "all": "Tous",
+      "empty": "Pas encore de contacts. Commencez par le premier refuge.",
+      "statusLabel": "Statut de {name}",
+      "lastContact": "dernier contact {date}",
+      "write": "Écrire un message",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "deleteConfirm": "Oui, supprimer",
+      "save": "Enregistrer",
+      "added": "Ajouté.",
+      "fields": {
+        "audience": "Public",
+        "name": "Nom",
+        "organisation": "Organisation",
+        "email": "Adresse e-mail",
+        "phone": "Téléphone",
+        "city": "Ville",
+        "note": "Note"
+      },
+      "errors": {
+        "invalid": "Remplissez au moins un nom ou une organisation.",
+        "email": "Cette adresse e-mail n’est pas correcte."
+      },
+      "prepare": "Préparer 10 refuges",
+      "prepareHint": "Les refuges les plus proches de la liste, avec leur site dans la note. Ajoute toi-même l’adresse e-mail ; rien n’est envoyé.",
+      "prepared": "{n, plural, =0 {Aucun nouveau refuge : ils sont déjà là.} one {# refuge prêt. Ajoute l’adresse e-mail et écris ton message.} other {# refuges prêts. Ajoute les adresses e-mail et écris tes messages.}}"
+    },
+    "numbers": {
+      "title": "Chiffres par semaine",
+      "hint": "Seulement des nombres issus de données réelles, sans noms, pour les 8 dernières semaines. Les données d’exemple et les administrateurs ne comptent pas.",
+      "steadyPairs": "Duos réguliers",
+      "metrics": {
+        "members": "Membres",
+        "dogs": "Chiens",
+        "shelters": "Refuges",
+        "intros": "Premières rencontres",
+        "walks": "Promenades"
+      },
+      "thisWeek": "cette semaine",
+      "chartLabel": "{name} : {total} en 8 semaines",
+      "tip": "semaine du {week} : {n}",
+      "total": "{n} en 8 semaines",
+      "asTable": "Voir en tableau",
+      "weekOf": "Semaine du"
+    },
+    "visits": {
+      "title": "Visites du site",
+      "text": "Le comptage des visiteurs commence dès que vous activez Web Analytics dans le tableau de bord Vercel (projet rondje → Analytics → Enable). Avec l’offre gratuite Hobby, cela ne coûte rien, dans les limites de Vercel. Les chiffres apparaissent alors dans le tableau de bord.",
+      "privacy": "Sans cookies. Les pages de gestion, les liens avec des codes et l’app ne comptent pas.",
+      "open": "Ouvrir le tableau de bord Vercel"
+    },
+    "costs": {
+      "title": "Coûts par mois",
+      "hint": "Ce que coûte Rondje aujourd’hui. Les montants annuels sont indiqués par mois ; ils ne comptent qu’une fois la tâche correspondante cochée.",
+      "perYear": "{amount} par an",
+      "total": "Total par mois",
+      "perMember": "Coût par membre",
+      "walksPerActive": "Promenades par membre actif",
+      "walksPerActiveHint": "Promenades des 30 derniers jours, divisées par les promeneurs qui ont marché pendant cette période.",
+      "members": "{n, plural, one {# vrai membre} other {# vrais membres}}",
+      "items": {
+        "vercel": "Vercel Hobby",
+        "neon": "Neon Free",
+        "apple": "Apple Developer",
+        "domain": "Domaine",
+        "resend": "Resend (gratuit)"
+      },
+      "when": {
+        "apple": "dès votre inscription",
+        "domain": "dès l’achat"
+      }
+    }
   }
 }

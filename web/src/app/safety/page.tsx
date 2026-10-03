@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
+import { COLLIE } from '@/components/landing/looks'
+import { IconTile, PageHero } from '@/components/landing/PageHero'
+import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('safety')
@@ -10,19 +13,21 @@ export async function generateMetadata() {
 export default async function SafetyPage() {
   const t = await getTranslations()
   const blocks = [
-    { icon: 'route', title: t('safety.during'), text: t('safety.duringText') },
-    { icon: 'chat', title: t('safety.after'), text: t('safety.afterText') },
-    { icon: 'lock', title: t('safety.fraud'), text: t('safety.fraudText') },
-    { icon: 'shield', title: t('safety.liability'), text: t('safety.liabilityText') },
+    { icon: 'route', tone: 'green', title: t('safety.during'), text: t('safety.duringText') },
+    { icon: 'chat', tone: 'blue', title: t('safety.after'), text: t('safety.afterText') },
+    { icon: 'lock', tone: 'warm', title: t('safety.fraud'), text: t('safety.fraudText') },
+    { icon: 'shield', tone: 'green', title: t('safety.liability'), text: t('safety.liabilityText') },
   ] as const
 
   return (
     <div className="narrow-page stack-l">
-      <header className="stack-s">
-        <h1>{t('safety.title')}</h1>
-        <p className="lede">{t('safety.lede')}</p>
-      </header>
-      <section className="stack">
+      <PageHero
+        eyebrow={t('landing.pages.safety')}
+        title={t('safety.title')}
+        lede={t('safety.lede')}
+        art={{ dog: COLLIE, tone: 'green', badge: <Icon name="shield" /> }}
+      />
+      <section className="lp-card pad stack">
         <h2>{t('safety.levels')}</h2>
         <ol className="timeline">
           <li>{t('safety.level1')}</li>
@@ -32,18 +37,25 @@ export default async function SafetyPage() {
       </section>
       <div className="safety-grid">
         {blocks.map((b) => (
-          <section key={b.title} className="card stack-s">
-            <Icon name={b.icon} />
+          <section key={b.title} className="lp-card pad stack-s">
+            <IconTile tone={b.tone} size="s">
+              <Icon name={b.icon} size={20} />
+            </IconTile>
             <h3>{b.title}</h3>
             <p className="small">{b.text}</p>
           </section>
         ))}
       </div>
-      <section className="card flat stack-s">
-        <h2>{t('safety.report')}</h2>
-        <p>{t('safety.reportText')}</p>
+      <section className="lp-card soft-rose lp-tip">
+        <IconTile tone="alert">
+          <Icon name="flag" />
+        </IconTile>
+        <div>
+          <h2>{t('safety.report')}</h2>
+          <p>{t('safety.reportText')}</p>
+        </div>
       </section>
-      <nav className="row" aria-label={t('footer.terms')}>
+      <nav className="row lp-touch" aria-label={t('footer.terms')}>
         <Link href="/legal/conduct" className="button secondary small">
           {t('footer.conduct')}
         </Link>

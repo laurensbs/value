@@ -19,6 +19,39 @@ struct RondjeTests {
         #expect(!dog.host.isShelter)
     }
 
+    @Test func drawsADogFromAPartialPortrait() throws {
+        let look = try JSONDecoder().decode(DogLook.self, from: Data(##"{"fur":"#b98a62","ears":"#8e6443","muzzle":"#f1dfcb","tongue":false}"##.utf8))
+        #expect(look.earStyle == "floppy")
+        #expect(look.collar == "#1f5a3d")
+    }
+
+    @Test func aPushOpensTheRightTab() {
+        #expect(Push.tab(forPath: "/chat/r1") == "appointments")
+        #expect(Push.tab(forPath: "/walk/w1") == "appointments")
+        #expect(Push.tab(forPath: "/requests") == "appointments")
+        #expect(Push.tab(forPath: "/dogs/d1") == "discover")
+        #expect(Push.tab(forPath: "/notifications") == "profile")
+    }
+
+    @Test func moneyTalkInChatGetsAWarning() {
+        #expect(ChatView.mentionsMoney("Kun je even een Tikkie sturen?"))
+        #expect(ChatView.mentionsMoney("Dat kost €10"))
+        #expect(!ChatView.mentionsMoney("Tot morgen om zes uur!"))
+    }
+
+    @Test func friendshipGrowsWithWalks() {
+        #expect(DogFriendsView.bond(1).1 == "hand.wave.fill")
+        #expect(DogFriendsView.bond(3).1 == "figure.walk")
+        #expect(DogFriendsView.bond(7).1 == "heart.fill")
+        #expect(DogFriendsView.bond(12).1 == "star.fill")
+    }
+
+    @Test func darkCoatsGetVisibleEyes() {
+        #expect(DogFace.isDark("#20242a"))
+        #expect(!DogFace.isDark("#e2b45c"))
+        #expect(!DogFace.isDark("not a colour"))
+    }
+
     @Test func decodesDatesWithAndWithoutMilliseconds() throws {
         struct Box: Decodable { var a: Date; var b: Date }
         let box = try APIClient.makeDecoder().decode(Box.self, from: Data(#"{"a":"2026-10-02T11:31:00.000Z","b":"2026-10-02T11:31:00Z"}"#.utf8))

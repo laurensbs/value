@@ -51,7 +51,8 @@ export async function apiMember(): Promise<OnboardedViewer | NextResponse> {
 
 /** The illustrated portrait the app draws for a dog without photos. */
 export function dogLook(dog: { id: string; avatar?: unknown }) {
-  return { ...lookFor(dog), tile: tileFor(dog.id) }
+  // A stored portrait may be partial; the generated one fills in what is missing.
+  return { ...lookFor({ id: dog.id }), ...lookFor(dog), tile: tileFor(dog.id) }
 }
 
 /** A dog card for lists: public fields only. Private ones (meeting place, vet, chip) never go out here. */

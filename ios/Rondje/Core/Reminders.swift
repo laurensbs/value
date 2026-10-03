@@ -11,8 +11,10 @@ enum Reminders {
     /// Asks once, at a moment where it makes sense (after a request was sent or accepted).
     static func askIfNeeded() async {
         let center = UNUserNotificationCenter.current()
-        guard await center.notificationSettings().authorizationStatus == .notDetermined else { return }
-        _ = try? await center.requestAuthorization(options: [.alert, .sound, .badge])
+        if await center.notificationSettings().authorizationStatus == .notDetermined {
+            _ = try? await center.requestAuthorization(options: [.alert, .sound, .badge])
+        }
+        await Push.registerIfAllowed()
     }
 
     /// Makes the scheduled reminders match the accepted appointments, both as walker and as owner.
@@ -55,7 +57,9 @@ final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unc
     var onOpen: (@MainActor (String) -> Void)?
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        let tab = response.notification.request.content.userInfo["tab"] as? String ?? ""
+        let info = response.notification.request.content.userInfo
+        // Local reminders say which tab; pushes from the server carry the website path ("/chat/…", "/walk/…").
+        let tab = info["tab"] as? String ?? Push.tab(forPath: info["url"] as? String ?? "")
         await MainActor.run { onOpen?(tab) }
     }
 

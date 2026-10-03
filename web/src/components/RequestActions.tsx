@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { useState, useTransition } from 'react'
+import { playSound, type SoundName } from '@/lib/sounds'
 import { cancelRequest, respondToRequest, setTrust } from '@/server/actions/requests'
 import { startWalk } from '@/server/actions/walks'
 import { Icon } from './Icon'
@@ -10,11 +11,14 @@ function useAction() {
   const t = useTranslations('request.reasons')
   const [pending, start] = useTransition()
   const [error, setError] = useState<string | null>(null)
-  function run(fn: () => Promise<{ ok: boolean; error?: string } | void>) {
+  function run(fn: () => Promise<{ ok: boolean; error?: string } | void>, sound?: SoundName) {
     setError(null)
     start(async () => {
       const result = await fn()
-      if (result && !result.ok) setError(t.has(result.error ?? '') ? t(result.error ?? 'invalid') : t('invalid'))
+      if (result && !result.ok) {
+        setError(t.has(result.error ?? '') ? t(result.error ?? 'invalid') : t('invalid'))
+        playSound('error')
+      } else if (sound) playSound(sound)
     })
   }
   return { pending, error, run }
@@ -26,7 +30,7 @@ export function DecideButtons({ requestId }: { requestId: string }) {
   return (
     <div className="stack-s">
       <div className="row">
-        <button type="button" className="button primary small" disabled={pending} onClick={() => run(() => respondToRequest(requestId, 'accept'))}>
+        <button type="button" className="button primary small" disabled={pending} onClick={() => run(() => respondToRequest(requestId, 'accept'), 'success')}>
           <Icon name="check" size={16} /> {t('accept')}
         </button>
         <button type="button" className="button ghost small" disabled={pending} onClick={() => run(() => respondToRequest(requestId, 'decline'))}>

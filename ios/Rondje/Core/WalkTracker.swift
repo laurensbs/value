@@ -27,6 +27,8 @@ final class WalkTracker {
     private(set) var lastFix: Date?
     private(set) var overdueMin = 0
     private(set) var signalWeak = false
+    /// The recorded fixes with their times, for Apple Health (only used when the walker switched that on).
+    @ObservationIgnored private(set) var locations: [CLLocation] = []
 
     private var pending: [[String: Double]] = []
     private var lastLocation: CLLocation?
@@ -51,6 +53,7 @@ final class WalkTracker {
         guard self.info?.walkId != info.walkId else { return }
         self.info = info
         route = []
+        locations = []
         distanceM = 0
         overdueMin = 0
         pending = []
@@ -121,6 +124,7 @@ final class WalkTracker {
         }
         lastLocation = location
         route.append(location.coordinate)
+        locations.append(location)
         pending.append([
             "lat": location.coordinate.latitude,
             "lng": location.coordinate.longitude,
