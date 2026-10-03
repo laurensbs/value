@@ -71,6 +71,8 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
   await next()
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
   await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
+  // Wait until the profile is saved and we left onboarding, so the next step doesn't race the save.
+  await page.waitForURL((url) => !url.pathname.startsWith('/onboarding'))
 }
 
 /** Signs in as the e2e admin (ADMIN_EMAILS in playwright.config.ts). On a reused server the account may already exist. */

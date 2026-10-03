@@ -2,10 +2,15 @@ import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { GroupWalkButton } from '@/components/GroupWalkButton'
 import { Icon } from '@/components/Icon'
-import { COUNTRIES, COUNTRY_INFO, isCountry } from '@/lib/countries'
+import { DogTile } from '@/components/landing/DogTile'
+import { Flag } from '@/components/landing/Flag'
+import { COLLIE, GOLDEN, TRIO } from '@/components/landing/looks'
+import { PageHero } from '@/components/landing/PageHero'
+import { COUNTRIES, isCountry } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { myGroupSignups, upcomingGroupWalks } from '@/server/queries'
 import { getViewer } from '@/server/session'
+import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('groupWalks')
@@ -29,22 +34,31 @@ export default async function GroupWalksPage({ searchParams }: { searchParams: P
 
   return (
     <div className="stack-l">
-      <header className="stack-s">
-        <h1>{t('groupWalks.title')}</h1>
-        <p className="lede">{t('groupWalks.lede')}</p>
-      </header>
-      <nav className="choices" aria-label={t('common.country')}>
+      <PageHero
+        eyebrow={t('landing.pages.groupWalks')}
+        title={t('groupWalks.title')}
+        lede={t('groupWalks.lede')}
+        art={{ dog: GOLDEN, friend: COLLIE, tone: 'green', badge: <Icon name="users" /> }}
+      />
+      <nav className="choices lp-touch" aria-label={t('common.country')}>
         {COUNTRIES.map((c) => (
           <Link key={c} href={`/group-walks?country=${c}`} className={`chip${c === country ? ' on' : ''}`}>
-            {COUNTRY_INFO[c].flag} {t(`common.countries.${c}`)}
+            <Flag country={c} /> {t(`common.countries.${c}`)}
           </Link>
         ))}
       </nav>
       {walks.length === 0 ? (
-        <div className="card flat stack-s">
-          <p>{t('groupWalks.empty')}</p>
+        <div className="lp-card lp-tip lp-empty">
+          <div className="lp-mini-fan" aria-hidden="true">
+            {TRIO.map((dog, i) => (
+              <span key={dog.tile} className={`n${i}`}>
+                <DogTile dog={dog} />
+              </span>
+            ))}
+          </div>
           <div>
-            <Link href={`/shelters?country=${country}`} className="button secondary small">
+            <p>{t('groupWalks.empty')}</p>
+            <Link href={`/shelters?country=${country}`} className="button primary">
               {t('nav.shelters')}
             </Link>
           </div>
@@ -53,9 +67,9 @@ export default async function GroupWalksPage({ searchParams }: { searchParams: P
         [...byDay.entries()].map(([day, list]) => (
           <section key={day} className="stack-s">
             <h2 className="day-title">{day}</h2>
-            <ul className="list">
+            <ul className="list lp-touch">
               {list.map((w) => (
-                <li key={w.id} className="list-item">
+                <li key={w.id} className="list-item lp-walk">
                   <div className="time-badge" aria-hidden="true">
                     {format.dateTime(w.startsAt, { hour: '2-digit', minute: '2-digit' })}
                   </div>

@@ -115,10 +115,19 @@ struct EmptyState: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: symbol)
-                .font(.system(size: 38, weight: .semibold))
-                .foregroundStyle(Palette.grass)
-                .symbolEffect(.bounce, options: .nonRepeating)
+            ZStack(alignment: .bottomTrailing) {
+                DogPortrait(look: DogLook(fur: "#e2b45c", ears: "#c99540", muzzle: "#f2d79b", earStyle: "floppy", head: "round", tongue: true, collar: "#1f5a3d", tile: "#f6ebcf"), cornerRadius: 30)
+                    .frame(width: 104, height: 104)
+                    .rotationEffect(.degrees(-4))
+                Image(systemName: symbol)
+                    .font(.subheadline.weight(.bold))
+                    .foregroundStyle(Palette.onBall)
+                    .frame(width: 36, height: 36)
+                    .background(Palette.ball, in: .circle)
+                    .offset(x: 8, y: 8)
+                    .symbolEffect(.bounce, options: .nonRepeating)
+            }
+            .padding(.bottom, 6)
             Text(title).font(.headline)
             Text(text).font(.subheadline).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
         }

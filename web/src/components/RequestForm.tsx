@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { playSound } from '@/lib/sounds'
 import { useForm } from '@/lib/use-form'
 import { createRequest } from '@/server/actions/requests'
 import type { FormState } from '@/server/actions/profile'
@@ -22,6 +23,11 @@ export function RequestForm({ dogId, dogName, meetReason, soloReason, defaultDat
   const { state, pending, onSubmit } = useForm<FormState>(createRequest, { ok: false })
   const [kind, setKind] = useState<'meet' | 'solo'>(soloReason ? 'meet' : 'solo')
   const reason = kind === 'solo' ? soloReason : meetReason
+  // A soft "send" when the request is on its way, a soft "error" when it is not.
+  useEffect(() => {
+    if (state.ok) playSound('send')
+    else if (state.error) playSound('error')
+  }, [state])
 
   if (state.ok) {
     return (

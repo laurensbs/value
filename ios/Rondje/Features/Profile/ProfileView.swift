@@ -12,7 +12,26 @@ struct ProfileView: View {
                 VStack(spacing: 18) {
                     header
                     MembershipCard()
-                    if let trust = model.me?.trust { stats(trust) }
+                    if let code = model.me?.profile?.referralCode {
+                        ShareLink(
+                            item: Brand.share("/r/\(code)"),
+                            subject: Text("Wandel je mee?"),
+                            message: Text("Ik wandel met honden uit de buurt via \(Brand.name). Gratis, en je helpt er iemand mee. Doe je mee?")
+                        ) {
+                            Label("Nodig vrienden uit", systemImage: "person.2.wave.2.fill")
+                        }
+                        .buttonStyle(.secondary)
+                    }
+                    if model.role != .owner, let trust = model.me?.trust { stats(trust) }
+                    if let lift = MoodStore.averageLift, lift > 0 {
+                        Label(L("Na een rondje voel je je gemiddeld beter dan ervoor. Alleen jij ziet dit."), systemImage: "sun.max.fill")
+                            .font(.subheadline)
+                            .foregroundStyle(Palette.ink)
+                            .padding(14)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Palette.grassSoft, in: .rect(cornerRadius: 18, style: .continuous))
+                    }
+                    DeviceSettingsView()
                     links
                     Text("\(Brand.name) \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")
                         .font(.caption).foregroundStyle(Palette.muted)
@@ -69,12 +88,34 @@ struct ProfileView: View {
         .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
     }
 
+    private var roleText: String {
+        switch model.role {
+        case .walker: L("Ik wil wandelen")
+        case .owner: L("Ik heb een hond")
+        case .both: L("Allebei")
+        }
+    }
+
     private var links: some View {
         VStack(spacing: 0) {
+            NavigationLink { BadgesView() } label: {
+                row("rosette", L("Jouw niveau en badges"), ProgressStore.shared.progress.map { "\($0.level.name) · \($0.points) " + L("punten") })
+            }
+            Divider().padding(.leading, 56)
+            NavigationLink { RoleView() } label: {
+                row("arrow.left.arrow.right", L("Wat doe je op Rondje?"), roleText)
+            }
+            Divider().padding(.leading, 56)
+            if model.role != .owner {
+            NavigationLink { DogFriendsView() } label: {
+                row("book.fill", L("Hondenvriendenboek"), L("Alle honden met wie je liep"))
+            }
+            Divider().padding(.leading, 56)
             NavigationLink { QuizView() } label: {
                 row("checkmark.seal.fill", L("Veiligheidsquiz"), model.me?.profile?.quizPassed == true ? L("Gehaald") : L("Nodig voor zelfstandige rondjes"))
             }
             Divider().padding(.leading, 56)
+            }
             NavigationLink { MyDogsView() } label: { row("pawprint.fill", L("Mijn honden"), L("Voor jezelf, de buren of opa en oma")) }
             Divider().padding(.leading, 56)
             NavigationLink { NotificationsView() } label: {
@@ -196,6 +237,7 @@ struct NotificationsView: View {
         case "walk-started": "figure.walk"
         case "walk-ended": "house.fill"
         case "walk-overdue": "clock.badge.exclamationmark"
+        case "chat-message": "bubble.left.fill"
         case "trust-granted": "hand.thumbsup.fill"
         default: "bell.fill"
         }
@@ -211,6 +253,7 @@ struct NotificationsView: View {
         case "walk-started": return L("\(walker) is op pad met \(dog). Kijk live mee.")
         case "walk-ended": return L("\(dog) is weer thuis.")
         case "walk-overdue": return L("Het rondje met \(dog) loopt uit.")
+        case "chat-message": return L("\(n.text("senderName")) stuurde een bericht over \(dog).")
         case "trust-granted": return L("Je mag nu zelfstandig met \(dog) wandelen.")
         case "group-walk-new": return L("Er is een nieuwe groepswandeling bij een opvang.")
         default: return L("Nieuwe melding")

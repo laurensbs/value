@@ -30,7 +30,7 @@ struct AppointmentsView: View {
                             .padding(12)
                             .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
                     }
-                    if !model.appointments.incoming.isEmpty || model.me?.profile?.hasDogs == true {
+                    if model.role == .both || (model.role == .walker && !model.appointments.incoming.isEmpty) {
                         Picker("Weergave", selection: $side) {
                             ForEach(Side.allCases) { Text($0.title).tag($0) }
                         }
@@ -42,7 +42,7 @@ struct AppointmentsView: View {
                             title: side == .walking ? L("Nog geen afspraken") : L("Nog geen aanvragen"),
                             text: side == .walking ? L("Kies een hond bij Ontdek en plan een kennismaking.") : L("Zodra iemand met je hond wil wandelen, zie je het hier.")
                         )
-                        if side == .walking {
+                        if side == .walking && model.role != .owner {
                             Button("Naar Ontdek") { model.selectedTab = .discover }.buttonStyle(.primary).padding(.horizontal, 40)
                         }
                     }
@@ -58,7 +58,7 @@ struct AppointmentsView: View {
             .task { await model.refreshAppointments() }
             .onAppear {
                 // Owners who do not walk themselves, or who have someone waiting, start on their dogs.
-                if model.me?.profile?.wantsToWalk == false || (model.pendingIncoming > 0 && !model.appointments.outgoing.contains(where: \.isOpen)) {
+                if model.role == .owner || (model.pendingIncoming > 0 && !model.appointments.outgoing.contains(where: \.isOpen)) {
                     side = .dogs
                 }
             }
@@ -78,6 +78,10 @@ struct AppointmentCard: View {
     @State private var trustSheet = false
     @State private var following: String?
     @State private var feedbackFor: String?
+    @State private var chatting = false
+    @State private var breathing = false
+    /// Offer the breathing minute before a walk; switched off with "Niet meer tonen".
+    @AppStorage("offerBreathing") private var offerBreathing = true
 
     var body: some View {
         Card {
@@ -131,6 +135,21 @@ struct AppointmentCard: View {
                 .presentationDetents([.large])
                 .onDisappear { Task { await model.refreshAppointments() } }
         }
+        .fullScreenCover(isPresented: $breathing) {
+            BreathingView {
+                breathing = false
+                Task { await start() }
+            }
+            .overlay(alignment: .bottom) {
+                Button("Niet meer tonen") { offerBreathing = false; breathing = false; Task { await start() } }
+                    .font(.footnote).foregroundStyle(Palette.onGrass.opacity(0.7))
+                    .padding(.bottom, 4)
+            }
+        }
+        .sheet(isPresented: $chatting) {
+            ChatView(requestId: item.id, title: asOwner ? (item.walker?.firstName ?? item.dog.name) : item.dog.name)
+                .presentationDetents([.large])
+        }
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
             Button("Annuleer afspraak", role: .destructive) { Task { await act("cancel") } }
         } message: {
@@ -144,12 +163,16 @@ struct AppointmentCard: View {
     private var contact: some View {
         let phone = asOwner ? item.walker?.phone : item.host?.phone
         let email = asOwner ? item.walker?.email : item.host?.email
-        if item.status == "accepted", phone != nil || email != nil {
+        let canChat = ["pending", "accepted", "completed"].contains(item.status)
+        if canChat || (item.status == "accepted" && (phone != nil || email != nil)) {
             HStack(spacing: 10) {
-                if let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
+                if canChat {
+                    Button("Chat", systemImage: "bubble.left.and.bubble.right.fill") { chatting = true }.buttonStyle(.bordered)
+                }
+                if item.status == "accepted", let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
                     Button("Bel", systemImage: "phone.fill") { openURL(url) }.buttonStyle(.bordered)
                 }
-                if let email, let url = URL(string: "mailto:\(email)") {
+                if item.status == "accepted", let email, let url = URL(string: "mailto:\(email)") {
                     Button("Mail", systemImage: "envelope.fill") { openURL(url) }.buttonStyle(.bordered)
                 }
             }
@@ -177,7 +200,7 @@ struct AppointmentCard: View {
             } else {
                 if item.canStart() && item.walkStatus != "ended" {
                     Button {
-                        Task { await start() }
+                        if item.walkStatus != "active" && offerBreathing { breathing = true } else { Task { await start() } }
                     } label: {
                         Label(item.walkStatus == "active" ? L("Ga verder met je rondje") : L("Start het rondje"), systemImage: "figure.walk")
                     }
@@ -233,7 +256,7 @@ struct AppointmentCard: View {
             let live: LiveWalk? = item.walkStatus == "active"
                 ? try? await APIClient.shared.get("/api/walks/\(started.walkId)/live?after=999999999")
                 : nil
-            Haptics.success()
+            Haptics.success(.start)
             walk.start(.init(
                 walkId: started.walkId, dogName: item.dog.name, look: item.dog.look, startedAt: live?.startedAt ?? .now,
                 plannedEnd: live?.plannedEndAt ?? .now.addingTimeInterval(Double(item.durationMin) * 60),

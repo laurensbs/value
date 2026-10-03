@@ -7,6 +7,7 @@ import { drizzle as drizzlePg } from 'drizzle-orm/node-postgres'
 import { drizzle as drizzlePglite } from 'drizzle-orm/pglite'
 import pg from 'pg'
 import migrations from './migrations.json'
+import { shouldMigrate } from './preview'
 import * as schema from './schema'
 
 export type Db = ReturnType<typeof drizzlePglite<typeof schema>>
@@ -94,7 +95,7 @@ async function migrate(): Promise<void> {
 /** Migrates (and seeds example data when the database is empty) once per server instance. */
 export function ready(): Promise<void> {
   state.ready ??= (async () => {
-    await migrate()
+    if (shouldMigrate()) await migrate()
     const { seedIfEmpty } = await import('./seed')
     await seedIfEmpty(db)
   })().catch((error) => {

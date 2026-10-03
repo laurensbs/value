@@ -78,12 +78,70 @@ final class APIClient: Sendable {
         Keychain.clear()
     }
 
-    private func authenticate(path: String, body: [String: String]) async throws {
+    /// The public settings, including which ways of signing in the server offers.
+    func config() async throws -> AppConfig {
+        let (data, response) = try await raw("GET", "/api/v1/config", body: Optional<[String: String]>.none, authorized: false)
+        guard response.statusCode == 200, let config = try? decoder.decode(AppConfig.self, from: data) else { throw APIError.unexpected }
+        return config
+    }
+
+    /// Sign in with Apple through the native sheet: the server checks the identity token with Apple
+    /// and the raw nonce. Apple only shares the name the very first time, so it is passed along then.
+    /// No cookies go along (this session has none), as Better Auth requires for app requests.
+    func signInWithApple(identityToken: String, nonce: String, name: PersonNameComponents?) async throws {
+        try await authenticate(path: "/api/auth/sign-in/social", body: AppleIDToken(token: identityToken, nonce: nonce, name: name)) { data, status in
+            self.socialAuthError(data: data, status: status, provider: .apple)
+        }
+    }
+
+    /// Links an Apple ID to the account that is signed in now (after OAUTH_LINK_ERROR and a password login).
+    func linkApple(identityToken: String, nonce: String) async throws {
+        let (_, response) = try await raw("POST", "/api/auth/link-social", body: AppleIDToken(token: identityToken, nonce: nonce, name: nil))
+        guard response.statusCode == 200 else { throw APIError.unexpected }
+    }
+
+    /// Finishes a sign-in through the website: the one-time code from rondje://auth/callback, plus the
+    /// PKCE verifier only this app knows, becomes a session.
+    func exchangeNativeCode(_ code: String, verifier: String) async throws {
+        try await authenticate(path: "/api/auth/native/exchange", body: ["code": code, "codeVerifier": verifier]) { data, status in
+            self.socialAuthError(data: data, status: status, provider: nil)
+        }
+    }
+
+    private func authenticate<B: Encodable>(path: String, body: B, errors: ((Data, Int) -> APIError)? = nil) async throws {
         let (data, response) = try await raw("POST", path, body: body, authorized: false)
         guard let token = response.value(forHTTPHeaderField: "set-auth-token"), !token.isEmpty else {
-            throw authError(data: data, status: response.statusCode)
+            throw errors?(data, response.statusCode) ?? authError(data: data, status: response.statusCode)
         }
         Keychain.save(token)
+    }
+
+    private func socialAuthError(data: Data, status: Int, provider: SocialProvider?) -> APIError {
+        struct Body: Decodable { var code: String?; var error: String? }
+        let body = try? JSONDecoder().decode(Body.self, from: data)
+        return Self.socialAuthError(code: body?.code ?? body?.error, status: status, provider: provider)
+    }
+
+    /// Errors from Apple or Google sign-in, from the server or from rondje://auth/callback?error=….
+    /// Server messages are English, so every known code gets its own Dutch text.
+    static func socialAuthError(code: String?, status: Int, provider: SocialProvider?) -> APIError {
+        let name = provider?.name
+        switch code?.lowercased().replacingOccurrences(of: "_", with: "-") {
+        case "oauth-link-error":
+            // A password account with this e-mail address exists: log in with it, then Apple is linked.
+            return .server(code: "link", message: L("Er is al een account met dit e-mailadres. Log in met je wachtwoord om Apple te koppelen."))
+        case "account-not-linked":
+            return .server(code: "exists", message: L("Er is al een account met dit e-mailadres. Log in met je e-mailadres en wachtwoord."))
+        case "expired", "invalid-code":
+            return .server(code: "expired", message: L("Deze inlogpoging is verlopen. Probeer het opnieuw."))
+        case "provider-unavailable":
+            if let name { return .server(code: "unavailable", message: L("Inloggen met \(name) kan nu even niet. Log in met je e-mailadres.")) }
+            return .server(code: "unavailable", message: L("Inloggen lukte niet. Probeer het opnieuw."))
+        default:
+            if status == 429 { return .server(code: "rate", message: L("Te veel pogingen. Wacht even en probeer het opnieuw.")) }
+            if let name { return .server(code: "auth", message: L("Inloggen met \(name) lukte niet. Probeer het opnieuw.")) }
+            return .server(code: "auth", message: L("Inloggen lukte niet. Probeer het opnieuw."))
+        }
     }
 
     private func authError(data: Data, status: Int) -> APIError {
@@ -190,6 +248,26 @@ final class APIClient: Sendable {
 }
 
 private struct Failure: Decodable { var error: String; var message: String? }
+
+/// The body for Sign in with Apple and for linking Apple: `user` only when Apple shared a name.
+private struct AppleIDToken: Encodable {
+    struct IDToken: Encodable { var token: String; var nonce: String; var user: User? }
+    struct User: Encodable { var name: Name }
+    struct Name: Encodable { var firstName: String?; var lastName: String? }
+
+    var provider = SocialProvider.apple.rawValue
+    var idToken: IDToken
+
+    init(token: String, nonce: String, name: PersonNameComponents?) {
+        func clean(_ part: String?) -> String? {
+            guard let part = part?.trimmingCharacters(in: .whitespaces), !part.isEmpty else { return nil }
+            return part
+        }
+        let first = clean(name?.givenName), last = clean(name?.familyName)
+        let user = first == nil && last == nil ? nil : User(name: Name(firstName: first, lastName: last))
+        idToken = IDToken(token: token, nonce: nonce, user: user)
+    }
+}
 
 extension Notification.Name {
     static let rondjeSignedOut = Notification.Name("rondjeSignedOut")

@@ -1,0 +1,48 @@
+/* "Continue with Apple / Google", styled after the brand rules:
+   Apple (Human Interface Guidelines): black button with white logo and text on light
+   backgrounds, white with black on dark ones. Google (branding guidelines): white button,
+   1px #747775 border, #1f1f1f text, the full-colour G. */
+
+.buttons {
+  display: grid;
+  gap: 10px;
+}
+
+:global(.button).social {
+  min-height: 48px;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+:global(.button).social:focus-visible {
+  outline: 3px solid var(--grass);
+  outline-offset: 2px;
+}
+
+:global(.button).apple {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+}
+
+:global(.button).google {
+  background: #ffffff;
+  color: #1f1f1f;
+  border: 1px solid #747775;
+  font-family: Roboto, var(--font-body);
+}
+
+.mark {
+  flex-shrink: 0;
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) :global(.button).apple {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+}

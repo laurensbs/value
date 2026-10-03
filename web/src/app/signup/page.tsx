@@ -6,6 +6,7 @@ import { Icon } from '@/components/Icon'
 import { Logo } from '@/components/Logo'
 import { enabledSocialProviders } from '@/lib/auth'
 import { safeNext } from '@/lib/site'
+import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
 
 const INTENTS = ['walker', 'owner', 'shelter'] as const
@@ -28,6 +29,8 @@ export default async function SignupPage({
   const viewer = await getViewer()
   if (viewer) redirect(viewer.profile ? next : `/onboarding?next=${encodeURIComponent(next)}${intent ? `&intent=${intent}` : ''}`)
   const t = await getTranslations('auth')
+  // The app shell (Capacitor) shows no Google/Apple buttons: Google refuses sign-in in web views.
+  const providers = (await isNativeRequest()) ? [] : enabledSocialProviders
 
   return (
     <div className="auth">
@@ -42,7 +45,7 @@ export default async function SignupPage({
             {t('error')}
           </p>
         ) : null}
-        <AuthForm mode="signup" next={next} intent={intent} providers={enabledSocialProviders} />
+        <AuthForm mode="signup" next={next} intent={intent} providers={providers} />
         <ul className="auth-promises small">
           <li>
             <Icon name="heart" size={16} /> {t('promiseFree')}

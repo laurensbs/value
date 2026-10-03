@@ -127,6 +127,110 @@
     "impactKm": "Kilometres",
     "impactDogs": "Dogs who got out"
   },
+  "landing": {
+    "pills": {
+      "free": "Free",
+      "noAds": "No ads",
+      "adults": "18+"
+    },
+    "stage": {
+      "goodWalk": "Good walk!",
+      "calm": "Calm · 40 min"
+    },
+    "hero": {
+      "shelterLink": "Do you work at a shelter?"
+    },
+    "choose": {
+      "title": "What brings you here?",
+      "lede": "Pick what fits you, and we'll point you the right way.",
+      "walk": {
+        "title": "I want to walk",
+        "text": "With a dog from the neighbourhood or from a shelter."
+      },
+      "owner": {
+        "title": "I have a dog",
+        "text": "Or I'm looking for help with the dog of a neighbour or a grandparent."
+      },
+      "both": {
+        "title": "Both",
+        "text": "Walking other dogs, and help with your own dog."
+      },
+      "shelter": {
+        "title": "I work at a shelter",
+        "text": "Put your dogs online and plan guided group walks."
+      }
+    },
+    "dogs": {
+      "title": "Who's coming along today?",
+      "lede": "A few dogs who are waiting for a walk.",
+      "all": "See all dogs"
+    },
+    "how": {
+      "eyebrow": "In four steps",
+      "step": "Step {n}",
+      "s1": "Tell us who you are",
+      "s2": "Pick a dog",
+      "s3": "Meet together first",
+      "s4": "Your regular walk"
+    },
+    "app": {
+      "eyebrow": "On your phone",
+      "title": "Everything you need, right in your pocket",
+      "lede": "Discover dogs, plan a first meeting and head out together, while the owner follows along live.",
+      "soon": "Coming soon to the App Store",
+      "today": "Until then, {app} works on every phone, right in your browser. Tip: add {app} to your home screen and it opens like an app.",
+      "note": "Screens from the iPhone app, with example data.",
+      "discover": {
+        "title": "Discover",
+        "text": "Dogs near you, with their story and how long they like to walk.",
+        "alt": "The Discover screen in the iPhone app, showing Bobbie the beagle 600 metres away"
+      },
+      "owner": {
+        "title": "You choose",
+        "text": "As an owner you see who would like to walk, and you pick a moment to meet.",
+        "alt": "The home screen for owners in the iPhone app, with a request for a first meeting"
+      },
+      "walk": {
+        "title": "Follow along live",
+        "text": "During the walk the owner can follow along on the map. The SOS button is always within reach.",
+        "alt": "A walk with Bobbie in the iPhone app: map, time, distance and an SOS button"
+      }
+    },
+    "safety": {
+      "eyebrow": "Safe for people and dogs",
+      "t1": "Together first",
+      "t2": "ID checked in person",
+      "t3": "The owner decides",
+      "t4": "Follow along live",
+      "t5": "Private feedback",
+      "t6": "Report any time"
+    },
+    "community": {
+      "eyebrow": "Together this month",
+      "first": "No walks yet in {month}. Will you walk the first one?",
+      "join": "Join in"
+    },
+    "countries": {
+      "link": "See all cities"
+    },
+    "free": {
+      "price": "€0",
+      "priceNote": "for walkers, owners and shelters",
+      "ads": "No ads",
+      "subscription": "No subscription",
+      "data": "We never sell data"
+    },
+    "closing": {
+      "title": "A dog is waiting for you",
+      "text": "Near you live dogs whose people can't walk far any more. One extra walk makes their day."
+    },
+    "pages": {
+      "safety": "Safety",
+      "groupWalks": "Together with a shelter",
+      "shelters": "Shelters",
+      "cities": "Cities"
+    }
+  },
   "auth": {
     "loginTitle": "Welcome back",
     "signupTitle": "Create an account",
@@ -138,8 +242,6 @@
     "login": "Log in",
     "signup": "Create account",
     "withPasskey": "Log in with Face ID, fingerprint or passkey",
-    "withGoogle": "Continue with Google",
-    "withApple": "Continue with Apple",
     "noAccount": "No account yet?",
     "hasAccount": "Already have an account?",
     "termsNote": "By creating an account, you agree to the <terms>terms</terms> and the <privacy>privacy policy</privacy>.",
@@ -154,7 +256,6 @@
       "owner": "You're signing up a dog who could use an extra walk. Let's set up your account first.",
       "shelter": "You're putting your shelter's dogs on Rondje. First create your own account; then you can register the shelter."
     },
-    "orEmail": "or with your email address",
     "promiseFree": "Free, with no ads.",
     "promisePrivacy": "We never sell your data. Your location is rounded to about 500 metres.",
     "forgot": "Forgot your password?",
@@ -170,6 +271,13 @@
     "resetDone": "Your password has been changed and you have been signed out on other devices. Sign in now with your new password.",
     "resetInvalid": "This link has expired or was already used.",
     "backToLogin": "Back to sign in"
+  },
+  "social": {
+    "continueWithApple": "Continue with Apple",
+    "continueWithGoogle": "Continue with Google",
+    "or": "or with your email address",
+    "error": "Signing in with {provider} didn't work. Try again, or use your email address.",
+    "linkNotice": "There's already a Rondje account with this email address. Log in below with your password once and we'll link {provider} to it. After that you can also log in with {provider}."
   },
   "onboarding": {
     "title": "Tell us about yourself",
@@ -1738,5 +1846,422 @@
     "with": "With {name}.",
     "open": "Everything about this appointment in Rondje: {link}",
     "group": "Group walk at {org}"
+  },
+  "sounds": {
+    "toggle": "Sounds",
+    "hint": "Soft sounds at key moments, like a new walk or a new level. Only on this device."
+  },
+  "progressPage": {
+    "lede": "What you have done so far: your level, your badges and what everyone walks together.",
+    "privateTag": "Only you see this",
+    "levelLine": "Level {n} · {points, plural, one {# point} other {# points}}",
+    "ringLabel": "Level {n}: {name}",
+    "badgesLede": "Just for you. They never give priority.",
+    "badgeEarned": "Earned",
+    "badgeEarnedOn": "Earned on {date}",
+    "badgeNext": "Next: {title}",
+    "badgeNew": "New",
+    "weekLede": "A calm goal for yourself. Miss a week and nothing is lost.",
+    "goalNone": "None",
+    "goalTimes": "{n}×",
+    "challengeEyebrow": "Together this month",
+    "challengeEveryone": "Everyone together: {walks} of {goal} walks",
+    "mineShort": "{n} by you",
+    "earnPoints": "+{n}",
+    "recentEmpty": "Nothing earned yet. Your first walk earns 25 points straight away.",
+    "findDog": "Find a dog"
+  },
+  "friends": {
+    "title": "Dog friendship book",
+    "lede": "Every dog you walked with gets its own page here.",
+    "statFriends": "{n, plural, one {dog friend} other {dog friends}}",
+    "statWalks": "{n, plural, one {walk} other {walks}}",
+    "statDistance": "walked together",
+    "times": "{n}×",
+    "since": "Since {date}",
+    "last": "Last walk {date}",
+    "emptyTitle": "Your friendship book is still empty",
+    "emptyText": "After your first walk, the dog gets its own page here. See which dogs near you would love an extra walk.",
+    "emptyCta": "Discover dogs",
+    "private": "Only you see your friendship book."
+  },
+  "breathe": {
+    "title": "Breathing minute",
+    "heading": "Take a moment",
+    "lede": "One calm minute, before or after a walk. Breathe in for four counts and out for six.",
+    "ready": "Ready for a calm minute?",
+    "in": "Breathe in",
+    "out": "Breathe out",
+    "secondsLeft": "{n, plural, one {# second left} other {# seconds left}}",
+    "start": "Start",
+    "stop": "Stop",
+    "again": "One more minute",
+    "done": "Well done. You're back.",
+    "back": "Done",
+    "note": "Nothing is stored. Turn sounds on or off in your profile.",
+    "help": "Something on your mind? Talking helps.",
+    "helpLink": "Find help here"
+  },
+  "walkDone": {
+    "title": "Good walk!",
+    "text": "{dog} and you walked {distance}. Thank you.",
+    "moodTitle": "And how do you feel now?",
+    "moodPrivate": "This stays on this device. We never see it.",
+    "feedback": "How did it go?",
+    "done": "Done",
+    "points": "+{n} points",
+    "breathe": "Want a calm moment? Try the breathing minute"
+  },
+  "profileHub": {
+    "levelBadges": "{n, plural, =0 {No badges yet} one {# badge} other {# badges}}",
+    "friendsTitle": "Dog friendship book",
+    "friendsEmpty": "It starts here after your first walk",
+    "friendsCount": "{dogs, plural, one {# dog friend} other {# dog friends}} · {walks, plural, one {# walk} other {# walks}}",
+    "breatheTitle": "Breathing minute",
+    "breatheText": "One calm minute, before or after a walk",
+    "quizTodo": "Not done yet, needed for walking on your own",
+    "moreTitle": "Help out",
+    "inviteShort": "Know someone who loves walking, or someone with a dog? Share your own link.",
+    "supportText": "Free and ad-free. See how you can help.",
+    "tipText": "Know a shelter or someone with a dog who could use help?",
+    "shelterText": "Work at a shelter? Put your dogs online here.",
+    "alerts": "Notifications and sound"
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Discover",
+      "requests": "Walks",
+      "myDogs": "My dogs",
+      "shelter": "My shelter",
+      "me": "You"
+    },
+    "tabsLabel": "Main menu",
+    "footerLine": "{name} is free and ad-free"
+  },
+  "discover": {
+    "title": "Who’s coming along today?",
+    "levelTop": "Top level. What a lot of walks!",
+    "badges": "{n, plural, =0 {No badges yet} one {# badge} other {# badges}}",
+    "together": "Together this month",
+    "mine": "{n} by you",
+    "filters": {
+      "owner": "Neighbourhood",
+      "shelter": "Shelter"
+    },
+    "allCountries": "All countries",
+    "storyIn": "Story in {language}",
+    "groupWalksText": "Guided, at a shelter. A nice way to start.",
+    "allGroupWalks": "All group walks"
+  },
+  "launch": {
+    "title": "Launch hub",
+    "back": "Admin",
+    "lede": "Everything for the launch in one place: what is left, who does what, your messages and how it grows. At your own pace.",
+    "levelChip": "{level} · {points} points",
+    "pointsShort": "+{n}",
+    "install": "Tip: open this page on your iPhone in Safari and choose Share → Add to Home Screen. The launch hub then opens as its own app.",
+    "entry": {
+      "title": "Launch hub",
+      "text": "Launch list, message bank for shelters and others, weekly numbers and costs."
+    },
+    "nav": {
+      "label": "Sections",
+      "tasks": "Tasks",
+      "messages": "Messages",
+      "numbers": "Numbers"
+    },
+    "owner": {
+      "laurens": "Laurens",
+      "claude": "Claude",
+      "samen": "Together"
+    },
+    "waiting": {
+      "title": "Waiting for Laurens",
+      "count": "{open} of {total} open",
+      "hint": "Only you can do these four. After that, the rest goes faster on its own.",
+      "allDone": "All four done. Nice work."
+    },
+    "mine": {
+      "title": "Your other tasks",
+      "empty": "Nothing left open for you."
+    },
+    "others": {
+      "title": "Claude and together",
+      "empty": "Nothing left open here."
+    },
+    "done": {
+      "title": "Done ({n})",
+      "label": "Finished tasks"
+    },
+    "task": {
+      "markDone": "Mark as done",
+      "markOpen": "Set back to open",
+      "auto": "automatic",
+      "autoHint": "This ticks itself off as soon as it shows in the real data.",
+      "open": "Open",
+      "note": "Note",
+      "notePlaceholder": "Where does it stand?",
+      "saveNote": "Save",
+      "saved": "Saved",
+      "doneOn": "done on {date}"
+    },
+    "tasks": {
+      "name": {
+        "title": "Choose the name: Woofmigo, yes or no",
+        "hint": "First check in App Store Connect whether the name is free (Apps → + → New App), and search TMview for WOOF and MIGO in classes 9, 42 and 45. Until then everything stays on Brand.name and APP_NAME."
+      },
+      "goLive": {
+        "title": "Go live: merge to production",
+        "hint": "PR #3 and the parity PR, with migrations 0007 and 0008. Follow “Live zetten” in CLAUDE.md: local checks green, Vercel preview Ready, then squash-merge. Ticks itself off once this hub runs in production."
+      },
+      "submit": {
+        "title": "Submit to Apple",
+        "hint": "In App Store Connect, with the text from docs/app-store/vermelding.md and a test account for the review. You submit it yourself."
+      },
+      "money": {
+        "title": "Everything that costs money",
+        "hint": "Apple Developer (€99 a year) and the domain. Your approval and your payment: Claude buys nothing."
+      },
+      "sendThree": {
+        "title": "Send your first 3 e-mails",
+        "hint": "Pick 3 shelters under Contacts, add the e-mail address, tap \"Open in mail\" and send from your own mail. Then mark them \"sent\"."
+      },
+      "trademark": {
+        "title": "Trademark check on TMview",
+        "hint": "Search for “rondje” or the new name, in classes 9, 42 and 45."
+      },
+      "appleAccount": {
+        "title": "Apple Developer account",
+        "hint": "Needed to submit, for Sign in with Apple and for HealthKit. €99 a year; counts in the costs once you tick it off."
+      },
+      "domain": {
+        "title": "Buy and connect a domain",
+        "hint": "After choosing the name, about €12 a year. Then Vercel → Settings → Domains (docs/LAUNCH.md §8). Counts in the costs once you tick it off."
+      },
+      "socialKeys": {
+        "title": "Keys for Sign in with Apple and Google",
+        "hint": "Follow docs/LAUNCH.md §5 and add them in Vercel. Ticks itself off once both are on."
+      },
+      "healthkit": {
+        "title": "Turn on the HealthKit capability",
+        "hint": "For the App ID app.rondje.mobile on developer.apple.com, and in Xcode under Signing & Capabilities."
+      },
+      "legal": {
+        "title": "Legal check",
+        "hint": "Have a lawyer go through docs/legal/REVIEW.md. Only launch after the legal entity exists."
+      },
+      "analytics": {
+        "title": "Turn on Vercel Web Analytics",
+        "hint": "In the Vercel dashboard: project rondje → Analytics → Enable. Free on the Hobby plan, within its limits."
+      },
+      "privacy": {
+        "title": "Update the privacy policy",
+        "hint": "Add Apple Health (HealthKit) and the website statistics, via the lawyer."
+      },
+      "firstMails": {
+        "title": "Email the first 10 shelters",
+        "hint": "With the message bank below. Ticks itself off at 10 shelters on “sent” or further."
+      },
+      "firstDemo": {
+        "title": "First call with a shelter",
+        "hint": "Ticks itself off once a shelter in your contacts is on “meeting”."
+      },
+      "firstDog": {
+        "title": "First real dog online",
+        "hint": "From a real shelter or owner, without the Example label. Ticks itself off."
+      },
+      "blobCleanup": {
+        "title": "Also delete photos and routes from Blob after 30 days",
+        "hint": "So the privacy promise also holds for Vercel Blob (see STAND.md)."
+      },
+      "storeTexts": {
+        "title": "App Store text and screenshots with the chosen name",
+        "hint": "After choosing the name: fill it in in docs/app-store/vermelding.md and make new screenshots."
+      },
+      "mountAnalytics": {
+        "title": "Add the visitor counter to the site",
+        "hint": "The Analytics component is ready and still has to go into the layout. No cookies; admin pages are not counted."
+      }
+    },
+    "game": {
+      "title": "Progress",
+      "ring": "Level {n}: {name}",
+      "points": "{n} points",
+      "toNext": "{n} more points to {name}",
+      "top": "Highest level. Every step still counts.",
+      "levels": {
+        "pup": "Pup",
+        "walker": "Walker",
+        "packLeader": "Pack leader"
+      },
+      "routeTitle": "On the way to the first real walk",
+      "routeCount": "{done} of {total}",
+      "routeSteps": {
+        "live": "Live",
+        "supply": "First dog or shelter",
+        "intro": "First meeting",
+        "walk": "Walk"
+      },
+      "membersTitle": "On the way to 100 members",
+      "membersCount": "{n, plural, one {# member} other {# members}}",
+      "badgesTitle": "Badges",
+      "noPressure": "No streaks and no rush: points only come from what is done, and nothing is ever taken away."
+    },
+    "milestones": {
+      "firstShelter": {
+        "title": "First shelter online",
+        "badge": "Shelter friend"
+      },
+      "firstIntro": {
+        "title": "First meeting",
+        "badge": "First sniff"
+      },
+      "firstWalk": {
+        "title": "First real walk",
+        "badge": "Full circle"
+      },
+      "members10": {
+        "title": "10 members",
+        "badge": "Small pack"
+      },
+      "members50": {
+        "title": "50 members",
+        "badge": "Whole street"
+      },
+      "members100": {
+        "title": "100 members",
+        "badge": "Whole neighbourhood"
+      },
+      "reachedOn": "reached on {date}",
+      "reached": "reached",
+      "notYet": "not yet",
+      "progress": "{current} of {target}"
+    },
+    "audience": {
+      "shelter": "Shelters",
+      "vet": "Vets",
+      "student": "Student associations",
+      "neighbourhood": "Neighbourhood apps",
+      "press": "Local press"
+    },
+    "status": {
+      "todo": "To send",
+      "sent": "Sent",
+      "replied": "Replied",
+      "meeting": "Meeting"
+    },
+    "templateKind": {
+      "mail": "First email",
+      "followup": "Follow-up",
+      "call": "Call script",
+      "post": "Post"
+    },
+    "composer": {
+      "title": "Message bank",
+      "hint": "Pick a message, fill in the fields and open it in your own mail app, or copy the text. Rondje never sends anything itself.",
+      "audience": "For",
+      "template": "Message",
+      "language": "Language",
+      "to": "To",
+      "toNone": "Nobody yet (text only)",
+      "noEmailShort": "no email",
+      "fields": {
+        "naam": "Name",
+        "organisatie": "Organisation",
+        "stad": "City",
+        "link": "Link",
+        "afzender": "Your name",
+        "telefoon": "Your phone",
+        "datum": "Week of",
+        "dagen": "Two days (e.g. Tuesday or Thursday)"
+      },
+      "preview": "Preview",
+      "toLabel": "To:",
+      "missing": "Still to fill in: {fields}",
+      "noEmail": "This contact has no valid email address: your mail app opens without a recipient.",
+      "openMail": "Open in mail",
+      "copy": "Copy",
+      "copied": "Copied",
+      "sentAsk": "Did you send it?",
+      "markSent": "Mark as sent"
+    },
+    "contacts": {
+      "title": "Contacts",
+      "add": "Add contact",
+      "close": "Close",
+      "hint": "Business contact details only, and only here in the database. Only change the status after you sent or heard something yourself. Delete a contact when you no longer need it.",
+      "filter": "Filter by audience",
+      "all": "All",
+      "empty": "No contacts yet. Start with the first shelter.",
+      "statusLabel": "Status of {name}",
+      "lastContact": "last contact {date}",
+      "write": "Write message",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Yes, delete",
+      "save": "Save",
+      "added": "Added.",
+      "fields": {
+        "audience": "Audience",
+        "name": "Name",
+        "organisation": "Organisation",
+        "email": "Email address",
+        "phone": "Phone",
+        "city": "City",
+        "note": "Note"
+      },
+      "errors": {
+        "invalid": "Fill in at least a name or an organisation.",
+        "email": "This email address is not right."
+      },
+      "prepare": "Prepare 10 shelters",
+      "prepareHint": "The nearest shelters from the shelter list, with their website in the note. Fill in the e-mail address yourself; nothing is sent.",
+      "prepared": "{n, plural, =0 {No new shelters found: they are already here.} one {# shelter ready. Add the e-mail address and write your message.} other {# shelters ready. Add the e-mail addresses and write your messages.}}"
+    },
+    "numbers": {
+      "title": "Numbers per week",
+      "hint": "Only counts from real data, without names, for the last 8 weeks. Example data and admins do not count.",
+      "steadyPairs": "Steady pairs",
+      "metrics": {
+        "members": "Members",
+        "dogs": "Dogs",
+        "shelters": "Shelters",
+        "intros": "First meetings",
+        "walks": "Walks"
+      },
+      "thisWeek": "this week",
+      "chartLabel": "{name}: {total} in 8 weeks",
+      "tip": "week of {week}: {n}",
+      "total": "{n} in 8 weeks",
+      "asTable": "View as table",
+      "weekOf": "Week of"
+    },
+    "visits": {
+      "title": "Website visits",
+      "text": "Counting visitors starts once you turn on Web Analytics in the Vercel dashboard (project rondje → Analytics → Enable). On the free Hobby plan it costs nothing, within Vercel’s limits. The numbers then show in the dashboard.",
+      "privacy": "No cookies. Admin pages, links with codes and the app shell are not counted.",
+      "open": "Open the Vercel dashboard"
+    },
+    "costs": {
+      "title": "Costs per month",
+      "hint": "What Rondje costs now. Yearly amounts are shown per month; they only count once the matching task is ticked off.",
+      "perYear": "{amount} a year",
+      "total": "Total per month",
+      "perMember": "Cost per member",
+      "walksPerActive": "Walks per active member",
+      "walksPerActiveHint": "Walks in the last 30 days, divided by the walkers who walked then.",
+      "members": "{n, plural, one {# real member} other {# real members}}",
+      "items": {
+        "vercel": "Vercel Hobby",
+        "neon": "Neon Free",
+        "apple": "Apple Developer",
+        "domain": "Domain",
+        "resend": "Resend (free)"
+      },
+      "when": {
+        "apple": "once you join",
+        "domain": "once it is bought"
+      }
+    }
   }
 }

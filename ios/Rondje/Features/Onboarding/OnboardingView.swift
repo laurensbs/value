@@ -70,7 +70,15 @@ struct OnboardingView: View {
         }
         .screenBackground()
         .sensoryFeedback(.selection, trigger: step)
-        .onAppear { if firstName.isEmpty { firstName = model.me?.user.name ?? "" } }
+        .onAppear {
+            if firstName.isEmpty { firstName = model.me?.user.name ?? "" }
+            // What the person chose in the intro, so they don't have to say it twice.
+            switch UserDefaults.standard.string(forKey: "introRole") {
+            case "owner": wantsToWalk = false; hasDogs = true
+            case "both": wantsToWalk = true; hasDogs = true
+            default: break
+            }
+        }
     }
 
     private var canContinue: Bool {

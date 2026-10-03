@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct RondjeApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var model = AppModel()
     @State private var walk = WalkTracker.shared
     @Environment(\.scenePhase) private var scenePhase
@@ -22,12 +23,19 @@ struct RondjeApp: App {
 
 struct RootView: View {
     @Environment(AppModel.self) private var model
+    @AppStorage("seenIntro") private var seenIntro = false
 
     var body: some View {
         ZStack(alignment: .top) {
             switch model.phase {
             case .loading: SplashView()
-            case .signedOut: WelcomeView()
+            case .signedOut:
+                if seenIntro {
+                    WelcomeView()
+                } else {
+                    IntroView { withAnimation(.smooth) { seenIntro = true } }
+                        .transition(.opacity)
+                }
             case .onboarding: OnboardingView()
             case .ready: MainTabs()
             }
@@ -60,13 +68,22 @@ struct MainTabs: View {
     @Environment(AppModel.self) private var model
     @Environment(WalkTracker.self) private var walk
     @State private var showWalk = false
+    @State private var progress = ProgressStore.shared
 
     var body: some View {
         @Bindable var model = model
         TabView(selection: $model.selectedTab) {
-            DiscoverView()
-                .tabItem { Label("Ontdek", systemImage: "pawprint.fill") }
-                .tag(AppModel.Tab.discover)
+            if model.role != .owner {
+                DiscoverView()
+                    .tabItem { Label("Ontdek", systemImage: "pawprint.fill") }
+                    .tag(AppModel.Tab.discover)
+            }
+            if model.role != .walker {
+                OwnerHomeView()
+                    .tabItem { Label(model.role == .owner ? L("Thuis") : L("Mijn honden"), systemImage: "house.fill") }
+                    .badge(model.role == .both ? model.pendingIncoming : 0)
+                    .tag(AppModel.Tab.home)
+            }
             AppointmentsView()
                 .tabItem { Label("Afspraken", systemImage: "calendar") }
                 .badge(model.pendingIncoming)
@@ -77,10 +94,26 @@ struct MainTabs: View {
                 .tag(AppModel.Tab.profile)
         }
         .sensoryFeedback(.selection, trigger: model.selectedTab)
-        .fullScreenCover(isPresented: $showWalk) {
+        .fullScreenCover(isPresented: Binding(get: { progress.celebrate != nil && !showWalk }, set: { if !$0 { Task { await progress.seen() } } })) {
+            if let p = progress.celebrate { LevelUpView(progress: p) { Task { await progress.seen() } } }
+        }
+        .fullScreenCover(isPresented: $showWalk, onDismiss: { Task { await progress.load() } }) {
             ActiveWalkView()
         }
-        .onAppear { if walk.isActive { showWalk = true } }
+        .onAppear {
+            if walk.isActive { showWalk = true }
+            fitTab()
+        }
+        .onChange(of: model.role) { fitTab() }
         .onChange(of: walk.isActive) { _, active in if active { showWalk = true } }
+    }
+
+    /// Owners start at home, walkers at Discover; never on a tab that is not there.
+    private func fitTab() {
+        switch model.role {
+        case .owner: if model.selectedTab == .discover { model.selectedTab = .home }
+        case .walker: if model.selectedTab == .home { model.selectedTab = .discover }
+        case .both: break
+        }
     }
 }

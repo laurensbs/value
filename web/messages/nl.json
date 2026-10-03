@@ -127,6 +127,110 @@
     "impactKm": "Kilometer",
     "impactDogs": "Honden die naar buiten gingen"
   },
+  "landing": {
+    "pills": {
+      "free": "Gratis",
+      "noAds": "Geen reclame",
+      "adults": "18+"
+    },
+    "stage": {
+      "goodWalk": "Goed rondje!",
+      "calm": "Rustig · 40 min"
+    },
+    "hero": {
+      "shelterLink": "Werk je bij een opvang?"
+    },
+    "choose": {
+      "title": "Wat brengt je hier?",
+      "lede": "Kies wat bij je past, dan wijzen we je meteen de weg.",
+      "walk": {
+        "title": "Ik wil wandelen",
+        "text": "Met een hond uit de buurt of uit de opvang."
+      },
+      "owner": {
+        "title": "Ik heb een hond",
+        "text": "Of ik zoek hulp voor de hond van een buurvrouw, opa of oma."
+      },
+      "both": {
+        "title": "Allebei",
+        "text": "Zelf wandelen met andere honden, en hulp voor je eigen hond."
+      },
+      "shelter": {
+        "title": "Ik werk bij een opvang",
+        "text": "Zet je honden online en plan begeleide groepswandelingen."
+      }
+    },
+    "dogs": {
+      "title": "Wie gaat er vandaag mee?",
+      "lede": "Een paar honden die op een rondje wachten.",
+      "all": "Bekijk alle honden"
+    },
+    "how": {
+      "eyebrow": "In vier stappen",
+      "step": "Stap {n}",
+      "s1": "Vertel wie je bent",
+      "s2": "Kies een hond",
+      "s3": "Eerst samen kennismaken",
+      "s4": "Je vaste rondje"
+    },
+    "app": {
+      "eyebrow": "Op je telefoon",
+      "title": "Alles wat je nodig hebt, in je broekzak",
+      "lede": "Honden ontdekken, een kennismaking plannen en samen op pad, terwijl de eigenaar live meekijkt.",
+      "soon": "Binnenkort in de App Store",
+      "today": "Tot die tijd werkt {app} op elke telefoon, gewoon in je browser. Tip: zet {app} op je beginscherm, dan opent het als een app.",
+      "note": "Schermen uit de iPhone-app, met voorbeeldgegevens.",
+      "discover": {
+        "title": "Ontdek",
+        "text": "Honden in je buurt, met hun verhaal en hoe lang ze graag lopen.",
+        "alt": "Het scherm Ontdek in de iPhone-app, met Bobbie de beagle op 600 meter"
+      },
+      "owner": {
+        "title": "Jij kiest",
+        "text": "Als eigenaar zie je wie er wil wandelen, en kies je zelf een moment om kennis te maken.",
+        "alt": "Het thuisscherm voor eigenaren in de iPhone-app, met een aanvraag voor een kennismaking"
+      },
+      "walk": {
+        "title": "Live meekijken",
+        "text": "Tijdens het rondje kijkt de eigenaar mee op de kaart. De SOS-knop zit altijd binnen handbereik.",
+        "alt": "Een rondje met Bobbie in de iPhone-app: kaart, tijd, afstand en een SOS-knop"
+      }
+    },
+    "safety": {
+      "eyebrow": "Veilig, voor mens en hond",
+      "t1": "Eerst samen",
+      "t2": "ID in het echt",
+      "t3": "De eigenaar beslist",
+      "t4": "Live meekijken",
+      "t5": "Privé terugkoppeling",
+      "t6": "Melden kan altijd"
+    },
+    "community": {
+      "eyebrow": "Samen deze maand",
+      "first": "Nog geen rondjes in {month}. Loop jij de eerste?",
+      "join": "Doe mee"
+    },
+    "countries": {
+      "link": "Bekijk alle steden"
+    },
+    "free": {
+      "price": "€0",
+      "priceNote": "voor wandelaars, eigenaren en opvangen",
+      "ads": "Geen advertenties",
+      "subscription": "Geen abonnement",
+      "data": "We verkopen nooit gegevens"
+    },
+    "closing": {
+      "title": "Er wacht een hond op je",
+      "text": "Bij jou in de buurt wonen honden van mensen die zelf niet ver meer kunnen lopen. Een extra rondje maakt hun dag."
+    },
+    "pages": {
+      "safety": "Veiligheid",
+      "groupWalks": "Samen met een opvang",
+      "shelters": "Opvangen",
+      "cities": "Steden"
+    }
+  },
   "auth": {
     "loginTitle": "Welkom terug",
     "signupTitle": "Maak een account",
@@ -138,8 +242,6 @@
     "login": "Inloggen",
     "signup": "Account maken",
     "withPasskey": "Inloggen met Face ID, vingerafdruk of passkey",
-    "withGoogle": "Doorgaan met Google",
-    "withApple": "Doorgaan met Apple",
     "noAccount": "Nog geen account?",
     "hasAccount": "Al een account?",
     "termsNote": "Door een account te maken ga je akkoord met de <terms>voorwaarden</terms> en de <privacy>privacyverklaring</privacy>.",
@@ -154,7 +256,6 @@
       "owner": "Je meldt een hond aan die wel een extra rondje kan gebruiken. Eerst even een account.",
       "shelter": "Je zet de honden van je opvang op Rondje. Maak eerst je eigen account; daarna meld je de opvang aan."
     },
-    "orEmail": "of met je e-mailadres",
     "promiseFree": "Gratis, zonder advertenties.",
     "promisePrivacy": "We verkopen je gegevens nooit. Je locatie wordt afgerond op ongeveer 500 meter.",
     "forgot": "Wachtwoord vergeten?",
@@ -170,6 +271,13 @@
     "resetDone": "Je wachtwoord is gewijzigd en je bent op andere apparaten uitgelogd. Log nu in met je nieuwe wachtwoord.",
     "resetInvalid": "Deze link is verlopen of al gebruikt.",
     "backToLogin": "Naar inloggen"
+  },
+  "social": {
+    "continueWithApple": "Doorgaan met Apple",
+    "continueWithGoogle": "Doorgaan met Google",
+    "or": "of met je e-mailadres",
+    "error": "Inloggen met {provider} lukte niet. Probeer het nog eens, of gebruik je e-mailadres.",
+    "linkNotice": "Er is al een Rondje-account met dit e-mailadres. Log hieronder één keer in met je wachtwoord, dan koppelen we {provider} eraan. Daarna kun je ook met {provider} inloggen."
   },
   "onboarding": {
     "title": "Vertel iets over jezelf",
@@ -1738,5 +1846,422 @@
     "with": "Met {name}.",
     "open": "Alles over deze afspraak in Rondje: {link}",
     "group": "Groepswandeling bij {org}"
+  },
+  "sounds": {
+    "toggle": "Geluidjes",
+    "hint": "Zachte geluidjes bij belangrijke momenten, zoals een nieuw rondje of een nieuw level. Alleen op dit apparaat."
+  },
+  "progressPage": {
+    "lede": "Wat je tot nu toe hebt gedaan: je level, je penningen en wat jullie samen lopen.",
+    "privateTag": "Alleen jij ziet dit",
+    "levelLine": "Level {n} · {points, plural, one {# punt} other {# punten}}",
+    "ringLabel": "Level {n}: {name}",
+    "badgesLede": "Alleen voor jezelf. Ze geven geen voorrang.",
+    "badgeEarned": "Verdiend",
+    "badgeEarnedOn": "Verdiend op {date}",
+    "badgeNext": "Volgende: {title}",
+    "badgeNew": "Nieuw",
+    "weekLede": "Een rustig doel voor jezelf. Haal je het een week niet, dan is er niets verloren.",
+    "goalNone": "Geen",
+    "goalTimes": "{n}×",
+    "challengeEyebrow": "Samen deze maand",
+    "challengeEveryone": "Iedereen samen: {walks} van {goal} rondjes",
+    "mineShort": "{n} van jou",
+    "earnPoints": "+{n}",
+    "recentEmpty": "Nog niets verdiend. Je eerste rondje levert meteen 25 punten op.",
+    "findDog": "Zoek een hond"
+  },
+  "friends": {
+    "title": "Hondenvriendenboek",
+    "lede": "Elke hond waarmee je een rondje liep, krijgt hier een eigen pagina.",
+    "statFriends": "{n, plural, one {hondenvriend} other {hondenvrienden}}",
+    "statWalks": "{n, plural, one {rondje} other {rondjes}}",
+    "statDistance": "samen gelopen",
+    "times": "{n}×",
+    "since": "Sinds {date}",
+    "last": "Laatste rondje {date}",
+    "emptyTitle": "Je vriendenboek is nog leeg",
+    "emptyText": "Na je eerste rondje krijgt de hond hier een eigen pagina. Kijk welke honden bij jou in de buurt een extra rondje goed kunnen gebruiken.",
+    "emptyCta": "Ontdek honden",
+    "private": "Alleen jij ziet je vriendenboek."
+  },
+  "breathe": {
+    "title": "Ademminuut",
+    "heading": "Even landen",
+    "lede": "Eén rustige minuut, voor of na een rondje. Adem in op vier tellen en uit op zes.",
+    "ready": "Klaar voor een rustige minuut?",
+    "in": "Adem in",
+    "out": "Adem uit",
+    "secondsLeft": "{n, plural, one {Nog # seconde} other {Nog # seconden}}",
+    "start": "Begin",
+    "stop": "Stop",
+    "again": "Nog een minuut",
+    "done": "Mooi zo. Je bent er weer.",
+    "back": "Klaar",
+    "note": "Er wordt niets bewaard. Geluidjes zet je aan of uit bij je profiel.",
+    "help": "Zit je ergens mee? Praten helpt.",
+    "helpLink": "Hier vind je hulp"
+  },
+  "walkDone": {
+    "title": "Goed rondje!",
+    "text": "{dog} en jij liepen {distance}. Dank je wel.",
+    "moodTitle": "En hoe voel je je nu?",
+    "moodPrivate": "Dit blijft op dit apparaat. Wij krijgen het niet te zien.",
+    "feedback": "Hoe ging het?",
+    "done": "Klaar",
+    "points": "+{n} punten",
+    "breathe": "Nog even landen? Doe de ademminuut"
+  },
+  "profileHub": {
+    "levelBadges": "{n, plural, =0 {Nog geen penningen} one {# penning} other {# penningen}}",
+    "friendsTitle": "Hondenvriendenboek",
+    "friendsEmpty": "Na je eerste rondje begint het hier",
+    "friendsCount": "{dogs, plural, one {# hondenvriend} other {# hondenvrienden}} · {walks, plural, one {# rondje} other {# rondjes}}",
+    "breatheTitle": "Ademminuut",
+    "breatheText": "Eén rustige minuut, voor of na een rondje",
+    "quizTodo": "Nog niet gedaan, nodig voor zelfstandige rondjes",
+    "moreTitle": "Help mee",
+    "inviteShort": "Ken je iemand die graag wandelt, of iemand met een hond? Deel je eigen link.",
+    "supportText": "Gratis en zonder advertenties. Kijk hoe je helpt.",
+    "tipText": "Weet je een opvang of iemand met een hond die hulp kan gebruiken?",
+    "shelterText": "Werk je bij een opvang? Zet jullie honden hier online.",
+    "alerts": "Meldingen en geluid"
+  },
+  "shell": {
+    "tabs": {
+      "discover": "Ontdek",
+      "requests": "Rondjes",
+      "myDogs": "Mijn honden",
+      "shelter": "Mijn opvang",
+      "me": "Jij"
+    },
+    "tabsLabel": "Hoofdmenu",
+    "footerLine": "{name} is gratis en zonder reclame"
+  },
+  "discover": {
+    "title": "Wie gaat er vandaag mee?",
+    "levelTop": "Hoogste level. Wat een rondjes!",
+    "badges": "{n, plural, =0 {Nog geen penningen} one {# penning} other {# penningen}}",
+    "together": "Samen deze maand",
+    "mine": "{n} van jou",
+    "filters": {
+      "owner": "Buurt",
+      "shelter": "Opvang"
+    },
+    "allCountries": "Alle landen",
+    "storyIn": "Verhaal in het {language}",
+    "groupWalksText": "Begeleid, bij een opvang. Fijn om mee te beginnen.",
+    "allGroupWalks": "Alle groepswandelingen"
+  },
+  "launch": {
+    "title": "Lanceerhub",
+    "back": "Beheer",
+    "lede": "Alles voor de lancering op één plek: wat er nog moet, wie wat doet, je berichten en hoe het groeit. Op je eigen tempo.",
+    "levelChip": "{level} · {points} punten",
+    "pointsShort": "+{n}",
+    "install": "Tip: open deze pagina op je iPhone in Safari en kies Deel → Zet op beginscherm. Dan opent de lanceerhub als een eigen app.",
+    "entry": {
+      "title": "Lanceerhub",
+      "text": "Lanceerlijst, berichtenbank voor opvangen en andere partijen, cijfers per week en kosten."
+    },
+    "nav": {
+      "label": "Onderdelen",
+      "tasks": "Taken",
+      "messages": "Berichten",
+      "numbers": "Cijfers"
+    },
+    "owner": {
+      "laurens": "Laurens",
+      "claude": "Claude",
+      "samen": "Samen"
+    },
+    "waiting": {
+      "title": "Wacht op Laurens",
+      "count": "{open} van {total} open",
+      "hint": "Deze vier kun alleen jij doen. Daarna gaat de rest vanzelf sneller.",
+      "allDone": "Alle vier gedaan. Mooi werk."
+    },
+    "mine": {
+      "title": "Jouw andere taken",
+      "empty": "Niets meer open voor jou."
+    },
+    "others": {
+      "title": "Claude en samen",
+      "empty": "Hier staat niets meer open."
+    },
+    "done": {
+      "title": "Afgerond ({n})",
+      "label": "Afgeronde taken"
+    },
+    "task": {
+      "markDone": "Markeer als gedaan",
+      "markOpen": "Zet terug op open",
+      "auto": "automatisch",
+      "autoHint": "Dit vinkt zichzelf af zodra het in de echte data te zien is.",
+      "open": "Openen",
+      "note": "Notitie",
+      "notePlaceholder": "Wat is de stand?",
+      "saveNote": "Bewaar",
+      "saved": "Bewaard",
+      "doneOn": "gedaan op {date}"
+    },
+    "tasks": {
+      "name": {
+        "title": "De naam kiezen: Woofmigo ja of nee",
+        "hint": "Check eerst in App Store Connect of de naam vrij is (Apps → + → Nieuwe app), en zoek in TMview op WOOF en MIGO in klasse 9, 42 en 45. Tot dan blijft alles via Brand.name en APP_NAME."
+      },
+      "goLive": {
+        "title": "Live zetten: mergen naar productie",
+        "hint": "PR #3 en de parity-PR, met de migraties 0007 en 0008. Volg “Live zetten” in CLAUDE.md: lokale checks groen, Vercel-preview Ready, dan squash-mergen. Vinkt zichzelf af zodra deze hub in productie draait."
+      },
+      "submit": {
+        "title": "Indienen bij Apple",
+        "hint": "In App Store Connect, met de tekst uit docs/app-store/vermelding.md en een testaccount voor de review. Indienen doe je zelf."
+      },
+      "money": {
+        "title": "Alles wat geld kost",
+        "hint": "Apple Developer (€ 99 per jaar) en het domein. Jouw akkoord en jouw betaling: Claude koopt niets."
+      },
+      "sendThree": {
+        "title": "Verstuur je eerste 3 mails",
+        "hint": "Kies 3 opvangen bij Contacten, vul het e-mailadres in, tik op \"Open in mail\" en verstuur vanuit je eigen mail. Zet ze daarna op \"verstuurd\"."
+      },
+      "trademark": {
+        "title": "Merkcheck op TMview",
+        "hint": "Zoek op “rondje” of op de nieuwe naam, in klasse 9, 42 en 45."
+      },
+      "appleAccount": {
+        "title": "Apple Developer-account",
+        "hint": "Nodig om in te dienen, voor Inloggen met Apple en voor HealthKit. € 99 per jaar; telt mee bij de kosten zodra je dit afvinkt."
+      },
+      "domain": {
+        "title": "Domein kopen en koppelen",
+        "hint": "Na de naamkeuze, ongeveer € 12 per jaar. Daarna Vercel → Settings → Domains (docs/LAUNCH.md §8). Telt mee bij de kosten zodra je dit afvinkt."
+      },
+      "socialKeys": {
+        "title": "Sleutels voor Inloggen met Apple en Google",
+        "hint": "Volg docs/LAUNCH.md §5 en zet ze in Vercel. Vinkt zichzelf af zodra beide aanstaan."
+      },
+      "healthkit": {
+        "title": "HealthKit-capability aanzetten",
+        "hint": "Bij de App ID app.rondje.mobile op developer.apple.com, en in Xcode onder Signing & Capabilities."
+      },
+      "legal": {
+        "title": "Juridische check",
+        "hint": "Laat een jurist docs/legal/REVIEW.md doorlopen. Lanceer pas na de oprichting van de rechtsvorm."
+      },
+      "analytics": {
+        "title": "Vercel Web Analytics aanzetten",
+        "hint": "In het Vercel-dashboard: project rondje → Analytics → Enable. Gratis op het Hobby-abonnement, binnen de limieten."
+      },
+      "privacy": {
+        "title": "Privacybeleid aanvullen",
+        "hint": "Apple Gezondheid (HealthKit) en de websitestatistieken toevoegen, via de jurist."
+      },
+      "firstMails": {
+        "title": "De eerste 10 opvangen mailen",
+        "hint": "Met de berichtenbank hieronder. Vinkt zichzelf af bij 10 opvangen op “verstuurd” of verder."
+      },
+      "firstDemo": {
+        "title": "Eerste gesprek met een opvang",
+        "hint": "Vinkt zichzelf af zodra een opvang in je contacten op “afspraak” staat."
+      },
+      "firstDog": {
+        "title": "Eerste echte hond online",
+        "hint": "Van een echte opvang of eigenaar, zonder het label Voorbeeld. Vinkt zichzelf af."
+      },
+      "blobCleanup": {
+        "title": "Foto’s en routes na 30 dagen ook uit Blob wissen",
+        "hint": "Zodat de privacybelofte ook voor Vercel Blob klopt (zie STAND.md)."
+      },
+      "storeTexts": {
+        "title": "App Store-tekst en screenshots met de gekozen naam",
+        "hint": "Na de naamkeuze: de naam invullen in docs/app-store/vermelding.md en nieuwe screenshots maken."
+      },
+      "mountAnalytics": {
+        "title": "Websitebezoek-meter in de site zetten",
+        "hint": "Het Analytics-component staat klaar en moet nog in de layout. Zonder cookies; beheerpagina’s tellen niet mee."
+      }
+    },
+    "game": {
+      "title": "Voortgang",
+      "ring": "Level {n}: {name}",
+      "points": "{n} punten",
+      "toNext": "Nog {n} punten tot {name}",
+      "top": "Hoogste level. Elke stap telt nog steeds.",
+      "levels": {
+        "pup": "Pup",
+        "walker": "Wandelaar",
+        "packLeader": "Roedelleider"
+      },
+      "routeTitle": "Op weg naar het eerste echte rondje",
+      "routeCount": "{done} van {total}",
+      "routeSteps": {
+        "live": "Live",
+        "supply": "Eerste hond of opvang",
+        "intro": "Kennismaking",
+        "walk": "Rondje"
+      },
+      "membersTitle": "Op weg naar 100 leden",
+      "membersCount": "{n, plural, one {# lid} other {# leden}}",
+      "badgesTitle": "Badges",
+      "noPressure": "Geen streaks en geen haast: punten komen alleen bij wat af is, en er gaat nooit iets af."
+    },
+    "milestones": {
+      "firstShelter": {
+        "title": "Eerste opvang online",
+        "badge": "Opvangvriend"
+      },
+      "firstIntro": {
+        "title": "Eerste kennismaking",
+        "badge": "Eerste snuffel"
+      },
+      "firstWalk": {
+        "title": "Eerste echte rondje",
+        "badge": "Rondje rond"
+      },
+      "members10": {
+        "title": "10 leden",
+        "badge": "Kleine roedel"
+      },
+      "members50": {
+        "title": "50 leden",
+        "badge": "Hele straat"
+      },
+      "members100": {
+        "title": "100 leden",
+        "badge": "Hele buurt"
+      },
+      "reachedOn": "gehaald op {date}",
+      "reached": "gehaald",
+      "notYet": "nog niet",
+      "progress": "{current} van {target}"
+    },
+    "audience": {
+      "shelter": "Opvangen",
+      "vet": "Dierenartsen",
+      "student": "Studentenverenigingen",
+      "neighbourhood": "Buurtapps",
+      "press": "Lokale pers"
+    },
+    "status": {
+      "todo": "Te sturen",
+      "sent": "Verstuurd",
+      "replied": "Antwoord",
+      "meeting": "Afspraak"
+    },
+    "templateKind": {
+      "mail": "Eerste mail",
+      "followup": "Follow-up",
+      "call": "Belscript",
+      "post": "Bericht"
+    },
+    "composer": {
+      "title": "Berichtenbank",
+      "hint": "Kies een bericht, vul de velden in en open het in je eigen mailapp, of kopieer de tekst. Rondje verstuurt zelf niets.",
+      "audience": "Voor wie",
+      "template": "Bericht",
+      "language": "Taal",
+      "to": "Aan",
+      "toNone": "Nog niemand (alleen de tekst)",
+      "noEmailShort": "geen e-mail",
+      "fields": {
+        "naam": "Naam",
+        "organisatie": "Organisatie",
+        "stad": "Stad",
+        "link": "Link",
+        "afzender": "Jouw naam",
+        "telefoon": "Jouw telefoon",
+        "datum": "Week van",
+        "dagen": "Twee dagen (bijv. dinsdag of donderdag)"
+      },
+      "preview": "Voorbeeld",
+      "toLabel": "Aan:",
+      "missing": "Nog in te vullen: {fields}",
+      "noEmail": "Bij dit contact staat geen geldig e-mailadres: je mailapp opent zonder ontvanger.",
+      "openMail": "Open in mail",
+      "copy": "Kopieer",
+      "copied": "Gekopieerd",
+      "sentAsk": "Heb je hem verstuurd?",
+      "markSent": "Markeer als verstuurd"
+    },
+    "contacts": {
+      "title": "Contacten",
+      "add": "Contact toevoegen",
+      "close": "Sluiten",
+      "hint": "Alleen zakelijke contactgegevens, en alleen hier in de database. Pas de status pas aan als je zelf iets verstuurd of gehoord hebt. Verwijder een contact als je het niet meer nodig hebt.",
+      "filter": "Filter op doelgroep",
+      "all": "Alle",
+      "empty": "Nog geen contacten. Begin met de eerste opvang.",
+      "statusLabel": "Status van {name}",
+      "lastContact": "laatste contact {date}",
+      "write": "Schrijf bericht",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "deleteConfirm": "Ja, verwijder",
+      "save": "Opslaan",
+      "added": "Toegevoegd.",
+      "fields": {
+        "audience": "Doelgroep",
+        "name": "Naam",
+        "organisation": "Organisatie",
+        "email": "E-mailadres",
+        "phone": "Telefoon",
+        "city": "Stad",
+        "note": "Notitie"
+      },
+      "errors": {
+        "invalid": "Vul minstens een naam of een organisatie in.",
+        "email": "Dit e-mailadres klopt niet."
+      },
+      "prepare": "Zet 10 opvangen klaar",
+      "prepareHint": "De dichtstbijzijnde opvangen uit de opvanglijst, met hun website in de notitie. Vul zelf het e-mailadres in; er wordt niets verstuurd.",
+      "prepared": "{n, plural, =0 {Geen nieuwe opvangen gevonden: ze staan er al.} one {# opvang klaargezet. Vul het e-mailadres in en schrijf je bericht.} other {# opvangen klaargezet. Vul de e-mailadressen in en schrijf je berichten.}}"
+    },
+    "numbers": {
+      "title": "Cijfers per week",
+      "hint": "Alleen aantallen uit echte data, zonder namen, voor de laatste 8 weken. Voorbeelddata en beheerders tellen niet mee.",
+      "steadyPairs": "Vaste koppels",
+      "metrics": {
+        "members": "Leden",
+        "dogs": "Honden",
+        "shelters": "Opvangen",
+        "intros": "Kennismakingen",
+        "walks": "Rondjes"
+      },
+      "thisWeek": "deze week",
+      "chartLabel": "{name}: {total} in 8 weken",
+      "tip": "week van {week}: {n}",
+      "total": "{n} in 8 weken",
+      "asTable": "Bekijk als tabel",
+      "weekOf": "Week van"
+    },
+    "visits": {
+      "title": "Websitebezoek",
+      "text": "Het tellen van bezoekers begint zodra je Web Analytics aanzet in het Vercel-dashboard (project rondje → Analytics → Enable). Op het gratis Hobby-abonnement kost dat niets, binnen de limieten van Vercel. De cijfers staan dan in het dashboard.",
+      "privacy": "Zonder cookies. Beheerpagina’s, links met codes en de app-schil tellen niet mee.",
+      "open": "Open het Vercel-dashboard"
+    },
+    "costs": {
+      "title": "Kosten per maand",
+      "hint": "Wat Rondje nu kost. Jaarbedragen staan per maand; ze tellen pas mee zodra de bijbehorende taak is afgevinkt.",
+      "perYear": "{amount} per jaar",
+      "total": "Totaal per maand",
+      "perMember": "Kosten per lid",
+      "walksPerActive": "Rondjes per actief lid",
+      "walksPerActiveHint": "Rondjes in de laatste 30 dagen, gedeeld door de wandelaars die toen liepen.",
+      "members": "{n, plural, one {# echt lid} other {# echte leden}}",
+      "items": {
+        "vercel": "Vercel Hobby",
+        "neon": "Neon Free",
+        "apple": "Apple Developer",
+        "domain": "Domein",
+        "resend": "Resend (gratis)"
+      },
+      "when": {
+        "apple": "zodra je lid bent",
+        "domain": "zodra het gekocht is"
+      }
+    }
   }
 }
