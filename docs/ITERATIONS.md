@@ -232,3 +232,38 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 - De Patreon-link en de ontvanger instellen in Vercel.
 - Opvangen benaderen volgens `MARKETING.md`.
 - Pushmeldingen.
+
+
+## Cyclus 7: elke dag een betere ronde, op telefoon en desktop (2 en 3 oktober 2026)
+
+**Gevraagd:** blijf jezelf de juiste vragen stellen om Rondje op mobiel en desktop te perfectioneren, kijk wat marktleiders doen (alles begeleid, zoals Duolingo en Headspace) en let op beveiliging en snelheid.
+
+**Gebouwd:**
+- **Meldingen op het juiste moment.** Vandaag vraagt één keer "Zal ik je een seintje geven?", en op de iPhone eerst hoe je Rondje op je beginscherm zet. "Later" houdt de vraag twee weken weg.
+- **Afspraken.** Elke afspraak en groepswandeling heeft "Zet in je agenda" (een vaste week-wandeling blijft op Nederlandse tijd staan), en de ochtend ervoor komt een herinnering: "Morgen om 10:00: kennismaken met Bello."
+- **Chat en kennismaken:** kant-en-klare berichten, een checklist voor de eerste kennismaking en een aanvraag in een paar tikken.
+- **Een hond toevoegen, één vraag tegelijk,** met eigenschappen en zinnen om aan te tikken. "Over jou" werkt net zo.
+- **Je hond delen met de buren:** een bericht, een poster met QR-code, en hoeveel wandelaars er binnen 5 km wonen. Dat aantal staat er pas vanaf 3, zodat het nooit naar één buur wijst.
+- **Nieuwe honden in de buurt:** een wandelaar hoort hooguit één keer per week over een nieuwe hond, en nieuwe honden hebben een week lang een "Nieuw"-sticker.
+- **Zonder verbinding** toont Rondje een eigen pagina met "Noodgeval? Bel 112". Er worden geen pagina's of gegevens bewaard.
+- **Beveiliging:** een Content Security Policy met een nieuwe nonce per pagina, inloglinks die niet naar een andere site kunnen, na een blokkade geen telefoon, e-mail of ontmoetplek meer zichtbaar, geblokkeerde accounts nergens meer binnen (ook niet in de app), en beheerrechten via een e-mailadres tellen pas als dat adres bevestigd is (zodra e-mail aan staat).
+- **Snelheid:** de meeste pagina's antwoorden ongeveer twee keer zo snel, en lettertypen laden zonder dat de tekst verspringt.
+- **Toegankelijkheid:** gegroepeerde kaartmarkers, voortgangsbalken met een naam, genoeg contrast in licht en donker, en elke pagina past op een telefoon van 320 px breed in alle vier de talen. In het Frans blijven vraagtekens en dubbele punten bij hun woord.
+- **Beheer** is op de telefoon te vinden via een rij op Profiel, en toont of e-mail werkt en in welke regio de server draait.
+
+**Gevonden en opgelost:**
+- Na het aanmelden ontbrak de tabbalk tot je de pagina herlaadde.
+- Een tik op het wandelverslag zonder bereik leek opgeslagen, en twee snelle tikken konden elkaar ongedaan maken. Nu ziet de wandelaar precies wat de eigenaar ziet.
+- Als de klok werd verzet, schoof een vaste wekelijkse wandeling in je agenda een uur op.
+- Het chatvak zat achter de zwevende tabbalk.
+- Op een smalle telefoon duwde de kop in het Spaans en Frans de inlogknop van het scherm, en een stap in het welkomstgedeelte maakte de pagina even breder.
+- Oranje waarschuwingstekst had net te weinig contrast (4,49 : 1).
+
+**Tests:** 293 unit-tests, 15 end-to-endtests op een telefoon en 13 op desktop, een toegankelijkheidsaudit met axe (licht en donker) zonder fouten op 64 pagina's, geen verspringende lay-out op 12 pagina's, en `next build`.
+
+**Volgende stap:**
+- De live site nalopen vanaf de Mac (de cloud kan rondje-five.vercel.app niet openen).
+- E-mail instellen en daarna het beheeradres één keer bevestigen op `/admin`.
+- Op `/admin` kijken of de serverregio bij de regio van de database past.
+- Opgeslagen honden en aanbevelingen. Daarvoor is een databasewijziging nodig, en daar beslist Laurens eerst over.
+- De database claimen en naar de EU verhuizen blijft bij Laurens.
