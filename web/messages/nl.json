@@ -531,7 +531,9 @@
       "already-decided": "Hier is al een besluit over genomen.",
       "not-now": "Een rondje starten kan vanaf een half uur voor de afspraak.",
       "full": "Deze groepswandeling is vol.",
-      "not-signed-in": "Log eerst in."
+      "not-signed-in": "Log eerst in.",
+      "meet-via": "Deze manier van kennismaken kan hier niet. Kies samen wandelen.",
+      "needs-in-person": "Een gesprek telt niet als kennismaking in het echt. Dat kan pas als jullie elkaar ontmoet hebben."
     },
     "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
     "moments": "Momenten die {dog} goed uitkomen",
@@ -559,7 +561,8 @@
       "declined": "Afgewezen",
       "cancelled": "Ingetrokken",
       "completed": "Gelopen",
-      "expired": "Verlopen"
+      "expired": "Verlopen",
+      "talked": "Gesprek gehad"
     },
     "accept": "Accepteren",
     "decline": "Afwijzen",
@@ -587,6 +590,28 @@
     "past": "Eerdere afspraken ({n})",
     "startHint": "Starten kan vanaf {n} minuten voor de afspraak.",
     "calendar": "Zet in je agenda"
+  },
+  "meet": {
+    "legend": "Hoe maken jullie kennis?",
+    "via": {
+      "walk": "Samen wandelen",
+      "home": "Bij de eigenaar thuis",
+      "phone": "Eerst bellen",
+      "video": "Eerst videobellen"
+    },
+    "hint": {
+      "walk": "Jullie lopen samen een rondje. De eigenaar loopt mee en bekijkt je ID.",
+      "home": "Je komt langs bij de eigenaar en de hond. De eigenaar bekijkt je ID.",
+      "phone": "Eerst even kennismaken aan de telefoon. Daarna spreken jullie af in het echt, met de hond erbij.",
+      "video": "Eerst kennismaken in een videogesprek. Daarna spreken jullie af in het echt, met de hond erbij."
+    },
+    "remoteNote": "Een gesprek telt nog niet als kennismaking in het echt. Zelfstandig wandelen en de ID-check komen pas daarna.",
+    "phoneHow": "Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt.",
+    "videoHow": "Rondje heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Open alleen een link van een videodienst die je kent.",
+    "homeSafety": "Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie.",
+    "planInPerson": "Plan de kennismaking in het echt",
+    "afterCallWalker": "Na het gesprek is de volgende stap een kennismaking in het echt, met {dog} erbij.",
+    "afterCallHost": "Een gesprek telt nog niet als kennismaking in het echt. Het ID bekijken en zelfstandig wandelen toestaan kan pas als jullie elkaar met {dog} ontmoet hebben."
   },
   "walk": {
     "before": "Voor je vertrekt",
@@ -1135,8 +1160,8 @@
     "empty": "Nog geen meldingen.",
     "markRead": "Alles gelezen",
     "kinds": {
-      "request-new": "{walkerName} wil met {dogName} wandelen.",
-      "request-accepted": "Je afspraak met {dogName} is geaccepteerd.",
+      "request-new": "{via, select, walk {{walkerName} wil kennismaken met {dogName} tijdens een wandeling.} home {{walkerName} wil kennismaken met {dogName}, bij jou thuis.} phone {{walkerName} wil eerst bellen om kennis te maken met {dogName}.} video {{walkerName} wil eerst videobellen om kennis te maken met {dogName}.} other {{walkerName} wil met {dogName} wandelen.}}",
+      "request-accepted": "{via, select, phone {Je belafspraak over {dogName} is geaccepteerd.} video {Je videogesprek over {dogName} is geaccepteerd.} other {Je afspraak met {dogName} is geaccepteerd.}}",
       "request-declined": "Je afspraak met {dogName} is helaas afgewezen.",
       "request-cancelled": "Een afspraak is ingetrokken.",
       "walk-started": "{walkerName} is vertrokken met {dogName}. Kijk live mee.",
@@ -1156,7 +1181,7 @@
       "challenge-done": "{city} heeft de uitdaging gehaald: {goal} rondjes samen! {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel!",
       "nudge-back": "{variant, select, dog {Zin in een rondje met {dogName}? Plan het wanneer het jou uitkomt.} other {Zin in een rondje? Kijk welke honden er bij jou in de buurt een wandelmaatje zoeken.}}",
       "nudge-owner": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Voeg je er een toe?} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}",
-      "request-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} other {rondje met {dogName}}}. Veel plezier!",
+      "request-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} home {kennismaken met {dogName}, thuis} phone {eerst bellen over {dogName}} video {eerst videobellen over {dogName}} other {rondje met {dogName}}}. Veel plezier!",
       "group-walk-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}. Veel plezier!",
       "nudge-new-dog": "Nieuw bij jou in de buurt: {dogName} zoekt een wandelmaatje."
     }
@@ -1420,9 +1445,7 @@
     "costsTotal": "Samen ongeveer {min} tot {max} per maand, zonder de eenmalige kosten.",
     "costsNote": "Schatting, bijgewerkt op {date}. We houden de kosten zo laag mogelijk.",
     "giveTitle": "Steun Rondje",
-    "giveText": "Met een kleine maandelijkse bijdrage help je de kosten te dekken. Bijdragen gaan naar {operator}, dat Rondje bouwt en onderhoudt.",
-    "giveButton": "Steun Rondje via {platform}",
-    "giveNote": "Je betaalt via {platform}, onder hun voorwaarden. Een bijdrage is vrijwillig, niet fiscaal aftrekbaar, en geeft geen voordelen in Rondje.",
+    "giveButton": "Steun {app} via {platform}",
     "giveSoon": "Binnenkort kun je Rondje hier ook met een kleine bijdrage steunen. Tot die tijd helpt alles hieronder ook enorm.",
     "helpTitle": "Helpen zonder geld",
     "help": {
@@ -1451,7 +1474,7 @@
       },
       "tax": {
         "q": "Is een bijdrage fiscaal aftrekbaar?",
-        "a": "Nee. Rondje is (nog) geen goed doel met een ANBI-status. Je kunt een bijdrage dus niet aftrekken van de belasting."
+        "a": "Nee. Bijdragen gaan naar {operator}. {app} is (nog) geen stichting en geen goed doel met ANBI-status, dus je kunt een bijdrage niet aftrekken van de belasting. Komt er later een stichting, dan staat dat hier."
       },
       "perks": {
         "q": "Krijg ik er iets voor terug?",
@@ -1460,9 +1483,46 @@
       "sponsors": {
         "q": "Mogen bedrijven Rondje sponsoren?",
         "a": "Ja, als ze zich aan onze spelregels houden: geen advertenties in Rondje, geen gegevens, en geen invloed op welke honden of mensen zichtbaar zijn. Een sponsor kan bijvoorbeeld poepzakjes voor opvangen betalen."
+      },
+      "app": {
+        "q": "Waarom kan ik niet steunen in de app?",
+        "a": "Omdat geld niet in de app hoort: daar draait alles om wandelen. Bovendien hebben Apple en Google eigen regels voor betalingen in apps. Steunen kan daarom alleen hier op de website."
+      },
+      "share": {
+        "q": "Geven jullie zelf ook aan goede doelen?"
+      },
+      "once": {
+        "q": "Wat is het verschil tussen maandelijks steunen en de crowdfunding?",
+        "a": "Een maandelijkse bijdrage helpt de vaste kosten te dekken, zoals hosting en kaarten. De crowdfunding is een eenmalige actie voor eenmalige kosten, zoals de apps en de juridische check. Beide gaan naar {operator}."
       }
     },
-    "operatorUnknown": "de makers van Rondje"
+    "operatorUnknown": "de makers van Rondje",
+    "giveIntro": "Bijdragen gaan naar {operator}, dat {app} bouwt en onderhoudt. Elke bijdrage, klein of groot, helpt de kosten te dekken.",
+    "monthlyPill": "Maandelijks",
+    "monthlyTitle": "Steun elke maand",
+    "monthlyText": "Een kleine vaste bijdrage per maand dekt de vaste kosten, zoals hosting en kaarten. Zo blijft {app} gratis voor iedereen.",
+    "oncePill": "Eenmalig",
+    "onceTitle": "Doe mee aan de crowdfunding",
+    "onceText": "Liever één keer iets geven? Met de crowdfunding betalen we de eenmalige kosten, zoals de apps in de App Store en Google Play, de juridische check en flyers voor opvangen.",
+    "onceButton": "Doe mee via {platform}",
+    "progress": "{raised} van {goal} opgehaald",
+    "progressUpdated": "Bijgewerkt op {date}. Het actuele bedrag staat op {platform}.",
+    "platformNote": "Je betaalt via {platform}, onder hun voorwaarden.",
+    "giveNoteAll": "Een bijdrage is vrijwillig, niet fiscaal aftrekbaar, en geeft geen voordelen in {app}.",
+    "openTitle": "Eerlijk over geld",
+    "open": {
+      "paysTitle": "Wat je bijdrage betaalt",
+      "pays": "De kosten hierboven: hosting, database, kaarten, de apps en materiaal voor opvangen. Wat overblijft, gaat naar het verder bouwen en bekendmaken van {app}.",
+      "whoTitle": "Wie het ontvangt",
+      "who": "{operator}, dat {app} bouwt en onderhoudt. {app} is nog geen stichting en geen goed doel met ANBI-status. Een bijdrage is daarom niet fiscaal aftrekbaar.",
+      "whoSoon": "Dat staat hier zodra steunen kan. {app} is nog geen stichting en geen goed doel met ANBI-status.",
+      "shareTitle": "Een deel geven we door"
+    },
+    "shareSoon": "We willen een deel van wat binnenkomt doorgeven aan goede doelen voor honden en mensen in de buurt. Zodra er afspraken zijn, staat hier precies hoeveel en waarheen.",
+    "shareSet": "We geven {percent}% van alle bijdragen door aan goede doelen voor honden en mensen in de buurt. Waarheen en hoeveel precies, zetten we hier zodra het is overgemaakt.",
+    "whyTitle": "Waarom we dit doen",
+    "whyText": "Eenzaamheid, te weinig bewegen, en honden die meer aandacht kunnen gebruiken: bekijk de cijfers achter {app}, met bronnen.",
+    "whyLink": "Lees waarom"
   },
   "about": {
     "eyebrow": "Over Rondje",
@@ -1563,12 +1623,12 @@
     },
     "kinds": {
       "request-new": {
-        "subject": "{walkerName} wil met {dogName} wandelen",
-        "body": "Bekijk de aanvraag in Rondje en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen."
+        "subject": "{via, select, walk {{walkerName} wil kennismaken met {dogName} tijdens een wandeling} home {{walkerName} wil kennismaken met {dogName}, bij jou thuis} phone {{walkerName} wil eerst bellen om kennis te maken met {dogName}} video {{walkerName} wil eerst videobellen om kennis te maken met {dogName}} other {{walkerName} wil met {dogName} wandelen}}",
+        "body": "{via, select, home {Bekijk de aanvraag in Rondje en laat weten of het past. Spreek overdag af; familie of een buur mag er gerust bij zijn.} phone {Bekijk de aanvraag in Rondje en laat weten of het past. Een belletje telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} video {Bekijk de aanvraag in Rondje en laat weten of het past. Een videogesprek telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} other {Bekijk de aanvraag in Rondje en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen.}}"
       },
       "request-accepted": {
-        "subject": "Je afspraak met {dogName} is geaccepteerd",
-        "body": "In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen."
+        "subject": "{via, select, phone {Je belafspraak over {dogName} is geaccepteerd} video {Je videogesprek over {dogName} is geaccepteerd} other {Je afspraak met {dogName} is geaccepteerd}}",
+        "body": "{via, select, home {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. Spreek overdag af en laat iemand weten waar je bent.} phone {In Rondje zie je nu hoe je de eigenaar bereikt. Spreek in de chat af wie wie belt. Na het gesprek plan je de kennismaking in het echt.} video {Spreek in de chat van Rondje af hoe jullie videobellen. Na het gesprek plan je de kennismaking in het echt.} other {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen.}}"
       },
       "walk-overdue": {
         "subject": "Het rondje met {dogName} duurt langer dan gepland",
@@ -1615,7 +1675,7 @@
         "body": "{tip, select, photo {Een foto helpt wandelaars {dogName} te leren kennen. Een foto buiten, met oogcontact, werkt het best.} slots {Zet vaste wandelmomenten bij {dogName}, dan zien wandelaars meteen wanneer het past.} other {Nog geen aanvraag voor {dogName}? Deel de pagina met buren en vrienden, dat helpt vaak.}}"
       },
       "request-reminder": {
-        "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} other {rondje met {dogName}}}",
+        "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} home {kennismaken met {dogName}, thuis} phone {eerst bellen over {dogName}} video {eerst videobellen over {dogName}} other {rondje met {dogName}}}",
         "body": "Alles over de afspraak, zoals waar jullie afspreken en hoe je elkaar bereikt, staat in Rondje. Lukt het toch niet? Laat het de ander dan op tijd weten via de chat."
       },
       "group-walk-reminder": {
@@ -1732,7 +1792,7 @@
     },
     "next": "Je volgende afspraak",
     "nextWalk": "{when} · rondje met {dog}",
-    "nextMeeting": "{when} · kennismaking met {dog}",
+    "nextMeeting": "{when} · kennismaking met {dog}{via, select, home { (thuis)} phone { (eerst bellen)} video { (eerst videobellen)} other {}}",
     "nextOpen": "Bekijk",
     "pending": "{n, plural, one {# nieuw verzoek wacht op je antwoord} other {# nieuwe verzoeken wachten op je antwoord}}",
     "pendingOpen": "Bekijk verzoeken",
@@ -1966,7 +2026,7 @@
     "done": "Top! Je krijgt een seintje als er iets is."
   },
   "calendar": {
-    "meet": "Kennismaken met {dog}",
+    "meet": "{via, select, home {Kennismaken met {dog}, thuis bij de eigenaar} phone {Kennismaken met {dog}: eerst bellen} video {Kennismaken met {dog}: eerst videobellen} other {Kennismaken met {dog}}}",
     "walk": "Rondje met {dog}",
     "with": "Met {name}.",
     "open": "Alles over deze afspraak in Rondje: {link}",
@@ -1992,7 +2052,12 @@
       "thanks": "Dank je wel, het was een fijn rondje!",
       "again": "Zullen we nog eens gaan?",
       "thanksMeet": "Dank je wel, het was een fijne kennismaking!",
-      "soloNext": "Zou ik voortaan zelf met {dog} mogen wandelen?"
+      "soloNext": "Zou ik voortaan zelf met {dog} mogen wandelen?",
+      "whoCalls": "Bel jij mij, of zal ik jou bellen?",
+      "videoHow": "Hoe zullen we videobellen? Ik kan een link sturen.",
+      "readyCall": "Ik zit klaar voor ons gesprek.",
+      "thanksCall": "Dank je wel voor het fijne gesprek!",
+      "meetNext": "Zullen we nu afspreken om {dog} in het echt te ontmoeten?"
     },
     "host": {
       "helloMeet": "Wat leuk dat je kennis wilt maken met {dog}!",
@@ -2012,7 +2077,12 @@
       "thanks": "Dank je wel voor het rondje!",
       "weekly": "Zin om vaker te gaan? Elke week zou fijn zijn.",
       "thanksMeet": "Dank je wel voor de kennismaking!",
-      "againMeet": "Zullen we snel weer afspreken?"
+      "againMeet": "Zullen we snel weer afspreken?",
+      "whoCalls": "Ik bel je op het afgesproken moment.",
+      "videoHow": "Stuur maar een link voor het videogesprek, of zeg welke app je gebruikt.",
+      "readyCall": "Ik zit klaar, tot zo!",
+      "thanksCall": "Dank je wel voor het gesprek!",
+      "meetNext": "Kom gerust langs om {dog} in het echt te ontmoeten."
     }
   },
   "meetCheck": {
@@ -2025,14 +2095,17 @@
       "rules": "Wat mag wel en niet: loslopen, snoepjes, spelen met andere honden?",
       "stuff": "Waar liggen de riem en de zakjes, en hoe gaat het ophalen?",
       "emergency": "Wie bel je als er onderweg iets is? Vraag ook naar de dierenarts.",
-      "together": "Loop samen een stukje, zodat {dog} aan je kan wennen."
+      "together": "Loop samen een stukje, zodat {dog} aan je kan wennen.",
+      "inPerson": "Spreek af wanneer jullie elkaar in het echt ontmoeten, met {dog} erbij."
     },
     "host": {
       "leash": "Laat zien hoe {dog} aan de lijn loopt, en vertel wat {dog} spannend vindt.",
       "rules": "Vertel wat wel en niet mag: loslopen, snoepjes, spelen met andere honden.",
       "stuff": "Laat zien waar de riem en de zakjes liggen, en hoe het ophalen gaat.",
       "id": "Bekijk het ID van {name} in het echt. Daarna kun je dat hieronder bevestigen.",
-      "together": "Loop samen een stukje, zodat {dog} aan {name} kan wennen."
+      "together": "Loop samen een stukje, zodat {dog} aan {name} kan wennen.",
+      "callAbout": "Vertel hoe {dog} aan de lijn loopt en wat {dog} spannend vindt.",
+      "inPerson": "Spreek af wanneer jullie elkaar in het echt ontmoeten. Daar bekijk je het ID van {name}."
     }
   },
   "installAsk": {
@@ -2193,7 +2266,6 @@
     "lede": "Alles voor de lancering op één plek: wat er nog moet, wie wat doet, je berichten en hoe het groeit. Op je eigen tempo.",
     "levelChip": "{level} · {points} punten",
     "pointsShort": "+{n}",
-    "install": "Tip: open deze pagina op je iPhone in Safari en kies Deel → Zet op beginscherm. Dan opent de lanceerhub als een eigen app.",
     "entry": {
       "title": "Lanceerhub",
       "text": "Lanceerlijst, berichtenbank voor opvangen en andere partijen, cijfers per week en kosten."
@@ -2495,6 +2567,738 @@
       "when": {
         "apple": "zodra je lid bent",
         "domain": "zodra het gekocht is"
+      }
+    },
+    "import": {
+      "button": "Importeer CSV",
+      "title": "Contacten importeren",
+      "hint": "Plak een CSV of kies een bestand. De eerste regel noemt de kolommen:",
+      "rules": "Doelgroep (audience): shelter, vet, student, neighbourhood of press; opvang, dierenarts, studenten, buurt en pers mag ook. Naam of organisatie is genoeg. Maximaal {max} contacten per keer. Alles komt binnen als ‘te sturen’ en er wordt niets verstuurd.",
+      "paste": "CSV plakken",
+      "file": "Of kies een bestand",
+      "preview": "Bekijk voorbeeld",
+      "rowsLabel": "Contacten in het bestand",
+      "line": "regel {n}",
+      "counts": {
+        "new": "{n} nieuw",
+        "duplicate": "{n} dubbel",
+        "invalid": "{n} met een fout"
+      },
+      "status": {
+        "new": "Nieuw",
+        "existing": "Staat er al",
+        "duplicate": "Dubbel in bestand"
+      },
+      "problems": {
+        "audience": "Onbekende doelgroep",
+        "missingName": "Naam of organisatie ontbreekt",
+        "email": "E-mailadres klopt niet",
+        "tooLong": "Een veld is te lang"
+      },
+      "confirm": "{n, plural, one {Importeer # contact} other {Importeer # contacten}}",
+      "nothing": "Niets nieuws om te importeren",
+      "done": "{added, plural, =0 {Geen nieuwe contacten toegevoegd.} one {# contact toegevoegd als ‘te sturen’.} other {# contacten toegevoegd als ‘te sturen’.}}",
+      "skipped": "Overgeslagen: {duplicate} dubbel en {invalid} met een fout.",
+      "errors": {
+        "empty": "Er staan geen contacten in. Zet de kolomnamen op de eerste regel en daaronder één contact per regel.",
+        "header": "De eerste regel moet de kolomnamen hebben, met minstens audience en organisation of name.",
+        "tooMany": "Dit zijn {rows} contacten. Importeer er maximaal {max} tegelijk.",
+        "tooBig": "Dit bestand is te groot voor een contactlijst.",
+        "invalid": "Dat ging mis. Probeer het opnieuw.",
+        "read": "Dit bestand kon niet gelezen worden. Kies een .csv-bestand."
+      }
+    }
+  },
+  "adminHub": {
+    "title": "Beheer",
+    "hello": "Hoi {name}, dit is wat er speelt.",
+    "signIn": "Log in om Beheer te openen",
+    "open": "Bekijk",
+    "nav": {
+      "label": "Onderdelen van Beheer",
+      "overview": "Overzicht",
+      "launch": "Lancering",
+      "marketing": "Marketing",
+      "moderation": "Moderatie",
+      "shelters": "Opvangen",
+      "tips": "Tips",
+      "numbers": "Cijfers"
+    },
+    "tiles": {
+      "label": "Naar een onderdeel",
+      "launch": {
+        "title": "Lancering",
+        "open": "{open} van {total} wachten op jou",
+        "done": "Alles van jou is gedaan"
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Zichtbaarheid en groei"
+      },
+      "moderation": {
+        "title": "Moderatie",
+        "text": "{reports, plural, =0 {Geen open meldingen} one {# open melding} other {# open meldingen}} · {signals, plural, =0 {geen signalen} one {# signaal} other {# signalen}}"
+      },
+      "shelters": {
+        "title": "Opvangen",
+        "text": "{n, plural, =0 {Niemand wacht op verificatie} one {# wacht op verificatie} other {# wachten op verificatie}}"
+      },
+      "tips": {
+        "title": "Tips en stemmen",
+        "text": "{n, plural, =0 {Niets nieuws} one {# opvang gevraagd} other {# opvangen gevraagd}}"
+      },
+      "numbers": {
+        "title": "Cijfers",
+        "text": "{n, plural, one {# rondje} other {# rondjes}} deze week{running, plural, =0 {} other {, # nu onderweg}}"
+      }
+    },
+    "questionsTitle": "De beste vragen",
+    "questionsHint": "Wat een ervaren teamleider veiligheid en operatie elke dag nakijkt. Live uit de database, het dringendste bovenaan.",
+    "status": {
+      "calm": "Alles rustig. Er wacht niets op je.",
+      "attention": "{n, plural, one {Eén ding vraagt vandaag je aandacht.} other {# dingen vragen vandaag je aandacht.}}",
+      "urgent": "{n, plural, one {Eén ding heeft nu je aandacht nodig.} other {# dingen vragen je aandacht, en iets daarvan nu meteen.}}"
+    },
+    "level": {
+      "urgent": "Nu",
+      "attention": "Vandaag",
+      "calm": "Rustig"
+    },
+    "questions": {
+      "walks": {
+        "q": "Lopen er nu rondjes, en is er een rondje over tijd?",
+        "overdue": "{overdue, plural, one {# rondje is} other {# rondjes zijn}} over tijd, van de {running} die nu {running, plural, one {loopt} other {lopen}}. Kijk mee en neem zo nodig contact op.",
+        "running": "{running, plural, one {Er loopt nu # rondje} other {Er lopen nu # rondjes}}, allemaal op tijd.",
+        "none": "Er loopt nu geen rondje.",
+        "act": "Kijk mee"
+      },
+      "reports": {
+        "q": "Zijn er meldingen die op mij wachten?",
+        "serious": "{n, plural, one {# open melding} other {# open meldingen}}, waarvan {serious} over veiligheid of misbruik. De oudste wacht {days, plural, =0 {sinds vandaag} one {al # dag} other {al # dagen}}.",
+        "open": "{n, plural, one {# open melding} other {# open meldingen}}. De oudste wacht {days, plural, =0 {sinds vandaag} one {al # dag} other {al # dagen}}.",
+        "none": "Geen open meldingen.",
+        "act": "Handel meldingen af"
+      },
+      "signals": {
+        "q": "Gaat het ergens over geld, links of een slechte ervaring?",
+        "some": "Deze week: {feedback} keer feedback om na te kijken, {requests} gemarkeerde aanvragen en {chats} chatberichten over geld of met een link.",
+        "none": "Deze week geen gemarkeerde feedback, aanvragen of chatberichten.",
+        "act": "Bekijk de signalen"
+      },
+      "intros": {
+        "q": "Zijn er ID-checks of kennismakingen die vastzitten?",
+        "stuck": "{unanswered, plural, =0 {} one {# kennismaking wacht te lang op de eigenaar.} other {# kennismakingen wachten te lang op de eigenaar.}} {idPending, plural, =0 {} one {Na # kennismaking is het ID nog niet bevestigd.} other {Na # kennismakingen is het ID nog niet bevestigd.}}",
+        "none": "Niets zit vast. {waiting, plural, =0 {Er wacht geen kennismaking op antwoord.} one {# kennismaking wacht op antwoord, nog binnen de tijd.} other {# kennismakingen wachten op antwoord, nog binnen de tijd.}}",
+        "act": "Bekijk de hond"
+      },
+      "shelters": {
+        "q": "Welke opvangen wachten op verificatie?",
+        "waiting": "{n, plural, one {# opvang wacht} other {# opvangen wachten}} op verificatie, de oudste {days, plural, =0 {sinds vandaag} one {al # dag} other {al # dagen}}.",
+        "none": "Geen opvang wacht op verificatie.",
+        "act": "Verifieer opvangen"
+      },
+      "safety": {
+        "q": "Wie is er deze week geblokkeerd of verbannen?",
+        "repeat": "{repeat, plural, one {# persoon is} other {# mensen zijn}} in 30 dagen door twee of meer anderen geblokkeerd: kijk of er ook meldingen over zijn. Deze week {banned, plural, =0 {niemand verbannen} other {# verbannen ({names})}}.",
+        "banned": "Deze week verbannen: {names}. {blocks, plural, =0 {Geen blokkades door gebruikers.} one {# blokkade door gebruikers.} other {# blokkades door gebruikers.}}",
+        "quiet": "Deze week niemand verbannen. {blocks, plural, =0 {Geen blokkades door gebruikers.} one {# blokkade door gebruikers.} other {# blokkades door gebruikers.}}",
+        "act": "Bekijk moderatie"
+      },
+      "groupWalks": {
+        "q": "Komen de groepswandelingen van de komende twee dagen vol?",
+        "empty": "{empty, plural, one {# groepswandeling heeft} other {# groepswandelingen hebben}} nog geen aanmeldingen, van de {n} gepland. Deel ze, of vraag de opvang of ze doorgaan.",
+        "filled": "{n, plural, one {# groepswandeling gepland, met aanmeldingen.} other {# groepswandelingen gepland, allemaal met aanmeldingen.}}",
+        "none": "Geen groepswandelingen in de komende twee dagen.",
+        "act": "Open de opvang"
+      },
+      "tips": {
+        "q": "Welke tips en stemmen vragen om opvolging?",
+        "open": "{n, plural, one {# opvang gevraagd} other {# opvangen gevraagd}}, het meest {top} ({votes, plural, one {# stem} other {# stemmen}}). {followUp, plural, =0 {} one {Bij # benaderde opvang is het al twee weken stil.} other {Bij # benaderde opvangen is het al twee weken stil.}}",
+        "followUp": "{followUp, plural, one {Bij # benaderde opvang is het al twee weken stil.} other {Bij # benaderde opvangen is het al twee weken stil.}} Vraag na hoe het staat.",
+        "none": "Geen nieuwe tips of stemmen, en niets om na te vragen.",
+        "act": "Volg tips op"
+      },
+      "system": {
+        "q": "Zijn de database en de dagelijkse opruimronde gezond?",
+        "healthy": "De database ({database}) antwoordt in {ms} ms en de opruimronde is bij.",
+        "slow": "De database ({database}) deed {ms} ms over één simpele vraag. Kijk of app en database in dezelfde regio staan.",
+        "cronLate": "De opruimronde loopt achter: {requests} verlopen aanvragen, {walks} rondjes die nog openstaan en {routes} routes ouder dan 30 dagen. Kijk in Vercel bij Cron Jobs of /api/cron/cleanup draait.",
+        "demoDatabase": "Er is geen echte database gekoppeld: alles staat in het geheugen en is weg na de volgende deploy. Koppel Neon in Vercel.",
+        "act": "Bekijk instellingen"
+      }
+    },
+    "items": {
+      "overdue": "{minutes} min over tijd",
+      "unanswered": "wacht {days, plural, =0 {sinds vandaag} one {# dag} other {# dagen}} · kennismaking {startsAt}",
+      "idPending": "kennismaking {days, plural, one {# dag} other {# dagen}} geleden, ID nog niet bevestigd",
+      "emptyWalk": "{startsAt} · nog geen aanmeldingen"
+    },
+    "install": {
+      "title": "Beheer als app op je iPhone",
+      "text": "Open Beheer in Safari, tik op Deel en kies Zet op beginscherm. Dan opent Beheer als eigen app, met alle onderdelen hierboven."
+    },
+    "pages": {
+      "moderation": {
+        "title": "Moderatie",
+        "lede": "Meldingen, signalen over geld en links, en geblokkeerde accounts. Het dringendste eerst.",
+        "noBans": "Niemand geblokkeerd."
+      },
+      "shelters": {
+        "title": "Opvangen",
+        "lede": "Opvangen die zich aanmeldden, de oudste bovenaan. Hun honden gaan pas online als jij ze verifieert.",
+        "since": "aangemeld {date}"
+      },
+      "tips": {
+        "title": "Tips en stemmen"
+      },
+      "numbers": {
+        "title": "Cijfers",
+        "lede": "Hoe Rondje groeit, waar nieuwe mensen vandaan komen en hoe alles is ingesteld.",
+        "weekly": "Cijfers per week in de lanceerhub"
+      }
+    }
+  },
+  "impact": {
+    "source": "{name}, {year}",
+    "topics": {
+      "people": "Mensen",
+      "outside": "Naar buiten",
+      "dogs": "Honden"
+    },
+    "band": {
+      "eyebrow": "Samen voor een betere wereld",
+      "title": "Goed voor mensen, goed voor honden",
+      "lede": "Veel mensen voelen zich eenzaam of bewegen minder dan goed voor ze is. En veel honden kunnen een extra wandeling goed gebruiken.",
+      "factsLabel": "Een paar cijfers, met bron",
+      "adds": "{app} voegt daar iets kleins aan toe: een vaste wandeling met een hond die op je wacht. Goed voor de hond, fijn voor de mensen eromheen, en een reden om samen naar buiten te gaan.",
+      "join": "Doe mee",
+      "support": "Maak het mogelijk",
+      "more": "Waarom we dit doen"
+    },
+    "page": {
+      "eyebrow": "Waarom",
+      "title": "Samen naar buiten, voor mens en hond",
+      "lede": "Een rondje met een hond is klein. Toch raakt het aan grote dingen: eenzaamheid, te weinig bewegen, en honden die meer aandacht kunnen gebruiken. Daarom bestaat {app}.",
+      "factsTitle": "In cijfers",
+      "factsLede": "Bij elk cijfer staat de bron en het jaar, zodat je het zelf kunt nakijken.",
+      "mindTitle": "Buiten zijn, bewegen, en een hond die blij is dat je komt",
+      "mind1": "Onderzoek laat zien dat tijd in de natuur en regelmatig bewegen samenhangen met een betere gezondheid en je beter voelen. Ook even contact met een hond hangt in onderzoek samen met minder stress op dat moment.",
+      "mind2": "Een rondje lost niet alles op. Het is wel een fijn, vast moment in de week: even naar buiten, een praatje met een buurtgenoot, en een hond die blij is dat je er bent. Daar is {app} voor.",
+      "notCare": "{app} is geen hulpverlening en geen behandeling. Gaat het niet goed met je? Praat erover, je hoeft het niet alleen te doen.",
+      "suicideLines": "Denk je aan zelfdoding? Je kunt dag en nacht anoniem praten met:",
+      "helpLine": "{name} ({phone})",
+      "helpAll": "Alle hulplijnen",
+      "dogsTitle": "Honden die op een rondje wachten",
+      "dogs1": "Sommige mensen kunnen hun hond niet meer zo vaak uitlaten als ze zouden willen, omdat ze ouder worden, ziek zijn of slecht ter been. Hun hond mist dan beweging, en zij missen soms een praatje.",
+      "dogs2": "In opvangen wachten honden op een nieuw thuis. Een wandeling buiten de opvang is voor hen een fijne afwisseling. Met opvanghonden wandel je bij {app} altijd in begeleide groepswandelingen.",
+      "dogs3": "{app} brengt die honden samen met jongvolwassenen die graag naar buiten gaan, maar zelf geen hond kunnen hebben. Veilig, stap voor stap, en gratis.",
+      "safetyLink": "Zo regelen we veiligheid",
+      "doTitle": "Wat jij kunt doen",
+      "do": {
+        "walk": {
+          "title": "Ga wandelen",
+          "text": "Kies een hond in de buurt, of loop mee met een groepswandeling van een opvang.",
+          "link": "Bekijk honden"
+        },
+        "dog": {
+          "title": "Meld een hond aan",
+          "text": "Kun je zelf niet ver meer lopen, of ken je iemand die hulp kan gebruiken? Familie kan een hond ook aanmelden.",
+          "link": "Meld een hond aan"
+        },
+        "tip": {
+          "title": "Tip een opvang",
+          "text": "Ken je een opvang waar honden meer wandelingen kunnen gebruiken? Laat het ons weten.",
+          "link": "Tip een opvang"
+        },
+        "support": {
+          "title": "Maak het mogelijk",
+          "text": "{app} is gratis en blijft dat. Met een kleine bijdrage help je de kosten te dekken.",
+          "link": "Zo kun je helpen"
+        }
+      },
+      "sourcesTitle": "Bronnen",
+      "sourcesLede": "Alle cijfers op deze pagina, met hun bron. Gecontroleerd op {date}. Zie je een fout of een nieuwer cijfer? Laat het ons weten."
+    }
+  },
+  "marketing": {
+    "title": "Marketinghub",
+    "lede": "Wat je deze week doet, en materiaal dat klaarstaat. Hier wordt niets gepost of verstuurd: dat doe je altijd zelf.",
+    "nav": {
+      "label": "Onderdelen van de marketinghub",
+      "questions": "Vragen",
+      "interviews": "Gesprekken",
+      "posts": "Posts",
+      "links": "Links",
+      "material": "Materiaal"
+    },
+    "week": {
+      "title": "Deze week",
+      "hint": "De eerste vragen die om actie vragen, in volgorde. Tik door voor het waarom.",
+      "none": "Niets dringends. Kijk naar de vragen met ‘Let op’.",
+      "nextPost": "Volgende post: {title} (week {week}, {channel})",
+      "allPosted": "Alle posts uit de planner zijn gepost. Tijd voor een nieuwe reeks."
+    },
+    "status": {
+      "good": "Goed",
+      "watch": "Let op",
+      "act": "Doe iets",
+      "wait": "Nog geen data"
+    },
+    "labels": {
+      "step": {
+        "account": "account",
+        "profile": "profiel af",
+        "firstStep": "eerste stap",
+        "firstWalk": "eerste rondje"
+      }
+    },
+    "funnelSteps": {
+      "visits": "Bezoek",
+      "visitsHint": "in Vercel Analytics",
+      "account": "Account",
+      "profile": "Profiel af",
+      "firstStep": "Eerste stap",
+      "firstStepHint": "aanvraag, hond online of groepswandeling",
+      "firstWalk": "Eerste rondje"
+    },
+    "questions": {
+      "title": "De beste vragen",
+      "lede": "De vragen die een goede groeimarketeer nu zou stellen, live beantwoord uit echte gegevens. Voorbeelddata en beheerders tellen niet mee, en je ziet alleen aantallen, nooit namen.",
+      "why": "Waarom",
+      "now": "Wat nu",
+      "open": "Open",
+      "cols": {
+        "city": "Stad",
+        "demand": "Vraag",
+        "supply": "Honden",
+        "shelter": "Opvang",
+        "votes": "Stemmen",
+        "code": "Code",
+        "signups": "Aanmeldingen"
+      },
+      "funnel": {
+        "q": "Waar haken mensen af?",
+        "why": "Meer mensen binnenhalen helpt pas als ze ook doorstromen: de grootste lek dichten levert het meeste op.",
+        "answer": {
+          "empty": "Nog geen echte accounts. De trechter begint zodra de eerste mensen zich aanmelden.",
+          "drop": "Grootste uitval: van {from} naar {to}. Daar gaat {pct}% door."
+        },
+        "action": {
+          "empty": "Breng de eerste tien mensen binnen: plaats post 1 en leg flyers op twee plekken.",
+          "profile": "Mensen maken een account maar maken hun profiel niet af. Loop de onboarding zelf door op je telefoon en schrap wat niet nodig is.",
+          "firstStep": "Leden doen na hun profiel nog niets. Zien ze wel een hond bij hen in de buurt? Kijk bij ‘Wachten wandelaars op een hond?’.",
+          "firstWalk": "Aanvragen worden nog geen rondje. Kijk of eigenaren en opvangen op tijd antwoorden, en help bij de eerste kennismaking."
+        }
+      },
+      "newMembers": {
+        "q": "Hoeveel nieuwe leden deze week, tegen vorige week?",
+        "why": "Groei in een vast ritme laat zien of wat je deze week deed (een post, een flyer) iets oplevert.",
+        "answer": {
+          "none": "Geen nieuwe leden in de afgelopen twee weken ({total} in totaal).",
+          "up": "{thisWeek} nieuw in de afgelopen 7 dagen ({walkers, plural, one {# wandelaar} other {# wandelaars}}, {owners, plural, one {# eigenaar} other {# eigenaren}}), tegen {lastWeek} de week ervoor.",
+          "same": "{thisWeek} nieuw in de afgelopen 7 dagen, net als de week ervoor ({walkers, plural, one {# wandelaar} other {# wandelaars}}, {owners, plural, one {# eigenaar} other {# eigenaren}}).",
+          "down": "{thisWeek} nieuw in de afgelopen 7 dagen, tegen {lastWeek} de week ervoor."
+        },
+        "action": {
+          "start": "Er komt nog niemand vanzelf. Plan deze week twee posts uit de postplanner en leg flyers op twee plekken.",
+          "repeat": "Het groeit. Zoek uit waar het vandaan kwam (‘Werken uitnodigingslinks?’) en doe daar meer van.",
+          "push": "Plaats deze week de volgende post en vraag drie leden om één buurtgenoot met een hond uit te nodigen."
+        }
+      },
+      "demand": {
+        "q": "In welke stad is de meeste vraag en het minste aanbod?",
+        "why": "Een wandelaar zonder hond in de buurt haakt af: werf aanbod waar de vraag al is, niet overal tegelijk.",
+        "note": "Vraag = wandelaars uit de stad plus mensen die op een opvang daar stemden (ieder één keer). Honden = echte honden die nu te boeken zijn.",
+        "answer": {
+          "empty": "Nog geen vraag gemeten: geen wandelaars of stemmen met een stad.",
+          "gap": "{city}: {demand, plural, one {# persoon wil} other {# mensen willen}} er wandelen, en er {supply, plural, =0 {staat nog geen hond} one {staat # hond} other {staan # honden}} online."
+        },
+        "action": {
+          "votes": "Deel de opvangenlijst in een lokale groep: elke stem op ‘Ik wil hier wandelen’ telt hier als vraag.",
+          "supply": "Werf aanbod in {city}: mail de meest gevraagde opvang daar en leg flyers voor eigenaren bij een dierenarts in {city}.",
+          "balanced": "Vraag en aanbod lopen gelijk op. Werf nu wandelaars in {city}, zodat elke hond een vast maatje krijgt."
+        }
+      },
+      "wantedShelter": {
+        "q": "Welke opvang wordt het meest gevraagd?",
+        "why": "Een opvang die hoort dat er al mensen bij hen willen wandelen, zegt sneller ja: dat aantal is je beste openingszin.",
+        "answer": {
+          "none": "Nog geen stemmen of tips voor opvangen.",
+          "top": "{name} ({city}): {n, plural, one {# stem} other {# stemmen}}."
+        },
+        "action": {
+          "share": "Deel de opvangenlijst (post 7): bij elke opvang staat de knop ‘Ik wil hier wandelen’.",
+          "mail": "Mail {name} als eerste en noem het aantal: ‘{n, plural, one {Er wil al iemand} other {Er willen al # mensen}} bij jullie wandelen.’",
+          "follow": "Je hebt {name} al benaderd. Bel na als er na twee werkdagen geen antwoord is, en noem het aantal stemmen."
+        }
+      },
+      "shelterPipeline": {
+        "q": "Hoe staat de opvang-pijplijn?",
+        "why": "Eén opvang brengt in één keer veel honden en begeleiders mee: de eerste opvang is de grootste sprong in aanbod.",
+        "answer": {
+          "counts": "{sent} benaderd, {replied} antwoord, {meeting} gesprek, {live} live. {todo} klaar om te sturen."
+        },
+        "action": {
+          "review": "{pending, plural, one {Er wacht # opvangaanmelding} other {Er wachten # opvangaanmeldingen}} op jouw controle in Beheer. Doe dat eerst.",
+          "firstWalk": "Er is een opvang live. Plan de eerste begeleide groepswandeling en vraag daarna om twee introducties bij andere opvangen.",
+          "onboard": "Je hebt een gesprek. Help bij het aanmelden en zet samen de eerste 3 tot 5 starterhonden erop (Snel toevoegen met foto’s).",
+          "send": "Stuur deze week nog {missing} opvangmails vanuit de lanceerhub (doel: 10).",
+          "call": "De eerste tien mails zijn weg. Bel na twee werkdagen na en vraag naar de vrijwilligerscoördinator."
+        }
+      },
+      "ownersDog": {
+        "q": "Zetten eigenaren die zich aanmelden ook een hond online?",
+        "why": "Elke hond is aanbod: een eigenaar zonder hond online is een gemiste match.",
+        "answer": {
+          "none": "Nog geen echte eigenaren aangemeld.",
+          "share": "{withDog} van de {owners} eigenaren heeft een hond online ({pct}%)."
+        },
+        "action": {
+          "recruit": "Aanbod komt van eigenaren en hun familie: leg flyers voor eigenaren bij de dierenarts en plaats post 3 in een buurtgroep.",
+          "help": "{without, plural, one {# eigenaar zet} other {# eigenaren zetten}} nog geen hond online. Loop ‘Hond aanmelden’ zelf door en kijk waar het blijft hangen.",
+          "keep": "Goed zo. Vraag tevreden eigenaren of ze één buur met een hond kennen."
+        }
+      },
+      "walkersWaiting": {
+        "q": "Wachten wandelaars op een hond bij hen in de buurt?",
+        "why": "Wie niets in de buurt ziet, komt niet terug: aanbod dichtbij houdt een wandelaar vast.",
+        "answer": {
+          "none": "Nog geen echte wandelaars.",
+          "served": "Alle {walkers} wandelaars hebben een echte hond binnen {km} km.",
+          "waiting": "{waiting} van de {walkers} wandelaars heeft nog geen echte hond binnen {km} km. De meesten wachten in {city}."
+        },
+        "action": {
+          "recruit": "Werf wandelaars waar al honden zijn, of tegelijk met aanbod in dezelfde stad.",
+          "supply": "Vraag wachtende wandelaars om een buurtgenoot met een hond uit te nodigen (de tip-pagina heeft een kant-en-klaar berichtje) en werf aanbod in {city}.",
+          "keep": "Houd het zo: werf nieuwe wandelaars alleen in steden met honden."
+        }
+      },
+      "requests": {
+        "q": "Krijgen aanvragen op tijd antwoord?",
+        "why": "Een aanvraag zonder antwoord is de snelste manier om een wandelaar kwijt te raken.",
+        "answer": {
+          "none": "Nog geen echte aanvragen voor een kennismaking.",
+          "counts": "{total} aanvragen: {accepted} geaccepteerd, {pending} open, waarvan {stale} langer dan 2 dagen."
+        },
+        "action": {
+          "supplyFirst": "Eerst aanbod bij wandelaars in de buurt (‘Wachten wandelaars op een hond?’), dan komen de aanvragen vanzelf.",
+          "chase": "{stale, plural, one {# aanvraag wacht} other {# aanvragen wachten}} te lang. Help de eigenaar of opvang met antwoorden.",
+          "keep": "Aanvragen krijgen antwoord. Let op de stap erna: de eerste kennismaking."
+        }
+      },
+      "returning": {
+        "q": "Komen wandelaars terug na hun eerste rondje?",
+        "why": "Een vast maatje is de motor van het idee: terugkomen is het bewijs, niet het aantal aanmeldingen.",
+        "answer": {
+          "none": "Nog geen echt rondje gelopen.",
+          "counts": "{once} wandelaars liepen een rondje, {again} kwamen terug ({pct}%). {steady} vaste koppels (3 keer of vaker in 8 weken)."
+        },
+        "action": {
+          "firstWalk": "Alles draait nu om het eerste echte rondje. Help het eerste koppel persoonlijk bij de kennismaking.",
+          "ask": "Bel wie één keer liep en vraag wat er nodig is voor een tweede keer (gebruik de gespreksvragen voor wandelaars).",
+          "keep": "Mensen komen terug. Vraag het eerste vaste koppel of ze, met toestemming, in een video willen."
+        }
+      },
+      "referrals": {
+        "q": "Werken uitnodigingslinks?",
+        "why": "Mond-tot-mond is gratis groei: per link of code zie je welk kanaal echt aanmeldingen oplevert.",
+        "answer": {
+          "none": "Nog geen echte leden, dus nog niets te tellen.",
+          "counts": "{referred} van de {members} leden kwamen via een link ({pct}%): {own} via jouw eigen link, {viaMembers} via andere leden, {viaCodes} via campagnecodes."
+        },
+        "action": {
+          "codes": "Maak voor elke flyerplek en elk kanaal een eigen aanmeldlink (Links, hieronder). Over twee weken zie je hier wat werkt.",
+          "more": "Links werken. Stop met de zwakste code en doe meer van de beste."
+        }
+      },
+      "traffic": {
+        "q": "Welke pagina’s en campagnes brengen bezoekers?",
+        "why": "Zonder bezoekcijfers weet je niet welke post of flyer mensen naar de site bracht.",
+        "answer": {
+          "on": "Web Analytics staat aan (afgevinkt in de lanceerhub). Pagina’s en verwijzers, zoals instagram.com, zie je in Vercel. UTM-tags uit je campagnelinks zie je daar alleen met het betaalde Web Analytics Plus.",
+          "off": "Nog niet aan: er worden geen bezoeken geteld."
+        },
+        "action": {
+          "enable": "Zet het aan: Vercel → het project → Analytics → Enable (gratis op Hobby). Vink daarna ‘Vercel Web Analytics aanzetten’ af in de lanceerhub.",
+          "check": "Kijk eens per week naar Pages en Referrers. Aanmeldingen per code tel je hier, gratis (‘Werken uitnodigingslinks?’)."
+        }
+      }
+    },
+    "interviews": {
+      "title": "Gespreksvragen",
+      "lede": "Voor bellen en langsgaan. De vragen gaan over wat mensen deden, niet over wat ze zouden doen.",
+      "rules": "De regels: vraag naar de laatste keer en naar details, luister meer dan je praat, en vertel pas aan het eind over {app}. Een compliment is geen bewijs; een afspraak, een introductie of een hond online wel.",
+      "language": "Taal",
+      "listen": "Waar je op let",
+      "copy": "Kopieer vragen",
+      "copied": "Gekopieerd",
+      "shelter": {
+        "title": "Opvang",
+        "who": "De vrijwilligerscoördinator van een opvang",
+        "goal": "Doel: begrijpen hoe wandelen nu geregeld is en wat het lastigst is. Eerst luisteren, {app} pas aan het eind.",
+        "q1": "Hoe is het wandelen met de honden nu geregeld? Hoe ging het afgelopen week?",
+        "q2": "Hoeveel vrijwilligers liepen er vorige maand mee, en hoe kwamen die bij jullie binnen?",
+        "q3": "Wanneer ging het voor het laatst mis met een wandeling of een vrijwilliger? Wat gebeurde er?",
+        "q4": "Hoe plannen jullie nu wie wanneer met welke hond loopt? Waar staat dat?",
+        "q5": "Welke honden komen nu te weinig buiten? Waarom juist die?",
+        "q6": "Hebben jullie een wachtlijst voor nieuwe vrijwilligers? Wat gebeurt er met die mensen?",
+        "q7": "Wat hebben jullie al geprobeerd om meer wandelingen te regelen? Wat werkte niet?",
+        "q8": "Wie beslist er over een nieuwe samenwerking, en wat moet die persoon zien?",
+        "q9": "Hoe zijn vrijwilligers nu verzekerd tijdens een wandeling?",
+        "listen": "Een echt probleem is iets waar ze nu al tijd aan kwijt zijn, zoals een planningslijst of een wachtlijst. ‘Leuk idee’ is geen ja; een datum voor een proefwandeling wel. Schrijf de woorden op die ze zelf gebruiken."
+      },
+      "owner": {
+        "title": "Eigenaar",
+        "who": "Een oudere buurtgenoot met een hond, of een familielid",
+        "goal": "Doel: begrijpen hoe het uitlaten nu gaat, zonder iets te verkopen. Met familie vraag je naar wat zij zien.",
+        "q1": "Hoe ging het uitlaten gisteren? Wie liep er, en hoe lang?",
+        "q2": "Wanneer merkte u voor het eerst dat het uitlaten lastiger werd? Wat veranderde er toen?",
+        "q3": "Wie helpt er nu weleens met de hond? Hoe is dat zo gekomen?",
+        "q4": "Hoe vaak komt de hond nu buiten, en hoe vaak zou hij eigenlijk willen?",
+        "q5": "Heeft u weleens iemand anders met uw hond laten lopen? Hoe beviel dat?",
+        "q6": "Wat moet er gebeuren voordat u een onbekende met uw hond laat lopen?",
+        "q7": "Hoe maakt u nu afspraken: telefoon, WhatsApp, een briefje? Wie helpt u daarbij?",
+        "q8": "Wat mist u het meest sinds het uitlaten lastiger gaat?",
+        "listen": "Vertrouwen is het hele verhaal: let op wat iemand nodig heeft om ja te zeggen (eerst ontmoeten, een vast gezicht, familie erbij). Vraag nooit naar geld of een adres. Een warme reactie is nog geen hond online; een datum voor een kennismaking wel."
+      },
+      "walker": {
+        "title": "Wandelaar",
+        "who": "Iemand van 18 tot 30 die van honden houdt",
+        "goal": "Doel: begrijpen wat jongeren nu doen als ze een hond missen, en wat ze tegenhoudt.",
+        "q1": "Wanneer liep je voor het laatst met een hond? Hoe kwam dat zo?",
+        "q2": "Heb je ooit gezocht naar een manier om met honden om te gaan zonder er zelf een te hebben? Wat vond je, en waarom ben je wel of niet begonnen?",
+        "q3": "Hoe ziet een gewone week eruit? Waar zou een vast uurtje in passen?",
+        "q4": "Wat deed je de laatste keer dat je even naar buiten wilde, weg van je scherm?",
+        "q5": "Heb je weleens vrijwilligerswerk gedaan? Hoe ben je begonnen, en waarom ben je gestopt of gebleven?",
+        "q6": "Wat zou je tegenhouden om bij een onbekende aan te bellen voor een hond?",
+        "q7": "Wie in je omgeving heeft een hond die vaker naar buiten zou willen?",
+        "q8": "Hoe hoorde je de laatste keer over iets nieuws dat je toen ook echt bent gaan doen?",
+        "listen": "Let op het verschil tussen ‘lijkt me leuk’ en echt gedrag (al eens gezocht, al eens geholpen). Vraag 7 levert vaak aanbod op, vraag 8 vertelt waar je moet posten."
+      },
+      "vet": {
+        "title": "Dierenarts",
+        "who": "Een dierenarts of iemand achter de balie",
+        "goal": "Doel: begrijpen wanneer de praktijk eigenaren ziet die hun hond niet goed meer kunnen uitlaten, en of een flyer bij de balie past.",
+        "q1": "Hoe vaak zag u de afgelopen maand een eigenaar die de hond niet goed meer kon uitlaten? Wat was er aan de hand?",
+        "q2": "Wat raadde u die eigenaar toen aan? Wat deed hij daarna?",
+        "q3": "Naar wie of wat verwijst u nu als een hond te weinig beweging krijgt?",
+        "q4": "Wat ziet u bij honden die te weinig buiten komen?",
+        "q5": "Wat ligt er nu bij de balie, en wat nemen mensen daar echt van mee?",
+        "q6": "Wanneer gaf u voor het laatst iets van een lokaal initiatief door aan klanten? Hoe ging dat?",
+        "q7": "Wat zou u moeten weten voordat u een eigenaar naar een wandelaar verwijst?",
+        "listen": "Het juiste moment (na een operatie, bij een oudere eigenaar) is goud: schrijf op wanneer dat is. Vraag of je een flyer mag neerleggen, beloof geen gezondheidseffect, en noem de praktijk nergens partner zonder afspraak."
+      },
+      "students": {
+        "title": "Studentenvereniging",
+        "who": "Iemand uit het bestuur of een commissie",
+        "goal": "Doel: begrijpen hoe leden activiteiten en vrijwilligerswerk vinden, en of een gezamenlijke wandeling past.",
+        "q1": "Wat was de laatste activiteit waar veel leden op afkwamen? Waarom die?",
+        "q2": "Doen jullie iets met vrijwilligerswerk of goede doelen? Hoe ging dat de vorige keer?",
+        "q3": "Hoe bereiken jullie leden echt: groepsapp, Instagram, nieuwsbrief, borrel? Wat wordt gelezen?",
+        "q4": "Wie beslist over iets nieuws op de agenda, en wanneer wordt die gemaakt?",
+        "q5": "Hoeveel leden hebben thuis een hond gehad? Hoe merk je dat ze dat missen?",
+        "q6": "Wat ging er mis de laatste keer dat jullie met een externe partij samenwerkten?",
+        "q7": "Wat doen leden rond tentamens om even weg te zijn van de boeken?",
+        "listen": "Je zoekt één concrete volgende stap: een bericht in de groepsapp, een plekje in de nieuwsbrief, of een groepswandeling bij een opvang. Vraag wie dat regelt en wanneer de planning vastligt."
+      }
+    },
+    "posts": {
+      "title": "Postplanner",
+      "lede": "12 posts voor de eerste 6 weken, twee per week. Kies de taal, kopieer de tekst, download de afbeelding en post zelf. Daarna tik je op ‘Gepost’.",
+      "honest": "Eerlijk blijven: {app} is nieuw, gratis en zonder advertenties. Geen verzonnen ervaringen of cijfers, niemand in beeld zonder toestemming, en nooit beloven dat wandelen ergens tegen helpt.",
+      "progress": "{posted} van {total} gepost",
+      "week": "Week {week}",
+      "days": {
+        "tue": "dinsdag",
+        "thu": "donderdag",
+        "sun": "zondag"
+      },
+      "channels": {
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Buurtapp"
+      },
+      "goal": "Doel",
+      "visual": "Beeld",
+      "caption": "Tekst",
+      "link": "Link",
+      "linkBio": "Zet deze link in je bio (Instagram en TikTok maken links in een bijschrift niet klikbaar).",
+      "language": "Taal van de tekst",
+      "copy": "Kopieer tekst",
+      "copied": "Gekopieerd",
+      "copyLink": "Kopieer link",
+      "download": "Download afbeelding",
+      "posted": "Gepost",
+      "markPosted": "Markeer als gepost: {title}",
+      "markOpen": "Zet terug op niet gepost: {title}",
+      "fillIn": "Vul de [haakjes] in met echte cijfers voordat je post. Nu: {members} leden, {dogs} honden online, {walks} rondjes.",
+      "imageAlt": "Deelafbeelding: {title}",
+      "p01": {
+        "title": "Er wacht een hond op een extra rondje",
+        "sub": "Gratis wandelen met een hond uit je buurt",
+        "goal": "Aankondigen: vertel eerlijk wat je bouwt.",
+        "caption": "Ik bouw {app}: een gratis manier om een vast rondje te lopen met een hond uit je buurt. Vaak de hond van een oudere buurtgenoot die zelf niet ver meer kan lopen, soms een hond uit de opvang.\n\nHoe het werkt:\n• je bent 18 of ouder\n• de eerste keer maak je altijd samen kennis met de eigenaar\n• daarna loop je een vast rondje, op een moment dat jullie allebei past\n\nGeen advertenties, geen abonnement. {app} is net begonnen, dus je bent er vroeg bij. Link in bio.\n\n#honden #wandelen #buurt #vrijwilligerswerk",
+        "visual": "De deelafbeelding met drie getekende honden. Als carrousel: zet er een eigen foto van een riem aan een haakje achter."
+      },
+      "p02": {
+        "title": "Week 1",
+        "sub": "Ik bouw een gratis app zodat oma’s hond weer vaker naar buiten kan",
+        "goal": "Eerste markttest: bouwen in het openbaar. Reacties vertellen je of er vraag is.",
+        "caption": "Week 1: ik bouw een gratis app zodat oma’s hond weer vaker naar buiten kan.\n\nVeel ouderen kunnen hun hond niet meer zelf uitlaten. Veel jongeren houden van honden, maar kunnen er (nog) geen hebben. {app} brengt ze samen, en de eerste keer is de eigenaar er altijd bij.\n\nVraag aan jou: ken jij iemand wiens hond vaker naar buiten zou willen? Vertel het in de reacties.\n\n#bouweninhetopenbaar #honden #wandelen",
+        "visual": "Schermopname van de app met voice-over (script A in docs/GROWTH.md); de afbeelding als cover. Vastgepinde reactie: ‘Ik bouw dit in het openbaar. Elke week een update. Ik verkoop niets.’"
+      },
+      "p03": {
+        "title": "Kan uw hond wel een extra rondje gebruiken?",
+        "sub": "Gratis, met een jongere uit de buurt. Eerst samen kennismaken.",
+        "goal": "Aanbod: eigenaren en hun familie in de buurt bereiken.",
+        "caption": "Hallo buren! Kent u iemand wiens hond wel een extra rondje kan gebruiken? Bijvoorbeeld omdat lopen wat moeilijker gaat, na een operatie, of omdat de dagen lang zijn.\n\nVia {app} loopt een jongere (18+) uit de buurt gratis een vast rondje met de hond. De eerste keer maakt u altijd samen kennis, en u bepaalt wat er mag. {app} vraagt nooit om geld.\n\nGeen smartphone? Een familielid of buur kan de hond met toestemming voor u aanmelden: {link}",
+        "visual": "De afbeelding, of een foto van de geprinte flyer voor eigenaren. Vraag eerst de beheerder van de groep of je dit mag delen."
+      },
+      "p04": {
+        "title": "Geen eigen hond? Wel zin in buiten?",
+        "sub": "Loop gratis een vast rondje met een hond uit je buurt",
+        "goal": "Vraag: wandelaars van 18 tot 30 werven, in een stad waar al honden zijn.",
+        "caption": "Hou je van honden, maar past er (nog) geen bij je leven? Met {app} loop je gratis een vast rondje met een hond uit je buurt, bijvoorbeeld van iemand die zelf niet ver meer kan lopen.\n\nZo gaat het:\n1. Je maakt een profiel (18+) en doet een korte veiligheidsquiz\n2. Je maakt eerst samen kennis met de eigenaar\n3. Daarna is het jullie vaste rondje\n\nSamen wandelen kan je dag goed doen, en voor de hond is het een feestje. Link in bio.\n\n#studentenleven #honden #wandelen #buiten",
+        "visual": "De afbeelding als eerste slide, daarna de drie stappen als losse slides."
+      },
+      "p05": {
+        "title": "Snuffelen is werk",
+        "sub": "Waarom 800 meter soms 45 minuten duurt",
+        "goal": "Bereik: een video die op zichzelf leuk is, ook voor wie nooit gaat wandelen.",
+        "caption": "45 minuten over 800 meter. Dit is waarom: voor een hond is snuffelen echt werk, en een wandeling waarop hij mag ruiken is een goede wandeling. Laat ze ruiken. 🐾\n\n(Ik bouw {app}: gratis een vast rondje met een hond uit je buurt. Link in bio.)\n\n#honden #snuffelen #hondenliefde",
+        "visual": "Film op hondhoogte met de hond van een vriend of familielid (met toestemming), 4 of 5 snuffelmomenten met tekst erbij (script B in docs/GROWTH.md). Geen straatnaambordjes of huisnummers in beeld."
+      },
+      "p06": {
+        "title": "Gezocht: de eerste opvang",
+        "sub": "Voor begeleide groepswandelingen met jonge vrijwilligers, gratis",
+        "goal": "Partners: een opvang, welzijnsorganisatie of hogeschool vinden voor de eerste pilot.",
+        "caption": "Ik bouw {app}: een gratis platform dat jongvolwassenen (18–30) koppelt aan honden die een extra wandeling goed kunnen gebruiken. Honden van oudere of zieke buurtgenoten, en opvanghonden in begeleide groepswandelingen.\n\nWaar het nu staat, eerlijk: het platform is live en de veiligheidsstappen zitten erin (eerst samen kennismaken, ID in het echt gezien, toestemming per hond, een korte quiz). Er lopen nog geen echte koppels.\n\nWat ik zoek:\n• een dierenopvang die het met een paar starterhonden wil proberen\n• een welzijnsorganisatie of wijkteam dat oudere hondenbezitters kent\n• een docent of onderzoeker die wil meedenken over een eenvoudige meting\n\nKen je iemand? Een introductie of een reactie helpt enorm. {link}\n\n#vrijwilligerswerk #dierenwelzijn #buurt #socialimpact",
+        "visual": "De afbeelding bij de post. Tag geen organisaties zonder dat ze ervan weten."
+      },
+      "p07": {
+        "title": "Waar wil jij wandelen?",
+        "sub": "Stem op een opvang in jouw stad. De meest gevraagde benader ik als eerste.",
+        "goal": "Vraag meten: welke opvang eerst. Elke stem telt mee in ‘Welke opvang wordt het meest gevraagd?’.",
+        "caption": "Waar wil jij wandelen? Op {app} staan opvangen uit Nederland, België en Spanje, en bij elke opvang zit een knop ‘Ik wil hier wandelen’. De opvang met de meeste stemmen benader ik als eerste, en jij krijgt een seintje zodra hij aansluit. Stemmen kan hier: {link}",
+        "visual": "Een story met een linksticker naar de link hieronder, met de afbeelding als achtergrond."
+      },
+      "p08": {
+        "title": "Voor de hond van je oma, je buurman of je moeder",
+        "sub": "Meld een hond aan, ook voor een ander (met toestemming)",
+        "goal": "Aanbod via familie: wie de app zelf niet gebruikt, kan toch meedoen.",
+        "caption": "Heeft je moeder, oma of buurman een hond die vaker naar buiten zou willen? Met {app} loopt een jongere uit de buurt gratis een vast rondje met die hond.\n\nDe eigenaar hoeft zelf geen app te gebruiken: jij kunt de hond met toestemming aanmelden. De eerste kennismaking is altijd samen, en {app} vraagt nooit om geld. {link}",
+        "visual": "De afbeelding met twee getekende honden. Vraag eerst de beheerder van de groep of je dit mag delen."
+      },
+      "p09": {
+        "title": "Raad het ras",
+        "sub": "Ik tekende vier honden. Welk ras is welk?",
+        "goal": "Interactie: mensen raden in de reacties, en dat helpt het bereik.",
+        "caption": "Ik tekende vier honden voor {app}. Welk ras is welk? Zet je gok in de reacties, het antwoord staat in de laatste slide. 🐶\n\n#raadhetras #honden #tekenen",
+        "visual": "De afbeelding, daarna een slide met het antwoord: 1 labrador, 2 teckel, 3 franse bulldog, 4 border collie."
+      },
+      "p10": {
+        "title": "Zo houden we het veilig",
+        "sub": "18 jaar of ouder · Eerst samen kennismaken · ID in het echt gezien · Toestemming per hond · Korte veiligheidsquiz",
+        "goal": "Vertrouwen: laat eigenaren en familie zien hoe het stap voor stap gaat.",
+        "caption": "Een onbekende met je hond laten wandelen? Logisch dat je daar even over nadenkt. Daarom gaat het bij {app} stap voor stap:\n\n1. Wandelaars zijn 18 of ouder en doen een korte veiligheidsquiz\n2. De eerste keer maak je altijd samen kennis\n3. De eigenaar of opvang ziet het ID in het echt (er wordt geen kopie bewaard)\n4. Alleen met toestemming per hond loopt iemand zelfstandig\n5. Tijdens een rondje kan de eigenaar live meekijken, als hij dat wil\n\n{app} vraagt nooit om geld. Vragen? Stel ze hieronder.",
+        "visual": "Carrousel: de afbeelding, daarna één slide per stap."
+      },
+      "p11": {
+        "title": "6 weken {app}",
+        "sub": "Wat werkte, wat niet, en wat ik nu ga doen",
+        "goal": "Bouwen in het openbaar: een eerlijke tussenstand na 6 weken.",
+        "caption": "6 weken {app}, de eerlijke tussenstand.\n\nWat er staat: [aantal] mensen meldden zich aan, [aantal] honden staan online, [aantal] rondjes gelopen.\nWat werkte: [vul in, bijvoorbeeld het kanaal met de meeste aanmeldingen].\nWat niet werkte: [vul in].\nWat ik nu ga doen: [vul in].\n\nGeen advertenties, gewoon bouwen en vragen wat mensen nodig hebben. Wil je meedenken? Reageer of stuur een bericht. {link}",
+        "visual": "De afbeelding, of een eigen foto van je werkplek. Gebruik alleen echte cijfers uit ‘De beste vragen’."
+      },
+      "p12": {
+        "title": "30 minuten geen scherm",
+        "sub": "Wel een hond, frisse lucht en een kleine opdracht onderweg",
+        "goal": "Wandelaars: rond de tentamens, een rustmoment zonder te preken.",
+        "caption": "Tentamenweek? 30 minuten geen scherm. Wel een hond, frisse lucht en een kleine opdracht onderweg: zoek drie gele dingen.\n\nSamen wandelen kan je dag goed doen. Met {app} loop je gratis een vast rondje met een hond uit je buurt. Link in bio.\n\n#tentamenweek #studentenleven #wandelen",
+        "visual": "Een telefoon die in een tas verdwijnt, daarna wandelbeelden (zonder gezichten zonder toestemming). Zet in een vastgepinde reactie waar je terechtkunt als het niet goed gaat (in Nederland 113, 0800-0113)."
+      }
+    },
+    "card": {
+      "free": "gratis · geen advertenties"
+    },
+    "links": {
+      "title": "Campagnelinks",
+      "lede": "Een eigen link per plek en kanaal, met UTM-tags en een QR-code. Zo zie je later wat werkt.",
+      "page": "Pagina",
+      "pages": {
+        "home": "Home",
+        "dogs": "Honden",
+        "shelter": "Opvang aanmelden",
+        "cities": "Alle steden",
+        "suggest": "Tip een opvang of hond",
+        "safety": "Veiligheid"
+      },
+      "cityGroup": "Stadspagina’s",
+      "source": "Bron",
+      "sources": {
+        "flyer": "Flyer of poster",
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Buurtapp of buurtgroep",
+        "opvang": "Opvang",
+        "partner": "Partner",
+        "mail": "E-mail"
+      },
+      "detail": "Naam of plek",
+      "detailHint": "Bijvoorbeeld ‘bibliotheek oost’ of de naam van de opvang. Mag leeg.",
+      "campaign": "Campagne",
+      "campaignHint": "Bijvoorbeeld ‘start oktober’ of ‘tentamenweek’.",
+      "result": "Campagnelink",
+      "copy": "Kopieer link",
+      "copied": "Gekopieerd",
+      "qrFor": "QR-code voor",
+      "qrCampaign": "Campagnelink",
+      "qrCode": "Aanmeldlink",
+      "qrLabel": "QR-code voor {url}",
+      "downloadQr": "Download QR-code (SVG)",
+      "utmNote": "Let op: UTM-tags zie je in Vercel alleen met het betaalde Web Analytics Plus. Op het gratis plan zie je wel de pagina en de verwijzer. Wil je gratis tellen? Gebruik de aanmeldlink.",
+      "codeTitle": "Aanmeldingen tellen, gratis",
+      "codeText": "Een aanmeldlink met een eigen code opent het aanmeldscherm en onthoudt de code 30 dagen. Aanmeldingen per code zie je hierboven bij ‘Werken uitnodigingslinks?’.",
+      "code": "Code",
+      "codeHint": "Letters en cijfers, 7 tot 12 tekens.",
+      "owner": "Start bij ‘hond aanmelden’ (voor eigenaren)",
+      "codeLink": "Aanmeldlink"
+    },
+    "material": {
+      "title": "Materiaal",
+      "lede": "Wat er al klaarstaat, en hoe je het gebruikt.",
+      "open": "Open",
+      "flyerOwner": {
+        "title": "Flyer voor eigenaren",
+        "how": "Print hem en leg hem bij de dierenarts, de apotheek, de bibliotheek of het buurthuis (vraag eerst of het mag). Ben je ingelogd, dan zit jouw eigen link in de QR-code."
+      },
+      "flyerWalker": {
+        "title": "Flyer voor wandelaars",
+        "how": "Hang hem op bij de hogeschool, de bibliotheek of in een studentenhuis, liefst in een stad waar al honden zijn. Rond de tentamens werkt hij het best."
+      },
+      "poster": {
+        "title": "Poster voor een opvang",
+        "how": "Na de aansluiting: hang hem bij de ingang en in de wachtruimte. Bezoekers scannen de code en zien de honden van die opvang.",
+        "none": "Komt beschikbaar zodra de eerste echte opvang live is (in het opvangdashboard → Poster)."
+      },
+      "cities": {
+        "title": "Stadspagina’s",
+        "how": "Deel de pagina van een stad in een lokale groep. Mensen zien de honden, opvangen en groepswandelingen daar, en via de opvangenlijst stemmen ze met ‘Ik wil hier wandelen’.",
+        "top": "Meeste vraag nu:"
+      },
+      "shelters": {
+        "title": "Overzicht van opvangen",
+        "how": "Handig in een gesprek: laat zien dat de opvang er al staat als ‘Nog niet op {app}’, en dat mensen erop kunnen stemmen."
+      },
+      "suggest": {
+        "title": "Tip-pagina",
+        "how": "Voor wandelaars zonder hond in de buurt: hier staat een kant-en-klaar berichtje om een buurtgenoot met een hond uit te nodigen."
+      },
+      "messages": {
+        "title": "Berichtenbank in de lanceerhub",
+        "how": "Mails en belscripts voor opvangen, dierenartsen, verenigingen en de lokale pers. Je verstuurt ze zelf, vanuit je eigen mail."
       }
     }
   }

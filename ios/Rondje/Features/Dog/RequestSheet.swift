@@ -6,6 +6,10 @@ struct RequestSheet: View {
     let dog: DogFull
     let slots: [Slot]
     @State var kind: Kind
+    /// A shelter dog: met on the shelter's location, during a walk (the server enforces this too).
+    var isShelter = false
+    /// How a first meeting happens; after a first call, the app opens this sheet on "Samen wandelen".
+    @State var via: MeetVia = .walk
     var sent: () async -> Void
 
     @Environment(AppModel.self) private var model
@@ -28,9 +32,15 @@ struct RequestSheet: View {
                             .frame(width: 64, height: 64)
                         VStack(alignment: .leading) {
                             Text(kind == .meet ? L("Kennismaken met \(dog.name)") : L("Rondje met \(dog.name)")).font(.display(22))
-                            Text(kind == .meet ? L("De eigenaar loopt mee en bekijkt je ID.") : L("Zelfstandig, want de eigenaar vertrouwt je."))
+                            Text(kind == .meet ? via.hint : L("Zelfstandig, want de eigenaar vertrouwt je."))
                                 .font(.subheadline).foregroundStyle(Palette.muted)
+                                .contentTransition(.opacity)
                         }
+                    }
+
+                    // A shelter meets on its own location, during a walk; a solo walk is always a walk.
+                    if kind == .meet && !isShelter {
+                        meetChoice
                     }
 
                     Card {
@@ -81,8 +91,50 @@ struct RequestSheet: View {
         }
     }
 
+    /// The four ways to meet the first time, with their icon and one line each (as on the website).
+    private var meetChoice: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Hoe maken jullie kennis?").font(.headline)
+            ForEach(MeetVia.allCases) { option in
+                Button {
+                    withAnimation(.snappy) { via = option }
+                    Haptics.tap()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: option.symbol)
+                            .font(.body.weight(.semibold))
+                            .foregroundStyle(via == option ? Palette.onGrass : Palette.grass)
+                            .frame(width: 40, height: 40)
+                            .background(via == option ? Palette.grass : Palette.sunken, in: .rect(cornerRadius: 12, style: .continuous))
+                        Text(option.title).font(.subheadline.weight(.semibold)).foregroundStyle(Palette.ink)
+                        Spacer(minLength: 0)
+                        Image(systemName: via == option ? "checkmark.circle.fill" : "circle")
+                            .foregroundStyle(via == option ? Palette.grass : Palette.line)
+                    }
+                    .padding(10)
+                    .background(via == option ? Palette.grassSoft : Palette.surface, in: .rect(cornerRadius: 16, style: .continuous))
+                }
+                .buttonStyle(.plain)
+                .accessibilityAddTraits(via == option ? .isSelected : [])
+            }
+            switch via {
+            case .home:
+                Label("Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie.", systemImage: "shield.lefthalf.filled")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .phone:
+                Label("Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt. Een gesprek telt nog niet als kennismaking in het echt.", systemImage: "phone.fill")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .video:
+                Label("\(Brand.name) heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Een gesprek telt nog niet als kennismaking in het echt.", systemImage: "video.fill")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .walk:
+                EmptyView()
+            }
+        }
+    }
+
     private struct Payload: Encodable {
-        var dogId, kind, date, time, message: String
+        var dogId, kind, meetVia, date, time, message: String
         var weekly: Bool
     }
 
@@ -97,7 +149,7 @@ struct RequestSheet: View {
         let time = String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0)
         struct Sent: Decodable { var ok: Bool; var flagged: Bool }
         do {
-            let result: Sent = try await APIClient.shared.post("/api/v1/requests", Payload(dogId: dog.id, kind: kind.rawValue, date: date, time: time, message: message, weekly: weekly))
+            let result: Sent = try await APIClient.shared.post("/api/v1/requests", Payload(dogId: dog.id, kind: kind.rawValue, meetVia: kind == .meet && !isShelter ? via.rawValue : MeetVia.walk.rawValue, date: date, time: time, message: message, weekly: weekly))
             Haptics.success(.send)
             model.show(result.flagged ? L("Verstuurd. Berichten over geld worden gecontroleerd.") : L("Aanvraag verstuurd! Je hoort het zodra er antwoord is."))
             await model.refreshAppointments()
@@ -116,6 +168,7 @@ struct ReportSheet: View {
     var dogId: String? = nil
     var subjectUserId: String? = nil
     var walkId: String? = nil
+    var orgId: String? = nil
 
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -155,13 +208,13 @@ struct ReportSheet: View {
         }
     }
 
-    private struct Payload: Encodable { var category, description: String; var dogId, subjectUserId, walkId: String? }
+    private struct Payload: Encodable { var category, description: String; var dogId, subjectUserId, walkId, orgId: String? }
 
     private func send() async {
         busy = true
         defer { busy = false }
         do {
-            let _: OK = try await APIClient.shared.post("/api/v1/reports", Payload(category: category, description: text, dogId: dogId, subjectUserId: subjectUserId, walkId: walkId))
+            let _: OK = try await APIClient.shared.post("/api/v1/reports", Payload(category: category, description: text, dogId: dogId, subjectUserId: subjectUserId, walkId: walkId, orgId: orgId))
             if block, let subjectUserId {
                 let _: OK = try await APIClient.shared.post("/api/v1/blocks", ["userId": subjectUserId])
             }

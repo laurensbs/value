@@ -1,9 +1,7 @@
-import { eq } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
-import { getDb } from '@/db'
-import * as s from '@/db/schema'
 import { ageBand, trustBadges } from '@/lib/rules'
 import { apiViewer, fail, json } from '@/server/api'
+import { deleteUserWithFiles } from '@/server/blob-cleanup'
 import { trustSignals, unreadCount } from '@/server/queries'
 
 /** Who is signed in, their profile and their trust signals. */
@@ -39,14 +37,13 @@ export async function GET() {
   })
 }
 
-/** Deleting the account from inside the app (App Store rule 5.1.1(v), and the GDPR). Everything cascades. */
+/** Deleting the account from inside the app (App Store rule 5.1.1(v), and the GDPR). Everything cascades; its own photos leave Vercel Blob. */
 export async function DELETE(request: Request) {
   const viewer = await apiViewer()
   if (viewer instanceof NextResponse) return viewer
   const body = (await request.json().catch(() => null)) as { confirm?: string } | null
   const confirm = String(body?.confirm ?? '').trim().toUpperCase()
   if (confirm !== 'VERWIJDER' && confirm !== 'DELETE') return fail('invalid')
-  const db = await getDb()
-  await db.delete(s.user).where(eq(s.user.id, viewer.userId))
+  await deleteUserWithFiles(viewer.userId)
   return json({ ok: true })
 }

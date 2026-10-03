@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { ChatThread } from '@/components/ChatThread'
 import { DogPortrait } from '@/components/DogPortrait'
+import { MeetViaLabel } from '@/components/MeetVia'
 import { ReportButton } from '@/components/ReportButton'
 import { CHAT_MAX_LENGTH, chatAccess, chatMessages, chatSuggestions, markChatRead, partnerOf } from '@/server/chat'
 import { requireOnboarded } from '@/server/session'
@@ -35,6 +36,8 @@ export default async function ChatPage({ params }: { params: Promise<{ id: strin
         <div className="grow">
           <h1 className="chat-title">{t('title', { dogName: dog.name })}</h1>
           {other ? <p className="muted small">{access.isWalker ? t('withOwner', { name: other }) : t('withWalker', { name: other })}</p> : null}
+          {/* For a first meeting: how it happens, so a call is never mistaken for meeting in person. */}
+          {access.request.kind === 'meet' ? <MeetViaLabel via={access.request.meetVia} /> : null}
         </div>
         <Link href="/requests" className="link-button small">
           {t('back')}

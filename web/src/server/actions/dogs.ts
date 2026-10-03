@@ -1,11 +1,12 @@
 'use server'
 
-import { and, eq } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { deleteOwnDogWithFiles } from '../blob-cleanup'
 import { audit } from '../notify'
 import { saveDogForm } from '../dog-core'
 import { actionViewer, isOrgMember } from '../session'
@@ -39,9 +40,7 @@ export async function setDogStatus(dogId: string, status: 'active' | 'paused' | 
 
 export async function deleteDog(dogId: string): Promise<void> {
   const viewer = await actionViewer()
-  const db = await getDb()
-  await db
-    .delete(s.dog)
-    .where(and(eq(s.dog.id, dogId), eq(s.dog.ownerId, viewer.userId)))
+  // The dog, its walks and their photos, also from Vercel Blob.
+  await deleteOwnDogWithFiles(String(dogId), viewer.userId)
   redirect('/my-dogs')
 }

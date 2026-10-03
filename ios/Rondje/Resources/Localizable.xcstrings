@@ -173,6 +173,50 @@
         }
       }
     },
+    "%@ heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ has no video calling of its own. Agree in the chat which app you use and share the link there."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ no tiene videollamadas propias. Acordad en el chat qué app usáis y compartid allí el enlace."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien."
+          }
+        }
+      }
+    },
+    "%@ heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Een gesprek telt nog niet als kennismaking in het echt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ has no video calling of its own. Agree in the chat which app you use and share the link there. A call doesn't count as meeting in person yet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ no tiene videollamadas propias. Acordad en el chat qué app usáis y compartid allí el enlace. Una llamada aún no cuenta como conoceros en persona."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien. Un appel ne compte pas encore comme une rencontre en vrai."
+          }
+        }
+      }
+    },
     "%@ is gratis voor wandelaars, eigenaren en opvangen. Leden houden het veilig en online, en een deel gaat naar goede doelen." : {
       "localizations" : {
         "en" : {
@@ -2055,6 +2099,28 @@
         }
       }
     },
+    "Bij de eigenaar thuis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At the owner's home"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En casa del dueño"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chez le propriétaire"
+          }
+        }
+      }
+    },
     "Bij jou in de buurt wonen honden van mensen die zelf niet ver meer kunnen lopen. Een extra rondje maakt hun dag." : {
       "localizations" : {
         "en" : {
@@ -2121,6 +2187,28 @@
         }
       }
     },
+    "Blokkeer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquear"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquer"
+          }
+        }
+      }
+    },
     "Blokkeer deze persoon ook" : {
       "localizations" : {
         "en" : {
@@ -2139,6 +2227,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bloquer aussi cette personne"
+          }
+        }
+      }
+    },
+    "Blokkeren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquear"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquer"
           }
         }
       }
@@ -2430,6 +2540,7 @@
       }
     },
     "De eigenaar loopt mee en bekijkt je ID." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2689,6 +2800,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cette tentative de connexion a expiré. Réessaie."
+          }
+        }
+      }
+    },
+    "Deze persoon blokkeren?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block this person?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Bloquear a esta persona?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquer cette personne ?"
           }
         }
       }
@@ -3155,6 +3288,28 @@
         }
       }
     },
+    "Een gesprek telt nog niet als kennismaking in het echt. Het ID bekijken en zelfstandig wandelen toestaan kan pas als jullie elkaar met %@ ontmoet hebben." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A call doesn't count as meeting in person yet. Checking the ID and allowing walks alone is only possible once you've met with %@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una llamada aún no cuenta como conoceros en persona. Comprobar el documento de identidad y permitir paseos en solitario solo es posible cuando os hayáis visto con %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un appel ne compte pas encore comme une rencontre en vrai. Vérifier la pièce d'identité et autoriser les balades seul n'est possible qu'après vous être rencontrés avec %@."
+          }
+        }
+      }
+    },
     "Een hond die ooit beet, is alleen voor wandelaars met ervaring." : {
       "localizations" : {
         "en" : {
@@ -3243,6 +3398,50 @@
         }
       }
     },
+    "Eerst bellen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Call first"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Primero una llamada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "D'abord un appel"
+          }
+        }
+      }
+    },
+    "Eerst even kennismaken aan de telefoon. Daarna spreken jullie af in het echt, met de hond erbij." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get to know each other on the phone first. Then you meet in person, with the dog."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Primero os conocéis por teléfono. Después quedáis en persona, con el perro."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites d'abord connaissance au téléphone. Ensuite, vous vous rencontrez en vrai, avec le chien."
+          }
+        }
+      }
+    },
     "Eerst kennismaken" : {
       "localizations" : {
         "en" : {
@@ -3265,6 +3464,28 @@
         }
       }
     },
+    "Eerst kennismaken in een videogesprek. Daarna spreken jullie af in het echt, met de hond erbij." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get to know each other on a video call first. Then you meet in person, with the dog."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Primero os conocéis por videollamada. Después quedáis en persona, con el perro."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites d'abord connaissance par appel vidéo. Ensuite, vous vous rencontrez en vrai, avec le chien."
+          }
+        }
+      }
+    },
     "Eerst kennismaken, met de eigenaar of de opvang erbij." : {
       "localizations" : {
         "en" : {
@@ -3283,6 +3504,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "D'abord faire connaissance, avec le propriétaire ou le refuge présent."
+          }
+        }
+      }
+    },
+    "Eerst videobellen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video call first"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Primero una videollamada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "D'abord un appel vidéo"
           }
         }
       }
@@ -3947,6 +4190,28 @@
         }
       }
     },
+    "Geblokkeerd. Jullie kunnen elkaar geen berichten meer sturen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocked. You can no longer send each other messages."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqueado. Ya no podéis enviaros mensajes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqué. Vous ne pouvez plus vous envoyer de messages."
+          }
+        }
+      }
+    },
     "Geboortedatum" : {
       "localizations" : {
         "en" : {
@@ -4449,6 +4714,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sexe"
+          }
+        }
+      }
+    },
+    "Gesprek gehad" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Call done"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llamada hecha"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appel effectué"
           }
         }
       }
@@ -5065,6 +5352,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comment tu te sens après une balade, comme état d'esprit."
+          }
+        }
+      }
+    },
+    "Hoe maken jullie kennis?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How would you like to meet?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo os vais a conocer?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment voulez-vous faire connaissance ?"
           }
         }
       }
@@ -6147,6 +6456,28 @@
         }
       }
     },
+    "Je komt langs bij de eigenaar en de hond. De eigenaar bekijkt je ID." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You visit the owner and the dog at home. The owner checks your ID."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visitas al dueño y al perro en su casa. El dueño comprueba tu documento de identidad."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu rends visite au propriétaire et au chien. Le propriétaire vérifie ta pièce d'identité."
+          }
+        }
+      }
+    },
     "Je krijgt een melding als iemand wil wandelen." : {
       "localizations" : {
         "en" : {
@@ -6539,6 +6870,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ton niveau et tes badges"
+          }
+        }
+      }
+    },
+    "Jullie lopen samen een rondje. De eigenaar loopt mee en bekijkt je ID." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You go for a walk together. The owner comes along and checks your ID."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dais un paseo juntos. El dueño os acompaña y comprueba tu documento de identidad."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous faites une balade ensemble. Le propriétaire vous accompagne et vérifie ta pièce d'identité."
           }
         }
       }
@@ -7842,6 +8195,28 @@
         }
       }
     },
+    "Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt. Een gesprek telt nog niet als kennismaking in het echt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once accepted, you see each other's phone number, if filled in. Agree in the chat who calls whom. A call doesn't count as meeting in person yet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando se acepte, veréis vuestros números de teléfono, si los habéis añadido. Acordad en el chat quién llama a quién. Una llamada aún no cuenta como conoceros en persona."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une fois accepté, vous voyez vos numéros de téléphone, s'ils sont renseignés. Convenez dans la discussion de qui appelle qui. Un appel ne compte pas encore comme une rencontre en vrai."
+          }
+        }
+      }
+    },
     "Na een paar rondjes ken je elkaar. Dan kun je zelfstandig wandelen toestaan." : {
       "localizations" : {
         "en" : {
@@ -7882,6 +8257,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En moyenne, tu te sens mieux après une balade qu'avant. Toi seul·e vois ceci."
+          }
+        }
+      }
+    },
+    "Na het gesprek is de volgende stap een kennismaking in het echt, met %@ erbij." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After the call, the next step is meeting in person, with %@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Después de la llamada, el siguiente paso es conoceros en persona, con %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Après l'appel, la prochaine étape est une rencontre en vrai, avec %@."
           }
         }
       }
@@ -8728,6 +9125,28 @@
         }
       }
     },
+    "Open afspraken tussen jullie worden geannuleerd, en jullie kunnen elkaar geen berichten of aanvragen meer sturen. De ander krijgt hier geen melding van." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open appointments between you are cancelled, and you can no longer send each other messages or requests. The other person isn't notified."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las citas abiertas entre vosotros se cancelan y ya no podréis enviaros mensajes ni solicitudes. La otra persona no recibe ningún aviso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les rendez-vous en cours entre vous sont annulés, et vous ne pouvez plus vous envoyer de messages ni de demandes. L'autre personne n'en est pas informée."
+          }
+        }
+      }
+    },
     "Opgeslagen" : {
       "localizations" : {
         "en" : {
@@ -9032,6 +9451,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ville"
+          }
+        }
+      }
+    },
+    "Plan de kennismaking in het echt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plan meeting in person"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planea el encuentro en persona"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planifier la rencontre en vrai"
           }
         }
       }
@@ -9696,6 +10137,28 @@
         }
       }
     },
+    "Samen wandelen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walk together"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pasear juntos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promenade ensemble"
+          }
+        }
+      }
+    },
     "Sinds %@" : {
       "localizations" : {
         "en" : {
@@ -9846,6 +10309,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ne parle pas d'argent : %@ est gratuit. Le propriétaire fournit les sacs et les friandises."
+          }
+        }
+      }
+    },
+    "Spreek in de chat af wie wie belt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agree in the chat who calls whom."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acordad en el chat quién llama a quién."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convenez dans la discussion de qui appelle qui."
           }
         }
       }
@@ -10594,6 +11079,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beaucoup d'expérience"
+          }
+        }
+      }
+    },
+    "Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visiting safely: meet during the day, let someone know where you are, and family or a neighbour are welcome to join."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una visita segura: quedad de día, avisa a alguien de dónde estás, y la familia o un vecino pueden estar presentes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une visite en toute sécurité : rencontrez-vous en journée, préviens quelqu'un de l'endroit où tu es, et la famille ou un voisin peuvent être présents."
+          }
+        }
+      }
+    },
+    "Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visiting safely: meet during the day, let someone know where you are, and family or a neighbour are welcome to join. You only see the address and phone number once accepted."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una visita segura: quedad de día, avisa a alguien de dónde estás, y la familia o un vecino pueden estar presentes. La dirección y el teléfono solo los ves cuando se acepte."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une visite en toute sécurité : rencontrez-vous en journée, préviens quelqu'un de l'endroit où tu es, et la famille ou un voisin peuvent être présents. Tu ne vois l'adresse et le téléphone qu'une fois accepté."
           }
         }
       }

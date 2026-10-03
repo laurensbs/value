@@ -7,6 +7,7 @@ import { isCountry } from '@/lib/countries'
 import { MAX_TRAITS, PROVIDES } from '@/lib/dog-options'
 import { fuzzLatLng, isValidLatLng } from '@/lib/geo'
 import { isAllowedPhotoUrl } from '@/lib/photos'
+import { type BlobDeleter, deleteUnusedFilesLater } from './blob-cleanup'
 import type { FormState } from './actions/profile'
 import { isOrgMember, type OnboardedViewer } from './session'
 
@@ -54,7 +55,11 @@ function parseJsonArray(value: FormDataEntryValue | null): unknown[] {
 }
 
 /** Creates or updates a dog from the dog form's fields. Only its owner or its shelter's staff may save it. */
-export async function saveDogForm(viewer: OnboardedViewer, form: FormData): Promise<FormState & { dogId?: string; orgId?: string | null }> {
+export async function saveDogForm(
+  viewer: OnboardedViewer,
+  form: FormData,
+  opts: { deleteBlobs?: BlobDeleter | null } = {},
+): Promise<FormState & { dogId?: string; orgId?: string | null }> {
   const parsed = dogSchema.safeParse({
     name: form.get('name'),
     breed: form.get('breed') ?? '',
@@ -132,6 +137,10 @@ export async function saveDogForm(viewer: OnboardedViewer, form: FormData): Prom
   if (existing) {
     await db.update(s.dog).set(values).where(eq(s.dog.id, id))
     await db.delete(s.dogSlot).where(eq(s.dogSlot.dogId, id))
+    // Photos taken off a private dog also leave Vercel Blob (unless something else still shows them).
+    // A shelter's photos stay: they belong to the shelter, not to the staff member who edits.
+    const removed = existing.orgId ? [] : existing.photos.filter((p) => !values.photos.includes(p))
+    if (removed.length) deleteUnusedFilesLater(removed, 'a dog photo change', opts.deleteBlobs)
   } else {
     dogId = crypto.randomUUID()
     await db.insert(s.dog).values({ id: dogId, ...values, ownerId: orgId ? null : viewer.userId, orgId })
