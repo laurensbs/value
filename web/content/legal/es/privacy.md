@@ -1,6 +1,6 @@
 ---
 title: Política de privacidad
-version: "0.2"
+version: "0.3"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"
 ---
@@ -47,7 +47,14 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 
 - solicitudes, mensajes enviados con una solicitud, aceptaciones y cancelaciones;
 - paseos previstos y realizados, paseos periódicos, confianza en solitario por perro;
-- asistencia a paseos en grupo de protectoras.
+- asistencia a paseos en grupo de protectoras;
+- mensajes de chat entre paseante y propietario o protectora sobre una solicitud.
+
+**Progreso y recordatorios**
+
+- tus puntos, nivel e insignias, calculados a partir de lo que hiciste en Rondje (como paseos, el test de seguridad o una foto para el propietario). Solo tú los ves;
+- tu objetivo semanal, si eliges uno, y si quieres recordatorios amables;
+- qué recordatorios te enviamos y cuándo, para no enviarte nunca demasiados.
 
 **Seguridad**
 
@@ -91,6 +98,8 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 | Registrar la comprobación de identidad, test de seguridad, limitaciones de cuentas nuevas | Interés legítimo: la seguridad de personas y animales |
 | Valoraciones privadas, denuncias, moderación, bloqueos y expulsiones | Interés legítimo: seguridad y prevención de abusos. En parte, obligación legal (DSA) |
 | Revisión de peticiones de pago, IBAN y enlaces; límites al número de solicitudes | Interés legítimo: prevenir estafas y spam |
+| Mostrar puntos, nivel, insignias y objetivo semanal | Contrato |
+| Recordatorios amables (uno cada tres días como mucho) sobre tus primeros pasos, tu objetivo semanal y el reto de tu ciudad | Interés legítimo: ayudarte a mantener tus paseos. Puedes desactivarlos en tu perfil cuando quieras |
 | Verificar protectoras | Contrato con la protectora, e interés legítimo: evitar cuentas falsas |
 | Gestionar recomendaciones y votos de protectoras: contactar nosotros con ellas y avisarte cuando se unan | Interés legítimo: más protectoras y perros en Rondje. Puedes oponerte siempre |
 | Seguridad, resolución de errores, copias de seguridad | Interés legítimo: una plataforma segura y que funcione |
@@ -114,6 +123,8 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 - **No guardamos copias ni fotos de tu documento de identidad.** En el primer encuentro, el propietario o la protectora mira tu documento. En la app solo marca que la comprobación se ha hecho.
 - Tus **registros de ánimo** (cómo te sientes antes y después del paseo) solo se guardan en tu propio dispositivo. Nunca llegan a nuestros servidores. Si borras la app o sus datos, desaparecen.
 - Sin publicidad, sin cookies de seguimiento, sin analítica de terceros y sin venta de datos.
+- **Sin rachas ni trucos adictivos.** Solo tú ves tus puntos e insignias. Nunca se pierden y nunca dan prioridad. Los recordatorios nunca te amenazan con perder nada.
+- **No leemos tus chats.** Si un mensaje habla de dinero o contiene un enlace, quien lo recibe ve automáticamente un aviso. Los administradores solo ven que ocurrió y cuántas veces, no el texto.
 - No tomamos decisiones sobre ti basadas únicamente en un tratamiento automatizado. Nuestras revisiones automáticas muestran un aviso o marcan un mensaje. Decide una persona.
 
 ## 7. ¿Quién ve tus datos?
@@ -163,6 +174,8 @@ Para el Reino Unido existe una decisión de adecuación de la Comisión Europea 
 | Datos sobre una expulsión, para evitar que alguien vuelva a registrarse | [propuesta: lo más breve posible, p. ej. 2 años – pendiente de verificar] |
 | Solicitudes | [plazo por determinar] |
 | Mensajes de chat entre paseante y propietario o protectora | 1 año |
+| Puntos, nivel, insignias y objetivo semanal | Mientras exista tu cuenta |
+| Recordatorios enviados | Como aviso en tu cuenta mientras exista. Para no enviar demasiados, solo miramos el último año |
 | Recomendaciones y votos de protectoras | Hasta un año después de gestionarlas; las que no se gestionaron, a los dos años |
 | Registros de seguridad | [plazo por determinar, p. ej. 90 días] |
 | Registros de ánimo | No los tenemos. Solo en tu dispositivo, hasta que los borres |

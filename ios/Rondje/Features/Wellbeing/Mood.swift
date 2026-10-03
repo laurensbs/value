@@ -51,7 +51,7 @@ struct MoodPicker: View {
             HStack(spacing: 8) {
                 ForEach(1...5, id: \.self) { value in
                     Button {
-                        Haptics.soft()
+                        Haptics.soft(.select)
                         picked(value)
                     } label: {
                         Text(Self.faces[value - 1])

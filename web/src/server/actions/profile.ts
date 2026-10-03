@@ -1,6 +1,7 @@
 'use server'
 
 import { eq } from 'drizzle-orm'
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getLocale } from 'next-intl/server'
@@ -51,6 +52,8 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
   const p = parsed.data
   // Where someone was going, or the first thing to do for the role they chose.
   const start = form.get('intent') === 'shelter' ? '/shelter' : p.hasDogs && !p.wantsToWalk ? '/my-dogs/new?welcome=1' : '/?welcome=1'
+  // The whole page changes now (tab bar, header): refresh the layout too, not only the next page.
+  revalidatePath('/', 'layout')
   redirect(safeNext(form.get('next') || undefined, start))
 }
 
@@ -130,6 +133,13 @@ export async function setEmailNotifications(on: boolean): Promise<void> {
   const viewer = await actionViewer()
   const db = await getDb()
   await db.update(s.profile).set({ emailNotifications: Boolean(on) }).where(eq(s.profile.userId, viewer.userId))
+}
+
+/** Friendly reminders (first steps, weekly goal, the town's challenge): on or off. */
+export async function setReminders(on: boolean): Promise<void> {
+  const viewer = await actionViewer()
+  const db = await getDb()
+  await db.update(s.profile).set({ reminders: Boolean(on) }).where(eq(s.profile.userId, viewer.userId))
 }
 
 export async function markNotificationsRead(): Promise<void> {

@@ -4,7 +4,7 @@ Een echte iPhone-app in SwiftUI, naast de website. Hij praat met dezelfde server
 
 ## Wat de app doet
 
-- **Inloggen** met e-mail en wachtwoord. De sessie staat alleen in de Keychain van het toestel.
+- **Inloggen** met e-mail en wachtwoord, en (zodra aangezet, zie hieronder) met Apple of Google: hetzelfde account als op de website. De sessie staat alleen in de Keychain van het toestel.
 - **Intro en rol**: bij de eerste start kies je "Ik wil wandelen", "Ik heb een hond" of "Allebei". De intro, de tabs en het beginscherm passen zich daarop aan; eigenaren krijgen een eigen Thuis-scherm. Wisselen kan altijd onder Jij.
 - **Profiel maken** in vier korte stappen, met de gedragscode en voorwaarden.
 - **Ontdekken**: honden in de buurt als lijst of op de kaart (op hun buurt, nooit op een adres), filters, zoeken en groepswandelingen bij opvangen.
@@ -19,6 +19,8 @@ Een echte iPhone-app in SwiftUI, naast de website. Hij praat met dezelfde server
 - **Pushmeldingen** voor aanvragen, chat en rondjes, zodra de Apple-pushsleutel op de server staat.
 - **Herinneringen** een half uur vóór elke geaccepteerde afspraak (lokaal op de telefoon, zonder server).
 - **Widget** "Volgende rondje" voor het beginscherm en het toegangsscherm.
+- **Geluidjes** bij belangrijke momenten: aanvraag of bericht verstuurd, geaccepteerd, rondje start en af ("Goed rondje!"), nieuw niveau of badge, de ademminuut en een zachte toon bij een fout. Niet bij elke tik. Ze volgen de stilteschakelaar, onderbreken nooit muziek en staan onder Jij uit te zetten. `design/sounds.py` maakt ze zelf (geen downloads); de website speelt dezelfde bestanden uit `web/public/sounds`.
+- **Apple Gezondheid** (staat nog uit, zie hieronder): als de gebruiker het aanzet, wordt een rondje een buitenwandeling met tijd, afstand en route (zonder de eerste en laatste 200 m, zodat het huis van de eigenaar er niet in staat) en de ademminuut een mindfulness-sessie. Met een aparte schakelaar ook de stemming na een rondje. Alles blijft op de iPhone; de app leest niets uit Gezondheid.
 
 ## Veiligheid en privacy
 
@@ -45,6 +47,31 @@ Open daarna `ios/Rondje.xcodeproj` in Xcode en kies een iPhone-simulator. Debug-
 
 Voor een echte iPhone of de App Store: zet je team bij `DEVELOPMENT_TEAM` in `project.yml` en zet de App Group `group.app.rondje.mobile` aan in het Apple Developer-portaal.
 
+## Apple Gezondheid aanzetten
+
+De code is klaar, maar staat uit (`RONDJE_FEATURE_HEALTH: NO` in `project.yml`, voor Debug en Release). Zolang het App ID geen HealthKit heeft, zou ondertekenen anders mislukken. Met de vlag uit is er onder Jij geen Gezondheid-onderdeel en roept de app HealthKit nergens aan.
+
+1. Zet in het Apple Developer-account bij Certificates, Identifiers & Profiles → Identifiers → `app.rondje.mobile` de capability **HealthKit** aan en bewaar.
+2. Zet in `project.yml`: `RONDJE_APP_ENTITLEMENTS: Rondje/Resources/Rondje.capabilities.entitlements` (dat is `Rondje.entitlements` plus de extra capabilities, waaronder HealthKit) en `RONDJE_FEATURE_HEALTH: YES`. Draai daarna `xcodegen generate`.
+3. Bouw en kijk onder Jij: "Apple Gezondheid" staat er, standaard uit voor de gebruiker.
+4. App Store Connect: de gezondheidsgegevens blijven op het toestel en gaan niet naar onze server, dus in het privacylabel tellen ze niet als "verzameld". Het privacybeleid moet wel noemen wat de app in Gezondheid bewaart (Apple vraagt dat voor HealthKit-apps), en vermeld bij de review waar de koppeling zit (Jij → Apple Gezondheid).
+
+Alleen in de simulator proberen kan zonder account: `xcodebuild … RONDJE_FEATURE_HEALTH=YES RONDJE_APP_ENTITLEMENTS=Rondje/Resources/Rondje.capabilities.entitlements CODE_SIGN_IDENTITY=-`. Met een gratis Apple ID (`device.sh`) blijft het uit.
+## Inloggen met Apple en Google aanzetten
+
+Staat standaard uit (`RONDJE_FEATURE_SOCIAL_LOGIN: NO` in `project.yml`). De knoppen verschijnen pas als die schakelaar op `YES` staat én de server de aanbieder noemt in `GET /api/v1/config` (`auth.providers`, en `auth.appleNative` voor het Apple-venster in de app).
+
+1. Apple Developer-account (betaald): zet bij de App ID `app.rondje.mobile` de capability **Sign in with Apple** aan.
+2. Server (Vercel): `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `APPLE_CLIENT_ID`, `APPLE_CLIENT_SECRET` en `APPLE_APP_BUNDLE_ID=app.rondje.mobile` (zie `web/README.md`).
+3. In `project.yml`, onder `settings.base`:
+   - `RONDJE_FEATURE_SOCIAL_LOGIN: YES`
+   - `RONDJE_APP_ENTITLEMENTS: Rondje/Resources/Rondje.capabilities.entitlements` (dezelfde rechten als `Rondje.entitlements`, plus Sign in with Apple)
+4. `xcodegen generate` en opnieuw bouwen.
+
+Zonder stap 1 mislukt het ondertekenen met `Rondje.capabilities.entitlements`; laat dan `Rondje.entitlements` staan. Een build zonder de capability (ook `./device.sh` met een gratis Apple ID) toont Apple via de website in plaats van het Apple-venster. Google loopt altijd via een veilig browservenster (ASWebAuthenticationSession met PKCE), zonder extra SDK.
+
+Om de knoppen lokaal te bekijken zonder sleutels: start een Debug-build met het launch-argument `-RondjeForceSocial YES`.
+
 ## Talen
 
 De app is er in het Nederlands (de brontaal), Engels, Frans en Spaans, net als de website. Alle teksten staan in `Rondje/Resources/Localizable.xcstrings`. Nieuwe of gewijzigde tekst vertalen gaat zo:
@@ -63,5 +90,5 @@ Het app-icoon (licht, donker en getint) komt uit `design/icon.mjs`: het merkteke
 ## Nog te doen
 
 - Pushmeldingen werken pas als APNS_KEY_ID, APNS_TEAM_ID, APNS_PRIVATE_KEY en APNS_BUNDLE_ID in Vercel staan (zie docs/LAUNCH.md). Daarvoor is een Apple Developer-account nodig.
-- Inloggen met Apple en passkeys in de app.
+- Inloggen met Apple en Google aanzetten (zie hierboven; wacht op het Apple Developer-account en de sleutels). Passkeys in de app.
 - De app in App Store Connect zetten (wacht op jouw akkoord: dat is een account en een publicatie).

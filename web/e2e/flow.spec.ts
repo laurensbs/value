@@ -2,6 +2,8 @@ import { expect, request, test } from '@playwright/test'
 import { newPerson, onboard, PNG_1X1, shot, signUp, soonSlot, unique } from './helpers'
 
 test('owner and walker: meet request, accept, trust, live walk with GPS, follow along, private feedback', async ({ browser }) => {
+  // The whole journey of two people, celebrations included: longer than one page test, above all on a cold dev server.
+  test.setTimeout(240_000)
   const id = unique()
 
   // --- Owner signs up and adds a dog ---
@@ -42,7 +44,11 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
     walker: true,
     owner: false,
   })
-  await expect(walker.page).toHaveURL(/\/dogs/)
+  // New walkers start on their own home: a welcome, the first steps and the dogs nearby.
+  await expect(walker.page).toHaveURL(/\/\?welcome=1$/)
+  await expect(walker.page.getByRole('heading', { name: 'Welkom bij Rondje, Fleur!' })).toBeVisible()
+  await expect(walker.page.getByRole('link', { name: 'Start' })).toHaveAttribute('href', '/profile/edit')
+  await shot(walker.page, '05-today-walker')
   await walker.page.goto(dogUrl)
   // Contact details stay private until the appointment is accepted.
   await expect(walker.page.getByText('Oudegracht 1')).toHaveCount(0)
@@ -132,11 +138,24 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   const chatUrl = `/api/v1/requests/${requestId}/messages`
   const sent = await app.post(chatUrl, { data: { body: 'Bello doet het super!' }, headers: bearer })
   expect((await sent.json()).chat.body).toBe('Bello doet het super!')
-  expect((await (await app.get(chatUrl, { headers: bearer })).json()).messages).toHaveLength(3)
+  // Talk of money is flagged, from the app too; the owner sees a warning under it.
+  const money = await app.post(chatUrl, { data: { body: 'Zal ik €10 overmaken voor de koekjes?' }, headers: bearer })
+  expect((await money.json()).chat.flags).toContain('money')
+  expect((await (await app.get(chatUrl, { headers: bearer })).json()).messages).toHaveLength(4)
+  // Notifications come with a ready text and the page they lead to.
+  const notes = (await (await app.get('/api/v1/notifications', { headers: bearer })).json()).notifications
+  expect(notes[0]).toMatchObject({ text: expect.stringMatching(/\w/), href: expect.stringMatching(/^\//) })
+  // Reminders can be switched off on their own, without touching the profile.
+  expect((await app.patch('/api/v1/profile', { data: { reminders: false }, headers: bearer })).status()).toBe(200)
+  expect((await (await app.get('/api/v1/me', { headers: bearer })).json()).profile.reminders).toBe(false)
+  expect((await app.patch('/api/v1/profile', { data: { reminders: true }, headers: bearer })).status()).toBe(200)
   // The iPhone app registers its push token; anything that isn't one is refused.
   expect((await app.post('/api/v1/devices', { data: { token: 'a'.repeat(64), sandbox: true }, headers: bearer })).status()).toBe(200)
   expect((await app.post('/api/v1/devices', { data: { token: 'not-a-token' }, headers: bearer })).status()).toBe(400)
   await app.dispose()
+  await owner.page.goto(`/chat/${requestId}`)
+  await expect(owner.page.getByRole('note').filter({ hasText: 'Rondje is gratis' })).toBeVisible()
+  await shot(owner.page, '07b-chat-warning')
 
   // --- Owner follows along live ---
   await owner.page.goto(`/follow/${walkId}`)
@@ -156,8 +175,20 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // --- Walker ends the walk and gives private feedback ---
   await walker.page.getByRole('button', { name: 'Rondje klaar' }).click()
   await walker.page.getByRole('button', { name: 'Ja, rondje klaar' }).click()
-  await expect(walker.page).toHaveURL(/ended=1/)
+  // First the level and badge moment (once), then "Goed rondje!" with the private mood check.
+  // The page drops ?ended=1 from the address straight away, so a reload doesn't replay it.
+  const party = walker.page.getByRole('dialog', { name: 'Level omhoog!' })
+  await expect(party).toBeVisible()
+  await expect(party.getByText('Eerste rondje')).toBeVisible()
+  await shot(walker.page, '10a-celebration')
+  await party.getByRole('button', { name: 'Top!' }).click()
+  await expect(party).toBeHidden()
+  await expect(walker.page.getByRole('heading', { name: 'Goed rondje!' })).toBeVisible()
   await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
+  // A walk, the walk report and a photo for the owner.
+  await expect(walker.page.getByText('+35 punten')).toBeVisible()
+  await expect(walker.page.getByText(/Bello en jij: Net kennisgemaakt/)).toBeVisible()
+  await expect(walker.page.getByRole('link', { name: 'Plan nog een rondje met Bello' })).toHaveAttribute('href', /#plan$/)
   await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
   await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('1× Gedronken')
   await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
@@ -170,7 +201,11 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page.getByText(/Dank je. Als er iets is/)).toBeVisible()
 
   // --- The owner's live page turns into the summary with their own feedback form ---
-  await expect(owner.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible({ timeout: 20_000 })
+  // Bello's first walk brings the owner to level 2 as well.
+  await expect(owner.page.getByRole('dialog', { name: 'Level omhoog!' })).toBeVisible({ timeout: 20_000 })
+  await owner.page.getByRole('button', { name: 'Top!' }).click()
+  await expect(owner.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
+  await expect(owner.page.getByText('+10 punten')).toBeVisible()
   await owner.page.getByLabel('Blij en moe').check()
   await owner.page.getByRole('group', { name: /op tijd terug/ }).getByLabel('Ja').check()
   await owner.page.getByRole('group', { name: /weer met deze wandelaar/ }).getByLabel('Ja').check()
@@ -184,6 +219,19 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.getByRole('button', { name: 'Nakijken' }).click()
   await expect(walker.page.getByText(/Gehaald!/)).toBeVisible()
   await shot(walker.page, '11-quiz')
+  // Home again: the celebration was seen, the first steps moved on, and the week shows the walk.
+  await walker.page.goto('/')
+  await expect(walker.page.getByRole('heading', { name: /Fleur/ }).first()).toBeVisible()
+  const quizParty = walker.page.getByRole('dialog', { name: 'Nieuwe penning!' })
+  await expect(quizParty).toBeVisible()
+  await expect(quizParty.getByText('Veiligheidsquiz gehaald')).toBeVisible()
+  await quizParty.getByRole('button', { name: 'Top!' }).click()
+  await expect(walker.page.getByText('1 van 1 rondjes').or(walker.page.getByText('Weekdoel gehaald!'))).toBeVisible()
+  await shot(walker.page, '11b-today-after-walk')
+  await walker.page.goto('/progress')
+  await expect(walker.page.getByRole('heading', { name: 'Snuffelaar' })).toBeVisible()
+  await expect(walker.page.getByText('Net kennisgemaakt')).toBeVisible()
+  await shot(walker.page, '11c-progress')
   await walker.page.goto('/profile')
   await shot(walker.page, '12-profile')
   await walker.page.goto('/requests')

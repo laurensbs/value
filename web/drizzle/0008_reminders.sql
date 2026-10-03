@@ -1,0 +1,1 @@
+ALTER TABLE "profile" ADD COLUMN "reminders" boolean DEFAULT true NOT NULL;

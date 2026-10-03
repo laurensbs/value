@@ -68,7 +68,7 @@ struct ReportSheet: View {
                 let _: OK = try await APIClient.shared.post("/api/v1/blocks", ["userId": subjectUserId])
             }
             remember()
-            Haptics.success()
+            Haptics.success(nil)
             model.show(L("Bedankt. We kijken ernaar."), symbol: "shield.lefthalf.filled")
             dismiss()
         } catch {

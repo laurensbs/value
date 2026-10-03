@@ -72,7 +72,11 @@ export default function LeafletMap({
     markerLayer.current = L.layerGroup().addTo(m)
     m.on('click', (e: L.LeafletMouseEvent) => pickRef.current?.({ lat: e.latlng.lat, lng: e.latlng.lng }))
     map.current = m
+    // A map that was hidden (a step in a flow, a closed section) has no size until it is shown.
+    const resize = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(() => m.invalidateSize())
+    resize?.observe(el.current)
     return () => {
+      resize?.disconnect()
       m.remove()
       map.current = null
       // Layers belonged to the removed map; the next map (e.g. after a remount) needs new ones.

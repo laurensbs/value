@@ -33,7 +33,7 @@ export default async function FollowPage({ params }: { params: Promise<{ id: str
         dog={dog}
         route={points}
         role="owner"
-        viewerId={viewer.userId}
+        viewer={viewer}
         otherUserId={walk.walkerId}
         fallbackCenter={center}
       />

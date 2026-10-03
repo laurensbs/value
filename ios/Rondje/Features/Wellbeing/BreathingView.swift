@@ -1,7 +1,8 @@
 import SwiftUI
 
 /// One calm minute before a walk: breathe in for 4 seconds, out for 6, with a circle that grows and shrinks
-/// and a soft haptic at each turn. Optional, skippable, and nothing is stored.
+/// and a soft haptic and sound at each turn. Optional and skippable. Nothing is stored, unless the walker
+/// switched on Apple Health: then the minute is saved there as a mindful session, on this iPhone only.
 struct BreathingView: View {
     /// When set, a 'Niet meer tonen' button sits under the main button.
     var stopOffering: (() -> Void)? = nil
@@ -9,6 +10,7 @@ struct BreathingView: View {
     @State private var expanded = false
     @State private var secondsLeft = 60
     @State private var inhale = true
+    @State private var startedAt = Date.now
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let inSeconds = 4.0
@@ -60,6 +62,7 @@ struct BreathingView: View {
         .padding(24)
         .background(Palette.walkBackground.ignoresSafeArea())
         .task { await run() }
+        .onDisappear { HealthService.shared.saveMindfulMinute(start: startedAt, end: .now) }
         .task {
             // The countdown ticks every second, independent of the breathing rhythm.
             let start = Date.now
@@ -73,11 +76,11 @@ struct BreathingView: View {
     private func run() async {
         while !Task.isCancelled && secondsLeft > 0 {
             inhale = true
-            Haptics.soft()
+            Haptics.soft(.breatheIn)
             withAnimation(.easeInOut(duration: inSeconds)) { expanded = true }
             try? await Task.sleep(for: .seconds(inSeconds))
             inhale = false
-            Haptics.soft()
+            Haptics.soft(.breatheOut)
             withAnimation(.easeInOut(duration: outSeconds)) { expanded = false }
             try? await Task.sleep(for: .seconds(outSeconds))
         }

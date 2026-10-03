@@ -168,8 +168,15 @@ struct ActiveWalkView: View {
         do {
             let distance = try await walk.finish()
             WalkLog.record(WalkLogEntry(walkId: info.walkId, dogId: model.appointments.outgoing.first { $0.walkId == info.walkId }?.dog.id, dogName: info.dogName, look: info.look, side: "walker", person: nil, distanceM: distance, minutes: max(1, Int(Date.now.timeIntervalSince(info.startedAt) / 60)), photos: photos.count, date: info.startedAt))
-            Haptics.success()
+            let endedAt = Date.now
+            Haptics.success(.finish)
             finished = (info, distance)
+            let route = walk.locations
+            Task {
+                if let note = await HealthService.shared.saveWalk(start: info.startedAt, end: endedAt, distanceM: Double(distance), locations: route) {
+                    model.show(note, symbol: "heart.text.square", tint: Palette.muted)
+                }
+            }
             await model.refreshAppointments()
         } catch {
             Haptics.error()
@@ -304,7 +311,7 @@ struct FeedbackSheet: View {
             if role == .walker, let dogId = model.appointments.outgoing.first(where: { $0.walkId == walkId })?.dog.id {
                 Keepsakes.shared.recordWalkFeedback(dogId: dogId, behaviour: choice, feltSafe: yes2)
             }
-            Haptics.success()
+            Haptics.success(.send)
             model.show(L("Bedankt voor je antwoord"))
             close()
             Task { await model.refreshAppointments() }

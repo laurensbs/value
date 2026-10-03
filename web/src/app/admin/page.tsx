@@ -1,4 +1,4 @@
-import { and, count, desc, eq, inArray, isNotNull, ne, sql } from 'drizzle-orm'
+import { and, arrayOverlaps, count, desc, eq, gt, inArray, isNotNull, ne, sql } from 'drizzle-orm'
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { BanUser, HideDog, OrgDecision, RemoveDemo, ResolveReport, TipActions } from '@/components/AdminTools'
@@ -6,7 +6,9 @@ import { dbMode, getDb } from '@/db'
 import * as s from '@/db/schema'
 import { enabledSocialProviders } from '@/lib/auth'
 import { emailMatchesWebsite, registryLookupUrl } from '@/lib/org-fields'
+import { CHAT_WARN_FLAGS } from '@/lib/rules'
 import { adminEmails, siteUrl } from '@/lib/site'
+import { fromNow } from '@/lib/time'
 import { tipKey } from '@/lib/tips'
 import { growthKpis } from '@/server/kpis'
 import { requireAdmin } from '@/server/session'
@@ -50,6 +52,23 @@ export default async function AdminPage() {
     .where(sql`cardinality(${s.walkRequest.flags}) > 0`)
     .orderBy(desc(s.walkRequest.createdAt))
     .limit(30)
+  // Chats stay private, also for admins: only who sent messages about money or with links, and how many.
+  const flaggedChatRows = await db
+    .select({ senderId: s.chatMessage.senderId, name: s.profile.firstName, flags: s.chatMessage.flags })
+    .from(s.chatMessage)
+    .innerJoin(s.profile, eq(s.profile.userId, s.chatMessage.senderId))
+    .where(and(arrayOverlaps(s.chatMessage.flags, [...CHAT_WARN_FLAGS]), gt(s.chatMessage.createdAt, fromNow(-30 * 24 * 60 * 60_000))))
+    .limit(500)
+  const flaggedChats = [
+    ...flaggedChatRows
+      .reduce((map, r) => {
+        const entry = map.get(r.senderId) ?? { senderId: r.senderId, name: r.name, n: 0, flags: new Set<string>() }
+        entry.n++
+        for (const f of r.flags) if (CHAT_WARN_FLAGS.includes(f)) entry.flags.add(f)
+        return map.set(r.senderId, entry)
+      }, new Map<string, { senderId: string; name: string; n: number; flags: Set<string> }>())
+      .values(),
+  ].sort((a, b) => b.n - a.n)
   const pendingOrgs = await db.select().from(s.organization).where(eq(s.organization.status, 'pending')).orderBy(desc(s.organization.createdAt))
   const banned = await db
     .select({ userId: s.profile.userId, firstName: s.profile.firstName, reason: s.profile.banReason })
@@ -101,6 +120,14 @@ export default async function AdminPage() {
   return (
     <div className="stack-l">
       <h1>{t('admin.title')}</h1>
+
+      <Link href="/admin/launch" className="card spread" style={{ color: 'inherit', textDecoration: 'none', flexWrap: 'nowrap' }}>
+        <span className="stack-s">
+          <strong>{t('launch.entry.title')}</strong>
+          <span className="muted small">{t('launch.entry.text')}</span>
+        </span>
+        <span aria-hidden="true">→</span>
+      </Link>
 
       <section className="stack-s">
         <h2>{t('admin.stats')}</h2>
@@ -255,6 +282,30 @@ export default async function AdminPage() {
                   </div>
                   <p className="small">{r.message}</p>
                   <BanUser userId={r.walkerId} banned={false} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        <h3>{t('admin.flaggedChats')}</h3>
+        <p className="muted small">{t('admin.flaggedChatsHint')}</p>
+        {flaggedChats.length === 0 ? (
+          <p className="muted">{t('admin.none')}</p>
+        ) : (
+          <ul className="list">
+            {flaggedChats.map((c) => (
+              <li key={c.senderId} className="list-item">
+                <div className="grow stack-s">
+                  <div className="row">
+                    <strong>{c.name}</strong>
+                    <span className="muted small">{t('admin.flaggedChatCount', { n: c.n })}</span>
+                    {[...c.flags].map((f) => (
+                      <span key={f} className="pill warn">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                  <BanUser userId={c.senderId} banned={false} />
                 </div>
               </li>
             ))}

@@ -1,6 +1,6 @@
 ---
 title: Privacyverklaring
-version: "0.2"
+version: "0.3"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
 ---
@@ -47,7 +47,14 @@ Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: o
 
 - verzoeken, berichten bij een verzoek, acceptaties en afzeggingen;
 - geplande en gelopen wandelingen, vaste afspraken, solo-vertrouwen per hond;
-- aanwezigheid bij groepswandelingen van opvangen.
+- aanwezigheid bij groepswandelingen van opvangen;
+- chatberichten tussen wandelaar en eigenaar of opvang over een verzoek.
+
+**Voortgang en herinneringen**
+
+- je punten, niveau en penningen, berekend uit wat je op Rondje deed (zoals gelopen rondjes, de veiligheidsquiz of een foto voor de eigenaar). Alleen jij ziet ze;
+- je weekdoel, als je er een kiest, en of je vriendelijke herinneringen wilt;
+- welke herinneringen we je stuurden en wanneer, zodat we er nooit te veel sturen.
 
 **Veiligheid**
 
@@ -91,6 +98,8 @@ Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: o
 | ID-check registreren, veiligheidsquiz, beperkingen voor nieuwe accounts | Gerechtvaardigd belang: veiligheid van mensen en dieren |
 | Privé-feedback, meldingen, moderatie, blokkades en uitsluitingen | Gerechtvaardigd belang: veiligheid en misbruik voorkomen. Deels wettelijke plicht (DSA) |
 | Controle op betaalverzoeken, IBAN's en links; limieten op het aantal verzoeken | Gerechtvaardigd belang: oplichting en spam voorkomen |
+| Punten, niveau, penningen en weekdoel tonen | Overeenkomst |
+| Vriendelijke herinneringen (hooguit één per drie dagen) over je eerste stappen, je weekdoel en de uitdaging in je stad | Gerechtvaardigd belang: je helpen de rondjes vol te houden. Uitzetten kan altijd in je profiel |
 | Opvangen verifiëren | Overeenkomst met de opvang, en gerechtvaardigd belang: nepaccounts voorkomen |
 | Tips en stemmen voor opvangen verwerken: opvangen zelf benaderen en je laten weten als ze aansluiten | Gerechtvaardigd belang: meer opvangen en honden op Rondje. Je kunt altijd bezwaar maken |
 | Beveiliging, foutoplossing, back-ups | Gerechtvaardigd belang: een veilig en werkend platform |
@@ -114,6 +123,8 @@ Gebruiken we een gerechtvaardigd belang? Dan hebben we afgewogen dat dat belang 
 - We bewaren **geen kopie of foto van je identiteitsbewijs**. Bij de kennismaking kijkt de eigenaar of opvang naar je ID. In de app vinkt die persoon alleen aan dat de check is gedaan.
 - Je **stemming-check-ins** (hoe voel je je voor en na de wandeling) worden alleen op je eigen apparaat opgeslagen. Ze komen nooit op onze servers. Verwijder je de app of de app-gegevens, dan zijn ze weg.
 - Geen advertenties, geen trackingcookies, geen analyse door derden, geen verkoop van gegevens.
+- **Geen streaks of verslavende trucs.** Je punten en penningen ziet alleen jij. Ze gaan nooit verloren en geven geen voorrang. Herinneringen dreigen nooit met verlies.
+- We **lezen je chats niet**. Gaat een bericht over geld of staat er een link in, dan ziet de ontvanger automatisch een waarschuwing. Beheerders zien alleen dat het gebeurde en hoe vaak, niet de tekst.
 - Geen besluiten over jou die alleen door een computer worden genomen. Onze automatische controles geven een waarschuwing of markeren een bericht. Een medewerker beslist.
 
 ## 7. Wie ziet je gegevens?
@@ -163,6 +174,8 @@ Wil je meer weten over deze waarborgen? Mail ons.
 | Gegevens over een uitsluiting, om te voorkomen dat iemand zich opnieuw aanmeldt | [voorstel: zo kort mogelijk, bijv. 2 jaar – te controleren] |
 | Verzoeken | [bewaartermijn vast te stellen] |
 | Chatberichten tussen wandelaar en eigenaar of opvang | 1 jaar |
+| Punten, niveau, penningen en weekdoel | Zolang je account bestaat |
+| Verstuurde herinneringen | Als melding in je account zolang je account bestaat. Om er niet te veel te sturen, kijken we alleen naar het laatste jaar |
 | Tips en stemmen voor opvangen | Tot een jaar nadat we ze hebben afgehandeld; tips waar niets mee gebeurde na twee jaar |
 | Beveiligingslogs | [bewaartermijn vast te stellen, bijv. 90 dagen] |
 | Stemming-check-ins | Niet bij ons. Alleen op je eigen apparaat, tot je ze verwijdert |

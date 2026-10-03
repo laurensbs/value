@@ -194,7 +194,7 @@ struct BadgesView: View {
 
     private func saveGoal() async {
         let _: OK? = try? await APIClient.shared.patch("/api/v1/profile", GoalPayload(weeklyGoal: goal))
-        Haptics.tap()
+        Haptics.tap(.select)
         await store.load()
     }
 
@@ -267,7 +267,7 @@ struct LevelUpView: View {
         .frame(maxWidth: .infinity)
         .background(Palette.walkBackground.ignoresSafeArea())
         .onAppear {
-            Haptics.success()
+            Haptics.success(.levelUp)
             withAnimation(.spring(duration: 0.9, bounce: 0.5)) { pop = true }
         }
     }

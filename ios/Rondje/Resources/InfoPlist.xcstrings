@@ -90,6 +90,64 @@
         }
       }
     },
+    "NSHealthShareUsageDescription": {
+      "comment": "Privacy - Health Share Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app reads nothing from Apple Health. It only saves something there if you turn that on."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app no lee nada de Apple Salud. Solo guarda algo allí si tú lo activas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'app ne lit rien dans Apple Santé. Elle n'y enregistre quelque chose que si tu l'actives."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De app leest niets uit Apple Gezondheid. Hij bewaart er alleen iets in als jij dat aanzet."
+          }
+        }
+      }
+    },
+    "NSHealthUpdateUsageDescription": {
+      "comment": "Privacy - Health Update Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only if you turn it on: your walks are saved as a walk, the breathing minute as mindfulness and, if you like, how you feel after a walk. It stays on this iPhone and never goes to our server."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo si lo activas: tus paseos se guardan como caminata, el minuto de respiración como mindfulness y, si quieres, cómo te sientes después de un paseo. Se queda en este iPhone y nunca va a nuestro servidor."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seulement si tu l'actives : tes balades sont enregistrées comme marche, la minute de respiration comme pleine conscience et, si tu le souhaites, comment tu te sens après une balade. Cela reste sur cet iPhone et ne va jamais sur notre serveur."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen als jij het aanzet: dan worden je rondjes als wandeling bewaard, de ademminuut als mindfulness en, als je wilt, hoe je je na een rondje voelt. Dat blijft op deze iPhone en gaat nooit naar onze server."
+          }
+        }
+      }
+    },
     "NSLocationAlwaysAndWhenInUseUsageDescription": {
       "comment": "Privacy - Location Always and When In Use Usage Description",
       "localizations": {

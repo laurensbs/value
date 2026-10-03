@@ -39,6 +39,7 @@ export default async function EditProfilePage() {
           photoUrl: p.photoUrl,
           wantsToWalk: p.wantsToWalk,
           hasDogs: p.hasDogs,
+          weeklyGoal: p.weeklyGoal ?? null,
           pppLicense: p.pppLicense,
         }}
       />

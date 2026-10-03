@@ -24,7 +24,7 @@ export async function progressJson(p: Progress) {
     },
     levelUp: p.levelUp,
     roles: p.roles,
-    week: { goal: p.weeklyGoal, walks: p.walksThisWeek, activeWeeks: p.activeWeeks },
+    week: { goal: p.weeklyGoal, walks: p.walksThisWeek, days: p.weekDays, activeWeeks: p.activeWeeks },
     badges: p.badges.map((b) => ({
       key: b.key,
       icon: b.icon,
@@ -44,6 +44,7 @@ export async function progressJson(p: Progress) {
     newAwards: p.newAwards.map((a) => ({
       key: a.key,
       tier: a.tier,
+      icon: BADGES.find((b) => b.key === a.key)?.icon ?? 'paw',
       name: t(`badges.${a.key}.name`),
       title: t(`badges.${a.key}.tier`, { n: tierOf(a.key, a.tier) }),
       color: tierColor(a.tier),

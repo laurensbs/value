@@ -58,6 +58,8 @@ export const profile = pgTable(
     weeklyGoal: integer('weekly_goal'),
     /** The highest level this person has seen celebrated, so a level-up is shown once. */
     seenLevel: integer('seen_level').notNull().default(1),
+    /** Friendly reminders (weekly goal, the town's challenge, first steps). Never more than one every few days. */
+    reminders: boolean('reminders').notNull().default(true),
     bannedAt: timestamp('banned_at'),
     banReason: text('ban_reason'),
     createdAt: created(),
@@ -541,4 +543,40 @@ export const suggestion = pgTable(
     // One vote per person per directory shelter. Free-form tips have no directory id (NULLs never clash).
     uniqueIndex('suggestion_vote_idx').on(t.suggestedBy, t.directoryId),
   ],
+)
+
+/**
+ * The admin's launch hub (/admin/launch): one row per launch task, by the stable key from
+ * src/server/launch-core.ts. Milestones that were reached are stored here too (key
+ * 'milestone:<id>'), so a badge stays even if the data behind it is deleted later.
+ */
+export const launchTask = pgTable('launch_task', {
+  key: text('key').primaryKey(),
+  status: text('status').notNull().default('open'), // open | done
+  doneAt: timestamp('done_at'),
+  note: text('note').notNull().default(''),
+})
+
+/**
+ * People and organisations the admin wants to approach for the launch (shelters, vets, student
+ * associations, neighbourhood groups, local press). Business contact details only, entered by hand,
+ * and only here in the database. Rondje never sends anything itself: the admin mails from their own
+ * mail app and marks the status by hand (todo → sent → replied → meeting).
+ */
+export const outreachContact = pgTable(
+  'outreach_contact',
+  {
+    id: text('id').primaryKey(),
+    audience: text('audience').notNull(),
+    name: text('name').notNull().default(''),
+    organisation: text('organisation').notNull().default(''),
+    email: text('email'),
+    phone: text('phone'),
+    city: text('city').notNull().default(''),
+    status: text('status').notNull().default('todo'),
+    lastContactAt: timestamp('last_contact_at'),
+    note: text('note').notNull().default(''),
+    createdAt: created(),
+  },
+  (t) => [index('outreach_contact_status_idx').on(t.status, t.createdAt)],
 )

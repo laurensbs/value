@@ -133,6 +133,7 @@ struct DiscoverView: View {
         }
         .onChange(of: LocationService.shared.allowed) { _, allowed in if allowed { Task { await load() } } }
         .sensoryFeedback(.selection, trigger: filter)
+        .onChange(of: filter) { SoundFX.play(.select) }
     }
 
     private var header: some View {

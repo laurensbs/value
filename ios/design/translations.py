@@ -3,10 +3,6 @@
 # Keep placeholders (%@, %lld) in the same order as the Dutch key.
 
 T = {
-    "Je goed voelen": ("Feeling good", "Se sentir bien", "Sentirse bien"),
-    "Voor mensen die het even zwaar hebben. Een rondje buiten kan je dag goed doen.": ("For people going through a hard time. A walk outside can do your day good.", "Pour les personnes qui traversent une période difficile. Une balade dehors peut faire du bien à ta journée.", "Para personas que lo están pasando mal. Un paseo al aire libre puede alegrarte el día."),
-    "Hulphonden": ("Assistance dogs", "Chiens d'assistance", "Perros de asistencia"),
-    "Honden die mensen met een beperking of trauma helpen zelfstandig te leven.": ("Dogs that help people with a disability or trauma live independently.", "Des chiens qui aident les personnes en situation de handicap ou ayant vécu un traumatisme à vivre de façon autonome.", "Perros que ayudan a personas con discapacidad o trauma a vivir de forma independiente."),
     "Waar we aan willen bijdragen": ("What we want to contribute to", "Ce à quoi nous voulons contribuer", "A qué queremos contribuir"),
     "We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies welke organisaties het zijn en waar je bijdrage heen gaat.": ("We are still making arrangements. Once they are settled, you will see exactly which organisations they are and where your contribution goes.", "Nous sommes encore en train de nous organiser. Dès que ce sera réglé, tu verras ici précisément de quelles organisations il s'agit et où va ta contribution.", "Todavía estamos cerrando acuerdos. En cuanto estén listos, verás aquí exactamente qué organizaciones son y adónde va tu aportación."),
     " gelopen": (" walked", " parcourus", " recorridos"),
@@ -439,7 +435,6 @@ T = {
     "Aan de slag": ("Let's go", "C'est parti", "Empezar"),
     "Acht korte vragen. Nodig voor zelfstandige rondjes.": ("Eight short questions. Needed for solo walks.", "Huit petites questions. Nécessaire pour les balades en solo.", "Ocho preguntas cortas. Necesario para paseos en solitario."),
     "Bij jou in de buurt wonen honden van mensen die zelf niet ver meer kunnen lopen. Een extra rondje maakt hun dag.": ("Near you live dogs of people who can't walk far any more. An extra walk makes their day.", "Près de chez toi vivent des chiens de personnes qui ne peuvent plus marcher loin. Une balade de plus illumine leur journée.", "Cerca de ti viven perros de personas que ya no pueden caminar mucho. Un paseo extra les alegra el día."),
-    "Buiten zijn met een hond helpt tegen stress en eenzaamheid. Het is gratis, zonder reclame, en veilig.": ("Being outside with a dog helps against stress and loneliness. It's free, without ads, and safe.", "Être dehors avec un chien aide contre le stress et la solitude. C'est gratuit, sans pub et sûr.", "Estar fuera con un perro ayuda contra el estrés y la soledad. Es gratis, sin anuncios y seguro."),
     "Daarna wandel je zelfstandig. De eigenaar kijkt live mee, en jij stuurt een foto of een plasje door.": ("After that you walk on your own. The owner watches live, and you send a photo or a pee update.", "Ensuite tu te promènes seul·e. Le propriétaire suit en direct, et tu envoies une photo ou un pipi.", "Después paseas por tu cuenta. El dueño lo sigue en directo y tú envías una foto o un pis."),
     "Eerst kennismaken": ("First, meet", "D'abord, faire connaissance", "Primero, conoceros"),
     "Eigenaren zien wie je bent.": ("Owners see who you are.", "Les propriétaires voient qui tu es.", "Los dueños ven quién eres."),
@@ -573,6 +568,80 @@ T = {
         "So you see dogs near you, and during a walk the owner can watch live. Your exact location is never shown on your profile.",
         "Pour voir les chiens près de chez toi, et pendant une balade le propriétaire peut suivre en direct. Ta position exacte n'apparaît jamais sur ton profil.",
         "Para ver perros cerca de ti, y durante un paseo el dueño puede seguirlo en directo. Tu ubicación exacta nunca aparece en tu perfil."),
+    # --- parity: geluid en gezondheid ---
+    "Geluidjes": ("Sounds", "Petits sons", "Sonidos"),
+    "Zachte geluidjes bij belangrijke momenten. Staat je iPhone op stil, dan hoor je niets.": (
+        "Soft little sounds at the moments that matter. With your iPhone on silent, you hear nothing.",
+        "De petits sons doux aux moments importants. Si ton iPhone est en mode silencieux, tu n'entends rien.",
+        "Sonidos suaves en los momentos importantes. Si tu iPhone está en silencio, no oyes nada."),
+    "Apple Gezondheid": ("Apple Health", "Apple Santé", "Apple Salud"),
+    "Rondjes bewaren in Apple Gezondheid": ("Save walks in Apple Health", "Enregistrer les balades dans Apple Santé", "Guardar paseos en Apple Salud"),
+    "Als buitenwandeling met tijd, afstand en route, en de ademminuut als mindfulness. Begin en eind van de route laten we weg, zodat niemands huis erin staat.": (
+        "As an outdoor walk with time, distance and route, and the breathing minute as mindfulness. We leave out the start and end of the route, so nobody's home is in it.",
+        "Comme marche en extérieur avec durée, distance et parcours, et la minute de respiration comme pleine conscience. Nous retirons le début et la fin du parcours, pour que le domicile de personne n'y figure.",
+        "Como caminata al aire libre con tiempo, distancia y ruta, y el minuto de respiración como mindfulness. Quitamos el inicio y el final de la ruta, para que no aparezca la casa de nadie."),
+    "Stemming na een rondje bewaren in Apple Gezondheid": ("Save your mood after a walk in Apple Health", "Enregistrer ton humeur après une balade dans Apple Santé", "Guardar tu estado de ánimo después de un paseo en Apple Salud"),
+    "Hoe je je na een rondje voelt, als gemoedstoestand.": ("How you feel after a walk, as a state of mind.", "Comment tu te sens après une balade, comme état d'esprit.", "Cómo te sientes después de un paseo, como estado de ánimo."),
+    "Niet beschikbaar op dit toestel": ("Not available on this device", "Non disponible sur cet appareil", "No disponible en este dispositivo"),
+    "Alleen op deze iPhone. %@ leest niets uit Gezondheid en stuurt er niets van naar de server.": (
+        "Only on this iPhone. %@ reads nothing from Health and sends none of it to the server.",
+        "Uniquement sur cet iPhone. %@ ne lit rien dans Santé et n'en envoie rien au serveur.",
+        "Solo en este iPhone. %@ no lee nada de Salud y no envía nada de ello al servidor."),
+    "Apple Gezondheid is niet beschikbaar op dit toestel.": ("Apple Health is not available on this device.", "Apple Santé n'est pas disponible sur cet appareil.", "Apple Salud no está disponible en este dispositivo."),
+    "Dat lukte even niet. Probeer het later nog eens.": ("That didn't work just now. Please try again later.", "Ça n'a pas marché. Réessaie plus tard.", "No ha funcionado. Inténtalo más tarde."),
+    "%@ mag nog niets bewaren in Gezondheid. Dat zet je aan in Instellingen > Privacy en beveiliging > Gezondheid.": (
+        "%@ may not save anything in Health yet. Turn it on in Settings > Privacy & Security > Health.",
+        "%@ n'a pas encore le droit d'enregistrer dans Santé. Active-le dans Réglages > Confidentialité et sécurité > Santé.",
+        "%@ aún no puede guardar nada en Salud. Actívalo en Ajustes > Privacidad y seguridad > Salud."),
+    "Niet bewaard in Apple Gezondheid: %@ heeft daar geen toestemming meer voor.": (
+        "Not saved in Apple Health: %@ no longer has permission for that.",
+        "Non enregistré dans Apple Santé : %@ n'en a plus l'autorisation.",
+        "No se guardó en Apple Salud: %@ ya no tiene permiso para ello."),
+    "Dit rondje kon niet in Apple Gezondheid worden bewaard.": ("This walk could not be saved in Apple Health.", "Cette balade n'a pas pu être enregistrée dans Apple Santé.", "No se pudo guardar este paseo en Apple Salud."),
+    # Info.plist
+    "NSHealthUpdateUsageDescription": (
+        "Only if you turn it on: your walks are saved as a walk, the breathing minute as mindfulness and, if you like, how you feel after a walk. It stays on this iPhone and never goes to our server.",
+        "Seulement si tu l'actives : tes balades sont enregistrées comme marche, la minute de respiration comme pleine conscience et, si tu le souhaites, comment tu te sens après une balade. Cela reste sur cet iPhone et ne va jamais sur notre serveur.",
+        "Solo si lo activas: tus paseos se guardan como caminata, el minuto de respiración como mindfulness y, si quieres, cómo te sientes después de un paseo. Se queda en este iPhone y nunca va a nuestro servidor."),
+    "NSHealthShareUsageDescription": (
+        "The app reads nothing from Apple Health. It only saves something there if you turn that on.",
+        "L'app ne lit rien dans Apple Santé. Elle n'y enregistre quelque chose que si tu l'actives.",
+        "La app no lee nada de Apple Salud. Solo guarda algo allí si tú lo activas."),
+    # --- parity: inloggen ---
+    "Ga door met Apple": ("Continue with Apple", "Continuer avec Apple", "Continuar con Apple"),
+    "Doorgaan met Google": ("Continue with Google", "Continuer avec Google", "Continuar con Google"),
+    "of": ("or", "ou", "o"),
+    "Kies hoe je wilt inloggen.": ("Choose how you want to log in.", "Choisis comment te connecter.", "Elige cómo quieres iniciar sesión."),
+    "Inloggen met %@ lukte niet. Probeer het opnieuw.": (
+        "Logging in with %@ didn't work. Please try again.",
+        "La connexion avec %@ a échoué. Réessaie.",
+        "No se pudo iniciar sesión con %@. Inténtalo de nuevo."),
+    "Deze inlogpoging is verlopen. Probeer het opnieuw.": (
+        "This login attempt has expired. Please try again.",
+        "Cette tentative de connexion a expiré. Réessaie.",
+        "Este intento de inicio de sesión ha caducado. Inténtalo de nuevo."),
+    "Er is al een account met dit e-mailadres. Log in met je e-mailadres en wachtwoord.": (
+        "There's already an account with this email address. Log in with your email and password.",
+        "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton e-mail et ton mot de passe.",
+        "Ya existe una cuenta con este correo. Inicia sesión con tu correo y tu contraseña."),
+    "Er is al een account met dit e-mailadres. Log in met je wachtwoord om Apple te koppelen.": (
+        "There's already an account with this email address. Log in with your password to link Apple.",
+        "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton mot de passe pour associer Apple.",
+        "Ya existe una cuenta con este correo. Inicia sesión con tu contraseña para vincular Apple."),
+    "Inloggen met %@ kan nu even niet. Log in met je e-mailadres.": (
+        "Logging in with %@ isn't available right now. Log in with your email address.",
+        "La connexion avec %@ n'est pas disponible pour le moment. Connecte-toi avec ton adresse e-mail.",
+        "Ahora mismo no se puede iniciar sesión con %@. Inicia sesión con tu correo electrónico."),
+    "Apple is gekoppeld. Voortaan kun je ook met Apple inloggen.": (
+        "Apple is linked. From now on you can also log in with Apple.",
+        "Apple est associé. Tu peux désormais aussi te connecter avec Apple.",
+        "Apple está vinculado. A partir de ahora también puedes iniciar sesión con Apple."),
+    # --- deel A: geen organisaties, geen gezondheidsclaims ---
+    "Dierenopvangen": ("Animal shelters", "Refuges pour animaux", "Protectoras de animales"),
+    "Opvangen die honden een nieuwe kans geven, met eten, zorg en wandelingen.": ("Shelters that give dogs a new chance, with food, care and walks.", "Des refuges qui donnent une nouvelle chance aux chiens : nourriture, soins et balades.", "Protectoras que dan a los perros una nueva oportunidad, con comida, cuidados y paseos."),
+    "Ouderen in de buurt": ("Older neighbours", "Les aînés du quartier", "Mayores del barrio"),
+    "Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven.": ("Initiatives that help older people with a dog stay independent for longer.", "Des initiatives qui aident les aînés avec un chien à rester autonomes plus longtemps.", "Iniciativas que ayudan a las personas mayores con perro a seguir siendo independientes más tiempo."),
+    "Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig.": ("Getting outside together with a dog can make your day. It's free, without ads, and safe.", "Sortir ensemble avec un chien peut embellir ta journée. C'est gratuit, sans pub et sûr.", "Salir juntos con un perro puede alegrarte el día. Es gratis, sin anuncios y seguro."),
 }
 
 # Each build unit adds its own keys in design/translations_<unit>.py (a dict T); they are merged here.

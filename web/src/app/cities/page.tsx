@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
-import { COUNTRIES, COUNTRY_INFO } from '@/lib/countries'
+import { Icon } from '@/components/Icon'
+import { Flag } from '@/components/landing/Flag'
+import { BEAGLE } from '@/components/landing/looks'
+import { PageHero } from '@/components/landing/PageHero'
+import { COUNTRIES } from '@/lib/countries'
 import { publicCities } from '@/server/cities'
+import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('cities')
@@ -13,19 +18,21 @@ export default async function CitiesPage() {
   const cities = await publicCities()
   return (
     <div className="stack-l">
-      <header className="stack-s">
-        <h1>{t('cities.title')}</h1>
-        <p className="lede">{t('cities.lede')}</p>
-      </header>
+      <PageHero
+        eyebrow={t('landing.pages.cities')}
+        title={t('cities.title')}
+        lede={t('cities.lede')}
+        art={{ dog: BEAGLE, tone: 'warm', badge: <Icon name="pin" /> }}
+      />
       {COUNTRIES.map((country) => {
         const list = cities.filter((c) => c.country === country)
         if (!list.length) return null
         return (
-          <section key={country} className="stack-s">
+          <section key={country} className="lp-card lp-country-card">
             <h2>
-              {COUNTRY_INFO[country].flag} {t(`common.countries.${country}`)}
+              <Flag country={country} /> {t(`common.countries.${country}`)}
             </h2>
-            <div className="choices">
+            <div className="choices lp-touch">
               {list.map((c) => (
                 <Link key={c.slug} href={`/cities/${c.slug}`} className="chip">
                   {c.name}

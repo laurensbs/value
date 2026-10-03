@@ -12,6 +12,7 @@ import {
   statsFrom,
   tierColor,
   walksInWeek,
+  weekDays,
   weekOf,
   type PointEvent,
 } from './progress'
@@ -143,6 +144,12 @@ describe('the week', () => {
     expect(walksInWeek(events, new Date('2026-10-07T12:00:00Z'))).toBe(2)
     expect(walksInWeek(events, new Date('2026-10-13T12:00:00Z'))).toBe(0)
     expect(activeWeeks(events)).toBe(2)
+  })
+
+  it('shows the days of this week with a walk, Monday first', () => {
+    const events = [walk('2026-10-05T08:00:00Z', 'd1', 'a'), walk('2026-10-05T16:00:00Z', 'd1', 'b'), walk('2026-10-11T20:00:00Z', 'd1', 'c')]
+    expect(weekDays(events, new Date('2026-10-08T12:00:00Z'))).toEqual([2, 0, 0, 0, 0, 0, 1])
+    expect(weekDays(events, new Date('2026-10-12T12:00:00Z'))).toEqual([0, 0, 0, 0, 0, 0, 0])
   })
 })
 

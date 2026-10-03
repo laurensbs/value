@@ -43,7 +43,7 @@ struct CareCounters: View {
 
     private func log(_ kind: String, _ delta: Int) async {
         if delta < 0 && care[kind] == 0 { return }
-        delta > 0 ? Haptics.tap() : Haptics.soft()
+        delta > 0 ? Haptics.tap(.tap) : Haptics.soft()
         do {
             care = try await APIClient.shared.post("/api/v1/walks/\(walkId)/care", Payload(kind: kind, delta: delta))
         } catch {
@@ -153,7 +153,7 @@ struct SendPhotoButton: View {
         do {
             let url = try await ImageTools.upload(image)
             let added: Added = try await APIClient.shared.post("/api/v1/walks/\(walkId)/photos", Payload(url: url))
-            Haptics.success()
+            Haptics.success(.send)
             sent(added.photo)
         } catch {
             Haptics.error()

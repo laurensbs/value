@@ -24,10 +24,12 @@ export interface ProfileInitial {
   photoUrl: string | null
   wantsToWalk: boolean
   hasDogs: boolean
+  /** Walks a week someone aims for; only asked in onboarding and when editing. */
+  weeklyGoal?: number | null
   pppLicense: boolean
 }
 
-const LANGUAGES: [string, string][] = [
+export const LANGUAGES: [string, string][] = [
   ['nl', 'Nederlands'],
   ['en', 'English'],
   ['es', 'Español'],
@@ -85,6 +87,21 @@ export function ProfileForm({ mode, initial, next, maxBirthDate }: Props) {
           <span>{t('onboarding.hasDogs')}</span>
         </label>
       </fieldset>
+
+      {mode === 'edit' ? (
+        <label className="field form-section">
+          <span>{t('profile.weeklyGoal')}</span>
+          <select className="select" name="weeklyGoal" defaultValue={initial.weeklyGoal ? String(initial.weeklyGoal) : ''}>
+            <option value="">{t('progress.goalNone')}</option>
+            {[1, 2, 3, 4, 5, 6, 7].map((n) => (
+              <option key={n} value={n}>
+                {t('progress.goalOption', { n })}
+              </option>
+            ))}
+          </select>
+          <span className="hint">{t('profile.weeklyGoalHint')}</span>
+        </label>
+      ) : null}
 
       <fieldset className="form-section field">
         <legend>{t('onboarding.experience')}</legend>

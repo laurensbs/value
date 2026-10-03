@@ -283,7 +283,7 @@ struct AppointmentCard: View {
         defer { busy = false }
         do {
             try await WalkStarter.start(item, model: model, walk: walk)
-            Haptics.success()
+            Haptics.success(.start)
         } catch {
             Haptics.error()
             model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)

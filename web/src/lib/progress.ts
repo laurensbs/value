@@ -271,6 +271,14 @@ export function walksInWeek(events: PointEvent[], now: Date): number {
   return events.filter((e) => e.kind === 'walk' && weekOf(e.at) === week).length
 }
 
+/** Walks per day this week, Monday first: a little calendar, not a streak. */
+export function weekDays(events: PointEvent[], now: Date): number[] {
+  const week = weekOf(now)
+  const days = [0, 0, 0, 0, 0, 0, 0]
+  for (const e of events) if (e.kind === 'walk' && weekOf(e.at) === week) days[localParts(e.at).weekday - 1]++
+  return days
+}
+
 /** Weeks with at least one walk, ever. Only grows: a quiet week takes nothing away. */
 export function activeWeeks(events: PointEvent[]): number {
   return new Set(events.filter((e) => e.kind === 'walk').map((e) => weekOf(e.at))).size

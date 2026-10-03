@@ -629,6 +629,28 @@
         }
       }
     },
+    "%@ mag nog niets bewaren in Gezondheid. Dat zet je aan in Instellingen > Privacy en beveiliging > Gezondheid." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ may not save anything in Health yet. Turn it on in Settings > Privacy & Security > Health."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ aún no puede guardar nada en Salud. Actívalo en Ajustes > Privacidad y seguridad > Salud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ n'a pas encore le droit d'enregistrer dans Santé. Active-le dans Réglages > Confidentialité et sécurité > Santé."
+          }
+        }
+      }
+    },
     "%@ mag zelfstandig met %@ wandelen" : {
       "localizations" : {
         "en" : {
@@ -2387,6 +2409,28 @@
         }
       }
     },
+    "Alleen op deze iPhone. %@ leest niets uit Gezondheid en stuurt er niets van naar de server." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only on this iPhone. %@ reads nothing from Health and sends none of it to the server."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo en este iPhone. %@ no lee nada de Salud y no envía nada de ello al servidor."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uniquement sur cet iPhone. %@ ne lit rien dans Santé et n'en envoie rien au serveur."
+          }
+        }
+      }
+    },
     "Alleen van mij" : {
       "localizations" : {
         "en" : {
@@ -2515,6 +2559,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tout est calme à la maison"
+          }
+        }
+      }
+    },
+    "Als buitenwandeling met tijd, afstand en route, en de ademminuut als mindfulness. Begin en eind van de route laten we weg, zodat niemands huis erin staat." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As an outdoor walk with time, distance and route, and the breathing minute as mindfulness. We leave out the start and end of the route, so nobody's home is in it."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como caminata al aire libre con tiempo, distancia y ruta, y el minuto de respiración como mindfulness. Quitamos el inicio y el final de la ruta, para que no aparezca la casa de nadie."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comme marche en extérieur avec durée, distance et parcours, et la minute de respiration comme pleine conscience. Nous retirons le début et la fin du parcours, pour que le domicile de personne n'y figure."
           }
         }
       }
@@ -2713,6 +2779,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler le rendez-vous"
+          }
+        }
+      }
+    },
+    "Apple Gezondheid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Health"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Salud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Santé"
+          }
+        }
+      }
+    },
+    "Apple Gezondheid is niet beschikbaar op dit toestel." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Health is not available on this device."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Salud no está disponible en este dispositivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Santé n'est pas disponible sur cet appareil."
+          }
+        }
+      }
+    },
+    "Apple is gekoppeld. Voortaan kun je ook met Apple inloggen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple is linked. From now on you can also log in with Apple."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple está vinculado. A partir de ahora también puedes iniciar sesión con Apple."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple est associé. Tu peux désormais aussi te connecter avec Apple."
           }
         }
       }
@@ -3311,28 +3443,6 @@
         }
       }
     },
-    "Buiten zijn met een hond helpt tegen stress en eenzaamheid. Het is gratis, zonder reclame, en veilig." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Being outside with a dog helps against stress and loneliness. It's free, without ads, and safe."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estar fuera con un perro ayuda contra el estrés y la soledad. Es gratis, sin anuncios y seguro."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Être dehors avec un chien aide contre le stress et la solitude. C'est gratuit, sans pub et sûr."
-          }
-        }
-      }
-    },
     "Buurt" : {
       "localizations" : {
         "en" : {
@@ -3637,6 +3747,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Merci."
+          }
+        }
+      }
+    },
+    "Dat lukte even niet. Probeer het later nog eens." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That didn't work just now. Please try again later."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No ha funcionado. Inténtalo más tarde."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ça n'a pas marché. Réessaie plus tard."
           }
         }
       }
@@ -4213,6 +4345,28 @@
         }
       }
     },
+    "Deze inlogpoging is verlopen. Probeer het opnieuw." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This login attempt has expired. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este intento de inicio de sesión ha caducado. Inténtalo de nuevo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette tentative de connexion a expiré. Réessaie."
+          }
+        }
+      }
+    },
     "Di" : {
       "localizations" : {
         "en" : {
@@ -4275,6 +4429,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vétérinaire (nom et téléphone)"
+          }
+        }
+      }
+    },
+    "Dierenopvangen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animal shelters"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protectoras de animales"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refuges pour animaux"
           }
         }
       }
@@ -4433,6 +4609,28 @@
         }
       }
     },
+    "Dit rondje kon niet in Apple Gezondheid worden bewaard." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This walk could not be saved in Apple Health."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo guardar este paseo en Apple Salud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette balade n'a pas pu être enregistrée dans Apple Santé."
+          }
+        }
+      }
+    },
     "Dit zien alleen wandelaars met een geaccepteerde afspraak." : {
       "localizations" : {
         "en" : {
@@ -4561,6 +4759,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rejoins %@"
+          }
+        }
+      }
+    },
+    "Doorgaan met Google" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Google"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar con Google"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer avec Google"
           }
         }
       }
@@ -5335,6 +5555,50 @@
         }
       }
     },
+    "Er is al een account met dit e-mailadres. Log in met je e-mailadres en wachtwoord." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There's already an account with this email address. Log in with your email and password."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya existe una cuenta con este correo. Inicia sesión con tu correo y tu contraseña."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton e-mail et ton mot de passe."
+          }
+        }
+      }
+    },
+    "Er is al een account met dit e-mailadres. Log in met je wachtwoord om Apple te koppelen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There's already an account with this email address. Log in with your password to link Apple."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya existe una cuenta con este correo. Inicia sesión con tu contraseña para vincular Apple."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un compte existe déjà avec cette adresse e-mail. Connecte-toi avec ton mot de passe pour associer Apple."
+          }
+        }
+      }
+    },
     "Er is al een account met dit e-mailadres. Log in." : {
       "localizations" : {
         "en" : {
@@ -5881,6 +6145,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Photos"
+          }
+        }
+      }
+    },
+    "Ga door met Apple" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Apple"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar con Apple"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer avec Apple"
           }
         }
       }
@@ -6453,6 +6739,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De l'argent pour le propriétaire"
+          }
+        }
+      }
+    },
+    "Geluidjes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sounds"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Petits sons"
           }
         }
       }
@@ -7535,6 +7843,28 @@
         }
       }
     },
+    "Hoe je je na een rondje voelt, als gemoedstoestand." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How you feel after a walk, as a state of mind."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cómo te sientes después de un paseo, como estado de ánimo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment tu te sens après une balade, comme état d'esprit."
+          }
+        }
+      }
+    },
     "Hoe laat?" : {
       "localizations" : {
         "en" : {
@@ -7851,28 +8181,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajouter un chien"
-          }
-        }
-      }
-    },
-    "Honden die mensen met een beperking of trauma helpen zelfstandig te leven." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dogs that help people with a disability or trauma live independently."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Perros que ayudan a personas con discapacidad o trauma a vivir de forma independiente."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Des chiens qui aident les personnes en situation de handicap ou ayant vécu un traumatisme à vivre de façon autonome."
           }
         }
       }
@@ -8247,28 +8555,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De l'aide pour ton chien"
-          }
-        }
-      }
-    },
-    "Hulphonden" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Assistance dogs"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Perros de asistencia"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chiens d'assistance"
           }
         }
       }
@@ -9241,6 +9527,28 @@
         }
       }
     },
+    "Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Initiatives that help older people with a dog stay independent for longer."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciativas que ayudan a las personas mayores con perro a seguir siendo independientes más tiempo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des initiatives qui aident les aînés avec un chien à rester autonomes plus longtemps."
+          }
+        }
+      }
+    },
     "Inloggen" : {
       "localizations" : {
         "en" : {
@@ -9281,6 +9589,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La connexion a échoué. Réessaie."
+          }
+        }
+      }
+    },
+    "Inloggen met %@ kan nu even niet. Log in met je e-mailadres." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logging in with %@ isn't available right now. Log in with your email address."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora mismo no se puede iniciar sesión con %@. Inicia sesión con tu correo electrónico."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connexion avec %@ n'est pas disponible pour le moment. Connecte-toi avec ton adresse e-mail."
+          }
+        }
+      }
+    },
+    "Inloggen met %@ lukte niet. Probeer het opnieuw." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logging in with %@ didn't work. Please try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo iniciar sesión con %@. Inténtalo de nuevo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connexion avec %@ a échoué. Réessaie."
           }
         }
       }
@@ -9639,28 +9991,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tu participes ! Apporte ta pièce d'identité."
-          }
-        }
-      }
-    },
-    "Je goed voelen" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feeling good"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sentirse bien"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se sentir bien"
           }
         }
       }
@@ -10961,6 +11291,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choisis ci-dessous un chien qui te plaît."
+          }
+        }
+      }
+    },
+    "Kies hoe je wilt inloggen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose how you want to log in."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige cómo quieres iniciar sesión."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisis comment te connecter."
           }
         }
       }
@@ -13253,6 +13605,50 @@
         }
       }
     },
+    "Niet beschikbaar op dit toestel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not available on this device"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No disponible en este dispositivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non disponible sur cet appareil"
+          }
+        }
+      }
+    },
+    "Niet bewaard in Apple Gezondheid: %@ heeft daar geen toestemming meer voor." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not saved in Apple Health: %@ no longer has permission for that."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se guardó en Apple Salud: %@ ya no tiene permiso para ello."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non enregistré dans Apple Santé : %@ n'en a plus l'autorisation."
+          }
+        }
+      }
+    },
     "Niet elke hond vindt een onbekende hond fijn." : {
       "localizations" : {
         "en" : {
@@ -14013,6 +14409,28 @@
         }
       }
     },
+    "of" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "or"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "o"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ou"
+          }
+        }
+      }
+    },
     "Of ik regel het voor een buurvrouw, opa of oma." : {
       "localizations" : {
         "en" : {
@@ -14409,6 +14827,28 @@
         }
       }
     },
+    "Opvangen die honden een nieuwe kans geven, met eten, zorg en wandelingen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shelters that give dogs a new chance, with food, care and walks."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protectoras que dan a los perros una nueva oportunidad, con comida, cuidados y paseos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des refuges qui donnent une nouvelle chance aux chiens : nourriture, soins et balades."
+          }
+        }
+      }
+    },
     "Oren naar achteren en een lage staart? Geef de hond wat ruimte en praat rustig." : {
       "localizations" : {
         "en" : {
@@ -14427,6 +14867,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oreilles en arrière et queue basse ? Laisse de l'espace au chien et parle calmement."
+          }
+        }
+      }
+    },
+    "Ouderen in de buurt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Older neighbours"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mayores del barrio"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les aînés du quartier"
           }
         }
       }
@@ -15421,6 +15883,28 @@
         }
       }
     },
+    "Rondjes bewaren in Apple Gezondheid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save walks in Apple Health"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar paseos en Apple Salud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer les balades dans Apple Santé"
+          }
+        }
+      }
+    },
     "Rust lekker uit. Je hebt het goed gedaan." : {
       "localizations" : {
         "en" : {
@@ -15483,6 +15967,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rester calme, ne pas courir après le chien et appeler tout de suite le propriétaire"
+          }
+        }
+      }
+    },
+    "Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting outside together with a dog can make your day. It's free, without ads, and safe."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salir juntos con un perro puede alegrarte el día. Es gratis, sin anuncios y seguro."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sortir ensemble avec un chien peut embellir ta journée. C'est gratuit, sans pub et sûr."
           }
         }
       }
@@ -16083,6 +16589,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Présente-toi ou organise la balade."
+          }
+        }
+      }
+    },
+    "Stemming na een rondje bewaren in Apple Gezondheid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save your mood after a walk in Apple Health"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar tu estado de ánimo después de un paseo en Apple Salud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer ton humeur après une balade dans Apple Santé"
           }
         }
       }
@@ -17831,28 +18359,6 @@
         }
       }
     },
-    "Voor mensen die het even zwaar hebben. Een rondje buiten kan je dag goed doen." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For people going through a hard time. A walk outside can do your day good."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Para personas que lo están pasando mal. Un paseo al aire libre puede alegrarte el día."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pour les personnes qui traversent une période difficile. Une balade dehors peut faire du bien à ta journée."
-          }
-        }
-      }
-    },
     "Voor wie" : {
       "localizations" : {
         "en" : {
@@ -19093,6 +19599,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sa"
+          }
+        }
+      }
+    },
+    "Zachte geluidjes bij belangrijke momenten. Staat je iPhone op stil, dan hoor je niets." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soft little sounds at the moments that matter. With your iPhone on silent, you hear nothing."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonidos suaves en los momentos importantes. Si tu iPhone está en silencio, no oyes nada."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De petits sons doux aux moments importants. Si ton iPhone est en mode silencieux, tu n'entends rien."
           }
         }
       }

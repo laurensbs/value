@@ -133,6 +133,8 @@ struct WalkDoneFlow: View {
                     .frame(maxWidth: .infinity)
             }
             .scrollIndicators(.hidden)
+            // Only the final answer goes to Apple Health, and only when the person turned that on.
+            .onDisappear { if let moodAfter { HealthService.shared.saveMood(moodAfter) } }
             .scrollDismissesKeyboard(.interactively)
             .id(index)
             .transition(reduceMotion ? .opacity : .push(from: .trailing))
