@@ -1289,7 +1289,9 @@
     "notFound": "Esta página no existe (o ya no existe).",
     "generic": "Algo ha salido mal. Inténtalo de nuevo.",
     "home": "Ir a la página de inicio",
-    "retry": "Intentar de nuevo"
+    "retry": "Intentar de nuevo",
+    "server": "Algo ha fallado por nuestra parte. Inténtalo de nuevo en un momento.",
+    "offline": "No ha funcionado. Comprueba tu conexión e inténtalo de nuevo."
   },
   "legal": {
     "fallback": "Este texto aún no está traducido. Estás leyendo la versión en neerlandés.",
@@ -2216,7 +2218,8 @@
     "feedback": "¿Qué tal fue?",
     "done": "Listo",
     "points": "+{n} puntos",
-    "breathe": "¿Un momento de calma? Haz el minuto para respirar"
+    "breathe": "¿Un momento de calma? Haz el minuto para respirar",
+    "textShort": "{dog} y tú habéis salido juntos. Muchas gracias."
   },
   "profileHub": {
     "levelBadges": "{n, plural, =0 {Aún sin medallas} one {# medalla} other {# medallas}}",
@@ -3301,5 +3304,9 @@
         "how": "Correos y guiones de llamada para protectoras, veterinarios, asociaciones y prensa local. Los envías tú, desde tu propio correo."
       }
     }
+  },
+  "loading": {
+    "label": "Cargando…",
+    "slow": "Esto está tardando más de lo normal."
   }
 }

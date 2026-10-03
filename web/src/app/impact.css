@@ -69,7 +69,11 @@
   font-weight: 560;
 }
 
+/* A source link at the foot of a card: small text, but a full 44px to tap. */
 .im-stat-source {
+  display: flex;
+  align-items: flex-end;
+  min-height: 44px;
   margin-top: auto;
   padding-top: 4px;
   color: var(--muted);

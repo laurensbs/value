@@ -1289,7 +1289,9 @@
     "notFound": "Cette page n'existe pas (ou plus).",
     "generic": "Une erreur s'est produite. Veuillez réessayer.",
     "home": "Retour à l'accueil",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "server": "Un problème est survenu de notre côté. Réessayez dans un instant.",
+    "offline": "Cela n'a pas fonctionné. Vérifiez votre connexion et réessayez."
   },
   "legal": {
     "fallback": "Ce texte n'est pas encore traduit. Vous lisez la version néerlandaise.",
@@ -2216,7 +2218,8 @@
     "feedback": "Comment ça s'est passé ?",
     "done": "Terminé",
     "points": "+{n} points",
-    "breathe": "Envie d'un moment de calme ? Faites la minute de respiration"
+    "breathe": "Envie d'un moment de calme ? Faites la minute de respiration",
+    "textShort": "{dog} et vous êtes sortis ensemble. Merci beaucoup."
   },
   "profileHub": {
     "levelBadges": "{n, plural, =0 {Pas encore de médailles} one {# médaille} other {# médailles}}",
@@ -3301,5 +3304,9 @@
         "how": "E-mails et scripts d’appel pour refuges, vétérinaires, associations et presse locale. Tu les envoies toi-même, depuis ta propre adresse."
       }
     }
+  },
+  "loading": {
+    "label": "Chargement…",
+    "slow": "C'est plus long que d'habitude."
   }
 }

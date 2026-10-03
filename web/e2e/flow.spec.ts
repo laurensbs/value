@@ -323,35 +323,43 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // --- Walker ends the walk and gives private feedback ---
   await walker.page.getByRole('button', { name: 'Rondje klaar' }).click()
   await walker.page.getByRole('button', { name: 'Ja, rondje klaar' }).click()
-  // First the level and badge moment (once), then "Goed rondje!" with the private mood check.
-  // The page drops ?ended=1 from the address straight away, so a reload doesn't replay it.
-  const party = walker.page.getByRole('dialog', { name: 'Level omhoog!' })
-  await expect(party).toBeVisible()
-  await expect(party.getByText('Eerste rondje')).toBeVisible()
-  await shot(walker.page, '10a-celebration')
-  await party.getByRole('button', { name: 'Top!' }).click()
-  await expect(party).toBeHidden()
+  // First "Goed rondje!" with the private mood check; the level and badge moment (once) only comes
+  // when the walker moves on. The page drops ?ended=1 from the address straight away, so a reload
+  // doesn't replay it.
   await expect(walker.page.getByRole('heading', { name: 'Goed rondje!' })).toBeVisible()
-  await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
+  await expect(walker.page.getByText(/^Bello en jij (liepen [\d.,]+ k?m|zijn samen op pad geweest)\. Dank je wel\.$/)).toBeVisible()
+  const party = walker.page.getByRole('dialog', { name: 'Level omhoog!' })
+  await expect(party).toHaveCount(0)
   // A walk, the walk report and a photo for the owner.
   await expect(walker.page.getByText('+35 punten')).toBeVisible()
   await expect(walker.page.getByText(/Bello en jij: Net kennisgemaakt/)).toBeVisible()
   await expect(walker.page.getByRole('link', { name: 'Plan nog een rondje met Bello' })).toHaveAttribute('href', /#plan$/)
-  await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
   await expect(walker.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('1× Gedronken')
   await expect(walker.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
   await shot(walker.page, '10-summary')
+  await walker.page.getByRole('button', { name: 'Hoe ging het?' }).click()
+  await expect(party).toBeVisible()
+  await expect(party.getByText('Eerste rondje')).toBeVisible()
+  await shot(walker.page, '10a-celebration')
+  await party.getByRole('button', { name: 'Verder' }).click()
+  await expect(party).toBeHidden()
   await walker.page.getByRole('radio', { name: 'Top' }).click()
   await walker.page.getByLabel('Makkelijk').check()
   await walker.page.getByRole('group', { name: /ophalen en terugbrengen/ }).getByLabel('Ja').check()
   await walker.page.getByRole('group', { name: /Voelde je je veilig/ }).getByLabel('Ja').check()
   await walker.page.getByRole('button', { name: 'Verstuur' }).click()
   await expect(walker.page.getByText(/Dank je. Als er iets is/)).toBeVisible()
+  // Coming back later: the plain summary with its own head, and no party again.
+  await walker.page.reload()
+  await expect(walker.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
+  await expect(walker.page.getByText(/Bello liep .* met je mee/)).toBeVisible()
+  await expect(walker.page.getByRole('heading', { name: 'Goed rondje!' })).toHaveCount(0)
+  await expect(party).toHaveCount(0)
 
   // --- The owner's live page turns into the summary with their own feedback form ---
   // Bello's first walk brings the owner to level 2 as well.
   await expect(owner.page.getByRole('dialog', { name: 'Level omhoog!' })).toBeVisible({ timeout: 20_000 })
-  await owner.page.getByRole('button', { name: 'Top!' }).click()
+  await owner.page.getByRole('button', { name: 'Verder' }).click()
   await expect(owner.page.getByRole('heading', { name: 'Rondje met Bello' })).toBeVisible()
   await expect(owner.page.getByText('+10 punten')).toBeVisible()
   await owner.page.getByLabel('Blij en moe').check()

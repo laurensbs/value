@@ -1,6 +1,6 @@
 // Mobile + desktop quality pass over the app's pages, signed out and signed in:
 // horizontal overflow, page errors, failed requests, anything the Content-Security-Policy
-// blocks, tap targets under 44px (mobile), unlabeled controls, images without alt, slow pages,
+// blocks, tap targets lower than 44px (mobile), unlabeled controls, images without alt, slow pages,
 // and axe-core's WCAG 2.2 AA and best-practice rules in light and dark mode. Writes a
 // screenshot per page.
 // Usage: node scripts/audit.mjs <baseUrl> <outDir>   (server needs ADMIN_EMAILS to include audit@rondje.test)
@@ -87,7 +87,8 @@ async function check(page, path, label, tag = '') {
         // Map attribution is a legal credit, not a control.
         if (el.closest('.leaflet-control-attribution')) continue
         if (el.type === 'checkbox' || el.type === 'radio') { if (el.closest('label')) continue }
-        if (r.height < 44 && r.width < 44 || r.height < 32) issues.push(`small target ${Math.round(r.width)}x${Math.round(r.height)}: <${el.tagName.toLowerCase()}> "${name(el)}"`)
+        // Every tap target is at least 44px high (Apple HIG); a wide but low button is still hard to hit.
+        if (r.height < 44) issues.push(`small target ${Math.round(r.width)}x${Math.round(r.height)}: <${el.tagName.toLowerCase()}> "${name(el)}"`)
       }
     }
     for (const el of document.querySelectorAll('input:not([type=hidden]), select, textarea')) {
