@@ -1420,9 +1420,7 @@
     "costsTotal": "En total, entre {min} y {max} al mes, sin contar los pagos únicos.",
     "costsNote": "Estimación, actualizada el {date}. Mantenemos los costes lo más bajos posible.",
     "giveTitle": "Apoya a Rondje",
-    "giveText": "Con una pequeña aportación mensual ayudas a cubrir los costes. Las aportaciones van a {operator}, que desarrolla y mantiene Rondje.",
-    "giveButton": "Apoya a Rondje en {platform}",
-    "giveNote": "Pagas a través de {platform}, según sus condiciones. La aportación es voluntaria, no desgrava y no da ventajas en Rondje.",
+    "giveButton": "Apoya a {app} en {platform}",
     "giveSoon": "Pronto podrás apoyar a Rondje aquí con una pequeña aportación. Mientras tanto, todo lo de abajo también ayuda muchísimo.",
     "helpTitle": "Ayudar sin dinero",
     "help": {
@@ -1451,7 +1449,7 @@
       },
       "tax": {
         "q": "¿La aportación desgrava?",
-        "a": "No. Rondje (todavía) no es una entidad benéfica reconocida, así que no puedes deducir la aportación en tus impuestos."
+        "a": "No. Las aportaciones van a {operator}. {app} (todavía) no es una fundación ni una entidad benéfica reconocida, así que no puedes deducir la aportación en tus impuestos. Si más adelante se crea una fundación, lo indicaremos aquí."
       },
       "perks": {
         "q": "¿Recibo algo a cambio?",
@@ -1460,9 +1458,46 @@
       "sponsors": {
         "q": "¿Pueden las empresas patrocinar Rondje?",
         "a": "Sí, si respetan nuestras reglas: sin anuncios en Rondje, sin datos y sin influir en qué perros o personas se ven. Un patrocinador puede, por ejemplo, pagar bolsas para las protectoras."
+      },
+      "app": {
+        "q": "¿Por qué no puedo apoyar desde la app?",
+        "a": "Porque el dinero no tiene sitio en la app: allí todo gira en torno a pasear. Además, Apple y Google tienen sus propias normas para los pagos dentro de las apps. Por eso solo se puede apoyar aquí, en la web."
+      },
+      "share": {
+        "q": "¿Vosotros también donáis a causas solidarias?"
+      },
+      "once": {
+        "q": "¿Qué diferencia hay entre apoyar cada mes y el crowdfunding?",
+        "a": "Una aportación mensual ayuda a cubrir los costes fijos, como el alojamiento web y los mapas. El crowdfunding es una campaña única para costes únicos, como las apps y la revisión legal. Ambas van a {operator}."
       }
     },
-    "operatorUnknown": "los creadores de Rondje"
+    "operatorUnknown": "los creadores de Rondje",
+    "giveIntro": "Las aportaciones van a {operator}, que desarrolla y mantiene {app}. Cada aportación, grande o pequeña, ayuda a cubrir los costes.",
+    "monthlyPill": "Mensual",
+    "monthlyTitle": "Apoya cada mes",
+    "monthlyText": "Una pequeña aportación fija al mes cubre los costes fijos, como el alojamiento web y los mapas. Así {app} sigue siendo gratis para todos.",
+    "oncePill": "Una vez",
+    "onceTitle": "Súmate al crowdfunding",
+    "onceText": "¿Prefieres dar una sola vez? Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
+    "onceButton": "Súmate en {platform}",
+    "progress": "{raised} de {goal} recaudados",
+    "progressUpdated": "Actualizado el {date}. El importe actual está en {platform}.",
+    "platformNote": "Pagas a través de {platform}, según sus condiciones.",
+    "giveNoteAll": "La aportación es voluntaria, no desgrava y no da ventajas en {app}.",
+    "openTitle": "Claros con el dinero",
+    "open": {
+      "paysTitle": "Qué paga tu aportación",
+      "pays": "Los costes de arriba: alojamiento web, base de datos, mapas, las apps y material para protectoras. Lo que sobre se dedica a seguir desarrollando y dando a conocer {app}.",
+      "whoTitle": "Quién la recibe",
+      "who": "{operator}, que desarrolla y mantiene {app}. {app} todavía no es una fundación ni una entidad benéfica reconocida, por eso la aportación no desgrava.",
+      "whoSoon": "Aparecerá aquí en cuanto se pueda aportar. {app} todavía no es una fundación ni una entidad benéfica reconocida.",
+      "shareTitle": "Una parte la donamos"
+    },
+    "shareSoon": "Queremos destinar una parte de lo que entre a causas solidarias para perros y personas del barrio. En cuanto haya acuerdos, aquí verás exactamente cuánto y adónde va.",
+    "shareSet": "Destinamos el {percent} % de todas las aportaciones a causas solidarias para perros y personas del barrio. Adónde va y cuánto exactamente lo publicaremos aquí en cuanto se haya transferido.",
+    "whyTitle": "Por qué lo hacemos",
+    "whyText": "La soledad, moverse poco y perros que necesitan más atención: mira las cifras detrás de {app}, con sus fuentes.",
+    "whyLink": "Lee por qué"
   },
   "about": {
     "eyebrow": "Sobre Rondje",
@@ -2496,6 +2531,68 @@
         "apple": "cuando te des de alta",
         "domain": "cuando esté comprado"
       }
+    }
+  },
+  "impact": {
+    "source": "{name}, {year}",
+    "topics": {
+      "people": "Personas",
+      "outside": "Salir a la calle",
+      "dogs": "Perros"
+    },
+    "band": {
+      "eyebrow": "Juntos por un mundo mejor",
+      "title": "Bueno para las personas, bueno para los perros",
+      "lede": "Mucha gente se siente sola o se mueve menos de lo que le conviene. Y muchos perros agradecerían un paseo más.",
+      "factsLabel": "Algunas cifras, con su fuente",
+      "adds": "{app} aporta algo pequeño: un paseo fijo con un perro que te espera. Bueno para el perro, agradable para quienes lo rodean y una razón para salir juntos.",
+      "join": "Únete",
+      "support": "Hazlo posible",
+      "more": "Por qué lo hacemos"
+    },
+    "page": {
+      "eyebrow": "Por qué",
+      "title": "Salir juntos, por las personas y los perros",
+      "lede": "Un paseo con un perro es algo pequeño. Aun así, toca cosas grandes: la soledad, moverse poco y perros que necesitan más atención. Por eso existe {app}.",
+      "factsTitle": "En cifras",
+      "factsLede": "Cada cifra lleva su fuente y su año, para que puedas comprobarla tú mismo.",
+      "mindTitle": "Estar al aire libre, moverse y un perro que se alegra de verte",
+      "mind1": "La investigación muestra que pasar tiempo en la naturaleza y moverse con regularidad se asocian con mejor salud y con sentirse mejor. Un rato con un perro también se asocia, en los estudios, con menos estrés en ese momento.",
+      "mind2": "Un paseo no lo resuelve todo. Pero sí es un momento fijo y agradable en tu semana: salir, charlar con un vecino y un perro que se alegra de que estés ahí. Para eso está {app}.",
+      "notCare": "{app} no es un servicio de ayuda psicológica ni un tratamiento. ¿No estás bien? Habla de ello, no tienes por qué pasarlo solo.",
+      "suicideLines": "¿Piensas en el suicidio? Puedes hablar de forma anónima, día y noche, con:",
+      "helpLine": "{name} ({phone})",
+      "helpAll": "Todas las líneas de ayuda",
+      "dogsTitle": "Perros que esperan un paseo",
+      "dogs1": "Hay personas que ya no pueden pasear a su perro tan a menudo como quisieran, porque se hacen mayores, están enfermas o les cuesta caminar. Su perro echa de menos el ejercicio, y ellas a veces echan de menos una charla.",
+      "dogs2": "En las protectoras, los perros esperan un nuevo hogar. Un paseo fuera de la protectora es un cambio agradable para ellos. Con perros de protectora, en {app} siempre paseas en paseos de grupo guiados.",
+      "dogs3": "{app} une a esos perros con jóvenes adultos a los que les encanta salir, pero que no pueden tener perro. Con seguridad, paso a paso y gratis.",
+      "safetyLink": "Así cuidamos la seguridad",
+      "doTitle": "Qué puedes hacer tú",
+      "do": {
+        "walk": {
+          "title": "Sal a pasear",
+          "text": "Elige un perro cerca de ti o únete a un paseo de grupo de una protectora.",
+          "link": "Ver perros"
+        },
+        "dog": {
+          "title": "Registra un perro",
+          "text": "¿Ya no puedes caminar mucho, o conoces a alguien a quien le vendría bien una mano? La familia también puede registrar un perro.",
+          "link": "Registra un perro"
+        },
+        "tip": {
+          "title": "Recomienda una protectora",
+          "text": "¿Conoces una protectora donde los perros necesitan más paseos? Cuéntanoslo.",
+          "link": "Recomienda una protectora"
+        },
+        "support": {
+          "title": "Hazlo posible",
+          "text": "{app} es gratis y lo seguirá siendo. Con una pequeña aportación ayudas a cubrir los costes.",
+          "link": "Cómo puedes ayudar"
+        }
+      },
+      "sourcesTitle": "Fuentes",
+      "sourcesLede": "Todas las cifras de esta página, con su fuente. Comprobadas el {date}. ¿Ves un error o una cifra más reciente? Cuéntanoslo."
     }
   }
 }

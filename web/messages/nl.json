@@ -1420,9 +1420,7 @@
     "costsTotal": "Samen ongeveer {min} tot {max} per maand, zonder de eenmalige kosten.",
     "costsNote": "Schatting, bijgewerkt op {date}. We houden de kosten zo laag mogelijk.",
     "giveTitle": "Steun Rondje",
-    "giveText": "Met een kleine maandelijkse bijdrage help je de kosten te dekken. Bijdragen gaan naar {operator}, dat Rondje bouwt en onderhoudt.",
-    "giveButton": "Steun Rondje via {platform}",
-    "giveNote": "Je betaalt via {platform}, onder hun voorwaarden. Een bijdrage is vrijwillig, niet fiscaal aftrekbaar, en geeft geen voordelen in Rondje.",
+    "giveButton": "Steun {app} via {platform}",
     "giveSoon": "Binnenkort kun je Rondje hier ook met een kleine bijdrage steunen. Tot die tijd helpt alles hieronder ook enorm.",
     "helpTitle": "Helpen zonder geld",
     "help": {
@@ -1451,7 +1449,7 @@
       },
       "tax": {
         "q": "Is een bijdrage fiscaal aftrekbaar?",
-        "a": "Nee. Rondje is (nog) geen goed doel met een ANBI-status. Je kunt een bijdrage dus niet aftrekken van de belasting."
+        "a": "Nee. Bijdragen gaan naar {operator}. {app} is (nog) geen stichting en geen goed doel met ANBI-status, dus je kunt een bijdrage niet aftrekken van de belasting. Komt er later een stichting, dan staat dat hier."
       },
       "perks": {
         "q": "Krijg ik er iets voor terug?",
@@ -1460,9 +1458,46 @@
       "sponsors": {
         "q": "Mogen bedrijven Rondje sponsoren?",
         "a": "Ja, als ze zich aan onze spelregels houden: geen advertenties in Rondje, geen gegevens, en geen invloed op welke honden of mensen zichtbaar zijn. Een sponsor kan bijvoorbeeld poepzakjes voor opvangen betalen."
+      },
+      "app": {
+        "q": "Waarom kan ik niet steunen in de app?",
+        "a": "Omdat geld niet in de app hoort: daar draait alles om wandelen. Bovendien hebben Apple en Google eigen regels voor betalingen in apps. Steunen kan daarom alleen hier op de website."
+      },
+      "share": {
+        "q": "Geven jullie zelf ook aan goede doelen?"
+      },
+      "once": {
+        "q": "Wat is het verschil tussen maandelijks steunen en de crowdfunding?",
+        "a": "Een maandelijkse bijdrage helpt de vaste kosten te dekken, zoals hosting en kaarten. De crowdfunding is een eenmalige actie voor eenmalige kosten, zoals de apps en de juridische check. Beide gaan naar {operator}."
       }
     },
-    "operatorUnknown": "de makers van Rondje"
+    "operatorUnknown": "de makers van Rondje",
+    "giveIntro": "Bijdragen gaan naar {operator}, dat {app} bouwt en onderhoudt. Elke bijdrage, klein of groot, helpt de kosten te dekken.",
+    "monthlyPill": "Maandelijks",
+    "monthlyTitle": "Steun elke maand",
+    "monthlyText": "Een kleine vaste bijdrage per maand dekt de vaste kosten, zoals hosting en kaarten. Zo blijft {app} gratis voor iedereen.",
+    "oncePill": "Eenmalig",
+    "onceTitle": "Doe mee aan de crowdfunding",
+    "onceText": "Liever één keer iets geven? Met de crowdfunding betalen we de eenmalige kosten, zoals de apps in de App Store en Google Play, de juridische check en flyers voor opvangen.",
+    "onceButton": "Doe mee via {platform}",
+    "progress": "{raised} van {goal} opgehaald",
+    "progressUpdated": "Bijgewerkt op {date}. Het actuele bedrag staat op {platform}.",
+    "platformNote": "Je betaalt via {platform}, onder hun voorwaarden.",
+    "giveNoteAll": "Een bijdrage is vrijwillig, niet fiscaal aftrekbaar, en geeft geen voordelen in {app}.",
+    "openTitle": "Eerlijk over geld",
+    "open": {
+      "paysTitle": "Wat je bijdrage betaalt",
+      "pays": "De kosten hierboven: hosting, database, kaarten, de apps en materiaal voor opvangen. Wat overblijft, gaat naar het verder bouwen en bekendmaken van {app}.",
+      "whoTitle": "Wie het ontvangt",
+      "who": "{operator}, dat {app} bouwt en onderhoudt. {app} is nog geen stichting en geen goed doel met ANBI-status. Een bijdrage is daarom niet fiscaal aftrekbaar.",
+      "whoSoon": "Dat staat hier zodra steunen kan. {app} is nog geen stichting en geen goed doel met ANBI-status.",
+      "shareTitle": "Een deel geven we door"
+    },
+    "shareSoon": "We willen een deel van wat binnenkomt doorgeven aan goede doelen voor honden en mensen in de buurt. Zodra er afspraken zijn, staat hier precies hoeveel en waarheen.",
+    "shareSet": "We geven {percent}% van alle bijdragen door aan goede doelen voor honden en mensen in de buurt. Waarheen en hoeveel precies, zetten we hier zodra het is overgemaakt.",
+    "whyTitle": "Waarom we dit doen",
+    "whyText": "Eenzaamheid, te weinig bewegen, en honden die meer aandacht kunnen gebruiken: bekijk de cijfers achter {app}, met bronnen.",
+    "whyLink": "Lees waarom"
   },
   "about": {
     "eyebrow": "Over Rondje",
@@ -2496,6 +2531,68 @@
         "apple": "zodra je lid bent",
         "domain": "zodra het gekocht is"
       }
+    }
+  },
+  "impact": {
+    "source": "{name}, {year}",
+    "topics": {
+      "people": "Mensen",
+      "outside": "Naar buiten",
+      "dogs": "Honden"
+    },
+    "band": {
+      "eyebrow": "Samen voor een betere wereld",
+      "title": "Goed voor mensen, goed voor honden",
+      "lede": "Veel mensen voelen zich eenzaam of bewegen minder dan goed voor ze is. En veel honden kunnen een extra wandeling goed gebruiken.",
+      "factsLabel": "Een paar cijfers, met bron",
+      "adds": "{app} voegt daar iets kleins aan toe: een vaste wandeling met een hond die op je wacht. Goed voor de hond, fijn voor de mensen eromheen, en een reden om samen naar buiten te gaan.",
+      "join": "Doe mee",
+      "support": "Maak het mogelijk",
+      "more": "Waarom we dit doen"
+    },
+    "page": {
+      "eyebrow": "Waarom",
+      "title": "Samen naar buiten, voor mens en hond",
+      "lede": "Een rondje met een hond is klein. Toch raakt het aan grote dingen: eenzaamheid, te weinig bewegen, en honden die meer aandacht kunnen gebruiken. Daarom bestaat {app}.",
+      "factsTitle": "In cijfers",
+      "factsLede": "Bij elk cijfer staat de bron en het jaar, zodat je het zelf kunt nakijken.",
+      "mindTitle": "Buiten zijn, bewegen, en een hond die blij is dat je komt",
+      "mind1": "Onderzoek laat zien dat tijd in de natuur en regelmatig bewegen samenhangen met een betere gezondheid en je beter voelen. Ook even contact met een hond hangt in onderzoek samen met minder stress op dat moment.",
+      "mind2": "Een rondje lost niet alles op. Het is wel een fijn, vast moment in de week: even naar buiten, een praatje met een buurtgenoot, en een hond die blij is dat je er bent. Daar is {app} voor.",
+      "notCare": "{app} is geen hulpverlening en geen behandeling. Gaat het niet goed met je? Praat erover, je hoeft het niet alleen te doen.",
+      "suicideLines": "Denk je aan zelfdoding? Je kunt dag en nacht anoniem praten met:",
+      "helpLine": "{name} ({phone})",
+      "helpAll": "Alle hulplijnen",
+      "dogsTitle": "Honden die op een rondje wachten",
+      "dogs1": "Sommige mensen kunnen hun hond niet meer zo vaak uitlaten als ze zouden willen, omdat ze ouder worden, ziek zijn of slecht ter been. Hun hond mist dan beweging, en zij missen soms een praatje.",
+      "dogs2": "In opvangen wachten honden op een nieuw thuis. Een wandeling buiten de opvang is voor hen een fijne afwisseling. Met opvanghonden wandel je bij {app} altijd in begeleide groepswandelingen.",
+      "dogs3": "{app} brengt die honden samen met jongvolwassenen die graag naar buiten gaan, maar zelf geen hond kunnen hebben. Veilig, stap voor stap, en gratis.",
+      "safetyLink": "Zo regelen we veiligheid",
+      "doTitle": "Wat jij kunt doen",
+      "do": {
+        "walk": {
+          "title": "Ga wandelen",
+          "text": "Kies een hond in de buurt, of loop mee met een groepswandeling van een opvang.",
+          "link": "Bekijk honden"
+        },
+        "dog": {
+          "title": "Meld een hond aan",
+          "text": "Kun je zelf niet ver meer lopen, of ken je iemand die hulp kan gebruiken? Familie kan een hond ook aanmelden.",
+          "link": "Meld een hond aan"
+        },
+        "tip": {
+          "title": "Tip een opvang",
+          "text": "Ken je een opvang waar honden meer wandelingen kunnen gebruiken? Laat het ons weten.",
+          "link": "Tip een opvang"
+        },
+        "support": {
+          "title": "Maak het mogelijk",
+          "text": "{app} is gratis en blijft dat. Met een kleine bijdrage help je de kosten te dekken.",
+          "link": "Zo kun je helpen"
+        }
+      },
+      "sourcesTitle": "Bronnen",
+      "sourcesLede": "Alle cijfers op deze pagina, met hun bron. Gecontroleerd op {date}. Zie je een fout of een nieuwer cijfer? Laat het ons weten."
     }
   }
 }

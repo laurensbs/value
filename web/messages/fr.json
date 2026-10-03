@@ -1420,9 +1420,7 @@
     "costsTotal": "Au total environ {min} à {max} par mois, hors frais uniques.",
     "costsNote": "Estimation, mise à jour le {date}. Nous gardons les coûts aussi bas que possible.",
     "giveTitle": "Soutenir Rondje",
-    "giveText": "Une petite contribution mensuelle aide à couvrir les coûts. Les contributions vont à {operator}, qui développe et fait tourner Rondje.",
-    "giveButton": "Soutenir Rondje sur {platform}",
-    "giveNote": "Vous payez via {platform}, selon leurs conditions. Une contribution est volontaire, non déductible des impôts, et ne donne aucun avantage dans Rondje.",
+    "giveButton": "Soutenir {app} sur {platform}",
     "giveSoon": "Bientôt, vous pourrez soutenir Rondje ici avec une petite contribution. En attendant, tout ce qui suit aide énormément aussi.",
     "helpTitle": "Aider sans argent",
     "help": {
@@ -1450,8 +1448,8 @@
         "a": "À {operator}, pour les coûts ci-dessus : hébergement, base de données, cartes, les applications et du matériel pour les refuges. Le reste sert à développer et faire connaître Rondje."
       },
       "tax": {
-        "q": "Une contribution est-elle déductible des impôts ?",
-        "a": "Non. Rondje n'est pas (encore) une organisation caritative reconnue : vous ne pouvez donc pas déduire une contribution de vos impôts."
+        "q": "Une contribution est-elle déductible des impôts ?",
+        "a": "Non. Les contributions vont à {operator}. {app} n’est pas (encore) une fondation ni une organisation caritative reconnue : vous ne pouvez donc pas déduire une contribution de vos impôts. Si une fondation voit le jour plus tard, ce sera indiqué ici."
       },
       "perks": {
         "q": "Est-ce que je reçois quelque chose en retour ?",
@@ -1460,9 +1458,46 @@
       "sponsors": {
         "q": "Des entreprises peuvent-elles sponsoriser Rondje ?",
         "a": "Oui, si elles respectent nos règles : pas de publicité dans Rondje, pas de données, et aucune influence sur les chiens ou les personnes visibles. Un sponsor peut par exemple payer des sacs à crottes pour les refuges."
+      },
+      "app": {
+        "q": "Pourquoi ne puis-je pas contribuer dans l’appli ?",
+        "a": "Parce que l’argent n’a pas sa place dans l’appli : tout y tourne autour de la promenade. De plus, Apple et Google ont leurs propres règles pour les paiements dans les applis. C’est pourquoi on ne peut contribuer qu’ici, sur le site."
+      },
+      "share": {
+        "q": "Donnez-vous vous-mêmes à de bonnes causes ?"
+      },
+      "once": {
+        "q": "Quelle est la différence entre le soutien mensuel et le financement participatif ?",
+        "a": "Une contribution mensuelle aide à couvrir les frais fixes, comme l’hébergement et les cartes. Le financement participatif est une campagne ponctuelle pour des frais ponctuels, comme les applis et la vérification juridique. Les deux vont à {operator}."
       }
     },
-    "operatorUnknown": "les créateurs de Rondje"
+    "operatorUnknown": "les créateurs de Rondje",
+    "giveIntro": "Les contributions vont à {operator}, qui développe et fait tourner {app}. Chaque contribution, petite ou grande, aide à couvrir les coûts.",
+    "monthlyPill": "Mensuel",
+    "monthlyTitle": "Soutenir chaque mois",
+    "monthlyText": "Une petite contribution régulière chaque mois couvre les frais fixes, comme l’hébergement et les cartes. Ainsi, {app} reste gratuit pour tout le monde.",
+    "oncePill": "Ponctuel",
+    "onceTitle": "Participer au financement participatif",
+    "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
+    "onceButton": "Participer sur {platform}",
+    "progress": "{raised} récoltés sur {goal}",
+    "progressUpdated": "Mis à jour le {date}. Le montant actuel figure sur {platform}.",
+    "platformNote": "Vous payez via {platform}, selon leurs conditions.",
+    "giveNoteAll": "Une contribution est volontaire, non déductible des impôts, et ne donne aucun avantage dans {app}.",
+    "openTitle": "Transparents sur l’argent",
+    "open": {
+      "paysTitle": "Ce que paie votre contribution",
+      "pays": "Les coûts ci-dessus : hébergement, base de données, cartes, les applis et du matériel pour les refuges. Le reste sert à développer {app} et à le faire connaître.",
+      "whoTitle": "Qui la reçoit",
+      "who": "{operator}, qui développe et fait tourner {app}. {app} n’est pas encore une fondation ni une organisation caritative reconnue : une contribution n’est donc pas déductible des impôts.",
+      "whoSoon": "Ce sera indiqué ici dès qu’il sera possible de contribuer. {app} n’est pas encore une fondation ni une organisation caritative reconnue.",
+      "shareTitle": "Nous en reversons une partie"
+    },
+    "shareSoon": "Nous voulons reverser une partie de ce qui arrive à de bonnes causes pour les chiens et les gens du quartier. Dès qu’il y aura des accords, vous verrez ici exactement combien et à qui.",
+    "shareSet": "Nous reversons {percent} % de toutes les contributions à de bonnes causes pour les chiens et les gens du quartier. À qui et combien exactement sera indiqué ici une fois le virement effectué.",
+    "whyTitle": "Pourquoi nous le faisons",
+    "whyText": "La solitude, le manque de mouvement et des chiens qui auraient besoin de plus d’attention : découvrez les chiffres derrière {app}, avec leurs sources.",
+    "whyLink": "Lire pourquoi"
   },
   "about": {
     "eyebrow": "À propos de Rondje",
@@ -2496,6 +2531,68 @@
         "apple": "dès votre inscription",
         "domain": "dès l’achat"
       }
+    }
+  },
+  "impact": {
+    "source": "{name}, {year}",
+    "topics": {
+      "people": "Les gens",
+      "outside": "Sortir",
+      "dogs": "Les chiens"
+    },
+    "band": {
+      "eyebrow": "Ensemble pour un monde meilleur",
+      "title": "Bon pour les gens, bon pour les chiens",
+      "lede": "Beaucoup de gens se sentent seuls ou bougent moins que ce qui leur ferait du bien. Et beaucoup de chiens apprécieraient une promenade de plus.",
+      "factsLabel": "Quelques chiffres, avec leur source",
+      "adds": "{app} y ajoute quelque chose de simple : une promenade régulière avec un chien qui vous attend. Bon pour le chien, agréable pour son entourage, et une raison de sortir ensemble.",
+      "join": "Participer",
+      "support": "Rendre cela possible",
+      "more": "Pourquoi nous le faisons"
+    },
+    "page": {
+      "eyebrow": "Pourquoi",
+      "title": "Sortir ensemble, pour les gens et les chiens",
+      "lede": "Une promenade avec un chien, c’est peu de chose. Pourtant, cela touche à de grandes questions : la solitude, le manque de mouvement et des chiens qui auraient besoin de plus d’attention. C’est pour cela que {app} existe.",
+      "factsTitle": "En chiffres",
+      "factsLede": "Chaque chiffre est accompagné de sa source et de son année, pour que vous puissiez le vérifier vous-même.",
+      "mindTitle": "Être dehors, bouger, et un chien heureux de vous voir",
+      "mind1": "La recherche montre que le temps passé dans la nature et l’activité physique régulière sont associés à une meilleure santé et à un meilleur moral. Un moment avec un chien est aussi associé, dans les études, à moins de stress sur le moment.",
+      "mind2": "Une promenade ne résout pas tout. Mais c’est un moment agréable et régulier dans la semaine : sortir, échanger quelques mots avec un voisin, et un chien content que vous soyez là. C’est à cela que sert {app}.",
+      "notCare": "{app} n’est ni un service d’aide psychologique ni un traitement. Ça ne va pas ? Parlez-en, vous n’êtes pas obligé de traverser cela seul.",
+      "suicideLines": "Vous pensez au suicide ? Vous pouvez parler anonymement, jour et nuit, avec :",
+      "helpLine": "{name} ({phone})",
+      "helpAll": "Toutes les lignes d’aide",
+      "dogsTitle": "Des chiens qui attendent une promenade",
+      "dogs1": "Certaines personnes ne peuvent plus promener leur chien aussi souvent qu’elles le voudraient, parce qu’elles vieillissent, sont malades ou ont du mal à marcher. Leur chien manque d’exercice, et elles manquent parfois d’un brin de causette.",
+      "dogs2": "Dans les refuges, des chiens attendent un nouveau foyer. Une promenade hors du refuge est pour eux un changement bienvenu. Avec les chiens de refuge, sur {app}, vous marchez toujours lors de promenades de groupe encadrées.",
+      "dogs3": "{app} réunit ces chiens et de jeunes adultes qui aiment sortir mais ne peuvent pas avoir de chien. En sécurité, pas à pas, et gratuitement.",
+      "safetyLink": "Comment nous gérons la sécurité",
+      "doTitle": "Ce que vous pouvez faire",
+      "do": {
+        "walk": {
+          "title": "Partez en promenade",
+          "text": "Choisissez un chien près de chez vous, ou rejoignez une promenade de groupe d’un refuge.",
+          "link": "Voir les chiens"
+        },
+        "dog": {
+          "title": "Inscrivez un chien",
+          "text": "Vous ne pouvez plus marcher loin, ou vous connaissez quelqu’un qui aurait besoin d’un coup de main ? La famille peut aussi inscrire un chien.",
+          "link": "Inscrire un chien"
+        },
+        "tip": {
+          "title": "Signalez un refuge",
+          "text": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades ? Dites-le-nous.",
+          "link": "Signaler un refuge"
+        },
+        "support": {
+          "title": "Rendez cela possible",
+          "text": "{app} est gratuit et le restera. Une petite contribution aide à couvrir les coûts.",
+          "link": "Comment aider"
+        }
+      },
+      "sourcesTitle": "Sources",
+      "sourcesLede": "Tous les chiffres de cette page, avec leur source. Vérifiés le {date}. Vous voyez une erreur ou un chiffre plus récent ? Dites-le-nous."
     }
   }
 }
