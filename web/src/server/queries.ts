@@ -251,11 +251,6 @@ const dogRow = cache(async (id: string): Promise<Dog | null> => {
   return dog ?? null
 })
 
-/** Whether a dog with this id exists at all (visible or not): a single cached lookup. */
-export async function dogExists(id: string): Promise<boolean> {
-  return (await dogRow(id)) != null
-}
-
 export async function getDogDetail(id: string, viewer: Viewer | null): Promise<DogDetail | null> {
   const row = await dogRow(id)
   if (!row) return null

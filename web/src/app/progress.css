@@ -866,6 +866,7 @@
   font-size: clamp(2rem, 8vw, 2.6rem);
   font-weight: 780;
   animation: done-rise var(--motion-klein) var(--ease-klein) 350ms backwards;
+  --rise: 8px;
 }
 
 .walk-done-text {
@@ -904,6 +905,14 @@
 
 .walk-done .mood-faces button:nth-child(5) {
   --n: 4;
+}
+
+/* How far each part rises. Not inherited: the card's 24 px stays on the card, its title and the level
+   moment inside it rise their own 8 px (onderzoek §3.6, §3.7). */
+@property --rise {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 8px;
 }
 
 @keyframes done-rise {
@@ -1075,12 +1084,14 @@
   font-weight: 600;
   opacity: 0.88;
   animation: done-rise var(--motion-klein) var(--ease-klein) 350ms backwards;
+  --rise: 8px;
 }
 
 .level-up-name {
   color: var(--on-walk);
   font-size: clamp(2.3rem, 10vw, 3.2rem);
   animation: done-rise var(--motion-klein) var(--ease-klein) 350ms backwards;
+  --rise: 8px;
 }
 
 .level-up-awards {

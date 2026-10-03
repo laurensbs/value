@@ -1,6 +1,36 @@
 import { expect, test, type Browser, type Page } from '@playwright/test'
 import { addDog, newPerson, onboard, signUp, soonSlot, unique } from './helpers'
 
+/**
+ * Tap targets on this screen lower than 44 px. A chip or tick row is tapped through its whole label,
+ * so that is what counts; a link inside a sentence is exempt (WCAG 2.5.8), like in scripts/audit.mjs.
+ */
+async function smallTargets(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    const small: string[] = []
+    const measured = new Set<Element>()
+    const root = document.querySelector('dialog[open]') ?? document.querySelector('main') ?? document.body
+    for (const el of root.querySelectorAll<HTMLElement>('a, button, input:not([type=hidden]), select, summary, [role=button]')) {
+      const box = el.getBoundingClientRect()
+      if (!box.width || !box.height || getComputedStyle(el).visibility === 'hidden') continue
+      if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li, label')) continue
+      if (el.closest('.leaflet-control-attribution')) continue
+      let target: Element = el
+      if (el instanceof HTMLInputElement && (el.type === 'checkbox' || el.type === 'radio')) {
+        const label = el.closest('label')
+        if (label) {
+          if (measured.has(label)) continue
+          measured.add(label)
+          target = label
+        }
+      }
+      const r = target.getBoundingClientRect()
+      if (r.height < 44) small.push(`<${target.tagName.toLowerCase()}> "${(target.textContent ?? '').trim().slice(0, 40)}" ${Math.round(r.width)}x${Math.round(r.height)}`)
+    }
+    return small
+  })
+}
+
 /** Owner puts Bello online, the walker asks to meet, the owner accepts, and the walker starts the walk. */
 async function walkerOnAWalk(browser: Browser, id: string) {
   const owner = await newPerson(browser)
@@ -22,16 +52,23 @@ async function walkerOnAWalk(browser: Browser, id: string) {
     await expect(walker.page.getByLabel('Tijd')).toHaveValue(slot.time, { timeout: 1000 })
   }).toPass()
   await walker.page.getByLabel('Bericht').fill('Hoi! Ik maak graag kennis met Bello.')
+  // The request form's chips (kind of walk) are big enough to tap.
+  expect(await smallTargets(walker.page)).toEqual([])
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
   await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
 
   await owner.page.goto('/requests')
+  await expect(owner.page.getByRole('button', { name: 'Accepteren' })).toBeVisible()
+  expect(await smallTargets(owner.page)).toEqual([])
   await owner.page.getByRole('button', { name: 'Accepteren' }).click()
   await expect(owner.page.getByText('Geaccepteerd').first()).toBeVisible()
 
   await walker.page.goto('/requests')
   await walker.page.getByRole('button', { name: 'Start rondje' }).click()
+  // The checklist before the walk: every row is one big tap target.
+  await expect(walker.page.getByLabel('Riem en tuig zitten goed vast')).toBeVisible()
+  expect(await smallTargets(walker.page)).toEqual([])
   await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
   await walker.page.getByLabel('Ik heb poepzakjes bij me').check()
   await walker.page.getByLabel('Mijn telefoon is opgeladen').check()
@@ -61,6 +98,8 @@ test('after a walk with a new level: first "Goed rondje!", the level only after 
   await page.waitForTimeout(2_000)
   await expect(page.getByRole('dialog')).toHaveCount(0)
   await expect(page.locator('.confetti')).toHaveCount(0)
+  // Everything to tap here, the faces and the feedback chips below included, is at least 44 px high.
+  expect(await smallTargets(page)).toEqual([])
 
   // Only when the walker moves on: one party, the one with the paws (like the iPhone app).
   await page.getByRole('button', { name: 'Klaar', exact: true }).click()
@@ -68,11 +107,48 @@ test('after a walk with a new level: first "Goed rondje!", the level only after 
   await expect(party).toBeVisible()
   await expect(party.getByText('Eerste rondje')).toBeVisible()
   await expect(page.locator('.level-up-paw').first()).toBeAttached()
+  expect(await smallTargets(page)).toEqual([])
   await party.getByRole('button', { name: 'Verder' }).click()
   await expect(page).toHaveURL((url) => url.pathname === '/')
   // Seen once: home doesn't celebrate the same level again.
   await expect(page.getByRole('heading', { name: /Fleur/ }).first()).toBeVisible()
   await expect(page.getByRole('dialog', { name: 'Level omhoog!' })).toHaveCount(0)
+
+  // Browser back brings the old screen back from the cache: no second party for a level already seen.
+  await page.goBack()
+  await expect(page).toHaveURL(/\/walk\//)
+  const klaar = page.getByRole('button', { name: 'Klaar', exact: true })
+  if (await klaar.isVisible()) {
+    await klaar.click()
+    await expect(page).toHaveURL((url) => url.pathname === '/')
+  }
+  await page.waitForTimeout(1_000)
+  await expect(page.getByRole('dialog', { name: 'Level omhoog!' })).toHaveCount(0)
+
+  await owner.context.close()
+  await walker.context.close()
+})
+
+test('leaving "Goed rondje!" without "Klaar": the level comes with paws, never confetti', async ({ browser }) => {
+  test.setTimeout(180_000)
+  const { owner, walker } = await walkerOnAWalk(browser, unique())
+  const page = walker.page
+  await endWalk(page)
+  await expect(page.getByRole('heading', { name: 'Goed rondje!', level: 1 })).toBeVisible()
+
+  // Not "Klaar", but straight home through the logo: the one party on the web is still LevelUp.
+  await page.getByRole('banner').locator('a[href="/"]').first().click()
+  await expect(page).toHaveURL((url) => url.pathname === '/')
+  const party = page.getByRole('dialog', { name: 'Level omhoog!' })
+  await expect(party).toBeVisible()
+  await expect(page.locator('.level-up-paw').first()).toBeAttached()
+  await expect(page.locator('.confetti')).toHaveCount(0)
+  await party.getByRole('button', { name: 'Verder' }).click()
+  await expect(party).toHaveCount(0)
+  // Seen once: the progress page doesn't celebrate it again.
+  await page.goto('/progress')
+  await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
+  await expect(page.getByRole('dialog')).toHaveCount(0)
 
   await owner.context.close()
   await walker.context.close()

@@ -12,6 +12,18 @@ import { ProgressIcon } from './ProgressIcon'
 
 const noop = () => () => undefined
 
+/** "Goed rondje!" for this walk was shown in this tab before (browser back brings the old screen back). */
+function shownBefore(walkId: string): boolean {
+  const key = `rondje:walk-done:${walkId}`
+  try {
+    if (sessionStorage.getItem(key)) return true
+    sessionStorage.setItem(key, '1')
+  } catch {
+    // Storage can be unavailable (private mode): then it simply plays as the first time.
+  }
+  return false
+}
+
 interface Props {
   walkId: string
   dogName: string
@@ -39,19 +51,22 @@ export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, cel
   const [then, setThen] = useState<'feedback' | 'done' | null>(null)
   const [celebrated, setCelebrated] = useState(false)
   const started = useRef(false)
+  // Back from home: the screen returns from the browser's cache. No second chime and no second party.
+  const replay = useRef(false)
   const mood = picked ?? stored
 
   useEffect(() => {
     if (started.current) return
     started.current = true
-    playSound('finish')
+    replay.current = shownBefore(walkId)
+    if (!replay.current) playSound('finish')
     // A reload shows the plain summary instead of celebrating (and chiming) again.
     const url = new URL(window.location.href)
     if (url.searchParams.has('ended')) {
       url.searchParams.delete('ended')
       window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`)
     }
-  }, [])
+  }, [walkId])
 
   function go(action: 'feedback' | 'done') {
     if (action === 'done') {
@@ -66,7 +81,7 @@ export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, cel
   }
 
   function proceed(action: 'feedback' | 'done') {
-    if (celebration && !celebrated) {
+    if (celebration && !celebrated && !replay.current) {
       setThen(action)
       return
     }

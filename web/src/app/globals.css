@@ -779,7 +779,10 @@ fieldset.field {
 }
 
 .choice span {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  vertical-align: top;
   padding: 8px 14px;
   border: 1.5px solid var(--line);
   border-radius: 999px;
@@ -804,6 +807,9 @@ fieldset.field {
   grid-template-columns: 22px 1fr;
   gap: 10px;
   align-items: start;
+  /* The whole row is the tap target: at least 44 px high, a one-line row centred in it. */
+  min-height: 44px;
+  align-content: center;
   font-size: 0.95rem;
 }
 
@@ -4572,50 +4578,7 @@ legend {
   text-align: center;
 }
 
-/* ---------- Celebration ---------- */
-
-.celebration {
-  border: 0;
-  padding: 0;
-  width: min(420px, calc(100% - 32px));
-  border-radius: var(--radius-l);
-  background: var(--surface);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.celebration::backdrop {
-  background: rgb(13 19 16 / 0.55);
-  backdrop-filter: blur(3px);
-}
-
-.celebration[open] {
-  animation: celebrate-in var(--motion-pop) var(--ease-pop) both;
-}
-
-@keyframes celebrate-in {
-  from {
-    opacity: 0;
-    transform: scale(0.85) translateY(20px);
-  }
-}
-
-.celebration-body {
-  display: grid;
-  justify-items: center;
-  gap: 14px;
-  padding: 28px 22px 22px;
-  text-align: center;
-}
-
-.celebration h2 {
-  font-size: 1.7rem;
-}
-
-.celebration-hero {
-  animation: hop 1.1s ease 0.25s both;
-}
+/* ---------- After a walk: points, friendship, the next walk ---------- */
 
 @keyframes hop {
   0% {
@@ -4631,84 +4594,6 @@ legend {
   }
 }
 
-.celebration-medals {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-}
-
-.celebration-medals li {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  width: 112px;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.celebration-medals .medal {
-  animation: medal-in var(--motion-pop) var(--ease-pop) both;
-}
-
-.celebration-medals li:nth-child(2) .medal {
-  animation-delay: 0.12s;
-}
-
-.celebration-medals li:nth-child(3) .medal {
-  animation-delay: 0.24s;
-}
-
-.celebration-medals li:nth-child(4) .medal {
-  animation-delay: 0.36s;
-}
-
-@keyframes medal-in {
-  from {
-    transform: scale(0) rotate(-40deg);
-  }
-}
-
-.celebration form {
-  width: 100%;
-}
-
-.confetti {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.confetti i {
-  position: absolute;
-  top: -14px;
-  left: var(--x);
-  width: 8px;
-  height: 14px;
-  border-radius: 2px;
-  background: var(--color);
-  opacity: 0;
-  animation: confetti 2.2s ease-in var(--delay) forwards;
-}
-
-@keyframes confetti {
-  0% {
-    opacity: 1;
-    transform: translateY(0) rotate(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(560px) rotate(var(--spin));
-  }
-}
-
-/* ---------- After a walk: points, friendship, the next walk ---------- */
-
 .points-card {
   display: flex;
   gap: 16px;
@@ -4716,7 +4601,13 @@ legend {
   padding: 16px 18px;
   border-radius: var(--radius-l);
   background: color-mix(in oklab, var(--ball) 32%, var(--surface));
-  animation: rise 0.5s ease 0.15s both;
+  animation: rise var(--motion-scherm) var(--ease-scherm) 0.15s both;
+}
+
+/* Under "Goed rondje!" the points simply sit there: the moment is about the dog (onderzoek §3.6). */
+.walk-done ~ .points-card,
+.walk-done ~ .points-card .points-burst {
+  animation: none;
 }
 
 .points-burst {
@@ -4733,12 +4624,13 @@ legend {
   font-weight: 800;
   font-size: 1.6rem;
   letter-spacing: -0.02em;
-  animation: hop 0.9s ease 0.3s both;
+  animation: hop var(--motion-pop) var(--ease-klein) 0.3s both;
 }
 
 .level-line {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 10px;
   color: var(--ink);
   text-decoration: none;
