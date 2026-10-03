@@ -1,0 +1,400 @@
+{
+  "checked": "2026-10-03",
+  "facts": [
+    {
+      "id": "nl-young-adults-strongly-lonely",
+      "topic": "people",
+      "scope": "NL",
+      "featured": true,
+      "value": {
+        "nl": "23%",
+        "en": "23%",
+        "es": "23 %",
+        "fr": "23 %"
+      },
+      "label": {
+        "nl": "van de jongvolwassenen (16–25 jaar) in Nederland voelt zich sterk eenzaam.",
+        "en": "of young adults (16–25) in the Netherlands feel strongly lonely.",
+        "es": "de los jóvenes adultos (16–25 años) en los Países Bajos se siente muy solo.",
+        "fr": "des jeunes adultes (16–25 ans) aux Pays-Bas se sentent très seuls."
+      },
+      "year": 2024,
+      "source": {
+        "name": "GGD GHOR, Gezondheidsmonitor Jongvolwassenen",
+        "url": "https://ggdghor.nl/actueel-bericht/blijvende-zorgen-over-mentale-gezondheid-jongvolwassenen-ondanks-lichte-verbetering/"
+      },
+      "check": "GGD GHOR, nieuwsbericht 21 januari 2025 over de Gezondheidsmonitor Jongvolwassenen 2024: het aandeel jongvolwassenen (16–25) dat zich sterk eenzaam voelt daalde van 27% naar 23%."
+    },
+    {
+      "id": "nl-depression-past-year",
+      "topic": "people",
+      "scope": "NL",
+      "featured": true,
+      "value": {
+        "nl": "9%",
+        "en": "9%",
+        "es": "9 %",
+        "fr": "9 %"
+      },
+      "label": {
+        "nl": "van de volwassenen in Nederland (18–75 jaar) had in de afgelopen 12 maanden een depressie.",
+        "en": "of adults in the Netherlands (18–75) had a depression in the past 12 months.",
+        "es": "de los adultos en los Países Bajos (18–75 años) tuvo una depresión en los últimos 12 meses.",
+        "fr": "des adultes aux Pays-Bas (18–75 ans) ont connu une dépression au cours des 12 derniers mois."
+      },
+      "year": 2022,
+      "source": {
+        "name": "Trimbos-instituut, NEMESIS-3",
+        "url": "https://cijfers.trimbos.nl/nemesis/prevalentie/prevalentie/"
+      },
+      "check": "Trimbos NEMESIS, Prevalentie: van de Nederlandse volwassenen (18–75 jaar) heeft 9% in de afgelopen 12 maanden een depressieve stoornis gehad (vrouwen 10%, mannen 7%). Gegevens 2019–2022."
+    },
+    {
+      "id": "nl-strongly-lonely-15-plus",
+      "topic": "people",
+      "scope": "NL",
+      "value": {
+        "nl": "9,8%",
+        "en": "9.8%",
+        "es": "9,8 %",
+        "fr": "9,8 %"
+      },
+      "label": {
+        "nl": "van de Nederlanders van 15 jaar en ouder voelde zich sterk eenzaam. Bij jongeren gaat het vaker om het missen van een hechte band.",
+        "en": "of people aged 15 and over in the Netherlands felt strongly lonely. Young people more often miss a close bond.",
+        "es": "de las personas de 15 años o más en los Países Bajos se sintió muy sola. Los jóvenes echan en falta más a menudo un vínculo estrecho.",
+        "fr": "des personnes de 15 ans et plus aux Pays-Bas se sentaient très seules. Chez les jeunes, il s’agit plus souvent d’un lien proche qui manque."
+      },
+      "year": 2024,
+      "source": {
+        "name": "CBS",
+        "url": "https://www.cbs.nl/nl-nl/nieuws/2025/39/10-procent-van-de-15-plussers-sterk-eenzaam-in-2024"
+      },
+      "check": "CBS-nieuwsbericht (2025, week 39): bijna 10 procent van de bevolking van 15 jaar of ouder voelde zich in 2024 sterk eenzaam (9,8%). Emotionele eenzaamheid komt relatief vaak voor bij jongeren tot 25 jaar (12,9% sterk emotioneel eenzaam)."
+    },
+    {
+      "id": "nl-75-plus-lonely",
+      "topic": "people",
+      "scope": "NL",
+      "value": {
+        "nl": "51%",
+        "en": "51%",
+        "es": "51 %",
+        "fr": "51 %"
+      },
+      "label": {
+        "nl": "van de 75-plussers in Nederland voelt zich eenzaam.",
+        "en": "of people aged 75 and over in the Netherlands feel lonely.",
+        "es": "de las personas de 75 años o más en los Países Bajos se siente sola.",
+        "fr": "des personnes de 75 ans et plus aux Pays-Bas se sentent seules."
+      },
+      "year": 2024,
+      "source": {
+        "name": "GGD’en, CBS en RIVM, Gezondheidsmonitor (VZinfo)",
+        "url": "https://www.vzinfo.nl/eenzaamheid/leeftijd-en-geslacht"
+      },
+      "check": "VZinfo, Eenzaamheid > Leeftijd en geslacht: van alle 75-plussers voelt 51% zich eenzaam (Gezondheidsmonitor Volwassenen en Ouderen 2024). Van alle volwassenen is dat 46%, waarvan 13% sterk eenzaam."
+    },
+    {
+      "id": "dog-contact-student-stress",
+      "topic": "people",
+      "scope": "STUDY",
+      "value": {
+        "nl": "14 studies",
+        "en": "14 trials",
+        "es": "14 ensayos",
+        "fr": "14 essais"
+      },
+      "label": {
+        "nl": "met loting lieten zien: tijd met een hond ging bij studenten samen met minder ervaren stress en spanning.",
+        "en": "with random allocation showed that time with a dog went with less self-reported stress and anxiety in students.",
+        "es": "aleatorizados mostraron que pasar tiempo con un perro se asociaba con menos estrés y ansiedad percibidos en estudiantes.",
+        "fr": "randomisés ont montré que du temps avec un chien allait de pair avec moins de stress et d’anxiété ressentis chez des étudiants."
+      },
+      "year": 2025,
+      "source": {
+        "name": "Sim e.a., BMC Complementary Medicine and Therapies",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12341270/"
+      },
+      "check": "Sim SQ e.a. (2025), BMC Complement Med Ther 25:303: meta-analyse van 14 gerandomiseerde studies (n = 1.868 studenten), g = −0,67 voor zelfgerapporteerde stress en angst. Het ging om getrainde therapiehonden met begeleider, niet om uitlaten."
+    },
+    {
+      "id": "pets-help-meet-neighbours",
+      "topic": "people",
+      "scope": "STUDY",
+      "value": {
+        "nl": "1 op 2",
+        "en": "1 in 2",
+        "es": "1 de cada 2",
+        "fr": "1 sur 2"
+      },
+      "label": {
+        "nl": "huisdiereigenaren leerde buurtgenoten kennen via hun huisdier, in onderzoek in Australië en de VS.",
+        "en": "pet owners got to know people in their neighbourhood through their pet, in research in Australia and the US.",
+        "es": "dueños de mascotas conoció a vecinos gracias a su animal, según un estudio en Australia y EE. UU.",
+        "fr": "propriétaires d’animaux ont rencontré des voisins grâce à leur animal, selon une étude en Australie et aux États-Unis."
+      },
+      "year": 2015,
+      "source": {
+        "name": "Wood e.a., PLOS ONE",
+        "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0122085"
+      },
+      "check": "Wood L e.a. (2015), PLoS ONE 10(4):e0122085, n = 2.692 in Perth, San Diego, Portland en Nashville: 47,7% tot 53,4% van de huisdiereigenaren leerde mensen in de buurt kennen via hun huisdier. Cross-sectioneel."
+    },
+    {
+      "id": "nl-adults-meet-activity-guidelines",
+      "topic": "outside",
+      "scope": "NL",
+      "featured": true,
+      "value": {
+        "nl": "46%",
+        "en": "46%",
+        "es": "46 %",
+        "fr": "46 %"
+      },
+      "label": {
+        "nl": "van de volwassenen in Nederland beweegt genoeg volgens de beweegrichtlijnen. Ruim de helft dus niet.",
+        "en": "of adults in the Netherlands move enough to meet the national activity guidelines. So more than half do not.",
+        "es": "de los adultos en los Países Bajos se mueve lo suficiente según las pautas nacionales. Más de la mitad, no.",
+        "fr": "des adultes aux Pays-Bas bougent assez selon les recommandations nationales. Plus de la moitié, donc, non."
+      },
+      "year": 2025,
+      "source": {
+        "name": "RIVM / CBS, Leefstijlmonitor (VZinfo)",
+        "url": "https://www.vzinfo.nl/bewegen/volwassenen"
+      },
+      "check": "VZinfo, Bewegen > Volwassenen: in 2025 voldeed 46,1% van de volwassenen (18+) aan de Beweegrichtlijnen 2017 (Gezondheidsenquête/Leefstijlmonitor, zelfgerapporteerd)."
+    },
+    {
+      "id": "world-adults-insufficiently-active",
+      "topic": "outside",
+      "scope": "WORLD",
+      "value": {
+        "nl": "31%",
+        "en": "31%",
+        "es": "31 %",
+        "fr": "31 %"
+      },
+      "label": {
+        "nl": "van de volwassenen wereldwijd beweegt minder dan de WHO aanraadt: minstens 150 minuten per week.",
+        "en": "of adults worldwide are less active than WHO recommends: at least 150 minutes a week.",
+        "es": "de los adultos en el mundo se mueve menos de lo que recomienda la OMS: al menos 150 minutos a la semana.",
+        "fr": "des adultes dans le monde bougent moins que ce que recommande l’OMS : au moins 150 minutes par semaine."
+      },
+      "year": 2022,
+      "source": {
+        "name": "WHO, factsheet Physical activity",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity"
+      },
+      "check": "WHO-factsheet (26 juni 2024), Key facts: 31% van de volwassenen (ongeveer 1,8 miljard mensen) haalde in 2022 de aanbevolen hoeveelheid beweging niet."
+    },
+    {
+      "id": "nature-120-minutes-wellbeing",
+      "topic": "outside",
+      "scope": "STUDY",
+      "value": {
+        "nl": "120 min",
+        "en": "120 min",
+        "es": "120 min",
+        "fr": "120 min"
+      },
+      "label": {
+        "nl": "per week in de natuur hing in Engels onderzoek samen met een betere ervaren gezondheid en meer welzijn.",
+        "en": "a week in nature was linked, in English research, to better self-reported health and wellbeing.",
+        "es": "a la semana en la naturaleza se asociaron, en un estudio inglés, con mejor salud percibida y más bienestar.",
+        "fr": "par semaine dans la nature étaient associées, dans une étude anglaise, à une meilleure santé perçue et plus de bien-être."
+      },
+      "year": 2019,
+      "source": {
+        "name": "White e.a., Scientific Reports",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6565732/"
+      },
+      "check": "White MP e.a. (2019), Sci Rep 9:7730, n = 19.806 (Engeland, MENE). Abstract en Results: 120 minuten of meer per week in de natuur hing samen met betere ervaren gezondheid (OR 1,59) en welzijn (OR 1,23). Observationeel verband."
+    },
+    {
+      "id": "activity-lower-depression-risk",
+      "topic": "outside",
+      "scope": "STUDY",
+      "value": {
+        "nl": "25%",
+        "en": "25%",
+        "es": "25 %",
+        "fr": "25 %"
+      },
+      "label": {
+        "nl": "kleinere kans op een depressie hing in onderzoek samen met bewegen zoals 2,5 uur stevig wandelen per week. Een verband, geen bewijs van oorzaak.",
+        "en": "lower chance of depression was linked, in research, to activity like 2.5 hours of brisk walking a week. A link, not proof of cause.",
+        "es": "menos probabilidad de depresión se asoció, en los estudios, con una actividad como 2,5 horas de caminata rápida a la semana. Una asociación, no una prueba de causa.",
+        "fr": "de risque de dépression en moins était associé, dans les études, à une activité comme 2 h 30 de marche rapide par semaine. Un lien, pas une preuve de cause."
+      },
+      "year": 2022,
+      "source": {
+        "name": "Pearce e.a., JAMA Psychiatry",
+        "url": "https://jamanetwork.com/journals/jamapsychiatry/fullarticle/2790780"
+      },
+      "check": "Pearce M e.a. (2022), JAMA Psychiatry 79(6):550–559: meta-analyse van 15 prospectieve cohortstudies (n = 191.130). De aanbevolen hoeveelheid beweging (8,8 mMET-u/week, gelijk aan 2,5 uur stevig wandelen) ging samen met 25% lager risico op depressie. Observationeel."
+    },
+    {
+      "id": "dog-owners-activity-odds",
+      "topic": "outside",
+      "scope": "STUDY",
+      "value": {
+        "nl": "4×",
+        "en": "4×",
+        "es": "4×",
+        "fr": "4×"
+      },
+      "label": {
+        "nl": "zo grote kans om genoeg te bewegen hadden hondenbezitters in Brits onderzoek, vergeleken met mensen zonder hond.",
+        "en": "the odds of moving enough: dog owners compared with people without a dog, in a UK study.",
+        "es": "más probabilidades de moverse lo suficiente tenían los dueños de perros que quienes no tienen perro, en un estudio británico.",
+        "fr": "plus de chances de bouger assez pour les propriétaires de chiens que pour les personnes sans chien, dans une étude britannique."
+      },
+      "year": 2019,
+      "source": {
+        "name": "Westgarth e.a., Scientific Reports",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6473089/"
+      },
+      "check": "Westgarth C e.a. (2019), Sci Rep 9:5704, West Cheshire: odds ratio 4,10 (95%-BI 2,05–8,19) voor het halen van 150 minuten beweging per week, hondenbezitters versus mensen zonder hond. Cross-sectioneel; gaat over eigenaren."
+    },
+    {
+      "id": "es-dogs-into-shelters",
+      "topic": "dogs",
+      "scope": "ES",
+      "featured": true,
+      "value": {
+        "nl": "169.268",
+        "en": "169,268",
+        "es": "169.268",
+        "fr": "169 268"
+      },
+      "label": {
+        "nl": "honden kwamen in 2025 in Spaanse opvangen terecht. Minder dan de helft vond dat jaar een nieuw thuis.",
+        "en": "dogs entered shelters in Spain in 2025. Fewer than half found a new home that year.",
+        "es": "perros ingresaron en 2025 en centros de acogida de España. Menos de la mitad encontró un nuevo hogar ese año.",
+        "fr": "chiens sont entrés dans des refuges en Espagne en 2025. Moins de la moitié a trouvé un nouveau foyer cette année-là."
+      },
+      "year": 2025,
+      "source": {
+        "name": "Fundación Affinity, “Él nunca lo haría”",
+        "url": "https://www.fundacion-affinity.org/es/estudio-el-nunca-lo-haria-de-la-fundacion-affinity"
+      },
+      "check": "Fundación Affinity, studie Él nunca lo haría 2026: in 2025 kwamen 285.720 dieren in Spaanse opvangen terecht, van wie 169.268 honden. 42,9% van de honden vond een nieuw thuis."
+    },
+    {
+      "id": "nl-dogs-and-households",
+      "topic": "dogs",
+      "scope": "NL",
+      "value": {
+        "nl": "1,8 mln",
+        "en": "1.8M",
+        "es": "1,8 mill.",
+        "fr": "1,8 M"
+      },
+      "label": {
+        "nl": "honden leven er in Nederland. Ruim 1 op de 6 huishoudens heeft een hond.",
+        "en": "dogs live in the Netherlands. More than 1 in 6 households has a dog.",
+        "es": "perros viven en los Países Bajos. Más de 1 de cada 6 hogares tiene perro.",
+        "fr": "chiens vivent aux Pays-Bas. Plus d’un foyer sur six a un chien."
+      },
+      "year": 2026,
+      "source": {
+        "name": "Ipsos I&O voor Dibevo en NVG",
+        "url": "https://www.ipsos-publiek.nl/actueel/huisdieren-helpen-te-ontspannen-en-maken-gelukkig/"
+      },
+      "check": "Ipsos I&O, 11 mei 2026, onderzoek voor Dibevo en NVG (veldwerk februari 2026, 4.318 respondenten): ongeveer 3,2 miljoen katten en 1,8 miljoen honden; 17% van de huishoudens heeft een of meer honden. Schatting."
+    },
+    {
+      "id": "nl-dogs-cannot-stay-with-owner",
+      "topic": "dogs",
+      "scope": "NL",
+      "value": {
+        "nl": "700+",
+        "en": "700+",
+        "es": "700+",
+        "fr": "700+"
+      },
+      "label": {
+        "nl": "honden per jaar komen in asielen van de Dierenbescherming terecht, omdat ze niet bij hun baasje kunnen blijven wonen.",
+        "en": "dogs a year end up in Dierenbescherming shelters in the Netherlands because they can no longer live with their owner.",
+        "es": "perros al año llegan a los refugios de la Dierenbescherming neerlandesa porque ya no pueden vivir con su dueño.",
+        "fr": "chiens par an arrivent dans les refuges de la Dierenbescherming néerlandaise parce qu’ils ne peuvent plus vivre avec leur maître."
+      },
+      "year": 2025,
+      "source": {
+        "name": "Dierenbescherming",
+        "url": "https://www.dierenbescherming.nl/actueel/om-de-drie-dagen-gedumpte-hond-in-het-dierenasiel"
+      },
+      "check": "Dierenbescherming, nieuwsbericht 19 september 2025: er komen meer dan 700 honden per jaar in de asielen van de Dierenbescherming terecht, omdat zij niet kunnen blijven wonen bij hun baasje. Alleen asielen van de Dierenbescherming."
+    },
+    {
+      "id": "be-flanders-shelter-dogs",
+      "topic": "dogs",
+      "scope": "BE",
+      "value": {
+        "nl": "7.156",
+        "en": "7,156",
+        "es": "7156",
+        "fr": "7 156"
+      },
+      "label": {
+        "nl": "honden werden in 2024 opgevangen in Vlaamse dierenasielen.",
+        "en": "dogs were taken in by shelters in Flanders in 2024.",
+        "es": "perros fueron acogidos en 2024 en refugios de Flandes.",
+        "fr": "chiens ont été accueillis en 2024 dans les refuges de Flandre."
+      },
+      "year": 2024,
+      "source": {
+        "name": "Vlaamse overheid, Dierenwelzijn",
+        "url": "https://assets.vlaanderen.be/image/upload/v1756717629/repositories-prd/Opgevangen_dieren_in_Vlaamse_dierenasielen_2024_swxl16.pdf"
+      },
+      "check": "Vlaamse overheid, Dierenwelzijn, tabel 'Opgevangen dieren in Vlaamse dierenasielen in 2024': honden totaal 7.156 (gevonden 2.574, afgestaan door de eigenaar 3.101, in beslag genomen 1.332, overig 149). Ook in het persbericht van minister Weyts van 1 september 2025."
+    },
+    {
+      "id": "owner-health-surrendered-dogs",
+      "topic": "dogs",
+      "scope": "STUDY",
+      "value": {
+        "nl": "29%",
+        "en": "29%",
+        "es": "29 %",
+        "fr": "29 %"
+      },
+      "label": {
+        "nl": "van de honden die bij een Deense opvang werden afgestaan, kwam daar door de gezondheid van het baasje, bijvoorbeeld ziekte of ouderdom.",
+        "en": "of dogs surrendered to a Danish shelter came in because of their owner’s health, for example illness or old age.",
+        "es": "de los perros entregados a una protectora danesa llegaron por la salud de su dueño, por ejemplo enfermedad o edad avanzada.",
+        "fr": "des chiens abandonnés dans un refuge danois y sont arrivés à cause de la santé de leur maître, par exemple maladie ou grand âge."
+      },
+      "year": 2020,
+      "source": {
+        "name": "Jensen, Sandøe en Nielsen, Animals",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7341242/"
+      },
+      "check": "Jensen JBH, Sandøe P, Nielsen SS (2020), Animals: 3.204 afgestane honden bij één Deense opvang, 1996–2017. Redenen: gezondheid van de eigenaar (29%; 'sick or old'), gedragsproblemen (23%), woonsituatie (21%)."
+    },
+    {
+      "id": "shelter-outings-adoption",
+      "topic": "dogs",
+      "scope": "STUDY",
+      "value": {
+        "nl": "5×",
+        "en": "5×",
+        "es": "5×",
+        "fr": "5×"
+      },
+      "label": {
+        "nl": "zo grote kans op adoptie hadden opvanghonden die even op uitje gingen, in onderzoek bij 51 Amerikaanse opvangen.",
+        "en": "as likely to be adopted: shelter dogs that went on brief outings, in research across 51 US shelters.",
+        "es": "más probabilidades de adopción tenían los perros de protectora que salían de excursión, en un estudio en 51 protectoras de EE. UU.",
+        "fr": "plus de chances d’être adoptés pour les chiens de refuge emmenés en sortie, dans une étude menée dans 51 refuges américains."
+      },
+      "year": 2023,
+      "source": {
+        "name": "Gunter e.a., Animals",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10668817/"
+      },
+      "check": "Gunter LM e.a. (2023), Animals 13(22):3528: 1.955 honden in 51 Amerikaanse opvangen. Honden die op een kort uitje gingen (1–4 uur) hadden een 5,0 keer zo grote kans op adoptie (relatieve risicoratio). Observationeel; de opvang koos welke honden meegingen."
+    }
+  ]
+}

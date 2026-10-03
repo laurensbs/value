@@ -1445,9 +1445,7 @@
     "costsTotal": "Together about {min} to {max} per month, not counting one-off costs.",
     "costsNote": "Estimate, updated on {date}. We keep costs as low as we can.",
     "giveTitle": "Support Rondje",
-    "giveText": "A small monthly contribution helps cover the costs. Contributions go to {operator}, who builds and runs Rondje.",
-    "giveButton": "Support Rondje on {platform}",
-    "giveNote": "You pay through {platform}, under their terms. A contribution is voluntary, not tax-deductible, and gives no benefits in Rondje.",
+    "giveButton": "Support {app} on {platform}",
     "giveSoon": "Soon you will be able to support Rondje here with a small contribution. Until then, everything below helps a lot too.",
     "helpTitle": "Helping without money",
     "help": {
@@ -1476,7 +1474,7 @@
       },
       "tax": {
         "q": "Is a contribution tax-deductible?",
-        "a": "No. Rondje is not (yet) a registered charity, so you cannot deduct a contribution from your taxes."
+        "a": "No. Contributions go to {operator}. {app} is not (yet) a foundation or a registered charity, so you cannot deduct a contribution from your taxes. If a foundation is set up later, it will say so here."
       },
       "perks": {
         "q": "Do I get anything in return?",
@@ -1485,9 +1483,46 @@
       "sponsors": {
         "q": "Can companies sponsor Rondje?",
         "a": "Yes, if they stick to our rules: no ads in Rondje, no data, and no say in which dogs or people are visible. A sponsor could, for example, pay for poo bags for shelters."
+      },
+      "app": {
+        "q": "Why can I not contribute in the app?",
+        "a": "Because money does not belong in the app: there, everything is about walking. Apple and Google also have their own rules for payments in apps. That is why you can only contribute here on the website."
+      },
+      "share": {
+        "q": "Do you give to good causes yourselves?"
+      },
+      "once": {
+        "q": "What is the difference between monthly support and the crowdfunding?",
+        "a": "A monthly contribution helps cover the running costs, like hosting and maps. The crowdfunding is a one-off campaign for one-off costs, like the apps and the legal check. Both go to {operator}."
       }
     },
-    "operatorUnknown": "the makers of Rondje"
+    "operatorUnknown": "the makers of Rondje",
+    "giveIntro": "Contributions go to {operator}, who builds and runs {app}. Every contribution, big or small, helps cover the costs.",
+    "monthlyPill": "Monthly",
+    "monthlyTitle": "Support every month",
+    "monthlyText": "A small regular amount each month covers the running costs, like hosting and maps. That keeps {app} free for everyone.",
+    "oncePill": "One-off",
+    "onceTitle": "Join the crowdfunding",
+    "onceText": "Rather give once? The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
+    "onceButton": "Join on {platform}",
+    "progress": "{raised} of {goal} raised",
+    "progressUpdated": "Updated on {date}. The current amount is on {platform}.",
+    "platformNote": "You pay through {platform}, under their terms.",
+    "giveNoteAll": "A contribution is voluntary, not tax-deductible, and gives no benefits in {app}.",
+    "openTitle": "Open about money",
+    "open": {
+      "paysTitle": "What your contribution pays for",
+      "pays": "The costs above: hosting, database, maps, the apps and materials for shelters. Anything left goes to building and spreading the word about {app}.",
+      "whoTitle": "Who receives it",
+      "who": "{operator}, who builds and runs {app}. {app} is not a foundation or a registered charity yet, so a contribution is not tax-deductible.",
+      "whoSoon": "This will be listed here as soon as you can contribute. {app} is not a foundation or a registered charity yet.",
+      "shareTitle": "We pass part of it on"
+    },
+    "shareSoon": "We want to pass part of what comes in on to good causes for dogs and people in the neighbourhood. As soon as there are agreements, this is where you will see exactly how much and where it goes.",
+    "shareSet": "We pass {percent}% of all contributions on to good causes for dogs and people in the neighbourhood. Where it goes and exactly how much will be listed here once it has been transferred.",
+    "whyTitle": "Why we do this",
+    "whyText": "Loneliness, moving too little, and dogs who could use more attention: see the figures behind {app}, with sources.",
+    "whyLink": "Read why"
   },
   "about": {
     "eyebrow": "About Rondje",
@@ -2721,6 +2756,68 @@
         "lede": "How Rondje grows, where new people come from and how everything is set up.",
         "weekly": "Numbers per week in the launch hub"
       }
+    }
+  },
+  "impact": {
+    "source": "{name}, {year}",
+    "topics": {
+      "people": "People",
+      "outside": "Getting outside",
+      "dogs": "Dogs"
+    },
+    "band": {
+      "eyebrow": "Together for a better world",
+      "title": "Good for people, good for dogs",
+      "lede": "Many people feel lonely or move less than is good for them. And many dogs could do with an extra walk.",
+      "factsLabel": "A few figures, with sources",
+      "adds": "{app} adds something small: a regular walk with a dog who is waiting for you. Good for the dog, nice for the people around it, and a reason to get outside together.",
+      "join": "Join in",
+      "support": "Make it possible",
+      "more": "Why we do this"
+    },
+    "page": {
+      "eyebrow": "Why",
+      "title": "Getting outside together, for people and dogs",
+      "lede": "A walk with a dog is a small thing. Yet it touches on big ones: loneliness, moving too little, and dogs who could use more attention. That is why {app} exists.",
+      "factsTitle": "In figures",
+      "factsLede": "Every figure comes with its source and year, so you can check it yourself.",
+      "mindTitle": "Being outside, moving, and a dog who is happy to see you",
+      "mind1": "Research shows that time in nature and regular exercise are linked to better health and feeling better. A little time with a dog is also linked, in research, to less stress in the moment.",
+      "mind2": "A walk does not solve everything. It is a nice, regular moment in your week: getting outside, a chat with a neighbour, and a dog who is happy you came. That is what {app} is for.",
+      "notCare": "{app} is not a care service and not a treatment. Not feeling okay? Talk about it, you do not have to do this alone.",
+      "suicideLines": "Thinking about suicide? You can talk anonymously, day and night, with:",
+      "helpLine": "{name} ({phone})",
+      "helpAll": "All help lines",
+      "dogsTitle": "Dogs waiting for a walk",
+      "dogs1": "Some people can no longer walk their dog as often as they would like, because they are getting older, are ill or find walking hard. Their dog misses the exercise, and they sometimes miss a chat.",
+      "dogs2": "In shelters, dogs wait for a new home. A walk outside the shelter is a welcome change for them. With shelter dogs, you always walk in guided group walks on {app}.",
+      "dogs3": "{app} brings these dogs together with young adults who love being outside but cannot have a dog of their own. Safely, step by step, and for free.",
+      "safetyLink": "How we handle safety",
+      "doTitle": "What you can do",
+      "do": {
+        "walk": {
+          "title": "Go for a walk",
+          "text": "Pick a dog nearby, or join a shelter’s group walk.",
+          "link": "See dogs"
+        },
+        "dog": {
+          "title": "Add a dog",
+          "text": "Can you no longer walk far, or do you know someone who could use a hand? Family can add a dog too.",
+          "link": "Add a dog"
+        },
+        "tip": {
+          "title": "Tip off a shelter",
+          "text": "Know a shelter where dogs could use more walks? Let us know.",
+          "link": "Suggest a shelter"
+        },
+        "support": {
+          "title": "Make it possible",
+          "text": "{app} is free and will stay free. A small contribution helps cover the costs.",
+          "link": "How you can help"
+        }
+      },
+      "sourcesTitle": "Sources",
+      "sourcesLede": "Every figure on this page, with its source. Checked on {date}. Spotted a mistake or a newer figure? Let us know."
     }
   }
 }

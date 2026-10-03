@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { visitorCountry, visitorPosition } from '@/components/discover/visitor'
 import { Icon } from '@/components/Icon'
+import { ImpactBand } from '@/components/impact/ImpactBand'
 import { Chooser } from '@/components/landing/Chooser'
 import { Community } from '@/components/landing/Community'
 import { DogPeek } from '@/components/landing/DogPeek'
@@ -125,6 +126,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           ))}
         </ul>
       </section>
+
+      <ImpactBand native={native} />
 
       <Community />
 
