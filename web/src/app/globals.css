@@ -16,7 +16,7 @@
   --on-ball: #16201a;
   --calm: #2d5d8a;
   --calm-soft: #e1ebf5;
-  --warn: #a35a00;
+  --warn: #9a5500;
   --warn-soft: #fbecd6;
   --danger: #b3261e;
   --danger-soft: #f9dedc;
@@ -2864,8 +2864,11 @@ legend {
 }
 
 .cost-table td {
-  white-space: nowrap;
   text-align: right;
+}
+
+.cost-amount {
+  white-space: nowrap;
 }
 
 .support-card {

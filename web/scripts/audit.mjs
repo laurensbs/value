@@ -16,7 +16,7 @@ const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelte
 const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
 const axeSource = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8')
 // Bars that stay put while the page scrolls under them: a control behind one is reached by scrolling.
-const BARS = '.header, .tabbar, .active-walk, .form-actions, .onboarding-actions, .walk-actions, .bulk-actions, .chat-compose'
+const BARS = '.header, .tabbar, .app-tabs, .active-walk, .form-actions, .onboarding-actions, .walk-actions, .bulk-actions, .chat-compose'
 
 /** axe-core in light and dark mode: names and roles for screen readers, contrast, target sizes. */
 async function axe(page) {
@@ -25,6 +25,14 @@ async function axe(page) {
   if (!(await page.evaluate(() => 'axe' in window))) await page.evaluate(axeSource)
   for (const scheme of ['light', 'dark']) {
     await page.emulateMedia({ colorScheme: scheme })
+    // Colours fade to the new scheme: measure once they got there, not halfway.
+    await page.evaluate(() => {
+      void document.documentElement.offsetHeight // starts the fades now, so they are listed below
+      return Promise.race([
+        Promise.all(document.getAnimations().filter((a) => a.effect?.getTiming().iterations !== Infinity).map((a) => a.finished.catch(() => {}))),
+        new Promise((resolve) => setTimeout(resolve, 1500)),
+      ])
+    })
     const violations = await page.evaluate(async (bars) => {
       const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
       const result = await window.axe.run(document, { runOnly: { type: 'tag', values: tags }, resultTypes: ['violations'] })
