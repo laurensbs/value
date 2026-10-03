@@ -17,7 +17,19 @@ final class AppModel {
     /// The last refresh failed: the screens show saved data.
     var offline = false
 
-    enum Tab: Hashable { case discover, appointments, profile }
+    enum Tab: Hashable { case discover, home, appointments, profile }
+
+    /// What someone does on Rondje, from their profile: it shapes the tabs and the home screen.
+    enum Role { case walker, owner, both }
+
+    var role: Role {
+        let p = me?.profile
+        switch (p?.wantsToWalk ?? true, p?.hasDogs ?? false) {
+        case (true, true): return .both
+        case (false, true): return .owner
+        default: return .walker
+        }
+    }
 
     struct Banner: Identifiable, Equatable {
         let id = UUID()
@@ -31,7 +43,12 @@ final class AppModel {
     init() {
         UNUserNotificationCenter.current().delegate = NotificationRouter.shared
         NotificationRouter.shared.onOpen = { [weak self] tab in
-            if tab == "appointments" { self?.selectedTab = .appointments }
+            switch tab {
+            case "appointments": self?.selectedTab = .appointments
+            case "discover": self?.selectedTab = .discover
+            case "profile": self?.selectedTab = .profile
+            default: break
+            }
         }
         NotificationCenter.default.addObserver(forName: .rondjeSignedOut, object: nil, queue: .main) { [weak self] _ in
             MainActor.assumeIsolated { self?.reset() }
@@ -63,7 +80,10 @@ final class AppModel {
             self.me = me
             Cache.save(me, as: "me")
             phase = me.profile == nil ? .onboarding : .ready
-            if phase == .ready { await refreshAppointments() }
+            if phase == .ready {
+                await refreshAppointments()
+                await Push.registerIfAllowed()
+            }
         } catch APIError.unauthorized {
             reset()
         } catch {
@@ -91,6 +111,7 @@ final class AppModel {
 
     func signOut() async {
         WalkTracker.shared.stop()
+        await Push.unregister()
         await api.signOut()
         reset()
     }
@@ -101,6 +122,7 @@ final class AppModel {
         appointments = AppointmentsResponse(outgoing: [], incoming: [])
         SharedStore.save(nil)
         Cache.clear()
+        MoodStore.clear()
         Reminders.clearAll()
         WidgetCenter.shared.reloadAllTimelines()
         phase = .signedOut

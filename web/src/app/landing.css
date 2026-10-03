@@ -1,0 +1,1920 @@
+/* Rondje — the public website (home, about, support, safety, shelters, group walks, cities).
+   Same look as the iPhone app: pastel dog tiles with soft shadows, round 24px cards, icon tiles in
+   the soft app colours, and the dashed walking route. Every class starts with "lp-". */
+
+:root {
+  --lp-radius: 24px;
+  --lp-line: color-mix(in oklab, var(--line) 65%, transparent);
+  --lp-shadow: 0 1px 2px rgb(22 32 26 / 0.05), 0 12px 32px -10px rgb(22 32 26 / 0.16);
+  --lp-shadow-dog: 0 22px 38px -14px rgb(22 32 26 / 0.3), 0 4px 10px rgb(22 32 26 / 0.06);
+  --lp-ease: cubic-bezier(0.2, 0.9, 0.25, 1.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --lp-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -10px rgb(0 0 0 / 0.5);
+    --lp-shadow-dog: 0 22px 38px -14px rgb(0 0 0 / 0.6), 0 4px 10px rgb(0 0 0 / 0.3);
+  }
+}
+
+/* ---------- Shared pieces ---------- */
+
+.lp {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+@media (min-width: 900px) {
+  .lp {
+    gap: 88px;
+  }
+}
+
+.lp-h2 {
+  font-size: clamp(1.65rem, 3.4vw, 2.4rem);
+  font-weight: 780;
+  letter-spacing: -0.03em;
+}
+
+.lp-h3 {
+  font-size: 1.35rem;
+  font-weight: 740;
+}
+
+.lp-sub {
+  color: var(--muted);
+  font-size: 1.06rem;
+  max-width: 52ch;
+}
+
+.lp-eyebrow {
+  color: var(--grass);
+  font-size: 0.8rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lp-eyebrow.on-dark {
+  color: var(--ball);
+}
+
+.lp-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.lp-section-head.row-end {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px 20px;
+}
+
+.lp-section-head.row-end > div {
+  display: grid;
+  gap: 6px;
+}
+
+.lp-card {
+  background: var(--surface);
+  border: 1px solid var(--lp-line);
+  border-radius: var(--lp-radius);
+  box-shadow: 0 1px 2px rgb(22 32 26 / 0.04);
+}
+
+.lp-card.pad {
+  padding: 20px;
+}
+
+.lp-card.soft-green {
+  background: var(--grass-soft);
+  border-color: transparent;
+}
+
+.lp-card.soft-rose {
+  background: var(--danger-soft);
+  border-color: transparent;
+}
+
+.lp-card.soft-blue {
+  background: var(--calm-soft);
+  border-color: transparent;
+}
+
+.lp-cta {
+  min-height: 52px;
+  padding: 14px 24px;
+  font-size: 1.02rem;
+}
+
+.lp-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lp-ctas.center {
+  justify-content: center;
+}
+
+@media (max-width: 559px) {
+  .lp-ctas .lp-cta {
+    flex: 1 1 100%;
+  }
+}
+
+/* Soft app colours, for icon tiles and badges. */
+.lp-tone-green {
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.lp-tone-blue {
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.lp-tone-warm {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.lp-tone-ball {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.lp-tone-rose {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.lp-tone-alert {
+  background: var(--surface);
+  color: var(--danger);
+}
+
+.lp-icon-tile {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 17px;
+}
+
+.lp-icon-tile.s {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+}
+
+.lp-icon-tile.l {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+}
+
+/* A dog on its pastel tile (components/landing/DogTile.tsx). */
+.lp-dogtile {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 27%;
+  background: color-mix(in oklab, var(--tile) var(--tile-mix), var(--surface));
+  box-shadow: var(--lp-shadow-dog);
+}
+
+.lp-dogtile svg {
+  width: 86%;
+  height: 86%;
+}
+
+/* The dashed walking route around the dogs. */
+.lp-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  overflow: visible;
+  animation: lp-spin 90s linear infinite;
+}
+
+.lp-ring-fill {
+  fill: var(--grass-soft);
+}
+
+.lp-ring-dash {
+  fill: none;
+  stroke: var(--ball);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 3.4 2.85;
+}
+
+.lp-float {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: lp-float 6s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0s) + 1s);
+}
+
+@keyframes lp-deal {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+    rotate: 0deg;
+    scale: 0.86;
+  }
+}
+
+@keyframes lp-pop {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+    scale: 0.6;
+  }
+}
+
+@keyframes lp-float {
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes lp-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes lp-march {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+/* ---------- Home: hero ---------- */
+
+.lp-hero {
+  display: grid;
+  gap: 4px;
+  align-items: center;
+}
+
+.lp-hero .lp-stage {
+  order: -1;
+}
+
+.lp-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .lp-hero {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    gap: 32px;
+    padding-block: 36px 8px;
+  }
+
+  .lp-hero .lp-stage {
+    order: 0;
+  }
+}
+
+.lp-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 9px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--lp-line);
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lp-kicker-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ball);
+  box-shadow: 0 0 0 3px var(--grass-soft);
+}
+
+.lp-title {
+  margin-top: 14px;
+  font-size: clamp(2.35rem, 6.2vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.lp-lede {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  max-width: 52ch;
+}
+
+.lp-pills {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.lp-pill.green {
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.lp-pill.blue {
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.lp-pill.warm {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.lp-hero .lp-ctas {
+  margin-top: 26px;
+  width: 100%;
+}
+
+.lp-hero-aside {
+  margin-top: 6px;
+}
+
+.lp-hero-aside a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--grass);
+  font-weight: 680;
+  text-underline-offset: 4px;
+}
+
+/* The stage: three tilted dog cards on the route, like the app's welcome screen. */
+.lp-stage {
+  --card: clamp(100px, 28vw, 184px);
+  position: relative;
+  height: calc(var(--card) * 2.2);
+  width: 100%;
+}
+
+.lp-stage .lp-ring {
+  width: calc(var(--card) * 2.08);
+  height: calc(var(--card) * 2.08);
+}
+
+.lp-paw-badge {
+  position: absolute;
+  z-index: 4;
+  left: calc(50% + var(--card) * 0.56);
+  top: calc(50% - var(--card) * 0.98);
+  width: calc(var(--card) * 0.4);
+  height: calc(var(--card) * 0.4);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ball);
+  color: var(--on-ball);
+  box-shadow: var(--lp-shadow);
+  animation: lp-pop 0.5s var(--lp-ease) 0.75s both;
+}
+
+.lp-paw-badge svg {
+  width: 52%;
+  height: 52%;
+}
+
+.lp-fan {
+  position: absolute;
+  inset: 0;
+}
+
+.lp-fan-card {
+  position: absolute;
+  width: var(--card);
+  height: var(--card);
+  left: calc(50% - var(--card) / 2 + var(--x));
+  top: calc(50% - var(--card) / 2 + var(--y));
+  rotate: var(--r);
+  animation: lp-deal 0.9s var(--lp-ease) var(--d) both;
+}
+
+.lp-fan-card.n0 {
+  --x: calc(var(--card) * -0.74);
+  --y: calc(var(--card) * 0.1);
+  --r: -9deg;
+  --d: 0.05s;
+}
+
+.lp-fan-card.n1 {
+  --x: 0px;
+  --y: calc(var(--card) * -0.14);
+  --r: 0deg;
+  --d: 0.18s;
+}
+
+.lp-fan-card.n2 {
+  --x: calc(var(--card) * 0.74);
+  --y: calc(var(--card) * 0.08);
+  --r: 9deg;
+  --d: 0.31s;
+}
+
+.lp-fan-card.n1 .lp-float {
+  animation-duration: 5.2s;
+}
+
+.lp-fan-card.n2 .lp-float {
+  animation-duration: 6.8s;
+}
+
+.lp-chip {
+  position: absolute;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 720;
+  font-size: 0.86rem;
+  white-space: nowrap;
+  box-shadow: var(--lp-shadow);
+  animation: lp-pop 0.55s var(--lp-ease) both;
+}
+
+.lp-chip .icon {
+  color: var(--grass);
+}
+
+.lp-chip-a {
+  left: 0;
+  top: 6%;
+  animation-delay: 0.9s;
+}
+
+.lp-chip-b {
+  right: 0;
+  bottom: 5%;
+  animation-delay: 1.05s;
+}
+
+.lp-chip-dot {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+@media (min-width: 900px) {
+  .lp-chip-a {
+    left: 2%;
+    top: 9%;
+  }
+
+  .lp-chip-b {
+    right: 0;
+    bottom: 9%;
+  }
+}
+
+/* ---------- Home: what brings you here? ---------- */
+
+.lp-choose {
+  display: grid;
+  gap: 22px;
+}
+
+.lp-choose-intro {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+@media (min-width: 900px) {
+  .lp-choose {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 40px;
+    align-items: center;
+  }
+}
+
+.lp-mini-fan {
+  --mini: 58px;
+  position: relative;
+  width: calc(var(--mini) * 2.5);
+  height: calc(var(--mini) * 1.25);
+  margin-bottom: 6px;
+}
+
+.lp-mini-fan > span {
+  position: absolute;
+  top: calc(var(--mini) * 0.14);
+  width: var(--mini);
+  height: var(--mini);
+}
+
+.lp-mini-fan > .n0 {
+  left: 0;
+  rotate: -8deg;
+}
+
+.lp-mini-fan > .n1 {
+  left: calc(var(--mini) * 0.75);
+  top: 0;
+  z-index: 1;
+}
+
+.lp-mini-fan > .n2 {
+  left: calc(var(--mini) * 1.5);
+  rotate: 8deg;
+  z-index: 2;
+}
+
+.lp-mini-fan .lp-dogtile {
+  box-shadow: 0 10px 18px -8px rgb(22 32 26 / 0.3);
+}
+
+@media (min-width: 900px) {
+  .lp-mini-fan {
+    --mini: 74px;
+  }
+}
+
+.lp-choices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .lp-choices {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lp-choice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  min-height: 92px;
+  padding: 16px;
+  border-radius: var(--lp-radius);
+  background: var(--surface);
+  border: 1px solid var(--lp-line);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgb(22 32 26 / 0.04);
+  transition:
+    translate 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    scale 0.12s ease;
+}
+
+.lp-choice:active {
+  scale: 0.98;
+}
+
+@media (hover: hover) {
+  .lp-choice:hover {
+    translate: 0 -2px;
+    box-shadow: var(--lp-shadow);
+    border-color: color-mix(in oklab, var(--grass) 35%, var(--line));
+  }
+
+  .lp-choice:hover .lp-choice-go {
+    translate: 3px 0;
+    color: var(--grass);
+  }
+}
+
+.lp-choice-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.lp-choice-text strong {
+  font-family: var(--font-display);
+  font-size: 1.14rem;
+  font-weight: 740;
+  letter-spacing: -0.015em;
+}
+
+.lp-choice-text span {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.lp-choice-go {
+  flex: none;
+  color: var(--muted);
+  transition: translate 0.18s ease;
+}
+
+/* ---------- Home: who's coming along today? ---------- */
+
+.lp-peek-all {
+  white-space: nowrap;
+}
+
+.lp-peek-list {
+  list-style: none;
+  margin: 0 -16px;
+  padding: 4px 16px 14px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(236px, 74%);
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 16px;
+  scrollbar-width: none;
+}
+
+.lp-peek-list::-webkit-scrollbar {
+  display: none;
+}
+
+.lp-peek-list > li {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+@media (min-width: 760px) {
+  .lp-peek-list {
+    margin: 0;
+    padding: 0;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    overflow: visible;
+  }
+}
+
+.lp-peek-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--lp-line);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    translate 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+@media (hover: hover) {
+  .lp-peek-card:hover {
+    translate: 0 -3px;
+    box-shadow: var(--lp-shadow);
+  }
+
+  .lp-peek-card:hover .lp-peek-photo svg {
+    rotate: -4deg;
+    scale: 1.04;
+  }
+}
+
+.lp-peek-photo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 5 / 4;
+  background: color-mix(in oklab, var(--tile, #ecdcd0) var(--tile-mix), var(--surface));
+}
+
+.lp-peek-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lp-peek-photo svg {
+  width: 64%;
+  height: auto;
+  transition:
+    rotate 0.25s var(--lp-ease),
+    scale 0.25s var(--lp-ease);
+}
+
+.lp-peek-flag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.lp-peek-host {
+  background: color-mix(in oklab, var(--surface) 90%, transparent);
+  box-shadow: 0 2px 8px rgb(22 32 26 / 0.08);
+}
+
+.lp-peek-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 16px;
+}
+
+.lp-peek-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+}
+
+.lp-peek-name strong {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 780;
+  letter-spacing: -0.02em;
+}
+
+.lp-peek-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lp-peek-pills .pill {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+/* ---------- Home: how it works ---------- */
+
+.lp-steps {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.lp-steps::before {
+  content: '';
+  position: absolute;
+  left: 47px;
+  top: 40px;
+  bottom: 40px;
+  border-left: 3px dashed color-mix(in oklab, var(--grass) 30%, var(--line));
+}
+
+.lp-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.lp-step-text h3 {
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.lp-step-text p {
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+
+.lp-step-art {
+  position: relative;
+  font-size: 96px;
+  width: 1em;
+  height: 1em;
+  border-radius: 0.3em;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--lp-shadow);
+}
+
+.lp-step-art.a1 {
+  background: var(--calm-soft);
+  rotate: -3deg;
+}
+
+.lp-step-art.a2 {
+  background: var(--warn-soft);
+  rotate: 2deg;
+}
+
+.lp-step-art.a3 {
+  background: var(--grass-soft);
+  rotate: -2deg;
+}
+
+.lp-step-art.a4 {
+  background: color-mix(in oklab, var(--ball) 34%, var(--surface));
+  rotate: 3deg;
+}
+
+.lp-step-n {
+  position: absolute;
+  top: -9px;
+  left: -9px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  border: 3px solid var(--paper);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+@media (min-width: 900px) {
+  .lp-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .lp-steps::before {
+    left: 12.5%;
+    right: 12.5%;
+    top: 66px;
+    bottom: auto;
+    border-left: 0;
+    border-top: 3px dashed color-mix(in oklab, var(--grass) 30%, var(--line));
+  }
+
+  .lp-step {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    align-items: start;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .lp-step-art {
+    font-size: 132px;
+  }
+
+  .lp-step-text p {
+    max-width: 30ch;
+  }
+}
+
+.lp-scene {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1em;
+  height: 1em;
+}
+
+.lp-scene-dot {
+  position: absolute;
+  right: 0.07em;
+  bottom: 0.07em;
+  width: 0.28em;
+  height: 0.28em;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 0.025em solid var(--surface);
+  box-shadow: 0 4px 10px rgb(22 32 26 / 0.15);
+}
+
+.lp-scene-dot svg {
+  width: 0.15em;
+  height: 0.15em;
+}
+
+.lp-scene-dot.ball {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.lp-scene-dot.rose {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.lp-scene-dot.blue {
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.lp-scene-dot.green {
+  background: var(--grass);
+  color: var(--on-grass);
+}
+
+.lp-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 0.06em;
+  width: 0.68em;
+  padding: 0.07em 0.06em;
+  border-radius: 0.12em;
+  background: var(--surface);
+  box-shadow: 0 6px 14px rgb(22 32 26 / 0.12);
+  translate: 0 -0.04em;
+}
+
+.lp-mini-avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 0.22em;
+  height: 0.22em;
+  border-radius: 50%;
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.lp-mini-avatar svg {
+  width: 0.14em;
+  height: 0.14em;
+}
+
+.lp-mini-lines {
+  flex: 1;
+  display: grid;
+  gap: 0.035em;
+}
+
+.lp-mini-lines i {
+  display: block;
+  height: 0.035em;
+  border-radius: 99px;
+  background: var(--line);
+}
+
+.lp-mini-lines i:first-child {
+  width: 92%;
+  background: color-mix(in oklab, var(--ink) 70%, transparent);
+}
+
+.lp-mini-lines i:nth-child(2) {
+  width: 72%;
+}
+
+.lp-mini-lines i:nth-child(3) {
+  width: 52%;
+}
+
+.lp-scene-dog {
+  width: 0.7em;
+  height: 0.7em;
+  translate: 0 -0.03em;
+}
+
+.lp-scene-dog.lp-dogtile {
+  box-shadow: 0 8px 16px -6px rgb(22 32 26 / 0.3);
+}
+
+.lp-meet-people {
+  display: flex;
+  translate: 0 -0.04em;
+}
+
+.lp-meet-people > span {
+  display: grid;
+  place-items: center;
+  width: 0.38em;
+  height: 0.38em;
+  border-radius: 50%;
+  border: 0.03em solid var(--surface);
+  box-shadow: 0 6px 12px rgb(22 32 26 / 0.12);
+}
+
+.lp-meet-people svg {
+  width: 0.2em;
+  height: 0.2em;
+}
+
+.lp-meet-people .p1 {
+  background: var(--surface);
+  color: var(--grass);
+}
+
+.lp-meet-people .p2 {
+  margin-left: -0.1em;
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.lp-route-loop {
+  width: 0.74em;
+  height: 0.74em;
+  overflow: visible;
+}
+
+.lp-route-loop path {
+  fill: none;
+  stroke: var(--grass);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 9 7;
+  animation: lp-march 2.4s linear infinite;
+}
+
+.lp-route-paw {
+  position: absolute;
+  left: 0.18em;
+  top: 0.54em;
+  display: grid;
+  place-items: center;
+  width: 0.22em;
+  height: 0.22em;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--grass);
+  box-shadow: 0 4px 10px rgb(22 32 26 / 0.15);
+}
+
+.lp-route-paw svg {
+  width: 0.13em;
+  height: 0.13em;
+}
+
+/* ---------- Home: the app on a phone ---------- */
+
+.lp-showcase {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  gap: 28px;
+  padding: 30px 20px 26px;
+  border-radius: 32px;
+  background: var(--walk-bg);
+  color: var(--on-walk);
+}
+
+.lp-showcase::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 460px;
+  height: 460px;
+  left: 50%;
+  bottom: -60px;
+  translate: -50% 0;
+  border-radius: 50%;
+  border: 3px dashed color-mix(in oklab, var(--ball) 45%, transparent);
+}
+
+@media (min-width: 900px) {
+  .lp-showcase::before {
+    width: 560px;
+    height: 560px;
+    left: auto;
+    bottom: auto;
+    right: -120px;
+    top: -40px;
+    translate: none;
+  }
+}
+
+.lp-showcase::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 420px;
+  height: 420px;
+  left: -160px;
+  bottom: -220px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--ball) 18%, transparent), transparent);
+}
+
+.lp-showcase-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.lp-showcase-lede {
+  color: color-mix(in oklab, var(--on-walk) 82%, transparent);
+  font-size: 1.08rem;
+  max-width: 46ch;
+}
+
+.lp-shot-legend {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lp-shot-legend li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: color-mix(in oklab, var(--on-walk) 82%, transparent);
+  font-size: 0.95rem;
+}
+
+.lp-shot-legend strong {
+  display: block;
+  color: var(--on-walk);
+  font-size: 1rem;
+}
+
+.lp-legend-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--on-walk) 12%, transparent);
+  color: var(--ball);
+}
+
+.lp-soon {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: color-mix(in oklab, var(--on-walk) 9%, transparent);
+  border: 1px solid color-mix(in oklab, var(--on-walk) 14%, transparent);
+}
+
+.lp-soon-pill {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-weight: 760;
+  font-size: 0.85rem;
+}
+
+.lp-soon p {
+  color: color-mix(in oklab, var(--on-walk) 88%, transparent);
+  font-size: 0.95rem;
+}
+
+.lp-phones {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  min-width: 0;
+}
+
+.lp-phone-row {
+  --w: clamp(96px, 29vw, 196px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 18px;
+}
+
+.lp-phone {
+  flex: none;
+  width: var(--w);
+  padding: calc(var(--w) * 0.03);
+  border-radius: calc(var(--w) * 0.17);
+  background: #0b0f0d;
+  box-shadow:
+    0 34px 60px -24px rgb(0 0 0 / 0.65),
+    inset 0 0 0 1.5px rgb(255 255 255 / 0.14);
+}
+
+.lp-phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: calc(var(--w) * 0.145);
+}
+
+.lp-phone.n0 {
+  rotate: -7deg;
+  margin-right: calc(var(--w) * -0.2);
+  translate: 0 16px;
+}
+
+.lp-phone.n1 {
+  position: relative;
+  z-index: 1;
+  width: calc(var(--w) * 1.12);
+  border-radius: calc(var(--w) * 0.19);
+}
+
+.lp-phone.n1 img {
+  border-radius: calc(var(--w) * 0.163);
+}
+
+.lp-phone.n2 {
+  rotate: 7deg;
+  margin-left: calc(var(--w) * -0.2);
+  translate: 0 16px;
+}
+
+.lp-phones-note {
+  margin-top: 10px;
+  color: color-mix(in oklab, var(--on-walk) 70%, transparent);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .lp-showcase {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 32px;
+    align-items: center;
+    padding: 48px;
+  }
+}
+
+/* ---------- Home: safety ---------- */
+
+.lp-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+.lp-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+}
+
+.lp-feature h3 {
+  font-size: 1.06rem;
+  margin-bottom: 4px;
+}
+
+.lp-feature p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.lp-feature .link-button {
+  margin-top: 4px;
+}
+
+/* On phones the safety points form one grouped card, like a settings list in iOS. */
+@media (max-width: 639px) {
+  .lp-features.grouped {
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--lp-line);
+    border-radius: var(--lp-radius);
+    overflow: hidden;
+  }
+
+  .lp-features.grouped > .lp-feature {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    padding: 16px;
+  }
+
+  .lp-features.grouped > .lp-feature + .lp-feature {
+    border-top: 1px solid var(--lp-line);
+  }
+
+  .lp-features.grouped .lp-icon-tile {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+}
+
+/* ---------- Home: together this month ---------- */
+
+.lp-community {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .lp-community {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+  }
+}
+
+.lp-challenge {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  align-content: start;
+}
+
+.lp-challenge-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.lp-challenge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--calm);
+  font-weight: 760;
+}
+
+.lp-challenge-title {
+  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  font-weight: 760;
+}
+
+.lp-progress {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.lp-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--calm);
+}
+
+.lp-challenge-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.lp-challenge-numbers strong {
+  font-size: 1.08rem;
+}
+
+.lp-challenge-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--lp-line);
+}
+
+.lp-challenge-foot p {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lp-challenge-foot .button {
+  min-height: 44px;
+}
+
+.lp-impact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.lp-impact > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--sunken);
+}
+
+.lp-impact dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.lp-impact dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.lp-countries {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  align-content: start;
+}
+
+.lp-country-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lp-country-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  background: var(--sunken);
+  font-weight: 650;
+  font-size: 0.92rem;
+}
+
+.lp-flag {
+  flex: none;
+  display: inline-block;
+  width: 22px;
+  height: 15px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.1);
+  vertical-align: -2px;
+}
+
+.lp-flag-nl {
+  background: linear-gradient(#ae1c28 33.4%, #ffffff 33.4% 66.6%, #21468b 66.6%);
+}
+
+.lp-flag-be {
+  background: linear-gradient(90deg, #1d1d1b 33.4%, #fdda24 33.4% 66.6%, #ef3340 66.6%);
+}
+
+.lp-flag-es {
+  background: linear-gradient(#aa151b 25%, #f1bf00 25% 75%, #aa151b 75%);
+}
+
+/* ---------- Home: free, and it stays that way ---------- */
+
+.lp-free {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  gap: 20px;
+  padding: 28px 22px;
+  border-radius: 32px;
+  background: var(--grass-soft);
+}
+
+.lp-free-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.lp-free-copy p {
+  max-width: 58ch;
+  font-size: 1.04rem;
+}
+
+.lp-free-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lp-free-points li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px 7px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 680;
+  font-size: 0.92rem;
+}
+
+.lp-free-points .icon {
+  color: var(--grass);
+}
+
+.lp-free-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--grass);
+  font-weight: 720;
+}
+
+/* "€0" inside a dashed walking route, like a coin. On phones it opens the block. */
+.lp-free-price {
+  position: relative;
+  isolation: isolate;
+  order: -1;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 190px;
+  text-align: center;
+}
+
+.lp-free-price::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 3px dashed color-mix(in oklab, var(--grass) 35%, transparent);
+  background: color-mix(in oklab, var(--surface) 50%, transparent);
+}
+
+.lp-free-price strong {
+  font-family: var(--font-display);
+  font-size: 4.6rem;
+  font-weight: 820;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--grass);
+}
+
+.lp-free-price span {
+  max-width: 17ch;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+@media (max-width: 899px) {
+  .lp-free-copy .lp-icon-tile {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .lp-free {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr);
+    align-items: center;
+    padding: 44px;
+  }
+
+  .lp-free-price {
+    order: 0;
+    min-height: 280px;
+  }
+
+  .lp-free-price::before {
+    width: 280px;
+    height: 280px;
+  }
+
+  .lp-free-price strong {
+    font-size: 7rem;
+  }
+
+  .lp-free-price span {
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- Home: closing ---------- */
+
+.lp-closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.lp-closing .lp-sub {
+  margin-bottom: 8px;
+}
+
+.lp-closing .lp-ctas {
+  width: 100%;
+}
+
+.lp-closing-dogs {
+  --mini: 84px;
+  position: relative;
+  width: calc(var(--mini) * 2.6);
+  height: calc(var(--mini) * 1.3);
+}
+
+.lp-closing-dogs > span:not(.lp-closing-paw) {
+  position: absolute;
+  top: calc(var(--mini) * 0.16);
+  width: var(--mini);
+  height: var(--mini);
+}
+
+.lp-closing-dogs > .n0 {
+  left: 0;
+  rotate: -10deg;
+}
+
+.lp-closing-dogs > .n1 {
+  left: calc(var(--mini) * 0.8);
+  top: 0;
+  z-index: 1;
+}
+
+.lp-closing-dogs > .n2 {
+  left: calc(var(--mini) * 1.6);
+  rotate: 10deg;
+  z-index: 2;
+}
+
+.lp-closing-paw {
+  position: absolute;
+  z-index: 3;
+  right: -14px;
+  top: -6px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--ball);
+  color: var(--on-ball);
+  box-shadow: var(--lp-shadow);
+}
+
+/* ---------- Other public pages: header with a small scene ---------- */
+
+.lp-page-hero {
+  display: grid;
+  gap: 8px;
+  align-items: center;
+}
+
+.lp-page-hero .lp-art-scene {
+  order: -1;
+}
+
+.lp-page-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.lp-page-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 790;
+  letter-spacing: -0.035em;
+}
+
+@media (min-width: 720px) {
+  .lp-page-hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 28px;
+    padding-top: 12px;
+  }
+
+  .lp-page-hero .lp-art-scene {
+    order: 0;
+  }
+}
+
+.lp-art-scene {
+  --s: 84px;
+  position: relative;
+  width: calc(var(--s) * 2.35);
+  height: calc(var(--s) * 1.7);
+  margin-left: -6px;
+}
+
+@media (min-width: 720px) {
+  .lp-art-scene {
+    --s: 112px;
+    margin-left: 0;
+  }
+}
+
+.lp-ring.mini {
+  width: calc(var(--s) * 1.62);
+  height: calc(var(--s) * 1.62);
+}
+
+.lp-scene-card {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  top: calc(50% - var(--s) / 2);
+}
+
+.lp-scene-card.lead {
+  z-index: 2;
+  left: calc(50% - var(--s) * 0.68);
+  rotate: -7deg;
+  animation: lp-deal 0.85s var(--lp-ease) 0.05s both;
+}
+
+.lp-scene-card.friend {
+  z-index: 1;
+  left: calc(50% - var(--s) * 0.1);
+  top: calc(50% - var(--s) * 0.62);
+  rotate: 9deg;
+  scale: 0.8;
+  animation: lp-deal 0.85s var(--lp-ease) 0.18s both;
+}
+
+.lp-scene-badge {
+  position: absolute;
+  z-index: 3;
+  left: calc(50% + var(--s) * 0.22);
+  top: calc(50% + var(--s) * 0.02);
+  width: calc(var(--s) * 0.5);
+  height: calc(var(--s) * 0.5);
+  border-radius: 30%;
+  display: grid;
+  place-items: center;
+  rotate: 8deg;
+  border: 3px solid var(--paper);
+  box-shadow: var(--lp-shadow);
+  animation: lp-pop 0.5s var(--lp-ease) 0.5s both;
+}
+
+.lp-scene-badge svg {
+  width: 48%;
+  height: 48%;
+}
+
+/* Section blocks on the other public pages. */
+.lp-block {
+  display: grid;
+  gap: 14px;
+}
+
+.lp-block-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lp-block-title h2 {
+  font-size: 1.4rem;
+}
+
+.lp-card .check-list,
+.lp-card .timeline {
+  margin-top: 4px;
+}
+
+.lp-card.pad > h2 + p,
+.lp-card.pad > h2 + ul {
+  margin-top: 2px;
+}
+
+.lp-tip {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.lp-tip > div {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.lp-country-card {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.lp-country-card h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lp-country-card h2 .lp-flag {
+  width: 30px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.lp-faq {
+  display: grid;
+  gap: 10px;
+}
+
+.lp-faq details {
+  padding: 4px 18px;
+}
+
+.lp-faq details[open] {
+  padding-bottom: 16px;
+}
+
+.lp-faq summary {
+  padding-block: 12px;
+}
+
+/* ---------- Motion: calm when people ask for less ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-float,
+  .lp-ring,
+  .lp-route-loop path {
+    animation: none;
+  }
+}
+
+/* Group walks: empty state with the three dogs, and walk cards in the app's shape. */
+.lp-empty {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.lp-empty .lp-mini-fan {
+  --mini: 54px;
+  flex: none;
+  margin: 0;
+}
+
+.lp-walk {
+  border-radius: var(--lp-radius);
+  border-color: var(--lp-line);
+}
+
+/* Touch screens: chips and small buttons on these pages get a full 44px target. */
+@media (pointer: coarse) {
+  .lp-touch .chip,
+  .lp-touch .button {
+    min-height: 44px;
+  }
+}
+
+.lp-tip .button {
+  min-height: 44px;
+}

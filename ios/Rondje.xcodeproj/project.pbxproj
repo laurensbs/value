@@ -8,10 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		069A4CEC550C6B8F9D7F31B6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */; };
+		0815887EEFE6F55BD5813657 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885A8805C0F35865B3C3FD85 /* Push.swift */; };
 		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
 		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
+		18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B076DE4C10D0103F33700 /* OwnerHomeView.swift */; };
+		234630D5FA9E43FFC3168F9E /* SocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C528725BFBCA08FD25266 /* SocialAuth.swift */; };
 		2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EA1B62ECCEC400102F6036 /* APIClient.swift */; };
+		26EB9B4433C18066EA749D1A /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = B400323AA6D6C3D1DF40D5A6 /* Mood.swift */; };
+		27841FFFAF656709D17D9B32 /* finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8C0B9023C8D287C0B409C354 /* finish.wav */; };
 		2F60108EC649C7D6D370A542 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
+		30EB45270BACA1438E06CF3F /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2188FDF561F8FEBEFE3F473F /* RoleView.swift */; };
 		31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26926AF94C5CD2A73149D080 /* WalkActivity.swift */; };
 		320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
 		335853283270DFF0D690A32E /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
@@ -20,23 +26,38 @@
 		3BE62065632AD4C2F8AE7309 /* RondjeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */; };
 		3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */; };
 		3BF3B61965BB09D5875A2004 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */; };
+		404272DEE8B3BC9A865ABB26 /* breathe-out.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81AA56846A60EA596FE7ED1E /* breathe-out.wav */; };
 		41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265151C9DD7CB381C0CE8F78 /* ProfileView.swift */; };
 		445F05C31F5873E97C2E7DD4 /* DogFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96821FF9F74F149B48CEA05 /* DogFace.swift */; };
 		4660BE55365FF96EE9B1FD6E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C56C585C3705ACBC5EBC617 /* LocationService.swift */; };
 		4730F6F96A9FE6D28214E9D2 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAF25DE5216EB791FAD7058 /* DiscoverView.swift */; };
 		4951C59EC95C340A43E6DCBF /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E359D37F55A06E65249298 /* AppModel.swift */; };
 		4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88239320CAE586D79B3603F4 /* Brand.swift */; };
+		4D6F906AA9E5C57E4A01B461 /* SoundHealthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80C3DE0E1BB69AAEE2F57A /* SoundHealthTests.swift */; };
 		50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2B1E42F731544CC1E42AAC /* MembershipView.swift */; };
+		510EEAFA10836E93400A0BBF /* SocialSignInButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84B1FFC41C21F6195B618E1 /* SocialSignInButtons.swift */; };
 		518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B89ADE16C47AB0E0761B7EF /* AuthView.swift */; };
+		5198C0AD339CAAF20B4E90B8 /* breathe-in.wav in Resources */ = {isa = PBXBuildFile; fileRef = C04CD2CA2FAAC2B7C5AFCA5D /* breathe-in.wav */; };
 		53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A4BC365EFDB4E41F534AF /* MyDogsView.swift */; };
+		5A6E953AD397B6F468A9D37E /* ProgressViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5186B4F03524632EF6DE929 /* ProgressViews.swift */; };
+		5B2B7A783C132F90E603AA54 /* levelup.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDD8C21D8BFC457E452B32E7 /* levelup.wav */; };
+		5EC6C25F274965F6B282AA41 /* SocialAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31152A3018077A50218B0B0 /* SocialAuthTests.swift */; };
+		6FE07F407894AD98538D3729 /* SoundFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D5F7B33E2B640AC7958CD5 /* SoundFX.swift */; };
+		734D38F8D37789B01464A0A8 /* start.wav in Resources */ = {isa = PBXBuildFile; fileRef = A809DA6616A886BEB7C7924E /* start.wav */; };
 		76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD5CF06280BE763D95E942 /* DogDetailView.swift */; };
+		7AF0140755593E049FF0339D /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520CB0DEFF2BE0A69B58BCB8 /* IntroView.swift */; };
 		7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F500D8982F770787859D0608 /* OnboardingView.swift */; };
 		7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4094F34979CE06F5674464 /* AppointmentsView.swift */; };
+		7FA3C3171D8C2F4332F2A2C1 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAD11147FF36E602F8684366 /* tap.wav */; };
+		894A93AC4F5EF1039DA502F4 /* DeviceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EF2E91DC678FA7D0CB1A5 /* DeviceSettingsView.swift */; };
 		89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E03C393BF21260C48A977 /* Keychain.swift */; };
 		8AFC612490A49580D6D08903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43456FF9403F24AC05FF054 /* Assets.xcassets */; };
 		8FC260210FFB86EA81151AB5 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */; };
+		8FC4508C7392A299F5B32ADA /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2783A9F80D81377B5AC59E /* ChatView.swift */; };
 		92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */; };
+		93379E1DF8936C1A06A6AB36 /* HomeCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */; };
 		9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9A08C803E561C51B6117F836 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4EEFEA994707D9EF187C405F /* success.wav */; };
 		9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A13AA036854983EE311380 /* Reminders.swift */; };
 		9CDA95671502696AA356E081 /* WalkReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */; };
 		A5B062402B7D781A373CFD12 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05B78B489C3C4D7955EFF48 /* SharedStore.swift */; };
@@ -45,12 +66,18 @@
 		BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96821FF9F74F149B48CEA05 /* DogFace.swift */; };
 		BF938F9011478C1964370149 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
 		C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABF8650A285AB54D3700A6 /* QuizView.swift */; };
+		C2EC7212BCBF4AC54DC62914 /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47349ADB02864986DF8F962 /* HealthService.swift */; };
+		C77503601605BBB0F813FB7B /* select.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4D775D41D52CB9BEA5E3FE33 /* select.wav */; };
 		CCEFB44617D607D474DA62B3 /* RondjeWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */; };
 		CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD05E7729A1853A5748BF1F /* Cache.swift */; };
 		D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
+		DBFE493DC52B55DCB51950A9 /* send.wav in Resources */ = {isa = PBXBuildFile; fileRef = 621DAB4172F92ABF01906A0C /* send.wav */; };
 		DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19F92B1AB52E54BEE189E52 /* ImageTools.swift */; };
 		E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38BF1BFD0974FB881BD72B /* Models.swift */; };
+		E81899E7FBE5C3A4F4D17164 /* DogFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */; };
 		EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847F8B3EE6862459619E1EDC /* Components.swift */; };
+		EC0AE7C7D16615103E859B9D /* BreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF02E3AFFF3C3F5EAAC028C /* BreathingView.swift */; };
+		F193DDC6BC5F8F106975A6C2 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 57BB655805A990B9B4401A04 /* error.wav */; };
 		F1E78BE8FCA520FB54C3EABF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */; };
 		F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */; };
 		F5113606F3E26750DF757621 /* WalkTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26863FB98876ECFB2C52F0FF /* WalkTracker.swift */; };
@@ -89,9 +116,13 @@
 
 /* Begin PBXFileReference section */
 		0BDEFBB338DEF518134A6397 /* Rondje.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Rondje.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EF02E3AFFF3C3F5EAAC028C /* BreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingView.swift; sourceTree = "<group>"; };
+		0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFriendsView.swift; sourceTree = "<group>"; };
 		1894A396998000A3824F47B3 /* ActiveWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalkView.swift; sourceTree = "<group>"; };
+		18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCards.swift; sourceTree = "<group>"; };
 		1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.entitlements; sourceTree = "<group>"; };
 		1F24382B16C639D32D509682 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		2188FDF561F8FEBEFE3F473F /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
 		265151C9DD7CB381C0CE8F78 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26863FB98876ECFB2C52F0FF /* WalkTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkTracker.swift; sourceTree = "<group>"; };
 		26926AF94C5CD2A73149D080 /* WalkActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkActivity.swift; sourceTree = "<group>"; };
@@ -99,19 +130,32 @@
 		2B89ADE16C47AB0E0761B7EF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		2CABF8650A285AB54D3700A6 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		303A4BC365EFDB4E41F534AF /* MyDogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
+		3D1CDBFD7D320C152487C262 /* Rondje.capabilities.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rondje.capabilities.entitlements; sourceTree = "<group>"; };
 		3DD05E7729A1853A5748BF1F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		455C528725BFBCA08FD25266 /* SocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuth.swift; sourceTree = "<group>"; };
+		4D775D41D52CB9BEA5E3FE33 /* select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = select.wav; sourceTree = "<group>"; };
+		4EEFEA994707D9EF187C405F /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		50EA1B62ECCEC400102F6036 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		520CB0DEFF2BE0A69B58BCB8 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		54E359D37F55A06E65249298 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		57BB655805A990B9B4401A04 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
+		616EF2E91DC678FA7D0CB1A5 /* DeviceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingsView.swift; sourceTree = "<group>"; };
+		621DAB4172F92ABF01906A0C /* send.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = send.wav; sourceTree = "<group>"; };
 		630E03C393BF21260C48A977 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		67D5F7B33E2B640AC7958CD5 /* SoundFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFX.swift; sourceTree = "<group>"; };
 		67DED918E6B83E74ED1F0BF7 /* Rondje.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rondje.entitlements; sourceTree = "<group>"; };
 		6D4094F34979CE06F5674464 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		70E5204817845A7F3A04E605 /* RondjeWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RondjeWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7391B5B3612456961B4E3B8B /* DogLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogLook.swift; sourceTree = "<group>"; };
+		741B076DE4C10D0103F33700 /* OwnerHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerHomeView.swift; sourceTree = "<group>"; };
 		787E299C18C0D741D32C0544 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		80CB134CFF71E6AB85E8D340 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		81AA56846A60EA596FE7ED1E /* breathe-out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "breathe-out.wav"; sourceTree = "<group>"; };
 		83EF6C22A2E41F6611BA8146 /* FollowWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowWalkView.swift; sourceTree = "<group>"; };
 		847F8B3EE6862459619E1EDC /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		88239320CAE586D79B3603F4 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		885A8805C0F35865B3C3FD85 /* Push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Push.swift; sourceTree = "<group>"; };
+		8C0B9023C8D287C0B409C354 /* finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = finish.wav; sourceTree = "<group>"; };
 		921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeTests.swift; sourceTree = "<group>"; };
 		9444E27E94A2B8808B22C5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -119,15 +163,26 @@
 		9C2B1E42F731544CC1E42AAC /* MembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipView.swift; sourceTree = "<group>"; };
 		9C56C585C3705ACBC5EBC617 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeWidgets.swift; sourceTree = "<group>"; };
+		A47349ADB02864986DF8F962 /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
+		A5186B4F03524632EF6DE929 /* ProgressViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViews.swift; sourceTree = "<group>"; };
 		A5CD5CF06280BE763D95E942 /* DogDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailView.swift; sourceTree = "<group>"; };
+		A809DA6616A886BEB7C7924E /* start.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = start.wav; sourceTree = "<group>"; };
+		AAD11147FF36E602F8684366 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
 		AB627D88D88D1EB0404E149F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACD1A4270703CA0ABCF80DF0 /* WalkReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkReport.swift; sourceTree = "<group>"; };
+		B31152A3018077A50218B0B0 /* SocialAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthTests.swift; sourceTree = "<group>"; };
+		B400323AA6D6C3D1DF40D5A6 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
+		C04CD2CA2FAAC2B7C5AFCA5D /* breathe-in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "breathe-in.wav"; sourceTree = "<group>"; };
 		C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondjeApp.swift; sourceTree = "<group>"; };
 		C38AD4205552639E40224CBC /* RequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSheet.swift; sourceTree = "<group>"; };
+		C63FA08A3879BB0A900D8F73 /* Rondje.free.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rondje.free.entitlements; sourceTree = "<group>"; };
 		CBB7E66E9A9FD4894A0298B5 /* RondjeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RondjeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD8C21D8BFC457E452B32E7 /* levelup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = levelup.wav; sourceTree = "<group>"; };
 		CE38BF1BFD0974FB881BD72B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D19F92B1AB52E54BEE189E52 /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
+		D54FE87577E74A459BC311FD /* RondjeWidgets.free.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.free.entitlements; sourceTree = "<group>"; };
 		E05B78B489C3C4D7955EFF48 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
+		E84B1FFC41C21F6195B618E1 /* SocialSignInButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButtons.swift; sourceTree = "<group>"; };
 		EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F43456FF9403F24AC05FF054 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +190,8 @@
 		F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		F7A13AA036854983EE311380 /* Reminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
 		F96821FF9F74F149B48CEA05 /* DogFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFace.swift; sourceTree = "<group>"; };
+		FA2783A9F80D81377B5AC59E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		FC80C3DE0E1BB69AAEE2F57A /* SoundHealthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundHealthTests.swift; sourceTree = "<group>"; };
 		FD670507F95B7E0867549B73 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,9 +204,20 @@
 				787E299C18C0D741D32C0544 /* InfoPlist.xcstrings */,
 				954DD8792F2162F0D7D65F98 /* Localizable.xcstrings */,
 				9B00DEE21628989AA3A923CE /* PrivacyInfo.xcprivacy */,
+				3D1CDBFD7D320C152487C262 /* Rondje.capabilities.entitlements */,
 				67DED918E6B83E74ED1F0BF7 /* Rondje.entitlements */,
+				C63FA08A3879BB0A900D8F73 /* Rondje.free.entitlements */,
+				2F482A6AA80041AB31EF3049 /* Sounds */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		149A1E124629011813222EC9 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				FA2783A9F80D81377B5AC59E /* ChatView.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		201468F762F551C6326C5D44 /* RondjeWidgets */ = {
@@ -159,6 +227,7 @@
 				F7398768EE7B42AEDC033326 /* InfoPlist.xcstrings */,
 				80CB134CFF71E6AB85E8D340 /* Localizable.xcstrings */,
 				1F0FF26D14D9C8A45FCD9248 /* RondjeWidgets.entitlements */,
+				D54FE87577E74A459BC311FD /* RondjeWidgets.free.entitlements */,
 				A2046C879E61F95CCD5AEDE9 /* RondjeWidgets.swift */,
 			);
 			path = RondjeWidgets;
@@ -175,10 +244,29 @@
 			);
 			sourceTree = "<group>";
 		};
+		2F482A6AA80041AB31EF3049 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				C04CD2CA2FAAC2B7C5AFCA5D /* breathe-in.wav */,
+				81AA56846A60EA596FE7ED1E /* breathe-out.wav */,
+				57BB655805A990B9B4401A04 /* error.wav */,
+				8C0B9023C8D287C0B409C354 /* finish.wav */,
+				CDD8C21D8BFC457E452B32E7 /* levelup.wav */,
+				4D775D41D52CB9BEA5E3FE33 /* select.wav */,
+				621DAB4172F92ABF01906A0C /* send.wav */,
+				A809DA6616A886BEB7C7924E /* start.wav */,
+				4EEFEA994707D9EF187C405F /* success.wav */,
+				AAD11147FF36E602F8684366 /* tap.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		3D54E11EDED7982A9A500ED8 /* RondjeTests */ = {
 			isa = PBXGroup;
 			children = (
 				921BFA4DA9E044463EF0EFDA /* RondjeTests.swift */,
+				B31152A3018077A50218B0B0 /* SocialAuthTests.swift */,
+				FC80C3DE0E1BB69AAEE2F57A /* SoundHealthTests.swift */,
 			);
 			path = RondjeTests;
 			sourceTree = "<group>";
@@ -195,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				2AAF25DE5216EB791FAD7058 /* DiscoverView.swift */,
+				18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -210,13 +299,30 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7E9D6556E80BC5D094F3281B /* Owner */ = {
+			isa = PBXGroup;
+			children = (
+				741B076DE4C10D0103F33700 /* OwnerHomeView.swift */,
+			);
+			path = Owner;
+			sourceTree = "<group>";
+		};
 		8920EAEBDBB30C0E44894F32 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				2B89ADE16C47AB0E0761B7EF /* AuthView.swift */,
+				E84B1FFC41C21F6195B618E1 /* SocialSignInButtons.swift */,
 				F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		92977604C0FF49578771FA17 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				A5186B4F03524632EF6DE929 /* ProgressViews.swift */,
+			);
+			path = Progress;
 			sourceTree = "<group>";
 		};
 		97EDF6BA00B8CE243A18FEE3 /* Onboarding */ = {
@@ -225,6 +331,15 @@
 				F500D8982F770787859D0608 /* OnboardingView.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		B4D6DC0035564556243D4B87 /* Wellbeing */ = {
+			isa = PBXGroup;
+			children = (
+				0EF02E3AFFF3C3F5EAAC028C /* BreathingView.swift */,
+				B400323AA6D6C3D1DF40D5A6 /* Mood.swift */,
+			);
+			path = Wellbeing;
 			sourceTree = "<group>";
 		};
 		B52BEB8FC192755A9861AC4A /* Walk */ = {
@@ -260,12 +375,17 @@
 			children = (
 				C075500CEDC1C31D95AC0C23 /* Appointments */,
 				8920EAEBDBB30C0E44894F32 /* Auth */,
+				149A1E124629011813222EC9 /* Chat */,
 				553D978CF87506047C11816A /* Discover */,
 				EAE74B5DF0748E9781D657A0 /* Dog */,
+				E47C270BD36C4CCD9FCC7246 /* Intro */,
 				426DB77FC1CFFA02380230ED /* Membership */,
 				97EDF6BA00B8CE243A18FEE3 /* Onboarding */,
+				7E9D6556E80BC5D094F3281B /* Owner */,
 				EFC38ED52995A5B1AC192CEA /* Profile */,
+				92977604C0FF49578771FA17 /* Progress */,
 				B52BEB8FC192755A9861AC4A /* Walk */,
+				B4D6DC0035564556243D4B87 /* Wellbeing */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -276,10 +396,14 @@
 				50EA1B62ECCEC400102F6036 /* APIClient.swift */,
 				3DD05E7729A1853A5748BF1F /* Cache.swift */,
 				EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */,
+				A47349ADB02864986DF8F962 /* HealthService.swift */,
 				630E03C393BF21260C48A977 /* Keychain.swift */,
 				9C56C585C3705ACBC5EBC617 /* LocationService.swift */,
 				CE38BF1BFD0974FB881BD72B /* Models.swift */,
+				885A8805C0F35865B3C3FD85 /* Push.swift */,
 				F7A13AA036854983EE311380 /* Reminders.swift */,
+				455C528725BFBCA08FD25266 /* SocialAuth.swift */,
+				67D5F7B33E2B640AC7958CD5 /* SoundFX.swift */,
 				26863FB98876ECFB2C52F0FF /* WalkTracker.swift */,
 			);
 			path = Core;
@@ -297,6 +421,14 @@
 			path = Rondje;
 			sourceTree = "<group>";
 		};
+		E47C270BD36C4CCD9FCC7246 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				520CB0DEFF2BE0A69B58BCB8 /* IntroView.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
 		EAE74B5DF0748E9781D657A0 /* Dog */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,10 +441,13 @@
 		EFC38ED52995A5B1AC192CEA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				616EF2E91DC678FA7D0CB1A5 /* DeviceSettingsView.swift */,
+				0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */,
 				1F24382B16C639D32D509682 /* EditProfileView.swift */,
 				303A4BC365EFDB4E41F534AF /* MyDogsView.swift */,
 				265151C9DD7CB381C0CE8F78 /* ProfileView.swift */,
 				2CABF8650A285AB54D3700A6 /* QuizView.swift */,
+				2188FDF561F8FEBEFE3F473F /* RoleView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -449,6 +584,16 @@
 				3B290FB70F174DEDFD36485C /* InfoPlist.xcstrings in Resources */,
 				3BF3B61965BB09D5875A2004 /* Localizable.xcstrings in Resources */,
 				069A4CEC550C6B8F9D7F31B6 /* PrivacyInfo.xcprivacy in Resources */,
+				5198C0AD339CAAF20B4E90B8 /* breathe-in.wav in Resources */,
+				404272DEE8B3BC9A865ABB26 /* breathe-out.wav in Resources */,
+				F193DDC6BC5F8F106975A6C2 /* error.wav in Resources */,
+				27841FFFAF656709D17D9B32 /* finish.wav in Resources */,
+				5B2B7A783C132F90E603AA54 /* levelup.wav in Resources */,
+				C77503601605BBB0F813FB7B /* select.wav in Resources */,
+				DBFE493DC52B55DCB51950A9 /* send.wav in Resources */,
+				734D38F8D37789B01464A0A8 /* start.wav in Resources */,
+				9A08C803E561C51B6117F836 /* success.wav in Resources */,
+				7FA3C3171D8C2F4332F2A2C1 /* tap.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +614,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BE62065632AD4C2F8AE7309 /* RondjeTests.swift in Sources */,
+				5EC6C25F274965F6B282AA41 /* SocialAuthTests.swift in Sources */,
+				4D6F906AA9E5C57E4A01B461 /* SoundHealthTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,28 +629,43 @@
 				7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */,
 				518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */,
 				4BDD7E00D0CAD60C891F8688 /* Brand.swift in Sources */,
+				EC0AE7C7D16615103E859B9D /* BreathingView.swift in Sources */,
 				CD739C28E9250DDC1E53D195 /* Cache.swift in Sources */,
+				8FC4508C7392A299F5B32ADA /* ChatView.swift in Sources */,
 				EB37B805DC39ED64AF19DAE5 /* Components.swift in Sources */,
+				894A93AC4F5EF1039DA502F4 /* DeviceSettingsView.swift in Sources */,
 				4730F6F96A9FE6D28214E9D2 /* DiscoverView.swift in Sources */,
 				76E88B5AF7B454E9ECE67593 /* DogDetailView.swift in Sources */,
 				BF1A873E18B4800DC5A433F7 /* DogFace.swift in Sources */,
+				E81899E7FBE5C3A4F4D17164 /* DogFriendsView.swift in Sources */,
 				0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */,
 				B36148C24CCB7EBA91005943 /* EditProfileView.swift in Sources */,
 				3BF34C33A412F5DB4E75288D /* FollowWalkView.swift in Sources */,
 				F2E6168EA64E7129790B0941 /* Haptics.swift in Sources */,
+				C2EC7212BCBF4AC54DC62914 /* HealthService.swift in Sources */,
+				93379E1DF8936C1A06A6AB36 /* HomeCards.swift in Sources */,
 				DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */,
+				7AF0140755593E049FF0339D /* IntroView.swift in Sources */,
 				89EAE0D5DC49B9249E9D795A /* Keychain.swift in Sources */,
 				4660BE55365FF96EE9B1FD6E /* LocationService.swift in Sources */,
 				50057FB51E1299A3690141F9 /* MembershipView.swift in Sources */,
 				E64EEDFFD55E387FA6D5B06C /* Models.swift in Sources */,
+				26EB9B4433C18066EA749D1A /* Mood.swift in Sources */,
 				53A99F8F326A9960231D3F7E /* MyDogsView.swift in Sources */,
 				7B261F47B3465004658AF387 /* OnboardingView.swift in Sources */,
+				18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */,
 				41F9D527F628C56D64E08256 /* ProfileView.swift in Sources */,
+				5A6E953AD397B6F468A9D37E /* ProgressViews.swift in Sources */,
+				0815887EEFE6F55BD5813657 /* Push.swift in Sources */,
 				C208541C7CFFFC94E58F6A44 /* QuizView.swift in Sources */,
 				9BFFC4A4D2C6C7621B0C6ACB /* Reminders.swift in Sources */,
 				119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */,
+				30EB45270BACA1438E06CF3F /* RoleView.swift in Sources */,
 				92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */,
 				320096D6615B5EA40709AA59 /* SharedStore.swift in Sources */,
+				234630D5FA9E43FFC3168F9E /* SocialAuth.swift in Sources */,
+				510EEAFA10836E93400A0BBF /* SocialSignInButtons.swift in Sources */,
+				6FE07F407894AD98538D3729 /* SoundFX.swift in Sources */,
 				D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */,
 				31D25DA03203DA7319172DA2 /* WalkActivity.swift in Sources */,
 				9CDA95671502696AA356E081 /* WalkReport.swift in Sources */,
@@ -544,14 +706,14 @@
 		361CABDDA539BA65E95F06B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_WIDGET_ENTITLEMENTS)";
 				INFOPLIST_FILE = RondjeWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile.widgets;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(RONDJE_BUNDLE_ID).widgets";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -613,6 +775,11 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RONDJE_API_BASE_URL = "https:/$()/rondje-five.vercel.app";
+				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				RONDJE_BUNDLE_ID = app.rondje.mobile;
+				RONDJE_FEATURE_HEALTH = NO;
+				RONDJE_FEATURE_SOCIAL_LOGIN = NO;
+				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -626,14 +793,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_APP_ENTITLEMENTS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Rondje/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(RONDJE_BUNDLE_ID)";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -645,14 +812,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_APP_ENTITLEMENTS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Rondje/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(RONDJE_BUNDLE_ID)";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -662,14 +829,14 @@
 		B64ED374481278F25EC6E0CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(RONDJE_WIDGET_ENTITLEMENTS)";
 				INFOPLIST_FILE = RondjeWidgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.rondje.mobile.widgets;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(RONDJE_BUNDLE_ID).widgets";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -738,6 +905,11 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RONDJE_API_BASE_URL = "http:/$()/localhost:3100";
+				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
+				RONDJE_BUNDLE_ID = app.rondje.mobile;
+				RONDJE_FEATURE_HEALTH = NO;
+				RONDJE_FEATURE_SOCIAL_LOGIN = NO;
+				RONDJE_WIDGET_ENTITLEMENTS = RondjeWidgets/RondjeWidgets.entitlements;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;

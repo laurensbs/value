@@ -1,0 +1,1246 @@
+/* Rondje — the signed-in website as an app: the floating tab bar, the short footer,
+   Ontdek (greeting, level, challenge, tip, filters) and the big dog cards.
+   Same tokens as globals.css and the iPhone app (ios/Rondje/UI/Theme.swift). */
+
+:root {
+  --card-radius: 26px;
+  --soft-shadow: 0 1px 2px rgb(22 32 26 / 0.05), 0 10px 28px rgb(22 32 26 / 0.07);
+  --soft-shadow-hover: 0 2px 4px rgb(22 32 26 / 0.06), 0 16px 36px rgb(22 32 26 / 0.12);
+  --tabs-space: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --soft-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px rgb(0 0 0 / 0.3);
+    --soft-shadow-hover: 0 2px 4px rgb(0 0 0 / 0.35), 0 16px 36px rgb(0 0 0 / 0.4);
+  }
+}
+
+/* ---------- Shell: header, tab bar, footer ---------- */
+
+.app-header .wide-only {
+  display: none;
+}
+
+.app-header .nav a[aria-current='page'] {
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+@media (min-width: 900px) {
+  .app-header .wide-only {
+    display: inline-flex;
+  }
+}
+
+.app-mode .main {
+  padding-bottom: 32px;
+}
+
+.app-tabs {
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+}
+
+.app-tabs-inner {
+  pointer-events: auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 2px;
+  width: min(100%, 440px);
+  padding: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 74%, transparent);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  backdrop-filter: saturate(1.6) blur(18px);
+  border: 1px solid color-mix(in oklab, var(--line) 55%, transparent);
+  box-shadow: 0 12px 32px rgb(22 32 26 / 0.16), 0 1px 3px rgb(22 32 26 / 0.08);
+}
+
+.app-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 54px;
+  padding: 6px 4px 5px;
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 650;
+  line-height: 1.1;
+  transition: background-color 0.25s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.app-tab:active {
+  transform: scale(0.95);
+}
+
+.app-tab[aria-current='page'] {
+  background: color-mix(in oklab, var(--grass-soft) 88%, transparent);
+  color: var(--grass);
+}
+
+.app-tab-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.app-tab[aria-current='page'] .icon {
+  stroke-width: 2.3;
+}
+
+.app-tab-badge {
+  position: absolute;
+  top: -7px;
+  right: -13px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--danger);
+  color: var(--on-danger);
+  border: 2px solid var(--surface);
+  font-size: 0.66rem;
+  font-weight: 760;
+  display: grid;
+  place-items: center;
+}
+
+@media (min-width: 900px) {
+  .app-tabs {
+    display: none;
+  }
+}
+
+/* Below 900px the floating tab bar sits over the bottom of the screen; keep the chat box above it. */
+@media (max-width: 899px) {
+  .app-mode .chat-form {
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.footer.compact {
+  padding: 14px 0 calc(16px + env(safe-area-inset-bottom, 0px));
+  font-size: 0.85rem;
+  border-top: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
+}
+
+.app-mode .footer.compact {
+  padding-bottom: var(--tabs-space);
+}
+
+@media (min-width: 900px) {
+  .app-mode .footer.compact {
+    padding-bottom: 18px;
+  }
+}
+
+.footer.compact .footer-inner {
+  justify-content: space-between;
+  gap: 4px 18px;
+}
+
+.footer-brand {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 650;
+}
+
+/* Phones: the line with the logo and the language, the links below it. Wide screens: one line. */
+.footer-links {
+  order: 3;
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 14px;
+}
+
+@media (min-width: 900px) {
+  .footer-brand {
+    flex: none;
+  }
+
+  .footer-links {
+    order: 0;
+    flex-basis: auto;
+    margin-left: auto;
+  }
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Ontdek ---------- */
+
+.discover {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.greeting-hello {
+  color: var(--muted);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.greeting h1 {
+  font-size: clamp(1.9rem, 5.2vw, 2.7rem);
+}
+
+.discover-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-cards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+.home-cards > .welcome-card,
+.home-cards > .steps-card {
+  grid-column: 1 / -1;
+}
+
+.home-cards h2 {
+  font-family: var(--font-body);
+  letter-spacing: 0;
+}
+
+/* Welcome after onboarding */
+.welcome-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: var(--card-radius);
+  background: color-mix(in oklab, var(--ball) 34%, var(--surface));
+  color: var(--ink);
+  animation: card-in 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.welcome-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+.welcome-badge {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--grass);
+  color: var(--on-grass);
+  transform: rotate(-6deg);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+/* First steps */
+.steps-card {
+  padding: 18px;
+  border-radius: var(--card-radius);
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--grass) 25%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.steps-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.steps-head h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.steps-ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: var(--grass);
+  flex-shrink: 0;
+}
+
+.steps-ring .ring {
+  position: absolute;
+  inset: 0;
+}
+
+.ring-track,
+.ring-fill {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.steps-ring .ring-track {
+  stroke: var(--line);
+  stroke-width: 6;
+}
+
+.steps-ring .ring-fill {
+  stroke: var(--grass);
+  stroke-width: 6;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.first-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.first-steps li {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--sunken);
+  color: var(--muted);
+}
+
+.first-steps li.done .step-dot {
+  background: var(--grass);
+  color: var(--on-grass);
+}
+
+.first-steps li.next .step-dot {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.step-title {
+  font-weight: 650;
+}
+
+.first-steps li.done .step-title {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--muted);
+}
+
+.step-hint {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* Level */
+.level-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: var(--card-radius);
+  background: linear-gradient(135deg, var(--walk-bg), color-mix(in oklab, var(--walk-bg) 80%, #4f9a6e));
+  color: var(--on-walk);
+  text-decoration: none;
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+  .level-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--soft-shadow-hover);
+  }
+}
+
+.level-ring {
+  position: relative;
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+}
+
+.level-ring .ring {
+  position: absolute;
+  inset: 0;
+}
+
+.level-ring .ring-track {
+  stroke: rgb(255 255 255 / 0.2);
+  stroke-width: 8;
+}
+
+.level-ring .ring-fill {
+  stroke: var(--ball);
+  stroke-width: 8;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.level-number {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.level-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.level-name {
+  font-size: 1.15rem;
+  font-weight: 750;
+}
+
+.level-next {
+  opacity: 0.88;
+  font-size: 0.95rem;
+}
+
+.level-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ball);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.level-chevron {
+  opacity: 0.7;
+}
+
+/* Challenge of the month */
+.challenge-card {
+  padding: 18px;
+  border-radius: var(--card-radius);
+  background: var(--surface);
+  box-shadow: var(--soft-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.challenge-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.challenge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--calm);
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
+.challenge-card h2 {
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.challenge-bar {
+  height: 7px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.challenge-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--calm);
+  transition: width 0.8s ease;
+}
+
+.challenge-bar.done span {
+  background: var(--grass);
+}
+
+.challenge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.challenge-mine {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--grass);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.challenge-done {
+  color: var(--grass);
+  font-weight: 700;
+}
+
+/* Tip of the day */
+.tip-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--card-radius);
+  background: linear-gradient(135deg, var(--walk-bg), color-mix(in oklab, var(--walk-bg) 86%, #4f9a6e));
+  color: var(--on-walk);
+}
+
+.tip-icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.tip-card .tip-title {
+  font-size: 0.8rem;
+  font-weight: 750;
+  opacity: 0.82;
+  margin-bottom: 3px;
+}
+
+.tip-card p {
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* Search, map and filters */
+.discover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.discover-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchbar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: var(--soft-shadow);
+  color: var(--muted);
+}
+
+.searchbar:focus-within {
+  outline: 3px solid var(--calm);
+  outline-offset: 1px;
+}
+
+.searchbar label {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+}
+
+.searchbar input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.02rem;
+  padding: 14px 0;
+  outline: none;
+}
+
+.searchbar input::placeholder {
+  color: var(--muted);
+}
+
+.round-button {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  color: var(--grass);
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.15s ease;
+}
+
+.round-button:active {
+  transform: scale(0.94);
+}
+
+.filter-pills,
+.country-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: -16px;
+  padding: 3px 16px;
+}
+
+.filter-pills::-webkit-scrollbar,
+.country-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgb(22 32 26 / 0.06);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.filter-pill:active {
+  transform: scale(0.96);
+}
+
+.filter-pill.on {
+  background: var(--grass);
+  color: var(--on-grass);
+}
+
+.filter-pill.small {
+  min-height: 38px;
+  padding: 0 13px;
+  font-size: 0.88rem;
+  gap: 6px;
+  box-shadow: none;
+  background: transparent;
+  border: 1.5px solid var(--line);
+}
+
+.filter-pill.small.on {
+  background: var(--grass-soft);
+  color: var(--grass);
+  border-color: var(--grass);
+}
+
+@media (min-width: 760px) {
+  .filter-pills,
+  .country-pills {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+.empty-card {
+  padding: 20px;
+  border-radius: var(--card-radius);
+  background: var(--surface);
+  box-shadow: var(--soft-shadow);
+}
+
+/* ---------- Dog cards ---------- */
+
+.dog-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+.dcard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  border-radius: 28px;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+  .dcard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--soft-shadow-hover);
+  }
+}
+
+.dcard:active {
+  transform: scale(0.985);
+}
+
+.dcard-media {
+  position: relative;
+  display: block;
+  height: 220px;
+  flex-shrink: 0;
+}
+
+.dog-photo.cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  object-fit: cover;
+}
+
+.dcard-float {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.dcard-distance {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 80%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgb(22 32 26 / 0.1);
+}
+
+.dcard-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.dcard-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px 18px;
+}
+
+.dcard-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.dcard-name {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 760;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.dcard-breed {
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dcard-host {
+  align-self: center;
+  display: inline-flex;
+  color: var(--muted);
+}
+
+.dcard-story {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lang-tag {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 6px;
+  border-radius: 6px;
+  background: var(--sunken);
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 760;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  text-decoration: none;
+  vertical-align: 1px;
+}
+
+.dcard-pills {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.dcard-pills .pill {
+  padding: 5px 11px;
+  font-size: 0.82rem;
+}
+
+/* ---------- Group walks row ---------- */
+
+.gw-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.section-head .link-button {
+  white-space: nowrap;
+}
+
+.gw-scroll {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 -16px;
+  padding: 4px 16px 10px;
+  scroll-snap-type: x proximity;
+}
+
+.gw-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.gw-scroll li {
+  scroll-snap-align: start;
+}
+
+.gw-card {
+  width: 260px;
+  min-height: 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: var(--soft-shadow);
+  color: inherit;
+  text-decoration: none;
+}
+
+.gw-org {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--grass);
+  font-weight: 700;
+  min-width: 0;
+}
+
+.gw-org span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gw-place {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gw-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-card {
+    animation: none;
+  }
+}
+
+/* ---------- Onboarding: one question per screen ---------- */
+
+.flow {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.flow-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flow-bars {
+  display: flex;
+  gap: 6px;
+}
+
+.flow-bars span {
+  flex: 1;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--line);
+  transition: background-color 0.3s ease;
+}
+
+.flow-bars span.on {
+  background: var(--grass);
+}
+
+.flow-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.flow-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  animation: flow-in 0.35s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.flow-body h1 {
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  outline: none;
+}
+
+@keyframes flow-in {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+}
+
+.flow-welcome {
+  padding-top: 8px;
+}
+
+.flow-dogs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0 8px;
+}
+
+.flow-dog {
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  border-radius: 30px;
+  background: color-mix(in oklab, var(--tile) var(--tile-mix), var(--surface));
+  transform: rotate(-6deg) translateX(14px);
+}
+
+.flow-dog:nth-child(2) {
+  z-index: 1;
+  width: 136px;
+  height: 136px;
+  border-radius: 34px;
+  transform: none;
+  box-shadow: var(--soft-shadow);
+}
+
+.flow-dog:nth-child(3) {
+  transform: rotate(6deg) translateX(-14px);
+}
+
+.flow-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.flow-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.flow-points .icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--grass);
+}
+
+.option-list {
+  display: grid;
+  gap: 12px;
+}
+
+.option-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 22px;
+  background: var(--surface);
+  border: 2px solid transparent;
+  box-shadow: var(--soft-shadow);
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.option-card:active {
+  transform: scale(0.985);
+}
+
+.option-card input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.option-card:has(input:checked) {
+  border-color: var(--grass);
+  background: color-mix(in oklab, var(--grass-soft) 55%, var(--surface));
+}
+
+.option-card:has(input:focus-visible) {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+.option-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background: var(--sunken);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.option-card:has(input:checked) .option-icon {
+  background: var(--grass);
+  color: var(--on-grass);
+}
+
+.option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.option-title {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.option-hint {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.input.big {
+  font-size: 1.1rem;
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+.promise-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.promise-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.promise-list .option-icon {
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.terms-check {
+  padding: 4px 2px;
+}
+
+.flow-actions {
+  display: flex;
+  gap: 10px;
+  position: sticky;
+  bottom: 0;
+  padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(to top, var(--paper) 70%, transparent);
+}
+
+.flow-actions .button {
+  min-height: 54px;
+  font-size: 1.05rem;
+}
+
+.flow-actions .grow {
+  flex: 1;
+}
+
+.flow-skip {
+  align-self: center;
+  min-height: 44px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-body {
+    animation: none;
+  }
+}

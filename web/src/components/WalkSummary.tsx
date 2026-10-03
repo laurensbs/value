@@ -1,3 +1,4 @@
+import '@/app/progress.css'
 import { and, count, eq, lte } from 'drizzle-orm'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -13,6 +14,9 @@ import { Celebration } from './Celebration'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
 import { Map } from './map'
+import type { Celebration as LevelMoment } from './progress/LevelUp'
+import { ProgressIcon } from './progress/ProgressIcon'
+import { WalkDone } from './progress/WalkDone'
 import { ReportButton } from './ReportButton'
 import { MoodCheck, WalkFeedback } from './WalkFeedback'
 import { WalkCareTally } from './WalkCare'
@@ -26,13 +30,15 @@ interface Props {
   viewer: OnboardedViewer
   otherUserId: string | null
   fallbackCenter: { lat: number; lng: number }
+  /** Right after the walker ended the walk: "Goed rondje!" with a private mood check, like the iPhone app. */
+  justEnded?: { points: number | null; celebration: LevelMoment | null } | null
 }
 
 /**
  * After a walk: what it earned and how the friendship with the dog grows, the route, private
  * feedback from both sides, (for walkers) a mood check, and the obvious next step: the next walk.
  */
-export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId, fallbackCenter }: Props) {
+export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId, fallbackCenter, justEnded }: Props) {
   const t = await getTranslations()
   const locale = await getLocale()
   const db = await getDb()
@@ -58,16 +64,22 @@ export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId,
   const newBond = walksTogether > 1 && bondFor(walksTogether - 1) !== bond
   const celebrate = progress.levelUp || progress.newAwards.length > 0
   const week = progress.weeklyGoal != null && role === 'walker'
+  const distance = formatWalkDistance(walk.distanceM ?? 0, locale)
+  // "Goed rondje!" right after ending; the level/badge moment is left to <Celebration> below, so it never shows twice.
+  const done = role === 'walker' && justEnded ? justEnded : null
 
   return (
     <div className="narrow-page stack-l">
+      {done ? (
+        <WalkDone walkId={walk.id} dogName={dog.name} distance={distance} points={null} feedbackGiven={Boolean(given)} celebration={null} />
+      ) : null}
       <header className="summary-head">
         <DogPortrait dog={dog} size={88} />
         <div className="stack-s">
           <p className="eyebrow">{t('walk.ended')}</p>
           <h1>{t('walk.with', { name: dog.name })}</h1>
           <p className="lede">
-            {t('walk.endedText', { name: dog.name, distance: formatWalkDistance(walk.distanceM ?? 0, locale), minutes })}
+            {t('walk.endedText', { name: dog.name, distance, minutes })}
           </p>
         </div>
       </header>
@@ -136,12 +148,19 @@ export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId,
       ) : null}
       <WalkCareTally care={{ pee: walk.pee, poo: walk.poo, water: walk.water }} hideEmpty />
       <WalkPhotoStrip photos={photos} dogName={dog.name} />
-      {role === 'walker' ? <MoodCheck /> : null}
-      {given ? (
-        <p className="notice success">{t('walk.thanks')}</p>
-      ) : (
-        <WalkFeedback walkId={walk.id} role={role} dogName={dog.name} />
-      )}
+      {role === 'walker' && !done ? <MoodCheck walkId={walk.id} /> : null}
+      <div id="feedback" className="feedback-anchor">
+        {given ? (
+          <p className="notice success">{t('walk.thanks')}</p>
+        ) : (
+          <WalkFeedback walkId={walk.id} role={role} dogName={dog.name} />
+        )}
+      </div>
+      {role === 'walker' && !done ? (
+        <Link href={`/breathe?next=${encodeURIComponent(`/walk/${walk.id}`)}`} className="walk-done-breathe">
+          <ProgressIcon name="breathe" size={18} /> {t('walkDone.breathe')}
+        </Link>
+      ) : null}
       <div className="row">
         {role === 'walker' ? (
           <Link href={`/dogs/${dog.id}#plan`} className="button primary">

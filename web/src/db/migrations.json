@@ -168,10 +168,18 @@
     ]
   },
   {
-    "tag": "0009_hub",
+    "tag": "0009_launch",
     "statements": [
-      "CREATE TABLE \"hub_entry\" (\n\t\"id\" text PRIMARY KEY NOT NULL,\n\t\"kind\" text NOT NULL,\n\t\"data\" jsonb NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL,\n\t\"updated_at\" timestamp DEFAULT now() NOT NULL\n);",
-      "CREATE INDEX \"hub_entry_kind_idx\" ON \"hub_entry\" USING btree (\"kind\");"
+      "-- IF NOT EXISTS: a preview build (PR #7) may already have created these tables under the old tag 0008_launch.\nCREATE TABLE IF NOT EXISTS \"launch_task\" (\n\t\"key\" text PRIMARY KEY NOT NULL,\n\t\"status\" text DEFAULT 'open' NOT NULL,\n\t\"done_at\" timestamp,\n\t\"note\" text DEFAULT '' NOT NULL\n);",
+      "CREATE TABLE IF NOT EXISTS \"outreach_contact\" (\n\t\"id\" text PRIMARY KEY NOT NULL,\n\t\"audience\" text NOT NULL,\n\t\"name\" text DEFAULT '' NOT NULL,\n\t\"organisation\" text DEFAULT '' NOT NULL,\n\t\"email\" text,\n\t\"phone\" text,\n\t\"city\" text DEFAULT '' NOT NULL,\n\t\"status\" text DEFAULT 'todo' NOT NULL,\n\t\"last_contact_at\" timestamp,\n\t\"note\" text DEFAULT '' NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL\n);",
+      "CREATE INDEX IF NOT EXISTS \"outreach_contact_status_idx\" ON \"outreach_contact\" USING btree (\"status\",\"created_at\");"
+    ]
+  },
+  {
+    "tag": "0010_hub",
+    "statements": [
+      "-- IF NOT EXISTS: a preview with PREVIEW_MIGRATIONS=1 may have created this table under the old tag 0009_hub.\nCREATE TABLE IF NOT EXISTS \"hub_entry\" (\n\t\"id\" text PRIMARY KEY NOT NULL,\n\t\"kind\" text NOT NULL,\n\t\"data\" jsonb NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL,\n\t\"updated_at\" timestamp DEFAULT now() NOT NULL\n);",
+      "CREATE INDEX IF NOT EXISTS \"hub_entry_kind_idx\" ON \"hub_entry\" USING btree (\"kind\");"
     ]
   }
 ]
