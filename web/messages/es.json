@@ -2819,5 +2819,487 @@
       "sourcesTitle": "Fuentes",
       "sourcesLede": "Todas las cifras de esta página, con su fuente. Comprobadas el {date}. ¿Ves un error o una cifra más reciente? Cuéntanoslo."
     }
+  },
+  "marketing": {
+    "title": "Centro de marketing",
+    "lede": "Qué hacer esta semana y material listo para usar. Desde aquí no se publica ni se envía nada: eso lo haces siempre tú.",
+    "nav": {
+      "label": "Partes del centro de marketing",
+      "questions": "Preguntas",
+      "interviews": "Entrevistas",
+      "posts": "Publicaciones",
+      "links": "Enlaces",
+      "material": "Material"
+    },
+    "week": {
+      "title": "Esta semana",
+      "hint": "Las primeras preguntas que piden acción, en orden. Toca para ver el porqué.",
+      "none": "Nada urgente. Mira las preguntas marcadas con ‘Atención’.",
+      "nextPost": "Siguiente publicación: {title} (semana {week}, {channel})",
+      "allPosted": "Todas las publicaciones del plan están publicadas. Hora de una nueva serie."
+    },
+    "status": {
+      "good": "Bien",
+      "watch": "Atención",
+      "act": "Actúa",
+      "wait": "Aún sin datos"
+    },
+    "labels": {
+      "step": {
+        "account": "cuenta",
+        "profile": "perfil completo",
+        "firstStep": "primer paso",
+        "firstWalk": "primer paseo"
+      }
+    },
+    "funnelSteps": {
+      "visits": "Visitas",
+      "visitsHint": "en Vercel Analytics",
+      "account": "Cuenta",
+      "profile": "Perfil completo",
+      "firstStep": "Primer paso",
+      "firstStepHint": "solicitud, perro publicado o paseo en grupo",
+      "firstWalk": "Primer paseo"
+    },
+    "questions": {
+      "title": "Las mejores preguntas",
+      "lede": "Las preguntas que haría ahora un buen profesional de crecimiento, respondidas en directo con datos reales. Los datos de ejemplo y los administradores no cuentan, y solo ves cifras, nunca nombres.",
+      "why": "Por qué",
+      "now": "Qué hacer",
+      "open": "Abrir",
+      "cols": {
+        "city": "Ciudad",
+        "demand": "Demanda",
+        "supply": "Perros",
+        "shelter": "Protectora",
+        "votes": "Votos",
+        "code": "Código",
+        "signups": "Registros"
+      },
+      "funnel": {
+        "q": "¿Dónde abandona la gente?",
+        "why": "Atraer a más gente solo sirve si avanzan: cerrar la mayor fuga es lo que más rinde.",
+        "answer": {
+          "empty": "Aún no hay cuentas reales. El embudo empieza en cuanto se registren las primeras personas.",
+          "drop": "Mayor caída: de {from} a {to}. Ahí avanza el {pct}%."
+        },
+        "action": {
+          "empty": "Consigue a las diez primeras personas: publica la publicación 1 y deja folletos en dos sitios.",
+          "profile": "La gente crea una cuenta pero no completa el perfil. Haz tú mismo el registro en el móvil y quita lo que no haga falta.",
+          "firstStep": "Los miembros no hacen nada después del perfil. ¿Ven algún perro cerca? Mira ‘¿Hay paseadores esperando un perro?’.",
+          "firstWalk": "Las solicitudes aún no se convierten en paseos. Comprueba que dueños y protectoras respondan a tiempo y ayuda con el primer encuentro."
+        }
+      },
+      "newMembers": {
+        "q": "¿Cuántos miembros nuevos esta semana, frente a la anterior?",
+        "why": "Crecer a un ritmo constante muestra si lo que hiciste esta semana (una publicación, un folleto) funcionó.",
+        "answer": {
+          "none": "Ningún miembro nuevo en las dos últimas semanas ({total} en total).",
+          "up": "{thisWeek} nuevos en los últimos 7 días ({walkers, plural, one {# paseador} other {# paseadores}}, {owners, plural, one {# dueño} other {# dueños}}), frente a {lastWeek} la semana anterior.",
+          "same": "{thisWeek} nuevos en los últimos 7 días, igual que la semana anterior ({walkers, plural, one {# paseador} other {# paseadores}}, {owners, plural, one {# dueño} other {# dueños}}).",
+          "down": "{thisWeek} nuevos en los últimos 7 días, frente a {lastWeek} la semana anterior."
+        },
+        "action": {
+          "start": "Todavía no llega nadie por sí solo. Programa dos publicaciones del plan esta semana y deja folletos en dos sitios.",
+          "repeat": "Está creciendo. Averigua de dónde vino (‘¿Funcionan los enlaces de invitación?’) y haz más de eso.",
+          "push": "Publica la siguiente publicación esta semana y pide a tres miembros que inviten a un vecino con perro."
+        }
+      },
+      "demand": {
+        "q": "¿Qué ciudad tiene más demanda y menos oferta?",
+        "why": "Un paseador sin perro cerca abandona: busca oferta donde ya hay demanda, no en todas partes a la vez.",
+        "note": "Demanda = paseadores de la ciudad más personas que votaron por una protectora de allí (cada una una vez). Perros = perros reales que se pueden reservar ahora.",
+        "answer": {
+          "empty": "Aún no se ha medido demanda: no hay paseadores ni votos con ciudad.",
+          "gap": "{city}: {demand, plural, one {# persona quiere} other {# personas quieren}} pasear allí, y {supply, plural, =0 {aún no hay ningún perro} one {hay # perro} other {hay # perros}} publicados."
+        },
+        "action": {
+          "votes": "Comparte el listado de protectoras en un grupo local: cada voto a ‘Quiero pasear aquí’ cuenta aquí como demanda.",
+          "supply": "Busca oferta en {city}: escribe a la protectora más pedida allí y deja folletos para dueños en un veterinario de {city}.",
+          "balanced": "La demanda y la oferta van a la par. Ahora busca paseadores en {city}, para que cada perro tenga un compañero fijo."
+        }
+      },
+      "wantedShelter": {
+        "q": "¿Qué protectora es la más pedida?",
+        "why": "Una protectora que oye que ya hay gente que quiere pasear con ellos dice que sí antes: esa cifra es tu mejor frase de apertura.",
+        "answer": {
+          "none": "Aún no hay votos ni sugerencias de protectoras.",
+          "top": "{name} ({city}): {n, plural, one {# voto} other {# votos}}."
+        },
+        "action": {
+          "share": "Comparte el listado de protectoras (publicación 7): cada protectora tiene el botón ‘Quiero pasear aquí’.",
+          "mail": "Escribe primero a {name} y menciona la cifra: ‘{n, plural, one {Ya hay alguien que quiere} other {Ya hay # personas que quieren}} pasear con vosotros.’",
+          "follow": "Ya contactaste con {name}. Llama si no hay respuesta en dos días laborables y menciona el número de votos."
+        }
+      },
+      "shelterPipeline": {
+        "q": "¿Cómo va el proceso con las protectoras?",
+        "why": "Una protectora trae muchos perros y responsables de golpe: la primera protectora es el mayor salto en oferta.",
+        "answer": {
+          "counts": "{sent} contactadas, {replied} respondieron, {meeting} reunión, {live} activas. {todo} listas para enviar."
+        },
+        "action": {
+          "review": "{pending, plural, one {Hay # solicitud de protectora esperando} other {Hay # solicitudes de protectoras esperando}} tu revisión en Administración. Hazlo primero.",
+          "firstWalk": "Hay una protectora activa. Organiza el primer paseo en grupo supervisado y pide después dos presentaciones a otras protectoras.",
+          "onboard": "Tienes una reunión. Ayuda con el registro y añadid juntos los primeros 3 a 5 perros para principiantes (Añadir rápido con fotos).",
+          "send": "Envía esta semana {missing} correos más a protectoras desde el centro de lanzamiento (objetivo: 10).",
+          "call": "Los diez primeros correos ya se enviaron. Llama a los dos días laborables y pregunta por quien coordina el voluntariado."
+        }
+      },
+      "ownersDog": {
+        "q": "¿Los dueños que se registran publican también un perro?",
+        "why": "Cada perro es oferta: un dueño sin perro publicado es un encuentro perdido.",
+        "answer": {
+          "none": "Aún no se ha registrado ningún dueño real.",
+          "share": "{withDog} de los {owners} dueños tienen un perro publicado ({pct}%)."
+        },
+        "action": {
+          "recruit": "La oferta viene de los dueños y sus familias: deja folletos para dueños en el veterinario y publica la publicación 3 en un grupo del barrio.",
+          "help": "{without, plural, one {# dueño aún no ha publicado} other {# dueños aún no han publicado}} un perro. Recorre tú mismo ‘Añadir un perro’ y mira dónde se atasca.",
+          "keep": "Muy bien. Pregunta a los dueños contentos si conocen a un vecino con perro."
+        }
+      },
+      "walkersWaiting": {
+        "q": "¿Hay paseadores esperando un perro cerca?",
+        "why": "Quien no ve nada cerca no vuelve: tener oferta cerca es lo que retiene a un paseador.",
+        "answer": {
+          "none": "Aún no hay paseadores reales.",
+          "served": "Los {walkers} paseadores tienen un perro real a menos de {km} km.",
+          "waiting": "{waiting} de los {walkers} paseadores aún no tienen un perro real a menos de {km} km. La mayoría espera en {city}."
+        },
+        "action": {
+          "recruit": "Busca paseadores donde ya hay perros, o a la vez que la oferta en la misma ciudad.",
+          "supply": "Pide a los paseadores que esperan que inviten a un vecino con perro (la página de sugerencias tiene un mensaje listo) y busca oferta en {city}.",
+          "keep": "Sigue así: busca paseadores nuevos solo en ciudades con perros."
+        }
+      },
+      "requests": {
+        "q": "¿Las solicitudes reciben respuesta a tiempo?",
+        "why": "Una solicitud sin respuesta es la forma más rápida de perder a un paseador.",
+        "answer": {
+          "none": "Aún no hay solicitudes reales de un primer encuentro.",
+          "counts": "{total} solicitudes: {accepted} aceptadas, {pending} abiertas, de las que {stale} llevan más de 2 días."
+        },
+        "action": {
+          "supplyFirst": "Primero oferta cerca de los paseadores (‘¿Hay paseadores esperando un perro?’), luego llegarán las solicitudes.",
+          "chase": "{stale, plural, one {# solicitud lleva} other {# solicitudes llevan}} demasiado tiempo esperando. Ayuda al dueño o a la protectora a responder.",
+          "keep": "Las solicitudes reciben respuesta. Atento al paso siguiente: el primer encuentro."
+        }
+      },
+      "returning": {
+        "q": "¿Vuelven los paseadores después de su primer paseo?",
+        "why": "Un compañero fijo es el motor de la idea: volver es la prueba, no el número de registros.",
+        "answer": {
+          "none": "Aún no se ha dado ningún paseo real.",
+          "counts": "{once} paseadores dieron un paseo, {again} volvieron ({pct}%). {steady} parejas fijas (3 veces o más en 8 semanas)."
+        },
+        "action": {
+          "firstWalk": "Ahora todo gira en torno al primer paseo real. Ayuda en persona a la primera pareja con el primer encuentro.",
+          "ask": "Llama a quien paseó una vez y pregunta qué haría falta para una segunda (usa las preguntas para paseadores).",
+          "keep": "La gente vuelve. Pregunta a la primera pareja fija si quiere salir en un vídeo, con su consentimiento."
+        }
+      },
+      "referrals": {
+        "q": "¿Funcionan los enlaces de invitación?",
+        "why": "El boca a boca es crecimiento gratis: por enlace o código ves qué canal trae registros de verdad.",
+        "answer": {
+          "none": "Aún no hay miembros reales, así que no hay nada que contar.",
+          "counts": "{referred} de los {members} miembros llegaron por un enlace ({pct}%): {own} por tu propio enlace, {viaMembers} por otros miembros, {viaCodes} por códigos de campaña."
+        },
+        "action": {
+          "codes": "Crea un enlace de registro propio para cada lugar de folletos y cada canal (Enlaces, abajo). En dos semanas verás aquí qué funciona.",
+          "more": "Los enlaces funcionan. Deja el código más flojo y haz más del mejor."
+        }
+      },
+      "traffic": {
+        "q": "¿Qué páginas y campañas traen visitas?",
+        "why": "Sin cifras de visitas no sabes qué publicación o folleto trajo a la gente a la web.",
+        "answer": {
+          "on": "Web Analytics está activado (marcado en el centro de lanzamiento). Las páginas y los referentes, como instagram.com, están en Vercel. Las etiquetas UTM de tus enlaces de campaña solo se ven allí con el Web Analytics Plus de pago.",
+          "off": "Aún no está activado: no se cuentan visitas."
+        },
+        "action": {
+          "enable": "Actívalo: Vercel → el proyecto → Analytics → Enable (gratis en Hobby). Después marca ‘Activar Vercel Web Analytics’ en el centro de lanzamiento.",
+          "check": "Mira Pages y Referrers una vez por semana. Los registros por código se cuentan aquí, gratis (‘¿Funcionan los enlaces de invitación?’)."
+        }
+      }
+    },
+    "interviews": {
+      "title": "Preguntas para entrevistas",
+      "lede": "Para llamadas y visitas. Las preguntas tratan de lo que la gente hizo, no de lo que haría.",
+      "rules": "Las reglas: pregunta por la última vez y por detalles, escucha más de lo que hablas, y habla de {app} solo al final. Un cumplido no es una prueba; una cita, una presentación o un perro publicado sí.",
+      "language": "Idioma",
+      "listen": "En qué fijarte",
+      "copy": "Copiar preguntas",
+      "copied": "Copiado",
+      "shelter": {
+        "title": "Protectora",
+        "who": "Quien coordina el voluntariado de una protectora",
+        "goal": "Objetivo: entender cómo se organizan ahora los paseos y qué es lo más difícil. Primero escuchar, {app} solo al final.",
+        "q1": "¿Cómo se organizan ahora los paseos con los perros? ¿Cómo fue la semana pasada?",
+        "q2": "¿Cuántos voluntarios pasearon el mes pasado y cómo llegaron a vosotros?",
+        "q3": "¿Cuándo salió mal por última vez un paseo o un voluntario? ¿Qué pasó?",
+        "q4": "¿Cómo planificáis ahora quién pasea a qué perro y cuándo? ¿Dónde lo apuntáis?",
+        "q5": "¿Qué perros salen ahora demasiado poco? ¿Por qué esos?",
+        "q6": "¿Tenéis lista de espera para nuevos voluntarios? ¿Qué pasa con esas personas?",
+        "q7": "¿Qué habéis probado ya para organizar más paseos? ¿Qué no funcionó?",
+        "q8": "¿Quién decide sobre una nueva colaboración y qué necesita ver esa persona?",
+        "q9": "¿Cómo están asegurados ahora los voluntarios durante un paseo?",
+        "listen": "Un problema real es algo en lo que ya gastan tiempo, como una planilla o una lista de espera. ‘Buena idea’ no es un sí; una fecha para un paseo de prueba sí. Apunta las palabras que usan ellos."
+      },
+      "owner": {
+        "title": "Dueño",
+        "who": "Un vecino mayor con perro, o un familiar",
+        "goal": "Objetivo: entender cómo va ahora lo de sacar al perro, sin vender nada. Con la familia, pregunta por lo que ven.",
+        "q1": "¿Cómo fue ayer el paseo del perro? ¿Quién lo sacó y cuánto tiempo?",
+        "q2": "¿Cuándo notó por primera vez que sacar al perro costaba más? ¿Qué cambió entonces?",
+        "q3": "¿Quién le ayuda a veces con el perro? ¿Cómo surgió?",
+        "q4": "¿Cuántas veces sale ahora el perro, y cuántas le gustaría salir de verdad?",
+        "q5": "¿Ha dejado alguna vez que otra persona pasee a su perro? ¿Qué tal fue?",
+        "q6": "¿Qué tendría que pasar antes de dejar que un desconocido pasee a su perro?",
+        "q7": "¿Cómo queda ahora con la gente: teléfono, WhatsApp, una nota? ¿Quién le ayuda con eso?",
+        "q8": "¿Qué es lo que más echa de menos desde que sacar al perro cuesta más?",
+        "listen": "La confianza lo es todo: fíjate en lo que alguien necesita para decir que sí (conocerse antes, una cara conocida, la familia presente). Nunca preguntes por dinero ni por una dirección. Una reacción cálida aún no es un perro publicado; una fecha para conocerse sí."
+      },
+      "walker": {
+        "title": "Paseador",
+        "who": "Alguien de 18 a 30 años a quien le encantan los perros",
+        "goal": "Objetivo: entender qué hacen ahora los jóvenes cuando echan de menos un perro y qué les frena.",
+        "q1": "¿Cuándo paseaste un perro por última vez? ¿Cómo surgió?",
+        "q2": "¿Has buscado alguna vez una forma de estar con perros sin tener uno? ¿Qué encontraste y por qué empezaste o no?",
+        "q3": "¿Cómo es una semana normal? ¿Dónde cabría una hora fija?",
+        "q4": "¿Qué hiciste la última vez que quisiste salir un rato, lejos de la pantalla?",
+        "q5": "¿Has hecho voluntariado alguna vez? ¿Cómo empezaste y por qué lo dejaste o seguiste?",
+        "q6": "¿Qué te frenaría para llamar a la puerta de un desconocido por un perro?",
+        "q7": "¿Quién de tu entorno tiene un perro al que le gustaría salir más?",
+        "q8": "¿Cómo te enteraste la última vez de algo nuevo que luego empezaste a hacer de verdad?",
+        "listen": "Fíjate en la diferencia entre ‘suena bien’ y el comportamiento real (ya buscó, ya ayudó). La pregunta 7 suele traer oferta, la 8 te dice dónde publicar."
+      },
+      "vet": {
+        "title": "Veterinario",
+        "who": "Un veterinario o alguien de recepción",
+        "goal": "Objetivo: entender cuándo ve la clínica a dueños que ya no pueden pasear bien a su perro, y si encaja un folleto en el mostrador.",
+        "q1": "¿Cuántas veces el mes pasado vio a un dueño que ya no podía pasear bien a su perro? ¿Qué pasaba?",
+        "q2": "¿Qué le aconsejó? ¿Qué hizo después?",
+        "q3": "¿A quién o a qué deriva ahora cuando un perro hace poco ejercicio?",
+        "q4": "¿Qué ve en los perros que salen demasiado poco?",
+        "q5": "¿Qué hay ahora en el mostrador y qué se llevan de verdad los clientes?",
+        "q6": "¿Cuándo pasó por última vez algo de una iniciativa local a sus clientes? ¿Qué tal fue?",
+        "q7": "¿Qué necesitaría saber antes de derivar a un dueño a un paseador?",
+        "listen": "El momento justo (tras una operación, con un dueño mayor) es oro: apunta cuándo es. Pregunta si puedes dejar un folleto, nunca prometas un efecto en la salud y nunca llames socia a la clínica sin un acuerdo."
+      },
+      "students": {
+        "title": "Asociación de estudiantes",
+        "who": "Alguien de la junta o de una comisión",
+        "goal": "Objetivo: entender cómo encuentran los socios actividades y voluntariado, y si encaja un paseo en grupo.",
+        "q1": "¿Cuál fue la última actividad a la que fueron muchos socios? ¿Por qué esa?",
+        "q2": "¿Hacéis algo de voluntariado o causas solidarias? ¿Cómo fue la última vez?",
+        "q3": "¿Cómo llegáis de verdad a los socios: grupo de chat, Instagram, boletín, quedadas? ¿Qué se lee?",
+        "q4": "¿Quién decide sobre algo nuevo en la agenda y cuándo se hace?",
+        "q5": "¿Cuántos socios tenían perro en casa? ¿Cómo notas que lo echan de menos?",
+        "q6": "¿Qué salió mal la última vez que colaborasteis con alguien de fuera?",
+        "q7": "¿Qué hacen los socios en época de exámenes para desconectar de los libros?",
+        "listen": "Buscas un siguiente paso concreto: un mensaje en el grupo de chat, un hueco en el boletín o un paseo en grupo en una protectora. Pregunta quién lo organiza y cuándo se cierra la agenda."
+      }
+    },
+    "posts": {
+      "title": "Plan de publicaciones",
+      "lede": "12 publicaciones para las primeras 6 semanas, dos por semana. Elige el idioma, copia el texto, descarga la imagen y publícalo tú. Después toca ‘Publicado’.",
+      "honest": "Sé honesto: {app} es nuevo, gratis y sin anuncios. Nada de experiencias ni cifras inventadas, nadie en una imagen sin su consentimiento, y nunca prometas que pasear ayuda contra algo.",
+      "progress": "{posted} de {total} publicadas",
+      "week": "Semana {week}",
+      "days": {
+        "tue": "martes",
+        "thu": "jueves",
+        "sun": "domingo"
+      },
+      "channels": {
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "App del barrio"
+      },
+      "goal": "Objetivo",
+      "visual": "Imagen",
+      "caption": "Texto",
+      "link": "Enlace",
+      "linkBio": "Pon este enlace en tu biografía (Instagram y TikTok no hacen clicables los enlaces de un texto).",
+      "language": "Idioma del texto",
+      "copy": "Copiar texto",
+      "copied": "Copiado",
+      "copyLink": "Copiar enlace",
+      "download": "Descargar imagen",
+      "posted": "Publicado",
+      "markPosted": "Marcar como publicado: {title}",
+      "markOpen": "Marcar como no publicado: {title}",
+      "fillIn": "Rellena los [corchetes] con cifras reales antes de publicar. Ahora: {members} miembros, {dogs} perros publicados, {walks} paseos.",
+      "imageAlt": "Imagen para compartir: {title}",
+      "p01": {
+        "title": "Hay un perro esperando un paseo más",
+        "sub": "Pasea gratis con un perro de tu barrio",
+        "goal": "Anunciar: cuenta con honestidad lo que estás construyendo.",
+        "caption": "Estoy creando {app}: una forma gratuita de dar un paseo fijo con un perro de tu barrio. A menudo el perro de un vecino mayor que ya no puede caminar mucho, a veces un perro de una protectora.\n\nCómo funciona:\n• tienes 18 años o más\n• la primera vez siempre os conocéis junto con el dueño\n• después das un paseo fijo, a la hora que os venga bien a los dos\n\nSin anuncios, sin suscripción. {app} acaba de empezar, así que llegas pronto. Enlace en la bio.\n\n#perros #pasear #barrio #voluntariado",
+        "visual": "La imagen con tres perros dibujados. Como carrusel: añade una foto tuya de una correa colgada de un gancho."
+      },
+      "p02": {
+        "title": "Semana 1",
+        "sub": "Estoy creando una app gratis para que el perro de la abuela salga más",
+        "goal": "Primera prueba de mercado: construir en público. Los comentarios te dicen si hay demanda.",
+        "caption": "Semana 1: estoy creando una app gratis para que el perro de la abuela salga más a menudo.\n\nMuchas personas mayores ya no pueden sacar ellas mismas a su perro. Muchos jóvenes adoran los perros pero (aún) no pueden tener uno. {app} los une, y la primera vez el dueño siempre está presente.\n\nUna pregunta para ti: ¿conoces a alguien cuyo perro querría salir más? Cuéntamelo en los comentarios.\n\n#construirenpublico #perros #pasear",
+        "visual": "Grabación de pantalla de la app con voz en off (guion A en docs/GROWTH.md); la imagen como portada. Comentario fijado: ‘Lo construyo en público. Una novedad cada semana. No vendo nada.’"
+      },
+      "p03": {
+        "title": "¿A su perro le vendría bien un paseo más?",
+        "sub": "Gratis, con un joven del barrio. Primero se conocen juntos.",
+        "goal": "Oferta: llegar a los dueños y a sus familias en el barrio.",
+        "caption": "¡Hola, vecinos! ¿Conocen a alguien cuyo perro necesitaría un paseo más? Por ejemplo porque caminar cuesta un poco más, tras una operación, o porque los días se hacen largos.\n\nCon {app}, un joven (18+) del barrio da gratis un paseo fijo con el perro. La primera vez siempre se conocen juntos, y usted decide qué se permite. {app} nunca pide dinero.\n\n¿Sin smartphone? Un familiar o un vecino puede apuntar al perro por usted, con su permiso: {link}",
+        "visual": "La imagen, o una foto del folleto impreso para dueños. Pregunta antes a quien administra el grupo si puedes compartirlo."
+      },
+      "p04": {
+        "title": "¿Sin perro propio? ¿Con ganas de salir?",
+        "sub": "Da gratis un paseo fijo con un perro de tu barrio",
+        "goal": "Demanda: conseguir paseadores de 18 a 30 años, en una ciudad que ya tiene perros.",
+        "caption": "¿Te encantan los perros pero (aún) no encaja uno en tu vida? Con {app} das gratis un paseo fijo con un perro de tu barrio, por ejemplo el de alguien que ya no puede caminar mucho.\n\nAsí funciona:\n1. Creas un perfil (18+) y haces un breve test de seguridad\n2. Primero conoces al dueño, juntos\n3. Después es vuestro paseo fijo\n\nPasear juntos puede alegrarte el día, y para el perro es una fiesta. Enlace en la bio.\n\n#vidauniversitaria #perros #pasear #airelibre",
+        "visual": "La imagen como primera diapositiva y después los tres pasos, uno por diapositiva."
+      },
+      "p05": {
+        "title": "Olfatear es trabajo",
+        "sub": "Por qué 800 metros a veces llevan 45 minutos",
+        "goal": "Alcance: un vídeo que gusta por sí solo, también a quien nunca va a pasear.",
+        "caption": "45 minutos para 800 metros. Esta es la razón: para un perro, olfatear es trabajo de verdad, y un paseo en el que puede oler es un buen paseo. Déjales oler. 🐾\n\n(Estoy creando {app}: un paseo fijo y gratis con un perro de tu barrio. Enlace en la bio.)\n\n#perros #olfatear #amorperruno",
+        "visual": "Graba a la altura del perro, con el perro de un amigo o familiar (con su permiso), 4 o 5 momentos de olfateo con texto (guion B en docs/GROWTH.md). Sin placas de calles ni números de portal a la vista."
+      },
+      "p06": {
+        "title": "Se busca: la primera protectora",
+        "sub": "Para paseos en grupo supervisados con voluntarios jóvenes, gratis",
+        "goal": "Socios: encontrar una protectora, una entidad social o una universidad para el primer piloto.",
+        "caption": "Estoy creando {app}: una plataforma gratuita que pone en contacto a jóvenes (18–30) con perros a los que les vendría bien un paseo más. Perros de vecinos mayores o enfermos, y perros de protectoras en paseos en grupo supervisados.\n\nDónde está, con honestidad: la plataforma funciona y los pasos de seguridad están incluidos (conocerse primero juntos, DNI visto en persona, permiso por perro, un test breve). Todavía no hay parejas reales paseando.\n\nLo que busco:\n• una protectora que quiera probarlo con algunos perros para principiantes\n• una entidad social o un equipo de barrio que conozca a dueños mayores\n• un docente o investigador que quiera pensar en una medición sencilla\n\n¿Conoces a alguien? Una presentación o un comentario ayudan muchísimo. {link}\n\n#voluntariado #bienestaranimal #barrio #impactosocial",
+        "visual": "La imagen con la publicación. No etiquetes organizaciones sin que lo sepan."
+      },
+      "p07": {
+        "title": "¿Dónde quieres pasear?",
+        "sub": "Vota una protectora de tu ciudad. Contactaré primero con la más pedida.",
+        "goal": "Medir la demanda: qué protectora primero. Cada voto cuenta en ‘¿Qué protectora es la más pedida?’.",
+        "caption": "¿Dónde quieres pasear? En {app} hay protectoras de los Países Bajos, Bélgica y España, y cada una tiene un botón ‘Quiero pasear aquí’. Contactaré primero con la protectora más votada, y te avisaremos en cuanto se una. Vota aquí: {link}",
+        "visual": "Una historia con un sticker de enlace al enlace de abajo, con la imagen de fondo."
+      },
+      "p08": {
+        "title": "Para el perro de tu abuela, tu vecino o tu madre",
+        "sub": "Apunta a un perro, también por otra persona (con su permiso)",
+        "goal": "Oferta a través de la familia: quien no usa la app también puede participar.",
+        "caption": "¿Tu madre, tu abuela o tu vecino tienen un perro al que le gustaría salir más? Con {app}, un joven del barrio da gratis un paseo fijo con ese perro.\n\nEl dueño no necesita usar ninguna app: tú puedes apuntar al perro, con su permiso. El primer encuentro es siempre juntos, y {app} nunca pide dinero. {link}",
+        "visual": "La imagen con dos perros dibujados. Pregunta antes a quien administra el grupo si puedes compartirlo."
+      },
+      "p09": {
+        "title": "Adivina la raza",
+        "sub": "He dibujado cuatro perros. ¿Qué raza es cada uno?",
+        "goal": "Interacción: la gente adivina en los comentarios, y eso ayuda al alcance.",
+        "caption": "He dibujado cuatro perros para {app}. ¿Qué raza es cada uno? Deja tu apuesta en los comentarios, la respuesta está en la última diapositiva. 🐶\n\n#adivinalaraza #perros #dibujo",
+        "visual": "La imagen y después una diapositiva con la respuesta: 1 labrador, 2 teckel, 3 bulldog francés, 4 border collie."
+      },
+      "p10": {
+        "title": "Así lo hacemos seguro",
+        "sub": "18 años o más · Primero os conocéis juntos · DNI visto en persona · Permiso por perro · Breve test de seguridad",
+        "goal": "Confianza: muestra a dueños y familias cómo funciona paso a paso.",
+        "caption": "¿Dejar que un desconocido pasee a tu perro? Es normal pensárselo. Por eso en {app} todo va paso a paso:\n\n1. Los paseadores tienen 18 años o más y hacen un breve test de seguridad\n2. La primera vez siempre os conocéis juntos\n3. El dueño o la protectora ve el DNI en persona (no se guarda ninguna copia)\n4. Solo con permiso para cada perro pasea alguien por su cuenta\n5. Durante un paseo, el dueño puede seguirlo en directo si quiere\n\n{app} nunca pide dinero. ¿Preguntas? Déjalas abajo.",
+        "visual": "Carrusel: la imagen y después una diapositiva por paso."
+      },
+      "p11": {
+        "title": "6 semanas de {app}",
+        "sub": "Qué funcionó, qué no, y qué voy a hacer ahora",
+        "goal": "Construir en público: un balance honesto tras 6 semanas.",
+        "caption": "6 semanas de {app}, el balance honesto.\n\nDónde estamos: [número] personas se registraron, [número] perros están publicados, [número] paseos dados.\nQué funcionó: [rellenar, por ejemplo el canal con más registros].\nQué no funcionó: [rellenar].\nQué voy a hacer ahora: [rellenar].\n\nSin anuncios, solo construir y preguntar qué necesita la gente. ¿Quieres aportar ideas? Comenta o envía un mensaje. {link}",
+        "visual": "La imagen, o una foto tuya de tu sitio de trabajo. Usa solo cifras reales de ‘Las mejores preguntas’."
+      },
+      "p12": {
+        "title": "30 minutos sin pantalla",
+        "sub": "Pero con un perro, aire fresco y una pequeña misión por el camino",
+        "goal": "Paseadores: en época de exámenes, un momento de calma sin sermones.",
+        "caption": "¿Semana de exámenes? 30 minutos sin pantalla. Pero con un perro, aire fresco y una pequeña misión por el camino: encuentra tres cosas amarillas.\n\nPasear juntos puede alegrarte el día. Con {app} das gratis un paseo fijo con un perro de tu barrio. Enlace en la bio.\n\n#exámenes #vidauniversitaria #pasear",
+        "visual": "Un móvil que desaparece en una bolsa y después imágenes del paseo (sin caras sin permiso). En un comentario fijado, indica dónde pedir ayuda si alguien no está bien (en los Países Bajos el 113, 0800-0113)."
+      }
+    },
+    "card": {
+      "free": "gratis · sin anuncios"
+    },
+    "links": {
+      "title": "Enlaces de campaña",
+      "lede": "Un enlace propio por lugar y canal, con etiquetas UTM y un código QR. Así verás después qué funciona.",
+      "page": "Página",
+      "pages": {
+        "home": "Inicio",
+        "dogs": "Perros",
+        "shelter": "Registro de protectoras",
+        "cities": "Todas las ciudades",
+        "suggest": "Sugerir una protectora o un perro",
+        "safety": "Seguridad"
+      },
+      "cityGroup": "Páginas de ciudades",
+      "source": "Fuente",
+      "sources": {
+        "flyer": "Folleto o póster",
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "App o grupo del barrio",
+        "opvang": "Protectora",
+        "partner": "Socio",
+        "mail": "Correo"
+      },
+      "detail": "Nombre o lugar",
+      "detailHint": "Por ejemplo ‘biblioteca este’ o el nombre de la protectora. Puede quedar vacío.",
+      "campaign": "Campaña",
+      "campaignHint": "Por ejemplo ‘inicio octubre’ o ‘exámenes’.",
+      "result": "Enlace de campaña",
+      "copy": "Copiar enlace",
+      "copied": "Copiado",
+      "qrFor": "Código QR para",
+      "qrCampaign": "Enlace de campaña",
+      "qrCode": "Enlace de registro",
+      "qrLabel": "Código QR para {url}",
+      "downloadQr": "Descargar código QR (SVG)",
+      "utmNote": "Ojo: Vercel solo muestra las etiquetas UTM con el Web Analytics Plus de pago. En el plan gratuito sí ves la página y el referente. ¿Quieres contar gratis? Usa el enlace de registro.",
+      "codeTitle": "Contar registros, gratis",
+      "codeText": "Un enlace de registro con código propio abre la pantalla de registro y recuerda el código durante 30 días. Los registros por código aparecen arriba en ‘¿Funcionan los enlaces de invitación?’.",
+      "code": "Código",
+      "codeHint": "Letras y números, de 7 a 12 caracteres.",
+      "owner": "Empezar en ‘añadir un perro’ (para dueños)",
+      "codeLink": "Enlace de registro"
+    },
+    "material": {
+      "title": "Material",
+      "lede": "Lo que ya está listo y cómo usarlo.",
+      "open": "Abrir",
+      "flyerOwner": {
+        "title": "Folleto para dueños",
+        "how": "Imprímelo y déjalo en el veterinario, la farmacia, la biblioteca o el centro cívico (pregunta antes). Si has iniciado sesión, tu propio enlace va en el código QR."
+      },
+      "flyerWalker": {
+        "title": "Folleto para paseadores",
+        "how": "Cuélgalo en la universidad, la biblioteca o en un piso de estudiantes, mejor en una ciudad que ya tenga perros. Funciona mejor en época de exámenes."
+      },
+      "poster": {
+        "title": "Póster para una protectora",
+        "how": "Tras la incorporación: cuélgalo en la entrada y en la sala de espera. Los visitantes escanean el código y ven los perros de esa protectora.",
+        "none": "Disponible en cuanto la primera protectora real esté activa (en el panel de la protectora → Póster)."
+      },
+      "cities": {
+        "title": "Páginas de ciudades",
+        "how": "Comparte la página de una ciudad en un grupo local. La gente ve los perros, protectoras y paseos en grupo de allí, y desde el listado de protectoras vota con ‘Quiero pasear aquí’.",
+        "top": "Más demanda ahora:"
+      },
+      "shelters": {
+        "title": "Listado de protectoras",
+        "how": "Útil en una conversación: muestra que la protectora ya aparece como ‘Aún no está en {app}’ y que la gente puede votarla."
+      },
+      "suggest": {
+        "title": "Página de sugerencias",
+        "how": "Para paseadores sin perro cerca: tiene un mensaje listo para invitar a un vecino con perro."
+      },
+      "messages": {
+        "title": "Banco de mensajes del centro de lanzamiento",
+        "how": "Correos y guiones de llamada para protectoras, veterinarios, asociaciones y prensa local. Los envías tú, desde tu propio correo."
+      }
+    }
   }
 }

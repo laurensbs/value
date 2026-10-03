@@ -2819,5 +2819,487 @@
       "sourcesTitle": "Sources",
       "sourcesLede": "Tous les chiffres de cette page, avec leur source. Vérifiés le {date}. Vous voyez une erreur ou un chiffre plus récent ? Dites-le-nous."
     }
+  },
+  "marketing": {
+    "title": "Centre marketing",
+    "lede": "Ce qu’il faut faire cette semaine, et du matériel prêt à l’emploi. Rien n’est publié ni envoyé d’ici : c’est toujours toi qui le fais.",
+    "nav": {
+      "label": "Parties du centre marketing",
+      "questions": "Questions",
+      "interviews": "Entretiens",
+      "posts": "Publications",
+      "links": "Liens",
+      "material": "Matériel"
+    },
+    "week": {
+      "title": "Cette semaine",
+      "hint": "Les premières questions qui demandent une action, dans l’ordre. Touche pour voir le pourquoi.",
+      "none": "Rien d’urgent. Regarde les questions marquées « À surveiller ».",
+      "nextPost": "Prochaine publication : {title} (semaine {week}, {channel})",
+      "allPosted": "Toutes les publications du planning sont publiées. Place à une nouvelle série."
+    },
+    "status": {
+      "good": "Bien",
+      "watch": "À surveiller",
+      "act": "À faire",
+      "wait": "Pas encore de données"
+    },
+    "labels": {
+      "step": {
+        "account": "compte",
+        "profile": "profil complété",
+        "firstStep": "premier pas",
+        "firstWalk": "première promenade"
+      }
+    },
+    "funnelSteps": {
+      "visits": "Visites",
+      "visitsHint": "dans Vercel Analytics",
+      "account": "Compte",
+      "profile": "Profil complété",
+      "firstStep": "Premier pas",
+      "firstStepHint": "demande, chien en ligne ou promenade de groupe",
+      "firstWalk": "Première promenade"
+    },
+    "questions": {
+      "title": "Les meilleures questions",
+      "lede": "Les questions qu’un bon spécialiste de la croissance poserait maintenant, avec une réponse en direct tirée des vraies données. Les données d’exemple et les administrateurs ne comptent pas, et tu ne vois que des chiffres, jamais de noms.",
+      "why": "Pourquoi",
+      "now": "Et maintenant",
+      "open": "Ouvrir",
+      "cols": {
+        "city": "Ville",
+        "demand": "Demande",
+        "supply": "Chiens",
+        "shelter": "Refuge",
+        "votes": "Votes",
+        "code": "Code",
+        "signups": "Inscriptions"
+      },
+      "funnel": {
+        "q": "Où les gens décrochent-ils ?",
+        "why": "Attirer plus de monde n’aide que si les gens avancent : boucher la plus grosse fuite rapporte le plus.",
+        "answer": {
+          "empty": "Pas encore de vrais comptes. L’entonnoir commence dès que les premières personnes s’inscrivent.",
+          "drop": "Plus grosse perte : de {from} à {to}. {pct} % passent cette étape."
+        },
+        "action": {
+          "empty": "Fais venir les dix premières personnes : publie la publication 1 et dépose des flyers à deux endroits.",
+          "profile": "Les gens créent un compte mais ne terminent pas leur profil. Fais toi-même l’inscription sur ton téléphone et supprime ce qui n’est pas nécessaire.",
+          "firstStep": "Les membres ne font rien après leur profil. Voient-ils un chien près de chez eux ? Regarde « Des promeneurs attendent-ils un chien ? ».",
+          "firstWalk": "Les demandes ne deviennent pas encore des promenades. Vérifie que propriétaires et refuges répondent à temps, et aide pour la première rencontre."
+        }
+      },
+      "newMembers": {
+        "q": "Combien de nouveaux membres cette semaine, par rapport à la semaine dernière ?",
+        "why": "Une croissance régulière montre si ce que tu as fait cette semaine (une publication, un flyer) a marché.",
+        "answer": {
+          "none": "Aucun nouveau membre ces deux dernières semaines ({total} au total).",
+          "up": "{thisWeek} nouveaux ces 7 derniers jours ({walkers, plural, one {# promeneur} other {# promeneurs}}, {owners, plural, one {# propriétaire} other {# propriétaires}}), contre {lastWeek} la semaine d’avant.",
+          "same": "{thisWeek} nouveaux ces 7 derniers jours, comme la semaine d’avant ({walkers, plural, one {# promeneur} other {# promeneurs}}, {owners, plural, one {# propriétaire} other {# propriétaires}}).",
+          "down": "{thisWeek} nouveaux ces 7 derniers jours, contre {lastWeek} la semaine d’avant."
+        },
+        "action": {
+          "start": "Personne ne vient encore tout seul. Prévois deux publications du planning cette semaine et dépose des flyers à deux endroits.",
+          "repeat": "Ça grandit. Cherche d’où ça vient (« Les liens d’invitation marchent-ils ? ») et fais-en plus.",
+          "push": "Publie la prochaine publication cette semaine et demande à trois membres d’inviter un voisin qui a un chien."
+        }
+      },
+      "demand": {
+        "q": "Quelle ville a le plus de demande et le moins d’offre ?",
+        "why": "Un promeneur sans chien à proximité décroche : cherche de l’offre là où la demande existe déjà, pas partout à la fois.",
+        "note": "Demande = promeneurs de la ville plus les personnes qui ont voté pour un refuge de cette ville (chacune une fois). Chiens = vrais chiens réservables maintenant.",
+        "answer": {
+          "empty": "Pas encore de demande mesurée : aucun promeneur ni vote avec une ville.",
+          "gap": "{city} : {demand, plural, one {# personne veut} other {# personnes veulent}} y promener, et {supply, plural, =0 {aucun chien n’est} one {# chien est} other {# chiens sont}} en ligne."
+        },
+        "action": {
+          "votes": "Partage la liste des refuges dans un groupe local : chaque vote « Je veux promener ici » compte ici comme demande.",
+          "supply": "Trouve de l’offre à {city} : écris au refuge le plus demandé là-bas et dépose des flyers pour propriétaires chez un vétérinaire à {city}.",
+          "balanced": "La demande et l’offre avancent ensemble. Cherche maintenant des promeneurs à {city}, pour que chaque chien ait un binôme régulier."
+        }
+      },
+      "wantedShelter": {
+        "q": "Quel refuge est le plus demandé ?",
+        "why": "Un refuge qui apprend que des gens veulent déjà promener chez lui dit oui plus vite : ce chiffre est ta meilleure phrase d’accroche.",
+        "answer": {
+          "none": "Pas encore de votes ni de suggestions de refuges.",
+          "top": "{name} ({city}) : {n, plural, one {# vote} other {# votes}}."
+        },
+        "action": {
+          "share": "Partage la liste des refuges (publication 7) : chaque refuge a le bouton « Je veux promener ici ».",
+          "mail": "Écris d’abord à {name} et cite le chiffre : « {n, plural, one {Quelqu’un veut déjà} other {# personnes veulent déjà}} promener chez vous. »",
+          "follow": "Tu as déjà contacté {name}. Appelle s’il n’y a pas de réponse après deux jours ouvrables, et cite le nombre de votes."
+        }
+      },
+      "shelterPipeline": {
+        "q": "Où en est la prospection des refuges ?",
+        "why": "Un refuge apporte beaucoup de chiens et d’encadrants d’un coup : le premier refuge est le plus grand bond en offre.",
+        "answer": {
+          "counts": "{sent} contactés, {replied} réponses, {meeting} rendez-vous, {live} en ligne. {todo} prêts à envoyer."
+        },
+        "action": {
+          "review": "{pending, plural, one {# inscription de refuge attend} other {# inscriptions de refuges attendent}} ta vérification dans l’administration. Fais-le d’abord.",
+          "firstWalk": "Un refuge est en ligne. Organise la première promenade de groupe encadrée, puis demande deux mises en relation avec d’autres refuges.",
+          "onboard": "Tu as un rendez-vous. Aide à l’inscription et ajoutez ensemble les 3 à 5 premiers chiens débutants (Ajout rapide avec photos).",
+          "send": "Envoie encore {missing} e-mails à des refuges depuis le centre de lancement cette semaine (objectif : 10).",
+          "call": "Les dix premiers e-mails sont partis. Rappelle après deux jours ouvrables et demande la personne qui coordonne les bénévoles."
+        }
+      },
+      "ownersDog": {
+        "q": "Les propriétaires qui s’inscrivent mettent-ils aussi un chien en ligne ?",
+        "why": "Chaque chien, c’est de l’offre : un propriétaire sans chien en ligne, c’est une rencontre manquée.",
+        "answer": {
+          "none": "Aucun vrai propriétaire inscrit pour l’instant.",
+          "share": "{withDog} des {owners} propriétaires ont un chien en ligne ({pct} %)."
+        },
+        "action": {
+          "recruit": "L’offre vient des propriétaires et de leur famille : dépose des flyers pour propriétaires chez le vétérinaire et publie la publication 3 dans un groupe de quartier.",
+          "help": "{without, plural, one {# propriétaire n’a} other {# propriétaires n’ont}} pas encore mis de chien en ligne. Fais toi-même « Ajouter un chien » et regarde où ça bloque.",
+          "keep": "Bravo. Demande aux propriétaires satisfaits s’ils connaissent un voisin avec un chien."
+        }
+      },
+      "walkersWaiting": {
+        "q": "Des promeneurs attendent-ils un chien près de chez eux ?",
+        "why": "Qui ne voit rien à proximité ne revient pas : de l’offre tout près, c’est ce qui retient un promeneur.",
+        "answer": {
+          "none": "Pas encore de vrais promeneurs.",
+          "served": "Les {walkers} promeneurs ont un vrai chien à moins de {km} km.",
+          "waiting": "{waiting} des {walkers} promeneurs n’ont pas encore de vrai chien à moins de {km} km. La plupart attendent à {city}."
+        },
+        "action": {
+          "recruit": "Recrute des promeneurs là où il y a déjà des chiens, ou en même temps que l’offre dans la même ville.",
+          "supply": "Demande aux promeneurs en attente d’inviter un voisin qui a un chien (la page de suggestions a un message tout prêt) et trouve de l’offre à {city}.",
+          "keep": "Continue ainsi : ne recrute de nouveaux promeneurs que dans des villes qui ont des chiens."
+        }
+      },
+      "requests": {
+        "q": "Les demandes reçoivent-elles une réponse à temps ?",
+        "why": "Une demande sans réponse, c’est le moyen le plus rapide de perdre un promeneur.",
+        "answer": {
+          "none": "Pas encore de vraies demandes de première rencontre.",
+          "counts": "{total} demandes : {accepted} acceptées, {pending} ouvertes, dont {stale} depuis plus de 2 jours."
+        },
+        "action": {
+          "supplyFirst": "D’abord de l’offre près des promeneurs (« Des promeneurs attendent-ils un chien ? »), ensuite les demandes viendront.",
+          "chase": "{stale, plural, one {# demande attend} other {# demandes attendent}} depuis trop longtemps. Aide le propriétaire ou le refuge à répondre.",
+          "keep": "Les demandes reçoivent une réponse. Surveille l’étape suivante : la première rencontre."
+        }
+      },
+      "returning": {
+        "q": "Les promeneurs reviennent-ils après leur première promenade ?",
+        "why": "Un binôme régulier est le moteur de l’idée : revenir est la preuve, pas le nombre d’inscriptions.",
+        "answer": {
+          "none": "Pas encore de vraie promenade.",
+          "counts": "{once} promeneurs ont fait une promenade, {again} sont revenus ({pct} %). {steady} binômes réguliers (3 fois ou plus en 8 semaines)."
+        },
+        "action": {
+          "firstWalk": "Tout tourne maintenant autour de la première vraie promenade. Aide en personne le premier binôme lors de la rencontre.",
+          "ask": "Appelle ceux qui ont marché une fois et demande ce qu’il faudrait pour une deuxième (utilise les questions d’entretien pour les promeneurs).",
+          "keep": "Les gens reviennent. Demande au premier binôme régulier s’il veut bien apparaître dans une vidéo, avec son accord."
+        }
+      },
+      "referrals": {
+        "q": "Les liens d’invitation marchent-ils ?",
+        "why": "Le bouche-à-oreille, c’est de la croissance gratuite : par lien ou par code, tu vois quel canal apporte vraiment des inscriptions.",
+        "answer": {
+          "none": "Pas encore de vrais membres, donc rien à compter.",
+          "counts": "{referred} des {members} membres sont venus par un lien ({pct} %) : {own} par ton propre lien, {viaMembers} par d’autres membres, {viaCodes} par des codes de campagne."
+        },
+        "action": {
+          "codes": "Crée un lien d’inscription propre à chaque lieu de flyers et à chaque canal (Liens, plus bas). Dans deux semaines, tu verras ici ce qui marche.",
+          "more": "Les liens marchent. Arrête le code le plus faible et fais plus du meilleur."
+        }
+      },
+      "traffic": {
+        "q": "Quelles pages et campagnes amènent des visiteurs ?",
+        "why": "Sans chiffres de visites, tu ne sais pas quelle publication ou quel flyer a amené les gens sur le site.",
+        "answer": {
+          "on": "Web Analytics est activé (coché dans le centre de lancement). Les pages et les référents, comme instagram.com, sont dans Vercel. Les balises UTM de tes liens de campagne n’y apparaissent qu’avec Web Analytics Plus, payant.",
+          "off": "Pas encore activé : aucune visite n’est comptée."
+        },
+        "action": {
+          "enable": "Active-le : Vercel → le projet → Analytics → Enable (gratuit sur Hobby). Coche ensuite « Activer Vercel Web Analytics » dans le centre de lancement.",
+          "check": "Regarde Pages et Referrers une fois par semaine. Les inscriptions par code sont comptées ici, gratuitement (« Les liens d’invitation marchent-ils ? »)."
+        }
+      }
+    },
+    "interviews": {
+      "title": "Questions d’entretien",
+      "lede": "Pour les appels et les visites. Les questions portent sur ce que les gens ont fait, pas sur ce qu’ils feraient.",
+      "rules": "Les règles : demande la dernière fois et des détails, écoute plus que tu ne parles, et ne parle de {app} qu’à la fin. Un compliment n’est pas une preuve ; un rendez-vous, une mise en relation ou un chien en ligne, oui.",
+      "language": "Langue",
+      "listen": "Ce qu’il faut écouter",
+      "copy": "Copier les questions",
+      "copied": "Copié",
+      "shelter": {
+        "title": "Refuge",
+        "who": "La personne qui coordonne les bénévoles d’un refuge",
+        "goal": "But : comprendre comment les promenades sont organisées aujourd’hui et ce qui est le plus difficile. D’abord écouter, {app} seulement à la fin.",
+        "q1": "Comment les promenades des chiens sont-elles organisées aujourd’hui ? Comment s’est passée la semaine dernière ?",
+        "q2": "Combien de bénévoles ont promené le mois dernier, et comment sont-ils arrivés chez vous ?",
+        "q3": "Quand une promenade ou un bénévole a-t-il posé problème pour la dernière fois ? Que s’est-il passé ?",
+        "q4": "Comment planifiez-vous aujourd’hui qui promène quel chien et quand ? Où est-ce noté ?",
+        "q5": "Quels chiens sortent trop peu aujourd’hui ? Pourquoi ceux-là ?",
+        "q6": "Avez-vous une liste d’attente de nouveaux bénévoles ? Que deviennent ces personnes ?",
+        "q7": "Qu’avez-vous déjà essayé pour organiser plus de promenades ? Qu’est-ce qui n’a pas marché ?",
+        "q8": "Qui décide d’un nouveau partenariat, et que doit voir cette personne ?",
+        "q9": "Comment les bénévoles sont-ils assurés pendant une promenade aujourd’hui ?",
+        "listen": "Un vrai problème, c’est quelque chose qui leur prend déjà du temps, comme un planning ou une liste d’attente. « Bonne idée » n’est pas un oui ; une date pour une promenade d’essai, oui. Note les mots qu’ils emploient eux-mêmes."
+      },
+      "owner": {
+        "title": "Propriétaire",
+        "who": "Un voisin âgé qui a un chien, ou un membre de sa famille",
+        "goal": "But : comprendre comment se passent les sorties du chien aujourd’hui, sans rien vendre. Avec la famille, demande ce qu’ils voient.",
+        "q1": "Comment s’est passée la sortie du chien hier ? Qui l’a promené, et combien de temps ?",
+        "q2": "Quand avez-vous remarqué pour la première fois que sortir le chien devenait plus difficile ? Qu’est-ce qui a changé alors ?",
+        "q3": "Qui vous aide parfois avec le chien ? Comment c’est arrivé ?",
+        "q4": "Combien de fois le chien sort-il maintenant, et combien de fois aimerait-il vraiment sortir ?",
+        "q5": "Avez-vous déjà laissé quelqu’un d’autre promener votre chien ? Comment ça s’est passé ?",
+        "q6": "Que faudrait-il avant que vous laissiez un inconnu promener votre chien ?",
+        "q7": "Comment prenez-vous rendez-vous aujourd’hui : téléphone, WhatsApp, un mot ? Qui vous aide pour ça ?",
+        "q8": "Qu’est-ce qui vous manque le plus depuis que sortir le chien est plus difficile ?",
+        "listen": "La confiance, c’est toute l’histoire : repère ce dont la personne a besoin pour dire oui (se rencontrer d’abord, un visage familier, la famille présente). Ne demande jamais d’argent ni d’adresse. Une réaction chaleureuse n’est pas encore un chien en ligne ; une date de rencontre, oui."
+      },
+      "walker": {
+        "title": "Promeneur",
+        "who": "Quelqu’un de 18 à 30 ans qui adore les chiens",
+        "goal": "But : comprendre ce que font les jeunes aujourd’hui quand un chien leur manque, et ce qui les freine.",
+        "q1": "Quand as-tu promené un chien pour la dernière fois ? Comment c’est arrivé ?",
+        "q2": "As-tu déjà cherché un moyen de passer du temps avec des chiens sans en avoir un ? Qu’as-tu trouvé, et pourquoi as-tu commencé ou pas ?",
+        "q3": "À quoi ressemble une semaine normale ? Où une heure fixe pourrait-elle trouver sa place ?",
+        "q4": "Qu’as-tu fait la dernière fois que tu voulais sortir un moment, loin de ton écran ?",
+        "q5": "As-tu déjà fait du bénévolat ? Comment as-tu commencé, et pourquoi as-tu arrêté ou continué ?",
+        "q6": "Qu’est-ce qui t’empêcherait de sonner chez un inconnu pour un chien ?",
+        "q7": "Qui, autour de toi, a un chien qui aimerait sortir plus souvent ?",
+        "q8": "Comment as-tu entendu parler la dernière fois de quelque chose de nouveau que tu as ensuite vraiment commencé ?",
+        "listen": "Fais la différence entre « ça a l’air sympa » et un vrai comportement (a déjà cherché, a déjà aidé). La question 7 apporte souvent de l’offre, la question 8 te dit où publier."
+      },
+      "vet": {
+        "title": "Vétérinaire",
+        "who": "Un vétérinaire ou quelqu’un à l’accueil",
+        "goal": "But : comprendre quand le cabinet voit des propriétaires qui ne peuvent plus bien promener leur chien, et si un flyer à l’accueil a sa place.",
+        "q1": "Combien de fois le mois dernier avez-vous vu un propriétaire qui ne pouvait plus bien promener son chien ? Que se passait-il ?",
+        "q2": "Que lui avez-vous conseillé ? Qu’a-t-il fait ensuite ?",
+        "q3": "Vers qui ou quoi orientez-vous aujourd’hui quand un chien manque d’exercice ?",
+        "q4": "Que voyez-vous chez les chiens qui sortent trop peu ?",
+        "q5": "Qu’y a-t-il aujourd’hui à l’accueil, et qu’est-ce que les gens emportent vraiment ?",
+        "q6": "Quand avez-vous transmis pour la dernière fois quelque chose d’une initiative locale à vos clients ? Comment ça s’est passé ?",
+        "q7": "Que faudrait-il savoir avant d’orienter un propriétaire vers un promeneur ?",
+        "listen": "Le bon moment (après une opération, avec un propriétaire âgé) vaut de l’or : note quand c’est. Demande si tu peux déposer un flyer, ne promets jamais d’effet sur la santé, et ne présente jamais le cabinet comme partenaire sans accord."
+      },
+      "students": {
+        "title": "Association étudiante",
+        "who": "Quelqu’un du bureau ou d’une commission",
+        "goal": "But : comprendre comment les membres trouvent des activités et du bénévolat, et si une promenade de groupe aurait sa place.",
+        "q1": "Quelle a été la dernière activité où beaucoup de membres sont venus ? Pourquoi celle-là ?",
+        "q2": "Faites-vous du bénévolat ou des actions solidaires ? Comment ça s’est passé la dernière fois ?",
+        "q3": "Comment touchez-vous vraiment les membres : groupe de discussion, Instagram, newsletter, soirées ? Qu’est-ce qui est lu ?",
+        "q4": "Qui décide d’une nouveauté au programme, et quand est-il fixé ?",
+        "q5": "Combien de membres avaient un chien à la maison ? Comment remarques-tu qu’il leur manque ?",
+        "q6": "Qu’est-ce qui a mal tourné la dernière fois que vous avez travaillé avec un partenaire extérieur ?",
+        "q7": "Que font les membres pendant les examens pour s’éloigner un peu des livres ?",
+        "listen": "Tu cherches une prochaine étape concrète : un message dans le groupe, une place dans la newsletter, ou une promenade de groupe dans un refuge. Demande qui s’en occupe et quand le programme est bouclé."
+      }
+    },
+    "posts": {
+      "title": "Planning de publications",
+      "lede": "12 publications pour les 6 premières semaines, deux par semaine. Choisis la langue, copie le texte, télécharge l’image et publie toi-même. Ensuite, touche « Publié ».",
+      "honest": "Reste honnête : {app} est nouveau, gratuit et sans publicité. Pas d’expériences ni de chiffres inventés, personne en image sans accord, et ne promets jamais que marcher aide contre quoi que ce soit.",
+      "progress": "{posted} sur {total} publiées",
+      "week": "Semaine {week}",
+      "days": {
+        "tue": "mardi",
+        "thu": "jeudi",
+        "sun": "dimanche"
+      },
+      "channels": {
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Appli de quartier"
+      },
+      "goal": "But",
+      "visual": "Visuel",
+      "caption": "Texte",
+      "link": "Lien",
+      "linkBio": "Mets ce lien dans ta bio (Instagram et TikTok ne rendent pas cliquables les liens dans une légende).",
+      "language": "Langue du texte",
+      "copy": "Copier le texte",
+      "copied": "Copié",
+      "copyLink": "Copier le lien",
+      "download": "Télécharger l’image",
+      "posted": "Publié",
+      "markPosted": "Marquer comme publié : {title}",
+      "markOpen": "Marquer comme non publié : {title}",
+      "fillIn": "Remplis les [crochets] avec de vrais chiffres avant de publier. Maintenant : {members} membres, {dogs} chiens en ligne, {walks} promenades.",
+      "imageAlt": "Image à partager : {title}",
+      "p01": {
+        "title": "Un chien attend une promenade de plus",
+        "sub": "Promène gratuitement un chien de ton quartier",
+        "goal": "Annoncer : dis honnêtement ce que tu construis.",
+        "caption": "Je crée {app} : une façon gratuite de faire une promenade régulière avec un chien de ton quartier. Souvent le chien d’un voisin âgé qui ne peut plus marcher loin, parfois un chien de refuge.\n\nComment ça marche :\n• tu as 18 ans ou plus\n• la première fois, tu rencontres toujours le propriétaire ensemble\n• ensuite, tu fais une promenade régulière, à un moment qui vous convient à tous les deux\n\nPas de publicité, pas d’abonnement. {app} vient de démarrer, tu es donc parmi les premiers. Lien en bio.\n\n#chiens #promenade #quartier #bénévolat",
+        "visual": "L’image avec trois chiens dessinés. En carrousel : ajoute ta propre photo d’une laisse accrochée à un crochet."
+      },
+      "p02": {
+        "title": "Semaine 1",
+        "sub": "Je crée une appli gratuite pour que le chien de mamie sorte plus souvent",
+        "goal": "Premier test de marché : construire en public. Les commentaires te disent s’il y a de la demande.",
+        "caption": "Semaine 1 : je crée une appli gratuite pour que le chien de mamie sorte plus souvent.\n\nBeaucoup de personnes âgées ne peuvent plus promener leur chien elles-mêmes. Beaucoup de jeunes adorent les chiens mais ne peuvent pas (encore) en avoir. {app} les réunit, et la première fois, le propriétaire est toujours là.\n\nUne question pour toi : connais-tu quelqu’un dont le chien aimerait sortir plus souvent ? Dis-le en commentaire.\n\n#construireenpublic #chiens #promenade",
+        "visual": "Enregistrement d’écran de l’appli avec voix off (script A dans docs/GROWTH.md) ; l’image en couverture. Commentaire épinglé : « Je construis ça en public. Une mise à jour chaque semaine. Je ne vends rien. »"
+      },
+      "p03": {
+        "title": "Votre chien aurait-il besoin d’une promenade de plus ?",
+        "sub": "Gratuit, avec un jeune du quartier. On se rencontre d’abord ensemble.",
+        "goal": "Offre : toucher les propriétaires et leur famille dans le quartier.",
+        "caption": "Bonjour les voisins ! Connaissez-vous quelqu’un dont le chien aurait bien besoin d’une promenade de plus ? Par exemple parce que marcher est plus difficile, après une opération, ou parce que les journées sont longues.\n\nAvec {app}, un jeune (18+) du quartier promène gratuitement le chien, à un rythme régulier. La première fois, vous vous rencontrez toujours ensemble, et c’est vous qui décidez de ce qui est permis. {app} ne demande jamais d’argent.\n\nPas de smartphone ? Un proche ou un voisin peut inscrire le chien pour vous, avec votre accord : {link}",
+        "visual": "L’image, ou une photo du flyer imprimé pour propriétaires. Demande d’abord à l’administrateur du groupe si tu peux le partager."
+      },
+      "p04": {
+        "title": "Pas de chien à toi ? Envie de sortir ?",
+        "sub": "Fais gratuitement une promenade régulière avec un chien de ton quartier",
+        "goal": "Demande : recruter des promeneurs de 18 à 30 ans, dans une ville qui a déjà des chiens.",
+        "caption": "Tu adores les chiens, mais il n’y a pas (encore) de place pour un chien dans ta vie ? Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier, par exemple celui de quelqu’un qui ne peut plus marcher loin.\n\nComment ça se passe :\n1. Tu crées un profil (18+) et tu fais un court quiz de sécurité\n2. Tu rencontres d’abord le propriétaire, ensemble\n3. Ensuite, c’est votre promenade régulière\n\nMarcher ensemble peut faire du bien à ta journée, et pour le chien c’est la fête. Lien en bio.\n\n#viedétudiant #chiens #promenade #dehors",
+        "visual": "L’image en première diapositive, puis les trois étapes, une par diapositive."
+      },
+      "p05": {
+        "title": "Renifler, c’est du travail",
+        "sub": "Pourquoi 800 mètres prennent parfois 45 minutes",
+        "goal": "Portée : une vidéo sympa en soi, même pour ceux qui ne promèneront jamais.",
+        "caption": "45 minutes pour 800 mètres. Voici pourquoi : pour un chien, renifler est un vrai travail, et une promenade où il peut sentir est une bonne promenade. Laissez-les renifler. 🐾\n\n(Je crée {app} : une promenade régulière et gratuite avec un chien de ton quartier. Lien en bio.)\n\n#chiens #reniflage #amourdeschiens",
+        "visual": "Filme à hauteur de chien, avec le chien d’un ami ou d’un proche (avec accord), 4 ou 5 moments de reniflage avec du texte (script B dans docs/GROWTH.md). Pas de plaques de rue ni de numéros de maison à l’image."
+      },
+      "p06": {
+        "title": "Recherche : le premier refuge",
+        "sub": "Pour des promenades de groupe encadrées avec de jeunes bénévoles, gratuitement",
+        "goal": "Partenaires : trouver un refuge, une association sociale ou une haute école pour le premier pilote.",
+        "caption": "Je crée {app} : une plateforme gratuite qui met en relation de jeunes adultes (18–30) avec des chiens qui ont besoin d’une promenade de plus. Des chiens de voisins âgés ou malades, et des chiens de refuge lors de promenades de groupe encadrées.\n\nOù ça en est, honnêtement : la plateforme est en ligne et les étapes de sécurité sont là (rencontre ensemble d’abord, pièce d’identité vue en personne, accord pour chaque chien, un court quiz). Il n’y a pas encore de vrais binômes qui marchent.\n\nCe que je cherche :\n• un refuge qui veut essayer avec quelques chiens débutants\n• une association sociale ou une équipe de quartier qui connaît des propriétaires âgés\n• un enseignant ou un chercheur prêt à réfléchir à une mesure simple\n\nTu connais quelqu’un ? Une mise en relation ou un commentaire aide énormément. {link}\n\n#bénévolat #bienêtreanimal #quartier #impactsocial",
+        "visual": "L’image avec la publication. Ne tague pas d’organisations sans qu’elles le sachent."
+      },
+      "p07": {
+        "title": "Où veux-tu promener ?",
+        "sub": "Vote pour un refuge de ta ville. Je contacterai d’abord le plus demandé.",
+        "goal": "Mesurer la demande : quel refuge d’abord. Chaque vote compte dans « Quel refuge est le plus demandé ? ».",
+        "caption": "Où veux-tu promener ? Sur {app}, il y a des refuges aux Pays-Bas, en Belgique et en Espagne, et chaque refuge a un bouton « Je veux promener ici ». Je contacterai d’abord le refuge qui a le plus de votes, et tu seras prévenu dès qu’il nous rejoint. Vote ici : {link}",
+        "visual": "Une story avec un sticker lien vers le lien ci-dessous, avec l’image en fond."
+      },
+      "p08": {
+        "title": "Pour le chien de ta grand-mère, ton voisin ou ta mère",
+        "sub": "Inscris un chien, aussi pour quelqu’un d’autre (avec son accord)",
+        "goal": "Offre via la famille : ceux qui n’utilisent pas l’appli peuvent quand même participer.",
+        "caption": "Ta mère, ta grand-mère ou ton voisin a un chien qui aimerait sortir plus souvent ? Avec {app}, un jeune du quartier promène gratuitement ce chien, à un rythme régulier.\n\nLe propriétaire n’a pas besoin d’utiliser une appli : tu peux inscrire le chien, avec son accord. La première rencontre se fait toujours ensemble, et {app} ne demande jamais d’argent. {link}",
+        "visual": "L’image avec deux chiens dessinés. Demande d’abord à l’administrateur du groupe si tu peux le partager."
+      },
+      "p09": {
+        "title": "Devine la race",
+        "sub": "J’ai dessiné quatre chiens. Quelle race est laquelle ?",
+        "goal": "Interaction : les gens devinent en commentaire, ce qui aide la portée.",
+        "caption": "J’ai dessiné quatre chiens pour {app}. Quelle race est laquelle ? Mets ta réponse en commentaire, la solution est sur la dernière diapositive. 🐶\n\n#devinelarace #chiens #dessin",
+        "visual": "L’image, puis une diapositive avec la réponse : 1 labrador, 2 teckel, 3 bouledogue français, 4 border collie."
+      },
+      "p10": {
+        "title": "Comment on garde ça sûr",
+        "sub": "18 ans ou plus · Rencontre ensemble d’abord · Pièce d’identité vue en personne · Accord pour chaque chien · Court quiz de sécurité",
+        "goal": "Confiance : montrer aux propriétaires et aux familles comment ça se passe, étape par étape.",
+        "caption": "Laisser un inconnu promener ton chien ? Normal d’y réfléchir. C’est pour ça que {app} avance étape par étape :\n\n1. Les promeneurs ont 18 ans ou plus et font un court quiz de sécurité\n2. La première fois, on se rencontre toujours ensemble\n3. Le propriétaire ou le refuge voit la pièce d’identité en personne (aucune copie n’est gardée)\n4. Ce n’est qu’avec un accord pour chaque chien que quelqu’un promène seul\n5. Pendant une promenade, le propriétaire peut suivre en direct, s’il le souhaite\n\n{app} ne demande jamais d’argent. Des questions ? Pose-les ci-dessous.",
+        "visual": "Carrousel : l’image, puis une diapositive par étape."
+      },
+      "p11": {
+        "title": "6 semaines de {app}",
+        "sub": "Ce qui a marché, ce qui n’a pas marché, et ce que je vais faire",
+        "goal": "Construire en public : un point honnête après 6 semaines.",
+        "caption": "6 semaines de {app}, le point honnête.\n\nOù on en est : [nombre] personnes se sont inscrites, [nombre] chiens sont en ligne, [nombre] promenades faites.\nCe qui a marché : [à remplir, par exemple le canal avec le plus d’inscriptions].\nCe qui n’a pas marché : [à remplir].\nCe que je vais faire maintenant : [à remplir].\n\nPas de publicité, juste construire et demander aux gens ce dont ils ont besoin. Envie de réfléchir avec moi ? Commente ou envoie un message. {link}",
+        "visual": "L’image, ou ta propre photo de ton espace de travail. N’utilise que de vrais chiffres de « Les meilleures questions »."
+      },
+      "p12": {
+        "title": "30 minutes sans écran",
+        "sub": "Mais un chien, de l’air frais et une petite mission en route",
+        "goal": "Promeneurs : pendant les examens, un moment de calme sans faire la morale.",
+        "caption": "Semaine d’examens ? 30 minutes sans écran. Mais un chien, de l’air frais et une petite mission en route : trouve trois choses jaunes.\n\nMarcher ensemble peut faire du bien à ta journée. Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier. Lien en bio.\n\n#examens #viedétudiant #promenade",
+        "visual": "Un téléphone qui disparaît dans un sac, puis des images de promenade (pas de visages sans accord). Dans un commentaire épinglé, indique où trouver de l’aide si ça ne va pas (aux Pays-Bas le 113, 0800-0113)."
+      }
+    },
+    "card": {
+      "free": "gratuit · sans publicité"
+    },
+    "links": {
+      "title": "Liens de campagne",
+      "lede": "Un lien propre à chaque lieu et canal, avec des balises UTM et un QR code. Pour voir ensuite ce qui marche.",
+      "page": "Page",
+      "pages": {
+        "home": "Accueil",
+        "dogs": "Chiens",
+        "shelter": "Inscription des refuges",
+        "cities": "Toutes les villes",
+        "suggest": "Suggérer un refuge ou un chien",
+        "safety": "Sécurité"
+      },
+      "cityGroup": "Pages des villes",
+      "source": "Source",
+      "sources": {
+        "flyer": "Flyer ou affiche",
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Appli ou groupe de quartier",
+        "opvang": "Refuge",
+        "partner": "Partenaire",
+        "mail": "E-mail"
+      },
+      "detail": "Nom ou lieu",
+      "detailHint": "Par exemple « bibliothèque est » ou le nom du refuge. Peut rester vide.",
+      "campaign": "Campagne",
+      "campaignHint": "Par exemple « lancement octobre » ou « examens ».",
+      "result": "Lien de campagne",
+      "copy": "Copier le lien",
+      "copied": "Copié",
+      "qrFor": "QR code pour",
+      "qrCampaign": "Lien de campagne",
+      "qrCode": "Lien d’inscription",
+      "qrLabel": "QR code pour {url}",
+      "downloadQr": "Télécharger le QR code (SVG)",
+      "utmNote": "Attention : Vercel n’affiche les balises UTM qu’avec Web Analytics Plus, payant. Avec l’offre gratuite, tu vois quand même la page et le référent. Pour compter gratuitement, utilise le lien d’inscription.",
+      "codeTitle": "Compter les inscriptions, gratuitement",
+      "codeText": "Un lien d’inscription avec un code propre ouvre l’écran d’inscription et retient le code pendant 30 jours. Les inscriptions par code apparaissent plus haut, sous « Les liens d’invitation marchent-ils ? ».",
+      "code": "Code",
+      "codeHint": "Lettres et chiffres, de 7 à 12 caractères.",
+      "owner": "Commencer par « ajouter un chien » (pour les propriétaires)",
+      "codeLink": "Lien d’inscription"
+    },
+    "material": {
+      "title": "Matériel",
+      "lede": "Ce qui est déjà prêt, et comment l’utiliser.",
+      "open": "Ouvrir",
+      "flyerOwner": {
+        "title": "Flyer pour propriétaires",
+        "how": "Imprime-le et dépose-le chez le vétérinaire, à la pharmacie, à la bibliothèque ou à la maison de quartier (demande d’abord). Si tu es connecté, ton propre lien est dans le QR code."
+      },
+      "flyerWalker": {
+        "title": "Flyer pour promeneurs",
+        "how": "Affiche-le à la haute école, à la bibliothèque ou dans un kot ou une colocation, de préférence dans une ville qui a déjà des chiens. Il marche le mieux pendant les examens."
+      },
+      "poster": {
+        "title": "Affiche pour un refuge",
+        "how": "Après l’arrivée du refuge : accroche-la à l’entrée et dans la salle d’attente. Les visiteurs scannent le code et voient les chiens de ce refuge.",
+        "none": "Disponible dès que le premier vrai refuge est en ligne (dans le tableau de bord du refuge → Affiche)."
+      },
+      "cities": {
+        "title": "Pages des villes",
+        "how": "Partage la page d’une ville dans un groupe local. Les gens y voient les chiens, refuges et promenades de groupe, et depuis la liste des refuges, ils votent avec « Je veux promener ici ».",
+        "top": "Plus forte demande maintenant :"
+      },
+      "shelters": {
+        "title": "Liste des refuges",
+        "how": "Pratique en rendez-vous : montre que le refuge apparaît déjà comme « Pas encore sur {app} », et que les gens peuvent voter pour lui."
+      },
+      "suggest": {
+        "title": "Page de suggestions",
+        "how": "Pour les promeneurs sans chien à proximité : un message tout prêt pour inviter un voisin qui a un chien."
+      },
+      "messages": {
+        "title": "Banque de messages du centre de lancement",
+        "how": "E-mails et scripts d’appel pour refuges, vétérinaires, associations et presse locale. Tu les envoies toi-même, depuis ta propre adresse."
+      }
+    }
   }
 }
