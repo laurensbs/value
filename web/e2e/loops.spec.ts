@@ -31,7 +31,7 @@ test('growth loop: a vote brings the shelter, and the voter hears when it joins 
 
   // The admin verifies it; the walker who asked for it gets a notification.
   const admin = await signInAdmin(browser)
-  await admin.page.goto('/admin')
+  await admin.page.goto('/admin/shelters')
   await admin.page.getByRole('listitem').filter({ hasText: '87654321' }).getByRole('button', { name: 'Verifiëren' }).click()
   await expect(admin.page.getByText('87654321')).toHaveCount(0)
 

@@ -77,7 +77,7 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
 
   // --- Admin verifies the shelter ---
   const admin = await signInAdmin(browser)
-  await admin.page.goto('/admin')
+  await admin.page.goto('/admin/shelters')
   await shot(admin.page, '22-admin')
   const row = admin.page.getByRole('listitem').filter({ hasText: orgName })
   await expect(row.getByText('Marieke de Vries')).toBeVisible()

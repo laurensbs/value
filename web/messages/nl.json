@@ -2193,7 +2193,6 @@
     "lede": "Alles voor de lancering op één plek: wat er nog moet, wie wat doet, je berichten en hoe het groeit. Op je eigen tempo.",
     "levelChip": "{level} · {points} punten",
     "pointsShort": "+{n}",
-    "install": "Tip: open deze pagina op je iPhone in Safari en kies Deel → Zet op beginscherm. Dan opent de lanceerhub als een eigen app.",
     "entry": {
       "title": "Lanceerhub",
       "text": "Lanceerlijst, berichtenbank voor opvangen en andere partijen, cijfers per week en kosten."
@@ -2495,6 +2494,194 @@
       "when": {
         "apple": "zodra je lid bent",
         "domain": "zodra het gekocht is"
+      }
+    },
+    "import": {
+      "button": "Importeer CSV",
+      "title": "Contacten importeren",
+      "hint": "Plak een CSV of kies een bestand. De eerste regel noemt de kolommen:",
+      "rules": "Doelgroep (audience): shelter, vet, student, neighbourhood of press; opvang, dierenarts, studenten, buurt en pers mag ook. Naam of organisatie is genoeg. Maximaal {max} contacten per keer. Alles komt binnen als ‘te sturen’ en er wordt niets verstuurd.",
+      "paste": "CSV plakken",
+      "file": "Of kies een bestand",
+      "preview": "Bekijk voorbeeld",
+      "rowsLabel": "Contacten in het bestand",
+      "line": "regel {n}",
+      "counts": {
+        "new": "{n} nieuw",
+        "duplicate": "{n} dubbel",
+        "invalid": "{n} met een fout"
+      },
+      "status": {
+        "new": "Nieuw",
+        "existing": "Staat er al",
+        "duplicate": "Dubbel in bestand"
+      },
+      "problems": {
+        "audience": "Onbekende doelgroep",
+        "missingName": "Naam of organisatie ontbreekt",
+        "email": "E-mailadres klopt niet",
+        "tooLong": "Een veld is te lang"
+      },
+      "confirm": "{n, plural, one {Importeer # contact} other {Importeer # contacten}}",
+      "nothing": "Niets nieuws om te importeren",
+      "done": "{added, plural, =0 {Geen nieuwe contacten toegevoegd.} one {# contact toegevoegd als ‘te sturen’.} other {# contacten toegevoegd als ‘te sturen’.}}",
+      "skipped": "Overgeslagen: {duplicate} dubbel en {invalid} met een fout.",
+      "errors": {
+        "empty": "Er staan geen contacten in. Zet de kolomnamen op de eerste regel en daaronder één contact per regel.",
+        "header": "De eerste regel moet de kolomnamen hebben, met minstens audience en organisation of name.",
+        "tooMany": "Dit zijn {rows} contacten. Importeer er maximaal {max} tegelijk.",
+        "tooBig": "Dit bestand is te groot voor een contactlijst.",
+        "invalid": "Dat ging mis. Probeer het opnieuw.",
+        "read": "Dit bestand kon niet gelezen worden. Kies een .csv-bestand."
+      }
+    }
+  },
+  "adminHub": {
+    "title": "Beheer",
+    "hello": "Hoi {name}, dit is wat er speelt.",
+    "signIn": "Log in om Beheer te openen",
+    "open": "Bekijk",
+    "nav": {
+      "label": "Onderdelen van Beheer",
+      "overview": "Overzicht",
+      "launch": "Lancering",
+      "marketing": "Marketing",
+      "moderation": "Moderatie",
+      "shelters": "Opvangen",
+      "tips": "Tips",
+      "numbers": "Cijfers"
+    },
+    "tiles": {
+      "label": "Naar een onderdeel",
+      "launch": {
+        "title": "Lancering",
+        "open": "{open} van {total} wachten op jou",
+        "done": "Alles van jou is gedaan"
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Zichtbaarheid en groei"
+      },
+      "moderation": {
+        "title": "Moderatie",
+        "text": "{reports, plural, =0 {Geen open meldingen} one {# open melding} other {# open meldingen}} · {signals, plural, =0 {geen signalen} one {# signaal} other {# signalen}}"
+      },
+      "shelters": {
+        "title": "Opvangen",
+        "text": "{n, plural, =0 {Niemand wacht op verificatie} one {# wacht op verificatie} other {# wachten op verificatie}}"
+      },
+      "tips": {
+        "title": "Tips en stemmen",
+        "text": "{n, plural, =0 {Niets nieuws} one {# opvang gevraagd} other {# opvangen gevraagd}}"
+      },
+      "numbers": {
+        "title": "Cijfers",
+        "text": "{n, plural, one {# rondje} other {# rondjes}} deze week{running, plural, =0 {} other {, # nu onderweg}}"
+      }
+    },
+    "questionsTitle": "De beste vragen",
+    "questionsHint": "Wat een ervaren teamleider veiligheid en operatie elke dag nakijkt. Live uit de database, het dringendste bovenaan.",
+    "status": {
+      "calm": "Alles rustig. Er wacht niets op je.",
+      "attention": "{n, plural, one {Eén ding vraagt vandaag je aandacht.} other {# dingen vragen vandaag je aandacht.}}",
+      "urgent": "{n, plural, one {Eén ding heeft nu je aandacht nodig.} other {# dingen vragen je aandacht, en iets daarvan nu meteen.}}"
+    },
+    "level": {
+      "urgent": "Nu",
+      "attention": "Vandaag",
+      "calm": "Rustig"
+    },
+    "questions": {
+      "walks": {
+        "q": "Lopen er nu rondjes, en is er een rondje over tijd?",
+        "overdue": "{overdue, plural, one {# rondje is} other {# rondjes zijn}} over tijd, van de {running} die nu {running, plural, one {loopt} other {lopen}}. Kijk mee en neem zo nodig contact op.",
+        "running": "{running, plural, one {Er loopt nu # rondje} other {Er lopen nu # rondjes}}, allemaal op tijd.",
+        "none": "Er loopt nu geen rondje.",
+        "act": "Kijk mee"
+      },
+      "reports": {
+        "q": "Zijn er meldingen die op mij wachten?",
+        "serious": "{n, plural, one {# open melding} other {# open meldingen}}, waarvan {serious} over veiligheid of misbruik. De oudste wacht {days, plural, =0 {sinds vandaag} one {al # dag} other {al # dagen}}.",
+        "open": "{n, plural, one {# open melding} other {# open meldingen}}. De oudste wacht {days, plural, =0 {sinds vandaag} one {al # dag} other {al # dagen}}.",
+        "none": "Geen open meldingen.",
+        "act": "Handel meldingen af"
+      },
+      "signals": {
+        "q": "Gaat het ergens over geld, links of een slechte ervaring?",
+        "some": "Deze week: {feedback} keer feedback om na te kijken, {requests} gemarkeerde aanvragen en {chats} chatberichten over geld of met een link.",
+        "none": "Deze week geen gemarkeerde feedback, aanvragen of chatberichten.",
+        "act": "Bekijk de signalen"
+      },
+      "intros": {
+        "q": "Zijn er ID-checks of kennismakingen die vastzitten?",
+        "stuck": "{unanswered, plural, =0 {} one {# kennismaking wacht te lang op de eigenaar.} other {# kennismakingen wachten te lang op de eigenaar.}} {idPending, plural, =0 {} one {Na # kennismaking is het ID nog niet bevestigd.} other {Na # kennismakingen is het ID nog niet bevestigd.}}",
+        "none": "Niets zit vast. {waiting, plural, =0 {Er wacht geen kennismaking op antwoord.} one {# kennismaking wacht op antwoord, nog binnen de tijd.} other {# kennismakingen wachten op antwoord, nog binnen de tijd.}}",
+        "act": "Bekijk de hond"
+      },
+      "shelters": {
+        "q": "Welke opvangen wachten op verificatie?",
+        "waiting": "{n, plural, one {# opvang wacht} other {# opvangen wachten}} op verificatie, de oudste {days, plural, =0 {sinds vandaag} one {al # dag} other {al # dagen}}.",
+        "none": "Geen opvang wacht op verificatie.",
+        "act": "Verifieer opvangen"
+      },
+      "safety": {
+        "q": "Wie is er deze week geblokkeerd of verbannen?",
+        "repeat": "{repeat, plural, one {# persoon is} other {# mensen zijn}} in 30 dagen door twee of meer anderen geblokkeerd: kijk of er ook meldingen over zijn. Deze week {banned, plural, =0 {niemand verbannen} other {# verbannen ({names})}}.",
+        "banned": "Deze week verbannen: {names}. {blocks, plural, =0 {Geen blokkades door gebruikers.} one {# blokkade door gebruikers.} other {# blokkades door gebruikers.}}",
+        "quiet": "Deze week niemand verbannen. {blocks, plural, =0 {Geen blokkades door gebruikers.} one {# blokkade door gebruikers.} other {# blokkades door gebruikers.}}",
+        "act": "Bekijk moderatie"
+      },
+      "groupWalks": {
+        "q": "Komen de groepswandelingen van de komende twee dagen vol?",
+        "empty": "{empty, plural, one {# groepswandeling heeft} other {# groepswandelingen hebben}} nog geen aanmeldingen, van de {n} gepland. Deel ze, of vraag de opvang of ze doorgaan.",
+        "filled": "{n, plural, one {# groepswandeling gepland, met aanmeldingen.} other {# groepswandelingen gepland, allemaal met aanmeldingen.}}",
+        "none": "Geen groepswandelingen in de komende twee dagen.",
+        "act": "Open de opvang"
+      },
+      "tips": {
+        "q": "Welke tips en stemmen vragen om opvolging?",
+        "open": "{n, plural, one {# opvang gevraagd} other {# opvangen gevraagd}}, het meest {top} ({votes, plural, one {# stem} other {# stemmen}}). {followUp, plural, =0 {} one {Bij # benaderde opvang is het al twee weken stil.} other {Bij # benaderde opvangen is het al twee weken stil.}}",
+        "followUp": "{followUp, plural, one {Bij # benaderde opvang is het al twee weken stil.} other {Bij # benaderde opvangen is het al twee weken stil.}} Vraag na hoe het staat.",
+        "none": "Geen nieuwe tips of stemmen, en niets om na te vragen.",
+        "act": "Volg tips op"
+      },
+      "system": {
+        "q": "Zijn de database en de dagelijkse opruimronde gezond?",
+        "healthy": "De database ({database}) antwoordt in {ms} ms en de opruimronde is bij.",
+        "slow": "De database ({database}) deed {ms} ms over één simpele vraag. Kijk of app en database in dezelfde regio staan.",
+        "cronLate": "De opruimronde loopt achter: {requests} verlopen aanvragen, {walks} rondjes die nog openstaan en {routes} routes ouder dan 30 dagen. Kijk in Vercel bij Cron Jobs of /api/cron/cleanup draait.",
+        "demoDatabase": "Er is geen echte database gekoppeld: alles staat in het geheugen en is weg na de volgende deploy. Koppel Neon in Vercel.",
+        "act": "Bekijk instellingen"
+      }
+    },
+    "items": {
+      "overdue": "{minutes} min over tijd",
+      "unanswered": "wacht {days, plural, =0 {sinds vandaag} one {# dag} other {# dagen}} · kennismaking {startsAt}",
+      "idPending": "kennismaking {days, plural, one {# dag} other {# dagen}} geleden, ID nog niet bevestigd",
+      "emptyWalk": "{startsAt} · nog geen aanmeldingen"
+    },
+    "install": {
+      "title": "Beheer als app op je iPhone",
+      "text": "Open Beheer in Safari, tik op Deel en kies Zet op beginscherm. Dan opent Beheer als eigen app, met alle onderdelen hierboven."
+    },
+    "pages": {
+      "moderation": {
+        "title": "Moderatie",
+        "lede": "Meldingen, signalen over geld en links, en geblokkeerde accounts. Het dringendste eerst.",
+        "noBans": "Niemand geblokkeerd."
+      },
+      "shelters": {
+        "title": "Opvangen",
+        "lede": "Opvangen die zich aanmeldden, de oudste bovenaan. Hun honden gaan pas online als jij ze verifieert.",
+        "since": "aangemeld {date}"
+      },
+      "tips": {
+        "title": "Tips en stemmen"
+      },
+      "numbers": {
+        "title": "Cijfers",
+        "lede": "Hoe Rondje groeit, waar nieuwe mensen vandaan komen en hoe alles is ingesteld.",
+        "weekly": "Cijfers per week in de lanceerhub"
       }
     }
   }

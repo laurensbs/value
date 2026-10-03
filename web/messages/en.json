@@ -2193,7 +2193,6 @@
     "lede": "Everything for the launch in one place: what is left, who does what, your messages and how it grows. At your own pace.",
     "levelChip": "{level} · {points} points",
     "pointsShort": "+{n}",
-    "install": "Tip: open this page on your iPhone in Safari and choose Share → Add to Home Screen. The launch hub then opens as its own app.",
     "entry": {
       "title": "Launch hub",
       "text": "Launch list, message bank for shelters and others, weekly numbers and costs."
@@ -2495,6 +2494,194 @@
       "when": {
         "apple": "once you join",
         "domain": "once it is bought"
+      }
+    },
+    "import": {
+      "button": "Import CSV",
+      "title": "Import contacts",
+      "hint": "Paste a CSV or choose a file. The first line names the columns:",
+      "rules": "Audience: shelter, vet, student, neighbourhood or press. A name or an organisation is enough. At most {max} contacts at a time. Everything comes in as ‘to send’ and nothing is sent.",
+      "paste": "Paste CSV",
+      "file": "Or choose a file",
+      "preview": "Preview",
+      "rowsLabel": "Contacts in the file",
+      "line": "line {n}",
+      "counts": {
+        "new": "{n} new",
+        "duplicate": "{n} duplicate",
+        "invalid": "{n} with an error"
+      },
+      "status": {
+        "new": "New",
+        "existing": "Already in the list",
+        "duplicate": "Duplicate in file"
+      },
+      "problems": {
+        "audience": "Unknown audience",
+        "missingName": "Name or organisation missing",
+        "email": "E-mail address is wrong",
+        "tooLong": "A field is too long"
+      },
+      "confirm": "{n, plural, one {Import # contact} other {Import # contacts}}",
+      "nothing": "Nothing new to import",
+      "done": "{added, plural, =0 {No new contacts added.} one {# contact added as ‘to send’.} other {# contacts added as ‘to send’.}}",
+      "skipped": "Skipped: {duplicate} duplicate and {invalid} with an error.",
+      "errors": {
+        "empty": "There are no contacts in it. Put the column names on the first line and one contact per line below.",
+        "header": "The first line must have the column names, with at least audience and organisation or name.",
+        "tooMany": "These are {rows} contacts. Import at most {max} at a time.",
+        "tooBig": "This file is too big for a contact list.",
+        "invalid": "Something went wrong. Please try again.",
+        "read": "This file could not be read. Choose a .csv file."
+      }
+    }
+  },
+  "adminHub": {
+    "title": "Admin",
+    "hello": "Hi {name}, here is what is going on.",
+    "signIn": "Sign in to open Admin",
+    "open": "View",
+    "nav": {
+      "label": "Admin sections",
+      "overview": "Overview",
+      "launch": "Launch",
+      "marketing": "Marketing",
+      "moderation": "Moderation",
+      "shelters": "Shelters",
+      "tips": "Tips",
+      "numbers": "Numbers"
+    },
+    "tiles": {
+      "label": "Go to a section",
+      "launch": {
+        "title": "Launch",
+        "open": "{open} of {total} waiting for you",
+        "done": "All your tasks are done"
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Visibility and growth"
+      },
+      "moderation": {
+        "title": "Moderation",
+        "text": "{reports, plural, =0 {No open reports} one {# open report} other {# open reports}} · {signals, plural, =0 {no signals} one {# signal} other {# signals}}"
+      },
+      "shelters": {
+        "title": "Shelters",
+        "text": "{n, plural, =0 {Nobody waiting for verification} one {# waiting for verification} other {# waiting for verification}}"
+      },
+      "tips": {
+        "title": "Tips and votes",
+        "text": "{n, plural, =0 {Nothing new} one {# shelter asked for} other {# shelters asked for}}"
+      },
+      "numbers": {
+        "title": "Numbers",
+        "text": "{n, plural, one {# walk} other {# walks}} this week{running, plural, =0 {} other {, # out now}}"
+      }
+    },
+    "questionsTitle": "The best questions",
+    "questionsHint": "What an experienced trust & safety and operations lead checks every day. Live from the database, most urgent first.",
+    "status": {
+      "calm": "All quiet. Nothing is waiting for you.",
+      "attention": "{n, plural, one {One thing needs your attention today.} other {# things need your attention today.}}",
+      "urgent": "{n, plural, one {One thing needs your attention right now.} other {# things need your attention, and one of them right now.}}"
+    },
+    "level": {
+      "urgent": "Now",
+      "attention": "Today",
+      "calm": "Quiet"
+    },
+    "questions": {
+      "walks": {
+        "q": "Are walks happening now, and is one overdue?",
+        "overdue": "{overdue, plural, one {# walk is} other {# walks are}} overdue, of the {running} {running, plural, one {walk} other {walks}} going on now. Follow along and get in touch if needed.",
+        "running": "{running, plural, one {# walk is going on now} other {# walks are going on now}}, all on time.",
+        "none": "No walk is going on right now.",
+        "act": "Follow along"
+      },
+      "reports": {
+        "q": "Are there reports waiting for me?",
+        "serious": "{n, plural, one {# open report} other {# open reports}}, of which {serious} about safety or abuse. The oldest has waited {days, plural, =0 {since today} one {# day} other {# days}}.",
+        "open": "{n, plural, one {# open report} other {# open reports}}. The oldest has waited {days, plural, =0 {since today} one {# day} other {# days}}.",
+        "none": "No open reports.",
+        "act": "Handle reports"
+      },
+      "signals": {
+        "q": "Is anything about money, links or a bad experience?",
+        "some": "This week: {feedback} feedback to review, {requests} flagged requests and {chats} chat messages about money or with a link.",
+        "none": "No flagged feedback, requests or chat messages this week.",
+        "act": "View the signals"
+      },
+      "intros": {
+        "q": "Are ID checks or first meetings stuck?",
+        "stuck": "{unanswered, plural, =0 {} one {# first meeting has waited too long for the owner.} other {# first meetings have waited too long for the owner.}} {idPending, plural, =0 {} one {After # first meeting the ID is not confirmed yet.} other {After # first meetings the ID is not confirmed yet.}}",
+        "none": "Nothing is stuck. {waiting, plural, =0 {No first meeting is waiting for an answer.} one {# first meeting is waiting for an answer, still in time.} other {# first meetings are waiting for an answer, still in time.}}",
+        "act": "View the dog"
+      },
+      "shelters": {
+        "q": "Which shelters are waiting for verification?",
+        "waiting": "{n, plural, one {# shelter is} other {# shelters are}} waiting for verification, the oldest {days, plural, =0 {since today} one {for # day} other {for # days}}.",
+        "none": "No shelter is waiting for verification.",
+        "act": "Verify shelters"
+      },
+      "safety": {
+        "q": "Who was blocked or banned this week?",
+        "repeat": "{repeat, plural, one {# person was} other {# people were}} blocked by two or more others in 30 days: check whether there are reports about them too. This week {banned, plural, =0 {nobody banned} other {# banned ({names})}}.",
+        "banned": "Banned this week: {names}. {blocks, plural, =0 {No blocks by members.} one {# block by members.} other {# blocks by members.}}",
+        "quiet": "Nobody banned this week. {blocks, plural, =0 {No blocks by members.} one {# block by members.} other {# blocks by members.}}",
+        "act": "View moderation"
+      },
+      "groupWalks": {
+        "q": "Are the group walks of the next two days filling up?",
+        "empty": "{empty, plural, one {# group walk has} other {# group walks have}} no sign-ups yet, of the {n} planned. Share them, or ask the shelter whether they go ahead.",
+        "filled": "{n, plural, one {# group walk planned, with sign-ups.} other {# group walks planned, all with sign-ups.}}",
+        "none": "No group walks in the next two days.",
+        "act": "Open the shelter"
+      },
+      "tips": {
+        "q": "Which tips and votes need a follow-up?",
+        "open": "{n, plural, one {# shelter asked for} other {# shelters asked for}}, most of all {top} ({votes, plural, one {# vote} other {# votes}}). {followUp, plural, =0 {} one {# contacted shelter has been quiet for two weeks.} other {# contacted shelters have been quiet for two weeks.}}",
+        "followUp": "{followUp, plural, one {# contacted shelter has been quiet for two weeks.} other {# contacted shelters have been quiet for two weeks.}} Ask how things stand.",
+        "none": "No new tips or votes, and nothing to follow up.",
+        "act": "Follow up tips"
+      },
+      "system": {
+        "q": "Are the database and the daily cleanup healthy?",
+        "healthy": "The database ({database}) answers in {ms} ms and the cleanup is up to date.",
+        "slow": "The database ({database}) took {ms} ms for one simple question. Check that the app and the database are in the same region.",
+        "cronLate": "The cleanup is behind: {requests} expired requests, {walks} walks still open and {routes} routes older than 30 days. Check in Vercel under Cron Jobs whether /api/cron/cleanup runs.",
+        "demoDatabase": "No real database is connected: everything lives in memory and is gone after the next deploy. Connect Neon in Vercel.",
+        "act": "View settings"
+      }
+    },
+    "items": {
+      "overdue": "{minutes} min overdue",
+      "unanswered": "waiting {days, plural, =0 {since today} one {# day} other {# days}} · meeting {startsAt}",
+      "idPending": "met {days, plural, one {# day} other {# days}} ago, ID not confirmed yet",
+      "emptyWalk": "{startsAt} · no sign-ups yet"
+    },
+    "install": {
+      "title": "Admin as an app on your iPhone",
+      "text": "Open Admin in Safari, tap Share and choose Add to Home Screen. Admin then opens as its own app, with all the sections above."
+    },
+    "pages": {
+      "moderation": {
+        "title": "Moderation",
+        "lede": "Reports, signals about money and links, and blocked accounts. Most urgent first.",
+        "noBans": "Nobody blocked."
+      },
+      "shelters": {
+        "title": "Shelters",
+        "lede": "Shelters that signed up, the oldest first. Their dogs only go online once you verify them.",
+        "since": "signed up {date}"
+      },
+      "tips": {
+        "title": "Tips and votes"
+      },
+      "numbers": {
+        "title": "Numbers",
+        "lede": "How Rondje grows, where new people come from and how everything is set up.",
+        "weekly": "Numbers per week in the launch hub"
       }
     }
   }
