@@ -1,5 +1,6 @@
 ---
 title: Conditions d'utilisation
+description: "Les conditions pour promeneurs, propriétaires et refuges : qui peut participer, se rencontrer d'abord, pas d'argent, responsabilité et plaintes."
 version: "0.2"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"

@@ -1,5 +1,6 @@
 ---
 title: Algemene voorwaarden
+description: "De voorwaarden voor wandelaars, eigenaren en opvangen: wie mee mag doen, eerst kennismaken, geen geld, aansprakelijkheid en klachten."
 version: "0.2"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"

@@ -29,3 +29,8 @@ export function contentSecurityPolicy(nonce: string, options: { dev: boolean; ht
 export function newNonce(): string {
   return btoa(crypto.randomUUID())
 }
+
+/** The nonce in a policy made by contentSecurityPolicy, or undefined when there is none. */
+export function nonceFrom(policy: string | null | undefined): string | undefined {
+  return /'nonce-([A-Za-z0-9+/=_-]+)'/.exec(policy ?? '')?.[1]
+}

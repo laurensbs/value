@@ -1,5 +1,6 @@
 ---
 title: Política de cookies
+description: "Solo usamos cookies funcionales y almacenamiento local: sin anuncios, sin seguimiento y sin análisis de otras empresas."
 version: "0.1"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"

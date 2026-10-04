@@ -1,5 +1,6 @@
 ---
 title: Terms of Use
+description: "The terms for walkers, owners and shelters: who may take part, meeting first, no money, liability and complaints."
 version: "0.2"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"

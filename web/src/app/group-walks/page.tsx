@@ -10,11 +10,12 @@ import { COUNTRIES, isCountry } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { myGroupSignups, upcomingGroupWalks } from '@/server/queries'
 import { getViewer } from '@/server/session'
+import { pageMetadata } from '@/lib/seo'
 import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('groupWalks')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/group-walks', title: t('title'), description: t('lede') })
 }
 
 export default async function GroupWalksPage({ searchParams }: { searchParams: Promise<{ country?: string }> }) {

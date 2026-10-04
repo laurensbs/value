@@ -6,11 +6,13 @@ import { BEAGLE } from '@/components/landing/looks'
 import { PageHero } from '@/components/landing/PageHero'
 import { COUNTRIES } from '@/lib/countries'
 import { publicCities } from '@/server/cities'
+import { pageMetadata } from '@/lib/seo'
+import { APP_NAME } from '@/lib/site'
 import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('cities')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/cities', title: t('title'), description: t('indexDescription', { app: APP_NAME }) })
 }
 
 export default async function CitiesPage() {

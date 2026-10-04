@@ -1,5 +1,6 @@
 ---
 title: Condiciones para protectoras colaboradoras
+description: "Las condiciones para protectoras colaboradoras: verificación, perfiles de perros, encuentros y paseos en grupo, seguro, datos y fotos."
 version: "0.1"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"

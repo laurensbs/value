@@ -1,5 +1,6 @@
 ---
 title: Condiciones de uso
+description: "Las condiciones para paseadores, propietarios y protectoras: quién puede participar, conocerse primero, sin dinero, responsabilidad y quejas."
 version: "0.2"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"

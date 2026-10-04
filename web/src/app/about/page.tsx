@@ -8,6 +8,8 @@ import { loadMarkdown } from '@/lib/content'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
+import { pageMetadata } from '@/lib/seo'
+import { APP_NAME } from '@/lib/site'
 import '../landing.css'
 
 const HOW: { key: 'meet' | 'adults' | 'shelters' | 'free'; icon: 'users' | 'shield' | 'building' | 'heart'; tone: Tone }[] = [
@@ -19,7 +21,7 @@ const HOW: { key: 'meet' | 'adults' | 'shelters' | 'free'; icon: 'users' | 'shie
 
 export async function generateMetadata() {
   const t = await getTranslations('about')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/about', title: t('title'), description: t('metaDescription', { app: APP_NAME }) })
 }
 
 /** Who is behind Rondje and why, how it works, and how to share your walks (with consent). */

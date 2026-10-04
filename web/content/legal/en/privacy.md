@@ -1,5 +1,6 @@
 ---
 title: Privacy Policy
+description: "Which personal data we process, why and for how long, who sees it and what your rights are. Your exact address is never public."
 version: "0.3"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"

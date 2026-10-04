@@ -1,5 +1,6 @@
 ---
 title: Partnervoorwaarden voor opvangen
+description: "De partnervoorwaarden voor opvangen: verificatie, hondenprofielen, kennismakingen en groepswandelingen, verzekering, gegevens en foto's."
 version: "0.1"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"

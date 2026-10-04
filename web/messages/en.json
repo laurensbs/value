@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Rondje · a regular walk with a dog who's waiting for you",
-    "description": "Rondje connects young adults with dogs from neighbours and shelters that could really use an extra walk. Free and safe, in the Netherlands, Belgium and Spain."
+    "title": "{app} · a regular walk with a dog who's waiting for you",
+    "description": "{app} connects young adults with dogs from neighbours and shelters that could use an extra walk. Free and safe, in the Netherlands, Belgium and Spain."
   },
   "nav": {
     "dogs": "Dogs",
@@ -1081,11 +1081,13 @@
     "level": "Level: {level}",
     "at": "Meet at {place}",
     "idNote": "Bring a valid ID. The supervisor will check it; Rondje doesn't keep a copy.",
-    "meetDogs": "See this shelter's dogs"
+    "meetDogs": "See this shelter's dogs",
+    "eventName": "Group walk with {shelter}"
   },
   "directory": {
     "title": "Shelters in the Netherlands, Belgium and Spain",
     "lede": "Shelters with volunteer walkers. You'll find partners right here on Rondje; with the others, you can volunteer through their own website.",
+    "metaDescription": "Shelters with volunteer walkers. You'll find partners right here on {app}; with the others, you can volunteer through their own website.",
     "partner": "On Rondje",
     "notPartner": "Not on Rondje yet",
     "walking": "Has volunteer walkers",
@@ -1106,6 +1108,7 @@
   "help": {
     "title": "Not okay right now?",
     "lede": "A walk outside can brighten your day, but it doesn't replace professional help. You can always reach out here, free and anonymously.",
+    "metaDescription": "A walk outside can brighten your day, but it doesn't replace professional help. You can always reach out here, free and anonymously.",
     "emergency": "If you're in immediate danger, call {number}.",
     "lines": {
       "suicide": "Thinking about suicide? Available day and night.",
@@ -1366,6 +1369,7 @@
     "eyebrow": "Referrals",
     "title": "Suggest a shelter",
     "lede": "Know a shelter where dogs could use an extra walk? Let us know. We contact the shelter ourselves, never in your name.",
+    "metaDescription": "Know a shelter where dogs could use an extra walk? Let us know. We contact the shelter ourselves, never in your name.",
     "tabs": {
       "shelter": "A shelter",
       "owner": "Someone with a dog"
@@ -1407,6 +1411,7 @@
     "eyebrow": "Free, and it stays that way",
     "title": "Make Rondje possible",
     "lede": "Rondje is free for walkers, owners and shelters, and it will stay that way. Still, keeping Rondje safe and online costs money. Here is how that works.",
+    "metaDescription": "{app} is free for walkers, owners and shelters, and it will stay that way. Still, keeping {app} safe and online costs money. Here is how.",
     "promiseTitle": "Our promise",
     "promise": {
       "free": "Rondje stays free for everyone: no subscription, no paywall, no premium version.",
@@ -1550,6 +1555,7 @@
     "eyebrow": "About Rondje",
     "title": "A walk together, good for you and for a dog",
     "lede": "Rondje connects young adults with dogs that want to get out more: from neighbours who can no longer walk their dog well, and from shelters.",
+    "metaDescription": "{app} connects young adults with dogs that want to get out more: from neighbours who can no longer walk their dog well, and from shelters.",
     "whyTitle": "Why Rondje",
     "why1": "Many young people love being outside and love dogs, but cannot have one themselves. At the same time, older people and people who are ill cannot walk their dog as often as they would like. And in shelters, every dog is waiting for one more walk.",
     "why2": "A regular walk with a dog is good for everyone: exercise, fresh air and a chat with a neighbour. Rondje makes that easy, safe and free.",
@@ -1714,8 +1720,9 @@
   "cities": {
     "title": "Dog walking by city",
     "lede": "Rondje works in every city. For each city you see which shelters there are, when group walks take place and how many dogs are waiting for a walk.",
+    "indexDescription": "{app} works in every city. For each city you see which shelters there are, when group walks take place and how many dogs are waiting.",
     "metaTitle": "Dog walking in {city}",
-    "metaDescription": "Walk a dog in {city} for free, on a regular day: dogs of neighbours and from shelters, group walks and a safe first meeting. No ads, no subscription.",
+    "metaDescription": "Walk a dog in {city} for free, on a regular day: dogs of neighbours and shelters, group walks and a safe first meeting. No ads.",
     "cityLede": "Walk a dog from {city} for free: from a neighbour who can no longer walk far, or from a shelter. You meet first, then you walk a regular round.",
     "dogsWaiting": "{n, plural, =0 {No dogs in {city} online yet. Add the first one, or look nearby.} one {# dog in {city} is waiting for a walk.} other {# dogs in {city} are waiting for a walk.}}",
     "seeDogs": "See dogs in {city}",
@@ -2773,6 +2780,7 @@
       "eyebrow": "Why",
       "title": "Getting outside together, for people and dogs",
       "lede": "A walk with a dog is a small thing. Yet it touches on big ones: loneliness, moving too little, and dogs who could use more attention. That is why {app} exists.",
+      "metaDescription": "A walk with a dog is a small thing, yet it touches on big ones: loneliness, moving too little, and dogs who could use more attention.",
       "factsTitle": "In figures",
       "factsLede": "Every figure comes with its source and year, so you can check it yourself.",
       "mindTitle": "Being outside, moving, and a dog who is happy to see you",

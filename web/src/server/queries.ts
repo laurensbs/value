@@ -327,6 +327,7 @@ export async function publicOrg(orgId: string) {
       treatsPolicy: s.organization.treatsPolicy,
       provides: s.organization.provides,
       status: s.organization.status,
+      isDemo: s.organization.isDemo,
     })
     .from(s.organization)
     .where(eq(s.organization.id, orgId))
