@@ -997,7 +997,170 @@
     "comesBack": "This question comes back once more later.",
     "next": "Continue",
     "later": "Do it later",
-    "laterHint": "Without the quiz you can't ask for a first meeting yet."
+    "laterHint": "Without the quiz you can't ask for a first meeting yet.",
+    "honest": "The quiz teaches you the rules; the owner decides whether you may walk alone.",
+    "lessonLink": "Read the lesson ‘{title}’",
+    "schoolFirst": "Dog school first? Five short lessons, about 2 minutes each."
+  },
+  "school": {
+    "title": "Dog school",
+    "metaDescription": "Five short lessons about walking a dog safely: saying hello, body language, the first meeting, warm and cold, and if something happens.",
+    "lede": "Five short lessons about walking safely. About 2 minutes each.",
+    "guest": "The first lesson works without an account.",
+    "pace": "No points and no rush: at your own pace, as often as you like.",
+    "count": "{done} of {total} lessons",
+    "pathLabel": "Lessons",
+    "here": "Continue here",
+    "stop": "{title}, lesson {n} of {total}",
+    "stopDone": "{title}, lesson {n} of {total}, done",
+    "stopNext": "{title}, lesson {n} of {total}, next",
+    "quizPassed": "Passed",
+    "quizStopPassed": "{title}, passed",
+    "notNow": "Not now",
+    "progress": "Progress in this lesson",
+    "next": "Continue",
+    "comesBack": "This question comes back once more at the end of the lesson.",
+    "hold": "Hold",
+    "held": "Done",
+    "holdHint": "Do it for real, outside. Hold the button until the circle is full.",
+    "done": "Lesson done!",
+    "doneCount": "{done} of {total} lessons done",
+    "quizReady": "Ready for the quiz? You're well prepared.",
+    "toQuiz": "To the quiz",
+    "later": "Later",
+    "nextLesson": "Next lesson: {title}",
+    "toPath": "To the dog school",
+    "backToQuiz": "Back to the quiz",
+    "wallTitle": "Want to go on?",
+    "wallText": "With an account you can take the quiz and ask to walk a dog.",
+    "wallSignup": "Create an account",
+    "wallLogin": "I already have an account",
+    "lessons": {
+      "hello": {
+        "title": "Saying hello",
+        "sniff": "You introduce yourself to a dog with your hand. Let him sniff calmly first.",
+        "first": {
+          "q": "You see Bobbie for the first time. What do you do?",
+          "a0": "Keep your hand low and let him sniff",
+          "a1": "Pat his head straight away",
+          "why1": "A hand from above feels to a dog like something big coming at him.",
+          "a2": "Pick him up for a cuddle",
+          "why2": "Being picked up is scary for a dog that doesn't know you yet.",
+          "explain": "Exactly! That way he knows who you are."
+        },
+        "ask": "A dog on the street? Always ask the owner first if you may pet him.",
+        "away": {
+          "q": "Bobbie turns his head away when you pet him. What does that mean?",
+          "a0": "Enough for now, give him space",
+          "a1": "He wants more pats",
+          "why1": "Turning away is a polite way of saying no.",
+          "explain": "Well spotted. Listening to a dog is half the work."
+        }
+      },
+      "body": {
+        "title": "Body language",
+        "signals": "Yawning, licking lips and looking away often mean: I don't feel at ease.",
+        "space": {
+          "q": "Which dog wants some space?",
+          "a0": "Happy",
+          "why0": "This dog is happy. Look at the eyes and the mouth.",
+          "a1": "Uneasy",
+          "a2": "Sleepy",
+          "why2": "This dog is just tired.",
+          "explain": "Yes. His eyes look away and his brows look worried."
+        },
+        "then": {
+          "q": "What do you do then?",
+          "a0": "Find a quieter spot",
+          "a1": "Keep walking into the crowd",
+          "why1": "Crowds make it even more stressful for him.",
+          "a2": "Give him a big hug",
+          "why2": "To many dogs a hug feels like being held down.",
+          "explain": "Exactly. Calm helps more than attention."
+        },
+        "whole": "Wagging doesn't always mean happy. Look at the whole dog: eyes, ears, mouth and tail."
+      },
+      "meet": {
+        "title": "The first meeting",
+        "together": "The first time, you always walk together with the owner.",
+        "id": "Bring your ID. The owner looks at it, {app} never keeps a copy.",
+        "bring": {
+          "q": "What do you bring to the first meeting?",
+          "a0": "Your ID",
+          "a1": "Money for the owner",
+          "why1": "{app} is free. Money never comes into it.",
+          "a2": "A bag of treats",
+          "why2": "Treats only if the owner says it's okay.",
+          "explain": "Yes. That way the owner knows who is walking the dog."
+        },
+        "solo": {
+          "q": "After the first meeting. When may you walk the dog on your own?",
+          "a0": "When the owner trusts you and you passed the quiz",
+          "a1": "Straight away, you know him now",
+          "why1": "The owner decides. It goes dog by dog.",
+          "explain": "Right. Step by step, safe for everyone."
+        },
+        "leash": {
+          "q": "May the dog go off the lead?",
+          "a0": "Only if the owner explicitly says so, and only where it's allowed",
+          "a1": "Yes, if he listens well",
+          "why1": "Even a dog that listens well stays on the lead, unless the owner says otherwise.",
+          "explain": "Exactly. When in doubt, he stays on the lead."
+        }
+      },
+      "weather": {
+        "title": "Warm, cold and water",
+        "hand": {
+          "text": "Put your hand flat on the pavement. Hold it there for 7 seconds.",
+          "after": "Too hot for your hand? Then also for his paws. Walk on the grass or in the shade."
+        },
+        "hot": {
+          "q": "It's 28 degrees. What fits?",
+          "a0": "A short walk in the shade, with water",
+          "a1": "A good run, then it's over quickly",
+          "why1": "Running in the heat is hard on a dog.",
+          "a2": "A long walk in the sun",
+          "why2": "Sun and hot asphalt are too much for his paws.",
+          "explain": "Exactly. Short, cool and with water."
+        },
+        "salt": "In winter, road salt stings paws. Give them a quick wipe after the walk.",
+        "dark": "In the dark? A light on the leash makes you both easier to see."
+      },
+      "help": {
+        "title": "If something happens",
+        "sos": "During the walk, the ‘Need help’ button is always at the bottom. There you'll find 112, the owner and what to do.",
+        "loose": {
+          "q": "The dog has slipped away. What do you do first?",
+          "a0": "Stay calm, don't run after the dog and call the owner right away",
+          "a1": "Run after him fast",
+          "why1": "Running turns it into a game. Then he runs away faster.",
+          "a2": "Search yourself first, then call the owner",
+          "why2": "Call the owner right away. Together you'll find him faster.",
+          "explain": "Yes. Crouching down and cheerfully calling his name helps too."
+        },
+        "bite": {
+          "q": "The dog bites another dog. What do you do?",
+          "a0": "Get everyone safe, exchange details, call the owner and report it",
+          "a1": "Quickly walk on",
+          "why1": "Walking away helps no one. The other owner needs your details.",
+          "explain": "Good. After the walk, you report it with the ‘Report’ button."
+        },
+        "otherDog": {
+          "q": "Another dog comes towards you. What do you do?",
+          "a0": "Keep your distance and ask the other owner first",
+          "a1": "Just let them sniff",
+          "why1": "Not every dog likes a strange dog.",
+          "explain": "Well done. When in doubt, walk on calmly."
+        },
+        "late": {
+          "q": "You're coming back later than agreed. What do you do?",
+          "a0": "Let the owner know right away",
+          "a1": "Nothing, the app shows it anyway",
+          "why1": "A short message saves worry.",
+          "explain": "Exactly. Letting them know is always good."
+        }
+      }
+    }
   },
   "shelter": {
     "title": "For shelters",
@@ -1221,7 +1384,9 @@
     "liability": "Who is responsible for what?",
     "liabilityText": "Rondje puts people in touch and is not itself a party to the arrangement. The owner remains liable for any damage the dog causes and must be insured for it. We recommend that walkers take out their own liability insurance. Read the terms for all the details.",
     "report": "Seen or experienced something?",
-    "reportText": "Report it using the ‘Report’ button on a profile, dog or walk. We try to look into it within 24 hours."
+    "reportText": "Report it using the ‘Report’ button on a profile, dog or walk. We try to look into it within 24 hours.",
+    "schoolText": "Five short lessons about walking safely, about 2 minutes each. The first one works without an account.",
+    "schoolLink": "Start with lesson 1"
   },
   "report": {
     "title": "Report",
@@ -2298,7 +2463,8 @@
     "supportText": "Free and ad-free. See how you can help.",
     "tipText": "Know a shelter or someone with a dog who could use help?",
     "shelterText": "Work at a shelter? Put your dogs online here.",
-    "adminText": "Reports, shelters, numbers and the launch hub"
+    "adminText": "Reports, shelters, numbers and the launch hub",
+    "schoolText": "{done} of {total} lessons, at your own pace"
   },
   "shell": {
     "tabs": {

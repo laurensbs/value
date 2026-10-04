@@ -997,7 +997,170 @@
     "comesBack": "Esta pregunta volverá a salir más tarde.",
     "next": "Continuar",
     "later": "Hacerlo más tarde",
-    "laterHint": "Sin el test todavía no puedes pedir un primer encuentro."
+    "laterHint": "Sin el test todavía no puedes pedir un primer encuentro.",
+    "honest": "El test te enseña las normas; el dueño decide si puedes pasear solo.",
+    "lessonLink": "Lee la lección «{title}»",
+    "schoolFirst": "¿Primero la escuela canina? Cinco lecciones cortas, unos 2 minutos cada una."
+  },
+  "school": {
+    "title": "Escuela canina",
+    "metaDescription": "Cinco lecciones cortas para pasear a un perro con seguridad: saludar, lenguaje corporal, el primer encuentro, calor y frío, y si pasa algo.",
+    "lede": "Cinco lecciones cortas sobre pasear con seguridad. Unos 2 minutos cada una.",
+    "guest": "La primera lección se puede hacer sin cuenta.",
+    "pace": "Sin puntos y sin prisa: a tu ritmo, tantas veces como quieras.",
+    "count": "{done} de {total} lecciones",
+    "pathLabel": "Lecciones",
+    "here": "Sigue aquí",
+    "stop": "{title}, lección {n} de {total}",
+    "stopDone": "{title}, lección {n} de {total}, hecha",
+    "stopNext": "{title}, lección {n} de {total}, la siguiente",
+    "quizPassed": "Aprobado",
+    "quizStopPassed": "{title}, aprobado",
+    "notNow": "Ahora no",
+    "progress": "Progreso en esta lección",
+    "next": "Continuar",
+    "comesBack": "Esta pregunta vuelve a salir al final de la lección.",
+    "hold": "Mantén",
+    "held": "Listo",
+    "holdHint": "Hazlo de verdad, fuera. Mantén el botón hasta que el círculo esté lleno.",
+    "done": "¡Lección hecha!",
+    "doneCount": "{done} de {total} lecciones hechas",
+    "quizReady": "¿Listo para el test? Estás bien preparado.",
+    "toQuiz": "Al test",
+    "later": "Más tarde",
+    "nextLesson": "Siguiente lección: {title}",
+    "toPath": "A la escuela canina",
+    "backToQuiz": "Volver al test",
+    "wallTitle": "¿Quieres seguir?",
+    "wallText": "Con una cuenta puedes hacer el test y pedir pasear a un perro.",
+    "wallSignup": "Crear una cuenta",
+    "wallLogin": "Ya tengo una cuenta",
+    "lessons": {
+      "hello": {
+        "title": "Saludar",
+        "sniff": "A un perro te presentas con la mano. Deja que olfatee tranquilo primero.",
+        "first": {
+          "q": "Ves a Bobbie por primera vez. ¿Qué haces?",
+          "a0": "Mantener la mano baja y dejar que olfatee",
+          "a1": "Acariciarle la cabeza enseguida",
+          "why1": "Una mano desde arriba se siente para un perro como algo grande que se le viene encima.",
+          "a2": "Cogerlo en brazos para abrazarlo",
+          "why2": "Que lo cojan en brazos asusta a un perro que aún no te conoce.",
+          "explain": "¡Exacto! Así sabe quién eres."
+        },
+        "ask": "¿Un perro en la calle? Pregunta siempre primero al dueño si puedes acariciarlo.",
+        "away": {
+          "q": "Bobbie aparta la cabeza cuando lo acaricias. ¿Qué significa?",
+          "a0": "Basta por ahora, dale espacio",
+          "a1": "Quiere más caricias",
+          "why1": "Apartarse es una forma educada de decir que no.",
+          "explain": "Bien visto. Escuchar a un perro es la mitad del trabajo."
+        }
+      },
+      "body": {
+        "title": "Lenguaje corporal",
+        "signals": "Bostezar, lamerse los labios y apartar la mirada suele significar: no estoy a gusto.",
+        "space": {
+          "q": "¿Qué perro quiere algo de espacio?",
+          "a0": "Contento",
+          "why0": "Este perro está contento. Fíjate en los ojos y la boca.",
+          "a1": "Incómodo",
+          "a2": "Con sueño",
+          "why2": "Este perro solo está cansado.",
+          "explain": "Sí. Sus ojos miran a otro lado y sus cejas están preocupadas."
+        },
+        "then": {
+          "q": "¿Qué haces entonces?",
+          "a0": "Buscar un sitio más tranquilo",
+          "a1": "Seguir hacia el bullicio",
+          "why1": "El bullicio lo pone aún más nervioso.",
+          "a2": "Darle un abrazo fuerte",
+          "why2": "Para muchos perros, un abrazo se siente como estar sujetos.",
+          "explain": "Exacto. La calma ayuda más que la atención."
+        },
+        "whole": "Mover la cola no siempre es estar contento. Mira todo el perro: ojos, orejas, boca y cola."
+      },
+      "meet": {
+        "title": "El primer encuentro",
+        "together": "La primera vez siempre paseas junto con el dueño.",
+        "id": "Lleva tu documento de identidad. El dueño lo mira, {app} nunca guarda una copia.",
+        "bring": {
+          "q": "¿Qué llevas al primer encuentro?",
+          "a0": "Tu documento de identidad",
+          "a1": "Dinero para el dueño",
+          "why1": "{app} es gratis. El dinero nunca entra en juego.",
+          "a2": "Una bolsa de premios",
+          "why2": "Premios solo si el dueño dice que se puede.",
+          "explain": "Sí. Así el dueño sabe quién pasea al perro."
+        },
+        "solo": {
+          "q": "Después del primer encuentro. ¿Cuándo puedes pasear al perro solo?",
+          "a0": "Cuando el dueño confía en ti y aprobaste el test",
+          "a1": "Enseguida, ya lo conoces",
+          "why1": "Decide el dueño. Va perro a perro.",
+          "explain": "Correcto. Paso a paso, seguro para todos."
+        },
+        "leash": {
+          "q": "¿Puede ir el perro suelto?",
+          "a0": "Solo si el dueño lo dice claramente, y solo donde está permitido",
+          "a1": "Sí, si obedece bien",
+          "why1": "Incluso un perro que obedece bien va con correa, salvo que el dueño diga otra cosa.",
+          "explain": "Exacto. Si dudas, sigue con correa."
+        }
+      },
+      "weather": {
+        "title": "Calor, frío y agua",
+        "hand": {
+          "text": "Pon la mano plana sobre la acera. Mantenla 7 segundos.",
+          "after": "¿Demasiado caliente para tu mano? Entonces también para sus patas. Camina por el césped o a la sombra."
+        },
+        "hot": {
+          "q": "Hace 28 grados. ¿Qué encaja?",
+          "a0": "Un paseo corto a la sombra, con agua",
+          "a1": "Correr, así se acaba antes",
+          "why1": "Correr con calor es duro para un perro.",
+          "a2": "Un paseo largo al sol",
+          "why2": "El sol y el asfalto caliente son demasiado para sus patas.",
+          "explain": "Exacto. Corto, fresco y con agua."
+        },
+        "salt": "En invierno, la sal de las calles pica en las patas. Límpialas tras el paseo.",
+        "dark": "¿De noche? Una luz en la correa os hace más visibles a los dos."
+      },
+      "help": {
+        "title": "Si pasa algo",
+        "sos": "Durante el paseo, el botón «Necesito ayuda» está siempre abajo. Ahí encuentras el 112, el dueño y qué hacer.",
+        "loose": {
+          "q": "El perro se ha soltado. ¿Qué haces primero?",
+          "a0": "Mantener la calma, no correr tras el perro y llamar enseguida al dueño",
+          "a1": "Correr rápido tras él",
+          "why1": "Correr lo convierte en un juego. Entonces huye más rápido.",
+          "a2": "Buscar primero tú, y luego llamar al dueño",
+          "why2": "Llama enseguida al dueño. Juntos lo encontraréis antes.",
+          "explain": "Sí. Agacharte y llamarlo alegremente también ayuda."
+        },
+        "bite": {
+          "q": "El perro muerde a otro perro. ¿Qué haces?",
+          "a0": "Poner a todos a salvo, intercambiar datos, llamar al dueño y avisarlo",
+          "a1": "Seguir andando rápido",
+          "why1": "Irte no ayuda a nadie. El otro dueño necesita tus datos.",
+          "explain": "Bien. Después del paseo, lo cuentas con el botón «Denunciar»."
+        },
+        "otherDog": {
+          "q": "Otro perro viene hacia vosotros. ¿Qué haces?",
+          "a0": "Mantener la distancia y preguntar primero al otro dueño",
+          "a1": "Dejar que se huelan",
+          "why1": "No a todos los perros les gusta un perro desconocido.",
+          "explain": "Muy bien. Si dudas, sigue caminando con calma."
+        },
+        "late": {
+          "q": "Vuelves más tarde de lo acordado. ¿Qué haces?",
+          "a0": "Avisar enseguida al dueño",
+          "a1": "Nada, la app ya lo muestra",
+          "why1": "Un mensaje corto evita preocupaciones.",
+          "explain": "Exacto. Avisar siempre está bien."
+        }
+      }
+    }
   },
   "shelter": {
     "title": "Para protectoras",
@@ -1221,7 +1384,9 @@
     "liability": "¿Quién es responsable de qué?",
     "liabilityText": "Rondje pone a las personas en contacto y no es parte en el acuerdo. El dueño sigue siendo responsable de los daños que cause el perro y debe tener un seguro que los cubra. A quienes pasean les recomendamos tener su propio seguro de responsabilidad civil. Consulta las condiciones para ver todos los detalles.",
     "report": "¿Has visto o vivido algo?",
-    "reportText": "Denúncialo con el botón «Denunciar» en un perfil, un perro o un paseo. Intentamos revisarlo en menos de 24 horas."
+    "reportText": "Denúncialo con el botón «Denunciar» en un perfil, un perro o un paseo. Intentamos revisarlo en menos de 24 horas.",
+    "schoolText": "Cinco lecciones cortas sobre pasear con seguridad, unos 2 minutos cada una. La primera se puede hacer sin cuenta.",
+    "schoolLink": "Empieza con la lección 1"
   },
   "report": {
     "title": "Denunciar",
@@ -2298,7 +2463,8 @@
     "supportText": "Gratis y sin anuncios. Mira cómo puedes ayudar.",
     "tipText": "¿Conoces una protectora o a alguien con perro que necesite ayuda?",
     "shelterText": "¿Trabajas en una protectora? Publica aquí vuestros perros.",
-    "adminText": "Denuncias, protectoras, cifras y el centro de lanzamiento"
+    "adminText": "Denuncias, protectoras, cifras y el centro de lanzamiento",
+    "schoolText": "{done} de {total} lecciones, a tu ritmo"
   },
   "shell": {
     "tabs": {

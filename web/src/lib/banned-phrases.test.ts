@@ -31,6 +31,14 @@ const PUSH_TEXTS = [
   'progress.week',
   'progress.activeWeeks',
   'walkDone.',
+  // The Hondenschool: the lessons, the path, the wall after lesson 1, and the new lines around the quiz.
+  'school.',
+  'quiz.honest',
+  'quiz.lessonLink',
+  'quiz.schoolFirst',
+  'profileHub.schoolText',
+  'safety.schoolText',
+  'safety.schoolLink',
   // Not on the web yet: Guus and "één ding nu" are checked as soon as they get texts.
   'guus.',
   'nextStep.',

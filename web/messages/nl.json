@@ -997,7 +997,170 @@
     "comesBack": "Deze vraag komt straks nog een keer terug.",
     "next": "Verder",
     "later": "Later doen",
-    "laterHint": "Zonder quiz kun je nog geen kennismaking aanvragen."
+    "laterHint": "Zonder quiz kun je nog geen kennismaking aanvragen.",
+    "honest": "De quiz leert je de regels; de eigenaar beslist of je alleen mag.",
+    "lessonLink": "Lees de les ‘{title}’",
+    "schoolFirst": "Eerst de Hondenschool? Vijf korte lessen, elk ongeveer 2 minuten."
+  },
+  "school": {
+    "title": "Hondenschool",
+    "metaDescription": "Vijf korte lessen over veilig wandelen met een hond: hoi zeggen, lichaamstaal, de kennismaking, warm en koud, en als er iets gebeurt.",
+    "lede": "Vijf korte lessen over veilig wandelen. Elk ongeveer 2 minuten.",
+    "guest": "De eerste les kan zonder account.",
+    "pace": "Geen punten en geen haast: in je eigen tempo, zo vaak je wilt.",
+    "count": "{done} van {total} lessen",
+    "pathLabel": "Lessen",
+    "here": "Hier verder",
+    "stop": "{title}, les {n} van {total}",
+    "stopDone": "{title}, les {n} van {total}, klaar",
+    "stopNext": "{title}, les {n} van {total}, volgende",
+    "quizPassed": "Gehaald",
+    "quizStopPassed": "{title}, gehaald",
+    "notNow": "Niet nu",
+    "progress": "Voortgang in deze les",
+    "next": "Verder",
+    "comesBack": "Deze vraag komt aan het eind van de les nog een keer.",
+    "hold": "Houd vast",
+    "held": "Klaar",
+    "holdHint": "Doe het echt, buiten. Houd de knop vast tot de cirkel vol is.",
+    "done": "Les klaar!",
+    "doneCount": "{done} van {total} lessen klaar",
+    "quizReady": "Klaar voor de quiz? Je bent goed voorbereid.",
+    "toQuiz": "Naar de quiz",
+    "later": "Later",
+    "nextLesson": "Volgende les: {title}",
+    "toPath": "Naar de Hondenschool",
+    "backToQuiz": "Terug naar de quiz",
+    "wallTitle": "Wil je verder?",
+    "wallText": "Met een account kun je de quiz doen en een hond vragen.",
+    "wallSignup": "Account maken",
+    "wallLogin": "Ik heb al een account",
+    "lessons": {
+      "hello": {
+        "title": "Hoi zeggen",
+        "sniff": "Aan een hond stel je je voor met je hand. Laat hem eerst rustig snuffelen.",
+        "first": {
+          "q": "Je ziet Bobbie voor het eerst. Wat doe je?",
+          "a0": "Hand laag houden en laten snuffelen",
+          "a1": "Meteen over zijn kop aaien",
+          "why1": "Een hand van boven voelt voor een hond als iets groots dat op hem afkomt.",
+          "a2": "Hem optillen voor een knuffel",
+          "why2": "Optillen is spannend voor een hond die je nog niet kent.",
+          "explain": "Precies! Zo weet hij wie je bent."
+        },
+        "ask": "Een hond op straat? Vraag altijd eerst de eigenaar of je mag aaien.",
+        "away": {
+          "q": "Bobbie draait zijn kop weg als je hem aait. Wat betekent dat?",
+          "a0": "Even genoeg, geef hem ruimte",
+          "a1": "Hij wil meer aaitjes",
+          "why1": "Wegdraaien is een beleefde manier om nee te zeggen.",
+          "explain": "Goed gezien. Luisteren naar een hond is de helft van het werk."
+        }
+      },
+      "body": {
+        "title": "Lichaamstaal",
+        "signals": "Gapen, lippen likken en wegkijken betekenen vaak: ik voel me niet op mijn gemak.",
+        "space": {
+          "q": "Welke hond wil wat ruimte?",
+          "a0": "Blij",
+          "why0": "Deze hond is blij. Kijk naar de ogen en de mond.",
+          "a1": "Ongemakkelijk",
+          "a2": "Slaperig",
+          "why2": "Deze hond is gewoon moe.",
+          "explain": "Ja. Zijn ogen kijken weg en zijn wenkbrauwen staan bezorgd."
+        },
+        "then": {
+          "q": "Wat doe je dan?",
+          "a0": "Een rustigere plek zoeken",
+          "a1": "Lekker doorlopen naar de drukte",
+          "why1": "Drukte maakt het voor hem nog spannender.",
+          "a2": "Hem stevig knuffelen",
+          "why2": "Knuffelen voelt voor veel honden als vastgehouden worden.",
+          "explain": "Precies. Rust helpt meer dan aandacht."
+        },
+        "whole": "Kwispelen is niet altijd blij. Kijk naar de hele hond: ogen, oren, mond en staart."
+      },
+      "meet": {
+        "title": "De kennismaking",
+        "together": "De eerste keer loop je altijd samen met de eigenaar.",
+        "id": "Neem je ID mee. De eigenaar bekijkt het, {app} bewaart nooit een kopie.",
+        "bring": {
+          "q": "Wat neem je mee naar de kennismaking?",
+          "a0": "Je ID",
+          "a1": "Geld voor de eigenaar",
+          "why1": "{app} is gratis. Geld hoort er nooit bij.",
+          "a2": "Een zak koekjes",
+          "why2": "Koekjes alleen als de eigenaar zegt dat het mag.",
+          "explain": "Ja. Zo weet de eigenaar wie er met de hond loopt."
+        },
+        "solo": {
+          "q": "Na de kennismaking. Wanneer mag je zelfstandig met de hond?",
+          "a0": "Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald",
+          "a1": "Meteen, je kent hem nu",
+          "why1": "De eigenaar beslist. Dat gaat per hond.",
+          "explain": "Klopt. Stap voor stap, voor iedereen veilig."
+        },
+        "leash": {
+          "q": "Mag de hond los?",
+          "a0": "Alleen als de eigenaar het uitdrukkelijk zegt, en alleen waar het mag",
+          "a1": "Ja, als hij goed luistert",
+          "why1": "Ook een hond die goed luistert blijft aan de lijn, tenzij de eigenaar iets anders zegt.",
+          "explain": "Precies. Bij twijfel blijft hij aan de lijn."
+        }
+      },
+      "weather": {
+        "title": "Warm, koud en water",
+        "hand": {
+          "text": "Leg je hand plat op de stoep. Houd hem er 7 seconden op.",
+          "after": "Te heet voor je hand? Dan ook voor zijn pootjes. Loop dan in het gras of in de schaduw."
+        },
+        "hot": {
+          "q": "Het is 28 graden. Wat past?",
+          "a0": "Kort rondje in de schaduw, met water",
+          "a1": "Lekker rennen, dan is het snel klaar",
+          "why1": "Rennen in de hitte is zwaar voor een hond.",
+          "a2": "Een lang rondje in de zon",
+          "why2": "Zon en warm asfalt zijn te veel voor zijn pootjes.",
+          "explain": "Precies. Kort, koel en met water."
+        },
+        "salt": "In de winter prikt strooizout in pootjes. Even afvegen na het rondje.",
+        "dark": "In het donker? Een lampje aan de riem maakt jullie allebei beter zichtbaar."
+      },
+      "help": {
+        "title": "Als er iets gebeurt",
+        "sos": "Tijdens het rondje staat de knop ‘Hulp nodig’ altijd onderaan. Daar vind je 112, de eigenaar en wat je moet doen.",
+        "loose": {
+          "q": "De hond is losgeschoten. Wat doe je eerst?",
+          "a0": "Rustig blijven, niet achter de hond aan rennen en meteen de eigenaar bellen",
+          "a1": "Er hard achteraan rennen",
+          "why1": "Rennen maakt er een spelletje van. Dan rent hij harder weg.",
+          "a2": "Eerst zelf zoeken, dan pas de eigenaar bellen",
+          "why2": "Bel de eigenaar meteen. Samen vind je hem sneller.",
+          "explain": "Ja. Door je knieën en vrolijk zijn naam roepen helpt ook."
+        },
+        "bite": {
+          "q": "De hond bijt een andere hond. Wat doe je?",
+          "a0": "Iedereen in veiligheid, gegevens uitwisselen, de eigenaar bellen en het melden",
+          "a1": "Snel doorlopen",
+          "why1": "Weglopen helpt niemand. De andere eigenaar heeft je gegevens nodig.",
+          "explain": "Goed. Na het rondje meld je het met de knop ‘Melden’."
+        },
+        "otherDog": {
+          "q": "Een andere hond komt op jullie af. Wat doe je?",
+          "a0": "Afstand houden en eerst de andere eigenaar vragen",
+          "a1": "Laat ze maar snuffelen",
+          "why1": "Niet elke hond vindt een onbekende hond fijn.",
+          "explain": "Goed zo. Bij twijfel loop je rustig door."
+        },
+        "late": {
+          "q": "Je loopt later terug dan afgesproken. Wat doe je?",
+          "a0": "De eigenaar meteen laten weten",
+          "a1": "Niets, de app laat het toch zien",
+          "why1": "Een kort berichtje voorkomt zorgen.",
+          "explain": "Precies. Even laten weten is altijd goed."
+        }
+      }
+    }
   },
   "shelter": {
     "title": "Voor opvangen",
@@ -1221,7 +1384,9 @@
     "liability": "Wie is waarvoor verantwoordelijk?",
     "liabilityText": "Rondje brengt mensen met elkaar in contact en is zelf geen partij bij de afspraak. De eigenaar blijft aansprakelijk voor schade die de hond veroorzaakt en moet daarvoor verzekerd zijn. Wandelaars raden we een eigen aansprakelijkheidsverzekering aan. Lees de voorwaarden voor alle details.",
     "report": "Iets gezien of meegemaakt?",
-    "reportText": "Meld het via de knop ‘Melden’ bij een profiel, hond of rondje. We proberen binnen 24 uur te kijken."
+    "reportText": "Meld het via de knop ‘Melden’ bij een profiel, hond of rondje. We proberen binnen 24 uur te kijken.",
+    "schoolText": "Vijf korte lessen over veilig wandelen, elk ongeveer 2 minuten. De eerste kan zonder account.",
+    "schoolLink": "Begin met les 1"
   },
   "report": {
     "title": "Melden",
@@ -2298,7 +2463,8 @@
     "supportText": "Gratis en zonder advertenties. Kijk hoe je helpt.",
     "tipText": "Weet je een opvang of iemand met een hond die hulp kan gebruiken?",
     "shelterText": "Werk je bij een opvang? Zet jullie honden hier online.",
-    "adminText": "Meldingen, opvangen, cijfers en de lanceerhub"
+    "adminText": "Meldingen, opvangen, cijfers en de lanceerhub",
+    "schoolText": "{done} van {total} lessen, in je eigen tempo"
   },
   "shell": {
     "tabs": {
