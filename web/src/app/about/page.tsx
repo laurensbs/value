@@ -1,16 +1,21 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
+import { SuicideLines } from '@/components/impact/SuicideLines'
 import { BROWN, GOLDEN } from '@/components/landing/looks'
 import { IconTile, PageHero, type Tone } from '@/components/landing/PageHero'
+import { SupportButton } from '@/components/SupportButton'
 import { CONTACT_PATH } from '@/lib/contact'
 import { loadMarkdown } from '@/lib/content'
+import { guessCountry } from '@/lib/guess-country'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
 import { pageMetadata } from '@/lib/seo'
 import { APP_NAME } from '@/lib/site'
 import '../landing.css'
+import '../impact.css'
 
 const HOW: { key: 'meet' | 'adults' | 'shelters' | 'free'; icon: 'users' | 'shield' | 'building' | 'heart'; tone: Tone }[] = [
   { key: 'meet', icon: 'users', tone: 'green' },
@@ -36,6 +41,10 @@ export default async function AboutPage({ searchParams }: { searchParams: Promis
   // The founder's story only appears once he publishes it; admins can preview the draft.
   const showDraft = !published && preview === '1' && Boolean((await getViewer())?.isAdmin)
   const storyHtml = story && (published || showDraft) ? story.html.replace(/<!--[\s\S]*?-->/g, '') : null
+  // Only a photo that ships with the site (public/about/), described in the story's own language.
+  const photo = story && /^\/about\/[\w-]+\.(jpe?g|png|webp)$/.test(story.data.photo ?? '') ? { src: story.data.photo, alt: story.data.photoAlt ?? '' } : null
+  // Under a story about depression: the suicide prevention line of the visitor's country (113 in the Netherlands).
+  const country = await guessCountry()
 
   return (
     <div className="narrow-page stack-l">
@@ -78,14 +87,30 @@ export default async function AboutPage({ searchParams }: { searchParams: Promis
       </section>
 
       {storyHtml ? (
-        <section className="lp-card pad stack-s about-story">
+        <section className="lp-card pad stack about-story" id="verhaal" aria-labelledby={story?.data.title ? 'about-story-title' : undefined}>
           {showDraft ? <span className="pill warn">{t('about.draft')}</span> : null}
-          {story?.data.title ? <h2>{story.data.title}</h2> : null}
+          <div className="about-story-head">
+            {photo ? <Image src={photo.src} alt={photo.alt} width={1200} height={1200} sizes="(min-width: 640px) 220px, calc(100vw - 72px)" className="about-photo" /> : null}
+            {story?.data.title ? <h2 id="about-story-title">{story.data.title}</h2> : null}
+          </div>
           {story && story.locale !== locale ? <p className="muted small">{t('about.storyFallback')}</p> : null}
           <div className="prose" dangerouslySetInnerHTML={{ __html: storyHtml }} />
-          <p className="notice small">
-            {t('about.helpLine')} <Link href="/help">{t('about.helpLink')}</Link>
-          </p>
+          {!native && cfg.crowdfundingUrl ? (
+            <div className="about-campaign">
+              <p>{t('about.campaign', { platform: cfg.crowdfundingPlatform ?? '' })}</p>
+              <SupportButton url={cfg.crowdfundingUrl} label={t('home.helpUs.give')} />
+            </div>
+          ) : null}
+          <div className="notice small about-help">
+            <Icon name="help" size={18} />
+            <div className="stack-s">
+              <p>{t('about.helpLine')}</p>
+              <SuicideLines country={country} />
+              <p>
+                <Link href={`/help?country=${country}`}>{t('about.helpLink')} →</Link>
+              </p>
+            </div>
+          </div>
         </section>
       ) : (
         <section className="lp-card pad lp-tip">

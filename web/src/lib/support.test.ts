@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import crowdfunding from '../../content/crowdfunding.json'
-import { campaign, crowdfundingUrl, supportConfig, supportUrl } from './support'
+import { campaign, crowdfundingUrl, roundsFor, supportConfig, supportUrl } from './support'
 
 describe('supportUrl', () => {
   it('accepts https links to known support platforms only', () => {
@@ -129,5 +129,16 @@ describe('campaign', () => {
   it('the content file has every field, so filling it in is all it takes', () => {
     expect(Object.keys(crowdfunding).sort()).toEqual(['goal', 'raised', 'shareToCausesPercent', 'updated'])
     expect(campaign(crowdfunding).updated).not.toBeNull()
+  })
+})
+
+describe('roundsFor', () => {
+  it('counts whole rounds of €5, like "Geef een rondje" on the campaign page', () => {
+    expect(roundsFor(3000)).toBe(600)
+    expect(roundsFor(0)).toBe(0)
+    expect(roundsFor(4)).toBe(0)
+    expect(roundsFor(12)).toBe(2)
+    expect(roundsFor(-5)).toBe(0)
+    expect(roundsFor(Number.NaN)).toBe(0)
   })
 })

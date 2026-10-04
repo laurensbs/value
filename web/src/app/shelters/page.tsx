@@ -78,7 +78,7 @@ export default async function SheltersPage({ searchParams }: { searchParams: Pro
     <div className="stack-l">
       <PageHero
         eyebrow={t('landing.pages.shelters')}
-        title={t('directory.title')}
+        title={t('directory.titleIn', { country })}
         lede={t('directory.lede')}
         art={{ dog: BROWN, friend: COLLIE, tone: 'blue', badge: <Icon name="building" /> }}
       />

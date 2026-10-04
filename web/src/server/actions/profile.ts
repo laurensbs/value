@@ -13,6 +13,7 @@ import { isAdult } from '@/lib/rules'
 import { safeNext } from '@/lib/site'
 import { deleteUnusedFilesLater, deleteUserWithFiles } from '../blob-cleanup'
 import { location, profileSchema, safePhoto, saveOnboarding } from '../profile-core'
+import { dogsChanged } from '../newest-dogs'
 import { markProgressSeen, progressFor } from '../progress'
 import { actionViewer, getViewer } from '../session'
 
@@ -129,6 +130,8 @@ export async function deleteAccount(_prev: FormState, form: FormData): Promise<F
     return { ok: false, error: 'confirm' }
   }
   await deleteUserWithFiles(viewer.userId)
+  // Their dogs leave the home page at once, not after the cache expires.
+  dogsChanged()
   const jar = await cookies()
   for (const c of jar.getAll()) if (c.name.includes('better-auth')) jar.delete(c.name)
   redirect('/?deleted=1')
