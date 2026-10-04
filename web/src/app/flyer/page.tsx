@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { PrintButton } from '@/components/PrintButton'
 import { QrCode } from '@/components/QrCode'
+import { Wordmark } from '@/components/Wordmark'
 import { inviteUrl } from '@/lib/invite'
 import { APP_NAME, siteUrl } from '@/lib/site'
 import { getViewer } from '@/server/session'
@@ -49,7 +50,9 @@ export default async function FlyerPage({ searchParams }: { searchParams: Promis
 
       <article className="poster">
         <header className="poster-head">
-          <p className="poster-org">{APP_NAME}</p>
+          <p className="poster-org">
+            <Wordmark label={APP_NAME} />
+          </p>
         </header>
         <h2 className="poster-title">{t(`${audience}.headline`)}</h2>
         <p className="poster-text">{t(`${audience}.text`)}</p>

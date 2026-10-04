@@ -8,6 +8,7 @@ import { Icon } from './Icon'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { Logo } from './Logo'
 import { NavLinks } from './shell/NavLinks'
+import { Wordmark } from './Wordmark'
 
 /**
  * Visitors get the site header with the links about Rondje. Signed in, it becomes the app's top
@@ -34,8 +35,7 @@ export async function Header({ viewer, unread }: { viewer: Viewer | null; unread
       <header className="header app-header">
         <div className="header-inner">
           <Link href="/" className="brand" aria-label={APP_NAME}>
-            <Logo />
-            <span>{APP_NAME}</span>
+            <Wordmark />
           </Link>
           <NavLinks links={links} label={t('menu')} />
           <div className="header-actions">
@@ -63,8 +63,8 @@ export async function Header({ viewer, unread }: { viewer: Viewer | null; unread
     <header className="header">
       <div className="header-inner">
         <Link href="/" className="brand" aria-label={APP_NAME}>
-          <Logo />
-          <span>{APP_NAME}</span>
+          <Wordmark />
+          <Logo className="brand-mark" />
         </Link>
         <nav className="nav" aria-label={t('menu')}>
           {viewer?.profile ? <Link href="/">{t('today')}</Link> : null}

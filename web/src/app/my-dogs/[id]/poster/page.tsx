@@ -6,6 +6,7 @@ import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
 import { PrintButton } from '@/components/PrintButton'
 import { QrCode } from '@/components/QrCode'
+import { Wordmark } from '@/components/Wordmark'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { dogShareUrl } from '@/lib/invite'
@@ -49,7 +50,9 @@ export default async function DogPosterPage({ params }: { params: Promise<{ id: 
 
       <article className="poster">
         <header className="poster-head">
-          <p className="poster-org">{APP_NAME}</p>
+          <p className="poster-org">
+            <Wordmark label={APP_NAME} />
+          </p>
         </header>
         <h2 className="poster-title">{t('dogShare.posterHeadline', { name: dog.name })}</h2>
         <div className="poster-dog">
