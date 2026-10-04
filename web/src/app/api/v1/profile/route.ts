@@ -22,8 +22,9 @@ export async function POST(request: Request) {
   return result.ok ? json({ ok: true }) : fail(result.error ?? 'invalid')
 }
 
-// Switches that are saved as they are, without the profile checks.
-const SETTINGS = ['emailNotifications', 'reminders'] as const
+// Switches that are saved as they are, without the profile checks. localNudges: the app plans its
+// own seintjes on the phone, so the server sends that person none (server/nudges.ts).
+const SETTINGS = ['emailNotifications', 'reminders', 'localNudges'] as const
 
 /** Editing the profile from the app. The photo stays as it is; the same checks as the website apply. */
 export async function PATCH(request: Request) {

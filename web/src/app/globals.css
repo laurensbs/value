@@ -4027,17 +4027,6 @@ legend {
   border-radius: 14px;
 }
 
-.back-card {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  border-color: color-mix(in srgb, var(--grass) 35%, var(--line));
-}
-
-.back-card .button {
-  align-self: flex-start;
-}
-
 .push-ask {
   display: flex;
   gap: 14px;

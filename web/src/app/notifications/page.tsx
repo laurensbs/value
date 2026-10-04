@@ -3,6 +3,7 @@ import { getFormatter, getTranslations } from 'next-intl/server'
 import { Icon, type IconName } from '@/components/Icon'
 import { MarkNotificationsRead } from '@/components/MarkNotificationsRead'
 import { notificationHref, notificationValues, type NotificationData } from '@/lib/notification-links'
+import { seintjesStopped } from '@/server/nudges'
 import { notificationsFor } from '@/server/queries'
 import { requireViewer } from '@/server/session'
 
@@ -28,24 +29,28 @@ const ICONS: Record<string, IconName> = {
   'chat-message': 'chat',
   'walk-photo': 'camera',
   'nudge-step': 'sparkle',
-  'nudge-week': 'calendar',
   'nudge-challenge': 'trophy',
   'challenge-done': 'trophy',
   'nudge-new-dog': 'paw',
-  'nudge-back': 'paw',
   'nudge-owner': 'home',
 }
 
 export default async function NotificationsPage() {
   const viewer = await requireViewer('/notifications')
-  const items = await notificationsFor(viewer.userId)
-  const t = await getTranslations('notifications')
+  const [items, stopped, t, nav] = await Promise.all([
+    notificationsFor(viewer.userId),
+    viewer.profile ? seintjesStopped(viewer.userId, viewer.profile.reminders) : false,
+    getTranslations('notifications'),
+    getTranslations('nav'),
+  ])
   const format = await getFormatter()
   const hasUnread = items.some((n) => !n.readAt)
 
   return (
     <div className="narrow-page stack-l">
       <h1>{t('title')}</h1>
+      {/* Seintjes went off by themselves: said once, here, never as a push. */}
+      {stopped ? <p className="muted">{t.rich('stopped', { tab: nav('profile'), link: (chunks) => <Link href="/profile#alerts">{chunks}</Link> })}</p> : null}
       {items.length === 0 ? (
         <p className="muted">{t('empty')}</p>
       ) : (

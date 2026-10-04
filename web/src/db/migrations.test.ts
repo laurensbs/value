@@ -53,6 +53,43 @@ describe('database migrations', () => {
     await db.close()
   }, 30_000)
 
+  it('0011 turns seintjes off for new profiles only: existing rows keep their choice', async () => {
+    const db = new PGlite()
+    const at = migrations.findIndex((m) => m.tag === '0011_reminders_off')
+    expect(at).toBeGreaterThan(0)
+    for (const migration of migrations.slice(0, at)) for (const statement of migration.statements) await db.exec(statement)
+
+    // Before 0011: one profile with the old default (on) and one that turned seintjes off itself.
+    await db.exec(`
+      insert into "user" (id, name, email, email_verified, created_at, updated_at) values
+        ('oud', 'Oud', 'oud@example.org', false, now(), now()),
+        ('uit', 'Uit', 'uit@example.org', false, now(), now()),
+        ('nieuw', 'Nieuw', 'nieuw@example.org', false, now(), now());
+      insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code, updated_at)
+        values ('oud', 'Oud', '1950-01-01', 'NL', 'Utrecht', now(), '0.1', 'OUD234', '2026-09-01 10:00');
+      insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code, reminders)
+        values ('uit', 'Uit', '1990-01-01', 'NL', 'Utrecht', now(), '0.1', 'UIT234', false);
+    `)
+
+    // Twice: a cold start that runs it again changes nothing.
+    for (const migration of migrations.slice(at)) for (const statement of migration.statements) await db.exec(statement)
+    for (const statement of migrations[at].statements) await db.exec(statement)
+
+    await db.exec(`insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code)
+      values ('nieuw', 'Nieuw', '2000-01-01', 'NL', 'Utrecht', now(), '0.1', 'NIE234')`)
+    const rows = await db.query<{ user_id: string; reminders: boolean; local_nudges: boolean; updated_at: string }>(
+      `select user_id, reminders, local_nudges, to_char(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at from profile order by user_id`,
+    )
+    expect(rows.rows.map(({ user_id, reminders, local_nudges }) => ({ user_id, reminders, local_nudges }))).toEqual([
+      { user_id: 'nieuw', reminders: false, local_nudges: false },
+      { user_id: 'oud', reminders: true, local_nudges: false },
+      { user_id: 'uit', reminders: false, local_nudges: false },
+    ])
+    // The existing row was not rewritten.
+    expect(rows.rows.find((r) => r.user_id === 'oud')!.updated_at).toBe('2026-09-01 10:00')
+    await db.close()
+  }, 30_000)
+
   it('only ever adds: no drops or renames after the first migration', () => {
     for (const migration of migrations.slice(1)) {
       for (const statement of migration.statements) {

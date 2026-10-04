@@ -147,7 +147,6 @@ export async function ChallengeCard({ challenges }: { challenges: ChallengesView
           <Icon name="users" size={18} />
           {t('discover.together')}
         </span>
-        <span className="muted small">{t('challenges.daysLeft', { n: challenges.daysLeft })}</span>
       </div>
       <h2 id="challenge-title">{goal.title}</h2>
       <div

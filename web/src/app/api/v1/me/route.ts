@@ -29,6 +29,7 @@ export async function GET() {
       referralCode: p.referralCode,
       emailNotifications: p.emailNotifications,
       reminders: p.reminders,
+      localNudges: p.localNudges,
       banned: Boolean(p.bannedAt),
     },
     trust: signals && { ...signals, badges: trustBadges(signals) },

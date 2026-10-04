@@ -868,8 +868,9 @@
     "weeklyGoal": "Objectif de la semaine",
     "weeklyGoalHint": "À quelle fréquence voulez-vous vous balader ? Sauter une semaine, c'est toujours permis.",
     "alerts": "Notifications",
-    "reminders": "Rappels bienveillants",
-    "remindersHint": "Sur vos premières étapes, votre objectif de la semaine, le défi de votre ville et les nouveaux chiens près de chez vous. Un tous les quelques jours au maximum, en notification push ou sinon par e-mail.",
+    "alertsText": "Les messages, demandes et rendez-vous vous parviennent toujours ; les petits coups de pouce, seulement si vous les activez ci-dessous.",
+    "reminders": "Petits coups de pouce",
+    "remindersHint": "Seulement des extras : vos premières étapes, le défi de votre ville et les nouveaux chiens près de chez vous. Au maximum un par semaine ; si trois de suite ne servent à rien, ils s'arrêtent d'eux-mêmes. Les messages, demandes et rendez-vous vous parviennent toujours, même si ceci est désactivé.",
     "pushIos": "Des alertes sur votre iPhone ? Elles fonctionnent dès que Rondje est sur votre écran d’accueil :",
     "pushIosInApp": "Des alertes sur votre iPhone ? Ouvrez d’abord Rondje dans Safari et mettez-le sur votre écran d’accueil depuis là."
   },
@@ -1176,6 +1177,7 @@
   "notifications": {
     "title": "Notifications",
     "empty": "Pas encore de notifications.",
+    "stopped": "Les petits coups de pouce sont désactivés. Vous les voulez à nouveau ? Activez-les dans <link>{tab}</link>.",
     "markRead": "Tout marquer comme lu",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} aimerait rencontrer {dogName} lors d'une balade.} home {{walkerName} aimerait rencontrer {dogName} chez vous.} phone {{walkerName} aimerait d'abord appeler pour faire connaissance avec {dogName}.} video {{walkerName} aimerait d'abord un appel vidéo pour faire connaissance avec {dogName}.} other {{walkerName} aimerait promener {dogName}.}}",
@@ -1194,11 +1196,9 @@
       "walk-photo": "Nouvelle photo de {dogName} pendant la promenade.",
       "chat-message": "{senderName} a envoyé un message à propos de {dogName}.",
       "nudge-step": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Vous complétez votre profil ?} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade.} quiz {Votre prochaine étape : le quiz de sécurité. Quelques questions, et vous saurez à quoi faire attention.} meet {Envie d'une première rencontre ? Découvrez les chiens près de chez vous.} other {Votre prochaine étape sur Rondje vous attend.}}",
-      "nudge-week": "Le week-end arrive ! Plus que {left, plural, one {# balade} other {# balades}} pour votre objectif de la semaine. Pas possible ? Aucun souci, une nouvelle semaine arrive.",
       "nudge-challenge": "Nouveau mois, nouveau défi : {city} fait {goal} balades ensemble. Vous en êtes ?",
       "challenge-done": "{city} a relevé le défi : {goal} balades ensemble ! {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci !",
-      "nudge-back": "{variant, select, dog {Envie d'une balade avec {dogName} ? Planifiez-la quand cela vous convient.} other {Envie d'une balade ? Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}}",
-      "nudge-owner": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Vous en ajoutez une ?} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}",
+      "nudge-owner": "{dogName} est bien en ligne, mais peu de promeneurs habitent encore près de chez vous. Ce n'est ni à cause de vous ni à cause de {dogName}.",
       "request-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}. Belle rencontre !} home {rencontre avec {dogName}, à domicile. Belle rencontre !} phone {premier appel au sujet de {dogName}. Bon échange !} video {premier appel vidéo au sujet de {dogName}. Bon échange !} other {balade avec {dogName}. Bonne balade !}}",
       "group-walk-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}. Bonne balade !",
       "nudge-new-dog": "Près de chez vous : {dogName} vient d'arriver sur Rondje et cherche un compagnon de promenade."
@@ -1676,10 +1676,6 @@
         "subject": "{step, select, about {Complétez votre profil} dog {Inscrivez votre chien sur Rondje} quiz {Votre prochaine étape : le quiz de sécurité} meet {Envie d'une première rencontre ?} other {Votre prochaine étape sur Rondje}}",
         "body": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Cela ne prend qu'une minute.} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade. La première fois, vous vous rencontrez toujours ensemble.} quiz {Quelques questions sur la promenade en sécurité, et vous saurez à quoi faire attention. Ensuite, vous pourrez aussi promener le chien sans le propriétaire, s'il est d'accord.} meet {Découvrez les chiens près de chez vous et demandez une première rencontre. La première fois, vous marchez avec le propriétaire.} other {Votre prochaine étape sur Rondje vous attend.}}"
       },
-      "nudge-week": {
-        "subject": "Plus que {left, plural, one {# balade} other {# balades}} pour votre objectif de la semaine",
-        "body": "Le week-end arrive. Chaque balade compte, même courte. Pas cette semaine ? Aucun souci : vous ne perdez rien."
-      },
       "nudge-challenge": {
         "subject": "{city} fait {goal} balades ensemble",
         "body": "Nouveau mois, nouveau défi pour {city}. Chaque balade compte, même courte. Vous en êtes ?"
@@ -1688,13 +1684,9 @@
         "subject": "{city} a relevé le défi !",
         "body": "{goal} balades ensemble ce mois-ci. {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci, de la part de tous les chiens."
       },
-      "nudge-back": {
-        "subject": "{variant, select, dog {Envie d'une balade avec {dogName} ?} other {Envie d'une balade ?}}",
-        "body": "{variant, select, dog {Planifiez une balade avec {dogName} quand cela vous convient.} other {Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}} Pas le temps ? Aucun souci, Rondje est là quand vous en avez envie."
-      },
       "nudge-owner": {
-        "subject": "Un conseil pour {dogName}",
-        "body": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Une photo en extérieur, avec un contact visuel, fonctionne le mieux.} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
+        "subject": "{dogName} est en ligne",
+        "body": "Peu de promeneurs habitent encore près de chez vous. Ce n'est ni à cause de vous ni à cause de {dogName}. Vous n'avez rien à faire : {dogName} reste visible pour les promeneurs."
       },
       "request-reminder": {
         "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}} home {rencontre avec {dogName}, à domicile} phone {premier appel au sujet de {dogName}} video {premier appel vidéo au sujet de {dogName}} other {balade avec {dogName}}}",
@@ -1709,7 +1701,7 @@
         "body": "{dogName} vient d'arriver sur Rondje, non loin de chez vous. Voyez si vous vous entendez bien et planifiez une première rencontre quand cela vous convient."
       }
     },
-    "reminderFooter": "Vous recevez ce rappel parce que les rappels sont activés dans votre profil. Nous en envoyons un tous les quelques jours au maximum. Vous pouvez les désactiver dans votre profil, sous Réglages.",
+    "reminderFooter": "Vous recevez ceci parce que les petits coups de pouce sont activés dans votre profil. Au maximum un par semaine. Vous pouvez les désactiver dans votre profil, sous Notifications.",
     "verify": {
       "subject": "Confirmez votre adresse e-mail pour Rondje",
       "heading": "Est-ce bien votre adresse e-mail ?",
@@ -1855,11 +1847,8 @@
         "8": "Il y a un panneau d'affichage au supermarché ? Un flyer avec votre lien amène des promeneurs de votre quartier."
       }
     },
-    "backTitle": "Bon retour sur Rondje !",
-    "backText": "{dog} et vous : {bond}. Envie d'une nouvelle balade ? Planifiez-la quand cela vous convient.",
-    "backPlan": "Planifier une balade avec {dog}",
     "walkersNear": "{n, plural, one {# promeneur habite} other {# promeneurs habitent}} à moins de 5 km de chez vous.",
-    "walkersFew": "Encore peu de promeneurs près de chez vous. <link>Parlez de {dog} à vos voisins</link> pour qu'ils découvrent Rondje."
+    "walkersFew": "Peu de promeneurs habitent encore près de chez vous. <link>Parlez de {dog} à vos voisins</link> si vous le souhaitez."
   },
   "progress": {
     "title": "Votre progression",
@@ -1907,11 +1896,6 @@
         "tier": "{n, plural, one {Une balade avant 8 h} other {# balades avant 8 h}}",
         "hint": "Une balade matinale quand la ville dort encore."
       },
-      "evening": {
-        "name": "Balade du soir",
-        "tier": "{n, plural, one {Une balade après 20 h} other {# balades après 20 h}}",
-        "hint": "Prenez une lampe quand il fait nuit."
-      },
       "weekend": {
         "name": "Promeneur du week-end",
         "tier": "{n} balades le week-end",
@@ -1946,16 +1930,6 @@
         "name": "Accueillant",
         "tier": "{n, plural, one {Votre chien a fait une balade} other {Votre chien a fait # balades}}",
         "hint": "Chaque balade de votre chien compte."
-      },
-      "friends": {
-        "name": "Cercle d'amis",
-        "tier": "{n} promeneurs différents pour votre chien",
-        "hint": "Plus d'amis, plus de balades."
-      },
-      "invite": {
-        "name": "Ambassadeur",
-        "tier": "{n, plural, one {Un ami nous a rejoints} other {# amis nous ont rejoints}}",
-        "hint": "Invitez quelqu'un avec votre propre lien."
       }
     },
     "earnTitle": "Comment gagner des points",
@@ -1991,7 +1965,6 @@
     "weekTitle": "Cette semaine",
     "weekGoal": "{done} sur {goal, plural, one {# balade} other {# balades}}",
     "weekDone": "Objectif de la semaine atteint !",
-    "weekLeft": "Encore {n, plural, one {# balade} other {# balades}} pour votre objectif",
     "weekNoGoal": "{n, plural, =0 {Pas encore de balade cette semaine} one {# balade cette semaine} other {# balades cette semaine}}",
     "weekSet": "Choisissez un objectif",
     "weekChange": "Modifier",
@@ -2033,7 +2006,6 @@
     "mine": "{n, plural, =0 {Vous en faites une ?} one {Vous en avez fait #} other {Vous en avez fait #}}",
     "done": "Réussi ! Merci à tous.",
     "stats": "{dogs, plural, one {# chien} other {# chiens}} · {walkers, plural, one {# promeneur} other {# promeneurs}} · {km} km",
-    "daysLeft": "{n, plural, one {Encore # jour} other {Encore # jours}}",
     "private": "Nous comptons seulement les balades, jamais qui les a faites."
   },
   "pushAsk": {
@@ -2042,7 +2014,7 @@
     "dog": "Vous saurez tout de suite quand quelqu'un veut promener {dog} ou vous envoie un message.",
     "general": "Vous saurez tout de suite quand il y a du nouveau, comme une demande ou un message.",
     "request": "Vous saurez tout de suite quand il y a une réponse pour {dog}.",
-    "calm": "Des rappels tous les trois jours au maximum. Vous pouvez désactiver tout cela dans votre profil.",
+    "calm": "Seulement quand il se passe vraiment quelque chose, comme un message ou un rendez-vous. Des petits coups de pouce, seulement si vous les activez.",
     "yes": "Oui, volontiers",
     "later": "Plus tard",
     "done": "Parfait ! Vous recevrez un signal quand il y aura du nouveau."
@@ -2254,8 +2226,7 @@
     "supportText": "Gratuit et sans publicité. Découvrez comment aider.",
     "tipText": "Vous connaissez un refuge ou quelqu'un avec un chien qui aurait besoin d'aide ?",
     "shelterText": "Vous travaillez dans un refuge ? Mettez vos chiens en ligne ici.",
-    "adminText": "Signalements, refuges, chiffres et le centre de lancement",
-    "alerts": "Notifications et son"
+    "adminText": "Signalements, refuges, chiffres et le centre de lancement"
   },
   "shell": {
     "tabs": {

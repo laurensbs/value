@@ -137,6 +137,17 @@ export default async function ProfilePage() {
         </ul>
       ) : null}
 
+      {/* Everything about notifications in one place, with one sentence on what you do and do not get. */}
+      <section id="alerts" className="stack" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">{t('profile.alerts')}</h2>
+        <div className="card stack">
+          <p className="muted small">{t('profile.alertsText')}</p>
+          {pushKey ? <PushToggle publicKey={pushKey} /> : null}
+          <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
+          <RemindersToggle on={viewer.profile.reminders} />
+        </div>
+      </section>
+
       <section className="stack" aria-labelledby="settings-title">
         <h2 id="settings-title">{t('profile.settings')}</h2>
         <div className="card stack">
@@ -148,13 +159,7 @@ export default async function ProfilePage() {
             <strong>{t('profile.passkeys')}</strong>
             <PasskeyButton />
           </div>
-          <div className="stack-s">
-            <strong>{t('profileHub.alerts')}</strong>
-            <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
-            {pushKey ? <PushToggle publicKey={pushKey} /> : null}
-            <RemindersToggle on={viewer.profile.reminders} />
-            <SoundToggle />
-          </div>
+          <SoundToggle />
         </div>
       </section>
 

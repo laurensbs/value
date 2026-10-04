@@ -137,7 +137,7 @@ export async function WalkSummary({ walk, dog, route, role, viewer, otherUserId,
               <span>
                 {progress.walksThisWeek >= (progress.weeklyGoal ?? 0)
                   ? t('progress.weekDone')
-                  : t('progress.weekLeft', { n: (progress.weeklyGoal ?? 0) - progress.walksThisWeek })}
+                  : t('progress.weekGoal', { done: progress.walksThisWeek, goal: progress.weeklyGoal ?? 0 })}
               </span>
             </p>
           ) : null}

@@ -115,8 +115,13 @@ describe('stats and badges', () => {
     expect(owner.find((b) => b.key === 'host')).toMatchObject({ tier: 1 })
     // Not a walker, but earned walking badges stay visible.
     expect(owner.some((b) => b.key === 'walks')).toBe(true)
-    expect(owner.some((b) => b.key === 'evening' && b.tier === 1)).toBe(true)
+    expect(owner.some((b) => b.key === 'early' && b.tier === 1)).toBe(true)
     expect(owner.some((b) => b.key === 'reports')).toBe(false)
+  })
+
+  it('has no badge for walking in the dark, for more strangers with your dog, or for recruiting', () => {
+    const all = [...badgesFor(statsFrom(events), { walker: true, owner: true }), ...badgesFor({ ...statsFrom(events), evening: 50, dogFriends: 9, invites: 20 }, { walker: true, owner: true })]
+    for (const key of ['evening', 'friends', 'invite']) expect(all.some((b) => b.key === key), key).toBe(false)
   })
 
   it('lists every earned tier separately', () => {

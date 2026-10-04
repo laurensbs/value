@@ -10,16 +10,14 @@ export type NotificationData = {
   orgId?: string
   orgName?: string
   groupWalkId?: string
-  // Reminders (lib/nudges.ts)
+  // Seintjes (lib/nudges.ts)
   step?: string
   role?: string
   city?: string
   goal?: number
-  left?: number
   mine?: number
+  // Appointment reminders (server/reminders.ts): what it is, "today" or "tomorrow", the local time, and the start.
   variant?: string
-  tip?: string
-  // Appointment reminders (server/reminders.ts): "today" or "tomorrow", the local time, and the start.
   day?: string
   time?: string
   at?: string
@@ -40,10 +38,9 @@ export function notificationHref(kind: string, data: NotificationData): string {
   if (kind === 'org-pending') return '/admin'
   if ((kind === 'shelter-joined' || kind === 'group-walk-new') && data.orgId) return `/dogs?org=${data.orgId}`
   if (kind === 'nudge-step') return STEP_HREFS[data.step ?? ''] ?? '/'
-  if (kind === 'nudge-week') return '/'
   if (kind === 'nudge-challenge' || kind === 'challenge-done') return '/progress#challenge'
-  if (kind === 'nudge-back' || kind === 'nudge-new-dog') return data.dogId ? `/dogs/${data.dogId}` : '/dogs'
-  if (kind === 'nudge-owner') return !data.dogId ? '/my-dogs' : data.tip === 'share' ? `/dogs/${data.dogId}` : `/my-dogs/${data.dogId}/edit`
+  if (kind === 'nudge-new-dog') return data.dogId ? `/dogs/${data.dogId}` : '/dogs'
+  if (kind === 'nudge-owner') return data.dogId ? `/dogs/${data.dogId}` : '/my-dogs'
   return '/requests'
 }
 
@@ -56,12 +53,10 @@ export function notificationValues(data: NotificationData): Record<string, strin
     senderName: data.senderName ?? '',
     city: data.city ?? '',
     goal: Number(data.goal ?? 0),
-    left: Number(data.left ?? 0),
     mine: Number(data.mine ?? 0),
     step: data.step ?? 'other',
     role: data.role ?? 'other',
     variant: data.variant ?? 'other',
-    tip: data.tip ?? 'other',
     day: data.day ?? 'other',
     time: data.time ?? '',
     via: data.meetVia ?? 'other',

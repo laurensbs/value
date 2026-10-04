@@ -1,66 +1,74 @@
-// Friendly reminders ("herinneringen") that help people come back: never a guilt trip.
+// Seintjes: reminders with no news behind them. Calm by design, never a guilt trip.
 //
-// The rules (docs/DECISIONS.md, decision 7):
-// - At most one reminder every few days, whatever the reason.
-// - Only about things the person chose or started: their first steps, their weekly goal, their
-//   town's challenge, walks they did before, a dog they put on Rondje, and for walkers a dog that
-//   just came online near them (each dog once).
-// - Ignoring them costs nothing, and the text never pretends otherwise (no "you'll lose", no sad dog).
-// - Each kind stops by itself: a few first-step reminders, two "come back" reminders after a walk.
-// - One switch in the profile (and in the app) turns them all off.
+// The rules (docs/DECISIONS.md, decision 36, and the research "Duolingo-achtig, zonder druk" §3.4):
+// - Only for people who turned them on themselves (profile.reminders, off for new profiles).
+// - At most one every seven days, whatever the kind. Real events (a request, an answer, an
+//   appointment) are not seintjes: they come as notifications whatever this setting says.
+// - Only about things the person chose or started: their first steps, their town's challenge, a dog
+//   they put on Rondje, and for walkers a dog that just came online near them (each dog once).
+// - No countdowns, no "we miss you", no deadlines: lib/banned-phrases.json is checked in a test.
+// - Three in a row that led to nothing, and they stop by themselves when the fourth would be due:
+//   the switch goes off, and the app says so in one line (never a push). Nothing about opens is
+//   stored for this.
+// - Someone whose iPhone plans its own seintjes (profile.localNudges) gets none from the server:
+//   not as a push, not by email and not in the notification list.
 
-import { nearness, type Place } from './nearby'
-import { localParts, weekOf, type Roles } from './progress'
+import { nearness, shownCount, type Place } from './nearby'
+import { localParts, type Roles } from './progress'
 
-export const NUDGE_KINDS = ['nudge-step', 'nudge-week', 'nudge-challenge', 'challenge-done', 'nudge-new-dog', 'nudge-back', 'nudge-owner'] as const
+export const NUDGE_KINDS = ['nudge-step', 'nudge-challenge', 'challenge-done', 'nudge-new-dog', 'nudge-owner'] as const
 export type NudgeKind = (typeof NUDGE_KINDS)[number]
 
 export function isNudgeKind(kind: string): kind is NudgeKind {
   return (NUDGE_KINDS as readonly string[]).includes(kind)
 }
 
-/** Never more than one reminder in this many days. */
-export const NUDGE_GAP_DAYS = 3
+/**
+ * Every seintje, also kinds that are no longer sent: older rows keep their kind. All of them count
+ * for the seven days and the three in a row. Their names all start with "nudge-", except the good news.
+ */
+export function isSeintje(kind: string): boolean {
+  return kind.startsWith('nudge-') || kind === 'challenge-done'
+}
+
+/** A seintje kind that is no longer sent: hidden from the notification list (it has no text any more). */
+export function isRetiredNudge(kind: string): boolean {
+  return isSeintje(kind) && !isNudgeKind(kind)
+}
+
+/** Never more than one seintje in this many days. */
+export const NUDGE_GAP_DAYS = 7
+/** After this many seintjes in a row with nothing done after them, they stop. */
+export const IGNORED_MAX = 3
 /** First-step reminders only in the first weeks, and only a few. */
 export const STEP_NUDGE_DAYS = 21
 export const STEP_NUDGE_MAX = 3
-/** "Zin in een rondje?" after this many quiet days, at most twice until the next walk. */
-export const BACK_AFTER_DAYS = 14
-export const BACK_MAX = 2
 /** A dog is new for this many days after it came online. */
 export const NEW_DOG_DAYS = 7
-
 export type NudgeStep = 'about' | 'dog' | 'quiz' | 'meet'
 
 export interface SentNudge {
   kind: string
   at: Date
-  data: { step?: string; tip?: string; dogId?: string }
+  data: { step?: string; dogId?: string }
 }
 
 export interface NudgeFacts {
   roles: Roles
   joinedAt: Date
-  weeklyGoal: number | null
   /** Finished walks, ever. */
   walks: number
-  lastWalkAt: Date | null
-  walksThisWeek: number
-  /** Accepted walks and meetings from now until the end of Sunday. */
-  plannedThisWeek: number
-  /** Anything coming up: an open or accepted request in the future. */
-  planned: boolean
   /** Which first steps are done. */
   steps: Record<NudgeStep, boolean>
   /** This month's challenge in the person's town. */
   challenge: { city: string; goal: number; walks: number; mine: number; done: boolean } | null
-  /** The dog this walker walked most, if it can still be walked. */
-  favouriteDog: { id: string; name: string } | null
   /** Dogs of other owners that came online near this walker lately and that they have not asked about, nearest first. */
   newDogs: { id: string; name: string }[]
-  /** An owner's dog that has been on Rondje for a while without a single request. */
-  quietDog: { id: string; name: string; since: Date; photos: number; slots: number } | null
-  /** Reminders sent before. */
+  /** An owner's dog that has been on Rondje for a while without a single request, and how many walkers live nearby. */
+  quietDog: { id: string; name: string; since: Date; walkersNear: number } | null
+  /** The last time this person did something: asked, walked, wrote, changed a dog or their profile. */
+  lastActiveAt: Date | null
+  /** Seintjes sent before (every kind that isSeintje). */
   sent: SentNudge[]
 }
 
@@ -126,12 +134,36 @@ function stepOrder(roles: Roles): NudgeStep[] {
   return ['about', ...(roles.owner ? (['dog'] as const) : []), ...(roles.walker ? (['quiz', 'meet'] as const) : [])]
 }
 
-/** The one reminder worth sending today, or null. Good news first, then what someone started. */
+/** A seintje of any kind (also one no longer sent) in the last seven calendar days. */
+export function sentTooRecently(sent: readonly SentNudge[], now: Date): boolean {
+  return sent.some((s) => isSeintje(s.kind) && localDay(now) - localDay(s.at) < NUDGE_GAP_DAYS)
+}
+
+/**
+ * Three seintjes in a row and nothing done since the first of them: they stop, on the day the
+ * fourth would be due (a week after the third). Counted from what people did (lastActiveAt, see
+ * server/nudges.ts), never from whether a notification was opened. Only kinds sent today count,
+ * and only a week apart as the weekly rule sends them: seintjes of kinds no longer sent, or three
+ * that came closer together, never switch anyone off.
+ */
+export function ignoredInARow(sent: readonly SentNudge[], lastActiveAt: Date | null, now: Date): boolean {
+  const latest = sent
+    .filter((s) => isNudgeKind(s.kind))
+    .sort((a, b) => b.at.getTime() - a.at.getTime())
+    .slice(0, IGNORED_MAX)
+  if (latest.length < IGNORED_MAX) return false
+  const weekApart = latest.every((s, i) => i === 0 || localDay(latest[i - 1].at) - localDay(s.at) >= NUDGE_GAP_DAYS)
+  const fourthDue = localDay(now) - localDay(latest[0].at) >= NUDGE_GAP_DAYS
+  return weekApart && fourthDue && latest.every((s) => !lastActiveAt || s.at > lastActiveAt)
+}
+
+/** The one seintje worth sending today, or null. Good news first, then what someone started. */
 export function pickNudge(f: NudgeFacts, now: Date): Nudge | null {
   const today = localDay(now)
   const daysSince = (at: Date) => today - localDay(at)
-  const sent = f.sent.filter((s) => isNudgeKind(s.kind))
-  if (sent.some((s) => daysSince(s.at) < NUDGE_GAP_DAYS)) return null
+  const sent = f.sent.filter((s) => isSeintje(s.kind))
+  if (sentTooRecently(sent, now)) return null
+  if (ignoredInARow(sent, f.lastActiveAt, now)) return null
   const sentOf = (kind: NudgeKind) => sent.filter((s) => s.kind === kind)
   const local = localParts(now)
   const age = daysSince(f.joinedAt)
@@ -162,42 +194,18 @@ export function pickNudge(f: NudgeFacts, now: Date): Nudge | null {
     return { kind: 'nudge-challenge', data: { city: c.city, goal: c.goal } }
   }
 
-  // Thursday or Friday: the weekly goal, only while it is still within reach this week.
-  if (f.roles.walker && f.weeklyGoal && f.walks > 0 && (local.weekday === 4 || local.weekday === 5)) {
-    const left = f.weeklyGoal - f.walksThisWeek - f.plannedThisWeek
-    const daysLeft = 8 - local.weekday
-    if (left > 0 && left <= daysLeft && !sentOf('nudge-week').some((s) => weekOf(s.at) === weekOf(now))) {
-      return { kind: 'nudge-week', data: { left, goal: f.weeklyGoal } }
-    }
-  }
-
-  // A dog that just came online nearby: each dog once, and at most one such message a week.
+  // A dog that just came online nearby: each dog once.
   if (f.roles.walker && f.newDogs.length) {
-    const told = sentOf('nudge-new-dog')
-    const toldDogs = new Set(told.map((s) => s.data.dogId))
+    const toldDogs = new Set(sentOf('nudge-new-dog').map((s) => s.data.dogId))
     const dog = f.newDogs.find((d) => !toldDogs.has(d.id))
-    if (dog && told.every((s) => daysSince(s.at) >= 7)) return { kind: 'nudge-new-dog', data: { dogId: dog.id, dogName: dog.name } }
+    if (dog) return { kind: 'nudge-new-dog', data: { dogId: dog.id, dogName: dog.name } }
   }
 
-  // Quiet for two weeks with nothing planned: an invitation, twice at most until the next walk.
-  if (f.roles.walker && f.lastWalkAt && daysSince(f.lastWalkAt) >= BACK_AFTER_DAYS && !f.planned) {
-    const since = sentOf('nudge-back').filter((s) => s.at > f.lastWalkAt!)
-    if (since.length < BACK_MAX && since.every((s) => daysSince(s.at) >= BACK_AFTER_DAYS)) {
-      const dog = f.favouriteDog
-      return { kind: 'nudge-back', data: dog ? { variant: 'dog', dogId: dog.id, dogName: dog.name } : { variant: 'any' } }
-    }
-  }
-
-  // An owner whose dog has had no request for a week: one practical tip, twice at most.
+  // An owner whose dog has had no request for a week while few walkers live nearby (too few to show
+  // a count, as on Today): that we look too. Once per dog, never "no request yet".
   const q = f.quietDog
-  if (f.roles.owner && q && daysSince(q.since) >= 7) {
-    const tips = sentOf('nudge-owner')
-    if (tips.length < 2 && tips.every((s) => daysSince(s.at) >= 10)) {
-      const given = new Set(tips.map((s) => s.data.tip))
-      const options = [...(q.photos === 0 ? ['photo'] : []), ...(q.slots === 0 ? ['slots'] : []), 'share']
-      const tip = options.find((o) => !given.has(o)) ?? 'share'
-      return { kind: 'nudge-owner', data: { tip, dogId: q.id, dogName: q.name } }
-    }
+  if (f.roles.owner && q && daysSince(q.since) >= 7 && shownCount(q.walkersNear) == null && !sentOf('nudge-owner').some((s) => s.data.dogId === q.id)) {
+    return { kind: 'nudge-owner', data: { dogId: q.id, dogName: q.name } }
   }
 
   return null

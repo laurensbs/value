@@ -30,7 +30,6 @@ export async function WeekCard({ goal, walks, days, activeWeeks, now = new Date(
             {t('weekTitle')}
           </h2>
           <p className="week-status">{goal != null ? (done ? t('weekDone') : t('weekGoal', { done: walks, goal })) : t('weekNoGoal', { n: walks })}</p>
-          {goal != null && !done ? <p className="muted small">{t('weekLeft', { n: goal - walks })}</p> : null}
         </div>
       </div>
       <ol className="week-days" aria-hidden="true">

@@ -135,7 +135,7 @@ export function EmailNotificationsToggle({ on }: { on: boolean }) {
   return <SettingToggle on={on} save={setEmailNotifications} label={t('emailNotifications')} hint={t('emailNotificationsHint')} />
 }
 
-/** Friendly reminders, at most one every few days: on or off. */
+/** Seintjes: reminders without news behind them, at most one a week. Off until someone turns them on. */
 export function RemindersToggle({ on }: { on: boolean }) {
   const t = useTranslations('profile')
   return <SettingToggle on={on} save={setReminders} label={t('reminders')} hint={t('remindersHint')} />

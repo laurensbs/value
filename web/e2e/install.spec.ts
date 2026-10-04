@@ -27,7 +27,7 @@ test('iPhone: the steps to the home screen on Today and in the profile, and Safa
 
   // The profile explains why there is no switch for heads-ups yet, with the same steps.
   await fleur.page.goto('/profile')
-  await expect(fleur.page.getByText('Seintjes op je iPhone? Die werken zodra Rondje op je beginscherm staat:')).toBeVisible()
+  await expect(fleur.page.getByText('Meldingen op je iPhone? Die werken zodra Rondje op je beginscherm staat:')).toBeVisible()
   await expect(fleur.page.getByText('Kies “Zet op beginscherm”')).toBeVisible()
   await shot(fleur.page, '21-install-profile')
 

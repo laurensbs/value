@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isNewDog, newDogsNear, pickNudge, type NewDog, type NudgeFacts, type SentNudge } from './nudges'
+import { ignoredInARow, isNewDog, isRetiredNudge, isSeintje, newDogsNear, pickNudge, type NewDog, type NudgeFacts, type SentNudge } from './nudges'
 
 // The daily run is at 07:30 UTC (09:30 in Amsterdam). 1 October 2026 is a Thursday.
 const at = (date: string) => new Date(`${date}T07:30:00Z`)
@@ -11,17 +11,12 @@ function facts(over: Partial<NudgeFacts> = {}): NudgeFacts {
   return {
     roles: walker,
     joinedAt: at('2026-08-01'),
-    weeklyGoal: null,
     walks: 0,
-    lastWalkAt: null,
-    walksThisWeek: 0,
-    plannedThisWeek: 0,
-    planned: false,
     steps: { about: true, dog: true, quiz: true, meet: true },
     challenge: null,
-    favouriteDog: null,
     newDogs: [],
     quietDog: null,
+    lastActiveAt: at('2026-08-01'),
     sent: [],
     ...over,
   }
@@ -38,13 +33,16 @@ describe('first steps', () => {
     expect(pickNudge(newWalker(), at('2026-10-06'))).toEqual({ kind: 'nudge-step', data: { step: 'about' } })
   })
 
-  it('never asks the same step twice and stops after three', () => {
+  it('never asks the same step twice and stops after three, a week apart', () => {
+    // Something done after each one, so these are not three ignored in a row.
+    const busy = { lastActiveAt: at('2026-10-20') }
     const one = [sent('nudge-step', '2026-10-06', { step: 'about' })]
-    expect(pickNudge(newWalker({ sent: one }), at('2026-10-09'))?.data).toEqual({ step: 'quiz' })
-    const two = [...one, sent('nudge-step', '2026-10-09', { step: 'quiz' })]
-    expect(pickNudge(newWalker({ sent: two }), at('2026-10-12'))?.data).toEqual({ step: 'meet' })
-    const three = [...two, sent('nudge-step', '2026-10-12', { step: 'meet' })]
-    expect(pickNudge(newWalker({ sent: three }), at('2026-10-15'))).toBeNull()
+    expect(pickNudge(newWalker({ ...busy, sent: one }), at('2026-10-12'))).toBeNull()
+    expect(pickNudge(newWalker({ ...busy, sent: one }), at('2026-10-13'))?.data).toEqual({ step: 'quiz' })
+    const two = [...one, sent('nudge-step', '2026-10-13', { step: 'quiz' })]
+    expect(pickNudge(newWalker({ ...busy, sent: two }), at('2026-10-20'))?.data).toEqual({ step: 'meet' })
+    const three = [...two, sent('nudge-step', '2026-10-20', { step: 'meet' })]
+    expect(pickNudge(newWalker({ lastActiveAt: at('2026-10-21'), sent: three }), at('2026-10-27'))).toBeNull()
   })
 
   it('tells owners that a profile helps walkers', () => {
@@ -60,12 +58,85 @@ describe('first steps', () => {
 })
 
 describe('spacing', () => {
-  it('sends nothing within three calendar days of the last reminder', () => {
-    const f = facts({ joinedAt: at('2026-10-05'), steps: { about: false, dog: false, quiz: false, meet: false } })
-    expect(pickNudge({ ...f, sent: [sent('nudge-week', '2026-10-06')] }, at('2026-10-08'))).toBeNull()
-    // Even when the run is a little earlier than three full days later.
-    const late = { kind: 'nudge-week', at: new Date('2026-10-06T07:59:00Z'), data: {} }
-    expect(pickNudge({ ...f, sent: [late] }, at('2026-10-09'))).not.toBeNull()
+  const f = facts({ joinedAt: at('2026-10-05'), steps: { about: false, dog: false, quiz: false, meet: false } })
+
+  it('sends nothing within seven calendar days of the last seintje, whatever its kind', () => {
+    expect(pickNudge({ ...f, sent: [sent('nudge-new-dog', '2026-10-06')] }, at('2026-10-12'))).toBeNull()
+    // Even when the run is a little earlier than seven full days later.
+    const late = { kind: 'nudge-new-dog', at: new Date('2026-10-06T07:59:00Z'), data: {} }
+    expect(pickNudge({ ...f, sent: [late] }, at('2026-10-13'))).not.toBeNull()
+  })
+
+  // Kinds that are no longer sent ("nudge-" and a name Rondje does not send any more) stay in old rows.
+  it('counts kinds that are no longer sent too', () => {
+    expect(pickNudge({ ...f, sent: [sent('nudge-gone', '2026-10-08')] }, at('2026-10-09'))).toBeNull()
+    expect(pickNudge({ ...f, sent: [sent('nudge-old', '2026-10-08')] }, at('2026-10-14'))).toBeNull()
+  })
+
+  it('never two within seven days, on any day of the year', () => {
+    const busy = facts({
+      joinedAt: at('2026-10-01'),
+      walks: 2,
+      steps: { about: false, dog: false, quiz: false, meet: false },
+      challenge: { city: 'Utrecht', goal: 50, walks: 50, mine: 1, done: true },
+      newDogs: Array.from({ length: 30 }, (_, i) => ({ id: `d${i}`, name: `Dog ${i}` })),
+    })
+    const log: SentNudge[] = []
+    for (let day = 0; day < 120; day++) {
+      const now = new Date(Date.UTC(2026, 9, 1 + day, 7, 30))
+      // Something done every day: only the seven days hold them back.
+      const pick = pickNudge({ ...busy, sent: log, lastActiveAt: now }, now)
+      if (pick) log.push({ kind: pick.kind, at: now, data: pick.data as SentNudge['data'] })
+    }
+    expect(log.length).toBeGreaterThan(5)
+    for (let i = 1; i < log.length; i++) expect(log[i].at.getTime() - log[i - 1].at.getTime()).toBeGreaterThanOrEqual(7 * 86_400_000)
+  })
+})
+
+describe('three in a row with nothing done', () => {
+  const dogs = Array.from({ length: 10 }, (_, i) => ({ id: `d${i}`, name: `Dog ${i}` }))
+  const f = facts({ walks: 1, newDogs: dogs, lastActiveAt: at('2026-10-01') })
+  const three = [sent('nudge-new-dog', '2026-10-02', { dogId: 'x1' }), sent('nudge-new-dog', '2026-10-09', { dogId: 'x2' }), sent('nudge-step', '2026-10-16')]
+
+  it('stop on the day the fourth would be due, not the morning after the third', () => {
+    expect(ignoredInARow(three, at('2026-10-01'), at('2026-10-17'))).toBe(false)
+    expect(ignoredInARow(three, at('2026-10-01'), at('2026-10-22'))).toBe(false)
+    expect(ignoredInARow(three, at('2026-10-01'), at('2026-10-23'))).toBe(true)
+    expect(pickNudge({ ...f, sent: three }, at('2026-10-23'))).toBeNull()
+    expect(pickNudge({ ...f, sent: three }, at('2026-12-23'))).toBeNull()
+  })
+
+  it('go on when something was done after one of them', () => {
+    expect(ignoredInARow(three, at('2026-10-03'), at('2026-10-23'))).toBe(false)
+    expect(pickNudge({ ...f, sent: three, lastActiveAt: at('2026-10-03') }, at('2026-10-23'))?.kind).toBe('nudge-new-dog')
+    // Two ignored is not three.
+    expect(ignoredInARow(three.slice(1), at('2026-10-01'), at('2026-10-23'))).toBe(false)
+  })
+
+  it('only count seintjes a week apart: three closer together (as the old rules sent them) switch nobody off', () => {
+    const close = [sent('nudge-step', '2026-10-02'), sent('nudge-step', '2026-10-05'), sent('nudge-challenge', '2026-10-08')]
+    expect(ignoredInARow(close, at('2026-10-01'), at('2026-10-15'))).toBe(false)
+    expect(pickNudge({ ...f, sent: close }, at('2026-10-15'))?.kind).toBe('nudge-new-dog')
+  })
+
+  it('only count kinds sent today: old kinds and other notifications never switch anyone off', () => {
+    const old = [sent('nudge-old', '2026-10-02'), sent('nudge-gone', '2026-10-09'), sent('request-accepted', '2026-10-12'), sent('challenge-done', '2026-10-16')]
+    expect(ignoredInARow(old, at('2026-10-01'), at('2026-10-30'))).toBe(false)
+    // But they still count for the seven days between two seintjes.
+    expect(pickNudge({ ...f, sent: [sent('nudge-old', '2026-10-20')] }, at('2026-10-23'))).toBeNull()
+  })
+})
+
+describe('kinds', () => {
+  it('knows the seintjes, also the ones no longer sent', () => {
+    expect(isSeintje('nudge-step')).toBe(true)
+    expect(isSeintje('challenge-done')).toBe(true)
+    expect(isSeintje('nudge-old')).toBe(true)
+    expect(isSeintje('request-reminder')).toBe(false)
+    expect(isRetiredNudge('nudge-old')).toBe(true)
+    expect(isRetiredNudge('nudge-gone')).toBe(true)
+    expect(isRetiredNudge('nudge-owner')).toBe(false)
+    expect(isRetiredNudge('walk-ended')).toBe(false)
   })
 })
 
@@ -94,51 +165,10 @@ describe('the town challenge', () => {
   })
 })
 
-describe('the weekly goal', () => {
-  const f = facts({ weeklyGoal: 2, walks: 5, walksThisWeek: 0, plannedThisWeek: 1 })
-
-  it('reminds on Thursday what is left, counting planned walks', () => {
-    expect(pickNudge(f, at('2026-10-08'))).toEqual({ kind: 'nudge-week', data: { left: 1, goal: 2 } })
-    expect(pickNudge(f, at('2026-10-07'))).toBeNull()
-  })
-
-  it('stays quiet when the goal is reached, planned or out of reach', () => {
-    expect(pickNudge({ ...f, walksThisWeek: 1 }, at('2026-10-08'))).toBeNull()
-    expect(pickNudge({ ...f, weeklyGoal: 7, plannedThisWeek: 0 }, at('2026-10-09'))).toBeNull()
-  })
-
-  it('tries Friday when Thursday was taken, once a week', () => {
-    expect(pickNudge({ ...f, sent: [sent('nudge-step', '2026-10-06')] }, at('2026-10-09'))?.kind).toBe('nudge-week')
-    expect(pickNudge({ ...f, sent: [sent('nudge-week', '2026-10-05')] }, at('2026-10-09'))).toBeNull()
-  })
-})
-
-describe('coming back', () => {
-  const bello = { id: 'bello', name: 'Bello' }
-  const f = facts({ walks: 3, lastWalkAt: at('2026-10-01'), favouriteDog: bello })
-
-  it('invites after two quiet weeks, with the dog they know', () => {
-    expect(pickNudge(f, at('2026-10-14'))).toBeNull()
-    expect(pickNudge(f, at('2026-10-15'))).toEqual({ kind: 'nudge-back', data: { variant: 'dog', dogId: 'bello', dogName: 'Bello' } })
-    expect(pickNudge({ ...f, favouriteDog: null }, at('2026-10-15'))?.data).toEqual({ variant: 'any' })
-  })
-
-  it('not when something is planned, and twice at most until the next walk', () => {
-    expect(pickNudge({ ...f, planned: true }, at('2026-10-15'))).toBeNull()
-    const once = [sent('nudge-back', '2026-10-15')]
-    expect(pickNudge({ ...f, sent: once }, at('2026-10-20'))).toBeNull()
-    expect(pickNudge({ ...f, sent: once }, at('2026-10-29'))?.kind).toBe('nudge-back')
-    const twice = [...once, sent('nudge-back', '2026-10-29')]
-    expect(pickNudge({ ...f, sent: twice }, at('2026-12-01'))).toBeNull()
-    // A new walk starts the count again.
-    expect(pickNudge({ ...f, sent: twice, lastWalkAt: at('2026-11-10') }, at('2026-12-01'))?.kind).toBe('nudge-back')
-  })
-})
-
 describe('a new dog nearby', () => {
   const bello = { id: 'bello', name: 'Bello' }
   const max = { id: 'max', name: 'Max' }
-  const f = facts({ walks: 2, lastWalkAt: at('2026-10-01'), newDogs: [bello, max] })
+  const f = facts({ walks: 2, newDogs: [bello, max] })
 
   it('tells walkers about the nearest new dog, each dog once', () => {
     expect(pickNudge(f, at('2026-10-06'))).toEqual({ kind: 'nudge-new-dog', data: { dogId: 'bello', dogName: 'Bello' } })
@@ -151,12 +181,6 @@ describe('a new dog nearby', () => {
     const told = [sent('nudge-new-dog', '2026-10-06', { dogId: 'bello' })]
     expect(pickNudge({ ...f, sent: told }, at('2026-10-12'))).toBeNull()
     expect(pickNudge({ ...f, roles: owner }, at('2026-10-06'))).toBeNull()
-  })
-
-  it('comes after the weekly goal and before the invitation to come back', () => {
-    const week = { ...f, weeklyGoal: 2 }
-    expect(pickNudge(week, at('2026-10-08'))?.kind).toBe('nudge-week')
-    expect(pickNudge({ ...f, lastWalkAt: at('2026-09-01') }, at('2026-10-06'))?.kind).toBe('nudge-new-dog')
   })
 })
 
@@ -202,21 +226,20 @@ describe('which new dogs are near', () => {
 })
 
 describe('owners', () => {
-  const quiet = { id: 'bello', name: 'Bello', since: at('2026-10-01'), photos: 0, slots: 0 }
+  const quiet = { id: 'bello', name: 'Bello', since: at('2026-10-01'), walkersNear: 1 }
 
-  it('gives a practical tip when a dog had no request for a week, twice at most', () => {
+  it('hear once per dog that walkers are still few, a week after it came online without a request', () => {
     const f = facts({ roles: owner, quietDog: quiet })
     expect(pickNudge(f, at('2026-10-07'))).toBeNull()
-    expect(pickNudge(f, at('2026-10-08'))).toEqual({ kind: 'nudge-owner', data: { tip: 'photo', dogId: 'bello', dogName: 'Bello' } })
-    const once = [sent('nudge-owner', '2026-10-08', { tip: 'photo' })]
-    expect(pickNudge({ ...f, sent: once }, at('2026-10-15'))).toBeNull()
-    expect(pickNudge({ ...f, sent: once }, at('2026-10-18'))?.data).toMatchObject({ tip: 'slots' })
-    const twice = [...once, sent('nudge-owner', '2026-10-18', { tip: 'slots' })]
-    expect(pickNudge({ ...f, sent: twice }, at('2026-11-30'))).toBeNull()
+    expect(pickNudge(f, at('2026-10-08'))).toEqual({ kind: 'nudge-owner', data: { dogId: 'bello', dogName: 'Bello' } })
+    const once = [sent('nudge-owner', '2026-10-08', { dogId: 'bello' })]
+    expect(pickNudge({ ...f, sent: once, lastActiveAt: at('2026-10-09') }, at('2026-11-30'))).toBeNull()
+    // Another quiet dog is another message, a week later at the soonest.
+    const luna = { ...quiet, id: 'luna', name: 'Luna' }
+    expect(pickNudge({ ...f, quietDog: luna, sent: once, lastActiveAt: at('2026-10-09') }, at('2026-10-15'))?.data).toEqual({ dogId: 'luna', dogName: 'Luna' })
   })
 
-  it('suggests sharing when the profile is already complete', () => {
-    const f = facts({ roles: owner, quietDog: { ...quiet, photos: 3, slots: 2 } })
-    expect(pickNudge(f, at('2026-10-08'))?.data).toMatchObject({ tip: 'share' })
+  it('hear nothing when enough walkers live nearby: then it would not be true', () => {
+    expect(pickNudge(facts({ roles: owner, quietDog: { ...quiet, walkersNear: 3 } }), at('2026-10-08'))).toBeNull()
   })
 })

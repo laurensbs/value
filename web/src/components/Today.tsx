@@ -7,11 +7,11 @@ import { MASCOT } from '@/lib/avatar'
 import { countryInfo, isCountry } from '@/lib/countries'
 import { formatDistance } from '@/lib/geo'
 import { shownCount } from '@/lib/nearby'
-import { BACK_AFTER_DAYS, isNewDog } from '@/lib/nudges'
-import { bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
+import { isNewDog } from '@/lib/nudges'
+import { localParts, STEP_POINTS, weekOf } from '@/lib/progress'
 import { zonedToUtc } from '@/lib/time'
 import { challengesFor } from '@/server/challenges'
-import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
+import { progressFor, rolesOf } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
 import { webPushKey } from '@/server/push'
 import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, walkersNear, type RequestRow } from '@/server/queries'
@@ -65,7 +65,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const near = p.lat != null && p.lng != null ? { lat: p.lat, lng: p.lng } : country ? countryInfo(country).center : null
 
   // The first screen after opening the app: everything is asked at the same time.
-  const [t, tp, td, tpa, format, locale, progress, challenges, outgoing, incoming, dogs, nearby, impact, friends, dogStats, walkers] = await Promise.all([
+  const [t, tp, td, tpa, format, locale, progress, challenges, outgoing, incoming, dogs, nearby, impact, dogStats, walkers] = await Promise.all([
     getTranslations('today'),
     getTranslations('progress'),
     getTranslations('dogs'),
@@ -79,7 +79,6 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     owner ? myDogs(viewer) : Promise.resolve([]),
     walker ? listDogs({ country, near }, 8) : Promise.resolve([]),
     impactTotals(),
-    walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
     owner ? dogWeekStats(viewer.userId, now) : new Map<string, { week: number; walkers: number }>(),
     owner ? walkersNear(p, viewer.userId) : 0,
   ])
@@ -92,11 +91,6 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const nearbyDogs = nearby.filter((item) => item.dog.ownerId !== viewer.userId).slice(0, 6)
   const next = nextAppointment([...outgoing, ...incoming], now)
   const pending = incoming.filter((r) => r.request.status === 'pending').length
-  // Back after a quiet while, with nothing planned: an invitation to walk a dog they already know.
-  const lastWalk = Math.max(0, ...friends.map((f) => f.lastAt?.getTime() ?? 0))
-  const planned = outgoing.some((r) => (r.request.status === 'pending' || r.request.status === 'accepted') && r.request.startsAt > now)
-  const backFriend =
-    lastWalk && now.getTime() - lastWalk >= BACK_AFTER_DAYS * 86_400_000 && !planned ? (friends.find((f) => f.dog.status === 'active') ?? null) : null
 
   const hour = localParts(now).hour
   const stepsLeft = json.steps.filter((step) => !step.done)
@@ -155,22 +149,6 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
         </Link>
       ) : null}
 
-      {backFriend ? (
-        <section className="card back-card" aria-labelledby="back-title">
-          <DogPortrait dog={backFriend.dog} size={72} decorative />
-          <div className="stack-s">
-            <h2 id="back-title" className="small-title">
-              {t('backTitle')}
-            </h2>
-            <p>{t('backText', { dog: backFriend.dog.name, bond: tp(`friends.bond.${bondFor(backFriend.walks)}`) })}</p>
-            <Link href={`/dogs/${backFriend.dog.id}#plan`} className="button primary small">
-              {t('backPlan', { dog: backFriend.dog.name })}
-              <Icon name="arrow" size={16} />
-            </Link>
-          </div>
-        </section>
-      ) : null}
-
       {pending > 0 ? (
         <Link href="/requests" className="notice warn pending-card">
           <Icon name="bell" size={20} />
@@ -226,7 +204,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       <div className="today-grid">
         {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
-        <ChallengeCard challenges={challenges} now={now} />
+        <ChallengeCard challenges={challenges} />
       </div>
 
       {owner ? (
