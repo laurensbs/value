@@ -6,13 +6,16 @@ const INSTAGRAM = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleW
 
 test.skip(({ isMobile }) => !isMobile, 'Putting Rondje on the home screen is about phones')
 
-test('iPhone: the steps to the home screen on Today and in the profile, and Safari first from another app', async ({ browser }) => {
+test('iPhone: the steps to the home screen at Rondjes and in the profile, and Safari first from another app', async ({ browser }) => {
   const fleur = await newPerson(browser, undefined, { userAgent: IPHONE })
   // A browser there may say it can do push; only Rondje on the home screen really can.
   await fleur.context.grantPermissions(['notifications'])
   await signUp(fleur.page, { name: 'Fleur', email: `fleur-${unique()}@example.com`, intent: 'walker' })
   await onboard(fleur.page, { birthDate: '2003-05-01', city: 'Utrecht', bio: 'Ik wandel graag.', phone: '', walker: true, owner: false })
   await expect(fleur.page).toHaveURL(/\/\?welcome=1$/)
+  // Vandaag keeps to one thing; the question comes where requests and answers arrive.
+  await expect(fleur.page.getByRole('region', { name: 'Zet je Rondje op je beginscherm?' })).toHaveCount(0)
+  await fleur.page.goto('/requests')
 
   // On iPhone a heads-up only works from the home screen, so Rondje shows the three taps and asks nothing else.
   const ask = fleur.page.getByRole('region', { name: 'Zet je Rondje op je beginscherm?' })
@@ -35,7 +38,7 @@ test('iPhone: the steps to the home screen on Today and in the profile, and Safa
   const inApp = await browser.newContext({ userAgent: INSTAGRAM, permissions: ['clipboard-read', 'clipboard-write'] })
   await inApp.addCookies(await fleur.context.cookies())
   const page = await inApp.newPage()
-  await page.goto('/')
+  await page.goto('/requests')
   const inAppAsk = page.getByRole('region', { name: 'Zet je Rondje op je beginscherm?' })
   await expect(inAppAsk).toContainText('Open Rondje in Safari')
   await inAppAsk.getByRole('button', { name: 'Kopieer link' }).click()
@@ -52,6 +55,7 @@ test('Android: the push question first, then the browser installs Rondje after o
   await signUp(sam.page, { name: 'Sam', email: `sam-${unique()}@example.com`, intent: 'walker' })
   await onboard(sam.page, { birthDate: '2001-09-12', city: 'Utrecht', bio: 'Ik loop graag.', phone: '', walker: true, owner: false })
   await expect(sam.page).toHaveURL(/\/\?welcome=1$/)
+  await sam.page.goto('/requests')
 
   // The browser offers its install question; a stand-in plays its part and says yes.
   const offer = () =>
