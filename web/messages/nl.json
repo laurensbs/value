@@ -88,7 +88,7 @@
     "demo": "Demo-modus: er is nog geen database gekoppeld. Gegevens worden niet bewaard.",
     "more": "Meer over Rondje Mee",
     "about": "Over Rondje Mee",
-    "support": "Maak Rondje Mee mogelijk",
+    "support": "Help ons",
     "tip": "Tip een opvang",
     "forShelters": "Voor opvangen",
     "contact": "Contact"
@@ -1754,7 +1754,7 @@
       }
     },
     "operatorUnknown": "de makers van Rondje Mee",
-    "giveIntro": "Bijdragen gaan naar {operator}, dat {app} bouwt en onderhoudt. Elke bijdrage, klein of groot, helpt de kosten te dekken.",
+    "giveIntro": "Bijdragen gaan naar {operator}, die {app} bouwt en onderhoudt. Elke bijdrage, klein of groot, helpt de kosten te dekken.",
     "monthlyPill": "Maandelijks",
     "monthlyTitle": "Steun elke maand",
     "monthlyText": "Een kleine vaste bijdrage per maand dekt de vaste kosten, zoals hosting en kaarten. Zo blijft {app} gratis voor iedereen.",
@@ -1771,7 +1771,7 @@
       "paysTitle": "Wat je bijdrage betaalt",
       "pays": "De kosten hierboven: hosting, database, kaarten, de apps en materiaal voor opvangen. Wat overblijft, gaat naar het verder bouwen en bekendmaken van {app}.",
       "whoTitle": "Wie het ontvangt",
-      "who": "{operator}, dat {app} bouwt en onderhoudt. {app} is nog geen stichting en geen goed doel met ANBI-status. Een bijdrage is daarom niet fiscaal aftrekbaar.",
+      "who": "{operator}, die {app} bouwt en onderhoudt. {app} is nog geen stichting en geen goed doel met ANBI-status. Een bijdrage is daarom niet fiscaal aftrekbaar.",
       "whoSoon": "Dat staat hier zodra steunen kan. {app} is nog geen stichting en geen goed doel met ANBI-status.",
       "shareTitle": "Een deel geven we door"
     },

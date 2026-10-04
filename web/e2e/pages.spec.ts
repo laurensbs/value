@@ -102,7 +102,7 @@ test('support link: on the website when the recipient is named, never in the app
   const link = web.page.getByRole('link', { name: /Steun Rondje Mee via/ })
   test.skip((await link.count()) === 0, 'Needs SUPPORT_URL and OPERATOR_NAME on the server (see playwright.config.ts)')
   await expect(link).toHaveAttribute('href', /patreon\.com/)
-  await expect(web.page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje Mee mogelijk' })).toBeVisible()
+  await expect(web.page.getByRole('contentinfo').getByRole('link', { name: 'Help ons' })).toBeVisible()
 
   // The iOS and Android apps add "RondjeApp" to the user agent: no money anywhere.
   const app = await browser.newContext({ userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp' })
@@ -111,7 +111,7 @@ test('support link: on the website when the recipient is named, never in the app
   await expect(page.getByRole('heading', { name: 'Maak Rondje Mee mogelijk', level: 1 })).toBeVisible()
   await expect(page.getByRole('link', { name: /Steun Rondje Mee via/ })).toHaveCount(0)
   await expect(page.getByText(/Samen ongeveer/)).toHaveCount(0)
-  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje Mee mogelijk' })).toHaveCount(0)
+  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Help ons' })).toHaveCount(0)
   await page.goto('/')
   await expect(page.getByRole('link', { name: /Hoe we gratis blijven/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Over Rondje Mee/ }).first()).toBeVisible()
