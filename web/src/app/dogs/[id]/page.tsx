@@ -10,6 +10,7 @@ import { DogShare } from '@/components/DogShare'
 import { EnergyDots } from '@/components/EnergyDots'
 import { GroupWalkButton } from '@/components/GroupWalkButton'
 import { Icon } from '@/components/Icon'
+import { PlanBar } from '@/components/PlanBar'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
 import { isNewDog } from '@/lib/nudges'
@@ -90,6 +91,19 @@ export default async function DogPage({
   const defaultDate = moments[0]?.date ?? toZonedParts(fromNow(24 * 3600_000)).date
   const defaultTime = moments[0]?.time ?? '10:00'
   const plan = encodeURIComponent(`/dogs/${dog.id}#plan`)
+  // On a phone, the one main action stays at hand until the plan itself is in view: the quiz first,
+  // an account first, or straight to the plan. Not for your own dog, an example dog, a shelter dog
+  // (group walks), or when you already asked.
+  const planBar =
+    isMine || dog.isDemo || host.kind !== 'owner' || openRequest
+      ? null
+      : !viewer
+        ? { href: `/signup?intent=walker&next=${plan}`, label: t('request.signupFirst', { name: dog.name }) }
+        : meetReason === 'needs-quiz'
+          ? { href: `/profile/quiz?next=${plan}`, label: t('request.quizFirst') }
+          : meetReason === null || soloReason === null
+            ? { href: '#plan', label: t('request.title') }
+            : null
 
   return (
     <div className="dog-page">
@@ -203,7 +217,7 @@ export default async function DogPage({
 
         <section className="stack-s">
           <h2>{t('dog.facts')}</h2>
-          <dl className="facts">
+          <dl className="facts one-card">
             <div>
               <dt>{t('dog.walk')}</dt>
               <dd>{t('common.minutes', { n: dog.walkMinutes })}</dd>
@@ -368,6 +382,7 @@ export default async function DogPage({
           <ReportButton dogId={dog.id} subjectUserId={dog.ownerId} orgId={dog.orgId} />
         ) : null}
       </div>
+      {planBar ? <PlanBar href={planBar.href} label={planBar.label} /> : null}
     </div>
   )
 }
