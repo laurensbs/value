@@ -1,13 +1,20 @@
-import { Bone, BoneCard, BoneHead, LoadingPage } from '@/components/Loading'
+import { Bone, BoneHead, LoadingPage } from '@/components/Loading'
 
-/** Home (Today for members): a greeting, the next walk, the week and a tip. */
+/** Home (Today for members): a greeting, the one big card with its button, then the dogs. */
 export default function Loading() {
   return (
     <LoadingPage narrow>
       <BoneHead />
-      <Bone h="7.5rem" className="block" />
-      <BoneCard lines={2} />
-      <BoneCard lines={3} />
+      <div className="bone-card stack">
+        <Bone w="40%" h="1.2rem" />
+        <Bone h="1.6rem" />
+        <Bone w="70%" h="1.6rem" />
+        <Bone h="56px" round />
+      </div>
+      <div className="row">
+        <Bone w="132px" h="132px" />
+        <Bone w="132px" h="132px" />
+      </div>
     </LoadingPage>
   )
 }

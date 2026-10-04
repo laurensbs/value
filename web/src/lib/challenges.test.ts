@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { challengesFrom, goalFor, monthBounds, type ChallengeWalk } from './challenges'
+import { challengeView, challengesFrom, goalFor, monthBounds, type ChallengeWalk } from './challenges'
 
 const walk = (city: string, at: string, walkerId = 'w1', dogId = 'd1', distanceM = 1500): ChallengeWalk => ({
   city,
@@ -48,5 +48,12 @@ describe('monthly challenges', () => {
 
   it('skip the town when the profile has none', () => {
     expect(challengesFrom([], { userId: 'x', city: '  ' }, new Date()).city).toBeNull()
+  })
+
+  it('show no numbers before the first walk, and totals only with five walkers and five dogs', () => {
+    expect(challengeView({ walks: 0, walkers: 0, dogs: 0 })).toEqual({ empty: true, totals: false })
+    expect(challengeView({ walks: 3, walkers: 2, dogs: 3 })).toEqual({ empty: false, totals: false })
+    expect(challengeView({ walks: 12, walkers: 5, dogs: 4 })).toEqual({ empty: false, totals: false })
+    expect(challengeView({ walks: 12, walkers: 5, dogs: 5 })).toEqual({ empty: false, totals: true })
   })
 })

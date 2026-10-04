@@ -1,0 +1,584 @@
+{
+  "about": "What 'Eén ding nu' on Vandaag shows, per situation. Read by src/lib/next-step.test.ts (Vitest); meant for the iPhone tests too (RondjeTests/NextStepTests.swift can mirror it). Times are minutes from 'now' (Europe/Amsterdam). 'expect' is the first step; 'kinds', when given, is the whole list in order. Appointments default to: kind meet, meetVia walk, status accepted, 45 minutes, not weekly, walker w1 'Sam', no walk, no feedback. Dogs with isDemo are examples and never become a step.",
+  "now": "2026-10-05T10:00:00+02:00",
+  "scenarios": [
+    {
+      "name": "new walker without the quiz, a real dog nearby",
+      "facts": {
+        "walker": true,
+        "quizPassed": false,
+        "nearby": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "isDemo": false,
+            "distanceM": 400,
+            "city": "Utrecht"
+          }
+        ]
+      },
+      "expect": "quiz",
+      "kinds": [
+        "quiz",
+        "nearby",
+        "done"
+      ]
+    },
+    {
+      "name": "new walker without the quiz, only example dogs: the quiz, then an honest empty town",
+      "facts": {
+        "walker": true,
+        "quizPassed": false,
+        "nearby": [
+          {
+            "id": "demo-saar",
+            "name": "Saar",
+            "isDemo": true,
+            "distanceM": 900,
+            "city": "Utrecht"
+          }
+        ]
+      },
+      "expect": "quiz",
+      "kinds": [
+        "quiz",
+        "emptyTown"
+      ]
+    },
+    {
+      "name": "walker with the quiz, only example dogs: we start here",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "nearby": [
+          {
+            "id": "demo-saar",
+            "name": "Saar",
+            "isDemo": true,
+            "distanceM": 900,
+            "city": "Utrecht"
+          }
+        ]
+      },
+      "expect": "emptyTown",
+      "kinds": [
+        "emptyTown"
+      ]
+    },
+    {
+      "name": "walker with the quiz, real dogs nearby: the nearest one",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "nearby": [
+          {
+            "id": "demo-saar",
+            "name": "Saar",
+            "isDemo": true,
+            "distanceM": 100,
+            "city": "Utrecht"
+          },
+          {
+            "id": "bello",
+            "name": "Bello",
+            "isDemo": false,
+            "distanceM": 400,
+            "city": "Utrecht"
+          },
+          {
+            "id": "pip",
+            "name": "Pip",
+            "isDemo": false,
+            "distanceM": 900,
+            "city": "Utrecht"
+          }
+        ]
+      },
+      "expect": "nearby",
+      "dog": "Bello",
+      "kinds": [
+        "nearby",
+        "done"
+      ]
+    },
+    {
+      "name": "walker waiting for an answer",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "status": "pending",
+            "startsInMin": 1440
+          }
+        ]
+      },
+      "expect": "waiting",
+      "kinds": [
+        "waiting",
+        "emptyTown"
+      ]
+    },
+    {
+      "name": "walker: the walk can start now",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "kind": "solo",
+            "startsInMin": 10
+          }
+        ]
+      },
+      "expect": "start"
+    },
+    {
+      "name": "walker: a call never starts a walk, it is the next appointment",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "meetVia": "phone",
+            "startsInMin": 10
+          }
+        ]
+      },
+      "expect": "upcoming"
+    },
+    {
+      "name": "walker out with a dog right now",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "kind": "solo",
+            "startsInMin": -20,
+            "walkId": "w9",
+            "walkStatus": "active"
+          }
+        ]
+      },
+      "expect": "live"
+    },
+    {
+      "name": "walker after a walk without feedback",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "kind": "solo",
+            "status": "completed",
+            "startsInMin": -180,
+            "walkId": "w9",
+            "walkStatus": "ended"
+          }
+        ]
+      },
+      "expect": "feedback",
+      "kinds": [
+        "feedback",
+        "rebook",
+        "emptyTown"
+      ]
+    },
+    {
+      "name": "walker after a walk with feedback: another walk with the same dog",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "kind": "solo",
+            "status": "completed",
+            "startsInMin": -180,
+            "walkId": "w9",
+            "walkStatus": "ended",
+            "feedbackGiven": true
+          }
+        ]
+      },
+      "expect": "rebook",
+      "dog": "Bello"
+    },
+    {
+      "name": "walker who walked a little before the planned time: still asked how it went, then another walk",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "startsInMin": 10,
+            "walkId": "w9",
+            "walkStatus": "ended"
+          }
+        ]
+      },
+      "expect": "feedback",
+      "kinds": [
+        "feedback",
+        "rebook",
+        "emptyTown"
+      ]
+    },
+    {
+      "name": "walker with a weekly walk: no rebook suggestion",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "kind": "solo",
+            "weekly": true,
+            "status": "completed",
+            "startsInMin": -180,
+            "walkId": "w9",
+            "walkStatus": "ended",
+            "feedbackGiven": true
+          }
+        ]
+      },
+      "expect": "emptyTown"
+    },
+    {
+      "name": "walker with a meeting in two days",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "startsInMin": 2880
+          }
+        ]
+      },
+      "expect": "upcoming"
+    },
+    {
+      "name": "an appointment with an example dog never counts",
+      "facts": {
+        "walker": true,
+        "quizPassed": true,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "demo-saar",
+              "name": "Saar",
+              "isDemo": true
+            },
+            "kind": "solo",
+            "startsInMin": 10
+          }
+        ]
+      },
+      "expect": "emptyTown",
+      "kinds": [
+        "emptyTown"
+      ]
+    },
+    {
+      "name": "owner without a dog on Rondje",
+      "facts": {
+        "owner": true
+      },
+      "expect": "addDog",
+      "kinds": [
+        "addDog",
+        "done"
+      ]
+    },
+    {
+      "name": "owner: the dog is online, nobody asked yet",
+      "facts": {
+        "owner": true,
+        "ownDogs": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "status": "active"
+          }
+        ]
+      },
+      "expect": "share",
+      "dog": "Bello",
+      "kinds": [
+        "share",
+        "ownerWaiting"
+      ]
+    },
+    {
+      "name": "owner: an example dog is no dog of your own",
+      "facts": {
+        "owner": true,
+        "ownDogs": [
+          {
+            "id": "demo-saar",
+            "name": "Saar",
+            "status": "active",
+            "isDemo": true
+          }
+        ]
+      },
+      "expect": "addDog"
+    },
+    {
+      "name": "owner: someone asks to meet the dog",
+      "facts": {
+        "owner": true,
+        "ownDogs": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "status": "active"
+          }
+        ],
+        "incoming": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "status": "pending",
+            "startsInMin": 1440
+          }
+        ]
+      },
+      "expect": "decide",
+      "kinds": [
+        "decide",
+        "ownerWaiting"
+      ]
+    },
+    {
+      "name": "owner: after meeting in person, how was it",
+      "facts": {
+        "owner": true,
+        "ownDogs": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "status": "active"
+          }
+        ],
+        "incoming": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "startsInMin": -1440
+          }
+        ]
+      },
+      "expect": "debrief",
+      "id": "debrief.bello.w1"
+    },
+    {
+      "name": "owner: trust already recorded, no talk-over",
+      "facts": {
+        "owner": true,
+        "ownDogs": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "status": "active"
+          }
+        ],
+        "incoming": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "status": "completed",
+            "startsInMin": -1440
+          }
+        ],
+        "trust": {
+          "bello:w1": {
+            "idSeen": true,
+            "soloAllowed": false
+          }
+        }
+      },
+      "expect": "ownerWaiting"
+    },
+    {
+      "name": "owner: a first call is no meeting in person, no talk-over",
+      "facts": {
+        "owner": true,
+        "ownDogs": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "status": "active"
+          }
+        ],
+        "incoming": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "meetVia": "phone",
+            "status": "completed",
+            "startsInMin": -1440
+          }
+        ]
+      },
+      "expect": "ownerWaiting"
+    },
+    {
+      "name": "owner: the dog is out with a walker",
+      "facts": {
+        "owner": true,
+        "ownDogs": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "status": "active"
+          }
+        ],
+        "incoming": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "kind": "solo",
+            "startsInMin": -15,
+            "walkId": "w9",
+            "walkStatus": "active"
+          }
+        ]
+      },
+      "expect": "liveOwn"
+    },
+    {
+      "name": "walker and owner: a request for the dog comes before the quiz",
+      "facts": {
+        "walker": true,
+        "owner": true,
+        "quizPassed": false,
+        "ownDogs": [
+          {
+            "id": "bello",
+            "name": "Bello",
+            "status": "active"
+          }
+        ],
+        "incoming": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "status": "pending",
+            "startsInMin": 1440
+          }
+        ]
+      },
+      "expect": "decide"
+    },
+    {
+      "name": "shelter staff with nothing to do",
+      "facts": {},
+      "expect": "done",
+      "kinds": [
+        "done"
+      ]
+    },
+    {
+      "name": "at night a suggestion waits until the morning",
+      "now": "2026-10-05T23:30:00+02:00",
+      "facts": {
+        "walker": true,
+        "quizPassed": false
+      },
+      "expect": "night",
+      "kinds": [
+        "night"
+      ]
+    },
+    {
+      "name": "at night a walk that is going on still shows",
+      "now": "2026-10-05T23:30:00+02:00",
+      "facts": {
+        "walker": true,
+        "quizPassed": false,
+        "outgoing": [
+          {
+            "id": "r1",
+            "dog": {
+              "id": "bello",
+              "name": "Bello"
+            },
+            "kind": "solo",
+            "startsInMin": -20,
+            "walkId": "w9",
+            "walkStatus": "active"
+          }
+        ]
+      },
+      "expect": "live",
+      "kinds": [
+        "live",
+        "night"
+      ]
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import { bondFor, KIND_KEYS, LEVEL_KEYS, LEVELS, POINTS, type PointKind } from '
 import { challengesFor } from '@/server/challenges'
 import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
+import { impactTotals } from '@/server/queries'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -27,12 +28,14 @@ export default async function ProgressPage() {
   const viewer = await requireOnboarded('/progress')
   const now = new Date()
   const { walker, owner } = rolesOf(viewer.profile)
-  const [t, format, progress, challenges, friends] = await Promise.all([
+  const [t, tt, format, progress, challenges, friends, impact] = await Promise.all([
     getTranslations('progress'),
+    getTranslations('today'),
     getFormatter(),
     progressFor(viewer, now),
     challengesFor(viewer, now),
     walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
+    impactTotals(),
   ])
   const json = await progressJson(progress)
   const earn = [...new Set([...(walker ? WALKER_EARN : []), ...(owner ? OWNER_EARN : [])])]
@@ -71,9 +74,13 @@ export default async function ProgressPage() {
       </p>
 
       <div className="today-grid">
-        {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
+        {/* The week only counts once there is something to count: after your first walk. */}
+        {walker && progress.activeWeeks > 0 ? (
+          <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} />
+        ) : null}
         <ChallengeCard challenges={challenges} />
       </div>
+      {impact.walks > 0 ? <p className="together muted small">{tt('together', { walks: impact.walks, dogs: impact.dogs })}</p> : null}
 
       <section className="stack" aria-labelledby="badges-title">
         <div className="section-title">

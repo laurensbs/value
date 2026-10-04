@@ -557,6 +557,50 @@
   }
 }
 
+/* At most one line above the dogs: Guus with the next step and a cross for "Later". */
+.next-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 6px 10px 12px;
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--soft-shadow);
+}
+
+.next-line .dog-face {
+  flex: none;
+}
+
+.next-line p {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.next-line-link {
+  color: var(--grass);
+  font-weight: 750;
+}
+
+.next-line-close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.next-line-close:hover {
+  background: var(--sunken);
+}
+
 /* Kaart: a screen of its own. The map fills everything under the search bar (no scrolling to find it),
    on phones up to the bottom edge, under the floating tab bar, like a maps app. */
 .discover.map-mode {
