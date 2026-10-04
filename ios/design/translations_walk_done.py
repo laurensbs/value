@@ -17,7 +17,6 @@ T = {
     # Step 2: points
     "Jouw punten": ("Your points", "Tes points", "Tus puntos"),
     "+%lld punten": ("+%lld points", "+%lld points", "+%lld puntos"),
-    "Nieuw niveau: %@!": ("New level: %@!", "Nouveau niveau : %@ !", "¡Nuevo nivel: %@!"),
     "Vertel hoe het ging": ("Tell us how it went", "Dis-nous comment ça s'est passé", "Cuéntanos qué tal fue"),
     "Je punten tellen we zodra je weer verbinding hebt.": (
         "We'll count your points as soon as you're back online.",

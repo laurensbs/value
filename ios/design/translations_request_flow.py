@@ -71,10 +71,6 @@ T = {
 
     # Sent
     "Verstuurd!": ("Sent!", "Envoyé !", "¡Enviado!"),
-    "Ik laat het je weten zodra de eigenaar van %@ antwoordt.": (
-        "I'll let you know as soon as %@'s owner replies.",
-        "Je te préviens dès que le propriétaire de %@ répond.",
-        "Te aviso en cuanto responda el dueño de %@."),
     "Intussen kun je de Hondenschool doen. Vijf lessen van 2 minuten.": (
         "Meanwhile you can do the Dog School. Five 2-minute lessons.",
         "En attendant, tu peux suivre l'École des chiens. Cinq leçons de 2 minutes.",

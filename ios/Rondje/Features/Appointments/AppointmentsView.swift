@@ -134,6 +134,7 @@ struct AppointmentCard: View {
                     let status = item.isCall && item.status == "completed" ? (L("Gesprek gehad"), Palette.calm, Palette.calmSoft) : Labels.status(item.status)
                     Chip(text: status.0, tint: status.1, soft: status.2)
                         .contentTransition(.opacity)
+                        .animation(Motion.or(Motion.klein, reduce: reduceMotion), value: item.status)
                     Text(item.isMeeting ? L("Kennismaking met \(item.dog.name)") : L("Rondje met \(item.dog.name)"))
                         .font(.headline)
                     if item.isMeeting {
@@ -282,6 +283,8 @@ struct AppointmentCard: View {
             }
             .tint(Palette.grass)
             .font(.subheadline.weight(.semibold))
+            // Large bordered buttons are at least 44 points tall.
+            .controlSize(.large)
         }
     }
 
@@ -329,6 +332,7 @@ struct AppointmentCard: View {
                     Image(systemName: "xmark")
                 }
                 .buttonStyle(.bordered)
+                .controlSize(.large)
                 .tint(Palette.muted)
                 .accessibilityLabel("Annuleer")
             }

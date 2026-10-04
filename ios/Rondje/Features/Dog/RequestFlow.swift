@@ -276,9 +276,14 @@ struct RequestFlow: View {
                     promise("person.text.rectangle", L("Neem je ID mee. De eigenaar bekijkt het."))
                 }
             }
-            Button("Lees de hele gedragscode") { openURL(Brand.web("/legal/conduct")) }
-                .font(.footnote.weight(.semibold))
-                .tint(Palette.grass)
+            Button { openURL(Brand.web("/legal/conduct")) } label: {
+                Text("Lees de hele gedragscode")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Palette.grass)
+                    .frame(minHeight: 44)
+                    .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -400,17 +405,20 @@ struct RequestFlow: View {
         host.name.trimmingCharacters(in: .whitespaces).isEmpty ? L("Verstuurd!") : L("Verstuurd naar \(hostName).")
     }
 
-    /// What happens now, in three steps. Only what is true for this kind of request.
-    private var nextSteps: [String] {
+    private var nextSteps: [String] { Self.nextSteps(kind: kind, via: meetVia, hostName: hostName, dogName: dog.name) }
+
+    /// What happens now, in three steps. Only what is true for this kind of request: a solo walk
+    /// needs no meeting, and after a call you still meet in person.
+    static func nextSteps(kind: Kind, via: MeetVia, hostName: String, dogName: String) -> [String] {
         let who = hostName.prefix(1).uppercased() + hostName.dropFirst()
         let read = L("\(who) leest je bericht.")
         guard kind == .meet else {
-            return [read, L("Zegt \(hostName) ja, dan staat het rondje bij je afspraken."), L("Op de dag zelf start je het rondje bij Afspraken.")]
+            return [read, L("Zegt \(hostName) ja, dan staat het rondje vast."), L("Op de dag zelf start je het rondje bij Afspraken.")]
         }
-        let together = switch meetVia {
+        let together = switch via {
         case .walk: L("De eerste keer lopen jullie samen.")
-        case .home: L("De eerste keer kom je langs bij \(hostName) en \(dog.name).")
-        case .phone, .video: L("Eerst bellen jullie. Daarna ontmoet je \(dog.name) in het echt.")
+        case .home: L("De eerste keer kom je langs bij \(hostName) en \(dogName).")
+        case .phone, .video: L("Eerst bellen jullie. Daarna ontmoet je \(dogName) in het echt.")
         }
         return [read, L("Jullie spreken een moment af."), together]
     }
@@ -585,10 +593,15 @@ struct RequestFlow: View {
     }
 
     private func edit(_ label: String, action: @escaping () -> Void) -> some View {
-        Button("Aanpassen", action: action)
-            .font(.subheadline.weight(.semibold))
-            .tint(Palette.grass)
-            .accessibilityLabel(label)
+        Button(action: action) {
+            Text("Aanpassen")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Palette.grass)
+                .frame(minWidth: 44, minHeight: 44)
+                .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
     }
 
     // MARK: Actions
