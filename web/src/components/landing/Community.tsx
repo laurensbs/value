@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { COUNTRIES } from '@/lib/countries'
-import { daysLeft } from '@/server/progress-json'
 import { IMPACT_MIN_WALKS, impactTotals } from '@/server/queries'
 import { homeChallenge } from './challenge'
 import { Flag } from './Flag'
@@ -28,7 +27,6 @@ export async function Community() {
             <Icon name="users" size={20} />
             {t('landing.community.eyebrow')}
           </span>
-          <span className="muted small">{t('challenges.daysLeft', { n: daysLeft(month) })}</span>
         </div>
         <h2 id="lp-community-title" className="lp-challenge-title">
           {title}

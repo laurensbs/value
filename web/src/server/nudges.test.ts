@@ -10,9 +10,9 @@ const db = drizzle({ client, schema })
 
 vi.mock('server-only', () => ({}))
 vi.mock('@/db', () => ({ getDb: async () => db }))
-const pushNow = vi.fn(async (..._args: unknown[]) => {})
+const pushNow = vi.fn<(...args: unknown[]) => Promise<void>>(async () => {})
 vi.mock('./push', () => ({ canPush: () => true, pushNow }))
-const sendEmail = vi.fn(async (_email: { to: string }) => true)
+const sendEmail = vi.fn<(email: { to: string }) => Promise<boolean>>(async () => true)
 vi.mock('./email', () => ({
   emailEnabled: () => true,
   toLocale: (v: string | null) => v ?? 'nl',

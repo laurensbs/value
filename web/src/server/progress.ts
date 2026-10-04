@@ -5,6 +5,7 @@ import * as s from '@/db/schema'
 import {
   ABOUT_MIN_LENGTH,
   activeWeeks,
+  BADGES,
   badgesFor,
   earnedTiers,
   firstSteps,
@@ -116,7 +117,11 @@ export async function progressFor(viewer: OnboardedViewer, now = new Date()): Pr
       .from(s.pointEvent)
       .where(eq(s.pointEvent.userId, userId))
       .orderBy(desc(s.pointEvent.at)),
-    db.select().from(s.award).where(eq(s.award.userId, userId)),
+    // Only badges that still exist: earned tiers of a badge that was taken out stay stored, unseen.
+    db
+      .select()
+      .from(s.award)
+      .where(and(eq(s.award.userId, userId), inArray(s.award.key, BADGES.map((b) => b.key)))),
     db.execute<{ requested: boolean; has_dog: boolean; dog_met: boolean }>(sql`
       select
         exists (select 1 from walk_request where walker_id = ${userId}) as requested,

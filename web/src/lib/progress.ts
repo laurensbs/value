@@ -206,13 +206,18 @@ interface BadgeDef {
   for: 'walker' | 'owner' | 'all'
 }
 
+/**
+ * Not here on purpose (onderzoek "Duolingo-achtig, zonder druk" §4): a badge for walks after 20:00
+ * (it rewards walking in the dark), for more different walkers with your dog (it rewards strangers
+ * over a steady pair) and for inviting people (it rewards recruiting). Tiers people earned of those
+ * stay in the award table, but are no longer shown.
+ */
 export const BADGES: readonly BadgeDef[] = [
   { key: 'walks', stat: 'walks', tiers: [1, 10, 25, 50, 100], icon: 'paw', for: 'walker' },
   // In line with the friendship labels below: good friends at 5 walks, best friends at 10.
   { key: 'buddy', stat: 'buddy', tiers: [5, 10, 25], icon: 'heart', for: 'walker' },
   { key: 'pack', stat: 'dogs', tiers: [3, 5, 10], icon: 'users', for: 'walker' },
   { key: 'early', stat: 'early', tiers: [1, 10], icon: 'sun', for: 'walker' },
-  { key: 'evening', stat: 'evening', tiers: [1, 10], icon: 'moon', for: 'walker' },
   { key: 'weekend', stat: 'weekend', tiers: [5, 25], icon: 'calendar', for: 'walker' },
   { key: 'seasons', stat: 'seasons', tiers: [4], icon: 'leaf', for: 'walker' },
   { key: 'photos', stat: 'photos', tiers: [5, 25], icon: 'camera', for: 'walker' },
@@ -220,8 +225,6 @@ export const BADGES: readonly BadgeDef[] = [
   { key: 'shelter', stat: 'groupWalks', tiers: [1, 5, 10], icon: 'building', for: 'walker' },
   { key: 'quiz', stat: 'quiz', tiers: [1], icon: 'shield', for: 'walker' },
   { key: 'host', stat: 'dogWalks', tiers: [1, 10, 50], icon: 'home', for: 'owner' },
-  { key: 'friends', stat: 'dogFriends', tiers: [2, 5], icon: 'users', for: 'owner' },
-  { key: 'invite', stat: 'invites', tiers: [1, 3, 10], icon: 'share', for: 'all' },
 ]
 
 export interface BadgeState {

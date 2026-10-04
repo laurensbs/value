@@ -13,12 +13,10 @@ export async function ChallengeCard({ challenges, now = new Date() }: { challeng
 
   return (
     <section className={`card challenge-card ${c.season}`} aria-labelledby="challenge-title" id="challenge">
-      <div className="spread">
-        <p className="eyebrow">
-          <Icon name={SEASON_ICON[c.season]} size={14} /> {t('title')}
-        </p>
-        <span className="pill">{t('daysLeft', { n: c.daysLeft })}</span>
-      </div>
+      {/* No countdown ("Nog # dagen"): the month's goal is shared, never a deadline. */}
+      <p className="eyebrow">
+        <Icon name={SEASON_ICON[c.season]} size={14} /> {t('title')}
+      </p>
       <h2 id="challenge-title">{main.title}</h2>
       <div className="challenge-bar" role="progressbar" aria-labelledby="challenge-title" aria-valuemin={0} aria-valuemax={main.goal} aria-valuenow={Math.min(main.walks, main.goal)} aria-valuetext={main.progressText}>
         <span style={{ width: `${Math.min(100, (main.walks / main.goal) * 100)}%` }} />

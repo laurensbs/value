@@ -65,7 +65,9 @@ describe('progress', () => {
     expect(p.weeklyGoal).toBe(2)
     expect(p.byWalk.w1).toBe(40)
     const earned = p.badges.filter((b) => b.tier > 0).map((b) => b.key)
-    expect(earned).toEqual(expect.arrayContaining(['walks', 'early', 'quiz', 'invite']))
+    expect(earned).toEqual(expect.arrayContaining(['walks', 'early', 'quiz']))
+    // Tom joined through Fleur's link: points, but no recruiting badge.
+    expect(earned).not.toContain('invite')
     expect(p.newAwards).toContainEqual({ key: 'walks', tier: 1 })
     expect(p.steps.every((s) => s.done)).toBe(true)
     expect(p.recent.find((r) => r.kind === 'walk')).toMatchObject({ points: 25, dogName: 'Bello' })
@@ -76,6 +78,16 @@ describe('progress', () => {
     await syncPoints('fleur')
     const p = await progressFor(await viewer('fleur'))
     expect(p.points).toBe(90)
+  })
+
+  it('keeps tiers of a badge that was taken out stored, but never shows or celebrates them', async () => {
+    await client.exec(`insert into award (user_id, key, tier, earned_at) values ('fleur', 'evening', 1, '2026-10-02 18:00')`)
+    const p = await progressFor(await viewer('fleur'))
+    expect(p.badges.some((b) => b.key === 'evening')).toBe(false)
+    expect(p.newAwards.some((a) => a.key === 'evening')).toBe(false)
+    expect(Object.keys(p.earnedAt).some((k) => k.startsWith('evening'))).toBe(false)
+    const stored = await client.query(`select 1 from award where user_id = 'fleur' and key = 'evening'`)
+    expect(stored.rows).toHaveLength(1)
   })
 
   it('celebrates once', async () => {
