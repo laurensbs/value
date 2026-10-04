@@ -7,7 +7,7 @@ const serverUrl = process.env.CAP_SERVER_URL ?? 'https://rondje-five.vercel.app'
 
 const config: CapacitorConfig = {
   appId: 'app.rondje.mobile',
-  appName: 'Rondje',
+  appName: 'Rondje Mee',
   webDir: 'native-shell',
   // Lets the website recognise the apps (src/server/native.ts): they never show ways to give money.
   appendUserAgent: 'RondjeApp',

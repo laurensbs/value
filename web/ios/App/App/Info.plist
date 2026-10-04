@@ -14,7 +14,7 @@
 		<string>fr</string>
 	</array>
 	<key>CFBundleDisplayName</key>
-        <string>Rondje</string>
+        <string>Rondje Mee</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -32,7 +32,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Tijdens een rondje deelt Rondje je locatie met de eigenaar van de hond, zodat die kan meekijken. Dat stopt zodra je het rondje beëindigt.</string>
+	<string>Tijdens een rondje deelt Rondje Mee je locatie met de eigenaar van de hond, zodat die kan meekijken. Dat stopt zodra je het rondje beëindigt.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Om een foto van jezelf of van een hond te maken voor je profiel.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { APP_NAME } from '@/lib/site'
 
 export const dynamic = 'force-static'
 
@@ -13,7 +14,7 @@ export function GET() {
     id: '/admin',
     name: 'Beheer',
     short_name: 'Beheer',
-    description: 'Beheer van Rondje: meldingen, opvangen, lancering, marketing en cijfers.',
+    description: `Beheer van ${APP_NAME}: meldingen, opvangen, lancering, marketing en cijfers.`,
     lang: 'nl',
     start_url: '/admin',
     scope: '/admin',

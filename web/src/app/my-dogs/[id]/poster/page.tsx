@@ -9,7 +9,7 @@ import { QrCode } from '@/components/QrCode'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { dogShareUrl } from '@/lib/invite'
-import { siteUrl } from '@/lib/site'
+import { APP_NAME, siteUrl } from '@/lib/site'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -49,7 +49,7 @@ export default async function DogPosterPage({ params }: { params: Promise<{ id: 
 
       <article className="poster">
         <header className="poster-head">
-          <p className="poster-org">Rondje</p>
+          <p className="poster-org">{APP_NAME}</p>
         </header>
         <h2 className="poster-title">{t('dogShare.posterHeadline', { name: dog.name })}</h2>
         <div className="poster-dog">
