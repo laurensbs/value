@@ -84,7 +84,7 @@ test('Vandaag: one thing now, Later puts it away, and an honest empty town', asy
 
   // One card, one big button: the quiz comes before any request.
   const card = page.getByRole('region', { name: 'Eén ding nu' })
-  await expect(card.getByRole('heading', { name: 'Welkom bij Rondje, Noa!' })).toBeVisible()
+  await expect(card.getByRole('heading', { name: 'Welkom bij Rondje Mee, Noa!' })).toBeVisible()
   await expect(card).toContainText('Je bent nu Puppy, level 1.')
   await expect(card).toContainText('Eerst de veiligheidsquiz, dan kun je een hond vragen.')
   const button = card.getByRole('link', { name: 'Start de quiz' })
