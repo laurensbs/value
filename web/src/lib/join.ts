@@ -4,10 +4,8 @@ import { cleanInviteCode, INVITE_COOKIE, rememberInviter } from './invite'
 // /aanmelden: the one short link for posters, WhatsApp, the crowdfunding and the shelters.
 // Pure functions, so the page, the proxy and the tests share them.
 
+// /join, /unete and /rejoindre lead here too (redirects in next.config.ts).
 export const JOIN_PATH = '/aanmelden'
-
-/** The same page under a word that reads well in the other languages (redirects in next.config.ts). */
-export const JOIN_ALIASES = ['/join', '/unete', '/rejoindre'] as const
 
 /** The three ways in. Each one is the sign-up that already exists for that intent (see AuthForm and /onboarding). */
 export const JOIN_CHOICES = [

@@ -67,13 +67,12 @@ test('/aanmelden: one screen, then a walker signs up, does the quiz, and the app
   expect(me.status()).toBe(200)
   expect(await me.json()).toMatchObject({ user: { email, name: 'Lot' }, profile: { firstName: 'Lot', wantsToWalk: true, quizPassed: true } })
   await app.dispose()
-  await context.close()
 })
 
 test('/aanmelden: "Ik heb een hond" leads to adding the dog; /join, /unete and /rejoindre open the same page', async ({ browser }) => {
   test.setTimeout(180_000)
   const id = unique()
-  const { context, page } = await newPerson(browser, undefined, PHONE)
+  const { page } = await newPerson(browser, undefined, PHONE)
 
   for (const alias of ['/join', '/unete', '/rejoindre']) {
     const res = await page.request.get(`${alias}?bron=poster`, { maxRedirects: 0 })
@@ -93,5 +92,4 @@ test('/aanmelden: "Ik heb een hond" leads to adding the dog; /join, /unete and /
   // An owner who is signed in skips the page and lands on Vandaag: no quiz for owners.
   await page.goto('/aanmelden')
   await expect(page).toHaveURL((url) => url.pathname === '/')
-  await context.close()
 })

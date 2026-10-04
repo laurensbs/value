@@ -62,7 +62,7 @@ export default async function JoinPage() {
         {/* Inside the app shell this would be news about itself. */}
         {native ? null : (
           <p className="join-app small">
-            <Icon name="phone" size={18} />
+            <Icon name="check" size={18} />
             <span>{t('app')}</span>
           </p>
         )}
