@@ -24,6 +24,10 @@ describe('canonicalUrl', () => {
     expect(canonicalUrl('/dogs?org=o1#top')).toBe('https://rondje.test/dogs')
     expect(canonicalUrl('/cities/madrid/')).toBe('https://rondje.test/cities/madrid')
   })
+
+  it('keeps only a parameter that makes it another page', () => {
+    expect(canonicalUrl('/dogs?org=o1&q=x', { org: 'o1' })).toBe('https://rondje.test/dogs?org=o1')
+  })
 })
 
 describe('clampDescription', () => {

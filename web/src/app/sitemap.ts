@@ -25,7 +25,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [cities, legal] = await Promise.all([indexableCities(), Promise.all(LEGAL_DOCS.map((d) => legalHtml(d, 'nl')))])
   return [
     ...PAGES.map((p) => ({ url: canonicalUrl(p), lastModified: built, changeFrequency: 'weekly' as const, priority: p === '/' ? 1 : 0.7 })),
-    ...[...cities].sort(([a], [b]) => a.localeCompare(b)).map(([slug, changed]) => ({ url: canonicalUrl(`/cities/${slug}`), lastModified: changed, changeFrequency: 'weekly' as const, priority: 0.6 })),
+    // A city's date is only the day: when exactly a private owner changed their dog is nobody's business.
+    ...[...cities]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([slug, changed]) => ({ url: canonicalUrl(`/cities/${slug}`), lastModified: changed.toISOString().slice(0, 10), changeFrequency: 'weekly' as const, priority: 0.6 })),
     ...LEGAL_DOCS.map((d, i) => ({ url: canonicalUrl(`/legal/${d}`), lastModified: day(legal[i]?.data.updated) ?? built, changeFrequency: 'monthly' as const, priority: 0.3 })),
   ]
 }

@@ -13,15 +13,23 @@ export function clampDescription(text: string, max = DESCRIPTION_MAX): string {
   return `${(space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[\s,.;:–-]+$/, '')}…`
 }
 
-/** The one address search engines should use for a page: this site's origin and the path, never a query or anchor. */
-export function canonicalUrl(path: string): string {
+/**
+ * The one address search engines should use for a page: this site's origin and the path. A query or
+ * anchor in `path` is dropped (filters, ?claim=, ?q= are views of the same page); only a parameter that
+ * makes it another page, passed in `query`, stays.
+ */
+export function canonicalUrl(path: string, query: Record<string, string> = {}): string {
   const clean = path.split(/[?#]/)[0].replace(/\/+$/, '')
-  return new URL(clean || '/', `${siteUrl()}/`).href
+  const url = new URL(clean || '/', `${siteUrl()}/`)
+  for (const [key, value] of Object.entries(query)) url.searchParams.set(key, value)
+  return url.href
 }
 
 export interface PageSeo {
-  /** The page's path; a query (?org=, ?claim=, ?q=) never becomes part of the canonical address. */
+  /** The page's path; a query in it (?claim=, ?q=, ?country=) never becomes part of the canonical address. */
   path: string
+  /** A parameter that makes this another page (one shelter's dogs: ?org=), kept in the canonical address. */
+  query?: Record<string, string>
   /** The page title; the layout adds " · <name>". */
   title: string
   /** True when `title` already is the whole title (the home page), so the name is not added twice. */
@@ -40,7 +48,7 @@ export interface PageSeo {
  * replaced as a whole by a page's, so the site name and image are set here again.
  */
 export function pageMetadata(page: PageSeo): Metadata {
-  const url = canonicalUrl(page.path)
+  const url = canonicalUrl(page.path, page.query)
   const description = clampDescription(page.description)
   const shareTitle = page.shareTitle ?? page.title
   const images = page.images ?? ['/og.png']

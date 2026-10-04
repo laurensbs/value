@@ -35,7 +35,8 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 | `BETTER_AUTH_URL` | optional | Canonical URL; defaults to the Vercel production domain. |
 | `NEXT_PUBLIC_TILE_URL` | optional | Map tiles; defaults to OpenStreetMap. Use a tile provider with an API key before heavy traffic. |
 | `SUPPORT_URL` + `OPERATOR_NAME` | optional | The support button on `/support` (https Patreon, Ko-fi, Open Collective or Buy Me a Coffee only). Shown only when both are set, and never in the apps. |
-| `INSTAGRAM_HANDLE` | optional | Instagram link (footer, about, support). Hidden while empty. |
+| `INSTAGRAM_HANDLE` | optional | Instagram link (footer, about, support, and `sameAs` in the home page's structured data). Hidden while empty. |
+| `GOOGLE_SITE_VERIFICATION` | optional | The token of Google Search Console's HTML tag (`<meta name="google-site-verification">`). No tag while empty. |
 | `CONTACT_EMAIL` | needed before launch | The only contact address: `/contact`, the legal texts (`{{contact}}` in `content/legal`), `/banned`, about and forgot password. While empty, those link to `/contact`, which says the address is coming. Use an address on a domain we own. |
 | `RESEND_API_KEY` + `EMAIL_FROM` | recommended | Email through Resend: password reset, and notification emails (new request, accepted, overdue walk, shelter verified). Without them no email is sent and "forgot password" explains that. `EMAIL_FROM` like `Rondje <hallo@your-domain>` (a domain verified in Resend). |
 | `VAPID_PUBLIC_KEY` + `VAPID_PRIVATE_KEY` + `VAPID_SUBJECT` | optional | Push notifications in browsers (and on iPhone once the site is on the home screen). Generate a pair with `npx web-push generate-vapid-keys`; `VAPID_SUBJECT` is `mailto:` plus your address. Without them the toggle in the profile stays hidden. |
@@ -55,7 +56,8 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 - `src/db/schema.ts` and `drizzle/`: schema and SQL migrations. After a schema change run `npm run db:generate`; it also embeds the SQL into `src/db/migrations.json`, which the app applies at runtime under an advisory lock.
 - `messages/*.json`: interface text. `nl` is the source; missing keys fall back to it.
 - `content/legal/<locale>/*.md`: terms, privacy, conduct code, safety, shelter terms, cookies.
-- `src/app/cities/**`, `src/lib/cities.ts`: a public page per city for search engines (cities from the shelter directory and verified shelters): shelters, group walks, a count of dogs waiting (never the dogs themselves) and the free promise. In the sitemap.
+- `src/app/cities/**`, `src/lib/cities.ts`: a public page per city for search engines (cities from the shelter directory and verified shelters): shelters, group walks, a count of dogs waiting (never the dogs themselves) and the free promise. A city is in search engines and the sitemap only once it has a real dog, an upcoming real group walk or a verified partner shelter (`indexableCities` in `src/server/cities.ts`; example data never counts); until then the page says noindex.
+- `src/lib/seo.ts`, `src/components/JsonLd.tsx`: per page title, description (max. 155), canonical without query, preview card; JSON-LD (Organization + WebSite on the home page, BreadcrumbList and Event on city pages). `node scripts/seo-crawl.mjs <baseUrl>` walks the sitemap as Googlebot in four languages and checks all of it.
 - `content/shelters.json`: shelter directory for `/shelters` (public sources, unverified).
 
 ## Native apps
