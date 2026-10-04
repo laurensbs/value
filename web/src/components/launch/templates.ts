@@ -1,7 +1,7 @@
 // The message bank of the launch hub. Shelter texts come from docs/OUTREACH.md §5 (nl, fr, es);
 // the others are new, in the same tone. Rules for every text: honest, warm, no health claims, no
 // names of organisations as partners, and say that it is free and new. {app} is filled in with
-// APP_NAME (src/lib/site.ts), so the texts follow the final name. Nothing here is sent by Rondje.
+// APP_NAME (src/lib/site.ts), so the texts follow the name. Nothing here is sent by the app itself.
 
 import type { Audience } from './audiences'
 

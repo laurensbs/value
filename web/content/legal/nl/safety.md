@@ -10,7 +10,7 @@ status: "Concept – nog niet juridisch getoetst"
 
 Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch iets misgaat. Het geldt voor wandelaars, eigenaren en opvangen.
 
-**Belangrijk:** Rondje is geen hulpdienst en kijkt niet 24 uur per dag mee. Bij direct gevaar voor mensen bel je altijd eerst **112**. Wacht niet op Rondje.
+**Belangrijk:** Rondje Mee is geen hulpdienst en kijkt niet 24 uur per dag mee. Bij direct gevaar voor mensen bel je altijd eerst **112**. Wacht niet op Rondje Mee.
 
 ## 1. Voor de wandeling
 
@@ -49,7 +49,7 @@ Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch i
 5. Kies in de app voor "hond ontsnapt". Zo weet de eigenaar waar je de hond voor het laatst zag.
 6. Blijf in de buurt van de plek waar de hond wegliep, tenzij de eigenaar iets anders zegt.
 7. Is er gevaar voor het verkeer of voor mensen? Bel **112**.
-8. Is de hond na korte tijd nog niet terug? De eigenaar meldt de hond als vermist, zie de nummers in artikel 4. Meld het ook bij Rondje.
+8. Is de hond na korte tijd nog niet terug? De eigenaar meldt de hond als vermist, zie de nummers in artikel 4. Meld het ook bij Rondje Mee.
 
 ### 3.2 Een beet of verwonding
 
@@ -93,7 +93,7 @@ Voel je je somber, gestrest of gaat het mentaal niet goed met je? Praat erover. 
 3. Denk je aan een noodsituatie, zoals een ongeluk of een onwel geworden wandelaar? Bel **112** en geef de laatst bekende locatie door.
 4. Denk je dat de wandelaar de hond niet terugbrengt? Bel de politie (zie artikel 4) en meld het in de app.
 
-Rondje kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten een wandeling kunnen we niemand opsporen.
+Rondje Mee kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten een wandeling kunnen we niemand opsporen.
 
 ### 3.6 Je vermoedt mishandeling of verwaarlozing
 
@@ -145,7 +145,7 @@ Rondje kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten een
 | Spanje | Línea de atención a la conducta suicida | 024 |
 | Spanje | Teléfono de la Esperanza | 717 003 717 [te controleren] |
 
-## 6. Melden bij Rondje
+## 6. Melden bij Rondje Mee
 
 Meld elk incident en elke onveilige situatie via de knop **Melden** in de app, of mail naar {{contact}}. Vertel daarbij:
 
@@ -154,7 +154,7 @@ Meld elk incident en elke onveilige situatie via de knop **Melden** in de app, o
 - of er letsel of schade is;
 - foto's, als je die hebt.
 
-## 7. Wat Rondje doet
+## 7. Wat Rondje Mee doet
 
 - We bevestigen dat we je melding hebben ontvangen.
 - We streven ernaar een melding over veiligheid **binnen 24 uur** te beoordelen. Dat is een streven, geen garantie.
@@ -164,4 +164,4 @@ Meld elk incident en elke onveilige situatie via de knop **Melden** in de app, o
 - We nemen een besluit en leggen dat uit. Je kunt bezwaar maken.
 - We werken mee met politie en andere instanties als de wet dat verplicht, of als iemands leven of veiligheid in gevaar is.
 
-Rondje beslist niet wie aansprakelijk is voor schade. Dat regelen de betrokkenen onderling, met hun verzekeraars.
+Rondje Mee beslist niet wie aansprakelijk is voor schade. Dat regelen de betrokkenen onderling, met hun verzekeraars.

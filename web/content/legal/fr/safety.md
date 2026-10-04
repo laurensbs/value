@@ -10,7 +10,7 @@ status: "Projet – pas encore vérifié par un juriste"
 
 Ce protocole vous aide à promener un chien en toute sécurité et à bien réagir si quelque chose tourne mal. Il s'applique aux promeneurs, aux propriétaires et aux refuges.
 
-**Important :** Rondje n'est pas un service d'urgence et ne surveille pas les promenades 24 heures sur 24. En cas de danger immédiat pour des personnes, appelez toujours d'abord le **112**. N'attendez pas Rondje.
+**Important :** Rondje Mee n'est pas un service d'urgence et ne surveille pas les promenades 24 heures sur 24. En cas de danger immédiat pour des personnes, appelez toujours d'abord le **112**. N'attendez pas Rondje Mee.
 
 ## 1. Avant la promenade
 
@@ -49,7 +49,7 @@ Ce protocole vous aide à promener un chien en toute sécurité et à bien réag
 5. Choisissez « chien échappé » dans l'application. Le propriétaire voit ainsi où vous avez vu le chien pour la dernière fois.
 6. Restez près de l'endroit où le chien s'est échappé, sauf si le propriétaire vous dit autre chose.
 7. Il y a un danger pour la circulation ou pour des personnes ? Appelez le **112**.
-8. Si le chien n'est pas revenu après peu de temps, le propriétaire déclare sa disparition (voir les numéros à l'article 4). Signalez-le aussi à Rondje.
+8. Si le chien n'est pas revenu après peu de temps, le propriétaire déclare sa disparition (voir les numéros à l'article 4). Signalez-le aussi à Rondje Mee.
 
 ### 3.2 Une morsure ou une blessure
 
@@ -93,7 +93,7 @@ Vous vous sentez déprimé, stressé ou cela ne va pas moralement ? Parlez-en. V
 3. Vous pensez à une urgence, comme un accident ou un malaise ? Appelez le **112** et donnez la dernière position connue.
 4. Vous pensez que le promeneur ne ramènera pas le chien ? Appelez la police (voir l'article 4) et signalez-le dans l'application.
 
-Rondje ne voit la position de quelqu'un que pendant une promenade active. En dehors d'une promenade, nous ne pouvons localiser personne.
+Rondje Mee ne voit la position de quelqu'un que pendant une promenade active. En dehors d'une promenade, nous ne pouvons localiser personne.
 
 ### 3.6 Vous soupçonnez une maltraitance ou une négligence
 
@@ -145,7 +145,7 @@ Rondje ne voit la position de quelqu'un que pendant une promenade active. En deh
 | Espagne | Ligne de prévention du suicide (Línea 024) | 024 |
 | Espagne | Teléfono de la Esperanza | 717 003 717 [à vérifier] |
 
-## 6. Signaler un incident à Rondje
+## 6. Signaler un incident à Rondje Mee
 
 Signalez chaque incident et chaque situation dangereuse avec le bouton **Signaler** dans l'application, ou écrivez à {{contact}}. Indiquez :
 
@@ -154,7 +154,7 @@ Signalez chaque incident et chaque situation dangereuse avec le bouton **Signale
 - s'il y a eu des blessures ou des dégâts ;
 - des photos, si vous en avez.
 
-## 7. Ce que fait Rondje
+## 7. Ce que fait Rondje Mee
 
 - Nous confirmons la réception de votre signalement.
 - Nous visons à examiner les signalements liés à la sécurité **dans les 24 heures**. C'est un objectif, pas une garantie.
@@ -164,4 +164,4 @@ Signalez chaque incident et chaque situation dangereuse avec le bouton **Signale
 - Nous prenons une décision et l'expliquons. Vous pouvez la contester.
 - Nous coopérons avec la police et les autres autorités lorsque la loi l'exige, ou lorsque la vie ou la sécurité de quelqu'un est en danger.
 
-Rondje ne décide pas qui est responsable des dommages. Les personnes concernées règlent cela entre elles, avec leurs assureurs.
+Rondje Mee ne décide pas qui est responsable des dommages. Les personnes concernées règlent cela entre elles, avec leurs assureurs.

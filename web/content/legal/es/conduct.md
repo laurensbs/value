@@ -6,9 +6,9 @@ updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
-# Código de conducta de Rondje
+# Código de conducta de Rondje Mee
 
-Rondje solo funciona si todo el mundo se siente seguro: paseantes, propietarios, protectoras y, sobre todo, los perros. Este código de conducta forma parte de las condiciones de uso y se aplica a todas las personas que usan Rondje.
+Rondje Mee solo funciona si todo el mundo se siente seguro: paseantes, propietarios, protectoras y, sobre todo, los perros. Este código de conducta forma parte de las condiciones de uso y se aplica a todas las personas que usan Rondje Mee.
 
 ## 1. Para todos
 
@@ -86,13 +86,13 @@ Rondje solo funciona si todo el mundo se siente seguro: paseantes, propietarios,
 ## 5. Respeto entre personas
 
 - **Sin acoso.** Sin acercamientos no deseados, sin comentarios sexuales, sin amenazas. No es no.
-- **Sin discriminación.** En Rondje todo el mundo es bienvenido, sin importar su origen, religión, género, orientación sexual, discapacidad o edad (a partir de 18 años).
+- **Sin discriminación.** En Rondje Mee todo el mundo es bienvenido, sin importar su origen, religión, género, orientación sexual, discapacidad o edad (a partir de 18 años).
 - **Respeta la privacidad.**
   - Usa teléfonos y direcciones solo para el paseo.
   - No compartas datos de otras personas.
   - No copies ni fotografíes el documento de identidad de nadie.
 - **Fotos.** Publica fotos o vídeos del perro o de otras personas solo con su permiso, o con el del propietario. Nunca muestres dónde vive el propietario.
-- **Contacto fuera de Rondje.** Limita el contacto al paseo. No insistas si la otra persona no quiere más contacto.
+- **Contacto fuera de Rondje Mee.** Limita el contacto al paseo. No insistas si la otra persona no quiere más contacto.
 
 ## 6. Tolerancia cero
 

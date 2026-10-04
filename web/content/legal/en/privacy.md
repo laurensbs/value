@@ -6,13 +6,13 @@ updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
-# Rondje Privacy Policy
+# Rondje Mee Privacy Policy
 
-This policy explains which personal data Rondje processes, why, for how long, and what rights you have. It applies to the Rondje website and app.
+This policy explains which personal data Rondje Mee processes, why, for how long, and what rights you have. It applies to the Rondje Mee website and app.
 
 ## 1. Who is responsible?
 
-[Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], Chamber of Commerce (KvK) number [KvK-nummer], is the controller of your data on Rondje.
+[Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], Chamber of Commerce (KvK) number [KvK-nummer], is the controller of your data on Rondje Mee.
 
 Questions about privacy? Email us at {{contact}}. [To verify: whether a data protection officer is required. If so, add their contact details here.]
 
@@ -53,7 +53,7 @@ Questions about privacy? Email us at {{contact}}. [To verify: whether a data pro
 
 **Progress and reminders**
 
-- your points, level and badges, worked out from what you did on Rondje (such as walks, the safety quiz or a photo for the owner). Only you can see them;
+- your points, level and badges, worked out from what you did on Rondje Mee (such as walks, the safety quiz or a photo for the owner). Only you can see them;
 - your weekly goal, if you choose one, and whether you want friendly reminders;
 - which reminders we sent you and when, so we never send too many.
 
@@ -78,7 +78,7 @@ Questions about privacy? Email us at {{contact}}. [To verify: whether a data pro
 
 - name of the organisation, KvK, KBO or CIF/NIF number, address, website, Instagram, logo and photos;
 - public contact details for walkers (email and phone) and practical information such as walking times;
-- a contact person for Rondje (name, email, phone). These details are not public: only Rondje's administrators see them, to check the shelter and for questions;
+- a contact person for Rondje Mee (name, email, phone). These details are not public: only Rondje Mee's administrators see them, to check the shelter and for questions;
 - staff accounts.
 
 **Shelter suggestions**
@@ -86,7 +86,7 @@ Questions about privacy? Email us at {{contact}}. [To verify: whether a data pro
 - which shelter you suggest or where you want to walk (name, town, website), your note, and that the suggestion came from you;
 - we never store details about private people you mention. Want to help someone with a dog? Ask them yourself, and they sign up themselves.
 
-**Health data.** Rondje does not ask about your health. Please do not include health information in your profile or in your dog's story, whether about yourself or others. For example, write "I can't walk far anymore" rather than naming a diagnosis.
+**Health data.** Rondje Mee does not ask about your health. Please do not include health information in your profile or in your dog's story, whether about yourself or others. For example, write "I can't walk far anymore" rather than naming a diagnosis.
 
 ## 4. Why do we use your data, and on what legal basis?
 
@@ -102,7 +102,7 @@ Questions about privacy? Email us at {{contact}}. [To verify: whether a data pro
 | Showing points, level, badges and your weekly goal | Contract |
 | Friendly reminders (one every three days at most) about your first steps, your weekly goal and your town's challenge | Legitimate interest: helping you keep up your walks. You can turn them off in your profile at any time |
 | Verifying shelters | Contract with the shelter, and legitimate interest: preventing fake accounts |
-| Handling suggestions and votes for shelters: contacting shelters ourselves and telling you when they join | Legitimate interest: more shelters and dogs on Rondje. You can always object |
+| Handling suggestions and votes for shelters: contacting shelters ourselves and telling you when they join | Legitimate interest: more shelters and dogs on Rondje Mee. You can always object |
 | Security, troubleshooting, backups | Legitimate interest: a safe and working platform |
 | Service emails (for example about a new request or a change to the terms) | Contract |
 | Optional features, such as push notifications or signing in with Google or Apple | Consent (which you can withdraw at any time) or contract |
@@ -133,7 +133,7 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 - **Other users** see your public profile: first name, photo, age or birth year [to verify: which exactly], roughly where you live, bio, experience and languages.
 - **Once a request is accepted**, both sides also see each other's phone number, and the walker sees the protected details that the owner has released for that purpose.
 - **Shelters** see the details of walkers who sign up with them, and attendance at group walks. If a shelter uses that data in its own volunteer records, the shelter is responsible for that itself.
-- **Private feedback** is never shown to the other person. Only a limited number of Rondje team members can read it.
+- **Private feedback** is never shown to the other person. Only a limited number of Rondje Mee team members can read it.
 - **Authorities** such as the police only receive data where the law requires it, or where someone's life or safety is at risk.
 
 ## 8. Processors and other recipients
@@ -221,11 +221,11 @@ Not happy with how we handle your data? Please tell us first. You can also alway
 
 ## 14. Data protection impact assessment (DPIA)
 
-Rondje processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje. That is why we carry out a data protection impact assessment (DPIA) before launching the service, and keep it up to date [to verify: status].
+Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we carry out a data protection impact assessment (DPIA) before launching the service, and keep it up to date [to verify: status].
 
 ## 15. Age
 
-Rondje is only for people aged 18 and over. If we find out that someone is younger, we close the account and delete the data.
+Rondje Mee is only for people aged 18 and over. If we find out that someone is younger, we close the account and delete the data.
 
 ## 16. Changes
 

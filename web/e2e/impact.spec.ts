@@ -45,7 +45,7 @@ test('support page: monthly support, open about money, and an honest promise abo
   await expect(page.getByText(/nog geen stichting en geen goed doel met ANBI-status/).first()).toBeVisible()
   await expect(page.getByRole('link', { name: 'Lees waarom →' })).toHaveAttribute('href', '/waarom')
   await expect(page.getByText('Waarom kan ik niet steunen in de app?')).toBeVisible()
-  const monthly = page.getByRole('link', { name: /Steun Rondje via/ })
+  const monthly = page.getByRole('link', { name: /Steun Rondje Mee via/ })
   if (await monthly.count()) {
     await expect(monthly).toHaveAttribute('href', /patreon\.com/)
     // No campaign link is configured in the tests, so no crowdfunding button and no progress bar.

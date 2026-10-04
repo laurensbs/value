@@ -6,13 +6,13 @@ updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
-# Privacyverklaring van Rondje
+# Privacyverklaring van Rondje Mee
 
-In deze verklaring lees je welke persoonsgegevens Rondje verwerkt, waarom, hoe lang, en welke rechten je hebt. Ze geldt voor de website en de app van Rondje.
+In deze verklaring lees je welke persoonsgegevens Rondje Mee verwerkt, waarom, hoe lang, en welke rechten je hebt. Ze geldt voor de website en de app van Rondje Mee.
 
 ## 1. Wie is verantwoordelijk?
 
-[Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], KvK-nummer [KvK-nummer], is de verwerkingsverantwoordelijke voor je gegevens op Rondje.
+[Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], KvK-nummer [KvK-nummer], is de verwerkingsverantwoordelijke voor je gegevens op Rondje Mee.
 
 Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functionaris gegevensbescherming verplicht is. Zo ja, contactgegevens hier vermelden.]
 
@@ -53,7 +53,7 @@ Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functiona
 
 **Voortgang en herinneringen**
 
-- je punten, niveau en penningen, berekend uit wat je op Rondje deed (zoals gelopen rondjes, de veiligheidsquiz of een foto voor de eigenaar). Alleen jij ziet ze;
+- je punten, niveau en penningen, berekend uit wat je op Rondje Mee deed (zoals gelopen rondjes, de veiligheidsquiz of een foto voor de eigenaar). Alleen jij ziet ze;
 - je weekdoel, als je er een kiest, en of je vriendelijke herinneringen wilt;
 - welke herinneringen we je stuurden en wanneer, zodat we er nooit te veel sturen.
 
@@ -78,7 +78,7 @@ Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functiona
 
 - naam van de organisatie, KvK-, KBO- of CIF/NIF-nummer, adres, website, Instagram, logo en foto's;
 - openbare contactgegevens voor wandelaars (e-mailadres en telefoon) en praktische informatie zoals wandeltijden;
-- een contactpersoon voor Rondje (naam, e-mailadres, telefoon). Die gegevens zijn niet openbaar: alleen beheerders van Rondje zien ze, voor de controle van de opvang en voor vragen;
+- een contactpersoon voor Rondje Mee (naam, e-mailadres, telefoon). Die gegevens zijn niet openbaar: alleen beheerders van Rondje Mee zien ze, voor de controle van de opvang en voor vragen;
 - accounts van medewerkers.
 
 **Tips voor opvangen**
@@ -86,7 +86,7 @@ Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functiona
 - welke opvang je tipt of waar je wilt wandelen (naam, plaats, website), je toelichting, en dat de tip van jou komt;
 - we bewaren nooit gegevens over particulieren die je noemt. Wil je iemand met een hond helpen? Dan vraag je het zelf, en meldt die persoon zich zelf aan.
 
-**Gezondheidsgegevens.** Rondje vraagt niet naar je gezondheid. Zet ook zelf geen gezondheidsgegevens in je profiel of in het verhaal van je hond, niet van jezelf en niet van anderen. Schrijf bijvoorbeeld "ik kan zelf niet ver meer lopen" in plaats van een diagnose.
+**Gezondheidsgegevens.** Rondje Mee vraagt niet naar je gezondheid. Zet ook zelf geen gezondheidsgegevens in je profiel of in het verhaal van je hond, niet van jezelf en niet van anderen. Schrijf bijvoorbeeld "ik kan zelf niet ver meer lopen" in plaats van een diagnose.
 
 ## 4. Waarvoor gebruiken we je gegevens, en op welke grondslag?
 
@@ -102,7 +102,7 @@ Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functiona
 | Punten, niveau, penningen en weekdoel tonen | Overeenkomst |
 | Vriendelijke herinneringen (hooguit één per drie dagen) over je eerste stappen, je weekdoel en de uitdaging in je stad | Gerechtvaardigd belang: je helpen de rondjes vol te houden. Uitzetten kan altijd in je profiel |
 | Opvangen verifiëren | Overeenkomst met de opvang, en gerechtvaardigd belang: nepaccounts voorkomen |
-| Tips en stemmen voor opvangen verwerken: opvangen zelf benaderen en je laten weten als ze aansluiten | Gerechtvaardigd belang: meer opvangen en honden op Rondje. Je kunt altijd bezwaar maken |
+| Tips en stemmen voor opvangen verwerken: opvangen zelf benaderen en je laten weten als ze aansluiten | Gerechtvaardigd belang: meer opvangen en honden op Rondje Mee. Je kunt altijd bezwaar maken |
 | Beveiliging, foutoplossing, back-ups | Gerechtvaardigd belang: een veilig en werkend platform |
 | Service-e-mails (bijvoorbeeld bij een nieuw verzoek of een wijziging van de voorwaarden) | Overeenkomst |
 | Optionele functies, zoals pushmeldingen of inloggen met Google of Apple | Toestemming (die je altijd kunt intrekken) of overeenkomst |
@@ -133,7 +133,7 @@ Gebruiken we een gerechtvaardigd belang? Dan hebben we afgewogen dat dat belang 
 - **Andere gebruikers** zien je openbare profiel: voornaam, foto, leeftijd of geboortejaar [te controleren: wat precies], ongeveer waar je woont, bio, ervaring en talen.
 - **Na acceptatie** van een verzoek zien beide kanten ook elkaars telefoonnummer, en de wandelaar ziet de afgeschermde gegevens die de eigenaar daarvoor heeft vrijgegeven.
 - **Opvangen** zien de gegevens van wandelaars die zich bij hen aanmelden, en de aanwezigheid bij groepswandelingen. Gebruikt een opvang die gegevens in de eigen vrijwilligersadministratie? Dan is de opvang daarvoor zelf verantwoordelijk.
-- **Privé-feedback** ziet de ander nooit. Alleen een beperkt aantal medewerkers van Rondje kan die lezen.
+- **Privé-feedback** ziet de ander nooit. Alleen een beperkt aantal medewerkers van Rondje Mee kan die lezen.
 - **Instanties** zoals politie of justitie krijgen gegevens alleen als de wet dat verplicht, of als iemands leven of veiligheid in gevaar is.
 
 ## 8. Verwerkers en andere ontvangers
@@ -221,11 +221,11 @@ Ben je niet tevreden over hoe we met je gegevens omgaan? Laat het ons eerst wete
 
 ## 14. Gegevensbeschermingseffectbeoordeling (DPIA)
 
-Rondje verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje gebruiken. Daarom voeren we een gegevensbeschermingseffectbeoordeling (DPIA) uit voordat we de dienst lanceren, en we houden die actueel [te controleren: status].
+Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom voeren we een gegevensbeschermingseffectbeoordeling (DPIA) uit voordat we de dienst lanceren, en we houden die actueel [te controleren: status].
 
 ## 15. Leeftijd
 
-Rondje is alleen voor mensen van 18 jaar en ouder. Merken we dat iemand jonger is? Dan sluiten we het account en verwijderen we de gegevens.
+Rondje Mee is alleen voor mensen van 18 jaar en ouder. Merken we dat iemand jonger is? Dan sluiten we het account en verwijderen we de gegevens.
 
 ## 16. Wijzigingen
 

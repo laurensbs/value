@@ -5,10 +5,10 @@
 // The offline page, in the language the person last used Rondje in (they tell the worker, see
 // components/OfflineReady.tsx). Text only: no fonts or images to keep around.
 const OFFLINE = {
-  nl: { title: 'Geen verbinding', text: 'Rondje kan het internet nu niet bereiken. Zodra je weer verbinding hebt, gaat het vanzelf verder.', retry: 'Probeer opnieuw', sos: 'Noodgeval? Bel <a href="tel:112">112</a>.' },
-  en: { title: 'No connection', text: "Rondje can't reach the internet right now. As soon as you're back online, it carries on by itself.", retry: 'Try again', sos: 'Emergency? Call <a href="tel:112">112</a>.' },
-  es: { title: 'Sin conexión', text: 'Rondje no puede conectarse a internet ahora mismo. En cuanto vuelvas a tener conexión, seguirá solo.', retry: 'Reintentar', sos: '¿Una emergencia? Llama al <a href="tel:112">112</a>.' },
-  fr: { title: 'Pas de connexion', text: "Rondje n'arrive pas à joindre internet pour le moment. Dès que la connexion revient, tout reprend tout seul.", retry: 'Réessayer', sos: 'Urgence ? Appelez le <a href="tel:112">112</a>.' },
+  nl: { title: 'Geen verbinding', text: 'Rondje Mee kan het internet nu niet bereiken. Zodra je weer verbinding hebt, gaat het vanzelf verder.', retry: 'Probeer opnieuw', sos: 'Noodgeval? Bel <a href="tel:112">112</a>.' },
+  en: { title: 'No connection', text: "Rondje Mee can't reach the internet right now. As soon as you're back online, it carries on by itself.", retry: 'Try again', sos: 'Emergency? Call <a href="tel:112">112</a>.' },
+  es: { title: 'Sin conexión', text: 'Rondje Mee no puede conectarse a internet ahora mismo. En cuanto vuelvas a tener conexión, seguirá solo.', retry: 'Reintentar', sos: '¿Una emergencia? Llama al <a href="tel:112">112</a>.' },
+  fr: { title: 'Pas de connexion', text: "Rondje Mee n'arrive pas à joindre internet pour le moment. Dès que la connexion revient, tout reprend tout seul.", retry: 'Réessayer', sos: 'Urgence ? Appelez le <a href="tel:112">112</a>.' },
 }
 const STORE = 'rondje'
 const LANG_KEY = '/__rondje-lang'
@@ -62,7 +62,7 @@ async function offlinePage() {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>${t.title} · Rondje</title>
+<title>${t.title} · Rondje Mee</title>
 <style>
 :root{--paper:#f4f6f0;--ink:#16201a;--muted:#55635a;--grass:#1f5a3d;--on-grass:#fff}
 @media (prefers-color-scheme:dark){:root{--paper:#0d1310;--ink:#e7eee8;--muted:#9eafa4;--grass:#8fdcae;--on-grass:#0d1310}}
@@ -104,7 +104,7 @@ self.addEventListener('push', (event) => {
   } catch {
     data = { body: event.data ? event.data.text() : '' }
   }
-  const title = data.title || 'Rondje'
+  const title = data.title || 'Rondje Mee'
   event.waitUntil(
     self.registration.showNotification(title, {
       body: data.body || '',

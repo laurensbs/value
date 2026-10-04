@@ -76,7 +76,7 @@ describe('the message bank', () => {
       const braces = [...`${t.subject} ${t.body}`.matchAll(/\{([^}]*)\}/g)].map((m) => m[1])
       for (const key of braces) expect(PLACEHOLDERS, `${t.id}: {${key}}`).toContain(key)
       if (MAIL_KINDS.includes(t.kind)) expect(t.subject, t.id).not.toBe('')
-      // The name is not final yet: texts use {app} (APP_NAME).
+      // The name lives in one place: texts use {app} (APP_NAME), never the name written out.
       expect(`${t.subject} ${t.body}`, t.id).not.toMatch(/\bRondje\b/)
       expect(`${t.subject} ${t.body}`, t.id).toContain('{app}')
     }

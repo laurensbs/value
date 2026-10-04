@@ -78,7 +78,7 @@
     }
   },
   "footer": {
-    "tagline": "Rondje is een gratis platform dat wandelaars, eigenaren en opvangen met elkaar in contact brengt. Rondje is zelf geen partij bij de afspraken.",
+    "tagline": "Rondje Mee is een gratis platform dat wandelaars, eigenaren en opvangen met elkaar in contact brengt. Rondje Mee is zelf geen partij bij de afspraken.",
     "terms": "Voorwaarden",
     "privacy": "Privacy",
     "conduct": "Gedragscode",
@@ -86,9 +86,9 @@
     "cookies": "Cookies",
     "shelterTerms": "Voorwaarden opvangen",
     "demo": "Demo-modus: er is nog geen database gekoppeld. Gegevens worden niet bewaard.",
-    "more": "Meer over Rondje",
-    "about": "Over Rondje",
-    "support": "Maak Rondje mogelijk",
+    "more": "Meer over Rondje Mee",
+    "about": "Over Rondje Mee",
+    "support": "Maak Rondje Mee mogelijk",
     "tip": "Tip een opvang",
     "forShelters": "Voor opvangen",
     "contact": "Contact"
@@ -113,19 +113,19 @@
     "forSheltersText": "Zet al je honden in één keer online, plan begeleide groepswandelingen en krijg een vaste groep jonge vrijwilligers.",
     "safetyTitle": "Vertrouwen bouw je op, stap voor stap",
     "safety1": "De eerste keer loop je altijd samen met de eigenaar of de opvang.",
-    "safety2": "Het ID wordt bij de kennismaking in het echt bekeken. Rondje bewaart geen kopie.",
+    "safety2": "Het ID wordt bij de kennismaking in het echt bekeken. Rondje Mee bewaart geen kopie.",
     "safety3": "Zelfstandig wandelen kan pas als de eigenaar je ID in het echt heeft gezien en het voor die hond toestaat.",
     "safety4": "Tijdens het rondje ziet de eigenaar live waar de hond is. Na 30 dagen wordt de route gewist.",
     "safety5": "Na elk rondje geven beide kanten privé feedback. Zorgen komen bij ons team terecht, niet bij de ander.",
     "safety6": "Melden en blokkeren kan altijd. Wie zich niet aan de regels houdt, verdwijnt van het platform.",
     "safetyMore": "Lees hoe veiligheid werkt",
     "countriesTitle": "Nu in drie landen",
-    "countriesText": "Rondje werkt in Nederland, België en Spanje, in het Nederlands, Frans, Spaans en Engels.",
+    "countriesText": "Rondje Mee werkt in Nederland, België en Spanje, in het Nederlands, Frans, Spaans en Engels.",
     "freeTitle": "Gratis, en dat blijft zo",
-    "freeText": "Geen advertenties, geen abonnement, en we verkopen nooit gegevens. Rondje draait op vrijwillige steun, en later op partners en fondsen die zich aan onze spelregels houden.",
+    "freeText": "Geen advertenties, geen abonnement, en we verkopen nooit gegevens. Rondje Mee draait op vrijwillige steun, en later op partners en fondsen die zich aan onze spelregels houden.",
     "exampleDogs": "Voorbeelden, zodat je ziet hoe het werkt",
     "freeLink": "Hoe we gratis blijven",
-    "freeLinkApp": "Over Rondje",
+    "freeLinkApp": "Over Rondje Mee",
     "impactTitle": "Wat we samen liepen",
     "impactWalks": "Rondjes gelopen",
     "impactKm": "Kilometer",
@@ -259,7 +259,7 @@
     "intent": {
       "walker": "Je gaat wandelen met honden uit de buurt of uit de opvang. Eerst even een account.",
       "owner": "Je meldt een hond aan die wel een extra rondje kan gebruiken. Eerst even een account.",
-      "shelter": "Je zet de honden van je opvang op Rondje. Maak eerst je eigen account; daarna meld je de opvang aan."
+      "shelter": "Je zet de honden van je opvang op Rondje Mee. Maak eerst je eigen account; daarna meld je de opvang aan."
     },
     "promiseFree": "Gratis, zonder advertenties.",
     "promisePrivacy": "We verkopen je gegevens nooit. Je locatie wordt afgerond op ongeveer 500 meter.",
@@ -282,7 +282,7 @@
     "continueWithGoogle": "Doorgaan met Google",
     "or": "of met je e-mailadres",
     "error": "Inloggen met {provider} lukte niet. Probeer het nog eens, of gebruik je e-mailadres.",
-    "linkNotice": "Er is al een Rondje-account met dit e-mailadres. Log hieronder één keer in met je wachtwoord, dan koppelen we {provider} eraan. Daarna kun je ook met {provider} inloggen."
+    "linkNotice": "Er is al een Rondje Mee-account met dit e-mailadres. Log hieronder één keer in met je wachtwoord, dan koppelen we {provider} eraan. Daarna kun je ook met {provider} inloggen."
   },
   "onboarding": {
     "title": "Vertel iets over jezelf",
@@ -310,7 +310,7 @@
     "terms": "Ik ben 18 jaar of ouder en ga akkoord met de <terms>voorwaarden</terms>, de <conduct>gedragscode</conduct> en de <privacy>privacyverklaring</privacy>.",
     "submit": "Profiel opslaan",
     "errors": {
-      "too-young": "Rondje is voor mensen van 18 jaar en ouder.",
+      "too-young": "Rondje Mee is voor mensen van 18 jaar en ouder.",
       "terms": "Ga akkoord met de voorwaarden om verder te gaan.",
       "invalid": "Vul de verplichte velden in.",
       "not-signed-in": "Log eerst in."
@@ -336,9 +336,9 @@
       "roleBoth": "Allebei",
       "roleBothText": "Ik heb een hond en wandel graag met andere honden.",
       "roleShelter": "Ik werk bij een opvang",
-      "roleShelterText": "Zet de honden van jullie opvang op Rondje.",
+      "roleShelterText": "Zet de honden van jullie opvang op Rondje Mee.",
       "aboutTitle": "Hoe mogen we je noemen?",
-      "aboutText": "Rondje is voor mensen van 18 jaar en ouder. Anderen zien alleen je voornaam en leeftijdsgroep.",
+      "aboutText": "Rondje Mee is voor mensen van 18 jaar en ouder. Anderen zien alleen je voornaam en leeftijdsgroep.",
       "placeTitle": "Waar woon je ongeveer?",
       "placeText": "Dan zie je honden en mensen bij jou in de buurt. We ronden je locatie af op zo'n 500 meter.",
       "experienceTitle": "Hoeveel ervaring heb je met honden?",
@@ -360,15 +360,15 @@
       "profileText": "Eigenaren kiezen sneller iemand met een foto en een paar zinnen. Je kunt dit ook later doen.",
       "profileOwnerText": "Wandelaars vinden het fijn om te weten bij wie ze aanbellen. Je kunt dit ook later doen.",
       "promiseTitle": "Bijna klaar!",
-      "promiseText": "Zo houden we Rondje veilig en fijn, voor mensen en honden.",
+      "promiseText": "Zo houden we Rondje Mee veilig en fijn, voor mensen en honden.",
       "promise1": "De eerste keer loop je altijd samen met de eigenaar of de opvang.",
       "promise2": "Je adres is nooit zichtbaar, en je telefoonnummer pas na een afspraak.",
-      "promise3": "Rondje is gratis en zonder reclame. Vraagt iemand om geld? Meld het.",
+      "promise3": "Rondje Mee is gratis en zonder reclame. Vraagt iemand om geld? Meld het.",
       "finish": "Laat me de honden zien",
       "needRole": "Kies wat je wilt doen.",
       "needName": "Vul je voornaam in.",
       "needBirthDate": "Vul je geboortedatum in.",
-      "tooYoung": "Rondje is voor mensen van 18 jaar en ouder.",
+      "tooYoung": "Rondje Mee is voor mensen van 18 jaar en ouder.",
       "needCity": "Vul je woonplaats in.",
       "needTerms": "Ga akkoord met de voorwaarden om verder te gaan.",
       "welcomeTitleAnon": "Hoi, fijn dat je er bent!",
@@ -497,7 +497,7 @@
     "publish": "Zet online",
     "walkingTimes": "Wandeltijden",
     "website": "Website",
-    "hiddenByModerator": "Verborgen door Rondje",
+    "hiddenByModerator": "Verborgen door Rondje Mee",
     "savedWalkers": "{n, plural, one {# wandelaar woont} other {# wandelaars wonen}} binnen 5 km. Deze week zien ze {name} als nieuwe hond.",
     "savedShare": "Vertel je buren over {name}: <link>hier staat een bericht om te delen</link>."
   },
@@ -511,7 +511,7 @@
     "time": "Tijd",
     "weekly": "Elke week op dit moment (vast rondje)",
     "message": "Bericht",
-    "messageHint": "Stel je kort voor. Spreek geen geld af: Rondje is gratis, de eigenaar zorgt voor zakjes en koekjes.",
+    "messageHint": "Stel je kort voor. Spreek geen geld af: Rondje Mee is gratis, de eigenaar zorgt voor zakjes en koekjes.",
     "rules": "Ik houd me aan de <conduct>gedragscode</conduct>: aan de lijn, geen koekjes zonder toestemming, en ik meld het meteen als er iets gebeurt.",
     "submit": "Verstuur aanvraag",
     "sent": "Je aanvraag voor {dog} staat bij je afspraken.",
@@ -520,7 +520,7 @@
     "reasons": {
       "not-onboarded": "Maak eerst je profiel af.",
       "banned": "Je account is geblokkeerd.",
-      "too-young": "Rondje is voor mensen van 18 jaar en ouder.",
+      "too-young": "Rondje Mee is voor mensen van 18 jaar en ouder.",
       "own-dog": "Dit is je eigen hond.",
       "dog-unavailable": "Deze hond is nu niet beschikbaar.",
       "demo-dog": "Dit is een voorbeeld; hiervoor kun je geen afspraak maken.",
@@ -598,14 +598,14 @@
     "resume": "Ga verder met rondje",
     "summary": "Bekijk rondje",
     "weekly": "Elke week",
-    "flagged": "Dit bericht bevat iets over geld, een link of contactgegevens. Rondje is gratis: maak nooit geld over.",
+    "flagged": "Dit bericht bevat iets over geld, een link of contactgegevens. Rondje Mee is gratis: maak nooit geld over.",
     "about": "Over {name}",
     "walks": "{n, plural, =0 {nog geen rondjes} one {# rondje gelopen} other {# rondjes gelopen}}",
     "idChecks": "{n, plural, =0 {ID nog niet gezien} one {ID gezien door # persoon} other {ID gezien door # mensen}}",
     "quizBadge": "Veiligheidsquiz gehaald",
     "newBadge": "Nieuw",
     "trustTitle": "Na de kennismaking",
-    "idSeen": "Ik heb het ID in het echt gezien (Rondje bewaart geen kopie)",
+    "idSeen": "Ik heb het ID in het echt gezien (Rondje Mee bewaart geen kopie)",
     "soloAllowed": "{name} mag zelfstandig met {dog} wandelen",
     "saveTrust": "Bevestigen",
     "contact": "Contact",
@@ -656,7 +656,7 @@
     },
     "remoteNote": "Een gesprek telt nog niet als kennismaking in het echt. Zelfstandig wandelen en de ID-check komen pas daarna.",
     "phoneHow": "Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt.",
-    "videoHow": "Rondje heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Open alleen een link van een videodienst die je kent.",
+    "videoHow": "Rondje Mee heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Open alleen een link van een videodienst die je kent.",
     "homeSafety": "Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie.",
     "planInPerson": "Plan de kennismaking in het echt",
     "afterCallWalker": "Na het gesprek is de volgende stap een kennismaking in het echt, met {dog} erbij.",
@@ -683,7 +683,7 @@
     "sosEscaped": "Hond weggelopen",
     "sosEscapedSteps": "Blijf rustig en roep de hond niet achterna. Bel direct de eigenaar. Blijf op de plek waar je de hond kwijtraakte. Meld de hond bij {registry}.",
     "sosBite": "Beet of verwonding",
-    "sosBiteSteps": "Zorg eerst dat iedereen veilig is. Bel bij ernstig letsel {number}. Wissel gegevens uit en meld het daarna bij Rondje.",
+    "sosBiteSteps": "Zorg eerst dat iedereen veilig is. Bel bij ernstig letsel {number}. Wissel gegevens uit en meld het daarna bij Rondje Mee.",
     "sosAnimal": "Dierenambulance of dierenpolitie: {name}",
     "noGps": "We kunnen je locatie nog niet zien. Sta locatie toe in je browser of app.",
     "gpsDenied": "Locatie staat uit. Zonder locatie kan de eigenaar niet meekijken; zet het aan in je instellingen.",
@@ -692,7 +692,7 @@
     "ended": "Rondje klaar",
     "endedText": "{name} liep {distance} in {minutes, plural, one {# minuut} other {# minuten}} met je mee.",
     "feedbackTitle": "Hoe ging het?",
-    "feedbackPrivate": "Alleen Rondje leest dit. De ander ziet je antwoorden niet.",
+    "feedbackPrivate": "Alleen Rondje Mee leest dit. De ander ziet je antwoorden niet.",
     "dogBehaviour": "Hoe was {name} tijdens het rondje?",
     "behaviour": {
       "easy": "Makkelijk",
@@ -885,7 +885,7 @@
     "quizStart": "Start de quiz",
     "invite": "Nodig iemand uit",
     "inviteText": "Ken je iemand met een hond die vaker naar buiten wil, of iemand die graag wandelt? Deel je link.",
-    "inviteMessage": "Ik loop rondjes met honden via Rondje. Doe je mee? {url}",
+    "inviteMessage": "Ik loop rondjes met honden via Rondje Mee. Doe je mee? {url}",
     "ppp": "Ik heb een geldige Spaanse licentie voor potentieel gevaarlijke honden (PPP)",
     "privacy": "Je gegevens",
     "export": "Download mijn gegevens",
@@ -899,18 +899,18 @@
     "invited": "{n, plural, =0 {Nog niemand deed mee via jouw link.} one {# persoon deed mee via jouw link. Dank je!} other {# mensen deden mee via jouw link. Dank je!}}",
     "privacyText": "Je kunt al je gegevens downloaden of je account met alles erop en eraan verwijderen. Routes van rondjes bewaren we 30 dagen.",
     "settings": "Instellingen",
-    "shelterCta": "Werk je bij een dierenopvang? Zet de honden van jullie opvang op Rondje en plan begeleide groepswandelingen.",
+    "shelterCta": "Werk je bij een dierenopvang? Zet de honden van jullie opvang op Rondje Mee en plan begeleide groepswandelingen.",
     "tipTitle": "Tip een opvang",
     "tipText": "Ken je een opvang of asiel waar honden meer wandelingen kunnen gebruiken, of iemand met een hond die hulp kan gebruiken? Zo help je zonder dat wij iemand ongevraagd benaderen.",
-    "supportTitle": "Rondje blijft gratis",
-    "supportText": "Geen advertenties en geen abonnement. Wil je helpen om Rondje online en veilig te houden? Kijk hoe, met of zonder geld.",
+    "supportTitle": "Rondje Mee blijft gratis",
+    "supportText": "Geen advertenties en geen abonnement. Wil je helpen om Rondje Mee online en veilig te houden? Kijk hoe, met of zonder geld.",
     "flyer": "Print een flyer voor je buurt",
     "email": "E-mail",
     "emailNotifications": "Stuur me een e-mail bij belangrijke meldingen",
-    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje.",
+    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje Mee.",
     "pushNotifications": "Pushmeldingen in deze browser",
     "pushHint": "Een melding bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt.",
-    "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser.",
+    "pushBlocked": "Je browser blokkeert meldingen voor Rondje Mee. Zet ze aan in de instellingen van je browser.",
     "progressTitle": "Jouw voortgang",
     "weeklyGoal": "Weekdoel",
     "weeklyGoalHint": "Hoe vaak wil je een rondje lopen? Een week overslaan mag altijd.",
@@ -918,8 +918,8 @@
     "alertsText": "Berichten, verzoeken en afspraken krijg je altijd; extra seintjes alleen als je ze hieronder zelf aanzet.",
     "reminders": "Extra seintjes",
     "remindersHint": "Alleen extra's: je eerste stappen, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per week; doe je drie keer niets met zo'n seintje, dan gaan ze vanzelf uit. Berichten, verzoeken en afspraken krijg je altijd, ook als dit uit staat.",
-    "pushIos": "Meldingen op je iPhone? Die werken zodra Rondje op je beginscherm staat:",
-    "pushIosInApp": "Meldingen op je iPhone? Open Rondje eerst in Safari en zet het daar op je beginscherm."
+    "pushIos": "Meldingen op je iPhone? Die werken zodra Rondje Mee op je beginscherm staat:",
+    "pushIosInApp": "Meldingen op je iPhone? Open Rondje Mee eerst in Safari en zet het daar op je beginscherm."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -967,7 +967,7 @@
         "q": "De hond bijt een andere hond. Wat doe je?",
         "a0": "Snel doorlopen",
         "a1": "Niets, het hoort erbij",
-        "a2": "Zorg dat iedereen veilig is, wissel gegevens uit, bel de eigenaar en meld het in Rondje",
+        "a2": "Zorg dat iedereen veilig is, wissel gegevens uit, bel de eigenaar en meld het in Rondje Mee",
         "why": "Eerst iedereen veilig. Daarna gegevens uitwisselen, de eigenaar bellen en het melden, zodat iedereen weet wat er gebeurde."
       },
       "stress": {
@@ -1039,7 +1039,7 @@
     "cancelWalk": "Annuleren",
     "staff": "Medewerkers",
     "addStaff": "Medewerker toevoegen",
-    "staffHint": "De medewerker moet eerst zelf een Rondje-account maken.",
+    "staffHint": "De medewerker moet eerst zelf een Rondje Mee-account maken.",
     "errors": {
       "invalid": "Controleer de verplichte velden.",
       "authorized": "Bevestig dat je de opvang mag vertegenwoordigen.",
@@ -1059,7 +1059,7 @@
     "benefit3Title": "Jij houdt de regie",
     "benefit3": "Bij de wandeling bekijk je het ID van nieuwe vrijwilligers en noteer je wie er was en wie niet kwam.",
     "benefit4Title": "Een vaste groep jonge wandelaars",
-    "benefit4": "Rondje vindt wandelaars van 18 tot 30 die graag vaker naar buiten willen. Gratis, zonder abonnement.",
+    "benefit4": "Rondje Mee vindt wandelaars van 18 tot 30 die graag vaker naar buiten willen. Gratis, zonder abonnement.",
     "loginFirst": "Maak eerst je eigen account. Daarna meld je de opvang aan; dat duurt twee minuten.",
     "finishProfile": "Maak eerst je profiel af",
     "where": "Waar is de opvang?",
@@ -1107,7 +1107,7 @@
     "providesLabel": "Wat krijgen wandelaars van jullie mee?",
     "providesHint": "Dit wordt de standaard voor nieuwe honden. Per hond kun je het aanpassen.",
     "defaultWalkMinutes": "Hoe lang duurt een wandeling meestal? (minuten)",
-    "coordinatorHint": "Contactpersoon voor Rondje. Niet openbaar: alleen Rondje ziet dit, voor de controle en voor vragen.",
+    "coordinatorHint": "Contactpersoon voor Rondje Mee. Niet openbaar: alleen Rondje Mee ziet dit, voor de controle en voor vragen.",
     "coordinatorName": "Naam contactpersoon",
     "coordinatorEmail": "E-mailadres contactpersoon",
     "coordinatorPhone": "Telefoon contactpersoon",
@@ -1131,7 +1131,7 @@
     "draftsOpen": "Afmaken en online zetten",
     "unnamed": "Nog zonder naam",
     "details": "Gegevens van de opvang",
-    "detailsLede": "Wat wandelaars over jullie zien, en hoe ze jullie bereiken. De contactpersoon is alleen voor Rondje.",
+    "detailsLede": "Wat wandelaars over jullie zien, en hoe ze jullie bereiken. De contactpersoon is alleen voor Rondje Mee.",
     "visibleAfterCheck": "Zichtbaar na controle",
     "poster": "Poster"
   },
@@ -1145,29 +1145,29 @@
     "empty": "Nog geen groepswandelingen in dit land. Bekijk de opvangen in de buurt.",
     "level": "Niveau: {level}",
     "at": "Verzamelen: {place}",
-    "idNote": "Neem een geldig identiteitsbewijs mee. De begeleider bekijkt het; Rondje bewaart geen kopie.",
+    "idNote": "Neem een geldig identiteitsbewijs mee. De begeleider bekijkt het; Rondje Mee bewaart geen kopie.",
     "meetDogs": "Bekijk de honden van deze opvang",
     "eventName": "Groepswandeling bij {shelter}"
   },
   "directory": {
     "title": "Opvangen in Nederland, België en Spanje",
-    "lede": "Opvangen met wandelvrijwilligers. Partners zie je direct in Rondje; bij de andere kun je via hun eigen website vrijwilliger worden.",
+    "lede": "Opvangen met wandelvrijwilligers. Partners zie je direct in Rondje Mee; bij de andere kun je via hun eigen website vrijwilliger worden.",
     "metaDescription": "Opvangen met wandelvrijwilligers. Partners zie je direct in {app}; bij de andere kun je via hun eigen website vrijwilliger worden.",
-    "partner": "Op Rondje",
-    "notPartner": "Nog niet op Rondje",
+    "partner": "Op Rondje Mee",
+    "notPartner": "Nog niet op Rondje Mee",
     "walking": "Heeft wandelvrijwilligers",
     "website": "Website",
-    "claim": "Werk je hier? Zet je opvang op Rondje",
+    "claim": "Werk je hier? Zet je opvang op Rondje Mee",
     "unverified": "Gegevens uit openbare bronnen, nog niet gecontroleerd.",
     "claimShort": "Dit is mijn opvang",
     "dogs": "{n, plural, =0 {nog geen honden} one {# hond} other {# honden}}",
-    "noPartners": "Hier zijn nog geen opvangen op Rondje. Werk je bij een opvang? Meld hem hieronder aan.",
+    "noPartners": "Hier zijn nog geen opvangen op Rondje Mee. Werk je bij een opvang? Meld hem hieronder aan.",
     "seeDogs": "Bekijk honden",
     "vote": "Ik wil hier wandelen",
     "voted": "Je stem telt",
     "votesHint": "Hoe meer mensen bij een opvang willen wandelen, hoe eerder we die opvang uitnodigen. We nemen zelf contact op, nooit namens jou.",
     "tipTitle": "Ken je een opvang die hier niet staat?",
-    "tipText": "Tip hem. Wij nemen zelf contact op met de opvang, en laten het je weten als hij op Rondje komt.",
+    "tipText": "Tip hem. Wij nemen zelf contact op met de opvang, en laten het je weten als hij op Rondje Mee komt.",
     "tipButton": "Tip een opvang"
   },
   "help": {
@@ -1181,19 +1181,19 @@
       "young": "Voor jongeren tussen 16 en 27.",
       "children": "Voor kinderen en jongeren."
     },
-    "notTherapy": "Rondje is geen hulpverlening en stelt geen diagnoses. Gaat het langer niet goed? Je huisarts kan met je meedenken.",
+    "notTherapy": "Rondje Mee is geen hulpverlening en stelt geen diagnoses. Gaat het langer niet goed? Je huisarts kan met je meedenken.",
     "dogTitle": "Iets met een hond?",
     "lostPets": "Vermiste of gevonden dieren: {name}",
     "animalEmergency": "Dieren in nood: {name}",
     "police": "Geen spoed, wel politie nodig? Bel {number}.",
     "website": "Website",
-    "contact": "Een vraag voor Rondje zelf, bijvoorbeeld over je account of je privacy?",
+    "contact": "Een vraag voor Rondje Mee zelf, bijvoorbeeld over je account of je privacy?",
     "contactLink": "Zo bereik je ons"
   },
   "contact": {
     "title": "Contact",
     "heading": "Zo bereik je ons",
-    "lede": "Een vraag, een privacyverzoek, een klacht of een idee? Hier lees je hoe je Rondje bereikt.",
+    "lede": "Een vraag, een privacyverzoek, een klacht of een idee? Hier lees je hoe je Rondje Mee bereikt.",
     "emailTitle": "Mail ons",
     "emailText": "Voor vragen, privacyverzoeken, klachten en samenwerken. Je kunt ons schrijven in het Nederlands, Engels, Spaans of Frans.",
     "soonTitle": "Ons e-mailadres staat hier binnenkort",
@@ -1206,7 +1206,7 @@
     "moreTitle": "Meer lezen"
   },
   "safety": {
-    "title": "Hoe Rondje veiligheid regelt",
+    "title": "Hoe Rondje Mee veiligheid regelt",
     "lede": "Mensen geven niet zomaar hun hond mee. Daarom bouwen we vertrouwen stap voor stap op, en houden we het platform schoon.",
     "levels": "Stap voor stap",
     "level1": "Nieuw account: eerst de veiligheidsquiz. Daarna kun je een kennismaking aanvragen of meelopen met een begeleide groepswandeling.",
@@ -1217,9 +1217,9 @@
     "after": "Na het rondje",
     "afterText": "Beide kanten geven privé feedback. Een gewonde of gestreste hond, of iemand die zich onveilig voelde, komt meteen bij ons team.",
     "fraud": "Fraude en misbruik",
-    "fraudText": "Rondje is gratis: wie om geld vraagt, valt op. Berichten met betaalverzoeken, rekeningnummers of links worden gemarkeerd. Opvangen worden gecontroleerd met hun KvK-, KBO- of CIF-nummer. Wie een hond of mens slecht behandelt, wordt geblokkeerd en gemeld waar dat moet.",
+    "fraudText": "Rondje Mee is gratis: wie om geld vraagt, valt op. Berichten met betaalverzoeken, rekeningnummers of links worden gemarkeerd. Opvangen worden gecontroleerd met hun KvK-, KBO- of CIF-nummer. Wie een hond of mens slecht behandelt, wordt geblokkeerd en gemeld waar dat moet.",
     "liability": "Wie is waarvoor verantwoordelijk?",
-    "liabilityText": "Rondje brengt mensen met elkaar in contact en is zelf geen partij bij de afspraak. De eigenaar blijft aansprakelijk voor schade die de hond veroorzaakt en moet daarvoor verzekerd zijn. Wandelaars raden we een eigen aansprakelijkheidsverzekering aan. Lees de voorwaarden voor alle details.",
+    "liabilityText": "Rondje Mee brengt mensen met elkaar in contact en is zelf geen partij bij de afspraak. De eigenaar blijft aansprakelijk voor schade die de hond veroorzaakt en moet daarvoor verzekerd zijn. Wandelaars raden we een eigen aansprakelijkheidsverzekering aan. Lees de voorwaarden voor alle details.",
     "report": "Iets gezien of meegemaakt?",
     "reportText": "Meld het via de knop ‘Melden’ bij een profiel, hond of rondje. We proberen binnen 24 uur te kijken."
   },
@@ -1259,11 +1259,11 @@
       "group-signup": "{walkerName} loopt mee met een groepswandeling.",
       "org-verified": "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.",
       "org-pending": "{orgName} heeft zich aangemeld als opvang. Controleer de gegevens.",
-      "shelter-joined": "{orgName} staat nu op Rondje. Bekijk de honden!",
+      "shelter-joined": "{orgName} staat nu op Rondje Mee. Bekijk de honden!",
       "group-walk-new": "Er is een groepswandeling gepland bij {orgName}. Loop je mee?",
       "walk-photo": "Nieuwe foto van {dogName} tijdens het rondje.",
       "chat-message": "{senderName} stuurde een bericht over {dogName}.",
-      "nudge-step": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Maak je je profiel af?} dog {Zet je hond op Rondje, dan kunnen wandelaars uit je buurt een rondje aanbieden.} quiz {Je volgende stap: de veiligheidsquiz. Een paar vragen, en je weet waar je op let.} meet {Zin in een eerste kennismaking? Kijk welke honden er bij jou in de buurt wonen.} other {Je volgende stap op Rondje staat klaar.}}",
+      "nudge-step": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Maak je je profiel af?} dog {Zet je hond op Rondje Mee, dan kunnen wandelaars uit je buurt een rondje aanbieden.} quiz {Je volgende stap: de veiligheidsquiz. Een paar vragen, en je weet waar je op let.} meet {Zin in een eerste kennismaking? Kijk welke honden er bij jou in de buurt wonen.} other {Je volgende stap op Rondje Mee staat klaar.}}",
       "nudge-challenge": "Nieuwe maand, nieuwe uitdaging: {city} loopt samen {goal} rondjes. Loop je mee?",
       "challenge-done": "{city} heeft de uitdaging gehaald: {goal} rondjes samen! {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel!",
       "nudge-owner": "{dogName} staat gewoon online, maar er wonen nog weinig wandelaars bij jou in de buurt. Dat ligt niet aan jou of aan {dogName}.",
@@ -1367,7 +1367,7 @@
   },
   "banned": {
     "title": "Je account is geblokkeerd",
-    "text": "Je kunt Rondje niet meer gebruiken. Reden: {reason}. Ben je het hier niet mee eens? Mail ons, dan kijken we opnieuw.",
+    "text": "Je kunt Rondje Mee niet meer gebruiken. Reden: {reason}. Ben je het hier niet mee eens? Mail ons, dan kijken we opnieuw.",
     "noReason": "niet opgegeven",
     "contact": "Mail naar <email>{address}</email> met je naam en het e-mailadres van je account.",
     "contactPage": "Op de <link>contactpagina</link> lees je hoe je ons bereikt. Vermeld je naam en het e-mailadres van je account."
@@ -1446,12 +1446,12 @@
     "noteHint": "Zet hier geen namen, telefoonnummers of e-mailadressen van mensen in.",
     "submit": "Tip versturen",
     "done": {
-      "tipped": "Bedankt voor je tip! We nemen zelf contact op met {name}. Komt de opvang op Rondje, dan laten we het je weten.",
+      "tipped": "Bedankt voor je tip! We nemen zelf contact op met {name}. Komt de opvang op Rondje Mee, dan laten we het je weten.",
       "voted": "Bedankt! {name} staat al in onze lijst, en we hebben je stem geteld. Hoe meer mensen er willen wandelen, hoe eerder we de opvang uitnodigen.",
       "pending": "{name} heeft zich al aangemeld en wordt nu gecontroleerd. Binnenkort staan de honden erop."
     },
     "errors": {
-      "exists": "{name} staat al op Rondje.",
+      "exists": "{name} staat al op Rondje Mee.",
       "contact": "Laat telefoonnummers, e-mailadressen en rekeningnummers weg. We bewaren alleen gegevens over de opvang zelf.",
       "website": "Dit lijkt geen geldig webadres. Bijvoorbeeld: www.opvang.nl",
       "too-many": "Je hebt vandaag al {max} tips gegeven. Morgen kan het weer.",
@@ -1459,10 +1459,10 @@
     },
     "seeShelter": "Bekijk de honden",
     "loginTitle": "Log in om een opvang te tippen",
-    "loginText": "Zo houden we spam buiten, en kunnen we je laten weten wanneer de opvang op Rondje komt.",
+    "loginText": "Zo houden we spam buiten, en kunnen we je laten weten wanneer de opvang op Rondje Mee komt.",
     "privacy": "We bewaren je tip en wie hem gaf, en sturen je een melding als de opvang aansluit. Afgehandelde tips verwijderen we na een jaar.",
     "ownerTitle": "Ken je iemand met een hond die hulp kan gebruiken?",
-    "ownerText": "Rondje neemt nooit zelf contact op met mensen die zich niet hebben aangemeld, en we bewaren hier niets over hen. Zo help je wel:",
+    "ownerText": "Rondje Mee neemt nooit zelf contact op met mensen die zich niet hebben aangemeld, en we bewaren hier niets over hen. Zo help je wel:",
     "ownerStep1": "Vraag het eerst zelf, bijvoorbeeld bij de koffie. Vertel dat het gratis is en dat jullie elkaar altijd eerst samen ontmoeten.",
     "ownerStep2": "Help met aanmelden: je kunt een hond ook aanmelden voor iemand anders, als die dat goed vindt.",
     "ownerAddDog": "Hond aanmelden voor iemand anders",
@@ -1474,23 +1474,23 @@
   },
   "support": {
     "eyebrow": "Gratis, en dat blijft zo",
-    "title": "Maak Rondje mogelijk",
-    "lede": "Rondje is gratis voor wandelaars, eigenaren en opvangen, en dat blijft zo. Toch kost het geld om Rondje veilig en online te houden. Zo zit dat.",
+    "title": "Maak Rondje Mee mogelijk",
+    "lede": "Rondje Mee is gratis voor wandelaars, eigenaren en opvangen, en dat blijft zo. Toch kost het geld om Rondje Mee veilig en online te houden. Zo zit dat.",
     "metaDescription": "{app} is gratis voor wandelaars, eigenaren en opvangen, en dat blijft zo. Toch kost het geld om {app} veilig en online te houden. Zo zit dat.",
     "promiseTitle": "Onze belofte",
     "promise": {
-      "free": "Rondje blijft gratis voor iedereen: geen abonnement, geen betaalmuur, geen premiumversie.",
-      "ads": "Geen advertenties in Rondje.",
+      "free": "Rondje Mee blijft gratis voor iedereen: geen abonnement, geen betaalmuur, geen premiumversie.",
+      "ads": "Geen advertenties in Rondje Mee.",
       "data": "We verkopen nooit gegevens, en delen ze niet voor marketing.",
       "sponsors": "Een sponsor of partner bepaalt nooit welke honden of mensen je ziet.",
-      "equal": "Wie Rondje steunt, krijgt geen voorrang en geen extra's. Iedereen gebruikt Rondje op dezelfde manier."
+      "equal": "Wie Rondje Mee steunt, krijgt geen voorrang en geen extra's. Iedereen gebruikt Rondje Mee op dezelfde manier."
     },
-    "costsTitle": "Wat Rondje kost",
-    "costsLede": "Een eerlijke schatting, van nu tot een groter Rondje. Hoe meer mensen Rondje gebruiken, hoe meer het kost.",
+    "costsTitle": "Wat Rondje Mee kost",
+    "costsLede": "Een eerlijke schatting, van nu tot een groter Rondje Mee. Hoe meer mensen Rondje Mee gebruiken, hoe meer het kost.",
     "costs": {
       "hosting": {
         "label": "Website en app",
-        "why": "Hosting, zodat Rondje snel en veilig draait."
+        "why": "Hosting, zodat Rondje Mee snel en veilig draait."
       },
       "database": {
         "label": "Database",
@@ -1536,9 +1536,9 @@
     },
     "costsTotal": "Samen ongeveer {min} tot {max} per maand, zonder de eenmalige kosten.",
     "costsNote": "Schatting, bijgewerkt op {date}. We houden de kosten zo laag mogelijk.",
-    "giveTitle": "Steun Rondje",
+    "giveTitle": "Steun Rondje Mee",
     "giveButton": "Steun {app} via {platform}",
-    "giveSoon": "Binnenkort kun je Rondje hier ook met een kleine bijdrage steunen. Tot die tijd helpt alles hieronder ook enorm.",
+    "giveSoon": "Binnenkort kun je Rondje Mee hier ook met een kleine bijdrage steunen. Tot die tijd helpt alles hieronder ook enorm.",
     "helpTitle": "Helpen zonder geld",
     "help": {
       "tipTitle": "Tip een opvang",
@@ -1557,12 +1557,12 @@
     "faqTitle": "Veelgestelde vragen",
     "faq": {
       "free": {
-        "q": "Waarom is Rondje gratis?",
-        "a": "Omdat geld geen drempel mag zijn om samen naar buiten te gaan, voor jongeren en voor ouderen met een hond. Daarom vragen we niemand te betalen om Rondje te gebruiken."
+        "q": "Waarom is Rondje Mee gratis?",
+        "a": "Omdat geld geen drempel mag zijn om samen naar buiten te gaan, voor jongeren en voor ouderen met een hond. Daarom vragen we niemand te betalen om Rondje Mee te gebruiken."
       },
       "where": {
         "q": "Waar gaat mijn bijdrage naartoe?",
-        "a": "Naar {operator}, voor de kosten hierboven: hosting, database, kaarten, de apps en materiaal voor opvangen. Wat overblijft, gaat naar het verder bouwen en bekendmaken van Rondje."
+        "a": "Naar {operator}, voor de kosten hierboven: hosting, database, kaarten, de apps en materiaal voor opvangen. Wat overblijft, gaat naar het verder bouwen en bekendmaken van Rondje Mee."
       },
       "tax": {
         "q": "Is een bijdrage fiscaal aftrekbaar?",
@@ -1573,8 +1573,8 @@
         "a": "Nee, en dat is bewust. Wie steunt, krijgt geen voorrang, geen extra functies en geen invloed op koppelen of moderatie. Wel onze dank, en af en toe een update."
       },
       "sponsors": {
-        "q": "Mogen bedrijven Rondje sponsoren?",
-        "a": "Ja, als ze zich aan onze spelregels houden: geen advertenties in Rondje, geen gegevens, en geen invloed op welke honden of mensen zichtbaar zijn. Een sponsor kan bijvoorbeeld poepzakjes voor opvangen betalen."
+        "q": "Mogen bedrijven Rondje Mee sponsoren?",
+        "a": "Ja, als ze zich aan onze spelregels houden: geen advertenties in Rondje Mee, geen gegevens, en geen invloed op welke honden of mensen zichtbaar zijn. Een sponsor kan bijvoorbeeld poepzakjes voor opvangen betalen."
       },
       "app": {
         "q": "Waarom kan ik niet steunen in de app?",
@@ -1588,7 +1588,7 @@
         "a": "Een maandelijkse bijdrage helpt de vaste kosten te dekken, zoals hosting en kaarten. De crowdfunding is een eenmalige actie voor eenmalige kosten, zoals de apps en de juridische check. Beide gaan naar {operator}."
       }
     },
-    "operatorUnknown": "de makers van Rondje",
+    "operatorUnknown": "de makers van Rondje Mee",
     "giveIntro": "Bijdragen gaan naar {operator}, dat {app} bouwt en onderhoudt. Elke bijdrage, klein of groot, helpt de kosten te dekken.",
     "monthlyPill": "Maandelijks",
     "monthlyTitle": "Steun elke maand",
@@ -1617,25 +1617,25 @@
     "whyLink": "Lees waarom"
   },
   "about": {
-    "eyebrow": "Over Rondje",
+    "eyebrow": "Over Rondje Mee",
     "title": "Samen een rondje, goed voor jou en voor een hond",
-    "lede": "Rondje brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer goed kunnen uitlaten, en uit opvangen.",
+    "lede": "Rondje Mee brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer goed kunnen uitlaten, en uit opvangen.",
     "metaDescription": "{app} brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer kunnen uitlaten, en uit opvangen.",
-    "whyTitle": "Waarom Rondje",
+    "whyTitle": "Waarom Rondje Mee",
     "why1": "Veel jongeren willen graag naar buiten en houden van honden, maar kunnen er zelf geen hebben. Tegelijk zijn er ouderen en mensen die ziek zijn, die hun hond niet meer zo vaak kunnen uitlaten als ze zouden willen. En in opvangen wacht elke hond op een extra wandeling.",
-    "why2": "Een vast rondje met een hond is goed voor iedereen: beweging, buitenlucht en een praatje met een buurtgenoot. Rondje maakt dat makkelijk, veilig en gratis.",
-    "why3": "Rondje is geen hulpverlening of therapie. Gaat het niet goed met je? Op de hulppagina vind je waar je terechtkunt.",
+    "why2": "Een vast rondje met een hond is goed voor iedereen: beweging, buitenlucht en een praatje met een buurtgenoot. Rondje Mee maakt dat makkelijk, veilig en gratis.",
+    "why3": "Rondje Mee is geen hulpverlening of therapie. Gaat het niet goed met je? Op de hulppagina vind je waar je terechtkunt.",
     "howTitle": "Hoe het werkt",
     "how": {
       "meet": "De eerste keer ontmoet je de eigenaar en de hond altijd samen. Pas daarna mag je alleen wandelen, als de eigenaar dat wil.",
       "adults": "Iedereen die wandelt is 18 jaar of ouder en doet eerst een korte veiligheidsquiz.",
       "shelters": "Bij opvangen wandel je in begeleide groepswandelingen, op momenten die de opvang kiest.",
-      "free": "Rondje is gratis. Niemand vraagt of betaalt geld voor een wandeling."
+      "free": "Rondje Mee is gratis. Niemand vraagt of betaalt geld voor een wandeling."
     },
     "safetyLink": "Lees hoe we veiligheid regelen",
     "whoTitle": "Wie zit erachter",
-    "who": "Rondje is een klein, onafhankelijk initiatief uit Nederland, gemaakt door mensen die van honden houden en buurtgenoten met elkaar willen verbinden.",
-    "whoOperator": "Rondje is een klein, onafhankelijk initiatief uit Nederland, gebouwd en onderhouden door {operator}.",
+    "who": "Rondje Mee is een klein, onafhankelijk initiatief uit Nederland, gemaakt door mensen die van honden houden en buurtgenoten met elkaar willen verbinden.",
+    "whoOperator": "Rondje Mee is een klein, onafhankelijk initiatief uit Nederland, gebouwd en onderhouden door {operator}.",
     "draft": "Concept: alleen beheerders zien dit",
     "storyFallback": "Dit verhaal is (nog) alleen in het Nederlands.",
     "helpLine": "Gaat het niet goed met je? Je hoeft het niet alleen te doen.",
@@ -1663,9 +1663,9 @@
     "headline": "Wandel met onze honden",
     "text": "Gratis, voor iedereen van 18 jaar en ouder. Je loopt mee in een begeleide groepswandeling en leert de honden rustig kennen.",
     "when": "Wanneer",
-    "qrLabel": "QR-code naar de honden van de opvang op Rondje",
+    "qrLabel": "QR-code naar de honden van de opvang op Rondje Mee",
     "cta": "Scan, kies een hond en meld je aan voor een groepswandeling.",
-    "footer": "Rondje: gratis samen wandelen met honden uit de buurt en de opvang."
+    "footer": "Rondje Mee: gratis samen wandelen met honden uit de buurt en de opvang."
   },
   "flyer": {
     "title": "Flyer voor je buurt",
@@ -1677,8 +1677,8 @@
     "where": "Goede plekken: de supermarkt, de bibliotheek, de huisarts, de dierenarts, het buurthuis of je portiek. Vraag wel even of het mag.",
     "yourLink": "De QR-code bevat jouw persoonlijke uitnodigingslink. Zo zie je in je profiel hoeveel mensen via jou kwamen.",
     "print": "Printen of opslaan als pdf",
-    "qrLabel": "QR-code naar Rondje",
-    "footer": "Rondje is gratis en blijft gratis. Rondje brengt mensen met elkaar in contact en is zelf geen partij bij de afspraken.",
+    "qrLabel": "QR-code naar Rondje Mee",
+    "footer": "Rondje Mee is gratis en blijft gratis. Rondje Mee brengt mensen met elkaar in contact en is zelf geen partij bij de afspraken.",
     "owner": {
       "headline": "Kan uw hond wel een extra rondje gebruiken?",
       "text": "Lukt het niet meer zo goed om de hond uit te laten? Een jongere uit de buurt loopt gratis een vast rondje met uw hond. U leert elkaar eerst samen kennen, en u bepaalt wat er mag.",
@@ -1704,31 +1704,31 @@
     }
   },
   "email": {
-    "open": "Open Rondje",
-    "footer": "Je krijgt deze e-mail omdat je een account hebt bij Rondje. E-mails bij meldingen zet je uit in je profiel, onder Instellingen.",
-    "resetFooter": "Je krijgt deze e-mail omdat iemand een nieuw wachtwoord vroeg voor je account bij Rondje.",
+    "open": "Open Rondje Mee",
+    "footer": "Je krijgt deze e-mail omdat je een account hebt bij Rondje Mee. E-mails bij meldingen zet je uit in je profiel, onder Instellingen.",
+    "resetFooter": "Je krijgt deze e-mail omdat iemand een nieuw wachtwoord vroeg voor je account bij Rondje Mee.",
     "reset": {
-      "subject": "Een nieuw wachtwoord voor Rondje",
+      "subject": "Een nieuw wachtwoord voor Rondje Mee",
       "heading": "Kies een nieuw wachtwoord",
-      "body": "Iemand (hopelijk jij) vroeg om een nieuw wachtwoord voor je account bij Rondje. De link hieronder werkt een uur.",
+      "body": "Iemand (hopelijk jij) vroeg om een nieuw wachtwoord voor je account bij Rondje Mee. De link hieronder werkt een uur.",
       "cta": "Nieuw wachtwoord kiezen",
       "ignore": "Heb jij dit niet gevraagd? Dan hoef je niets te doen: je wachtwoord blijft hetzelfde."
     },
     "kinds": {
       "request-new": {
         "subject": "{via, select, walk {{walkerName} wil kennismaken met {dogName} tijdens een wandeling} home {{walkerName} wil kennismaken met {dogName}, bij jou thuis} phone {{walkerName} wil eerst bellen om kennis te maken met {dogName}} video {{walkerName} wil eerst videobellen om kennis te maken met {dogName}} other {{walkerName} wil met {dogName} wandelen}}",
-        "body": "{via, select, home {Bekijk de aanvraag in Rondje en laat weten of het past. Spreek overdag af; familie of een buur mag er gerust bij zijn.} phone {Bekijk de aanvraag in Rondje en laat weten of het past. Een belletje telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} video {Bekijk de aanvraag in Rondje en laat weten of het past. Een videogesprek telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} other {Bekijk de aanvraag in Rondje en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen.}}"
+        "body": "{via, select, home {Bekijk de aanvraag in Rondje Mee en laat weten of het past. Spreek overdag af; familie of een buur mag er gerust bij zijn.} phone {Bekijk de aanvraag in Rondje Mee en laat weten of het past. Een belletje telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} video {Bekijk de aanvraag in Rondje Mee en laat weten of het past. Een videogesprek telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} other {Bekijk de aanvraag in Rondje Mee en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen.}}"
       },
       "request-accepted": {
         "subject": "{via, select, walk {Ja! Je kennismaking met {dogName} staat} home {Ja! Je kennismaking met {dogName} staat} phone {Ja! Je belafspraak over {dogName} staat} video {Ja! Je videogesprek over {dogName} staat} other {Ja! Je afspraak met {dogName} staat}}",
-        "body": "{via, select, home {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. Spreek overdag af en laat iemand weten waar je bent.} phone {In Rondje zie je nu hoe je de eigenaar bereikt. Spreek in de chat af wie wie belt. Na het gesprek plan je de kennismaking in het echt.} video {Spreek in de chat van Rondje af hoe jullie videobellen. Na het gesprek plan je de kennismaking in het echt.} walk {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen.} other {Je ziet nu waar jullie afspreken en hoe je de eigenaar bereikt. Tijdens het rondje kan de eigenaar live meekijken.}}"
+        "body": "{via, select, home {In Rondje Mee zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. Spreek overdag af en laat iemand weten waar je bent.} phone {In Rondje Mee zie je nu hoe je de eigenaar bereikt. Spreek in de chat af wie wie belt. Na het gesprek plan je de kennismaking in het echt.} video {Spreek in de chat van Rondje Mee af hoe jullie videobellen. Na het gesprek plan je de kennismaking in het echt.} walk {In Rondje Mee zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen.} other {Je ziet nu waar jullie afspreken en hoe je de eigenaar bereikt. Tijdens het rondje kan de eigenaar live meekijken.}}"
       },
       "walk-overdue": {
         "subject": "Het rondje met {dogName} duurt langer dan gepland",
-        "body": "Het rondje loopt uit. Kijk in Rondje waar ze nu zijn, of bel de wandelaar. Is er nood? Bel 112."
+        "body": "Het rondje loopt uit. Kijk in Rondje Mee waar ze nu zijn, of bel de wandelaar. Is er nood? Bel 112."
       },
       "org-verified": {
-        "subject": "Je opvang staat op Rondje",
+        "subject": "Je opvang staat op Rondje Mee",
         "body": "We hebben je opvang gecontroleerd. Je honden zijn nu zichtbaar voor wandelaars. Plan een groepswandeling om te beginnen."
       },
       "org-pending": {
@@ -1736,16 +1736,16 @@
         "body": "{orgName} heeft zich aangemeld. Controleer de gegevens in Beheer."
       },
       "shelter-joined": {
-        "subject": "{orgName} staat nu op Rondje",
+        "subject": "{orgName} staat nu op Rondje Mee",
         "body": "Je tipte of stemde op deze opvang, en hij doet nu mee. Bekijk de honden en loop mee met een groepswandeling."
       },
       "chat-message": {
         "subject": "{senderName} stuurde je een bericht over {dogName}",
-        "body": "Lees en beantwoord het in Rondje. Zo hoef je je telefoonnummer pas te delen als jullie elkaar kennen."
+        "body": "Lees en beantwoord het in Rondje Mee. Zo hoef je je telefoonnummer pas te delen als jullie elkaar kennen."
       },
       "nudge-step": {
-        "subject": "{step, select, about {Maak je profiel af} dog {Zet je hond op Rondje} quiz {Je volgende stap: de veiligheidsquiz} meet {Zin in een eerste kennismaking?} other {Je volgende stap op Rondje}}",
-        "body": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Het kost maar een minuutje.} dog {Zet je hond op Rondje, dan kunnen wandelaars uit je buurt een rondje aanbieden. De eerste keer ontmoeten jullie elkaar altijd samen.} quiz {Een paar vragen over veilig wandelen, en je weet waar je op let. Daarna kun je een kennismaking aanvragen.} meet {Kijk welke honden er bij jou in de buurt wonen en vraag een kennismaking aan. De eerste keer loop je samen met de eigenaar.} other {Je volgende stap op Rondje staat klaar.}}"
+        "subject": "{step, select, about {Maak je profiel af} dog {Zet je hond op Rondje Mee} quiz {Je volgende stap: de veiligheidsquiz} meet {Zin in een eerste kennismaking?} other {Je volgende stap op Rondje Mee}}",
+        "body": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Het kost maar een minuutje.} dog {Zet je hond op Rondje Mee, dan kunnen wandelaars uit je buurt een rondje aanbieden. De eerste keer ontmoeten jullie elkaar altijd samen.} quiz {Een paar vragen over veilig wandelen, en je weet waar je op let. Daarna kun je een kennismaking aanvragen.} meet {Kijk welke honden er bij jou in de buurt wonen en vraag een kennismaking aan. De eerste keer loop je samen met de eigenaar.} other {Je volgende stap op Rondje Mee staat klaar.}}"
       },
       "nudge-challenge": {
         "subject": "{city} loopt samen {goal} rondjes",
@@ -1761,30 +1761,30 @@
       },
       "request-reminder": {
         "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} home {kennismaken met {dogName}, thuis} phone {eerst bellen over {dogName}} video {eerst videobellen over {dogName}} other {rondje met {dogName}}}",
-        "body": "Alles over de afspraak, zoals waar jullie afspreken en hoe je elkaar bereikt, staat in Rondje. Lukt het toch niet? Laat het de ander dan op tijd weten via de chat."
+        "body": "Alles over de afspraak, zoals waar jullie afspreken en hoe je elkaar bereikt, staat in Rondje Mee. Lukt het toch niet? Laat het de ander dan op tijd weten via de chat."
       },
       "group-walk-reminder": {
         "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}",
-        "body": "Waar jullie verzamelen staat in Rondje, bij de groepswandelingen. Kun je toch niet? Meld je dan af, dan komt je plek vrij voor een ander."
+        "body": "Waar jullie verzamelen staat in Rondje Mee, bij de groepswandelingen. Kun je toch niet? Meld je dan af, dan komt je plek vrij voor een ander."
       },
       "nudge-new-dog": {
         "subject": "{dogName} zoekt een wandelmaatje bij jou in de buurt",
-        "body": "{dogName} staat sinds kort op Rondje, niet ver van jou. Kijk of jullie bij elkaar passen en plan een kennismaking wanneer het jou uitkomt."
+        "body": "{dogName} staat sinds kort op Rondje Mee, niet ver van jou. Kijk of jullie bij elkaar passen en plan een kennismaking wanneer het jou uitkomt."
       }
     },
     "reminderFooter": "Je krijgt dit seintje omdat extra seintjes aanstaan in je profiel. Hooguit één per week. Uitzetten kan in je profiel, onder Meldingen.",
     "verify": {
-      "subject": "Bevestig je e-mailadres voor Rondje",
+      "subject": "Bevestig je e-mailadres voor Rondje Mee",
       "heading": "Is dit jouw e-mailadres?",
-      "body": "Iemand die met dit e-mailadres is ingelogd, vraagt om beheer van Rondje. Was jij dat? Tik dan op de knop. De link werkt een uur.",
+      "body": "Iemand die met dit e-mailadres is ingelogd, vraagt om beheer van Rondje Mee. Was jij dat? Tik dan op de knop. De link werkt een uur.",
       "cta": "Ja, dit is mijn adres",
       "ignore": "Heb jij dit niet gevraagd? Tik dan niet op de knop. Verder hoef je niets te doen.",
-      "footer": "Je krijgt deze e-mail omdat iemand vroeg om dit e-mailadres te bevestigen bij Rondje."
+      "footer": "Je krijgt deze e-mail omdat iemand vroeg om dit e-mailadres te bevestigen bij Rondje Mee."
     }
   },
   "cities": {
     "title": "Honden uitlaten per stad",
-    "lede": "Rondje werkt in elke stad. Per stad zie je welke opvangen er zijn, wanneer er groepswandelingen zijn en hoeveel honden op een rondje wachten.",
+    "lede": "Rondje Mee werkt in elke stad. Per stad zie je welke opvangen er zijn, wanneer er groepswandelingen zijn en hoeveel honden op een rondje wachten.",
     "indexDescription": "{app} werkt in elke stad. Per stad zie je welke opvangen er zijn, wanneer er groepswandelingen zijn en hoeveel honden op een rondje wachten.",
     "metaTitle": "Honden uitlaten in {city}",
     "metaDescription": "Gratis een vast rondje met een hond in {city}: van buren of uit de opvang, groepswandelingen en eerst kennismaken. Zonder advertenties.",
@@ -1793,9 +1793,9 @@
     "seeDogs": "Bekijk honden in {city}",
     "addDog": "Meld een hond aan",
     "sheltersTitle": "Opvangen in {city}",
-    "onRondje": "Op Rondje",
+    "onRondje": "Op Rondje Mee",
     "dogCount": "{n, plural, one {# hond} other {# honden}}",
-    "notYet": "Nog niet op Rondje",
+    "notYet": "Nog niet op Rondje Mee",
     "noShelters": "We kennen nog geen opvang in {city}. Weet jij er een?",
     "voteHint": "Wil je bij een van deze opvangen wandelen? Laat het weten op de opvangenlijst, dan nodigen wij ze uit.",
     "toDirectory": "Naar de opvangenlijst",
@@ -1804,8 +1804,8 @@
     "noWalks": "Er staan nog geen groepswandelingen gepland in {city}.",
     "allWalks": "Alle groepswandelingen",
     "freeTitle": "Altijd gratis, nooit advertenties",
-    "freeText": "Rondje kost niets, voor wandelaars, eigenaren en opvangen. Er komen geen advertenties en geen betaalde versie. Leden en partners houden Rondje in de lucht, en steunen geeft nooit voorrang.",
-    "howFree": "Zo blijft Rondje gratis",
+    "freeText": "Rondje Mee kost niets, voor wandelaars, eigenaren en opvangen. Er komen geen advertenties en geen betaalde versie. Leden en partners houden Rondje Mee in de lucht, en steunen geeft nooit voorrang.",
+    "howFree": "Zo blijft Rondje Mee gratis",
     "otherCities": "Andere steden",
     "all": "Alle steden",
     "footerLink": "Steden"
@@ -1827,7 +1827,7 @@
     "safety": "Spreek de eerste keer altijd samen af, op een plek die jullie allebei kennen. Iets niet in orde? Meld het via het profiel.",
     "back": "Terug naar afspraken",
     "label": "Berichten",
-    "flagged": "Let op: dit bericht gaat over geld of bevat een link. Rondje is gratis: maak nooit geld over en deel geen bankgegevens. Klopt er iets niet? Meld het."
+    "flagged": "Let op: dit bericht gaat over geld of bevat een link. Rondje Mee is gratis: maak nooit geld over en deel geen bankgegevens. Klopt er iets niet? Meld het."
   },
   "today": {
     "metaTitle": "Vandaag",
@@ -1835,7 +1835,7 @@
     "afternoon": "Goedemiddag, {name}",
     "evening": "Goedenavond, {name}",
     "night": "Hoi {name}",
-    "welcomeTitle": "Welkom bij Rondje, {name}!",
+    "welcomeTitle": "Welkom bij Rondje Mee, {name}!",
     "welcomeText": "Je bent nu {level}, level 1. Hieronder staan je eerste stappen: elke stap brengt je dichter bij je eerste rondje.",
     "stepsTitle": "Je eerste stappen",
     "stepsCount": "{done} van {total} gedaan",
@@ -1843,7 +1843,7 @@
     "steps": {
       "account": {
         "title": "Profiel gemaakt",
-        "hint": "Welkom bij Rondje!"
+        "hint": "Welkom bij Rondje Mee!"
       },
       "about": {
         "title": "Een foto en een paar zinnen over jou",
@@ -2014,7 +2014,7 @@
       "groupWalk": "Meelopen met een groepswandeling van een opvang",
       "quiz": "De veiligheidsquiz halen",
       "profile": "Een foto en een paar zinnen over jezelf",
-      "firstDog": "Je hond op Rondje zetten",
+      "firstDog": "Je hond op Rondje Mee zetten",
       "invite": "Een vriend die meedoet via jouw link"
     },
     "earnNote": "Elk rondje telt even zwaar, kort of lang. Ja zeggen op een verzoek levert nooit punten op: die keuze gaat alleen over veiligheid.",
@@ -2095,7 +2095,7 @@
     "meet": "{via, select, home {Kennismaken met {dog}, thuis bij de eigenaar} phone {Kennismaken met {dog}: eerst bellen} video {Kennismaken met {dog}: eerst videobellen} other {Kennismaken met {dog}}}",
     "walk": "Rondje met {dog}",
     "with": "Met {name}.",
-    "open": "Alles over deze afspraak in Rondje: {link}",
+    "open": "Alles over deze afspraak in Rondje Mee: {link}",
     "group": "Groepswandeling bij {org}"
   },
   "chatQuick": {
@@ -2175,10 +2175,10 @@
     }
   },
   "installAsk": {
-    "title": "Zet je Rondje op je beginscherm?",
-    "text": "Dan open je Rondje met één tik, net als een app.",
-    "textPush": "Dan open je Rondje met één tik, net als een app, en kan ik je een seintje geven als er nieuws is.",
-    "inApp": "Je zit nu in de browser van een andere app, en daar kan dat niet. Open Rondje in Safari via het menu ⋯, of kopieer de link en plak hem in Safari. Daar log je één keer opnieuw in.",
+    "title": "Zet Rondje Mee op je beginscherm?",
+    "text": "Dan open je Rondje Mee met één tik, net als een app.",
+    "textPush": "Dan open je Rondje Mee met één tik, net als een app, en kan ik je een seintje geven als er nieuws is.",
+    "inApp": "Je zit nu in de browser van een andere app, en daar kan dat niet. Open Rondje Mee in Safari via het menu ⋯, of kopieer de link en plak hem in Safari. Daar log je één keer opnieuw in.",
     "steps": {
       "share": "Tik op Delen",
       "shareMore": "(zie je dat niet, tik dan eerst op ⋯)",
@@ -2191,7 +2191,7 @@
     "copy": "Kopieer link",
     "copied": "Gekopieerd. Plak de link in Safari.",
     "copyFailed": "Kopiëren lukte niet. Typ in Safari: {address}",
-    "done": "Gelukt! Je vindt Rondje nu op je beginscherm."
+    "done": "Gelukt! Je vindt Rondje Mee nu op je beginscherm."
   },
   "manifest": {
     "description": "Een vast rondje met een hond die op je wacht.",
@@ -2202,21 +2202,21 @@
   "dogShare": {
     "title": "Vertel je buren over {name}",
     "text": "Wandelaars in de buurt kunnen {name} nu vinden. Het gaat sneller als je het ook zelf vertelt: stuur dit bericht naar mensen die je kent, of zet het in een buurtgroep.",
-    "message": "{name} zoekt een wandelmaatje in {city}! Hou je van honden en heb je af en toe tijd voor een rondje? Via Rondje maak je eerst samen kennis. Gratis, voor iedereen van 18 jaar en ouder: {url}",
+    "message": "{name} zoekt een wandelmaatje in {city}! Hou je van honden en heb je af en toe tijd voor een rondje? Via Rondje Mee maak je eerst samen kennis. Gratis, voor iedereen van 18 jaar en ouder: {url}",
     "share": "Delen",
     "whatsapp": "WhatsApp",
     "copy": "Kopiëren",
     "copied": "Gekopieerd. Plak het waar je wilt.",
     "copyFailed": "Kopiëren lukte niet. Selecteer de tekst hierboven en kopieer hem zelf.",
     "poster": "Liever op papier? Print een poster",
-    "privacy": "Wie de link opent, ziet dezelfde pagina van {name} als iedereen op Rondje. Je adres en telefoonnummer blijven privé tot je een afspraak accepteert.",
+    "privacy": "Wie de link opent, ziet dezelfde pagina van {name} als iedereen op Rondje Mee. Je adres en telefoonnummer blijven privé tot je een afspraak accepteert.",
     "posterMetaTitle": "Poster voor je hond",
     "posterTitle": "Poster voor {name}",
     "posterLede": "Print de poster en hang hem op waar buren hem zien: bij de supermarkt, de bibliotheek, de dierenarts of in je portiek. Vraag wel even of het mag.",
     "posterOffline": "{name} staat nu niet online. Zet {name} eerst weer online, anders werkt de QR-code niet.",
     "posterHeadline": "{name} zoekt een wandelmaatje",
     "posterText": "Hou je van honden en heb je af en toe tijd? Ik zoek iemand in {city} die een vast rondje van {minutes} minuten met {name} wil lopen. We maken eerst samen kennis.",
-    "posterQr": "QR-code naar de pagina van {name} op Rondje",
+    "posterQr": "QR-code naar de pagina van {name} op Rondje Mee",
     "posterCta": "Scan de code en maak kennis met {name}."
   },
   "sounds": {
@@ -2530,7 +2530,7 @@
     },
     "composer": {
       "title": "Berichtenbank",
-      "hint": "Kies een bericht, vul de velden in en open het in je eigen mailapp, of kopieer de tekst. Rondje verstuurt zelf niets.",
+      "hint": "Kies een bericht, vul de velden in en open het in je eigen mailapp, of kopieer de tekst. Rondje Mee verstuurt zelf niets.",
       "audience": "Voor wie",
       "template": "Bericht",
       "language": "Taal",
@@ -2616,7 +2616,7 @@
     },
     "costs": {
       "title": "Kosten per maand",
-      "hint": "Wat Rondje nu kost. Jaarbedragen staan per maand; ze tellen pas mee zodra de bijbehorende taak is afgevinkt.",
+      "hint": "Wat Rondje Mee nu kost. Jaarbedragen staan per maand; ze tellen pas mee zodra de bijbehorende taak is afgevinkt.",
       "perYear": "{amount} per jaar",
       "total": "Totaal per maand",
       "perMember": "Kosten per lid",
@@ -2819,7 +2819,7 @@
       },
       "numbers": {
         "title": "Cijfers",
-        "lede": "Hoe Rondje groeit, waar nieuwe mensen vandaan komen en hoe alles is ingesteld.",
+        "lede": "Hoe Rondje Mee groeit, waar nieuwe mensen vandaan komen en hoe alles is ingesteld.",
         "weekly": "Cijfers per week in de lanceerhub"
       }
     }

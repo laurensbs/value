@@ -6,13 +6,13 @@ updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
-# Política de privacidad de Rondje
+# Política de privacidad de Rondje Mee
 
-En esta política te explicamos qué datos personales trata Rondje, para qué, durante cuánto tiempo y qué derechos tienes. Se aplica a la web y a la app de Rondje.
+En esta política te explicamos qué datos personales trata Rondje Mee, para qué, durante cuánto tiempo y qué derechos tienes. Se aplica a la web y a la app de Rondje Mee.
 
 ## 1. ¿Quién es el responsable del tratamiento?
 
-El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], con número de la Cámara de Comercio neerlandesa (KvK) [KvK-nummer].
+El responsable del tratamiento de tus datos en Rondje Mee es [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], con número de la Cámara de Comercio neerlandesa (KvK) [KvK-nummer].
 
 ¿Preguntas sobre privacidad? Escríbenos a {{contact}}. [Pendiente de verificar: si es obligatorio nombrar un delegado de protección de datos. En ese caso, indicar aquí sus datos de contacto.]
 
@@ -53,7 +53,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 
 **Progreso y recordatorios**
 
-- tus puntos, nivel e insignias, calculados a partir de lo que hiciste en Rondje (como paseos, el test de seguridad o una foto para el propietario). Solo tú los ves;
+- tus puntos, nivel e insignias, calculados a partir de lo que hiciste en Rondje Mee (como paseos, el test de seguridad o una foto para el propietario). Solo tú los ves;
 - tu objetivo semanal, si eliges uno, y si quieres recordatorios amables;
 - qué recordatorios te enviamos y cuándo, para no enviarte nunca demasiados.
 
@@ -78,7 +78,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 
 - nombre de la entidad, número KvK, KBO o NIF (antes CIF), dirección, web, Instagram, logo y fotos;
 - datos de contacto públicos para paseadores (correo y teléfono) e información práctica, como los horarios de paseo;
-- una persona de contacto para Rondje (nombre, correo, teléfono). Estos datos no son públicos: solo los ven los administradores de Rondje, para verificar la protectora y para dudas;
+- una persona de contacto para Rondje Mee (nombre, correo, teléfono). Estos datos no son públicos: solo los ven los administradores de Rondje Mee, para verificar la protectora y para dudas;
 - cuentas del equipo.
 
 **Recomendaciones de protectoras**
@@ -86,7 +86,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 - qué protectora recomiendas o dónde quieres pasear (nombre, localidad, web), tu comentario y que la recomendación es tuya;
 - nunca guardamos datos de particulares que menciones. ¿Quieres ayudar a alguien con perro? Pregúntaselo tú, y que esa persona se registre por sí misma.
 
-**Datos de salud.** Rondje no te pregunta por tu salud. No incluyas datos de salud en tu perfil ni en la historia de tu perro, ni tuyos ni de otras personas. Por ejemplo, escribe «ya no puedo caminar mucho» en lugar de mencionar un diagnóstico.
+**Datos de salud.** Rondje Mee no te pregunta por tu salud. No incluyas datos de salud en tu perfil ni en la historia de tu perro, ni tuyos ni de otras personas. Por ejemplo, escribe «ya no puedo caminar mucho» en lugar de mencionar un diagnóstico.
 
 ## 4. ¿Para qué usamos tus datos y con qué base jurídica?
 
@@ -102,7 +102,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 | Mostrar puntos, nivel, insignias y objetivo semanal | Contrato |
 | Recordatorios amables (uno cada tres días como mucho) sobre tus primeros pasos, tu objetivo semanal y el reto de tu ciudad | Interés legítimo: ayudarte a mantener tus paseos. Puedes desactivarlos en tu perfil cuando quieras |
 | Verificar protectoras | Contrato con la protectora, e interés legítimo: evitar cuentas falsas |
-| Gestionar recomendaciones y votos de protectoras: contactar nosotros con ellas y avisarte cuando se unan | Interés legítimo: más protectoras y perros en Rondje. Puedes oponerte siempre |
+| Gestionar recomendaciones y votos de protectoras: contactar nosotros con ellas y avisarte cuando se unan | Interés legítimo: más protectoras y perros en Rondje Mee. Puedes oponerte siempre |
 | Seguridad, resolución de errores, copias de seguridad | Interés legítimo: una plataforma segura y que funcione |
 | Correos de servicio (por ejemplo, una nueva solicitud o un cambio en las condiciones) | Ejecución del contrato |
 | Funciones opcionales, como notificaciones *push* o iniciar sesión con Google o Apple | Consentimiento (que puedes retirar en cualquier momento) o ejecución del contrato |
@@ -133,7 +133,7 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 - **Otros usuarios** ven tu perfil público: nombre, foto, edad o año de nacimiento [pendiente de verificar: qué exactamente], zona aproximada, presentación, experiencia e idiomas.
 - **Tras aceptar** una solicitud, ambas partes ven también el teléfono de la otra, y el paseante ve los datos reservados que el propietario haya habilitado para ello.
 - **Las protectoras** ven los datos de los paseantes que se apuntan con ellas y la asistencia a los paseos en grupo. Si una protectora usa esos datos en su propia gestión de voluntariado, es responsable de ello.
-- **Las valoraciones privadas** nunca las ve la otra persona. Solo puede leerlas un número limitado de personas del equipo de Rondje.
+- **Las valoraciones privadas** nunca las ve la otra persona. Solo puede leerlas un número limitado de personas del equipo de Rondje Mee.
 - **Las autoridades**, como la policía, solo reciben datos cuando la ley lo exige o cuando la vida o la seguridad de alguien está en peligro.
 
 ## 8. Encargados del tratamiento y otros destinatarios
@@ -221,11 +221,11 @@ Algunos datos no podemos borrarlos de inmediato, por ejemplo si son necesarios p
 
 ## 14. Evaluación de impacto (EIPD)
 
-Rondje trata datos de ubicación durante los paseos. Además, pueden usar Rondje personas en situación vulnerable, como propietarios mayores o enfermos. Por eso realizamos una evaluación de impacto relativa a la protección de datos (EIPD) antes de lanzar el servicio, y la mantenemos actualizada [pendiente de verificar: estado].
+Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso realizamos una evaluación de impacto relativa a la protección de datos (EIPD) antes de lanzar el servicio, y la mantenemos actualizada [pendiente de verificar: estado].
 
 ## 15. Edad
 
-Rondje es solo para mayores de 18 años. Si descubrimos que alguien es menor, cerramos la cuenta y borramos sus datos.
+Rondje Mee es solo para mayores de 18 años. Si descubrimos que alguien es menor, cerramos la cuenta y borramos sus datos.
 
 ## 16. Cambios
 

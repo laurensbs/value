@@ -78,7 +78,7 @@
     }
   },
   "footer": {
-    "tagline": "Rondje est une plateforme gratuite qui met en relation promeneurs, propriétaires et refuges. Rondje n'est pas lui-même partie aux accords conclus.",
+    "tagline": "Rondje Mee est une plateforme gratuite qui met en relation promeneurs, propriétaires et refuges. Rondje Mee n'est pas lui-même partie aux accords conclus.",
     "terms": "Conditions",
     "privacy": "Confidentialité",
     "conduct": "Code de conduite",
@@ -86,9 +86,9 @@
     "cookies": "Cookies",
     "shelterTerms": "Conditions refuges",
     "demo": "Mode démo : aucune base de données n'est encore connectée. Les données ne sont pas enregistrées.",
-    "more": "En savoir plus sur Rondje",
-    "about": "À propos de Rondje",
-    "support": "Rendre Rondje possible",
+    "more": "En savoir plus sur Rondje Mee",
+    "about": "À propos de Rondje Mee",
+    "support": "Rendre Rondje Mee possible",
     "tip": "Recommander un refuge",
     "forShelters": "Pour les refuges",
     "contact": "Contact"
@@ -113,19 +113,19 @@
     "forSheltersText": "Mettez tous vos chiens en ligne en une fois, organisez des balades en groupe encadrées et constituez un groupe fidèle de jeunes bénévoles.",
     "safetyTitle": "La confiance se construit pas à pas",
     "safety1": "La première fois, la balade se fait toujours avec le propriétaire ou le refuge.",
-    "safety2": "La pièce d'identité est vérifiée en personne lors de la première rencontre. Rondje n'en garde aucune copie.",
+    "safety2": "La pièce d'identité est vérifiée en personne lors de la première rencontre. Rondje Mee n'en garde aucune copie.",
     "safety3": "Les balades en autonomie ne sont possibles qu’une fois que le propriétaire a vu votre pièce d’identité en personne et les autorise pour ce chien.",
     "safety4": "Pendant la balade, le propriétaire voit en direct où se trouve le chien. Le trajet est effacé après 30 jours.",
     "safety5": "Après chaque balade, chacun donne son avis en privé. Les inquiétudes sont transmises à notre équipe, pas à l'autre personne.",
     "safety6": "Vous pouvez toujours signaler et bloquer. Quiconque ne respecte pas les règles est exclu de la plateforme.",
     "safetyMore": "Découvrez comment fonctionne la sécurité",
     "countriesTitle": "Déjà dans trois pays",
-    "countriesText": "Rondje fonctionne aux Pays-Bas, en Belgique et en Espagne, en néerlandais, français, espagnol et anglais.",
+    "countriesText": "Rondje Mee fonctionne aux Pays-Bas, en Belgique et en Espagne, en néerlandais, français, espagnol et anglais.",
     "freeTitle": "Gratuit, et ça le restera",
-    "freeText": "Pas de publicité, pas d'abonnement, et nous ne vendons jamais de données. Rondje vit du soutien volontaire, et plus tard de partenaires et de fonds qui respectent nos règles.",
+    "freeText": "Pas de publicité, pas d'abonnement, et nous ne vendons jamais de données. Rondje Mee vit du soutien volontaire, et plus tard de partenaires et de fonds qui respectent nos règles.",
     "exampleDogs": "Des exemples, pour voir comment ça marche",
     "freeLink": "Comment nous restons gratuits",
-    "freeLinkApp": "À propos de Rondje",
+    "freeLinkApp": "À propos de Rondje Mee",
     "impactTitle": "Ce que nous avons marché ensemble",
     "impactWalks": "Promenades",
     "impactKm": "Kilomètres",
@@ -259,7 +259,7 @@
     "intent": {
       "walker": "Vous allez promener des chiens du quartier ou d'un refuge. Commençons par créer votre compte.",
       "owner": "Vous inscrivez un chien à qui une balade de plus ferait du bien. Commençons par créer votre compte.",
-      "shelter": "Vous mettez les chiens de votre refuge sur Rondje. Créez d'abord votre propre compte ; ensuite, vous inscrirez le refuge."
+      "shelter": "Vous mettez les chiens de votre refuge sur Rondje Mee. Créez d'abord votre propre compte ; ensuite, vous inscrirez le refuge."
     },
     "promiseFree": "Gratuit, sans publicité.",
     "promisePrivacy": "Nous ne vendons jamais vos données. Votre position est arrondie à environ 500 mètres.",
@@ -282,7 +282,7 @@
     "continueWithGoogle": "Continuer avec Google",
     "or": "ou avec votre adresse e-mail",
     "error": "La connexion avec {provider} n'a pas fonctionné. Réessayez ou utilisez votre adresse e-mail.",
-    "linkNotice": "Un compte Rondje existe déjà avec cette adresse e-mail. Connectez-vous une fois ci-dessous avec votre mot de passe et nous y associerons {provider}. Ensuite, vous pourrez aussi vous connecter avec {provider}."
+    "linkNotice": "Un compte Rondje Mee existe déjà avec cette adresse e-mail. Connectez-vous une fois ci-dessous avec votre mot de passe et nous y associerons {provider}. Ensuite, vous pourrez aussi vous connecter avec {provider}."
   },
   "onboarding": {
     "title": "Parlez-nous de vous",
@@ -310,7 +310,7 @@
     "terms": "J'ai 18 ans ou plus et j'accepte les <terms>conditions</terms>, le <conduct>code de conduite</conduct> et la <privacy>politique de confidentialité</privacy>.",
     "submit": "Enregistrer le profil",
     "errors": {
-      "too-young": "Rondje est réservé aux personnes de 18 ans et plus.",
+      "too-young": "Rondje Mee est réservé aux personnes de 18 ans et plus.",
       "terms": "Acceptez les conditions pour continuer.",
       "invalid": "Remplissez les champs obligatoires.",
       "not-signed-in": "Connectez-vous d'abord."
@@ -336,9 +336,9 @@
       "roleBoth": "Les deux",
       "roleBothText": "J'ai un chien et j'aime aussi promener d'autres chiens.",
       "roleShelter": "Je travaille dans un refuge",
-      "roleShelterText": "Mettez les chiens de votre refuge sur Rondje.",
+      "roleShelterText": "Mettez les chiens de votre refuge sur Rondje Mee.",
       "aboutTitle": "Comment doit-on vous appeler ?",
-      "aboutText": "Rondje est réservé aux personnes de 18 ans et plus. Les autres ne voient que votre prénom et votre tranche d'âge.",
+      "aboutText": "Rondje Mee est réservé aux personnes de 18 ans et plus. Les autres ne voient que votre prénom et votre tranche d'âge.",
       "placeTitle": "Où habitez-vous, à peu près ?",
       "placeText": "Vous verrez ainsi des chiens et des gens près de chez vous. Nous arrondissons votre position à environ 500 mètres.",
       "experienceTitle": "Quelle expérience avez-vous avec les chiens ?",
@@ -360,15 +360,15 @@
       "profileText": "Les propriétaires choisissent plus vite quelqu'un avec une photo et quelques phrases. Vous pouvez aussi le faire plus tard.",
       "profileOwnerText": "Les promeneurs aiment savoir chez qui ils sonnent. Vous pouvez aussi le faire plus tard.",
       "promiseTitle": "Presque fini !",
-      "promiseText": "Voici comment Rondje reste sûr et agréable, pour les gens et les chiens.",
+      "promiseText": "Voici comment Rondje Mee reste sûr et agréable, pour les gens et les chiens.",
       "promise1": "La première fois, vous marchez toujours avec le propriétaire ou le refuge.",
       "promise2": "Votre adresse n'est jamais visible, et votre numéro seulement après un rendez-vous.",
-      "promise3": "Rondje est gratuit et sans publicité. Quelqu'un vous demande de l'argent ? Signalez-le.",
+      "promise3": "Rondje Mee est gratuit et sans publicité. Quelqu'un vous demande de l'argent ? Signalez-le.",
       "finish": "Montrez-moi les chiens",
       "needRole": "Choisissez ce que vous voulez faire.",
       "needName": "Indiquez votre prénom.",
       "needBirthDate": "Indiquez votre date de naissance.",
-      "tooYoung": "Rondje est réservé aux personnes de 18 ans et plus.",
+      "tooYoung": "Rondje Mee est réservé aux personnes de 18 ans et plus.",
       "needCity": "Indiquez votre ville.",
       "needTerms": "Acceptez les conditions pour continuer.",
       "welcomeTitleAnon": "Bonjour, bienvenue !",
@@ -497,7 +497,7 @@
     "publish": "Mettre en ligne",
     "walkingTimes": "Horaires de promenade",
     "website": "Site web",
-    "hiddenByModerator": "Masqué par Rondje",
+    "hiddenByModerator": "Masqué par Rondje Mee",
     "savedWalkers": "{n, plural, one {# promeneur habite} other {# promeneurs habitent}} à moins de 5 km. Cette semaine, ils verront {name} parmi les nouveaux chiens.",
     "savedShare": "Parlez de {name} à vos voisins : <link>voici un message à partager</link>."
   },
@@ -511,7 +511,7 @@
     "time": "Heure",
     "weekly": "Chaque semaine à cette heure (balade régulière)",
     "message": "Message",
-    "messageHint": "Présentez-vous brièvement. Ne convenez d'aucun paiement : Rondje est gratuit, le propriétaire fournit les sacs et les friandises.",
+    "messageHint": "Présentez-vous brièvement. Ne convenez d'aucun paiement : Rondje Mee est gratuit, le propriétaire fournit les sacs et les friandises.",
     "rules": "Je respecte le <conduct>code de conduite</conduct> : en laisse, pas de friandises sans autorisation, et je signale immédiatement tout incident.",
     "submit": "Envoyer la demande",
     "sent": "Votre demande pour {dog} se trouve dans vos rendez-vous.",
@@ -520,7 +520,7 @@
     "reasons": {
       "not-onboarded": "Complétez d'abord votre profil.",
       "banned": "Votre compte est bloqué.",
-      "too-young": "Rondje est réservé aux personnes de 18 ans et plus.",
+      "too-young": "Rondje Mee est réservé aux personnes de 18 ans et plus.",
       "own-dog": "C'est votre propre chien.",
       "dog-unavailable": "Ce chien n'est pas disponible pour le moment.",
       "demo-dog": "C'est un exemple ; impossible de prendre rendez-vous pour ce chien.",
@@ -598,14 +598,14 @@
     "resume": "Reprendre la balade",
     "summary": "Voir la balade",
     "weekly": "Chaque semaine",
-    "flagged": "Ce message mentionne de l'argent, un lien ou des coordonnées. Rondje est gratuit : n'envoyez jamais d'argent.",
+    "flagged": "Ce message mentionne de l'argent, un lien ou des coordonnées. Rondje Mee est gratuit : n'envoyez jamais d'argent.",
     "about": "À propos de {name}",
     "walks": "{n, plural, =0 {pas encore de balade} one {# balade effectuée} other {# balades effectuées}}",
     "idChecks": "{n, plural, =0 {identité pas encore vérifiée} one {identité vérifiée par # personne} other {identité vérifiée par # personnes}}",
     "quizBadge": "Quiz de sécurité réussi",
     "newBadge": "Nouveau",
     "trustTitle": "Après la première rencontre",
-    "idSeen": "J'ai vu sa pièce d'identité en personne (Rondje n'en garde aucune copie)",
+    "idSeen": "J'ai vu sa pièce d'identité en personne (Rondje Mee n'en garde aucune copie)",
     "soloAllowed": "{name} peut promener {dog} en autonomie",
     "saveTrust": "Confirmer",
     "contact": "Contact",
@@ -656,7 +656,7 @@
     },
     "remoteNote": "Un appel ne compte pas encore comme une rencontre en vrai. Les balades seul et la vérification de la pièce d'identité viennent ensuite.",
     "phoneHow": "Une fois accepté, vous voyez le numéro de téléphone de l'autre, s'il est renseigné. Convenez dans la discussion de qui appelle qui.",
-    "videoHow": "Rondje n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien. N'ouvrez qu'un lien d'un service vidéo que vous connaissez.",
+    "videoHow": "Rondje Mee n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien. N'ouvrez qu'un lien d'un service vidéo que vous connaissez.",
     "homeSafety": "Une visite en toute sécurité : rencontrez-vous en journée, prévenez quelqu'un de l'endroit où vous êtes, et la famille ou un voisin peuvent être présents. Vous ne voyez l'adresse et le téléphone qu'une fois accepté.",
     "planInPerson": "Planifier la rencontre en vrai",
     "afterCallWalker": "Après l'appel, la prochaine étape est une rencontre en vrai, avec {dog}.",
@@ -683,7 +683,7 @@
     "sosEscaped": "Le chien s'est échappé",
     "sosEscapedSteps": "Restez calme et ne courez pas après le chien en criant. Appelez immédiatement le propriétaire. Restez à l'endroit où vous l'avez perdu. Signalez sa disparition auprès de {registry}.",
     "sosBite": "Morsure ou blessure",
-    "sosBiteSteps": "Assurez-vous d'abord que tout le monde est en sécurité. En cas de blessure grave, appelez le {number}. Échangez vos coordonnées, puis signalez l'incident sur Rondje.",
+    "sosBiteSteps": "Assurez-vous d'abord que tout le monde est en sécurité. En cas de blessure grave, appelez le {number}. Échangez vos coordonnées, puis signalez l'incident sur Rondje Mee.",
     "sosAnimal": "Ambulance pour animaux ou police animale : {name}",
     "noGps": "Nous ne voyons pas encore votre position. Autorisez la localisation dans votre navigateur ou dans l'application.",
     "gpsDenied": "La localisation est désactivée. Sans elle, le propriétaire ne peut pas suivre la balade ; activez-la dans vos réglages.",
@@ -692,7 +692,7 @@
     "ended": "Balade terminée",
     "endedText": "{name} a marché {distance} avec vous en {minutes, plural, one {# minute} other {# minutes}}.",
     "feedbackTitle": "Comment ça s'est passé ?",
-    "feedbackPrivate": "Seul Rondje lit ceci. L'autre personne ne voit pas vos réponses.",
+    "feedbackPrivate": "Seul Rondje Mee lit ceci. L'autre personne ne voit pas vos réponses.",
     "dogBehaviour": "Comment était {name} pendant la balade ?",
     "behaviour": {
       "easy": "Facile",
@@ -885,7 +885,7 @@
     "quizStart": "Commencer le quiz",
     "invite": "Inviter quelqu'un",
     "inviteText": "Vous connaissez quelqu'un dont le chien aimerait sortir plus souvent, ou quelqu'un qui aime marcher ? Partagez votre lien.",
-    "inviteMessage": "Je promène des chiens avec Rondje. Vous me rejoignez ? {url}",
+    "inviteMessage": "Je promène des chiens avec Rondje Mee. Vous me rejoignez ? {url}",
     "ppp": "J'ai une licence espagnole valide pour les chiens potentiellement dangereux (PPP)",
     "privacy": "Vos données",
     "export": "Télécharger mes données",
@@ -896,21 +896,21 @@
     "passkeys": "Connexion sans mot de passe",
     "deleteError": "Tapez DELETE pour confirmer.",
     "deleteWord": "DELETE",
-    "invited": "{n, plural, =0 {Personne n'a encore rejoint Rondje grâce à votre lien.} one {# personne a rejoint Rondje grâce à votre lien. Merci !} other {# personnes ont rejoint Rondje grâce à votre lien. Merci !}}",
+    "invited": "{n, plural, =0 {Personne n'a encore rejoint Rondje Mee grâce à votre lien.} one {# personne a rejoint Rondje Mee grâce à votre lien. Merci !} other {# personnes ont rejoint Rondje Mee grâce à votre lien. Merci !}}",
     "privacyText": "Vous pouvez télécharger toutes vos données ou supprimer votre compte avec tout ce qu'il contient. Nous conservons les trajets des balades pendant 30 jours.",
     "settings": "Paramètres",
-    "shelterCta": "Vous travaillez dans un refuge ? Mettez les chiens de votre refuge sur Rondje et organisez des balades en groupe encadrées.",
+    "shelterCta": "Vous travaillez dans un refuge ? Mettez les chiens de votre refuge sur Rondje Mee et organisez des balades en groupe encadrées.",
     "tipTitle": "Recommander un refuge",
     "tipText": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades, ou quelqu'un avec un chien qui aurait besoin d'aide ? Voici comment aider sans que nous contactions qui que ce soit sans y être invités.",
-    "supportTitle": "Rondje reste gratuit",
-    "supportText": "Pas de publicité ni d'abonnement. Vous voulez aider à garder Rondje en ligne et sûr ? Voyez comment, avec ou sans argent.",
+    "supportTitle": "Rondje Mee reste gratuit",
+    "supportText": "Pas de publicité ni d'abonnement. Vous voulez aider à garder Rondje Mee en ligne et sûr ? Voyez comment, avec ou sans argent.",
     "flyer": "Imprimer un flyer pour votre quartier",
     "email": "E-mail",
     "emailNotifications": "M'envoyer un e-mail pour les notifications importantes",
-    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje.",
+    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje Mee.",
     "pushNotifications": "Notifications push dans ce navigateur",
     "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure.",
-    "pushBlocked": "Votre navigateur bloque les notifications de Rondje. Activez-les dans les réglages du navigateur.",
+    "pushBlocked": "Votre navigateur bloque les notifications de Rondje Mee. Activez-les dans les réglages du navigateur.",
     "progressTitle": "Votre progression",
     "weeklyGoal": "Objectif de la semaine",
     "weeklyGoalHint": "À quelle fréquence voulez-vous vous balader ? Sauter une semaine, c'est toujours permis.",
@@ -918,8 +918,8 @@
     "alertsText": "Les messages, demandes et rendez-vous vous parviennent toujours ; les petits coups de pouce, seulement si vous les activez ci-dessous.",
     "reminders": "Petits coups de pouce",
     "remindersHint": "Seulement des extras : vos premières étapes, le défi de votre ville et les nouveaux chiens près de chez vous. Au maximum un par semaine ; si trois de suite ne servent à rien, ils s'arrêtent d'eux-mêmes. Les messages, demandes et rendez-vous vous parviennent toujours, même si ceci est désactivé.",
-    "pushIos": "Des alertes sur votre iPhone ? Elles fonctionnent dès que Rondje est sur votre écran d’accueil :",
-    "pushIosInApp": "Des alertes sur votre iPhone ? Ouvrez d’abord Rondje dans Safari et mettez-le sur votre écran d’accueil depuis là."
+    "pushIos": "Des alertes sur votre iPhone ? Elles fonctionnent dès que Rondje Mee est sur votre écran d’accueil :",
+    "pushIosInApp": "Des alertes sur votre iPhone ? Ouvrez d’abord Rondje Mee dans Safari et mettez-le sur votre écran d’accueil depuis là."
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -967,7 +967,7 @@
         "q": "Le chien mord un autre chien. Que faites-vous ?",
         "a0": "S'éloigner rapidement",
         "a1": "Rien, ça arrive",
-        "a2": "S'assurer que tout le monde est en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler sur Rondje",
+        "a2": "S'assurer que tout le monde est en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler sur Rondje Mee",
         "why": "D’abord la sécurité de tous. Ensuite, échanger les coordonnées, appeler le propriétaire et le signaler, pour que chacun sache ce qui s’est passé."
       },
       "stress": {
@@ -1039,7 +1039,7 @@
     "cancelWalk": "Annuler",
     "staff": "Équipe",
     "addStaff": "Ajouter un membre de l'équipe",
-    "staffHint": "Cette personne doit d'abord créer son propre compte Rondje.",
+    "staffHint": "Cette personne doit d'abord créer son propre compte Rondje Mee.",
     "errors": {
       "invalid": "Vérifiez les champs obligatoires.",
       "authorized": "Confirmez que vous pouvez représenter le refuge.",
@@ -1059,7 +1059,7 @@
     "benefit3Title": "Vous gardez la main",
     "benefit3": "Lors de la balade, vous vérifiez la pièce d'identité des nouveaux bénévoles et notez qui était là et qui n'est pas venu.",
     "benefit4Title": "Un groupe fidèle de jeunes promeneurs",
-    "benefit4": "Rondje trouve des promeneurs de 18 à 30 ans qui ont envie de sortir plus souvent. Gratuit, sans abonnement.",
+    "benefit4": "Rondje Mee trouve des promeneurs de 18 à 30 ans qui ont envie de sortir plus souvent. Gratuit, sans abonnement.",
     "loginFirst": "Créez d'abord votre propre compte. Ensuite, inscrivez le refuge ; cela prend deux minutes.",
     "finishProfile": "Complétez d'abord votre profil",
     "where": "Où se trouve le refuge ?",
@@ -1107,7 +1107,7 @@
     "providesLabel": "Que donnez-vous aux promeneurs ?",
     "providesHint": "Ce sera la valeur par défaut des nouveaux chiens. Modifiable par chien.",
     "defaultWalkMinutes": "Combien de temps dure une promenade en général ? (minutes)",
-    "coordinatorHint": "Personne de contact pour Rondje. Pas public : seul Rondje le voit, pour la vérification et les questions.",
+    "coordinatorHint": "Personne de contact pour Rondje Mee. Pas public : seul Rondje Mee le voit, pour la vérification et les questions.",
     "coordinatorName": "Nom de la personne de contact",
     "coordinatorEmail": "E-mail de la personne de contact",
     "coordinatorPhone": "Téléphone de la personne de contact",
@@ -1131,7 +1131,7 @@
     "draftsOpen": "Compléter et mettre en ligne",
     "unnamed": "Pas encore de nom",
     "details": "Informations du refuge",
-    "detailsLede": "Ce que les promeneurs voient de vous, et comment vous joindre. La personne de contact est seulement pour Rondje.",
+    "detailsLede": "Ce que les promeneurs voient de vous, et comment vous joindre. La personne de contact est seulement pour Rondje Mee.",
     "visibleAfterCheck": "Visible après la vérification",
     "poster": "Affiche"
   },
@@ -1145,29 +1145,29 @@
     "empty": "Pas encore de balades en groupe dans ce pays. Découvrez les refuges près de chez vous.",
     "level": "Niveau : {level}",
     "at": "Rendez-vous : {place}",
-    "idNote": "Apportez une pièce d'identité valide. L'accompagnateur la vérifiera ; Rondje n'en garde aucune copie.",
+    "idNote": "Apportez une pièce d'identité valide. L'accompagnateur la vérifiera ; Rondje Mee n'en garde aucune copie.",
     "meetDogs": "Voir les chiens de ce refuge",
     "eventName": "Balade en groupe avec {shelter}"
   },
   "directory": {
     "title": "Refuges aux Pays-Bas, en Belgique et en Espagne",
-    "lede": "Des refuges qui accueillent des bénévoles promeneurs. Les partenaires sont directement sur Rondje ; pour les autres, vous pouvez devenir bénévole via leur propre site web.",
+    "lede": "Des refuges qui accueillent des bénévoles promeneurs. Les partenaires sont directement sur Rondje Mee ; pour les autres, vous pouvez devenir bénévole via leur propre site web.",
     "metaDescription": "Des refuges qui accueillent des bénévoles promeneurs. Les partenaires sont sur {app} ; pour les autres, devenez bénévole via leur site web.",
-    "partner": "Sur Rondje",
-    "notPartner": "Pas encore sur Rondje",
+    "partner": "Sur Rondje Mee",
+    "notPartner": "Pas encore sur Rondje Mee",
     "walking": "Accueille des bénévoles promeneurs",
     "website": "Site web",
-    "claim": "Vous travaillez ici ? Inscrivez votre refuge sur Rondje",
+    "claim": "Vous travaillez ici ? Inscrivez votre refuge sur Rondje Mee",
     "unverified": "Informations issues de sources publiques, pas encore vérifiées.",
     "claimShort": "C'est mon refuge",
     "dogs": "{n, plural, =0 {pas encore de chiens} one {# chien} other {# chiens}}",
-    "noPartners": "Il n'y a pas encore de refuges sur Rondje ici. Vous travaillez dans un refuge ? Inscrivez-le ci-dessous.",
+    "noPartners": "Il n'y a pas encore de refuges sur Rondje Mee ici. Vous travaillez dans un refuge ? Inscrivez-le ci-dessous.",
     "seeDogs": "Voir les chiens",
     "vote": "Je veux promener ici",
     "voted": "Votre voix compte",
     "votesHint": "Plus il y a de personnes qui veulent promener dans un refuge, plus vite nous l'invitons. Nous contactons les refuges nous-mêmes, jamais en votre nom.",
     "tipTitle": "Vous connaissez un refuge qui n'est pas dans la liste ?",
-    "tipText": "Recommandez-le. Nous contactons le refuge nous-mêmes, et vous prévenons quand il rejoint Rondje.",
+    "tipText": "Recommandez-le. Nous contactons le refuge nous-mêmes, et vous prévenons quand il rejoint Rondje Mee.",
     "tipButton": "Recommander un refuge"
   },
   "help": {
@@ -1181,19 +1181,19 @@
       "young": "Pour les jeunes de 16 à 27 ans.",
       "children": "Pour les enfants et les jeunes."
     },
-    "notTherapy": "Rondje n'est pas un service d'aide et ne pose pas de diagnostic. Ça ne va pas depuis un moment ? Votre médecin généraliste peut vous aider à y voir plus clair.",
+    "notTherapy": "Rondje Mee n'est pas un service d'aide et ne pose pas de diagnostic. Ça ne va pas depuis un moment ? Votre médecin généraliste peut vous aider à y voir plus clair.",
     "dogTitle": "Un souci avec un chien ?",
     "lostPets": "Animaux perdus ou trouvés : {name}",
     "animalEmergency": "Animaux en détresse : {name}",
     "police": "Pas d'urgence, mais besoin de la police ? Appelez le {number}.",
     "website": "Site web",
-    "contact": "Une question pour Rondje, par exemple sur votre compte ou votre vie privée ?",
+    "contact": "Une question pour Rondje Mee, par exemple sur votre compte ou votre vie privée ?",
     "contactLink": "Comment nous joindre"
   },
   "contact": {
     "title": "Contact",
     "heading": "Comment nous joindre",
-    "lede": "Une question, une demande liée à la vie privée, une plainte ou une idée ? Voici comment joindre Rondje.",
+    "lede": "Une question, une demande liée à la vie privée, une plainte ou une idée ? Voici comment joindre Rondje Mee.",
     "emailTitle": "Écrivez-nous",
     "emailText": "Pour les questions, les demandes liées à la vie privée, les plaintes et les collaborations. Vous pouvez nous écrire en néerlandais, en anglais, en espagnol ou en français.",
     "soonTitle": "Notre adresse e-mail sera bientôt ici",
@@ -1206,7 +1206,7 @@
     "moreTitle": "En savoir plus"
   },
   "safety": {
-    "title": "Comment Rondje assure la sécurité",
+    "title": "Comment Rondje Mee assure la sécurité",
     "lede": "On ne confie pas son chien à n'importe qui. C'est pourquoi nous construisons la confiance pas à pas et veillons à garder la plateforme saine.",
     "levels": "Pas à pas",
     "level1": "Nouveau compte : d’abord le quiz de sécurité. Ensuite, vous pouvez demander une première rencontre ou participer à une balade en groupe encadrée.",
@@ -1217,9 +1217,9 @@
     "after": "Après la balade",
     "afterText": "Chacun donne son avis en privé. Si un chien est blessé ou stressé, ou si quelqu'un ne s'est pas senti en sécurité, notre équipe est prévenue immédiatement.",
     "fraud": "Fraude et abus",
-    "fraudText": "Rondje est gratuit : quiconque demande de l'argent se fait remarquer. Les messages contenant des demandes de paiement, des numéros de compte ou des liens sont marqués. Les refuges sont vérifiés grâce à leur numéro KvK, BCE/KBO ou CIF. Quiconque maltraite un chien ou une personne est bloqué et signalé aux autorités si nécessaire.",
+    "fraudText": "Rondje Mee est gratuit : quiconque demande de l'argent se fait remarquer. Les messages contenant des demandes de paiement, des numéros de compte ou des liens sont marqués. Les refuges sont vérifiés grâce à leur numéro KvK, BCE/KBO ou CIF. Quiconque maltraite un chien ou une personne est bloqué et signalé aux autorités si nécessaire.",
     "liability": "Qui est responsable de quoi ?",
-    "liabilityText": "Rondje met les gens en relation et n'est pas lui-même partie à l'accord. Le propriétaire reste responsable des dommages causés par le chien et doit être assuré pour cela. Nous recommandons aux promeneurs de souscrire leur propre assurance responsabilité civile. Consultez les conditions pour tous les détails.",
+    "liabilityText": "Rondje Mee met les gens en relation et n'est pas lui-même partie à l'accord. Le propriétaire reste responsable des dommages causés par le chien et doit être assuré pour cela. Nous recommandons aux promeneurs de souscrire leur propre assurance responsabilité civile. Consultez les conditions pour tous les détails.",
     "report": "Vous avez vu ou vécu quelque chose ?",
     "reportText": "Signalez-le avec le bouton « Signaler » sur un profil, un chien ou une balade. Nous essayons d'examiner chaque signalement sous 24 heures."
   },
@@ -1259,17 +1259,17 @@
       "group-signup": "{walkerName} participe à une balade en groupe.",
       "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles.",
       "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
-      "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
+      "shelter-joined": "{orgName} est maintenant sur Rondje Mee. Découvrez les chiens !",
       "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?",
       "walk-photo": "Nouvelle photo de {dogName} pendant la promenade.",
       "chat-message": "{senderName} a envoyé un message à propos de {dogName}.",
-      "nudge-step": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Vous complétez votre profil ?} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade.} quiz {Votre prochaine étape : le quiz de sécurité. Quelques questions, et vous saurez à quoi faire attention.} meet {Envie d'une première rencontre ? Découvrez les chiens près de chez vous.} other {Votre prochaine étape sur Rondje vous attend.}}",
+      "nudge-step": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Vous complétez votre profil ?} dog {Inscrivez votre chien sur Rondje Mee pour que des promeneurs du quartier puissent proposer une balade.} quiz {Votre prochaine étape : le quiz de sécurité. Quelques questions, et vous saurez à quoi faire attention.} meet {Envie d'une première rencontre ? Découvrez les chiens près de chez vous.} other {Votre prochaine étape sur Rondje Mee vous attend.}}",
       "nudge-challenge": "Nouveau mois, nouveau défi : {city} fait {goal} balades ensemble. Vous en êtes ?",
       "challenge-done": "{city} a relevé le défi : {goal} balades ensemble ! {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci !",
       "nudge-owner": "{dogName} est bien en ligne, mais peu de promeneurs habitent encore près de chez vous. Ce n'est ni à cause de vous ni à cause de {dogName}.",
       "request-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}. Belle rencontre !} home {rencontre avec {dogName}, à domicile. Belle rencontre !} phone {premier appel au sujet de {dogName}. Bon échange !} video {premier appel vidéo au sujet de {dogName}. Bon échange !} other {balade avec {dogName}. Bonne balade !}}",
       "group-walk-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}. Bonne balade !",
-      "nudge-new-dog": "Près de chez vous : {dogName} vient d'arriver sur Rondje et cherche un compagnon de promenade."
+      "nudge-new-dog": "Près de chez vous : {dogName} vient d'arriver sur Rondje Mee et cherche un compagnon de promenade."
     }
   },
   "admin": {
@@ -1351,7 +1351,7 @@
     "flaggedChatCount": "{n, plural, one {# message} other {# messages}}",
     "confirm": {
       "title": "Confirmez d'abord votre adresse e-mail",
-      "text": "Gérer Rondje permet de voir et de modifier beaucoup de choses. C'est pourquoi nous vous demandons une seule fois de confirmer que {email} est bien à vous. Vous recevrez un e-mail avec un bouton.",
+      "text": "Gérer Rondje Mee permet de voir et de modifier beaucoup de choses. C'est pourquoi nous vous demandons une seule fois de confirmer que {email} est bien à vous. Vous recevrez un e-mail avec un bouton.",
       "send": "Envoyer l'e-mail",
       "sent": "Envoyé. Ouvrez l'e-mail et touchez le bouton : vous reviendrez ici.",
       "failed": "L'envoi n'a pas fonctionné. Réessayez dans un instant.",
@@ -1367,7 +1367,7 @@
   },
   "banned": {
     "title": "Votre compte a été bloqué",
-    "text": "Vous ne pouvez plus utiliser Rondje. Motif : {reason}. Vous n'êtes pas d'accord ? Écrivez-nous et nous réexaminerons votre cas.",
+    "text": "Vous ne pouvez plus utiliser Rondje Mee. Motif : {reason}. Vous n'êtes pas d'accord ? Écrivez-nous et nous réexaminerons votre cas.",
     "noReason": "non précisé",
     "contact": "Écrivez à <email>{address}</email> en indiquant votre nom et l'adresse e-mail de votre compte.",
     "contactPage": "La <link>page de contact</link> explique comment nous joindre. Indiquez votre nom et l'adresse e-mail de votre compte."
@@ -1446,12 +1446,12 @@
     "noteHint": "N'indiquez pas de noms, numéros de téléphone ou adresses e-mail de personnes.",
     "submit": "Envoyer la recommandation",
     "done": {
-      "tipped": "Merci pour votre recommandation ! Nous contacterons {name} nous-mêmes. Si le refuge rejoint Rondje, nous vous préviendrons.",
+      "tipped": "Merci pour votre recommandation ! Nous contacterons {name} nous-mêmes. Si le refuge rejoint Rondje Mee, nous vous préviendrons.",
       "voted": "Merci ! {name} est déjà dans notre liste, et nous avons compté votre voix. Plus il y a de gens qui veulent y promener, plus vite nous invitons le refuge.",
       "pending": "{name} s'est déjà inscrit et est en cours de vérification. Ses chiens seront bientôt en ligne."
     },
     "errors": {
-      "exists": "{name} est déjà sur Rondje.",
+      "exists": "{name} est déjà sur Rondje Mee.",
       "contact": "Retirez les numéros de téléphone, adresses e-mail et numéros de compte. Nous ne gardons que des informations sur le refuge lui-même.",
       "website": "Cette adresse web ne semble pas valide. Par exemple : www.refuge.be",
       "too-many": "Vous avez déjà envoyé {max} recommandations aujourd'hui. Ce sera possible demain.",
@@ -1459,10 +1459,10 @@
     },
     "seeShelter": "Voir les chiens",
     "loginTitle": "Connectez-vous pour recommander un refuge",
-    "loginText": "Cela évite le spam, et nous permet de vous prévenir quand le refuge rejoint Rondje.",
+    "loginText": "Cela évite le spam, et nous permet de vous prévenir quand le refuge rejoint Rondje Mee.",
     "privacy": "Nous gardons votre recommandation et qui l'a envoyée, et vous prévenons si le refuge nous rejoint. Les recommandations traitées sont supprimées après un an.",
     "ownerTitle": "Vous connaissez quelqu'un avec un chien qui aurait besoin d'aide ?",
-    "ownerText": "Rondje ne contacte jamais des personnes qui ne se sont pas inscrites, et nous ne gardons rien sur elles ici. Voici comment aider :",
+    "ownerText": "Rondje Mee ne contacte jamais des personnes qui ne se sont pas inscrites, et nous ne gardons rien sur elles ici. Voici comment aider :",
     "ownerStep1": "Demandez-lui d'abord vous-même, par exemple autour d'un café. Dites que c'est gratuit et qu'on se rencontre toujours d'abord ensemble.",
     "ownerStep2": "Aidez-la à s'inscrire : vous pouvez aussi ajouter un chien pour quelqu'un d'autre, avec son accord.",
     "ownerAddDog": "Ajouter un chien pour quelqu'un d'autre",
@@ -1474,23 +1474,23 @@
   },
   "support": {
     "eyebrow": "Gratuit, et ça le restera",
-    "title": "Rendre Rondje possible",
-    "lede": "Rondje est gratuit pour les promeneurs, les propriétaires et les refuges, et le restera. Pourtant, garder Rondje sûr et en ligne coûte de l'argent. Voici comment.",
+    "title": "Rendre Rondje Mee possible",
+    "lede": "Rondje Mee est gratuit pour les promeneurs, les propriétaires et les refuges, et le restera. Pourtant, garder Rondje Mee sûr et en ligne coûte de l'argent. Voici comment.",
     "metaDescription": "{app} est gratuit pour les promeneurs, les propriétaires et les refuges, et le restera. Mais rester sûr et en ligne coûte de l'argent.",
     "promiseTitle": "Notre promesse",
     "promise": {
-      "free": "Rondje reste gratuit pour tout le monde : pas d'abonnement, pas de paywall, pas de version premium.",
-      "ads": "Pas de publicité dans Rondje.",
+      "free": "Rondje Mee reste gratuit pour tout le monde : pas d'abonnement, pas de paywall, pas de version premium.",
+      "ads": "Pas de publicité dans Rondje Mee.",
       "data": "Nous ne vendons jamais de données, et ne les partageons pas à des fins marketing.",
       "sponsors": "Un sponsor ou partenaire ne décide jamais quels chiens ou quelles personnes vous voyez.",
-      "equal": "Soutenir Rondje ne donne ni priorité ni avantages. Tout le monde utilise Rondje de la même façon."
+      "equal": "Soutenir Rondje Mee ne donne ni priorité ni avantages. Tout le monde utilise Rondje Mee de la même façon."
     },
-    "costsTitle": "Ce que coûte Rondje",
-    "costsLede": "Une estimation honnête, d'aujourd'hui à un Rondje plus grand. Plus il y a d'utilisateurs, plus cela coûte.",
+    "costsTitle": "Ce que coûte Rondje Mee",
+    "costsLede": "Une estimation honnête, d'aujourd'hui à un Rondje Mee plus grand. Plus il y a d'utilisateurs, plus cela coûte.",
     "costs": {
       "hosting": {
         "label": "Site et application",
-        "why": "L'hébergement, pour que Rondje soit rapide et sûr."
+        "why": "L'hébergement, pour que Rondje Mee soit rapide et sûr."
       },
       "database": {
         "label": "Base de données",
@@ -1536,9 +1536,9 @@
     },
     "costsTotal": "Au total environ {min} à {max} par mois, hors frais uniques.",
     "costsNote": "Estimation, mise à jour le {date}. Nous gardons les coûts aussi bas que possible.",
-    "giveTitle": "Soutenir Rondje",
+    "giveTitle": "Soutenir Rondje Mee",
     "giveButton": "Soutenir {app} sur {platform}",
-    "giveSoon": "Bientôt, vous pourrez soutenir Rondje ici avec une petite contribution. En attendant, tout ce qui suit aide énormément aussi.",
+    "giveSoon": "Bientôt, vous pourrez soutenir Rondje Mee ici avec une petite contribution. En attendant, tout ce qui suit aide énormément aussi.",
     "helpTitle": "Aider sans argent",
     "help": {
       "tipTitle": "Recommander un refuge",
@@ -1557,12 +1557,12 @@
     "faqTitle": "Questions fréquentes",
     "faq": {
       "free": {
-        "q": "Pourquoi Rondje est-il gratuit ?",
-        "a": "Parce que l'argent ne doit jamais empêcher de sortir ensemble, ni les jeunes, ni les personnes âgées avec un chien. C'est pourquoi personne ne paie pour utiliser Rondje."
+        "q": "Pourquoi Rondje Mee est-il gratuit ?",
+        "a": "Parce que l'argent ne doit jamais empêcher de sortir ensemble, ni les jeunes, ni les personnes âgées avec un chien. C'est pourquoi personne ne paie pour utiliser Rondje Mee."
       },
       "where": {
         "q": "Où va ma contribution ?",
-        "a": "À {operator}, pour les coûts ci-dessus : hébergement, base de données, cartes, les applications et du matériel pour les refuges. Le reste sert à développer et faire connaître Rondje."
+        "a": "À {operator}, pour les coûts ci-dessus : hébergement, base de données, cartes, les applications et du matériel pour les refuges. Le reste sert à développer et faire connaître Rondje Mee."
       },
       "tax": {
         "q": "Une contribution est-elle déductible des impôts ?",
@@ -1573,8 +1573,8 @@
         "a": "Non, et c'est voulu. Soutenir ne donne ni priorité, ni fonctions supplémentaires, ni influence sur les mises en relation ou la modération. Mais vous avez nos remerciements, et des nouvelles de temps en temps."
       },
       "sponsors": {
-        "q": "Des entreprises peuvent-elles sponsoriser Rondje ?",
-        "a": "Oui, si elles respectent nos règles : pas de publicité dans Rondje, pas de données, et aucune influence sur les chiens ou les personnes visibles. Un sponsor peut par exemple payer des sacs à crottes pour les refuges."
+        "q": "Des entreprises peuvent-elles sponsoriser Rondje Mee ?",
+        "a": "Oui, si elles respectent nos règles : pas de publicité dans Rondje Mee, pas de données, et aucune influence sur les chiens ou les personnes visibles. Un sponsor peut par exemple payer des sacs à crottes pour les refuges."
       },
       "app": {
         "q": "Pourquoi ne puis-je pas contribuer dans l’appli ?",
@@ -1588,7 +1588,7 @@
         "a": "Une contribution mensuelle aide à couvrir les frais fixes, comme l’hébergement et les cartes. Le financement participatif est une campagne ponctuelle pour des frais ponctuels, comme les applis et la vérification juridique. Les deux vont à {operator}."
       }
     },
-    "operatorUnknown": "les créateurs de Rondje",
+    "operatorUnknown": "les créateurs de Rondje Mee",
     "giveIntro": "Les contributions vont à {operator}, qui développe et fait tourner {app}. Chaque contribution, petite ou grande, aide à couvrir les coûts.",
     "monthlyPill": "Mensuel",
     "monthlyTitle": "Soutenir chaque mois",
@@ -1617,25 +1617,25 @@
     "whyLink": "Lire pourquoi"
   },
   "about": {
-    "eyebrow": "À propos de Rondje",
+    "eyebrow": "À propos de Rondje Mee",
     "title": "Une promenade ensemble, bonne pour vous et pour un chien",
-    "lede": "Rondje met en relation de jeunes adultes avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
+    "lede": "Rondje Mee met en relation de jeunes adultes avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
     "metaDescription": "{app} met en relation de jeunes adultes avec des chiens qui veulent sortir plus : de voisins qui ne peuvent plus les promener, et des refuges.",
-    "whyTitle": "Pourquoi Rondje",
+    "whyTitle": "Pourquoi Rondje Mee",
     "why1": "Beaucoup de jeunes aiment sortir et adorent les chiens, mais ne peuvent pas en avoir un. En même temps, des personnes âgées ou malades ne peuvent plus promener leur chien aussi souvent qu'elles le voudraient. Et dans les refuges, chaque chien attend une promenade de plus.",
-    "why2": "Une promenade régulière avec un chien fait du bien à tout le monde : du mouvement, de l'air frais et un brin de causette avec un voisin. Rondje rend cela simple, sûr et gratuit.",
-    "why3": "Rondje n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
+    "why2": "Une promenade régulière avec un chien fait du bien à tout le monde : du mouvement, de l'air frais et un brin de causette avec un voisin. Rondje Mee rend cela simple, sûr et gratuit.",
+    "why3": "Rondje Mee n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
     "howTitle": "Comment ça marche",
     "how": {
       "meet": "La première fois, vous rencontrez toujours le propriétaire et le chien ensemble. Ensuite seulement, vous pouvez promener seul, si le propriétaire le souhaite.",
       "adults": "Toute personne qui promène a 18 ans ou plus et passe d'abord un court quiz de sécurité.",
       "shelters": "Dans les refuges, on promène lors de promenades en groupe encadrées, aux moments choisis par le refuge.",
-      "free": "Rondje est gratuit. Personne ne demande ni ne paie d'argent pour une promenade."
+      "free": "Rondje Mee est gratuit. Personne ne demande ni ne paie d'argent pour une promenade."
     },
     "safetyLink": "Lire comment nous gérons la sécurité",
-    "whoTitle": "Qui est derrière Rondje",
-    "who": "Rondje est une petite initiative indépendante des Pays-Bas, créée par des personnes qui aiment les chiens et veulent rapprocher les voisins.",
-    "whoOperator": "Rondje est une petite initiative indépendante des Pays-Bas, développée et gérée par {operator}.",
+    "whoTitle": "Qui est derrière Rondje Mee",
+    "who": "Rondje Mee est une petite initiative indépendante des Pays-Bas, créée par des personnes qui aiment les chiens et veulent rapprocher les voisins.",
+    "whoOperator": "Rondje Mee est une petite initiative indépendante des Pays-Bas, développée et gérée par {operator}.",
     "draft": "Brouillon : seuls les administrateurs le voient",
     "storyFallback": "Cette histoire n'existe (pour l'instant) qu'en néerlandais.",
     "helpLine": "Ça ne va pas ? Vous n'êtes pas obligé de faire face seul.",
@@ -1663,9 +1663,9 @@
     "headline": "Promenez nos chiens",
     "text": "Gratuit, pour toute personne de 18 ans ou plus. Vous participez à une promenade en groupe encadrée et faites connaissance avec les chiens en douceur.",
     "when": "Quand",
-    "qrLabel": "QR code vers les chiens du refuge sur Rondje",
+    "qrLabel": "QR code vers les chiens du refuge sur Rondje Mee",
     "cta": "Scannez, choisissez un chien et inscrivez-vous à une promenade en groupe.",
-    "footer": "Rondje : promener ensemble, gratuitement, des chiens du quartier et du refuge."
+    "footer": "Rondje Mee : promener ensemble, gratuitement, des chiens du quartier et du refuge."
   },
   "flyer": {
     "title": "Flyer pour votre quartier",
@@ -1677,8 +1677,8 @@
     "where": "Bons endroits : le supermarché, la bibliothèque, le médecin, le vétérinaire, la maison de quartier ou votre immeuble. Demandez d'abord si c'est permis.",
     "yourLink": "Le QR code contient votre lien d'invitation personnel : votre profil indique combien de personnes sont venues grâce à vous.",
     "print": "Imprimer ou enregistrer en PDF",
-    "qrLabel": "QR code vers Rondje",
-    "footer": "Rondje est gratuit et le restera. Rondje met les gens en relation et n'est pas partie à leurs arrangements.",
+    "qrLabel": "QR code vers Rondje Mee",
+    "footer": "Rondje Mee est gratuit et le restera. Rondje Mee met les gens en relation et n'est pas partie à leurs arrangements.",
     "owner": {
       "headline": "Votre chien aurait-il besoin d'une promenade de plus ?",
       "text": "Vous avez plus de mal à sortir votre chien ? Un jeune du quartier le promène régulièrement, gratuitement. Vous faites toujours connaissance d'abord, et c'est vous qui décidez de ce qui est permis.",
@@ -1704,31 +1704,31 @@
     }
   },
   "email": {
-    "open": "Ouvrir Rondje",
-    "footer": "Vous recevez cet e-mail parce que vous avez un compte Rondje. Vous pouvez désactiver les e-mails de notification dans votre profil, sous Réglages.",
-    "resetFooter": "Vous recevez cet e-mail parce que quelqu'un a demandé un nouveau mot de passe pour votre compte Rondje.",
+    "open": "Ouvrir Rondje Mee",
+    "footer": "Vous recevez cet e-mail parce que vous avez un compte Rondje Mee. Vous pouvez désactiver les e-mails de notification dans votre profil, sous Réglages.",
+    "resetFooter": "Vous recevez cet e-mail parce que quelqu'un a demandé un nouveau mot de passe pour votre compte Rondje Mee.",
     "reset": {
-      "subject": "Un nouveau mot de passe pour Rondje",
+      "subject": "Un nouveau mot de passe pour Rondje Mee",
       "heading": "Choisissez un nouveau mot de passe",
-      "body": "Quelqu'un (vous, nous l'espérons) a demandé un nouveau mot de passe pour votre compte Rondje. Le lien ci-dessous est valable une heure.",
+      "body": "Quelqu'un (vous, nous l'espérons) a demandé un nouveau mot de passe pour votre compte Rondje Mee. Le lien ci-dessous est valable une heure.",
       "cta": "Choisir un nouveau mot de passe",
       "ignore": "Ce n'est pas vous ? Vous n'avez rien à faire : votre mot de passe reste le même."
     },
     "kinds": {
       "request-new": {
         "subject": "{via, select, walk {{walkerName} aimerait rencontrer {dogName} lors d'une balade} home {{walkerName} aimerait rencontrer {dogName} chez vous} phone {{walkerName} aimerait d'abord appeler pour faire connaissance avec {dogName}} video {{walkerName} aimerait d'abord un appel vidéo pour faire connaissance avec {dogName}} other {{walkerName} aimerait promener {dogName}}}",
-        "body": "{via, select, home {Consultez la demande dans Rondje et dites si cela vous convient. Rencontrez-vous en journée ; la famille ou un voisin peuvent être présents.} phone {Consultez la demande dans Rondje et dites si cela vous convient. Un appel ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} video {Consultez la demande dans Rondje et dites si cela vous convient. Un appel vidéo ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} other {Consultez la demande dans Rondje et dites si cela vous convient. La première fois, vous vous rencontrez toujours ensemble.}}"
+        "body": "{via, select, home {Consultez la demande dans Rondje Mee et dites si cela vous convient. Rencontrez-vous en journée ; la famille ou un voisin peuvent être présents.} phone {Consultez la demande dans Rondje Mee et dites si cela vous convient. Un appel ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} video {Consultez la demande dans Rondje Mee et dites si cela vous convient. Un appel vidéo ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} other {Consultez la demande dans Rondje Mee et dites si cela vous convient. La première fois, vous vous rencontrez toujours ensemble.}}"
       },
       "request-accepted": {
         "subject": "{via, select, walk {Oui ! Votre première rencontre avec {dogName} est confirmée} home {Oui ! Votre première rencontre avec {dogName} est confirmée} phone {Oui ! Votre appel au sujet de {dogName} est confirmé} video {Oui ! Votre appel vidéo au sujet de {dogName} est confirmé} other {Oui ! Votre rendez-vous avec {dogName} est confirmé}}",
-        "body": "{via, select, home {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} walk {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.} other {Vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Pendant la balade, le propriétaire peut suivre en direct.}}"
+        "body": "{via, select, home {Dans Rondje Mee, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje Mee, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje Mee de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} walk {Dans Rondje Mee, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.} other {Vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Pendant la balade, le propriétaire peut suivre en direct.}}"
       },
       "walk-overdue": {
         "subject": "La promenade avec {dogName} dure plus longtemps que prévu",
-        "body": "La promenade se prolonge. Regardez dans Rondje où ils sont, ou appelez le promeneur. En cas d'urgence, appelez le 112."
+        "body": "La promenade se prolonge. Regardez dans Rondje Mee où ils sont, ou appelez le promeneur. En cas d'urgence, appelez le 112."
       },
       "org-verified": {
-        "subject": "Votre refuge est sur Rondje",
+        "subject": "Votre refuge est sur Rondje Mee",
         "body": "Nous avons vérifié votre refuge. Vos chiens sont maintenant visibles pour les promeneurs. Planifiez une promenade en groupe pour commencer."
       },
       "org-pending": {
@@ -1736,16 +1736,16 @@
         "body": "{orgName} s'est inscrit. Vérifiez les informations dans l'administration."
       },
       "shelter-joined": {
-        "subject": "{orgName} est maintenant sur Rondje",
+        "subject": "{orgName} est maintenant sur Rondje Mee",
         "body": "Vous avez recommandé ce refuge ou voté pour lui, et il nous a rejoints. Découvrez les chiens et participez à une promenade en groupe."
       },
       "chat-message": {
         "subject": "{senderName} vous a envoyé un message à propos de {dogName}",
-        "body": "Lisez-le et répondez dans Rondje. Ainsi, vous ne partagez votre numéro qu’une fois que vous vous connaissez."
+        "body": "Lisez-le et répondez dans Rondje Mee. Ainsi, vous ne partagez votre numéro qu’une fois que vous vous connaissez."
       },
       "nudge-step": {
-        "subject": "{step, select, about {Complétez votre profil} dog {Inscrivez votre chien sur Rondje} quiz {Votre prochaine étape : le quiz de sécurité} meet {Envie d'une première rencontre ?} other {Votre prochaine étape sur Rondje}}",
-        "body": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Cela ne prend qu'une minute.} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade. La première fois, vous vous rencontrez toujours ensemble.} quiz {Quelques questions sur la promenade en sécurité, et vous saurez à quoi faire attention. Ensuite, vous pourrez demander une première rencontre.} meet {Découvrez les chiens près de chez vous et demandez une première rencontre. La première fois, vous marchez avec le propriétaire.} other {Votre prochaine étape sur Rondje vous attend.}}"
+        "subject": "{step, select, about {Complétez votre profil} dog {Inscrivez votre chien sur Rondje Mee} quiz {Votre prochaine étape : le quiz de sécurité} meet {Envie d'une première rencontre ?} other {Votre prochaine étape sur Rondje Mee}}",
+        "body": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Cela ne prend qu'une minute.} dog {Inscrivez votre chien sur Rondje Mee pour que des promeneurs du quartier puissent proposer une balade. La première fois, vous vous rencontrez toujours ensemble.} quiz {Quelques questions sur la promenade en sécurité, et vous saurez à quoi faire attention. Ensuite, vous pourrez demander une première rencontre.} meet {Découvrez les chiens près de chez vous et demandez une première rencontre. La première fois, vous marchez avec le propriétaire.} other {Votre prochaine étape sur Rondje Mee vous attend.}}"
       },
       "nudge-challenge": {
         "subject": "{city} fait {goal} balades ensemble",
@@ -1761,30 +1761,30 @@
       },
       "request-reminder": {
         "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}} home {rencontre avec {dogName}, à domicile} phone {premier appel au sujet de {dogName}} video {premier appel vidéo au sujet de {dogName}} other {balade avec {dogName}}}",
-        "body": "Tout sur le rendez-vous, comme le lieu de rencontre et la façon de vous joindre, se trouve dans Rondje. Finalement, vous ne pouvez pas ? Prévenez l'autre personne à temps via la discussion."
+        "body": "Tout sur le rendez-vous, comme le lieu de rencontre et la façon de vous joindre, se trouve dans Rondje Mee. Finalement, vous ne pouvez pas ? Prévenez l'autre personne à temps via la discussion."
       },
       "group-walk-reminder": {
         "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}",
-        "body": "Le point de rendez-vous se trouve dans Rondje, dans les balades en groupe. Finalement, vous ne pouvez pas venir ? Annulez votre inscription pour libérer votre place."
+        "body": "Le point de rendez-vous se trouve dans Rondje Mee, dans les balades en groupe. Finalement, vous ne pouvez pas venir ? Annulez votre inscription pour libérer votre place."
       },
       "nudge-new-dog": {
         "subject": "{dogName} cherche un compagnon de promenade près de chez vous",
-        "body": "{dogName} vient d'arriver sur Rondje, non loin de chez vous. Voyez si vous vous entendez bien et planifiez une première rencontre quand cela vous convient."
+        "body": "{dogName} vient d'arriver sur Rondje Mee, non loin de chez vous. Voyez si vous vous entendez bien et planifiez une première rencontre quand cela vous convient."
       }
     },
     "reminderFooter": "Vous recevez ceci parce que les petits coups de pouce sont activés dans votre profil. Au maximum un par semaine. Vous pouvez les désactiver dans votre profil, sous Notifications.",
     "verify": {
-      "subject": "Confirmez votre adresse e-mail pour Rondje",
+      "subject": "Confirmez votre adresse e-mail pour Rondje Mee",
       "heading": "Est-ce bien votre adresse e-mail ?",
-      "body": "Une personne connectée avec cette adresse e-mail demande à gérer Rondje. Était-ce vous ? Touchez alors le bouton. Le lien est valable une heure.",
+      "body": "Une personne connectée avec cette adresse e-mail demande à gérer Rondje Mee. Était-ce vous ? Touchez alors le bouton. Le lien est valable une heure.",
       "cta": "Oui, c'est mon adresse",
       "ignore": "Ce n'est pas vous ? Ne touchez pas le bouton. Vous n'avez rien d'autre à faire.",
-      "footer": "Vous recevez cet e-mail parce que quelqu'un a demandé à confirmer cette adresse sur Rondje."
+      "footer": "Vous recevez cet e-mail parce que quelqu'un a demandé à confirmer cette adresse sur Rondje Mee."
     }
   },
   "cities": {
     "title": "Promener un chien par ville",
-    "lede": "Rondje fonctionne dans chaque ville. Pour chaque ville, vous voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent une promenade.",
+    "lede": "Rondje Mee fonctionne dans chaque ville. Pour chaque ville, vous voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent une promenade.",
     "indexDescription": "{app} fonctionne dans chaque ville. Vous y voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent.",
     "metaTitle": "Promener un chien à {city}",
     "metaDescription": "Promenez gratuitement un chien à {city} : chiens de voisins ou de refuges, balades en groupe et première rencontre sûre. Sans publicité.",
@@ -1793,9 +1793,9 @@
     "seeDogs": "Voir les chiens à {city}",
     "addDog": "Inscrire un chien",
     "sheltersTitle": "Refuges à {city}",
-    "onRondje": "Sur Rondje",
+    "onRondje": "Sur Rondje Mee",
     "dogCount": "{n, plural, one {# chien} other {# chiens}}",
-    "notYet": "Pas encore sur Rondje",
+    "notYet": "Pas encore sur Rondje Mee",
     "noShelters": "Nous ne connaissons pas encore de refuge à {city}. Vous en connaissez un ?",
     "voteHint": "Vous aimeriez promener des chiens dans l'un de ces refuges ? Dites-le sur la liste des refuges et nous les inviterons.",
     "toDirectory": "Vers la liste des refuges",
@@ -1804,8 +1804,8 @@
     "noWalks": "Aucune promenade en groupe n'est encore prévue à {city}.",
     "allWalks": "Toutes les promenades en groupe",
     "freeTitle": "Toujours gratuit, jamais de publicité",
-    "freeText": "Rondje ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n'y aura ni publicité ni version payante. Les membres et partenaires font vivre Rondje, et soutenir ne donne jamais de priorité.",
-    "howFree": "Comment Rondje reste gratuit",
+    "freeText": "Rondje Mee ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n'y aura ni publicité ni version payante. Les membres et partenaires font vivre Rondje Mee, et soutenir ne donne jamais de priorité.",
+    "howFree": "Comment Rondje Mee reste gratuit",
     "otherCities": "Autres villes",
     "all": "Toutes les villes",
     "footerLink": "Villes"
@@ -1827,7 +1827,7 @@
     "safety": "La première fois, retrouvez-vous toujours ensemble, dans un lieu que vous connaissez tous les deux. Un souci ? Signalez-le depuis le profil.",
     "back": "Retour aux demandes",
     "label": "Messages",
-    "flagged": "Attention : ce message parle d'argent ou contient un lien. Rondje est gratuit : n'envoyez jamais d'argent et ne partagez pas vos coordonnées bancaires. Quelque chose ne va pas ? Signalez-le."
+    "flagged": "Attention : ce message parle d'argent ou contient un lien. Rondje Mee est gratuit : n'envoyez jamais d'argent et ne partagez pas vos coordonnées bancaires. Quelque chose ne va pas ? Signalez-le."
   },
   "today": {
     "metaTitle": "Aujourd'hui",
@@ -1835,7 +1835,7 @@
     "afternoon": "Bon après-midi, {name}",
     "evening": "Bonsoir, {name}",
     "night": "Salut, {name}",
-    "welcomeTitle": "Bienvenue sur Rondje, {name} !",
+    "welcomeTitle": "Bienvenue sur Rondje Mee, {name} !",
     "welcomeText": "Vous êtes maintenant {level}, niveau 1. Voici vos premiers pas : chacun vous rapproche de votre première balade.",
     "stepsTitle": "Vos premiers pas",
     "stepsCount": "{done} sur {total} faits",
@@ -1843,7 +1843,7 @@
     "steps": {
       "account": {
         "title": "Profil créé",
-        "hint": "Bienvenue sur Rondje !"
+        "hint": "Bienvenue sur Rondje Mee !"
       },
       "about": {
         "title": "Une photo et quelques phrases sur vous",
@@ -2014,7 +2014,7 @@
       "groupWalk": "Participer à une balade de groupe d'un refuge",
       "quiz": "Réussir le quiz de sécurité",
       "profile": "Une photo et quelques phrases sur vous",
-      "firstDog": "Mettre votre chien sur Rondje",
+      "firstDog": "Mettre votre chien sur Rondje Mee",
       "invite": "Un ami qui nous rejoint grâce à votre lien"
     },
     "earnNote": "Chaque balade compte autant, courte ou longue. Accepter une demande ne rapporte jamais de points : ce choix ne concerne que la sécurité.",
@@ -2095,7 +2095,7 @@
     "meet": "{via, select, home {Rencontre avec {dog}, chez le propriétaire} phone {Rencontre avec {dog} : d'abord un appel} video {Rencontre avec {dog} : d'abord un appel vidéo} other {Rencontre avec {dog}}}",
     "walk": "Balade avec {dog}",
     "with": "Avec {name}.",
-    "open": "Tout sur ce rendez-vous dans Rondje : {link}",
+    "open": "Tout sur ce rendez-vous dans Rondje Mee : {link}",
     "group": "Balade en groupe avec {org}"
   },
   "chatQuick": {
@@ -2175,10 +2175,10 @@
     }
   },
   "installAsk": {
-    "title": "Vous mettez Rondje sur votre écran d’accueil ?",
-    "text": "Rondje s’ouvre alors d’une seule touche, comme une app.",
-    "textPush": "Rondje s’ouvre alors d’une seule touche, comme une app, et je peux vous prévenir quand il y a du nouveau.",
-    "inApp": "Vous êtes dans le navigateur d’une autre app, qui ne le permet pas. Ouvrez Rondje dans Safari via le menu ⋯, ou copiez le lien et collez-le dans Safari. Vous vous reconnecterez une fois là-bas.",
+    "title": "Vous mettez Rondje Mee sur votre écran d’accueil ?",
+    "text": "Rondje Mee s’ouvre alors d’une seule touche, comme une app.",
+    "textPush": "Rondje Mee s’ouvre alors d’une seule touche, comme une app, et je peux vous prévenir quand il y a du nouveau.",
+    "inApp": "Vous êtes dans le navigateur d’une autre app, qui ne le permet pas. Ouvrez Rondje Mee dans Safari via le menu ⋯, ou copiez le lien et collez-le dans Safari. Vous vous reconnecterez une fois là-bas.",
     "steps": {
       "share": "Touchez Partager",
       "shareMore": "(vous ne le voyez pas ? Touchez d’abord ⋯)",
@@ -2191,7 +2191,7 @@
     "copy": "Copier le lien",
     "copied": "Copié. Collez le lien dans Safari.",
     "copyFailed": "La copie n’a pas fonctionné. Tapez dans Safari : {address}",
-    "done": "C’est fait ! Rondje est maintenant sur votre écran d’accueil."
+    "done": "C’est fait ! Rondje Mee est maintenant sur votre écran d’accueil."
   },
   "manifest": {
     "description": "Une balade régulière avec un chien qui vous attend.",
@@ -2202,21 +2202,21 @@
   "dogShare": {
     "title": "Parlez de {name} à vos voisins",
     "text": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {name}. Ça ira plus vite si vous en parlez aussi : envoyez ce message à des gens que vous connaissez, ou publiez-le dans un groupe du quartier.",
-    "message": "{name} cherche quelqu'un pour se promener à {city} ! Vous aimez les chiens et vous avez parfois le temps pour une balade ? Sur Rondje, on se rencontre toujours d'abord. Gratuit, pour toute personne de 18 ans ou plus : {url}",
+    "message": "{name} cherche quelqu'un pour se promener à {city} ! Vous aimez les chiens et vous avez parfois le temps pour une balade ? Sur Rondje Mee, on se rencontre toujours d'abord. Gratuit, pour toute personne de 18 ans ou plus : {url}",
     "share": "Partager",
     "whatsapp": "WhatsApp",
     "copy": "Copier",
     "copied": "Copié. Collez-le où vous voulez.",
     "copyFailed": "La copie n'a pas fonctionné. Sélectionnez le texte ci-dessus et copiez-le vous-même.",
     "poster": "Plutôt sur papier ? Imprimez une affiche",
-    "privacy": "Les personnes qui ouvrent le lien voient la même page de {name} que tout le monde sur Rondje. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
+    "privacy": "Les personnes qui ouvrent le lien voient la même page de {name} que tout le monde sur Rondje Mee. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
     "posterMetaTitle": "Affiche pour votre chien",
     "posterTitle": "Affiche pour {name}",
     "posterLede": "Imprimez l'affiche et accrochez-la là où vos voisins la verront : au supermarché, à la bibliothèque, chez le vétérinaire ou dans votre hall d'immeuble. Demandez d'abord si c'est permis.",
     "posterOffline": "{name} n'est pas en ligne pour le moment. Remettez d'abord {name} en ligne, sinon le QR code ne fonctionnera pas.",
     "posterHeadline": "{name} cherche quelqu'un pour se promener",
     "posterText": "Vous aimez les chiens et vous avez parfois un peu de temps ? Je cherche quelqu'un à {city} pour une balade régulière de {minutes} minutes avec {name}. On se rencontre d'abord.",
-    "posterQr": "QR code vers la page de {name} sur Rondje",
+    "posterQr": "QR code vers la page de {name} sur Rondje Mee",
     "posterCta": "Scannez le code et faites connaissance avec {name}."
   },
   "sounds": {
@@ -2530,7 +2530,7 @@
     },
     "composer": {
       "title": "Banque de messages",
-      "hint": "Choisissez un message, remplissez les champs et ouvrez-le dans votre propre app de mail, ou copiez le texte. Rondje n’envoie rien lui-même.",
+      "hint": "Choisissez un message, remplissez les champs et ouvrez-le dans votre propre app de mail, ou copiez le texte. Rondje Mee n’envoie rien lui-même.",
       "audience": "Pour",
       "template": "Message",
       "language": "Langue",
@@ -2616,7 +2616,7 @@
     },
     "costs": {
       "title": "Coûts par mois",
-      "hint": "Ce que coûte Rondje aujourd’hui. Les montants annuels sont indiqués par mois ; ils ne comptent qu’une fois la tâche correspondante cochée.",
+      "hint": "Ce que coûte Rondje Mee aujourd’hui. Les montants annuels sont indiqués par mois ; ils ne comptent qu’une fois la tâche correspondante cochée.",
       "perYear": "{amount} par an",
       "total": "Total par mois",
       "perMember": "Coût par membre",
@@ -2819,7 +2819,7 @@
       },
       "numbers": {
         "title": "Chiffres",
-        "lede": "Comment Rondje grandit, d’où viennent les nouveaux et comment tout est configuré.",
+        "lede": "Comment Rondje Mee grandit, d’où viennent les nouveaux et comment tout est configuré.",
         "weekly": "Chiffres par semaine dans le centre de lancement"
       }
     }
