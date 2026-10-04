@@ -2379,8 +2379,8 @@
     },
     "tasks": {
       "name": {
-        "title": "Name: new round, Woofmigo is dropped (Guaumigo)",
-        "hint": "Guaumigo, a Spanish dog-walking app that is also active in NL and BE, is too close to Woofmigo. Choose from the new name round (_werk/naam/). Until then everything stays on APP_NAME and Brand.name."
+        "title": "Name chosen: Rondje Mee",
+        "hint": "In the App Store: \"Rondje Mee\", subtitle \"Wandel met een buurhond\". In the code the name lives in one place: APP_NAME (web) and APP_DISPLAY_NAME (iPhone). Now also claim the name in App Store Connect."
       },
       "goLive": {
         "title": "Go live: merge to production",
@@ -2392,7 +2392,7 @@
       },
       "money": {
         "title": "Everything that costs money",
-        "hint": "Apple Developer (€99 a year) and the domain. Your approval and your payment: Claude buys nothing."
+        "hint": "Apple Developer (€99 a year). The domain is already bought. Your approval and your payment: Claude buys nothing."
       },
       "sendThree": {
         "title": "Send your first 3 e-mails",
@@ -2400,15 +2400,15 @@
       },
       "trademark": {
         "title": "Trademark check on TMview",
-        "hint": "Search the new name (exact and similar) in TMview, BOIP and OEPM (Spain), in classes 9, 42 and 45. Watch out for Guaumigo and the EU application PawAmigo."
+        "hint": "Search \"Rondje Mee\" (exact and similar, also \"Rondje\") in TMview, BOIP and OEPM (Spain), in classes 9, 42 and 45."
       },
       "appleAccount": {
         "title": "Apple Developer account",
         "hint": "Needed to submit, for Sign in with Apple and for HealthKit. €99 a year; counts in the costs once you tick it off."
       },
       "domain": {
-        "title": "Buy and connect a domain",
-        "hint": "Only buy once the name passes every check: trademarks, App Store, domains and handles. About €12 a year. Then Vercel → Settings → Domains (docs/LAUNCH.md §8). Counts in the costs once you tick it off."
+        "title": "Domain: rondjemee.nl",
+        "hint": "Bought; rondjemee.com and www redirect to rondjemee.nl. Last step: BETTER_AUTH_URL to https://rondjemee.nl once the domain is reachable (docs/LAUNCH.md §8). Counts in the costs once you tick it off."
       },
       "socialKeys": {
         "title": "Keys for Sign in with Apple and Google",
@@ -2447,8 +2447,8 @@
         "hint": "So the privacy promise also holds for Vercel Blob (see STAND.md)."
       },
       "storeTexts": {
-        "title": "App Store text and screenshots with the chosen name",
-        "hint": "After choosing the name: fill it in in docs/app-store/vermelding.md and make new screenshots."
+        "title": "App Store text and screenshots with Rondje Mee",
+        "hint": "The name and subtitle are in docs/app-store/vermelding.md. Still to do: new screenshots that show Rondje Mee."
       },
       "mountAnalytics": {
         "title": "Add the visitor counter to the site",

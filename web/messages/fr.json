@@ -2379,8 +2379,8 @@
     },
     "tasks": {
       "name": {
-        "title": "Nom : nouveau tour, Woofmigo est abandonné (Guaumigo)",
-        "hint": "Guaumigo, une app espagnole de promenade de chiens aussi active aux Pays-Bas et en Belgique, ressemble trop à Woofmigo. Choisissez dans le nouveau tour de noms (_werk/naam/). D’ici là, tout reste sur APP_NAME et Brand.name."
+        "title": "Nom choisi : Rondje Mee",
+        "hint": "Dans l’App Store : « Rondje Mee », sous-titre « Wandel met een buurhond ». Dans le code, le nom est à un seul endroit : APP_NAME (web) et APP_DISPLAY_NAME (iPhone). Réservez maintenant aussi le nom dans App Store Connect."
       },
       "goLive": {
         "title": "Mettre en ligne : fusionner en production",
@@ -2392,7 +2392,7 @@
       },
       "money": {
         "title": "Tout ce qui coûte de l’argent",
-        "hint": "Apple Developer (99 € par an) et le domaine. Votre accord et votre paiement : Claude n’achète rien."
+        "hint": "Apple Developer (99 € par an). Le domaine est déjà acheté. Votre accord et votre paiement : Claude n’achète rien."
       },
       "sendThree": {
         "title": "Envoie tes 3 premiers e-mails",
@@ -2400,15 +2400,15 @@
       },
       "trademark": {
         "title": "Vérifier la marque sur TMview",
-        "hint": "Cherchez le nouveau nom (exact et similaire) dans TMview, BOIP et OEPM (Espagne), dans les classes 9, 42 et 45. Attention à Guaumigo et à la demande européenne PawAmigo."
+        "hint": "Cherchez « Rondje Mee » (exact et similaire, aussi « Rondje ») dans TMview, BOIP et OEPM (Espagne), dans les classes 9, 42 et 45."
       },
       "appleAccount": {
         "title": "Compte Apple Developer",
         "hint": "Nécessaire pour soumettre, pour Se connecter avec Apple et pour HealthKit. 99 € par an ; compté dans les coûts dès que vous cochez."
       },
       "domain": {
-        "title": "Acheter et relier un domaine",
-        "hint": "N’achetez que lorsque le nom passe toutes les vérifications : marques, App Store, domaines et comptes. Environ 12 € par an. Ensuite Vercel → Settings → Domains (docs/LAUNCH.md §8). Compté dans les coûts dès que vous cochez."
+        "title": "Domaine : rondjemee.nl",
+        "hint": "Acheté ; rondjemee.com et www redirigent vers rondjemee.nl. Dernière étape : BETTER_AUTH_URL sur https://rondjemee.nl dès que le domaine répond (docs/LAUNCH.md §8). Compté dans les coûts dès que vous cochez."
       },
       "socialKeys": {
         "title": "Clés pour Se connecter avec Apple et Google",
@@ -2447,8 +2447,8 @@
         "hint": "Pour que la promesse de confidentialité vaille aussi pour Vercel Blob (voir STAND.md)."
       },
       "storeTexts": {
-        "title": "Texte et captures App Store avec le nom choisi",
-        "hint": "Après le choix du nom : le reporter dans docs/app-store/vermelding.md et faire de nouvelles captures."
+        "title": "Texte et captures App Store avec Rondje Mee",
+        "hint": "Le nom et le sous-titre sont dans docs/app-store/vermelding.md. Reste à faire : de nouvelles captures où l’on voit Rondje Mee."
       },
       "mountAnalytics": {
         "title": "Ajouter le compteur de visites au site",

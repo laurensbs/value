@@ -2379,8 +2379,8 @@
     },
     "tasks": {
       "name": {
-        "title": "Naam: nieuwe ronde, Woofmigo vervalt (Guaumigo)",
-        "hint": "Guaumigo, een Spaanse uitlaatapp die ook in NL en BE actief is, lijkt te veel op Woofmigo. Kies uit de nieuwe naamronde (_werk/naam/). Tot dan blijft alles via APP_NAME en Brand.name."
+        "title": "Naam gekozen: Rondje Mee",
+        "hint": "In de App Store: \"Rondje Mee\", ondertitel \"Wandel met een buurhond\". In de code staat de naam op één plek: APP_NAME (web) en APP_DISPLAY_NAME (iPhone). Leg de naam nu ook vast in App Store Connect."
       },
       "goLive": {
         "title": "Live zetten: mergen naar productie",
@@ -2392,7 +2392,7 @@
       },
       "money": {
         "title": "Alles wat geld kost",
-        "hint": "Apple Developer (€ 99 per jaar) en het domein. Jouw akkoord en jouw betaling: Claude koopt niets."
+        "hint": "Apple Developer (€ 99 per jaar). Het domein is al gekocht. Jouw akkoord en jouw betaling: Claude koopt niets."
       },
       "sendThree": {
         "title": "Verstuur je eerste 3 mails",
@@ -2400,15 +2400,15 @@
       },
       "trademark": {
         "title": "Merkcheck op TMview",
-        "hint": "Zoek de nieuwe naam (exact én gelijkend) in TMview, BOIP en OEPM (Spanje), in klasse 9, 42 en 45. Let op Guaumigo en de EU-aanvraag PawAmigo."
+        "hint": "Zoek \"Rondje Mee\" (exact én gelijkend, ook \"Rondje\") in TMview, BOIP en OEPM (Spanje), in klasse 9, 42 en 45."
       },
       "appleAccount": {
         "title": "Apple Developer-account",
         "hint": "Nodig om in te dienen, voor Inloggen met Apple en voor HealthKit. € 99 per jaar; telt mee bij de kosten zodra je dit afvinkt."
       },
       "domain": {
-        "title": "Domein kopen en koppelen",
-        "hint": "Koop pas als de naam alle checks doorstaat: merken, App Store, domeinen en handles. Ongeveer € 12 per jaar. Daarna Vercel → Settings → Domains (docs/LAUNCH.md §8). Telt mee bij de kosten zodra je dit afvinkt."
+        "title": "Domein: rondjemee.nl",
+        "hint": "Gekocht; rondjemee.com en www sturen door naar rondjemee.nl. Laatste stap: BETTER_AUTH_URL op https://rondjemee.nl zodra het domein bereikbaar is (docs/LAUNCH.md §8). Telt mee bij de kosten zodra je dit afvinkt."
       },
       "socialKeys": {
         "title": "Sleutels voor Inloggen met Apple en Google",
@@ -2447,8 +2447,8 @@
         "hint": "Zodat de privacybelofte ook voor Vercel Blob klopt (zie STAND.md)."
       },
       "storeTexts": {
-        "title": "App Store-tekst en screenshots met de gekozen naam",
-        "hint": "Na de naamkeuze: de naam invullen in docs/app-store/vermelding.md en nieuwe screenshots maken."
+        "title": "App Store-tekst en screenshots met Rondje Mee",
+        "hint": "De naam en de ondertitel staan in docs/app-store/vermelding.md. Nog te doen: nieuwe screenshots waarop Rondje Mee staat."
       },
       "mountAnalytics": {
         "title": "Websitebezoek-meter in de site zetten",
