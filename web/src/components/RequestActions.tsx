@@ -205,7 +205,7 @@ function TrustSteps({ trust, allowSolo, animate }: { trust: Trust; allowSolo: bo
       {rungs.map((rung, i) => (
         <li key={rung.key} className={rung.done ? 'done' : undefined} style={{ '--n': i } as CSSProperties}>
           <span className="trust-step-mark" aria-hidden="true">
-            {rung.done ? <Icon name="check" size={16} /> : null}
+            {rung.done ? <Icon name="check" size={14} /> : null}
           </span>
           <span>
             {rung.label}
