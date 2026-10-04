@@ -60,9 +60,11 @@ struct NextStepCard: View {
 
     // MARK: Step
 
+    /// Guus has not introduced himself yet: then he is the only one talking on the screen.
+    @MainActor static var introPending: Bool { Keepsakes.shared.coachOn && !Keepsakes.shared.has("met.guus") }
+
     private var current: NextStep {
-        let keepsakes = Keepsakes.shared
-        if keepsakes.coachOn && !keepsakes.has("met.guus") {
+        if Self.introPending {
             let name = model.firstName
             return NextStep(
                 id: "intro", mood: .happy,

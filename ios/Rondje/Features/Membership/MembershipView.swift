@@ -2,40 +2,7 @@ import SwiftUI
 
 /// "Word lid van Rondje": Rondje stays free and ad-free, and is carried by members who give.
 /// Giving never happens inside the app for now: there is no ANBI foundation yet, so the button
-/// opens the website in Safari (App Store rule 3.2.2(iv) allows that for fundraising).
-struct MembershipCard: View {
-    @State private var open = false
-    @State private var wag = false
-
-    var body: some View {
-        Button { open = true } label: {
-            HStack(spacing: 14) {
-                Image(systemName: "heart.fill")
-                    .font(.title2)
-                    .foregroundStyle(Palette.onBall)
-                    .frame(width: 52, height: 52)
-                    .background(Palette.ball, in: .rect(cornerRadius: 16, style: .continuous))
-                    .symbolEffect(.bounce, value: wag)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Word lid van \(Brand.name)").font(.headline).foregroundStyle(Palette.onGrass)
-                    Text("Help een rondje: gratis voor iedereen, zonder reclame.")
-                        .font(.subheadline).foregroundStyle(Palette.onGrass.opacity(0.85))
-                        .multilineTextAlignment(.leading)
-                }
-                Spacer()
-                Image(systemName: "chevron.right").foregroundStyle(Palette.onGrass.opacity(0.7))
-            }
-            .padding(16)
-            .background(Palette.walkBackground, in: .rect(cornerRadius: 24, style: .continuous))
-        }
-        .buttonStyle(.plain)
-        .onAppear { wag.toggle() }
-        .sheet(isPresented: $open) {
-            MembershipView().presentationDetents([.large]).presentationCornerRadius(32)
-        }
-    }
-}
-
+/// opens the website in Safari (App Store rule 3.2.2(iv) allows that for fundraising). Opened from Jij.
 struct MembershipView: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss

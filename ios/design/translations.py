@@ -406,8 +406,6 @@ T = {
         "Busca sombra, dale agua y deja que el perro descanse. Si jadea mucho o se tambalea: llama al veterinario."),
     "Zwak GPS-signaal": ("Weak GPS signal", "Signal GPS faible", "Señal GPS débil"),
     "de wandelaar": ("the walker", "le promeneur", "el paseador"),
-    "keer ID gezien": ("times ID seen", "fois pièce d'identité vue", "veces documento visto"),
-    "lid sinds": ("member since", "membre depuis", "socio desde"),
     "“%@”": ("“%@”", "« %@ »", "«%@»"),
     "%.1f km": ("%.1f km", "%.1f km", "%.1f km"),
     "Geen verbinding. Je ziet de afspraken van je laatste bezoek.": ("No connection. You're seeing the appointments from your last visit.", "Pas de connexion. Tu vois les rendez-vous de ta dernière visite.", "Sin conexión. Ves las citas de tu última visita."),
@@ -415,7 +413,6 @@ T = {
     "Een duidelijke foto van jezelf helpt eigenaren om je te vertrouwen.": ("A clear photo of yourself helps owners trust you.", "Une photo claire de toi aide les propriétaires à te faire confiance.", "Una foto clara tuya ayuda a los dueños a confiar en ti."),
     "Wandel je mee?": ("Will you walk with me?", "Tu viens te promener ?", "¿Vienes a pasear?"),
     "Ik wandel met honden uit de buurt via %@. Gratis, en je helpt er iemand mee. Doe je mee?": ("I walk dogs from the neighbourhood with %@. It's free, and you help someone. Want to join?", "Je promène des chiens du quartier avec %@. C'est gratuit, et tu aides quelqu'un. Tu viens ?", "Paseo perros del barrio con %@. Es gratis y ayudas a alguien. ¿Te apuntas?"),
-    "Nodig vrienden uit": ("Invite friends", "Inviter des amis", "Invitar amigos"),
     "Wie wil er met %@ wandelen?": ("Who wants to walk %@?", "Qui veut promener %@ ?", "¿Quién quiere pasear a %@?"),
     "Deel": ("Share", "Partager", "Compartir"),
     "Spreek geen geld af en houd persoonlijke gegevens voor jezelf tot je elkaar kent.": ("Don't agree on money, and keep personal details to yourself until you've met.", "Ne parle pas d'argent et garde tes données personnelles pour toi tant que vous ne vous êtes pas rencontrés.", "No acordéis dinero y guarda tus datos personales hasta que os conozcáis."),
@@ -490,7 +487,7 @@ T = {
     "Vertel de wandelaar waar je hond van schrikt. Dat helpt meer dan een lange lijst regels.": ("Tell the walker what startles your dog. That helps more than a long list of rules.", "Dis au promeneur ce qui effraie ton chien. C'est plus utile qu'une longue liste de règles.", "Cuéntale al paseador qué asusta a tu perro. Ayuda más que una larga lista de normas."),
     "Vraag of de wandelaar een foto stuurt. Dan wandel je in gedachten een beetje mee.": ("Ask the walker to send a photo. Then you walk along a little in your mind.", "Demande au promeneur d'envoyer une photo. Tu te promènes un peu avec eux en pensée.", "Pide al paseador que envíe una foto. Así paseas un poco con ellos en tu mente."),
     "Wandelen met andere honden, en hulp voor je eigen hond.": ("Walking other dogs, and help for your own dog.", "Promener d'autres chiens, et de l'aide pour ton propre chien.", "Pasear otros perros, y ayuda para tu propio perro."),
-    "Wat doe je op Rondje?": ("What do you do on Rondje?", "Que fais-tu sur Rondje ?", "¿Qué haces en Rondje?"),
+    "Wat doe je op %@?": ("What do you do on %@?", "Que fais-tu sur %@ ?", "¿Qué haces en %@?"),
     "Wil met je hond wandelen": ("Wants to walk your dog", "Veut promener ton chien", "Quiere pasear a tu perro"),
     "Zet je hond erop": ("Add your dog", "Ajoute ton chien", "Añade tu perro"),
     "Zo werkt het voor eigenaren": ("How it works for owners", "Comment ça marche pour les propriétaires", "Cómo funciona para dueños"),
@@ -542,7 +539,6 @@ T = {
     "Nog %lld punten tot %@": ("%lld points to %@", "Encore %lld points avant %@", "%lld puntos para %@"),
     "Samen deze maand": ("Together this month", "Ensemble ce mois-ci", "Juntos este mes"),
     "Weekdoel": ("Weekly goal", "Objectif de la semaine", "Meta semanal"),
-    "punten": ("points", "points", "puntos"),
     # Info.plist
     "NSCameraUsageDescription": (
         "To send the owner a photo during a walk. Only the photos you send go to the owner.",

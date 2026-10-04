@@ -57,7 +57,7 @@ struct RoleView: View {
             .animation(.snappy, value: model.role)
         }
         .screenBackground()
-        .navigationTitle("Wat doe je op Rondje?")
+        .navigationTitle(L("Wat doe je op \(Brand.name)?"))
     }
 
     private struct Payload: Encodable { var wantsToWalk, hasDogs: Bool }

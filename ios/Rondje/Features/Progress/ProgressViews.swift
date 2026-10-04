@@ -42,6 +42,8 @@ final class ProgressStore {
 /// The level ring: where you are and how far to the next level. Tap for badges.
 struct LevelCard: View {
     let progress: Progress
+    /// False on the level screen itself, where the card is not a link.
+    var showsChevron = true
 
     var body: some View {
         HStack(spacing: 16) {
@@ -63,10 +65,12 @@ struct LevelCard: View {
                     Text("Hoogste level. Wat een rondjes!").font(.subheadline).foregroundStyle(Palette.onGrass.opacity(0.85))
                 }
                 let earned = progress.badges.filter { $0.tier > 0 }.count
-                Label("\(earned) badges", systemImage: "rosette").font(.caption.weight(.semibold)).foregroundStyle(Palette.ball)
+                Label(earned == 1 ? L("1 badge") : L("\(earned) badges"), systemImage: "rosette").font(.caption.weight(.semibold)).foregroundStyle(Palette.ball)
             }
             Spacer()
-            Image(systemName: "chevron.right").foregroundStyle(Palette.onGrass.opacity(0.7))
+            if showsChevron {
+                Image(systemName: "chevron.right").foregroundStyle(Palette.onGrass.opacity(0.7))
+            }
         }
         .padding(16)
         .background(LinearGradient(colors: [Palette.walkBackground, Palette.grass], startPoint: .topLeading, endPoint: .bottomTrailing),
@@ -118,8 +122,10 @@ struct BadgesView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 if let p = store.progress {
-                    LevelCard(progress: p)
+                    LevelCard(progress: p, showsChevron: false)
                     weekGoal(p)
+                    // "Samen deze maand": a shared goal of the town, next to your own progress.
+                    if let c = store.challenges { ChallengeCard(challenges: c) }
                     SectionTitle(title: L("Badges"), subtitle: L("Alleen voor jezelf. Ze geven geen voorrang."))
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
                         ForEach(p.badges) { badge($0) }

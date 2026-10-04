@@ -94,7 +94,6 @@ T = {
         "Niveau maximal. Quelle collection de balades !",
         "Nivel máximo. ¡Cuántos paseos!"),
     "Jouw level": ("Your level", "Ton niveau", "Tu nivel"),
-    "Jouw level en badges": ("Your level and badges", "Ton niveau et tes badges", "Tu nivel e insignias"),
     # --- intro, onboarding ---
     "Even naar buiten": ("A moment outside", "Un moment dehors", "Un rato fuera"),
     "Een vaste afspraak, en een hond die blij is dat je komt. Gratis en zonder reclame.": (

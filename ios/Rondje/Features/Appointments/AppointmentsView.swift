@@ -33,7 +33,8 @@ struct AppointmentsView: View {
                                 .padding(12)
                                 .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
                         }
-                        if !items.isEmpty {
+                        // Starting a walk is something walkers do: owners never see this hint.
+                        if !items.isEmpty && side == .walking {
                             GuusHint(id: "appointments", text: L("Op de dag zelf start je hier je rondje. Een half uur van tevoren mag het al."))
                         }
                         if model.role == .both || (model.role == .walker && !model.appointments.incoming.isEmpty) {
@@ -261,29 +262,61 @@ struct AppointmentCard: View {
         }
     }
 
+    /// Cancelling is rare and always asks first, so it sits behind "…" instead of on its own row.
+    /// An owner answers an open request with "Weiger", which does the same.
+    private var canCancel: Bool {
+        item.isOpen && item.walkStatus != "active" && !(asOwner && item.status == "pending")
+    }
+
+    private var moreMenu: some View {
+        Menu {
+            Button("Annuleer afspraak", systemImage: "xmark.circle", role: .destructive) { confirmCancel = true }
+        } label: {
+            Image(systemName: "ellipsis")
+                .font(.body.weight(.semibold))
+                .foregroundStyle(Palette.muted)
+                .frame(width: 44, height: 44)
+                .contentShape(.rect)
+        }
+        .accessibilityLabel("Meer")
+    }
+
     @ViewBuilder
     private var contact: some View {
         let phone = asOwner ? item.walker?.phone : item.host?.phone
         let email = asOwner ? item.walker?.email : item.host?.email
         let canChat = ["pending", "accepted", "completed"].contains(item.status)
         if canChat || (item.status == "accepted" && (phone != nil || email != nil)) {
-            HStack(spacing: 10) {
-                if canChat {
-                    Button("Chat", systemImage: "bubble.left.and.bubble.right.fill") { chatting = true }.buttonStyle(.bordered)
-                }
-                if item.status == "accepted", let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
-                    Button("Bel", systemImage: "phone.fill") { openURL(url) }.buttonStyle(.bordered)
-                        .transition(opening)
-                }
-                if item.status == "accepted", let email, let url = URL(string: "mailto:\(email)") {
-                    Button("Mail", systemImage: "envelope.fill") { openURL(url) }.buttonStyle(.bordered)
-                        .transition(opening)
-                }
+            // Words when they fit, otherwise only the icons (with their names for VoiceOver).
+            ViewThatFits(in: .horizontal) {
+                contactButtons(canChat: canChat, phone: phone, email: email)
+                contactButtons(canChat: canChat, phone: phone, email: email).labelStyle(.iconOnly)
             }
             .tint(Palette.grass)
             .font(.subheadline.weight(.semibold))
             // Large bordered buttons are at least 44 points tall.
             .controlSize(.large)
+        }
+    }
+
+    /// Chat, call and mail, and "…" (cancel) at the end of the same row.
+    private func contactButtons(canChat: Bool, phone: String?, email: String?) -> some View {
+        HStack(spacing: 10) {
+            if canChat {
+                Button("Chat", systemImage: "bubble.left.and.bubble.right.fill") { chatting = true }.buttonStyle(.bordered)
+            }
+            if item.status == "accepted", let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
+                Button("Bel", systemImage: "phone.fill") { openURL(url) }.buttonStyle(.bordered)
+                    .transition(opening)
+            }
+            if item.status == "accepted", let email, let url = URL(string: "mailto:\(email)") {
+                Button("Mail", systemImage: "envelope.fill") { openURL(url) }.buttonStyle(.bordered)
+                    .transition(opening)
+            }
+            if canCancel {
+                Spacer(minLength: 0)
+                moreMenu
+            }
         }
     }
 
@@ -323,17 +356,6 @@ struct AppointmentCard: View {
                 } else if item.walkStatus == "ended", item.feedbackGiven != true, let id = item.walkId {
                     Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
                 }
-            }
-            if item.isOpen && item.walkStatus != "active" {
-                Button {
-                    confirmCancel = true
-                } label: {
-                    Image(systemName: "xmark")
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .tint(Palette.muted)
-                .accessibilityLabel("Annuleer")
             }
         }
         .disabled(busy)

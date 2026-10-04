@@ -1461,6 +1461,28 @@
         }
       }
     },
+    "%lld rondjes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld walks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld paseos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld balades"
+          }
+        }
+      }
+    },
     "%lld van %lld" : {
       "localizations" : {
         "en" : {
@@ -1485,6 +1507,34 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld van %2$lld"
+          }
+        }
+      }
+    },
+    "%lld van %lld · Volgende: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld of %2$lld · Next: %3$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld de %2$lld · Siguiente: %3$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld sur %2$lld · Ensuite : %3$@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld van %2$lld · Volgende: %3$@"
           }
         }
       }
@@ -1689,6 +1739,28 @@
         }
       }
     },
+    "%lld× ID gezien" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ID seen %lld×"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento visto %lld×"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pièce d'identité vue %lld×"
+          }
+        }
+      }
+    },
     "%lld× samen" : {
       "localizations" : {
         "en" : {
@@ -1751,6 +1823,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "+%lld points"
+          }
+        }
+      }
+    },
+    "1 badge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 badge"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 insignia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 badge"
+          }
+        }
+      }
+    },
+    "1 rondje" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 walk"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 paseo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 balade"
           }
         }
       }
@@ -1971,6 +2087,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accepte une rencontre"
+          }
+        }
+      }
+    },
+    "Account" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compte"
           }
         }
       }
@@ -4705,6 +4843,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ma"
+          }
+        }
+      }
+    },
+    "Dicht" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermé"
           }
         }
       }
@@ -10133,6 +10293,28 @@
         }
       }
     },
+    "Instellingen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
+          }
+        }
+      }
+    },
     "Intimidatie" : {
       "localizations" : {
         "en" : {
@@ -11305,28 +11487,6 @@
         }
       }
     },
-    "Jouw level en badges" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your level and badges"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tu nivel e insignias"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ton niveau et tes badges"
-          }
-        }
-      }
-    },
     "Jouw punten" : {
       "localizations" : {
         "en" : {
@@ -11633,28 +11793,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous êtes maintenant %@ !"
-          }
-        }
-      }
-    },
-    "keer ID gezien" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "times ID seen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "veces documento visto"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "fois pièce d'identité vue"
           }
         }
       }
@@ -12975,28 +13113,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Langage corporel"
-          }
-        }
-      }
-    },
-    "lid sinds" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "member since"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "socio desde"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "membre depuis"
           }
         }
       }
@@ -14717,6 +14833,28 @@
         }
       }
     },
+    "Nodig uit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invite"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invitar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inviter"
+          }
+        }
+      }
+    },
     "Nodig voor zelfstandige rondjes" : {
       "localizations" : {
         "en" : {
@@ -14735,28 +14873,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nécessaire pour les balades en solo"
-          }
-        }
-      }
-    },
-    "Nodig vrienden uit" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invite friends"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invitar amigos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inviter des amis"
           }
         }
       }
@@ -15561,6 +15677,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quels jours ?"
+          }
+        }
+      }
+    },
+    "Open" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abierto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvert"
           }
         }
       }
@@ -16401,28 +16539,6 @@
         }
       }
     },
-    "punten" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "points"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "puntos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "points"
-          }
-        }
-      }
-    },
     "Quiz gehaald" : {
       "localizations" : {
         "en" : {
@@ -17035,6 +17151,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les rappels sont programmés sur ton téléphone. Rien ne passe par un serveur. Les rappels de rendez-vous ne comptent pas."
+          }
+        }
+      }
+    },
+    "sinds %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "since %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "desde %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "depuis %@"
           }
         }
       }
@@ -19879,6 +20017,28 @@
         }
       }
     },
+    "Wandelen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walking"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paseos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promenades"
+          }
+        }
+      }
+    },
     "Wandelen in de ochtend? Dan is het rustiger en koeler, fijn voor oudere honden." : {
       "localizations" : {
         "en" : {
@@ -20099,24 +20259,24 @@
         }
       }
     },
-    "Wat doe je op Rondje?" : {
+    "Wat doe je op %@?" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "What do you do on Rondje?"
+            "value" : "What do you do on %@?"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Qué haces en Rondje?"
+            "value" : "¿Qué haces en %@?"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Que fais-tu sur Rondje ?"
+            "value" : "Que fais-tu sur %@ ?"
           }
         }
       }

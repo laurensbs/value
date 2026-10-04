@@ -62,15 +62,19 @@ struct DiscoverView: View {
                     VStack(alignment: .leading, spacing: 18) {
                         header
                         NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || !loading, nearbyFailed: error != nil)
-                        NudgeOfferCard()
-                        WeekRecapCard(side: .walker)
-                        FirstSteps { model.perform(Keepsakes.shared.lessonsDone.count < 5 ? .lessons : .quiz) }
-                        if let p = progress.progress, p.points > 0 {
-                            NavigationLink { BadgesView() } label: { LevelCard(progress: p) }.buttonStyle(.plain)
+                        // One Guus at a time: next to the next step, at most the week in review or the seintje offer.
+                        if !NextStepCard.introPending {
+                            if WeekRecapCard.current(side: .walker) != nil {
+                                WeekRecapCard(side: .walker)
+                            } else if NudgeOfferCard.isShowing(walks: model.me?.trust?.walks ?? 0) {
+                                NudgeOfferCard()
+                            }
                         }
-                        if let c = progress.challenges { ChallengeCard(challenges: c) }
-                        DailyTip()
-                        GuusHint(id: "discover", text: L("Tik op een hond om zijn verhaal te lezen. Begin gerust met Rustig."))
+                        // The level and "Samen deze maand" live under Jij now; the dogs come first here.
+                        FirstSteps { model.perform(Keepsakes.shared.lessonsDone.count < 5 ? .lessons : .quiz) }
+                        if !NextStepCard.introPending {
+                            GuusHint(id: "discover", text: L("Tik op een hond om zijn verhaal te lezen. Begin gerust met Rustig."))
+                        }
                         filters
                             .id("filters")
                         if showMap {
@@ -82,6 +86,8 @@ struct DiscoverView: View {
                             list
                         }
                         if !groupWalks.isEmpty { groupWalksSection }
+                        DailyTip()
+                            .padding(.top, 8)
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 32)

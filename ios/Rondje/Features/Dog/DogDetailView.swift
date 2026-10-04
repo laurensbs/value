@@ -96,23 +96,25 @@ struct DogDetailView: View {
                     .padding(14).background(Palette.warnSoft, in: .rect(cornerRadius: 16, style: .continuous))
             }
 
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
-                fact("bolt.fill", L("Energie"), Labels.energy(d.dog.energy))
-                fact("ruler", L("Formaat"), Labels.size(d.dog.size))
-                fact("timer", L("Rondje"), L("\(d.dog.walkMinutes) minuten"))
-                fact("star.fill", L("Niveau"), Labels.level(d.dog.level))
-            }
-
-            if !d.dog.story.isEmpty {
-                Card {
-                    Text("Over \(d.dog.name)").font(.headline)
-                    Text(d.dog.story).foregroundStyle(Palette.ink)
+            // The four facts on one card, instead of four separate tiles.
+            Card {
+                LazyVGrid(columns: [GridItem(.flexible(), alignment: .leading), GridItem(.flexible(), alignment: .leading)], spacing: 14) {
+                    fact("bolt.fill", L("Energie"), Labels.energy(d.dog.energy))
+                    fact("ruler", L("Formaat"), Labels.size(d.dog.size))
+                    fact("timer", L("Rondje"), L("\(d.dog.walkMinutes) minuten"))
+                    fact("star.fill", L("Niveau"), Labels.level(d.dog.level))
                 }
             }
 
-            if !d.dog.traits.isEmpty {
-                FlowLayout(spacing: 8) {
-                    ForEach(d.dog.traits, id: \.self) { Chip(text: $0) }
+            if !d.dog.story.isEmpty || !d.dog.traits.isEmpty {
+                Card {
+                    Text("Over \(d.dog.name)").font(.headline)
+                    if !d.dog.story.isEmpty { Text(d.dog.story).foregroundStyle(Palette.ink) }
+                    if !d.dog.traits.isEmpty {
+                        FlowLayout(spacing: 8) {
+                            ForEach(d.dog.traits, id: \.self) { Chip(text: $0) }
+                        }
+                    }
                 }
             }
 
@@ -130,18 +132,16 @@ struct DogDetailView: View {
                 if d.dog.ppp && d.dog.country == "ES" {
                     info("doc.text.fill", L("PPP-hond: in Spanje alleen met licentie"), tint: Palette.warn)
                 }
-            }
-
-            hostCard(d)
-
-            if !d.slots.isEmpty {
-                Card {
-                    Text("Vaste momenten").font(.headline)
+                // The regular moments belong with the practical things, not on a card of their own.
+                if !d.slots.isEmpty {
+                    Text("Vaste momenten").font(.subheadline.weight(.semibold)).padding(.top, 4)
                     ForEach(d.slots, id: \.self) { slot in
                         info("clock", L("\(Labels.weekday(slot.weekday).capitalized) om \(slot.time)"))
                     }
                 }
             }
+
+            hostCard(d)
 
             if d.canSeePrivate && (!d.dog.meetingInfo.isEmpty || !d.dog.vetInfo.isEmpty) {
                 Card {
@@ -221,14 +221,15 @@ struct DogDetailView: View {
     }
 
     private func fact(_ symbol: String, _ title: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Image(systemName: symbol).foregroundStyle(Palette.grass).frame(height: 24)
-            Text(title).font(.caption).foregroundStyle(Palette.muted)
-            Text(value).font(.subheadline.weight(.semibold))
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: symbol).foregroundStyle(Palette.grass).frame(width: 22)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.caption).foregroundStyle(Palette.muted)
+                Text(value).font(.subheadline.weight(.semibold))
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(14)
-        .background(Palette.surface, in: .rect(cornerRadius: 18, style: .continuous))
+        .accessibilityElement(children: .combine)
     }
 
     private func info(_ symbol: String, _ text: String, tint: Color = Palette.grass) -> some View {
