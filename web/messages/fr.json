@@ -96,7 +96,7 @@
   "home": {
     "eyebrow": "Nederland · België · España",
     "title": "Une balade régulière avec un chien <mark>qui vous attend.</mark>",
-    "lede": "Rondje met en relation de jeunes adultes avec les chiens de voisins qui ne peuvent plus marcher bien loin, et avec des chiens de refuge. Gratuit, sûr et bon pour tous les deux.",
+    "lede": "Promenez régulièrement le chien d'un voisin qui ne peut plus marcher bien loin, ou un chien de refuge. Gratuit, et la première fois toujours ensemble.",
     "ctaDogs": "Voir les chiens près de chez vous",
     "ctaOwner": "Inscrire un chien",
     "ctaShelter": "Pour les refuges",
@@ -123,7 +123,7 @@
     "countriesText": "Rondje fonctionne aux Pays-Bas, en Belgique et en Espagne, en néerlandais, français, espagnol et anglais.",
     "freeTitle": "Gratuit, et ça le restera",
     "freeText": "Pas de publicité, pas d'abonnement, et nous ne vendons jamais de données. Rondje vit du soutien volontaire, et plus tard de partenaires et de fonds qui respectent nos règles.",
-    "exampleDogs": "Quelques chiens qui attendent une balade",
+    "exampleDogs": "Des exemples, pour voir comment ça marche",
     "freeLink": "Comment nous restons gratuits",
     "freeLinkApp": "À propos de Rondje",
     "impactTitle": "Ce que nous avons marché ensemble",
@@ -167,7 +167,8 @@
     "dogs": {
       "title": "Qui vient avec vous aujourd’hui ?",
       "lede": "Quelques chiens qui attendent leur balade.",
-      "all": "Voir tous les chiens"
+      "all": "Voir tous les chiens",
+      "ledeExamples": "Ce sont des exemples, pour que vous voyiez comment ça marche."
     },
     "how": {
       "eyebrow": "En quatre étapes",
@@ -225,8 +226,8 @@
       "data": "Nous ne vendons jamais de données"
     },
     "closing": {
-      "title": "Un chien vous attend",
-      "text": "Près de chez vous vivent des chiens dont les maîtres ne peuvent plus marcher bien loin. Une balade de plus illumine leur journée."
+      "title": "Peut-être juste au coin de la rue",
+      "text": "Peut-être qu’une personne près de chez vous ne peut plus marcher bien loin. Une balade de plus illumine la journée du chien et de son maître."
     },
     "pages": {
       "safety": "Sécurité",
@@ -321,7 +322,7 @@
       "next": "Continuer",
       "skip": "Passer",
       "welcomeTitle": "Bonjour {name}, bienvenue !",
-      "welcomeText": "Quelques questions rapides, puis nous préparons Rondje pour vous. Exactement comme il vous faut.",
+      "welcomeText": "Quelques questions rapides. Ensuite, vous verrez quels chiens près de chez vous ont besoin d’une balade, ou vous mettrez votre propre chien en ligne.",
       "welcome1": "Vous choisissez : vous balader, un chien, ou les deux.",
       "welcome2": "Nous vous montrons des chiens et des gens près de chez vous.",
       "welcome3": "Ça prend une minute. Vous pourrez tout changer plus tard.",
@@ -352,7 +353,7 @@
       "goal2": "2 fois par semaine",
       "goal2Text": "Un compagnon régulier pour un chien",
       "goal3": "3 fois par semaine",
-      "goal3Text": "Un vrai marcheur",
+      "goal3Text": "Si vous avez souvent du temps",
       "goalRecommended": "Conseillé",
       "goalLater": "Je ne sais pas encore",
       "profileTitle": "Montrez qui vous êtes",
@@ -363,7 +364,7 @@
       "promise1": "La première fois, vous marchez toujours avec le propriétaire ou le refuge.",
       "promise2": "Votre adresse n'est jamais visible, et votre numéro seulement après un rendez-vous.",
       "promise3": "Rondje est gratuit et sans publicité. Quelqu'un vous demande de l'argent ? Signalez-le.",
-      "finish": "C'est fini, allons-y !",
+      "finish": "Montrez-moi les chiens",
       "needRole": "Choisissez ce que vous voulez faire.",
       "needName": "Indiquez votre prénom.",
       "needBirthDate": "Indiquez votre date de naissance.",
@@ -373,7 +374,10 @@
       "welcomeTitleAnon": "Bonjour, bienvenue !",
       "needExperience": "Choisissez ce qui vous correspond le mieux.",
       "promise1Owner": "La première fois, le promeneur marche toujours avec vous.",
-      "progressLabel": "Progression"
+      "progressLabel": "Progression",
+      "finishOwner": "Passons à mon chien",
+      "finishShelter": "Passons à notre refuge",
+      "finishNext": "C’est prêt, on continue"
     },
     "bioBlocksLabel": "Touchez pour ajouter une phrase",
     "bioBlocks": {
@@ -426,7 +430,7 @@
     "showList": "Liste",
     "away": "à {distance}",
     "years": "{n, plural, one {# an} other {# ans}}",
-    "empty": "Il n'y a pas encore de chiens ici. Vous connaissez quelqu'un dont le chien aimerait sortir plus souvent ? Ou rejoignez une balade avec un refuge près de chez vous.",
+    "empty": "Nous venons tout juste de commencer ici. Vous connaissez quelqu’un dont le chien aimerait sortir plus souvent ? Envoyez-lui votre lien, ou recommandez un refuge.",
     "inviteOwner": "Inviter un propriétaire",
     "findShelter": "Refuges à proximité",
     "fromOwner": "Du quartier",
@@ -441,7 +445,9 @@
       "no": "Merci de ne pas donner de friandises."
     },
     "tipShelter": "Recommander un refuge",
-    "new": "Nouveau"
+    "new": "Nouveau",
+    "emptyFiltered": "Aucun chien ne correspond à ce choix. Essayez-en un autre, ou voyez tous les chiens.",
+    "sendLink": "Envoyez votre lien"
   },
   "dog": {
     "story": "À propos de {name}",
@@ -508,8 +514,8 @@
     "messageHint": "Présentez-vous brièvement. Ne convenez d'aucun paiement : Rondje est gratuit, le propriétaire fournit les sacs et les friandises.",
     "rules": "Je respecte le <conduct>code de conduite</conduct> : en laisse, pas de friandises sans autorisation, et je signale immédiatement tout incident.",
     "submit": "Envoyer la demande",
-    "sent": "Demande envoyée. Vous recevrez une notification dès qu'il y aura une réponse.",
-    "sentFlagged": "Demande envoyée. Attention : les messages concernant de l'argent, des liens de paiement ou des numéros de compte n'ont pas leur place sur Rondje et sont vérifiés.",
+    "sent": "Votre demande pour {dog} se trouve dans vos rendez-vous.",
+    "sentFlagged": "Attention : les messages concernant de l'argent, des liens de paiement ou des numéros de compte n'ont pas leur place ici et sont vérifiés.",
     "shelterNote": "Les chiens de refuge sont promenés en groupe encadré. Choisissez une balade en groupe ci-dessous.",
     "reasons": {
       "not-onboarded": "Complétez d'abord votre profil.",
@@ -548,7 +554,15 @@
       "outdoors": "J'adore être dehors, même sous la pluie."
     },
     "signupFirst": "Faire connaissance avec {name}",
-    "signupFirstText": "Gratuit. Vous créez d'abord un compte, puis vous choisissez un moment pour faire connaissance."
+    "signupFirstText": "Gratuit. Vous créez d'abord un compte, puis vous choisissez un moment pour faire connaissance.",
+    "sentTitle": "Envoyée à {owner}.",
+    "sentNext": "Et maintenant",
+    "sentStep1": "{owner} lit votre message.",
+    "sentStep2": "Si {owner} dit oui, vous verrez chacun les coordonnées de l’autre.",
+    "sentStep3": "{via, select, walk {La première fois, vous vous promenez ensemble.} home {La première fois, vous passez chez {owner}.} phone {D’abord un petit appel. Ensuite, vous vous rencontrez en vrai.} video {D’abord un petit appel vidéo. Ensuite, vous vous rencontrez en vrai.} other {Vous vous promenez en autonomie. {owner} peut suivre en direct.}}",
+    "sentNotify": "Vous recevrez une notification dès que {owner} répondra.",
+    "done": "Terminé",
+    "viewRequests": "Voir vos rendez-vous"
   },
   "requests": {
     "title": "Balades",
@@ -558,7 +572,7 @@
     "emptyIncoming": "Pas encore de demandes pour vos chiens.",
     "status": {
       "pending": "En attente de réponse",
-      "accepted": "Accepté",
+      "accepted": "Confirmé",
       "declined": "Refusé",
       "cancelled": "Annulé",
       "completed": "Effectué",
@@ -583,14 +597,29 @@
     "idSeen": "J'ai vu sa pièce d'identité en personne (Rondje n'en garde aucune copie)",
     "soloAllowed": "{name} peut promener {dog} en autonomie",
     "saveTrust": "Confirmer",
-    "trustSaved": "Mis à jour.",
     "contact": "Contact",
     "meeting": "Lieu de rendez-vous",
     "cancelConfirm": "Annuler ce rendez-vous ?",
     "keep": "Non, retour",
     "past": "Rendez-vous passés ({n})",
     "startHint": "Vous pouvez commencer à partir de {n} minutes avant le rendez-vous.",
-    "calendar": "Ajouter à l'agenda"
+    "calendar": "Ajouter à l'agenda",
+    "acceptedNote": "C’est convenu avec {walker} ! Vous voyez maintenant les coordonnées de l’autre, et {walker} reçoit une notification.",
+    "ladderTitleSolo": "{walker} peut désormais promener {dog} en autonomie.",
+    "ladderTitleId": "Vous avez vu la pièce d’identité de {walker}.",
+    "ladderTextSolo": "Vous pouvez suivre chaque balade en direct, et retirer cette autorisation à tout moment.",
+    "ladderTextId": "Vous voulez que {walker} promène aussi {dog} en autonomie ? Vous pouvez l’activer ici quand vous le souhaitez.",
+    "ladderTextShelter": "Les chiens de refuge se promènent toujours en groupe encadré.",
+    "ladderQuiz": "{walker} pourra demander une balade en autonomie dès que le quiz de sécurité sera réussi.",
+    "ladderLabel": "La confiance, pas à pas",
+    "ladderMeet": "Première rencontre",
+    "ladderId": "Pièce d’identité vue",
+    "ladderSolo": "Peut se promener en autonomie",
+    "ladderDone": "fait",
+    "ladderNotYet": "pas encore",
+    "ladderClose": "Terminé",
+    "trustSoloOff": "{walker} ne promène plus {dog} en autonomie.",
+    "trustIdOff": "La case « pièce d’identité vue » est de nouveau décochée."
   },
   "meet": {
     "legend": "Comment souhaitez-vous faire connaissance ?",
@@ -617,7 +646,6 @@
   "walk": {
     "before": "Avant de partir",
     "checkLeash": "La laisse et le harnais sont bien attachés",
-    "checkBags": "J'ai des sacs à crottes sur moi",
     "checkPhone": "Mon téléphone est chargé",
     "locationNote": "Pendant la balade, votre téléphone partage votre position avec le propriétaire. Le partage s'arrête dès que vous terminez la balade.",
     "start": "Commencer la balade",
@@ -1054,7 +1082,7 @@
       "details": "Présentez votre refuge : logo, description et horaires de promenade",
       "dogs": "Mettez vos chiens en ligne",
       "walk": "Planifiez une première promenade en groupe",
-      "verified": "Rondje vérifie votre refuge (en général sous deux jours ouvrables)"
+      "verified": "Nous vérifions votre refuge (nous essayons de le faire sous deux jours ouvrables)"
     },
     "checklistGo": "Y aller →",
     "checklistDone": "fait",
@@ -1131,7 +1159,7 @@
     "soonTitle": "Notre adresse e-mail sera bientôt ici",
     "soonText": "Nous mettons encore en place notre adresse de contact. En attendant, voici ce que vous pouvez déjà faire :",
     "nowTitle": "Ce que vous pouvez déjà faire",
-    "report": "Il s'agit d'un profil, d'un chien ou d'une promenade ? Utilisez le bouton « Signaler » sur cette page. Nous examinons chaque signalement sous 24 heures.",
+    "report": "Il s'agit d'un profil, d'un chien ou d'une promenade ? Utilisez le bouton « Signaler » sur cette page. Nous essayons d'examiner chaque signalement sous 24 heures.",
     "help": "Ça ne va pas fort ? La page d’aide liste des lignes d’écoute gratuites et anonymes.",
     "helpLink": "Aller à la page d'aide",
     "suggest": "Vous voulez recommander un refuge ou partager une idée ? Utilisez le formulaire de suggestion.",
@@ -1153,7 +1181,7 @@
     "liability": "Qui est responsable de quoi ?",
     "liabilityText": "Rondje met les gens en relation et n'est pas lui-même partie à l'accord. Le propriétaire reste responsable des dommages causés par le chien et doit être assuré pour cela. Nous recommandons aux promeneurs de souscrire leur propre assurance responsabilité civile. Consultez les conditions pour tous les détails.",
     "report": "Vous avez vu ou vécu quelque chose ?",
-    "reportText": "Signalez-le avec le bouton « Signaler » sur un profil, un chien ou une balade. Nous examinons chaque signalement sous 24 heures."
+    "reportText": "Signalez-le avec le bouton « Signaler » sur un profil, un chien ou une balade. Nous essayons d'examiner chaque signalement sous 24 heures."
   },
   "report": {
     "title": "Signaler",
@@ -1168,7 +1196,7 @@
     },
     "description": "Racontez-nous ce qui s'est passé",
     "submit": "Envoyer le signalement",
-    "done": "Merci. Nous examinerons votre signalement sous 24 heures. En cas d'urgence, appelez le 112.",
+    "done": "Merci. Nous essaierons d'examiner votre signalement sous 24 heures. En cas d'urgence, appelez le 112.",
     "blockDone": "Bloqué. Vous ne pourrez plus prendre rendez-vous ensemble.",
     "error": "Décrivez ce qui s'est passé, en quelques mots au moins.",
     "block": "Bloquer cette personne",
@@ -1181,7 +1209,7 @@
     "markRead": "Tout marquer comme lu",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} aimerait rencontrer {dogName} lors d'une balade.} home {{walkerName} aimerait rencontrer {dogName} chez vous.} phone {{walkerName} aimerait d'abord appeler pour faire connaissance avec {dogName}.} video {{walkerName} aimerait d'abord un appel vidéo pour faire connaissance avec {dogName}.} other {{walkerName} aimerait promener {dogName}.}}",
-      "request-accepted": "{via, select, phone {Votre appel au sujet de {dogName} a été accepté.} video {Votre appel vidéo au sujet de {dogName} a été accepté.} other {Votre rendez-vous avec {dogName} a été accepté.}}",
+      "request-accepted": "{via, select, walk {Oui ! Votre première rencontre avec {dogName} est confirmée.} home {Oui ! Votre première rencontre avec {dogName} est confirmée.} phone {Oui ! Votre appel au sujet de {dogName} est confirmé.} video {Oui ! Votre appel vidéo au sujet de {dogName} est confirmé.} other {Oui ! Votre balade avec {dogName} est confirmée.}}",
       "request-declined": "Malheureusement, votre rendez-vous avec {dogName} a été refusé.",
       "request-cancelled": "Un rendez-vous a été annulé.",
       "walk-started": "{walkerName} a commencé la balade avec {dogName}. Suivez-la en direct.",
@@ -1649,8 +1677,8 @@
         "body": "{via, select, home {Consultez la demande dans Rondje et dites si cela vous convient. Rencontrez-vous en journée ; la famille ou un voisin peuvent être présents.} phone {Consultez la demande dans Rondje et dites si cela vous convient. Un appel ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} video {Consultez la demande dans Rondje et dites si cela vous convient. Un appel vidéo ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} other {Consultez la demande dans Rondje et dites si cela vous convient. La première fois, vous vous rencontrez toujours ensemble.}}"
       },
       "request-accepted": {
-        "subject": "{via, select, phone {Votre appel au sujet de {dogName} est accepté} video {Votre appel vidéo au sujet de {dogName} est accepté} other {Votre rendez-vous avec {dogName} est accepté}}",
-        "body": "{via, select, home {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} other {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.}}"
+        "subject": "{via, select, walk {Oui ! Votre première rencontre avec {dogName} est confirmée} home {Oui ! Votre première rencontre avec {dogName} est confirmée} phone {Oui ! Votre appel au sujet de {dogName} est confirmé} video {Oui ! Votre appel vidéo au sujet de {dogName} est confirmé} other {Oui ! Votre balade avec {dogName} est confirmée}}",
+        "body": "{via, select, home {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} walk {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.} other {Vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Pendant la balade, le propriétaire peut suivre en direct.}}"
       },
       "walk-overdue": {
         "subject": "La promenade avec {dogName} dure plus longtemps que prévu",
@@ -1977,7 +2005,7 @@
       "levelUpText": "Vous êtes maintenant {name}, niveau {n}.",
       "newBadge": "Nouvelle médaille !",
       "newBadges": "{n} nouvelles médailles !",
-      "close": "Super !",
+      "close": "Continuer",
       "allBadges": "Voir vos médailles"
     },
     "card": "Voir votre progression",

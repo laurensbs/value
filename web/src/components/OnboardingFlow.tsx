@@ -455,7 +455,8 @@ export function OnboardingFlow({ firstName, photoUrl, country: initialCountry, m
         ) : null}
         {step === 'promise' ? (
           <SubmitButton className="button primary wide big" pending={pending}>
-            {t('flow.finish')}
+            {/* Says where the button leads: the dogs, your own dog, the shelter, or back to where you were. */}
+            {t(next ? 'flow.finishNext' : role === 'owner' ? 'flow.finishOwner' : role === 'shelter' ? 'flow.finishShelter' : 'flow.finish')}
           </SubmitButton>
         ) : (
           <button type="submit" className="button primary wide big">

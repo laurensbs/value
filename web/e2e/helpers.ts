@@ -49,7 +49,10 @@ export async function signUp(page: Page, opts: { name: string; email: string; in
  * a few words about yourself (typed, or ready sentences tapped), and the promises. Someone who
  * neither walks nor has a dog is treated as shelter staff.
  */
-export async function onboard(page: Page, opts: { birthDate: string; city: string; bio: string | string[]; phone: string; walker: boolean; owner: boolean }) {
+export async function onboard(
+  page: Page,
+  opts: { birthDate: string; city: string; bio: string | string[]; phone: string; walker: boolean; owner: boolean; next?: boolean },
+) {
   const next = () => page.getByRole('button', { name: 'Verder' }).click()
   await page.getByRole('button', { name: 'Laten we beginnen' }).click()
   const role = opts.walker && opts.owner ? /^Allebei/ : opts.owner ? /^Ik heb een hond/ : opts.walker ? /^Ik wil wandelen/ : /^Ik werk bij een opvang/
@@ -77,7 +80,9 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
   await page.getByLabel(/Telefoonnummer/).fill(opts.phone)
   await next()
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
-  await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
+  // The last button says where it leads: the dogs for walkers, your own dog for owners, the shelter for shelter staff.
+  const finish = opts.walker ? 'Laat me de honden zien' : opts.owner ? 'Verder met mijn hond' : 'Verder met onze opvang'
+  await page.getByRole('button', { name: opts.next ? 'Klaar, ga verder' : finish }).click()
   // Wait until the profile is saved and we left onboarding, so the next step doesn't race the save.
   await page.waitForURL((url) => !url.pathname.startsWith('/onboarding'))
 }

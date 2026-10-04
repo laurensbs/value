@@ -313,6 +313,7 @@ export default async function DogPage({
               <RequestForm
               dogId={dog.id}
               dogName={dog.name}
+              ownerName={host.name || dog.name}
               walkerName={viewer.profile?.firstName ?? ''}
               meetReason={meetReason}
               soloReason={soloReason}

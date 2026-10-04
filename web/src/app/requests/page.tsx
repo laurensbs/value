@@ -5,7 +5,7 @@ import { Icon } from '@/components/Icon'
 import { MeetChecklist } from '@/components/MeetChecklist'
 import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
 import { PushAsk } from '@/components/PushAsk'
-import { CancelButton, DecideButtons, StartButton, TrustForm } from '@/components/RequestActions'
+import { AcceptReveal, CancelButton, DecideButtons, StartButton, TrustForm } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
 import { canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
@@ -307,7 +307,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                       ) : null}
                       {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} /> : null}
                       {accepted ? (
-                        <>
+                        <AcceptReveal requestId={r.request.id} walkerName={r.walker.firstName}>
                           <Contact contact={{ name: r.walker.firstName, phone: r.walker.phone, email: r.walker.email }} label={t('requests.contact')} />
                           {meetings.has(r.request.id) ? (
                             <MeetChecklist requestId={r.request.id} title={t('meetCheck.title', { dog: r.dog.name })} items={meetings.get(r.request.id)!} />
@@ -328,6 +328,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                               walkerName={r.walker.firstName}
                               initial={grant}
                               allowSolo={!r.dog.orgId}
+                              quizPassed={signals.get(r.walker.id)?.quizPassed ?? false}
                             />
                           )}
                           <div className="row">
@@ -339,7 +340,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             {!active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
                             {!active ? <CancelButton requestId={r.request.id} /> : null}
                           </div>
-                        </>
+                        </AcceptReveal>
                       ) : null}
                     </div>
                   </li>
