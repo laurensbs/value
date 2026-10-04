@@ -58,8 +58,17 @@ export const profile = pgTable(
     weeklyGoal: integer('weekly_goal'),
     /** The highest level this person has seen celebrated, so a level-up is shown once. */
     seenLevel: integer('seen_level').notNull().default(1),
-    /** Friendly reminders (weekly goal, the town's challenge, first steps). Never more than one every few days. */
-    reminders: boolean('reminders').notNull().default(true),
+    /**
+     * Seintjes: reminders without news behind them (first steps, the town's challenge, a new dog
+     * nearby). Off for new profiles: only someone who turns them on gets them, at most one a week
+     * (lib/nudges.ts). Profiles from before 0011 keep what they had.
+     */
+    reminders: boolean('reminders').notNull().default(false),
+    /**
+     * The iPhone app plans its own seintjes on this person's phone (set by the app through PATCH
+     * /api/v1/profile). The server then sends them no seintje of its own, so nothing comes twice.
+     */
+    localNudges: boolean('local_nudges').notNull().default(false),
     bannedAt: timestamp('banned_at'),
     banReason: text('ban_reason'),
     createdAt: created(),
