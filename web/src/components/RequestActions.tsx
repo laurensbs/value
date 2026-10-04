@@ -47,7 +47,11 @@ export function DecideButtons({ requestId }: { requestId: string }) {
   const [choice, setChoice] = useState<'accept' | 'decline' | null>(null)
   function decide(decision: 'accept' | 'decline') {
     setChoice(decision)
-    if (decision === 'accept') justAccepted.add(requestId)
+    if (decision === 'accept') {
+      justAccepted.add(requestId)
+      // Only for the answer that is on its way: never as a surprise on a later visit.
+      window.setTimeout(() => justAccepted.delete(requestId), 10_000)
+    }
     run(() => respondToRequest(requestId, decision), decision === 'accept' ? 'success' : undefined, () => justAccepted.delete(requestId))
   }
   return (
