@@ -104,7 +104,7 @@ enum Lessons {
                 .wrong(L("Een zak koekjes"), why: L("Koekjes alleen als de eigenaar zegt dat het mag.")),
             ], explain: L("Ja. Zo weet de eigenaar wie er met de hond loopt.")),
             .choice(question: L("Na de kennismaking. Wanneer mag je zelfstandig met de hond?"), options: [
-                .right(L("Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald")),
+                .right(L("Als de eigenaar je vertrouwen geeft, je ID in het echt heeft gezien en je de quiz hebt gehaald")),
                 .wrong(L("Meteen, je kent hem nu"), why: L("De eigenaar beslist. Dat gaat per hond.")),
             ], explain: L("Klopt. Stap voor stap, voor iedereen veilig.")),
             .choice(question: L("Mag de hond los?"), options: [

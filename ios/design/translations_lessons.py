@@ -144,10 +144,10 @@ T = {
         "After the first meeting. When may you walk the dog on your own?",
         "Après la rencontre. Quand peux-tu promener le chien seul ?",
         "Después del primer encuentro. ¿Cuándo puedes pasear al perro solo?"),
-    "Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald": (
-        "When the owner trusts you and you passed the quiz",
-        "Quand le propriétaire te fait confiance et que tu as réussi le quiz",
-        "Cuando el dueño confía en ti y aprobaste el test"),
+    "Als de eigenaar je vertrouwen geeft, je ID in het echt heeft gezien en je de quiz hebt gehaald": (
+        "When the owner trusts you, has seen your ID in person and you passed the quiz",
+        "Quand le propriétaire te fait confiance, a vu ta pièce d'identité en personne et que tu as réussi le quiz",
+        "Cuando el dueño confía en ti, ha visto tu documento en persona y aprobaste el test"),
     "Meteen, je kent hem nu": ("Straight away, you know him now", "Tout de suite, tu le connais maintenant", "Enseguida, ya lo conoces"),
     "De eigenaar beslist. Dat gaat per hond.": ("The owner decides. It goes dog by dog.", "C'est le propriétaire qui décide. Chien par chien.", "Decide el dueño. Va perro a perro."),
     "Klopt. Stap voor stap, voor iedereen veilig.": ("Right. Step by step, safe for everyone.", "C'est ça. Pas à pas, en sécurité pour tout le monde.", "Correcto. Paso a paso, seguro para todos."),

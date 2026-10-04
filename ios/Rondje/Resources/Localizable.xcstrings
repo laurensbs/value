@@ -2889,24 +2889,24 @@
         }
       }
     },
-    "Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald" : {
+    "Als de eigenaar je vertrouwen geeft, je ID in het echt heeft gezien en je de quiz hebt gehaald" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When the owner trusts you and you passed the quiz"
+            "value" : "When the owner trusts you, has seen your ID in person and you passed the quiz"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cuando el dueño confía en ti y aprobaste el test"
+            "value" : "Cuando el dueño confía en ti, ha visto tu documento en persona y aprobaste el test"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quand le propriétaire te fait confiance et que tu as réussi le quiz"
+            "value" : "Quand le propriétaire te fait confiance, a vu ta pièce d'identité en personne et que tu as réussi le quiz"
           }
         }
       }
