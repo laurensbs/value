@@ -4,8 +4,6 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 const nextConfig: NextConfig = {
-  // When this version was built: the sitemap's last change for pages without their own date.
-  env: { SITE_BUILT_AT: new Date().toISOString() },
   // Crawlers get the metadata (canonical, robots, description) in the <head> of the HTML itself,
   // not streamed into the body afterwards. Next.js's own list of such bots plus Googlebot: Google
   // reads rel=canonical only in the head, and noindex should be there before anything is rendered.

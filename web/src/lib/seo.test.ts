@@ -78,24 +78,39 @@ describe('structured data', () => {
     })
   })
 
-  it('describes a group walk as a free, scheduled event at the shelter', () => {
-    const event = groupWalkEvent({
+  it('describes a group walk as a free, scheduled event at its meeting point', () => {
+    const walk = {
       name: 'Paseo en grupo con Protectora',
+      description: 'Paseo tranquilo por la huerta.',
       startsAt: new Date('2026-10-10T08:00:00Z'),
       durationMin: 75,
-      path: '/cities/madrid',
-      shelter: { name: 'Protectora', address: 'Calle 1', city: 'Madrid', country: 'ES', website: null },
-    })
+      path: '/cities/madrid#groepswandeling-gw1',
+      meetingPoint: 'Entrada de la protectora',
+      city: 'Madrid',
+      country: 'ES',
+      image: null,
+      shelter: { name: 'Protectora', website: 'https://protectora.example' },
+    }
+    const event = groupWalkEvent(walk)
     expect(event).toMatchObject({
       '@type': 'Event',
+      description: 'Paseo tranquilo por la huerta.',
       startDate: '2026-10-10T08:00:00.000Z',
       endDate: '2026-10-10T09:15:00.000Z',
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       eventStatus: 'https://schema.org/EventScheduled',
       isAccessibleForFree: true,
-      url: 'https://rondje.test/cities/madrid',
-      location: { '@type': 'Place', name: 'Protectora', address: { '@type': 'PostalAddress', streetAddress: 'Calle 1', addressLocality: 'Madrid', addressCountry: 'ES' } },
-      organizer: { '@type': 'Organization', name: 'Protectora' },
+      url: 'https://rondje.test/cities/madrid#groepswandeling-gw1',
+      image: ['https://rondje.test/og.png'],
+      location: { '@type': 'Place', name: 'Entrada de la protectora', address: { '@type': 'PostalAddress', addressLocality: 'Madrid', addressCountry: 'ES' } },
+      organizer: { '@type': 'Organization', name: 'Protectora', url: 'https://protectora.example' },
+    })
+    // Never a street address: the place is the meeting point in the city.
+    expect((event.location as { address: Record<string, unknown> }).address).not.toHaveProperty('streetAddress')
+    // Without a meeting point, the shelter's name; the shelter's own image when it has one.
+    expect(groupWalkEvent({ ...walk, meetingPoint: ' ', image: 'https://blob.example/cover.jpg' })).toMatchObject({
+      location: { name: 'Protectora' },
+      image: ['https://blob.example/cover.jpg'],
     })
   })
 

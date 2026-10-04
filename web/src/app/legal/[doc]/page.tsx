@@ -2,16 +2,16 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { fillContact } from '@/lib/contact'
-import { isLegalDoc, LEGAL_DOCS, legalHtml } from '@/lib/legal'
+import { isLegalDoc, LEGAL_DOCS, legalFrontMatter, legalHtml } from '@/lib/legal'
 import { pageMetadata } from '@/lib/seo'
 import { supportConfig } from '@/lib/support'
 
 export async function generateMetadata({ params }: { params: Promise<{ doc: string }> }) {
   const { doc } = await params
   if (!isLegalDoc(doc)) return {}
-  const [t, content] = await Promise.all([getTranslations('legal'), legalHtml(doc, await getLocale())])
+  const [t, front] = await Promise.all([getTranslations('legal'), legalFrontMatter(doc, await getLocale())])
   // Each document describes itself in its front matter, so search results tell the six apart.
-  return pageMetadata({ path: `/legal/${doc}`, title: t(`titles.${doc}`), description: content?.data.description || t(`titles.${doc}`) })
+  return pageMetadata({ path: `/legal/${doc}`, title: t(`titles.${doc}`), description: front?.description || t(`titles.${doc}`) })
 }
 
 export default async function LegalPage({ params }: { params: Promise<{ doc: string }> }) {

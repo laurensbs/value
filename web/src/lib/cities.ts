@@ -52,14 +52,15 @@ export function cityList(extra: Place[] = []): City[] {
 /**
  * "Other cities" on a city page: the nearest ones in the same country, at most `max`. When some of
  * them have real dogs, walks or a partner shelter (`indexable`), only those are linked, so visitors and
- * search engines are led to pages with something on them. Cities without a location come last.
+ * search engines are led to pages with something on them. A city's location is where its shelters
+ * are (see cityList); a city without any is not "near" anything, so the list is then empty and the
+ * page leaves the section out. Other cities without a location are left out for the same reason.
  */
 export function nearbyCities(city: City, all: City[], indexable: ReadonlySet<string>, max = 8): City[] {
-  const from = city.lat != null && city.lng != null ? { lat: city.lat, lng: city.lng } : null
-  const away = (c: City) => (from && c.lat != null && c.lng != null ? distanceM(from, { lat: c.lat, lng: c.lng }) : Infinity)
+  if (city.lat == null || city.lng == null) return []
+  const from = { lat: city.lat, lng: city.lng }
   const others = all
-    .filter((c) => c.country === city.country && c.slug !== city.slug)
-    .map((c) => ({ c, m: away(c) }))
+    .flatMap((c) => (c.country === city.country && c.slug !== city.slug && c.lat != null && c.lng != null ? [{ c, m: distanceM(from, { lat: c.lat, lng: c.lng }) }] : []))
     .sort((a, b) => a.m - b.m || a.c.name.localeCompare(b.c.name, 'nl'))
     .map(({ c }) => c)
   const withContent = others.filter((c) => indexable.has(c.slug))

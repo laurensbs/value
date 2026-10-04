@@ -11,16 +11,26 @@ export interface MarkdownContent {
   locale: string
 }
 
-/** Loads content/<dir>/<locale>/<name>.md (falling back to Dutch) and renders it. */
-export async function loadMarkdown(dir: string, name: string, locale: string): Promise<MarkdownContent | null> {
+/** Reads content/<dir>/<locale>/<name>.md, falling back to Dutch, without rendering it. */
+async function readMarkdown(dir: string, name: string, locale: string) {
   for (const l of [...new Set([locale, 'nl'])]) {
     try {
       const raw = await readFile(path.join(process.cwd(), 'content', dir, l, `${name}.md`), 'utf8')
-      const { data, body } = parseFrontMatter(raw)
-      return { html: await marked.parse(body, { gfm: true }), data, locale: l }
+      return { ...parseFrontMatter(raw), locale: l }
     } catch {
       // try the next locale
     }
   }
   return null
+}
+
+/** Loads content/<dir>/<locale>/<name>.md (falling back to Dutch) and renders it. */
+export async function loadMarkdown(dir: string, name: string, locale: string): Promise<MarkdownContent | null> {
+  const found = await readMarkdown(dir, name, locale)
+  return found ? { html: await marked.parse(found.body, { gfm: true }), data: found.data, locale: found.locale } : null
+}
+
+/** Only the front matter (title, description, updated…) of a text, for metadata and the sitemap. */
+export async function loadFrontMatter(dir: string, name: string, locale: string): Promise<Record<string, string> | null> {
+  return (await readMarkdown(dir, name, locale))?.data ?? null
 }

@@ -1,26 +1,32 @@
 import 'server-only'
+import { cache } from 'react'
 import { and, eq, gte, isNull, max, or } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { citySlug, cityList, type City } from '@/lib/cities'
+import { upcomingSince } from './queries'
 
-/** All cities with a public page, including those of verified shelters (not example shelters). */
-export async function publicCities(): Promise<City[]> {
+/**
+ * All cities with a public page, including those of verified shelters (not example shelters).
+ * Asked once per request (React cache): a city page needs it for its metadata and its content.
+ */
+export const publicCities = cache(async (): Promise<City[]> => {
   const db = await getDb()
   const orgs = await db
     .select({ name: s.organization.city, country: s.organization.country, lat: s.organization.lat, lng: s.organization.lng, isDemo: s.organization.isDemo })
     .from(s.organization)
     .where(eq(s.organization.status, 'verified'))
   return cityList(orgs.filter((o) => !o.isDemo))
-}
+})
 
 /**
  * The cities whose page has something real on it, with when that last changed: at least one active
  * dog, an upcoming group walk or a verified partner shelter. Example content (isDemo) never counts,
  * and neither does a dog of a shelter that is not verified. Other city pages stay for visitors but
  * are kept out of search engines: dozens of near-identical pages would count against the whole site.
+ * Asked once per request, like publicCities.
  */
-export async function indexableCities(): Promise<Map<string, Date>> {
+export const indexableCities = cache(async (): Promise<Map<string, Date>> => {
   const db = await getDb()
   const realOrg = and(eq(s.organization.status, 'verified'), eq(s.organization.isDemo, false))
   const [cities, dogs, walks, shelters] = await Promise.all([
@@ -35,7 +41,8 @@ export async function indexableCities(): Promise<Map<string, Date>> {
       .select({ city: s.organization.city, country: s.organization.country, changed: max(s.groupWalk.createdAt) })
       .from(s.groupWalk)
       .innerJoin(s.organization, eq(s.organization.id, s.groupWalk.orgId))
-      .where(and(eq(s.groupWalk.status, 'scheduled'), gte(s.groupWalk.startsAt, new Date()), realOrg))
+      // The same "upcoming" as the walks the page lists (upcomingGroupWalks).
+      .where(and(eq(s.groupWalk.status, 'scheduled'), gte(s.groupWalk.startsAt, upcomingSince()), realOrg))
       .groupBy(s.organization.city, s.organization.country),
     db
       .select({ city: s.organization.city, country: s.organization.country, changed: max(s.organization.updatedAt) })
@@ -54,7 +61,7 @@ export async function indexableCities(): Promise<Map<string, Date>> {
     if (!known || changed > known) found.set(slug, changed)
   }
   return found
-}
+})
 
 /** True when the city's page may be in search engines and in the sitemap (see indexableCities). */
 export async function cityIsIndexable(slug: string): Promise<boolean> {

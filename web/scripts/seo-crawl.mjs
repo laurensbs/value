@@ -94,7 +94,8 @@ for (const lang of langs) {
     const p = read(html)
     const issues = []
     if (status !== 200) issues.push(`status ${status}`)
-    if (!lastmod) issues.push('no lastmod')
+    // Only cities (last real change) and legal texts (their own date) carry a date; the rest none.
+    if (!lastmod && /^\/(cities|legal)\//.test(path)) issues.push('no lastmod')
     if (!p.title) issues.push('no title')
     if (!p.description) issues.push('no description')
     else if (p.description.length > DESCRIPTION_MAX) issues.push(`description ${p.description.length} > ${DESCRIPTION_MAX}`)

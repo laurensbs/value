@@ -37,9 +37,13 @@ describe('nearbyCities', () => {
     city('nergens', 'NL', null, null),
   ]
 
-  it('lists the nearest cities in the same country first, without the city itself', () => {
-    expect(nearbyCities(leiden, all, new Set()).map((c) => c.slug)).toEqual(['noordwijk', 'gouda', 'zwolle', 'leeuwarden', 'nergens'])
+  it('lists the nearest cities in the same country first, without the city itself or places without a location', () => {
+    expect(nearbyCities(leiden, all, new Set()).map((c) => c.slug)).toEqual(['noordwijk', 'gouda', 'zwolle', 'leeuwarden'])
     expect(nearbyCities(leiden, all, new Set(), 2).map((c) => c.slug)).toEqual(['noordwijk', 'gouda'])
+  })
+
+  it('has nothing to show for a city without any known location', () => {
+    expect(nearbyCities(city('nergens', 'NL', null, null), all, new Set(['zwolle']))).toEqual([])
   })
 
   it('links only cities with something on them, when there are any', () => {

@@ -49,9 +49,9 @@ export default async function CityPage({ params }: Props) {
       id: s.organization.id,
       name: s.organization.name,
       city: s.organization.city,
-      country: s.organization.country,
-      address: s.organization.address,
       website: s.organization.website,
+      logoUrl: s.organization.logoUrl,
+      coverUrl: s.organization.coverUrl,
       directoryId: s.organization.directoryId,
     })
     .from(s.organization)
@@ -77,9 +77,25 @@ export default async function CityPage({ params }: Props) {
   // Structured data: the way back to all cities, and each real group walk as an event at its shelter.
   const path = `/cities/${city.slug}`
   const shelterOf = new Map(partners.map((p) => [p.id, p]))
+  const walkAnchor = (id: string) => `groepswandeling-${id}`
   const events = walks.flatMap((w) => {
     const shelter = shelterOf.get(w.orgId)
-    return shelter ? [groupWalkEvent({ name: t('groupWalks.eventName', { shelter: shelter.name }), startsAt: w.startsAt, durationMin: w.durationMin, path, shelter })] : []
+    if (!shelter) return []
+    const image = [shelter.coverUrl, shelter.logoUrl].find((src) => src?.startsWith('https://')) ?? null
+    return [
+      groupWalkEvent({
+        name: t('groupWalks.eventName', { shelter: shelter.name }),
+        description: w.notes || t('groupWalks.lede'),
+        startsAt: w.startsAt,
+        durationMin: w.durationMin,
+        path: `${path}#${walkAnchor(w.id)}`,
+        meetingPoint: w.meetingPoint,
+        city: city.name,
+        country: city.country,
+        image,
+        shelter,
+      }),
+    ]
   })
 
   return (
@@ -162,7 +178,7 @@ export default async function CityPage({ params }: Props) {
         {walks.length ? (
           <ul className="list">
             {walks.map((w) => (
-              <li key={w.id} className="list-item">
+              <li key={w.id} id={walkAnchor(w.id)} className="list-item">
                 <div className="time-badge" aria-hidden="true">
                   {format.dateTime(w.startsAt, { hour: '2-digit', minute: '2-digit' })}
                 </div>

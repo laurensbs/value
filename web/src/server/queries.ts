@@ -334,9 +334,14 @@ export async function publicOrg(orgId: string) {
   return org && org.status === 'verified' ? org : null
 }
 
+/** A group walk counts as upcoming until an hour after its start: late joiners still find it. */
+export function upcomingSince(now = Date.now()): Date {
+  return new Date(now - 60 * 60_000)
+}
+
 export async function upcomingGroupWalks(filter: { orgId?: string; country?: string }) {
   const db = await getDb()
-  const where = [eq(s.groupWalk.status, 'scheduled'), gte(s.groupWalk.startsAt, new Date(Date.now() - 60 * 60_000))]
+  const where = [eq(s.groupWalk.status, 'scheduled'), gte(s.groupWalk.startsAt, upcomingSince())]
   if (filter.orgId) where.push(eq(s.groupWalk.orgId, filter.orgId))
   if (filter.country) where.push(eq(s.organization.country, filter.country))
   const rows = await db

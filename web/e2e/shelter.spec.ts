@@ -14,6 +14,8 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await shot(staff.page, '20-shelter-signup')
   await staff.page.getByLabel('Naam van de opvang').fill(orgName)
   await staff.page.getByLabel('Plaats').fill('Utrecht')
+  // The street address is for Rondje only: it must never show up on a public page or in structured data.
+  await staff.page.getByLabel('Adres', { exact: true }).fill('Geheimstraat 12')
   await staff.page.getByLabel(/KvK-, KBO- of CIF-nummer/).fill('12345678')
   await staff.page.getByLabel('Hoeveel honden hebben jullie ongeveer?').fill('40')
   await staff.page.getByLabel('Instagram').fill('@opvang_test')
@@ -110,10 +112,16 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
       '@type': 'Event',
       name: `Groepswandeling bij ${orgName}`,
       isAccessibleForFree: true,
-      location: expect.objectContaining({ '@type': 'Place', name: orgName }),
+      // The walk's own place: the meeting point in the city, never the shelter's street address.
+      location: { '@type': 'Place', name: 'Bij de hoofdingang', address: { '@type': 'PostalAddress', addressLocality: 'Utrecht', addressCountry: 'NL' } },
       organizer: expect.objectContaining({ name: orgName }),
+      url: expect.stringMatching(/\/cities\/utrecht#groepswandeling-/),
     }),
   )
+  // The event's address works: it leads to the walk on the page.
+  const eventUrl = structured.find((t) => t['@type'] === 'Event' && t.name === `Groepswandeling bij ${orgName}`).url as string
+  await expect(visitor.page.locator(`[id="${new URL(eventUrl).hash.slice(1)}"]`)).toContainText(orgName)
+  expect(await (await visitor.page.request.get('/cities/utrecht')).text()).not.toContain('Geheimstraat')
   expect(await (await visitor.page.request.get('/sitemap.xml')).text()).toContain('/cities/utrecht<')
 
   // --- A walker joins the group walk ---

@@ -98,38 +98,47 @@ export function breadcrumbs(items: { name: string; path: string }[]): Thing {
 
 export interface GroupWalkEvent {
   name: string
+  /** What the shelter wrote about the walk, or a general line about group walks. */
+  description: string
   startsAt: Date
   durationMin: number
-  /** The page that lists the walk. */
+  /** Where the walk is listed; with an anchor, the address of this one walk. */
   path: string
-  shelter: { name: string; address: string; city: string; country: string; website: string | null }
+  /** Where walkers meet, as the shelter wrote it; the same text the walk shows on the site. */
+  meetingPoint: string
+  city: string
+  country: string
+  /** The shelter's own https image (cover or logo), else the site's card. */
+  image: string | null
+  shelter: { name: string; website: string | null }
 }
 
-/** A real group walk at a shelter as a schema.org Event. Never call this for example walks. */
+/**
+ * A real group walk at a shelter as a schema.org Event. Never call this for example walks. The place
+ * is the meeting point in the city, never the shelter's street address: that is not public anywhere
+ * else, and at a small shelter it can be someone's home.
+ */
 export function groupWalkEvent(walk: GroupWalkEvent): Thing {
-  const { shelter } = walk
   const end = new Date(walk.startsAt.getTime() + walk.durationMin * 60_000)
+  const [path, anchor] = walk.path.split('#')
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: walk.name,
+    description: clampDescription(walk.description, 300),
     startDate: walk.startsAt.toISOString(),
     endDate: end.toISOString(),
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
     isAccessibleForFree: true,
-    url: canonicalUrl(walk.path),
+    url: `${canonicalUrl(path)}${anchor ? `#${anchor}` : ''}`,
+    image: [walk.image ?? new URL('/og.png', canonicalUrl('/')).href],
     location: {
       '@type': 'Place',
-      name: shelter.name,
-      address: {
-        '@type': 'PostalAddress',
-        ...(shelter.address.trim() ? { streetAddress: shelter.address.trim() } : {}),
-        addressLocality: shelter.city,
-        addressCountry: shelter.country,
-      },
+      name: walk.meetingPoint.trim() || walk.shelter.name,
+      address: { '@type': 'PostalAddress', addressLocality: walk.city, addressCountry: walk.country },
     },
-    organizer: { '@type': 'Organization', name: shelter.name, ...(shelter.website ? { url: shelter.website } : {}) },
+    organizer: { '@type': 'Organization', name: walk.shelter.name, ...(walk.shelter.website ? { url: walk.shelter.website } : {}) },
   }
 }
 

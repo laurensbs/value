@@ -64,7 +64,9 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
   const sitemap = await (await page.request.get('/sitemap.xml')).text()
   expect(sitemap).toContain('/support')
-  expect(sitemap).toContain('<lastmod>')
+  // Dates only where they are true: a legal text's own date, none for pages that change with a deploy.
+  expect(sitemap).toMatch(/\/legal\/privacy<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)
+  expect(sitemap).not.toMatch(/\/support<\/loc>\s*<lastmod>/)
   // Example dogs, walks and shelters never put a city in the sitemap (Amsterdam has only a directory shelter).
   for (const city of ['amsterdam', 'madrid', 'valencia', 'gent']) expect(sitemap).not.toContain(`/cities/${city}<`)
 
