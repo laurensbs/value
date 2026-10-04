@@ -930,9 +930,10 @@
     "alerts": "Avisos",
     "alertsText": "Los mensajes, solicitudes y citas te llegan siempre; las sugerencias extra, solo si las activas aquí abajo.",
     "reminders": "Sugerencias extra",
-    "remindersHint": "Solo extras: tus primeros pasos, el reto de tu ciudad y perros nuevos cerca de ti. Como mucho una por semana; si tres seguidas no te sirven de nada, se desactivan solas. Los mensajes, solicitudes y citas te llegan siempre, aunque esto esté desactivado.",
+    "remindersHint": "Solo extras: tus primeros pasos, el reto de tu ciudad y perros nuevos cerca de ti. Como mucho una por semana; si tres seguidas no te sirven de nada, se desactivan solas.",
     "pushIos": "¿Avisos en tu iPhone? Funcionan en cuanto Rondje Mee está en tu pantalla de inicio:",
-    "pushIosInApp": "¿Avisos en tu iPhone? Abre primero Rondje Mee en Safari y ponlo desde allí en tu pantalla de inicio."
+    "pushIosInApp": "¿Avisos en tu iPhone? Abre primero Rondje Mee en Safari y ponlo desde allí en tu pantalla de inicio.",
+    "inviteShort": "Invitar"
   },
   "quiz": {
     "title": "Test de seguridad",
@@ -2470,14 +2471,16 @@
     "friendsCount": "{dogs, plural, one {# amigo perruno} other {# amigos perrunos}} · {walks, plural, one {# paseo} other {# paseos}}",
     "breatheTitle": "Minuto para respirar",
     "breatheText": "Un minuto tranquilo, antes o después de un paseo",
-    "quizTodo": "Aún no hecho, necesario para pasear por tu cuenta",
+    "quizTodo": "Aún no lo has hecho. Hace falta antes de pedir un perro.",
     "moreTitle": "Echa una mano",
     "inviteShort": "¿Conoces a alguien a quien le guste pasear, o a alguien con perro? Comparte tu enlace.",
     "supportText": "Gratis y sin anuncios. Mira cómo puedes ayudar.",
     "tipText": "¿Conoces una protectora o a alguien con perro que necesite ayuda?",
     "shelterText": "¿Trabajas en una protectora? Publica aquí vuestros perros.",
     "adminText": "Denuncias, protectoras, cifras y el centro de lanzamiento",
-    "schoolText": "{done} de {total} lecciones, a tu ritmo"
+    "schoolText": "{done} de {total} lecciones, a tu ritmo",
+    "walkTitle": "Pasear",
+    "accountTitle": "Cuenta"
   },
   "shell": {
     "tabs": {

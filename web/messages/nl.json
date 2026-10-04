@@ -930,9 +930,10 @@
     "alerts": "Meldingen",
     "alertsText": "Berichten, verzoeken en afspraken krijg je altijd; extra seintjes alleen als je ze hieronder zelf aanzet.",
     "reminders": "Extra seintjes",
-    "remindersHint": "Alleen extra's: je eerste stappen, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per week; doe je drie keer niets met zo'n seintje, dan gaan ze vanzelf uit. Berichten, verzoeken en afspraken krijg je altijd, ook als dit uit staat.",
+    "remindersHint": "Alleen extra's: je eerste stappen, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per week; doe je drie keer niets met zo'n seintje, dan gaan ze vanzelf uit.",
     "pushIos": "Meldingen op je iPhone? Die werken zodra Rondje Mee op je beginscherm staat:",
-    "pushIosInApp": "Meldingen op je iPhone? Open Rondje Mee eerst in Safari en zet het daar op je beginscherm."
+    "pushIosInApp": "Meldingen op je iPhone? Open Rondje Mee eerst in Safari en zet het daar op je beginscherm.",
+    "inviteShort": "Nodig uit"
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -2470,14 +2471,16 @@
     "friendsCount": "{dogs, plural, one {# hondenvriend} other {# hondenvrienden}} · {walks, plural, one {# rondje} other {# rondjes}}",
     "breatheTitle": "Ademminuut",
     "breatheText": "Eén rustige minuut, voor of na een rondje",
-    "quizTodo": "Nog niet gedaan, nodig voor zelfstandige rondjes",
+    "quizTodo": "Nog niet gedaan. Nodig voordat je een hond aanvraagt.",
     "moreTitle": "Help mee",
     "inviteShort": "Ken je iemand die graag wandelt, of iemand met een hond? Deel je eigen link.",
     "supportText": "Gratis en zonder advertenties. Kijk hoe je helpt.",
     "tipText": "Weet je een opvang of iemand met een hond die hulp kan gebruiken?",
     "shelterText": "Werk je bij een opvang? Zet jullie honden hier online.",
     "adminText": "Meldingen, opvangen, cijfers en de lanceerhub",
-    "schoolText": "{done} van {total} lessen, in je eigen tempo"
+    "schoolText": "{done} van {total} lessen, in je eigen tempo",
+    "walkTitle": "Wandelen",
+    "accountTitle": "Account"
   },
   "shell": {
     "tabs": {
