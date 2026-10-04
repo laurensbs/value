@@ -286,11 +286,7 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
       {section(
         'basics',
         <>
-          <div className="field">
-            <span>{t('myDogs.photos')}</span>
-            <PhotoUploader name="photos" initial={initial.photos} max={6} variant="dog" />
-            <span className="hint">{t('myDogs.photosHint')}</span>
-          </div>
+          {/* The name first: on a phone it is in view straight away, not under the button at the bottom. */}
           <div className="grid-2">
             <label className="field">
               <span>{t('myDogs.name')}</span>
@@ -300,6 +296,11 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
               <span>{t('myDogs.breed')}</span>
               <input className="input" name="breed" defaultValue={initial.breed} maxLength={80} />
             </label>
+          </div>
+          <div className="field">
+            <span>{t('myDogs.photos')}</span>
+            <PhotoUploader name="photos" initial={initial.photos} max={6} variant="dog" />
+            <span className="hint">{t('myDogs.photosHint')}</span>
           </div>
           <div className="grid-2">
             <Choices name="sex" values={['female', 'male'] as const} value={initial.sex} label={t('myDogs.sex')} render={(v) => t(`dogs.sex.${v}`)} />

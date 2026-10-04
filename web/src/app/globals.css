@@ -220,6 +220,7 @@ mark {
 
 .brand {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 10px;
   color: var(--ink);
@@ -241,6 +242,7 @@ mark {
   font-weight: 600;
   padding: 8px 12px;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 .nav a:hover,
@@ -1451,6 +1453,18 @@ fieldset.field {
   }
 }
 
+/* Signed out on a small laptop, the header holds four links, help, the language and the login
+   button: the help pill shows its icon there too, so the links fit next to the logo. */
+@media (min-width: 900px) and (max-width: 1099px) {
+  .header:not(.app-header) .help-pill {
+    padding: 8px;
+  }
+
+  .header:not(.app-header) .help-pill .label {
+    display: none;
+  }
+}
+
 .energy {
   display: inline-flex;
   align-items: center;
@@ -2587,9 +2601,12 @@ legend {
 
 .bulk-photo .chip {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 6px 9px;
+  top: 6px;
+  right: 6px;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
 }
 
 .grid-2.tight {

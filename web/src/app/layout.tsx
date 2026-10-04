@@ -12,6 +12,8 @@ import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
 import { OfflineReady } from '@/components/OfflineReady'
 import { TabBar, type Tab } from '@/components/TabBar'
+import type { IconName } from '@/components/Icon'
+import { appPlaces, type PlaceKey } from '@/lib/places'
 import { siteUrl } from '@/lib/site'
 import { fontVariables } from './fonts'
 import { unreadCounts } from '@/server/queries'
@@ -44,6 +46,8 @@ export const viewport: Viewport = {
   ],
 }
 
+const TAB_ICONS: Record<PlaceKey, IconName> = { today: 'sun', dogs: 'paw', requests: 'route', shelter: 'building', myDogs: 'home' }
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Every page waits for this: once the session is known, everything else is asked at the same time.
   const userId = (await getSession())?.user.id
@@ -55,21 +59,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     userId ? activeWalkFor(userId) : null,
   ])
   // The tabs follow why someone is here: walkers find dogs, owners see their own dogs, both get both.
-  const roles = viewer?.profile ? rolesOf(viewer.profile) : null
-  const tabs: Tab[] | null =
-    viewer?.profile && roles
-      ? [
-          { href: '/', label: t('nav.today'), icon: 'sun' },
-          ...(roles.walker ? [{ href: '/dogs', label: t('nav.dogs'), icon: 'paw' as const }] : []),
-          { href: '/requests', label: t('nav.requests'), icon: 'route', badge: unread.walks },
-          ...(viewer.orgs[0]
-            ? [{ href: `/shelter/${viewer.orgs[0].id}`, label: t('nav.shelter'), icon: 'building' as const }]
-            : roles.owner
-              ? [{ href: '/my-dogs', label: t('nav.myDogs'), icon: 'home' as const }]
-              : []),
-          { href: '/profile', label: t('nav.profile'), icon: 'user' },
-        ]
-      : null
+  const tabs: Tab[] | null = viewer?.profile
+    ? [
+        ...appPlaces(rolesOf(viewer.profile), viewer.orgs[0]?.id).map((p) => ({
+          href: p.href,
+          label: t(`nav.${p.key}`),
+          icon: TAB_ICONS[p.key],
+          badge: p.key === 'requests' ? unread.walks : undefined,
+        })),
+        { href: '/profile', label: t('nav.profile'), icon: 'user' },
+      ]
+    : null
 
   return (
     <html lang={locale} className={fontVariables}>

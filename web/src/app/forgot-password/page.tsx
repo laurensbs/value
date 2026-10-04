@@ -13,7 +13,7 @@ export async function generateMetadata() {
 
 export default async function ForgotPasswordPage() {
   const t = await getTranslations('auth')
-  const tf = await getTranslations('footer')
+  const tc = await getTranslations('contact')
   const { contactEmail } = supportConfig()
   return (
     <div className="auth">
@@ -27,18 +27,11 @@ export default async function ForgotPasswordPage() {
           <ForgotPasswordForm />
         ) : (
           <p className="notice" role="status">
-            {t('forgotUnavailable')}
-            {contactEmail ? (
-              <>
-                {' '}
-                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-              </>
-            ) : (
-              <>
-                {' '}
-                <Link href={CONTACT_PATH}>{tf('contact')}</Link>
-              </>
-            )}
+            {/* One flex item, so the address or link follows the sentence instead of standing beside it. */}
+            <span>
+              {t('forgotUnavailable')}{' '}
+              {contactEmail ? <a href={`mailto:${contactEmail}`}>{contactEmail}</a> : <Link href={CONTACT_PATH}>{tc('heading')}</Link>}
+            </span>
           </p>
         )}
         <p className="muted">

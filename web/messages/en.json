@@ -2173,6 +2173,14 @@
     "posterQr": "QR code to {name}'s page on Rondje",
     "posterCta": "Scan the code and meet {name}."
   },
+  "shelterShare": {
+    "title": "Tell volunteers about your dogs",
+    "text": "Put this message on your website, in your newsletter or in your volunteers' group. Anyone who opens the link sees your dogs and group walks and can sign up right away.",
+    "message": "Come and walk the dogs of {name}! {hasTimes, select, yes {When: {times}. } other {}}The first time, you walk together with one of us, and no experience is needed. Free, for everyone aged 18 and over. Bring your ID the first time. Pick a dog and a time: {url}",
+    "copyMessage": "Copy the message",
+    "copyLink": "Copy the link",
+    "linkCopied": "Link copied. Put it behind a button on your website, for example."
+  },
   "sounds": {
     "toggle": "Sounds",
     "hint": "Soft sounds at key moments, like a new walk or a new level. Only on this device."

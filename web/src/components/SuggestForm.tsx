@@ -64,7 +64,9 @@ export function SuggestForm({ prefill, defaultCountry }: { prefill: TipPrefill; 
       ) : null}
       {!state.ok && state.error === 'exists' ? (
         <p className="notice" role="status">
-          {t('errors.exists', { name: state.name ?? '' })} <Link href={`/dogs?org=${state.orgId}`}>{t('seeShelter')}</Link>
+          <span>
+            {t('errors.exists', { name: state.name ?? '' })} <Link href={`/dogs?org=${state.orgId}`}>{t('seeShelter')}</Link>
+          </span>
         </p>
       ) : !state.ok && state.error ? (
         <p className="notice danger" role="alert">

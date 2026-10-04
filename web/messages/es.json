@@ -2173,6 +2173,14 @@
     "posterQr": "Código QR a la página de {name} en Rondje",
     "posterCta": "Escanea el código y conoce a {name}."
   },
+  "shelterShare": {
+    "title": "Da a conocer vuestros perros a voluntarios",
+    "text": "Pon este mensaje en vuestra web, en el boletín o en el grupo de voluntarios. Quien abra el enlace verá vuestros perros y paseos en grupo, y podrá apuntarse al momento.",
+    "message": "¡Ven a pasear a los perros de {name}! {hasTimes, select, yes {Cuándo: {times}. } other {}}La primera vez paseas con alguien de nuestro equipo, y no hace falta experiencia. Gratis, para cualquier persona de 18 años o más. Trae tu documento de identidad la primera vez. Elige un perro y un momento: {url}",
+    "copyMessage": "Copiar el mensaje",
+    "copyLink": "Copiar el enlace",
+    "linkCopied": "Enlace copiado. Ponlo, por ejemplo, detrás de un botón en vuestra web."
+  },
   "sounds": {
     "toggle": "Sonidos",
     "hint": "Sonidos suaves en los momentos importantes, como un paseo nuevo o un nivel nuevo. Solo en este dispositivo."

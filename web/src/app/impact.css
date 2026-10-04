@@ -71,6 +71,9 @@
 
 .im-stat-source {
   margin-top: auto;
+  /* A small link, but still a target a thumb can hit. */
+  align-self: flex-start;
+  min-height: 32px;
   padding-top: 4px;
   color: var(--muted);
   font-size: 0.74rem;

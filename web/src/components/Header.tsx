@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/i18n/config'
+import { appPlaces } from '@/lib/places'
 import { APP_NAME } from '@/lib/site'
+import { rolesOf } from '@/server/progress'
 import type { Viewer } from '@/server/session'
 import { Avatar } from './Avatar'
 import { Icon } from './Icon'
@@ -12,22 +14,16 @@ import { NavLinks } from './shell/NavLinks'
 /**
  * Visitors get the site header with the links about Rondje. Signed in, it becomes the app's top
  * bar: on phones only the logo, help and notifications (the tab bar does the rest); on wide
- * screens the same places as the tab bar, with the current one marked.
+ * screens the same places as the tab bar, with the current one marked, and Beheer for admins.
  */
 export async function Header({ viewer, unread }: { viewer: Viewer | null; unread: number }) {
   const t = await getTranslations('nav')
   const locale = (await getLocale()) as Locale
-  const firstOrg = viewer?.orgs[0]
 
   if (viewer?.profile) {
     const ts = await getTranslations('shell')
     const links = [
-      { href: '/', label: t('today') },
-      { href: '/dogs', label: ts('tabs.discover') },
-      { href: '/group-walks', label: t('groupWalks') },
-      { href: '/requests', label: t('requests') },
-      { href: '/my-dogs', label: t('myDogs') },
-      ...(firstOrg ? [{ href: `/shelter/${firstOrg.id}`, label: t('shelter') }] : []),
+      ...appPlaces(rolesOf(viewer.profile), viewer.orgs[0]?.id).map((p) => ({ href: p.href, label: p.key === 'dogs' ? ts('tabs.discover') : t(p.key) })),
       ...(viewer.isAdmin || viewer.adminUnconfirmed ? [{ href: '/admin', label: t('admin') }] : []),
     ]
     return (
@@ -43,7 +39,7 @@ export async function Header({ viewer, unread }: { viewer: Viewer | null; unread
               <Icon name="help" size={16} />
               <span className="label">{t('helpPill')}</span>
             </Link>
-            <span className="wide-only">
+            <span className="wide-only header-lang">
               <LanguageSwitcher current={locale} label={t('language')} compact />
             </span>
             <Link href="/notifications" className="icon-link" aria-label={`${t('notifications')}${unread ? ` (${unread})` : ''}`}>
