@@ -201,7 +201,8 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       <NextStepCard steps={card} now={now.getTime()} label={tn('title')} laterLabel={tn('later')} welcome={welcome ? t('welcomeTitle', { name: p.firstName }) : null} />
 
-      {owner ? (
+      {/* Your dogs. Without one yet, the card above says how (and the Mijn honden tab is there). */}
+      {owner && ownDogs.length ? (
         <section className="stack" aria-labelledby="my-dogs-title">
           <div className="section-title">
             <h2 id="my-dogs-title">{t('myDogsTitle')}</h2>
@@ -222,22 +223,20 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               </span>
             </p>
           ) : null}
-          {ownDogs.length ? (
-            <ul className="mini-dogs">
-              {ownDogs.map((dog) => (
-                <li key={dog.id}>
-                  <Link href={`/dogs/${dog.id}`} className="mini-dog">
-                    <DogPortrait dog={dog} size={64} decorative />
-                    <span className="stack-s">
-                      <strong>{dog.name}</strong>
-                      <span className="muted small">{t('dogWeek', { n: dogStats.get(dog.id)?.week ?? 0 })}</span>
-                      <span className="muted small">{t('dogFriends', { n: dogStats.get(dog.id)?.walkers ?? 0 })}</span>
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null}
+          <ul className="mini-dogs">
+            {ownDogs.map((dog) => (
+              <li key={dog.id}>
+                <Link href={`/dogs/${dog.id}`} className="mini-dog">
+                  <DogPortrait dog={dog} size={64} decorative />
+                  <span className="stack-s">
+                    <strong>{dog.name}</strong>
+                    <span className="muted small">{t('dogWeek', { n: dogStats.get(dog.id)?.week ?? 0 })}</span>
+                    <span className="muted small">{t('dogFriends', { n: dogStats.get(dog.id)?.walkers ?? 0 })}</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 
