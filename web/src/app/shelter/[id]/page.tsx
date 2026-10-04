@@ -8,6 +8,7 @@ import { Icon } from '@/components/Icon'
 import { ShelterShare } from '@/components/ShelterShare'
 import { AttendanceButtons, CancelGroupWalkButton, GroupWalkForm, ImportForm, StaffForm } from '@/components/ShelterTools'
 import { ageBand } from '@/lib/rules'
+import { shareOffer } from '@/lib/shelter-share'
 import { siteUrl } from '@/lib/site'
 import { fromNow, nextWeekday } from '@/lib/time'
 import { isOrgMember, requireOnboarded } from '@/server/session'
@@ -44,10 +45,10 @@ export default async function ShelterDashboardPage({
     { key: 'walk', done: upcoming.length > 0, href: '#groepswandelingen' },
     { key: 'verified', done: org.status === 'verified', href: null },
   ]
-  // Once others can see the dogs: a ready message for volunteers, with the link to the shelter's dogs.
+  // Once others can see the dogs or a walk to come: a ready message for volunteers, with the link to the shelter's page.
   const shareUrl = `${siteUrl()}/dogs?org=${org.id}`
   const times = org.walkingTimes.replace(/\s+/g, ' ').trim().replace(/[\s.,;:!]+$/, '')
-  const canShare = org.status === 'verified' && (active.length > 0 || upcoming.length > 0)
+  const offer = shareOffer(org.status, active.length, walks.map((w) => w.startsAt))
 
   return (
     <div className="stack-l">
@@ -136,8 +137,8 @@ export default async function ShelterDashboardPage({
         </div>
       </div>
 
-      {canShare ? (
-        <ShelterShare url={shareUrl} message={t('shelterShare.message', { name: org.name, hasTimes: times ? 'yes' : 'no', times, url: shareUrl })} />
+      {offer ? (
+        <ShelterShare url={shareUrl} message={t('shelterShare.message', { name: org.name, hasTimes: times ? 'yes' : 'no', times, pick: offer, url: shareUrl })} />
       ) : null}
 
       <section className="stack" id="honden">

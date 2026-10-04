@@ -2176,7 +2176,7 @@
   "shelterShare": {
     "title": "Parlez de vos chiens aux bénévoles",
     "text": "Publiez ce message sur votre site, dans votre newsletter ou dans le groupe des bénévoles. En ouvrant le lien, on voit vos chiens et vos promenades en groupe, et on peut s'inscrire tout de suite.",
-    "message": "Venez promener les chiens de {name} ! {hasTimes, select, yes {Quand : {times}. } other {}}La première fois, vous marchez avec quelqu'un de notre équipe, et aucune expérience n'est nécessaire. Gratuit, pour toute personne de 18 ans ou plus. Apportez une pièce d'identité la première fois. Choisissez un chien et un moment : {url}",
+    "message": "Venez promener les chiens de {name} ! {hasTimes, select, yes {Quand : {times}. } other {}}La première fois, vous marchez avec quelqu'un de notre équipe, et aucune expérience n'est nécessaire. Gratuit, pour toute personne de 18 ans ou plus. Apportez une pièce d'identité la première fois. {pick, select, dog {Choisissez un chien et un moment : {url}} other {Inscrivez-vous à une promenade en groupe : {url}}}",
     "copyMessage": "Copier le message",
     "copyLink": "Copier le lien",
     "linkCopied": "Lien copié. Placez-le par exemple derrière un bouton sur votre site."
