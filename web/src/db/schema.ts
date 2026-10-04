@@ -497,6 +497,23 @@ export const award = pgTable(
 )
 
 /**
+ * The Hondenschool (besluit 4 okt 2026): which lessons someone finished, one row per lesson. Only that
+ * and when; no points, no score and no streak. A guest's lessons (in localStorage) are added after
+ * signing in. The lessons themselves live in src/lib/lessons.ts.
+ */
+export const lessonProgress = pgTable(
+  'lesson_progress',
+  {
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    lessonId: text('lesson_id').notNull(),
+    completedAt: timestamp('completed_at').defaultNow().notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.lessonId] })],
+)
+
+/**
  * Where to send push notifications for someone: a browser push subscription (kind 'web',
  * endpoint plus keys) or an iPhone's APNs device token (kind 'apns'). Removed when it stops working.
  */
