@@ -5,41 +5,59 @@ import { getTranslations } from 'next-intl/server'
 import { DogFace } from '@/components/DogFace'
 import { Icon } from '@/components/Icon'
 import { lookFor, tileFor } from '@/lib/avatar'
-import type { DogListItem } from '@/server/queries'
+import type { NewestDog } from '@/lib/newest-dogs'
+import { DogTile } from './DogTile'
 import { LandingIcon } from './LandingIcon'
+import { BEAGLE } from './looks'
 
-/** "Who's coming along today?": a few dogs as big cards, like the Discover screen in the app. */
-export async function DogPeek({ items }: { items: DogListItem[] }) {
+/**
+ * "Net aangemeld": the newest real dogs, Netherlands first (server/newest-dogs.ts). Never an example
+ * dog: until the first real dog is online, one invitation to add a dog instead.
+ */
+export async function NewestDogs({ dogs }: { dogs: NewestDog[] }) {
   const t = await getTranslations()
-  if (!items.length) return null
+  if (!dogs.length) {
+    return (
+      <section className="lp-card lp-new-empty" aria-labelledby="lp-new-title">
+        <span className="lp-new-empty-dog" aria-hidden="true">
+          <DogTile dog={BEAGLE} />
+        </span>
+        <div className="lp-new-empty-copy">
+          <h2 id="lp-new-title" className="lp-h3">
+            {t('landing.dogs.emptyTitle')}
+          </h2>
+          <p className="muted">{t('landing.dogs.emptyText')}</p>
+          <Link href="/aanmelden" className="button primary lp-cta">
+            {t('landing.dogs.emptyCta')}
+            <Icon name="arrow" size={18} />
+          </Link>
+        </div>
+      </section>
+    )
+  }
   return (
-    <section className="lp-peek" aria-labelledby="lp-peek-title">
+    <section className="lp-peek lp-new" aria-labelledby="lp-new-title">
       <div className="lp-section-head row-end">
         <div>
-          <h2 id="lp-peek-title" className="lp-h2">
+          <h2 id="lp-new-title" className="lp-h2">
             {t('landing.dogs.title')}
           </h2>
-          {/* Only examples so far: say so, instead of "dogs waiting for a walk". */}
-          <p className="lp-sub">{items.every(({ dog }) => dog.isDemo) ? t('landing.dogs.ledeExamples') : t('landing.dogs.lede')}</p>
+          <p className="lp-sub">{t('landing.dogs.lede')}</p>
         </div>
         <Link href="/dogs" className="link-button lp-peek-all">
           {t('landing.dogs.all')} →
         </Link>
       </div>
       <ul className="lp-peek-list">
-        {items.map(({ dog, host }) => (
+        {dogs.map((dog) => (
           <li key={dog.id}>
             <Link href={`/dogs/${dog.id}`} className="lp-peek-card">
               <span className="lp-peek-photo" style={{ '--tile': tileFor(dog.id) } as CSSProperties}>
-                {dog.photos[0] ? <img src={dog.photos[0]} alt="" loading="lazy" /> : <DogFace look={lookFor(dog)} size={150} />}
-                {dog.isDemo ? (
-                  <span className="pill ball lp-peek-flag">{t('common.example')}</span>
-                ) : (
-                  <span className="pill lp-peek-flag lp-peek-host">
-                    <Icon name={host.kind === 'shelter' ? 'building' : 'home'} size={13} />
-                    {host.kind === 'shelter' ? t('dogs.fromShelter') : t('dogs.fromOwner')}
-                  </span>
-                )}
+                {dog.photo ? <img src={dog.photo} alt="" loading="lazy" /> : <DogFace look={lookFor(dog)} size={150} />}
+                <span className="pill lp-peek-flag lp-peek-host">
+                  <Icon name={dog.host === 'shelter' ? 'building' : 'home'} size={13} />
+                  {dog.host === 'shelter' ? t('dogs.fromShelter') : t('dogs.fromOwner')}
+                </span>
               </span>
               <span className="lp-peek-body">
                 <span className="lp-peek-name">

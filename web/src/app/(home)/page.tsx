@@ -1,26 +1,25 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { getTranslations } from 'next-intl/server'
-import { visitorCountry, visitorPosition } from '@/components/discover/visitor'
 import { Icon } from '@/components/Icon'
 import { ImpactBand } from '@/components/impact/ImpactBand'
 import { Chooser } from '@/components/landing/Chooser'
 import { Community } from '@/components/landing/Community'
-import { DogPeek } from '@/components/landing/DogPeek'
 import { DogStage } from '@/components/landing/DogStage'
 import { DogTile } from '@/components/landing/DogTile'
+import { HelpUs } from '@/components/landing/HelpUs'
 import { HowItWorks } from '@/components/landing/HowItWorks'
 import { LandingIcon, PawMark } from '@/components/landing/LandingIcon'
+import { NewestDogs } from '@/components/landing/NewestDogs'
 import { TRIO } from '@/components/landing/looks'
 import { IconTile, type Tone } from '@/components/landing/PageHero'
 import { PhoneShowcase } from '@/components/landing/PhoneShowcase'
 import { JsonLd } from '@/components/JsonLd'
-import { countryInfo, isCountry } from '@/lib/countries'
 import { pageMetadata, siteGraph } from '@/lib/seo'
 import { APP_NAME } from '@/lib/site'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
-import { listDogs } from '@/server/queries'
+import { newestRealDogs } from '@/server/newest-dogs'
 import { Today } from '@/components/Today'
 import { getViewer, type OnboardedViewer } from '@/server/session'
 import '../landing.css'
@@ -50,12 +49,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     return <Today viewer={viewer as OnboardedViewer} welcome={welcome === '1'} />
   }
   const t = await getTranslations()
-  const native = await isNativeRequest()
-  // Dogs from the visitor's own country first, nearest first (same rule as /dogs).
-  const country = viewer?.profile && isCountry(viewer.profile.country) ? viewer.profile.country : await visitorCountry()
-  const near = (await visitorPosition(country)) ?? countryInfo(country).center
-  const local = await listDogs({ country, near }, 4)
-  const dogs = local.length ? local : await listDogs({}, 4)
+  // The newest real dogs, the same for everyone: Netherlands first (lib/newest-dogs.ts), never examples.
+  const [native, dogs] = await Promise.all([isNativeRequest(), newestRealDogs()])
   const ownerHref = viewer?.profile ? '/my-dogs/new' : '/signup?intent=owner'
   const bothHref = viewer?.profile ? '/my-dogs/new' : `/signup?next=${encodeURIComponent('/my-dogs/new')}`
 
@@ -64,10 +59,6 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       <JsonLd data={siteGraph({ instagram: supportConfig().instagram })} />
       <section className="lp-hero">
         <div className="lp-hero-copy">
-          <p className="lp-kicker">
-            <span className="lp-kicker-dot" aria-hidden="true" />
-            {t('home.eyebrow')}
-          </p>
           <h1 className="lp-title">{t.rich('home.title', { mark: (chunks) => <mark>{chunks}</mark> })}</h1>
           <p className="lp-lede">{t('home.lede')}</p>
           <ul className="lp-pills">
@@ -100,9 +91,11 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         <DogStage />
       </section>
 
+      <HelpUs native={native} />
+
       <Chooser ownerHref={ownerHref} bothHref={bothHref} />
 
-      <DogPeek items={dogs} />
+      <NewestDogs dogs={dogs} />
 
       <HowItWorks />
 

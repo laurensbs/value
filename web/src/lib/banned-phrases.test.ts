@@ -26,6 +26,9 @@ const PUSH_TEXTS = [
   'pushAsk.',
   'profile.reminders',
   'profile.alerts',
+  // The home page asks for help and shows new dogs: warm, never a countdown or guilt.
+  'home.helpUs.',
+  'landing.dogs.',
   'today.',
   'challenges.',
   'discover.together',
