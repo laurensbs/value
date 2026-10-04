@@ -85,7 +85,7 @@ De naam staat op één plek: `APP_DISPLAY_NAME` in `project.yml`. `Brand.swift` 
 
 ## Beelden
 
-Het app-icoon (licht, donker en getint) komt uit `design/icon.mjs`: het merkteken van de website (het rondje met de bal) met een hond erin. De hondenportretten in de app zijn dezelfde getekende portretten als op de website (`DogFace`), geen foto's van echte honden.
+Het app-icoon (licht, donker en getint) en het woordmerk op het welkomstscherm komen uit `design/icon.mjs`: het logo "rondje mee" met de tennisbal als punt op de j, gestapeld op het icoon. De bronnen zijn de SVG's in `design/` en `design/brand/`. De hondenportretten in de app zijn dezelfde getekende portretten als op de website (`DogFace`), geen foto's van echte honden.
 
 ## Nog te doen
 
