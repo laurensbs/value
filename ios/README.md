@@ -79,6 +79,8 @@ De app is er in het Nederlands (de brontaal), Engels, Frans en Spaans, net als d
 1. Zet de Nederlandse tekst met de vertalingen in `design/translations.py`.
 2. Draai `python3 design/localize.py` in `ios/`. Het script meldt welke teksten nog geen vertaling hebben.
 
+Welke taal de app toont, kiest iOS: de taal van de telefoon, of de keuze per app onder Instellingen › Apps › Rondje Mee › Taal. Jij › Instellingen › Taal / Language opent die pagina (`LanguageRow`), en `UIPrefersShowingLanguageSettings` in `Info.plist` zorgt dat iOS de keuze ook toont als de telefoon maar één taal heeft. De app stuurt dezelfde taal als `Accept-Language` mee (`AppLanguage.code`), zodat teksten van de server erbij passen. Geef een tekst die in een `String`-parameter belandt altijd door `L(...)`: `TextField("…")` met een `String` wordt niet vertaald.
+
 ## De naam veranderen
 
 De naam staat op één plek: `APP_DISPLAY_NAME` in `project.yml`. `Brand.swift` leest hem uit, dus alle schermen volgen vanzelf. De goede doelen staan ook in `Brand.swift`.

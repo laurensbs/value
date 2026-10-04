@@ -219,7 +219,7 @@ enum Labels {
         case "id-seen": (L("ID gezien"), "person.text.rectangle.fill")
         case "quiz": (L("Quiz gehaald"), "checkmark.seal.fill")
         case "regular": (L("Vaste wandelaar"), "star.fill")
-        default: ("Nieuw", "leaf.fill")
+        default: (L("Nieuw"), "leaf.fill")
         }
     }
     static func weekday(_ n: Int) -> String {

@@ -185,6 +185,7 @@ final class APIClient: Sendable {
         request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(AppLanguage.code, forHTTPHeaderField: "Accept-Language")
         request.httpBody = body
         struct Uploaded: Decodable { var url: String }
         do {
@@ -240,7 +241,8 @@ final class APIClient: Sendable {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue(Locale.preferredLanguages.first ?? "nl", forHTTPHeaderField: "Accept-Language")
+        // The language the app is shown in (also a per-app choice in Settings), so server texts match the screen.
+        request.setValue(AppLanguage.code, forHTTPHeaderField: "Accept-Language")
         request.setValue("RondjeApp/1 iOS", forHTTPHeaderField: "User-Agent")
         if authorized, let token = Keychain.load() {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

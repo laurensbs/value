@@ -55,6 +55,7 @@ struct ProfileView: View {
                         }
                     }
                     RowGroup(title: L("Instellingen")) {
+                        LanguageRow()
                         // Seintjes are about walking other people's dogs, so only for people who walk.
                         if walks {
                             NavigationLink { NudgeSettingsView() } label: {

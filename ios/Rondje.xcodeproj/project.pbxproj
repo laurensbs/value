@@ -13,6 +13,7 @@
 		0D99C085CABE59AE8D73E699 /* DogLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391B5B3612456961B4E3B8B /* DogLook.swift */; };
 		0FEF775DD9FC044B2D891DDE /* ReviewFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95201D289CF712EF870552C2 /* ReviewFixTests.swift */; };
 		119F1FC3FF21A6FD9DE6BC2D /* RequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD4205552639E40224CBC /* RequestSheet.swift */; };
+		160ACF742F45DD22CA4BFDEB /* AppLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CD97920EE1D4C71B77FF9A /* AppLanguageTests.swift */; };
 		175F77F5196A62C1655569B1 /* MeetingPrepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C2CD13BF1767A8EEEEBF85 /* MeetingPrepTests.swift */; };
 		18922670E8B44A3C1C0E9EB8 /* OwnerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B076DE4C10D0103F33700 /* OwnerHomeView.swift */; };
 		207C8F02BE6AF15DF6CBEAB4 /* Nudges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9FDDA430E7CB05F922F29 /* Nudges.swift */; };
@@ -75,6 +76,7 @@
 		8FC260210FFB86EA81151AB5 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BBB2D5DD6A9BA2A9A1CBDE /* WelcomeView.swift */; };
 		8FC4508C7392A299F5B32ADA /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2783A9F80D81377B5AC59E /* ChatView.swift */; };
 		8FF39E90B905F5B10FDB120D /* NextStepCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C702C76D7E5B7C458DFE9B46 /* NextStepCard.swift */; };
+		9268AC09BF75D02A461925BC /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF6D041AC19C109BE22EEA /* AppLanguage.swift */; };
 		92C13DBFE06393853113EDDF /* RondjeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C173C344AF32F0BDE9C6F5A8 /* RondjeApp.swift */; };
 		93379E1DF8936C1A06A6AB36 /* HomeCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */; };
 		9559AEBBC2D4ECB0A75EBC0B /* RondjeWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70E5204817845A7F3A04E605 /* RondjeWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -151,6 +153,7 @@
 		0EF02E3AFFF3C3F5EAAC028C /* BreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingView.swift; sourceTree = "<group>"; };
 		0F64754CD5B754C3DD73B691 /* DogFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFriendsView.swift; sourceTree = "<group>"; };
 		15E3F54E3EB9ABCADD9BA706 /* Celebration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celebration.swift; sourceTree = "<group>"; };
+		16CD97920EE1D4C71B77FF9A /* AppLanguageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageTests.swift; sourceTree = "<group>"; };
 		1894A396998000A3824F47B3 /* ActiveWalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalkView.swift; sourceTree = "<group>"; };
 		18A5D719A7B9AF378FAD00A0 /* HomeCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCards.swift; sourceTree = "<group>"; };
 		1A88616B313C038F92D9E88B /* CoachTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachTests.swift; sourceTree = "<group>"; };
@@ -242,6 +245,7 @@
 		E05B78B489C3C4D7955EFF48 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		E2EA00A9187BEF701567797A /* RequestFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFlow.swift; sourceTree = "<group>"; };
 		E31286B121AAD5EDE2C4E643 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
+		E6DF6D041AC19C109BE22EEA /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		E7C2CD13BF1767A8EEEEBF85 /* MeetingPrepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingPrepTests.swift; sourceTree = "<group>"; };
 		E84B1FFC41C21F6195B618E1 /* SocialSignInButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButtons.swift; sourceTree = "<group>"; };
 		E8A0F32AFB60F6636601B39A /* HomecomingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomecomingCard.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 		3D54E11EDED7982A9A500ED8 /* RondjeTests */ = {
 			isa = PBXGroup;
 			children = (
+				16CD97920EE1D4C71B77FF9A /* AppLanguageTests.swift */,
 				1A88616B313C038F92D9E88B /* CoachTests.swift */,
 				607B59A0A85BFA9C3288D3A7 /* LessonTests.swift */,
 				E7C2CD13BF1767A8EEEEBF85 /* MeetingPrepTests.swift */,
@@ -503,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				50EA1B62ECCEC400102F6036 /* APIClient.swift */,
+				E6DF6D041AC19C109BE22EEA /* AppLanguage.swift */,
 				3DD05E7729A1853A5748BF1F /* Cache.swift */,
 				7A4083E54D1AF7AE3DB71A13 /* CoachAction.swift */,
 				EE1DC00C397EA8BC4DEA46AF /* Haptics.swift */,
@@ -730,6 +736,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				160ACF742F45DD22CA4BFDEB /* AppLanguageTests.swift in Sources */,
 				D816027B3EAAB79AB48528C8 /* CoachTests.swift in Sources */,
 				33EEC3741BAF509A1EA96790 /* LessonTests.swift in Sources */,
 				175F77F5196A62C1655569B1 /* MeetingPrepTests.swift in Sources */,
@@ -751,6 +758,7 @@
 			files = (
 				2522E04E4FAA1D7B1D70C94F /* APIClient.swift in Sources */,
 				36A9C3B86B83EBCBD703FD6D /* ActiveWalkView.swift in Sources */,
+				9268AC09BF75D02A461925BC /* AppLanguage.swift in Sources */,
 				4951C59EC95C340A43E6DCBF /* AppModel.swift in Sources */,
 				7B397A9EFCC7152CE0DD3C50 /* AppointmentsView.swift in Sources */,
 				518F1FC1683BA1FD90C090B9 /* AuthView.swift in Sources */,

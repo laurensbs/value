@@ -27,6 +27,8 @@
 		<string>fr</string>
 		<string>es</string>
 	</array>
+	<key>UIPrefersShowingLanguageSettings</key>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
