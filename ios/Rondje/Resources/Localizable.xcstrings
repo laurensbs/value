@@ -5447,6 +5447,28 @@
         }
       }
     },
+    "E-mailadres" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo electrónico"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adresse e-mail"
+          }
+        }
+      }
+    },
     "Een account is gratis en blijft gratis." : {
       "localizations" : {
         "en" : {
@@ -14949,6 +14971,28 @@
         }
       }
     },
+    "Nieuw" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau"
+          }
+        }
+      }
+    },
     "Nieuw in je vriendenboek: %@" : {
       "localizations" : {
         "en" : {
@@ -15599,6 +15643,28 @@
         }
       }
     },
+    "Nu: %@. Tik om in de instellingen van je iPhone een andere taal te kiezen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now: %@. Tap to choose another language in your iPhone settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora: %@. Toca para elegir otro idioma en los ajustes de tu iPhone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actuellement : %@. Touche pour choisir une autre langue dans les réglages de ton iPhone."
+          }
+        }
+      }
+    },
     "Ochtend 9:00" : {
       "localizations" : {
         "en" : {
@@ -15991,6 +16057,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir Réglages"
+          }
+        }
+      }
+    },
+    "Opent de instellingen van je iPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens your iPhone settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre los ajustes de tu iPhone"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre les réglages de ton iPhone"
           }
         }
       }
@@ -17999,6 +18087,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Envoyer ton lien"
+          }
+        }
+      }
+    },
+    "Taal / Language" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma / Language"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue / Language"
           }
         }
       }

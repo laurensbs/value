@@ -106,7 +106,8 @@ struct AuthView: View {
         }
     }
 
-    private func field(_ title: String, text: Binding<String>, field: Field) -> some View {
+    // A LocalizedStringKey, not a String: TextField shows a String as it is, untranslated.
+    private func field(_ title: LocalizedStringKey, text: Binding<String>, field: Field) -> some View {
         TextField(title, text: text)
             .focused($focus, equals: field)
             .padding(16)

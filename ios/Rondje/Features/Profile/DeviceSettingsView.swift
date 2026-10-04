@@ -11,6 +11,24 @@ struct SoundsToggle: View {
     }
 }
 
+/// Under Jij, Instellingen: the app's language. iOS keeps a language per app (Settings › Rondje Mee ›
+/// Language), as Apple recommends, so this row says which one is on and opens that page. The title is
+/// also in English, for someone who landed in a language they don't read.
+struct LanguageRow: View {
+    @Environment(\.openURL) private var openURL
+
+    var body: some View {
+        Button {
+            if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+        } label: {
+            ProfileRow(symbol: "globe", title: L("Taal / Language"),
+                       detail: L("Nu: \(AppLanguage.name). Tik om in de instellingen van je iPhone een andere taal te kiezen."),
+                       external: true)
+        }
+        .accessibilityHint(L("Opent de instellingen van je iPhone"))
+    }
+}
+
 /// Under Jij: Apple Health, only on this iPhone. Shown only where Health exists.
 struct HealthSettings: View {
     @Environment(AppModel.self) private var model
