@@ -114,7 +114,7 @@
     "safetyTitle": "Vertrouwen bouw je op, stap voor stap",
     "safety1": "De eerste keer loop je altijd samen met de eigenaar of de opvang.",
     "safety2": "Het ID wordt bij de kennismaking in het echt bekeken. Rondje bewaart geen kopie.",
-    "safety3": "Zelfstandig wandelen kan pas als de eigenaar dat voor die hond toestaat, en na de veiligheidsquiz.",
+    "safety3": "Zelfstandig wandelen kan pas als de eigenaar je ID in het echt heeft gezien en het voor die hond toestaat.",
     "safety4": "Tijdens het rondje ziet de eigenaar live waar de hond is. Na 30 dagen wordt de route gewist.",
     "safety5": "Na elk rondje geven beide kanten privé feedback. Zorgen komen bij ons team terecht, niet bij de ander.",
     "safety6": "Melden en blokkeren kan altijd. Wie zich niet aan de regels houdt, verdwijnt van het platform.",
@@ -542,7 +542,10 @@
       "meet-via": "Deze manier van kennismaken kan hier niet. Kies samen wandelen.",
       "needs-in-person": "Een gesprek telt niet als kennismaking in het echt. Dat kan pas als jullie elkaar ontmoet hebben.",
       "needs-id": "De eigenaar moet eerst je ID in het echt zien, bij jullie kennismaking.",
-      "already-open": "Je hebt al een aanvraag of afspraak met deze hond open staan."
+      "already-open": "Je hebt al een aanvraag of afspraak met deze hond open staan.",
+      "solo-not-allowed": "Zelfstandig wandelen staat voor deze wandelaar en hond niet aan. Zet het eerst aan bij ‘Na de kennismaking’, of wijs de aanvraag af.",
+      "id-not-seen": "Zelfstandig wandelen kan pas als je het ID van de wandelaar in het echt hebt gezien.",
+      "meeting-ahead": "Dit kan na jullie kennismaking, als je de wandelaar en het ID in het echt hebt gezien."
     },
     "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
     "moments": "Momenten die {dog} goed uitkomen",
@@ -568,7 +571,9 @@
     "signedOut": "Je bent niet meer ingelogd. Log opnieuw in en probeer het dan nog eens.",
     "bannedMore": "Lees waarom",
     "openPending": "Je aanvraag voor {dog} staat al bij je afspraken. Zodra {owner} antwoordt, krijg je een melding.",
-    "openAccepted": "Je hebt al een afspraak met {dog}: {when}."
+    "openAccepted": "Je hebt al een afspraak met {dog}: {when}.",
+    "quizFirst": "Eerst de quiz (± 3 min)",
+    "quizFirstText": "Voordat je een kennismaking aanvraagt, doe je een korte veiligheidsquiz. Daarna kom je hier terug bij {dog}."
   },
   "requests": {
     "title": "Rondjes",
@@ -630,8 +635,10 @@
     "ladderPpp": "In Spanje mag {walker} {dog} pas zelfstandig uitlaten met een PPP-licentie in het profiel.",
     "soloNeedsId": "Zelfstandig kan pas aan als je het ID in het echt hebt gezien.",
     "soloOffWithId": "Zonder ‘ID gezien’ kan {walker} niet zelfstandig met {dog} op pad, dus dat staat dan ook uit.",
-    "trustElsewhere": "Wat {walker} met {dog} mag, regel je bij de eerste afspraak hierboven.",
-    "declinedNote": "Je zei nee tegen {walker} voor {dog}. {walker} krijgt een melding."
+    "trustElsewhere": "Wat {walker} met {dog} mag, regel je hieronder bij ‘Na de kennismaking’.",
+    "declinedNote": "Je zei nee tegen {walker} voor {dog}. {walker} krijgt een melding.",
+    "trustPair": "{walker} en {dog}",
+    "trustLater": "Na jullie kennismaking leg je hier vast of je het ID van {walker} in het echt hebt gezien."
   },
   "meet": {
     "legend": "Hoe maken jullie kennis?",
@@ -916,63 +923,81 @@
   },
   "quiz": {
     "title": "Veiligheidsquiz",
-    "lede": "Acht vragen over veilig wandelen. Alles goed? Dan kun je zelfstandige rondjes aanvragen.",
+    "lede": "Acht korte vragen over veilig wandelen. Geen haast: bij elke vraag lees je waarom, en een vraag die je mist, komt nog een keer terug. Daarna kun je een kennismaking aanvragen.",
     "submit": "Nakijken",
-    "passed": "Gehaald! Je kunt nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.",
+    "passed": "Je kunt nu een kennismaking aanvragen of meelopen met een groepswandeling.",
     "failed": "Bijna. Kijk de rode vragen nog eens na.",
     "q": {
       "heat": {
         "q": "Het is 28 graden. Wat doe je?",
         "a0": "Gewoon lopen, honden kunnen goed tegen warmte",
         "a1": "Kort rondje in de schaduw, water mee, en voel met je hand of het asfalt te heet is",
-        "a2": "Lekker rennen, dan is het sneller klaar"
+        "a2": "Lekker rennen, dan is het sneller klaar",
+        "why": "Asfalt wordt bij warm weer zo heet dat het pijn doet aan pootjes. Houd je hand er even op: te heet voor jou is te heet voor de hond. Schaduw en water helpen."
       },
       "leash": {
         "q": "Mag de hond los?",
         "a0": "Alleen als de eigenaar dat uitdrukkelijk heeft toegestaan, en alleen waar het mag",
         "a1": "Ja, als het rustig is",
-        "a2": "Ja, als de hond goed luistert"
+        "a2": "Ja, als de hond goed luistert",
+        "why": "Los lopen kan alleen als de eigenaar dat zelf heeft gezegd, en alleen waar het mag. Ook een hond die goed luistert, kan schrikken en wegrennen."
       },
       "treats": {
         "q": "Je hebt een koekje in je zak. Mag je dat geven?",
         "a0": "Ja, honden houden van koekjes",
         "a1": "Alleen een klein stukje",
-        "a2": "Alleen als het profiel zegt dat het mag"
+        "a2": "Alleen als het profiel zegt dat het mag",
+        "why": "Niet elke hond mag elk koekje, bijvoorbeeld door een dieet. Op het profiel van de hond zie je wat mag."
       },
       "otherDogs": {
         "q": "Een andere hond komt op jullie af. Wat doe je?",
         "a0": "Laat ze lekker snuffelen",
         "a1": "Houd afstand, vraag de andere eigenaar eerst, en loop rustig door als je twijfelt",
-        "a2": "Til de hond op"
+        "a2": "Til de hond op",
+        "why": "Niet elke hond vindt een andere hond fijn, ook als het er vriendelijk uitziet. Afstand houden en eerst vragen voorkomt gedoe."
       },
       "escaped": {
         "q": "De hond is losgeschoten. Wat eerst?",
         "a0": "Blijf rustig, roep niet achter de hond aan en bel direct de eigenaar",
         "a1": "Eerst zelf zoeken, dan pas de eigenaar bellen",
-        "a2": "Naar huis gaan en wachten"
+        "a2": "Naar huis gaan en wachten",
+        "why": "Achter een hond aan rennen en roepen maakt het vaak erger. De eigenaar weet wat werkt; daarom bel je meteen."
       },
       "bite": {
         "q": "De hond bijt een andere hond. Wat doe je?",
         "a0": "Snel doorlopen",
         "a1": "Niets, het hoort erbij",
-        "a2": "Zorg dat iedereen veilig is, wissel gegevens uit, bel de eigenaar en meld het in Rondje"
+        "a2": "Zorg dat iedereen veilig is, wissel gegevens uit, bel de eigenaar en meld het in Rondje",
+        "why": "Eerst iedereen veilig. Daarna gegevens uitwisselen, de eigenaar bellen en het melden, zodat iedereen weet wat er gebeurde."
       },
       "stress": {
         "q": "De hond gaapt veel, likt zijn lippen en trekt weg. Wat betekent dat?",
         "a0": "Hij heeft honger",
         "a1": "Hij voelt zich niet op zijn gemak; zoek een rustigere plek",
-        "a2": "Hij wil spelen"
+        "a2": "Hij wil spelen",
+        "why": "Gapen, lippen likken en wegtrekken laten zien dat een hond zich niet op zijn gemak voelt. Een rustigere plek helpt."
       },
       "overdue": {
         "q": "Je loopt later terug dan afgesproken. Wat doe je?",
         "a0": "Laat het de eigenaar meteen weten",
         "a1": "Niets, de app laat het toch zien",
-        "a2": "Sneller lopen"
+        "a2": "Sneller lopen",
+        "why": "De eigenaar rekent op je en vraagt zich af waar jullie blijven. Even laten weten haalt die zorg weg."
       }
     },
     "alreadyPassed": "Je hebt de quiz al gehaald. Opnieuw doen mag altijd.",
     "toDogs": "Naar de honden",
-    "tryAgain": "Niet helemaal. Kijk nog eens."
+    "tryAgain": "Niet helemaal. Kijk nog eens.",
+    "done": "Gehaald!",
+    "left": "{n, plural, one {Nog # vraag} other {Nog # vragen}}",
+    "check": "Kijk na",
+    "right": "Klopt.",
+    "notQuite": "Niet helemaal.",
+    "answerWas": "Het goede antwoord: {answer}",
+    "comesBack": "Deze vraag komt straks nog een keer terug.",
+    "next": "Verder",
+    "later": "Later doen",
+    "laterHint": "Zonder quiz kun je nog geen kennismaking aanvragen."
   },
   "shelter": {
     "title": "Voor opvangen",
@@ -1184,9 +1209,9 @@
     "title": "Hoe Rondje veiligheid regelt",
     "lede": "Mensen geven niet zomaar hun hond mee. Daarom bouwen we vertrouwen stap voor stap op, en houden we het platform schoon.",
     "levels": "Stap voor stap",
-    "level1": "Nieuw account: je kunt een kennismaking aanvragen of meelopen met een begeleide groepswandeling.",
+    "level1": "Nieuw account: eerst de veiligheidsquiz. Daarna kun je een kennismaking aanvragen of meelopen met een begeleide groepswandeling.",
     "level2": "Na de kennismaking: de eigenaar heeft je ID in het echt gezien en kan zelfstandig wandelen voor die ene hond toestaan.",
-    "level3": "Na de veiligheidsquiz: je kunt zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.",
+    "level3": "Daarna: zelfstandige rondjes aanvragen bij eigenaren die dat voor hun hond toestaan.",
     "during": "Tijdens het rondje",
     "duringText": "Je telefoon deelt je locatie met de eigenaar zolang het rondje loopt. Loopt het uit, dan krijgen jullie allebei een melding. Met de hulpknop zie je meteen wie je moet bellen.",
     "after": "Na het rondje",
@@ -1720,7 +1745,7 @@
       },
       "nudge-step": {
         "subject": "{step, select, about {Maak je profiel af} dog {Zet je hond op Rondje} quiz {Je volgende stap: de veiligheidsquiz} meet {Zin in een eerste kennismaking?} other {Je volgende stap op Rondje}}",
-        "body": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Het kost maar een minuutje.} dog {Zet je hond op Rondje, dan kunnen wandelaars uit je buurt een rondje aanbieden. De eerste keer ontmoeten jullie elkaar altijd samen.} quiz {Een paar vragen over veilig wandelen, en je weet waar je op let. Daarna mag je ook alleen op pad, als de eigenaar dat goed vindt.} meet {Kijk welke honden er bij jou in de buurt wonen en vraag een kennismaking aan. De eerste keer loop je samen met de eigenaar.} other {Je volgende stap op Rondje staat klaar.}}"
+        "body": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Het kost maar een minuutje.} dog {Zet je hond op Rondje, dan kunnen wandelaars uit je buurt een rondje aanbieden. De eerste keer ontmoeten jullie elkaar altijd samen.} quiz {Een paar vragen over veilig wandelen, en je weet waar je op let. Daarna kun je een kennismaking aanvragen.} meet {Kijk welke honden er bij jou in de buurt wonen en vraag een kennismaking aan. De eerste keer loop je samen met de eigenaar.} other {Je volgende stap op Rondje staat klaar.}}"
       },
       "nudge-challenge": {
         "subject": "{city} loopt samen {goal} rondjes",
@@ -1830,7 +1855,7 @@
       },
       "quiz": {
         "title": "Haal de veiligheidsquiz",
-        "hint": "Acht korte vragen. Nodig om zelfstandig te wandelen."
+        "hint": "Acht korte vragen. Nodig voor je eerste kennismaking."
       },
       "meet": {
         "title": "Plan een kennismaking",

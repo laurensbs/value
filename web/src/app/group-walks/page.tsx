@@ -93,7 +93,13 @@ export default async function GroupWalksPage({ searchParams }: { searchParams: P
                       <Link href={`/dogs?org=${w.orgId}`} className="link-button small">
                         {t('groupWalks.meetDogs')}
                       </Link>
-                      <GroupWalkButton id={w.id} joined={joined.has(w.id)} full={w.booked >= w.capacity} signedIn={Boolean(viewer?.profile)} />
+                      <GroupWalkButton
+                        id={w.id}
+                        joined={joined.has(w.id)}
+                        full={w.booked >= w.capacity}
+                        signedIn={Boolean(viewer?.profile)}
+                        needsQuiz={Boolean(viewer?.profile && !viewer.profile.quizPassedAt && !viewer.orgs.some((o) => o.id === w.orgId))}
+                      />
                     </div>
                   </div>
                 </li>

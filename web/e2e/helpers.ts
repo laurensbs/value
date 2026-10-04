@@ -1,4 +1,5 @@
 import { expect, type Browser, type BrowserContextOptions, type Page } from '@playwright/test'
+import { QUIZ } from '../src/lib/quiz'
 
 /** With SHOTS=1, saves a full-page screenshot per step for design review (shots/<name>.png). */
 export async function shot(page: Page, name: string) {
@@ -51,7 +52,17 @@ export async function signUp(page: Page, opts: { name: string; email: string; in
  */
 export async function onboard(
   page: Page,
-  opts: { birthDate: string; city: string; bio: string | string[]; phone: string; walker: boolean; owner: boolean; next?: boolean },
+  opts: {
+    birthDate: string
+    city: string
+    bio: string | string[]
+    phone: string
+    walker: boolean
+    owner: boolean
+    next?: boolean
+    /** Do the safety quiz that follows for walkers (default); false leaves it for later. */
+    quiz?: boolean
+  },
 ) {
   const next = () => page.getByRole('button', { name: 'Verder' }).click()
   await page.getByRole('button', { name: 'Laten we beginnen' }).click()
@@ -85,6 +96,24 @@ export async function onboard(
   await page.getByRole('button', { name: opts.next ? 'Klaar, ga verder' : finish }).click()
   // Wait until the profile is saved and we left onboarding, so the next step doesn't race the save.
   await page.waitForURL((url) => !url.pathname.startsWith('/onboarding'))
+  // Walkers do the safety quiz straight away (besluit 4 okt 2026); then on to where they were going.
+  if (opts.walker && (opts.quiz ?? true)) {
+    await expect(page).toHaveURL(/\/profile\/quiz\?next=/)
+    await passQuiz(page)
+  }
+}
+
+/** The calm quiz: one question at a time, every answer right the first time, then "Verder". */
+export async function passQuiz(page: Page) {
+  for (const q of QUIZ) {
+    await page.locator(`input[name="answer"][value="${q.correct}"]`).check()
+    await page.getByRole('button', { name: 'Kijk na' }).click()
+    await expect(page.getByRole('status').filter({ hasText: 'Klopt.' })).toBeVisible()
+    await page.getByRole('button', { name: 'Verder' }).click()
+  }
+  await expect(page.getByRole('heading', { name: 'Gehaald!' })).toBeVisible()
+  await page.getByRole('link', { name: 'Verder' }).click()
+  await page.waitForURL((url) => !url.pathname.startsWith('/profile/quiz'))
 }
 
 /** A dog put online in the fewest taps: a name, the suggested walk and town, and the two safety promises. */

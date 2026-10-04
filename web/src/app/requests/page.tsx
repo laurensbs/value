@@ -128,12 +128,16 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         .map(async ([side, r]) => [r.request.id, await meetChecklist(side, r.dog.name, r.walker.firstName, r.request.meetVia)] as const),
     ),
   )
-  // One trust form per walker and dog, under their first agreed meeting in person: two forms for the
-  // same pair could show different things and overwrite each other.
-  const trustFormAt = new Map<string, string>()
-  for (const r of inOpen) {
+  // Walkers and dogs who met in person (rules.ts canRecordTrust): a walk together, or an accepted walk
+  // or home visit whose moment has come. Trust is about the two of them, not about one appointment:
+  // one form per pair, in its own section.
+  const metPairs = new Map<string, RequestRow>()
+  for (const r of incoming) {
     const key = `${r.dog.id}:${r.walker.id}`
-    if (r.request.status === 'accepted' && !isRemoteMeeting(r.request) && !trustFormAt.has(key)) trustFormAt.set(key, r.request.id)
+    const met =
+      Boolean(r.walkId) ||
+      (isMeetVia(r.request.meetVia) && !isRemoteMeeting(r.request) && (r.request.status === 'completed' || (r.request.status === 'accepted' && r.request.startsAt <= now)))
+    if (met && !metPairs.has(key)) metPairs.set(key, r)
   }
   // What could still stop a solo walk once the owner allows it: the same rule the walker meets (rules.ts).
   const soloCaveat = (r: RequestRow): SoloCaveat => {
@@ -302,7 +306,6 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
               {inOpen.map((r) => {
                 const accepted = r.request.status === 'accepted'
                 const active = r.walkStatus === 'active'
-                const grant = grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false }
                 const call = isRemoteMeeting(r.request)
                 return (
                   <li key={r.request.id} className="list-item request incoming">
@@ -346,18 +349,11 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           {call ? (
                             // A call never counts as meeting in person: no ID check, no solo walks from here.
                             <CallNote via={r.request.meetVia} text={`${callHow(r)} ${t('meet.afterCallHost', { dog: r.dog.name })}`} />
-                          ) : trustFormAt.get(`${r.dog.id}:${r.walker.id}`) === r.request.id ? (
-                            <TrustForm
-                              dogId={r.dog.id}
-                              dogName={r.dog.name}
-                              walkerId={r.walker.id}
-                              walkerName={r.walker.firstName}
-                              initial={grant}
-                              allowSolo={!r.dog.orgId}
-                              caveat={soloCaveat(r)}
-                            />
-                          ) : (
+                          ) : metPairs.has(`${r.dog.id}:${r.walker.id}`) ? (
                             <p className="muted small">{t('requests.trustElsewhere', { walker: r.walker.firstName, dog: r.dog.name })}</p>
+                          ) : (
+                            // The ID is seen at the meeting itself: recording it waits until then.
+                            <p className="muted small">{t('requests.trustLater', { walker: r.walker.firstName })}</p>
                           )}
                           <div className="row">
                             {active && r.walkId ? (
@@ -376,6 +372,29 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
               })}
             </ul>
           )}
+          {metPairs.size ? (
+            <section className="stack-s trust-pairs" aria-labelledby="trust-pairs-title">
+              <h2 id="trust-pairs-title">{t('requests.trustTitle')}</h2>
+              <ul className="list">
+                {[...metPairs.values()].map((r) => (
+                  <li key={`${r.dog.id}:${r.walker.id}`} className="list-item trust-pair">
+                    <div className="grow stack-s">
+                      <TrustForm
+                        dogId={r.dog.id}
+                        dogName={r.dog.name}
+                        walkerId={r.walker.id}
+                        walkerName={r.walker.firstName}
+                        title={t('requests.trustPair', { walker: r.walker.firstName, dog: r.dog.name })}
+                        initial={grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false }}
+                        allowSolo={!r.dog.orgId}
+                        caveat={soloCaveat(r)}
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
           {inPast.length ? (
             <details className="past">
               <summary>{t('requests.past', { n: inPast.length })}</summary>

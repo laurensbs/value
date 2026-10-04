@@ -2337,6 +2337,85 @@ fieldset.form-section {
   color: var(--muted);
 }
 
+/* The safety quiz, one calm question at a time: no clock, no score (besluit 4 okt 2026). */
+.quiz-step {
+  animation: moment-rise var(--motion-scherm) var(--ease-scherm) backwards;
+  --rise: 12px;
+}
+
+.quiz-question {
+  margin-bottom: 12px;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+  outline: none;
+}
+
+.quiz-option {
+  padding: 8px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.quiz-option:has(input:checked) {
+  border-color: var(--grass);
+}
+
+.quiz-option.is-right {
+  border-color: var(--grass);
+  background: var(--grass-soft);
+}
+
+.quiz-option.is-wrong {
+  border-color: var(--warn);
+  background: var(--warn-soft);
+}
+
+.quiz-feedback {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--grass-soft);
+  outline: none;
+  animation: fade-in var(--motion-klein) ease-out backwards;
+}
+
+.quiz-feedback.wrong {
+  background: var(--warn-soft);
+}
+
+.quiz-feedback p {
+  margin: 0;
+}
+
+.quiz-done {
+  justify-items: start;
+}
+
+.quiz-done h2 {
+  outline: none;
+}
+
+.quiz-done-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--grass-soft);
+  color: var(--grass);
+  animation: moment-pop var(--motion-pop) var(--ease-pop) backwards;
+}
+
+.trust-pairs .trust-form {
+  border: 0;
+  padding: 0;
+}
+
 /* After "Afwijzen": what happened, where the focus lands. */
 .decline-note {
   margin: 0;
@@ -2361,6 +2440,8 @@ fieldset.form-section {
   }
 
   /* Less motion: everything appears at once with a short fade; the sounds stay. */
+  .quiz-step,
+  .quiz-done-mark,
   .request-sent,
   .request-sent-paw,
   .request-sent-title,

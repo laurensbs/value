@@ -114,7 +114,7 @@
     "safetyTitle": "La confianza se construye paso a paso",
     "safety1": "La primera vez siempre paseas junto al dueño o la protectora.",
     "safety2": "En el primer encuentro se comprueba el documento de identidad en persona. Rondje no guarda ninguna copia.",
-    "safety3": "Solo puedes pasear por tu cuenta si el dueño lo permite para ese perro y después de aprobar el test de seguridad.",
+    "safety3": "Solo puedes pasear por tu cuenta cuando el dueño haya visto tu documento en persona y lo permita para ese perro.",
     "safety4": "Durante el paseo, el dueño ve en directo dónde está el perro. La ruta se borra a los 30 días.",
     "safety5": "Después de cada paseo, ambas partes dan su opinión en privado. Las preocupaciones llegan a nuestro equipo, no a la otra persona.",
     "safety6": "Siempre puedes denunciar y bloquear. Quien no cumple las normas sale de la plataforma.",
@@ -542,7 +542,10 @@
       "meet-via": "Esta forma de conoceros no es posible aquí. Elige pasear juntos.",
       "needs-in-person": "Una llamada no cuenta como conoceros en persona. Eso solo es posible cuando os hayáis visto.",
       "needs-id": "El dueño tiene que ver primero tu documento de identidad en persona, en vuestro primer encuentro.",
-      "already-open": "Ya tienes una solicitud o una cita abierta con este perro."
+      "already-open": "Ya tienes una solicitud o una cita abierta con este perro.",
+      "solo-not-allowed": "Los paseos por su cuenta no están activados para esta persona y este perro. Actívalos primero en «Después del primer encuentro», o rechaza la solicitud.",
+      "id-not-seen": "Los paseos por su cuenta solo son posibles cuando hayas visto en persona el documento de identidad de quien pasea.",
+      "meeting-ahead": "Esto es posible después de vuestro primer encuentro, cuando hayas visto en persona a quien pasea y su documento."
     },
     "messagePlaceholder": "¡Hola! Soy … y me encantaría pasear a {dog}.",
     "moments": "Momentos que le van bien a {dog}",
@@ -568,7 +571,9 @@
     "signedOut": "Ya no tienes la sesión iniciada. Vuelve a entrar e inténtalo otra vez.",
     "bannedMore": "Lee por qué",
     "openPending": "Tu solicitud para {dog} ya está en tus citas. Te avisaremos en cuanto {owner} responda.",
-    "openAccepted": "Ya tienes una cita con {dog}: {when}."
+    "openAccepted": "Ya tienes una cita con {dog}: {when}.",
+    "quizFirst": "Primero el test (unos 3 min)",
+    "quizFirstText": "Antes de pedir un primer encuentro, haces un test corto de seguridad. Después vuelves aquí con {dog}."
   },
   "requests": {
     "title": "Paseos",
@@ -630,8 +635,10 @@
     "ladderPpp": "En España, {walker} solo puede pasear a {dog} por su cuenta con la licencia PPP en su perfil.",
     "soloNeedsId": "Pasear por su cuenta solo se puede activar cuando hayas visto su documento en persona.",
     "soloOffWithId": "Sin «documento visto», {walker} no puede pasear a {dog} por su cuenta, así que eso también se desactiva.",
-    "trustElsewhere": "Lo que {walker} puede hacer con {dog} se ajusta en la primera cita de arriba.",
-    "declinedNote": "Has dicho que no a {walker} para {dog}. {walker} recibe un aviso."
+    "trustElsewhere": "Lo que {walker} puede hacer con {dog} se ajusta abajo, en «Después del primer encuentro».",
+    "declinedNote": "Has dicho que no a {walker} para {dog}. {walker} recibe un aviso.",
+    "trustPair": "{walker} y {dog}",
+    "trustLater": "Después de vuestro primer encuentro, aquí indicas si has visto en persona el documento de {walker}."
   },
   "meet": {
     "legend": "¿Cómo os vais a conocer?",
@@ -916,63 +923,81 @@
   },
   "quiz": {
     "title": "Test de seguridad",
-    "lede": "Ocho preguntas sobre cómo pasear con seguridad. ¿Todo correcto? Entonces podrás pedir paseos por tu cuenta.",
+    "lede": "Ocho preguntas cortas sobre pasear con seguridad. Sin prisa: en cada pregunta lees el porqué, y la que falles vuelve a salir. Después podrás pedir un primer encuentro.",
     "submit": "Corregir",
-    "passed": "¡Aprobado! Ya puedes pedir paseos por tu cuenta a los dueños que lo permitan.",
+    "passed": "Ya puedes pedir un primer encuentro o unirte a un paseo en grupo.",
     "failed": "Casi. Revisa otra vez las preguntas en rojo.",
     "q": {
       "heat": {
         "q": "Hace 28 grados. ¿Qué haces?",
         "a0": "Pasear como siempre, los perros aguantan bien el calor",
         "a1": "Dar un paseo corto por la sombra, llevar agua y comprobar con la mano si el asfalto quema",
-        "a2": "Correr un buen rato, así se acaba antes"
+        "a2": "Correr un buen rato, así se acaba antes",
+        "why": "Con calor, el asfalto puede calentarse tanto que hace daño en las patas. Pon la mano un momento: si quema para ti, quema para el perro. La sombra y el agua ayudan."
       },
       "leash": {
         "q": "¿Se puede soltar al perro?",
         "a0": "Solo si el dueño lo ha autorizado expresamente, y solo donde esté permitido",
         "a1": "Sí, si la zona está tranquila",
-        "a2": "Sí, si el perro obedece bien"
+        "a2": "Sí, si el perro obedece bien",
+        "why": "Suelto solo si el dueño lo ha dicho, y solo donde está permitido. Hasta un perro que obedece bien puede asustarse y salir corriendo."
       },
       "treats": {
         "q": "Llevas un premio en el bolsillo. ¿Puedes dárselo?",
         "a0": "Sí, a los perros les encantan los premios",
         "a1": "Solo un trocito",
-        "a2": "Solo si el perfil dice que está permitido"
+        "a2": "Solo si el perfil dice que está permitido",
+        "why": "No todos los perros pueden comer cualquier premio, por ejemplo por una dieta. En el perfil del perro ves qué se puede."
       },
       "otherDogs": {
         "q": "Otro perro viene hacia vosotros. ¿Qué haces?",
         "a0": "Dejar que se huelan a gusto",
         "a1": "Mantener la distancia, preguntar primero al otro dueño y seguir caminando con calma si tienes dudas",
-        "a2": "Coger al perro en brazos"
+        "a2": "Coger al perro en brazos",
+        "why": "No a todos los perros les gustan otros perros, aunque parezca amistoso. Mantener la distancia y preguntar primero evita problemas."
       },
       "escaped": {
         "q": "El perro se ha soltado. ¿Qué haces primero?",
         "a0": "Mantener la calma, no perseguir al perro gritando y llamar enseguida al dueño",
         "a1": "Buscarlo primero por tu cuenta y luego llamar al dueño",
-        "a2": "Irte a casa y esperar"
+        "a2": "Irte a casa y esperar",
+        "why": "Correr y gritar detrás de un perro suele empeorarlo. El dueño sabe qué funciona, por eso llamas enseguida."
       },
       "bite": {
         "q": "El perro muerde a otro perro. ¿Qué haces?",
         "a0": "Seguir caminando rápido",
         "a1": "Nada, es normal",
-        "a2": "Asegurarte de que todos están a salvo, intercambiar datos, llamar al dueño y avisar en Rondje"
+        "a2": "Asegurarte de que todos están a salvo, intercambiar datos, llamar al dueño y avisar en Rondje",
+        "why": "Primero, que todos estén a salvo. Después intercambiar datos, llamar al dueño y avisar, para que todos sepan qué pasó."
       },
       "stress": {
         "q": "El perro bosteza mucho, se relame y se aparta. ¿Qué significa?",
         "a0": "Tiene hambre",
         "a1": "No se siente a gusto; busca un sitio más tranquilo",
-        "a2": "Quiere jugar"
+        "a2": "Quiere jugar",
+        "why": "Bostezar, lamerse los labios y apartarse muestran que el perro no está a gusto. Un sitio más tranquilo ayuda."
       },
       "overdue": {
         "q": "Vas a volver más tarde de lo acordado. ¿Qué haces?",
         "a0": "Avisar al dueño enseguida",
         "a1": "Nada, la app ya lo muestra",
-        "a2": "Caminar más rápido"
+        "a2": "Caminar más rápido",
+        "why": "El dueño cuenta contigo y se pregunta dónde estáis. Un mensaje rápido quita esa preocupación."
       }
     },
     "alreadyPassed": "Ya has aprobado el test. Puedes repetirlo siempre que quieras.",
     "toDogs": "Ver los perros",
-    "tryAgain": "No del todo. Échale otro vistazo."
+    "tryAgain": "No del todo. Échale otro vistazo.",
+    "done": "¡Aprobado!",
+    "left": "{n, plural, one {Queda # pregunta} other {Quedan # preguntas}}",
+    "check": "Comprobar",
+    "right": "Correcto.",
+    "notQuite": "No del todo.",
+    "answerWas": "La respuesta correcta: {answer}",
+    "comesBack": "Esta pregunta volverá a salir más tarde.",
+    "next": "Continuar",
+    "later": "Hacerlo más tarde",
+    "laterHint": "Sin el test todavía no puedes pedir un primer encuentro."
   },
   "shelter": {
     "title": "Para protectoras",
@@ -1184,9 +1209,9 @@
     "title": "Cómo gestiona Rondje la seguridad",
     "lede": "Nadie le deja su perro a cualquiera. Por eso construimos la confianza paso a paso y mantenemos la plataforma limpia.",
     "levels": "Paso a paso",
-    "level1": "Cuenta nueva: puedes pedir un primer encuentro o unirte a un paseo en grupo acompañado.",
+    "level1": "Cuenta nueva: primero el test de seguridad. Después puedes pedir un primer encuentro o unirte a un paseo en grupo acompañado.",
     "level2": "Después del primer encuentro: el dueño ha visto tu documento de identidad en persona y puede permitir paseos por tu cuenta con ese perro en concreto.",
-    "level3": "Después del test de seguridad: puedes pedir paseos por tu cuenta a los dueños que lo permitan.",
+    "level3": "Después: pedir paseos por tu cuenta a los dueños que lo permitan para su perro.",
     "during": "Durante el paseo",
     "duringText": "Tu móvil comparte tu ubicación con el dueño mientras dura el paseo. Si se alarga, los dos recibís un aviso. Con el botón de ayuda ves al momento a quién llamar.",
     "after": "Después del paseo",
@@ -1720,7 +1745,7 @@
       },
       "nudge-step": {
         "subject": "{step, select, about {Completa tu perfil} dog {Pon a tu perro en Rondje} quiz {Tu siguiente paso: el test de seguridad} meet {¿Te apetece un primer encuentro?} other {Tu siguiente paso en Rondje}}",
-        "body": "{step, select, about {Una foto y unas líneas sobre ti ayudan a {role, select, owner {los paseadores} other {los dueños}} a conocerte. Solo te llevará un minuto.} dog {Pon a tu perro en Rondje para que paseadores de tu barrio puedan ofrecer un paseo. La primera vez siempre os conocéis en persona.} quiz {Unas preguntas sobre pasear con seguridad y sabrás en qué fijarte. Después también puedes pasear sin el dueño, si está de acuerdo.} meet {Mira qué perros viven cerca de ti y pide un primer encuentro. La primera vez paseas junto al dueño.} other {Tu siguiente paso en Rondje te espera.}}"
+        "body": "{step, select, about {Una foto y unas líneas sobre ti ayudan a {role, select, owner {los paseadores} other {los dueños}} a conocerte. Solo te llevará un minuto.} dog {Pon a tu perro en Rondje para que paseadores de tu barrio puedan ofrecer un paseo. La primera vez siempre os conocéis en persona.} quiz {Unas preguntas sobre pasear con seguridad y sabrás en qué fijarte. Después podrás pedir un primer encuentro.} meet {Mira qué perros viven cerca de ti y pide un primer encuentro. La primera vez paseas junto al dueño.} other {Tu siguiente paso en Rondje te espera.}}"
       },
       "nudge-challenge": {
         "subject": "{city} da {goal} paseos juntos",
@@ -1830,7 +1855,7 @@
       },
       "quiz": {
         "title": "Aprueba el test de seguridad",
-        "hint": "Ocho preguntas cortas. Necesario para pasear por tu cuenta."
+        "hint": "Ocho preguntas cortas. Necesario para tu primer encuentro."
       },
       "meet": {
         "title": "Planea un primer encuentro",

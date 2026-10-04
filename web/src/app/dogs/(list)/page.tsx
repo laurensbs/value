@@ -132,7 +132,15 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
         </header>
       )}
 
-      {org ? <OrgHeader org={org} walks={orgWalks} joined={joined} signedIn={Boolean(viewer?.profile)} /> : null}
+      {org ? (
+        <OrgHeader
+          org={org}
+          walks={orgWalks}
+          joined={joined}
+          signedIn={Boolean(viewer?.profile)}
+          needsQuiz={Boolean(viewer?.profile && !viewer.profile.quizPassedAt && !myOrgs.has(org.id))}
+        />
+      ) : null}
 
       <section id="honden" className="discover-list" aria-labelledby={member && plain ? 'dogs-title' : undefined}>
         {member && plain ? (

@@ -7,7 +7,20 @@ type Org = NonNullable<Awaited<ReturnType<typeof publicOrg>>>
 type GroupWalks = Awaited<ReturnType<typeof upcomingGroupWalks>>
 
 /** The shelter's card above its dogs (/dogs?org=…): who they are, when to walk, group walks. */
-export async function OrgHeader({ org, walks, joined, signedIn }: { org: Org; walks: GroupWalks; joined: Set<string>; signedIn: boolean }) {
+export async function OrgHeader({
+  org,
+  walks,
+  joined,
+  signedIn,
+  needsQuiz = false,
+}: {
+  org: Org
+  walks: GroupWalks
+  joined: Set<string>
+  signedIn: boolean
+  /** A walker without the safety quiz: the quiz comes before joining (besluit 4 okt 2026). */
+  needsQuiz?: boolean
+}) {
   const t = await getTranslations()
   const format = await getFormatter()
   return (
@@ -69,7 +82,7 @@ export async function OrgHeader({ org, walks, joined, signedIn }: { org: Org; wa
                   </span>
                   <span className="small">{t('groupWalks.spots', { left: Math.max(0, gw.capacity - gw.booked) })}</span>
                 </div>
-                <GroupWalkButton id={gw.id} joined={joined.has(gw.id)} full={gw.booked >= gw.capacity} signedIn={signedIn} next={`/dogs?org=${org.id}`} />
+                <GroupWalkButton id={gw.id} joined={joined.has(gw.id)} full={gw.booked >= gw.capacity} signedIn={signedIn} needsQuiz={needsQuiz} next={`/dogs?org=${org.id}`} />
               </li>
             ))}
           </ul>

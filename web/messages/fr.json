@@ -114,7 +114,7 @@
     "safetyTitle": "La confiance se construit pas à pas",
     "safety1": "La première fois, la balade se fait toujours avec le propriétaire ou le refuge.",
     "safety2": "La pièce d'identité est vérifiée en personne lors de la première rencontre. Rondje n'en garde aucune copie.",
-    "safety3": "Les balades en autonomie ne sont possibles que si le propriétaire les autorise pour ce chien, et après le quiz de sécurité.",
+    "safety3": "Les balades en autonomie ne sont possibles qu’une fois que le propriétaire a vu votre pièce d’identité en personne et les autorise pour ce chien.",
     "safety4": "Pendant la balade, le propriétaire voit en direct où se trouve le chien. Le trajet est effacé après 30 jours.",
     "safety5": "Après chaque balade, chacun donne son avis en privé. Les inquiétudes sont transmises à notre équipe, pas à l'autre personne.",
     "safety6": "Vous pouvez toujours signaler et bloquer. Quiconque ne respecte pas les règles est exclu de la plateforme.",
@@ -542,7 +542,10 @@
       "meet-via": "Ce mode de rencontre n'est pas possible ici. Choisissez la promenade ensemble.",
       "needs-in-person": "Un appel ne compte pas comme une rencontre en vrai. Ce n'est possible qu'après vous être rencontrés.",
       "needs-id": "Le propriétaire doit d'abord voir votre pièce d'identité en personne, lors de votre rencontre.",
-      "already-open": "Vous avez déjà une demande ou un rendez-vous en cours avec ce chien."
+      "already-open": "Vous avez déjà une demande ou un rendez-vous en cours avec ce chien.",
+      "solo-not-allowed": "Les balades en autonomie ne sont pas activées pour cette personne et ce chien. Activez-les d’abord sous « Après la première rencontre », ou refusez la demande.",
+      "id-not-seen": "Les balades en autonomie ne sont possibles qu’après avoir vu en personne la pièce d’identité de la personne qui promène.",
+      "meeting-ahead": "C’est possible après votre rencontre, une fois que vous avez vu la personne et sa pièce d’identité en vrai."
     },
     "messagePlaceholder": "Bonjour ! Je suis … et j'aimerais beaucoup promener {dog}.",
     "moments": "Moments qui conviennent à {dog}",
@@ -568,7 +571,9 @@
     "signedOut": "Vous n'êtes plus connecté. Reconnectez-vous, puis réessayez.",
     "bannedMore": "Lire pourquoi",
     "openPending": "Votre demande pour {dog} figure déjà dans vos rendez-vous. Vous recevrez une notification dès que {owner} répondra.",
-    "openAccepted": "Vous avez déjà un rendez-vous avec {dog} : {when}."
+    "openAccepted": "Vous avez déjà un rendez-vous avec {dog} : {when}.",
+    "quizFirst": "D’abord le quiz (environ 3 min)",
+    "quizFirstText": "Avant de demander une première rencontre, vous faites un court quiz de sécurité. Ensuite, vous revenez ici auprès de {dog}."
   },
   "requests": {
     "title": "Balades",
@@ -630,8 +635,10 @@
     "ladderPpp": "En Espagne, {walker} ne peut promener {dog} en autonomie qu’avec une licence PPP dans son profil.",
     "soloNeedsId": "L’autonomie ne peut être activée qu’après avoir vu sa pièce d’identité en personne.",
     "soloOffWithId": "Sans « pièce d’identité vue », {walker} ne peut pas promener {dog} en autonomie : c’est donc aussi désactivé.",
-    "trustElsewhere": "Ce que {walker} peut faire avec {dog} se règle dans le premier rendez-vous ci-dessus.",
-    "declinedNote": "Vous avez dit non à {walker} pour {dog}. {walker} reçoit une notification."
+    "trustElsewhere": "Ce que {walker} peut faire avec {dog} se règle plus bas, sous « Après la première rencontre ».",
+    "declinedNote": "Vous avez dit non à {walker} pour {dog}. {walker} reçoit une notification.",
+    "trustPair": "{walker} et {dog}",
+    "trustLater": "Après votre rencontre, vous indiquez ici si vous avez vu en personne la pièce d’identité de {walker}."
   },
   "meet": {
     "legend": "Comment souhaitez-vous faire connaissance ?",
@@ -916,63 +923,81 @@
   },
   "quiz": {
     "title": "Quiz de sécurité",
-    "lede": "Huit questions pour se promener en toute sécurité. Tout est juste ? Vous pourrez alors demander des balades en autonomie.",
+    "lede": "Huit petites questions pour se promener en sécurité. Pas de presse : chaque question explique pourquoi, et celle que vous manquez revient simplement. Ensuite, vous pourrez demander une première rencontre.",
     "submit": "Vérifier",
-    "passed": "Réussi ! Vous pouvez maintenant demander des balades en autonomie aux propriétaires qui l'autorisent.",
+    "passed": "Vous pouvez maintenant demander une première rencontre ou rejoindre une balade en groupe.",
     "failed": "Presque. Revoyez les questions en rouge.",
     "q": {
       "heat": {
         "q": "Il fait 28 degrés. Que faites-vous ?",
         "a0": "Se promener normalement, les chiens supportent bien la chaleur",
         "a1": "Faire une courte balade à l'ombre, emporter de l'eau et vérifier de la main que le bitume n'est pas trop chaud",
-        "a2": "Courir un bon coup, comme ça c'est plus vite fini"
+        "a2": "Courir un bon coup, comme ça c'est plus vite fini",
+        "why": "Par temps chaud, l’asphalte peut devenir assez chaud pour faire mal aux pattes. Posez la main un instant : trop chaud pour vous, trop chaud pour le chien. L’ombre et l’eau aident."
       },
       "leash": {
         "q": "Le chien peut-il être lâché ?",
         "a0": "Seulement si le propriétaire l'a expressément autorisé, et uniquement là où c'est permis",
         "a1": "Oui, si c'est calme",
-        "a2": "Oui, si le chien obéit bien"
+        "a2": "Oui, si le chien obéit bien",
+        "why": "Sans laisse seulement si le propriétaire l’a dit, et seulement là où c’est permis. Même un chien qui écoute bien peut prendre peur et filer."
       },
       "treats": {
         "q": "Vous avez une friandise dans votre poche. Pouvez-vous la donner ?",
         "a0": "Oui, les chiens adorent les friandises",
         "a1": "Seulement un petit morceau",
-        "a2": "Seulement si le profil indique que c'est permis"
+        "a2": "Seulement si le profil indique que c'est permis",
+        "why": "Tous les chiens ne peuvent pas manger n’importe quelle friandise, par exemple à cause d’un régime. Le profil du chien indique ce qui est permis."
       },
       "otherDogs": {
         "q": "Un autre chien vient vers vous. Que faites-vous ?",
         "a0": "Les laisser se renifler tranquillement",
         "a1": "Garder ses distances, demander d'abord à l'autre propriétaire et continuer calmement en cas de doute",
-        "a2": "Prendre le chien dans ses bras"
+        "a2": "Prendre le chien dans ses bras",
+        "why": "Tous les chiens n’apprécient pas les autres chiens, même si cela semble amical. Garder ses distances et demander d’abord évite les ennuis."
       },
       "escaped": {
         "q": "Le chien s'est échappé. Que faites-vous en premier ?",
         "a0": "Rester calme, ne pas courir après le chien en criant et appeler immédiatement le propriétaire",
         "a1": "Chercher d'abord soi-même, puis seulement appeler le propriétaire",
-        "a2": "Rentrer chez soi et attendre"
+        "a2": "Rentrer chez soi et attendre",
+        "why": "Courir et crier après un chien aggrave souvent les choses. Le propriétaire sait ce qui marche : vous l’appelez tout de suite."
       },
       "bite": {
         "q": "Le chien mord un autre chien. Que faites-vous ?",
         "a0": "S'éloigner rapidement",
         "a1": "Rien, ça arrive",
-        "a2": "S'assurer que tout le monde est en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler sur Rondje"
+        "a2": "S'assurer que tout le monde est en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler sur Rondje",
+        "why": "D’abord la sécurité de tous. Ensuite, échanger les coordonnées, appeler le propriétaire et le signaler, pour que chacun sache ce qui s’est passé."
       },
       "stress": {
         "q": "Le chien bâille beaucoup, se lèche les babines et s'éloigne. Qu'est-ce que cela veut dire ?",
         "a0": "Il a faim",
         "a1": "Il n'est pas à l'aise ; cherchez un endroit plus calme",
-        "a2": "Il veut jouer"
+        "a2": "Il veut jouer",
+        "why": "Bâiller, se lécher les babines et s’éloigner montrent qu’un chien n’est pas à l’aise. Un endroit plus calme aide."
       },
       "overdue": {
         "q": "Vous rentrez plus tard que prévu. Que faites-vous ?",
         "a0": "Prévenir immédiatement le propriétaire",
         "a1": "Rien, l'appli l'affiche de toute façon",
-        "a2": "Marcher plus vite"
+        "a2": "Marcher plus vite",
+        "why": "Le propriétaire compte sur vous et se demande où vous êtes. Un petit message enlève cette inquiétude."
       }
     },
     "alreadyPassed": "Vous avez déjà réussi le quiz. Vous pouvez le refaire quand vous voulez.",
     "toDogs": "Voir les chiens",
-    "tryAgain": "Pas tout à fait. Regardez encore une fois."
+    "tryAgain": "Pas tout à fait. Regardez encore une fois.",
+    "done": "Réussi !",
+    "left": "{n, plural, one {Encore # question} other {Encore # questions}}",
+    "check": "Vérifier",
+    "right": "C’est juste.",
+    "notQuite": "Pas tout à fait.",
+    "answerWas": "La bonne réponse : {answer}",
+    "comesBack": "Cette question reviendra une fois encore plus tard.",
+    "next": "Continuer",
+    "later": "Plus tard",
+    "laterHint": "Sans le quiz, vous ne pouvez pas encore demander de première rencontre."
   },
   "shelter": {
     "title": "Pour les refuges",
@@ -1184,9 +1209,9 @@
     "title": "Comment Rondje assure la sécurité",
     "lede": "On ne confie pas son chien à n'importe qui. C'est pourquoi nous construisons la confiance pas à pas et veillons à garder la plateforme saine.",
     "levels": "Pas à pas",
-    "level1": "Nouveau compte : vous pouvez demander une première rencontre ou participer à une balade en groupe encadrée.",
+    "level1": "Nouveau compte : d’abord le quiz de sécurité. Ensuite, vous pouvez demander une première rencontre ou participer à une balade en groupe encadrée.",
     "level2": "Après la première rencontre : le propriétaire a vu votre pièce d'identité en personne et peut autoriser les balades en autonomie pour ce chien-là.",
-    "level3": "Après le quiz de sécurité : vous pouvez demander des balades en autonomie aux propriétaires qui l'autorisent.",
+    "level3": "Ensuite : demander des balades en autonomie aux propriétaires qui l’autorisent pour leur chien.",
     "during": "Pendant la balade",
     "duringText": "Votre téléphone partage votre position avec le propriétaire pendant toute la balade. Si elle dure plus longtemps que prévu, vous recevez tous les deux une notification. Le bouton d'aide vous montre tout de suite qui appeler.",
     "after": "Après la balade",
@@ -1720,7 +1745,7 @@
       },
       "nudge-step": {
         "subject": "{step, select, about {Complétez votre profil} dog {Inscrivez votre chien sur Rondje} quiz {Votre prochaine étape : le quiz de sécurité} meet {Envie d'une première rencontre ?} other {Votre prochaine étape sur Rondje}}",
-        "body": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Cela ne prend qu'une minute.} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade. La première fois, vous vous rencontrez toujours ensemble.} quiz {Quelques questions sur la promenade en sécurité, et vous saurez à quoi faire attention. Ensuite, vous pourrez aussi promener le chien sans le propriétaire, s'il est d'accord.} meet {Découvrez les chiens près de chez vous et demandez une première rencontre. La première fois, vous marchez avec le propriétaire.} other {Votre prochaine étape sur Rondje vous attend.}}"
+        "body": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Cela ne prend qu'une minute.} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade. La première fois, vous vous rencontrez toujours ensemble.} quiz {Quelques questions sur la promenade en sécurité, et vous saurez à quoi faire attention. Ensuite, vous pourrez demander une première rencontre.} meet {Découvrez les chiens près de chez vous et demandez une première rencontre. La première fois, vous marchez avec le propriétaire.} other {Votre prochaine étape sur Rondje vous attend.}}"
       },
       "nudge-challenge": {
         "subject": "{city} fait {goal} balades ensemble",
@@ -1830,7 +1855,7 @@
       },
       "quiz": {
         "title": "Réussissez le quiz de sécurité",
-        "hint": "Huit questions courtes. Nécessaire pour se balader seul."
+        "hint": "Huit questions courtes. Nécessaire pour votre première rencontre."
       },
       "meet": {
         "title": "Planifiez une première rencontre",

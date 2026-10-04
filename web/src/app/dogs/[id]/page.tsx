@@ -66,7 +66,8 @@ export default async function DogPage({
   ])
   // Already a request or appointment with this dog: say so, instead of a form for a second one.
   // After an agreed first call the form stays, to plan meeting in person.
-  const openRequest = openRequestConflict(open, { kind: 'meet', meetVia: 'walk' })
+  // An agreed weekly solo walk leaves room for an extra one: then the form stays (rules.ts).
+  const openRequest = openRequestConflict(open, { kind: 'meet', meetVia: 'walk' }) && openRequestConflict(open, { kind: 'solo', meetVia: 'walk' })
 
   let meetReason: string | null = 'not-signed-in'
   let soloReason: string | null = 'not-signed-in'
@@ -276,7 +277,14 @@ export default async function DogPage({
                       <span className="small">{t('groupWalks.spots', { left: Math.max(0, gw.capacity - gw.booked) })}</span>
                     </div>
                     {isMine ? null : (
-                      <GroupWalkButton id={gw.id} joined={joined.has(gw.id)} full={gw.booked >= gw.capacity} signedIn={Boolean(viewer?.profile)} />
+                      <GroupWalkButton
+                        id={gw.id}
+                        joined={joined.has(gw.id)}
+                        full={gw.booked >= gw.capacity}
+                        signedIn={Boolean(viewer?.profile)}
+                        needsQuiz={Boolean(viewer?.profile && !viewer.profile.quizPassedAt)}
+                        next={`/dogs/${dog.id}`}
+                      />
                     )}
                   </li>
                 ))}
@@ -310,7 +318,17 @@ export default async function DogPage({
         ) : null}
 
         {!isMine && host.kind === 'owner' ? (
-          viewer ? (
+          viewer && meetReason === 'needs-quiz' ? (
+            // Walkers do the safety quiz before asking for anything; it brings them straight back here.
+            <div id="plan" className="card flat stack-s quiz-first">
+              <p>{t('request.quizFirstText', { dog: dog.name })}</p>
+              <div className="row">
+                <Link href={`/profile/quiz?next=${plan}`} className="button primary">
+                  {t('request.quizFirst')}
+                </Link>
+              </div>
+            </div>
+          ) : viewer ? (
             <div id="plan">
               <RequestForm
               dogId={dog.id}

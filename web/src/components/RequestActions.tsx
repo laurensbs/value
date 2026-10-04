@@ -328,6 +328,7 @@ export function TrustForm({
   dogName,
   walkerId,
   walkerName,
+  title,
   initial,
   allowSolo,
   caveat,
@@ -336,6 +337,8 @@ export function TrustForm({
   dogName: string
   walkerId: string
   walkerName: string
+  /** Who this is about: the walker and the dog. */
+  title: string
   /** The trust stored on the server. */
   initial: Trust
   allowSolo: boolean
@@ -350,7 +353,7 @@ export function TrustForm({
   const changed = editing !== null && !sameTrust(editing, initial)
   const [ladder, setLadder] = useState<Trust | null>(null)
   const [off, setOff] = useState<'solo' | 'id' | null>(null)
-  const title = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLElement>(null)
   // Turning the ID off takes walks on their own with it; the form says so before saving.
   const soloDropped = initial.soloAllowed && !value.idSeen
 
@@ -373,8 +376,8 @@ export function TrustForm({
 
   return (
     <div className="trust-form stack-s">
-      <strong ref={title} tabIndex={-1} className="trust-form-title">
-        {t('trustTitle')}
+      <strong ref={titleRef} tabIndex={-1} className="trust-form-title">
+        {title}
       </strong>
       <TrustSteps trust={initial} allowSolo={allowSolo} />
       <label className="check">
@@ -424,7 +427,7 @@ export function TrustForm({
           caveat={caveat}
           onClose={() => {
             setLadder(null)
-            title.current?.focus({ preventScroll: true })
+            titleRef.current?.focus({ preventScroll: true })
           }}
         />
       ) : null}

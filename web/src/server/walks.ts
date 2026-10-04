@@ -4,7 +4,7 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { routeLengthM } from '@/lib/geo'
 import { isAllowedPhotoUrl } from '@/lib/photos'
-import { canStartWalk, isInPerson, overdueMinutes } from '@/lib/rules'
+import { canStartWalk, isInPerson, overdueMinutes, soloTrustReason } from '@/lib/rules'
 import { notify } from './notify'
 import type { FormState } from './actions/profile'
 import type { OnboardedViewer, Viewer } from './session'
@@ -147,6 +147,17 @@ export async function activeWalkFor(userId: string): Promise<ActiveWalk | null> 
   return theirs ? { ...theirs, role: 'watcher' } : null
 }
 
+/** Whether a solo walk may go ahead with the trust stored right now (rules.ts soloTrustReason). */
+async function soloTrustNow(kind: string, dog: { id: string; orgId: string | null }, walkerId: string) {
+  if (kind !== 'solo') return null
+  const db = await getDb()
+  const [grant] = await db
+    .select({ soloAllowed: s.trustGrant.soloAllowed, idSeen: s.trustGrant.idSeen })
+    .from(s.trustGrant)
+    .where(and(eq(s.trustGrant.dogId, dog.id), eq(s.trustGrant.walkerId, walkerId)))
+  return soloTrustReason(kind, dog, grant)
+}
+
 /** Starts the walk for an accepted request, or returns the one already running. Shared with the app API. */
 export async function beginWalk(requestId: string, viewer: OnboardedViewer): Promise<FormState & { walkId?: string }> {
   const db = await getDb()
@@ -165,6 +176,9 @@ export async function beginWalk(requestId: string, viewer: OnboardedViewer): Pro
   // A first call is not a walk: no live location, ever (lib/rules.ts).
   if (!isInPerson(row.request.meetVia)) return { ok: false, error: 'needs-in-person' }
   if (!canStartWalk(row.request, viewer.userId)) return { ok: false, error: 'not-now' }
+  // A solo walk starts only while the owner's yes and the ID seen still stand (also for a weekly one).
+  const trust = await soloTrustNow(row.request.kind, row.dog, row.request.walkerId)
+  if (trust) return { ok: false, error: trust }
 
   const id = crypto.randomUUID()
   const now = new Date()
@@ -200,8 +214,8 @@ export async function finishWalk(walkId: string, viewer: OnboardedViewer): Promi
 
   if (access.walk.requestId) {
     const [request] = await db.select().from(s.walkRequest).where(eq(s.walkRequest.id, access.walk.requestId))
-    if (request?.weekly && request.status === 'accepted') {
-      // A fixed weekly walk rolls on to next week, already accepted.
+    if (request?.weekly && request.status === 'accepted' && !(await soloTrustNow(request.kind, access.dog, request.walkerId))) {
+      // A fixed weekly walk rolls on to next week, already accepted, as long as the trust for it holds.
       await db
         .update(s.walkRequest)
         .set({ startsAt: new Date(request.startsAt.getTime() + 7 * 24 * 60 * 60_000) })

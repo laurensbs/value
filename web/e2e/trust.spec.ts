@@ -1,5 +1,5 @@
 import { expect, request, test, type BrowserContext, type Page } from '@playwright/test'
-import { addDog, newPerson, onboard, signUp, smallTargets, unique } from './helpers'
+import { addDog, newPerson, onboard, signUp, smallTargets, soonSlot, unique } from './helpers'
 
 /** Records which sounds a page plays (onderzoek §2: send, success, error), without playing them. */
 async function listenForSounds(context: BrowserContext) {
@@ -42,6 +42,13 @@ test('trust moments: sent stays until "Klaar", accepting opens warmly, trust is 
   // --- No connection while sending: the form stays as it was, with one plain sentence under it ---
   await walker.page.goto(dogUrl)
   const plan = walker.page.locator('#plan')
+  // Soon, so the walk together can start in this test: recording the ID waits for the meeting itself.
+  const slot = soonSlot()
+  await expect(async () => {
+    await walker.page.getByLabel('Datum').fill(slot.date)
+    await walker.page.getByLabel('Tijd').fill(slot.time)
+    await expect(walker.page.getByLabel('Tijd')).toHaveValue(slot.time, { timeout: 1000 })
+  }).toPass()
   await walker.page.getByLabel('Bericht').fill('Hoi! Ik maak graag kennis met Bello.')
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.context.setOffline(true)
@@ -114,7 +121,8 @@ test('trust moments: sent stays until "Klaar", accepting opens warmly, trust is 
     // An old copy of the page: sending it again is the same request, not a second one.
     await walker.page.getByLabel(/Ik houd me aan de/).check()
     await again.click()
-    await expect(walker.page.getByRole('heading', { name: 'Verstuurd naar Ans.' })).toBeVisible()
+    // The same request counts as sent; another moment is refused. Either way, no second request.
+    await expect(walker.page.getByRole('heading', { name: 'Verstuurd naar Ans.' }).or(plan.getByRole('alert'))).toBeVisible()
   }
   await walker.page.reload()
   await expect(openNote).toBeVisible()
@@ -160,9 +168,22 @@ test('trust moments: sent stays until "Klaar", accepting opens warmly, trust is 
   await walker.page.goto('/notifications')
   await expect(walker.page.getByText('Ja! Je kennismaking met Bello staat.')).toBeVisible()
 
+  // Before the meeting the ID cannot be recorded yet: it is seen at the meeting itself.
+  await expect(owner.page.getByText('Na jullie kennismaking leg je hier vast of je het ID van Fleur in het echt hebt gezien.')).toBeVisible()
+  await expect(owner.page.locator('.trust-form')).toHaveCount(0)
+  // They meet: Fleur and Ans start the walk together.
+  await walker.page.goto('/requests')
+  await walker.page.getByRole('button', { name: 'Start rondje' }).click()
+  await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
+  await walker.page.getByLabel('Mijn telefoon is opgeladen').check()
+  await walker.page.getByRole('button', { name: 'Start het rondje' }).click()
+  await expect(walker.page.getByRole('timer')).toBeVisible()
+
   // --- Trust: the ladder instead of "Bijgewerkt." ---
-  const trust = owner.page.locator('.trust-form')
+  await owner.page.goto('/requests?view=incoming')
+  const trust = owner.page.getByRole('region', { name: 'Na de kennismaking' }).locator('.trust-form')
   await expect(trust).toHaveCount(1)
+  await expect(trust).toContainText('Fleur en Bello')
   await expect(trust.locator('.trust-steps li.done')).toHaveCount(1)
   // Walks on their own wait for the ID seen in person (besluit 4 okt).
   await expect(owner.page.getByLabel(/mag zelfstandig met Bello wandelen/)).toBeDisabled()
@@ -175,8 +196,8 @@ test('trust moments: sent stays until "Klaar", accepting opens warmly, trust is 
   await expect(ladder).toBeVisible()
   await expect(ladder.getByRole('listitem')).toHaveText(['Kennismaking: gedaan', 'ID gezien: gedaan', 'Mag zelfstandig: gedaan'])
   await expect(ladder).toContainText('Je kunt bij elk rondje live meekijken, en je kunt dit altijd weer uitzetten.')
-  // Fleur has not done the safety quiz yet: the ladder says what that means, instead of promising too much.
-  await expect(ladder).toContainText('Een zelfstandig rondje aanvragen kan Fleur zodra de veiligheidsquiz gehaald is.')
+  // Fleur did the safety quiz when signing up and Bello needs no experience: nothing else stands in the way.
+  await expect(ladder.locator('.trust-ladder-text .muted')).toHaveCount(0)
   await expect(ladder.getByRole('button', { name: 'Klaar' })).toBeFocused()
   expect(await animation(owner.page, '.trust-ladder .trust-steps li.done .trust-step-mark')).toBe('moment-pop')
   expect(await smallTargets(owner.page)).toEqual([])
@@ -234,7 +255,7 @@ test('trust moments: sent stays until "Klaar", accepting opens warmly, trust is 
     headers: { ...bearer, 'Accept-Language': 'nl-NL' },
   })
   expect(refused.status()).toBe(400)
-  expect(await refused.json()).toEqual({ error: 'needs-id', message: 'De eigenaar moet eerst je ID in het echt zien, bij jullie kennismaking.' })
+  expect(await refused.json()).toEqual({ error: 'id-not-seen', message: 'Zelfstandig wandelen kan pas als je het ID van de wandelaar in het echt hebt gezien.' })
   await app.dispose()
 
   // The walker sees the same appointment as agreed, and earlier ones behind a big enough summary.
@@ -243,12 +264,13 @@ test('trust moments: sent stays until "Klaar", accepting opens warmly, trust is 
   expect(await smallTargets(walker.page)).toEqual([])
 
   // Signed out in the meantime: the walker hears that, with the way back in, not "try again later".
+  await walker.page.goto(pipUrl)
+  await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.context.clearCookies()
-  await walker.page.getByRole('button', { name: 'Intrekken' }).click()
-  await walker.page.locator('.list-item.request').getByRole('button', { name: 'Intrekken' }).click()
-  const signedOut = walker.page.locator('.list-item.request').getByRole('alert')
+  await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
+  const signedOut = walker.page.locator('#plan').getByRole('alert')
   await expect(signedOut).toContainText('Je bent niet meer ingelogd. Log opnieuw in en probeer het dan nog eens.')
-  await expect(signedOut.getByRole('link', { name: 'Inloggen' })).toHaveAttribute('href', '/login?next=%2Frequests')
+  await expect(signedOut.getByRole('link', { name: 'Inloggen' })).toHaveAttribute('href', `/login?next=${encodeURIComponent(pipUrl)}`)
 
   await owner.context.close()
   await walker.context.close()

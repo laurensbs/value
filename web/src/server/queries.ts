@@ -219,7 +219,8 @@ export async function relationFor(viewer: Viewer, dog: Dog): Promise<DogRelation
   return {
     isStaff: Boolean(dog.orgId && viewer.orgs.some((o) => o.id === dog.orgId)),
     blocked,
-    soloAllowed: Boolean(grant?.soloAllowed),
+    // Solo walks count only with the ID seen in person (besluit 4 okt 2026), also for older rows.
+    soloAllowed: Boolean(grant?.soloAllowed && grant?.idSeen),
     idSeen: Boolean(grant?.idSeen),
     hasAccepted: accepted.length > 0,
   }
@@ -450,11 +451,21 @@ export async function outgoingRequests(userId: string): Promise<RequestRow[]> {
   return requestRows(userId, and(eq(s.walkRequest.walkerId, userId), ne(s.walkRequest.status, 'cancelled')))
 }
 
+/** The trust stored for one walker and dog, as it is (rules.ts soloTrustReason reads it), or null. */
+export async function trustGrantOf(dogId: string, walkerId: string): Promise<{ soloAllowed: boolean; idSeen: boolean } | null> {
+  const db = await getDb()
+  const [grant] = await db
+    .select({ soloAllowed: s.trustGrant.soloAllowed, idSeen: s.trustGrant.idSeen })
+    .from(s.trustGrant)
+    .where(and(eq(s.trustGrant.dogId, dogId), eq(s.trustGrant.walkerId, walkerId)))
+  return grant ?? null
+}
+
 /** A walker's requests for one dog that are waiting or agreed and still to come (rules.ts: openRequestConflict). */
 export async function openRequestsFor(walkerId: string, dogId: string) {
   const db = await getDb()
   return db
-    .select({ status: s.walkRequest.status, startsAt: s.walkRequest.startsAt, meetVia: s.walkRequest.meetVia, kind: s.walkRequest.kind })
+    .select({ status: s.walkRequest.status, startsAt: s.walkRequest.startsAt, meetVia: s.walkRequest.meetVia, kind: s.walkRequest.kind, weekly: s.walkRequest.weekly })
     .from(s.walkRequest)
     .where(
       and(
@@ -570,7 +581,8 @@ export async function trustGrantsFor(dogIds: string[]): Promise<Map<string, { id
   if (dogIds.length === 0) return result
   const db = await getDb()
   const rows = await db.select().from(s.trustGrant).where(inArray(s.trustGrant.dogId, dogIds))
-  for (const r of rows) result.set(`${r.dogId}:${r.walkerId}`, { idSeen: r.idSeen, soloAllowed: r.soloAllowed })
+  // Solo walks count only with the ID seen in person (besluit 4 okt 2026), also for older rows.
+  for (const r of rows) result.set(`${r.dogId}:${r.walkerId}`, { idSeen: r.idSeen, soloAllowed: r.soloAllowed && r.idSeen })
   return result
 }
 

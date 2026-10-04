@@ -57,7 +57,7 @@ You can have more than one role.
 3. **First meeting.** The first time you meet is always a first meeting (*kennismaking*), with the owner or a shelter staff member present.
 4. **ID check.** At the first meeting, the walker shows a valid identity document. The owner or shelter checks that the name, photo and age match and ticks a box in the app. Rondje keeps no copy. Please do not take a photo or copy of it yourself either.
 5. **Solo trust.** Walking a dog alone is only allowed once the owner or shelter has explicitly given permission in the app. This applies to that one dog only and can be withdrawn at any time.
-6. **Safety quiz.** Before your first solo walk, you complete a short quiz in the app.
+6. **Safety quiz.** Before you ask for a first meeting or join a group walk, you complete a short safety quiz.
 7. **New accounts** can at first only take part in first meetings and supervised walks. The app shows when this changes.
 8. **Recurring walks.** You can arrange a fixed weekly walk. Can't make it? Cancel through the app as soon as possible.
 

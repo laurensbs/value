@@ -13,6 +13,7 @@ import { isAdult } from '@/lib/rules'
 import { safeNext } from '@/lib/site'
 import { deleteUnusedFilesLater, deleteUserWithFiles } from '../blob-cleanup'
 import { location, profileSchema, safePhoto, saveOnboarding } from '../profile-core'
+import { markProgressSeen, progressFor } from '../progress'
 import { actionViewer, getViewer } from '../session'
 
 export interface FormState {
@@ -55,9 +56,14 @@ export async function completeOnboarding(_prev: FormState, form: FormData): Prom
   const p = parsed.data
   // Where someone was going, or the first thing to do for the role they chose.
   const start = form.get('intent') === 'shelter' ? '/shelter' : p.hasDogs && !p.wantsToWalk ? '/my-dogs/new?welcome=1' : '/?welcome=1'
+  const destination = safeNext(form.get('next') || undefined, start)
   // The whole page changes now (tab bar, header): refresh the layout too, not only the next page.
   revalidatePath('/', 'layout')
-  redirect(safeNext(form.get('next') || undefined, start))
+  // Walkers do the safety quiz straight away, before they can ask for anything (besluit 4 okt 2026).
+  if (p.wantsToWalk && form.get('intent') !== 'shelter' && !viewer.profile?.quizPassedAt) {
+    redirect(`/profile/quiz?next=${encodeURIComponent(destination)}`)
+  }
+  redirect(destination)
 }
 
 export async function updateProfile(_prev: FormState, form: FormData): Promise<FormState> {
@@ -108,6 +114,10 @@ export async function submitQuiz(_prev: FormState & { wrong?: string[] }, form: 
   if (!result.passed) return { ok: false, error: 'quiz-failed', wrong: result.wrong }
   const db = await getDb()
   await db.update(s.profile).set({ quizPassedAt: new Date() }).where(eq(s.profile.userId, viewer.userId))
+  // The quiz is a calm step, not a prize: its badge counts, without a party right after (geen punten).
+  const fresh = await progressFor({ ...viewer, profile: { ...viewer.profile, quizPassedAt: new Date() } })
+  await markProgressSeen(viewer.userId, fresh.level.level)
+  revalidatePath('/', 'layout')
   return { ok: true, message: 'quiz-passed', wrong: [] }
 }
 
