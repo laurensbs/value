@@ -1,5 +1,5 @@
 /* Rondje — the signed-in website as an app: the floating tab bar, the short footer,
-   Ontdek (greeting, level, challenge, tip, filters) and the big dog cards.
+   Ontdek (search, Lijst | Kaart, filters, the map screen) and the big dog cards.
    Same tokens as globals.css and the iPhone app (ios/Rondje/UI/Theme.swift). */
 
 :root {
@@ -200,43 +200,10 @@
   gap: 18px;
 }
 
-.greeting {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-top: 4px;
-}
-
-.greeting-hello {
-  color: var(--muted);
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.greeting h1 {
-  font-size: clamp(1.9rem, 5.2vw, 2.7rem);
-}
-
 .discover-head {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.home-cards {
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-}
-
-.home-cards > .welcome-card,
-.home-cards > .steps-card {
-  grid-column: 1 / -1;
-}
-
-.home-cards h2 {
-  font-family: var(--font-body);
-  letter-spacing: 0;
 }
 
 /* Welcome after onboarding */
@@ -255,18 +222,6 @@
   font-family: var(--font-display);
   font-size: 1.3rem;
   letter-spacing: -0.02em;
-}
-
-.welcome-badge {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: var(--grass);
-  color: var(--on-grass);
-  transform: rotate(-6deg);
 }
 
 @keyframes card-in {
@@ -485,22 +440,6 @@
   gap: 10px;
 }
 
-.challenge-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.challenge-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--calm);
-  font-size: 0.85rem;
-  font-weight: 750;
-}
-
 .challenge-card h2 {
   font-size: 1.12rem;
   font-weight: 700;
@@ -526,30 +465,8 @@
   background: var(--grass);
 }
 
-.challenge-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.challenge-mine {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--grass);
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.challenge-done {
-  color: var(--grass);
-  font-weight: 700;
-}
-
 /* Tip of the day. Scoped to the home cards: Today has its own tip card (globals.css) with the same class name. */
-.home-cards .tip-card {
+.discover .tip-card {
   display: flex;
   align-items: flex-start;
   gap: 14px;
@@ -570,16 +487,220 @@
   color: var(--on-ball);
 }
 
-.home-cards .tip-card .tip-title {
+.discover .tip-card .tip-title {
   font-size: 0.8rem;
   font-weight: 750;
   opacity: 0.82;
   margin-bottom: 3px;
 }
 
-.home-cards .tip-card p {
+.discover .tip-card p {
   font-size: 1rem;
   line-height: 1.45;
+}
+
+/* Search, Lijst | Kaart and the filters: always the first thing on Ontdek. */
+.discover-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.view-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-self: stretch;
+}
+
+.view-switch a {
+  justify-content: center;
+}
+
+/* The filters and the countries in one row that scrolls sideways, the countries after a thin line. */
+.pill-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: -16px;
+  padding: 3px 16px;
+}
+
+.pill-row::-webkit-scrollbar {
+  display: none;
+}
+
+.pill-row > .filter-pills,
+.pill-row > .country-pills {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.pill-row > .country-pills {
+  padding-left: 8px;
+  border-left: 1.5px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .pill-row {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .pill-row > .filter-pills,
+  .pill-row > .country-pills {
+    flex-wrap: wrap;
+  }
+}
+
+/* Kaart: a screen of its own. The map fills everything under the search bar (no scrolling to find it),
+   on phones up to the bottom edge, under the floating tab bar, like a maps app. */
+.discover.map-mode {
+  gap: 10px;
+  height: calc(100vh - var(--header-h) - env(safe-area-inset-top, 0px) - 20px);
+  height: calc(100dvh - var(--header-h) - env(safe-area-inset-top, 0px) - 20px);
+}
+
+.discover.map-mode .discover-list {
+  flex: 1;
+  min-height: 0;
+  gap: 10px;
+}
+
+.main:has(> .discover.map-mode) {
+  padding-bottom: 0;
+}
+
+.shell:has(.discover.map-mode) .footer {
+  display: none;
+}
+
+.map-screen {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+  margin-inline: -16px;
+}
+
+.map.fill {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  border-radius: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.map-overlay {
+  position: absolute;
+  z-index: 1000;
+  left: 12px;
+  right: 12px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.map-overlay > * {
+  pointer-events: auto;
+}
+
+/* Above the floating tab bar on phones. */
+@media (max-width: 899px) {
+  .has-tabbar .map-overlay {
+    bottom: calc(94px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.map-note {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 94%, transparent);
+  box-shadow: var(--soft-shadow);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* A tapped paw: the dog in one compact card. A tap on it opens the dog. */
+.map-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(100%, 520px);
+  min-height: 96px;
+  padding: 12px 14px 12px 12px;
+  border-radius: 24px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--soft-shadow-hover);
+  animation: card-in var(--motion-scherm) var(--ease-scherm) both;
+}
+
+.map-card > .dog-photo {
+  flex-shrink: 0;
+  border-radius: 18px;
+}
+
+.map-card > .icon {
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+.map-card-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.map-card-text strong {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+.map-card-text .muted {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.map-card .dcard-pills {
+  flex-wrap: wrap;
+}
+
+.map-card .dcard-tag {
+  position: static;
+}
+
+@media (min-width: 900px) {
+  .discover.map-mode {
+    height: calc(100dvh - var(--header-h) - 44px);
+  }
+
+  .map-screen {
+    margin-inline: 0;
+  }
+
+  .map.fill {
+    border-radius: var(--radius-m);
+    border: 1px solid var(--line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-card {
+    animation: fade-in var(--motion-klein) ease-out backwards !important;
+  }
 }
 
 /* Search, map and filters */
