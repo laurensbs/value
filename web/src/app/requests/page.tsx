@@ -219,13 +219,14 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                       <DogPortrait dog={r.dog} size={72} />
                     </Link>
                     <div className="grow stack-s">
-                      <div className="spread">
-                        <strong className="request-title">
-                          {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
-                        </strong>
+                      <strong className="request-title">
+                        {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
+                      </strong>
+                      {/* Where it stands and how you meet, in one row. */}
+                      <div className="request-tags">
                         <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       </div>
-                      {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="muted small">
                         <Icon name="calendar" size={14} /> {when(r)} · {t('common.minutes', { n: r.request.durationMin })}
                         {r.request.weekly ? ` · ${t('requests.weekly')}` : ''}
@@ -322,31 +323,32 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                 return (
                   <li key={r.request.id} className="list-item request incoming">
                     <div className="grow stack">
-                      <div className="spread">
-                        <span className="request-title">
-                          <DogPortrait dog={r.dog} size={36} />
-                          <strong>
-                            {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
-                          </strong>
-                        </span>
+                      <span className="request-title">
+                        <DogPortrait dog={r.dog} size={36} />
+                        <strong>
+                          {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
+                        </strong>
+                      </span>
+                      <div className="request-tags">
                         <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       </div>
-                      {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="small">
                         <Icon name="calendar" size={14} /> {when(r)} · {t('common.minutes', { n: r.request.durationMin })}
                         {r.request.weekly ? ` · ${t('requests.weekly')}` : ''}
                       </p>
                       <WalkerCard walker={r.walker} signals={signals.get(r.walker.id)!} />
                       {r.request.message ? <blockquote className="message">{r.request.message}</blockquote> : null}
-                      <div className="row">
-                        <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
-                      </div>
                       {r.request.flags.length ? (
                         <p className="notice warn small" role="note">
                           <Icon name="alert" size={16} /> {t('requests.flagged')}
                         </p>
                       ) : null}
+                      {/* One main action: yes or no. Chatting first stays one tap away, right under it. */}
                       {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} /> : null}
+                      <div className="row">
+                        <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
+                      </div>
                       {accepted ? (
                         <AcceptReveal requestId={r.request.id} walkerName={r.walker.firstName}>
                           <Contact contact={{ name: r.walker.firstName, phone: r.walker.phone, email: r.walker.email }} label={t('requests.contact')} />
