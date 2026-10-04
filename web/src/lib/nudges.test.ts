@@ -111,6 +111,12 @@ describe('three in a row with nothing done', () => {
     expect(ignoredInARow(three.slice(1), at('2026-10-01'))).toBe(false)
   })
 
+  it('only count seintjes a week apart: what the old rules sent every three days switches nobody off', () => {
+    const old = [sent('nudge-step', '2026-10-02'), sent('nudge-step', '2026-10-05'), sent('nudge-gone', '2026-10-08')]
+    expect(ignoredInARow(old, at('2026-10-01'))).toBe(false)
+    expect(pickNudge({ ...f, sent: old }, at('2026-10-15'))?.kind).toBe('nudge-new-dog')
+  })
+
   it('count every seintje, also old kinds, and nothing else', () => {
     const old = [sent('nudge-old', '2026-10-02'), sent('nudge-gone', '2026-10-09'), sent('request-accepted', '2026-10-12'), sent('challenge-done', '2026-10-16')]
     expect(ignoredInARow(old, at('2026-10-01'))).toBe(true)

@@ -1,6 +1,6 @@
 // Seintjes: reminders with no news behind them. Calm by design, never a guilt trip.
 //
-// The rules (docs/DECISIONS.md, decision 7, and the research "Duolingo-achtig, zonder druk" §3.4):
+// The rules (docs/DECISIONS.md, decision 36, and the research "Duolingo-achtig, zonder druk" §3.4):
 // - Only for people who turned them on themselves (profile.reminders, off for new profiles).
 // - At most one every seven days, whatever the kind. Real events (a request, an answer, an
 //   appointment) are not seintjes: they come as notifications whatever this setting says.
@@ -135,13 +135,17 @@ function stepOrder(roles: Roles): NudgeStep[] {
 /**
  * Three seintjes in a row and nothing done since the first of them: they stop. Counted from what
  * people did (lastActiveAt, see server/nudges.ts), never from whether a notification was opened.
+ * Only seintjes a week apart count, as the weekly rule sends them: what the old rules sent (every
+ * three days, until October 2026) never switches anyone off.
  */
 export function ignoredInARow(sent: readonly SentNudge[], lastActiveAt: Date | null): boolean {
   const latest = sent
     .filter((s) => isSeintje(s.kind))
     .sort((a, b) => b.at.getTime() - a.at.getTime())
     .slice(0, IGNORED_MAX)
-  return latest.length === IGNORED_MAX && latest.every((s) => !lastActiveAt || s.at > lastActiveAt)
+  if (latest.length < IGNORED_MAX) return false
+  const weekApart = latest.every((s, i) => i === 0 || localDay(latest[i - 1].at) - localDay(s.at) >= NUDGE_GAP_DAYS)
+  return weekApart && latest.every((s) => !lastActiveAt || s.at > lastActiveAt)
 }
 
 /** The one seintje worth sending today, or null. Good news first, then what someone started. */
