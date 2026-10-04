@@ -126,6 +126,9 @@ test('Hondenschool: lesson 1 without an account, a miss comes back at the end, a
   // --- A miss in the quiz points to the lesson that teaches it, and back ---
   await other.page.goto('/profile/quiz')
   await expect(other.page.getByText('De quiz leert je de regels; de eigenaar beslist of je alleen mag.')).toBeVisible()
+  // Eight paws, one per question, like the app; no clock.
+  await expect(other.page.locator('.quiz-paws > span')).toHaveCount(8)
+  await expect(other.page.getByRole('timer')).toHaveCount(0)
   const heat = QUIZ.find((q) => q.id === 'heat')!
   await other.page.locator(`input[name="answer"][value="${(heat.correct + 1) % heat.options}"]`).check()
   await other.page.getByRole('button', { name: 'Kijk na' }).click()

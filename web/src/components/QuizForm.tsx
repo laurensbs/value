@@ -107,6 +107,14 @@ export function QuizForm({ next, back }: { next: string; back: string }) {
 
   return (
     <div className="quiz-flow stack">
+      {/* One paw per question, like the app: green once it was right, the current one a little bigger. Never red. */}
+      <div className="quiz-paws" aria-hidden="true">
+        {QUIZ.map((q) => (
+          <span key={q.id} className={`${q.id in answers ? 'is-right' : ''}${q.id === question.id ? ' is-now' : ''}`}>
+            <Icon name="paw" size={20} />
+          </span>
+        ))}
+      </div>
       <p className="muted small" aria-live="polite">
         {t('left', { n: queue.length })}
       </p>

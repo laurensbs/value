@@ -2394,6 +2394,38 @@ fieldset.form-section {
   margin: 0;
 }
 
+/* Eight paws, one per question: green once it was right, the current one a little bigger. */
+.quiz-paws {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  justify-items: center;
+  color: var(--line);
+}
+
+.quiz-paws > span {
+  display: grid;
+  transition: transform var(--motion-klein) var(--ease-klein), color var(--motion-klein) var(--ease-klein);
+}
+
+.quiz-paws > .is-right {
+  color: var(--grass);
+}
+
+.quiz-paws > .is-now {
+  color: var(--muted);
+  transform: scale(1.25);
+}
+
+.quiz-paws > .is-right.is-now {
+  color: var(--grass);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-paws > .is-now {
+    transform: none;
+  }
+}
+
 /* To the Hondenschool lesson that teaches this: a whole line to tap, not a word in a sentence. */
 .quiz-lesson-link {
   display: inline-flex;
