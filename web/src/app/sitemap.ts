@@ -3,6 +3,10 @@ import { LEGAL_DOCS, legalHtml } from '@/lib/legal'
 import { canonicalUrl } from '@/lib/seo'
 import { indexableCities } from '@/server/cities'
 
+// Asked on every request, not frozen at build time: a city enters the sitemap as soon as its page
+// stops saying noindex (the first real dog, walk or partner shelter), not at the next deploy.
+export const dynamic = 'force-dynamic'
+
 const PAGES = ['/', '/dogs', '/shelters', '/group-walks', '/shelter', '/about', '/waarom', '/support', '/suggest', '/flyer', '/help', '/contact', '/safety', '/cities']
 
 /** A date from front matter ("2026-10-02"), or null. */
