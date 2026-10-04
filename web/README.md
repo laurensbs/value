@@ -66,7 +66,9 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 npx cap sync           # after changing capacitor.config.ts or native-shell/
 npx cap open ios       # Xcode (macOS)
 npx cap open android   # Android Studio
-node scripts/native-assets.mjs && npx @capacitor/assets generate   # icons and splash screens
+node scripts/brand-assets.mjs   # every logo image: favicon, PWA and app icons, splash screens
 ```
+
+The logo sources (wordmark, stacked app icon, favicon) are in `assets/brand/`; `scripts/brand-assets.mjs` renders the website icons, the Capacitor sources in `assets/` and every app icon and splash screen of both shells from them.
 
 The shells load `server.url` from `capacitor.config.ts` (set `CAP_SERVER_URL` to point at another deployment). They show `native-shell/offline.html` when there is no connection.
