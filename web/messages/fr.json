@@ -919,9 +919,10 @@
     "alerts": "Notifications",
     "alertsText": "Les messages, demandes et rendez-vous vous parviennent toujours ; les petits coups de pouce, seulement si vous les activez ci-dessous.",
     "reminders": "Petits coups de pouce",
-    "remindersHint": "Seulement des extras : vos premières étapes, le défi de votre ville et les nouveaux chiens près de chez vous. Au maximum un par semaine ; si trois de suite ne servent à rien, ils s'arrêtent d'eux-mêmes. Les messages, demandes et rendez-vous vous parviennent toujours, même si ceci est désactivé.",
+    "remindersHint": "Seulement des extras : vos premières étapes, le défi de votre ville et les nouveaux chiens près de chez vous. Au maximum un par semaine ; si trois de suite ne servent à rien, ils s'arrêtent d'eux-mêmes.",
     "pushIos": "Des alertes sur votre iPhone ? Elles fonctionnent dès que Rondje est sur votre écran d’accueil :",
-    "pushIosInApp": "Des alertes sur votre iPhone ? Ouvrez d’abord Rondje dans Safari et mettez-le sur votre écran d’accueil depuis là."
+    "pushIosInApp": "Des alertes sur votre iPhone ? Ouvrez d’abord Rondje dans Safari et mettez-le sur votre écran d’accueil depuis là.",
+    "inviteShort": "Inviter"
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -2459,14 +2460,16 @@
     "friendsCount": "{dogs, plural, one {# ami à quatre pattes} other {# amis à quatre pattes}} · {walks, plural, one {# balade} other {# balades}}",
     "breatheTitle": "Minute de respiration",
     "breatheText": "Une minute calme, avant ou après une balade",
-    "quizTodo": "Pas encore fait, nécessaire pour vous balader seul",
+    "quizTodo": "Pas encore fait. Nécessaire avant de demander un chien.",
     "moreTitle": "Donner un coup de main",
     "inviteShort": "Vous connaissez quelqu'un qui aime marcher, ou quelqu'un avec un chien ? Partagez votre lien.",
     "supportText": "Gratuit et sans publicité. Découvrez comment aider.",
     "tipText": "Vous connaissez un refuge ou quelqu'un avec un chien qui aurait besoin d'aide ?",
     "shelterText": "Vous travaillez dans un refuge ? Mettez vos chiens en ligne ici.",
     "adminText": "Signalements, refuges, chiffres et le centre de lancement",
-    "schoolText": "{done} leçons sur {total}, à votre rythme"
+    "schoolText": "{done} leçons sur {total}, à votre rythme",
+    "walkTitle": "Balades",
+    "accountTitle": "Compte"
   },
   "shell": {
     "tabs": {
