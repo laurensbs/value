@@ -25,11 +25,11 @@ test('a new walker: seintjes off, no countdowns, one block for notifications', a
   await expect(badges).toBeVisible()
   for (const name of ['Avondrondje', 'Vriendenkring', 'Ambassadeur']) await expect(badges).not.toContainText(name)
 
-  // /profile: one block "Meldingen" that says what you get; seintjes are off for a new profile.
+  // /profile: one block "Meldingen" that says what you get; extra seintjes are off for a new profile.
   await page.goto('/profile')
   const alerts = page.getByRole('region', { name: 'Meldingen', exact: true })
-  await expect(alerts).toContainText('Je krijgt alleen een melding als er echt iets is')
-  await expect(alerts.getByRole('checkbox', { name: /^Seintjes/ })).not.toBeChecked()
+  await expect(alerts).toContainText('Berichten, verzoeken en afspraken krijg je altijd')
+  await expect(alerts.getByRole('checkbox', { name: /^Extra seintjes/ })).not.toBeChecked()
   await expect(alerts.getByRole('checkbox', { name: /e-mail bij belangrijke meldingen/ })).toBeChecked()
 
   // The iPhone app can say it plans its own seintjes; the server then sends that phone none.
@@ -39,6 +39,10 @@ test('a new walker: seintjes off, no countdowns, one block for notifications', a
   expect((await (await app.get('/api/v1/me', { headers: bearer })).json()).profile).toMatchObject({ reminders: false, localNudges: false })
   expect((await app.patch('/api/v1/profile', { data: { localNudges: true }, headers: bearer })).status()).toBe(200)
   expect((await (await app.get('/api/v1/me', { headers: bearer })).json()).profile).toMatchObject({ reminders: false, localNudges: true })
+  // The app gets the challenge without a countdown (its daysLeft is optional), so "Nog # dagen" goes there too.
+  const challenges = await (await app.get('/api/v1/challenges', { headers: bearer })).json()
+  expect(challenges.all).toMatchObject({ goal: expect.any(Number) })
+  expect(challenges).not.toHaveProperty('daysLeft')
   await app.dispose()
   await walker.context.close()
 })

@@ -7,9 +7,11 @@
 // - Only about things the person chose or started: their first steps, their town's challenge, a dog
 //   they put on Rondje, and for walkers a dog that just came online near them (each dog once).
 // - No countdowns, no "we miss you", no deadlines: lib/banned-phrases.json is checked in a test.
-// - Three in a row that led to nothing, and they stop by themselves: the switch goes off, and the
-//   app says so in one line (never a push). Nothing about opens is stored for this.
-// - Someone whose iPhone plans its own seintjes (profile.localNudges) gets none from the server.
+// - Three in a row that led to nothing, and they stop by themselves when the fourth would be due:
+//   the switch goes off, and the app says so in one line (never a push). Nothing about opens is
+//   stored for this.
+// - Someone whose iPhone plans its own seintjes (profile.localNudges) gets none from the server:
+//   not as a push, not by email and not in the notification list.
 
 import { nearness, shownCount, type Place } from './nearby'
 import { localParts, type Roles } from './progress'
@@ -132,20 +134,27 @@ function stepOrder(roles: Roles): NudgeStep[] {
   return ['about', ...(roles.owner ? (['dog'] as const) : []), ...(roles.walker ? (['quiz', 'meet'] as const) : [])]
 }
 
+/** A seintje of any kind (also one no longer sent) in the last seven calendar days. */
+export function sentTooRecently(sent: readonly SentNudge[], now: Date): boolean {
+  return sent.some((s) => isSeintje(s.kind) && localDay(now) - localDay(s.at) < NUDGE_GAP_DAYS)
+}
+
 /**
- * Three seintjes in a row and nothing done since the first of them: they stop. Counted from what
- * people did (lastActiveAt, see server/nudges.ts), never from whether a notification was opened.
- * Only seintjes a week apart count, as the weekly rule sends them: what the old rules sent (every
- * three days, until October 2026) never switches anyone off.
+ * Three seintjes in a row and nothing done since the first of them: they stop, on the day the
+ * fourth would be due (a week after the third). Counted from what people did (lastActiveAt, see
+ * server/nudges.ts), never from whether a notification was opened. Only kinds sent today count,
+ * and only a week apart as the weekly rule sends them: seintjes of kinds no longer sent, or three
+ * that came closer together, never switch anyone off.
  */
-export function ignoredInARow(sent: readonly SentNudge[], lastActiveAt: Date | null): boolean {
+export function ignoredInARow(sent: readonly SentNudge[], lastActiveAt: Date | null, now: Date): boolean {
   const latest = sent
-    .filter((s) => isSeintje(s.kind))
+    .filter((s) => isNudgeKind(s.kind))
     .sort((a, b) => b.at.getTime() - a.at.getTime())
     .slice(0, IGNORED_MAX)
   if (latest.length < IGNORED_MAX) return false
   const weekApart = latest.every((s, i) => i === 0 || localDay(latest[i - 1].at) - localDay(s.at) >= NUDGE_GAP_DAYS)
-  return weekApart && latest.every((s) => !lastActiveAt || s.at > lastActiveAt)
+  const fourthDue = localDay(now) - localDay(latest[0].at) >= NUDGE_GAP_DAYS
+  return weekApart && fourthDue && latest.every((s) => !lastActiveAt || s.at > lastActiveAt)
 }
 
 /** The one seintje worth sending today, or null. Good news first, then what someone started. */
@@ -153,8 +162,8 @@ export function pickNudge(f: NudgeFacts, now: Date): Nudge | null {
   const today = localDay(now)
   const daysSince = (at: Date) => today - localDay(at)
   const sent = f.sent.filter((s) => isSeintje(s.kind))
-  if (sent.some((s) => daysSince(s.at) < NUDGE_GAP_DAYS)) return null
-  if (ignoredInARow(sent, f.lastActiveAt)) return null
+  if (sentTooRecently(sent, now)) return null
+  if (ignoredInARow(sent, f.lastActiveAt, now)) return null
   const sentOf = (kind: NudgeKind) => sent.filter((s) => s.kind === kind)
   const local = localParts(now)
   const age = daysSince(f.joinedAt)

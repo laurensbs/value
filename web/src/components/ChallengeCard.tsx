@@ -6,9 +6,9 @@ import { Icon, type IconName } from './Icon'
 const SEASON_ICON: Record<MonthChallenges['season'], IconName> = { winter: 'star', spring: 'leaf', summer: 'sun', autumn: 'leaf' }
 
 /** "Utrecht walks 50 rounds in October": the town's monthly goal, and everyone's together. */
-export async function ChallengeCard({ challenges, now = new Date() }: { challenges: MonthChallenges; now?: Date }) {
+export async function ChallengeCard({ challenges }: { challenges: MonthChallenges }) {
   const t = await getTranslations('challenges')
-  const c = await challengesJson(challenges, now)
+  const c = await challengesJson(challenges)
   const main = c.city ?? c.all
 
   return (

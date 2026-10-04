@@ -112,11 +112,11 @@ describe('no pressure in texts that nudge', () => {
 
   it('leaves calm texts alone', () => {
     const calm: [Locale, string][] = [
-      ['nl', 'Er zijn nog weinig wandelaars bij jou in de buurt. Wij zoeken mee.'],
+      ['nl', '{dogName} staat gewoon online, maar er wonen nog weinig wandelaars bij jou in de buurt.'],
       ['nl', '{done} van {goal, plural, one {# rondje} other {# rondjes}}'],
-      ['en', "There aren't many walkers near you yet. We're looking too."],
-      ['es', 'Todavía hay pocos paseadores cerca de ti. Buscamos contigo.'],
-      ['fr', 'Il y a encore peu de promeneurs près de chez vous. Nous cherchons avec vous.'],
+      ['en', '{dogName} is online, but few walkers live near you yet.'],
+      ['es', '{dogName} está en línea, pero todavía viven pocos paseadores cerca de ti.'],
+      ['fr', 'Peu de promeneurs habitent encore près de chez vous.'],
     ]
     for (const [locale, message] of calm) {
       expect(readings(message).flatMap((text) => pressure(text, locale)), `${locale}: ${message}`).toEqual([])

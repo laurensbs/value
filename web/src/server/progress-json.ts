@@ -79,12 +79,11 @@ export function levelMoment(p: Progress, json: Awaited<ReturnType<typeof progres
   }
 }
 
-/** Days left in the month, counting today. */
-export function daysLeft(c: MonthChallenges, now = new Date()): number {
-  return Math.max(1, Math.ceil((c.endsAt.getTime() - now.getTime()) / 86_400_000))
-}
-
-export async function challengesJson(c: MonthChallenges, now = new Date()) {
+/**
+ * The month's challenge, as the apps show it. No days left: a shared goal is never a countdown
+ * (the iPhone app treats a missing daysLeft as no countdown).
+ */
+export async function challengesJson(c: MonthChallenges) {
   const t = await getTranslations('challenges')
   const format = await getFormatter()
   const month = format.dateTime(new Date((c.startsAt.getTime() + c.endsAt.getTime()) / 2), { month: 'long' })
@@ -94,7 +93,6 @@ export async function challengesJson(c: MonthChallenges, now = new Date()) {
     season: c.season,
     startsAt: c.startsAt,
     endsAt: c.endsAt,
-    daysLeft: daysLeft(c, now),
     city: c.city && {
       ...c.city,
       title: t('city', { city: c.city.name, goal: c.city.goal, month }),

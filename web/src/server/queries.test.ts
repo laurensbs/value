@@ -113,11 +113,14 @@ describe('notifications', () => {
         ('n2', 'fleur', 'nudge-step', '{"step":"quiz"}', now() - interval '2 days'),
         ('n3', 'fleur', 'challenge-done', '{"city":"Utrecht","goal":10,"mine":1}', now() - interval '1 day'),
         -- An old row of a kind Rondje no longer sends: it has no text any more.
-        ('n4', 'fleur', 'nudge-old', '{"left":1}', now());
+        ('n4', 'fleur', 'nudge-old', '{"left":1}', now()),
+        -- An owner tip from before: today's text would claim something nobody checked then.
+        ('n5', 'fleur', 'nudge-owner', '{"tip":"photo","dogId":"bello","dogName":"Bello"}', now() - interval '4 days'),
+        ('n6', 'fleur', 'nudge-owner', '{"dogId":"bello","dogName":"Bello"}', now() - interval '5 days');
     `)
-    expect((await notificationsFor('fleur')).map((n) => n.id)).toEqual(['n3', 'n2', 'n1'])
-    expect(await unreadCounts('fleur')).toEqual({ all: 3, walks: 1 })
-    expect(await unreadCount('fleur')).toBe(3)
+    expect((await notificationsFor('fleur')).map((n) => n.id)).toEqual(['n3', 'n2', 'n1', 'n6'])
+    expect(await unreadCounts('fleur')).toEqual({ all: 4, walks: 1 })
+    expect(await unreadCount('fleur')).toBe(4)
     expect(await unreadCount('fleur', { reminders: false })).toBe(1)
   })
 })

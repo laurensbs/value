@@ -862,17 +862,17 @@
     "emailNotifications": "Stuur me een e-mail bij belangrijke meldingen",
     "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje.",
     "pushNotifications": "Pushmeldingen in deze browser",
-    "pushHint": "Een seintje bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt.",
+    "pushHint": "Een melding bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt.",
     "pushBlocked": "Je browser blokkeert meldingen voor Rondje. Zet ze aan in de instellingen van je browser.",
     "progressTitle": "Jouw voortgang",
     "weeklyGoal": "Weekdoel",
     "weeklyGoalHint": "Hoe vaak wil je een rondje lopen? Een week overslaan mag altijd.",
     "alerts": "Meldingen",
-    "alertsText": "Je krijgt alleen een melding als er echt iets is, zoals een verzoek, een antwoord of een afspraak; seintjes zonder aanleiding alleen als je ze hieronder zelf aanzet.",
-    "reminders": "Seintjes",
-    "remindersHint": "Over je eerste stappen, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per week. Doe je drie keer niets met een seintje, dan stop ik vanzelf.",
-    "pushIos": "Seintjes op je iPhone? Die werken zodra Rondje op je beginscherm staat:",
-    "pushIosInApp": "Seintjes op je iPhone? Open Rondje eerst in Safari en zet het daar op je beginscherm."
+    "alertsText": "Berichten, verzoeken en afspraken krijg je altijd; extra seintjes alleen als je ze hieronder zelf aanzet.",
+    "reminders": "Extra seintjes",
+    "remindersHint": "Alleen extra's: je eerste stappen, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per week; doe je drie keer niets met zo'n seintje, dan gaan ze vanzelf uit. Berichten, verzoeken en afspraken krijg je altijd, ook als dit uit staat.",
+    "pushIos": "Meldingen op je iPhone? Die werken zodra Rondje op je beginscherm staat:",
+    "pushIosInApp": "Meldingen op je iPhone? Open Rondje eerst in Safari en zet het daar op je beginscherm."
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -1177,7 +1177,7 @@
   "notifications": {
     "title": "Meldingen",
     "empty": "Nog geen meldingen.",
-    "stopped": "Ik stuur even geen seintjes. Aanzetten kan bij <link>{tab}</link>.",
+    "stopped": "Extra seintjes staan nu uit. Wil je ze weer? Zet ze aan bij <link>{tab}</link>.",
     "markRead": "Alles gelezen",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} wil kennismaken met {dogName} tijdens een wandeling.} home {{walkerName} wil kennismaken met {dogName}, bij jou thuis.} phone {{walkerName} wil eerst bellen om kennis te maken met {dogName}.} video {{walkerName} wil eerst videobellen om kennis te maken met {dogName}.} other {{walkerName} wil met {dogName} wandelen.}}",
@@ -1198,7 +1198,7 @@
       "nudge-step": "{step, select, about {Een foto en een paar zinnen over jezelf helpen {role, select, owner {wandelaars} other {eigenaren}} je te leren kennen. Maak je je profiel af?} dog {Zet je hond op Rondje, dan kunnen wandelaars uit je buurt een rondje aanbieden.} quiz {Je volgende stap: de veiligheidsquiz. Een paar vragen, en je weet waar je op let.} meet {Zin in een eerste kennismaking? Kijk welke honden er bij jou in de buurt wonen.} other {Je volgende stap op Rondje staat klaar.}}",
       "nudge-challenge": "Nieuwe maand, nieuwe uitdaging: {city} loopt samen {goal} rondjes. Loop je mee?",
       "challenge-done": "{city} heeft de uitdaging gehaald: {goal} rondjes samen! {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel!",
-      "nudge-owner": "Er zijn nog weinig wandelaars bij jou in de buurt. Wij zoeken mee.",
+      "nudge-owner": "{dogName} staat gewoon online, maar er wonen nog weinig wandelaars bij jou in de buurt. Dat ligt niet aan jou of aan {dogName}.",
       "request-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} home {kennismaken met {dogName}, thuis} phone {eerst bellen over {dogName}} video {eerst videobellen over {dogName}} other {rondje met {dogName}}}. Veel plezier!",
       "group-walk-reminder": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: groepswandeling bij {orgName}. Veel plezier!",
       "nudge-new-dog": "Nieuw bij jou in de buurt: {dogName} zoekt een wandelmaatje."
@@ -1685,8 +1685,8 @@
         "body": "{goal} rondjes samen deze maand. {mine, plural, one {Eén daarvan liep jij.} other {# daarvan liep jij.}} Dankjewel, namens alle honden."
       },
       "nudge-owner": {
-        "subject": "Wij zoeken mee voor {dogName}",
-        "body": "Er zijn nog weinig wandelaars bij jou in de buurt. Wij zoeken mee. Je hoeft niets te doen: {dogName} blijft gewoon zichtbaar voor wandelaars."
+        "subject": "{dogName} staat online",
+        "body": "Er wonen nog weinig wandelaars bij jou in de buurt. Dat ligt niet aan jou of aan {dogName}. Je hoeft niets te doen: {dogName} blijft gewoon zichtbaar voor wandelaars."
       },
       "request-reminder": {
         "subject": "{day, select, today {Vandaag} tomorrow {Morgen} other {Binnenkort}} om {time}: {variant, select, meet {kennismaken met {dogName}} home {kennismaken met {dogName}, thuis} phone {eerst bellen over {dogName}} video {eerst videobellen over {dogName}} other {rondje met {dogName}}}",
@@ -1701,7 +1701,7 @@
         "body": "{dogName} staat sinds kort op Rondje, niet ver van jou. Kijk of jullie bij elkaar passen en plan een kennismaking wanneer het jou uitkomt."
       }
     },
-    "reminderFooter": "Je krijgt dit seintje omdat je seintjes zelf hebt aangezet in je profiel. Hooguit één per week. Uitzetten kan in je profiel, onder Meldingen.",
+    "reminderFooter": "Je krijgt dit seintje omdat extra seintjes aanstaan in je profiel. Hooguit één per week. Uitzetten kan in je profiel, onder Meldingen.",
     "verify": {
       "subject": "Bevestig je e-mailadres voor Rondje",
       "heading": "Is dit jouw e-mailadres?",
@@ -1848,7 +1848,7 @@
       }
     },
     "walkersNear": "{n, plural, one {# wandelaar woont} other {# wandelaars wonen}} binnen 5 km van jou.",
-    "walkersFew": "Er zijn nog weinig wandelaars bij jou in de buurt. Wij zoeken mee. <link>Vertel je buren over {dog}</link> als je wilt."
+    "walkersFew": "Er wonen nog weinig wandelaars bij jou in de buurt. <link>Vertel je buren over {dog}</link> als je wilt."
   },
   "progress": {
     "title": "Jouw voortgang",
@@ -2014,7 +2014,7 @@
     "dog": "Dan weet je het meteen als iemand met {dog} wil wandelen of je een berichtje stuurt.",
     "general": "Dan weet je het meteen als er iets nieuws is, zoals een verzoek of een berichtje.",
     "request": "Dan weet je het meteen als er antwoord is over {dog}.",
-    "calm": "Alleen als er echt iets is. Seintjes zonder aanleiding krijg je alleen als je ze zelf aanzet.",
+    "calm": "Alleen als er echt iets is, zoals een bericht of een afspraak. Extra seintjes alleen als je ze zelf aanzet.",
     "yes": "Ja, graag",
     "later": "Later",
     "done": "Top! Je krijgt een seintje als er iets is."

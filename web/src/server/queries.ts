@@ -458,8 +458,15 @@ export async function myDogs(viewer: Viewer): Promise<Dog[]> {
 /** Seintjes (lib/nudges.ts, isSeintje), also kinds that are no longer sent: they are not about a walk. */
 export const seintjeKind = or(like(s.notification.kind, 'nudge-%'), eq(s.notification.kind, 'challenge-done'))!
 
-/** A seintje kind that is no longer sent has no text any more, so it is left out of every list and count. */
-const notRetired = or(notLike(s.notification.kind, 'nudge-%'), inArray(s.notification.kind, [...NUDGE_KINDS]))!
+/**
+ * Seintjes that are no longer sent in that form are left out of every list and count: kinds without
+ * a text any more, and the owner tips from before October 2026 (they have a "tip"; today's text
+ * would say something about them that was never checked).
+ */
+const notRetired = and(
+  or(notLike(s.notification.kind, 'nudge-%'), inArray(s.notification.kind, [...NUDGE_KINDS])),
+  sql`not (${s.notification.kind} = 'nudge-owner' and ${s.notification.data}->>'tip' is not null)`,
+)!
 
 /** Unread notifications, in one question: all of them for the bell, and those about walks for the Rondjes tab. */
 export async function unreadCounts(userId: string): Promise<{ all: number; walks: number }> {

@@ -868,9 +868,9 @@
     "weeklyGoal": "Weekly goal",
     "weeklyGoalHint": "How often would you like to walk? Skipping a week is always fine.",
     "alerts": "Notifications",
-    "alertsText": "You only get a notification when something real happens, like a request, an answer or an appointment; reminders without a reason only if you turn them on below.",
-    "reminders": "Reminders",
-    "remindersHint": "About your first steps, your town's challenge and new dogs near you. At most one a week. If three in a row lead to nothing, I stop by myself.",
+    "alertsText": "Messages, requests and appointments always reach you; extra nudges only if you turn them on below.",
+    "reminders": "Extra nudges",
+    "remindersHint": "Only extras: your first steps, your town's challenge and new dogs near you. At most one a week; if three in a row lead to nothing, they switch off by themselves. Messages, requests and appointments always reach you, even with this off.",
     "pushIos": "Heads-ups on your iPhone? They work once Rondje is on your home screen:",
     "pushIosInApp": "Heads-ups on your iPhone? First open Rondje in Safari and put it on your home screen from there."
   },
@@ -1177,7 +1177,7 @@
   "notifications": {
     "title": "Notifications",
     "empty": "No notifications yet.",
-    "stopped": "I'm not sending any reminders for now. You can turn them on under <link>{tab}</link>.",
+    "stopped": "Extra nudges are now off. Want them back? Turn them on under <link>{tab}</link>.",
     "markRead": "Mark all as read",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} would like to meet {dogName} on a walk.} home {{walkerName} would like to meet {dogName} at your home.} phone {{walkerName} would like to call first to get to know {dogName}.} video {{walkerName} would like a video call first to get to know {dogName}.} other {{walkerName} would like to walk {dogName}.}}",
@@ -1198,7 +1198,7 @@
       "nudge-step": "{step, select, about {A photo and a few lines about yourself help {role, select, owner {walkers} other {owners}} get to know you. Finish your profile?} dog {Put your dog on Rondje so walkers nearby can offer a walk.} quiz {Your next step: the safety quiz. A few questions, and you'll know what to look out for.} meet {Up for a first meeting? See which dogs live near you.} other {Your next step on Rondje is ready.}}",
       "nudge-challenge": "New month, new challenge: {city} goes for {goal} walks together. Will you join in?",
       "challenge-done": "{city} made it: {goal} walks together! {mine, plural, one {One of them was yours.} other {# of them were yours.}} Thank you!",
-      "nudge-owner": "There aren't many walkers near you yet. We're looking too.",
+      "nudge-owner": "{dogName} is online, but few walkers live near you yet. That's not down to you or {dogName}.",
       "request-reminder": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} home {meeting {dogName}, at home} phone {a first call about {dogName}} video {a first video call about {dogName}} other {a walk with {dogName}}}. Have fun!",
       "group-walk-reminder": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: group walk at {orgName}. Have fun!",
       "nudge-new-dog": "New near you: {dogName} is looking for a walking buddy."
@@ -1685,8 +1685,8 @@
         "body": "{goal} walks together this month. {mine, plural, one {One of them was yours.} other {# of them were yours.}} Thank you, from all the dogs."
       },
       "nudge-owner": {
-        "subject": "We're looking for walkers for {dogName}",
-        "body": "There aren't many walkers near you yet. We're looking too. You don't need to do anything: {dogName} simply stays visible to walkers."
+        "subject": "{dogName} is online",
+        "body": "Few walkers live near you yet. That's not down to you or {dogName}. You don't need to do anything: {dogName} simply stays visible to walkers."
       },
       "request-reminder": {
         "subject": "{day, select, today {Today} tomorrow {Tomorrow} other {Soon}} at {time}: {variant, select, meet {meeting {dogName}} home {meeting {dogName}, at home} phone {a first call about {dogName}} video {a first video call about {dogName}} other {a walk with {dogName}}}",
@@ -1701,7 +1701,7 @@
         "body": "{dogName} joined Rondje recently, not far from you. See if you're a good match and plan a first meeting whenever it suits you."
       }
     },
-    "reminderFooter": "You get this reminder because you turned reminders on in your profile. At most one a week. You can turn them off in your profile, under Notifications.",
+    "reminderFooter": "You get this because extra nudges are on in your profile. At most one a week. You can turn them off in your profile, under Notifications.",
     "verify": {
       "subject": "Confirm your email address for Rondje",
       "heading": "Is this your email address?",
@@ -1848,7 +1848,7 @@
       }
     },
     "walkersNear": "{n, plural, one {# walker lives} other {# walkers live}} within 5 km of you.",
-    "walkersFew": "There aren't many walkers near you yet. We're looking too. <link>Tell your neighbours about {dog}</link> if you like."
+    "walkersFew": "Few walkers live near you yet. <link>Tell your neighbours about {dog}</link> if you like."
   },
   "progress": {
     "title": "Your progress",
@@ -2014,7 +2014,7 @@
     "dog": "Then you'll know right away when someone wants to walk {dog} or sends you a message.",
     "general": "Then you'll know right away when there's something new, like a request or a message.",
     "request": "Then you'll know right away when there's an answer about {dog}.",
-    "calm": "Only when something real happens. Reminders without a reason only if you turn them on yourself.",
+    "calm": "Only when something real happens, like a message or an appointment. Extra nudges only if you turn them on yourself.",
     "yes": "Yes, please",
     "later": "Later",
     "done": "Great! You'll get a heads-up when something comes up."

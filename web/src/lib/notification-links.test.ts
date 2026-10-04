@@ -61,6 +61,8 @@ describe('seintjes', () => {
         }
       }
       expect(t('kinds.nudge-new-dog', notificationValues({ dogName: 'Bello' })), locale).toContain('Bello')
+      // An owner with two dogs never gets two identical messages.
+      expect(t('kinds.nudge-owner', notificationValues({ dogName: 'Bello' })), locale).toContain('Bello')
       expect(e('kinds.nudge-new-dog.subject', notificationValues({ dogName: 'Bello' })), locale).toContain('Bello')
       expect(t('kinds.nudge-step', notificationValues({ step: 'about', role: 'owner' })), locale).not.toEqual(t('kinds.nudge-step', notificationValues({ step: 'about' })))
     }

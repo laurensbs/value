@@ -204,7 +204,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       <div className="today-grid">
         {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
-        <ChallengeCard challenges={challenges} now={now} />
+        <ChallengeCard challenges={challenges} />
       </div>
 
       {owner ? (

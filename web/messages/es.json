@@ -868,9 +868,9 @@
     "weeklyGoal": "Objetivo semanal",
     "weeklyGoalHint": "¿Con qué frecuencia quieres pasear? Saltarte una semana siempre está bien.",
     "alerts": "Avisos",
-    "alertsText": "Solo recibes un aviso cuando pasa algo de verdad, como una solicitud, una respuesta o una cita; recordatorios sin motivo, solo si los activas aquí abajo.",
-    "reminders": "Recordatorios",
-    "remindersHint": "Sobre tus primeros pasos, el reto de tu ciudad y perros nuevos cerca de ti. Como mucho uno por semana. Si tres seguidos no te sirven de nada, paro yo solo.",
+    "alertsText": "Los mensajes, solicitudes y citas te llegan siempre; las sugerencias extra, solo si las activas aquí abajo.",
+    "reminders": "Sugerencias extra",
+    "remindersHint": "Solo extras: tus primeros pasos, el reto de tu ciudad y perros nuevos cerca de ti. Como mucho una por semana; si tres seguidas no te sirven de nada, se desactivan solas. Los mensajes, solicitudes y citas te llegan siempre, aunque esto esté desactivado.",
     "pushIos": "¿Avisos en tu iPhone? Funcionan en cuanto Rondje está en tu pantalla de inicio:",
     "pushIosInApp": "¿Avisos en tu iPhone? Abre primero Rondje en Safari y ponlo desde allí en tu pantalla de inicio."
   },
@@ -1177,7 +1177,7 @@
   "notifications": {
     "title": "Notificaciones",
     "empty": "Todavía no hay notificaciones.",
-    "stopped": "Por ahora no te envío recordatorios. Puedes activarlos en <link>{tab}</link>.",
+    "stopped": "Las sugerencias extra están desactivadas. ¿Las quieres otra vez? Actívalas en <link>{tab}</link>.",
     "markRead": "Marcar todo como leído",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} quiere conocer a {dogName} dando un paseo.} home {{walkerName} quiere conocer a {dogName} en tu casa.} phone {{walkerName} quiere llamar primero para conocer a {dogName}.} video {{walkerName} quiere hacer primero una videollamada para conocer a {dogName}.} other {{walkerName} quiere pasear a {dogName}.}}",
@@ -1198,7 +1198,7 @@
       "nudge-step": "{step, select, about {Una foto y unas líneas sobre ti ayudan a {role, select, owner {los paseadores} other {los dueños}} a conocerte. ¿Completas tu perfil?} dog {Pon a tu perro en Rondje para que paseadores de tu barrio puedan ofrecer un paseo.} quiz {Tu siguiente paso: el test de seguridad. Unas pocas preguntas y sabrás en qué fijarte.} meet {¿Te apetece un primer encuentro? Mira qué perros viven cerca de ti.} other {Tu siguiente paso en Rondje te espera.}}",
       "nudge-challenge": "Nuevo mes, nuevo reto: {city} da {goal} paseos juntos. ¿Te apuntas?",
       "challenge-done": "¡{city} lo ha conseguido: {goal} paseos juntos! {mine, plural, one {Uno de ellos fue tuyo.} other {# de ellos fueron tuyos.}} ¡Gracias!",
-      "nudge-owner": "Todavía hay pocos paseadores cerca de ti. Buscamos contigo.",
+      "nudge-owner": "{dogName} está en línea, pero todavía viven pocos paseadores cerca de ti. No es por ti ni por {dogName}.",
       "request-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: {variant, select, meet {conocer a {dogName}} home {conocer a {dogName}, en casa} phone {primera llamada sobre {dogName}} video {primera videollamada sobre {dogName}} other {paseo con {dogName}}}. ¡Que vaya muy bien!",
       "group-walk-reminder": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: paseo en grupo con {orgName}. ¡Que vaya muy bien!",
       "nudge-new-dog": "Cerca de ti: {dogName} acaba de llegar a Rondje y busca compañero de paseo."
@@ -1685,8 +1685,8 @@
         "body": "{goal} paseos juntos este mes. {mine, plural, one {Uno de ellos fue tuyo.} other {# de ellos fueron tuyos.}} Gracias, de parte de todos los perros."
       },
       "nudge-owner": {
-        "subject": "Buscamos paseadores para {dogName}",
-        "body": "Todavía hay pocos paseadores cerca de ti. Buscamos contigo. No tienes que hacer nada: {dogName} sigue visible para los paseadores."
+        "subject": "{dogName} está en línea",
+        "body": "Todavía viven pocos paseadores cerca de ti. No es por ti ni por {dogName}. No tienes que hacer nada: {dogName} sigue visible para los paseadores."
       },
       "request-reminder": {
         "subject": "{day, select, today {Hoy} tomorrow {Mañana} other {Pronto}} a las {time}: {variant, select, meet {conocer a {dogName}} home {conocer a {dogName}, en casa} phone {primera llamada sobre {dogName}} video {primera videollamada sobre {dogName}} other {paseo con {dogName}}}",
@@ -1701,7 +1701,7 @@
         "body": "{dogName} acaba de llegar a Rondje, no muy lejos de ti. Mira si encajáis y planea un primer encuentro cuando te venga bien."
       }
     },
-    "reminderFooter": "Recibes este recordatorio porque activaste los recordatorios en tu perfil. Como mucho uno por semana. Puedes desactivarlos en tu perfil, en Avisos.",
+    "reminderFooter": "Recibes esto porque las sugerencias extra están activadas en tu perfil. Como mucho una por semana. Puedes desactivarlas en tu perfil, en Avisos.",
     "verify": {
       "subject": "Confirma tu correo electrónico para Rondje",
       "heading": "¿Es este tu correo electrónico?",
@@ -1848,7 +1848,7 @@
       }
     },
     "walkersNear": "{n, plural, one {# paseador vive} other {# paseadores viven}} a menos de 5 km de ti.",
-    "walkersFew": "Todavía hay pocos paseadores cerca de ti. Buscamos contigo. <link>Habla de {dog} a tus vecinos</link> si quieres."
+    "walkersFew": "Todavía viven pocos paseadores cerca de ti. <link>Habla de {dog} a tus vecinos</link> si quieres."
   },
   "progress": {
     "title": "Tu progreso",
@@ -2014,7 +2014,7 @@
     "dog": "Así sabrás enseguida cuándo alguien quiere pasear a {dog} o te envía un mensaje.",
     "general": "Así sabrás enseguida cuándo hay algo nuevo, como una solicitud o un mensaje.",
     "request": "Así sabrás enseguida cuándo haya respuesta sobre {dog}.",
-    "calm": "Solo cuando pasa algo de verdad. Recordatorios sin motivo, solo si tú los activas.",
+    "calm": "Solo cuando pasa algo de verdad, como un mensaje o una cita. Sugerencias extra, solo si tú las activas.",
     "yes": "Sí, por favor",
     "later": "Más tarde",
     "done": "¡Genial! Te avisaremos cuando haya algo."

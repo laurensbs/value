@@ -81,14 +81,14 @@ beforeAll(async () => {
     insert into walk (id, request_id, dog_id, walker_id, started_at, planned_end_at, ended_at, status) values
       ('w1', 'r1', 'bello', 'fleur', '2026-10-05 08:00', '2026-10-05 08:30', '2026-10-05 08:35', 'ended'),
       ('w2', 'r2', 'bello', 'tom', '2026-09-18 08:00', '2026-09-18 08:30', '2026-09-18 08:35', 'ended');
-    -- Moe did nothing since 1 August, and three seintjes since then (two of kinds no longer sent).
+    -- Moe did nothing since 1 August, and got three seintjes a week or more apart since then.
     insert into notification (id, user_id, kind, data, created_at) values
-      ('m1', 'moe', 'nudge-old', '{"variant":"any"}', '2026-09-10 07:30'),
-      ('m2', 'moe', 'nudge-gone', '{"left":1,"goal":1}', '2026-09-17 07:30'),
+      ('m1', 'moe', 'nudge-step', '{"step":"quiz"}', '2026-09-10 07:30'),
+      ('m2', 'moe', 'nudge-new-dog', '{"dogId":"elders"}', '2026-09-17 07:30'),
       ('m3', 'moe', 'nudge-challenge', '{"city":"Utrecht","goal":10}', '2026-10-01 07:30');
     insert into push_device (id, user_id, kind, endpoint) values
       ('d1', 'fleur', 'web', 'https://push.example.org/1'),
-      -- Tom's iPhone plans its own seintjes (local_nudges), so the server sends it none.
+      -- Tom's iPhone plans its own seintjes (local_nudges), so the server sends him none at all.
       ('d2', 'tom', 'apns', 'tom-iphone-token');
   `)
 }, 30_000)
@@ -104,9 +104,9 @@ afterAll(async () => {
 
 describe('sendNudges', () => {
   it('lets someone who just heard about an appointment wait a day', async () => {
-    const run = await sendNudges(now, new Set(['nieuw', 'fleur', 'tom', 'ans']))
-    expect(run).toMatchObject({ people: 6, sent: {}, pushed: 0, emailed: 0 })
-    // Three in a row and nothing done: Moe's stop anyway, quietly.
+    const run = await sendNudges(now, new Set(['nieuw', 'fleur', 'ans']))
+    expect(run).toMatchObject({ people: 5, sent: {}, pushed: 0, emailed: 0 })
+    // Three in a row and nothing done, and the fourth would be due today: Moe's stop, quietly.
     expect(run.stopped).toBe(1)
   })
 
@@ -121,21 +121,22 @@ describe('sendNudges', () => {
 
   it('sends each person with seintjes on the one that fits; with them off, none', async () => {
     const run = await sendNudges(now)
-    expect(run.people).toBe(5)
-    expect(run.sent).toEqual({ 'nudge-step': 1, 'nudge-new-dog': 2, 'nudge-owner': 1 })
+    expect(run.people).toBe(4)
+    expect(run.sent).toEqual({ 'nudge-step': 1, 'nudge-new-dog': 1, 'nudge-owner': 1 })
     expect(run.stopped).toBe(0)
 
     expect(await seintjes('nieuw')).toEqual([{ kind: 'nudge-step', data: { step: 'about' } }])
     expect(await seintjes('fleur')).toEqual([{ kind: 'nudge-new-dog', data: { dogId: 'luna', dogName: 'Luna' } }])
-    expect(await seintjes('tom')).toEqual([{ kind: 'nudge-new-dog', data: { dogId: 'luna', dogName: 'Luna' } }])
+    // Tom's iPhone plans his seintjes: nothing from the server, not even in his list.
+    expect(await seintjes('tom')).toEqual([])
     // Max is quiet and hardly any walkers live near Ans: the honest message, without "no request yet".
     expect(await seintjes('ans')).toEqual([{ kind: 'nudge-owner', data: { dogId: 'max', dogName: 'Max' } }])
     expect(await seintjes('stil')).toEqual([])
     expect(await seintjes('staf')).toEqual([])
 
-    // Fleur by push; Tom's iPhone plans its own, so neither a push to it nor an email; Ans turned email off.
+    // Fleur by push, Nina by email; Ans turned email off, so hers is only in her list.
     expect(run.pushed).toBe(1)
-    expect(pushNow).toHaveBeenCalledWith(db, ['fleur'], 'nudge-new-dog', { dogId: 'luna', dogName: 'Luna' }, { apns: true })
+    expect(pushNow).toHaveBeenCalledWith(db, ['fleur'], 'nudge-new-dog', { dogId: 'luna', dogName: 'Luna' })
     expect(pushNow.mock.calls.some((c) => (c[1] as string[]).includes('tom'))).toBe(false)
     expect(run.emailed).toBe(1)
     expect(sendEmail.mock.calls.map((c) => c[0].to)).toEqual(['nina@example.org'])
@@ -168,6 +169,22 @@ describe('sendNudges', () => {
   it('never at night', async () => {
     const night = await sendNudges(new Date('2026-10-20T22:30:00Z'))
     expect(night).toMatchObject({ people: 0, sent: {} })
+  })
+})
+
+describe('two runs at the same time', () => {
+  it('send each person one seintje at most (a scheduled call delivered twice)', async () => {
+    const monday = day('2026-11-02')
+    const [a, b] = await Promise.all([sendNudges(monday), sendNudges(monday)])
+    const total = (r: typeof a) => Object.values(r.sent).reduce((n, x) => n + (x ?? 0), 0)
+    expect(total(a) + total(b)).toBeGreaterThan(0)
+    const rows = await client.query<{ user_id: string; n: number }>(
+      `select user_id, count(*)::int as n from notification where created_at = $1 group by user_id`,
+      [monday.toISOString()],
+    )
+    expect(rows.rows.length).toBe(total(a) + total(b))
+    expect(rows.rows.every((r) => r.n === 1)).toBe(true)
+    expect(pushNow.mock.calls.length).toBe(a.pushed + b.pushed)
   })
 })
 

@@ -5,21 +5,24 @@ import * as s from '@/db/schema'
 import { challengesFrom, monthBounds, type ChallengeWalk } from '@/lib/challenges'
 import { citySlug } from '@/lib/cities'
 import type { NotificationData } from '@/lib/notification-links'
-import { ignoredInARow, NEW_DOG_DAYS, newDogsNear, pickNudge, type NewDog, type Nudge, type NudgeFacts, type NudgeKind, type SentNudge } from '@/lib/nudges'
+import { ignoredInARow, NEW_DOG_DAYS, newDogsNear, pickNudge, sentTooRecently, type NewDog, type Nudge, type NudgeFacts, type NudgeKind, type SentNudge } from '@/lib/nudges'
 import { ABOUT_MIN_LENGTH, localParts } from '@/lib/progress'
 import { emailEnabled, notificationEmail, sendEmail, toLocale } from './email'
 import { canPush, pushNow } from './push'
 import { seintjeKind, walkersNear } from './queries'
 
 // Seintjes, once a day (Vercel Cron calls /api/cron/nudges). The rules are in lib/nudges.ts. This
-// file gathers the facts for everyone who turned seintjes on, a few hundred people per query, and
-// delivers each seintje once: as a push when one of their devices can get it, otherwise by email
-// when they allow email. It is also in their notification list. After three in a row with nothing
-// done, it turns their seintjes off (the app says so in one line on /notifications).
+// file gathers the facts for everyone with seintjes on (and no iPhone that plans its own), a few
+// hundred people per query, and delivers each seintje once: as a push when one of their devices
+// can get it, otherwise by email when they allow email. It is also in their notification list.
+// After three in a row with nothing done, it turns their seintjes off (the app says so in one line
+// on /notifications). Two runs at the same time (a scheduled call delivered twice) send nobody two.
 
 const DAY = 24 * 60 * 60_000
 const CHUNK = 500
 const AT_ONCE = 10
+/** pg_advisory_xact_lock key for writing seintjes (the migrations use 727272). */
+const NUDGE_LOCK = 727273
 
 export interface NudgeRun {
   /** People with seintjes on. */
@@ -53,7 +56,7 @@ export async function sendNudges(now = new Date(), skip: ReadonlySet<string> = n
     const stop: Person[] = []
     const picks = chunk.flatMap((person) => {
       const f = facts.get(person.userId)!
-      if (ignoredInARow(f.facts.sent, f.facts.lastActiveAt)) {
+      if (ignoredInARow(f.facts.sent, f.facts.lastActiveAt, now)) {
         stop.push(person)
         return []
       }
@@ -71,33 +74,53 @@ export async function sendNudges(now = new Date(), skip: ReadonlySet<string> = n
     }
     run.stopped += stop.length
     if (!picks.length) continue
-    await db.insert(s.notification).values(
-      picks.map(({ person, nudge }) => ({ id: crypto.randomUUID(), userId: person.userId, kind: nudge.kind, data: nudge.data, createdAt: now })),
-    )
-    for (let j = 0; j < picks.length; j += AT_ONCE) {
-      const results = await Promise.all(picks.slice(j, j + AT_ONCE).map((p) => deliver(db, p.person, p.nudge, p.pushable)))
+    // One run at a time from here: whoever comes second sees the seintjes the first one just wrote
+    // and leaves those people out, so a call delivered twice never sends anyone two.
+    const going = await db.transaction(async (tx) => {
+      await tx.execute(sql`select pg_advisory_xact_lock(${NUDGE_LOCK})`)
+      const recent = await tx
+        .select({ userId: s.notification.userId, kind: s.notification.kind, at: s.notification.createdAt })
+        .from(s.notification)
+        .where(
+          and(
+            inArray(
+              s.notification.userId,
+              picks.map((p) => p.person.userId),
+            ),
+            seintjeKind,
+            gt(s.notification.createdAt, new Date(now.getTime() - 8 * DAY)),
+          ),
+        )
+      const tooSoon = new Set(recent.filter((r) => sentTooRecently([{ kind: r.kind, at: r.at, data: {} }], now)).map((r) => r.userId))
+      const go = picks.filter((p) => !tooSoon.has(p.person.userId))
+      if (go.length) {
+        await tx
+          .insert(s.notification)
+          .values(go.map(({ person, nudge }) => ({ id: crypto.randomUUID(), userId: person.userId, kind: nudge.kind, data: nudge.data, createdAt: now })))
+      }
+      return go
+    })
+    for (let j = 0; j < going.length; j += AT_ONCE) {
+      const results = await Promise.all(going.slice(j, j + AT_ONCE).map((p) => deliver(db, p.person, p.nudge, p.pushable)))
       for (const r of results) {
         if (r === 'push') run.pushed++
         if (r === 'email') run.emailed++
       }
     }
-    for (const { nudge } of picks) run.sent[nudge.kind] = (run.sent[nudge.kind] ?? 0) + 1
+    for (const { nudge } of going) run.sent[nudge.kind] = (run.sent[nudge.kind] ?? 0) + 1
   }
   return run
 }
 
-/**
- * As a push to the devices that can get one, else by email. Someone whose iPhone plans its own
- * seintjes gets none on that iPhone and none by email: only a browser they turned push on in.
- */
+/** As a push to the devices that can get one, else by email. */
 async function deliver(db: Db, person: Person, nudge: Nudge, pushable: boolean): Promise<'push' | 'email' | null> {
   const data = nudge.data as NotificationData
   try {
     if (pushable) {
-      await pushNow(db, [person.userId], nudge.kind, data, { apns: !person.localNudges })
+      await pushNow(db, [person.userId], nudge.kind, data)
       return 'push'
     }
-    if (emailEnabled() && person.wantsEmail && !person.localNudges) {
+    if (emailEnabled() && person.wantsEmail) {
       const email = await notificationEmail(nudge.kind, data, toLocale(person.locale), person.email)
       if (email && (await sendEmail(email))) return 'email'
     }
@@ -114,7 +137,6 @@ function peopleWithReminders(db: Db) {
       email: s.user.email,
       locale: s.profile.locale,
       wantsEmail: s.profile.emailNotifications,
-      localNudges: s.profile.localNudges,
       joinedAt: s.profile.createdAt,
       updatedAt: s.profile.updatedAt,
       wantsToWalk: s.profile.wantsToWalk,
@@ -130,7 +152,8 @@ function peopleWithReminders(db: Db) {
     })
     .from(s.profile)
     .innerJoin(s.user, eq(s.user.id, s.profile.userId))
-    .where(and(eq(s.profile.reminders, true), isNull(s.profile.bannedAt)))
+    // An iPhone that plans its own seintjes (localNudges): the server sends that person none at all.
+    .where(and(eq(s.profile.reminders, true), eq(s.profile.localNudges, false), isNull(s.profile.bannedAt)))
     .orderBy(s.profile.userId)
 }
 
@@ -178,7 +201,7 @@ export async function seintjesStopped(userId: string, reminders: boolean, now = 
   const db = await getDb()
   const [sent, active] = await Promise.all([sentTo(db, [userId], now), lastActive(db, [userId])])
   const nudges = sent.map((n) => ({ kind: n.kind, at: n.at, data: (n.data ?? {}) as SentNudge['data'] }))
-  return ignoredInARow(nudges, active.get(userId) ?? null)
+  return ignoredInARow(nudges, active.get(userId) ?? null, now)
 }
 
 /** This month's and last month's walks, by town, for the town challenges. */
@@ -318,9 +341,7 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
       lastActiveAt: active.get(p.userId) ?? null,
       sent: nudges,
     }
-    // An iPhone that plans its own seintjes does not count: it gets no seintje from here.
-    const pushable = (devicesOf.get(p.userId) ?? []).some((d) => canPush(d.kind) && !(d.kind === 'apns' && p.localNudges))
-    result.set(p.userId, { facts, pushable })
+    result.set(p.userId, { facts, pushable: (devicesOf.get(p.userId) ?? []).some((d) => canPush(d.kind)) })
   }
   return result
 }

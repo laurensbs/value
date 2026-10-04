@@ -98,28 +98,32 @@ describe('three in a row with nothing done', () => {
   const f = facts({ walks: 1, newDogs: dogs, lastActiveAt: at('2026-10-01') })
   const three = [sent('nudge-new-dog', '2026-10-02', { dogId: 'x1' }), sent('nudge-new-dog', '2026-10-09', { dogId: 'x2' }), sent('nudge-step', '2026-10-16')]
 
-  it('stop: no fourth', () => {
-    expect(ignoredInARow(three, at('2026-10-01'))).toBe(true)
+  it('stop on the day the fourth would be due, not the morning after the third', () => {
+    expect(ignoredInARow(three, at('2026-10-01'), at('2026-10-17'))).toBe(false)
+    expect(ignoredInARow(three, at('2026-10-01'), at('2026-10-22'))).toBe(false)
+    expect(ignoredInARow(three, at('2026-10-01'), at('2026-10-23'))).toBe(true)
     expect(pickNudge({ ...f, sent: three }, at('2026-10-23'))).toBeNull()
     expect(pickNudge({ ...f, sent: three }, at('2026-12-23'))).toBeNull()
   })
 
   it('go on when something was done after one of them', () => {
-    expect(ignoredInARow(three, at('2026-10-03'))).toBe(false)
+    expect(ignoredInARow(three, at('2026-10-03'), at('2026-10-23'))).toBe(false)
     expect(pickNudge({ ...f, sent: three, lastActiveAt: at('2026-10-03') }, at('2026-10-23'))?.kind).toBe('nudge-new-dog')
     // Two ignored is not three.
-    expect(ignoredInARow(three.slice(1), at('2026-10-01'))).toBe(false)
+    expect(ignoredInARow(three.slice(1), at('2026-10-01'), at('2026-10-23'))).toBe(false)
   })
 
-  it('only count seintjes a week apart: what the old rules sent every three days switches nobody off', () => {
-    const old = [sent('nudge-step', '2026-10-02'), sent('nudge-step', '2026-10-05'), sent('nudge-gone', '2026-10-08')]
-    expect(ignoredInARow(old, at('2026-10-01'))).toBe(false)
-    expect(pickNudge({ ...f, sent: old }, at('2026-10-15'))?.kind).toBe('nudge-new-dog')
+  it('only count seintjes a week apart: three closer together (as the old rules sent them) switch nobody off', () => {
+    const close = [sent('nudge-step', '2026-10-02'), sent('nudge-step', '2026-10-05'), sent('nudge-challenge', '2026-10-08')]
+    expect(ignoredInARow(close, at('2026-10-01'), at('2026-10-15'))).toBe(false)
+    expect(pickNudge({ ...f, sent: close }, at('2026-10-15'))?.kind).toBe('nudge-new-dog')
   })
 
-  it('count every seintje, also old kinds, and nothing else', () => {
+  it('only count kinds sent today: old kinds and other notifications never switch anyone off', () => {
     const old = [sent('nudge-old', '2026-10-02'), sent('nudge-gone', '2026-10-09'), sent('request-accepted', '2026-10-12'), sent('challenge-done', '2026-10-16')]
-    expect(ignoredInARow(old, at('2026-10-01'))).toBe(true)
+    expect(ignoredInARow(old, at('2026-10-01'), at('2026-10-30'))).toBe(false)
+    // But they still count for the seven days between two seintjes.
+    expect(pickNudge({ ...f, sent: [sent('nudge-old', '2026-10-20')] }, at('2026-10-23'))).toBeNull()
   })
 })
 

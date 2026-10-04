@@ -66,7 +66,7 @@ export default async function ProgressPage() {
 
       <div className="today-grid">
         {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
-        <ChallengeCard challenges={challenges} now={now} />
+        <ChallengeCard challenges={challenges} />
       </div>
 
       <section className="stack" aria-labelledby="badges-title">
