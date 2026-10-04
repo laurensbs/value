@@ -47,7 +47,7 @@ struct ProfileView: View {
                             }
                             NavigationLink { QuizView() } label: {
                                 ProfileRow(symbol: "checkmark.seal.fill", title: L("Veiligheidsquiz"),
-                                           detail: model.me?.profile?.quizPassed == true ? L("Gehaald") : L("Nodig voor zelfstandige rondjes"))
+                                           detail: model.quizPassed ? L("Gehaald") : L("Nodig voor elke aanvraag"))
                             }
                             NavigationLink { DogFriendsView() } label: {
                                 ProfileRow(symbol: "book.fill", title: L("Hondenvriendenboek"), detail: L("Alle honden met wie je liep"))

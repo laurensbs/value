@@ -9,6 +9,7 @@ struct DogDetailView: View {
     @State private var error: String?
     @State private var requestKind: RequestFlow.Kind?
     @State private var reporting = false
+    @State private var quizOpen = false
 
     var body: some View {
         ScrollView {
@@ -57,6 +58,10 @@ struct DogDetailView: View {
         .sheet(isPresented: $reporting) {
             ReportSheet(dogId: dogId, subjectUserId: detail?.host.kind == "owner" ? detail?.host.id : nil)
                 .presentationDetents([.medium, .large])
+        }
+        // After passing, the page loads again: then the server allows the request and the form button is back.
+        .sheet(isPresented: $quizOpen, onDismiss: { Task { await load() } }) {
+            NavigationStack { QuizGameView(mode: .gate) }
         }
     }
 
@@ -187,20 +192,30 @@ struct DogDetailView: View {
         }
     }
 
+    /// The safety quiz comes before any request: then one friendly button instead of the form.
+    /// The server says so too ("needs-quiz"), also to an app that does not know yet.
+    private func needsQuiz(_ d: DogDetail) -> Bool {
+        d.canRequest.meet == "needs-quiz" || (!model.quizPassed && d.canRequest.meet == nil)
+    }
+
     @ViewBuilder
     private var actionBar: some View {
         if let d = detail, !d.isMine, !d.host.isShelter {
             VStack(spacing: 8) {
-                if let reason = d.canRequest.meet {
-                    Text(reasonText(reason)).font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
-                }
-                HStack(spacing: 10) {
-                    if d.canRequest.solo == nil {
-                        Button("Zelfstandig rondje") { requestKind = .solo }.buttonStyle(.ball)
+                if needsQuiz(d) {
+                    QuizGate { quizOpen = true }
+                } else {
+                    if let reason = d.canRequest.meet {
+                        Text(reasonText(reason)).font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
                     }
-                    Button(d.canRequest.solo == nil ? L("Kennismaken") : L("Plan een kennismaking")) { requestKind = .meet }
-                        .buttonStyle(.primary)
-                        .disabled(d.canRequest.meet != nil)
+                    HStack(spacing: 10) {
+                        if d.canRequest.solo == nil {
+                            Button("Zelfstandig rondje") { requestKind = .solo }.buttonStyle(.ball)
+                        }
+                        Button(d.canRequest.solo == nil ? L("Kennismaken") : L("Plan een kennismaking")) { requestKind = .meet }
+                            .buttonStyle(.primary)
+                            .disabled(d.canRequest.meet != nil)
+                    }
                 }
             }
             .padding(.horizontal, 20)

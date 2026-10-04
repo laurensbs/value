@@ -31,6 +31,22 @@ struct TrustMomentTests {
         #expect(steps[0].first?.isUppercase == true)
     }
 
+    @Test func onlyNewWalkersDoTheQuizBeforeTheApp() {
+        #expect(AppModel.onboardingQuiz(marked: true, wantsToWalk: true, inOrg: false))
+        // Owners, shelter staff and existing accounts (never marked) go straight in.
+        #expect(!AppModel.onboardingQuiz(marked: true, wantsToWalk: false, inOrg: false))
+        #expect(!AppModel.onboardingQuiz(marked: true, wantsToWalk: true, inOrg: true))
+        #expect(!AppModel.onboardingQuiz(marked: false, wantsToWalk: true, inOrg: false))
+    }
+
+    @Test func everyQuizQuestionHasAnExplanation() {
+        // The ids of web/src/lib/quiz.ts.
+        for id in ["heat", "leash", "treats", "otherDogs", "escaped", "bite", "stress", "overdue"] {
+            #expect(QuizExplanation.text(for: id) != nil, "\(id)")
+        }
+        #expect(QuizExplanation.text(for: "new-question") == nil)
+    }
+
     @Test func errorsAreNeverTheSystemText() {
         let offline = APIError.offline.errorDescription
         let ours = APIError.unexpected.errorDescription

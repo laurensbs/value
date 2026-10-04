@@ -437,6 +437,8 @@ struct GroupWalkCard: View {
     var changed: () async -> Void
     @Environment(AppModel.self) private var model
     @State private var busy = false
+    /// Joining is a reaction too: walkers do the safety quiz first.
+    @State private var quizOpen = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -452,10 +454,17 @@ struct GroupWalkCard: View {
                 Spacer()
                 if walk.isDemo == true {
                     Chip(text: L("Voorbeeld"), tint: Palette.warn, soft: Palette.warnSoft)
+                } else if walk.mine != true && !model.quizPassed {
+                    Button("Eerst de quiz") { quizOpen = true }
+                        .font(.subheadline.weight(.bold))
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                        .tint(Palette.grass)
                 } else {
                     Button(walk.mine == true ? L("Afmelden") : L("Doe mee")) { Task { await toggle() } }
                         .font(.subheadline.weight(.bold))
                         .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
                         .tint(walk.mine == true ? Palette.muted : Palette.grass)
                         .disabled(busy || (walk.mine != true && walk.spotsLeft == 0))
                 }
@@ -464,6 +473,7 @@ struct GroupWalkCard: View {
         .padding(16)
         .frame(width: 260, height: 170, alignment: .topLeading)
         .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
+        .sheet(isPresented: $quizOpen) { NavigationStack { QuizGameView(mode: .gate) } }
     }
 
     private func toggle() async {
@@ -478,6 +488,8 @@ struct GroupWalkCard: View {
                 model.celebrate(.wag(L("Je doet mee! Neem je ID mee.")))
             }
             await changed()
+        } catch let error as APIError where error.code == "needs-quiz" {
+            quizOpen = true
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)

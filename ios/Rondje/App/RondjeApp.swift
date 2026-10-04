@@ -38,7 +38,13 @@ struct RootView: View {
                         .transition(.opacity)
                 }
             case .onboarding: OnboardingView()
-            case .ready: MainTabs()
+            case .ready:
+                if model.needsOnboardingQuiz {
+                    OnboardingQuizView()
+                        .transition(.opacity)
+                } else {
+                    MainTabs()
+                }
             }
             if let banner = model.banner {
                 BannerView(banner: banner)

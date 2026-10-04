@@ -14,11 +14,6 @@ T = {
     "Veiligheidsquiz, volgende": ("Safety quiz, next", "Quiz sécurité, le suivant", "Test de seguridad, el siguiente"),
     "Gehaald": ("Passed", "Réussi", "Aprobado"),
     "Hier verder": ("Continue here", "On continue ici", "Sigue aquí"),
-    "Hondenschool en quiz": ("Dog school and quiz", "École des chiens et quiz", "Escuela canina y test"),
-    "Vijf mini-lessen van 2 minuten, dan de quiz.": (
-        "Five 2-minute mini lessons, then the quiz.",
-        "Cinq mini-leçons de 2 minutes, puis le quiz.",
-        "Cinco minilecciones de 2 minutos y luego el test."),
 
     # Player
     "Sluit": ("Close", "Fermer", "Cerrar"),
@@ -37,28 +32,10 @@ T = {
     "Later": ("Later", "Plus tard", "Más tarde"),
 
     # Quiz game
-    "Acht vragen, ongeveer 3 minuten. Geen tijdsdruk.": (
-        "Eight questions, about 3 minutes. No time pressure.",
-        "Huit questions, environ 3 minutes. Sans pression.",
-        "Ocho preguntas, unos 3 minutos. Sin prisas."),
-    "Je deed alle vijf de lessen. Je bent goed voorbereid.": (
-        "You did all five lessons. You're well prepared.",
-        "Tu as fait les cinq leçons. Tu es bien préparé.",
-        "Hiciste las cinco lecciones. Estás bien preparado."),
     "Begin": ("Start", "Commencer", "Empezar"),
     "Eerst de Hondenschool?": ("Dog school first?", "D'abord l'école des chiens ?", "¿Primero la escuela canina?"),
-    "Bijna! Kijk vraag %lld nog even na.": ("Almost! Have another look at question %lld.", "Presque ! Regarde encore la question %lld.", "¡Casi! Revisa otra vez la pregunta %lld."),
-    "Bijna! Kijk deze nog even na.": ("Almost! Have another look at this one.", "Presque ! Regarde encore celle-ci.", "¡Casi! Revisa esta otra vez."),
-    "Vraag %lld van %lld": ("Question %lld of %lld", "Question %lld sur %lld", "Pregunta %lld de %lld"),
-    "%lld beantwoord": ("%lld answered", "%lld répondues", "%lld respondidas"),
-    "Vorige": ("Previous", "Précédente", "Anterior"),
     "Volgende": ("Next", "Suivante", "Siguiente"),
-    "Even kijken…": ("Let's see…", "Voyons voir…", "A ver…"),
     "Gehaald!": ("Passed!", "Réussi !", "¡Aprobado!"),
-    "Je mag nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.": (
-        "You can now request solo walks with owners who allow it.",
-        "Tu peux maintenant demander des balades en solo aux propriétaires qui l'acceptent.",
-        "Ya puedes pedir paseos en solitario a los dueños que lo permiten."),
     "+%lld punten": ("+%lld points", "+%lld points", "+%lld puntos"),
     "Probeer opnieuw": ("Try again", "Réessayer", "Reintentar"),
 

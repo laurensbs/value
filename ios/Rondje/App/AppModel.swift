@@ -28,6 +28,22 @@ final class AppModel {
     /// What someone does on Rondje, from their profile: it shapes the tabs and the home screen.
     enum Role { case walker, owner, both }
 
+    /// Whether this person may ask to meet or walk a dog: walkers pass the safety quiz first
+    /// (the server checks it too and answers "needs-quiz").
+    var quizPassed: Bool { me?.profile?.quizPassed == true || me?.trust?.quizPassed == true }
+
+    /// A new walker does the safety quiz right after making the profile, before the app opens.
+    /// Owners and shelter staff skip it. It stays until "Laat me de honden zien" on the quiz's done
+    /// screen (which removes the mark), so passing never jumps past that screen.
+    var needsOnboardingQuiz: Bool {
+        Self.onboardingQuiz(marked: Keepsakes.shared.has("onboarding.quiz"), wantsToWalk: me?.profile?.wantsToWalk == true,
+                            inOrg: !(me?.orgs.isEmpty ?? true))
+    }
+
+    nonisolated static func onboardingQuiz(marked: Bool, wantsToWalk: Bool, inOrg: Bool) -> Bool {
+        marked && wantsToWalk && !inOrg
+    }
+
     var role: Role {
         let p = me?.profile
         switch (p?.wantsToWalk ?? true, p?.hasDogs ?? false) {

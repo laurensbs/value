@@ -31,19 +31,7 @@ T = {
         "No dogs live near you yet. A group walk at a shelter is a lovely start.",
         "Aucun chien n'habite encore près de chez toi. Une balade en groupe dans un refuge est un bon début.",
         "Todavía no hay perros cerca de ti. Un paseo en grupo en un refugio es un buen comienzo."),
-    "Terwijl je wacht: een mini-les van 2 minuten?": (
-        "While you wait: a 2-minute mini lesson?",
-        "En attendant : une mini-leçon de 2 minutes ?",
-        "Mientras esperas: ¿una minilección de 2 minutos?"),
-    "Vijf mini-lessen van 2 minuten. Daarna ben je goed voorbereid op de quiz.": (
-        "Five 2-minute mini lessons. After that you're well prepared for the quiz.",
-        "Cinq mini-leçons de 2 minutes. Ensuite tu seras bien préparé pour le quiz.",
-        "Cinco minilecciones de 2 minutos. Después estarás bien preparado para el test."),
     "Naar de Hondenschool": ("To the Dog School", "Vers l'école des chiens", "A la Escuela de perros"),
-    "Klaar voor de quiz? Acht vragen, geen tijdsdruk.": (
-        "Ready for the quiz? Eight questions, no time pressure.",
-        "Prêt pour le quiz ? Huit questions, sans pression.",
-        "¿Listo para el test? Ocho preguntas, sin prisas."),
     "Start de quiz": ("Start the quiz", "Commencer le quiz", "Empezar el test"),
     "De eigenaar van %@ kijkt nog naar je aanvraag. Ik laat het je weten.": (
         "%@'s owner is still looking at your request. I'll let you know.",

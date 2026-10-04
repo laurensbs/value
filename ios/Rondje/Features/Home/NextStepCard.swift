@@ -170,7 +170,6 @@ struct NextStepCard: View {
             myDogsCount: myDogsCount,
             weekGoal: week?.goal,
             weekWalks: week?.walks ?? 0,
-            lessonsDone: keepsakes.lessonsDone.count,
             nearbyDogs: nearbyDogs,
             nearbyLoaded: nearbyLoaded,
             nearbyFailed: nearbyFailed,

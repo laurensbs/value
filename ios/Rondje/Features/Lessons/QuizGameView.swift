@@ -1,41 +1,57 @@
 import SwiftUI
 
-/// The safety quiz as a calm game: Guus asks, eight paws fill up, and a not-yet is just another look.
-/// Same server calls as before (GET and POST /api/v1/quiz); the answers are still checked on the server,
-/// and passing stays the gate for solo walks. No timer, no lives, unlimited tries.
+/// The safety quiz as a calm game, one question at a time: pick an answer, check it, and Guus explains
+/// why. A question that was not right yet comes back at the end. No timer, no lives, no points on screen.
+/// Every check goes to the server (POST /api/v1/quiz with the answers so far): the right answers never
+/// live in the app, and the server marks the quiz as passed once all of them are right.
 struct QuizGameView: View {
+    /// Where the quiz is played: from Jij or the Hondenschool, right after making an account, or in front
+    /// of a request (the "Eerst de quiz" gate).
+    enum Mode { case normal, onboarding, gate }
+
+    var mode: Mode = .normal
     /// Pushed from the Hondenschool path: "Eerst de Hondenschool?" goes back instead of pushing another path.
     var fromLessons = false
+    /// Called after the quiz was passed and the person tapped the button on the done screen.
+    var onDone: (() -> Void)? = nil
 
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
 
-    private enum Stage { case intro, questions, checking, passed }
+    private enum Stage { case intro, questions, passed }
+
+    /// What the last check said about the current question.
+    private struct Feedback: Equatable { var right: Bool }
 
     @State private var quiz: Quiz?
     @State private var loadError: String?
     @State private var stage: Stage = .intro
-    @State private var index = 0
-    @State private var answers: [String: Int] = [:]
-    /// The answers of the last check, so a wrong one stays marked until it is changed.
-    @State private var submitted: [String: Int] = [:]
-    @State private var wrong: Set<String> = []
-    /// Guus says "Bijna!" on the first question to look at again, until someone moves on.
-    @State private var almost = false
+    /// The questions still to go, in order; a question that was not right yet is added to the end again.
+    @State private var queue: [String] = []
+    @State private var position = 0
+    /// The answers the server confirmed as right.
+    @State private var right: [String: Int] = [:]
+    @State private var chosen: Int?
+    @State private var feedback: Feedback?
+    @State private var checking = false
+    @State private var passedOnServer = false
     @State private var error: String?
     @State private var showLessons = false
-
-    /// What passing earns on the server (POINTS.quiz).
-    static let points = 15
 
     var body: some View {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .screenBackground()
-            .navigationTitle(quiz?.title ?? L("Veiligheidsquiz"))
+            .navigationTitle(mode == .onboarding ? "" : (quiz?.title ?? L("Veiligheidsquiz")))
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(mode == .onboarding)
+            .toolbar {
+                if mode == .gate && stage != .passed {
+                    ToolbarItem(placement: .cancellationAction) { Button("Sluit", systemImage: "xmark") { dismiss() } }
+                }
+            }
             .navigationDestination(isPresented: $showLessons) { LessonsView(fromQuiz: true) }
             .task { await load() }
     }
@@ -50,7 +66,6 @@ struct QuizGameView: View {
             switch stage {
             case .intro: intro(quiz)
             case .questions: questions(quiz)
-            case .checking: checking
             case .passed: EmptyView()
             }
         } else if let loadError {
@@ -72,21 +87,20 @@ struct QuizGameView: View {
         return VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: 16) {
-                    if Keepsakes.shared.coachOn { Guus(mood: .happy, size: 100) }
-                    Text(quiz.title)
+                    if Keepsakes.shared.coachOn { Guus(mood: .happy, size: typeSize.isAccessibilitySize ? 72 : 100) }
+                    Text(mode == .onboarding ? L("Nog één ding: de veiligheidsquiz") : quiz.title)
                         .font(.display(28))
                         .multilineTextAlignment(.center)
-                    Text("Acht vragen, ongeveer 3 minuten. Geen tijdsdruk.")
+                        .accessibilityAddTraits(.isHeader)
+                    Text("Acht korte vragen over veilig wandelen, ongeveer 3 minuten. Na elke vraag leg ik uit waarom. Geen tijdsdruk.")
                         .font(.title3)
                         .foregroundStyle(Palette.muted)
                         .multilineTextAlignment(.center)
-                    if lessonsDone {
-                        Label("Je deed alle vijf de lessen. Je bent goed voorbereid.", systemImage: "graduationcap.fill")
+                    if mode != .normal {
+                        Text("Daarna kun je een kennismaking aanvragen.")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(Palette.grass)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 10)
-                            .background(Palette.grassSoft, in: .rect(cornerRadius: 16, style: .continuous))
+                            .multilineTextAlignment(.center)
                     }
                 }
                 .padding(24)
@@ -97,10 +111,11 @@ struct QuizGameView: View {
             VStack(spacing: 10) {
                 Button("Begin") {
                     Haptics.tap()
-                    withAnimation(.snappy) { stage = .questions }
+                    withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { stage = .questions }
                 }
                 .buttonStyle(.primary)
-                if !lessonsDone {
+                // The lessons are an extra, never in the way: not offered while making an account.
+                if mode == .normal && !lessonsDone {
                     Button("Eerst de Hondenschool?") {
                         if fromLessons { dismiss() } else { showLessons = true }
                     }
@@ -114,191 +129,206 @@ struct QuizGameView: View {
 
     // MARK: Questions
 
-    /// A wrong answer from the last check that was not changed yet.
-    private func needsLook(_ id: String) -> Bool {
-        wrong.contains(id) && answers[id] == submitted[id]
+    private func question(_ quiz: Quiz) -> Quiz.Question? {
+        guard position < queue.count else { return nil }
+        return quiz.questions.first { $0.id == queue[position] }
     }
 
+    @ViewBuilder
     private func questions(_ quiz: Quiz) -> some View {
-        let count = quiz.questions.count
-        let q = quiz.questions[min(index, count - 1)]
-        return VStack(spacing: 0) {
-            paws(quiz)
-                .padding(.horizontal, 24)
-                .padding(.top, 12)
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    guus
-                    Text(q.question)
-                        .font(.display(24))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityAddTraits(.isHeader)
-                    if needsLook(q.id) {
-                        Label("Kijk deze nog eens na.", systemImage: "arrow.uturn.backward")
-                            .font(.footnote.weight(.semibold))
-                            .foregroundStyle(Palette.warn)
-                    }
-                    VStack(spacing: 12) {
-                        ForEach(Array(q.options.enumerated()), id: \.offset) { i, option in
-                            optionTile(option, chosen: answers[q.id] == i) {
-                                Haptics.tap()
-                                withAnimation(.spring(duration: 0.35, bounce: 0.5)) { answers[q.id] = i }
+        if let q = question(quiz) {
+            VStack(spacing: 0) {
+                paws(quiz, current: q.id)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 12)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        if right[q.id] == nil && queue.prefix(position).contains(q.id) {
+                            Label("Deze kwam net al langs. Nog een keer?", systemImage: "arrow.uturn.backward")
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(Palette.warn)
+                        }
+                        Text(q.question)
+                            .font(.display(24))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityAddTraits(.isHeader)
+                        VStack(spacing: 12) {
+                            ForEach(Array(q.options.enumerated()), id: \.offset) { i, option in
+                                optionTile(option, index: i)
                             }
                         }
+                        .padding(.top, 4)
+                        // Locked after checking, without greying out: the chosen answer stays easy to read.
+                        .allowsHitTesting(feedback == nil && !checking)
+                        ErrorText(message: error)
                     }
-                    .padding(.top, 4)
-                    ErrorText(message: error)
+                    .padding(24)
+                    .id("\(q.id).\(position)")
+                    .transition(reduceMotion ? .opacity : .push(from: .trailing))
                 }
-                .padding(24)
-                .id(q.id)
-                .transition(reduceMotion ? .opacity : .push(from: .trailing))
+                bottom(q)
             }
-            HStack(spacing: 12) {
-                if index > 0 {
-                    Button("Vorige") { go(to: index - 1) }
-                        .buttonStyle(.secondary)
+        }
+    }
+
+    /// Check, or (after checking) Guus's explanation and "Verder".
+    @ViewBuilder
+    private func bottom(_ q: Quiz.Question) -> some View {
+        if let feedback {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .top, spacing: 12) {
+                    if Keepsakes.shared.coachOn {
+                        Guus(mood: feedback.right ? .proud : .calm, size: 48, hop: false)
+                            .accessibilityHidden(true)
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(feedback.right ? L("Goed zo!") : L("Net niet."))
+                            .font(.headline)
+                            .foregroundStyle(feedback.right ? Palette.grass : Palette.warn)
+                        if let why = QuizExplanation.text(for: q.id) {
+                            Text(why).font(.subheadline).foregroundStyle(Palette.ink)
+                        }
+                        if !feedback.right {
+                            Text("Deze vraag komt zo nog een keer terug.")
+                                .font(.footnote)
+                                .foregroundStyle(Palette.muted)
+                        }
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
                 }
-                if index < count - 1 {
-                    Button("Volgende") { go(to: index + 1) }
-                        .buttonStyle(.primary)
-                        .disabled(answers[q.id] == nil)
-                } else {
-                    Button("Nakijken") { Task { await submit(quiz) } }
-                        .buttonStyle(.primary)
-                        .disabled(answers.count < count)
-                }
+                Button("Verder") { next() }
+                    .buttonStyle(.primary)
             }
+            .padding(20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(feedback.right ? Palette.grassSoft : Palette.warnSoft)
+            .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))
+            .accessibilityElement(children: .contain)
+        } else {
+            Button {
+                Task { await check(q) }
+            } label: {
+                if checking { ProgressView().tint(Palette.onGrass) } else { Text("Controleer") }
+            }
+            .buttonStyle(.primary)
+            .disabled(chosen == nil || checking)
             .padding(.horizontal, 24)
             .padding(.bottom, 12)
         }
     }
 
-    /// Guus above the question: curious, or calm with "Bijna!" right after a check that was not yet a pass.
-    @ViewBuilder
-    private var guus: some View {
-        let coachOn = Keepsakes.shared.coachOn
-        let line = L("Bijna! Kijk deze nog even na.")
-        HStack(alignment: .top, spacing: 10) {
-            if coachOn { Guus(mood: almost ? .calm : .curious, size: 56) }
-            if almost {
-                Text(line)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Palette.ink)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .padding(.leading, coachOn ? BubbleShape.tailWidth : 0)
-                    .background(Palette.warnSoft, in: BubbleShape(tail: coachOn))
-                    .transition(.scale(scale: 0.92, anchor: .leading).combined(with: .opacity))
-                    .accessibilityLabel(coachOn ? L("Guus: \(line)") : line)
-            }
-        }
-    }
-
-    /// One paw per question: green when answered, soft orange for one to look at again. Never red.
-    private func paws(_ quiz: Quiz) -> some View {
-        let count = quiz.questions.count
-        let answered = quiz.questions.filter { answers[$0.id] != nil }.count
+    /// One paw per question: green when it was right, the current one a little bigger. Never red.
+    private func paws(_ quiz: Quiz, current: String) -> some View {
+        let done = quiz.questions.filter { right[$0.id] != nil }.count
         return HStack(spacing: 6) {
-            ForEach(Array(quiz.questions.enumerated()), id: \.element.id) { i, q in
+            ForEach(quiz.questions) { q in
                 Image(systemName: "pawprint.fill")
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(needsLook(q.id) ? Palette.warn : answers[q.id] != nil ? Palette.grass : Palette.line)
-                    .scaleEffect(i == index ? 1.25 : 1)
+                    .foregroundStyle(right[q.id] != nil ? Palette.grass : Palette.line)
+                    .scaleEffect(q.id == current && !reduceMotion ? 1.25 : 1)
                     .frame(maxWidth: .infinity)
             }
         }
-        .animation(.spring(duration: 0.35), value: answers)
-        .animation(.spring(duration: 0.35), value: index)
+        .animation(Motion.or(Motion.klein, reduce: reduceMotion), value: right)
+        .animation(Motion.or(Motion.klein, reduce: reduceMotion), value: current)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(L("Vraag \(index + 1) van \(count)"))
-        .accessibilityValue(L("\(answered) beantwoord"))
+        .accessibilityLabel(L("\(done) van \(quiz.questions.count) goed"))
     }
 
-    private func optionTile(_ text: String, chosen: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+    private func optionTile(_ text: String, index: Int) -> some View {
+        let isChosen = chosen == index
+        let tint: Color = feedback.map { isChosen ? ($0.right ? Palette.grass : Palette.warn) : Palette.line } ?? (isChosen ? Palette.grass : Palette.line)
+        return Button {
+            Haptics.tap()
+            withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) { chosen = index }
+        } label: {
             HStack(spacing: 12) {
                 Text(text)
                     .font(.body.weight(.semibold))
                     .foregroundStyle(Palette.ink)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Image(systemName: chosen ? "checkmark.circle.fill" : "circle")
+                Image(systemName: isChosen ? "checkmark.circle.fill" : "circle")
                     .font(.title3)
-                    .foregroundStyle(chosen ? Palette.grass : Palette.line)
+                    .foregroundStyle(tint)
                     .contentTransition(.symbolEffect(.replace))
             }
             .padding(.horizontal, 18)
             .padding(.vertical, 14)
             .frame(maxWidth: .infinity, minHeight: 64)
-            .background(chosen ? Palette.grassSoft : Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
+            .background(isChosen ? (feedback?.right == false ? Palette.warnSoft : Palette.grassSoft) : Palette.surface,
+                        in: .rect(cornerRadius: 20, style: .continuous))
             .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .strokeBorder(chosen ? Palette.grass : Palette.line.opacity(0.7), lineWidth: chosen ? 2 : 1))
+                .strokeBorder(isChosen ? tint : Palette.line.opacity(0.7), lineWidth: isChosen ? 2 : 1))
             .contentShape(.rect(cornerRadius: 20, style: .continuous))
-            .scaleEffect(chosen ? 1.03 : 1)
         }
         .buttonStyle(.plain)
-        .accessibilityAddTraits(chosen ? .isSelected : [])
+        .accessibilityAddTraits(isChosen ? .isSelected : [])
     }
 
-    private func go(to newIndex: Int) {
-        almost = false
-        withAnimation(.snappy) { index = newIndex }
-    }
+    // MARK: Actions
 
-    // MARK: Checking
-
-    private var checking: some View {
-        VStack(spacing: 18) {
-            if Keepsakes.shared.coachOn {
-                Guus(mood: .curious, size: 100)
-            } else {
-                ProgressView().controlSize(.large)
-            }
-            Text("Even kijken…")
-                .font(.display(24))
-                .foregroundStyle(Palette.ink)
-        }
-        .accessibilityElement(children: .combine)
-    }
-
-    private func submit(_ quiz: Quiz) async {
-        guard stage == .questions else { return }
+    /// Sends the answers that were right so far plus this one; the server says whether this one is right
+    /// and whether the whole quiz is now passed.
+    private func check(_ q: Quiz.Question) async {
+        guard let pick = chosen, !checking else { return }
+        checking = true
+        defer { checking = false }
         error = nil
-        withAnimation(.smooth) { stage = .checking }
-        Haptics.drumroll()
-        try? await Task.sleep(for: .seconds(1))
+        var answers = right
+        answers[q.id] = pick
         do {
             let result: QuizResult = try await APIClient.shared.post("/api/v1/quiz", ["answers": answers])
-            if result.passed {
-                withAnimation(.spring(duration: 0.5)) { stage = .passed }
-                model.celebrate(.big(title: L("Gehaald!"), text: L("Je mag nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.")),
-                                once: "quiz")
-                await model.refreshMe()
-                await ProgressStore.shared.load()
-            } else {
-                Haptics.soft()
-                submitted = answers
-                wrong = Set(result.wrong)
-                let first = quiz.questions.firstIndex { wrong.contains($0.id) } ?? 0
-                withAnimation(.snappy) {
-                    index = first
-                    almost = true
-                    stage = .questions
-                }
-                // The check button is gone and Guus's 'Bijna!' is only shown: say where to look.
-                AccessibilityNotification.Announcement(L("Bijna! Kijk vraag \(first + 1) nog even na.")).post()
-            }
+            let ok = !result.wrong.contains(q.id)
+            if ok { right[q.id] = pick } else { queue.append(q.id) }
+            passedOnServer = result.passed
+            if ok { Haptics.tap(.select) } else { Haptics.soft() }
+            withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { feedback = Feedback(right: ok) }
+            AccessibilityNotification.Announcement(ok ? L("Goed zo!") : L("Net niet.")).post()
         } catch {
+            Haptics.error()
             self.error = error.plainText
-            withAnimation(.smooth) { stage = .questions }
         }
+    }
+
+    private func next() {
+        Haptics.tap()
+        if passedOnServer {
+            finish()
+            return
+        }
+        withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) {
+            feedback = nil
+            chosen = nil
+            position += 1
+        }
+        // Should never happen (the last right answer passes the quiz), but never leave an empty screen.
+        if position >= queue.count, let quiz { start(quiz) }
+    }
+
+    private func finish() {
+        withAnimation(Motion.or(Motion.pop, reduce: reduceMotion)) { stage = .passed }
+        model.celebrate(.big(title: L("Gehaald!"), text: Self.passedText), once: "quiz")
+        Task {
+            await model.refreshMe()
+            await ProgressStore.shared.load()
+        }
+    }
+
+    private static var passedText: String {
+        L("Je kunt nu een kennismaking aanvragen. Zelfstandige rondjes komen later, als een eigenaar je vertrouwt.")
+    }
+
+    private func start(_ quiz: Quiz) {
+        queue = quiz.questions.map(\.id).filter { right[$0] == nil }
+        position = 0
     }
 
     // MARK: Passed
 
     private func passedView(fresh: Bool) -> some View {
         VStack(spacing: 16) {
-            // Centered while it fits, scrolling at large text sizes; "Klaar" stays pinned below.
+            // Centered while it fits, scrolling at large text sizes; the button stays pinned below.
             ScrollView {
                 VStack(spacing: 16) {
                     if Keepsakes.shared.coachOn {
@@ -311,22 +341,22 @@ struct QuizGameView: View {
                     }
                     Text("Gehaald!")
                         .font(.display(32))
-                    Text("Je kunt nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.")
+                        .accessibilityAddTraits(.isHeader)
+                    Text(Self.passedText)
                         .font(.title3)
                         .foregroundStyle(Palette.muted)
                         .multilineTextAlignment(.center)
-                    if fresh {
-                        Chip(text: L("+\(Self.points) punten"), symbol: "star.fill")
-                    }
                 }
                 .padding(.vertical, 16)
                 .frame(maxWidth: .infinity)
             }
             .scrollBounceBehavior(.basedOnSize)
             .defaultScrollAnchor(.center, for: .alignment)
-            if fresh {
-                Button("Klaar") { dismiss() }
-                    .buttonStyle(.primary)
+            if fresh || mode != .normal {
+                Button(mode == .onboarding ? L("Laat me de honden zien") : L("Klaar")) {
+                    if let onDone { onDone() } else { dismiss() }
+                }
+                .buttonStyle(.primary)
             }
         }
         .padding(.horizontal, 24)
@@ -337,9 +367,61 @@ struct QuizGameView: View {
         guard quiz == nil else { return }
         loadError = nil
         do {
-            quiz = try await APIClient.shared.get("/api/v1/quiz")
+            let loaded: Quiz = try await APIClient.shared.get("/api/v1/quiz")
+            quiz = loaded
+            start(loaded)
         } catch {
             loadError = error.plainText
+        }
+    }
+}
+
+/// Why each answer is right, said by Guus after every check. Keyed by the server's question ids
+/// (web/src/lib/quiz.ts); a question the app does not know yet simply has no explanation.
+enum QuizExplanation {
+    static func text(for id: String) -> String? {
+        switch id {
+        case "heat": L("Bij warmte loop je kort, in de schaduw en met water. Voel met je hand of de stoep niet te heet is voor zijn pootjes.")
+        case "leash": L("De hond blijft aan de lijn, tenzij de eigenaar uitdrukkelijk zegt dat hij los mag, en alleen waar het mag.")
+        case "treats": L("Geef alleen een koekje als het profiel van de hond zegt dat het mag. Sommige honden mogen niets extra's.")
+        case "otherDogs": L("Houd afstand en vraag de andere eigenaar eerst. Twijfel je, loop dan rustig door.")
+        case "escaped": L("Blijf rustig en ren niet achter de hond aan. Bel meteen de eigenaar: samen vind je hem sneller.")
+        case "bite": L("Zorg eerst dat iedereen veilig is. Wissel gegevens uit, bel de eigenaar en meld het in de app.")
+        case "stress": L("Veel gapen, lippen likken en wegtrekken betekent: ik voel me niet op mijn gemak. Zoek een rustigere plek.")
+        case "overdue": L("Laat het de eigenaar meteen weten als je later terug bent. Een kort berichtje geeft rust.")
+        default: nil
+        }
+    }
+}
+
+/// Right after making an account, a walker does the quiz before the app opens. Owners and shelter
+/// staff never see this (see AppModel.needsOnboardingQuiz).
+struct OnboardingQuizView: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        NavigationStack {
+            QuizGameView(mode: .onboarding) {
+                Keepsakes.shared.unmark("onboarding.quiz")
+            }
+        }
+    }
+}
+
+/// In front of a request or a group walk: one friendly button to the quiz instead of the form.
+struct QuizGate: View {
+    var open: () -> Void
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Text("Voordat je een hond aanvraagt, doe je één keer de veiligheidsquiz.")
+                .font(.footnote)
+                .foregroundStyle(Palette.muted)
+                .multilineTextAlignment(.center)
+            Button(action: open) {
+                Label("Eerst de quiz (± 3 min)", systemImage: "checkmark.seal.fill")
+            }
+            .buttonStyle(.primary)
         }
     }
 }

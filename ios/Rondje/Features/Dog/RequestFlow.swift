@@ -41,6 +41,9 @@ struct RequestFlow: View {
     @State private var busy = false
     @State private var error: String?
     @State private var outcome: Outcome?
+    /// The server answered "needs-quiz" (also when this app thought the quiz was done).
+    @State private var serverNeedsQuiz = false
+    @State private var quizOpen = false
     /// The confirmation comes in piece by piece: the paper plane, the text, then the three steps.
     @State private var shown = 0
     @State private var toLessons = false
@@ -80,16 +83,53 @@ struct RequestFlow: View {
             if let outcome {
                 done(outcome)
                     .transition(.opacity)
+            } else if needsQuiz {
+                quizFirst
             } else {
                 flow
             }
         }
         .screenBackground()
+        .sheet(isPresented: $quizOpen, onDismiss: { if model.quizPassed { serverNeedsQuiz = false } }) {
+            NavigationStack { QuizGameView(mode: .gate) }
+        }
         .sensoryFeedback(.selection, trigger: step)
         .onAppear(perform: prepare)
         .onDisappear(perform: finish)
         .onChange(of: message) { _, text in
             if text.count > Self.maxMessage { message = String(text.prefix(Self.maxMessage)) }
+        }
+    }
+
+    /// Walkers do the safety quiz once before any request; the server checks it too.
+    private var needsQuiz: Bool { serverNeedsQuiz || !model.quizPassed }
+
+    /// Instead of the form: one friendly button to the quiz. After passing, the form appears here.
+    private var quizFirst: some View {
+        VStack(spacing: 0) {
+            header
+            Spacer(minLength: 16)
+            VStack(spacing: 16) {
+                if Keepsakes.shared.coachOn {
+                    Guus(mood: .happy, size: typeSize.isAccessibilitySize ? 72 : 100)
+                        .accessibilityHidden(true)
+                }
+                Text("Eerst de veiligheidsquiz")
+                    .font(.display(26))
+                    .multilineTextAlignment(.center)
+                    .accessibilityAddTraits(.isHeader)
+                Text("Acht korte vragen over veilig wandelen. Daarna vraag je \(dog.name) meteen aan.")
+                    .foregroundStyle(Palette.muted)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(24)
+            Spacer(minLength: 16)
+            Button { quizOpen = true } label: {
+                Label("Eerst de quiz (± 3 min)", systemImage: "checkmark.seal.fill")
+            }
+            .buttonStyle(.primary)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 12)
         }
     }
 
@@ -368,8 +408,9 @@ struct RequestFlow: View {
 
     // MARK: Done
 
+    /// The Hondenschool is an extra while waiting for an answer, until all five lessons are done.
     private var offersLessons: Bool {
-        kind == .meet && model.me?.profile?.quizPassed != true && Keepsakes.shared.lessonsDone.count < 5
+        kind == .meet && Keepsakes.shared.lessonsDone.count < 5
     }
 
     /// The sheet itself is the confirmation: no banner on top of it, and it stays until "Klaar".
@@ -696,6 +737,9 @@ struct RequestFlow: View {
             AccessibilityNotification.Announcement(doneTitle).post()
             await model.refreshAppointments()
             await sent()
+        } catch let error as APIError where error.code == "needs-quiz" {
+            // The server wants the quiz first: show the way there instead of an error.
+            withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { serverNeedsQuiz = true }
         } catch {
             Haptics.error()
             withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) { self.error = error.plainText }

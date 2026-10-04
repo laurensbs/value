@@ -37,7 +37,6 @@ struct NextStepContext: Sendable {
     var myDogsCount: Int? = nil
     var weekGoal: Int? = nil
     var weekWalks = 0
-    var lessonsDone = 0
     var nearbyDogs: [DogCard] = []
     /// False while the dogs nearby are still loading, so Guus never says there are none before he looked.
     var nearbyLoaded = true
@@ -156,29 +155,23 @@ extension NextStep {
             )))
         }
 
-        // e. Nothing planned yet: three dogs to start with. Skipped when they could not be loaded,
-        // so the next step (the Hondenschool) comes through instead of a 'still looking' that never ends.
+        // e. The safety quiz comes before any request (the server checks it too). The five Hondenschool
+        // lessons are an extra, reachable from the quiz and under Jij; they are no step of their own.
+        if !c.quizPassed {
+            list.append(Candidate(step: NextStep(
+                id: "quiz", mood: .curious,
+                text: L("Eerst de veiligheidsquiz, dan kun je een hond aanvragen. Acht vragen, geen tijdsdruk."),
+                button: L("Start de quiz"), action: .quiz
+            ), suggestion: true))
+        }
+
+        // f. Nothing planned yet: three dogs to start with. Skipped when they could not be loaded,
+        // so a later step comes through instead of a 'still looking' that never ends.
         if outgoing.isEmpty && !(c.nearbyFailed && c.nearbyDogs.isEmpty) {
             list.append(Candidate(step: picks(c), suggestion: true))
         }
 
-        // f. The Hondenschool and the quiz.
         let waiting = outgoing.filter { $0.status == "pending" }.sorted { $0.startsAt < $1.startsAt }
-        if !c.quizPassed {
-            if c.lessonsDone < 5 {
-                list.append(Candidate(step: NextStep(
-                    id: "lessons", mood: .curious,
-                    text: waiting.isEmpty ? L("Vijf mini-lessen van 2 minuten. Daarna ben je goed voorbereid op de quiz.") : L("Terwijl je wacht: een mini-les van 2 minuten?"),
-                    button: L("Naar de Hondenschool"), action: .lessons
-                ), suggestion: true))
-            } else {
-                list.append(Candidate(step: NextStep(
-                    id: "quiz", mood: .curious,
-                    text: L("Klaar voor de quiz? Acht vragen, geen tijdsdruk."),
-                    button: L("Start de quiz"), action: .quiz
-                ), suggestion: true))
-            }
-        }
 
         // g. A request the owner is still looking at.
         if let item = waiting.first {
