@@ -2,6 +2,7 @@ import '../progress.css'
 import { count, eq } from 'drizzle-orm'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { HelpUsRow } from '@/components/HelpUsInApp'
 import { Icon } from '@/components/Icon'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, RemindersToggle, SignOutButton } from '@/components/ProfileTools'
@@ -185,6 +186,9 @@ export default async function ProfilePage() {
           </details>
         </div>
       </section>
+
+      {/* In the apps only: "Help ons via Whydonate", low on the page, one tap to the campaign in the browser. */}
+      <HelpUsRow native={native} />
 
       <SignOutButton label={t('nav.logout')} />
     </div>

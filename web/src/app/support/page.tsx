@@ -5,7 +5,7 @@ import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { SupportButton } from '@/components/SupportButton'
 import { APP_NAME } from '@/lib/site'
-import { campaign, supportConfig } from '@/lib/support'
+import { campaign, supportConfig, supportInApp } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
 import crowdfunding from '../../../content/crowdfunding.json'
@@ -36,9 +36,11 @@ export default async function SupportPage() {
   // Until there are real agreements, an honest intention instead of a promised share or names.
   const share =
     drive.shareToCausesPercent !== null ? t('support.shareSet', { percent: format.number(drive.shareToCausesPercent) }) : t('support.shareSoon', { app: APP_NAME })
+  // "Help ons via Whydonate" in the apps (HelpUsInApp): the question about the app says where to find it.
+  const appFaq = cfg.crowdfundingUrl && supportInApp() ? ('appVia' as const) : ('app' as const)
   const faq = native
     ? (['free', 'sponsors'] as const)
-    : ([...(['free', 'where', 'tax', 'perks', 'app', 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
+    : ([...(['free', 'where', 'tax', 'perks', appFaq, 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
   const total = costs.items.reduce((sum, c) => ({ min: sum.min + perMonth(c, c.min), max: sum.max + perMonth(c, c.max) }), { min: 0, max: 0 })
   // The amount stays on one line; "per maand" may move under it on a small phone.
   const amount = (c: Cost) => (
@@ -118,17 +120,6 @@ export default async function SupportPage() {
             <p>{t('support.giveIntro', { operator, app: APP_NAME })}</p>
           </div>
           <div className="im-give">
-            {cfg.url ? (
-              <article className="im-give-option stack-s">
-                <span className="pill blue">{t('support.monthlyPill')}</span>
-                <h3>{t('support.monthlyTitle')}</h3>
-                <p className="muted">{t('support.monthlyText', { app: APP_NAME })}</p>
-                <div>
-                  <SupportButton url={cfg.url} label={t('support.giveButton', { app: APP_NAME, platform: cfg.platform ?? '' })} />
-                </div>
-                <p className="muted small">{t('support.platformNote', { platform: cfg.platform ?? '' })}</p>
-              </article>
-            ) : null}
             {cfg.crowdfundingUrl ? (
               <article className="im-give-option stack-s" id="crowdfunding">
                 <span className="pill ball">{t('support.oncePill')}</span>
@@ -154,9 +145,25 @@ export default async function SupportPage() {
                   </div>
                 ) : null}
                 <div>
-                  <SupportButton url={cfg.crowdfundingUrl} label={t('support.onceButton', { platform: cfg.crowdfundingPlatform ?? '' })} />
+                  {/* Straight to the campaign in a new tab; the arrow says it leaves the site. */}
+                  <a href={cfg.crowdfundingUrl} target="_blank" rel="noopener noreferrer" className="button primary">
+                    <Icon name="heart" size={18} /> {t('support.onceGive', { platform: cfg.crowdfundingPlatform ?? '' })}
+                    <Icon name="external" size={16} />
+                    <span className="visually-hidden">{t('support.newTab')}</span>
+                  </a>
                 </div>
                 <p className="muted small">{t('support.platformNote', { platform: cfg.crowdfundingPlatform ?? '' })}</p>
+              </article>
+            ) : null}
+            {cfg.url ? (
+              <article className="im-give-option stack-s">
+                <span className="pill blue">{t('support.monthlyPill')}</span>
+                <h3>{t('support.monthlyTitle')}</h3>
+                <p className="muted">{t('support.monthlyText', { app: APP_NAME })}</p>
+                <div>
+                  <SupportButton url={cfg.url} label={t('support.giveButton', { app: APP_NAME, platform: cfg.platform ?? '' })} />
+                </div>
+                <p className="muted small">{t('support.platformNote', { platform: cfg.platform ?? '' })}</p>
               </article>
             ) : null}
           </div>
@@ -249,7 +256,7 @@ export default async function SupportPage() {
             <summary>
               <strong>{t(`support.faq.${k}.q`, { app: APP_NAME })}</strong>
             </summary>
-            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME })}</p>
+            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME, platform: cfg.crowdfundingPlatform ?? '' })}</p>
           </details>
         ))}
       </section>

@@ -96,7 +96,7 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await context.close()
 })
 
-test('support link: on the website when the recipient is named, never in the app', async ({ browser }) => {
+test('support link: on the website when the recipient is named; in the app only the campaign link', async ({ browser }) => {
   const web = await newPerson(browser)
   await web.page.goto('/support')
   const link = web.page.getByRole('link', { name: /Steun Rondje Mee via/ })
@@ -104,14 +104,16 @@ test('support link: on the website when the recipient is named, never in the app
   await expect(link).toHaveAttribute('href', /patreon\.com/)
   await expect(web.page.getByRole('contentinfo').getByRole('link', { name: 'Help ons' })).toBeVisible()
 
-  // The iOS and Android apps add "RondjeApp" to the user agent: no money anywhere.
+  // The iOS and Android apps add "RondjeApp" to the user agent: no costs and no support page there.
   const app = await browser.newContext({ userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp' })
   const page = await app.newPage()
   await page.goto('/support')
   await expect(page.getByRole('heading', { name: 'Maak Rondje Mee mogelijk', level: 1 })).toBeVisible()
   await expect(page.getByRole('link', { name: /Steun Rondje Mee via/ })).toHaveCount(0)
   await expect(page.getByText(/Samen ongeveer/)).toHaveCount(0)
-  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Help ons' })).toHaveCount(0)
+  // "Help ons" in the footer goes straight to the campaign there, never to /support (e2e/help-app.spec.ts).
+  await expect(page.getByRole('contentinfo').locator('a[href="/support"]')).toHaveCount(0)
+  await expect(page.getByRole('contentinfo').getByRole('link', { name: /^Help ons via Whydonate/ })).toHaveAttribute('href', /^https:\/\/whydonate\.com\//)
   await page.goto('/')
   await expect(page.getByRole('link', { name: /Hoe we gratis blijven/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Over Rondje Mee/ }).first()).toBeVisible()

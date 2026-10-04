@@ -49,7 +49,7 @@ Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programme
 
 2. **Deployments → Redeploy**, zodat de nieuwe waarden gelden.
 3. **Let op: Vercel-abonnement.** Het gratis Hobby-abonnement van Vercel is bedoeld voor niet-commercieel gebruik. Zodra je bijdragen vraagt, val je mogelijk daarbuiten. Controleer de voorwaarden van Vercel en neem zo nodig **Pro** (ongeveer $20 per maand) voordat je `SUPPORT_URL` zet.
-4. **In de apps verschijnt nooit iets over geld.** Apple en Google staan geen externe betaal- of donatielinks toe voor bedrijven. De apps sturen "RondjeApp" mee in hun user agent (na `npx cap sync`, zie stap 6 en 7); de site laat dan de kosten, de steunknop en de link in de footer weg.
+4. **In de apps alleen één link naar de crowdfunding, en betalen gebeurt nooit in de app** (besluit 5 okt 2026). De apps sturen "RondjeApp" mee in hun user agent (na `npx cap sync`, zie stap 6 en 7); de site laat dan de kosten, de steunknop en de pagina `/support` weg. Wel staat onderaan het profiel en in de footer "Help ons via Whydonate" (alleen als `CROWDFUNDING_URL` en `OPERATOR_NAME` gezet zijn). Eén tik opent de actie van Whydonate in Safari of de browser van de telefoon, nooit in de app zelf. **Uitzetten voor App Review:** zet `SUPPORT_IN_APP` op `0` in Vercel en redeploy; dan verdwijnt elke ingang in de apps, ook in de iPhone-app via `/api/v1/config`. Weer aan: `1` of de variabele weghalen.
 
 **E-mail (wachtwoord vergeten en meldingen).** Zonder e-mail kan niemand een nieuw wachtwoord aanvragen, en hoort een eigenaar alleen in de app over een nieuwe aanvraag of een rondje dat uitloopt. Zo zet je het aan:
 

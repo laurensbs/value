@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test'
+import crowdfunding from '../content/crowdfunding.json'
+import { campaign } from '../src/lib/support'
 import { newPerson, shot } from './helpers'
 
 const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp'
@@ -44,13 +46,20 @@ test('support page: monthly support, open about money, and an honest promise abo
   await expect(page.getByText(/We geven 10% van alle bijdragen door aan goede doelen/).first()).toBeVisible()
   await expect(page.getByText(/nog geen stichting en geen goed doel met ANBI-status/).first()).toBeVisible()
   await expect(page.getByRole('link', { name: 'Lees waarom →' })).toHaveAttribute('href', '/waarom')
-  await expect(page.getByText('Waarom kan ik niet steunen in de app?')).toBeVisible()
+  // The apps have "Help ons via Whydonate" (e2e/help-app.spec.ts): the question says where it is.
+  await expect(page.getByText('Kan ik ook vanuit de app helpen?')).toBeVisible()
+  await expect(page.getByText('Waarom kan ik niet steunen in de app?')).toHaveCount(0)
   const monthly = page.getByRole('link', { name: /Steun Rondje Mee via/ })
   if (await monthly.count()) {
     await expect(monthly).toHaveAttribute('href', /patreon\.com/)
-    // No campaign link is configured in the tests, so no crowdfunding button and no progress bar.
-    await expect(page.getByRole('link', { name: /Doe mee via/ })).toHaveCount(0)
-    await expect(page.getByRole('progressbar')).toHaveCount(0)
+    // The tests set a (fake) campaign link too: one unmistakable button that says where it goes and
+    // opens in a new tab, and a progress bar once content/crowdfunding.json has a goal and an amount raised.
+    const give = page.getByRole('link', { name: /^Geef een rondje via Whydonate/ })
+    await expect(give).toHaveAttribute('href', /^https:\/\/whydonate\.com\//)
+    await expect(give).toHaveAttribute('target', '_blank')
+    await expect(give).toHaveAttribute('rel', /noopener/)
+    await expect(give).toHaveAccessibleName(/opent in een nieuw tabblad/)
+    await expect(page.getByRole('progressbar')).toHaveCount(campaign(crowdfunding).progress ? 1 : 0)
   }
   await shot(page, '41-support')
   await context.close()

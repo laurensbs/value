@@ -1756,6 +1756,10 @@
         "q": "Why can I not contribute in the app?",
         "a": "Because money does not belong in the app: there, everything is about walking. Apple and Google also have their own rules for payments in apps. That is why you can only contribute here on the website."
       },
+      "appVia": {
+        "q": "Can I help from the app too?",
+        "a": "Yes. At the bottom of your profile in the app you will find ‘Help us via {platform}’. That button opens {platform} in your browser. You never pay inside the app itself: there, everything is about walking."
+      },
       "share": {
         "q": "Do you give to good causes yourselves?"
       },
@@ -1772,10 +1776,11 @@
     "oncePill": "One-off",
     "onceTitle": "Join the crowdfunding",
     "onceText": "Rather give once? The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
-    "onceButton": "Join on {platform}",
+    "onceGive": "Buy a round via {platform}",
     "progress": "{raised} of {goal} raised",
     "progressUpdated": "Updated on {date}. The current amount is on {platform}.",
     "platformNote": "You pay through {platform}, under their terms.",
+    "newTab": "(opens in a new tab)",
     "giveNoteAll": "A contribution is voluntary, not tax-deductible, and gives no benefits in {app}.",
     "openTitle": "Open about money",
     "open": {
@@ -1791,6 +1796,12 @@
     "whyTitle": "Why we do this",
     "whyText": "Loneliness, moving too little, and dogs who could use more attention: see the figures behind {app}, with sources.",
     "whyLink": "Read why"
+  },
+  "helpApp": {
+    "label": "Help us via {platform}",
+    "text": "Buy a round from {round} · {raised} of {goal}",
+    "textShort": "Buy a round from {round}",
+    "opens": "opens {platform} in your browser"
   },
   "about": {
     "eyebrow": "About Rondje Mee",
@@ -1980,7 +1991,7 @@
     "noWalks": "No group walks are planned in {city} yet.",
     "allWalks": "All group walks",
     "freeTitle": "Always free, never ads",
-    "freeText": "Rondje Mee costs nothing, for walkers, owners and shelters. There will be no ads and no paid version. Members and partners keep Rondje Mee running, and support never buys priority.",
+    "freeText": "Rondje Mee costs nothing, for walkers, owners and shelters. There will be no ads and no paid version. Voluntary gifts and partners keep Rondje Mee running, and support never buys priority.",
     "howFree": "How Rondje Mee stays free",
     "otherCities": "Other cities",
     "all": "All cities",

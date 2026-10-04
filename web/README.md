@@ -35,6 +35,8 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 | `BETTER_AUTH_URL` | optional | Canonical URL; defaults to the Vercel production domain. |
 | `NEXT_PUBLIC_TILE_URL` | optional | Map tiles; defaults to OpenStreetMap. Use a tile provider with an API key before heavy traffic. |
 | `SUPPORT_URL` + `OPERATOR_NAME` | optional | The support button on `/support` (https Patreon, Ko-fi, Open Collective or Buy Me a Coffee only). Shown only when both are set, and never in the apps. |
+| `CROWDFUNDING_URL` | optional | A one-off campaign (https Whydonate, GoFundMe, Doneeractie, Kickstarter, Ulule, Goteo or Verkami only), with `OPERATOR_NAME`. On `/support` the button "Geef een rondje via Whydonate" (new tab); goal and amount raised come from `content/crowdfunding.json`. In the apps one row "Help ons via Whydonate" at the bottom of the profile and the footer link open it in the phone's browser, and `/api/v1/config` returns it as `support`. |
+| `SUPPORT_IN_APP` | optional | `0` hides every "Help ons" entry in the apps (the off-switch for App Review; `support.inApp` in `/api/v1/config` turns false). Unset or `1`: shown. The website never changes. |
 | `INSTAGRAM_HANDLE` | optional | Instagram link (footer, about, support, and `sameAs` in the home page's structured data). Hidden while empty. |
 | `GOOGLE_SITE_VERIFICATION` | optional | The token of Google Search Console's HTML tag (`<meta name="google-site-verification">`). No tag while empty. |
 | `CONTACT_EMAIL` | needed before launch | The only contact address: `/contact`, the legal texts (`{{contact}}` in `content/legal`), `/banned`, about and forgot password. While empty, those link to `/contact`, which says the address is coming. Use an address on a domain we own. |

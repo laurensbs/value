@@ -90,6 +90,14 @@ export interface Campaign {
   updated: string | null
 }
 
+/** "Geef een rondje": on the campaign page one round is €5 (€3,000 = 600 rounds). */
+export const ROUND_EUR = 5
+
+/** How many rounds an amount in euros is, rounded down. */
+export function roundsFor(euros: number): number {
+  return Number.isFinite(euros) && euros > 0 ? Math.floor(euros / ROUND_EUR) : 0
+}
+
 const amount = (v: unknown): number | null => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? Math.round(v) : null)
 
 /**
@@ -105,5 +113,52 @@ export function campaign(raw: unknown): Campaign {
     progress: goal && raised !== null ? { goal, raised, percent: Math.min(100, Math.floor((raised / goal) * 100)) } : null,
     shareToCausesPercent: typeof share === 'number' && Number.isFinite(share) && share > 0 && share <= 100 ? Math.round(share * 10) / 10 : null,
     updated: typeof c.updated === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(c.updated) ? c.updated : null,
+  }
+}
+
+/**
+ * The server's off-switch for the "Help ons" link inside the iOS and Android apps (for App Review):
+ * SUPPORT_IN_APP=0 hides every entry in the apps; unset or "1" shows it. The website never changes.
+ */
+export function supportInApp(env: Record<string, string | undefined> = process.env): boolean {
+  return !/^(0|false|off|no)$/i.test(env.SUPPORT_IN_APP?.trim() ?? '')
+}
+
+/** "Help ons via Whydonate" in the apps: everything the app needs for one row that opens the campaign. */
+export interface AppSupport {
+  /** False when SUPPORT_IN_APP=0: the apps then show nothing about it. */
+  inApp: boolean
+  label: string
+  crowdfundingUrl: string
+  platform: string
+  operator: string
+  /** Goal and amount raised in whole euros; null until both are filled in (content/crowdfunding.json). */
+  goal: number | null
+  raised: number | null
+  /** The same numbers in rounds of €5 ("Geef een rondje"). */
+  rounds: { goal: number; raised: number } | null
+  shareToCausesPercent: number | null
+}
+
+/**
+ * The campaign for the apps, or null while there is no campaign link with a named recipient
+ * (CROWDFUNDING_URL + OPERATOR_NAME). The apps only ever open the link in the phone's browser:
+ * nothing is paid inside an app. `label` gets the platform's name, e.g. "Whydonate".
+ */
+export function appSupport(env: Record<string, string | undefined>, raw: unknown, label: (platform: string) => string): AppSupport | null {
+  const cfg = supportConfig(env)
+  if (!cfg.crowdfundingUrl || !cfg.crowdfundingPlatform || !cfg.operator) return null
+  const drive = campaign(raw)
+  const progress = drive.progress
+  return {
+    inApp: supportInApp(env),
+    label: label(cfg.crowdfundingPlatform),
+    crowdfundingUrl: cfg.crowdfundingUrl,
+    platform: cfg.crowdfundingPlatform,
+    operator: cfg.operator,
+    goal: progress?.goal ?? null,
+    raised: progress?.raised ?? null,
+    rounds: progress ? { goal: roundsFor(progress.goal), raised: roundsFor(progress.raised) } : null,
+    shareToCausesPercent: drive.shareToCausesPercent,
   }
 }

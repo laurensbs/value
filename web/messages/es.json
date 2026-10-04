@@ -1756,6 +1756,10 @@
         "q": "¿Por qué no puedo apoyar desde la app?",
         "a": "Porque el dinero no tiene sitio en la app: allí todo gira en torno a pasear. Además, Apple y Google tienen sus propias normas para los pagos dentro de las apps. Por eso solo se puede apoyar aquí, en la web."
       },
+      "appVia": {
+        "q": "¿Puedo ayudar también desde la app?",
+        "a": "Sí. Al final de tu perfil en la app está ‘Ayúdanos en {platform}’. Ese botón abre {platform} en tu navegador. Dentro de la app nunca pagas nada: allí todo gira en torno a pasear."
+      },
       "share": {
         "q": "¿Vosotros también donáis a causas solidarias?"
       },
@@ -1772,10 +1776,11 @@
     "oncePill": "Una vez",
     "onceTitle": "Súmate al crowdfunding",
     "onceText": "¿Prefieres dar una sola vez? Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
-    "onceButton": "Súmate en {platform}",
+    "onceGive": "Regala un paseo en {platform}",
     "progress": "{raised} de {goal} recaudados",
     "progressUpdated": "Actualizado el {date}. El importe actual está en {platform}.",
     "platformNote": "Pagas a través de {platform}, según sus condiciones.",
+    "newTab": "(se abre en una pestaña nueva)",
     "giveNoteAll": "La aportación es voluntaria, no desgrava y no da ventajas en {app}.",
     "openTitle": "Claros con el dinero",
     "open": {
@@ -1791,6 +1796,12 @@
     "whyTitle": "Por qué lo hacemos",
     "whyText": "La soledad, moverse poco y perros que necesitan más atención: mira las cifras detrás de {app}, con sus fuentes.",
     "whyLink": "Lee por qué"
+  },
+  "helpApp": {
+    "label": "Ayúdanos en {platform}",
+    "text": "Regala un paseo desde {round} · {raised} de {goal}",
+    "textShort": "Regala un paseo desde {round}",
+    "opens": "abre {platform} en tu navegador"
   },
   "about": {
     "eyebrow": "Sobre Rondje Mee",
@@ -1980,7 +1991,7 @@
     "noWalks": "Todavía no hay paseos en grupo previstos en {city}.",
     "allWalks": "Todos los paseos en grupo",
     "freeTitle": "Siempre gratis, nunca anuncios",
-    "freeText": "Rondje Mee no cuesta nada, ni a paseadores, ni a dueños, ni a protectoras. No habrá anuncios ni versión de pago. Los socios y colaboradores mantienen Rondje Mee, y apoyar nunca da prioridad.",
+    "freeText": "Rondje Mee no cuesta nada, ni a paseadores, ni a dueños, ni a protectoras. No habrá anuncios ni versión de pago. Las donaciones voluntarias y los colaboradores mantienen Rondje Mee, y apoyar nunca da prioridad.",
     "howFree": "Cómo Rondje Mee sigue gratis",
     "otherCities": "Otras ciudades",
     "all": "Todas las ciudades",

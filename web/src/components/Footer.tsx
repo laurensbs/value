@@ -5,6 +5,7 @@ import { CONTACT_PATH } from '@/lib/contact'
 import { APP_NAME } from '@/lib/site'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
+import { HelpUsFooterLink } from './HelpUsInApp'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { Logo } from './Logo'
 
@@ -33,7 +34,8 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
             <Link href={CONTACT_PATH}>{t('contact')}</Link>
             <Link href="/legal/terms">{t('terms')}</Link>
             <Link href="/legal/privacy">{t('privacy')}</Link>
-            {native ? null : <Link href="/support">{t('support')}</Link>}
+            {/* In the apps "Help ons" goes straight to the campaign, in the phone's browser (HelpUsInApp). */}
+            {native ? <HelpUsFooterLink native /> : <Link href="/support">{t('support')}</Link>}
           </nav>
           <LanguageSwitcher current={locale} label={tn('language')} compact />
         </div>
@@ -47,7 +49,7 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
       <div className="footer-inner">
         <nav className="footer-row" aria-label={t('more')}>
           <Link href="/about">{t('about')}</Link>
-          {native ? null : <Link href="/support">{t('support')}</Link>}
+          {native ? <HelpUsFooterLink native /> : <Link href="/support">{t('support')}</Link>}
           <Link href="/suggest">{t('tip')}</Link>
           <Link href="/cities">{tc('footerLink')}</Link>
           <Link href="/shelter">{t('forShelters')}</Link>

@@ -1756,6 +1756,10 @@
         "q": "Pourquoi ne puis-je pas contribuer dans l’appli ?",
         "a": "Parce que l’argent n’a pas sa place dans l’appli : tout y tourne autour de la promenade. De plus, Apple et Google ont leurs propres règles pour les paiements dans les applis. C’est pourquoi on ne peut contribuer qu’ici, sur le site."
       },
+      "appVia": {
+        "q": "Puis-je aussi aider depuis l’appli ?",
+        "a": "Oui. En bas de votre profil dans l’appli, vous trouverez « Aidez-nous via {platform} ». Ce bouton ouvre {platform} dans votre navigateur. Dans l’appli elle-même, vous ne payez jamais rien : tout y tourne autour de la promenade."
+      },
       "share": {
         "q": "Donnez-vous vous-mêmes à de bonnes causes ?"
       },
@@ -1772,10 +1776,11 @@
     "oncePill": "Ponctuel",
     "onceTitle": "Participer au financement participatif",
     "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
-    "onceButton": "Participer sur {platform}",
+    "onceGive": "Offrez une balade via {platform}",
     "progress": "{raised} récoltés sur {goal}",
     "progressUpdated": "Mis à jour le {date}. Le montant actuel figure sur {platform}.",
     "platformNote": "Vous payez via {platform}, selon leurs conditions.",
+    "newTab": "(s’ouvre dans un nouvel onglet)",
     "giveNoteAll": "Une contribution est volontaire, non déductible des impôts, et ne donne aucun avantage dans {app}.",
     "openTitle": "Transparents sur l’argent",
     "open": {
@@ -1791,6 +1796,12 @@
     "whyTitle": "Pourquoi nous le faisons",
     "whyText": "La solitude, le manque de mouvement et des chiens qui auraient besoin de plus d’attention : découvrez les chiffres derrière {app}, avec leurs sources.",
     "whyLink": "Lire pourquoi"
+  },
+  "helpApp": {
+    "label": "Aidez-nous via {platform}",
+    "text": "Offrez une balade dès {round} · {raised} sur {goal}",
+    "textShort": "Offrez une balade dès {round}",
+    "opens": "ouvre {platform} dans votre navigateur"
   },
   "about": {
     "eyebrow": "À propos de Rondje Mee",
@@ -1980,7 +1991,7 @@
     "noWalks": "Aucune promenade en groupe n'est encore prévue à {city}.",
     "allWalks": "Toutes les promenades en groupe",
     "freeTitle": "Toujours gratuit, jamais de publicité",
-    "freeText": "Rondje Mee ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n'y aura ni publicité ni version payante. Les membres et partenaires font vivre Rondje Mee, et soutenir ne donne jamais de priorité.",
+    "freeText": "Rondje Mee ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n’y aura ni publicité ni version payante. Les dons volontaires et les partenaires font vivre Rondje Mee, et soutenir ne donne jamais de priorité.",
     "howFree": "Comment Rondje Mee reste gratuit",
     "otherCities": "Autres villes",
     "all": "Toutes les villes",
