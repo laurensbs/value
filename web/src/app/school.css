@@ -200,9 +200,15 @@
 
 /* ----- One lesson ----- */
 
+/* A lesson is full screen: no room kept for the tab bar (hidden here) or the footer below it. */
+.main:has(.lesson),
+.has-tabbar .main:has(.lesson) {
+  padding-bottom: 16px;
+}
+
 .lesson {
   /* The next step stays at the bottom of the screen, also when a card is short. */
-  min-height: calc(100dvh - var(--header-h) - 40px - env(safe-area-inset-bottom, 0px));
+  min-height: calc(100dvh - var(--header-h) - 36px - env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: 12px;

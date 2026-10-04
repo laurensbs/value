@@ -136,7 +136,8 @@ export function DogFace({ look, size = 96, title, mood = 'neutral' }: Props) {
           strokeLinecap="round"
         />
       ) : (
-        <>
+        // A <g>, not a fragment: the share images (satori) only take real SVG elements inside <svg>.
+        <g>
           {/* Uneasy: the white of the eye shows while the pupils look aside, under worried brows. */}
           {mood === 'uneasy' ? (
             <g fill="#fff">
@@ -161,7 +162,7 @@ export function DogFace({ look, size = 96, title, mood = 'neutral' }: Props) {
               strokeLinecap="round"
             />
           ) : null}
-        </>
+        </g>
       )}
 
       <ellipse cx="60" cy={mcy} rx={mrx} ry={mry} fill={muzzle} />
