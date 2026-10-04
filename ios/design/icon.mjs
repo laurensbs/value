@@ -1,58 +1,35 @@
-// Renders the app icon (light, dark and tinted) from SVG with headless Chromium.
-// Run from web/: node ../ios/design/icon.mjs  (uses web/node_modules/playwright)
+// Renders the app icon (light, dark and tinted) and the wordmark of the welcome screen from the logo
+// sources (logo B, "het woordmerk": "rondje mee" with the tennis ball as the dot on the j).
+// Run from web/: node ../ios/design/icon.mjs  (uses web/node_modules/playwright; set PW_CHROMIUM_PATH
+// to use another Chromium).
+//
+// - icon-light.svg: the stacked word on forest green, square (iOS rounds the corners itself).
+// - icon-dark.svg: the same word on a transparent background; iOS puts its own dark backdrop behind it.
+// - icon-tinted.svg: grey and white on transparent; iOS tints it.
+// - brand/woordmerk.svg and brand/woordmerk-donker.svg: the wordmark for light and dark mode, written as
+//   the vector image "Wordmark" (cropped to the ink, so it lines up with the text around it).
 import { chromium } from '@playwright/test'
-import { writeFileSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const out = join(here, '..', 'Rondje', 'Resources', 'Assets.xcassets', 'AppIcon.appiconset')
+const assets = join(here, '..', 'Rondje', 'Resources', 'Assets.xcassets')
+const out = join(assets, 'AppIcon.appiconset')
 mkdirSync(out, { recursive: true })
 
-// The dog's face inside the walking loop: the brand mark of the website, made friendlier.
-function face(fur, ears, muzzle, ink) {
-  return `
-  <g transform="translate(512 552) scale(4.3) translate(-60 -62)">
-    <ellipse cx="31" cy="62" rx="11" ry="24" transform="rotate(14 31 62)" fill="${ears}"/>
-    <ellipse cx="89" cy="62" rx="11" ry="24" transform="rotate(-14 89 62)" fill="${ears}"/>
-    <ellipse cx="60" cy="62" rx="34" ry="32" fill="${fur}"/>
-    <ellipse cx="31" cy="62" rx="11" ry="24" transform="rotate(14 31 62)" fill="${ears}"/>
-    <ellipse cx="89" cy="62" rx="11" ry="24" transform="rotate(-14 89 62)" fill="${ears}"/>
-    <circle cx="47" cy="57" r="4.6" fill="${ink}"/><circle cx="73" cy="57" r="4.6" fill="${ink}"/>
-    <circle cx="48.6" cy="55.5" r="1.5" fill="#fff"/><circle cx="74.6" cy="55.5" r="1.5" fill="#fff"/>
-    <ellipse cx="60" cy="76" rx="18" ry="14" fill="${muzzle}"/>
-    <path d="M55.5 80.5 q4.5 11 9 0 z" fill="#e8798a"/>
-    <ellipse cx="60" cy="70" rx="7" ry="5" fill="${ink}"/>
-    <path d="M60 75 v4 M60 79 q-5 4 -9 1 M60 79 q5 4 9 1" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round"/>
-  </g>`
-}
-
-function icon({ bg1, bg2, loop, ball, fur, ears, muzzle, ink, transparent = false }) {
-  const background = transparent
-    ? ''
-    : `<defs><radialGradient id="g" cx="30%" cy="20%" r="95%"><stop offset="0" stop-color="${bg1}"/><stop offset="1" stop-color="${bg2}"/></radialGradient></defs>
-       <rect width="1024" height="1024" fill="url(#g)"/>`
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-    ${background}
-    <circle cx="512" cy="540" r="300" fill="none" stroke="${loop}" stroke-width="62" stroke-linecap="round" stroke-dasharray="76 112.5" transform="rotate(-97.3 512 540)"/>
-    ${face(fur, ears, muzzle, ink)}
-    <circle cx="512" cy="240" r="78" fill="${ball}"/>
-    <path d="M452 214 q60 34 120 0" fill="none" stroke="#000" stroke-opacity="0.16" stroke-width="9" stroke-linecap="round"/>
-  </svg>`
-}
-
 const variants = {
-  'icon-light.png': icon({ bg1: '#2c7a52', bg2: '#163f2b', loop: '#d9f05a', ball: '#d9f05a', fur: '#e2b45c', ears: '#c99540', muzzle: '#f5dfb5', ink: '#1d2421' }),
-  'icon-dark.png': icon({ bg1: '#0f2a1d', bg2: '#06120c', loop: '#d9f05a', ball: '#d9f05a', fur: '#e2b45c', ears: '#c99540', muzzle: '#f5dfb5', ink: '#1d2421', transparent: true }),
-  'icon-tinted.png': icon({ bg1: '#000', bg2: '#000', loop: '#bdbdbd', ball: '#ffffff', fur: '#e6e6e6', ears: '#9a9a9a', muzzle: '#ffffff', ink: '#2a2a2a', transparent: true }),
+  'icon-light.png': { svg: 'icon-light.svg', transparent: false },
+  'icon-dark.png': { svg: 'icon-dark.svg', transparent: true },
+  'icon-tinted.png': { svg: 'icon-tinted.svg', transparent: true },
 }
 
-const browser = await chromium.launch()
+const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH || undefined })
 const page = await browser.newPage({ viewport: { width: 1024, height: 1024 } })
-for (const [name, svg] of Object.entries(variants)) {
-  writeFileSync(join(here, name.replace('.png', '.svg')), svg)
-  await page.setContent(`<html><body style="margin:0;background:transparent">${svg}</body></html>`)
-  await page.locator('svg').screenshot({ path: join(out, name), omitBackground: name !== 'icon-light.png' })
+for (const [name, { svg, transparent }] of Object.entries(variants)) {
+  const source = readFileSync(join(here, svg), 'utf8').replace('<svg ', '<svg width="1024" height="1024" style="display:block" ')
+  await page.setContent(`<html><body style="margin:0;background:transparent">${source}</body></html>`)
+  await page.screenshot({ path: join(out, name), omitBackground: transparent, clip: { x: 0, y: 0, width: 1024, height: 1024 } })
 }
 await browser.close()
 
@@ -65,3 +42,21 @@ writeFileSync(join(out, 'Contents.json'), JSON.stringify({
   info: { author: 'xcode', version: 1 },
 }, null, 2))
 console.log('icons written to', out)
+
+// The wordmark as a vector image set, cropped to the ink (x 3.5-433.9, y -81.1-15.3, plus 1 unit).
+const crop = { x: 2.5, y: -82.13, w: 432.39, h: 98.43 }
+const wordmark = join(assets, 'Wordmark.imageset')
+mkdirSync(wordmark, { recursive: true })
+for (const [file, target] of [['woordmerk.svg', 'wordmark.svg'], ['woordmerk-donker.svg', 'wordmark-dark.svg']]) {
+  const body = readFileSync(join(here, 'brand', file), 'utf8').replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '')
+  writeFileSync(join(wordmark, target), `<svg xmlns="http://www.w3.org/2000/svg" width="${crop.w}" height="${crop.h}" viewBox="0 0 ${crop.w} ${crop.h}"><g transform="translate(${-crop.x} ${-crop.y})">${body}</g></svg>\n`)
+}
+writeFileSync(join(wordmark, 'Contents.json'), JSON.stringify({
+  images: [
+    { filename: 'wordmark.svg', idiom: 'universal' },
+    { appearances: [{ appearance: 'luminosity', value: 'dark' }], filename: 'wordmark-dark.svg', idiom: 'universal' },
+  ],
+  info: { author: 'xcode', version: 1 },
+  properties: { 'preserves-vector-representation': true },
+}, null, 2))
+console.log('wordmark written to', wordmark)
