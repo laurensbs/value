@@ -89,7 +89,7 @@ struct FollowWalkView: View {
                 error = nil
                 if update.status != "active" { return }
             } catch {
-                self.error = error.localizedDescription
+                self.error = error.plainText
             }
             try? await Task.sleep(for: .seconds(5))
         }

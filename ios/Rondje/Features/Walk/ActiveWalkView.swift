@@ -5,6 +5,7 @@ import SwiftUI
 struct ActiveWalkView: View {
     @Environment(WalkTracker.self) private var walk
     @Environment(AppModel.self) private var model
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var camera: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
     @State private var sos = false
     @State private var ending = false
@@ -30,7 +31,7 @@ struct ActiveWalkView: View {
 
             if let finished {
                 WalkDoneFlow(info: finished.info, distance: finished.distance, care: care, photoCount: photos.count)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))
             } else if let info = walk.info {
                 panel(info)
             }
@@ -72,7 +73,7 @@ struct ActiveWalkView: View {
         .sheet(isPresented: $sos) {
             if let info = walk.info { SOSSheet(info: info).presentationDetents([.large]) }
         }
-        .animation(.spring(duration: 0.5), value: finished?.info.walkId)
+        .animation(Motion.or(Motion.scherm, reduce: reduceMotion), value: finished?.info.walkId)
         .interactiveDismissDisabled()
     }
 
@@ -169,7 +170,8 @@ struct ActiveWalkView: View {
             let distance = try await walk.finish()
             WalkLog.record(WalkLogEntry(walkId: info.walkId, dogId: model.appointments.outgoing.first { $0.walkId == info.walkId }?.dog.id, dogName: info.dogName, look: info.look, side: "walker", person: nil, distanceM: distance, minutes: max(1, Int(Date.now.timeIntervalSince(info.startedAt) / 60)), photos: photos.count, date: info.startedAt))
             let endedAt = Date.now
-            Haptics.success(.finish)
+            // Felt and heard once, here: the done screen itself stays quiet. After an SOS report, only a soft tap.
+            if Keepsakes.shared.reported(walkId: info.walkId) { Haptics.tap() } else { Haptics.success(.finish) }
             finished = (info, distance)
             let route = walk.locations
             Task {
@@ -180,7 +182,7 @@ struct ActiveWalkView: View {
             await model.refreshAppointments()
         } catch {
             Haptics.error()
-            self.error = error.localizedDescription
+            self.error = error.plainText
             holdProgress = 0
         }
     }
@@ -316,7 +318,7 @@ struct FeedbackSheet: View {
             close()
             Task { await model.refreshAppointments() }
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

@@ -60,7 +60,7 @@ struct LevelCard: View {
                     Text("Nog \(max(0, next - progress.points)) punten tot \(nextName)")
                         .font(.subheadline).foregroundStyle(Palette.onGrass.opacity(0.85))
                 } else {
-                    Text("Hoogste niveau. Wat een rondjes!").font(.subheadline).foregroundStyle(Palette.onGrass.opacity(0.85))
+                    Text("Hoogste level. Wat een rondjes!").font(.subheadline).foregroundStyle(Palette.onGrass.opacity(0.85))
                 }
                 let earned = progress.badges.filter { $0.tier > 0 }.count
                 Label("\(earned) badges", systemImage: "rosette").font(.caption.weight(.semibold)).foregroundStyle(Palette.ball)
@@ -142,7 +142,7 @@ struct BadgesView: View {
             .padding(20)
         }
         .screenBackground()
-        .navigationTitle("Jouw niveau")
+        .navigationTitle("Jouw level")
         .task {
             await store.load()
             goal = store.progress?.week?.goal
@@ -230,10 +230,14 @@ struct BadgesView: View {
 }
 
 /// A short celebration for a new level or badge. Shown once, then marked as seen.
+/// The ball pops in, the name of the level follows at 350 ms. With Reduce Motion nothing moves:
+/// no confetti, the ball and text only fade in. The haptic and the sound stay, once.
 struct LevelUpView: View {
     let progress: Progress
     var close: () -> Void
     @State private var pop = false
+    @State private var named = false
+    @State private var played = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
@@ -249,26 +253,42 @@ struct LevelUpView: View {
                     .foregroundStyle(Palette.onBall)
                     .frame(width: 140, height: 140)
                     .background(Palette.ball, in: .circle)
-                    .scaleEffect(pop ? 1 : 0.3)
+                    .scaleEffect(pop || reduceMotion ? 1 : 0.3)
+                    .opacity(pop ? 1 : 0)
             }
             .frame(height: 280)
             Guus(mood: .proud, size: 72)
-            if progress.levelUp {
-                Text("Nieuw niveau!").font(.title3.weight(.semibold)).foregroundStyle(Palette.onWalk.opacity(0.85))
-                Text(progress.level.name).font(.display(36)).foregroundStyle(Palette.onWalk)
+            Group {
+                if progress.levelUp {
+                    Text("Nieuw level").font(.title3.weight(.semibold)).foregroundStyle(Palette.onWalk.opacity(0.85))
+                    Text(progress.level.name).font(.display(36)).foregroundStyle(Palette.onWalk)
+                }
+                ForEach(progress.newAwards ?? [], id: \.self) { a in
+                    Label(a.title ?? a.name, systemImage: "rosette").font(.headline).foregroundStyle(Palette.ball)
+                }
             }
-            ForEach(progress.newAwards ?? [], id: \.self) { a in
-                Label(a.title ?? a.name, systemImage: "rosette").font(.headline).foregroundStyle(Palette.ball)
-            }
+            .opacity(named ? 1 : 0)
+            .offset(y: named || reduceMotion ? 0 : 8)
             Spacer()
             Button("Verder") { close() }.buttonStyle(.ball)
         }
         .padding(24)
         .frame(maxWidth: .infinity)
         .background(Palette.walkBackground.ignoresSafeArea())
-        .onAppear {
+        .task {
+            guard !played else { return }
+            played = true
             Haptics.success(.levelUp)
-            withAnimation(.spring(duration: 0.9, bounce: 0.5)) { pop = true }
+            if reduceMotion {
+                withAnimation(Motion.vervaag) {
+                    pop = true
+                    named = true
+                }
+                return
+            }
+            withAnimation(Motion.pop) { pop = true }
+            try? await Task.sleep(for: .milliseconds(350))
+            withAnimation(Motion.klein) { named = true }
         }
     }
 }

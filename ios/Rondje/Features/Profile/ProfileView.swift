@@ -99,7 +99,7 @@ struct ProfileView: View {
     private var links: some View {
         VStack(spacing: 0) {
             NavigationLink { BadgesView() } label: {
-                row("rosette", L("Jouw niveau en badges"), ProgressStore.shared.progress.map { "\($0.level.name) · \($0.points) " + L("punten") })
+                row("rosette", L("Jouw level en badges"), ProgressStore.shared.progress.map { "\($0.level.name) · \($0.points) " + L("punten") })
             }
             Divider().padding(.leading, 56)
             NavigationLink { RoleView() } label: {
@@ -222,7 +222,7 @@ struct DeleteAccountSheet: View {
             dismiss()
             model.reset()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

@@ -10,8 +10,8 @@ enum APIError: LocalizedError, Equatable {
         switch self {
         case .server(_, let message): message
         case .unauthorized: L("Log opnieuw in om verder te gaan.")
-        case .offline: L("Geen verbinding. Controleer je internet en probeer het opnieuw.")
-        case .unexpected: L("Er ging iets mis. Probeer het opnieuw.")
+        case .offline: L("Dat lukte even niet. Controleer je verbinding en probeer het opnieuw.")
+        case .unexpected: L("Er ging iets mis aan onze kant. Probeer het zo nog eens.")
         }
     }
 
@@ -19,6 +19,18 @@ enum APIError: LocalizedError, Equatable {
         if case .server(let code, _) = self { return code }
         return nil
     }
+}
+
+extension Error {
+    /// A plain sentence for people, never the system's technical text. The server's own messages are
+    /// written for people already; anything else becomes "no connection" or "something on our side".
+    var plainText: String {
+        let error = self as? APIError ?? (self is URLError ? .offline : .unexpected)
+        return error.errorDescription ?? ""
+    }
+
+    /// No connection (as opposed to a problem on the server's side).
+    var isOffline: Bool { (self as? APIError) == .offline || self is URLError }
 }
 
 /// Talks to the Rondje API over HTTPS with the session token from the Keychain.

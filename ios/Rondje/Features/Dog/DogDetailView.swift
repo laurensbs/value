@@ -17,7 +17,10 @@ struct DogDetailView: View {
                 if let detail {
                     content(detail)
                 } else if let error {
-                    EmptyState(symbol: "exclamationmark.triangle", title: L("Niet gelukt"), text: error)
+                    EmptyState(
+                        symbol: "exclamationmark.triangle", title: L("Niet gelukt"), text: error,
+                        actionTitle: L("Probeer opnieuw"), action: { Task { await load(retry: true) } }
+                    )
                 } else {
                     ProgressView().frame(maxWidth: .infinity).padding(40)
                 }
@@ -46,7 +49,7 @@ struct DogDetailView: View {
         .task { await load() }
         .sheet(item: $requestKind) { kind in
             if let detail {
-                RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind, isShelter: detail.host.isShelter) { await load() }
+                RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind, host: detail.host) { await load() }
                     .presentationDetents([.large])
                     .presentationCornerRadius(32)
             }
@@ -232,12 +235,17 @@ struct DogDetailView: View {
         Label { Text(text).font(.subheadline) } icon: { Image(systemName: symbol).foregroundStyle(tint) }
     }
 
-    private func load() async {
+    /// `retry`: the person tapped "Probeer opnieuw", so a new failure is felt once.
+    private func load(retry: Bool = false) async {
         do {
             let d: DogDetail = try await APIClient.shared.get("/api/v1/dogs/\(dogId)")
-            withAnimation(.smooth) { detail = d }
+            withAnimation(Motion.scherm) {
+                detail = d
+                error = nil
+            }
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
+            if retry { Haptics.error() }
         }
     }
 }

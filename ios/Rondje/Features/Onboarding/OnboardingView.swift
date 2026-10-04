@@ -60,7 +60,7 @@ struct OnboardingView: View {
                 Button {
                     next()
                 } label: {
-                    if busy { ProgressView().tint(Palette.onGrass) } else { Text(step == steps - 1 ? L("Klaar, laat me honden zien") : L("Verder")) }
+                    if busy { ProgressView().tint(Palette.onGrass) } else { Text(step == steps - 1 ? L("Laat me de honden zien") : L("Verder")) }
                 }
                 .buttonStyle(.primary)
                 .disabled(!canContinue || busy)
@@ -247,7 +247,7 @@ struct OnboardingView: View {
             await model.refreshMe()
         } catch {
             Haptics.error()
-            withAnimation { self.error = error.localizedDescription }
+            withAnimation { self.error = error.plainText }
         }
     }
 }

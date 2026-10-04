@@ -289,7 +289,7 @@ struct QuizGameView: View {
                 AccessibilityNotification.Announcement(L("Bijna! Kijk vraag \(first + 1) nog even na.")).post()
             }
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
             withAnimation(.smooth) { stage = .questions }
         }
     }
@@ -339,7 +339,7 @@ struct QuizGameView: View {
         do {
             quiz = try await APIClient.shared.get("/api/v1/quiz")
         } catch {
-            loadError = error.localizedDescription
+            loadError = error.plainText
         }
     }
 }

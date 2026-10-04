@@ -71,7 +71,7 @@ struct RoleView: View {
             Haptics.success()
             await model.refreshMe()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

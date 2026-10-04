@@ -73,7 +73,7 @@ struct ReportSheet: View {
             model.show(L("Bedankt. We kijken ernaar."), symbol: "shield.lefthalf.filled")
             dismiss()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

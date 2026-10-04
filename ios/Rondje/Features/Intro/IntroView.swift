@@ -29,8 +29,8 @@ struct IntroView: View {
             Page(id: 3, title: L("Samen op pad"),
                  text: L("Daarna wandel je zelfstandig. De eigenaar kijkt live mee, en jij stuurt een foto of een plasje door."),
                  looks: [Self.brown], tint: Palette.warnSoft, symbol: "figure.walk"),
-            Page(id: 4, title: L("Goed voor jullie allebei"),
-                 text: L("Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig."),
+            Page(id: 4, title: L("Even naar buiten"),
+                 text: L("Een vaste afspraak, en een hond die blij is dat je komt. Gratis en zonder reclame."),
                  looks: [Self.golden, Self.brown], tint: Palette.grassSoft, symbol: "heart.fill"),
         ]
     }

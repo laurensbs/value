@@ -96,7 +96,7 @@ struct ChatView: View {
             await model.refreshAppointments()
         } catch {
             Haptics.error()
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 
@@ -229,7 +229,7 @@ struct ChatView: View {
             if !messages.contains(where: { $0.id == r.chat.id }) { withAnimation(.snappy) { messages.append(r.chat) } }
         } catch {
             Haptics.error()
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

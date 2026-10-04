@@ -139,7 +139,7 @@ struct SocialSignInButtons: View {
         } catch is CancellationError {
             return
         } catch {
-            fail(error.localizedDescription)
+            fail(error.plainText)
         }
     }
 

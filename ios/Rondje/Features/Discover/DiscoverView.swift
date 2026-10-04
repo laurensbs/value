@@ -4,12 +4,15 @@ import SwiftUI
 /// Dogs near you, as a list or on a map, plus supervised group walks at shelters.
 struct DiscoverView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.openURL) private var openURL
     @Namespace private var zoom
 
     @State private var dogs: [DogCard] = []
     @State private var groupWalks: [GroupWalk] = []
     @State private var loading = true
     @State private var error: String?
+    /// The last load failed for lack of a connection (not on the server's side).
+    @State private var offline = false
     @State private var showMap = false
     @State private var filter: Filter = .all
     @State private var query = ""
@@ -155,7 +158,7 @@ struct DiscoverView: View {
             HStack(spacing: 8) {
                 ForEach(Filter.allCases) { f in
                     Button {
-                        withAnimation(.snappy) { filter = f }
+                        withAnimation(Motion.klein) { filter = f }
                     } label: {
                         Label(f.title, systemImage: f.symbol)
                             .font(.subheadline.weight(.semibold))
@@ -163,6 +166,9 @@ struct DiscoverView: View {
                             .padding(.vertical, 9)
                             .foregroundStyle(filter == f ? Palette.onGrass : Palette.ink)
                             .background(filter == f ? Palette.grass : Palette.surface, in: .capsule)
+                            // The chip looks 38 points tall, but the tap area is 44.
+                            .frame(minHeight: 44)
+                            .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
                 }
@@ -181,9 +187,39 @@ struct DiscoverView: View {
                     .redacted(reason: .placeholder)
             }
         } else if let error, dogs.isEmpty {
-            EmptyState(symbol: "wifi.exclamationmark", title: L("Even geen verbinding"), text: error)
+            EmptyState(
+                symbol: offline ? "wifi.exclamationmark" : "exclamationmark.triangle",
+                title: offline ? L("Even geen verbinding") : L("Niet gelukt"), text: error,
+                actionTitle: L("Probeer opnieuw"), action: { Task { await load(retry: true) } }
+            )
+        } else if dogs.isEmpty {
+            // Honest: there are few dogs yet. Help bring one in instead of promising more.
+            EmptyState(
+                symbol: "pawprint", title: L("Nog geen honden hier"),
+                text: L("We zijn hier net begonnen. Ken je iemand wiens hond vaker naar buiten wil? Stuur je link, of tip een opvang.")
+            ) {
+                VStack(spacing: 10) {
+                    if let link = ownerInvite {
+                        ShareLink(item: link, message: Text("Ken je \(Brand.name)? Iemand uit de buurt loopt gratis een rondje met je hond. De eerste keer lopen jullie samen.")) {
+                            Label("Stuur je link", systemImage: "square.and.arrow.up")
+                        }
+                        .buttonStyle(.primary)
+                    }
+                    Button("Tip een opvang") { openURL(Brand.web("/suggest")) }
+                        .buttonStyle(.secondary)
+                }
+            }
         } else if visible.isEmpty {
-            EmptyState(symbol: "pawprint", title: L("Nog geen honden hier"), text: L("Er komen steeds meer honden bij. Kijk later nog eens, of tip een opvang op de website."))
+            EmptyState(
+                symbol: "line.3.horizontal.decrease", title: L("Geen honden gevonden"),
+                text: L("Met dit filter of deze zoekterm is er nu geen hond."),
+                actionTitle: L("Toon alle honden"), action: {
+                    withAnimation(Motion.klein) {
+                        filter = .all
+                        query = ""
+                    }
+                }
+            )
         } else {
             LazyVStack(spacing: 18) {
                 ForEach(Array(visible.enumerated()), id: \.element.id) { index, dog in
@@ -211,7 +247,14 @@ struct DiscoverView: View {
         }
     }
 
-    private func load() async {
+    /// Your invite link for someone with a dog: it opens sign-up as an owner and remembers who sent it.
+    private var ownerInvite: URL? {
+        guard let code = model.me?.profile?.referralCode, !code.isEmpty else { return nil }
+        return Brand.share("/r/\(code)").appending(queryItems: [URLQueryItem(name: "intent", value: "owner")])
+    }
+
+    /// `retry`: the person tapped "Probeer opnieuw", so a new failure is felt once.
+    private func load(retry: Bool = false) async {
         loading = true
         defer { loading = false }
         var path = "/api/v1/dogs"
@@ -221,13 +264,15 @@ struct DiscoverView: View {
         async let g: GroupWalksResponse = APIClient.shared.get("/api/v1/group-walks")
         do {
             let dr = try await d
-            withAnimation(.smooth) {
+            withAnimation(Motion.scherm) {
                 dogs = dr.dogs
                 error = nil
             }
             Cache.save(Array(dr.dogs.filter { !$0.isDemo && $0.energy == "calm" }.prefix(10)), as: "nearbyDogs")
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
+            offline = error.isOffline
+            if retry { Haptics.error() }
         }
         if let gr = try? await g {
             withAnimation(.smooth) { groupWalks = gr.groupWalks }
@@ -365,7 +410,7 @@ struct GroupWalkCard: View {
             await changed()
         } catch {
             Haptics.error()
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 }

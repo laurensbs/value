@@ -144,7 +144,7 @@ struct HomecomingCard: View {
             model.celebrate(.tap)
             finishIfDone()
         } catch {
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 

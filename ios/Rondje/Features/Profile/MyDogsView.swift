@@ -194,7 +194,7 @@ struct AddDogView: View {
             do {
                 urls.append(try await ImageTools.upload(image))
             } catch {
-                self.error = error.localizedDescription
+                self.error = error.plainText
                 return
             }
         }
@@ -212,7 +212,7 @@ struct AddDogView: View {
             await saved()
             dismiss()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

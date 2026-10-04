@@ -25,6 +25,29 @@ enum Palette {
     static let onWalk = Color(light: 0xFFFFFF, dark: 0xE7EEE8)
 }
 
+/// One motion language, the same six values as the website (web/src/app/globals.css: --motion-*).
+/// Something appearing may take a little longer than something leaving. With Reduce Motion, use
+/// `Motion.or(_:reduce:)`: then nothing moves, it only fades.
+enum Motion {
+    /// Pressing a button (scale 0.97). Web: 120 ms.
+    static let tik = Animation.spring(response: 0.25, dampingFraction: 0.7)
+    /// A tick, chip, status label or counter. Web: 200 ms.
+    static let klein = Animation.spring(response: 0.3, dampingFraction: 0.85)
+    /// A step, sheet or card coming in. Web: 320 ms.
+    static let scherm = Animation.spring(response: 0.4, dampingFraction: 0.9)
+    /// Something leaving. Web: 200 ms.
+    static let weg = Animation.easeIn(duration: 0.2)
+    /// A paw, level ball or tick appearing: about 6% overshoot, cheerful without bouncing. Web: 500 ms.
+    static let pop = Animation.spring(response: 0.5, dampingFraction: 0.65)
+    /// The breathing minute: 4 seconds in, 6 seconds out.
+    static func adem(in breathingIn: Bool) -> Animation { .easeInOut(duration: breathingIn ? 4 : 6) }
+
+    /// With Reduce Motion: only opacity, in 200 ms.
+    static let vervaag = Animation.easeInOut(duration: 0.2)
+
+    static func or(_ animation: Animation, reduce: Bool) -> Animation { reduce ? vervaag : animation }
+}
+
 extension Color {
     init(hex: UInt32, opacity: Double = 1) {
         self.init(

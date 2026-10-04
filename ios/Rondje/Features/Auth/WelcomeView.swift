@@ -7,6 +7,9 @@ struct WelcomeView: View {
     @State private var social = SocialSignIn.shared
     @State private var height: CGFloat = 900
     @AppStorage("introRole") private var role = ""
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// The dogs bob twice when the screen opens, then stand still. Never with Reduce Motion.
+    @State private var wiggle = false
 
     private let looks: [DogLook] = [
         DogLook(fur: "#e2b45c", ears: "#c99540", muzzle: "#f2d79b", earStyle: "floppy", head: "round", tongue: true, collar: "#1f5a3d", tile: "#f6ebcf"),
@@ -27,12 +30,12 @@ struct WelcomeView: View {
                         .rotationEffect(.degrees(Double(i - 1) * 9))
                         .offset(x: CGFloat(i - 1) * 96, y: i == 1 ? -18 : 14)
                         .shadow(color: .black.opacity(0.12), radius: 16, y: 10)
-                        // Only the bobbing repeats: a phase animator keeps layout changes (such as the
-                        // sign-in buttons appearing) out of the endless animation.
-                        .phaseAnimator([false, true]) { portrait, up in
-                            portrait.offset(y: up ? (i == 1 ? -6 : 4) : 0)
+                        // Two bobs (up, down, up, down), then still. A phase animator keeps layout changes
+                        // (such as the sign-in buttons appearing) out of the bobbing.
+                        .phaseAnimator([0, 1, 2, 3], trigger: wiggle) { portrait, phase in
+                            portrait.offset(y: phase % 2 == 1 ? (i == 1 ? -6 : 4) : 0)
                         } animation: { _ in
-                            .easeInOut(duration: 2.2).delay(Double(i) * 0.3)
+                            .easeInOut(duration: 1.1).delay(Double(i) * 0.15)
                         }
                 }
             }
@@ -73,7 +76,13 @@ struct WelcomeView: View {
         .screenBackground()
         .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { height = $0 }
         .task { await social.load() }
-        .animation(.snappy, value: social.options)
+        .task {
+            // A moment after the screen settles, so the change of trigger is seen.
+            guard !reduceMotion else { return }
+            try? await Task.sleep(for: .milliseconds(400))
+            wiggle = true
+        }
+        .animation(reduceMotion ? nil : Motion.scherm, value: social.options)
         .sheet(item: $mode) { mode in
             AuthView(mode: mode)
                 .presentationDetents([.large])

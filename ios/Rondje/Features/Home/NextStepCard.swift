@@ -196,7 +196,7 @@ struct NextStepCard: View {
             Haptics.success()
         } catch {
             Haptics.error()
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 }

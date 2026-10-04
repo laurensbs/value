@@ -110,7 +110,10 @@ struct AppointmentCard: View {
     @Environment(AppModel.self) private var model
     @Environment(WalkTracker.self) private var walk
     @Environment(\.openURL) private var openURL
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var busy = false
+    /// Just accepted here: the card says once that you now see each other's contact details.
+    @State private var justAccepted = false
     @State private var confirmCancel = false
     @State private var trustSheet = false
     @State private var following: String?
@@ -130,6 +133,7 @@ struct AppointmentCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     let status = item.isCall && item.status == "completed" ? (L("Gesprek gehad"), Palette.calm, Palette.calmSoft) : Labels.status(item.status)
                     Chip(text: status.0, tint: status.1, soft: status.2)
+                        .contentTransition(.opacity)
                     Text(item.isMeeting ? L("Kennismaking met \(item.dog.name)") : L("Rondje met \(item.dog.name)"))
                         .font(.headline)
                     if item.isMeeting {
@@ -162,22 +166,31 @@ struct AppointmentCard: View {
             }
             if item.status == "accepted", !item.dog.meetingInfo.isEmpty, !item.isCall {
                 Label(item.dog.meetingInfo, systemImage: "mappin.and.ellipse").font(.subheadline)
+                    .transition(opening)
             }
             meetNote
             contact
+            if justAccepted && item.status == "accepted" {
+                Label("Jullie zien elkaars contactgegevens nu.", systemImage: "checkmark.circle.fill")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Palette.grass)
+                    .transition(opening)
+            }
             PrepLink(item: item, asOwner: asOwner)
             actions
         }
+        // Accepting: the label turns to "Afgesproken" (klein) and the contact details slide open (scherm).
+        .animation(Motion.or(Motion.scherm, reduce: reduceMotion), value: item.status)
         .overlay(RoundedRectangle(cornerRadius: 24, style: .continuous).strokeBorder(Palette.ball, lineWidth: highlighted ? 3 : 0).animation(.easeInOut, value: highlighted))
         .sheet(item: $planInPerson) { detail in
-            RequestFlow(dog: detail.dog, slots: detail.slots, kind: .meet, isShelter: detail.host.isShelter, via: .walk) {}
+            RequestFlow(dog: detail.dog, slots: detail.slots, kind: .meet, host: detail.host, via: .walk) {}
                 .presentationDetents([.large])
                 .presentationCornerRadius(32)
         }
         .sheet(isPresented: $trustSheet) {
             if let walker = item.walker {
                 TrustSheet(item: item, walker: walker)
-                    .presentationDetents([.medium])
+                    .presentationDetents([.medium, .large])
             }
         }
         .fullScreenCover(item: Binding(get: { following.map(FollowID.init) }, set: { following = $0?.id })) { f in
@@ -212,6 +225,11 @@ struct AppointmentCard: View {
     }
 
     private struct FollowID: Identifiable { let id: String }
+
+    /// Contact details and the meeting place open with opacity and 8 points of movement; only fading with Reduce Motion.
+    private var opening: AnyTransition {
+        reduceMotion ? .opacity : .opacity.combined(with: .offset(y: 8))
+    }
 
     /// What to know about this way of meeting: safety for a visit at home; for a call, how to reach
     /// each other and that it does not count as meeting in person.
@@ -255,9 +273,11 @@ struct AppointmentCard: View {
                 }
                 if item.status == "accepted", let phone, let url = URL(string: "tel:\(phone.filter { $0.isNumber || $0 == "+" })") {
                     Button("Bel", systemImage: "phone.fill") { openURL(url) }.buttonStyle(.bordered)
+                        .transition(opening)
                 }
                 if item.status == "accepted", let email, let url = URL(string: "mailto:\(email)") {
                     Button("Mail", systemImage: "envelope.fill") { openURL(url) }.buttonStyle(.bordered)
+                        .transition(opening)
                 }
             }
             .tint(Palette.grass)
@@ -323,16 +343,18 @@ struct AppointmentCard: View {
             let _: OK = try await APIClient.shared.post("/api/v1/requests/\(item.id)", ["action": action])
             switch action {
             case "accept":
+                // The card itself is the moment: no banner on top of it.
                 Haptics.success()
-                model.show(L("Geaccepteerd. Jullie zien elkaars contactgegevens nu."))
-                await Reminders.askIfNeeded()
+                justAccepted = true
+                AccessibilityNotification.Announcement(L("Afgesproken")).post()
             case "decline": model.show(L("Afgewezen"), symbol: "hand.raised.fill", tint: Palette.muted)
             default: model.show(L("Geannuleerd"), symbol: "xmark.circle.fill", tint: Palette.muted)
             }
             await model.refreshAppointments()
+            if action == "accept" { await Reminders.askIfNeeded() }
         } catch {
             Haptics.error()
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 
@@ -343,7 +365,7 @@ struct AppointmentCard: View {
             planInPerson = try await APIClient.shared.get("/api/v1/dogs/\(item.dog.id)")
         } catch {
             Haptics.error()
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 
@@ -355,60 +377,200 @@ struct AppointmentCard: View {
             Haptics.success(.start)
         } catch {
             Haptics.error()
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 }
 
 /// After meeting: the owner records that they saw the walker's ID and may allow solo walks.
+/// Saving shows the trust ladder (meeting, ID seen, solo) instead of a "saved" banner.
 struct TrustSheet: View {
     let item: Appointment
     let walker: Appointment.Walker
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var idSeen = false
     @State private var solo = false
+    @State private var busy = false
     @State private var error: String?
+    /// What the owner saved, shown as the ladder.
+    @State private var saved: Saved?
+    /// How many rungs of the ladder are ticked so far.
+    @State private var ticked = 0
+
+    private struct Saved: Equatable { var idSeen: Bool; var solo: Bool; var gave: Bool }
+    private struct Rung { var title: String; var symbol: String; var done: Bool }
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    Toggle("Ik heb het ID van \(walker.firstName) in het echt gezien", isOn: $idSeen)
-                    if !item.dog.isShelter {
-                        Toggle("\(walker.firstName) mag zelfstandig met \(item.dog.name) wandelen", isOn: $solo)
-                    }
-                } footer: {
-                    Text("\(Brand.name) bewaart nooit een kopie van een ID. Zelfstandig wandelen kan pas als \(walker.firstName) ook de veiligheidsquiz heeft gehaald.")
+            Group {
+                if let saved {
+                    ladder(saved)
+                        .transition(.opacity)
+                } else {
+                    form
                 }
-                if let error { Text(error).foregroundStyle(Palette.danger) }
             }
-            .tint(Palette.grass)
-            .rondjeForm()
             .navigationTitle("Vertrouwen")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Annuleer") { dismiss() } }
-                ToolbarItem(placement: .confirmationAction) { Button("Bewaar") { Task { await save() } } }
-            }
-            .onAppear {
-                idSeen = item.trust?.idSeen ?? false
-                solo = item.trust?.soloAllowed ?? false
+                if saved == nil {
+                    ToolbarItem(placement: .cancellationAction) { Button("Annuleer") { dismiss() } }
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Bewaar") { Task { await save() } }.disabled(busy)
+                    }
+                }
             }
         }
+    }
+
+    private var form: some View {
+        Form {
+            Section {
+                Toggle("Ik heb het ID van \(walker.firstName) in het echt gezien", isOn: $idSeen)
+                if !item.dog.isShelter {
+                    Toggle("\(walker.firstName) mag zelfstandig met \(item.dog.name) wandelen", isOn: $solo)
+                }
+            } footer: {
+                Text("\(Brand.name) bewaart nooit een kopie van een ID. Zelfstandig wandelen kan pas als \(walker.firstName) ook de veiligheidsquiz heeft gehaald.")
+            }
+            if let error { Text(error).foregroundStyle(Palette.danger) }
+        }
+        .tint(Palette.grass)
+        .rondjeForm()
+        .onAppear {
+            idSeen = item.trust?.idSeen ?? false
+            solo = item.trust?.soloAllowed ?? false
+        }
+    }
+
+    // MARK: Ladder
+
+    private func rungs(_ saved: Saved) -> [Rung] {
+        var list = [
+            Rung(title: L("Kennismaking"), symbol: "person.2.fill", done: true),
+            Rung(title: L("ID gezien"), symbol: "person.text.rectangle.fill", done: saved.idSeen),
+        ]
+        // Shelter dogs are only walked in a supervised group: there is no solo rung.
+        if !item.dog.isShelter {
+            list.append(Rung(title: L("Mag zelfstandig"), symbol: "figure.walk", done: saved.solo))
+        }
+        return list
+    }
+
+    private func headline(_ saved: Saved) -> (String, String?) {
+        if saved.solo {
+            return (L("\(walker.firstName) mag nu zelfstandig met \(item.dog.name) op pad."),
+                    L("Je kijkt bij elk rondje live mee, en je kunt dit altijd weer uitzetten."))
+        }
+        if saved.idSeen {
+            return (L("Je hebt het ID van \(walker.firstName) gezien."),
+                    item.dog.isShelter ? nil : L("Zelfstandig wandelen kun je later altijd nog toestaan."))
+        }
+        return (L("Jullie lopen voorlopig samen."), nil)
+    }
+
+    private func ladder(_ saved: Saved) -> some View {
+        let list = rungs(saved)
+        let (title, text) = headline(saved)
+        return VStack(spacing: 20) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        ForEach(Array(list.enumerated()), id: \.offset) { i, rung in
+                            rungRow(rung, ticked: i < ticked, last: i == list.count - 1)
+                        }
+                    }
+                    Text(title)
+                        .font(.display(24))
+                        .foregroundStyle(Palette.ink)
+                        .accessibilityAddTraits(.isHeader)
+                    if let text {
+                        Text(text).foregroundStyle(Palette.muted)
+                    }
+                }
+                .padding(24)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .scrollBounceBehavior(.basedOnSize)
+            Button("Klaar") { dismiss() }
+                .buttonStyle(.primary)
+                .padding(.horizontal, 24)
+                .padding(.bottom, 12)
+        }
+        .screenBackground()
+        .task { await tick(list, gave: saved.gave) }
+    }
+
+    private func rungRow(_ rung: Rung, ticked: Bool, last: Bool) -> some View {
+        let checked = ticked && rung.done
+        return HStack(alignment: .top, spacing: 14) {
+            VStack(spacing: 0) {
+                ZStack {
+                    Circle().fill(rung.done ? Palette.grassSoft : Palette.sunken)
+                    Image(systemName: rung.symbol)
+                        .font(.headline)
+                        .foregroundStyle(rung.done ? Palette.grass : Palette.muted)
+                        .opacity(checked ? 0 : 1)
+                    Image(systemName: "checkmark")
+                        .font(.headline.weight(.heavy))
+                        .foregroundStyle(Palette.onBall)
+                        .frame(width: 44, height: 44)
+                        .background(Palette.ball, in: .circle)
+                        .scaleEffect(checked || reduceMotion ? 1 : 0.6)
+                        .opacity(checked ? 1 : 0)
+                }
+                .frame(width: 44, height: 44)
+                if !last {
+                    Rectangle()
+                        .fill(checked ? Palette.grass : Palette.line)
+                        .frame(width: 3, height: 22)
+                }
+            }
+            Text(rung.title)
+                .font(.headline)
+                .foregroundStyle(rung.done ? Palette.ink : Palette.muted)
+                .padding(.top, 11)
+            Spacer(minLength: 0)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(rung.title)
+        .accessibilityAddTraits(rung.done ? .isSelected : [])
+    }
+
+    /// The ticks pop 120 ms apart (150 ms and only fading with Reduce Motion). After the last one,
+    /// once, the success haptic and sound, but only when something was newly given.
+    private func tick(_ list: [Rung], gave: Bool) async {
+        guard ticked == 0 else { return }
+        let gap = reduceMotion ? 150 : 120
+        try? await Task.sleep(for: .milliseconds(250))
+        for i in list.indices {
+            guard !Task.isCancelled else { return }
+            withAnimation(Motion.or(Motion.pop, reduce: reduceMotion)) { ticked = i + 1 }
+            try? await Task.sleep(for: .milliseconds(gap))
+        }
+        guard gave, !Task.isCancelled else { return }
+        try? await Task.sleep(for: .milliseconds(200))
+        Haptics.success()
     }
 
     private struct Payload: Encodable { var action = "trust"; var dogId, walkerId: String; var idSeen, soloAllowed: Bool }
 
     private func save() async {
+        guard !busy else { return }
+        busy = true
+        defer { busy = false }
+        let given = (idSeen && item.trust?.idSeen != true) || (solo && item.trust?.soloAllowed != true)
         do {
             let _: OK = try await APIClient.shared.post("/api/v1/requests/\(item.id)", Payload(dogId: item.dog.id, walkerId: walker.id, idSeen: idSeen, soloAllowed: solo))
-            Haptics.success()
-            model.show(L("Opgeslagen"))
+            let result = Saved(idSeen: idSeen, solo: solo && !item.dog.isShelter, gave: given)
+            withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { saved = result }
+            AccessibilityNotification.Announcement(headline(result).0).post()
             await model.refreshAppointments()
-            dismiss()
         } catch {
-            self.error = error.localizedDescription
+            Haptics.error()
+            self.error = error.plainText
         }
     }
 }

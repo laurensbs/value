@@ -16,8 +16,9 @@ struct RequestFlow: View {
     let dog: DogFull
     let slots: [Slot]
     let kind: Kind
-    /// A shelter dog: met on the shelter's location, during a walk (the server enforces this too).
-    let isShelter: Bool
+    /// The owner or shelter: named in the confirmation. A shelter dog is met on the shelter's
+    /// location, during a walk (the server enforces this too).
+    let host: Host
     let prefill: RequestPrefill?
     var sent: () async -> Void
 
@@ -40,18 +41,20 @@ struct RequestFlow: View {
     @State private var busy = false
     @State private var error: String?
     @State private var outcome: Outcome?
+    /// The confirmation comes in piece by piece: the paper plane, the text, then the three steps.
+    @State private var shown = 0
     @State private var toLessons = false
 
     private struct Outcome: Equatable { var flagged: Bool }
     private static let steps = 3
     private static let maxMessage = 800
 
-    init(dog: DogFull, slots: [Slot], kind: Kind, isShelter: Bool = false, via: MeetVia = .walk,
+    init(dog: DogFull, slots: [Slot], kind: Kind, host: Host, via: MeetVia = .walk,
          prefill: RequestPrefill? = nil, sent: @escaping () async -> Void) {
         self.dog = dog
         self.slots = slots
         self.kind = kind
-        self.isShelter = isShelter
+        self.host = host
         self.prefill = prefill
         self.sent = sent
         let calendar = Calendar.current
@@ -69,7 +72,7 @@ struct RequestFlow: View {
     private var when: Date? { custom ? customDate : picked }
     private var title: String { kind == .meet ? L("Kennismaken met \(dog.name)") : L("Rondje met \(dog.name)") }
     /// A shelter meets on its own location, during a walk; a solo walk is always a walk.
-    private var choosesVia: Bool { kind == .meet && !isShelter }
+    private var choosesVia: Bool { kind == .meet && !host.isShelter }
     private var meetVia: MeetVia { choosesVia ? via : .walk }
 
     var body: some View {
@@ -103,7 +106,7 @@ struct RequestFlow: View {
         }
         .padding(.horizontal, 24)
         .padding(.top, 16)
-        .animation(.snappy, value: step)
+        .animation(Motion.klein, value: step)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(L("Stap \(step + 1) van 3"))
 
@@ -217,7 +220,7 @@ struct RequestFlow: View {
             ForEach(MeetVia.allCases) { option in
                 tile(option.title, caption: via == option ? option.hint : nil, symbol: option.symbol, selected: via == option) {
                     Haptics.tap()
-                    withAnimation(.snappy) { via = option }
+                    withAnimation(Motion.klein) { via = option }
                 }
             }
             switch via {
@@ -359,8 +362,8 @@ struct RequestFlow: View {
         kind == .meet && model.me?.profile?.quizPassed != true && Keepsakes.shared.lessonsDone.count < 5
     }
 
-    /// The sheet itself is the confirmation: no banner on top of it. The text scrolls at large text
-    /// sizes; "Klaar" stays pinned below it.
+    /// The sheet itself is the confirmation: no banner on top of it, and it stays until "Klaar".
+    /// The text scrolls at large text sizes; "Klaar" stays pinned below it.
     private func done(_ outcome: Outcome) -> some View {
         ZStack(alignment: .top) {
             VStack(spacing: 16) {
@@ -384,38 +387,131 @@ struct RequestFlow: View {
                     .allowsHitTesting(false)
             }
         }
+        .task { await reveal() }
+    }
+
+    /// The owner's or shelter's name; "de eigenaar" when the server sent none.
+    private var hostName: String {
+        let name = host.name.trimmingCharacters(in: .whitespaces)
+        return name.isEmpty ? L("de eigenaar") : name
+    }
+
+    private var doneTitle: String {
+        host.name.trimmingCharacters(in: .whitespaces).isEmpty ? L("Verstuurd!") : L("Verstuurd naar \(hostName).")
+    }
+
+    /// What happens now, in three steps. Only what is true for this kind of request.
+    private var nextSteps: [String] {
+        let who = hostName.prefix(1).uppercased() + hostName.dropFirst()
+        let read = L("\(who) leest je bericht.")
+        guard kind == .meet else {
+            return [read, L("Zegt \(hostName) ja, dan staat het rondje bij je afspraken."), L("Op de dag zelf start je het rondje bij Afspraken.")]
+        }
+        let together = switch meetVia {
+        case .walk: L("De eerste keer lopen jullie samen.")
+        case .home: L("De eerste keer kom je langs bij \(hostName) en \(dog.name).")
+        case .phone, .video: L("Eerst bellen jullie. Daarna ontmoet je \(dog.name) in het echt.")
+        }
+        return [read, L("Jullie spreken een moment af."), together]
     }
 
     private func doneText(_ outcome: Outcome) -> some View {
-            VStack(spacing: 16) {
+        VStack(spacing: 16) {
+            ZStack(alignment: .bottomTrailing) {
                 Guus(mood: .happy, size: typeSize.isAccessibilitySize ? 72 : 120)
-                Text("Verstuurd!")
-                    .font(.display(32))
+                Image(systemName: "paperplane.fill")
+                    .font(.headline)
+                    .foregroundStyle(Palette.onBall)
+                    .frame(width: 44, height: 44)
+                    .background(Palette.ball, in: .circle)
+                    .offset(x: 10, y: 6)
+                    .scaleEffect(shown >= 1 || reduceMotion ? 1 : 0.6)
+                    .opacity(shown >= 1 ? 1 : 0)
+            }
+            .accessibilityHidden(true)
+            VStack(spacing: 8) {
+                Text(doneTitle)
+                    .font(.display(30))
                     .foregroundStyle(Palette.ink)
-                    .accessibilityAddTraits(.isHeader)
-                Text(outcome.flagged
-                     ? L("Verstuurd. Berichten over geld worden gecontroleerd.")
-                     : L("Ik laat het je weten zodra de eigenaar van \(dog.name) antwoordt."))
-                    .font(.body)
-                    .foregroundStyle(Palette.muted)
                     .multilineTextAlignment(.center)
-                if offersLessons {
-                    VStack(spacing: 12) {
-                        Text("Intussen kun je de Hondenschool doen. Vijf lessen van 2 minuten.")
-                            .font(.subheadline)
-                            .foregroundStyle(Palette.ink)
-                            .multilineTextAlignment(.center)
-                        Button("Naar de Hondenschool") {
-                            toLessons = true
-                            dismiss()
-                        }
-                        .buttonStyle(.secondary)
-                    }
-                    .padding(16)
-                    .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
-                    .padding(.top, 8)
+                    .accessibilityAddTraits(.isHeader)
+                if outcome.flagged {
+                    Text("Verstuurd. Berichten over geld worden gecontroleerd.")
+                        .font(.subheadline)
+                        .foregroundStyle(Palette.warn)
+                        .multilineTextAlignment(.center)
                 }
             }
+            .opacity(shown >= 2 ? 1 : 0)
+            .offset(y: shown >= 2 || reduceMotion ? 0 : 8)
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Wat er nu gebeurt")
+                    .font(.headline)
+                    .foregroundStyle(Palette.ink)
+                    .opacity(shown >= 2 ? 1 : 0)
+                ForEach(Array(nextSteps.enumerated()), id: \.offset) { i, line in
+                    HStack(alignment: .firstTextBaseline, spacing: 12) {
+                        Text(verbatim: "\(i + 1)")
+                            .font(.subheadline.weight(.heavy))
+                            .foregroundStyle(Palette.onBall)
+                            .frame(width: 28, height: 28)
+                            .background(Palette.ball, in: .circle)
+                            .accessibilityHidden(true)
+                        Text(line)
+                            .font(.body)
+                            .foregroundStyle(Palette.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                    }
+                    .opacity(shown >= 3 + i ? 1 : 0)
+                    .offset(y: shown >= 3 + i || reduceMotion ? 0 : 6)
+                }
+                Text("Je krijgt een melding zodra \(hostName) antwoordt.")
+                    .font(.subheadline)
+                    .foregroundStyle(Palette.muted)
+                    .padding(.top, 2)
+                    .opacity(shown >= 3 + nextSteps.count ? 1 : 0)
+            }
+            .padding(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
+            if offersLessons {
+                VStack(spacing: 12) {
+                    Text("Intussen kun je de Hondenschool doen. Vijf lessen van 2 minuten.")
+                        .font(.subheadline)
+                        .foregroundStyle(Palette.ink)
+                        .multilineTextAlignment(.center)
+                    Button("Naar de Hondenschool") {
+                        toLessons = true
+                        dismiss()
+                    }
+                    .buttonStyle(.secondary)
+                }
+                .padding(16)
+                .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
+                .padding(.top, 8)
+                .opacity(shown >= 3 + nextSteps.count ? 1 : 0)
+            }
+        }
+    }
+
+    /// The paper plane pops (500 ms), the text follows 150 ms later, then the steps one by one,
+    /// 80 ms apart. With Reduce Motion everything fades in together in 200 ms.
+    private func reveal() async {
+        guard shown == 0 else { return }
+        let last = 3 + nextSteps.count
+        if reduceMotion {
+            withAnimation(Motion.vervaag) { shown = last }
+            return
+        }
+        withAnimation(Motion.pop) { shown = 1 }
+        try? await Task.sleep(for: .milliseconds(150))
+        withAnimation(Motion.scherm) { shown = 2 }
+        for next in 3...last {
+            try? await Task.sleep(for: .milliseconds(80))
+            guard !Task.isCancelled else { return }
+            withAnimation(Motion.klein) { shown = next }
+        }
     }
 
     // MARK: Pieces
@@ -450,7 +546,7 @@ struct RequestFlow: View {
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(selected ? .isSelected : [])
-        .animation(.snappy, value: selected)
+        .animation(Motion.klein, value: selected)
     }
 
     private func chip(_ sentence: String) -> some View {
@@ -517,14 +613,14 @@ struct RequestFlow: View {
     }
 
     private func go(to target: Int) {
-        withAnimation(reduceMotion ? .easeInOut(duration: 0.2) : .snappy) {
+        withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) {
             step = max(0, min(Self.steps - 1, target))
             error = nil
         }
     }
 
     private func choose(_ moment: RequestSuggestions.Moment) {
-        withAnimation(.snappy) {
+        withAnimation(Motion.klein) {
             custom = false
             picked = moment.date
             weekly = kind == .solo && (moment.fromSlot || prefill?.weekly == true)
@@ -532,7 +628,7 @@ struct RequestFlow: View {
     }
 
     private func chooseOther() {
-        withAnimation(.snappy) {
+        withAnimation(Motion.klein) {
             custom = true
             customDate = min(max(customDate, range.lowerBound), range.upperBound)
             weekly = kind == .solo && prefill?.weekly == true
@@ -542,7 +638,7 @@ struct RequestFlow: View {
     /// Adds the sentence with a space, or takes it out again when it is already in.
     private func toggle(_ sentence: String) {
         Haptics.tap()
-        withAnimation(.snappy) {
+        withAnimation(Motion.klein) {
             var text = message
             if let range = text.range(of: " " + sentence) ?? text.range(of: sentence + " ") ?? text.range(of: sentence) {
                 text.removeSubrange(range)
@@ -576,14 +672,15 @@ struct RequestFlow: View {
                                   message: message.trimmingCharacters(in: .whitespacesAndNewlines),
                                   weekly: kind == .solo ? weekly : nil)
             let result: Sent = try await APIClient.shared.post("/api/v1/requests", payload)
-            Haptics.success()
+            // Felt and heard together with the paper plane (send, 420 ms).
+            Haptics.success(.send)
+            withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { outcome = Outcome(flagged: result.flagged) }
+            AccessibilityNotification.Announcement(doneTitle).post()
             await model.refreshAppointments()
             await sent()
-            withAnimation(.spring(duration: 0.45)) { outcome = Outcome(flagged: result.flagged) }
-            AccessibilityNotification.Announcement(L("Verstuurd!")).post()
         } catch {
             Haptics.error()
-            withAnimation(.snappy) { self.error = error.localizedDescription }
+            withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) { self.error = error.plainText }
         }
     }
 

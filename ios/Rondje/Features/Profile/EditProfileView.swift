@@ -107,7 +107,7 @@ struct EditProfileView: View {
             model.show(L("Profiel opgeslagen"))
             dismiss()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

@@ -19,11 +19,11 @@ struct RebookSheet: View {
         Group {
             if let detail, let date {
                 if detail.canRequest.solo == nil {
-                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .solo, isShelter: detail.host.isShelter, prefill: RequestPrefill(
+                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .solo, host: detail.host, prefill: RequestPrefill(
                         date: date, weekly: true, message: RequestSuggestions.rebookMessage(date: date, calendar: .current)
                     )) {}
                 } else if detail.canRequest.meet == nil {
-                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .meet, isShelter: detail.host.isShelter, prefill: RequestPrefill(date: date, weekly: false, message: nil)) {}
+                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .meet, host: detail.host, prefill: RequestPrefill(date: date, weekly: false, message: nil)) {}
                 } else {
                     unavailable(detail.dog.name)
                 }
@@ -65,7 +65,7 @@ struct RebookSheet: View {
             date = RequestSuggestions.rebookDate(from: item.startsAt, now: .now, calendar: .current)
             withAnimation(.smooth) { detail = loaded }
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
             looked = true
         }
     }

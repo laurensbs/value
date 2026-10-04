@@ -137,7 +137,7 @@ struct AuthView: View {
             dismiss()
         } catch {
             Haptics.error()
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }
