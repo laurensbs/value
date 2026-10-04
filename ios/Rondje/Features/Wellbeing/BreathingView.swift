@@ -13,8 +13,6 @@ struct BreathingView: View {
     @State private var startedAt = Date.now
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private let inSeconds = 4.0
-    private let outSeconds = 6.0
 
     var body: some View {
         VStack(spacing: 28) {
@@ -77,12 +75,12 @@ struct BreathingView: View {
         while !Task.isCancelled && secondsLeft > 0 {
             inhale = true
             Haptics.soft(.breatheIn)
-            withAnimation(.easeInOut(duration: inSeconds)) { expanded = true }
-            try? await Task.sleep(for: .seconds(inSeconds))
+            withAnimation(Motion.adem(in: true)) { expanded = true }
+            try? await Task.sleep(for: .seconds(Motion.ademDuur(in: true)))
             inhale = false
             Haptics.soft(.breatheOut)
-            withAnimation(.easeInOut(duration: outSeconds)) { expanded = false }
-            try? await Task.sleep(for: .seconds(outSeconds))
+            withAnimation(Motion.adem(in: false)) { expanded = false }
+            try? await Task.sleep(for: .seconds(Motion.ademDuur(in: false)))
         }
         Haptics.success()
     }

@@ -140,7 +140,6 @@ struct EmptyState<Accessory: View>: View {
                     .padding(.top, 6)
             }
             accessory
-                .padding(.top, 6)
         }
         .padding(28)
         .frame(maxWidth: .infinity)

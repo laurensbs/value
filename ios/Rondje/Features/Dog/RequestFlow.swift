@@ -169,12 +169,7 @@ struct RequestFlow: View {
                     .padding(.bottom, 12)
             }
             Text("Wanneer?").font(.display(30))
-            CoachBubble(
-                mood: .curious,
-                text: kind == .solo
-                    ? L("Kies een moment dat je vaak kunt. Vaste momenten werken het best.")
-                    : meetVia.inPerson ? L("Kies een moment. De eigenaar loopt de eerste keer mee.") : meetVia.hint
-            )
+            CoachBubble(mood: .curious, text: whenHint)
             .padding(.bottom, 4)
 
             ForEach(moments, id: \.self) { moment in
@@ -210,6 +205,16 @@ struct RequestFlow: View {
                 .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
                 .sensoryFeedback(.selection, trigger: weekly)
             }
+        }
+    }
+
+    /// What Guus says above the moments. The way of meeting itself is explained on its own tile.
+    private var whenHint: String {
+        guard kind == .meet else { return L("Kies een moment dat je vaak kunt. Vaste momenten werken het best.") }
+        switch meetVia {
+        case .walk: return L("Kies een moment. De eigenaar loopt de eerste keer mee.")
+        case .home: return L("Kies een moment voor je bezoek.")
+        case .phone, .video: return L("Kies een moment voor het gesprek.")
         }
     }
 

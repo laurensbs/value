@@ -191,7 +191,6 @@ struct AppointmentCard: View {
         .sheet(isPresented: $trustSheet) {
             if let walker = item.walker {
                 TrustSheet(item: item, walker: walker)
-                    .presentationDetents([.medium, .large])
             }
         }
         .fullScreenCover(item: Binding(get: { following.map(FollowID.init) }, set: { following = $0?.id })) { f in
@@ -418,6 +417,8 @@ struct TrustSheet: View {
             }
             .navigationTitle("Vertrouwen")
             .navigationBarTitleDisplayMode(.inline)
+            // The ladder gets the whole height, so its words are never cut off.
+            .presentationDetents(saved == nil ? [.medium, .large] : [.large])
             .toolbar {
                 if saved == nil {
                     ToolbarItem(placement: .cancellationAction) { Button("Annuleer") { dismiss() } }

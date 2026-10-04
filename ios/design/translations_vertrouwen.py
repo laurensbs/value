@@ -46,6 +46,14 @@ T = {
         "You'll get a notification as soon as %@ replies.",
         "Tu reçois une notification dès que %@ répond.",
         "Recibirás un aviso en cuanto %@ responda."),
+    "Kies een moment voor je bezoek.": (
+        "Pick a moment for your visit.",
+        "Choisis un moment pour ta visite.",
+        "Elige un momento para tu visita."),
+    "Kies een moment voor het gesprek.": (
+        "Pick a moment for the call.",
+        "Choisis un moment pour l'appel.",
+        "Elige un momento para la llamada."),
     # --- accepted ---
     "Jullie zien elkaars contactgegevens nu.": (
         "You can now see each other's contact details.",

@@ -208,6 +208,7 @@ struct DiscoverView: View {
                     Button("Tip een opvang") { openURL(Brand.web("/suggest")) }
                         .buttonStyle(.secondary)
                 }
+                .padding(.top, 6)
             }
         } else if visible.isEmpty {
             EmptyState(

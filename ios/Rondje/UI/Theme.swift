@@ -40,7 +40,8 @@ enum Motion {
     /// A paw, level ball or tick appearing: about 6% overshoot, cheerful without bouncing. Web: 500 ms.
     static let pop = Animation.spring(response: 0.5, dampingFraction: 0.65)
     /// The breathing minute: 4 seconds in, 6 seconds out.
-    static func adem(in breathingIn: Bool) -> Animation { .easeInOut(duration: breathingIn ? 4 : 6) }
+    static func adem(in breathingIn: Bool) -> Animation { .easeInOut(duration: ademDuur(in: breathingIn)) }
+    static func ademDuur(in breathingIn: Bool) -> TimeInterval { breathingIn ? 4 : 6 }
 
     /// With Reduce Motion: only opacity, in 200 ms.
     static let vervaag = Animation.easeInOut(duration: 0.2)
