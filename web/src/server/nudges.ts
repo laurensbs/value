@@ -1,41 +1,44 @@
 import 'server-only'
-import { and, desc, eq, gt, gte, inArray, isNull, lt, ne, or, sql } from 'drizzle-orm'
+import { and, desc, eq, gt, gte, inArray, isNull, lt, or, sql } from 'drizzle-orm'
 import { getDb, type Db } from '@/db'
 import * as s from '@/db/schema'
 import { challengesFrom, monthBounds, type ChallengeWalk } from '@/lib/challenges'
 import { citySlug } from '@/lib/cities'
 import type { NotificationData } from '@/lib/notification-links'
-import { NEW_DOG_DAYS, newDogsNear, NUDGE_KINDS, pickNudge, type NewDog, type Nudge, type NudgeFacts, type NudgeKind, type SentNudge } from '@/lib/nudges'
-import { ABOUT_MIN_LENGTH, localParts, weekOf } from '@/lib/progress'
-import { zonedToUtc } from '@/lib/time'
+import { ignoredInARow, NEW_DOG_DAYS, newDogsNear, pickNudge, type NewDog, type Nudge, type NudgeFacts, type NudgeKind, type SentNudge } from '@/lib/nudges'
+import { ABOUT_MIN_LENGTH, localParts } from '@/lib/progress'
 import { emailEnabled, notificationEmail, sendEmail, toLocale } from './email'
 import { canPush, pushNow } from './push'
+import { seintjeKind, walkersNear } from './queries'
 
-// Friendly reminders, once a day (Vercel Cron calls /api/cron/nudges). The rules are in
-// lib/nudges.ts. This file gathers the facts for everyone who has reminders on, a few hundred
-// people per query, and delivers each reminder once: as a push when one of their devices can get
-// it, otherwise by email when they allow email. It is also in their notification list.
+// Seintjes, once a day (Vercel Cron calls /api/cron/nudges). The rules are in lib/nudges.ts. This
+// file gathers the facts for everyone who turned seintjes on, a few hundred people per query, and
+// delivers each seintje once: as a push when one of their devices can get it, otherwise by email
+// when they allow email. It is also in their notification list. After three in a row with nothing
+// done, it turns their seintjes off (the app says so in one line on /notifications).
 
 const DAY = 24 * 60 * 60_000
 const CHUNK = 500
 const AT_ONCE = 10
 
 export interface NudgeRun {
-  /** People with reminders on. */
+  /** People with seintjes on. */
   people: number
   sent: Partial<Record<NudgeKind, number>>
   pushed: number
   emailed: number
+  /** People whose seintjes stopped today: three in a row and nothing done. */
+  stopped: number
 }
 
 type Person = Awaited<ReturnType<typeof peopleWithReminders>>[number]
 
 /**
- * One run: picks and sends today's reminders. Only during the day in the Netherlands, whoever
+ * One run: picks and sends today's seintjes. Only during the day in the Netherlands, whoever
  * starts it. `skip` is who already heard about an appointment this morning: theirs can wait.
  */
 export async function sendNudges(now = new Date(), skip: ReadonlySet<string> = new Set()): Promise<NudgeRun> {
-  const run: NudgeRun = { people: 0, sent: {}, pushed: 0, emailed: 0 }
+  const run: NudgeRun = { people: 0, sent: {}, pushed: 0, emailed: 0, stopped: 0 }
   const hour = localParts(now).hour
   if (hour < 8 || hour >= 21) return run
 
@@ -47,12 +50,26 @@ export async function sendNudges(now = new Date(), skip: ReadonlySet<string> = n
   for (let i = 0; i < people.length; i += CHUNK) {
     const chunk = people.slice(i, i + CHUNK)
     const facts = await factsFor(db, chunk, towns, fresh, now)
+    const stop: Person[] = []
     const picks = chunk.flatMap((person) => {
-      if (skip.has(person.userId)) return []
       const f = facts.get(person.userId)!
+      if (ignoredInARow(f.facts.sent, f.facts.lastActiveAt)) {
+        stop.push(person)
+        return []
+      }
+      if (skip.has(person.userId)) return []
       const nudge = pickNudge(f.facts, now)
       return nudge ? [{ person, nudge, pushable: f.pushable }] : []
     })
+    // Three in a row and nothing done: the switch goes off, quietly. Keeping updated_at as it was
+    // keeps this from counting as something the person did (and /notifications can say why).
+    for (const person of stop) {
+      await db
+        .update(s.profile)
+        .set({ reminders: false, updatedAt: person.updatedAt })
+        .where(and(eq(s.profile.userId, person.userId), eq(s.profile.reminders, true)))
+    }
+    run.stopped += stop.length
     if (!picks.length) continue
     await db.insert(s.notification).values(
       picks.map(({ person, nudge }) => ({ id: crypto.randomUUID(), userId: person.userId, kind: nudge.kind, data: nudge.data, createdAt: now })),
@@ -69,14 +86,18 @@ export async function sendNudges(now = new Date(), skip: ReadonlySet<string> = n
   return run
 }
 
+/**
+ * As a push to the devices that can get one, else by email. Someone whose iPhone plans its own
+ * seintjes gets none on that iPhone and none by email: only a browser they turned push on in.
+ */
 async function deliver(db: Db, person: Person, nudge: Nudge, pushable: boolean): Promise<'push' | 'email' | null> {
   const data = nudge.data as NotificationData
   try {
     if (pushable) {
-      await pushNow(db, [person.userId], nudge.kind, data)
+      await pushNow(db, [person.userId], nudge.kind, data, { apns: !person.localNudges })
       return 'push'
     }
-    if (emailEnabled() && person.wantsEmail) {
+    if (emailEnabled() && person.wantsEmail && !person.localNudges) {
       const email = await notificationEmail(nudge.kind, data, toLocale(person.locale), person.email)
       if (email && (await sendEmail(email))) return 'email'
     }
@@ -93,10 +114,11 @@ function peopleWithReminders(db: Db) {
       email: s.user.email,
       locale: s.profile.locale,
       wantsEmail: s.profile.emailNotifications,
+      localNudges: s.profile.localNudges,
       joinedAt: s.profile.createdAt,
+      updatedAt: s.profile.updatedAt,
       wantsToWalk: s.profile.wantsToWalk,
       hasDogs: s.profile.hasDogs,
-      weeklyGoal: s.profile.weeklyGoal,
       country: s.profile.country,
       city: s.profile.city,
       lat: s.profile.lat,
@@ -110,6 +132,53 @@ function peopleWithReminders(db: Db) {
     .innerJoin(s.user, eq(s.user.id, s.profile.userId))
     .where(and(eq(s.profile.reminders, true), isNull(s.profile.bannedAt)))
     .orderBy(s.profile.userId)
+}
+
+/**
+ * When each of these people last did something themselves: asked for a walk, walked, wrote a
+ * message, joined a group walk, gave feedback, changed a dog or their profile (switches included).
+ * Built from what is there anyway; nothing about opening the app or a notification is stored.
+ */
+export async function lastActive(db: Db, ids: string[]): Promise<Map<string, Date>> {
+  if (!ids.length) return new Map()
+  const rows = await db
+    .select({
+      userId: s.profile.userId,
+      // Written out in full: in a query on one table, drizzle leaves out the table name.
+      at: sql<Date>`greatest(
+        profile.updated_at,
+        (select max(r.created_at) from walk_request r where r.walker_id = profile.user_id),
+        (select max(w.started_at) from walk w where w.walker_id = profile.user_id),
+        (select max(d.updated_at) from dog d where d.owner_id = profile.user_id),
+        (select max(m.created_at) from chat_message m where m.sender_id = profile.user_id),
+        (select max(g.created_at) from group_walk_signup g where g.user_id = profile.user_id),
+        (select max(f.created_at) from feedback f where f.from_user_id = profile.user_id)
+      )`.mapWith(s.profile.updatedAt),
+    })
+    .from(s.profile)
+    .where(inArray(s.profile.userId, ids))
+  return new Map(rows.map((r) => [r.userId, r.at]))
+}
+
+/** Seintjes sent to these people in the last year, every kind (also ones no longer sent). */
+function sentTo(db: Db, ids: string[], now: Date) {
+  return db
+    .select({ userId: s.notification.userId, kind: s.notification.kind, at: s.notification.createdAt, data: s.notification.data })
+    .from(s.notification)
+    .where(and(inArray(s.notification.userId, ids), seintjeKind, gt(s.notification.createdAt, new Date(now.getTime() - 400 * DAY))))
+}
+
+/**
+ * True when this person's seintjes went off by themselves (three in a row, nothing done since) and
+ * they did nothing since: then /notifications says so in one line. Turning them off yourself
+ * counts as doing something, so that never shows this line.
+ */
+export async function seintjesStopped(userId: string, reminders: boolean, now = new Date()): Promise<boolean> {
+  if (reminders) return false
+  const db = await getDb()
+  const [sent, active] = await Promise.all([sentTo(db, [userId], now), lastActive(db, [userId])])
+  const nudges = sent.map((n) => ({ kind: n.kind, at: n.at, data: (n.data ?? {}) as SentNudge['data'] }))
+  return ignoredInARow(nudges, active.get(userId) ?? null)
 }
 
 /** This month's and last month's walks, by town, for the town challenges. */
@@ -151,38 +220,17 @@ async function newDogs(db: Db, now: Date): Promise<NewDog[]> {
   )
 }
 
-/** The local start of this week (Monday) and of the next one. */
-function weekBounds(now: Date): { start: Date; end: Date } {
-  const monday = weekOf(now)
-  const next = new Date(Date.parse(`${monday}T12:00:00Z`) + 7 * DAY).toISOString().slice(0, 10)
-  return { start: zonedToUtc(monday, '00:00'), end: zonedToUtc(next, '00:00') }
-}
-
 async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWalk[]>, fresh: NewDog[], now: Date) {
   const ids = people.map((p) => p.userId)
-  const week = weekBounds(now)
   const freshIds = fresh.map((d) => d.id)
   const freshOwners = [...new Set(fresh.map((d) => d.ownerId))]
-  const [walks, requests, dogs, favourites, sent, devices, asked, blocks] = await Promise.all([
+  const [walks, requested, dogs, sent, active, devices, asked, blocks] = await Promise.all([
     db
-      .select({
-        userId: s.walk.walkerId,
-        walks: sql<number>`count(*)`.mapWith(Number),
-        lastAt: sql<Date>`max(${s.walk.startedAt})`.mapWith(s.walk.startedAt),
-        thisWeek: sql<number>`count(*) filter (where ${gte(s.walk.startedAt, week.start)})`.mapWith(Number),
-      })
+      .select({ userId: s.walk.walkerId, walks: sql<number>`count(*)`.mapWith(Number) })
       .from(s.walk)
       .where(and(inArray(s.walk.walkerId, ids), eq(s.walk.status, 'ended')))
       .groupBy(s.walk.walkerId),
-    db
-      .select({
-        userId: s.walkRequest.walkerId,
-        planned: sql<boolean>`bool_or(${and(inArray(s.walkRequest.status, ['pending', 'accepted']), gt(s.walkRequest.startsAt, now))})`,
-        thisWeek: sql<number>`count(*) filter (where ${and(eq(s.walkRequest.status, 'accepted'), gt(s.walkRequest.startsAt, now), lt(s.walkRequest.startsAt, week.end))})`.mapWith(Number),
-      })
-      .from(s.walkRequest)
-      .where(inArray(s.walkRequest.walkerId, ids))
-      .groupBy(s.walkRequest.walkerId),
+    db.selectDistinct({ userId: s.walkRequest.walkerId }).from(s.walkRequest).where(inArray(s.walkRequest.walkerId, ids)),
     db
       .select({
         userId: s.dog.ownerId,
@@ -191,38 +239,12 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
         since: s.dog.createdAt,
         // Written out in full: in a query on one table, drizzle leaves out the table name.
         quiet: sql<boolean>`(dog.status = 'active' and dog.org_id is null and not exists (select 1 from walk_request r where r.dog_id = dog.id))`,
-        photos: sql<number>`cardinality(dog.photos)`.mapWith(Number),
-        slots: sql<number>`(select count(*) from dog_slot sl where sl.dog_id = dog.id)`.mapWith(Number),
       })
       .from(s.dog)
       .where(and(inArray(s.dog.ownerId, ids), eq(s.dog.isDemo, false)))
       .orderBy(s.dog.createdAt),
-    // The dog each walker walked most that can still be walked (not their own).
-    db
-      .selectDistinctOn([s.walk.walkerId], { userId: s.walk.walkerId, id: s.dog.id, name: s.dog.name })
-      .from(s.walk)
-      .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
-      .where(
-        and(
-          inArray(s.walk.walkerId, ids),
-          eq(s.walk.status, 'ended'),
-          eq(s.dog.status, 'active'),
-          eq(s.dog.isDemo, false),
-          or(isNull(s.dog.ownerId), ne(s.dog.ownerId, s.walk.walkerId)),
-        ),
-      )
-      .groupBy(s.walk.walkerId, s.dog.id, s.dog.name)
-      .orderBy(s.walk.walkerId, desc(sql`count(*)`), desc(sql`max(${s.walk.startedAt})`)),
-    db
-      .select({ userId: s.notification.userId, kind: s.notification.kind, at: s.notification.createdAt, data: s.notification.data })
-      .from(s.notification)
-      .where(
-        and(
-          inArray(s.notification.userId, ids),
-          inArray(s.notification.kind, [...NUDGE_KINDS]),
-          gt(s.notification.createdAt, new Date(now.getTime() - 400 * DAY)),
-        ),
-      ),
+    sentTo(db, ids, now),
+    lastActive(db, ids),
     db.select({ userId: s.pushDevice.userId, kind: s.pushDevice.kind }).from(s.pushDevice).where(inArray(s.pushDevice.userId, ids)),
     // For the new dogs: the ones these people asked about already, and blocks between them and the owners.
     fresh.length
@@ -255,8 +277,7 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
     return map
   }
   const walksOf = one(walks)
-  const requestsOf = one(requests)
-  const favouriteOf = one(favourites)
+  const requestedBy = new Set(requested.map((r) => r.userId))
   const dogsOf = many(dogs)
   const sentOf = many(sent)
   const devicesOf = many(devices)
@@ -276,11 +297,10 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
 
   const result = new Map<string, { facts: NudgeFacts; pushable: boolean }>()
   for (const p of people) {
-    const w = walksOf.get(p.userId)
-    const r = requestsOf.get(p.userId)
     const own = dogsOf.get(p.userId) ?? []
-    const quiet = own.find((d) => d.quiet)
-    const fav = favouriteOf.get(p.userId)
+    const nudges = (sentOf.get(p.userId) ?? []).map((n) => ({ kind: n.kind, at: n.at, data: (n.data ?? {}) as SentNudge['data'] }))
+    const toldDogs = new Set(nudges.filter((n) => n.kind === 'nudge-owner').map((n) => n.data.dogId))
+    const quiet = own.find((d) => d.quiet && !toldDogs.has(d.id))
     const slug = citySlug(p.city)
     const town = slug ? challengesFrom(towns.get(slug) ?? [], { userId: p.userId, city: p.city }, now).city : null
     // Shelter staff are not asked to walk unless they said they want to.
@@ -289,20 +309,18 @@ async function factsFor(db: Db, people: Person[], towns: Map<string, ChallengeWa
     const facts: NudgeFacts = {
       roles,
       joinedAt: p.joinedAt,
-      weeklyGoal: p.weeklyGoal,
-      walks: w?.walks ?? 0,
-      lastWalkAt: w?.lastAt ?? null,
-      walksThisWeek: w?.thisWeek ?? 0,
-      plannedThisWeek: r?.thisWeek ?? 0,
-      planned: Boolean(r?.planned),
-      steps: { about: Boolean(p.about), dog: own.length > 0, quiz: Boolean(p.quiz), meet: Boolean(r) },
+      walks: walksOf.get(p.userId)?.walks ?? 0,
+      steps: { about: Boolean(p.about), dog: own.length > 0, quiz: Boolean(p.quiz), meet: requestedBy.has(p.userId) },
       challenge: town && { city: town.name, goal: town.goal, walks: town.walks, mine: town.mine, done: town.done },
-      favouriteDog: fav ? { id: fav.id, name: fav.name } : null,
       newDogs: roles.walker ? newDogsNear(place, fresh, { asked: askedOf.get(p.userId) ?? none, blocked: blockedOf.get(p.userId) ?? none }) : [],
-      quietDog: quiet ? { id: quiet.id, name: quiet.name, since: quiet.since, photos: quiet.photos, slots: quiet.slots } : null,
-      sent: (sentOf.get(p.userId) ?? []).map((n) => ({ kind: n.kind, at: n.at, data: (n.data ?? {}) as SentNudge['data'] })),
+      // How many walkers live nearby: only asked for a quiet dog the owner did not hear about yet.
+      quietDog: quiet ? { id: quiet.id, name: quiet.name, since: quiet.since, walkersNear: await walkersNear(p, p.userId) } : null,
+      lastActiveAt: active.get(p.userId) ?? null,
+      sent: nudges,
     }
-    result.set(p.userId, { facts, pushable: (devicesOf.get(p.userId) ?? []).some((d) => canPush(d.kind)) })
+    // An iPhone that plans its own seintjes does not count: it gets no seintje from here.
+    const pushable = (devicesOf.get(p.userId) ?? []).some((d) => canPush(d.kind) && !(d.kind === 'apns' && p.localNudges))
+    result.set(p.userId, { facts, pushable })
   }
   return result
 }

@@ -10,7 +10,7 @@ const db = drizzle({ client, schema })
 vi.mock('server-only', () => ({}))
 vi.mock('@/db', () => ({ getDb: async () => db }))
 
-const { getDogDetail, incomingRequests, outgoingRequests, walkersNear } = await import('./queries')
+const { getDogDetail, incomingRequests, notificationsFor, outgoingRequests, unreadCount, unreadCounts, walkersNear } = await import('./queries')
 
 async function viewer(userId: string) {
   const p = await db.query.profile.findFirst({ where: (t, { eq }) => eq(t.userId, userId) })
@@ -102,5 +102,22 @@ describe('walkers near a place', () => {
   it('goes by the town when the place itself has no location', async () => {
     expect(await walkersNear({ country: 'NL', city: 'Utrecht', lat: null, lng: null }, 'ans')).toBe(5)
     expect(await walkersNear({ country: 'BE', city: 'Utrecht', lat: null, lng: null }, 'ans')).toBe(0)
+  })
+})
+
+describe('notifications', () => {
+  it('leave out seintje kinds that are no longer sent, everywhere; seintjes are not about a walk', async () => {
+    await client.exec(`
+      insert into notification (id, user_id, kind, data, created_at) values
+        ('n1', 'fleur', 'request-accepted', '{"dogName":"Bello"}', now() - interval '3 days'),
+        ('n2', 'fleur', 'nudge-step', '{"step":"quiz"}', now() - interval '2 days'),
+        ('n3', 'fleur', 'challenge-done', '{"city":"Utrecht","goal":10,"mine":1}', now() - interval '1 day'),
+        -- An old row of a kind Rondje no longer sends: it has no text any more.
+        ('n4', 'fleur', 'nudge-old', '{"left":1}', now());
+    `)
+    expect((await notificationsFor('fleur')).map((n) => n.id)).toEqual(['n3', 'n2', 'n1'])
+    expect(await unreadCounts('fleur')).toEqual({ all: 3, walks: 1 })
+    expect(await unreadCount('fleur')).toBe(3)
+    expect(await unreadCount('fleur', { reminders: false })).toBe(1)
   })
 })

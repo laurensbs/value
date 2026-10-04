@@ -68,8 +68,11 @@ export function pushLater(db: Db, userIds: string[], kind: string, data: Notific
   }
 }
 
-/** Sends and waits until it is done: for scheduled jobs. Banned people and dead devices are skipped. */
-export async function pushNow(db: Db, userIds: string[], kind: string, data: NotificationData): Promise<void> {
+/**
+ * Sends and waits until it is done: for scheduled jobs. Banned people and dead devices are skipped,
+ * and iPhones too with `apns: false` (a seintje for someone whose iPhone plans its own).
+ */
+export async function pushNow(db: Db, userIds: string[], kind: string, data: NotificationData, { apns = true } = {}): Promise<void> {
   const rows = await db
     .select({ device: s.pushDevice, locale: s.profile.locale, bannedAt: s.profile.bannedAt })
     .from(s.pushDevice)
@@ -77,7 +80,7 @@ export async function pushNow(db: Db, userIds: string[], kind: string, data: Not
     .where(inArray(s.pushDevice.userId, userIds))
   const dead: string[] = []
   for (const { device, locale, bannedAt } of rows) {
-    if (bannedAt) continue
+    if (bannedAt || (!apns && device.kind === 'apns')) continue
     const message = await pushMessage(kind, data, toLocale(locale))
     const ok = device.kind === 'apns' ? await sendApns(device, message) : await sendWeb(device, message)
     if (!ok) dead.push(device.id)

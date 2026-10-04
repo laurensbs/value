@@ -26,7 +26,7 @@ describe('notification emails', () => {
   })
 })
 
-describe('reminders', () => {
+describe('seintjes', () => {
   const samples: [string, NotificationData][] = [
     ['nudge-step', { step: 'about' }],
     ['nudge-step', { step: 'about', role: 'owner' }],
@@ -34,17 +34,11 @@ describe('reminders', () => {
     ['nudge-step', { step: 'quiz' }],
     ['nudge-step', { step: 'meet' }],
     ['nudge-step', {}],
-    ['nudge-week', { left: 1, goal: 2 }],
-    ['nudge-week', { left: 2, goal: 3 }],
     ['nudge-challenge', { city: 'Utrecht', goal: 50 }],
     ['challenge-done', { city: 'Utrecht', goal: 50, mine: 1 }],
     ['challenge-done', { city: 'Utrecht', goal: 50, mine: 3 }],
-    ['nudge-back', { variant: 'dog', dogId: 'b1', dogName: 'Bello' }],
-    ['nudge-back', { variant: 'any' }],
     ['nudge-new-dog', { dogId: 'b1', dogName: 'Bello' }],
-    ['nudge-owner', { tip: 'photo', dogId: 'm1', dogName: 'Max' }],
-    ['nudge-owner', { tip: 'slots', dogId: 'm1', dogName: 'Max' }],
-    ['nudge-owner', { tip: 'share', dogId: 'm1', dogName: 'Max' }],
+    ['nudge-owner', { dogId: 'm1', dogName: 'Max' }],
   ]
 
   it('cover every kind', () => {
@@ -66,8 +60,6 @@ describe('reminders', () => {
           expect(text.length, `${locale} ${kind}`).toBeGreaterThan(8)
         }
       }
-      expect(t('kinds.nudge-week', notificationValues({ left: 2 })), locale).toContain('2')
-      expect(t('kinds.nudge-back', notificationValues({ variant: 'dog', dogName: 'Bello' })), locale).toContain('Bello')
       expect(t('kinds.nudge-new-dog', notificationValues({ dogName: 'Bello' })), locale).toContain('Bello')
       expect(e('kinds.nudge-new-dog.subject', notificationValues({ dogName: 'Bello' })), locale).toContain('Bello')
       expect(t('kinds.nudge-step', notificationValues({ step: 'about', role: 'owner' })), locale).not.toEqual(t('kinds.nudge-step', notificationValues({ step: 'about' })))
@@ -77,12 +69,10 @@ describe('reminders', () => {
   it('lead to the step, the dog or the challenge', () => {
     expect(notificationHref('nudge-step', { step: 'quiz' })).toBe('/profile/quiz')
     expect(notificationHref('nudge-step', { step: 'dog' })).toBe('/my-dogs/new')
-    expect(notificationHref('nudge-week', {})).toBe('/')
     expect(notificationHref('nudge-challenge', {})).toBe('/progress#challenge')
-    expect(notificationHref('nudge-back', { dogId: 'b1' })).toBe('/dogs/b1')
-    expect(notificationHref('nudge-back', {})).toBe('/dogs')
     expect(notificationHref('nudge-new-dog', { dogId: 'b1' })).toBe('/dogs/b1')
-    expect(notificationHref('nudge-owner', { dogId: 'm1', tip: 'photo' })).toBe('/my-dogs/m1/edit')
-    expect(notificationHref('nudge-owner', { dogId: 'm1', tip: 'share' })).toBe('/dogs/m1')
+    // Old rows still carry a tip; it no longer matters where they lead.
+    expect(notificationHref('nudge-owner', { dogId: 'm1' })).toBe('/dogs/m1')
+    expect(notificationHref('nudge-owner', {})).toBe('/my-dogs')
   })
 })

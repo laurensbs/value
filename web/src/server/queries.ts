@@ -1,6 +1,6 @@
 import 'server-only'
 import { cache } from 'react'
-import { and, asc, between, count, desc, eq, gte, inArray, isNull, ne, notInArray, or, sql } from 'drizzle-orm'
+import { and, asc, between, count, desc, eq, gte, inArray, isNull, like, ne, not, notLike, or, sql } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { citySlug } from '@/lib/cities'
@@ -455,32 +455,32 @@ export async function myDogs(viewer: Viewer): Promise<Dog[]> {
   return db.select().from(s.dog).where(eq(s.dog.ownerId, viewer.userId)).orderBy(asc(s.dog.createdAt))
 }
 
+/** Seintjes (lib/nudges.ts, isSeintje), also kinds that are no longer sent: they are not about a walk. */
+export const seintjeKind = or(like(s.notification.kind, 'nudge-%'), eq(s.notification.kind, 'challenge-done'))!
+
+/** A seintje kind that is no longer sent has no text any more, so it is left out of every list and count. */
+const notRetired = or(notLike(s.notification.kind, 'nudge-%'), inArray(s.notification.kind, [...NUDGE_KINDS]))!
+
 /** Unread notifications, in one question: all of them for the bell, and those about walks for the Rondjes tab. */
 export async function unreadCounts(userId: string): Promise<{ all: number; walks: number }> {
   const db = await getDb()
   const [r] = await db
     .select({
       all: count(),
-      walks: sql<number>`count(*) filter (where ${notInArray(s.notification.kind, [...NUDGE_KINDS])})`.mapWith(Number),
+      walks: sql<number>`count(*) filter (where ${not(seintjeKind)})`.mapWith(Number),
     })
     .from(s.notification)
-    .where(and(eq(s.notification.userId, userId), isNull(s.notification.readAt)))
+    .where(and(eq(s.notification.userId, userId), isNull(s.notification.readAt), notRetired))
   return r
 }
 
-/** Unread notifications. The Rondjes tab leaves reminders out: they are not about a walk. */
+/** Unread notifications. The Rondjes tab leaves seintjes out: they are not about a walk. */
 export async function unreadCount(userId: string, { reminders = true } = {}): Promise<number> {
   const db = await getDb()
   const [r] = await db
     .select({ n: count() })
     .from(s.notification)
-    .where(
-      and(
-        eq(s.notification.userId, userId),
-        isNull(s.notification.readAt),
-        reminders ? undefined : notInArray(s.notification.kind, [...NUDGE_KINDS]),
-      ),
-    )
+    .where(and(eq(s.notification.userId, userId), isNull(s.notification.readAt), notRetired, reminders ? undefined : not(seintjeKind)))
   return r.n
 }
 
@@ -489,7 +489,7 @@ export async function notificationsFor(userId: string) {
   return db
     .select()
     .from(s.notification)
-    .where(eq(s.notification.userId, userId))
+    .where(and(eq(s.notification.userId, userId), notRetired))
     .orderBy(desc(s.notification.createdAt))
     .limit(50)
 }
