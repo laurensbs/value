@@ -31,6 +31,10 @@ const nextConfig: NextConfig = {
       { source: '/over-ons', destination: '/about', permanent: true },
       { source: '/steun', destination: '/support', permanent: true },
       { source: '/tip', destination: '/suggest', permanent: true },
+      // The sign-up link in the other languages (lib/join.ts); ?bron= comes along.
+      { source: '/join', destination: '/aanmelden', permanent: false },
+      { source: '/unete', destination: '/aanmelden', permanent: false },
+      { source: '/rejoindre', destination: '/aanmelden', permanent: false },
       // The links people (and app stores) expect for the legal texts.
       { source: '/privacy', destination: '/legal/privacy', permanent: true },
       { source: '/terms', destination: '/legal/terms', permanent: true },

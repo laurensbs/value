@@ -7,7 +7,7 @@ import { indexableCities } from '@/server/cities'
 // stops saying noindex (the first real dog, walk or partner shelter), not at the next deploy.
 export const dynamic = 'force-dynamic'
 
-const PAGES = ['/', '/dogs', '/shelters', '/group-walks', '/shelter', '/about', '/waarom', '/support', '/suggest', '/flyer', '/help', '/contact', '/safety', '/school', '/cities']
+const PAGES = ['/', '/aanmelden', '/dogs', '/shelters', '/group-walks', '/shelter', '/about', '/waarom', '/support', '/suggest', '/flyer', '/help', '/contact', '/safety', '/school', '/cities']
 
 /** A day from front matter ("2026-10-02"), or undefined. */
 function day(value: string | undefined): string | undefined {

@@ -284,6 +284,17 @@
     "error": "La connexion avec {provider} n'a pas fonctionné. Réessayez ou utilisez votre adresse e-mail.",
     "linkNotice": "Un compte Rondje Mee existe déjà avec cette adresse e-mail. Connectez-vous une fois ci-dessous avec votre mot de passe et nous y associerons {provider}. Ensuite, vous pourrez aussi vous connecter avec {provider}."
   },
+  "join": {
+    "metaTitle": "Rejoindre",
+    "metaDescription": "Rejoignez Rondje Mee gratuitement : promenez un chien de votre quartier ou d'un refuge, ou trouvez un promeneur régulier pour votre chien.",
+    "title": "Rejoignez Rondje Mee",
+    "lede": "Qu'est-ce qui vous correspond ?",
+    "walker": "Je veux promener un chien",
+    "owner": "J'ai un chien qui profiterait d'une balade en plus",
+    "shelter": "Je travaille dans un refuge pour animaux",
+    "app": "Votre compte fonctionne tout de suite dans votre navigateur. Plus tard, vous vous connecterez avec le même compte dans l'app pour iPhone et Android.",
+    "trust": "Gratuit · Toujours une première rencontre ensemble · 18+"
+  },
   "onboarding": {
     "title": "Parlez-nous de vous",
     "lede": "Les propriétaires ne confient pas leur chien à n'importe qui. Une photo et quelques phrases aident vraiment.",

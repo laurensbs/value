@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { contentSecurityPolicy, newNonce } from '@/lib/csp'
+import { rememberSource } from '@/lib/join'
 
 /**
  * Production answers on several hostnames (rondjemee.nl, rondje-five.vercel.app, the team alias,
@@ -28,7 +29,8 @@ export function proxy(request: NextRequest) {
   headers.set('Content-Security-Policy', policy)
   const response = NextResponse.next({ request: { headers } })
   response.headers.set('Content-Security-Policy', policy)
-  return response
+  // /aanmelden?bron=poster: which poster or campaign brought a sign-up (lib/join.ts).
+  return rememberSource(request, response)
 }
 
 export const config = {

@@ -284,6 +284,17 @@
     "error": "Inloggen met {provider} lukte niet. Probeer het nog eens, of gebruik je e-mailadres.",
     "linkNotice": "Er is al een Rondje Mee-account met dit e-mailadres. Log hieronder één keer in met je wachtwoord, dan koppelen we {provider} eraan. Daarna kun je ook met {provider} inloggen."
   },
+  "join": {
+    "metaTitle": "Aanmelden",
+    "metaDescription": "Meld je gratis aan bij Rondje Mee: wandel met een hond uit je buurt of uit de opvang, of vind een vaste wandelaar voor je eigen hond.",
+    "title": "Doe mee met Rondje Mee",
+    "lede": "Wat past bij jou?",
+    "walker": "Ik wil wandelen",
+    "owner": "Ik heb een hond die een extra rondje kan gebruiken",
+    "shelter": "Ik werk bij een dierenopvang",
+    "app": "Je account werkt meteen in je browser. Straks log je met hetzelfde account in op de app voor iPhone en Android.",
+    "trust": "Gratis · Altijd eerst samen kennismaken · 18+"
+  },
   "onboarding": {
     "title": "Vertel iets over jezelf",
     "lede": "Eigenaren geven niet zomaar hun hond mee. Een foto en een paar zinnen helpen echt.",
