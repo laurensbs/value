@@ -96,7 +96,7 @@ export function RequestForm({ dogId, dogName, ownerName, open, walkerName, meetR
       <div className="card flat stack-s request-open">
         <p>{open.pending ? t('openPending', { dog: dogName, owner: ownerName }) : t('openAccepted', { dog: dogName, when: open.when })}</p>
         <div className="row">
-          <Link href="/requests" className="button secondary">
+          <Link href="/requests" className="button primary">
             {t('viewRequests')}
           </Link>
         </div>
