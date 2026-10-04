@@ -32,7 +32,14 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     applicationName: APP_NAME,
     manifest: '/manifest.webmanifest',
-    icons: { icon: '/favicon.svg', apple: '/apple-touch-icon.png' },
+    // The SVG favicon for current browsers, the .ico (16 and 32 px) for the rest; scripts/brand-assets.mjs makes both.
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: '32x32' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+      ],
+      apple: '/apple-touch-icon.png',
+    },
     // Pages that matter for search engines set their own card and canonical address (lib/seo.ts).
     openGraph: { title, description, images: ['/og.png'], siteName: APP_NAME, type: 'website' },
     twitter: { card: 'summary_large_image' },

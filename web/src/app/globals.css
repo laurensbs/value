@@ -246,16 +246,54 @@ mark {
   gap: 18px;
 }
 
+/* The logo in the header is the wordmark (components/Wordmark.tsx): "rondje mee" with the tennis ball
+   as the dot on the j. Ink and ball have their own logo colours; on a light page the ball is a deeper
+   lime (#adc82a), because #d9f05a disappears on paper. */
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  flex: none;
   color: var(--ink);
   text-decoration: none;
-  font-family: var(--font-display);
-  font-weight: 760;
-  font-size: 1.3rem;
-  letter-spacing: -0.02em;
+  border-radius: var(--radius-s);
+}
+
+:root {
+  --logo-ink: #14211a;
+  --logo-ball: #adc82a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --logo-ink: #f4f1e8;
+    --logo-ball: #d9f05a;
+  }
+}
+
+.wordmark {
+  display: block;
+  overflow: visible;
+}
+
+.wordmark-ink {
+  fill: var(--logo-ink);
+}
+
+.wordmark-ball {
+  fill: var(--logo-ball);
+}
+
+/* Width sets the size; the height follows the drawing (viewBox 432.39 x 98.43). A small nudge down puts
+   the x-height, not the ball, on the header's middle line. */
+.brand .wordmark {
+  --wordmark-w: 136px;
+  width: var(--wordmark-w);
+  height: calc(var(--wordmark-w) * 0.2276);
+  transform: translateY(1px);
+}
+
+.brand-mark {
+  display: none;
 }
 
 .nav {
@@ -287,26 +325,29 @@ mark {
   white-space: nowrap;
 }
 
-.brand > span {
-  white-space: nowrap;
-}
-
-/* On a phone the name is a small stacked wordmark ("Rondje" over "Mee"), so the help, the language
-   switch and "Iniciar sesión" still fit next to it on one line. */
+/* On a phone the wordmark is a little smaller and sits a little closer to the buttons, so the help,
+   the language switch and "Se connecter" still fit next to it on one line (measured in nl/en/es/fr). */
 @media (max-width: 459px) {
-  .brand > span {
-    width: min-content;
-    white-space: normal;
-    font-size: 1.12rem;
-    line-height: 0.95;
+  .header-inner {
+    gap: 12px;
+  }
+
+  /* 112px from about 380px wide; narrower phones give it what's left (at least 90px), with a few px to spare. */
+  .brand .wordmark {
+    --wordmark-w: clamp(90px, 100vw - 268px, 112px);
   }
 }
 
-/* Signed out on a 320px phone: the logo without its name, so the language switch and "Se connecter"
-   fit next to it on one line (the link keeps "Rondje Mee" as its name for screen readers). */
+/* Signed out on a 320px phone: the small mark (the favicon's j with the ball) instead of the wordmark,
+   so the language switch and "Se connecter" fit next to it on one line (the link keeps "Rondje Mee"
+   as its name for screen readers). */
 @media (max-width: 359px) {
-  .header-inner:has(> .header-actions > .button) .brand > span {
+  .header-inner:has(> .header-actions > .button) .brand .wordmark {
     display: none;
+  }
+
+  .header-inner:has(> .header-actions > .button) .brand-mark {
+    display: block;
   }
 }
 
@@ -3626,6 +3667,17 @@ legend {
   color: #1f5a3d;
 }
 
+/* Rondje Mee's own posters carry the wordmark. The poster is always white paper, also in dark mode. */
+.poster {
+  --logo-ink: #14211a;
+  --logo-ball: #adc82a;
+}
+
+.poster-org .wordmark {
+  width: 168px;
+  height: calc(168px * 0.2276);
+}
+
 .poster-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 7vw, 3.2rem);
@@ -3753,6 +3805,7 @@ legend {
 
 @media (pointer: coarse) {
   .brand {
+    min-width: 44px;
     min-height: 44px;
   }
 
