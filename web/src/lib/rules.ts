@@ -27,6 +27,8 @@ export type Reason =
   | 'needs-in-person'
   | 'meet-via'
   | 'experience'
+  | 'needs-id'
+  | 'already-open'
 
 export interface WalkerFacts {
   userId: string
@@ -55,6 +57,8 @@ export interface Relation {
   blocked: boolean
   /** The owner granted solo walks with this dog. */
   soloAllowed: boolean
+  /** The owner (or shelter) saw the walker's ID in person. Needed before any solo walk (besluit 4 okt 2026). */
+  idSeen: boolean
 }
 
 /** Age in whole years on `now`, from an ISO date (YYYY-MM-DD). */
@@ -105,6 +109,7 @@ export function canRequestSolo(w: WalkerFacts, d: DogFacts, r: Relation): Reason
   if (base) return base
   if (d.orgId) return 'needs-meeting'
   if (!r.soloAllowed) return 'needs-solo-trust'
+  if (!r.idSeen) return 'needs-id'
   if (!w.quizPassed) return 'needs-quiz'
   if (d.level === 'experienced' && w.experience === 'none') return 'experience'
   if (w.pendingRequests >= MAX_PENDING_REQUESTS) return 'too-many-pending'
@@ -154,6 +159,31 @@ export function canRecordTrust(requests: { status: string; meetVia: string }[], 
   const met = requests.filter((r) => r.status === 'accepted' || r.status === 'completed')
   if (met.some((r) => isInPerson(r.meetVia))) return null
   return met.length ? 'needs-in-person' : 'needs-meeting'
+}
+
+/** Solo walks only with an ID seen in person: an owner cannot allow one without the other. */
+export function checkTrust(input: { idSeen: boolean; soloAllowed: boolean }): Reason | null {
+  return input.soloAllowed && !input.idSeen ? 'needs-id' : null
+}
+
+/**
+ * The open request a new one would duplicate: the same walker and dog, waiting for an answer or
+ * agreed, and not in the past. One exception: an agreed first call is followed by planning to meet in
+ * person (createRequest closes the call once that is asked for).
+ */
+export function openRequestConflict<T extends { status: string; startsAt: Date; meetVia: string }>(
+  existing: T[],
+  next: { kind: string; meetVia: string },
+  now = new Date(),
+): T | null {
+  return (
+    existing.find(
+      (e) =>
+        (e.status === 'pending' || e.status === 'accepted') &&
+        e.startsAt.getTime() > now.getTime() &&
+        !(e.status === 'accepted' && !isInPerson(e.meetVia) && next.kind === 'meet' && isInPerson(next.meetVia)),
+    ) ?? null
+  )
 }
 
 /** A walk (with live location) only starts from an accepted walk or visit in person, never from a call. */

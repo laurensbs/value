@@ -6,11 +6,13 @@ import {
   canRequestSolo,
   canStartWalk,
   checkMeetVia,
+  checkTrust,
   feedbackNeedsReview,
   isAdult,
   isInPerson,
   isMeetVia,
   meetViaOptions,
+  openRequestConflict,
   overdueMinutes,
   scanText,
   trustBadges,
@@ -42,7 +44,7 @@ const dog: DogFacts = {
   level: 'starter',
 }
 
-const rel: Relation = { isStaff: false, blocked: false, soloAllowed: false }
+const rel: Relation = { isStaff: false, blocked: false, soloAllowed: false, idSeen: false }
 
 describe('age', () => {
   it('requires 18 on the day itself', () => {
@@ -86,20 +88,59 @@ describe('first meeting', () => {
 describe('solo walk', () => {
   it('needs solo trust from the owner and the quiz', () => {
     expect(canRequestSolo(walker, dog, rel)).toBe('needs-solo-trust')
-    expect(canRequestSolo({ ...walker, quizPassed: false }, dog, { ...rel, soloAllowed: true })).toBe('needs-quiz')
-    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true })).toBeNull()
+    expect(canRequestSolo({ ...walker, quizPassed: false }, dog, { ...rel, soloAllowed: true, idSeen: true })).toBe('needs-quiz')
+    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true, idSeen: true })).toBeNull()
+  })
+
+  it('needs the ID seen in person, even when the owner allowed it', () => {
+    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true, idSeen: false })).toBe('needs-id')
+    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: false, idSeen: true })).toBe('needs-solo-trust')
+  })
+
+  it('cannot be allowed without the ID seen', () => {
+    expect(checkTrust({ idSeen: false, soloAllowed: true })).toBe('needs-id')
+    expect(checkTrust({ idSeen: true, soloAllowed: true })).toBeNull()
+    expect(checkTrust({ idSeen: true, soloAllowed: false })).toBeNull()
+    // Taking everything back is always possible.
+    expect(checkTrust({ idSeen: false, soloAllowed: false })).toBeNull()
   })
 
   it('is never possible with shelter dogs (always supervised)', () => {
-    expect(canRequestSolo(walker, { ...dog, ownerId: null, orgId: 'org' }, { ...rel, soloAllowed: true })).toBe(
+    expect(canRequestSolo(walker, { ...dog, ownerId: null, orgId: 'org' }, { ...rel, soloAllowed: true, idSeen: true })).toBe(
       'needs-meeting',
     )
   })
 
   it('keeps experienced dogs away from walkers without dog experience', () => {
     expect(
-      canRequestSolo({ ...walker, experience: 'none' }, { ...dog, level: 'experienced' }, { ...rel, soloAllowed: true }),
+      canRequestSolo({ ...walker, experience: 'none' }, { ...dog, level: 'experienced' }, { ...rel, soloAllowed: true, idSeen: true }),
     ).toBe('experience')
+  })
+})
+
+describe('one open request per walker and dog', () => {
+  const later = new Date('2026-10-05T10:00:00')
+  const earlier = new Date('2026-09-30T10:00:00')
+  const meet = { kind: 'meet', meetVia: 'walk' }
+
+  it('finds a request that is waiting or agreed and still to come', () => {
+    expect(openRequestConflict([{ status: 'pending', startsAt: later, meetVia: 'walk' }], meet, now)).not.toBeNull()
+    expect(openRequestConflict([{ status: 'accepted', startsAt: later, meetVia: 'home' }], { kind: 'solo', meetVia: 'walk' }, now)).not.toBeNull()
+  })
+
+  it('lets go of what is past, said no to, cancelled or done', () => {
+    expect(openRequestConflict([{ status: 'pending', startsAt: earlier, meetVia: 'walk' }], meet, now)).toBeNull()
+    expect(openRequestConflict([{ status: 'accepted', startsAt: earlier, meetVia: 'walk' }], meet, now)).toBeNull()
+    for (const status of ['declined', 'cancelled', 'completed', 'expired']) {
+      expect(openRequestConflict([{ status, startsAt: later, meetVia: 'walk' }], meet, now)).toBeNull()
+    }
+  })
+
+  it('after an agreed first call, meeting in person can still be planned', () => {
+    const call = [{ status: 'accepted', startsAt: later, meetVia: 'phone' }]
+    expect(openRequestConflict(call, meet, now)).toBeNull()
+    expect(openRequestConflict(call, { kind: 'meet', meetVia: 'video' }, now)).not.toBeNull()
+    expect(openRequestConflict([{ status: 'pending', startsAt: later, meetVia: 'phone' }], meet, now)).not.toBeNull()
   })
 })
 

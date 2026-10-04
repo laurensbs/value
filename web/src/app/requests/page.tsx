@@ -5,10 +5,10 @@ import { Icon } from '@/components/Icon'
 import { MeetChecklist } from '@/components/MeetChecklist'
 import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
 import { PushAsk } from '@/components/PushAsk'
-import { AcceptReveal, CancelButton, DecideButtons, StartButton, TrustForm } from '@/components/RequestActions'
+import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
-import { canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { canRequestSolo, canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
 import {
   hostContacts,
   incomingRequests,
@@ -128,6 +128,31 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         .map(async ([side, r]) => [r.request.id, await meetChecklist(side, r.dog.name, r.walker.firstName, r.request.meetVia)] as const),
     ),
   )
+  // One trust form per walker and dog, under their first agreed meeting in person: two forms for the
+  // same pair could show different things and overwrite each other.
+  const trustFormAt = new Map<string, string>()
+  for (const r of inOpen) {
+    const key = `${r.dog.id}:${r.walker.id}`
+    if (r.request.status === 'accepted' && !isRemoteMeeting(r.request) && !trustFormAt.has(key)) trustFormAt.set(key, r.request.id)
+  }
+  // What could still stop a solo walk once the owner allows it: the same rule the walker meets (rules.ts).
+  const soloCaveat = (r: RequestRow): SoloCaveat => {
+    const reason = canRequestSolo(
+      {
+        userId: r.walker.id,
+        onboarded: true,
+        banned: false,
+        birthDate: r.walker.birthDate,
+        quizPassed: signals.get(r.walker.id)?.quizPassed ?? false,
+        pppLicense: r.walker.pppLicense,
+        experience: r.walker.experience === 'none' || r.walker.experience === 'lots' ? r.walker.experience : 'some',
+        pendingRequests: 0,
+      },
+      { ownerId: r.dog.ownerId, orgId: r.dog.orgId, country: r.dog.country, status: 'active', isDemo: false, ppp: r.dog.ppp, level: r.dog.level === 'experienced' ? 'experienced' : 'starter' },
+      { isStaff: false, blocked: false, soloAllowed: true, idSeen: true },
+    )
+    return reason === 'needs-quiz' || reason === 'experience' || reason === 'ppp-licence' ? reason : null
+  }
   // Waiting for an answer is the moment a heads-up matters most.
   const waitingFor = mineOpen.find((r) => r.request.status === 'pending')
   const pushKey = webPushKey()
@@ -147,6 +172,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
             </Link>
           </nav>
         ) : null}
+        <DeclinedNote />
       </header>
 
       {tab === 'mine' ? (
@@ -305,7 +331,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <Icon name="alert" size={16} /> {t('requests.flagged')}
                         </p>
                       ) : null}
-                      {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} /> : null}
+                      {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} /> : null}
                       {accepted ? (
                         <AcceptReveal requestId={r.request.id} walkerName={r.walker.firstName}>
                           <Contact contact={{ name: r.walker.firstName, phone: r.walker.phone, email: r.walker.email }} label={t('requests.contact')} />
@@ -320,7 +346,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           {call ? (
                             // A call never counts as meeting in person: no ID check, no solo walks from here.
                             <CallNote via={r.request.meetVia} text={`${callHow(r)} ${t('meet.afterCallHost', { dog: r.dog.name })}`} />
-                          ) : (
+                          ) : trustFormAt.get(`${r.dog.id}:${r.walker.id}`) === r.request.id ? (
                             <TrustForm
                               dogId={r.dog.id}
                               dogName={r.dog.name}
@@ -328,8 +354,10 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                               walkerName={r.walker.firstName}
                               initial={grant}
                               allowSolo={!r.dog.orgId}
-                              quizPassed={signals.get(r.walker.id)?.quizPassed ?? false}
+                              caveat={soloCaveat(r)}
                             />
+                          ) : (
+                            <p className="muted small">{t('requests.trustElsewhere', { walker: r.walker.firstName, dog: r.dog.name })}</p>
                           )}
                           <div className="row">
                             {active && r.walkId ? (

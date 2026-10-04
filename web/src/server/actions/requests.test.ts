@@ -21,7 +21,10 @@ vi.mock('@/db', () => ({ getDb: async () => db }))
 const notify = vi.fn(async () => {})
 vi.mock('../notify', () => ({ notify, audit: async () => {} }))
 vi.mock('../session', () => ({
-  actionViewer: async () => viewer(current),
+  actionViewer: async () => {
+    if (current === 'nobody') throw new Error('not-signed-in')
+    return viewer(current)
+  },
   isOrgMember: (v: { orgs: { id: string }[] }, orgId: string | null) => Boolean(orgId && v.orgs.some((o) => o.id === orgId)),
 }))
 
@@ -145,7 +148,20 @@ describe('after a first call', () => {
     await client.exec(`update walk_request set status = 'accepted' where dog_id = 'bello' and meet_via = 'home'`)
     expect((await relationFor(await viewer('fleur'), await dog('bello'))).hasAccepted).toBe(true)
     current = 'ans'
-    expect(await setTrust('bello', 'fleur', { idSeen: true, soloAllowed: true })).toEqual({ ok: true })
+    // Solo walks need the ID seen in person first (besluit 4 okt 2026).
+    expect(await setTrust('bello', 'fleur', { idSeen: false, soloAllowed: true })).toEqual({ ok: false, error: 'needs-id' })
+    expect(await setTrust('bello', 'fleur', { idSeen: true, soloAllowed: true })).toEqual({ ok: true, trust: { idSeen: true, soloAllowed: true } })
+    expect(notify).toHaveBeenCalledWith(db, ['fleur'], 'trust-granted', expect.objectContaining({ dogName: 'Bello' }))
+    // Saving the same again is no news for the walker.
+    notify.mockClear()
+    expect((await setTrust('bello', 'fleur', { idSeen: true, soloAllowed: true })).ok).toBe(true)
+    expect(notify).not.toHaveBeenCalled()
+  })
+
+  it('while the visit is still to come, a solo walk waits for it', async () => {
+    expect(await createRequest({ ok: false }, form({ dogId: 'bello', kind: 'solo' }))).toEqual({ ok: false, error: 'already-open' })
+    // The visit took place.
+    await client.exec(`update walk_request set starts_at = now() - interval '2 hours' where dog_id = 'bello' and meet_via = 'home'`)
   })
 
   it('a regular walk is always a walk, never a call or a visit', async () => {
@@ -153,5 +169,27 @@ describe('after a first call', () => {
       expect(await createRequest({ ok: false }, form({ dogId: 'bello', kind: 'solo', meetVia: via }))).toEqual({ ok: false, error: 'meet-via' })
     }
     expect((await createRequest({ ok: false }, form({ dogId: 'bello', kind: 'solo' }))).ok).toBe(true)
+  })
+})
+
+describe('one open request per walker and dog', () => {
+  it('the same request sent again is the one already there: no second request, no second message', async () => {
+    const before = await requestsOf('saar')
+    notify.mockClear()
+    expect(await createRequest({ ok: false }, form({ dogId: 'saar' }))).toEqual({ ok: true, message: 'sent' })
+    expect(await requestsOf('saar')).toEqual(before)
+    expect(notify).not.toHaveBeenCalled()
+  })
+
+  it('another moment for the same dog waits until the open one is answered or past', async () => {
+    expect(await createRequest({ ok: false }, form({ dogId: 'saar', time: '11:00' }))).toEqual({ ok: false, error: 'already-open' })
+    await client.exec(`update walk_request set status = 'declined' where dog_id = 'saar'`)
+    expect((await createRequest({ ok: false }, form({ dogId: 'saar', time: '11:00' }))).ok).toBe(true)
+  })
+
+  it('a signed-out person hears that, instead of "something went wrong"', async () => {
+    current = 'nobody'
+    expect(await createRequest({ ok: false }, form({ dogId: 'saar' }))).toEqual({ ok: false, error: 'not-signed-in' })
+    expect(await setTrust('saar', 'fleur', { idSeen: true, soloAllowed: false })).toEqual({ ok: false, error: 'not-signed-in' })
   })
 })

@@ -1,23 +1,23 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useEffect, useId, useRef, useState, useTransition, type CSSProperties } from 'react'
+import { useEffect, useId, useRef, useState, useSyncExternalStore, useTransition, type CSSProperties } from 'react'
 import { playSound, type SoundName } from '@/lib/sounds'
 import { cancelRequest, respondToRequest, setTrust } from '@/server/actions/requests'
 import { startWalk } from '@/server/actions/walks'
+import { ActionError, useActionErrorText } from './ActionError'
 import { Icon } from './Icon'
 
 type Result = { ok: boolean; error?: string } | void
 
 function useAction() {
-  const t = useTranslations('request.reasons')
-  const te = useTranslations('errors')
+  const errorText = useActionErrorText()
   const [pending, start] = useTransition()
-  const [error, setError] = useState<string | null>(null)
-  function run(fn: () => Promise<Result>, sound?: SoundName, onFail?: () => void) {
+  const [error, setError] = useState<{ code: string; text: string } | null>(null)
+  function run<R extends Result>(fn: () => Promise<R>, opts: { sound?: SoundName; onFail?: () => void; onOk?: (result: R) => void } = {}) {
     setError(null)
     start(async () => {
-      let result: Result
+      let result: R | { ok: false; error: string }
       try {
         result = await fn()
       } catch {
@@ -25,14 +25,18 @@ function useAction() {
         result = { ok: false, error: navigator.onLine ? 'server' : 'offline' }
       }
       if (result && !result.ok) {
-        onFail?.()
+        opts.onFail?.()
         const code = result.error ?? 'invalid'
-        setError(code === 'offline' || code === 'server' ? te(code) : t.has(code) ? t(code) : t('invalid'))
+        setError({ code, text: errorText(code) })
         playSound('error')
-      } else if (sound) playSound(sound)
+      } else {
+        opts.onOk?.(result as R)
+        if (opts.sound) playSound(opts.sound)
+      }
     })
   }
-  return { pending, error, run }
+  const errorLine = error ? <ActionError code={error.code} text={error.text} /> : null
+  return { pending, errorLine, run }
 }
 
 /**
@@ -41,9 +45,21 @@ function useAction() {
  */
 const justAccepted = new Set<string>()
 
-export function DecideButtons({ requestId }: { requestId: string }) {
+/** The request just said no to in this tab: the page says so, and keeps the focus there. */
+let declined: { walker: string; dog: string } | null = null
+const declinedListeners = new Set<() => void>()
+function setDeclined(value: typeof declined) {
+  declined = value
+  for (const listener of declinedListeners) listener()
+}
+function subscribeDeclined(listener: () => void) {
+  declinedListeners.add(listener)
+  return () => declinedListeners.delete(listener)
+}
+
+export function DecideButtons({ requestId, walkerName, dogName }: { requestId: string; walkerName: string; dogName: string }) {
   const t = useTranslations('requests')
-  const { pending, error, run } = useAction()
+  const { pending, errorLine, run } = useAction()
   const [choice, setChoice] = useState<'accept' | 'decline' | null>(null)
   function decide(decision: 'accept' | 'decline') {
     setChoice(decision)
@@ -52,7 +68,13 @@ export function DecideButtons({ requestId }: { requestId: string }) {
       // Only for the answer that is on its way: never as a surprise on a later visit.
       window.setTimeout(() => justAccepted.delete(requestId), 10_000)
     }
-    run(() => respondToRequest(requestId, decision), decision === 'accept' ? 'success' : undefined, () => justAccepted.delete(requestId))
+    run(() => respondToRequest(requestId, decision), {
+      sound: decision === 'accept' ? 'success' : undefined,
+      onFail: () => justAccepted.delete(requestId),
+      onOk: () => {
+        if (decision === 'decline') setDeclined({ walker: walkerName, dog: dogName })
+      },
+    })
   }
   return (
     <div className="stack-s">
@@ -64,12 +86,29 @@ export function DecideButtons({ requestId }: { requestId: string }) {
           {t('decline')}
         </button>
       </div>
-      {error ? (
-        <p className="error-text" role="alert">
-          {error}
-        </p>
-      ) : null}
+      {errorLine}
     </div>
+  )
+}
+
+/**
+ * After "Afwijzen" the request moves out of the list, and with it the button that had focus. This
+ * line takes its place at the top: what happened, and that the walker hears it.
+ */
+export function DeclinedNote() {
+  const t = useTranslations('requests')
+  const value = useSyncExternalStore(subscribeDeclined, () => declined, () => null)
+  const note = useRef<HTMLParagraphElement>(null)
+  useEffect(() => {
+    if (value) note.current?.focus({ preventScroll: false })
+  }, [value])
+  // Leaving the page forgets it.
+  useEffect(() => () => setDeclined(null), [])
+  if (!value) return null
+  return (
+    <p className="decline-note" ref={note} tabIndex={-1} role="status">
+      {t('declinedNote', { walker: value.walker, dog: value.dog })}
+    </p>
   )
 }
 
@@ -105,7 +144,7 @@ export function AcceptReveal({ requestId, walkerName, children }: { requestId: s
 
 export function CancelButton({ requestId }: { requestId: string }) {
   const t = useTranslations('requests')
-  const { pending, error, run } = useAction()
+  const { pending, errorLine, run } = useAction()
   const [confirming, setConfirming] = useState(false)
   if (!confirming) {
     return (
@@ -123,11 +162,7 @@ export function CancelButton({ requestId }: { requestId: string }) {
       <button type="button" className="button ghost small" onClick={() => setConfirming(false)}>
         {t('keep')}
       </button>
-      {error ? (
-        <p className="error-text" role="alert">
-          {error}
-        </p>
-      ) : null}
+      {errorLine}
     </div>
   )
 }
@@ -135,7 +170,7 @@ export function CancelButton({ requestId }: { requestId: string }) {
 export function StartButton({ requestId, enabled, hint }: { requestId: string; enabled: boolean; hint: string }) {
   const t = useTranslations('requests')
   const tw = useTranslations('walk')
-  const { pending, error, run } = useAction()
+  const { pending, errorLine, run } = useAction()
   const [open, setOpen] = useState(false)
   const [checked, setChecked] = useState<string[]>([])
   // Bags and treats are the owner's (dog.provides); the walker checks what is theirs to check.
@@ -174,11 +209,7 @@ export function StartButton({ requestId, enabled, hint }: { requestId: string; e
           {t('keep')}
         </button>
       </div>
-      {error ? (
-        <p className="error-text" role="alert">
-          {error}
-        </p>
-      ) : null}
+      {errorLine}
     </div>
   )
 }
@@ -187,6 +218,11 @@ interface Trust {
   idSeen: boolean
   soloAllowed: boolean
 }
+
+const sameTrust = (a: Trust, b: Trust) => a.idSeen === b.idSeen && a.soloAllowed === b.soloAllowed
+
+/** What can still stop a solo walk once the owner allowed it (rules.ts canRequestSolo), said in the ladder. */
+export type SoloCaveat = 'needs-quiz' | 'experience' | 'ppp-licence' | null
 
 /**
  * The trust ladder: first meeting, ID seen, walks on their own (that last rung only for a private
@@ -228,14 +264,14 @@ function TrustLadder({
   allowSolo,
   walkerName,
   dogName,
-  quizPassed,
+  caveat,
   onClose,
 }: {
   trust: Trust
   allowSolo: boolean
   walkerName: string
   dogName: string
-  quizPassed: boolean
+  caveat: SoloCaveat
   onClose: () => void
 }) {
   const t = useTranslations('requests')
@@ -254,6 +290,15 @@ function TrustLadder({
     return () => window.clearTimeout(timer)
   }, [trust, allowSolo])
 
+  const caveatText =
+    caveat === 'needs-quiz'
+      ? t('ladderQuiz', { walker: walkerName })
+      : caveat === 'experience'
+        ? t('ladderExperience', { walker: walkerName, dog: dogName })
+        : caveat === 'ppp-licence'
+          ? t('ladderPpp', { walker: walkerName, dog: dogName })
+          : null
+
   return (
     <dialog ref={ref} className="sheet trust-ladder" aria-labelledby={`${id}-title`} aria-describedby={`${id}-text`} onClose={onClose}>
       <div className="stack">
@@ -263,7 +308,7 @@ function TrustLadder({
         <TrustSteps trust={trust} allowSolo={allowSolo} animate />
         <div id={`${id}-text`} className="stack-s trust-ladder-text">
           <p>{solo ? t('ladderTextSolo') : allowSolo ? t('ladderTextId', { walker: walkerName, dog: dogName }) : t('ladderTextShelter')}</p>
-          {solo && !quizPassed ? <p className="muted small">{t('ladderQuiz', { walker: walkerName })}</p> : null}
+          {solo && caveatText ? <p className="muted small">{caveatText}</p> : null}
         </div>
         <button type="button" className="button primary big wide" onClick={() => ref.current?.close()} autoFocus>
           {t('ladderClose')}
@@ -273,6 +318,11 @@ function TrustLadder({
   )
 }
 
+/**
+ * ID seen and walks on their own, for one walker and one dog (one form per pair on the page). What is
+ * shown comes from the server; only an edit that is not saved yet lives here, and it is dropped as
+ * soon as the server's answer arrives. Walks on their own need the ID seen (besluit 4 okt 2026).
+ */
 export function TrustForm({
   dogId,
   dogName,
@@ -280,39 +330,44 @@ export function TrustForm({
   walkerName,
   initial,
   allowSolo,
-  quizPassed,
+  caveat,
 }: {
   dogId: string
   dogName: string
   walkerId: string
   walkerName: string
+  /** The trust stored on the server. */
   initial: Trust
   allowSolo: boolean
-  /** Solo walks are asked for only after the safety quiz: the ladder says so when it is not done yet. */
-  quizPassed: boolean
+  caveat: SoloCaveat
 }) {
   const t = useTranslations('requests')
-  const { pending, error, run } = useAction()
-  const [idSeen, setIdSeen] = useState(initial.idSeen)
-  const [solo, setSolo] = useState(initial.soloAllowed)
-  // What is saved now: the form compares against it, and the ladder shows it.
-  const [saved, setSaved] = useState<Trust>(initial)
+  const { pending, errorLine, run } = useAction()
+  // An edit belongs to the stored trust it started from; once the server has something else, it is gone.
+  const [draft, setDraft] = useState<{ base: Trust; value: Trust } | null>(null)
+  const editing = draft && sameTrust(draft.base, initial) ? draft.value : null
+  const value = editing ?? initial
+  const changed = editing !== null && !sameTrust(editing, initial)
   const [ladder, setLadder] = useState<Trust | null>(null)
   const [off, setOff] = useState<'solo' | 'id' | null>(null)
   const title = useRef<HTMLElement>(null)
-  const changed = idSeen !== saved.idSeen || solo !== saved.soloAllowed
+  // Turning the ID off takes walks on their own with it; the form says so before saving.
+  const soloDropped = initial.soloAllowed && !value.idSeen
+
+  function edit(next: Trust) {
+    setOff(null)
+    setDraft({ base: initial, value: next.idSeen ? next : { idSeen: false, soloAllowed: false } })
+  }
 
   function save() {
-    const before = saved
-    const after = { idSeen, soloAllowed: allowSolo && solo }
-    run(async () => {
-      const result = await setTrust(dogId, walkerId, after)
-      if (!result.ok) return result
-      setSaved(after)
-      // A rung was added: the ladder, with its sound. Only taken back: one plain sentence, no party.
-      if ((after.idSeen && !before.idSeen) || (after.soloAllowed && !before.soloAllowed)) setLadder(after)
-      else setOff(before.soloAllowed && !after.soloAllowed ? 'solo' : 'id')
-      return result
+    const before = initial
+    run(() => setTrust(dogId, walkerId, { idSeen: value.idSeen, soloAllowed: allowSolo && value.soloAllowed }), {
+      onOk: (result) => {
+        const after = result && 'trust' in result && result.trust ? result.trust : value
+        // A rung was added: the ladder, with its sound. Only taken back: one plain sentence, no party.
+        if ((after.idSeen && !before.idSeen) || (after.soloAllowed && !before.soloAllowed)) setLadder(after)
+        else setOff(before.soloAllowed && !after.soloAllowed ? 'solo' : 'id')
+      },
     })
   }
 
@@ -321,30 +376,33 @@ export function TrustForm({
       <strong ref={title} tabIndex={-1} className="trust-form-title">
         {t('trustTitle')}
       </strong>
-      <TrustSteps trust={saved} allowSolo={allowSolo} />
+      <TrustSteps trust={initial} allowSolo={allowSolo} />
       <label className="check">
-        <input
-          type="checkbox"
-          checked={idSeen}
-          onChange={(e) => {
-            setIdSeen(e.target.checked)
-            setOff(null)
-          }}
-        />
+        <input type="checkbox" checked={value.idSeen} onChange={(e) => edit({ ...value, idSeen: e.target.checked })} />
         <span>{t('idSeen')}</span>
       </label>
       {allowSolo ? (
-        <label className="check">
-          <input
-            type="checkbox"
-            checked={solo}
-            onChange={(e) => {
-              setSolo(e.target.checked)
-              setOff(null)
-            }}
-          />
-          <span>{t('soloAllowed', { name: walkerName, dog: dogName })}</span>
-        </label>
+        <>
+          <label className={`check${value.idSeen ? '' : ' is-disabled'}`}>
+            <input
+              type="checkbox"
+              checked={value.soloAllowed}
+              disabled={!value.idSeen}
+              aria-describedby={value.idSeen ? undefined : `${dogId}-${walkerId}-solo-hint`}
+              onChange={(e) => edit({ ...value, soloAllowed: e.target.checked })}
+            />
+            <span>{t('soloAllowed', { name: walkerName, dog: dogName })}</span>
+          </label>
+          {soloDropped ? (
+            <p className="muted small" id={`${dogId}-${walkerId}-solo-hint`}>
+              {t('soloOffWithId', { walker: walkerName, dog: dogName })}
+            </p>
+          ) : !value.idSeen ? (
+            <p className="muted small" id={`${dogId}-${walkerId}-solo-hint`}>
+              {t('soloNeedsId')}
+            </p>
+          ) : null}
+        </>
       ) : null}
       <div className="row">
         <button type="button" className="button secondary" disabled={pending || !changed} aria-busy={pending} onClick={save}>
@@ -356,18 +414,14 @@ export function TrustForm({
           {off === 'solo' ? t('trustSoloOff', { walker: walkerName, dog: dogName }) : t('trustIdOff')}
         </p>
       ) : null}
-      {error ? (
-        <p className="error-text" role="alert">
-          {error}
-        </p>
-      ) : null}
+      {errorLine}
       {ladder ? (
         <TrustLadder
           trust={ladder}
           allowSolo={allowSolo}
           walkerName={walkerName}
           dogName={dogName}
-          quizPassed={quizPassed}
+          caveat={caveat}
           onClose={() => {
             setLadder(null)
             title.current?.focus({ preventScroll: true })

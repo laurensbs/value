@@ -10,6 +10,7 @@ import { playSound } from '@/lib/sounds'
 import { useForm } from '@/lib/use-form'
 import { createRequest } from '@/server/actions/requests'
 import type { FormState } from '@/server/actions/profile'
+import { ActionError, useActionErrorText } from './ActionError'
 import { Icon } from './Icon'
 import { MEET_VIA_ICONS } from './MeetVia'
 import { SubmitButton } from './SubmitButton'
@@ -28,6 +29,11 @@ interface Props {
   dogName: string
   /** The owner's first name, as on the dog page: the request goes to them. */
   ownerName: string
+  /**
+   * A request or appointment with this dog that is still open (rules.ts openRequestConflict): then no
+   * form for a second one. Part of this component, so a confirmation just shown stays when the page refreshes.
+   */
+  open?: { pending: boolean; when: string } | null
   walkerName: string
   meetReason: string | null
   soloReason: string | null
@@ -53,10 +59,10 @@ async function sendRequest(prev: FormState, form: FormData): Promise<FormState> 
   }
 }
 
-export function RequestForm({ dogId, dogName, ownerName, walkerName, meetReason, soloReason, defaultDate, defaultTime, moments }: Props) {
+export function RequestForm({ dogId, dogName, ownerName, open, walkerName, meetReason, soloReason, defaultDate, defaultTime, moments }: Props) {
   const t = useTranslations('request')
   const tm = useTranslations('meet')
-  const te = useTranslations('errors')
+  const errorText = useActionErrorText()
   const { state, pending, onSubmit } = useForm<FormState>(sendRequest, { ok: false })
   const [kind, setKind] = useState<'meet' | 'solo'>(soloReason ? 'meet' : 'solo')
   const [meetVia, setMeetVia] = useState<MeetVia>('walk')
@@ -83,6 +89,19 @@ export function RequestForm({ dogId, dogName, ownerName, walkerName, meetReason,
 
   if (state.ok) {
     return <RequestSent dogName={dogName} ownerName={ownerName} via={kind === 'solo' ? 'solo' : meetVia} flagged={state.message === 'sent-flagged'} />
+  }
+
+  if (open) {
+    return (
+      <div className="card flat stack-s request-open">
+        <p>{open.pending ? t('openPending', { dog: dogName, owner: ownerName }) : t('openAccepted', { dog: dogName, when: open.when })}</p>
+        <div className="row">
+          <Link href="/requests" className="button secondary">
+            {t('viewRequests')}
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -219,11 +238,7 @@ export function RequestForm({ dogId, dogName, ownerName, walkerName, meetReason,
               })}
             </span>
           </label>
-          {state.error ? (
-            <p className="error-text" role="alert">
-              {state.error === 'offline' || state.error === 'server' ? te(state.error) : t(`reasons.${state.error}`)}
-            </p>
-          ) : null}
+          {state.error ? <ActionError code={state.error} text={errorText(state.error)} /> : null}
           <SubmitButton className="button primary wide" pending={pending}>
             {t('submit')}
           </SubmitButton>
@@ -283,7 +298,7 @@ function RequestSent({ dogName, ownerName, via, flagged }: { dogName: string; ow
       </p>
       <ol className="request-sent-steps" role="list" aria-labelledby="request-sent-next">
         <li>{t('sentStep1', { owner: ownerName })}</li>
-        <li>{t('sentStep2', { owner: ownerName })}</li>
+        <li>{t('sentStep2', { owner: ownerName, kind: via === 'solo' ? 'solo' : 'meet' })}</li>
         <li>{t('sentStep3', { owner: ownerName, via: via === 'solo' ? 'other' : via })}</li>
       </ol>
       <p className="request-sent-notify">{t('sentNotify', { owner: ownerName })}</p>

@@ -540,7 +540,9 @@
       "full": "Deze groepswandeling is vol.",
       "not-signed-in": "Log eerst in.",
       "meet-via": "Deze manier van kennismaken kan hier niet. Kies samen wandelen.",
-      "needs-in-person": "Een gesprek telt niet als kennismaking in het echt. Dat kan pas als jullie elkaar ontmoet hebben."
+      "needs-in-person": "Een gesprek telt niet als kennismaking in het echt. Dat kan pas als jullie elkaar ontmoet hebben.",
+      "needs-id": "De eigenaar moet eerst je ID in het echt zien, bij jullie kennismaking.",
+      "already-open": "Je hebt al een aanvraag of afspraak met deze hond open staan."
     },
     "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
     "moments": "Momenten die {dog} goed uitkomen",
@@ -557,12 +559,16 @@
     "signupFirstText": "Gratis. Je maakt eerst een account, daarna kies je een moment om samen kennis te maken.",
     "sentTitle": "Verstuurd naar {owner}.",
     "sentNext": "Wat er nu gebeurt",
-    "sentStep1": "{owner} leest je bericht.",
-    "sentStep2": "Zegt {owner} ja, dan zien jullie elkaars contactgegevens.",
+    "sentStep1": "{owner} krijgt je aanvraag.",
+    "sentStep2": "{kind, select, solo {Zegt {owner} ja, dan staat het rondje in je afspraken.} other {Zegt {owner} ja, dan zien jullie elkaars contactgegevens.}}",
     "sentStep3": "{via, select, walk {De eerste keer lopen jullie samen.} home {De eerste keer kom je bij {owner} thuis langs.} phone {Eerst bellen jullie even. Daarna spreken jullie af in het echt.} video {Eerst videobellen jullie even. Daarna spreken jullie af in het echt.} other {Je loopt het rondje zelfstandig. {owner} kan live meekijken.}}",
     "sentNotify": "Je krijgt een melding zodra {owner} antwoordt.",
     "done": "Klaar",
-    "viewRequests": "Bekijk je afspraken"
+    "viewRequests": "Bekijk je afspraken",
+    "signedOut": "Je bent niet meer ingelogd. Log opnieuw in en probeer het dan nog eens.",
+    "bannedMore": "Lees waarom",
+    "openPending": "Je aanvraag voor {dog} staat al bij je afspraken. Zodra {owner} antwoordt, krijg je een melding.",
+    "openAccepted": "Je hebt al een afspraak met {dog}: {when}."
   },
   "requests": {
     "title": "Rondjes",
@@ -608,7 +614,7 @@
     "ladderTitleSolo": "{walker} mag nu zelfstandig met {dog} op pad.",
     "ladderTitleId": "Je hebt het ID van {walker} gezien.",
     "ladderTextSolo": "Je kunt bij elk rondje live meekijken, en je kunt dit altijd weer uitzetten.",
-    "ladderTextId": "Wil je dat {walker} ook zelfstandig met {dog} loopt? Dat zet je hier aan wanneer jij dat wilt.",
+    "ladderTextId": "Wil je dat {walker} ook zelfstandig met {dog} loopt? Dat zet je aan bij ‘Na de kennismaking’, wanneer jij dat wilt.",
     "ladderTextShelter": "Opvanghonden lopen altijd mee in een begeleide groep.",
     "ladderQuiz": "Een zelfstandig rondje aanvragen kan {walker} zodra de veiligheidsquiz gehaald is.",
     "ladderLabel": "Vertrouwen, stap voor stap",
@@ -619,7 +625,13 @@
     "ladderNotYet": "nog niet",
     "ladderClose": "Klaar",
     "trustSoloOff": "{walker} loopt niet meer zelfstandig met {dog}.",
-    "trustIdOff": "Het vinkje bij ID gezien staat weer uit."
+    "trustIdOff": "Het vinkje bij ID gezien staat weer uit.",
+    "ladderExperience": "{dog} vraagt ervaring met honden. Volgens het profiel van {walker} is die er nog niet, dus een zelfstandig rondje aanvragen kan nog niet.",
+    "ladderPpp": "In Spanje mag {walker} {dog} pas zelfstandig uitlaten met een PPP-licentie in het profiel.",
+    "soloNeedsId": "Zelfstandig kan pas aan als je het ID in het echt hebt gezien.",
+    "soloOffWithId": "Zonder ‘ID gezien’ kan {walker} niet zelfstandig met {dog} op pad, dus dat staat dan ook uit.",
+    "trustElsewhere": "Wat {walker} met {dog} mag, regel je bij de eerste afspraak hierboven.",
+    "declinedNote": "Je zei nee tegen {walker} voor {dog}. {walker} krijgt een melding."
   },
   "meet": {
     "legend": "Hoe maken jullie kennis?",
@@ -1209,7 +1221,7 @@
     "markRead": "Alles gelezen",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} wil kennismaken met {dogName} tijdens een wandeling.} home {{walkerName} wil kennismaken met {dogName}, bij jou thuis.} phone {{walkerName} wil eerst bellen om kennis te maken met {dogName}.} video {{walkerName} wil eerst videobellen om kennis te maken met {dogName}.} other {{walkerName} wil met {dogName} wandelen.}}",
-      "request-accepted": "{via, select, walk {Ja! Je kennismaking met {dogName} staat.} home {Ja! Je kennismaking met {dogName} staat.} phone {Ja! Je belafspraak over {dogName} staat.} video {Ja! Je videogesprek over {dogName} staat.} other {Ja! Je rondje met {dogName} staat.}}",
+      "request-accepted": "{via, select, walk {Ja! Je kennismaking met {dogName} staat.} home {Ja! Je kennismaking met {dogName} staat.} phone {Ja! Je belafspraak over {dogName} staat.} video {Ja! Je videogesprek over {dogName} staat.} other {Ja! Je afspraak met {dogName} staat.}}",
       "request-declined": "Je afspraak met {dogName} is helaas afgewezen.",
       "request-cancelled": "Een afspraak is ingetrokken.",
       "walk-started": "{walkerName} is vertrokken met {dogName}. Kijk live mee.",
@@ -1677,7 +1689,7 @@
         "body": "{via, select, home {Bekijk de aanvraag in Rondje en laat weten of het past. Spreek overdag af; familie of een buur mag er gerust bij zijn.} phone {Bekijk de aanvraag in Rondje en laat weten of het past. Een belletje telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} video {Bekijk de aanvraag in Rondje en laat weten of het past. Een videogesprek telt nog niet als kennismaking in het echt: daarna spreken jullie af met {dogName} erbij.} other {Bekijk de aanvraag in Rondje en laat weten of het past. De eerste keer ontmoeten jullie elkaar altijd samen.}}"
       },
       "request-accepted": {
-        "subject": "{via, select, walk {Ja! Je kennismaking met {dogName} staat} home {Ja! Je kennismaking met {dogName} staat} phone {Ja! Je belafspraak over {dogName} staat} video {Ja! Je videogesprek over {dogName} staat} other {Ja! Je rondje met {dogName} staat}}",
+        "subject": "{via, select, walk {Ja! Je kennismaking met {dogName} staat} home {Ja! Je kennismaking met {dogName} staat} phone {Ja! Je belafspraak over {dogName} staat} video {Ja! Je videogesprek over {dogName} staat} other {Ja! Je afspraak met {dogName} staat}}",
         "body": "{via, select, home {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. Spreek overdag af en laat iemand weten waar je bent.} phone {In Rondje zie je nu hoe je de eigenaar bereikt. Spreek in de chat af wie wie belt. Na het gesprek plan je de kennismaking in het echt.} video {Spreek in de chat van Rondje af hoe jullie videobellen. Na het gesprek plan je de kennismaking in het echt.} walk {In Rondje zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen.} other {Je ziet nu waar jullie afspreken en hoe je de eigenaar bereikt. Tijdens het rondje kan de eigenaar live meekijken.}}"
       },
       "walk-overdue": {

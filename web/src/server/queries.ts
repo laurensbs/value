@@ -1,6 +1,6 @@
 import 'server-only'
 import { cache } from 'react'
-import { and, asc, between, count, desc, eq, gte, inArray, isNull, like, ne, not, notLike, or, sql } from 'drizzle-orm'
+import { and, asc, between, count, desc, eq, gt, gte, inArray, isNull, like, ne, not, notLike, or, sql } from 'drizzle-orm'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { citySlug } from '@/lib/cities'
@@ -372,7 +372,7 @@ export async function myGroupSignups(userId: string): Promise<Set<string>> {
 
 export interface RequestRow {
   request: typeof s.walkRequest.$inferSelect
-  dog: Pick<Dog, 'id' | 'name' | 'photos' | 'avatar' | 'city' | 'orgId' | 'ownerId' | 'meetingInfo' | 'walkMinutes' | 'isDemo'>
+  dog: Pick<Dog, 'id' | 'name' | 'photos' | 'avatar' | 'city' | 'orgId' | 'ownerId' | 'meetingInfo' | 'walkMinutes' | 'isDemo' | 'level' | 'ppp' | 'country'>
   walker: {
     id: string
     firstName: string
@@ -383,6 +383,7 @@ export interface RequestRow {
     city: string
     phone: string | null
     email: string
+    pppLicense: boolean
   }
   walkId: string | null
   walkStatus: string | null
@@ -398,11 +399,12 @@ async function requestRows(viewerId: string, where: ReturnType<typeof and>): Pro
       dog: {
         id: s.dog.id, name: s.dog.name, photos: s.dog.photos, avatar: s.dog.avatar, city: s.dog.city, orgId: s.dog.orgId,
         ownerId: s.dog.ownerId, meetingInfo: s.dog.meetingInfo, walkMinutes: s.dog.walkMinutes, isDemo: s.dog.isDemo,
+        level: s.dog.level, ppp: s.dog.ppp, country: s.dog.country,
       },
       walker: {
         id: s.profile.userId, firstName: s.profile.firstName, photoUrl: s.profile.photoUrl, bio: s.profile.bio,
         experience: s.profile.experience, birthDate: s.profile.birthDate, city: s.profile.city, phone: s.profile.phone,
-        email: s.user.email,
+        email: s.user.email, pppLicense: s.profile.pppLicense,
       },
     })
     .from(s.walkRequest)
@@ -440,6 +442,23 @@ async function requestRows(viewerId: string, where: ReturnType<typeof and>): Pro
 
 export async function outgoingRequests(userId: string): Promise<RequestRow[]> {
   return requestRows(userId, and(eq(s.walkRequest.walkerId, userId), ne(s.walkRequest.status, 'cancelled')))
+}
+
+/** A walker's requests for one dog that are waiting or agreed and still to come (rules.ts: openRequestConflict). */
+export async function openRequestsFor(walkerId: string, dogId: string) {
+  const db = await getDb()
+  return db
+    .select({ status: s.walkRequest.status, startsAt: s.walkRequest.startsAt, meetVia: s.walkRequest.meetVia, kind: s.walkRequest.kind })
+    .from(s.walkRequest)
+    .where(
+      and(
+        eq(s.walkRequest.dogId, dogId),
+        eq(s.walkRequest.walkerId, walkerId),
+        inArray(s.walkRequest.status, ['pending', 'accepted']),
+        gt(s.walkRequest.startsAt, new Date()),
+      ),
+    )
+    .orderBy(asc(s.walkRequest.startsAt))
 }
 
 export async function incomingRequests(viewer: Viewer): Promise<RequestRow[]> {

@@ -1967,7 +1967,9 @@ fieldset.form-section {
   cursor: pointer;
   font-weight: 650;
   color: var(--muted);
-  padding: 6px 0;
+  /* A tap target like any other: at least 44 px high. */
+  padding: 11px 0;
+  min-height: 44px;
 }
 
 .past[open] summary {
@@ -2025,13 +2027,42 @@ fieldset.form-section {
   }
 }
 
-/* While something is on its way, a small wheel inside the button; the label stays where it is. */
+/* While something is on its way, a small wheel inside the button in place of its label (onderzoek
+   §3.3): the label keeps its space, so the button keeps its width, and screen readers still read it. */
+.button {
+  --busy-ink: var(--ink);
+}
+
+.button.primary {
+  --busy-ink: var(--on-grass);
+}
+
+.button.ball {
+  --busy-ink: var(--on-ball);
+}
+
+.button.danger {
+  --busy-ink: var(--on-danger);
+}
+
+.button[aria-busy='true'] {
+  position: relative;
+  color: transparent;
+}
+
+.button[aria-busy='true'] > * {
+  visibility: hidden;
+}
+
 .button[aria-busy='true']::after {
   content: '';
-  flex: none;
-  width: 1em;
-  height: 1em;
-  border: 2px solid currentColor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.1em;
+  height: 1.1em;
+  margin: -0.55em 0 0 -0.55em;
+  border: 2px solid var(--busy-ink);
   border-right-color: transparent;
   border-radius: 50%;
   animation: busy-spin 0.8s linear infinite;
@@ -2301,6 +2332,22 @@ fieldset.form-section {
   font-weight: 600;
 }
 
+/* "Zelfstandig" waits for "ID gezien": the row stays readable, the box cannot be ticked yet. */
+.check.is-disabled {
+  color: var(--muted);
+}
+
+/* After "Afwijzen": what happened, where the focus lands. */
+.decline-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--sunken);
+  font-weight: 600;
+  outline: none;
+  animation: fade-in var(--motion-klein) ease-out backwards;
+}
+
 .dogs-empty {
   display: grid;
   justify-items: start;
@@ -2309,7 +2356,7 @@ fieldset.form-section {
 @media (prefers-reduced-motion: reduce) {
   .button[aria-busy='true']::after {
     animation: none !important;
-    border-right-color: currentColor;
+    border-right-color: var(--busy-ink);
     opacity: 0.5;
   }
 

@@ -13,9 +13,9 @@ import { Icon } from '@/components/Icon'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
 import { isNewDog } from '@/lib/nudges'
-import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
+import { canRequestMeeting, canRequestSolo, openRequestConflict } from '@/lib/rules'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
-import { dogFacts, getDogDetail, myGroupSignups, walkerFacts } from '@/server/queries'
+import { dogFacts, getDogDetail, myGroupSignups, openRequestsFor, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
 import { dogShareFor, localeOf } from '@/server/share'
 
@@ -58,13 +58,17 @@ export default async function DogPage({
   const detail = await getDogDetail(id, viewer)
   if (!detail) notFound()
   const { dog, host, slots, groupWalks, canSeePrivate, isMine, relation } = detail
-  const [t, format, facts, joined, share] = await Promise.all([
+  const [t, format, facts, joined, share, open] = await Promise.all([
     getTranslations(),
     getFormatter(),
     viewer?.profile ? walkerFacts(viewer) : null,
     viewer ? myGroupSignups(viewer.userId) : new Set<string>(),
     dogShareFor(detail, viewer),
+    viewer?.profile && !isMine && host.kind === 'owner' ? openRequestsFor(viewer.userId, dog.id) : [],
   ])
+  // Already a request or appointment with this dog: say so, instead of a form for a second one.
+  // After an agreed first call the form stays, to plan meeting in person.
+  const openRequest = openRequestConflict(open, { kind: 'meet', meetVia: 'walk' })
 
   let meetReason: string | null = 'not-signed-in'
   let soloReason: string | null = 'not-signed-in'
@@ -314,6 +318,14 @@ export default async function DogPage({
               dogId={dog.id}
               dogName={dog.name}
               ownerName={host.name || dog.name}
+              open={
+                openRequest
+                  ? {
+                      pending: openRequest.status === 'pending',
+                      when: format.dateTime(openRequest.startsAt, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }),
+                    }
+                  : null
+              }
               walkerName={viewer.profile?.firstName ?? ''}
               meetReason={meetReason}
               soloReason={soloReason}

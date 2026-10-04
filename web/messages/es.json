@@ -540,7 +540,9 @@
       "full": "Este paseo en grupo está completo.",
       "not-signed-in": "Primero inicia sesión.",
       "meet-via": "Esta forma de conoceros no es posible aquí. Elige pasear juntos.",
-      "needs-in-person": "Una llamada no cuenta como conoceros en persona. Eso solo es posible cuando os hayáis visto."
+      "needs-in-person": "Una llamada no cuenta como conoceros en persona. Eso solo es posible cuando os hayáis visto.",
+      "needs-id": "El dueño tiene que ver primero tu documento de identidad en persona, en vuestro primer encuentro.",
+      "already-open": "Ya tienes una solicitud o una cita abierta con este perro."
     },
     "messagePlaceholder": "¡Hola! Soy … y me encantaría pasear a {dog}.",
     "moments": "Momentos que le van bien a {dog}",
@@ -557,12 +559,16 @@
     "signupFirstText": "Gratis. Primero creas una cuenta y después eliges un momento para conoceros.",
     "sentTitle": "Enviada a {owner}.",
     "sentNext": "Qué pasa ahora",
-    "sentStep1": "{owner} lee tu mensaje.",
-    "sentStep2": "Si {owner} dice que sí, veréis los datos de contacto del otro.",
+    "sentStep1": "{owner} recibe tu solicitud.",
+    "sentStep2": "{kind, select, solo {Si {owner} dice que sí, el paseo aparece en tus citas.} other {Si {owner} dice que sí, veréis los datos de contacto del otro.}}",
     "sentStep3": "{via, select, walk {La primera vez paseáis juntos.} home {La primera vez vas a casa de {owner}.} phone {Primero habláis un momento por teléfono. Después quedáis en persona.} video {Primero hacéis una videollamada corta. Después quedáis en persona.} other {Paseas por tu cuenta. {owner} puede seguirlo en directo.}}",
     "sentNotify": "Te avisaremos en cuanto {owner} responda.",
     "done": "Listo",
-    "viewRequests": "Ver tus citas"
+    "viewRequests": "Ver tus citas",
+    "signedOut": "Ya no tienes la sesión iniciada. Vuelve a entrar e inténtalo otra vez.",
+    "bannedMore": "Lee por qué",
+    "openPending": "Tu solicitud para {dog} ya está en tus citas. Te avisaremos en cuanto {owner} responda.",
+    "openAccepted": "Ya tienes una cita con {dog}: {when}."
   },
   "requests": {
     "title": "Paseos",
@@ -608,7 +614,7 @@
     "ladderTitleSolo": "{walker} ya puede pasear a {dog} por su cuenta.",
     "ladderTitleId": "Has visto el documento de identidad de {walker}.",
     "ladderTextSolo": "Puedes seguir cada paseo en directo, y puedes desactivarlo cuando quieras.",
-    "ladderTextId": "¿Quieres que {walker} también pasee a {dog} por su cuenta? Puedes activarlo aquí cuando quieras.",
+    "ladderTextId": "¿Quieres que {walker} también pasee a {dog} por su cuenta? Puedes activarlo en «Después del primer encuentro» cuando quieras.",
     "ladderTextShelter": "Los perros de protectora siempre pasean en un grupo acompañado.",
     "ladderQuiz": "{walker} podrá pedir un paseo por su cuenta en cuanto apruebe el test de seguridad.",
     "ladderLabel": "Confianza, paso a paso",
@@ -619,7 +625,13 @@
     "ladderNotYet": "todavía no",
     "ladderClose": "Listo",
     "trustSoloOff": "{walker} ya no pasea a {dog} por su cuenta.",
-    "trustIdOff": "La marca de documento visto vuelve a estar quitada."
+    "trustIdOff": "La marca de documento visto vuelve a estar quitada.",
+    "ladderExperience": "{dog} necesita a alguien con experiencia con perros. El perfil de {walker} todavía no lo indica, así que aún no se puede pedir un paseo por su cuenta.",
+    "ladderPpp": "En España, {walker} solo puede pasear a {dog} por su cuenta con la licencia PPP en su perfil.",
+    "soloNeedsId": "Pasear por su cuenta solo se puede activar cuando hayas visto su documento en persona.",
+    "soloOffWithId": "Sin «documento visto», {walker} no puede pasear a {dog} por su cuenta, así que eso también se desactiva.",
+    "trustElsewhere": "Lo que {walker} puede hacer con {dog} se ajusta en la primera cita de arriba.",
+    "declinedNote": "Has dicho que no a {walker} para {dog}. {walker} recibe un aviso."
   },
   "meet": {
     "legend": "¿Cómo os vais a conocer?",
@@ -1209,7 +1221,7 @@
     "markRead": "Marcar todo como leído",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} quiere conocer a {dogName} dando un paseo.} home {{walkerName} quiere conocer a {dogName} en tu casa.} phone {{walkerName} quiere llamar primero para conocer a {dogName}.} video {{walkerName} quiere hacer primero una videollamada para conocer a {dogName}.} other {{walkerName} quiere pasear a {dogName}.}}",
-      "request-accepted": "{via, select, walk {¡Sí! Tu primer encuentro con {dogName} está confirmado.} home {¡Sí! Tu primer encuentro con {dogName} está confirmado.} phone {¡Sí! Tu llamada sobre {dogName} está confirmada.} video {¡Sí! Tu videollamada sobre {dogName} está confirmada.} other {¡Sí! Tu paseo con {dogName} está confirmado.}}",
+      "request-accepted": "{via, select, walk {¡Sí! Tu primer encuentro con {dogName} está confirmado.} home {¡Sí! Tu primer encuentro con {dogName} está confirmado.} phone {¡Sí! Tu llamada sobre {dogName} está confirmada.} video {¡Sí! Tu videollamada sobre {dogName} está confirmada.} other {¡Sí! Tu cita con {dogName} está confirmada.}}",
       "request-declined": "Lo sentimos, han rechazado tu paseo con {dogName}.",
       "request-cancelled": "Se ha cancelado un paseo.",
       "walk-started": "{walkerName} ha salido con {dogName}. Sigue el paseo en directo.",
@@ -1677,7 +1689,7 @@
         "body": "{via, select, home {Mira la solicitud en Rondje y dile si te viene bien. Quedad de día; la familia o un vecino pueden estar presentes.} phone {Mira la solicitud en Rondje y dile si te viene bien. Una llamada aún no cuenta como conoceros en persona: después quedáis con {dogName}.} video {Mira la solicitud en Rondje y dile si te viene bien. Una videollamada aún no cuenta como conoceros en persona: después quedáis con {dogName}.} other {Mira la solicitud en Rondje y dile si te viene bien. La primera vez siempre os conocéis en persona.}}"
       },
       "request-accepted": {
-        "subject": "{via, select, walk {¡Sí! Tu primer encuentro con {dogName} está confirmado} home {¡Sí! Tu primer encuentro con {dogName} está confirmado} phone {¡Sí! Tu llamada sobre {dogName} está confirmada} video {¡Sí! Tu videollamada sobre {dogName} está confirmada} other {¡Sí! Tu paseo con {dogName} está confirmado}}",
+        "subject": "{via, select, walk {¡Sí! Tu primer encuentro con {dogName} está confirmado} home {¡Sí! Tu primer encuentro con {dogName} está confirmado} phone {¡Sí! Tu llamada sobre {dogName} está confirmada} video {¡Sí! Tu videollamada sobre {dogName} está confirmada} other {¡Sí! Tu cita con {dogName} está confirmada}}",
         "body": "{via, select, home {En Rondje ya ves dónde quedáis y cómo contactar con el propietario. Quedad de día y avisa a alguien de dónde estás.} phone {En Rondje ya ves cómo contactar con el propietario. Acordad en el chat quién llama a quién. Después de la llamada, planeas el encuentro en persona.} video {Acordad en el chat de Rondje cómo haréis la videollamada. Después de la llamada, planeas el encuentro en persona.} walk {En Rondje ya ves dónde quedáis y cómo contactar con el propietario. La primera vez paseáis juntos.} other {Ya ves dónde quedáis y cómo contactar con el propietario. Durante el paseo, el propietario puede seguirlo en directo.}}"
       },
       "walk-overdue": {
