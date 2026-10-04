@@ -91,11 +91,15 @@ describe('progress', () => {
   })
 
   it('celebrates once', async () => {
+    await client.exec(`update profile set updated_at = '2026-09-01 10:00' where user_id = 'fleur'`)
     const before = await progressFor(await viewer('fleur'))
     await markProgressSeen('fleur', before.level.level)
     const after = await progressFor(await viewer('fleur'))
     expect(after.levelUp).toBe(false)
     expect(after.newAwards).toEqual([])
+    // Seeing a celebration is not changing your profile (the seintjes count that as doing something).
+    const row = await client.query<{ updated: string }>(`select to_char(updated_at, 'YYYY-MM-DD HH24:MI') as updated from profile where user_id = 'fleur'`)
+    expect(row.rows[0].updated).toBe('2026-09-01 10:00')
   })
 
   it('gives the owner points for their dog, and the first dog', async () => {

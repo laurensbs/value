@@ -209,9 +209,11 @@ export async function progressFor(viewer: OnboardedViewer, now = new Date()): Pr
 /** After the celebration: remember the level and badges someone has now seen. */
 export async function markProgressSeen(userId: string, level: number): Promise<void> {
   const db = await getDb()
+  // Bookkeeping, not something the person changed: updated_at stays as it was, since the seintjes
+  // count a changed profile as having done something (server/nudges.ts, lastActive).
   await db
     .update(s.profile)
-    .set({ seenLevel: sql`greatest(${s.profile.seenLevel}, ${Math.max(1, Math.trunc(level))})` })
+    .set({ seenLevel: sql`greatest(${s.profile.seenLevel}, ${Math.max(1, Math.trunc(level))})`, updatedAt: sql`${s.profile.updatedAt}` })
     .where(eq(s.profile.userId, userId))
   await db
     .update(s.award)
