@@ -5,6 +5,7 @@ import { InviteLink } from '@/components/ProfileTools'
 import { SuggestForm } from '@/components/SuggestForm'
 import { isCountry, type Country } from '@/lib/countries'
 import { directoryEntry } from '@/lib/directory'
+import { inviteUrl } from '@/lib/invite'
 import { siteUrl } from '@/lib/site'
 import { getViewer } from '@/server/session'
 
@@ -21,7 +22,7 @@ export default async function SuggestPage({ searchParams }: { searchParams: Prom
   const entry = directoryEntry(sp.directory)
   const here = `/suggest?kind=${kind}${entry ? `&directory=${encodeURIComponent(entry.id)}` : ''}`
   const country: Country = isCountry(viewer?.profile?.country) ? viewer.profile.country : 'NL'
-  const inviteUrl = viewer?.profile ? `${siteUrl()}/r/${viewer.profile.referralCode}?intent=owner` : null
+  const invite = viewer?.profile ? inviteUrl(siteUrl(), viewer.profile.referralCode, 'owner') : null
 
   return (
     <div className="narrow-page stack-l">
@@ -77,8 +78,8 @@ export default async function SuggestPage({ searchParams }: { searchParams: Prom
             </li>
             <li>{t('suggest.ownerStep3')}</li>
           </ol>
-          {inviteUrl ? (
-            <InviteLink url={inviteUrl} message={t('suggest.ownerMessage', { url: inviteUrl })} />
+          {invite ? (
+            <InviteLink url={invite} message={t('suggest.ownerMessage', { url: invite })} />
           ) : (
             <div className="row">
               <Link href={`/signup?intent=owner`} className="button secondary">

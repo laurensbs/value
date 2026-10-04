@@ -4,10 +4,13 @@ import { Icon } from '@/components/Icon'
 import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { SupportButton } from '@/components/SupportButton'
-import { supportConfig } from '@/lib/support'
+import { APP_NAME } from '@/lib/site'
+import { campaign, supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
+import crowdfunding from '../../../content/crowdfunding.json'
 import '../landing.css'
+import '../impact.css'
 
 type Cost = (typeof costs.items)[number]
 
@@ -24,9 +27,24 @@ export default async function SupportPage() {
   const format = await getFormatter()
   const native = await isNativeRequest()
   const cfg = supportConfig()
+  const drive = campaign(crowdfunding)
   const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
+  const day = (d: string) => format.dateTime(new Date(d), { day: 'numeric', month: 'long', year: 'numeric' })
+  const operator = cfg.operator ?? t('support.operatorUnknown')
+  const canGive = Boolean(cfg.operator && (cfg.url || cfg.crowdfundingUrl))
+  // Until there are real agreements, an honest intention instead of a promised share or names.
+  const share =
+    drive.shareToCausesPercent !== null ? t('support.shareSet', { percent: format.number(drive.shareToCausesPercent) }) : t('support.shareSoon', { app: APP_NAME })
+  const faq = native
+    ? (['free', 'sponsors'] as const)
+    : ([...(['free', 'where', 'tax', 'perks', 'app', 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
   const total = costs.items.reduce((sum, c) => ({ min: sum.min + perMonth(c, c.min), max: sum.max + perMonth(c, c.max) }), { min: 0, max: 0 })
-  const amount = (c: Cost) => `${c.min === c.max ? euro(c.min) : `${euro(c.min)}–${euro(c.max)}`} ${t(`support.per.${c.per}`)}`
+  // The amount stays on one line; "per maand" may move under it on a small phone.
+  const amount = (c: Cost) => (
+    <>
+      <span className="cost-amount">{c.min === c.max ? euro(c.min) : `${euro(c.min)}–${euro(c.max)}`}</span> {t(`support.per.${c.per}`)}
+    </>
+  )
 
   return (
     <div className="narrow-page stack-l">
@@ -51,6 +69,19 @@ export default async function SupportPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="lp-card lp-tip">
+        <IconTile tone="green">
+          <Icon name="leaf" />
+        </IconTile>
+        <div>
+          <h2 className="im-tip-title">{t('support.whyTitle')}</h2>
+          <p className="muted">{t('support.whyText', { app: APP_NAME })}</p>
+          <Link href="/waarom" className="link-button">
+            {t('support.whyLink')} →
+          </Link>
+        </div>
       </section>
 
       {native ? null : (
@@ -79,19 +110,86 @@ export default async function SupportPage() {
         </section>
       )}
 
-      {native ? null : cfg.url && cfg.operator ? (
-        <section className="lp-card pad soft-blue stack-s" id="steun">
-          <h2>{t('support.giveTitle')}</h2>
-          <p>{t('support.giveText', { operator: cfg.operator })}</p>
-          <div>
-            <SupportButton url={cfg.url} label={t('support.giveButton', { platform: cfg.platform ?? '' })} />
+      {native ? null : canGive ? (
+        <section className="lp-card pad soft-blue stack" id="steun" aria-labelledby="give-title">
+          <div className="stack-s">
+            <h2 id="give-title">{t('support.giveTitle')}</h2>
+            <p>{t('support.giveIntro', { operator, app: APP_NAME })}</p>
           </div>
-          <p className="muted small">{t('support.giveNote', { platform: cfg.platform ?? '' })}</p>
+          <div className="im-give">
+            {cfg.url ? (
+              <article className="im-give-option stack-s">
+                <span className="pill blue">{t('support.monthlyPill')}</span>
+                <h3>{t('support.monthlyTitle')}</h3>
+                <p className="muted">{t('support.monthlyText', { app: APP_NAME })}</p>
+                <div>
+                  <SupportButton url={cfg.url} label={t('support.giveButton', { app: APP_NAME, platform: cfg.platform ?? '' })} />
+                </div>
+                <p className="muted small">{t('support.platformNote', { platform: cfg.platform ?? '' })}</p>
+              </article>
+            ) : null}
+            {cfg.crowdfundingUrl ? (
+              <article className="im-give-option stack-s" id="crowdfunding">
+                <span className="pill ball">{t('support.oncePill')}</span>
+                <h3 id="once-title">{t('support.onceTitle')}</h3>
+                <p className="muted">{t('support.onceText', { app: APP_NAME })}</p>
+                {drive.progress ? (
+                  <div className="stack-s">
+                    <div
+                      className="lp-progress im-progress"
+                      role="progressbar"
+                      aria-labelledby="once-title"
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={drive.progress.percent}
+                      aria-valuetext={t('support.progress', { raised: euro(drive.progress.raised), goal: euro(drive.progress.goal) })}
+                    >
+                      <span style={{ width: `${Math.max(drive.progress.percent, drive.progress.raised > 0 ? 3 : 0)}%` }} />
+                    </div>
+                    <p className="im-progress-numbers">
+                      <strong>{t('support.progress', { raised: euro(drive.progress.raised), goal: euro(drive.progress.goal) })}</strong>
+                      {drive.updated ? <span className="muted small">{t('support.progressUpdated', { date: day(drive.updated), platform: cfg.crowdfundingPlatform ?? '' })}</span> : null}
+                    </p>
+                  </div>
+                ) : null}
+                <div>
+                  <SupportButton url={cfg.crowdfundingUrl} label={t('support.onceButton', { platform: cfg.crowdfundingPlatform ?? '' })} />
+                </div>
+                <p className="muted small">{t('support.platformNote', { platform: cfg.crowdfundingPlatform ?? '' })}</p>
+              </article>
+            ) : null}
+          </div>
+          <p className="muted small">{t('support.giveNoteAll', { app: APP_NAME })}</p>
         </section>
       ) : (
         <section className="lp-card pad soft-blue stack-s" id="steun">
           <h2>{t('support.giveTitle')}</h2>
           <p className="muted">{t('support.giveSoon')}</p>
+        </section>
+      )}
+
+      {native ? null : (
+        <section className="lp-card pad stack" aria-labelledby="open-title">
+          <div className="lp-block-title">
+            <IconTile tone="green" size="s">
+              <Icon name="eye" size={20} />
+            </IconTile>
+            <h2 id="open-title">{t('support.openTitle')}</h2>
+          </div>
+          <dl className="im-open">
+            <div>
+              <dt>{t('support.open.paysTitle')}</dt>
+              <dd>{t('support.open.pays', { app: APP_NAME })}</dd>
+            </div>
+            <div>
+              <dt>{t('support.open.whoTitle')}</dt>
+              <dd>{cfg.operator ? t('support.open.who', { operator: cfg.operator, app: APP_NAME }) : t('support.open.whoSoon', { app: APP_NAME })}</dd>
+            </div>
+            <div>
+              <dt>{t('support.open.shareTitle')}</dt>
+              <dd>{share}</dd>
+            </div>
+          </dl>
         </section>
       )}
 
@@ -145,12 +243,12 @@ export default async function SupportPage() {
 
       <section className="stack-s lp-faq">
         <h2>{t('support.faqTitle')}</h2>
-        {(native ? (['free', 'sponsors'] as const) : (['free', 'where', 'tax', 'perks', 'sponsors'] as const)).map((k) => (
+        {faq.map((k) => (
           <details key={k} className="lp-card disclosure">
             <summary>
-              <strong>{t(`support.faq.${k}.q`)}</strong>
+              <strong>{t(`support.faq.${k}.q`, { app: APP_NAME })}</strong>
             </summary>
-            <p>{t(`support.faq.${k}.a`, { operator: cfg.operator ?? t('support.operatorUnknown') })}</p>
+            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME })}</p>
           </details>
         ))}
       </section>

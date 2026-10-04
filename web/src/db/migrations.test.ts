@@ -14,6 +14,7 @@ describe('database migrations', () => {
       insert into organization (id, name, country, city) values ('o1', 'Opvang', 'NL', 'Utrecht');
       insert into dog (id, owner_id, name, sex, size, energy, level, treats, walk_minutes, country, city)
         values ('d1', 'u1', 'Bello', 'male', 'medium', 'medium', 'starter', 'yes', 45, 'NL', 'Utrecht');
+      insert into walk_request (id, dog_id, walker_id, kind, starts_at, duration_min) values ('r1', 'd1', 'u1', 'meet', now(), 45);
     `)
 
     for (const migration of rest) for (const statement of migration.statements) await db.exec(statement)
@@ -40,6 +41,12 @@ describe('database migrations', () => {
       values ('u1', 'Ans', '1950-01-01', 'NL', 'Utrecht', now(), '0.1', 'ABC234')`)
     const prefs = await db.query<{ locale: string | null; email_notifications: boolean }>('select locale, email_notifications from profile')
     expect(prefs.rows[0]).toEqual({ locale: null, email_notifications: true })
+
+    // Requests from before the choice of how to meet were all walks together; running it twice is harmless.
+    const meetVia = migrations.find((m) => m.tag === '0010_meet_via')!
+    for (const statement of meetVia.statements) await db.exec(statement)
+    const request = await db.query<{ meet_via: string }>('select meet_via from walk_request where id = $1', ['r1'])
+    expect(request.rows[0]).toEqual({ meet_via: 'walk' })
 
     const tips = await db.query<{ status: string }>('select status from suggestion')
     expect(tips.rows.map((r) => r.status)).toEqual(['new', 'new', 'new'])

@@ -34,9 +34,13 @@ test('tips: vote for a directory shelter, suggest a new one, admin follows up', 
 
   // The admin sees the tip and marks it as contacted.
   const admin = await signInAdmin(browser)
-  await admin.page.goto('/admin')
+  await admin.page.goto('/admin/numbers')
   await expect(admin.page.getByRole('heading', { name: 'Groei' })).toBeVisible()
   await expect(admin.page.getByText('Rondjes van vaste koppels, deze week')).toBeVisible()
+  // From the admin home, the tips tile leads to the tips.
+  await admin.page.goto('/admin')
+  await admin.page.locator('.admin-tiles').getByRole('link', { name: /^Tips en stemmen/ }).click()
+  await expect(admin.page).toHaveURL(/\/admin\/tips$/)
   const row = admin.page.getByRole('listitem').filter({ hasText: shelterName })
   await expect(row.getByText('De honden komen weinig buiten.')).toBeVisible()
   await row.getByRole('button', { name: 'Benaderd' }).click()

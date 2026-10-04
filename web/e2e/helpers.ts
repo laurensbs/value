@@ -1,4 +1,4 @@
-import { expect, type Browser, type Page } from '@playwright/test'
+import { expect, type Browser, type BrowserContextOptions, type Page } from '@playwright/test'
 
 /** With SHOTS=1, saves a full-page screenshot per step for design review (shots/<name>.png). */
 export async function shot(page: Page, name: string) {
@@ -23,12 +23,13 @@ export function soonSlot(now = new Date()): { date: string; time: string } {
 /** Each person gets their own (test) IP, as in real life: sign-in and sign-up are limited per IP address. */
 const randomIp = () => `10.${1 + Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${1 + Math.floor(Math.random() * 250)}`
 
-export async function newPerson(browser: Browser, geo?: { latitude: number; longitude: number }) {
+export async function newPerson(browser: Browser, geo?: { latitude: number; longitude: number }, options: BrowserContextOptions = {}) {
   const context = await browser.newContext({
     colorScheme: process.env.SHOTS_DARK ? 'dark' : 'light',
     geolocation: geo ?? { latitude: 52.0907, longitude: 5.1214 },
     permissions: ['geolocation'],
     extraHTTPHeaders: { 'x-forwarded-for': randomIp() },
+    ...options,
   })
   const page = await context.newPage()
   return { context, page }
@@ -45,10 +46,10 @@ export async function signUp(page: Page, opts: { name: string; email: string; in
 
 /**
  * The step-by-step onboarding: role, name and age, place, (walkers) experience and weekly goal,
- * a few words about yourself, and the promises. Someone who neither walks nor has a dog is
- * treated as shelter staff.
+ * a few words about yourself (typed, or ready sentences tapped), and the promises. Someone who
+ * neither walks nor has a dog is treated as shelter staff.
  */
-export async function onboard(page: Page, opts: { birthDate: string; city: string; bio: string; phone: string; walker: boolean; owner: boolean }) {
+export async function onboard(page: Page, opts: { birthDate: string; city: string; bio: string | string[]; phone: string; walker: boolean; owner: boolean }) {
   const next = () => page.getByRole('button', { name: 'Verder' }).click()
   await page.getByRole('button', { name: 'Laten we beginnen' }).click()
   const role = opts.walker && opts.owner ? /^Allebei/ : opts.owner ? /^Ik heb een hond/ : opts.walker ? /^Ik wil wandelen/ : /^Ik werk bij een opvang/
@@ -66,13 +67,32 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
     await expect(page.getByRole('radio', { name: /^1 keer per week/ })).toBeChecked()
     await next()
   }
-  await page.getByLabel('Over jou').fill(opts.bio)
+  if (typeof opts.bio === 'string') {
+    await page.getByLabel('Over jou').fill(opts.bio)
+  } else {
+    const sentences = page.getByRole('group', { name: 'Tik om een zin toe te voegen' })
+    for (const sentence of opts.bio) await sentences.getByRole('button', { name: sentence }).click()
+    await expect(page.getByLabel('Over jou')).toHaveValue(opts.bio.join(' '))
+  }
   await page.getByLabel(/Telefoonnummer/).fill(opts.phone)
   await next()
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
   await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
   // Wait until the profile is saved and we left onboarding, so the next step doesn't race the save.
   await page.waitForURL((url) => !url.pathname.startsWith('/onboarding'))
+}
+
+/** A dog put online in the fewest taps: a name, the suggested walk and town, and the two safety promises. */
+export async function addDog(page: Page, name: string) {
+  await page.goto('/my-dogs/new')
+  await page.getByLabel('Naam', { exact: true }).fill(name)
+  const next = page.getByRole('button', { name: 'Verder' })
+  // On past the name, the character, the story, the walk, where, and what only accepted walkers see.
+  for (let step = 0; step < 6; step++) await next.click()
+  await page.getByLabel(/Ik ben verzekerd/).check()
+  await page.getByLabel(/gechipt en gevaccineerd/).check()
+  await page.getByRole('button', { name: `Zet ${name} online` }).click()
+  await expect(page).toHaveURL(/\/dogs\/[^/?]+\?saved=1$/)
 }
 
 /** Signs in as the e2e admin (ADMIN_EMAILS in playwright.config.ts). On a reused server the account may already exist. */

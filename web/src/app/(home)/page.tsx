@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { visitorCountry, visitorPosition } from '@/components/discover/visitor'
 import { Icon } from '@/components/Icon'
+import { ImpactBand } from '@/components/impact/ImpactBand'
 import { Chooser } from '@/components/landing/Chooser'
 import { Community } from '@/components/landing/Community'
 import { DogPeek } from '@/components/landing/DogPeek'
@@ -18,7 +19,7 @@ import { isNativeRequest } from '@/server/native'
 import { listDogs } from '@/server/queries'
 import { Today } from '@/components/Today'
 import { getViewer, type OnboardedViewer } from '@/server/session'
-import './landing.css'
+import '../landing.css'
 
 const SAFETY: { key: 1 | 2 | 3 | 4 | 5 | 6; icon: ReactNode; tone: Tone }[] = [
   { key: 1, icon: <Icon name="users" />, tone: 'green' },
@@ -125,6 +126,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           ))}
         </ul>
       </section>
+
+      <ImpactBand native={native} />
 
       <Community />
 

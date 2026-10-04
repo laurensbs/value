@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { fillContact } from '@/lib/contact'
 import { isLegalDoc, LEGAL_DOCS, legalHtml } from '@/lib/legal'
+import { supportConfig } from '@/lib/support'
 
 export async function generateMetadata({ params }: { params: Promise<{ doc: string }> }) {
   const { doc } = await params
@@ -17,6 +19,9 @@ export default async function LegalPage({ params }: { params: Promise<{ doc: str
   const content = await legalHtml(doc, locale)
   if (!content) notFound()
   const t = await getTranslations('legal')
+  // The contact address comes from CONTACT_EMAIL; the link text without one is in the language of the text itself.
+  const tText = await getTranslations({ locale: content.locale, namespace: 'legal' })
+  const html = fillContact(content.html, supportConfig().contactEmail, tText('contactFallback'))
 
   return (
     <div className="legal-layout">
@@ -36,7 +41,7 @@ export default async function LegalPage({ params }: { params: Promise<{ doc: str
               .join(' · ')}
           </p>
         ) : null}
-        <div dangerouslySetInnerHTML={{ __html: content.html }} />
+        <div dangerouslySetInnerHTML={{ __html: html }} />
       </article>
     </div>
   )

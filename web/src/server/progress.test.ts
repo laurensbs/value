@@ -14,7 +14,7 @@ const { markProgressSeen, progressFor, syncPoints } = await import('./progress')
 
 async function viewer(userId: string) {
   const p = await db.query.profile.findFirst({ where: (t, { eq }) => eq(t.userId, userId) })
-  return { userId, email: `${userId}@example.org`, name: userId, image: null, isAdmin: false, orgs: [], profile: p! }
+  return { userId, email: `${userId}@example.org`, name: userId, image: null, isAdmin: false, adminUnconfirmed: false, orgs: [], profile: p! }
 }
 
 beforeAll(async () => {
@@ -23,15 +23,20 @@ beforeAll(async () => {
     insert into "user" (id, name, email, email_verified, created_at, updated_at) values
       ('ans', 'Ans', 'ans@example.org', false, now(), now()),
       ('fleur', 'Fleur', 'fleur@example.org', false, now(), now()),
-      ('tom', 'Tom', 'tom@example.org', false, now(), now());
+      ('tom', 'Tom', 'tom@example.org', false, now(), now()),
+      ('mia', 'Mia', 'mia@example.org', false, now(), now());
     insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code, referred_by,
       wants_to_walk, has_dogs, photo_url, bio, quiz_passed_at, weekly_goal)
     values
       ('ans', 'Ans', '1951-04-02', 'NL', 'Utrecht', now(), '1', 'ANS234', null, false, true, null, '', null, null),
       ('fleur', 'Fleur', '2003-06-15', 'NL', 'Utrecht', now(), '1', 'FLE234', null, true, false,
         'https://example.org/f.jpg', 'Ik studeer in Utrecht en mis de hond van mijn ouders.', '2026-10-01 10:00', 2),
-      ('tom', 'Tom', '1990-01-01', 'NL', 'Utrecht', now(), '1', 'TOM234', 'FLE234', true, false, null, '', null, null);
+      ('tom', 'Tom', '1990-01-01', 'NL', 'Utrecht', now(), '1', 'TOM234', 'FLE234', true, false, null, '', null, null),
+      ('mia', 'Mia', '1960-02-02', 'NL', 'Utrecht', now(), '1', 'MIA234', null, false, true, null, '', null, null);
     insert into dog (id, owner_id, name, country, city, created_at) values ('bello', 'ans', 'Bello', 'NL', 'Utrecht', '2026-09-30 09:00');
+    insert into dog (id, owner_id, name, country, city, status, created_at) values
+      ('pip', 'mia', 'Pip', 'NL', 'Utrecht', 'paused', '2026-09-29 09:00'),
+      ('saar', 'mia', 'Saar', 'NL', 'Utrecht', 'active', '2026-09-30 09:00');
     insert into walk_request (id, dog_id, walker_id, kind, starts_at, duration_min, status)
       values ('r1', 'bello', 'fleur', 'meeting', '2026-10-03 05:30', 30, 'completed');
     -- Saturday 3 October, 07:30 in Amsterdam (05:30 UTC): early and in the weekend.
@@ -92,6 +97,15 @@ describe('progress', () => {
       ['dogMet', true],
       ['dogWalk', true],
     ])
+  })
+
+  it('points an owner waiting for a first walker to the neighbours, until someone asks', async () => {
+    const waiting = await progressFor(await viewer('mia'))
+    // Her dog that is online, not the paused one.
+    expect(waiting.steps.find((s) => s.key === 'dogMet')).toEqual({ key: 'dogMet', done: false, href: '/dogs/saar#share', dog: { id: 'saar', name: 'Saar' } })
+    await client.exec(`insert into walk_request (id, dog_id, walker_id, kind, starts_at, duration_min) values ('r2', 'saar', 'tom', 'meeting', '2026-10-06 10:00', 30)`)
+    const asked = await progressFor(await viewer('mia'))
+    expect(asked.steps.find((s) => s.key === 'dogMet')).toEqual({ key: 'dogMet', done: false, href: '/requests' })
   })
 
   it('keeps points when the dog and its walks are deleted', async () => {

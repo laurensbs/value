@@ -71,11 +71,11 @@
     "city": "'s-Hertogenbosch",
     "region": "Noord-Brabant",
     "website": "https://dierentehuisdenbosch.nl",
-    "walkingProgram": "unknown",
+    "walkingProgram": "yes",
     "lat": 51.69,
     "lng": 5.30,
     "confidence": "high",
-    "note": "Bekend van virale video's van honden die het langst wachten."
+    "note": "Bekend van virale video's van honden die het langst wachten. Vrijwillige dierverzorgers laten ook honden uit; vanaf 18 jaar."
   },
   {
     "id": "nl-hof-van-ede",
@@ -83,12 +83,12 @@
     "name": "Dierentehuis De Hof van Ede (Dierenbescherming)",
     "city": "Ede",
     "region": "Gelderland",
-    "website": null,
-    "walkingProgram": "unknown",
+    "website": "https://www.dierenbescherming.nl/dierenasiel/dierentehuis-de-hof-van-ede",
+    "walkingProgram": "yes",
     "lat": 52.04,
     "lng": 5.66,
     "confidence": "high",
-    "note": "Dicht bij Wageningen (studentenstad)."
+    "note": "Vrijwilligers wandelen dagelijks met de honden op de hei of in het bos. Dicht bij Wageningen (studentenstad)."
   },
   {
     "id": "nl-de-wissel-leeuwarden",
@@ -109,12 +109,12 @@
     "name": "Dierenopvangcentrum Breda en omgeving",
     "city": "Breda",
     "region": "Noord-Brabant",
-    "website": null,
-    "walkingProgram": "unknown",
+    "website": "https://docbreda.nl",
+    "walkingProgram": "yes",
     "lat": 51.60,
     "lng": 4.73,
     "confidence": "high",
-    "note": "Asiel aan de Meester Bierensweg in Prinsenbeek."
+    "note": "DOC Breda, Oude Baan 60. Vrijwillige dierverzorgers laten ook honden uit; vanaf 18 jaar."
   },
   {
     "id": "nl-dierenasiel-gorinchem",
@@ -122,25 +122,25 @@
     "name": "Stichting Dierenasiel Gorinchem",
     "city": "Gorinchem",
     "region": "Zuid-Holland",
-    "website": null,
-    "walkingProgram": "unknown",
+    "website": "https://www.dierenasielgorinchem.nl",
+    "walkingProgram": "yes",
     "lat": 51.83,
     "lng": 4.97,
     "confidence": "high",
-    "note": ""
+    "note": "Vrijwilligers vanaf 16 jaar, in vaste ochtend- en middagdiensten."
   },
   {
     "id": "nl-dierentehuis-vijfheerenlanden",
     "country": "NL",
     "name": "Stichting Dierentehuis Vijfheerenlanden, Culemborg en Omstreken",
-    "city": "Culemborg",
+    "city": "Leerdam",
     "region": "Gelderland",
-    "website": null,
-    "walkingProgram": "unknown",
-    "lat": 51.96,
-    "lng": 5.23,
+    "website": "https://dierentehuisvijfheerenlanden.nl",
+    "walkingProgram": "yes",
+    "lat": 51.89,
+    "lng": 5.09,
     "confidence": "high",
-    "note": ""
+    "note": "Vrijwilligers laten de honden uit en trainen en socialiseren ze daarbij."
   },
   {
     "id": "nl-dierenopvangcentrum-oldenzaal",
@@ -156,30 +156,17 @@
     "note": "Dicht bij Enschede (studentenstad)."
   },
   {
-    "id": "nl-dierentehuis-amstelveen",
-    "country": "NL",
-    "name": "Dierentehuis Amstelveen",
-    "city": "Amstelveen",
-    "region": "Noord-Holland",
-    "website": null,
-    "walkingProgram": "unknown",
-    "lat": 52.30,
-    "lng": 4.86,
-    "confidence": "medium",
-    "note": "Laatste bevestiging uit 2017; controleren of het nog actief is."
-  },
-  {
     "id": "nl-dierenopvangcentrum-noordwijk",
     "country": "NL",
     "name": "Stichting Dierenopvangcentrum Noordwijk",
     "city": "Noordwijk",
     "region": "Zuid-Holland",
-    "website": null,
-    "walkingProgram": "unknown",
+    "website": "https://www.dierenasielnoordwijk.org",
+    "walkingProgram": "no",
     "lat": 52.23,
     "lng": 4.46,
     "confidence": "medium",
-    "note": "Dicht bij Leiden. Naam en contact nog controleren."
+    "note": "Dierenasiel Offem. Honden worden alleen uitgelaten door intern opgeleide medewerkers."
   },
   {
     "id": "nl-dierenasiel-zeeuwsch-vlaanderen",

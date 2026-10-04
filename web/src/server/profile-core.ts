@@ -5,9 +5,10 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { isCountry } from '@/lib/countries'
 import { fuzzLatLng, isValidLatLng } from '@/lib/geo'
-import { isAllowedPhotoUrl } from '@/lib/photos'
+import { isAllowedPhotoUrl, isProviderPhoto } from '@/lib/photos'
 import { isAdult } from '@/lib/rules'
 import { TERMS_VERSION } from '@/lib/site'
+import { deleteUnusedFilesLater } from './blob-cleanup'
 import type { FormState } from './actions/profile'
 import type { Viewer } from './session'
 
@@ -31,10 +32,11 @@ export const profileSchema = z.object({
   weeklyGoal: z.number().int().min(1).max(7).nullable().default(null),
 })
 
-/** Our own uploads, or the picture from the person's Google/Apple account (or the one they already had). */
+/** Our own uploads, or the picture from the person's Google account. Never an address someone else picked. */
 export function safePhoto(url: string | undefined, viewer: { image: string | null; profile: { photoUrl: string | null } | null }): string | null {
   if (!url) return null
-  return isAllowedPhotoUrl(url) || url === viewer.image || url === viewer.profile?.photoUrl ? url : null
+  if (isAllowedPhotoUrl(url)) return url
+  return isProviderPhoto(url) && (url === viewer.image || url === viewer.profile?.photoUrl) ? url : null
 }
 
 export function location(lat?: number, lng?: number) {
@@ -78,6 +80,8 @@ export async function saveOnboarding(
   }
   if (viewer.profile) {
     await db.update(s.profile).set(values).where(eq(s.profile.userId, viewer.userId))
+    const old = viewer.profile.photoUrl
+    if (old && old !== values.photoUrl) deleteUnusedFilesLater([old], 'a profile photo change')
   } else {
     await db.insert(s.profile).values({ userId: viewer.userId, ...values, referralCode: referralCode(), referredBy: opts.referredBy })
   }

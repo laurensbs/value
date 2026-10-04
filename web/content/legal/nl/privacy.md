@@ -13,7 +13,7 @@ In deze verklaring lees je welke persoonsgegevens Rondje verwerkt, waarom, hoe l
 
 [Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], KvK-nummer [KvK-nummer], is de verwerkingsverantwoordelijke voor je gegevens op Rondje.
 
-Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: of een functionaris gegevensbescherming verplicht is. Zo ja, contactgegevens hier vermelden.]
+Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functionaris gegevensbescherming verplicht is. Zo ja, contactgegevens hier vermelden.]
 
 ## 2. In het kort
 
@@ -93,7 +93,7 @@ Vragen over privacy? Mail ons via [e-mail: hallo@rondje.app]. [Te controleren: o
 |---|---|
 | Je account maken en beheren, inloggen | Overeenkomst |
 | Profielen tonen en wandelaars en honden aan elkaar koppelen | Overeenkomst |
-| Verzoeken, kennismakingen en wandelingen regelen, en contactgegevens na acceptatie delen | Overeenkomst |
+| Verzoeken, kennismakingen en wandelingen regelen, met een herinnering vooraf (ook voor groepswandelingen), en contactgegevens na acceptatie delen | Overeenkomst |
 | Live locatie tijdens een wandeling, melding bij een te late wandeling, SOS-scherm | Overeenkomst, en ons gerechtvaardigd belang en dat van eigenaren en wandelaars bij veiligheid |
 | ID-check registreren, veiligheidsquiz, beperkingen voor nieuwe accounts | Gerechtvaardigd belang: veiligheid van mensen en dieren |
 | Privé-feedback, meldingen, moderatie, blokkades en uitsluitingen | Gerechtvaardigd belang: veiligheid en misbruik voorkomen. Deels wettelijke plicht (DSA) |
@@ -206,7 +206,7 @@ Je hebt het recht om:
 - **bezwaar te maken** tegen verwerking op grond van gerechtvaardigd belang;
 - je toestemming in te trekken, als we op basis van toestemming verwerken.
 
-Stuur je verzoek via de app of naar [e-mail: hallo@rondje.app]. We reageren binnen één maand. Soms vragen we je eerst om aan te tonen dat het om jouw account gaat.
+Stuur je verzoek via de app of naar {{contact}}. We reageren binnen één maand. Soms vragen we je eerst om aan te tonen dat het om jouw account gaat.
 
 Sommige gegevens kunnen we niet meteen verwijderen, bijvoorbeeld als ze nodig zijn voor een open melding over de veiligheid van anderen. Dat leggen we je dan uit.
 

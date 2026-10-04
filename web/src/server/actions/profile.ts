@@ -7,9 +7,11 @@ import { redirect } from 'next/navigation'
 import { getLocale } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { INVITE_COOKIE } from '@/lib/invite'
 import { scoreQuiz } from '@/lib/quiz'
 import { isAdult } from '@/lib/rules'
 import { safeNext } from '@/lib/site'
+import { deleteUnusedFilesLater, deleteUserWithFiles } from '../blob-cleanup'
 import { location, profileSchema, safePhoto, saveOnboarding } from '../profile-core'
 import { actionViewer, getViewer } from '../session'
 
@@ -41,12 +43,13 @@ function readProfile(form: FormData) {
 export async function completeOnboarding(_prev: FormState, form: FormData): Promise<FormState> {
   const viewer = await getViewer()
   if (!viewer) return { ok: false, error: 'not-signed-in' }
+  if (viewer.profile?.bannedAt) return { ok: false, error: 'banned' }
   const parsed = readProfile(form)
   if (!parsed.success) return { ok: false, error: 'invalid' }
   const result = await saveOnboarding(viewer, parsed.data, {
     termsAccepted: form.get('terms') === 'on',
     locale: await getLocale(),
-    referredBy: (await cookies()).get('rondje_ref')?.value ?? null,
+    referredBy: (await cookies()).get(INVITE_COOKIE)?.value ?? null,
   })
   if (!result.ok) return result
   const p = parsed.data
@@ -64,6 +67,9 @@ export async function updateProfile(_prev: FormState, form: FormData): Promise<F
   const p = parsed.data
   if (!isAdult(p.birthDate)) return { ok: false, error: 'too-young' }
   const db = await getDb()
+  const oldPhoto = viewer.profile.photoUrl
+  // An empty field means the photo was removed; a missing field leaves it as it was.
+  const photoUrl = form.get('photoUrl') === null ? oldPhoto : safePhoto(p.photoUrl, viewer)
   await db
     .update(s.profile)
     .set({
@@ -76,8 +82,7 @@ export async function updateProfile(_prev: FormState, form: FormData): Promise<F
       experience: p.experience,
       phone: p.phone || null,
       languages: p.languages,
-      // An empty field means the photo was removed; a missing field leaves it as it was.
-      photoUrl: form.get('photoUrl') === null ? viewer.profile.photoUrl : safePhoto(p.photoUrl, viewer),
+      photoUrl,
       wantsToWalk: p.wantsToWalk,
       hasDogs: p.hasDogs,
       // A form without the goal (an older app) keeps the one that was set.
@@ -86,6 +91,10 @@ export async function updateProfile(_prev: FormState, form: FormData): Promise<F
     })
     .where(eq(s.profile.userId, viewer.userId))
   await db.update(s.user).set({ name: p.firstName }).where(eq(s.user.id, viewer.userId))
+  // A replaced or removed photo also goes from Vercel Blob, unless something else still shows it.
+  if (oldPhoto && oldPhoto !== photoUrl) deleteUnusedFilesLater([oldPhoto], 'a profile photo change')
+  // Walking or owning a dog decides the tabs, and the header shows the photo.
+  revalidatePath('/', 'layout')
   return { ok: true, message: 'saved' }
 }
 
@@ -102,15 +111,14 @@ export async function submitQuiz(_prev: FormState & { wrong?: string[] }, form: 
   return { ok: true, message: 'quiz-passed', wrong: [] }
 }
 
-/** GDPR: removes the account and everything linked to it (cascading deletes). */
+/** GDPR: removes the account and everything linked to it (cascading deletes), and its own photos in Vercel Blob. */
 export async function deleteAccount(_prev: FormState, form: FormData): Promise<FormState> {
   const viewer = await getViewer()
   if (!viewer) return { ok: false, error: 'not-signed-in' }
   if (String(form.get('confirm') ?? '').trim().toUpperCase() !== 'VERWIJDER' && String(form.get('confirm') ?? '').trim().toUpperCase() !== 'DELETE') {
     return { ok: false, error: 'confirm' }
   }
-  const db = await getDb()
-  await db.delete(s.user).where(eq(s.user.id, viewer.userId))
+  await deleteUserWithFiles(viewer.userId)
   const jar = await cookies()
   for (const c of jar.getAll()) if (c.name.includes('better-auth')) jar.delete(c.name)
   redirect('/?deleted=1')

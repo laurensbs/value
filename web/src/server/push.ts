@@ -88,8 +88,9 @@ export async function pushNow(db: Db, userIds: string[], kind: string, data: Not
 export async function pushMessage(kind: string, data: NotificationData, locale: ReturnType<typeof toLocale>): Promise<PushMessage> {
   const t = await getTranslations({ locale, namespace: 'notifications' })
   const body = t.has(`kinds.${kind}`) ? t(`kinds.${kind}`, notificationValues(data)) : t('title')
-  // One visible notification per conversation or walk, and one reminder: a newer one replaces the older.
-  const tag = isNudgeKind(kind) ? 'nudge' : data.requestId ? `${kind}:${data.requestId}` : data.walkId ? `${kind}:${data.walkId}` : kind
+  // One visible notification per conversation, walk or group walk, and one reminder: a newer one replaces the older.
+  const about = data.requestId || data.walkId || data.groupWalkId
+  const tag = isNudgeKind(kind) ? 'nudge' : about ? `${kind}:${about}` : kind
   return { title: APP_NAME, body, url: notificationHref(kind, data), tag }
 }
 

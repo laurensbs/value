@@ -177,7 +177,7 @@
 }
 
 .launch-check.pop {
-  animation: launch-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1.4);
+  animation: launch-pop var(--motion-pop) var(--ease-pop);
 }
 
 .launch-plus {
@@ -586,8 +586,8 @@ mark.launch-gap {
 
 .button.launch-icon-button {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   padding: 0;
 }
 
@@ -839,17 +839,6 @@ mark.launch-gap {
 .launch-costs tfoot td {
   border-bottom: 0;
   font-weight: 800;
-}
-
-.launch-install {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.launch-install .icon {
-  flex-shrink: 0;
-  margin-top: 2px;
 }
 
 .launch-steps {

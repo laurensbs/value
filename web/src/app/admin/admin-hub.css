@@ -1,0 +1,477 @@
+/* Beheer (/admin/**): the admin home with tiles and "de beste vragen", the section switch on every
+   admin page, and the CSV import in the launch hub. Mobile first (375 px), in the app style of
+   app-shell.css and launch.css. Only design tokens from globals.css, so light and dark both work. */
+
+.admin-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.admin-page,
+.admin-home {
+  width: 100%;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.admin-home {
+  max-width: 980px;
+}
+
+.admin-anchor {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+/* ---------- Section switch ---------- */
+
+.admin-nav {
+  /* Positioned, so a pill's offsetLeft counts from here (AdminNav scrolls the current one into view). */
+  position: relative;
+  margin-inline: -16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-nav ul {
+  display: flex;
+  gap: 6px;
+  width: max-content;
+  margin: 0;
+  padding: 2px 16px;
+  list-style: none;
+}
+
+.admin-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 650;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.admin-nav-pill:hover {
+  background: var(--sunken);
+}
+
+.admin-nav-pill[aria-current='page'] {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.admin-nav-pill:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+@media (min-width: 760px) {
+  .admin-nav {
+    margin-inline: 0;
+    overflow: visible;
+  }
+
+  .admin-nav ul {
+    flex-wrap: wrap;
+    width: auto;
+    padding: 0;
+  }
+}
+
+/* ---------- Home: header ---------- */
+
+.admin-home-head {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-home-head .eyebrow {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+}
+
+/* ---------- Home: tiles ---------- */
+
+.admin-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (min-width: 760px) {
+  .admin-tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+.admin-tile {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  min-height: 128px;
+  padding: 14px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-tile:hover {
+  border-color: color-mix(in oklab, var(--grass) 45%, var(--line));
+}
+
+.admin-tile:active {
+  transform: scale(0.98);
+}
+
+.admin-tile:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+.admin-tile-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.admin-tile-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.admin-tile-badge {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  background: var(--sunken);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.admin-tile.is-attention .admin-tile-badge {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.admin-tile.is-urgent {
+  border-color: color-mix(in oklab, var(--danger) 55%, var(--line));
+}
+
+.admin-tile.is-urgent .admin-tile-badge {
+  background: var(--danger);
+  color: var(--on-danger);
+}
+
+.admin-tile.is-urgent .admin-tile-icon {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.admin-tile-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.admin-tile-text {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+/* ---------- Home: the best questions ---------- */
+
+.admin-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-m);
+  font-weight: 650;
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.admin-status > svg {
+  flex-shrink: 0;
+}
+
+.admin-status.is-attention {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.admin-status.is-urgent {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.admin-questions {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .admin-questions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.admin-q {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.admin-q.is-urgent {
+  border-color: color-mix(in oklab, var(--danger) 55%, var(--line));
+  box-shadow: inset 4px 0 0 var(--danger);
+}
+
+.admin-q.is-attention {
+  box-shadow: inset 4px 0 0 var(--ball);
+}
+
+.admin-q.is-calm {
+  background: color-mix(in oklab, var(--surface) 70%, var(--paper));
+}
+
+.admin-q-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.admin-q.is-attention .admin-q-mark {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.admin-q.is-urgent .admin-q-mark {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.admin-q-body {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-q-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.admin-q-head h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.admin-q-head .pill {
+  flex-shrink: 0;
+}
+
+.admin-q-answer {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.admin-q.is-calm .admin-q-answer {
+  color: var(--muted);
+}
+
+.admin-q-items {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: var(--radius-s);
+  background: var(--sunken);
+  list-style: none;
+}
+
+.admin-q-items li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  overflow-wrap: anywhere;
+}
+
+.admin-q-act {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 2px;
+  color: var(--grass);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.admin-q-act:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.admin-q-act.quiet {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.admin-install {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.admin-install > svg {
+  flex-shrink: 0;
+  color: var(--grass);
+}
+
+/* ---------- Launch hub: CSV import ---------- */
+
+.launch-contacts-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.launch-import h3 {
+  margin: 0;
+}
+
+.launch-import-header {
+  display: block;
+  padding: 8px 10px;
+  border-radius: var(--radius-s);
+  background: var(--sunken);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.launch-import-text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+}
+
+.launch-import-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.launch-import-rows {
+  display: grid;
+  gap: 6px;
+  max-height: 420px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.launch-import-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'line state'
+    'who who';
+  gap: 2px 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.launch-import-row.is-invalid {
+  border-color: color-mix(in oklab, var(--warn) 50%, var(--line));
+  background: color-mix(in oklab, var(--warn-soft) 45%, var(--surface));
+}
+
+.launch-import-row.is-duplicate {
+  opacity: 0.75;
+}
+
+.launch-import-line {
+  grid-area: line;
+}
+
+.launch-import-who {
+  grid-area: who;
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.launch-import-state {
+  grid-area: state;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+@media (min-width: 640px) {
+  .launch-import-row {
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    grid-template-areas: 'line who state';
+    align-items: center;
+  }
+}

@@ -36,6 +36,7 @@ Les cookies fonctionnels ne nécessitent pas de consentement. C'est pourquoi vou
 Rondje enregistre certaines choses uniquement sur votre propre appareil, dans le navigateur ou dans l'application :
 
 - **Bilans d'humeur.** Comment vous vous sentez avant et après une promenade. Ces données restent sur votre appareil et n'arrivent jamais chez Rondje.
+- **Une question pour plus tard.** Si vous choisissez « Plus tard » quand nous vous proposons les notifications ou de mettre Rondje sur votre écran d'accueil, votre navigateur retient pendant deux semaines de ne pas reposer la question. Si vous choisissez « C’est déjà fait », il le retient pendant un an.
 - **Préférences**, comme l'affichage ou les réglages que vous choisissez [à vérifier : lesquels].
 
 Vous pouvez effacer ces données vous-même, par exemple en supprimant les données du site dans votre navigateur, ou les données de l'application ou l'application elle-même. Attention : vos bilans d'humeur disparaîtront alors vraiment. Nous n'en avons aucune copie.
@@ -50,4 +51,4 @@ Vous pouvez supprimer ou bloquer les cookies dans les réglages de votre navigat
 
 ## 7. Questions
 
-Des questions sur les cookies ? Écrivez à [e-mail: hallo@rondje.app].
+Des questions sur les cookies ? Écrivez à {{contact}}.

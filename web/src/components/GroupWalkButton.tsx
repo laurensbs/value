@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { useState, useTransition } from 'react'
 import { joinGroupWalk, leaveGroupWalk } from '@/server/actions/shelters'
+import { Icon } from './Icon'
 
 export function GroupWalkButton({ id, joined, full, signedIn, next = '/group-walks' }: { id: string; joined: boolean; full: boolean; signedIn: boolean; next?: string }) {
   const t = useTranslations()
@@ -36,6 +37,11 @@ export function GroupWalkButton({ id, joined, full, signedIn, next = '/group-wal
         {isJoined ? t('groupWalks.leave') : t('groupWalks.join')}
       </button>
       {isJoined ? <span className="pill green">{t('groupWalks.joined')}</span> : null}
+      {isJoined ? (
+        <a href={`/group-walks/${id}/calendar.ics`} className="link-button small">
+          <Icon name="calendar" size={14} /> {t('requests.calendar')}
+        </a>
+      ) : null}
       {error ? <span className="error-text">{t(`request.reasons.${error}`)}</span> : null}
     </div>
   )

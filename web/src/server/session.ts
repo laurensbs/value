@@ -6,7 +6,8 @@ import { cache } from 'react'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { auth } from '@/lib/auth'
-import { adminEmails } from '@/lib/site'
+import { adminAccess, safeNext } from '@/lib/site'
+import { emailEnabled } from './email'
 
 export type Profile = typeof s.profile.$inferSelect
 
@@ -24,6 +25,8 @@ export interface Viewer {
   name: string
   image: string | null
   isAdmin: boolean
+  /** On ADMIN_EMAILS, but the address is not confirmed yet: /admin asks for that first. */
+  adminUnconfirmed: boolean
   profile: Profile | null
   orgs: OrgMembership[]
 }
@@ -39,25 +42,29 @@ export const getViewer = cache(async (): Promise<Viewer | null> => {
   const session = await getSession()
   if (!session) return null
   const db = await getDb()
-  const [profile] = await db.select().from(s.profile).where(eq(s.profile.userId, session.user.id))
-  const orgs = await db
-    .select({
-      id: s.organization.id,
-      name: s.organization.name,
-      status: s.organization.status,
-      role: s.organizationMember.role,
-      country: s.organization.country,
-    })
-    .from(s.organizationMember)
-    .innerJoin(s.organization, eq(s.organization.id, s.organizationMember.orgId))
-    .where(eq(s.organizationMember.userId, session.user.id))
-  const role = (session.user as { role?: string }).role
+  // Every signed-in page waits for this: both questions go to the database at once.
+  const [[profile], orgs] = await Promise.all([
+    db.select().from(s.profile).where(eq(s.profile.userId, session.user.id)),
+    db
+      .select({
+        id: s.organization.id,
+        name: s.organization.name,
+        status: s.organization.status,
+        role: s.organizationMember.role,
+        country: s.organization.country,
+      })
+      .from(s.organizationMember)
+      .innerJoin(s.organization, eq(s.organization.id, s.organizationMember.orgId))
+      .where(eq(s.organizationMember.userId, session.user.id)),
+  ])
+  const access = adminAccess({ ...session.user, role: (session.user as { role?: string }).role }, emailEnabled())
   return {
     userId: session.user.id,
     email: session.user.email,
     name: session.user.name,
     image: session.user.image ?? null,
-    isAdmin: role === 'admin' || adminEmails().includes(session.user.email.toLowerCase()),
+    isAdmin: access === 'admin',
+    adminUnconfirmed: access === 'confirm',
     profile: profile ?? null,
     orgs,
   }
@@ -76,8 +83,14 @@ export async function requireOnboarded(next = '/dogs'): Promise<OnboardedViewer>
   return viewer as OnboardedViewer
 }
 
-export async function requireAdmin(): Promise<Viewer> {
-  const viewer = await requireViewer('/admin')
+/**
+ * For admin pages. `next` is the page itself (e.g. '/admin/launch'), so signing in leads back to
+ * it instead of to /admin. Only a path on this site counts; anything else becomes '/admin'.
+ * Someone on ADMIN_EMAILS who has not confirmed the address yet goes to /admin, which asks for that.
+ */
+export async function requireAdmin(next = '/admin'): Promise<Viewer> {
+  const viewer = await requireViewer(safeNext(next, '/admin'))
+  if (viewer.adminUnconfirmed) redirect('/admin')
   if (!viewer.isAdmin) redirect('/')
   return viewer
 }

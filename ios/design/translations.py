@@ -642,6 +642,71 @@ T = {
     "Ouderen in de buurt": ("Older neighbours", "Les aînés du quartier", "Mayores del barrio"),
     "Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven.": ("Initiatives that help older people with a dog stay independent for longer.", "Des initiatives qui aident les aînés avec un chien à rester autonomes plus longtemps.", "Iniciativas que ayudan a las personas mayores con perro a seguir siendo independientes más tiempo."),
     "Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig.": ("Getting outside together with a dog can make your day. It's free, without ads, and safe.", "Sortir ensemble avec un chien peut embellir ta journée. C'est gratuit, sans pub et sûr.", "Salir juntos con un perro puede alegrarte el día. Es gratis, sin anuncios y seguro."),
+    # --- kennismaking: manier ---
+    "Hoe maken jullie kennis?": ("How would you like to meet?", "Comment voulez-vous faire connaissance ?", "¿Cómo os vais a conocer?"),
+    "Samen wandelen": ("Walk together", "Promenade ensemble", "Pasear juntos"),
+    "Bij de eigenaar thuis": ("At the owner's home", "Chez le propriétaire", "En casa del dueño"),
+    "Eerst bellen": ("Call first", "D'abord un appel", "Primero una llamada"),
+    "Eerst videobellen": ("Video call first", "D'abord un appel vidéo", "Primero una videollamada"),
+    "Jullie lopen samen een rondje. De eigenaar loopt mee en bekijkt je ID.": (
+        "You go for a walk together. The owner comes along and checks your ID.",
+        "Vous faites une balade ensemble. Le propriétaire vous accompagne et vérifie ta pièce d'identité.",
+        "Dais un paseo juntos. El dueño os acompaña y comprueba tu documento de identidad."),
+    "Je komt langs bij de eigenaar en de hond. De eigenaar bekijkt je ID.": (
+        "You visit the owner and the dog at home. The owner checks your ID.",
+        "Tu rends visite au propriétaire et au chien. Le propriétaire vérifie ta pièce d'identité.",
+        "Visitas al dueño y al perro en su casa. El dueño comprueba tu documento de identidad."),
+    "Eerst even kennismaken aan de telefoon. Daarna spreken jullie af in het echt, met de hond erbij.": (
+        "Get to know each other on the phone first. Then you meet in person, with the dog.",
+        "Faites d'abord connaissance au téléphone. Ensuite, vous vous rencontrez en vrai, avec le chien.",
+        "Primero os conocéis por teléfono. Después quedáis en persona, con el perro."),
+    "Eerst kennismaken in een videogesprek. Daarna spreken jullie af in het echt, met de hond erbij.": (
+        "Get to know each other on a video call first. Then you meet in person, with the dog.",
+        "Faites d'abord connaissance par appel vidéo. Ensuite, vous vous rencontrez en vrai, avec le chien.",
+        "Primero os conocéis por videollamada. Después quedáis en persona, con el perro."),
+    "Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie.": (
+        "Visiting safely: meet during the day, let someone know where you are, and family or a neighbour are welcome to join. You only see the address and phone number once accepted.",
+        "Une visite en toute sécurité : rencontrez-vous en journée, préviens quelqu'un de l'endroit où tu es, et la famille ou un voisin peuvent être présents. Tu ne vois l'adresse et le téléphone qu'une fois accepté.",
+        "Una visita segura: quedad de día, avisa a alguien de dónde estás, y la familia o un vecino pueden estar presentes. La dirección y el teléfono solo los ves cuando se acepte."),
+    "Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn.": (
+        "Visiting safely: meet during the day, let someone know where you are, and family or a neighbour are welcome to join.",
+        "Une visite en toute sécurité : rencontrez-vous en journée, préviens quelqu'un de l'endroit où tu es, et la famille ou un voisin peuvent être présents.",
+        "Una visita segura: quedad de día, avisa a alguien de dónde estás, y la familia o un vecino pueden estar presentes."),
+    "Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt. Een gesprek telt nog niet als kennismaking in het echt.": (
+        "Once accepted, you see each other's phone number, if filled in. Agree in the chat who calls whom. A call doesn't count as meeting in person yet.",
+        "Une fois accepté, vous voyez vos numéros de téléphone, s'ils sont renseignés. Convenez dans la discussion de qui appelle qui. Un appel ne compte pas encore comme une rencontre en vrai.",
+        "Cuando se acepte, veréis vuestros números de teléfono, si los habéis añadido. Acordad en el chat quién llama a quién. Una llamada aún no cuenta como conoceros en persona."),
+    "%@ heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Een gesprek telt nog niet als kennismaking in het echt.": (
+        "%@ has no video calling of its own. Agree in the chat which app you use and share the link there. A call doesn't count as meeting in person yet.",
+        "%@ n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien. Un appel ne compte pas encore comme une rencontre en vrai.",
+        "%@ no tiene videollamadas propias. Acordad en el chat qué app usáis y compartid allí el enlace. Una llamada aún no cuenta como conoceros en persona."),
+    "%@ heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link.": (
+        "%@ has no video calling of its own. Agree in the chat which app you use and share the link there.",
+        "%@ n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien.",
+        "%@ no tiene videollamadas propias. Acordad en el chat qué app usáis y compartid allí el enlace."),
+    "Spreek in de chat af wie wie belt.": ("Agree in the chat who calls whom.", "Convenez dans la discussion de qui appelle qui.", "Acordad en el chat quién llama a quién."),
+    "Een gesprek telt nog niet als kennismaking in het echt. Het ID bekijken en zelfstandig wandelen toestaan kan pas als jullie elkaar met %@ ontmoet hebben.": (
+        "A call doesn't count as meeting in person yet. Checking the ID and allowing walks alone is only possible once you've met with %@.",
+        "Un appel ne compte pas encore comme une rencontre en vrai. Vérifier la pièce d'identité et autoriser les balades seul n'est possible qu'après vous être rencontrés avec %@.",
+        "Una llamada aún no cuenta como conoceros en persona. Comprobar el documento de identidad y permitir paseos en solitario solo es posible cuando os hayáis visto con %@."),
+    "Na het gesprek is de volgende stap een kennismaking in het echt, met %@ erbij.": (
+        "After the call, the next step is meeting in person, with %@.",
+        "Après l'appel, la prochaine étape est une rencontre en vrai, avec %@.",
+        "Después de la llamada, el siguiente paso es conoceros en persona, con %@."),
+    "Plan de kennismaking in het echt": ("Plan meeting in person", "Planifier la rencontre en vrai", "Planea el encuentro en persona"),
+    "Gesprek gehad": ("Call done", "Appel effectué", "Llamada hecha"),
+    # --- chat: melden en blokkeren (App Store-richtlijn 1.2) ---
+    "Blokkeren": ("Block", "Bloquer", "Bloquear"),
+    "Blokkeer": ("Block", "Bloquer", "Bloquear"),
+    "Deze persoon blokkeren?": ("Block this person?", "Bloquer cette personne ?", "¿Bloquear a esta persona?"),
+    "Open afspraken tussen jullie worden geannuleerd, en jullie kunnen elkaar geen berichten of aanvragen meer sturen. De ander krijgt hier geen melding van.": (
+        "Open appointments between you are cancelled, and you can no longer send each other messages or requests. The other person isn't notified.",
+        "Les rendez-vous en cours entre vous sont annulés, et vous ne pouvez plus vous envoyer de messages ni de demandes. L'autre personne n'en est pas informée.",
+        "Las citas abiertas entre vosotros se cancelan y ya no podréis enviaros mensajes ni solicitudes. La otra persona no recibe ningún aviso."),
+    "Geblokkeerd. Jullie kunnen elkaar geen berichten meer sturen.": (
+        "Blocked. You can no longer send each other messages.",
+        "Bloqué. Vous ne pouvez plus vous envoyer de messages.",
+        "Bloqueado. Ya no podéis enviaros mensajes."),
 }
 
 # Each build unit adds its own keys in design/translations_<unit>.py (a dict T); they are merged here.

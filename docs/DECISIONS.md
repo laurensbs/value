@@ -53,7 +53,9 @@ De velden in `PROMPT.md` waren niet ingevuld, dus ik gebruik de voorbeeldwaarden
 | 33 | **Posters en flyers met QR-code**, met de eigen uitnodigingslink van wie print | Ouderen en opvangen bereik je beter op papier dan online. Via de code zie je in Beheer welke flyers werken. |
 | 34 | Hondenpagina's van **particuliere eigenaren worden niet geïndexeerd** door zoekmachines | Een voornaam, een stad en een hond samen hoeven niet in Google. Opvangpagina's wel. |
 | 35 | **Rol bij de start** (wandelaar, eigenaar, allebei of opvang) bepaalt de app: tabs, eerste stappen, tips en het Vandaag-scherm | Laurens wilde dat de app alles voorkauwt, zoals Headspace en Duolingo. Iemand met een hond hoeft geen hondenlijst te zien, een wandelaar geen "Mijn honden". Kiezen kan later opnieuw in je profiel. |
-| 36 | **Vriendelijke herinneringen**: hooguit één per drie dagen, standaard aan, met één schakelaar uit | Terugkomen hoort bij een app die alles voorkauwt. Alleen over wat je zelf koos of begon (eerste stappen, weekdoel, de uitdaging in je stad, een hond die je kent), nooit met schuldgevoel, en elke soort stopt vanzelf: drie stapherinneringen in de eerste weken, twee keer "zin in een rondje?" na een stille periode. Push als dat kan, anders e-mail als je e-mail aan hebt. Regels in `web/src/lib/nudges.ts`. |
+| 36 | **Vriendelijke herinneringen**: hooguit één per drie dagen, standaard aan, met één schakelaar uit | Terugkomen hoort bij een app die alles voorkauwt. Alleen over wat je zelf koos of begon (eerste stappen, weekdoel, de uitdaging in je stad, een hond die je kent), plus voor wandelaars een hond die net nieuw is binnen 5 km (elke hond één keer, hooguit één zo'n bericht per week, nooit van iemand die je blokkeerde). Nooit met schuldgevoel, en elke soort stopt vanzelf: drie stapherinneringen in de eerste weken, twee keer "zin in een rondje?" na een stille periode. Push als dat kan, anders e-mail als je e-mail aan hebt. Regels in `web/src/lib/nudges.ts`. |
+| 37 | **Eigenaren zien hoeveel wandelaars er binnen 5 km wonen**, alleen als getal en pas vanaf drie | Een eigenaar die wacht op een eerste aanvraag wil weten of er iemand in de buurt is, zoals bij BorrowMyDoggy. Wie die wandelaars zijn blijft privé tot ze zelf een hond benaderen, en onder de drie wijst het getal te makkelijk naar één buur: dan krijgt de eigenaar een link om de buren over de hond te vertellen. Regels in `web/src/lib/nearby.ts`. |
+| 38 | **Zonder verbinding toont Rondje een eigen scherm**, maar bewaart geen pagina's of gegevens op het toestel | Een kale browserfout ("Geen internet") voelt kapot, juist buiten op een wandeling. Het scherm zegt in je eigen taal wat er aan de hand is, gaat vanzelf verder zodra er weer verbinding is en heeft altijd "Noodgeval? Bel 112". Pagina's bewaren zou oude afspraken of berichten kunnen tonen, en op een gedeelde telefoon zie je dan andermans gegevens. Alles in `web/public/sw.js`. |
 
 ## Wacht op jouw akkoord
 
@@ -63,7 +65,7 @@ Deze stappen heb ik voorbereid maar niet uitgevoerd:
 - **EU-database** en serverregio Frankfurt vóór echte gebruikers (kosten: Neon Launch op gebruik, of het gratis Neon-plan).
 - **Google- en Apple-login**: sleutels aanmaken (Apple: Developer-account, $99 per jaar).
 - **App Store en Play Store**: ontwikkelaarsaccounts en de inzending zelf (zie `LAUNCH.md`).
-- **Domeinnaam** registreren, bijvoorbeeld rondje.app of rondjelopen.nl. Kost ongeveer €10–20 per jaar.
+- **Domeinnaam** registreren, bijvoorbeeld rondjelopen.nl (het .app-domein met de naam Rondje is al van een ander bedrijf). Kost ongeveer €10–20 per jaar. Zet daarna `CONTACT_EMAIL` op een adres van dat (of een ander eigen) domein.
 - **Partners en opvangen benaderen** met de concept-mails in `PARTNERS.md` en `OUTREACH.md`.
 - **Video's posten** uit `GROWTH.md` op een eigen TikTok- of Instagram-account.
 - **Een stichting oprichten.** Pas nodig bij de eerste fondsaanvraag. Kosten bij de notaris: ongeveer €300–600.

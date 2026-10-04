@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { AUDIENCES, CONTACT_STATUSES } from '@/components/launch/audiences'
+import { contactKey, parseContactsCsv, type ImportError } from '@/components/launch/import'
 import { isEmail } from '@/components/launch/mail'
 import { DIRECTORY } from '@/lib/directory'
 import { audit } from '../notify'
@@ -156,4 +157,29 @@ export async function prepareShelterContacts(): Promise<{ added: number }> {
   }
   revalidatePath(PATH)
   return { added: picks.length }
+}
+
+export type ImportState = { ok: true; added: number; duplicate: number; invalid: number } | { ok: false; error: ImportError | 'invalid'; rows?: number }
+
+/**
+ * "Importeer CSV": many contacts at once, all with status "te sturen". The CSV is checked again
+ * here (the preview in the browser is only a preview): rows with an unknown audience, without a
+ * name or organisation, or with a wrong e-mail address are left out, and so is every contact
+ * that is already in the list (same organisation and e-mail address). Nothing is sent, and the
+ * audit log only gets the number of contacts, never their details.
+ */
+export async function importContacts(csv: string): Promise<ImportState> {
+  const admin = await requireAdmin()
+  if (typeof csv !== 'string') return { ok: false, error: 'invalid' }
+  const db = await getDb()
+  const existing = await db.select({ organisation: s.outreachContact.organisation, email: s.outreachContact.email }).from(s.outreachContact)
+  const result = parseContactsCsv(csv, existing.map(contactKey))
+  if (!result.ok) return { ok: false, error: result.error, rows: result.rows }
+  const fresh = result.rows.flatMap((row) => (row.status === 'new' ? [{ id: crypto.randomUUID(), ...row.contact, status: 'todo' }] : []))
+  if (fresh.length) {
+    await db.insert(s.outreachContact).values(fresh)
+    await audit(db, admin.userId, 'outreach.contacts.imported', 'outreach_contact', 'import', { added: fresh.length })
+  }
+  revalidatePath(PATH)
+  return { ok: true, added: fresh.length, duplicate: result.counts.duplicate, invalid: result.counts.invalid }
 }

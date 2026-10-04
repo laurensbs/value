@@ -12,10 +12,23 @@ import { ProgressIcon } from './ProgressIcon'
 
 const noop = () => () => undefined
 
+/** "Goed rondje!" for this walk was shown in this tab before (browser back brings the old screen back). */
+function shownBefore(walkId: string): boolean {
+  const key = `rondje:walk-done:${walkId}`
+  try {
+    if (sessionStorage.getItem(key)) return true
+    sessionStorage.setItem(key, '1')
+  } catch {
+    // Storage can be unavailable (private mode): then it simply plays as the first time.
+  }
+  return false
+}
+
 interface Props {
   walkId: string
   dogName: string
-  distance: string
+  /** The distance walked, or null under 50 m: then the sentence thanks without a number (never "0 m"). */
+  distance: string | null
   /** Points this walk earned so far (the walk, report, photo). */
   points: number | null
   feedbackGiven: boolean
@@ -25,7 +38,9 @@ interface Props {
 
 /**
  * Right after "Rondje klaar": a small celebration, the private mood check and the way to the feedback.
- * The same moment as the iPhone app's "Goed rondje!" sheet.
+ * The same moment as the iPhone app's "Goed rondje!" sheet: no confetti, it is about the dog. A new
+ * level or badge waits until the walker taps "Klaar" or "Hoe ging het?", like the app does after
+ * this screen. The timing (0.9 s, as long as the finish sound) lives in progress.css.
  */
 export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, celebration }: Props) {
   const t = useTranslations('walkDone')
@@ -36,19 +51,22 @@ export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, cel
   const [then, setThen] = useState<'feedback' | 'done' | null>(null)
   const [celebrated, setCelebrated] = useState(false)
   const started = useRef(false)
+  // Back from home: the screen returns from the browser's cache. No second chime and no second party.
+  const replay = useRef(false)
   const mood = picked ?? stored
 
   useEffect(() => {
     if (started.current) return
     started.current = true
-    playSound('finish')
+    replay.current = shownBefore(walkId)
+    if (!replay.current) playSound('finish')
     // A reload shows the plain summary instead of celebrating (and chiming) again.
     const url = new URL(window.location.href)
     if (url.searchParams.has('ended')) {
       url.searchParams.delete('ended')
       window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`)
     }
-  }, [])
+  }, [walkId])
 
   function go(action: 'feedback' | 'done') {
     if (action === 'done') {
@@ -63,7 +81,7 @@ export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, cel
   }
 
   function proceed(action: 'feedback' | 'done') {
-    if (celebration && !celebrated) {
+    if (celebration && !celebrated && !replay.current) {
       setThen(action)
       return
     }
@@ -75,10 +93,10 @@ export function WalkDone({ walkId, dogName, distance, points, feedbackGiven, cel
       <span className="walk-done-paw" aria-hidden="true">
         <ProgressIcon name="paw" size={46} />
       </span>
-      <h2 id="walk-done-title" className="walk-done-title">
+      <h1 id="walk-done-title" className="walk-done-title">
         {t('title')}
-      </h2>
-      <p className="walk-done-text">{t('text', { dog: dogName, distance })}</p>
+      </h1>
+      <p className="walk-done-text">{distance ? t('text', { dog: dogName, distance }) : t('textShort', { dog: dogName })}</p>
       {points ? <span className="pill ball">{tp('walkPoints', { n: points })}</span> : null}
       <div className="walk-done-mood">
         <MoodPicker

@@ -43,7 +43,10 @@ struct HomecomingCard: View {
         .task(id: walkId) { await load() }
         .onChange(of: item.feedbackGiven) { finishIfDone() }
         .sheet(isPresented: $chatting) {
-            ChatView(requestId: item.id, title: walker, suggestions: RequestSuggestions.chatReplies(for: item, asOwner: true))
+            ChatView(
+                requestId: item.id, title: walker, otherUserId: item.walker?.id, dogId: item.dog.id,
+                suggestions: RequestSuggestions.chatReplies(for: item, asOwner: true)
+            )
                 .presentationDetents([.large])
         }
         .sheet(isPresented: $feedback, onDismiss: { Task { await model.refreshAppointments() } }) {

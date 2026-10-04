@@ -146,7 +146,7 @@ struct WalkDoneFlow: View {
         .task { await start() }
         .sheet(item: $offer) { offer in
             if let detail {
-                RequestFlow(dog: detail.dog, slots: detail.slots, kind: offer.kind, prefill: offer.prefill) {
+                RequestFlow(dog: detail.dog, slots: detail.slots, kind: offer.kind, isShelter: detail.host.isShelter, prefill: offer.prefill) {
                     requested = true
                 }
             }

@@ -2,9 +2,15 @@ import SwiftUI
 
 /// The chat about one appointment, between the walker and the owner or shelter.
 /// Polls every few seconds while open, like the website. Messages about money get a warning.
+/// The "…" menu reports the other person (or shelter) or blocks them (App Store guideline 1.2).
 struct ChatView: View {
     let requestId: String
     let title: String
+    /// The other person in the chat: the walker for an owner, or the dog's owner for a walker.
+    var otherUserId: String? = nil
+    var dogId: String? = nil
+    /// A shelter's dog: reports go to the shelter; there is no single person to block.
+    var orgId: String? = nil
     /// Ready-made replies, shown while the field is empty. Tapping one only fills the field.
     var suggestions: [String] = []
 
@@ -16,6 +22,8 @@ struct ChatView: View {
     @State private var sending = false
     @State private var error: String?
     @State private var loaded = false
+    @State private var reporting = false
+    @State private var confirmBlock = false
     @FocusState private var focused: Bool
 
     private var me: String { model.me?.user.id ?? "" }
@@ -48,8 +56,47 @@ struct ChatView: View {
             .safeAreaInset(edge: .bottom) { composer }
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Sluit", systemImage: "xmark") { dismiss() } } }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("Sluit", systemImage: "xmark") { dismiss() } }
+                ToolbarItem(placement: .topBarTrailing) { safetyMenu }
+            }
+            .sheet(isPresented: $reporting) {
+                ReportSheet(dogId: dogId, subjectUserId: otherUserId, orgId: orgId)
+                    .presentationDetents([.medium, .large])
+            }
+            .confirmationDialog("Deze persoon blokkeren?", isPresented: $confirmBlock, titleVisibility: .visible) {
+                Button("Blokkeer", role: .destructive) { Task { await block() } }
+            } message: {
+                Text("Open afspraken tussen jullie worden geannuleerd, en jullie kunnen elkaar geen berichten of aanvragen meer sturen. De ander krijgt hier geen melding van.")
+            }
             .task { await poll() }
+        }
+    }
+
+    /// Report or block, from the chat itself: one tap away while talking.
+    private var safetyMenu: some View {
+        Menu {
+            Button("Melden", systemImage: "exclamationmark.bubble") { reporting = true }
+            if otherUserId != nil {
+                Button("Blokkeren", systemImage: "hand.raised.fill", role: .destructive) { confirmBlock = true }
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+        .accessibilityLabel("Meer")
+    }
+
+    private func block() async {
+        guard let otherUserId else { return }
+        do {
+            let _: OK = try await APIClient.shared.post("/api/v1/blocks", ["userId": otherUserId])
+            Haptics.success(nil)
+            model.show(L("Geblokkeerd. Jullie kunnen elkaar geen berichten meer sturen."), symbol: "hand.raised.fill")
+            await load()
+            await model.refreshAppointments()
+        } catch {
+            Haptics.error()
+            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 

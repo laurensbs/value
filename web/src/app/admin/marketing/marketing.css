@@ -1,0 +1,759 @@
+/* The marketing hub (/admin/marketing): mobile first (375 px), in the style of the launch hub.
+   Only design tokens from globals.css, so light and dark mode both work. Prefix: mk-. */
+
+.mk {
+  width: 100%;
+  max-width: 1040px;
+  margin-inline: auto;
+}
+
+.mk-anchor {
+  scroll-margin-top: calc(var(--header-h) + 80px);
+}
+
+.mk h3 {
+  font-size: 1.12rem;
+}
+
+/* ---------- Sticky section switch ---------- */
+
+.mk-tabs {
+  position: sticky;
+  top: calc(var(--header-h) + 8px);
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+  padding: 4px;
+  border-radius: 20px;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.mk-tabs a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 48px;
+  padding: 4px 2px;
+  border-radius: 16px;
+  color: var(--ink);
+  font-weight: 650;
+  font-size: 0.68rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-align: center;
+  text-decoration: none;
+}
+
+@media (min-width: 640px) {
+  .mk-tabs {
+    border-radius: 999px;
+  }
+
+  .mk-tabs a {
+    flex-direction: row;
+    gap: 6px;
+    min-height: 40px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+  }
+}
+
+.mk-tabs a:hover {
+  background: var(--sunken);
+}
+
+.mk-tabs a:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 1px;
+}
+
+/* ---------- This week ---------- */
+
+.mk-week {
+  padding: 16px 14px;
+  border-radius: var(--radius-l);
+  background: color-mix(in oklab, var(--ball) 24%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--ball) 70%, var(--line));
+}
+
+@media (min-width: 560px) {
+  .mk-week {
+    padding: 20px;
+  }
+}
+
+.mk-week-list {
+  margin: 0;
+  padding-left: 1.4em;
+  list-style: decimal;
+  display: grid;
+  gap: 12px;
+}
+
+.mk-week-list li {
+  display: grid;
+  gap: 2px;
+  line-height: 1.4;
+}
+
+.mk-week-list li::marker {
+  font-weight: 800;
+}
+
+.mk-week-q {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.mk-week-post {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-weight: 650;
+}
+
+/* ---------- Questions ---------- */
+
+.mk-questions,
+.mk-posts,
+.mk-material {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 980px) {
+  .mk-questions,
+  .mk-posts,
+  .mk-material,
+  .mk-interviews {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.mk-q {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border-left: 5px solid var(--line);
+}
+
+.mk-q.s-act {
+  border-left-color: var(--ball);
+}
+
+.mk-q.s-watch {
+  border-left-color: var(--warn);
+}
+
+.mk-q.s-good {
+  border-left-color: var(--grass);
+}
+
+.mk-q-head {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: start;
+}
+
+.mk-q-head h3 {
+  line-height: 1.25;
+  padding-top: 3px;
+}
+
+.mk-q-head .mk-status {
+  grid-column: 2;
+  justify-self: start;
+}
+
+.mk-q-n {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--sunken);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.mk-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 750;
+  background: var(--sunken);
+  color: var(--muted);
+}
+
+.mk-status::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.mk-status.s-good {
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.mk-status.s-watch {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.mk-status.s-act {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.mk-q-answer {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.mk-q-why {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.mk-q-now {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--paper);
+  border: 1px dashed var(--line);
+}
+
+.mk-q-now p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.mk-go {
+  justify-self: start;
+  font-weight: 700;
+}
+
+/* The funnel: one bar per step, on the scale of the first. */
+.mk-funnel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.mk-funnel li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px;
+  grid-template-areas: 'name n' 'bar bar';
+  gap: 2px 8px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 560px) {
+  .mk-funnel li {
+    grid-template-columns: minmax(120px, 1.1fr) minmax(0, 1.4fr) 34px;
+    grid-template-areas: 'name bar n';
+  }
+}
+
+.mk-funnel-name {
+  grid-area: name;
+  font-weight: 650;
+}
+
+.mk-funnel-visits {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mk-funnel-bar {
+  grid-area: bar;
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.mk-funnel-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--grass);
+}
+
+.mk-funnel-n {
+  grid-area: n;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-table-wrap {
+  overflow-x: auto;
+}
+
+.mk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.mk-table th,
+.mk-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.mk-table td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.mk-table thead th {
+  color: var(--muted);
+  font-weight: 650;
+  font-size: 0.8rem;
+}
+
+.mk-table thead th:not(:first-child) {
+  text-align: right;
+}
+
+.mk-table tbody th {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Language switch (NL · EN · ES · FR) ---------- */
+
+.mk-langs {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--sunken);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.mk-langs button {
+  min-width: 44px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.mk-langs button[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.mk-langs button:disabled {
+  opacity: 0.5;
+}
+
+.mk-langs button:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 1px;
+}
+
+/* ---------- Interviews ---------- */
+
+.mk-interviews {
+  display: grid;
+  gap: 12px;
+}
+
+.mk-interview {
+  min-width: 0;
+}
+
+.mk-interview summary {
+  display: grid;
+  gap: 2px;
+  cursor: pointer;
+  list-style: none;
+  padding-right: 28px;
+  position: relative;
+}
+
+.mk-interview summary::-webkit-details-marker {
+  display: none;
+}
+
+.mk-interview summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.mk-interview[open] summary::after {
+  content: '–';
+}
+
+.mk-interview-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.mk-interview-body {
+  margin-top: 12px;
+}
+
+.mk-interview-questions {
+  margin: 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: 8px;
+  line-height: 1.45;
+}
+
+.mk-listen {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--grass-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* ---------- Post planner ---------- */
+
+.mk-planner-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mk-post {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.mk-post.done {
+  background: color-mix(in oklab, var(--grass-soft) 45%, var(--surface));
+}
+
+.mk-post-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+}
+
+.mk-post-when {
+  font-weight: 750;
+  font-size: 0.9rem;
+}
+
+.mk-channel {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+.mk-channel.c-instagram {
+  background: color-mix(in oklab, #c13584 16%, var(--surface));
+}
+
+.mk-channel.c-tiktok {
+  background: color-mix(in oklab, var(--ink) 12%, var(--surface));
+}
+
+.mk-channel.c-linkedin {
+  background: var(--calm-soft);
+  color: var(--calm);
+}
+
+.mk-channel.c-buurtapp {
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.mk-posted {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.mk-posted[aria-pressed='true'] {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+}
+
+.mk-posted:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 2px;
+}
+
+.mk-post-body {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+@media (min-width: 560px) {
+  .mk-post-body {
+    grid-template-columns: 136px minmax(0, 1fr);
+  }
+}
+
+.mk-post-image {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--sunken);
+  aspect-ratio: 4 / 5;
+}
+
+.mk-post-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mk-post-text h3 {
+  line-height: 1.2;
+}
+
+.mk-post-text p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.mk-caption {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px dashed var(--line);
+  background: var(--paper);
+}
+
+.mk-caption summary {
+  display: grid;
+  gap: 2px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 26px;
+}
+
+.mk-caption summary::-webkit-details-marker {
+  display: none;
+}
+
+.mk-caption summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.mk-caption[open] summary::after {
+  content: '–';
+}
+
+.mk-caption-first {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.92rem;
+}
+
+.mk-caption[open] .mk-caption-first {
+  display: none;
+}
+
+.mk-caption p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.mk-post-link {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.mk-post-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- Campaign links ---------- */
+
+.mk-builder {
+  min-width: 0;
+}
+
+.mk-form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 560px) {
+  .mk-form-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.mk-form-grid .field > label {
+  font-weight: 650;
+  font-size: 0.92rem;
+}
+
+.mk-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.92rem;
+}
+
+.mk-check input {
+  width: 20px;
+  height: 20px;
+}
+
+@media (min-width: 560px) {
+  .mk-check {
+    margin-top: 26px;
+  }
+}
+
+.mk-result {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--paper);
+  border: 1px dashed var(--line);
+}
+
+.mk-url {
+  display: block;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+.mk-post-link .mk-url {
+  display: inline;
+}
+
+.mk-qr {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.mk-qr .qr {
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+/* ---------- Material ---------- */
+
+.mk-material-item {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  min-width: 0;
+}
+
+.mk-material-item p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.mk-material-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--grass-soft);
+  color: var(--grass);
+}
+
+.mk-material-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 0.9rem;
+}

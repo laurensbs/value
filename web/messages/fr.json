@@ -72,6 +72,9 @@
       "5": "ven",
       "6": "sam",
       "7": "dim"
+    },
+    "map": {
+      "cluster": "{count} à cet endroit"
     }
   },
   "footer": {
@@ -87,7 +90,8 @@
     "about": "À propos de Rondje",
     "support": "Rendre Rondje possible",
     "tip": "Recommander un refuge",
-    "forShelters": "Pour les refuges"
+    "forShelters": "Pour les refuges",
+    "contact": "Contact"
   },
   "home": {
     "eyebrow": "Nederland · België · España",
@@ -134,14 +138,14 @@
       "adults": "18+"
     },
     "stage": {
-      "goodWalk": "Belle balade !",
+      "goodWalk": "Belle balade !",
       "calm": "Calme · 40 min"
     },
     "hero": {
-      "shelterLink": "Vous travaillez dans un refuge ?"
+      "shelterLink": "Vous travaillez dans un refuge ?"
     },
     "choose": {
-      "title": "Qu'est-ce qui vous amène ?",
+      "title": "Qu'est-ce qui vous amène ?",
       "lede": "Choisissez ce qui vous correspond, et nous vous montrons le chemin.",
       "walk": {
         "title": "Je veux promener",
@@ -161,7 +165,7 @@
       }
     },
     "dogs": {
-      "title": "Qui vient avec vous aujourd’hui ?",
+      "title": "Qui vient avec vous aujourd’hui ?",
       "lede": "Quelques chiens qui attendent leur balade.",
       "all": "Voir tous les chiens"
     },
@@ -178,7 +182,7 @@
       "title": "Tout ce qu’il vous faut, dans votre poche",
       "lede": "Découvrez des chiens, planifiez une première rencontre et partez ensemble, pendant que le propriétaire suit la balade en direct.",
       "soon": "Bientôt sur l’App Store",
-      "today": "En attendant, {app} fonctionne sur tous les téléphones, directement dans le navigateur. Astuce : ajoutez {app} à votre écran d’accueil, il s’ouvrira comme une app.",
+      "today": "En attendant, {app} fonctionne sur tous les téléphones, directement dans le navigateur. Astuce : ajoutez {app} à votre écran d’accueil, il s’ouvrira comme une app.",
       "note": "Écrans de l'app iPhone, avec des données d'exemple.",
       "discover": {
         "title": "Découvrir",
@@ -193,7 +197,7 @@
       "walk": {
         "title": "Suivi en direct",
         "text": "Pendant la balade, le propriétaire suit sur la carte. Le bouton SOS est toujours à portée de main.",
-        "alt": "Une balade avec Bobbie dans l'app iPhone : carte, durée, distance et bouton SOS"
+        "alt": "Une balade avec Bobbie dans l'app iPhone : carte, durée, distance et bouton SOS"
       }
     },
     "safety": {
@@ -207,7 +211,7 @@
     },
     "community": {
       "eyebrow": "Ensemble ce mois-ci",
-      "first": "Pas encore de balade en {month}. Vous faites la première ?",
+      "first": "Pas encore de balade en {month}. Vous faites la première ?",
       "join": "Participer"
     },
     "countries": {
@@ -258,12 +262,12 @@
     },
     "promiseFree": "Gratuit, sans publicité.",
     "promisePrivacy": "Nous ne vendons jamais vos données. Votre position est arrondie à environ 500 mètres.",
-    "forgot": "Mot de passe oublié ?",
+    "forgot": "Mot de passe oublié ?",
     "forgotTitle": "Mot de passe oublié",
     "forgotLede": "Indiquez votre adresse e-mail. Si nous la connaissons, nous vous enverrons un lien pour choisir un nouveau mot de passe.",
     "forgotSubmit": "Envoyer le lien",
     "forgotSent": "S'il existe un compte avec cette adresse, un e-mail avec un lien se trouve maintenant dans votre boîte de réception. Vérifiez aussi les spams. Le lien est valable une heure.",
-    "forgotUnavailable": "La demande d'un nouveau mot de passe par e-mail n'est pas encore disponible. Vous avez une passkey ? Connectez-vous avec. Sinon, contactez-nous.",
+    "forgotUnavailable": "La demande d'un nouveau mot de passe par e-mail n'est pas encore disponible. Vous avez une passkey ? Connectez-vous avec. Sinon, contactez-nous.",
     "forgotAgain": "Demander un nouveau lien",
     "resetTitle": "Choisir un nouveau mot de passe",
     "resetNew": "Nouveau mot de passe",
@@ -316,13 +320,13 @@
       "back": "Retour",
       "next": "Continuer",
       "skip": "Passer",
-      "welcomeTitle": "Bonjour {name}, bienvenue !",
+      "welcomeTitle": "Bonjour {name}, bienvenue !",
       "welcomeText": "Quelques questions rapides, puis nous préparons Rondje pour vous. Exactement comme il vous faut.",
-      "welcome1": "Vous choisissez : vous balader, un chien, ou les deux.",
+      "welcome1": "Vous choisissez : vous balader, un chien, ou les deux.",
       "welcome2": "Nous vous montrons des chiens et des gens près de chez vous.",
       "welcome3": "Ça prend une minute. Vous pourrez tout changer plus tard.",
       "welcomeStart": "C'est parti",
-      "roleTitle": "Qu'est-ce qui vous amène ?",
+      "roleTitle": "Qu'est-ce qui vous amène ?",
       "roleText": "L'appli s'adapte à votre choix. Vous pouvez toujours le changer.",
       "roleWalker": "Je veux me balader",
       "roleWalkerText": "Avec un chien du quartier ou d'un refuge.",
@@ -332,16 +336,16 @@
       "roleBothText": "J'ai un chien et j'aime aussi promener d'autres chiens.",
       "roleShelter": "Je travaille dans un refuge",
       "roleShelterText": "Mettez les chiens de votre refuge sur Rondje.",
-      "aboutTitle": "Comment doit-on vous appeler ?",
+      "aboutTitle": "Comment doit-on vous appeler ?",
       "aboutText": "Rondje est réservé aux personnes de 18 ans et plus. Les autres ne voient que votre prénom et votre tranche d'âge.",
-      "placeTitle": "Où habitez-vous, à peu près ?",
+      "placeTitle": "Où habitez-vous, à peu près ?",
       "placeText": "Vous verrez ainsi des chiens et des gens près de chez vous. Nous arrondissons votre position à environ 500 mètres.",
-      "experienceTitle": "Quelle expérience avez-vous avec les chiens ?",
+      "experienceTitle": "Quelle expérience avez-vous avec les chiens ?",
       "experienceText": "Pour vous montrer d'abord des chiens qui vous correspondent.",
       "experienceNoneText": "J'ai envie d'apprendre. Les chiens calmes me conviennent bien.",
       "experienceSomeText": "J'ai déjà souvent promené des chiens.",
       "experienceLotsText": "J'ai grandi avec des chiens, même des chiens énergiques.",
-      "goalTitle": "À quelle fréquence voulez-vous vous balader ?",
+      "goalTitle": "À quelle fréquence voulez-vous vous balader ?",
       "goalText": "Un rythme régulier, c'est bien pour un chien. Vous pouvez toujours le changer, et sauter une semaine, c'est permis.",
       "goal1": "1 fois par semaine",
       "goal1Text": "Commencer en douceur",
@@ -354,21 +358,40 @@
       "profileTitle": "Montrez qui vous êtes",
       "profileText": "Les propriétaires choisissent plus vite quelqu'un avec une photo et quelques phrases. Vous pouvez aussi le faire plus tard.",
       "profileOwnerText": "Les promeneurs aiment savoir chez qui ils sonnent. Vous pouvez aussi le faire plus tard.",
-      "promiseTitle": "Presque fini !",
+      "promiseTitle": "Presque fini !",
       "promiseText": "Voici comment Rondje reste sûr et agréable, pour les gens et les chiens.",
       "promise1": "La première fois, vous marchez toujours avec le propriétaire ou le refuge.",
       "promise2": "Votre adresse n'est jamais visible, et votre numéro seulement après un rendez-vous.",
-      "promise3": "Rondje est gratuit et sans publicité. Quelqu'un vous demande de l'argent ? Signalez-le.",
-      "finish": "C'est fini, allons-y !",
+      "promise3": "Rondje est gratuit et sans publicité. Quelqu'un vous demande de l'argent ? Signalez-le.",
+      "finish": "C'est fini, allons-y !",
       "needRole": "Choisissez ce que vous voulez faire.",
       "needName": "Indiquez votre prénom.",
       "needBirthDate": "Indiquez votre date de naissance.",
       "tooYoung": "Rondje est réservé aux personnes de 18 ans et plus.",
       "needCity": "Indiquez votre ville.",
       "needTerms": "Acceptez les conditions pour continuer.",
-      "welcomeTitleAnon": "Bonjour, bienvenue !",
+      "welcomeTitleAnon": "Bonjour, bienvenue !",
       "needExperience": "Choisissez ce qui vous correspond le mieux.",
-      "promise1Owner": "La première fois, le promeneur marche toujours avec vous."
+      "promise1Owner": "La première fois, le promeneur marche toujours avec vous.",
+      "progressLabel": "Progression"
+    },
+    "bioBlocksLabel": "Touchez pour ajouter une phrase",
+    "bioBlocks": {
+      "hello": "Je m’appelle {name} et j’habite à {city}.",
+      "learning": "J’ai encore peu d’expérience avec les chiens, mais j’apprends volontiers.",
+      "walkedBefore": "J’ai souvent promené les chiens d’autres personnes.",
+      "grewUp": "J’ai grandi avec des chiens.",
+      "hadDog": "J’ai déjà eu un chien.",
+      "ownerHelp": "Parfois, un coup de main pour promener mon chien me serait utile.",
+      "student": "Je fais des études et j’ai souvent du temps en journée.",
+      "homeWork": "Je travaille à domicile et j’aime faire une balade à midi.",
+      "retired": "Je suis à la retraite et j’ai du temps en journée.",
+      "weekend": "Le week-end, j’ai le temps pour une longue balade.",
+      "outside": "J’adore être dehors, et avec un chien chaque balade est plus sympa.",
+      "missDog": "Un chien à la maison me manque.",
+      "neighbour": "J’aime rendre service aux gens du quartier.",
+      "ownerMeet": "J’aime rencontrer des gens du quartier.",
+      "reliable": "Quand je prends un engagement, vous pouvez compter sur moi."
     }
   },
   "dogs": {
@@ -414,10 +437,11 @@
     "orgOpeningHours": "Heures d'ouverture",
     "orgTreats": {
       "yes": "Vous pouvez apporter vos propres friandises.",
-      "own": "N'apportez pas de friandises : le refuge en a.",
+      "own": "N'apportez pas de friandises : le refuge en a.",
       "no": "Merci de ne pas donner de friandises."
     },
-    "tipShelter": "Recommander un refuge"
+    "tipShelter": "Recommander un refuge",
+    "new": "Nouveau"
   },
   "dog": {
     "story": "À propos de {name}",
@@ -467,7 +491,9 @@
     "publish": "Mettre en ligne",
     "walkingTimes": "Horaires de promenade",
     "website": "Site web",
-    "hiddenByModerator": "Masqué par Rondje"
+    "hiddenByModerator": "Masqué par Rondje",
+    "savedWalkers": "{n, plural, one {# promeneur habite} other {# promeneurs habitent}} à moins de 5 km. Cette semaine, ils verront {name} parmi les nouveaux chiens.",
+    "savedShare": "Parlez de {name} à vos voisins : <link>voici un message à partager</link>."
   },
   "request": {
     "title": "Prendre rendez-vous",
@@ -484,7 +510,6 @@
     "submit": "Envoyer la demande",
     "sent": "Demande envoyée. Vous recevrez une notification dès qu'il y aura une réponse.",
     "sentFlagged": "Demande envoyée. Attention : les messages concernant de l'argent, des liens de paiement ou des numéros de compte n'ont pas leur place sur Rondje et sont vérifiés.",
-    "loginFirst": "Connectez-vous pour prendre rendez-vous",
     "shelterNote": "Les chiens de refuge sont promenés en groupe encadré. Choisissez une balade en groupe ci-dessous.",
     "reasons": {
       "not-onboarded": "Complétez d'abord votre profil.",
@@ -507,8 +532,23 @@
       "already-decided": "Une décision a déjà été prise à ce sujet.",
       "not-now": "Vous pouvez commencer une balade à partir d'une demi-heure avant le rendez-vous.",
       "full": "Cette balade en groupe est complète.",
-      "not-signed-in": "Connectez-vous d'abord."
-    }
+      "not-signed-in": "Connectez-vous d'abord.",
+      "meet-via": "Ce mode de rencontre n'est pas possible ici. Choisissez la promenade ensemble.",
+      "needs-in-person": "Un appel ne compte pas comme une rencontre en vrai. Ce n'est possible qu'après vous être rencontrés."
+    },
+    "messagePlaceholder": "Bonjour ! Je suis … et j'aimerais beaucoup promener {dog}.",
+    "moments": "Moments qui conviennent à {dog}",
+    "blocksLabel": "Touchez pour ajouter une phrase",
+    "blocks": {
+      "helloMeet": "Bonjour ! Je m'appelle {name} et j'aimerais beaucoup rencontrer {dog}.",
+      "helloSolo": "Bonjour ! J'aimerais beaucoup promener {dog} à nouveau.",
+      "nearby": "J'habite tout près.",
+      "experience": "J'ai l'habitude des chiens.",
+      "flexible": "Mes horaires sont flexibles.",
+      "outdoors": "J'adore être dehors, même sous la pluie."
+    },
+    "signupFirst": "Faire connaissance avec {name}",
+    "signupFirstText": "Gratuit. Vous créez d'abord un compte, puis vous choisissez un moment pour faire connaissance."
   },
   "requests": {
     "title": "Balades",
@@ -522,7 +562,8 @@
       "declined": "Refusé",
       "cancelled": "Annulé",
       "completed": "Effectué",
-      "expired": "Expiré"
+      "expired": "Expiré",
+      "talked": "Appel effectué"
     },
     "accept": "Accepter",
     "decline": "Refuser",
@@ -548,7 +589,30 @@
     "cancelConfirm": "Annuler ce rendez-vous ?",
     "keep": "Non, retour",
     "past": "Rendez-vous passés ({n})",
-    "startHint": "Vous pouvez commencer à partir de {n} minutes avant le rendez-vous."
+    "startHint": "Vous pouvez commencer à partir de {n} minutes avant le rendez-vous.",
+    "calendar": "Ajouter à l'agenda"
+  },
+  "meet": {
+    "legend": "Comment souhaitez-vous faire connaissance ?",
+    "via": {
+      "walk": "Promenade ensemble",
+      "home": "Chez le propriétaire",
+      "phone": "D'abord un appel",
+      "video": "D'abord un appel vidéo"
+    },
+    "hint": {
+      "walk": "Vous faites une balade ensemble. Le propriétaire vous accompagne et vérifie votre pièce d'identité.",
+      "home": "Vous rendez visite au propriétaire et au chien chez eux. Le propriétaire vérifie votre pièce d'identité.",
+      "phone": "Faites d'abord connaissance au téléphone. Ensuite, vous vous rencontrez en vrai, avec le chien.",
+      "video": "Faites d'abord connaissance par appel vidéo. Ensuite, vous vous rencontrez en vrai, avec le chien."
+    },
+    "remoteNote": "Un appel ne compte pas encore comme une rencontre en vrai. Les balades seul et la vérification de la pièce d'identité viennent ensuite.",
+    "phoneHow": "Une fois accepté, vous voyez le numéro de téléphone de l'autre, s'il est renseigné. Convenez dans la discussion de qui appelle qui.",
+    "videoHow": "Rondje n'a pas d'appel vidéo intégré. Convenez dans la discussion de l'application à utiliser et partagez-y le lien. N'ouvrez qu'un lien d'un service vidéo que vous connaissez.",
+    "homeSafety": "Une visite en toute sécurité : rencontrez-vous en journée, prévenez quelqu'un de l'endroit où vous êtes, et la famille ou un voisin peuvent être présents. Vous ne voyez l'adresse et le téléphone qu'une fois accepté.",
+    "planInPerson": "Planifier la rencontre en vrai",
+    "afterCallWalker": "Après l'appel, la prochaine étape est une rencontre en vrai, avec {dog}.",
+    "afterCallHost": "Un appel ne compte pas encore comme une rencontre en vrai. Vérifier la pièce d'identité et autoriser les balades seul n'est possible qu'après vous être rencontrés avec {dog}."
   },
   "walk": {
     "before": "Avant de partir",
@@ -649,7 +713,8 @@
     "carePoo": "Caca",
     "careWater": "A bu",
     "careUndo": "En retirer un de {kind}",
-    "careNone": "Rien de noté pour l’instant"
+    "careNone": "Rien de noté pour l’instant",
+    "careFailed": "Non enregistré : pas de connexion. Touchez à nouveau quand vous avez du réseau."
   },
   "myDogs": {
     "title": "Mes chiens",
@@ -696,7 +761,6 @@
       "invalid": "Vérifiez les champs obligatoires.",
       "forbidden": "Ce chien n'est pas le vôtre."
     },
-    "newLede": "Un bon profil fait toute la différence. Décrivez honnêtement votre chien : vous trouverez plus vite le bon promeneur.",
     "privateHint": "Visible uniquement par les promeneurs avec qui vous avez accepté un rendez-vous.",
     "providesHint": "Le propriétaire fournit les sacs et les friandises. Ainsi, le promeneur n'a rien à payer.",
     "publish": "Mettre en ligne",
@@ -713,8 +777,53 @@
     "tip2": "Choisissez un ou deux créneaux fixes par semaine. Des balades régulières, c'est plus facile à tenir.",
     "tip3": "La première fois, prévoyez toujours une rencontre ensemble : vous ferez ainsi connaissance tranquillement, votre chien compris.",
     "weekday": "Jour",
-    "welcomeTitle": "Bienvenue, {name} ! Parlez-nous de votre chien",
-    "welcomeLede": "Une photo, son caractère et quand il peut se balader. Ensuite, quelqu'un du quartier pourra le trouver."
+    "welcomeTitle": "Bienvenue, {name} ! Parlez-nous de votre chien",
+    "steps": {
+      "yourDog": "votre chien",
+      "basicsTitle": "Qui est votre chien ?",
+      "basicsText": "Commencez par un nom et une photo. Nous vous demandons le reste étape par étape.",
+      "characterTitle": "Comment est {name} ?",
+      "characterText": "Ainsi, les personnes qui promènent voient si le courant passe. Touchez ce qui correspond, ou écrivez-le vous-même.",
+      "walkTitle": "À quoi ressemble une balade avec {name} ?",
+      "walkText": "Combien de temps, à quels moments, et ce qui est prêt pour la personne qui promène.",
+      "whereTitle": "Où vit {name} ?",
+      "whereText": "Les autres ne voient que le quartier, à peu près. Vous partagez l'adresse quand vous acceptez un rendez-vous.",
+      "privateTitle": "Seulement pour les personnes que vous acceptez",
+      "safetyTitle": "Pour finir : la sécurité",
+      "safetyText": "Encore quelques questions, et {name} est en ligne.",
+      "publish": "Mettre {name} en ligne",
+      "needName": "Comment s'appelle votre chien ?",
+      "needMinutes": "Choisissez la durée d'une balade, de 10 à 180 minutes.",
+      "needCity": "Dans quelle ville vit votre chien ?",
+      "traitsLabel": "Touchez ce qui correspond",
+      "minutesLabel": "Souvent choisi",
+      "storyTitle": "Quelle est l'histoire de {name} ?",
+      "storyText": "Qui est {name}, et pourquoi une balade en plus lui ferait du bien ? Touchez une phrase et modifiez-la comme vous voulez."
+    },
+    "traitChips": {
+      "playful": "Adore jouer",
+      "listens": "Obéit bien",
+      "cuddly": "Adore les câlins",
+      "niceOnLeash": "Marche bien en laisse",
+      "pulls": "Tire en laisse",
+      "likesDogs": "S'entend avec les autres chiens",
+      "noDogs": "Préfère éviter les autres chiens",
+      "cats": "S'entend avec les chats",
+      "kids": "S'entend avec les enfants",
+      "noises": "A peur des bruits forts",
+      "sniffer": "Adore renifler",
+      "swimmer": "Adore nager"
+    },
+    "storyBlocks": {
+      "happy": "{name} a un caractère joyeux et adore renifler.",
+      "older": "{name} a un certain âge et aime marcher tranquillement.",
+      "young": "{name} est jeune et déborde d'énergie.",
+      "dogs": "{name} aime les autres chiens.",
+      "people": "{name} adore les gens.",
+      "work": "Mon travail me laisse peu de temps en journée, alors une balade en plus est la bienvenue.",
+      "mobility": "Je marche moins facilement moi-même, alors une balade en plus est la bienvenue.",
+      "regular": "Nous cherchons quelqu'un de régulier pour quelques fois par semaine."
+    }
   },
   "profile": {
     "title": "Profil",
@@ -745,22 +854,24 @@
     "settings": "Paramètres",
     "shelterCta": "Vous travaillez dans un refuge ? Mettez les chiens de votre refuge sur Rondje et organisez des balades en groupe encadrées.",
     "tipTitle": "Recommander un refuge",
-    "tipText": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades, ou quelqu'un avec un chien qui aurait besoin d'aide ? Voici comment aider sans que nous contactions qui que ce soit sans y être invités.",
+    "tipText": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades, ou quelqu'un avec un chien qui aurait besoin d'aide ? Voici comment aider sans que nous contactions qui que ce soit sans y être invités.",
     "supportTitle": "Rondje reste gratuit",
-    "supportText": "Pas de publicité ni d'abonnement. Vous voulez aider à garder Rondje en ligne et sûr ? Voyez comment, avec ou sans argent.",
+    "supportText": "Pas de publicité ni d'abonnement. Vous voulez aider à garder Rondje en ligne et sûr ? Voyez comment, avec ou sans argent.",
     "flyer": "Imprimer un flyer pour votre quartier",
     "email": "E-mail",
     "emailNotifications": "M'envoyer un e-mail pour les notifications importantes",
-    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje.",
+    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje.",
     "pushNotifications": "Notifications push dans ce navigateur",
-    "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure. Sur iPhone : ajoutez d’abord Rondje à l’écran d’accueil.",
+    "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure.",
     "pushBlocked": "Votre navigateur bloque les notifications de Rondje. Activez-les dans les réglages du navigateur.",
     "progressTitle": "Votre progression",
     "weeklyGoal": "Objectif de la semaine",
-    "weeklyGoalHint": "À quelle fréquence voulez-vous vous balader ? Sauter une semaine, c'est toujours permis.",
+    "weeklyGoalHint": "À quelle fréquence voulez-vous vous balader ? Sauter une semaine, c'est toujours permis.",
     "alerts": "Notifications",
     "reminders": "Rappels bienveillants",
-    "remindersHint": "Sur vos premières étapes, votre objectif de la semaine et le défi de votre ville. Un tous les quelques jours au maximum, en notification push ou sinon par e-mail."
+    "remindersHint": "Sur vos premières étapes, votre objectif de la semaine, le défi de votre ville et les nouveaux chiens près de chez vous. Un tous les quelques jours au maximum, en notification push ou sinon par e-mail.",
+    "pushIos": "Des alertes sur votre iPhone ? Elles fonctionnent dès que Rondje est sur votre écran d’accueil :",
+    "pushIosInApp": "Des alertes sur votre iPhone ? Ouvrez d’abord Rondje dans Safari et mettez-le sur votre écran d’accueil depuis là."
   },
   "quiz": {
     "title": "Quiz de sécurité",
@@ -869,7 +980,7 @@
       "no-account": "Aucun compte n'existe avec cette adresse e-mail.",
       "no-rows": "Nous n'avons trouvé aucun chien dans le fichier.",
       "too-large": "Le fichier est trop volumineux.",
-      "website": "Cette adresse web ne semble pas valide. Par exemple : www.refuge.be",
+      "website": "Cette adresse web ne semble pas valide. Par exemple : www.refuge.be",
       "instagram": "Indiquez votre nom Instagram, par exemple @refuge."
     },
     "eyebrow": "Gratuit pour les refuges",
@@ -904,42 +1015,42 @@
       "staff": "membre de l'équipe"
     },
     "staffAdded": "Membre de l'équipe ajouté.",
-    "createdPending": "Votre refuge est inscrit. Nous le vérifions sous deux jours ouvrables. Ajoutez déjà vos chiens : ils seront visibles dès que le refuge sera vérifié.",
+    "createdPending": "Votre refuge est inscrit. Nous le vérifions sous deux jours ouvrables. Ajoutez déjà vos chiens : ils seront visibles dès que le refuge sera vérifié.",
     "sections": {
       "about": "Le refuge",
       "walking": "Promener chez vous",
       "contact": "Contact"
     },
-    "dogCount": "Combien de chiens avez-vous environ ?",
+    "dogCount": "Combien de chiens avez-vous environ ?",
     "dogCountHint": "Pour voir combien sont déjà en ligne.",
-    "descriptionHint": "Qui êtes-vous, quels chiens vivent chez vous, et que leur apporte une promenade de plus ?",
+    "descriptionHint": "Qui êtes-vous, quels chiens vivent chez vous, et que leur apporte une promenade de plus ?",
     "instagram": "Instagram",
     "logo": "Logo",
     "cover": "Photo de couverture",
     "coverHint": "Une photo large du refuge ou des chiens. Sans personnes qui n'ont pas donné leur accord.",
-    "walkingTimes": "Quand les bénévoles peuvent-ils venir promener ?",
-    "walkingTimesHint": "Par exemple : samedi et dimanche 10:00–12:00, mercredi après-midi sur rendez-vous",
+    "walkingTimes": "Quand les bénévoles peuvent-ils venir promener ?",
+    "walkingTimesHint": "Par exemple : samedi et dimanche 10:00–12:00, mercredi après-midi sur rendez-vous",
     "openingHours": "Heures d'ouverture",
-    "openingHoursHint": "Par exemple : du mardi au samedi 11:00–16:00",
-    "treatsLabel": "Apporter ses propres friandises ?",
+    "openingHoursHint": "Par exemple : du mardi au samedi 11:00–16:00",
+    "treatsLabel": "Apporter ses propres friandises ?",
     "treats": {
       "yes": "Oui, c'est permis",
       "own": "Non, nous avons des friandises",
       "no": "Plutôt pas de friandises du tout"
     },
-    "providesLabel": "Que donnez-vous aux promeneurs ?",
+    "providesLabel": "Que donnez-vous aux promeneurs ?",
     "providesHint": "Ce sera la valeur par défaut des nouveaux chiens. Modifiable par chien.",
-    "defaultWalkMinutes": "Combien de temps dure une promenade en général ? (minutes)",
-    "coordinatorHint": "Personne de contact pour Rondje. Pas public : seul Rondje le voit, pour la vérification et les questions.",
+    "defaultWalkMinutes": "Combien de temps dure une promenade en général ? (minutes)",
+    "coordinatorHint": "Personne de contact pour Rondje. Pas public : seul Rondje le voit, pour la vérification et les questions.",
     "coordinatorName": "Nom de la personne de contact",
     "coordinatorEmail": "E-mail de la personne de contact",
     "coordinatorPhone": "Téléphone de la personne de contact",
-    "identityLocked": "Le nom, le numéro et le pays ont été vérifiés : vous ne pouvez donc pas les modifier vous-même. Une erreur ? Dites-le-nous.",
+    "identityLocked": "Le nom, le numéro et le pays ont été vérifiés : vous ne pouvez donc pas les modifier vous-même. Une erreur ? Dites-le-nous.",
     "detailsSaved": "Enregistré.",
     "publicPage": "Voir votre page publique",
     "checklistTitle": "En ligne en quelques étapes",
     "checklist": {
-      "details": "Présentez votre refuge : logo, description et horaires de promenade",
+      "details": "Présentez votre refuge : logo, description et horaires de promenade",
       "dogs": "Mettez vos chiens en ligne",
       "walk": "Planifiez une première promenade en groupe",
       "verified": "Rondje vérifie votre refuge (en général sous deux jours ouvrables)"
@@ -987,13 +1098,13 @@
     "vote": "Je veux promener ici",
     "voted": "Votre voix compte",
     "votesHint": "Plus il y a de personnes qui veulent promener dans un refuge, plus vite nous l'invitons. Nous contactons les refuges nous-mêmes, jamais en votre nom.",
-    "tipTitle": "Vous connaissez un refuge qui n'est pas dans la liste ?",
+    "tipTitle": "Vous connaissez un refuge qui n'est pas dans la liste ?",
     "tipText": "Recommandez-le. Nous contactons le refuge nous-mêmes, et vous prévenons quand il rejoint Rondje.",
     "tipButton": "Recommander un refuge"
   },
   "help": {
     "title": "Ça ne va pas fort ?",
-    "lede": "Marcher aide beaucoup de gens, mais cela ne remplace pas une aide professionnelle. Ici, vous trouverez toujours du soutien, gratuitement et anonymement.",
+    "lede": "Une balade dehors peut faire du bien à votre journée, mais elle ne remplace pas une aide professionnelle. Ici, vous trouverez toujours du soutien, gratuitement et anonymement.",
     "emergency": "En cas de danger immédiat, appelez le {number}.",
     "lines": {
       "suicide": "Vous pensez au suicide ? Joignable jour et nuit.",
@@ -1006,7 +1117,24 @@
     "lostPets": "Animaux perdus ou trouvés : {name}",
     "animalEmergency": "Animaux en détresse : {name}",
     "police": "Pas d'urgence, mais besoin de la police ? Appelez le {number}.",
-    "website": "Site web"
+    "website": "Site web",
+    "contact": "Une question pour Rondje, par exemple sur votre compte ou votre vie privée ?",
+    "contactLink": "Comment nous joindre"
+  },
+  "contact": {
+    "title": "Contact",
+    "heading": "Comment nous joindre",
+    "lede": "Une question, une demande liée à la vie privée, une plainte ou une idée ? Voici comment joindre Rondje.",
+    "emailTitle": "Écrivez-nous",
+    "emailText": "Pour les questions, les demandes liées à la vie privée, les plaintes et les collaborations. Vous pouvez nous écrire en néerlandais, en anglais, en espagnol ou en français.",
+    "soonTitle": "Notre adresse e-mail sera bientôt ici",
+    "soonText": "Nous mettons encore en place notre adresse de contact. En attendant, voici ce que vous pouvez déjà faire :",
+    "nowTitle": "Ce que vous pouvez déjà faire",
+    "report": "Il s'agit d'un profil, d'un chien ou d'une promenade ? Utilisez le bouton « Signaler » sur cette page. Nous examinons chaque signalement sous 24 heures.",
+    "help": "Ça ne va pas fort ? La page d’aide liste des lignes d’écoute gratuites et anonymes.",
+    "helpLink": "Aller à la page d'aide",
+    "suggest": "Vous voulez recommander un refuge ou partager une idée ? Utilisez le formulaire de suggestion.",
+    "moreTitle": "En savoir plus"
   },
   "safety": {
     "title": "Comment Rondje assure la sécurité",
@@ -1050,8 +1178,8 @@
     "empty": "Pas encore de notifications.",
     "markRead": "Tout marquer comme lu",
     "kinds": {
-      "request-new": "{walkerName} aimerait promener {dogName}.",
-      "request-accepted": "Votre rendez-vous avec {dogName} a été accepté.",
+      "request-new": "{via, select, walk {{walkerName} aimerait rencontrer {dogName} lors d'une balade.} home {{walkerName} aimerait rencontrer {dogName} chez vous.} phone {{walkerName} aimerait d'abord appeler pour faire connaissance avec {dogName}.} video {{walkerName} aimerait d'abord un appel vidéo pour faire connaissance avec {dogName}.} other {{walkerName} aimerait promener {dogName}.}}",
+      "request-accepted": "{via, select, phone {Votre appel au sujet de {dogName} a été accepté.} video {Votre appel vidéo au sujet de {dogName} a été accepté.} other {Votre rendez-vous avec {dogName} a été accepté.}}",
       "request-declined": "Malheureusement, votre rendez-vous avec {dogName} a été refusé.",
       "request-cancelled": "Un rendez-vous a été annulé.",
       "walk-started": "{walkerName} a commencé la balade avec {dogName}. Suivez-la en direct.",
@@ -1061,16 +1189,19 @@
       "group-signup": "{walkerName} participe à une balade en groupe.",
       "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles.",
       "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
-      "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
-      "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?",
+      "shelter-joined": "{orgName} est maintenant sur Rondje. Découvrez les chiens !",
+      "group-walk-new": "{orgName} a prévu une promenade en groupe. Vous venez ?",
       "walk-photo": "Nouvelle photo de {dogName} pendant la promenade.",
       "chat-message": "{senderName} a envoyé un message à propos de {dogName}.",
-      "nudge-step": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Vous complétez votre profil ?} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade.} quiz {Votre prochaine étape : le quiz de sécurité. Quelques questions, et vous saurez à quoi faire attention.} meet {Envie d'une première rencontre ? Découvrez les chiens près de chez vous.} other {Votre prochaine étape sur Rondje vous attend.}}",
-      "nudge-week": "Le week-end arrive ! Plus que {left, plural, one {# balade} other {# balades}} pour votre objectif de la semaine. Pas possible ? Aucun souci, une nouvelle semaine arrive.",
-      "nudge-challenge": "Nouveau mois, nouveau défi : {city} fait {goal} balades ensemble. Vous en êtes ?",
-      "challenge-done": "{city} a relevé le défi : {goal} balades ensemble ! {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci !",
-      "nudge-back": "{variant, select, dog {Envie d'une balade avec {dogName} ? Planifiez-la quand cela vous convient.} other {Envie d'une balade ? Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}}",
-      "nudge-owner": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Vous en ajoutez une ?} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
+      "nudge-step": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Vous complétez votre profil ?} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade.} quiz {Votre prochaine étape : le quiz de sécurité. Quelques questions, et vous saurez à quoi faire attention.} meet {Envie d'une première rencontre ? Découvrez les chiens près de chez vous.} other {Votre prochaine étape sur Rondje vous attend.}}",
+      "nudge-week": "Le week-end arrive ! Plus que {left, plural, one {# balade} other {# balades}} pour votre objectif de la semaine. Pas possible ? Aucun souci, une nouvelle semaine arrive.",
+      "nudge-challenge": "Nouveau mois, nouveau défi : {city} fait {goal} balades ensemble. Vous en êtes ?",
+      "challenge-done": "{city} a relevé le défi : {goal} balades ensemble ! {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci !",
+      "nudge-back": "{variant, select, dog {Envie d'une balade avec {dogName} ? Planifiez-la quand cela vous convient.} other {Envie d'une balade ? Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}}",
+      "nudge-owner": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Vous en ajoutez une ?} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}",
+      "request-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}. Belle rencontre !} home {rencontre avec {dogName}, à domicile. Belle rencontre !} phone {premier appel au sujet de {dogName}. Bon échange !} video {premier appel vidéo au sujet de {dogName}. Bon échange !} other {balade avec {dogName}. Bonne balade !}}",
+      "group-walk-reminder": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}. Bonne balade !",
+      "nudge-new-dog": "Près de chez vous : {dogName} vient d'arriver sur Rondje et cherche un compagnon de promenade."
     }
   },
   "admin": {
@@ -1134,7 +1265,7 @@
     "referralCampaign": "code de campagne",
     "referralCount": "{n, plural, one {# inscription} other {# inscriptions}}",
     "growth": "Croissance",
-    "growthHint": "Les chiffres du plan marketing. Le plus important en premier : les promenades des duos réguliers (un promeneur et un chien avec au moins 3 promenades ensemble en 8 semaines). Les données d'exemple ne comptent pas.",
+    "growthHint": "Les chiffres du plan marketing. Le plus important en premier : les promenades des duos réguliers (un promeneur et un chien avec au moins 3 promenades ensemble en 8 semaines). Les données d'exemple ne comptent pas.",
     "kpi": {
       "steadyWalksWeek": "Promenades des duos réguliers, cette semaine",
       "steadyPairs": "{n, plural, one {# duo régulier} other {# duos réguliers}}",
@@ -1148,20 +1279,38 @@
       "tipsWeek": "Recommandations et votes, cette semaine"
     },
     "flaggedChats": "Messages de chat sur l'argent ou avec un lien (30 jours)",
-    "flaggedChatsHint": "Seulement qui et combien de fois : nous ne lisons jamais les chats. Le destinataire voit un avertissement et peut signaler le message.",
-    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}"
+    "flaggedChatsHint": "Seulement qui et combien de fois : nous ne lisons jamais les chats. Le destinataire voit un avertissement et peut signaler le message.",
+    "flaggedChatCount": "{n, plural, one {# message} other {# messages}}",
+    "confirm": {
+      "title": "Confirmez d'abord votre adresse e-mail",
+      "text": "Gérer Rondje permet de voir et de modifier beaucoup de choses. C'est pourquoi nous vous demandons une seule fois de confirmer que {email} est bien à vous. Vous recevrez un e-mail avec un bouton.",
+      "send": "Envoyer l'e-mail",
+      "sent": "Envoyé. Ouvrez l'e-mail et touchez le bouton : vous reviendrez ici.",
+      "failed": "L'envoi n'a pas fonctionné. Réessayez dans un instant.",
+      "expired": "Ce lien ne fonctionne plus. Envoyez un nouvel e-mail ci-dessous."
+    },
+    "region": "Rapidité",
+    "regionSame": "l'app ({app}) et la base de données ({db}) sont dans la même région.",
+    "regionNear": "l'app ({app}) et la base de données ({db}) sont proches.",
+    "regionFar": "l'app ({app}) et la base de données ({db}) sont loin l'une de l'autre : chaque requête à la base de données prend jusqu'à 100 ms de plus. Dans Vercel, choisissez la région {suggest} sous Settings → Functions.",
+    "email": "E-mail",
+    "emailOn": "activé, via Resend",
+    "emailOff": "désactivé : les e-mails de mot de passe et de rappel ne partent pas. Définissez RESEND_API_KEY et EMAIL_FROM dans Vercel."
   },
   "banned": {
     "title": "Votre compte a été bloqué",
     "text": "Vous ne pouvez plus utiliser Rondje. Motif : {reason}. Vous n'êtes pas d'accord ? Écrivez-nous et nous réexaminerons votre cas.",
     "noReason": "non précisé",
-    "contact": "Écrivez à hallo@rondje.app en indiquant votre nom et l'adresse e-mail de votre compte."
+    "contact": "Écrivez à <email>{address}</email> en indiquant votre nom et l'adresse e-mail de votre compte.",
+    "contactPage": "La <link>page de contact</link> explique comment nous joindre. Indiquez votre nom et l'adresse e-mail de votre compte."
   },
   "errors": {
     "notFound": "Cette page n'existe pas (ou plus).",
     "generic": "Une erreur s'est produite. Veuillez réessayer.",
     "home": "Retour à l'accueil",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "server": "Un problème est survenu de notre côté. Réessayez dans un instant.",
+    "offline": "Cela n'a pas fonctionné. Vérifiez votre connexion et réessayez."
   },
   "legal": {
     "fallback": "Ce texte n'est pas encore traduit. Vous lisez la version néerlandaise.",
@@ -1174,7 +1323,8 @@
       "shelters": "Conditions de partenariat pour les refuges",
       "cookies": "Cookies"
     },
-    "version": "Version {version}"
+    "version": "Version {version}",
+    "contactFallback": "notre adresse de contact"
   },
   "photos": {
     "add": "Ajouter une photo",
@@ -1188,8 +1338,8 @@
     "title": "Ajouter des chiens rapidement",
     "lede": "Choisissez une photo par chien. Remplissez ensuite l'essentiel pour chaque chien et mettez-les tous en ligne d'un coup. L'histoire et d'autres photos peuvent suivre plus tard.",
     "pick": "Choisir des photos, une par chien",
-    "pickHint": "Ou glissez-les ici. La photo s'appelle « Bram.jpg » ? Nous remplissons le nom pour vous. Jusqu'à {max} chiens à la fois.",
-    "uploading": "Envoi en cours : {done} sur {total}",
+    "pickHint": "Ou glissez-les ici. La photo s'appelle « Bram.jpg » ? Nous remplissons le nom pour vous. Jusqu'à {max} chiens à la fois.",
+    "uploading": "Envoi en cours : {done} sur {total}",
     "failed": "{n, plural, one {# photo n'a pas pu être envoyée.} other {# photos n'ont pas pu être envoyées.}} Réessayez-les.",
     "errors": {
       "too-many-drafts": "Jusqu'à {max} chiens peuvent attendre en brouillon. Mettez d'abord quelques chiens en ligne.",
@@ -1215,26 +1365,26 @@
   "suggest": {
     "eyebrow": "Recommander",
     "title": "Recommander un refuge",
-    "lede": "Vous connaissez un refuge où les chiens auraient bien besoin d'une promenade de plus ? Dites-le-nous. Nous contactons le refuge nous-mêmes, jamais en votre nom.",
+    "lede": "Vous connaissez un refuge où les chiens auraient bien besoin d'une promenade de plus ? Dites-le-nous. Nous contactons le refuge nous-mêmes, jamais en votre nom.",
     "tabs": {
       "shelter": "Un refuge",
       "owner": "Quelqu'un avec un chien"
     },
     "name": "Nom du refuge",
     "website": "Site web",
-    "note": "Pourquoi ce refuge ?",
-    "notePlaceholder": "Par exemple : ils cherchent des promeneurs, ou les chiens sortent peu.",
+    "note": "Pourquoi ce refuge ?",
+    "notePlaceholder": "Par exemple : ils cherchent des promeneurs, ou les chiens sortent peu.",
     "noteHint": "N'indiquez pas de noms, numéros de téléphone ou adresses e-mail de personnes.",
     "submit": "Envoyer la recommandation",
     "done": {
-      "tipped": "Merci pour votre recommandation ! Nous contacterons {name} nous-mêmes. Si le refuge rejoint Rondje, nous vous préviendrons.",
-      "voted": "Merci ! {name} est déjà dans notre liste, et nous avons compté votre voix. Plus il y a de gens qui veulent y promener, plus vite nous invitons le refuge.",
+      "tipped": "Merci pour votre recommandation ! Nous contacterons {name} nous-mêmes. Si le refuge rejoint Rondje, nous vous préviendrons.",
+      "voted": "Merci ! {name} est déjà dans notre liste, et nous avons compté votre voix. Plus il y a de gens qui veulent y promener, plus vite nous invitons le refuge.",
       "pending": "{name} s'est déjà inscrit et est en cours de vérification. Ses chiens seront bientôt en ligne."
     },
     "errors": {
       "exists": "{name} est déjà sur Rondje.",
       "contact": "Retirez les numéros de téléphone, adresses e-mail et numéros de compte. Nous ne gardons que des informations sur le refuge lui-même.",
-      "website": "Cette adresse web ne semble pas valide. Par exemple : www.refuge.be",
+      "website": "Cette adresse web ne semble pas valide. Par exemple : www.refuge.be",
       "too-many": "Vous avez déjà envoyé {max} recommandations aujourd'hui. Ce sera possible demain.",
       "invalid": "Indiquez le nom du refuge et la ville."
     },
@@ -1242,13 +1392,13 @@
     "loginTitle": "Connectez-vous pour recommander un refuge",
     "loginText": "Cela évite le spam, et nous permet de vous prévenir quand le refuge rejoint Rondje.",
     "privacy": "Nous gardons votre recommandation et qui l'a envoyée, et vous prévenons si le refuge nous rejoint. Les recommandations traitées sont supprimées après un an.",
-    "ownerTitle": "Vous connaissez quelqu'un avec un chien qui aurait besoin d'aide ?",
-    "ownerText": "Rondje ne contacte jamais des personnes qui ne se sont pas inscrites, et nous ne gardons rien sur elles ici. Voici comment aider :",
+    "ownerTitle": "Vous connaissez quelqu'un avec un chien qui aurait besoin d'aide ?",
+    "ownerText": "Rondje ne contacte jamais des personnes qui ne se sont pas inscrites, et nous ne gardons rien sur elles ici. Voici comment aider :",
     "ownerStep1": "Demandez-lui d'abord vous-même, par exemple autour d'un café. Dites que c'est gratuit et qu'on se rencontre toujours d'abord ensemble.",
-    "ownerStep2": "Aidez-la à s'inscrire : vous pouvez aussi ajouter un chien pour quelqu'un d'autre, avec son accord.",
+    "ownerStep2": "Aidez-la à s'inscrire : vous pouvez aussi ajouter un chien pour quelqu'un d'autre, avec son accord.",
     "ownerAddDog": "Ajouter un chien pour quelqu'un d'autre",
-    "ownerStep3": "Ou envoyez votre propre lien d'invitation avec ce message :",
-    "ownerMessage": "Je connais une application gratuite où des jeunes du quartier promènent ton chien. On se rencontre toujours d'abord ensemble. Regarde : {url}",
+    "ownerStep3": "Ou envoyez votre propre lien d'invitation avec ce message :",
+    "ownerMessage": "Je connais une application gratuite où des jeunes du quartier promènent ton chien. On se rencontre toujours d'abord ensemble. Regarde : {url}",
     "ownerSignup": "Créez un compte pour obtenir votre lien",
     "ownerPrivacy": "Votre lien montre seulement que quelqu'un est venu par vous. Nous ne demandons jamais les données d'autres personnes.",
     "ownerFlyer": "Ou affichez un flyer dans votre quartier, au supermarché ou chez le vétérinaire"
@@ -1259,7 +1409,7 @@
     "lede": "Rondje est gratuit pour les promeneurs, les propriétaires et les refuges, et le restera. Pourtant, garder Rondje sûr et en ligne coûte de l'argent. Voici comment.",
     "promiseTitle": "Notre promesse",
     "promise": {
-      "free": "Rondje reste gratuit pour tout le monde : pas d'abonnement, pas de paywall, pas de version premium.",
+      "free": "Rondje reste gratuit pour tout le monde : pas d'abonnement, pas de paywall, pas de version premium.",
       "ads": "Pas de publicité dans Rondje.",
       "data": "Nous ne vendons jamais de données, et ne les partageons pas à des fins marketing.",
       "sponsors": "Un sponsor ou partenaire ne décide jamais quels chiens ou quelles personnes vous voyez.",
@@ -1317,58 +1467,93 @@
     "costsTotal": "Au total environ {min} à {max} par mois, hors frais uniques.",
     "costsNote": "Estimation, mise à jour le {date}. Nous gardons les coûts aussi bas que possible.",
     "giveTitle": "Soutenir Rondje",
-    "giveText": "Une petite contribution mensuelle aide à couvrir les coûts. Les contributions vont à {operator}, qui développe et fait tourner Rondje.",
-    "giveButton": "Soutenir Rondje sur {platform}",
-    "giveNote": "Vous payez via {platform}, selon leurs conditions. Une contribution est volontaire, non déductible des impôts, et ne donne aucun avantage dans Rondje.",
+    "giveButton": "Soutenir {app} sur {platform}",
     "giveSoon": "Bientôt, vous pourrez soutenir Rondje ici avec une petite contribution. En attendant, tout ce qui suit aide énormément aussi.",
     "helpTitle": "Aider sans argent",
     "help": {
       "tipTitle": "Recommander un refuge",
-      "tip": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades ? Dites-le-nous.",
+      "tip": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades ? Dites-le-nous.",
       "tipLink": "Recommander un refuge",
       "inviteTitle": "Inviter quelqu'un",
-      "invite": "Vous connaissez quelqu'un qui adorerait promener un chien, ou un voisin avec un chien ? Envoyez votre lien personnel.",
+      "invite": "Vous connaissez quelqu'un qui adorerait promener un chien, ou un voisin avec un chien ? Envoyez votre lien personnel.",
       "inviteLink": "Vers votre lien d'invitation",
       "shareTitle": "Partager votre promenade",
       "share": "Partagez une photo de votre promenade sur les réseaux sociaux, avec l'accord du propriétaire.",
       "shareInstagram": "Partagez une photo de votre promenade et identifiez @{handle}, avec l'accord du propriétaire.",
       "shareLink": "Partager en toute sécurité",
       "partnerTitle": "Entreprises et partenaires",
-      "partner": "Une animalerie, un assureur, une commune ou un fonds qui veut aider ? Avec plaisir, avec des règles claires : pas de publicité et aucune influence sur qui vous voyez."
+      "partner": "Une animalerie, un assureur, une commune ou un fonds qui veut aider ? Avec plaisir, avec des règles claires : pas de publicité et aucune influence sur qui vous voyez."
     },
     "faqTitle": "Questions fréquentes",
     "faq": {
       "free": {
-        "q": "Pourquoi Rondje est-il gratuit ?",
+        "q": "Pourquoi Rondje est-il gratuit ?",
         "a": "Parce que l'argent ne doit jamais empêcher de sortir ensemble, ni les jeunes, ni les personnes âgées avec un chien. C'est pourquoi personne ne paie pour utiliser Rondje."
       },
       "where": {
-        "q": "Où va ma contribution ?",
-        "a": "À {operator}, pour les coûts ci-dessus : hébergement, base de données, cartes, les applications et du matériel pour les refuges. Le reste sert à développer et faire connaître Rondje."
+        "q": "Où va ma contribution ?",
+        "a": "À {operator}, pour les coûts ci-dessus : hébergement, base de données, cartes, les applications et du matériel pour les refuges. Le reste sert à développer et faire connaître Rondje."
       },
       "tax": {
         "q": "Une contribution est-elle déductible des impôts ?",
-        "a": "Non. Rondje n'est pas (encore) une organisation caritative reconnue : vous ne pouvez donc pas déduire une contribution de vos impôts."
+        "a": "Non. Les contributions vont à {operator}. {app} n’est pas (encore) une fondation ni une organisation caritative reconnue : vous ne pouvez donc pas déduire une contribution de vos impôts. Si une fondation voit le jour plus tard, ce sera indiqué ici."
       },
       "perks": {
-        "q": "Est-ce que je reçois quelque chose en retour ?",
+        "q": "Est-ce que je reçois quelque chose en retour ?",
         "a": "Non, et c'est voulu. Soutenir ne donne ni priorité, ni fonctions supplémentaires, ni influence sur les mises en relation ou la modération. Mais vous avez nos remerciements, et des nouvelles de temps en temps."
       },
       "sponsors": {
-        "q": "Des entreprises peuvent-elles sponsoriser Rondje ?",
-        "a": "Oui, si elles respectent nos règles : pas de publicité dans Rondje, pas de données, et aucune influence sur les chiens ou les personnes visibles. Un sponsor peut par exemple payer des sacs à crottes pour les refuges."
+        "q": "Des entreprises peuvent-elles sponsoriser Rondje ?",
+        "a": "Oui, si elles respectent nos règles : pas de publicité dans Rondje, pas de données, et aucune influence sur les chiens ou les personnes visibles. Un sponsor peut par exemple payer des sacs à crottes pour les refuges."
+      },
+      "app": {
+        "q": "Pourquoi ne puis-je pas contribuer dans l’appli ?",
+        "a": "Parce que l’argent n’a pas sa place dans l’appli : tout y tourne autour de la promenade. De plus, Apple et Google ont leurs propres règles pour les paiements dans les applis. C’est pourquoi on ne peut contribuer qu’ici, sur le site."
+      },
+      "share": {
+        "q": "Donnez-vous vous-mêmes à de bonnes causes ?"
+      },
+      "once": {
+        "q": "Quelle est la différence entre le soutien mensuel et le financement participatif ?",
+        "a": "Une contribution mensuelle aide à couvrir les frais fixes, comme l’hébergement et les cartes. Le financement participatif est une campagne ponctuelle pour des frais ponctuels, comme les applis et la vérification juridique. Les deux vont à {operator}."
       }
     },
-    "operatorUnknown": "les créateurs de Rondje"
+    "operatorUnknown": "les créateurs de Rondje",
+    "giveIntro": "Les contributions vont à {operator}, qui développe et fait tourner {app}. Chaque contribution, petite ou grande, aide à couvrir les coûts.",
+    "monthlyPill": "Mensuel",
+    "monthlyTitle": "Soutenir chaque mois",
+    "monthlyText": "Une petite contribution régulière chaque mois couvre les frais fixes, comme l’hébergement et les cartes. Ainsi, {app} reste gratuit pour tout le monde.",
+    "oncePill": "Ponctuel",
+    "onceTitle": "Participer au financement participatif",
+    "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
+    "onceButton": "Participer sur {platform}",
+    "progress": "{raised} récoltés sur {goal}",
+    "progressUpdated": "Mis à jour le {date}. Le montant actuel figure sur {platform}.",
+    "platformNote": "Vous payez via {platform}, selon leurs conditions.",
+    "giveNoteAll": "Une contribution est volontaire, non déductible des impôts, et ne donne aucun avantage dans {app}.",
+    "openTitle": "Transparents sur l’argent",
+    "open": {
+      "paysTitle": "Ce que paie votre contribution",
+      "pays": "Les coûts ci-dessus : hébergement, base de données, cartes, les applis et du matériel pour les refuges. Le reste sert à développer {app} et à le faire connaître.",
+      "whoTitle": "Qui la reçoit",
+      "who": "{operator}, qui développe et fait tourner {app}. {app} n’est pas encore une fondation ni une organisation caritative reconnue : une contribution n’est donc pas déductible des impôts.",
+      "whoSoon": "Ce sera indiqué ici dès qu’il sera possible de contribuer. {app} n’est pas encore une fondation ni une organisation caritative reconnue.",
+      "shareTitle": "Nous en reversons une partie"
+    },
+    "shareSoon": "Nous voulons reverser une partie de ce qui arrive à de bonnes causes pour les chiens et les gens du quartier. Dès qu’il y aura des accords, vous verrez ici exactement combien et à qui.",
+    "shareSet": "Nous reversons {percent} % de toutes les contributions à de bonnes causes pour les chiens et les gens du quartier. À qui et combien exactement sera indiqué ici une fois le virement effectué.",
+    "whyTitle": "Pourquoi nous le faisons",
+    "whyText": "La solitude, le manque de mouvement et des chiens qui auraient besoin de plus d’attention : découvrez les chiffres derrière {app}, avec leurs sources.",
+    "whyLink": "Lire pourquoi"
   },
   "about": {
     "eyebrow": "À propos de Rondje",
     "title": "Une promenade ensemble, bonne pour vous et pour un chien",
-    "lede": "Rondje met en relation de jeunes adultes avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
+    "lede": "Rondje met en relation de jeunes adultes avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
     "whyTitle": "Pourquoi Rondje",
     "why1": "Beaucoup de jeunes aiment sortir et adorent les chiens, mais ne peuvent pas en avoir un. En même temps, des personnes âgées ou malades ne peuvent plus promener leur chien aussi souvent qu'elles le voudraient. Et dans les refuges, chaque chien attend une promenade de plus.",
-    "why2": "Une promenade régulière avec un chien fait du bien à tout le monde : du mouvement, de l'air frais et un brin de causette avec un voisin. Rondje rend cela simple, sûr et gratuit.",
-    "why3": "Rondje n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
+    "why2": "Une promenade régulière avec un chien fait du bien à tout le monde : du mouvement, de l'air frais et un brin de causette avec un voisin. Rondje rend cela simple, sûr et gratuit.",
+    "why3": "Rondje n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
     "howTitle": "Comment ça marche",
     "how": {
       "meet": "La première fois, vous rencontrez toujours le propriétaire et le chien ensemble. Ensuite seulement, vous pouvez promener seul, si le propriétaire le souhaite.",
@@ -1380,36 +1565,36 @@
     "whoTitle": "Qui est derrière Rondje",
     "who": "Rondje est une petite initiative indépendante des Pays-Bas, créée par des personnes qui aiment les chiens et veulent rapprocher les voisins.",
     "whoOperator": "Rondje est une petite initiative indépendante des Pays-Bas, développée et gérée par {operator}.",
-    "draft": "Brouillon : seuls les administrateurs le voient",
+    "draft": "Brouillon : seuls les administrateurs le voient",
     "storyFallback": "Cette histoire n'existe (pour l'instant) qu'en néerlandais.",
-    "helpLine": "Ça ne va pas ? Vous n'êtes pas obligé de faire face seul.",
+    "helpLine": "Ça ne va pas ? Vous n'êtes pas obligé de faire face seul.",
     "helpLink": "Voir les lignes d'écoute",
     "shareTitle": "Partager votre promenade",
-    "share": "Une belle photo de votre promenade ? Partagez-la avec #rondjeapp, en respectant ces règles :",
-    "shareInstagram": "Une belle photo de votre promenade ? Partagez-la et identifiez @{handle}, ou utilisez #rondjeapp. En respectant ces règles :",
+    "share": "Une belle photo de votre promenade ? Partagez-la avec #rondjeapp, en respectant ces règles :",
+    "shareInstagram": "Une belle photo de votre promenade ? Partagez-la et identifiez @{handle}, ou utilisez #rondjeapp. En respectant ces règles :",
     "shareRules": {
       "askOwner": "Demandez toujours d'abord au propriétaire si vous pouvez partager une photo du chien.",
       "people": "Ne montrez que des personnes d'accord. Soyez particulièrement prudent avec les personnes âgées et les enfants.",
       "noAddress": "Jamais d'adresse, de numéro de maison, de plaque de rue ou d'itinéraire sur la carte. Ainsi tout le monde reste en sécurité.",
       "shelterRules": "Dans un refuge, les règles du refuge pour les photos s'appliquent.",
       "repost": "Nous demandons toujours l'autorisation avant de partager une photo.",
-      "remove": "Quelque chose de vous ou de votre chien est en ligne et doit disparaître ? Dites-le-nous, nous le retirerons."
+      "remove": "Quelque chose de vous ou de votre chien est en ligne et doit disparaître ? Dites-le-nous, nous le retirerons."
     },
     "contactTitle": "Contact",
-    "contact": "Des questions ou des idées ? La page d'aide explique comment nous joindre. Il s'agit d'une personne ou d'un chien ? Utilisez le bouton de signalement sur sa page.",
-    "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :"
+    "contact": "Des questions ou des idées ? La page d'aide explique comment nous joindre. Il s'agit d'une personne ou d'un chien ? Utilisez le bouton de signalement sur sa page.",
+    "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :"
   },
   "poster": {
     "title": "Affiche pour votre refuge",
     "lede": "Imprimez cette affiche et accrochez-la au refuge, à l'entrée ou dans la salle d'attente. Les visiteurs scannent le QR code et voient tout de suite vos chiens.",
-    "notVerified": "Votre refuge est encore en cours de vérification. Le QR code fonctionnera une fois la vérification terminée : attendez un peu avant de l'afficher.",
+    "notVerified": "Votre refuge est encore en cours de vérification. Le QR code fonctionnera une fois la vérification terminée : attendez un peu avant de l'afficher.",
     "print": "Imprimer ou enregistrer en PDF",
     "headline": "Promenez nos chiens",
     "text": "Gratuit, pour toute personne de 18 ans ou plus. Vous participez à une promenade en groupe encadrée et faites connaissance avec les chiens en douceur.",
     "when": "Quand",
     "qrLabel": "QR code vers les chiens du refuge sur Rondje",
     "cta": "Scannez, choisissez un chien et inscrivez-vous à une promenade en groupe.",
-    "footer": "Rondje : promener ensemble, gratuitement, des chiens du quartier et du refuge."
+    "footer": "Rondje : promener ensemble, gratuitement, des chiens du quartier et du refuge."
   },
   "flyer": {
     "title": "Flyer pour votre quartier",
@@ -1418,31 +1603,31 @@
       "owner": "Pour les propriétaires",
       "walker": "Pour les promeneurs"
     },
-    "where": "Bons endroits : le supermarché, la bibliothèque, le médecin, le vétérinaire, la maison de quartier ou votre immeuble. Demandez d'abord si c'est permis.",
-    "yourLink": "Le QR code contient votre lien d'invitation personnel : votre profil indique combien de personnes sont venues grâce à vous.",
+    "where": "Bons endroits : le supermarché, la bibliothèque, le médecin, le vétérinaire, la maison de quartier ou votre immeuble. Demandez d'abord si c'est permis.",
+    "yourLink": "Le QR code contient votre lien d'invitation personnel : votre profil indique combien de personnes sont venues grâce à vous.",
     "print": "Imprimer ou enregistrer en PDF",
     "qrLabel": "QR code vers Rondje",
     "footer": "Rondje est gratuit et le restera. Rondje met les gens en relation et n'est pas partie à leurs arrangements.",
     "owner": {
-      "headline": "Votre chien aurait-il besoin d'une promenade de plus ?",
-      "text": "Vous avez plus de mal à sortir votre chien ? Un jeune du quartier le promène régulièrement, gratuitement. Vous faites toujours connaissance d'abord, et c'est vous qui décidez de ce qui est permis.",
+      "headline": "Votre chien aurait-il besoin d'une promenade de plus ?",
+      "text": "Vous avez plus de mal à sortir votre chien ? Un jeune du quartier le promène régulièrement, gratuitement. Vous faites toujours connaissance d'abord, et c'est vous qui décidez de ce qui est permis.",
       "points": {
         "one": "Gratuit, maintenant et plus tard",
         "two": "Toujours une première rencontre ensemble",
         "three": "Les promeneurs ont 18 ans ou plus et passent d'abord un quiz de sécurité",
         "four": "Si vous le souhaitez, vous voyez en direct où se promène votre chien"
       },
-      "family": "Pas de smartphone ? Un proche ou un voisin peut inscrire votre chien pour vous, avec votre accord.",
+      "family": "Pas de smartphone ? Un proche ou un voisin peut inscrire votre chien pour vous, avec votre accord.",
       "cta": "Scannez le code ou allez sur le site pour inscrire votre chien."
     },
     "walker": {
-      "headline": "Vous aimez les chiens, mais vous n'en avez pas (encore) ?",
+      "headline": "Vous aimez les chiens, mais vous n'en avez pas (encore) ?",
       "text": "Faites une promenade régulière avec un chien de votre quartier, ou participez à une promenade dans un refuge. Gratuit, et bon pour vous comme pour le chien.",
       "points": {
         "one": "Pour toute personne de 18 ans ou plus",
         "two": "Toujours une première rencontre avec le propriétaire",
         "three": "Ou participez à une promenade en groupe encadrée dans un refuge",
-        "four": "Gratuit : personne ne demande ni ne paie d'argent"
+        "four": "Gratuit : personne ne demande ni ne paie d'argent"
       },
       "cta": "Scannez le code et trouvez un chien près de chez vous."
     }
@@ -1456,16 +1641,16 @@
       "heading": "Choisissez un nouveau mot de passe",
       "body": "Quelqu'un (vous, nous l'espérons) a demandé un nouveau mot de passe pour votre compte Rondje. Le lien ci-dessous est valable une heure.",
       "cta": "Choisir un nouveau mot de passe",
-      "ignore": "Ce n'est pas vous ? Vous n'avez rien à faire : votre mot de passe reste le même."
+      "ignore": "Ce n'est pas vous ? Vous n'avez rien à faire : votre mot de passe reste le même."
     },
     "kinds": {
       "request-new": {
-        "subject": "{walkerName} aimerait promener {dogName}",
-        "body": "Consultez la demande dans Rondje et dites si cela vous convient. La première fois, vous vous rencontrez toujours ensemble."
+        "subject": "{via, select, walk {{walkerName} aimerait rencontrer {dogName} lors d'une balade} home {{walkerName} aimerait rencontrer {dogName} chez vous} phone {{walkerName} aimerait d'abord appeler pour faire connaissance avec {dogName}} video {{walkerName} aimerait d'abord un appel vidéo pour faire connaissance avec {dogName}} other {{walkerName} aimerait promener {dogName}}}",
+        "body": "{via, select, home {Consultez la demande dans Rondje et dites si cela vous convient. Rencontrez-vous en journée ; la famille ou un voisin peuvent être présents.} phone {Consultez la demande dans Rondje et dites si cela vous convient. Un appel ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} video {Consultez la demande dans Rondje et dites si cela vous convient. Un appel vidéo ne compte pas encore comme une rencontre en vrai : ensuite, vous vous retrouvez avec {dogName}.} other {Consultez la demande dans Rondje et dites si cela vous convient. La première fois, vous vous rencontrez toujours ensemble.}}"
       },
       "request-accepted": {
-        "subject": "Votre rendez-vous avec {dogName} est accepté",
-        "body": "Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble."
+        "subject": "{via, select, phone {Votre appel au sujet de {dogName} est accepté} video {Votre appel vidéo au sujet de {dogName} est accepté} other {Votre rendez-vous avec {dogName} est accepté}}",
+        "body": "{via, select, home {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} other {Dans Rondje, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.}}"
       },
       "walk-overdue": {
         "subject": "La promenade avec {dogName} dure plus longtemps que prévu",
@@ -1476,7 +1661,7 @@
         "body": "Nous avons vérifié votre refuge. Vos chiens sont maintenant visibles pour les promeneurs. Planifiez une promenade en groupe pour commencer."
       },
       "org-pending": {
-        "subject": "Nouveau refuge à vérifier : {orgName}",
+        "subject": "Nouveau refuge à vérifier : {orgName}",
         "body": "{orgName} s'est inscrit. Vérifiez les informations dans l'administration."
       },
       "shelter-joined": {
@@ -1488,38 +1673,58 @@
         "body": "Lisez-le et répondez dans Rondje. Ainsi, vous ne partagez votre numéro qu’une fois que vous vous connaissez."
       },
       "nudge-step": {
-        "subject": "{step, select, about {Complétez votre profil} dog {Inscrivez votre chien sur Rondje} quiz {Votre prochaine étape : le quiz de sécurité} meet {Envie d'une première rencontre ?} other {Votre prochaine étape sur Rondje}}",
+        "subject": "{step, select, about {Complétez votre profil} dog {Inscrivez votre chien sur Rondje} quiz {Votre prochaine étape : le quiz de sécurité} meet {Envie d'une première rencontre ?} other {Votre prochaine étape sur Rondje}}",
         "body": "{step, select, about {Une photo et quelques mots sur vous aident {role, select, owner {les promeneurs} other {les propriétaires}} à vous connaître. Cela ne prend qu'une minute.} dog {Inscrivez votre chien sur Rondje pour que des promeneurs du quartier puissent proposer une balade. La première fois, vous vous rencontrez toujours ensemble.} quiz {Quelques questions sur la promenade en sécurité, et vous saurez à quoi faire attention. Ensuite, vous pourrez aussi promener le chien sans le propriétaire, s'il est d'accord.} meet {Découvrez les chiens près de chez vous et demandez une première rencontre. La première fois, vous marchez avec le propriétaire.} other {Votre prochaine étape sur Rondje vous attend.}}"
       },
       "nudge-week": {
         "subject": "Plus que {left, plural, one {# balade} other {# balades}} pour votre objectif de la semaine",
-        "body": "Le week-end arrive. Chaque balade compte, même courte. Pas cette semaine ? Aucun souci : vous ne perdez rien."
+        "body": "Le week-end arrive. Chaque balade compte, même courte. Pas cette semaine ? Aucun souci : vous ne perdez rien."
       },
       "nudge-challenge": {
         "subject": "{city} fait {goal} balades ensemble",
-        "body": "Nouveau mois, nouveau défi pour {city}. Chaque balade compte, même courte. Vous en êtes ?"
+        "body": "Nouveau mois, nouveau défi pour {city}. Chaque balade compte, même courte. Vous en êtes ?"
       },
       "challenge-done": {
-        "subject": "{city} a relevé le défi !",
+        "subject": "{city} a relevé le défi !",
         "body": "{goal} balades ensemble ce mois-ci. {mine, plural, one {L'une d'elles était la vôtre.} other {# d'entre elles étaient les vôtres.}} Merci, de la part de tous les chiens."
       },
       "nudge-back": {
-        "subject": "{variant, select, dog {Envie d'une balade avec {dogName} ?} other {Envie d'une balade ?}}",
-        "body": "{variant, select, dog {Planifiez une balade avec {dogName} quand cela vous convient.} other {Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}} Pas le temps ? Aucun souci, Rondje est là quand vous en avez envie."
+        "subject": "{variant, select, dog {Envie d'une balade avec {dogName} ?} other {Envie d'une balade ?}}",
+        "body": "{variant, select, dog {Planifiez une balade avec {dogName} quand cela vous convient.} other {Découvrez les chiens près de chez vous qui cherchent un compagnon de promenade.}} Pas le temps ? Aucun souci, Rondje est là quand vous en avez envie."
       },
       "nudge-owner": {
         "subject": "Un conseil pour {dogName}",
-        "body": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Une photo en extérieur, avec un contact visuel, fonctionne le mieux.} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
+        "body": "{tip, select, photo {Une photo aide les promeneurs à faire connaissance avec {dogName}. Une photo en extérieur, avec un contact visuel, fonctionne le mieux.} slots {Ajoutez des moments de balade réguliers pour {dogName}, les promeneurs verront tout de suite quand cela convient.} other {Pas encore de demande pour {dogName} ? Partagez la page avec vos voisins et amis, cela aide souvent.}}"
+      },
+      "request-reminder": {
+        "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : {variant, select, meet {rencontre avec {dogName}} home {rencontre avec {dogName}, à domicile} phone {premier appel au sujet de {dogName}} video {premier appel vidéo au sujet de {dogName}} other {balade avec {dogName}}}",
+        "body": "Tout sur le rendez-vous, comme le lieu de rencontre et la façon de vous joindre, se trouve dans Rondje. Finalement, vous ne pouvez pas ? Prévenez l'autre personne à temps via la discussion."
+      },
+      "group-walk-reminder": {
+        "subject": "{day, select, today {Aujourd'hui} tomorrow {Demain} other {Bientôt}} à {time} : balade en groupe avec {orgName}",
+        "body": "Le point de rendez-vous se trouve dans Rondje, dans les balades en groupe. Finalement, vous ne pouvez pas venir ? Annulez votre inscription pour libérer votre place."
+      },
+      "nudge-new-dog": {
+        "subject": "{dogName} cherche un compagnon de promenade près de chez vous",
+        "body": "{dogName} vient d'arriver sur Rondje, non loin de chez vous. Voyez si vous vous entendez bien et planifiez une première rencontre quand cela vous convient."
       }
     },
-    "reminderFooter": "Vous recevez ce rappel parce que les rappels sont activés dans votre profil. Nous en envoyons un tous les quelques jours au maximum. Vous pouvez les désactiver dans votre profil, sous Réglages."
+    "reminderFooter": "Vous recevez ce rappel parce que les rappels sont activés dans votre profil. Nous en envoyons un tous les quelques jours au maximum. Vous pouvez les désactiver dans votre profil, sous Réglages.",
+    "verify": {
+      "subject": "Confirmez votre adresse e-mail pour Rondje",
+      "heading": "Est-ce bien votre adresse e-mail ?",
+      "body": "Une personne connectée avec cette adresse e-mail demande à gérer Rondje. Était-ce vous ? Touchez alors le bouton. Le lien est valable une heure.",
+      "cta": "Oui, c'est mon adresse",
+      "ignore": "Ce n'est pas vous ? Ne touchez pas le bouton. Vous n'avez rien d'autre à faire.",
+      "footer": "Vous recevez cet e-mail parce que quelqu'un a demandé à confirmer cette adresse sur Rondje."
+    }
   },
   "cities": {
     "title": "Promener un chien par ville",
     "lede": "Rondje fonctionne dans chaque ville. Pour chaque ville, vous voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent une promenade.",
     "metaTitle": "Promener un chien à {city}",
-    "metaDescription": "Promenez gratuitement et régulièrement un chien à {city} : chiens de voisins et de refuges, promenades en groupe et première rencontre en sécurité. Sans publicité, sans abonnement.",
-    "cityLede": "Promenez gratuitement un chien de {city} : celui d'un voisin qui ne peut plus marcher loin, ou d'un refuge. D'abord une rencontre, ensuite une promenade régulière.",
+    "metaDescription": "Promenez gratuitement et régulièrement un chien à {city} : chiens de voisins et de refuges, promenades en groupe et première rencontre en sécurité. Sans publicité, sans abonnement.",
+    "cityLede": "Promenez gratuitement un chien de {city} : celui d'un voisin qui ne peut plus marcher loin, ou d'un refuge. D'abord une rencontre, ensuite une promenade régulière.",
     "dogsWaiting": "{n, plural, =0 {Pas encore de chiens de {city} en ligne. Inscrivez le premier ou regardez aux alentours.} one {# chien de {city} attend une promenade.} other {# chiens de {city} attendent une promenade.}}",
     "seeDogs": "Voir les chiens à {city}",
     "addDog": "Inscrire un chien",
@@ -1527,8 +1732,8 @@
     "onRondje": "Sur Rondje",
     "dogCount": "{n, plural, one {# chien} other {# chiens}}",
     "notYet": "Pas encore sur Rondje",
-    "noShelters": "Nous ne connaissons pas encore de refuge à {city}. Vous en connaissez un ?",
-    "voteHint": "Vous aimeriez promener des chiens dans l'un de ces refuges ? Dites-le sur la liste des refuges et nous les inviterons.",
+    "noShelters": "Nous ne connaissons pas encore de refuge à {city}. Vous en connaissez un ?",
+    "voteHint": "Vous aimeriez promener des chiens dans l'un de ces refuges ? Dites-le sur la liste des refuges et nous les inviterons.",
     "toDirectory": "Vers la liste des refuges",
     "tipShelter": "Proposer un refuge",
     "walksTitle": "Promenades en groupe à {city}",
@@ -1552,13 +1757,13 @@
     "sending": "Envoi…",
     "you": "Vous",
     "closed": "Cette demande est close. Vous pouvez encore lire les messages, mais plus en envoyer.",
-    "tooMany": "Doucement : vous avez envoyé beaucoup de messages en peu de temps. Réessayez dans un instant.",
+    "tooMany": "Doucement : vous avez envoyé beaucoup de messages en peu de temps. Réessayez dans un instant.",
     "error": "L’envoi a échoué. Réessayez.",
     "tooLong": "Ce message est trop long. Maximum {max} caractères.",
-    "safety": "La première fois, retrouvez-vous toujours ensemble, dans un lieu que vous connaissez tous les deux. Un souci ? Signalez-le depuis le profil.",
+    "safety": "La première fois, retrouvez-vous toujours ensemble, dans un lieu que vous connaissez tous les deux. Un souci ? Signalez-le depuis le profil.",
     "back": "Retour aux demandes",
     "label": "Messages",
-    "flagged": "Attention : ce message parle d'argent ou contient un lien. Rondje est gratuit : n'envoyez jamais d'argent et ne partagez pas vos coordonnées bancaires. Quelque chose ne va pas ? Signalez-le."
+    "flagged": "Attention : ce message parle d'argent ou contient un lien. Rondje est gratuit : n'envoyez jamais d'argent et ne partagez pas vos coordonnées bancaires. Quelque chose ne va pas ? Signalez-le."
   },
   "today": {
     "metaTitle": "Aujourd'hui",
@@ -1566,15 +1771,15 @@
     "afternoon": "Bon après-midi, {name}",
     "evening": "Bonsoir, {name}",
     "night": "Salut, {name}",
-    "welcomeTitle": "Bienvenue sur Rondje, {name} !",
-    "welcomeText": "Vous êtes maintenant {level}, niveau 1. Voici vos premiers pas : chacun vous rapproche de votre première balade.",
+    "welcomeTitle": "Bienvenue sur Rondje, {name} !",
+    "welcomeText": "Vous êtes maintenant {level}, niveau 1. Voici vos premiers pas : chacun vous rapproche de votre première balade.",
     "stepsTitle": "Vos premiers pas",
     "stepsCount": "{done} sur {total} faits",
     "start": "Commencer",
     "steps": {
       "account": {
         "title": "Profil créé",
-        "hint": "Bienvenue sur Rondje !"
+        "hint": "Bienvenue sur Rondje !"
       },
       "about": {
         "title": "Une photo et quelques phrases sur vous",
@@ -1598,7 +1803,9 @@
       },
       "dogMet": {
         "title": "Rencontrez votre premier promeneur",
-        "hint": "Quand quelqu'un demande à faire connaissance, vous le verrez dans Balades, et vous pourrez d'abord discuter."
+        "hint": "Quand quelqu'un demande à faire connaissance, vous le verrez dans Balades, et vous pourrez d'abord discuter.",
+        "shareHint": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {dog}. Parlez-en aussi à vos voisins, ça ira plus vite.",
+        "shareStart": "Parlez de {dog} à vos voisins"
       },
       "dogWalk": {
         "title": "La première balade de votre chien",
@@ -1607,12 +1814,12 @@
     },
     "next": "Votre prochain rendez-vous",
     "nextWalk": "{when} · balade avec {dog}",
-    "nextMeeting": "{when} · première rencontre avec {dog}",
+    "nextMeeting": "{when} · première rencontre avec {dog}{via, select, home { (à domicile)} phone { (d'abord un appel)} video { (d'abord un appel vidéo)} other {}}",
     "nextOpen": "Voir",
     "pending": "{n, plural, one {# nouvelle demande attend votre réponse} other {# nouvelles demandes attendent votre réponse}}",
     "pendingOpen": "Voir les demandes",
     "nearTitle": "Chiens près de chez vous",
-    "nearEmpty": "Pas encore de chiens près de chez vous. Vous connaissez quelqu'un avec un chien ? Invitez-le avec votre propre lien.",
+    "nearEmpty": "Pas encore de chiens près de chez vous. Vous connaissez quelqu'un avec un chien ? Invitez-le avec votre propre lien.",
     "nearAll": "Tous les chiens",
     "nearInvite": "Inviter quelqu'un",
     "myDogsTitle": "Vos chiens",
@@ -1623,18 +1830,18 @@
     "badgesTitle": "Vos médailles",
     "badgesAll": "Toutes les médailles",
     "badgesEmpty": "Vous gagnerez votre première médaille avec votre première balade.",
-    "together": "Ensemble, nous avons déjà fait {walks} balades avec {dogs} chiens. Vous en faites partie.",
+    "together": "Ensemble, nous avons déjà fait {walks, plural, one {# balade} other {# balades}} avec {dogs, plural, one {# chien} other {# chiens}}. Vous en faites partie.",
     "tips": {
       "walker": {
         "1": "Par temps chaud, emportez de l'eau et vérifiez avec la main que le trottoir n'est pas trop chaud pour ses pattes.",
         "2": "Laissez un chien renifler votre main avant de le caresser. C'est ainsi que vous vous présentez.",
         "3": "Renifler fatigue un chien autant que courir. Une balade tranquille à renifler est un cadeau.",
-        "4": "Oreilles en arrière et queue basse ? Laissez de l'espace au chien et parlez calmement.",
-        "5": "Dans le noir ? Une lampe sur la laisse vous rend tous les deux plus visibles.",
+        "4": "Oreilles en arrière et queue basse ? Laissez de l'espace au chien et parlez calmement.",
+        "5": "Dans le noir ? Une lampe sur la laisse vous rend tous les deux plus visibles.",
         "6": "Marchez à votre rythme. Un chien qui tire apprend plus si vous vous arrêtez que si vous tirez.",
         "7": "S'asseoir ensemble sur un banc compte aussi. Les balades n'ont pas besoin d'être rapides ou longues.",
-        "8": "Un autre chien arrive ? Demandez d'abord à son propriétaire s'ils peuvent se saluer.",
-        "9": "Balade le matin ? C'est plus calme et plus frais, agréable pour les chiens âgés.",
+        "8": "Un autre chien arrive ? Demandez d'abord à son propriétaire s'ils peuvent se saluer.",
+        "9": "Balade le matin ? C'est plus calme et plus frais, agréable pour les chiens âgés.",
         "10": "Racontez au propriétaire un joli moment de la balade. Ça illumine sa journée."
       },
       "owner": {
@@ -1645,12 +1852,14 @@
         "5": "Une photo de votre chien qui regarde l'objectif attire plus de promeneurs qu'une photo de dos.",
         "6": "Suivez la balade en direct, ou lâchez prise et lisez le compte rendu après.",
         "7": "Dites au promeneur que vous êtes content. Un merci garde un compagnon régulier.",
-        "8": "Il y a un panneau d'affichage au supermarché ? Un flyer avec votre lien amène des promeneurs de votre quartier."
+        "8": "Il y a un panneau d'affichage au supermarché ? Un flyer avec votre lien amène des promeneurs de votre quartier."
       }
     },
-    "backTitle": "Bon retour sur Rondje !",
-    "backText": "{dog} et vous : {bond}. Envie d'une nouvelle balade ? Planifiez-la quand cela vous convient.",
-    "backPlan": "Planifier une balade avec {dog}"
+    "backTitle": "Bon retour sur Rondje !",
+    "backText": "{dog} et vous : {bond}. Envie d'une nouvelle balade ? Planifiez-la quand cela vous convient.",
+    "backPlan": "Planifier une balade avec {dog}",
+    "walkersNear": "{n, plural, one {# promeneur habite} other {# promeneurs habitent}} à moins de 5 km de chez vous.",
+    "walkersFew": "Encore peu de promeneurs près de chez vous. <link>Parlez de {dog} à vos voisins</link> pour qu'ils découvrent Rondje."
   },
   "progress": {
     "title": "Votre progression",
@@ -1658,7 +1867,7 @@
     "levelN": "Niveau {n}",
     "toNext": "Encore {n, plural, one {# point} other {# points}} avant {name}",
     "top": "Vous avez atteint le niveau le plus haut. Chaque balade continue de compter.",
-    "private": "Vous seul voyez votre niveau et vos médailles. Ils ne donnent jamais de priorité : tout le monde est le bienvenu.",
+    "private": "Vous seul voyez votre niveau et vos médailles. Ils ne donnent jamais de priorité : tout le monde est le bienvenu.",
     "levels": {
       "puppy": "Chiot",
       "sniffer": "Renifleur",
@@ -1686,7 +1895,7 @@
       "buddy": {
         "name": "Compagnon fidèle",
         "tier": "{n} balades avec le même chien",
-        "hint": "Devenez bons amis avec un chien : cinq balades ensemble."
+        "hint": "Devenez bons amis avec un chien : cinq balades ensemble."
       },
       "pack": {
         "name": "Meute",
@@ -1762,7 +1971,7 @@
       "firstDog": "Mettre votre chien sur Rondje",
       "invite": "Un ami qui nous rejoint grâce à votre lien"
     },
-    "earnNote": "Chaque balade compte autant, courte ou longue. Accepter une demande ne rapporte jamais de points : ce choix ne concerne que la sécurité.",
+    "earnNote": "Chaque balade compte autant, courte ou longue. Accepter une demande ne rapporte jamais de points : ce choix ne concerne que la sécurité.",
     "recentTitle": "Derniers points gagnés",
     "recent": {
       "walk": "Balade avec {dog}",
@@ -1780,8 +1989,8 @@
     },
     "none": "Pas encore de points. Votre première balade en rapporte 25 d'un coup.",
     "weekTitle": "Cette semaine",
-    "weekGoal": "{done} sur {goal} balades",
-    "weekDone": "Objectif de la semaine atteint !",
+    "weekGoal": "{done} sur {goal, plural, one {# balade} other {# balades}}",
+    "weekDone": "Objectif de la semaine atteint !",
     "weekLeft": "Encore {n, plural, one {# balade} other {# balades}} pour votre objectif",
     "weekNoGoal": "{n, plural, =0 {Pas encore de balade cette semaine} one {# balade cette semaine} other {# balades cette semaine}}",
     "weekSet": "Choisissez un objectif",
@@ -1791,16 +2000,16 @@
     "activeWeeks": "{n, plural, one {# semaine} other {# semaines}} avec une balade",
     "activeWeeksHint": "Ça ne fait qu'augmenter. Une semaine calme ne retire rien.",
     "celebrate": {
-      "levelUp": "Niveau supérieur !",
+      "levelUp": "Niveau supérieur !",
       "levelUpText": "Vous êtes maintenant {name}, niveau {n}.",
-      "newBadge": "Nouvelle médaille !",
-      "newBadges": "{n} nouvelles médailles !",
-      "close": "Super !",
+      "newBadge": "Nouvelle médaille !",
+      "newBadges": "{n} nouvelles médailles !",
+      "close": "Super !",
       "allBadges": "Voir vos médailles"
     },
     "card": "Voir votre progression",
     "walkPoints": "+{n} points",
-    "walkPointsText": "pour cette balade. Merci !",
+    "walkPointsText": "pour cette balade. Merci !",
     "walkPointsOwner": "pour la balade de {dog}",
     "friends": {
       "title": "Vos amis chiens",
@@ -1813,7 +2022,7 @@
         "best": "Meilleurs amis"
       },
       "withDog": "{dog} et vous",
-      "newBond": "Nouveau : {dog} et vous êtes maintenant {bond} !"
+      "newBond": "Nouveau : {dog} et vous êtes maintenant {bond} !"
     }
   },
   "challenges": {
@@ -1821,31 +2030,170 @@
     "city": "{city} fait {goal} balades en {month}",
     "all": "Ensemble, {goal} balades en {month}",
     "progress": "{walks} sur {goal} balades",
-    "mine": "{n, plural, =0 {Vous en faites une ?} one {Vous en avez fait #} other {Vous en avez fait #}}",
-    "done": "Réussi ! Merci à tous.",
+    "mine": "{n, plural, =0 {Vous en faites une ?} one {Vous en avez fait #} other {Vous en avez fait #}}",
+    "done": "Réussi ! Merci à tous.",
     "stats": "{dogs, plural, one {# chien} other {# chiens}} · {walkers, plural, one {# promeneur} other {# promeneurs}} · {km} km",
     "daysLeft": "{n, plural, one {Encore # jour} other {Encore # jours}}",
     "private": "Nous comptons seulement les balades, jamais qui les a faites."
+  },
+  "pushAsk": {
+    "title": "Un petit signal quand il y a du nouveau ?",
+    "walker": "Vous saurez tout de suite quand un propriétaire répond ou vous envoie un message.",
+    "dog": "Vous saurez tout de suite quand quelqu'un veut promener {dog} ou vous envoie un message.",
+    "general": "Vous saurez tout de suite quand il y a du nouveau, comme une demande ou un message.",
+    "request": "Vous saurez tout de suite quand il y a une réponse pour {dog}.",
+    "calm": "Des rappels tous les trois jours au maximum. Vous pouvez désactiver tout cela dans votre profil.",
+    "yes": "Oui, volontiers",
+    "later": "Plus tard",
+    "done": "Parfait ! Vous recevrez un signal quand il y aura du nouveau."
+  },
+  "calendar": {
+    "meet": "{via, select, home {Rencontre avec {dog}, chez le propriétaire} phone {Rencontre avec {dog} : d'abord un appel} video {Rencontre avec {dog} : d'abord un appel vidéo} other {Rencontre avec {dog}}}",
+    "walk": "Balade avec {dog}",
+    "with": "Avec {name}.",
+    "open": "Tout sur ce rendez-vous dans Rondje : {link}",
+    "group": "Balade en groupe avec {org}"
+  },
+  "chatQuick": {
+    "label": "Messages tout prêts",
+    "walker": {
+      "helloMeet": "Bonjour ! J'aimerais beaucoup rencontrer {dog}. Ce moment vous convient-il ?",
+      "helloSolo": "Bonjour ! J'aimerais beaucoup promener {dog} à nouveau. Ce moment vous convient-il ?",
+      "where": "Où nous retrouvons-nous ?",
+      "watchOut": "Y a-t-il quelque chose à savoir sur {dog} ?",
+      "handover": "Comment faisons-nous pour récupérer et ramener {dog} ?",
+      "excited": "Super, j'ai hâte !",
+      "bring": "Dois-je apporter quelque chose ?",
+      "treat": "Puis-je donner une friandise à {dog} ?",
+      "tenMinutes": "J'arrive dans 10 minutes.",
+      "here": "Je suis là !",
+      "late": "J'ai un peu de retard, toutes mes excuses. J'arrive.",
+      "allGood": "Nous sommes en balade, tout va bien.",
+      "sniffing": "{dog} renifle partout avec bonheur !",
+      "almostBack": "Nous sommes presque de retour.",
+      "thanks": "Merci, c'était une très belle balade !",
+      "again": "On remet ça bientôt ?",
+      "thanksMeet": "Merci, c'était un plaisir de faire connaissance !",
+      "soloNext": "Pourrais-je désormais promener {dog} sans vous ?",
+      "whoCalls": "Vous m'appelez, ou je vous appelle ?",
+      "videoHow": "Comment faisons-nous l'appel vidéo ? Je peux envoyer un lien.",
+      "readyCall": "Tout est prêt de mon côté pour notre appel.",
+      "thanksCall": "Merci pour cet échange agréable !",
+      "meetNext": "Pouvons-nous maintenant prévoir de rencontrer {dog} en vrai ?"
+    },
+    "host": {
+      "helloMeet": "Quel plaisir que vous souhaitiez rencontrer {dog} !",
+      "helloSolo": "Quel plaisir que vous souhaitiez promener {dog} à nouveau !",
+      "otherTime": "Un autre moment vous conviendrait-il aussi ?",
+      "experience": "Avez-vous déjà promené des chiens ?",
+      "seeYouThen": "Super, à bientôt !",
+      "home": "Sonnez simplement, je serai à la maison.",
+      "nothingToBring": "Vous n'avez rien à apporter.",
+      "ready": "La laisse et les sacs sont prêts.",
+      "tellMe": "Pouvez-vous me dire comment ça s'est passé ?",
+      "seeYou": "À tout à l'heure !",
+      "excitedDog": "{dog} a déjà hâte !",
+      "lateHome": "Je rentrerai un peu plus tard. Est-ce que ça vous va ?",
+      "howIsIt": "Comment ça se passe ?",
+      "takeYourTime": "Prenez votre temps.",
+      "thanks": "Merci pour la balade !",
+      "weekly": "Envie de venir plus souvent ? Chaque semaine, ce serait super.",
+      "thanksMeet": "Merci pour cette rencontre !",
+      "againMeet": "On se revoit bientôt ?",
+      "whoCalls": "Je vous appelle à l'heure convenue.",
+      "videoHow": "Envoyez-moi un lien pour l'appel vidéo, ou dites-moi quelle application vous utilisez.",
+      "readyCall": "Tout est prêt, à tout de suite !",
+      "thanksCall": "Merci pour cet appel !",
+      "meetNext": "N'hésitez pas à venir rencontrer {dog} en vrai."
+    }
+  },
+  "meetCheck": {
+    "title": "Rencontre avec {dog}",
+    "intro": "De quoi parler ? Cochez ce que vous avez abordé.",
+    "count": "{done} sur {total}",
+    "done": "Tout est abordé. Belles balades à vous !",
+    "walker": {
+      "leash": "Comment se passe la marche en laisse avec {dog}, et qu'est-ce qui l'inquiète ?",
+      "rules": "Qu'est-ce qui est permis : sans laisse, friandises, jeux avec d'autres chiens ?",
+      "stuff": "Où sont la laisse et les sacs, et comment se passe la prise en charge ?",
+      "emergency": "Qui appeler en cas de problème pendant la balade ? Demandez aussi le vétérinaire.",
+      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à vous.",
+      "inPerson": "Convenez du moment où vous vous rencontrerez en vrai, avec {dog}."
+    },
+    "host": {
+      "leash": "Montrez comment se passe la marche en laisse avec {dog}, et ce qui l'inquiète.",
+      "rules": "Dites ce qui est permis : sans laisse, friandises, jeux avec d'autres chiens.",
+      "stuff": "Montrez où sont la laisse et les sacs, et comment se passe la prise en charge.",
+      "id": "Vérifiez en personne la pièce d'identité de {name}. Vous pourrez ensuite le confirmer ci-dessous.",
+      "together": "Marchez un peu ensemble, pour que {dog} s'habitue à {name}.",
+      "callAbout": "Racontez comment se passe la marche en laisse avec {dog}, et ce qui l'inquiète.",
+      "inPerson": "Convenez du moment où vous vous rencontrerez en vrai. C'est là que vous vérifierez la pièce d'identité de {name}."
+    }
+  },
+  "installAsk": {
+    "title": "Vous mettez Rondje sur votre écran d’accueil ?",
+    "text": "Rondje s’ouvre alors d’une seule touche, comme une app.",
+    "textPush": "Rondje s’ouvre alors d’une seule touche, comme une app, et je peux vous prévenir quand il y a du nouveau.",
+    "inApp": "Vous êtes dans le navigateur d’une autre app, qui ne le permet pas. Ouvrez Rondje dans Safari via le menu ⋯, ou copiez le lien et collez-le dans Safari. Vous vous reconnecterez une fois là-bas.",
+    "steps": {
+      "share": "Touchez Partager",
+      "shareMore": "(vous ne le voyez pas ? Touchez d’abord ⋯)",
+      "add": "Choisissez « Sur l’écran d’accueil »",
+      "confirm": "Touchez « Ajouter »"
+    },
+    "install": "Oui, volontiers",
+    "later": "Plus tard",
+    "already": "C’est déjà fait",
+    "copy": "Copier le lien",
+    "copied": "Copié. Collez le lien dans Safari.",
+    "copyFailed": "La copie n’a pas fonctionné. Tapez dans Safari : {address}",
+    "done": "C’est fait ! Rondje est maintenant sur votre écran d’accueil."
+  },
+  "manifest": {
+    "description": "Une balade régulière avec un chien qui vous attend.",
+    "dogs": "Chiens à proximité",
+    "requests": "Mes balades",
+    "notifications": "Notifications"
+  },
+  "dogShare": {
+    "title": "Parlez de {name} à vos voisins",
+    "text": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {name}. Ça ira plus vite si vous en parlez aussi : envoyez ce message à des gens que vous connaissez, ou publiez-le dans un groupe du quartier.",
+    "message": "{name} cherche quelqu'un pour se promener à {city} ! Vous aimez les chiens et vous avez parfois le temps pour une balade ? Sur Rondje, on se rencontre toujours d'abord. Gratuit, pour toute personne de 18 ans ou plus : {url}",
+    "share": "Partager",
+    "whatsapp": "WhatsApp",
+    "copy": "Copier",
+    "copied": "Copié. Collez-le où vous voulez.",
+    "copyFailed": "La copie n'a pas fonctionné. Sélectionnez le texte ci-dessus et copiez-le vous-même.",
+    "poster": "Plutôt sur papier ? Imprimez une affiche",
+    "privacy": "Les personnes qui ouvrent le lien voient la même page de {name} que tout le monde sur Rondje. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
+    "posterMetaTitle": "Affiche pour votre chien",
+    "posterTitle": "Affiche pour {name}",
+    "posterLede": "Imprimez l'affiche et accrochez-la là où vos voisins la verront : au supermarché, à la bibliothèque, chez le vétérinaire ou dans votre hall d'immeuble. Demandez d'abord si c'est permis.",
+    "posterOffline": "{name} n'est pas en ligne pour le moment. Remettez d'abord {name} en ligne, sinon le QR code ne fonctionnera pas.",
+    "posterHeadline": "{name} cherche quelqu'un pour se promener",
+    "posterText": "Vous aimez les chiens et vous avez parfois un peu de temps ? Je cherche quelqu'un à {city} pour une balade régulière de {minutes} minutes avec {name}. On se rencontre d'abord.",
+    "posterQr": "QR code vers la page de {name} sur Rondje",
+    "posterCta": "Scannez le code et faites connaissance avec {name}."
   },
   "sounds": {
     "toggle": "Petits sons",
     "hint": "Des sons doux aux moments importants, comme une nouvelle balade ou un nouveau niveau. Uniquement sur cet appareil."
   },
   "progressPage": {
-    "lede": "Ce que vous avez fait jusqu'ici : votre niveau, vos médailles et ce que nous marchons ensemble.",
+    "lede": "Ce que vous avez fait jusqu'ici : votre niveau, vos médailles et ce que nous marchons ensemble.",
     "privateTag": "Vous seul le voyez",
     "levelLine": "Niveau {n} · {points, plural, one {# point} other {# points}}",
-    "ringLabel": "Niveau {n} : {name}",
+    "ringLabel": "Niveau {n} : {name}",
     "badgesLede": "Rien que pour vous. Elles ne donnent jamais de priorité.",
     "badgeEarned": "Obtenue",
     "badgeEarnedOn": "Obtenue le {date}",
-    "badgeNext": "Prochaine : {title}",
+    "badgeNext": "Prochaine : {title}",
     "badgeNew": "Nouveau",
     "weekLede": "Un objectif tranquille pour vous. Une semaine sans, et rien n'est perdu.",
     "goalNone": "Aucun",
     "goalTimes": "{n}×",
     "challengeEyebrow": "Ensemble ce mois-ci",
-    "challengeEveryone": "Tous ensemble : {walks} balades sur {goal}",
+    "challengeEveryone": "Tous ensemble : {walks} balades sur {goal}",
     "mineShort": "{n} de vous",
     "earnPoints": "+{n}",
     "recentEmpty": "Rien gagné pour l'instant. Votre première balade rapporte tout de suite 25 points.",
@@ -1869,7 +2217,7 @@
     "title": "Minute de respiration",
     "heading": "Prendre un moment",
     "lede": "Une minute calme, avant ou après une balade. Inspirez sur quatre temps, expirez sur six.",
-    "ready": "Prêt pour une minute de calme ?",
+    "ready": "Prêt pour une minute de calme ?",
     "in": "Inspirez",
     "out": "Expirez",
     "secondsLeft": "{n, plural, one {Encore # seconde} other {Encore # secondes}}",
@@ -1879,18 +2227,19 @@
     "done": "Très bien. Vous êtes de retour.",
     "back": "Terminé",
     "note": "Rien n'est enregistré. Activez ou coupez les sons dans votre profil.",
-    "help": "Quelque chose vous pèse ? En parler aide.",
+    "help": "Quelque chose vous pèse ? En parler aide.",
     "helpLink": "Trouver de l'aide ici"
   },
   "walkDone": {
-    "title": "Belle balade !",
+    "title": "Belle balade !",
     "text": "{dog} et vous avez marché {distance}. Merci beaucoup.",
-    "moodTitle": "Et comment vous sentez-vous maintenant ?",
+    "moodTitle": "Et comment vous sentez-vous maintenant ?",
     "moodPrivate": "Cela reste sur cet appareil. Nous ne le voyons pas.",
-    "feedback": "Comment ça s'est passé ?",
+    "feedback": "Comment ça s'est passé ?",
     "done": "Terminé",
     "points": "+{n} points",
-    "breathe": "Envie d'un moment de calme ? Faites la minute de respiration"
+    "breathe": "Envie d'un moment de calme ? Faites la minute de respiration",
+    "textShort": "{dog} et vous êtes sortis ensemble. Merci beaucoup."
   },
   "profileHub": {
     "levelBadges": "{n, plural, =0 {Pas encore de médailles} one {# médaille} other {# médailles}}",
@@ -1901,10 +2250,11 @@
     "breatheText": "Une minute calme, avant ou après une balade",
     "quizTodo": "Pas encore fait, nécessaire pour vous balader seul",
     "moreTitle": "Donner un coup de main",
-    "inviteShort": "Vous connaissez quelqu'un qui aime marcher, ou quelqu'un avec un chien ? Partagez votre lien.",
+    "inviteShort": "Vous connaissez quelqu'un qui aime marcher, ou quelqu'un avec un chien ? Partagez votre lien.",
     "supportText": "Gratuit et sans publicité. Découvrez comment aider.",
-    "tipText": "Vous connaissez un refuge ou quelqu'un avec un chien qui aurait besoin d'aide ?",
-    "shelterText": "Vous travaillez dans un refuge ? Mettez vos chiens en ligne ici.",
+    "tipText": "Vous connaissez un refuge ou quelqu'un avec un chien qui aurait besoin d'aide ?",
+    "shelterText": "Vous travaillez dans un refuge ? Mettez vos chiens en ligne ici.",
+    "adminText": "Signalements, refuges, chiffres et le centre de lancement",
     "alerts": "Notifications et son"
   },
   "shell": {
@@ -1919,11 +2269,11 @@
     "footerLine": "{name} est gratuit et sans publicité"
   },
   "discover": {
-    "title": "Qui vient se balader aujourd’hui ?",
-    "levelTop": "Niveau maximum. Que de balades !",
+    "title": "Qui vient se balader aujourd’hui ?",
+    "levelTop": "Niveau maximum. Que de balades !",
     "badges": "{n, plural, =0 {Pas encore de médailles} one {# médaille} other {# médailles}}",
     "together": "Ensemble ce mois-ci",
-    "mine": "Vous : {n}",
+    "mine": "Vous : {n}",
     "filters": {
       "owner": "Quartier",
       "shelter": "Refuge"
@@ -1936,10 +2286,9 @@
   "launch": {
     "title": "Centre de lancement",
     "back": "Gestion",
-    "lede": "Tout pour le lancement au même endroit : ce qui reste à faire, qui fait quoi, vos messages et la croissance. À votre rythme.",
+    "lede": "Tout pour le lancement au même endroit : ce qui reste à faire, qui fait quoi, vos messages et la croissance. À votre rythme.",
     "levelChip": "{level} · {points} points",
     "pointsShort": "+{n}",
-    "install": "Astuce : ouvrez cette page sur votre iPhone dans Safari et choisissez Partager → Sur l’écran d’accueil. Le centre de lancement s’ouvre alors comme une app.",
     "entry": {
       "title": "Centre de lancement",
       "text": "Liste de lancement, banque de messages pour les refuges et d’autres, chiffres par semaine et coûts."
@@ -1980,19 +2329,19 @@
       "autoHint": "Se coche toute seule dès que les vraies données le montrent.",
       "open": "Ouvrir",
       "note": "Note",
-      "notePlaceholder": "Où en est-on ?",
+      "notePlaceholder": "Où en est-on ?",
       "saveNote": "Enregistrer",
       "saved": "Enregistré",
       "doneOn": "faite le {date}"
     },
     "tasks": {
       "name": {
-        "title": "Choisir le nom : Woofmigo, oui ou non",
-        "hint": "Vérifiez d’abord dans App Store Connect si le nom est libre (Apps → + → Nouvelle app), et cherchez WOOF et MIGO dans TMview, classes 9, 42 et 45. D’ici là, tout reste sur Brand.name et APP_NAME."
+        "title": "Nom : nouveau tour, Woofmigo est abandonné (Guaumigo)",
+        "hint": "Guaumigo, une app espagnole de promenade de chiens aussi active aux Pays-Bas et en Belgique, ressemble trop à Woofmigo. Choisissez dans le nouveau tour de noms (_werk/naam/). D’ici là, tout reste sur APP_NAME et Brand.name."
       },
       "goLive": {
-        "title": "Mettre en ligne : fusionner en production",
-        "hint": "La PR #3 et la PR de parité, avec les migrations 0007 et 0008. Suivez « Live zetten » dans CLAUDE.md : contrôles locaux au vert, preview Vercel Ready, puis squash-merge. Se coche toute seule quand ce centre tourne en production."
+        "title": "Mettre en ligne : fusionner en production",
+        "hint": "La PR #3 et la PR de parité, avec les migrations 0007 et 0008. Suivez « Live zetten » dans CLAUDE.md : contrôles locaux au vert, preview Vercel Ready, puis squash-merge. Se coche toute seule quand ce centre tourne en production."
       },
       "submit": {
         "title": "Soumettre à Apple",
@@ -2000,23 +2349,23 @@
       },
       "money": {
         "title": "Tout ce qui coûte de l’argent",
-        "hint": "Apple Developer (99 € par an) et le domaine. Votre accord et votre paiement : Claude n’achète rien."
+        "hint": "Apple Developer (99 € par an) et le domaine. Votre accord et votre paiement : Claude n’achète rien."
       },
       "sendThree": {
         "title": "Envoie tes 3 premiers e-mails",
-        "hint": "Choisis 3 refuges dans Contacts, ajoute l’adresse e-mail, touche « Ouvrir dans la messagerie » et envoie depuis ta propre messagerie. Puis marque-les « envoyé »."
+        "hint": "Choisis 3 refuges dans Contacts, ajoute l’adresse e-mail, touche « Ouvrir dans la messagerie » et envoie depuis ta propre messagerie. Puis marque-les « envoyé »."
       },
       "trademark": {
         "title": "Vérifier la marque sur TMview",
-        "hint": "Cherchez « rondje » ou le nouveau nom, dans les classes 9, 42 et 45."
+        "hint": "Cherchez le nouveau nom (exact et similaire) dans TMview, BOIP et OEPM (Espagne), dans les classes 9, 42 et 45. Attention à Guaumigo et à la demande européenne PawAmigo."
       },
       "appleAccount": {
         "title": "Compte Apple Developer",
-        "hint": "Nécessaire pour soumettre, pour Se connecter avec Apple et pour HealthKit. 99 € par an ; compté dans les coûts dès que vous cochez."
+        "hint": "Nécessaire pour soumettre, pour Se connecter avec Apple et pour HealthKit. 99 € par an ; compté dans les coûts dès que vous cochez."
       },
       "domain": {
         "title": "Acheter et relier un domaine",
-        "hint": "Après le choix du nom, environ 12 € par an. Ensuite Vercel → Settings → Domains (docs/LAUNCH.md §8). Compté dans les coûts dès que vous cochez."
+        "hint": "N’achetez que lorsque le nom passe toutes les vérifications : marques, App Store, domaines et comptes. Environ 12 € par an. Ensuite Vercel → Settings → Domains (docs/LAUNCH.md §8). Compté dans les coûts dès que vous cochez."
       },
       "socialKeys": {
         "title": "Clés pour Se connecter avec Apple et Google",
@@ -2032,7 +2381,7 @@
       },
       "analytics": {
         "title": "Activer Vercel Web Analytics",
-        "hint": "Dans le tableau de bord Vercel : projet rondje → Analytics → Enable. Gratuit avec l’offre Hobby, dans ses limites."
+        "hint": "Dans le tableau de bord Vercel : projet rondje → Analytics → Enable. Gratuit avec l’offre Hobby, dans ses limites."
       },
       "privacy": {
         "title": "Compléter la politique de confidentialité",
@@ -2040,11 +2389,11 @@
       },
       "firstMails": {
         "title": "Écrire aux 10 premiers refuges",
-        "hint": "Avec la banque de messages ci-dessous. Se coche toute seule à 10 refuges sur « envoyé » ou plus."
+        "hint": "Avec la banque de messages ci-dessous. Se coche toute seule à 10 refuges sur « envoyé » ou plus."
       },
       "firstDemo": {
         "title": "Premier appel avec un refuge",
-        "hint": "Se coche toute seule dès qu’un refuge de vos contacts est sur « rendez-vous »."
+        "hint": "Se coche toute seule dès qu’un refuge de vos contacts est sur « rendez-vous »."
       },
       "firstDog": {
         "title": "Premier vrai chien en ligne",
@@ -2056,16 +2405,16 @@
       },
       "storeTexts": {
         "title": "Texte et captures App Store avec le nom choisi",
-        "hint": "Après le choix du nom : le reporter dans docs/app-store/vermelding.md et faire de nouvelles captures."
+        "hint": "Après le choix du nom : le reporter dans docs/app-store/vermelding.md et faire de nouvelles captures."
       },
       "mountAnalytics": {
         "title": "Ajouter le compteur de visites au site",
-        "hint": "Le composant Analytics est prêt et doit encore aller dans le layout. Sans cookies ; les pages de gestion ne comptent pas."
+        "hint": "Le composant Analytics est prêt et doit encore aller dans le layout. Sans cookies ; les pages de gestion ne comptent pas."
       }
     },
     "game": {
       "title": "Progression",
-      "ring": "Niveau {n} : {name}",
+      "ring": "Niveau {n} : {name}",
       "points": "{n} points",
       "toNext": "Encore {n} points jusqu’à {name}",
       "top": "Niveau le plus haut. Chaque pas compte toujours.",
@@ -2085,7 +2434,7 @@
       "membersTitle": "En route vers 100 membres",
       "membersCount": "{n, plural, one {# membre} other {# membres}}",
       "badgesTitle": "Badges",
-      "noPressure": "Pas de séries et pas de pression : les points viennent seulement de ce qui est fait, et rien n’est jamais retiré."
+      "noPressure": "Pas de séries et pas de pression : les points viennent seulement de ce qui est fait, et rien n’est jamais retiré."
     },
     "milestones": {
       "firstShelter": {
@@ -2156,13 +2505,13 @@
         "dagen": "Deux jours (p. ex. mardi ou jeudi)"
       },
       "preview": "Aperçu",
-      "toLabel": "À :",
-      "missing": "Encore à remplir : {fields}",
-      "noEmail": "Ce contact n’a pas d’adresse e-mail valide : votre app de mail s’ouvre sans destinataire.",
+      "toLabel": "À :",
+      "missing": "Encore à remplir : {fields}",
+      "noEmail": "Ce contact n’a pas d’adresse e-mail valide : votre app de mail s’ouvre sans destinataire.",
       "openMail": "Ouvrir dans le mail",
       "copy": "Copier",
       "copied": "Copié",
-      "sentAsk": "L’avez-vous envoyé ?",
+      "sentAsk": "L’avez-vous envoyé ?",
       "markSent": "Marquer comme envoyé"
     },
     "contacts": {
@@ -2195,8 +2544,8 @@
         "email": "Cette adresse e-mail n’est pas correcte."
       },
       "prepare": "Préparer 10 refuges",
-      "prepareHint": "Les refuges les plus proches de la liste, avec leur site dans la note. Ajoute toi-même l’adresse e-mail ; rien n’est envoyé.",
-      "prepared": "{n, plural, =0 {Aucun nouveau refuge : ils sont déjà là.} one {# refuge prêt. Ajoute l’adresse e-mail et écris ton message.} other {# refuges prêts. Ajoute les adresses e-mail et écris tes messages.}}"
+      "prepareHint": "Les refuges les plus proches de la liste, avec leur site dans la note. Ajoute toi-même l’adresse e-mail ; rien n’est envoyé.",
+      "prepared": "{n, plural, =0 {Aucun nouveau refuge : ils sont déjà là.} one {# refuge prêt. Ajoute l’adresse e-mail et écris ton message.} other {# refuges prêts. Ajoute les adresses e-mail et écris tes messages.}}"
     },
     "numbers": {
       "title": "Chiffres par semaine",
@@ -2210,8 +2559,8 @@
         "walks": "Promenades"
       },
       "thisWeek": "cette semaine",
-      "chartLabel": "{name} : {total} en 8 semaines",
-      "tip": "semaine du {week} : {n}",
+      "chartLabel": "{name} : {total} en 8 semaines",
+      "tip": "semaine du {week} : {n}",
       "total": "{n} en 8 semaines",
       "asTable": "Voir en tableau",
       "weekOf": "Semaine du"
@@ -2224,7 +2573,7 @@
     },
     "costs": {
       "title": "Coûts par mois",
-      "hint": "Ce que coûte Rondje aujourd’hui. Les montants annuels sont indiqués par mois ; ils ne comptent qu’une fois la tâche correspondante cochée.",
+      "hint": "Ce que coûte Rondje aujourd’hui. Les montants annuels sont indiqués par mois ; ils ne comptent qu’une fois la tâche correspondante cochée.",
       "perYear": "{amount} par an",
       "total": "Total par mois",
       "perMember": "Coût par membre",
@@ -2242,6 +2591,742 @@
         "apple": "dès votre inscription",
         "domain": "dès l’achat"
       }
+    },
+    "import": {
+      "button": "Importer un CSV",
+      "title": "Importer des contacts",
+      "hint": "Colle un CSV ou choisis un fichier. La première ligne nomme les colonnes :",
+      "rules": "Public (audience) : shelter, vet, student, neighbourhood ou press. Un nom ou une organisation suffit. Au maximum {max} contacts à la fois. Tout arrive en ‘à envoyer’ et rien n’est envoyé.",
+      "paste": "Coller le CSV",
+      "file": "Ou choisis un fichier",
+      "preview": "Aperçu",
+      "rowsLabel": "Contacts du fichier",
+      "line": "ligne {n}",
+      "counts": {
+        "new": "{n} nouveaux",
+        "duplicate": "{n} en double",
+        "invalid": "{n} avec une erreur"
+      },
+      "status": {
+        "new": "Nouveau",
+        "existing": "Déjà dans la liste",
+        "duplicate": "En double dans le fichier"
+      },
+      "problems": {
+        "audience": "Public inconnu",
+        "missingName": "Nom ou organisation manquant",
+        "email": "Adresse e-mail incorrecte",
+        "tooLong": "Un champ est trop long"
+      },
+      "confirm": "{n, plural, one {Importer # contact} other {Importer # contacts}}",
+      "nothing": "Rien de nouveau à importer",
+      "done": "{added, plural, =0 {Aucun nouveau contact ajouté.} one {# contact ajouté en ‘à envoyer’.} other {# contacts ajoutés en ‘à envoyer’.}}",
+      "skipped": "Ignorés : {duplicate} en double et {invalid} avec une erreur.",
+      "errors": {
+        "empty": "Il n’y a aucun contact. Mets les noms des colonnes sur la première ligne et un contact par ligne en dessous.",
+        "header": "La première ligne doit contenir les noms des colonnes, avec au moins audience et organisation ou name.",
+        "tooMany": "Il y a {rows} contacts. Importe-en au maximum {max} à la fois.",
+        "tooBig": "Ce fichier est trop gros pour une liste de contacts.",
+        "invalid": "Une erreur s’est produite. Réessaie.",
+        "read": "Ce fichier n’a pas pu être lu. Choisis un fichier .csv."
+      }
     }
+  },
+  "adminHub": {
+    "title": "Gestion",
+    "hello": "Bonjour {name}, voici ce qui se passe.",
+    "signIn": "Connecte-toi pour ouvrir Gestion",
+    "open": "Voir",
+    "nav": {
+      "label": "Rubriques de Gestion",
+      "overview": "Aperçu",
+      "launch": "Lancement",
+      "marketing": "Marketing",
+      "moderation": "Modération",
+      "shelters": "Refuges",
+      "tips": "Suggestions",
+      "numbers": "Chiffres"
+    },
+    "tiles": {
+      "label": "Aller à une rubrique",
+      "launch": {
+        "title": "Lancement",
+        "open": "{open} sur {total} t’attendent",
+        "done": "Tout ce qui te revient est fait"
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Visibilité et croissance"
+      },
+      "moderation": {
+        "title": "Modération",
+        "text": "{reports, plural, =0 {Aucun signalement ouvert} one {# signalement ouvert} other {# signalements ouverts}} · {signals, plural, =0 {aucune alerte} one {# alerte} other {# alertes}}"
+      },
+      "shelters": {
+        "title": "Refuges",
+        "text": "{n, plural, =0 {Personne n’attend la vérification} one {# attend la vérification} other {# attendent la vérification}}"
+      },
+      "tips": {
+        "title": "Suggestions et votes",
+        "text": "{n, plural, =0 {Rien de nouveau} one {# refuge demandé} other {# refuges demandés}}"
+      },
+      "numbers": {
+        "title": "Chiffres",
+        "text": "{n, plural, one {# balade} other {# balades}} cette semaine{running, plural, =0 {} other {, # en cours}}"
+      }
+    },
+    "questionsTitle": "Les meilleures questions",
+    "questionsHint": "Ce qu’une responsable expérimentée de la sécurité et des opérations vérifie chaque jour. En direct depuis la base de données, le plus urgent en premier.",
+    "status": {
+      "calm": "Tout est calme. Rien ne t’attend.",
+      "attention": "{n, plural, one {Une chose demande ton attention aujourd’hui.} other {# choses demandent ton attention aujourd’hui.}}",
+      "urgent": "{n, plural, one {Une chose demande ton attention maintenant.} other {# choses demandent ton attention, dont une tout de suite.}}"
+    },
+    "level": {
+      "urgent": "Maintenant",
+      "attention": "Aujourd’hui",
+      "calm": "Calme"
+    },
+    "questions": {
+      "walks": {
+        "q": "Des balades ont-elles lieu, et l’une est-elle en retard ?",
+        "overdue": "{overdue, plural, one {# balade est} other {# balades sont}} en retard, sur {running} {running, plural, one {balade en cours} other {balades en cours}}. Suis-la et prends contact si besoin.",
+        "running": "{running, plural, one {# balade est en cours} other {# balades sont en cours}}, toutes à l’heure.",
+        "none": "Aucune balade n’est en cours.",
+        "act": "Suivre la balade"
+      },
+      "reports": {
+        "q": "Des signalements m’attendent-ils ?",
+        "serious": "{n, plural, one {# signalement ouvert} other {# signalements ouverts}}, dont {serious} sur la sécurité ou un abus. Le plus ancien attend {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}}.",
+        "open": "{n, plural, one {# signalement ouvert} other {# signalements ouverts}}. Le plus ancien attend {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}}.",
+        "none": "Aucun signalement ouvert.",
+        "act": "Traiter les signalements"
+      },
+      "signals": {
+        "q": "Est-il question d’argent, de liens ou d’une mauvaise expérience ?",
+        "some": "Cette semaine : {feedback} avis à vérifier, {requests} demandes signalées et {chats} messages de chat sur l’argent ou avec un lien.",
+        "none": "Cette semaine, aucun avis, demande ou message signalé.",
+        "act": "Voir les alertes"
+      },
+      "intros": {
+        "q": "Des vérifications d’identité ou des premières rencontres sont-elles bloquées ?",
+        "stuck": "{unanswered, plural, =0 {} one {# première rencontre attend trop longtemps le propriétaire.} other {# premières rencontres attendent trop longtemps le propriétaire.}} {idPending, plural, =0 {} one {Après # première rencontre, la pièce d’identité n’est pas encore confirmée.} other {Après # premières rencontres, la pièce d’identité n’est pas encore confirmée.}}",
+        "none": "Rien n’est bloqué. {waiting, plural, =0 {Aucune première rencontre n’attend de réponse.} one {# première rencontre attend une réponse, encore dans les temps.} other {# premières rencontres attendent une réponse, encore dans les temps.}}",
+        "act": "Voir le chien"
+      },
+      "shelters": {
+        "q": "Quels refuges attendent la vérification ?",
+        "waiting": "{n, plural, one {# refuge attend} other {# refuges attendent}} la vérification, le plus ancien {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}}.",
+        "none": "Aucun refuge n’attend la vérification.",
+        "act": "Vérifier les refuges"
+      },
+      "safety": {
+        "q": "Qui a été bloqué ou exclu cette semaine ?",
+        "repeat": "{repeat, plural, one {# personne a été bloquée} other {# personnes ont été bloquées}} par deux autres ou plus en 30 jours : vérifie s’il y a aussi des signalements. Cette semaine {banned, plural, =0 {personne n’a été exclu} other {# exclus ({names})}}.",
+        "banned": "Exclus cette semaine : {names}. {blocks, plural, =0 {Aucun blocage par les membres.} one {# blocage par les membres.} other {# blocages par les membres.}}",
+        "quiet": "Personne n’a été exclu cette semaine. {blocks, plural, =0 {Aucun blocage par les membres.} one {# blocage par les membres.} other {# blocages par les membres.}}",
+        "act": "Voir la modération"
+      },
+      "groupWalks": {
+        "q": "Les balades en groupe des deux prochains jours se remplissent-elles ?",
+        "empty": "{empty, plural, one {# balade en groupe n’a} other {# balades en groupe n’ont}} encore aucune inscription, sur les {n} prévues. Partage-les, ou demande au refuge si elles sont maintenues.",
+        "filled": "{n, plural, one {# balade en groupe prévue, avec des inscriptions.} other {# balades en groupe prévues, toutes avec des inscriptions.}}",
+        "none": "Aucune balade en groupe dans les deux prochains jours.",
+        "act": "Ouvrir le refuge"
+      },
+      "tips": {
+        "q": "Quelles suggestions et quels votes demandent un suivi ?",
+        "open": "{n, plural, one {# refuge demandé} other {# refuges demandés}}, surtout {top} ({votes, plural, one {# vote} other {# votes}}). {followUp, plural, =0 {} one {# refuge contacté est silencieux depuis deux semaines.} other {# refuges contactés sont silencieux depuis deux semaines.}}",
+        "followUp": "{followUp, plural, one {# refuge contacté est silencieux depuis deux semaines.} other {# refuges contactés sont silencieux depuis deux semaines.}} Demande où ils en sont.",
+        "none": "Aucune nouvelle suggestion ni vote, et rien à relancer.",
+        "act": "Suivre les suggestions"
+      },
+      "system": {
+        "q": "La base de données et le nettoyage quotidien vont-ils bien ?",
+        "healthy": "La base de données ({database}) répond en {ms} ms et le nettoyage est à jour.",
+        "slow": "La base de données ({database}) a mis {ms} ms pour une question simple. Vérifie que l’app et la base de données sont dans la même région.",
+        "cronLate": "Le nettoyage est en retard : {requests} demandes expirées, {walks} balades encore ouvertes et {routes} trajets de plus de 30 jours. Vérifie dans Vercel, sous Cron Jobs, si /api/cron/cleanup tourne.",
+        "demoDatabase": "Aucune vraie base de données n’est connectée : tout est en mémoire et disparaît au prochain déploiement. Connecte Neon dans Vercel.",
+        "act": "Voir les réglages"
+      }
+    },
+    "items": {
+      "overdue": "{minutes} min de retard",
+      "unanswered": "attend {days, plural, =0 {depuis aujourd’hui} one {depuis # jour} other {depuis # jours}} · rencontre {startsAt}",
+      "idPending": "rencontre il y a {days, plural, one {# jour} other {# jours}}, identité pas encore confirmée",
+      "emptyWalk": "{startsAt} · encore aucune inscription"
+    },
+    "install": {
+      "title": "Gestion comme app sur ton iPhone",
+      "text": "Ouvre Gestion dans Safari, touche Partager et choisis Sur l’écran d’accueil. Gestion s’ouvre alors comme une app à part, avec toutes les rubriques ci-dessus."
+    },
+    "pages": {
+      "moderation": {
+        "title": "Modération",
+        "lede": "Signalements, alertes sur l’argent et les liens, et comptes bloqués. Le plus urgent en premier.",
+        "noBans": "Personne n’est bloqué."
+      },
+      "shelters": {
+        "title": "Refuges",
+        "lede": "Les refuges inscrits, le plus ancien en premier. Leurs chiens ne sont en ligne qu’après ta vérification.",
+        "since": "inscrit le {date}"
+      },
+      "tips": {
+        "title": "Suggestions et votes"
+      },
+      "numbers": {
+        "title": "Chiffres",
+        "lede": "Comment Rondje grandit, d’où viennent les nouveaux et comment tout est configuré.",
+        "weekly": "Chiffres par semaine dans le centre de lancement"
+      }
+    }
+  },
+  "impact": {
+    "source": "{name}, {year}",
+    "topics": {
+      "people": "Les gens",
+      "outside": "Sortir",
+      "dogs": "Les chiens"
+    },
+    "band": {
+      "eyebrow": "Ensemble pour un monde meilleur",
+      "title": "Bon pour les gens, bon pour les chiens",
+      "lede": "Beaucoup de gens se sentent seuls ou bougent moins que ce qui leur ferait du bien. Et beaucoup de chiens apprécieraient une promenade de plus.",
+      "factsLabel": "Quelques chiffres, avec leur source",
+      "adds": "{app} y ajoute quelque chose de simple : une promenade régulière avec un chien qui vous attend. Bon pour le chien, agréable pour son entourage, et une raison de sortir ensemble.",
+      "join": "Participer",
+      "support": "Rendre cela possible",
+      "more": "Pourquoi nous le faisons"
+    },
+    "page": {
+      "eyebrow": "Pourquoi",
+      "title": "Sortir ensemble, pour les gens et les chiens",
+      "lede": "Une promenade avec un chien, c’est peu de chose. Pourtant, cela touche à de grandes questions : la solitude, le manque de mouvement et des chiens qui auraient besoin de plus d’attention. C’est pour cela que {app} existe.",
+      "factsTitle": "En chiffres",
+      "factsLede": "Chaque chiffre est accompagné de sa source et de son année, pour que vous puissiez le vérifier vous-même.",
+      "mindTitle": "Être dehors, bouger, et un chien heureux de vous voir",
+      "mind1": "La recherche montre que le temps passé dans la nature et l’activité physique régulière sont associés à une meilleure santé et à un meilleur moral. Un moment avec un chien est aussi associé, dans les études, à moins de stress sur le moment.",
+      "mind2": "Une promenade ne résout pas tout. Mais c’est un moment agréable et régulier dans la semaine : sortir, échanger quelques mots avec un voisin, et un chien content que vous soyez là. C’est à cela que sert {app}.",
+      "notCare": "{app} n’est ni un service d’aide psychologique ni un traitement. Ça ne va pas ? Parlez-en, vous n’êtes pas obligé de traverser cela seul.",
+      "suicideLines": "Vous pensez au suicide ? Vous pouvez parler anonymement, jour et nuit, avec :",
+      "helpLine": "{name} ({phone})",
+      "helpAll": "Toutes les lignes d’aide",
+      "dogsTitle": "Des chiens qui attendent une promenade",
+      "dogs1": "Certaines personnes ne peuvent plus promener leur chien aussi souvent qu’elles le voudraient, parce qu’elles vieillissent, sont malades ou ont du mal à marcher. Leur chien manque d’exercice, et elles manquent parfois d’un brin de causette.",
+      "dogs2": "Dans les refuges, des chiens attendent un nouveau foyer. Une promenade hors du refuge est pour eux un changement bienvenu. Avec les chiens de refuge, sur {app}, vous marchez toujours lors de promenades de groupe encadrées.",
+      "dogs3": "{app} réunit ces chiens et de jeunes adultes qui aiment sortir mais ne peuvent pas avoir de chien. En sécurité, pas à pas, et gratuitement.",
+      "safetyLink": "Comment nous gérons la sécurité",
+      "doTitle": "Ce que vous pouvez faire",
+      "do": {
+        "walk": {
+          "title": "Partez en promenade",
+          "text": "Choisissez un chien près de chez vous, ou rejoignez une promenade de groupe d’un refuge.",
+          "link": "Voir les chiens"
+        },
+        "dog": {
+          "title": "Inscrivez un chien",
+          "text": "Vous ne pouvez plus marcher loin, ou vous connaissez quelqu’un qui aurait besoin d’un coup de main ? La famille peut aussi inscrire un chien.",
+          "link": "Inscrire un chien"
+        },
+        "tip": {
+          "title": "Signalez un refuge",
+          "text": "Vous connaissez un refuge où les chiens auraient besoin de plus de promenades ? Dites-le-nous.",
+          "link": "Signaler un refuge"
+        },
+        "support": {
+          "title": "Rendez cela possible",
+          "text": "{app} est gratuit et le restera. Une petite contribution aide à couvrir les coûts.",
+          "link": "Comment aider"
+        }
+      },
+      "sourcesTitle": "Sources",
+      "sourcesLede": "Tous les chiffres de cette page, avec leur source. Vérifiés le {date}. Vous voyez une erreur ou un chiffre plus récent ? Dites-le-nous."
+    }
+  },
+  "marketing": {
+    "title": "Centre marketing",
+    "lede": "Ce qu’il faut faire cette semaine, et du matériel prêt à l’emploi. Rien n’est publié ni envoyé d’ici : c’est toujours toi qui le fais.",
+    "nav": {
+      "label": "Parties du centre marketing",
+      "questions": "Questions",
+      "interviews": "Entretiens",
+      "posts": "Publications",
+      "links": "Liens",
+      "material": "Matériel"
+    },
+    "week": {
+      "title": "Cette semaine",
+      "hint": "Les premières questions qui demandent une action, dans l’ordre. Touche pour voir le pourquoi.",
+      "none": "Rien d’urgent. Regarde les questions marquées « À surveiller ».",
+      "nextPost": "Prochaine publication : {title} (semaine {week}, {channel})",
+      "allPosted": "Toutes les publications du planning sont publiées. Place à une nouvelle série."
+    },
+    "status": {
+      "good": "Bien",
+      "watch": "À surveiller",
+      "act": "À faire",
+      "wait": "Pas encore de données"
+    },
+    "labels": {
+      "step": {
+        "account": "compte",
+        "profile": "profil complété",
+        "firstStep": "premier pas",
+        "firstWalk": "première promenade"
+      }
+    },
+    "funnelSteps": {
+      "visits": "Visites",
+      "visitsHint": "dans Vercel Analytics",
+      "account": "Compte",
+      "profile": "Profil complété",
+      "firstStep": "Premier pas",
+      "firstStepHint": "demande, chien en ligne ou promenade de groupe",
+      "firstWalk": "Première promenade"
+    },
+    "questions": {
+      "title": "Les meilleures questions",
+      "lede": "Les questions qu’un bon spécialiste de la croissance poserait maintenant, avec une réponse en direct tirée des vraies données. Les données d’exemple et les administrateurs ne comptent pas, et tu ne vois que des chiffres, jamais de noms.",
+      "why": "Pourquoi",
+      "now": "Et maintenant",
+      "open": "Ouvrir",
+      "cols": {
+        "city": "Ville",
+        "demand": "Demande",
+        "supply": "Chiens",
+        "shelter": "Refuge",
+        "votes": "Votes",
+        "code": "Code",
+        "signups": "Inscriptions"
+      },
+      "funnel": {
+        "q": "Où les gens décrochent-ils ?",
+        "why": "Attirer plus de monde n’aide que si les gens avancent : boucher la plus grosse fuite rapporte le plus.",
+        "answer": {
+          "empty": "Pas encore de vrais comptes. L’entonnoir commence dès que les premières personnes s’inscrivent.",
+          "drop": "Plus grosse perte : de {from} à {to}. {pct} % passent cette étape."
+        },
+        "action": {
+          "empty": "Fais venir les dix premières personnes : publie la publication 1 et dépose des flyers à deux endroits.",
+          "profile": "Les gens créent un compte mais ne terminent pas leur profil. Fais toi-même l’inscription sur ton téléphone et supprime ce qui n’est pas nécessaire.",
+          "firstStep": "Les membres ne font rien après leur profil. Voient-ils un chien près de chez eux ? Regarde « Des promeneurs attendent-ils un chien ? ».",
+          "firstWalk": "Les demandes ne deviennent pas encore des promenades. Vérifie que propriétaires et refuges répondent à temps, et aide pour la première rencontre."
+        }
+      },
+      "newMembers": {
+        "q": "Combien de nouveaux membres cette semaine, par rapport à la semaine dernière ?",
+        "why": "Une croissance régulière montre si ce que tu as fait cette semaine (une publication, un flyer) a marché.",
+        "answer": {
+          "none": "Aucun nouveau membre ces deux dernières semaines ({total} au total).",
+          "up": "{thisWeek} nouveaux ces 7 derniers jours ({walkers, plural, one {# promeneur} other {# promeneurs}}, {owners, plural, one {# propriétaire} other {# propriétaires}}), contre {lastWeek} la semaine d’avant.",
+          "same": "{thisWeek} nouveaux ces 7 derniers jours, comme la semaine d’avant ({walkers, plural, one {# promeneur} other {# promeneurs}}, {owners, plural, one {# propriétaire} other {# propriétaires}}).",
+          "down": "{thisWeek} nouveaux ces 7 derniers jours, contre {lastWeek} la semaine d’avant."
+        },
+        "action": {
+          "start": "Personne ne vient encore tout seul. Prévois deux publications du planning cette semaine et dépose des flyers à deux endroits.",
+          "repeat": "Ça grandit. Cherche d’où ça vient (« Les liens d’invitation marchent-ils ? ») et fais-en plus.",
+          "push": "Publie la prochaine publication cette semaine et demande à trois membres d’inviter un voisin qui a un chien."
+        }
+      },
+      "demand": {
+        "q": "Quelle ville a le plus de demande et le moins d’offre ?",
+        "why": "Un promeneur sans chien à proximité décroche : cherche de l’offre là où la demande existe déjà, pas partout à la fois.",
+        "note": "Demande = promeneurs de la ville plus les personnes qui ont voté pour un refuge de cette ville (chacune une fois). Chiens = vrais chiens réservables maintenant.",
+        "answer": {
+          "empty": "Pas encore de demande mesurée : aucun promeneur ni vote avec une ville.",
+          "gap": "{city} : {demand, plural, one {# personne veut} other {# personnes veulent}} y promener, et {supply, plural, =0 {aucun chien n’est} one {# chien est} other {# chiens sont}} en ligne."
+        },
+        "action": {
+          "votes": "Partage la liste des refuges dans un groupe local : chaque vote « Je veux promener ici » compte ici comme demande.",
+          "supply": "Trouve de l’offre à {city} : écris au refuge le plus demandé là-bas et dépose des flyers pour propriétaires chez un vétérinaire à {city}.",
+          "balanced": "La demande et l’offre avancent ensemble. Cherche maintenant des promeneurs à {city}, pour que chaque chien ait un binôme régulier."
+        }
+      },
+      "wantedShelter": {
+        "q": "Quel refuge est le plus demandé ?",
+        "why": "Un refuge qui apprend que des gens veulent déjà promener chez lui dit oui plus vite : ce chiffre est ta meilleure phrase d’accroche.",
+        "answer": {
+          "none": "Pas encore de votes ni de suggestions de refuges.",
+          "top": "{name} ({city}) : {n, plural, one {# vote} other {# votes}}."
+        },
+        "action": {
+          "share": "Partage la liste des refuges (publication 7) : chaque refuge a le bouton « Je veux promener ici ».",
+          "mail": "Écris d’abord à {name} et cite le chiffre : « {n, plural, one {Quelqu’un veut déjà} other {# personnes veulent déjà}} promener chez vous. »",
+          "follow": "Tu as déjà contacté {name}. Appelle s’il n’y a pas de réponse après deux jours ouvrables, et cite le nombre de votes."
+        }
+      },
+      "shelterPipeline": {
+        "q": "Où en est la prospection des refuges ?",
+        "why": "Un refuge apporte beaucoup de chiens et d’encadrants d’un coup : le premier refuge est le plus grand bond en offre.",
+        "answer": {
+          "counts": "{sent} contactés, {replied} réponses, {meeting} rendez-vous, {live} en ligne. {todo} prêts à envoyer."
+        },
+        "action": {
+          "review": "{pending, plural, one {# inscription de refuge attend} other {# inscriptions de refuges attendent}} ta vérification dans l’administration. Fais-le d’abord.",
+          "firstWalk": "Un refuge est en ligne. Organise la première promenade de groupe encadrée, puis demande deux mises en relation avec d’autres refuges.",
+          "onboard": "Tu as un rendez-vous. Aide à l’inscription et ajoutez ensemble les 3 à 5 premiers chiens débutants (Ajout rapide avec photos).",
+          "send": "Envoie encore {missing} e-mails à des refuges depuis le centre de lancement cette semaine (objectif : 10).",
+          "call": "Les dix premiers e-mails sont partis. Rappelle après deux jours ouvrables et demande la personne qui coordonne les bénévoles."
+        }
+      },
+      "ownersDog": {
+        "q": "Les propriétaires qui s’inscrivent mettent-ils aussi un chien en ligne ?",
+        "why": "Chaque chien, c’est de l’offre : un propriétaire sans chien en ligne, c’est une rencontre manquée.",
+        "answer": {
+          "none": "Aucun vrai propriétaire inscrit pour l’instant.",
+          "share": "{withDog} des {owners} propriétaires ont un chien en ligne ({pct} %)."
+        },
+        "action": {
+          "recruit": "L’offre vient des propriétaires et de leur famille : dépose des flyers pour propriétaires chez le vétérinaire et publie la publication 3 dans un groupe de quartier.",
+          "help": "{without, plural, one {# propriétaire n’a} other {# propriétaires n’ont}} pas encore mis de chien en ligne. Fais toi-même « Ajouter un chien » et regarde où ça bloque.",
+          "keep": "Bravo. Demande aux propriétaires satisfaits s’ils connaissent un voisin avec un chien."
+        }
+      },
+      "walkersWaiting": {
+        "q": "Des promeneurs attendent-ils un chien près de chez eux ?",
+        "why": "Qui ne voit rien à proximité ne revient pas : de l’offre tout près, c’est ce qui retient un promeneur.",
+        "answer": {
+          "none": "Pas encore de vrais promeneurs.",
+          "served": "Les {walkers} promeneurs ont un vrai chien à moins de {km} km.",
+          "waiting": "{waiting} des {walkers} promeneurs n’ont pas encore de vrai chien à moins de {km} km. La plupart attendent à {city}."
+        },
+        "action": {
+          "recruit": "Recrute des promeneurs là où il y a déjà des chiens, ou en même temps que l’offre dans la même ville.",
+          "supply": "Demande aux promeneurs en attente d’inviter un voisin qui a un chien (la page de suggestions a un message tout prêt) et trouve de l’offre à {city}.",
+          "keep": "Continue ainsi : ne recrute de nouveaux promeneurs que dans des villes qui ont des chiens."
+        }
+      },
+      "requests": {
+        "q": "Les demandes reçoivent-elles une réponse à temps ?",
+        "why": "Une demande sans réponse, c’est le moyen le plus rapide de perdre un promeneur.",
+        "answer": {
+          "none": "Pas encore de vraies demandes de première rencontre.",
+          "counts": "{total} demandes : {accepted} acceptées, {pending} ouvertes, dont {stale} depuis plus de 2 jours."
+        },
+        "action": {
+          "supplyFirst": "D’abord de l’offre près des promeneurs (« Des promeneurs attendent-ils un chien ? »), ensuite les demandes viendront.",
+          "chase": "{stale, plural, one {# demande attend} other {# demandes attendent}} depuis trop longtemps. Aide le propriétaire ou le refuge à répondre.",
+          "keep": "Les demandes reçoivent une réponse. Surveille l’étape suivante : la première rencontre."
+        }
+      },
+      "returning": {
+        "q": "Les promeneurs reviennent-ils après leur première promenade ?",
+        "why": "Un binôme régulier est le moteur de l’idée : revenir est la preuve, pas le nombre d’inscriptions.",
+        "answer": {
+          "none": "Pas encore de vraie promenade.",
+          "counts": "{once} promeneurs ont fait une promenade, {again} sont revenus ({pct} %). {steady} binômes réguliers (3 fois ou plus en 8 semaines)."
+        },
+        "action": {
+          "firstWalk": "Tout tourne maintenant autour de la première vraie promenade. Aide en personne le premier binôme lors de la rencontre.",
+          "ask": "Appelle ceux qui ont marché une fois et demande ce qu’il faudrait pour une deuxième (utilise les questions d’entretien pour les promeneurs).",
+          "keep": "Les gens reviennent. Demande au premier binôme régulier s’il veut bien apparaître dans une vidéo, avec son accord."
+        }
+      },
+      "referrals": {
+        "q": "Les liens d’invitation marchent-ils ?",
+        "why": "Le bouche-à-oreille, c’est de la croissance gratuite : par lien ou par code, tu vois quel canal apporte vraiment des inscriptions.",
+        "answer": {
+          "none": "Pas encore de vrais membres, donc rien à compter.",
+          "counts": "{referred} des {members} membres sont venus par un lien ({pct} %) : {own} par ton propre lien, {viaMembers} par d’autres membres, {viaCodes} par des codes de campagne."
+        },
+        "action": {
+          "codes": "Crée un lien d’inscription propre à chaque lieu de flyers et à chaque canal (Liens, plus bas). Dans deux semaines, tu verras ici ce qui marche.",
+          "more": "Les liens marchent. Arrête le code le plus faible et fais plus du meilleur."
+        }
+      },
+      "traffic": {
+        "q": "Quelles pages et campagnes amènent des visiteurs ?",
+        "why": "Sans chiffres de visites, tu ne sais pas quelle publication ou quel flyer a amené les gens sur le site.",
+        "answer": {
+          "on": "Web Analytics est activé (coché dans le centre de lancement). Les pages et les référents, comme instagram.com, sont dans Vercel. Les balises UTM de tes liens de campagne n’y apparaissent qu’avec Web Analytics Plus, payant.",
+          "off": "Pas encore activé : aucune visite n’est comptée."
+        },
+        "action": {
+          "enable": "Active-le : Vercel → le projet → Analytics → Enable (gratuit sur Hobby). Coche ensuite « Activer Vercel Web Analytics » dans le centre de lancement.",
+          "check": "Regarde Pages et Referrers une fois par semaine. Les inscriptions par code sont comptées ici, gratuitement (« Les liens d’invitation marchent-ils ? »)."
+        }
+      }
+    },
+    "interviews": {
+      "title": "Questions d’entretien",
+      "lede": "Pour les appels et les visites. Les questions portent sur ce que les gens ont fait, pas sur ce qu’ils feraient.",
+      "rules": "Les règles : demande la dernière fois et des détails, écoute plus que tu ne parles, et ne parle de {app} qu’à la fin. Un compliment n’est pas une preuve ; un rendez-vous, une mise en relation ou un chien en ligne, oui.",
+      "language": "Langue",
+      "listen": "Ce qu’il faut écouter",
+      "copy": "Copier les questions",
+      "copied": "Copié",
+      "shelter": {
+        "title": "Refuge",
+        "who": "La personne qui coordonne les bénévoles d’un refuge",
+        "goal": "But : comprendre comment les promenades sont organisées aujourd’hui et ce qui est le plus difficile. D’abord écouter, {app} seulement à la fin.",
+        "q1": "Comment les promenades des chiens sont-elles organisées aujourd’hui ? Comment s’est passée la semaine dernière ?",
+        "q2": "Combien de bénévoles ont promené le mois dernier, et comment sont-ils arrivés chez vous ?",
+        "q3": "Quand une promenade ou un bénévole a-t-il posé problème pour la dernière fois ? Que s’est-il passé ?",
+        "q4": "Comment planifiez-vous aujourd’hui qui promène quel chien et quand ? Où est-ce noté ?",
+        "q5": "Quels chiens sortent trop peu aujourd’hui ? Pourquoi ceux-là ?",
+        "q6": "Avez-vous une liste d’attente de nouveaux bénévoles ? Que deviennent ces personnes ?",
+        "q7": "Qu’avez-vous déjà essayé pour organiser plus de promenades ? Qu’est-ce qui n’a pas marché ?",
+        "q8": "Qui décide d’un nouveau partenariat, et que doit voir cette personne ?",
+        "q9": "Comment les bénévoles sont-ils assurés pendant une promenade aujourd’hui ?",
+        "listen": "Un vrai problème, c’est quelque chose qui leur prend déjà du temps, comme un planning ou une liste d’attente. « Bonne idée » n’est pas un oui ; une date pour une promenade d’essai, oui. Note les mots qu’ils emploient eux-mêmes."
+      },
+      "owner": {
+        "title": "Propriétaire",
+        "who": "Un voisin âgé qui a un chien, ou un membre de sa famille",
+        "goal": "But : comprendre comment se passent les sorties du chien aujourd’hui, sans rien vendre. Avec la famille, demande ce qu’ils voient.",
+        "q1": "Comment s’est passée la sortie du chien hier ? Qui l’a promené, et combien de temps ?",
+        "q2": "Quand avez-vous remarqué pour la première fois que sortir le chien devenait plus difficile ? Qu’est-ce qui a changé alors ?",
+        "q3": "Qui vous aide parfois avec le chien ? Comment c’est arrivé ?",
+        "q4": "Combien de fois le chien sort-il maintenant, et combien de fois aimerait-il vraiment sortir ?",
+        "q5": "Avez-vous déjà laissé quelqu’un d’autre promener votre chien ? Comment ça s’est passé ?",
+        "q6": "Que faudrait-il avant que vous laissiez un inconnu promener votre chien ?",
+        "q7": "Comment prenez-vous rendez-vous aujourd’hui : téléphone, WhatsApp, un mot ? Qui vous aide pour ça ?",
+        "q8": "Qu’est-ce qui vous manque le plus depuis que sortir le chien est plus difficile ?",
+        "listen": "La confiance, c’est toute l’histoire : repère ce dont la personne a besoin pour dire oui (se rencontrer d’abord, un visage familier, la famille présente). Ne demande jamais d’argent ni d’adresse. Une réaction chaleureuse n’est pas encore un chien en ligne ; une date de rencontre, oui."
+      },
+      "walker": {
+        "title": "Promeneur",
+        "who": "Quelqu’un de 18 à 30 ans qui adore les chiens",
+        "goal": "But : comprendre ce que font les jeunes aujourd’hui quand un chien leur manque, et ce qui les freine.",
+        "q1": "Quand as-tu promené un chien pour la dernière fois ? Comment c’est arrivé ?",
+        "q2": "As-tu déjà cherché un moyen de passer du temps avec des chiens sans en avoir un ? Qu’as-tu trouvé, et pourquoi as-tu commencé ou pas ?",
+        "q3": "À quoi ressemble une semaine normale ? Où une heure fixe pourrait-elle trouver sa place ?",
+        "q4": "Qu’as-tu fait la dernière fois que tu voulais sortir un moment, loin de ton écran ?",
+        "q5": "As-tu déjà fait du bénévolat ? Comment as-tu commencé, et pourquoi as-tu arrêté ou continué ?",
+        "q6": "Qu’est-ce qui t’empêcherait de sonner chez un inconnu pour un chien ?",
+        "q7": "Qui, autour de toi, a un chien qui aimerait sortir plus souvent ?",
+        "q8": "Comment as-tu entendu parler la dernière fois de quelque chose de nouveau que tu as ensuite vraiment commencé ?",
+        "listen": "Fais la différence entre « ça a l’air sympa » et un vrai comportement (a déjà cherché, a déjà aidé). La question 7 apporte souvent de l’offre, la question 8 te dit où publier."
+      },
+      "vet": {
+        "title": "Vétérinaire",
+        "who": "Un vétérinaire ou quelqu’un à l’accueil",
+        "goal": "But : comprendre quand le cabinet voit des propriétaires qui ne peuvent plus bien promener leur chien, et si un flyer à l’accueil a sa place.",
+        "q1": "Combien de fois le mois dernier avez-vous vu un propriétaire qui ne pouvait plus bien promener son chien ? Que se passait-il ?",
+        "q2": "Que lui avez-vous conseillé ? Qu’a-t-il fait ensuite ?",
+        "q3": "Vers qui ou quoi orientez-vous aujourd’hui quand un chien manque d’exercice ?",
+        "q4": "Que voyez-vous chez les chiens qui sortent trop peu ?",
+        "q5": "Qu’y a-t-il aujourd’hui à l’accueil, et qu’est-ce que les gens emportent vraiment ?",
+        "q6": "Quand avez-vous transmis pour la dernière fois quelque chose d’une initiative locale à vos clients ? Comment ça s’est passé ?",
+        "q7": "Que faudrait-il savoir avant d’orienter un propriétaire vers un promeneur ?",
+        "listen": "Le bon moment (après une opération, avec un propriétaire âgé) vaut de l’or : note quand c’est. Demande si tu peux déposer un flyer, ne promets jamais d’effet sur la santé, et ne présente jamais le cabinet comme partenaire sans accord."
+      },
+      "students": {
+        "title": "Association étudiante",
+        "who": "Quelqu’un du bureau ou d’une commission",
+        "goal": "But : comprendre comment les membres trouvent des activités et du bénévolat, et si une promenade de groupe aurait sa place.",
+        "q1": "Quelle a été la dernière activité où beaucoup de membres sont venus ? Pourquoi celle-là ?",
+        "q2": "Faites-vous du bénévolat ou des actions solidaires ? Comment ça s’est passé la dernière fois ?",
+        "q3": "Comment touchez-vous vraiment les membres : groupe de discussion, Instagram, newsletter, soirées ? Qu’est-ce qui est lu ?",
+        "q4": "Qui décide d’une nouveauté au programme, et quand est-il fixé ?",
+        "q5": "Combien de membres avaient un chien à la maison ? Comment remarques-tu qu’il leur manque ?",
+        "q6": "Qu’est-ce qui a mal tourné la dernière fois que vous avez travaillé avec un partenaire extérieur ?",
+        "q7": "Que font les membres pendant les examens pour s’éloigner un peu des livres ?",
+        "listen": "Tu cherches une prochaine étape concrète : un message dans le groupe, une place dans la newsletter, ou une promenade de groupe dans un refuge. Demande qui s’en occupe et quand le programme est bouclé."
+      }
+    },
+    "posts": {
+      "title": "Planning de publications",
+      "lede": "12 publications pour les 6 premières semaines, deux par semaine. Choisis la langue, copie le texte, télécharge l’image et publie toi-même. Ensuite, touche « Publié ».",
+      "honest": "Reste honnête : {app} est nouveau, gratuit et sans publicité. Pas d’expériences ni de chiffres inventés, personne en image sans accord, et ne promets jamais que marcher aide contre quoi que ce soit.",
+      "progress": "{posted} sur {total} publiées",
+      "week": "Semaine {week}",
+      "days": {
+        "tue": "mardi",
+        "thu": "jeudi",
+        "sun": "dimanche"
+      },
+      "channels": {
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Appli de quartier"
+      },
+      "goal": "But",
+      "visual": "Visuel",
+      "caption": "Texte",
+      "link": "Lien",
+      "linkBio": "Mets ce lien dans ta bio (Instagram et TikTok ne rendent pas cliquables les liens dans une légende).",
+      "language": "Langue du texte",
+      "copy": "Copier le texte",
+      "copied": "Copié",
+      "copyLink": "Copier le lien",
+      "download": "Télécharger l’image",
+      "posted": "Publié",
+      "markPosted": "Marquer comme publié : {title}",
+      "markOpen": "Marquer comme non publié : {title}",
+      "fillIn": "Remplis les [crochets] avec de vrais chiffres avant de publier. Maintenant : {members} membres, {dogs} chiens en ligne, {walks} promenades.",
+      "imageAlt": "Image à partager : {title}",
+      "p01": {
+        "title": "Un chien attend une promenade de plus",
+        "sub": "Promène gratuitement un chien de ton quartier",
+        "goal": "Annoncer : dis honnêtement ce que tu construis.",
+        "caption": "Je crée {app} : une façon gratuite de faire une promenade régulière avec un chien de ton quartier. Souvent le chien d’un voisin âgé qui ne peut plus marcher loin, parfois un chien de refuge.\n\nComment ça marche :\n• tu as 18 ans ou plus\n• la première fois, tu rencontres toujours le propriétaire ensemble\n• ensuite, tu fais une promenade régulière, à un moment qui vous convient à tous les deux\n\nPas de publicité, pas d’abonnement. {app} vient de démarrer, tu es donc parmi les premiers. Lien en bio.\n\n#chiens #promenade #quartier #bénévolat",
+        "visual": "L’image avec trois chiens dessinés. En carrousel : ajoute ta propre photo d’une laisse accrochée à un crochet."
+      },
+      "p02": {
+        "title": "Semaine 1",
+        "sub": "Je crée une appli gratuite pour que le chien de mamie sorte plus souvent",
+        "goal": "Premier test de marché : construire en public. Les commentaires te disent s’il y a de la demande.",
+        "caption": "Semaine 1 : je crée une appli gratuite pour que le chien de mamie sorte plus souvent.\n\nBeaucoup de personnes âgées ne peuvent plus promener leur chien elles-mêmes. Beaucoup de jeunes adorent les chiens mais ne peuvent pas (encore) en avoir. {app} les réunit, et la première fois, le propriétaire est toujours là.\n\nUne question pour toi : connais-tu quelqu’un dont le chien aimerait sortir plus souvent ? Dis-le en commentaire.\n\n#construireenpublic #chiens #promenade",
+        "visual": "Enregistrement d’écran de l’appli avec voix off (script A dans docs/GROWTH.md) ; l’image en couverture. Commentaire épinglé : « Je construis ça en public. Une mise à jour chaque semaine. Je ne vends rien. »"
+      },
+      "p03": {
+        "title": "Votre chien aurait-il besoin d’une promenade de plus ?",
+        "sub": "Gratuit, avec un jeune du quartier. On se rencontre d’abord ensemble.",
+        "goal": "Offre : toucher les propriétaires et leur famille dans le quartier.",
+        "caption": "Bonjour les voisins ! Connaissez-vous quelqu’un dont le chien aurait bien besoin d’une promenade de plus ? Par exemple parce que marcher est plus difficile, après une opération, ou parce que les journées sont longues.\n\nAvec {app}, un jeune (18+) du quartier promène gratuitement le chien, à un rythme régulier. La première fois, vous vous rencontrez toujours ensemble, et c’est vous qui décidez de ce qui est permis. {app} ne demande jamais d’argent.\n\nPas de smartphone ? Un proche ou un voisin peut inscrire le chien pour vous, avec votre accord : {link}",
+        "visual": "L’image, ou une photo du flyer imprimé pour propriétaires. Demande d’abord à l’administrateur du groupe si tu peux le partager."
+      },
+      "p04": {
+        "title": "Pas de chien à toi ? Envie de sortir ?",
+        "sub": "Fais gratuitement une promenade régulière avec un chien de ton quartier",
+        "goal": "Demande : recruter des promeneurs de 18 à 30 ans, dans une ville qui a déjà des chiens.",
+        "caption": "Tu adores les chiens, mais il n’y a pas (encore) de place pour un chien dans ta vie ? Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier, par exemple celui de quelqu’un qui ne peut plus marcher loin.\n\nComment ça se passe :\n1. Tu crées un profil (18+) et tu fais un court quiz de sécurité\n2. Tu rencontres d’abord le propriétaire, ensemble\n3. Ensuite, c’est votre promenade régulière\n\nMarcher ensemble peut faire du bien à ta journée, et pour le chien c’est la fête. Lien en bio.\n\n#viedétudiant #chiens #promenade #dehors",
+        "visual": "L’image en première diapositive, puis les trois étapes, une par diapositive."
+      },
+      "p05": {
+        "title": "Renifler, c’est du travail",
+        "sub": "Pourquoi 800 mètres prennent parfois 45 minutes",
+        "goal": "Portée : une vidéo sympa en soi, même pour ceux qui ne promèneront jamais.",
+        "caption": "45 minutes pour 800 mètres. Voici pourquoi : pour un chien, renifler est un vrai travail, et une promenade où il peut sentir est une bonne promenade. Laissez-les renifler. 🐾\n\n(Je crée {app} : une promenade régulière et gratuite avec un chien de ton quartier. Lien en bio.)\n\n#chiens #reniflage #amourdeschiens",
+        "visual": "Filme à hauteur de chien, avec le chien d’un ami ou d’un proche (avec accord), 4 ou 5 moments de reniflage avec du texte (script B dans docs/GROWTH.md). Pas de plaques de rue ni de numéros de maison à l’image."
+      },
+      "p06": {
+        "title": "Recherche : le premier refuge",
+        "sub": "Pour des promenades de groupe encadrées avec de jeunes bénévoles, gratuitement",
+        "goal": "Partenaires : trouver un refuge, une association sociale ou une haute école pour le premier pilote.",
+        "caption": "Je crée {app} : une plateforme gratuite qui met en relation de jeunes adultes (18–30) avec des chiens qui ont besoin d’une promenade de plus. Des chiens de voisins âgés ou malades, et des chiens de refuge lors de promenades de groupe encadrées.\n\nOù ça en est, honnêtement : la plateforme est en ligne et les étapes de sécurité sont là (rencontre ensemble d’abord, pièce d’identité vue en personne, accord pour chaque chien, un court quiz). Il n’y a pas encore de vrais binômes qui marchent.\n\nCe que je cherche :\n• un refuge qui veut essayer avec quelques chiens débutants\n• une association sociale ou une équipe de quartier qui connaît des propriétaires âgés\n• un enseignant ou un chercheur prêt à réfléchir à une mesure simple\n\nTu connais quelqu’un ? Une mise en relation ou un commentaire aide énormément. {link}\n\n#bénévolat #bienêtreanimal #quartier #impactsocial",
+        "visual": "L’image avec la publication. Ne tague pas d’organisations sans qu’elles le sachent."
+      },
+      "p07": {
+        "title": "Où veux-tu promener ?",
+        "sub": "Vote pour un refuge de ta ville. Je contacterai d’abord le plus demandé.",
+        "goal": "Mesurer la demande : quel refuge d’abord. Chaque vote compte dans « Quel refuge est le plus demandé ? ».",
+        "caption": "Où veux-tu promener ? Sur {app}, il y a des refuges aux Pays-Bas, en Belgique et en Espagne, et chaque refuge a un bouton « Je veux promener ici ». Je contacterai d’abord le refuge qui a le plus de votes, et tu seras prévenu dès qu’il nous rejoint. Vote ici : {link}",
+        "visual": "Une story avec un sticker lien vers le lien ci-dessous, avec l’image en fond."
+      },
+      "p08": {
+        "title": "Pour le chien de ta grand-mère, ton voisin ou ta mère",
+        "sub": "Inscris un chien, aussi pour quelqu’un d’autre (avec son accord)",
+        "goal": "Offre via la famille : ceux qui n’utilisent pas l’appli peuvent quand même participer.",
+        "caption": "Ta mère, ta grand-mère ou ton voisin a un chien qui aimerait sortir plus souvent ? Avec {app}, un jeune du quartier promène gratuitement ce chien, à un rythme régulier.\n\nLe propriétaire n’a pas besoin d’utiliser une appli : tu peux inscrire le chien, avec son accord. La première rencontre se fait toujours ensemble, et {app} ne demande jamais d’argent. {link}",
+        "visual": "L’image avec deux chiens dessinés. Demande d’abord à l’administrateur du groupe si tu peux le partager."
+      },
+      "p09": {
+        "title": "Devine la race",
+        "sub": "J’ai dessiné quatre chiens. Quelle race est laquelle ?",
+        "goal": "Interaction : les gens devinent en commentaire, ce qui aide la portée.",
+        "caption": "J’ai dessiné quatre chiens pour {app}. Quelle race est laquelle ? Mets ta réponse en commentaire, la solution est sur la dernière diapositive. 🐶\n\n#devinelarace #chiens #dessin",
+        "visual": "L’image, puis une diapositive avec la réponse : 1 labrador, 2 teckel, 3 bouledogue français, 4 border collie."
+      },
+      "p10": {
+        "title": "Comment on garde ça sûr",
+        "sub": "18 ans ou plus · Rencontre ensemble d’abord · Pièce d’identité vue en personne · Accord pour chaque chien · Court quiz de sécurité",
+        "goal": "Confiance : montrer aux propriétaires et aux familles comment ça se passe, étape par étape.",
+        "caption": "Laisser un inconnu promener ton chien ? Normal d’y réfléchir. C’est pour ça que {app} avance étape par étape :\n\n1. Les promeneurs ont 18 ans ou plus et font un court quiz de sécurité\n2. La première fois, on se rencontre toujours ensemble\n3. Le propriétaire ou le refuge voit la pièce d’identité en personne (aucune copie n’est gardée)\n4. Ce n’est qu’avec un accord pour chaque chien que quelqu’un promène seul\n5. Pendant une promenade, le propriétaire peut suivre en direct, s’il le souhaite\n\n{app} ne demande jamais d’argent. Des questions ? Pose-les ci-dessous.",
+        "visual": "Carrousel : l’image, puis une diapositive par étape."
+      },
+      "p11": {
+        "title": "6 semaines de {app}",
+        "sub": "Ce qui a marché, ce qui n’a pas marché, et ce que je vais faire",
+        "goal": "Construire en public : un point honnête après 6 semaines.",
+        "caption": "6 semaines de {app}, le point honnête.\n\nOù on en est : [nombre] personnes se sont inscrites, [nombre] chiens sont en ligne, [nombre] promenades faites.\nCe qui a marché : [à remplir, par exemple le canal avec le plus d’inscriptions].\nCe qui n’a pas marché : [à remplir].\nCe que je vais faire maintenant : [à remplir].\n\nPas de publicité, juste construire et demander aux gens ce dont ils ont besoin. Envie de réfléchir avec moi ? Commente ou envoie un message. {link}",
+        "visual": "L’image, ou ta propre photo de ton espace de travail. N’utilise que de vrais chiffres de « Les meilleures questions »."
+      },
+      "p12": {
+        "title": "30 minutes sans écran",
+        "sub": "Mais un chien, de l’air frais et une petite mission en route",
+        "goal": "Promeneurs : pendant les examens, un moment de calme sans faire la morale.",
+        "caption": "Semaine d’examens ? 30 minutes sans écran. Mais un chien, de l’air frais et une petite mission en route : trouve trois choses jaunes.\n\nMarcher ensemble peut faire du bien à ta journée. Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier. Lien en bio.\n\n#examens #viedétudiant #promenade",
+        "visual": "Un téléphone qui disparaît dans un sac, puis des images de promenade (pas de visages sans accord). Dans un commentaire épinglé, indique où trouver de l’aide si ça ne va pas (aux Pays-Bas le 113, 0800-0113)."
+      }
+    },
+    "card": {
+      "free": "gratuit · sans publicité"
+    },
+    "links": {
+      "title": "Liens de campagne",
+      "lede": "Un lien propre à chaque lieu et canal, avec des balises UTM et un QR code. Pour voir ensuite ce qui marche.",
+      "page": "Page",
+      "pages": {
+        "home": "Accueil",
+        "dogs": "Chiens",
+        "shelter": "Inscription des refuges",
+        "cities": "Toutes les villes",
+        "suggest": "Suggérer un refuge ou un chien",
+        "safety": "Sécurité"
+      },
+      "cityGroup": "Pages des villes",
+      "source": "Source",
+      "sources": {
+        "flyer": "Flyer ou affiche",
+        "instagram": "Instagram",
+        "tiktok": "TikTok",
+        "linkedin": "LinkedIn",
+        "buurtapp": "Appli ou groupe de quartier",
+        "opvang": "Refuge",
+        "partner": "Partenaire",
+        "mail": "E-mail"
+      },
+      "detail": "Nom ou lieu",
+      "detailHint": "Par exemple « bibliothèque est » ou le nom du refuge. Peut rester vide.",
+      "campaign": "Campagne",
+      "campaignHint": "Par exemple « lancement octobre » ou « examens ».",
+      "result": "Lien de campagne",
+      "copy": "Copier le lien",
+      "copied": "Copié",
+      "qrFor": "QR code pour",
+      "qrCampaign": "Lien de campagne",
+      "qrCode": "Lien d’inscription",
+      "qrLabel": "QR code pour {url}",
+      "downloadQr": "Télécharger le QR code (SVG)",
+      "utmNote": "Attention : Vercel n’affiche les balises UTM qu’avec Web Analytics Plus, payant. Avec l’offre gratuite, tu vois quand même la page et le référent. Pour compter gratuitement, utilise le lien d’inscription.",
+      "codeTitle": "Compter les inscriptions, gratuitement",
+      "codeText": "Un lien d’inscription avec un code propre ouvre l’écran d’inscription et retient le code pendant 30 jours. Les inscriptions par code apparaissent plus haut, sous « Les liens d’invitation marchent-ils ? ».",
+      "code": "Code",
+      "codeHint": "Lettres et chiffres, de 7 à 12 caractères.",
+      "owner": "Commencer par « ajouter un chien » (pour les propriétaires)",
+      "codeLink": "Lien d’inscription"
+    },
+    "material": {
+      "title": "Matériel",
+      "lede": "Ce qui est déjà prêt, et comment l’utiliser.",
+      "open": "Ouvrir",
+      "flyerOwner": {
+        "title": "Flyer pour propriétaires",
+        "how": "Imprime-le et dépose-le chez le vétérinaire, à la pharmacie, à la bibliothèque ou à la maison de quartier (demande d’abord). Si tu es connecté, ton propre lien est dans le QR code."
+      },
+      "flyerWalker": {
+        "title": "Flyer pour promeneurs",
+        "how": "Affiche-le à la haute école, à la bibliothèque ou dans un kot ou une colocation, de préférence dans une ville qui a déjà des chiens. Il marche le mieux pendant les examens."
+      },
+      "poster": {
+        "title": "Affiche pour un refuge",
+        "how": "Après l’arrivée du refuge : accroche-la à l’entrée et dans la salle d’attente. Les visiteurs scannent le code et voient les chiens de ce refuge.",
+        "none": "Disponible dès que le premier vrai refuge est en ligne (dans le tableau de bord du refuge → Affiche)."
+      },
+      "cities": {
+        "title": "Pages des villes",
+        "how": "Partage la page d’une ville dans un groupe local. Les gens y voient les chiens, refuges et promenades de groupe, et depuis la liste des refuges, ils votent avec « Je veux promener ici ».",
+        "top": "Plus forte demande maintenant :"
+      },
+      "shelters": {
+        "title": "Liste des refuges",
+        "how": "Pratique en rendez-vous : montre que le refuge apparaît déjà comme « Pas encore sur {app} », et que les gens peuvent voter pour lui."
+      },
+      "suggest": {
+        "title": "Page de suggestions",
+        "how": "Pour les promeneurs sans chien à proximité : un message tout prêt pour inviter un voisin qui a un chien."
+      },
+      "messages": {
+        "title": "Banque de messages du centre de lancement",
+        "how": "E-mails et scripts d’appel pour refuges, vétérinaires, associations et presse locale. Tu les envoies toi-même, depuis ta propre adresse."
+      }
+    }
+  },
+  "loading": {
+    "label": "Chargement…",
+    "slow": "C'est plus long que d'habitude."
   }
 }

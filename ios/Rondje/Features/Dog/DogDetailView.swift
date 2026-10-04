@@ -46,7 +46,7 @@ struct DogDetailView: View {
         .task { await load() }
         .sheet(item: $requestKind) { kind in
             if let detail {
-                RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind) { await load() }
+                RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind, isShelter: detail.host.isShelter) { await load() }
                     .presentationDetents([.large])
                     .presentationCornerRadius(32)
             }

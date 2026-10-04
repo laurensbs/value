@@ -7,6 +7,7 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
   const { id } = await ctx.params
   const viewer = await getViewer()
   if (!viewer) return NextResponse.json({ error: 'not-signed-in' }, { status: 401 })
+  if (viewer.profile?.bannedAt) return NextResponse.json({ error: 'banned' }, { status: 403 })
   const access = await walkAccess(id, viewer)
   if (!access) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
 

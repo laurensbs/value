@@ -19,11 +19,11 @@ struct RebookSheet: View {
         Group {
             if let detail, let date {
                 if detail.canRequest.solo == nil {
-                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .solo, prefill: RequestPrefill(
+                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .solo, isShelter: detail.host.isShelter, prefill: RequestPrefill(
                         date: date, weekly: true, message: RequestSuggestions.rebookMessage(date: date, calendar: .current)
                     )) {}
                 } else if detail.canRequest.meet == nil {
-                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .meet, prefill: RequestPrefill(date: date, weekly: false, message: nil)) {}
+                    RequestFlow(dog: detail.dog, slots: detail.slots, kind: .meet, isShelter: detail.host.isShelter, prefill: RequestPrefill(date: date, weekly: false, message: nil)) {}
                 } else {
                     unavailable(detail.dog.name)
                 }

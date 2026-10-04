@@ -4,7 +4,7 @@ import { WalkSummary } from '@/components/WalkSummary'
 import { WalkTracker } from '@/components/WalkTracker'
 import { countryInfo } from '@/lib/countries'
 import { progressFor } from '@/server/progress'
-import { progressJson } from '@/server/progress-json'
+import { levelMoment, progressJson } from '@/server/progress-json'
 import { hostContacts } from '@/server/queries'
 import { requireOnboarded, type OnboardedViewer } from '@/server/session'
 import { pointsSince, walkAccess, walkPhotos } from '@/server/walks'
@@ -17,12 +17,7 @@ export async function generateMetadata() {
 /** Right after ending: the points this walk earned and a new level or badge to celebrate, if any. */
 async function celebrationFor(viewer: OnboardedViewer, walkId: string) {
   const raw = await progressFor(viewer)
-  const p = await progressJson(raw)
-  const celebration =
-    p.levelUp || p.newAwards.length
-      ? { level: p.level.number, name: p.level.name, levelUp: p.levelUp, awards: p.newAwards.map((a) => ({ key: a.key, title: a.title, color: a.color })) }
-      : null
-  return { points: raw.byWalk[walkId] ?? null, celebration }
+  return { points: raw.byWalk[walkId] ?? null, celebration: levelMoment(raw, await progressJson(raw)) }
 }
 
 export default async function WalkPage({

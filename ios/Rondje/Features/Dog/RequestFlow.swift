@@ -16,6 +16,8 @@ struct RequestFlow: View {
     let dog: DogFull
     let slots: [Slot]
     let kind: Kind
+    /// A shelter dog: met on the shelter's location, during a walk (the server enforces this too).
+    let isShelter: Bool
     let prefill: RequestPrefill?
     var sent: () async -> Void
 
@@ -32,6 +34,8 @@ struct RequestFlow: View {
     @State private var customDate: Date
     @State private var weekly: Bool
     @State private var message: String
+    /// How a first meeting happens; after a first call, the app opens this flow on "Samen wandelen".
+    @State private var via: MeetVia
     @State private var prepared = false
     @State private var busy = false
     @State private var error: String?
@@ -42,10 +46,12 @@ struct RequestFlow: View {
     private static let steps = 3
     private static let maxMessage = 800
 
-    init(dog: DogFull, slots: [Slot], kind: Kind, prefill: RequestPrefill? = nil, sent: @escaping () async -> Void) {
+    init(dog: DogFull, slots: [Slot], kind: Kind, isShelter: Bool = false, via: MeetVia = .walk,
+         prefill: RequestPrefill? = nil, sent: @escaping () async -> Void) {
         self.dog = dog
         self.slots = slots
         self.kind = kind
+        self.isShelter = isShelter
         self.prefill = prefill
         self.sent = sent
         let calendar = Calendar.current
@@ -56,11 +62,15 @@ struct RequestFlow: View {
         _customDate = State(initialValue: prefill?.date ?? tomorrow)
         _weekly = State(initialValue: kind == .solo && prefill?.weekly == true)
         _message = State(initialValue: prefill?.message ?? "")
+        _via = State(initialValue: via)
     }
 
     private var range: ClosedRange<Date> { Date.now.addingTimeInterval(RequestSuggestions.lead)...Date.now.addingTimeInterval(RequestSuggestions.horizon) }
     private var when: Date? { custom ? customDate : picked }
     private var title: String { kind == .meet ? L("Kennismaken met \(dog.name)") : L("Rondje met \(dog.name)") }
+    /// A shelter meets on its own location, during a walk; a solo walk is always a walk.
+    private var choosesVia: Bool { kind == .meet && !isShelter }
+    private var meetVia: MeetVia { choosesVia ? via : .walk }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -148,15 +158,19 @@ struct RequestFlow: View {
         .padding(.top, 14)
     }
 
-    /// Step 1: a moment, from the dog's regular times when it has them.
+    /// Step 1: how to meet (for a first meeting), and a moment, from the dog's regular times when it has them.
     private var whenStep: some View {
         VStack(alignment: .leading, spacing: 12) {
+            if choosesVia {
+                meetChoice
+                    .padding(.bottom, 12)
+            }
             Text("Wanneer?").font(.display(30))
             CoachBubble(
                 mood: .curious,
-                text: kind == .meet
-                    ? L("Kies een moment. De eigenaar loopt de eerste keer mee.")
-                    : L("Kies een moment dat je vaak kunt. Vaste momenten werken het best.")
+                text: kind == .solo
+                    ? L("Kies een moment dat je vaak kunt. Vaste momenten werken het best.")
+                    : meetVia.inPerson ? L("Kies een moment. De eigenaar loopt de eerste keer mee.") : meetVia.hint
             )
             .padding(.bottom, 4)
 
@@ -196,6 +210,32 @@ struct RequestFlow: View {
         }
     }
 
+    /// The four ways to meet the first time, with their icon and one line each (as on the website).
+    private var meetChoice: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Hoe maken jullie kennis?").font(.display(30))
+            ForEach(MeetVia.allCases) { option in
+                tile(option.title, caption: via == option ? option.hint : nil, symbol: option.symbol, selected: via == option) {
+                    Haptics.tap()
+                    withAnimation(.snappy) { via = option }
+                }
+            }
+            switch via {
+            case .home:
+                Label("Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie.", systemImage: "shield.lefthalf.filled")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .phone:
+                Label("Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt. Een gesprek telt nog niet als kennismaking in het echt.", systemImage: "phone.fill")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .video:
+                Label("\(Brand.name) heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Een gesprek telt nog niet als kennismaking in het echt.", systemImage: "video.fill")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .walk:
+                EmptyView()
+            }
+        }
+    }
+
     /// Step 2: a hello that is already written, with sentences to add in one tap.
     private var introStep: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -229,7 +269,7 @@ struct RequestFlow: View {
                 promise("link", L("Altijd aan de lijn"))
                 promise("fork.knife", L("Geen koekjes zonder toestemming"))
                 promise("exclamationmark.bubble.fill", L("Meteen melden als er iets gebeurt"))
-                if kind == .meet {
+                if kind == .meet && meetVia.inPerson {
                     promise("person.text.rectangle", L("Neem je ID mee. De eigenaar bekijkt het."))
                 }
             }
@@ -246,6 +286,11 @@ struct RequestFlow: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Label(when.map(Format.when) ?? "", systemImage: "calendar")
                         .font(.headline)
+                    if choosesVia {
+                        Label(via.title, systemImage: via.symbol)
+                            .font(.subheadline)
+                            .foregroundStyle(Palette.muted)
+                    }
                     if kind == .solo && weekly {
                         Label("Elke week", systemImage: "repeat")
                             .font(.subheadline)
@@ -510,7 +555,7 @@ struct RequestFlow: View {
     }
 
     private struct Payload: Encodable {
-        var dogId, kind, date, time, message: String
+        var dogId, kind, meetVia, date, time, message: String
         /// Only for solo walks; a first meeting is never weekly.
         var weekly: Bool?
     }
@@ -527,7 +572,7 @@ struct RequestFlow: View {
         let time = String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0)
         struct Sent: Decodable { var ok: Bool; var flagged: Bool }
         do {
-            let payload = Payload(dogId: dog.id, kind: kind.rawValue, date: date, time: time,
+            let payload = Payload(dogId: dog.id, kind: kind.rawValue, meetVia: meetVia.rawValue, date: date, time: time,
                                   message: message.trimmingCharacters(in: .whitespacesAndNewlines),
                                   weekly: kind == .solo ? weekly : nil)
             let result: Sent = try await APIClient.shared.post("/api/v1/requests", payload)

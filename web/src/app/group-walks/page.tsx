@@ -21,10 +21,12 @@ export default async function GroupWalksPage({ searchParams }: { searchParams: P
   const sp = await searchParams
   const viewer = await getViewer()
   const country = isCountry(sp.country) ? sp.country : isCountry(viewer?.profile?.country) ? viewer.profile.country : await guessCountry()
-  const t = await getTranslations()
-  const format = await getFormatter()
-  const walks = await upcomingGroupWalks({ country })
-  const joined = viewer ? await myGroupSignups(viewer.userId) : new Set<string>()
+  const [t, format, walks, joined] = await Promise.all([
+    getTranslations(),
+    getFormatter(),
+    upcomingGroupWalks({ country }),
+    viewer ? myGroupSignups(viewer.userId) : new Set<string>(),
+  ])
 
   const byDay = new Map<string, typeof walks>()
   for (const w of walks) {

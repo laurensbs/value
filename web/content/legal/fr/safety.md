@@ -146,7 +146,7 @@ Rondje ne voit la position de quelqu'un que pendant une promenade active. En deh
 
 ## 6. Signaler un incident à Rondje
 
-Signalez chaque incident et chaque situation dangereuse avec le bouton **Signaler** dans l'application, ou écrivez à [e-mail: hallo@rondje.app]. Indiquez :
+Signalez chaque incident et chaque situation dangereuse avec le bouton **Signaler** dans l'application, ou écrivez à {{contact}}. Indiquez :
 
 - ce qui s'est passé, quand et où ;
 - qui était concerné ;
