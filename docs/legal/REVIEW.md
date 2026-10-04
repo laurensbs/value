@@ -23,6 +23,8 @@ Deze checklist hoort bij de conceptdocumenten van Rondje. Hij somt per land alle
 
 **Markeringen in de teksten:** `[te controleren]` / `[to verify]` / `[pendiente de verificar]` / `[à vérifier]` = onzeker of niet nagekeken. `[voorstel]` = een keuze die nog bevestigd moet worden. Placeholders tussen blokhaken (zoals `[KvK-nummer]`, `[bedrag]`) moeten worden ingevuld.
 
+**Sinds 5 oktober 2026** staan deze markeringen en placeholders niet meer zichtbaar in de teksten op de site: ze zijn opgelost met neutrale formuleringen of weggehaald, en de aanbieder is Laurens Bos (bereikbaar via het contactadres, zonder adres of KvK-nummer). De test `web/src/lib/legal-placeholders.test.ts` bewaakt dat er geen nieuwe bijkomen. De inhoudelijke punten hieronder blijven open tot de jurist ze heeft getoetst.
+
 **Belangrijk:** alle teksten zijn geschreven zonder toegang tot actuele bronnen (geen webonderzoek). Wetsartikelen, nummers en drempels moeten allemaal worden nagekeken.
 
 Prioriteit: **H** = hoog (vóór lancering oplossen), **M** = middel, **L** = laag.

@@ -2,7 +2,7 @@
 title: Algemene voorwaarden
 description: "De voorwaarden voor wandelaars, eigenaren en opvangen: wie mee mag doen, eerst kennismaken, geen geld, aansprakelijkheid en klachten."
 version: "0.2"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
@@ -12,7 +12,7 @@ Deze voorwaarden gelden voor iedereen die Rondje Mee gebruikt: de website en de 
 
 ## 1. Wie wij zijn
 
-Rondje Mee wordt aangeboden door [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], ingeschreven bij de KvK onder nummer [KvK-nummer], gevestigd op [adres] ("Rondje Mee", "wij" of "we").
+Rondje Mee wordt aangeboden door Laurens Bos, de maker van Rondje Mee ("Rondje Mee", "wij" of "we").
 
 Je bereikt ons via {{contact}}. Dit is ook ons contactpunt voor gebruikers en overheidsinstanties onder de Digital Services Act (DSA). Je kunt ons schrijven in het Nederlands, Engels, Spaans of Frans.
 
@@ -114,14 +114,14 @@ We raden je sterk aan een eigen **aansprakelijkheidsverzekering** te hebben (zie
 
 ## 12. Spanje: potentieel gevaarlijke honden (PPP)
 
-In Spanje gelden extra regels voor *perros potencialmente peligrosos* (PPP), vooral uit Ley 50/1999 en Real Decreto 287/2002. Ook regionale en gemeentelijke regels kunnen gelden [te controleren].
+In Spanje gelden extra regels voor *perros potencialmente peligrosos* (PPP), vooral uit Ley 50/1999 en Real Decreto 287/2002. Ook regionale en gemeentelijke regels kunnen gelden.
 
 - De eigenaar geeft in het profiel aan of de hond een PPP-hond is, en zorgt voor de verplichtingen van de houder, zoals registratie en verzekering.
 - Een PPP-hond mag alleen wandelen met een wandelaar die bevestigt een **geldige PPP-vergunning** (*licencia administrativa*) te hebben. Die neem je mee tijdens de wandeling.
-- Op openbare plekken draagt de hond een **muilkorf** en loopt hij aan een niet-uitrolbare **lijn van maximaal 2 meter** [te controleren].
+- Op openbare plekken draagt de hond een **muilkorf** en loopt hij aan een niet-uitrolbare **lijn van maximaal 2 meter**.
 - **Maximaal één PPP-hond per persoon.**
 
-Ook Ley 7/2023 over de rechten en het welzijn van dieren geldt. Volgens die wet moeten hondenhouders een aansprakelijkheidsverzekering hebben. Wanneer die plicht precies ingaat, hangt af van nadere regels [te controleren].
+Ook Ley 7/2023 over de rechten en het welzijn van dieren geldt. Volgens die wet moeten hondenhouders een aansprakelijkheidsverzekering hebben. Wanneer die plicht precies ingaat, hangt af van nadere regels.
 
 ## 13. Live locatie tijdens een wandeling
 
@@ -154,20 +154,20 @@ Eerlijk is eerlijk: met honden wandelen heeft risico's. Een hond kan bijten, ont
 **Schade door de hond**
 
 - **Nederland:** de bezitter van de hond (meestal de eigenaar of de opvang) is in principe aansprakelijk, ook als iemand anders de hond uitlaat (art. 6:179 BW). Een wandelaar die zelf een fout maakt, kan daarnaast aansprakelijk zijn (art. 6:162 BW).
-- **België:** sinds 1 januari 2025 geldt het nieuwe Boek 6 van het Burgerlijk Wetboek. De aansprakelijkheid voor dieren staat in art. 6.17 [te controleren]. Wie tijdens een wandeling als bewaarder van de hond geldt, hangt af van de omstandigheden [te controleren].
-- **Spanje:** de bezitter van een dier, of wie zich ervan bedient, is aansprakelijk voor de schade die het dier veroorzaakt (art. 1905 Código Civil). Ook een wandelaar kan daaronder vallen [te controleren].
+- **België:** sinds 1 januari 2025 geldt het nieuwe Boek 6 van het Burgerlijk Wetboek. De aansprakelijkheid voor dieren staat in art. 6.17. Wie tijdens een wandeling als bewaarder van de hond geldt, hangt af van de omstandigheden.
+- **Spanje:** de bezitter van een dier, of wie zich ervan bedient, is aansprakelijk voor de schade die het dier veroorzaakt (art. 1905 Código Civil). Ook een wandelaar kan daaronder vallen.
 
 **Verzekering**
 
 - Eigenaren en opvangen zorgen voor een aansprakelijkheidsverzekering die schade door de hond dekt, ook als iemand anders met de hond wandelt. Controleer dat in je polis.
 - Wandelaars raden we sterk aan een eigen aansprakelijkheidsverzekering voor particulieren te hebben. Let op: veel polissen dekken geen schade aan dieren of spullen die je "onder je hebt" (onder opzicht), zoals de hond zelf of zijn lijn.
-- Rondje Mee heeft geen verzekering voor wandelingen van gebruikers [te controleren], tenzij we dat later uitdrukkelijk laten weten.
+- Rondje Mee heeft geen verzekering voor wandelingen van gebruikers, tenzij we dat later uitdrukkelijk laten weten.
 
 **Onze aansprakelijkheid**
 
 - We doen ons best om Rondje Mee veilig en goed werkend aan te bieden, maar kunnen niet garanderen dat het altijd foutloos of zonder onderbreking werkt.
 - We zijn niet aansprakelijk voor wat gebruikers met elkaar afspreken of doen, voor wat honden doen, of voor de juistheid van wat gebruikers over zichzelf of hun hond vertellen. Dat geldt niet als we zelf iets verkeerd hebben gedaan.
-- Voor zover de wet dat toestaat, zijn we alleen aansprakelijk voor directe schade door onze eigen tekortkoming, tot maximaal € [bedrag] per gebeurtenis [voorstel – te controleren].
+- Voor zover de wet dat toestaat, zijn we alleen aansprakelijk voor directe schade door onze eigen tekortkoming.
 - Deze beperkingen gelden **niet** bij opzet of grove nalatigheid van Rondje Mee, niet bij dood of letsel door onze schuld, en niet als dwingend consumentenrecht ze verbiedt. Je wettelijke rechten als consument blijven altijd gelden.
 
 ## 16. Jouw inhoud en onze rechten
@@ -187,7 +187,7 @@ Eerlijk is eerlijk: met honden wandelen heeft risico's. Een hond kan bijten, ont
 
 ## 18. Klachten en bezwaar
 
-- Een klacht over Rondje Mee? Mail naar {{contact}}. We reageren binnen 14 dagen [voorstel].
+- Een klacht over Rondje Mee? Mail naar {{contact}}. We reageren binnen 14 dagen.
 - Oneens met een besluit over je inhoud, je account of je melding? Maak binnen **6 maanden** bezwaar via de app of per e-mail. Iemand die niet bij het eerste besluit betrokken was, bekijkt het opnieuw.
 - Je kunt ook naar een gecertificeerde instantie voor buitengerechtelijke geschilbeslechting volgens de DSA, of naar de rechter.
 - Het Europese ODR-platform voor online geschillen bestaat sinds juli 2025 niet meer.

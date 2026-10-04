@@ -2,7 +2,7 @@
 title: Condiciones para protectoras colaboradoras
 description: "Las condiciones para protectoras colaboradoras: verificación, perfiles de perros, encuentros y paseos en grupo, seguro, datos y fotos."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
@@ -16,7 +16,7 @@ Estas condiciones se aplican a las protectoras, refugios y otras entidades que p
   - Países Bajos: número de la Cámara de Comercio (KvK);
   - Bélgica: número de empresa (KBO/BCE);
   - España: NIF (antes CIF).
-- También podemos pedir la inscripción o autorización como protectora o centro de animales, si es obligatoria en tu país o comunidad autónoma [pendiente de verificar por país y región].
+- También podemos pedir la inscripción o autorización como protectora o centro de animales, si es obligatoria en tu país o comunidad autónoma.
 - La protectora designa a una persona de contacto facultada para actuar en nombre de la entidad.
 - Rondje Mee puede rechazar una solicitud o retirar una verificación, por ejemplo si los datos no son correctos o si se pierde una autorización. Te explicaremos el motivo.
 
@@ -54,7 +54,7 @@ Estas condiciones se aplican a las protectoras, refugios y otras entidades que p
 
 - La protectora tiene un seguro de responsabilidad civil que cubre los daños causados por sus perros, también cuando los pasea alguien a través de Rondje Mee.
 - La protectora decide si los paseantes que llegan por Rondje Mee quedan incluidos en su política y su seguro de voluntariado. La protectora explica claramente a los paseantes qué está cubierto y qué no.
-- Ten en cuenta la normativa de voluntariado de tu país, como la Ley 45/2015, de Voluntariado, en España, o la ley belga de voluntariado (Ley de 3 de julio de 2005). Pueden imponer obligaciones, como un seguro o información a los voluntarios [pendiente de verificar].
+- Ten en cuenta la normativa de voluntariado de tu país, como la Ley 45/2015, de Voluntariado, en España, o la ley belga de voluntariado (Ley de 3 de julio de 2005). Pueden imponer obligaciones, como un seguro o información a los voluntarios.
 - La protectora puede tener sus propias normas internas. Indícalas claramente en su perfil o en el del perro.
 
 ## 7. Cancelaciones
@@ -65,14 +65,13 @@ Estas condiciones se aplican a las protectoras, refugios y otras entidades que p
 
 ## 8. Sin dinero
 
-- La protectora no pide dinero a los paseantes por los paseos organizados a través de Rondje Mee, tampoco como aportación, cuota o fianza [pendiente de verificar: cómo tratar las cuotas de clubes de paseo ya existentes].
+- La protectora no pide dinero a los paseantes por los paseos organizados a través de Rondje Mee, tampoco como aportación, cuota o fianza.
 - No uses Rondje Mee para captar fondos ni para publicidad, salvo que lo hayamos acordado por escrito.
 
 ## 9. Protección de datos
 
 - **Rondje Mee** es responsable del tratamiento de los datos de la plataforma.
 - **La protectora** es responsable independiente del tratamiento de su propia gestión de voluntariado y de los datos que recibe a través de Rondje Mee y utiliza para sus propios fines.
-- [Pendiente de verificar: si el registro de asistencia es un tratamiento por cuenta de la protectora que requiere un contrato de encargo del tratamiento.]
 - La protectora usa los datos de los paseantes solo para los paseos y su acompañamiento. No para boletines, captación de fondos u otros fines, salvo que el paseante lo consienta.
 - La protectora protege bien los datos y limita el acceso a las personas del equipo que lo necesiten.
 - Si la protectora sospecha una brecha de datos o un uso indebido de datos a través de Rondje Mee, nos avisa lo antes posible y como máximo en 24 horas.

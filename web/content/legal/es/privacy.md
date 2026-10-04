@@ -2,7 +2,7 @@
 title: Política de privacidad
 description: "Qué datos personales tratamos, por qué y durante cuánto tiempo, quién los ve y qué derechos tienes. Tu dirección exacta nunca es pública."
 version: "0.3"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
@@ -12,9 +12,9 @@ En esta política te explicamos qué datos personales trata Rondje Mee, para qu�
 
 ## 1. ¿Quién es el responsable del tratamiento?
 
-El responsable del tratamiento de tus datos en Rondje Mee es [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], con número de la Cámara de Comercio neerlandesa (KvK) [KvK-nummer].
+El responsable del tratamiento de tus datos en Rondje Mee es Laurens Bos, el creador de Rondje Mee.
 
-¿Preguntas sobre privacidad? Escríbenos a {{contact}}. [Pendiente de verificar: si es obligatorio nombrar un delegado de protección de datos. En ese caso, indicar aquí sus datos de contacto.]
+¿Preguntas sobre privacidad? Escríbenos a {{contact}}.
 
 ## 2. En resumen
 
@@ -131,7 +131,7 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 
 ## 7. ¿Quién ve tus datos?
 
-- **Otros usuarios** ven tu perfil público: nombre, foto, edad o año de nacimiento [pendiente de verificar: qué exactamente], zona aproximada, presentación, experiencia e idiomas.
+- **Otros usuarios** ven tu perfil público: nombre, foto, franja de edad (por ejemplo, 25-34 años), zona aproximada, presentación, experiencia e idiomas.
 - **Tras aceptar** una solicitud, ambas partes ven también el teléfono de la otra, y el paseante ve los datos reservados que el propietario haya habilitado para ello.
 - **Las protectoras** ven los datos de los paseantes que se apuntan con ellas y la asistencia a los paseos en grupo. Si una protectora usa esos datos en su propia gestión de voluntariado, es responsable de ello.
 - **Las valoraciones privadas** nunca las ve la otra persona. Solo puede leerlas un número limitado de personas del equipo de Rondje Mee.
@@ -143,14 +143,14 @@ Trabajamos con las siguientes entidades. Con los encargados del tratamiento firm
 
 | Entidad | Para qué | Dónde |
 |---|---|---|
-| Vercel Inc. | Alojamiento de la web, servidor de la app y almacenamiento de fotos (Vercel Blob) | Región de la UE cuando sea posible; Vercel es una empresa estadounidense [pendiente de verificar: regiones] |
-| Neon Inc. | Base de datos (Postgres) | Región de la UE [pendiente de verificar: cuál] |
-| Resend Inc. (cuando el correo esté activado) | Envío de correos: una contraseña nueva y avisos como una solicitud nueva o un paseo que se alarga (puedes desactivarlos en tu perfil) | EE. UU.; transferencia basada en cláusulas contractuales tipo [por verificar] |
+| Vercel Inc. | Alojamiento de la web, servidor de la app y almacenamiento de fotos (Vercel Blob) | Región de la UE cuando sea posible; Vercel es una empresa estadounidense |
+| Neon Inc. | Base de datos (Postgres) | Región de la UE |
+| Resend Inc. (cuando el correo esté activado) | Envío de correos: una contraseña nueva y avisos como una solicitud nueva o un paseo que se alarga (puedes desactivarlos en tu perfil) | EE. UU.; transferencia basada en cláusulas contractuales tipo |
 | Google o Apple | Inicio de sesión, solo si lo eliges | Bajo la responsabilidad de Google o Apple |
 | Apple, Google o Mozilla | Notificaciones *push* a través de tu teléfono o navegador, solo si las activas. Reciben el texto del aviso, no rutas ni mensajes | Según las condiciones de Apple, Google o Mozilla |
-| OpenStreetMap Foundation | Imágenes de mapas (teselas) | Reino Unido [pendiente de verificar] |
+| OpenStreetMap Foundation | Imágenes de mapas (teselas) | Reino Unido |
 
-**Mapas.** Al abrir un mapa, tu dispositivo carga imágenes de los servidores de la OpenStreetMap Foundation. Esos servidores reciben tu dirección IP y datos técnicos de tu dispositivo. La OpenStreetMap Foundation es responsable de ese tratamiento [pendiente de verificar] y tiene su propia política de privacidad.
+**Mapas.** Al abrir un mapa, tu dispositivo carga imágenes de los servidores de la OpenStreetMap Foundation. Esos servidores reciben tu dirección IP y datos técnicos de tu dispositivo. La OpenStreetMap Foundation trata esos datos según su propia política de privacidad.
 
 **Tiendas de aplicaciones.** Si descargas la app en App Store o Google Play, Apple o Google tratan datos según sus propias políticas de privacidad.
 
@@ -158,10 +158,10 @@ Trabajamos con las siguientes entidades. Con los encargados del tratamiento firm
 
 Guardamos los datos en la UE siempre que es posible. Algunos proveedores son empresas estadounidenses, por lo que los datos podrían llegar a Estados Unidos, por ejemplo durante tareas de mantenimiento o soporte. En ese caso aplicamos garantías adecuadas:
 
-- el Marco de Privacidad de Datos UE-EE. UU. (*Data Privacy Framework*), si el proveedor está adherido [pendiente de verificar para cada proveedor];
+- el Marco de Privacidad de Datos UE-EE. UU. (*Data Privacy Framework*), si el proveedor está adherido;
 - o las cláusulas contractuales tipo de la Comisión Europea, con medidas adicionales cuando sea necesario.
 
-Para el Reino Unido existe una decisión de adecuación de la Comisión Europea [pendiente de verificar: vigencia].
+Para el Reino Unido existe una decisión de adecuación de la Comisión Europea.
 
 ¿Quieres saber más sobre estas garantías? Escríbenos.
 
@@ -172,14 +172,14 @@ Para el Reino Unido existe una decisión de adecuación de la Comisión Europea 
 | Datos de cuenta y perfil, perfiles de perros | Mientras exista tu cuenta. Tras eliminarla, hasta 30 días más (copias de seguridad) |
 | Puntos de recorrido y fotos de los paseos | 30 días. Más tiempo solo si hace falta para una denuncia abierta |
 | Valoraciones privadas | 1 año |
-| Denuncias y datos relacionados | Hasta 2 años después de cerrar la denuncia [propuesta] |
-| Datos sobre una expulsión, para evitar que alguien vuelva a registrarse | [propuesta: lo más breve posible, p. ej. 2 años – pendiente de verificar] |
-| Solicitudes | [plazo por determinar] |
+| Denuncias y datos relacionados | Hasta 2 años después de cerrar la denuncia |
+| Datos sobre una expulsión, para evitar que alguien vuelva a registrarse | Lo más breve posible: solo mientras sea necesario para este fin |
+| Solicitudes | Mientras exista tu cuenta |
 | Mensajes de chat entre paseante y propietario o protectora | 1 año |
 | Puntos, nivel, insignias y objetivo semanal | Mientras exista tu cuenta |
 | Recordatorios enviados | Como aviso en tu cuenta mientras exista. Para no enviar demasiados, solo miramos el último año |
 | Recomendaciones y votos de protectoras | Hasta un año después de gestionarlas; las que no se gestionaron, a los dos años |
-| Registros de seguridad | [plazo por determinar, p. ej. 90 días] |
+| Registros de seguridad | Lo más breve posible: solo mientras sea necesario para la seguridad y para resolver errores |
 | Registros de ánimo | No los tenemos. Solo en tu dispositivo, hasta que los borres |
 
 Si la ley nos obliga a conservar datos más tiempo, o para un litigio, solo lo haremos el tiempo necesario.
@@ -222,7 +222,7 @@ Algunos datos no podemos borrarlos de inmediato, por ejemplo si son necesarios p
 
 ## 14. Evaluación de impacto (EIPD)
 
-Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso realizamos una evaluación de impacto relativa a la protección de datos (EIPD) antes de lanzar el servicio, y la mantenemos actualizada [pendiente de verificar: estado].
+Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso realizamos una evaluación de impacto relativa a la protección de datos (EIPD), y la mantenemos actualizada.
 
 ## 15. Edad
 

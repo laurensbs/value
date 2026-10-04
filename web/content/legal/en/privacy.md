@@ -2,7 +2,7 @@
 title: Privacy Policy
 description: "Which personal data we process, why and for how long, who sees it and what your rights are. Your exact address is never public."
 version: "0.3"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -12,9 +12,9 @@ This policy explains which personal data Rondje Mee processes, why, for how long
 
 ## 1. Who is responsible?
 
-[Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], Chamber of Commerce (KvK) number [KvK-nummer], is the controller of your data on Rondje Mee.
+Laurens Bos, the maker of Rondje Mee, is the controller of your data on Rondje Mee.
 
-Questions about privacy? Email us at {{contact}}. [To verify: whether a data protection officer is required. If so, add their contact details here.]
+Questions about privacy? Email us at {{contact}}.
 
 ## 2. In short
 
@@ -131,7 +131,7 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 
 ## 7. Who can see your data?
 
-- **Other users** see your public profile: first name, photo, age or birth year [to verify: which exactly], roughly where you live, bio, experience and languages.
+- **Other users** see your public profile: first name, photo, age group (for example 25-34 years), roughly where you live, bio, experience and languages.
 - **Once a request is accepted**, both sides also see each other's phone number, and the walker sees the protected details that the owner has released for that purpose.
 - **Shelters** see the details of walkers who sign up with them, and attendance at group walks. If a shelter uses that data in its own volunteer records, the shelter is responsible for that itself.
 - **Private feedback** is never shown to the other person. Only a limited number of Rondje Mee team members can read it.
@@ -143,14 +143,14 @@ We work with the parties below. We sign a data processing agreement with our pro
 
 | Party | What | Where |
 |---|---|---|
-| Vercel Inc. | Hosting of the website, app server and photo storage (Vercel Blob) | EU region where possible; Vercel is a US company [to verify: regions] |
-| Neon Inc. | Database (Postgres) | EU region [to verify: which] |
-| Resend Inc. (once email is switched on) | Sending emails: a new password, and notifications such as a new request or a walk that runs late (you can turn these off in your profile) | USA; transfer based on standard contractual clauses [to be checked] |
+| Vercel Inc. | Hosting of the website, app server and photo storage (Vercel Blob) | EU region where possible; Vercel is a US company |
+| Neon Inc. | Database (Postgres) | EU region |
+| Resend Inc. (once email is switched on) | Sending emails: a new password, and notifications such as a new request or a walk that runs late (you can turn these off in your profile) | USA; transfer based on standard contractual clauses |
 | Google or Apple | Sign-in, only if you choose it | Google or Apple's own responsibility |
 | Apple, Google or Mozilla | Push notifications through your phone or browser, only if you turn them on. They receive the notification text, no routes or messages | Apple's, Google's or Mozilla's own terms |
-| OpenStreetMap Foundation | Map images (tiles) | United Kingdom [to verify] |
+| OpenStreetMap Foundation | Map images (tiles) | United Kingdom |
 
-**Maps.** When you open a map, your device loads map images from the OpenStreetMap Foundation's servers. Those servers receive your IP address and technical data about your device. The OpenStreetMap Foundation is responsible for this itself [to verify] and has its own privacy policy.
+**Maps.** When you open a map, your device loads map images from the OpenStreetMap Foundation's servers. Those servers receive your IP address and technical data about your device. The OpenStreetMap Foundation processes this data under its own privacy policy.
 
 **App stores.** If you download the app from the App Store or Google Play, Apple or Google process data under their own privacy policies.
 
@@ -158,10 +158,10 @@ We work with the parties below. We sign a data processing agreement with our pro
 
 We store data in the EU wherever possible. Some service providers are US companies. As a result, data may end up in the United States, for example during maintenance or support. In that case we ensure appropriate safeguards:
 
-- the EU-US Data Privacy Framework, if the provider is certified under it [to verify for each provider];
+- the EU-US Data Privacy Framework, if the provider is certified under it;
 - or the European Commission's standard contractual clauses, with supplementary measures where necessary.
 
-For the United Kingdom, an adequacy decision of the European Commission applies [to verify: validity].
+For the United Kingdom, an adequacy decision of the European Commission applies.
 
 Would you like to know more about these safeguards? Email us.
 
@@ -172,14 +172,14 @@ Would you like to know more about these safeguards? Email us.
 | Account and profile data, dog profiles | As long as your account exists. After deletion, up to 30 more days (backups) |
 | Walk route points and photos | 30 days. Longer only if needed for an open report |
 | Private feedback | 1 year |
-| Reports and related data | Up to 2 years after the report is closed [proposal] |
-| Data about a ban, to prevent someone from signing up again | [proposal: as short as possible, e.g. 2 years – to verify] |
-| Requests | [retention period to be decided] |
+| Reports and related data | Up to 2 years after the report is closed |
+| Data about a ban, to prevent someone from signing up again | As short as possible: only as long as needed for this purpose |
+| Requests | As long as your account exists |
 | Chat messages between walker and owner or shelter | 1 year |
 | Points, level, badges and weekly goal | As long as your account exists |
 | Reminders we sent | As a notification in your account for as long as it exists. To avoid sending too many, we only look at the last year |
 | Suggestions and votes for shelters | Up to a year after we handled them; suggestions nothing happened with after two years |
-| Security logs | [retention period to be decided, e.g. 90 days] |
+| Security logs | As short as possible: only as long as needed for security and fixing errors |
 | Mood check-ins | Not with us. Only on your own device, until you delete them |
 
 If we must keep data longer because the law requires it, or for a legal dispute, we only do so for as long as necessary.
@@ -222,7 +222,7 @@ Not happy with how we handle your data? Please tell us first. You can also alway
 
 ## 14. Data protection impact assessment (DPIA)
 
-Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we carry out a data protection impact assessment (DPIA) before launching the service, and keep it up to date [to verify: status].
+Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are carrying out a data protection impact assessment (DPIA), and we keep it up to date.
 
 ## 15. Age
 

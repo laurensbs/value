@@ -2,7 +2,7 @@
 title: Conditions d'utilisation
 description: "Les conditions pour promeneurs, propriétaires et refuges : qui peut participer, se rencontrer d'abord, pas d'argent, responsabilité et plaintes."
 version: "0.2"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
 
@@ -12,7 +12,7 @@ Ces conditions s'appliquent à toute personne qui utilise Rondje Mee : le site w
 
 ## 1. Qui sommes-nous ?
 
-Rondje Mee est proposé par [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], inscrite à la Chambre de commerce néerlandaise (KvK) sous le numéro [KvK-nummer], dont le siège est situé [adres] (« Rondje Mee » ou « nous »).
+Rondje Mee est proposé par Laurens Bos, le créateur de Rondje Mee (« Rondje Mee » ou « nous »).
 
 Vous pouvez nous joindre à {{contact}}. C'est aussi notre point de contact pour les utilisateurs et les autorités au sens du règlement sur les services numériques (DSA). Vous pouvez nous écrire en néerlandais, en anglais, en espagnol ou en français.
 
@@ -114,14 +114,14 @@ Nous vous recommandons vivement d'avoir votre propre **assurance responsabilité
 
 ## 12. Espagne : chiens potentiellement dangereux (PPP)
 
-En Espagne, des règles supplémentaires s'appliquent aux *perros potencialmente peligrosos* (PPP), principalement en vertu de la Ley 50/1999 et du Real Decreto 287/2002. Des règles régionales et communales peuvent aussi s'appliquer [à vérifier].
+En Espagne, des règles supplémentaires s'appliquent aux *perros potencialmente peligrosos* (PPP), principalement en vertu de la Ley 50/1999 et du Real Decreto 287/2002. Des règles régionales et communales peuvent aussi s'appliquer.
 
 - Le propriétaire indique sur le profil si le chien est un chien PPP et respecte les obligations du détenteur, comme l'enregistrement et l'assurance.
 - Un chien PPP ne peut être promené que par un promeneur qui confirme détenir une **licence PPP valable** (*licencia administrativa*). Vous la gardez sur vous pendant la promenade.
-- Dans les lieux publics, le chien porte une **muselière** et est tenu par une **laisse non extensible de 2 mètres maximum** [à vérifier].
+- Dans les lieux publics, le chien porte une **muselière** et est tenu par une **laisse non extensible de 2 mètres maximum**.
 - **Un seul chien PPP par personne.**
 
-La Ley 7/2023 sur les droits et le bien-être des animaux s'applique aussi. Selon cette loi, les détenteurs de chiens doivent avoir une assurance responsabilité civile. La date à laquelle cette obligation s'applique dépend de règles d'exécution [à vérifier].
+La Ley 7/2023 sur les droits et le bien-être des animaux s'applique aussi. Selon cette loi, les détenteurs de chiens doivent avoir une assurance responsabilité civile. La date à laquelle cette obligation s'applique dépend de règles d'exécution.
 
 ## 13. Localisation en direct pendant la promenade
 
@@ -154,20 +154,20 @@ Soyons honnêtes : promener des chiens comporte des risques. Un chien peut mordr
 **Dommages causés par le chien**
 
 - **Pays-Bas :** le possesseur du chien (généralement le propriétaire ou le refuge) est en principe responsable, même lorsque quelqu'un d'autre le promène (art. 6:179 du Code civil néerlandais). Un promeneur qui commet une faute peut aussi être responsable (art. 6:162 du Code civil néerlandais).
-- **Belgique :** depuis le 1er janvier 2025, le nouveau Livre 6 du Code civil s'applique. La responsabilité du fait des animaux figure à l'article 6.17 [à vérifier]. Qui est le gardien du chien pendant une promenade dépend des circonstances [à vérifier].
-- **Espagne :** le possesseur d'un animal, ou celui qui s'en sert, est responsable des dommages qu'il cause (art. 1905 du Code civil espagnol). Un promeneur peut aussi être concerné [à vérifier].
+- **Belgique :** depuis le 1er janvier 2025, le nouveau Livre 6 du Code civil s'applique. La responsabilité du fait des animaux figure à l'article 6.17. Qui est le gardien du chien pendant une promenade dépend des circonstances.
+- **Espagne :** le possesseur d'un animal, ou celui qui s'en sert, est responsable des dommages qu'il cause (art. 1905 du Code civil espagnol). Un promeneur peut aussi être concerné.
 
 **Assurance**
 
 - Les propriétaires et les refuges ont une assurance responsabilité civile qui couvre les dommages causés par le chien, y compris lorsque quelqu'un d'autre le promène. Vérifiez-le dans votre contrat.
 - Nous recommandons vivement aux promeneurs d'avoir leur propre assurance responsabilité civile vie privée (en Belgique, la « RC familiale »). Attention : beaucoup de contrats ne couvrent pas les dommages aux animaux ou aux objets dont vous avez la garde, comme le chien lui-même ou sa laisse.
-- Rondje Mee n'a pas d'assurance pour les promenades entre utilisateurs [à vérifier], sauf si nous vous informons expressément du contraire plus tard.
+- Rondje Mee n'a pas d'assurance pour les promenades entre utilisateurs, sauf si nous vous informons expressément du contraire plus tard.
 
 **Notre responsabilité**
 
 - Nous faisons de notre mieux pour proposer Rondje Mee de façon sûre et fonctionnelle, mais ne pouvons pas garantir qu'il fonctionnera toujours sans erreur ni interruption.
 - Nous ne sommes pas responsables de ce que les utilisateurs conviennent ou font entre eux, de ce que font les chiens, ni de l'exactitude de ce que les utilisateurs disent d'eux-mêmes ou de leur chien. Cela ne s'applique pas si nous avons nous-mêmes commis une faute.
-- Dans la mesure permise par la loi, nous ne sommes responsables que des dommages directs causés par notre propre manquement, jusqu'à un maximum de [bedrag] € par événement [proposition – à vérifier].
+- Dans la mesure permise par la loi, nous ne sommes responsables que des dommages directs causés par notre propre manquement.
 - Ces limitations ne s'appliquent **pas** en cas de faute intentionnelle ou de faute grave de Rondje Mee, ni en cas de décès ou de lésion corporelle dus à notre faute, ni lorsque le droit impératif de la consommation les interdit. Vos droits légaux de consommateur restent toujours d'application.
 
 ## 16. Vos contenus et nos droits
@@ -187,7 +187,7 @@ Soyons honnêtes : promener des chiens comporte des risques. Un chien peut mordr
 
 ## 18. Plaintes et recours
 
-- Une plainte au sujet de Rondje Mee ? Écrivez à {{contact}}. Nous répondons dans les 14 jours [proposition].
+- Une plainte au sujet de Rondje Mee ? Écrivez à {{contact}}. Nous répondons dans les 14 jours.
 - Vous n'êtes pas d'accord avec une décision concernant votre contenu, votre compte ou votre signalement ? Introduisez un recours dans les **6 mois**, via l'application ou par e-mail. Une personne qui n'a pas participé à la première décision la réexamine.
 - Vous pouvez aussi vous adresser à un organisme de règlement extrajudiciaire des litiges certifié selon le DSA, ou saisir le juge.
 - La plateforme européenne de règlement en ligne des litiges (RLL) n'existe plus depuis juillet 2025.

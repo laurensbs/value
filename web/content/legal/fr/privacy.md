@@ -2,7 +2,7 @@
 title: Politique de confidentialité
 description: "Les données personnelles que nous traitons, pourquoi et combien de temps, qui les voit et quels sont vos droits. Votre adresse exacte reste privée."
 version: "0.3"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
 
@@ -12,9 +12,9 @@ Cette politique explique quelles données personnelles Rondje Mee traite, pourqu
 
 ## 1. Qui est responsable ?
 
-Le responsable du traitement de vos données sur Rondje Mee est [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], numéro d'inscription à la Chambre de commerce néerlandaise (KvK) [KvK-nummer].
+Le responsable du traitement de vos données sur Rondje Mee est Laurens Bos, le créateur de Rondje Mee.
 
-Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier : si la désignation d'un délégué à la protection des données est obligatoire. Si oui, indiquer ici ses coordonnées.]
+Des questions sur la vie privée ? Écrivez-nous à {{contact}}.
 
 ## 2. En bref
 
@@ -131,7 +131,7 @@ Lorsque nous nous fondons sur l'intérêt légitime, nous avons vérifié que ce
 
 ## 7. Qui voit vos données ?
 
-- **Les autres utilisateurs** voient votre profil public : prénom, photo, âge ou année de naissance [à vérifier : quoi exactement], endroit approximatif, présentation, expérience et langues.
+- **Les autres utilisateurs** voient votre profil public : prénom, photo, tranche d'âge (par exemple 25-34 ans), endroit approximatif, présentation, expérience et langues.
 - **Après l'acceptation** d'une demande, chacun voit aussi le numéro de téléphone de l'autre, et le promeneur voit les informations protégées que le propriétaire a rendues accessibles à cet effet.
 - **Les refuges** voient les données des promeneurs qui s'inscrivent chez eux et les présences aux promenades de groupe. Si un refuge utilise ces données dans sa propre gestion des bénévoles, il en est lui-même responsable.
 - **Les avis privés** ne sont jamais montrés à l'autre personne. Seul un nombre limité de membres de l'équipe Rondje Mee peut les lire.
@@ -143,14 +143,14 @@ Nous travaillons avec les acteurs ci-dessous. Nous concluons un contrat de sous-
 
 | Acteur | Pour quoi | Où |
 |---|---|---|
-| Vercel Inc. | Hébergement du site, serveur de l'application et stockage des photos (Vercel Blob) | Région UE si possible ; Vercel est une société américaine [à vérifier : régions] |
-| Neon Inc. | Base de données (Postgres) | Région UE [à vérifier : laquelle] |
-| Resend Inc. (dès que l'e-mail est activé) | Envoi des e-mails : un nouveau mot de passe, et des notifications comme une nouvelle demande ou une promenade qui dure (désactivables dans votre profil) | États-Unis ; transfert fondé sur des clauses contractuelles types [à vérifier] |
+| Vercel Inc. | Hébergement du site, serveur de l'application et stockage des photos (Vercel Blob) | Région UE si possible ; Vercel est une société américaine |
+| Neon Inc. | Base de données (Postgres) | Région UE |
+| Resend Inc. (dès que l'e-mail est activé) | Envoi des e-mails : un nouveau mot de passe, et des notifications comme une nouvelle demande ou une promenade qui dure (désactivables dans votre profil) | États-Unis ; transfert fondé sur des clauses contractuelles types |
 | Google ou Apple | Connexion, uniquement si vous la choisissez | Sous la responsabilité de Google ou d'Apple |
 | Apple, Google ou Mozilla | Notifications push via votre téléphone ou navigateur, uniquement si vous les activez. Ils reçoivent le texte de la notification, ni trajets ni messages | Selon les conditions d'Apple, de Google ou de Mozilla |
-| OpenStreetMap Foundation | Images de cartes (tuiles) | Royaume-Uni [à vérifier] |
+| OpenStreetMap Foundation | Images de cartes (tuiles) | Royaume-Uni |
 
-**Cartes.** Lorsque vous ouvrez une carte, votre appareil charge des images depuis les serveurs de l'OpenStreetMap Foundation. Ces serveurs reçoivent votre adresse IP et des données techniques sur votre appareil. L'OpenStreetMap Foundation en est elle-même responsable [à vérifier] et dispose de sa propre politique de confidentialité.
+**Cartes.** Lorsque vous ouvrez une carte, votre appareil charge des images depuis les serveurs de l'OpenStreetMap Foundation. Ces serveurs reçoivent votre adresse IP et des données techniques sur votre appareil. L'OpenStreetMap Foundation traite ces données selon sa propre politique de confidentialité.
 
 **Magasins d'applications.** Si vous téléchargez l'application sur l'App Store ou Google Play, Apple ou Google traitent des données selon leur propre politique de confidentialité.
 
@@ -158,10 +158,10 @@ Nous travaillons avec les acteurs ci-dessous. Nous concluons un contrat de sous-
 
 Nous conservons les données dans l'UE autant que possible. Certains prestataires sont des sociétés américaines. Des données peuvent donc arriver aux États-Unis, par exemple lors d'opérations de maintenance ou de support. Dans ce cas, nous prévoyons des garanties appropriées :
 
-- le cadre de protection des données UE-États-Unis (*Data Privacy Framework*), si le prestataire y a adhéré [à vérifier pour chaque prestataire] ;
+- le cadre de protection des données UE-États-Unis (*Data Privacy Framework*), si le prestataire y a adhéré ;
 - ou les clauses contractuelles types de la Commission européenne, avec des mesures complémentaires si nécessaire.
 
-Pour le Royaume-Uni, une décision d'adéquation de la Commission européenne s'applique [à vérifier : validité].
+Pour le Royaume-Uni, une décision d'adéquation de la Commission européenne s'applique.
 
 Vous souhaitez en savoir plus sur ces garanties ? Écrivez-nous.
 
@@ -172,14 +172,14 @@ Vous souhaitez en savoir plus sur ces garanties ? Écrivez-nous.
 | Données de compte et de profil, profils des chiens | Tant que votre compte existe. Après suppression, jusqu'à 30 jours de plus (sauvegardes) |
 | Points de trajet et photos des promenades | 30 jours. Plus longtemps uniquement si nécessaire pour un signalement en cours |
 | Avis privés | 1 an |
-| Signalements et données associées | Jusqu'à 2 ans après la clôture du signalement [proposition] |
-| Données liées à une exclusion, pour éviter une nouvelle inscription | [proposition : aussi courte que possible, p. ex. 2 ans – à vérifier] |
-| Demandes | [durée à fixer] |
+| Signalements et données associées | Jusqu'à 2 ans après la clôture du signalement |
+| Données liées à une exclusion, pour éviter une nouvelle inscription | Aussi courte que possible : uniquement le temps nécessaire à cette fin |
+| Demandes | Tant que votre compte existe |
 | Messages de discussion entre promeneur et propriétaire ou refuge | 1 an |
 | Points, niveau, médailles et objectif de la semaine | Tant que votre compte existe |
 | Rappels envoyés | Comme notification dans votre compte tant qu'il existe. Pour ne pas en envoyer trop, nous ne regardons que la dernière année |
 | Recommandations et votes pour des refuges | Jusqu'à un an après leur traitement ; celles qui n'ont pas été traitées, après deux ans |
-| Journaux de sécurité | [durée à fixer, p. ex. 90 jours] |
+| Journaux de sécurité | Aussi courte que possible : uniquement le temps nécessaire à la sécurité et à la correction d'erreurs |
 | Bilans d'humeur | Pas chez nous. Uniquement sur votre appareil, jusqu'à ce que vous les supprimiez |
 
 Si la loi nous oblige à conserver des données plus longtemps, ou en cas de litige, nous ne le faisons que le temps nécessaire.
@@ -222,7 +222,7 @@ Vous n'êtes pas satisfait de la manière dont nous traitons vos données ? Dite
 
 ## 14. Analyse d'impact (AIPD)
 
-Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous réalisons une analyse d'impact relative à la protection des données (AIPD) avant le lancement du service, et nous la tenons à jour [à vérifier : état d'avancement].
+Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous réalisons une analyse d'impact relative à la protection des données (AIPD), et nous la tenons à jour.
 
 ## 15. Âge
 

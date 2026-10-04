@@ -2,7 +2,7 @@
 title: Terms of Use
 description: "The terms for walkers, owners and shelters: who may take part, meeting first, no money, liability and complaints."
 version: "0.2"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -12,7 +12,7 @@ These terms apply to everyone who uses Rondje Mee: the website and the iOS and A
 
 ## 1. Who we are
 
-Rondje Mee is provided by [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], registered with the Dutch Chamber of Commerce (KvK) under number [KvK-nummer], with its address at [adres] ("Rondje Mee", "we" or "us").
+Rondje Mee is provided by Laurens Bos, the maker of Rondje Mee ("Rondje Mee", "we" or "us").
 
 You can reach us at {{contact}}. This is also our point of contact for users and public authorities under the Digital Services Act (DSA). You can write to us in Dutch, English, Spanish or French.
 
@@ -114,14 +114,14 @@ We strongly recommend that you have your own **personal liability insurance** (s
 
 ## 12. Spain: potentially dangerous dogs (PPP)
 
-In Spain, extra rules apply to *perros potencialmente peligrosos* (PPP), mainly under Ley 50/1999 and Real Decreto 287/2002. Regional and municipal rules may also apply [to verify].
+In Spain, extra rules apply to *perros potencialmente peligrosos* (PPP), mainly under Ley 50/1999 and Real Decreto 287/2002. Regional and municipal rules may also apply.
 
 - The owner states on the profile whether the dog is a PPP dog, and meets the keeper's obligations, such as registration and insurance.
 - A PPP dog may only be walked by a walker who confirms they hold a **valid PPP licence** (*licencia administrativa*). You carry it with you during the walk.
-- In public places the dog wears a **muzzle** and is kept on a non-extendable **leash of no more than 2 metres** [to verify].
+- In public places the dog wears a **muzzle** and is kept on a non-extendable **leash of no more than 2 metres**.
 - **No more than one PPP dog per person.**
 
-Ley 7/2023 on the rights and welfare of animals also applies. Under this law, dog keepers must have liability insurance. Exactly when this obligation takes effect depends on further implementing rules [to verify].
+Ley 7/2023 on the rights and welfare of animals also applies. Under this law, dog keepers must have liability insurance. Exactly when this obligation takes effect depends on further implementing rules.
 
 ## 13. Live location during a walk
 
@@ -154,20 +154,20 @@ Let's be honest: walking dogs involves risks. A dog can bite, run away or knock 
 **Damage caused by the dog**
 
 - **Netherlands:** the possessor of the dog (usually the owner or the shelter) is in principle liable, even when someone else is walking it (art. 6:179 Dutch Civil Code). A walker who makes a mistake may also be liable (art. 6:162 Dutch Civil Code).
-- **Belgium:** since 1 January 2025, the new Book 6 of the Civil Code applies. Liability for animals is set out in art. 6.17 [to verify]. Who counts as the custodian of the dog during a walk depends on the circumstances [to verify].
-- **Spain:** the possessor of an animal, or whoever makes use of it, is liable for the damage it causes (art. 1905 Spanish Civil Code). A walker may also fall under this rule [to verify].
+- **Belgium:** since 1 January 2025, the new Book 6 of the Civil Code applies. Liability for animals is set out in art. 6.17. Who counts as the custodian of the dog during a walk depends on the circumstances.
+- **Spain:** the possessor of an animal, or whoever makes use of it, is liable for the damage it causes (art. 1905 Spanish Civil Code). A walker may also fall under this rule.
 
 **Insurance**
 
 - Owners and shelters must have liability insurance that covers damage caused by the dog, including when someone else walks it. Check this in your policy.
 - We strongly recommend that walkers have their own personal liability insurance. Please note: many policies do not cover damage to animals or things "in your custody", such as the dog itself or its leash.
-- Rondje Mee has no insurance for walks between users [to verify], unless we expressly tell you otherwise later.
+- Rondje Mee has no insurance for walks between users, unless we expressly tell you otherwise later.
 
 **Our liability**
 
 - We do our best to offer Rondje Mee in a safe and working state, but cannot guarantee that it will always work without errors or interruptions.
 - We are not liable for what users agree or do with each other, for what dogs do, or for the accuracy of what users say about themselves or their dog. This does not apply where we ourselves have done something wrong.
-- To the extent permitted by law, we are only liable for direct damage caused by our own failure, up to a maximum of € [bedrag] per event [proposal – to verify].
+- To the extent permitted by law, we are only liable for direct damage caused by our own failure.
 - These limitations do **not** apply in the case of intent or gross negligence on the part of Rondje Mee, to death or personal injury caused by our fault, or where mandatory consumer law prohibits them. Your statutory rights as a consumer always remain in place.
 
 ## 16. Your content and our rights
@@ -187,7 +187,7 @@ Let's be honest: walking dogs involves risks. A dog can bite, run away or knock 
 
 ## 18. Complaints and appeals
 
-- A complaint about Rondje Mee? Email {{contact}}. We will respond within 14 days [proposal].
+- A complaint about Rondje Mee? Email {{contact}}. We will respond within 14 days.
 - Disagree with a decision about your content, your account or your report? Appeal within **6 months** through the app or by email. Someone who was not involved in the original decision will review it.
 - You can also use a certified out-of-court dispute settlement body under the DSA, or go to court.
 - The European ODR platform for online disputes was discontinued in July 2025.

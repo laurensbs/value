@@ -2,7 +2,7 @@
 title: Privacyverklaring
 description: "Welke persoonsgegevens we verwerken, waarom en hoe lang, wie ze ziet en welke rechten je hebt. Je exacte adres is nooit openbaar."
 version: "0.3"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
@@ -12,9 +12,9 @@ In deze verklaring lees je welke persoonsgegevens Rondje Mee verwerkt, waarom, h
 
 ## 1. Wie is verantwoordelijk?
 
-[Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], KvK-nummer [KvK-nummer], is de verwerkingsverantwoordelijke voor je gegevens op Rondje Mee.
+Laurens Bos, de maker van Rondje Mee, is de verwerkingsverantwoordelijke voor je gegevens op Rondje Mee.
 
-Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functionaris gegevensbescherming verplicht is. Zo ja, contactgegevens hier vermelden.]
+Vragen over privacy? Mail ons via {{contact}}.
 
 ## 2. In het kort
 
@@ -131,7 +131,7 @@ Gebruiken we een gerechtvaardigd belang? Dan hebben we afgewogen dat dat belang 
 
 ## 7. Wie ziet je gegevens?
 
-- **Andere gebruikers** zien je openbare profiel: voornaam, foto, leeftijd of geboortejaar [te controleren: wat precies], ongeveer waar je woont, bio, ervaring en talen.
+- **Andere gebruikers** zien je openbare profiel: voornaam, foto, leeftijdsgroep (bijvoorbeeld 25-34 jaar), ongeveer waar je woont, bio, ervaring en talen.
 - **Na acceptatie** van een verzoek zien beide kanten ook elkaars telefoonnummer, en de wandelaar ziet de afgeschermde gegevens die de eigenaar daarvoor heeft vrijgegeven.
 - **Opvangen** zien de gegevens van wandelaars die zich bij hen aanmelden, en de aanwezigheid bij groepswandelingen. Gebruikt een opvang die gegevens in de eigen vrijwilligersadministratie? Dan is de opvang daarvoor zelf verantwoordelijk.
 - **Privé-feedback** ziet de ander nooit. Alleen een beperkt aantal medewerkers van Rondje Mee kan die lezen.
@@ -143,14 +143,14 @@ We werken met deze partijen. Met verwerkers sluiten we een verwerkersovereenkoms
 
 | Partij | Wat | Waar |
 |---|---|---|
-| Vercel Inc. | Hosting van website, app-server en opslag van foto's (Vercel Blob) | EU-regio waar mogelijk; Vercel is een Amerikaans bedrijf [te controleren: regio's] |
-| Neon Inc. | Database (Postgres) | EU-regio [te controleren: welke] |
-| Resend Inc. (zodra e-mail aanstaat) | Versturen van e-mails: een nieuw wachtwoord, en meldingen zoals een nieuwe aanvraag of een rondje dat uitloopt (die zet je uit in je profiel) | VS; doorgifte op basis van standaardcontractbepalingen [te controleren] |
+| Vercel Inc. | Hosting van website, app-server en opslag van foto's (Vercel Blob) | EU-regio waar mogelijk; Vercel is een Amerikaans bedrijf |
+| Neon Inc. | Database (Postgres) | EU-regio |
+| Resend Inc. (zodra e-mail aanstaat) | Versturen van e-mails: een nieuw wachtwoord, en meldingen zoals een nieuwe aanvraag of een rondje dat uitloopt (die zet je uit in je profiel) | VS; doorgifte op basis van standaardcontractbepalingen |
 | Google of Apple | Inloggen, alleen als je daarvoor kiest | Eigen verantwoordelijkheid van Google of Apple |
 | Apple, Google of Mozilla | Pushmeldingen via je telefoon of browser, alleen als je die aanzet. Ze krijgen de tekst van de melding, geen route of berichten | Eigen voorwaarden van Apple, Google of Mozilla |
-| OpenStreetMap Foundation | Kaartafbeeldingen (tiles) | Verenigd Koninkrijk [te controleren] |
+| OpenStreetMap Foundation | Kaartafbeeldingen (tiles) | Verenigd Koninkrijk |
 
-**Kaarten.** Als je een kaart opent, laadt je apparaat kaartafbeeldingen van de servers van de OpenStreetMap Foundation. Daarbij ontvangen die servers je IP-adres en technische gegevens over je apparaat. De OpenStreetMap Foundation is daarvoor zelf verantwoordelijk [te controleren] en heeft een eigen privacybeleid.
+**Kaarten.** Als je een kaart opent, laadt je apparaat kaartafbeeldingen van de servers van de OpenStreetMap Foundation. Daarbij ontvangen die servers je IP-adres en technische gegevens over je apparaat. De OpenStreetMap Foundation verwerkt die gegevens volgens haar eigen privacybeleid.
 
 **App stores.** Download je de app via de App Store of Google Play? Dan verwerken Apple of Google daarbij gegevens onder hun eigen privacybeleid.
 
@@ -158,10 +158,10 @@ We werken met deze partijen. Met verwerkers sluiten we een verwerkersovereenkoms
 
 We bewaren gegevens zo veel mogelijk in de EU. Sommige dienstverleners zijn Amerikaanse bedrijven. Daardoor kunnen gegevens in de Verenigde Staten terechtkomen, bijvoorbeeld bij onderhoud of ondersteuning. In dat geval zorgen we voor passende waarborgen:
 
-- het EU-VS Data Privacy Framework, als de dienstverlener daarbij is aangesloten [te controleren per dienstverlener];
+- het EU-VS Data Privacy Framework, als de dienstverlener daarbij is aangesloten;
 - of standaardcontractbepalingen van de Europese Commissie, met aanvullende maatregelen waar nodig.
 
-Voor het Verenigd Koninkrijk geldt een adequaatheidsbesluit van de Europese Commissie [te controleren: geldigheid].
+Voor het Verenigd Koninkrijk geldt een adequaatheidsbesluit van de Europese Commissie.
 
 Wil je meer weten over deze waarborgen? Mail ons.
 
@@ -172,14 +172,14 @@ Wil je meer weten over deze waarborgen? Mail ons.
 | Account- en profielgegevens, hondenprofielen | Zolang je account bestaat. Na verwijderen nog maximaal 30 dagen (back-ups) |
 | Routepunten en foto's van wandelingen | 30 dagen. Langer alleen als dat nodig is voor een open melding |
 | Privé-feedback | 1 jaar |
-| Meldingen en de gegevens die erbij horen | Tot 2 jaar na afsluiten van de melding [voorstel] |
-| Gegevens over een uitsluiting, om te voorkomen dat iemand zich opnieuw aanmeldt | [voorstel: zo kort mogelijk, bijv. 2 jaar – te controleren] |
-| Verzoeken | [bewaartermijn vast te stellen] |
+| Meldingen en de gegevens die erbij horen | Tot 2 jaar na afsluiten van de melding |
+| Gegevens over een uitsluiting, om te voorkomen dat iemand zich opnieuw aanmeldt | Zo kort mogelijk: alleen zolang dat voor dit doel nodig is |
+| Verzoeken | Zolang je account bestaat |
 | Chatberichten tussen wandelaar en eigenaar of opvang | 1 jaar |
 | Punten, niveau, penningen en weekdoel | Zolang je account bestaat |
 | Verstuurde herinneringen | Als melding in je account zolang je account bestaat. Om er niet te veel te sturen, kijken we alleen naar het laatste jaar |
 | Tips en stemmen voor opvangen | Tot een jaar nadat we ze hebben afgehandeld; tips waar niets mee gebeurde na twee jaar |
-| Beveiligingslogs | [bewaartermijn vast te stellen, bijv. 90 dagen] |
+| Beveiligingslogs | Zo kort mogelijk: alleen zolang dat nodig is voor de beveiliging en het oplossen van fouten |
 | Stemming-check-ins | Niet bij ons. Alleen op je eigen apparaat, tot je ze verwijdert |
 
 Moeten we gegevens langer bewaren omdat de wet dat eist, of voor een juridisch geschil? Dan doen we dat alleen zolang het nodig is.
@@ -222,7 +222,7 @@ Ben je niet tevreden over hoe we met je gegevens omgaan? Laat het ons eerst wete
 
 ## 14. Gegevensbeschermingseffectbeoordeling (DPIA)
 
-Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom voeren we een gegevensbeschermingseffectbeoordeling (DPIA) uit voordat we de dienst lanceren, en we houden die actueel [te controleren: status].
+Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom maken we een gegevensbeschermingseffectbeoordeling (DPIA), en we houden die actueel.
 
 ## 15. Leeftijd
 
