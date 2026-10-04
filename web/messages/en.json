@@ -458,7 +458,9 @@
     "tipShelter": "Suggest a shelter",
     "new": "New",
     "emptyFiltered": "No dogs match this choice. Try another one, or see all dogs.",
-    "sendLink": "Send your link"
+    "sendLink": "Send your link",
+    "viewLabel": "List or map",
+    "mapNote": "Dogs show on their neighbourhood, never on an address."
   },
   "dog": {
     "story": "About {name}",
