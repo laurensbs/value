@@ -2,7 +2,7 @@
 
 The website, which is also the iOS and Android app (Capacitor shells in `ios/` and `android/` load the live site). Next.js 16 App Router, React 19, Drizzle ORM, Better Auth, next-intl, Leaflet.
 
-Live: https://rondje-five.vercel.app · Launch guide (Dutch): [`../docs/LAUNCH.md`](../docs/LAUNCH.md)
+Live: https://rondjemee.nl · Launch guide (Dutch): [`../docs/LAUNCH.md`](../docs/LAUNCH.md)
 
 ## Run it
 

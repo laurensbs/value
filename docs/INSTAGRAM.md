@@ -39,7 +39,7 @@ Concept van 2 oktober 2026. Rondje heeft nog geen Instagram-account: je maakt he
 ## 3. Bio in vier talen
 
 - Maximaal 150 tekens. De tellingen hieronder zijn gecontroleerd; tel opnieuw als je de stad wijzigt.
-- De link staat in het linkveld, niet in de tekst: `rondje-five.vercel.app/r/INSTA`, of later `[jouw domein]/r/INSTA`.
+- De link staat in het linkveld, niet in de tekst: `rondjemee.nl/r/INSTA`.
 - De eerste regel is in elke taal de slogan van de app zelf.
 - Begin met één account, in het Nederlands. De andere talen zijn voor later: een eigen account per land, of als je het account in een andere taal voortzet (§10).
 - Noem alleen steden waar je echt live bent, niet "NL · BE · ES".

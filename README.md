@@ -2,7 +2,7 @@
 
 Rondje koppelt jongvolwassenen (18–30) aan honden die een extra wandeling goed kunnen gebruiken. Het gaat vooral om honden van oudere of zieke buurtgenoten die zelf niet ver meer kunnen lopen, en daarnaast om honden uit de opvang. Gratis, veilig, en goed voor allebei.
 
-**Live (website en app):** https://rondje-five.vercel.app · **Zo start je:** [`docs/LAUNCH.md`](docs/LAUNCH.md)
+**Live (website en app):** https://rondjemee.nl · **Zo start je:** [`docs/LAUNCH.md`](docs/LAUNCH.md)
 
 Eerste prototype (privé): https://claude.ai/artifact/V3UNzZhwMgq3rVwSJzZuFw
 
