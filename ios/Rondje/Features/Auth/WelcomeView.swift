@@ -43,9 +43,13 @@ struct WelcomeView: View {
             .frame(height: compact ? 165 : 220)
 
             VStack(spacing: 14) {
-                Text(Brand.name)
-                    .font(.display(46, weight: .heavy))
-                    .foregroundStyle(Palette.grass)
+                // The wordmark: "rondje mee" with the tennis ball as the dot on the j (light and dark in the asset).
+                Image("Wordmark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 50)
+                    .accessibilityLabel(Brand.name)
+                    .accessibilityAddTraits(.isHeader)
                 Text(role == "owner" ? L("Iemand uit je buurt maakt graag een rondje met je hond. Gratis en veilig.") : L("Wandel met een hond uit je buurt die een extra rondje goed kan gebruiken."))
                     .font(.title3.weight(.medium))
                     .multilineTextAlignment(.center)
