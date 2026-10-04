@@ -2354,6 +2354,8 @@ fieldset.form-section {
 }
 
 .quiz-option {
+  /* A whole answer is the tap target: comfortably above 44 px, also for a one-line answer. */
+  min-height: 52px;
   padding: 8px 12px;
   border: 1.5px solid var(--line);
   border-radius: 14px;
