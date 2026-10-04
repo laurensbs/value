@@ -458,7 +458,9 @@
     "tipShelter": "Recomendar una protectora",
     "new": "Nuevo",
     "emptyFiltered": "Ningún perro coincide con esta elección. Prueba otra, o mira todos los perros.",
-    "sendLink": "Envía tu enlace"
+    "sendLink": "Envía tu enlace",
+    "viewLabel": "Lista o mapa",
+    "mapNote": "Los perros aparecen en su barrio, nunca en una dirección."
   },
   "dog": {
     "story": "Sobre {name}",

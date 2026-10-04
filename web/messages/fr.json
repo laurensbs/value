@@ -458,7 +458,9 @@
     "tipShelter": "Recommander un refuge",
     "new": "Nouveau",
     "emptyFiltered": "Aucun chien ne correspond à ce choix. Essayez-en un autre, ou voyez tous les chiens.",
-    "sendLink": "Envoyez votre lien"
+    "sendLink": "Envoyez votre lien",
+    "viewLabel": "Liste ou carte",
+    "mapNote": "Les chiens apparaissent sur leur quartier, jamais sur une adresse."
   },
   "dog": {
     "story": "À propos de {name}",
