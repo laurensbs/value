@@ -83,5 +83,29 @@
     "trop tard",
     "\\bencore \\d",
     "(content|ravi|heureux) de vous revoir"
-  ]
+  ],
+  "lessons": {
+    "about": "Extra for the Hondenschool (keys under school. and the lines around the quiz): lessons are for learning, so no points to earn, no XP and no hearts. Not for the progress pages, where walks do give points.",
+    "all": [
+      "\\bxp\\b"
+    ],
+    "nl": [
+      "punten (te )?verdienen",
+      "\\bverdien(t|en)? (\\d+ |je |meer |extra )?punten",
+      "\\bhartjes?\\b"
+    ],
+    "en": [
+      "\\bearn(s|ed|ing)? (\\d+ |more |extra |some )?points\\b",
+      "\\bhearts\\b",
+      "\\b\\d+ hearts?\\b"
+    ],
+    "es": [
+      "\\bgana(s|r)? (\\d+ |más |unos )?puntos\\b",
+      "\\bcorazones\\b"
+    ],
+    "fr": [
+      "\\bgagne(r|z|s)? (\\d+ |des |plus de )?points\\b",
+      "\\bc(œ|oe)urs\\b"
+    ]
+  }
 }

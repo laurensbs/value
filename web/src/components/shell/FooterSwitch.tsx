@@ -12,10 +12,10 @@ export function isMarketingPath(pathname: string): boolean {
 
 /**
  * Signed in, the app pages get a one-line footer instead of the big site footer. None at all
- * where you should not be distracted: during a walk and in the onboarding screens.
+ * where you should not be distracted: during a walk, in the onboarding screens and in a lesson.
  */
 export function FooterSwitch({ full, compact }: { full: React.ReactNode; compact: React.ReactNode }) {
   const pathname = usePathname()
-  if (pathname.startsWith('/walk/') || pathname.startsWith('/follow/') || pathname.startsWith('/onboarding')) return null
+  if (pathname.startsWith('/walk/') || pathname.startsWith('/follow/') || pathname.startsWith('/onboarding') || pathname.startsWith('/school/')) return null
   return isMarketingPath(pathname) ? full : compact
 }

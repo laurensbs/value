@@ -86,6 +86,14 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
 - [ ] **L** AI-verordening: de berichtcontrole is gebaseerd op regels, niet op AI [te controleren in de code]. Gaat dit veranderen? Dan opnieuw toetsen.
 - [ ] **L** European Accessibility Act: waarschijnlijk niet van toepassing (geen e-commerce, vrijstelling voor micro-ondernemingen) [te controleren]. Toegankelijkheid blijft wel goed ontwerp.
 
+### 2.6 Inhoud van de Hondenschool en de veiligheidsquiz
+
+De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte lessen; de veiligheidsquiz is verplicht vóór een aanvraag. De teksten staan in `web/messages/{taal}.json` onder `school.lessons` en `quiz`, en in de app in `ios/Rondje/Features/Lessons/LessonContent.swift`.
+
+- [ ] **H** **Laten nalezen door een opvang of dierenarts** vóór lancering, vooral de les **"Warm, koud en water"** (hitte: de hand 7 seconden op de stoep, "kort rondje in de schaduw, met water" bij 28 graden, strooizout) en de vragen over **loslaten** (les "De kennismaking": "alleen als de eigenaar het uitdrukkelijk zegt, en alleen waar het mag") en een **ontsnapte of bijtende hond** (les "Als er iets gebeurt"). Kloppen de adviezen, zijn ze volledig genoeg, en wekken ze geen verwachting die Rondje niet kan waarmaken?
+- [ ] **M** **Geen schijnzekerheid:** de quiz heeft 8 vaste vragen en geeft aan welke fout waren, dus iedereen haalt hem. De teksten zeggen daarom: "De quiz leert je de regels; de eigenaar beslist of je alleen mag." Toets of dat (en de lessen zelf) niet als garantie of screening wordt opgevat (zie risico 2 en 3 in §1).
+- [ ] **L** De lessen geven geen punten en ontsluiten niets; ze zijn een vrijwillige uitleg.
+
 ## 3. Nederland
 
 ### 3.1 Aansprakelijkheid
@@ -215,6 +223,7 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
 - [ ] **L** Verwerkingsregister (art. 30), datalekprocedure, privacy by design. Pushmeldingen: welke dienst (APNs, FCM) en welke gegevens [te controleren].
 - [ ] **L** Lettertypes en andere externe bronnen: laad niets van derden (zoals Google Fonts) zonder noodzaak. Het prototype bundelt de lettertypes al.
 - [ ] **M** **Contactpersoon van een opvang** (naam, e-mail, telefoon): alleen zichtbaar voor beheerders. Grondslag: gerechtvaardigd belang (de opvang controleren en bereiken). Staat in de privacyverklaring (versie 0.2); controleer of de medewerker zelf geïnformeerd moet worden (art. 14 AVG) als een collega hem opgeeft.
+- [ ] **L** **Hondenschool-voortgang** (tabel `lesson_progress`, sinds 4 okt 2026): alleen welke les iemand afrondde en wanneer, geen score. Zonder account blijft het in de browser (localStorage) tot iemand een account heeft. Gaat mee in de gegevensexport en weg met het account. Noemen in de privacyverklaring?
 - [ ] **M** **Tips en stemmen voor opvangen:** alleen gegevens over de organisatie, plus wie de tip gaf. Grondslag: gerechtvaardigd belang. Bewaartermijn: een jaar na afhandeling, niet afgehandeld na twee jaar (automatisch). Over particulieren slaan we bewust niets op (art. 14 AVG): toets of het vrije toelichtingsveld met de automatische weigering van telefoonnummers en e-mailadressen genoeg is.
 
 ### 6.1 Steun via Patreon (bijdragen aan de exploitant)

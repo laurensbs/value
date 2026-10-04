@@ -187,5 +187,11 @@
       "-- Seintjes only for people who turn them on: new profiles start with reminders off. Only the default changes; existing rows keep their value. Safe to run twice.\nALTER TABLE \"profile\" ALTER COLUMN \"reminders\" SET DEFAULT false;",
       "-- IF NOT EXISTS: safe to run twice. Off for everyone: only the iPhone app turns it on.\nALTER TABLE \"profile\" ADD COLUMN IF NOT EXISTS \"local_nudges\" boolean DEFAULT false NOT NULL;"
     ]
+  },
+  {
+    "tag": "0012_lesson_progress",
+    "statements": [
+      "-- The Hondenschool: one row per finished lesson (besluit Laurens 4 okt 2026). Only a new table; nothing existing changes. IF NOT EXISTS, with the key and the link to \"user\" inside it: safe to run twice. Removing an account removes its rows.\nCREATE TABLE IF NOT EXISTS \"lesson_progress\" (\n\t\"user_id\" text NOT NULL,\n\t\"lesson_id\" text NOT NULL,\n\t\"completed_at\" timestamp DEFAULT now() NOT NULL,\n\tCONSTRAINT \"lesson_progress_user_id_lesson_id_pk\" PRIMARY KEY(\"user_id\",\"lesson_id\"),\n\tCONSTRAINT \"lesson_progress_user_id_user_id_fk\" FOREIGN KEY (\"user_id\") REFERENCES \"public\".\"user\"(\"id\") ON DELETE cascade ON UPDATE no action\n);"
+    ]
   }
 ]

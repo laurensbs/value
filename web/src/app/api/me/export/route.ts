@@ -2,6 +2,7 @@ import { eq, or } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
+import { lessonRowsFor } from '@/server/lessons'
 import { getViewer } from '@/server/session'
 
 /** GDPR data export: everything Rondje stores about the signed-in person, as JSON. */
@@ -25,6 +26,8 @@ export async function GET() {
     notifications: await db.select().from(s.notification).where(eq(s.notification.userId, id)),
     points: await db.select().from(s.pointEvent).where(eq(s.pointEvent.userId, id)),
     badges: await db.select().from(s.award).where(eq(s.award.userId, id)),
+    // The Hondenschool: which lessons, and when (no points or score are kept for them).
+    lessonsDone: await lessonRowsFor(id),
     shelterTips: await db
       .select({
         kind: s.suggestion.kind,

@@ -90,6 +90,55 @@ describe('database migrations', () => {
     await db.close()
   }, 30_000)
 
+  it('0012 adds lesson_progress next to existing data: nothing else changes, twice is harmless, an account takes its lessons along', async () => {
+    const db = new PGlite()
+    const at = migrations.findIndex((m) => m.tag === '0012_lesson_progress')
+    expect(at).toBeGreaterThan(0)
+    for (const migration of migrations.slice(0, at)) for (const statement of migration.statements) await db.exec(statement)
+
+    // A database as production has it: people, a profile with a passed quiz, points and a badge.
+    await db.exec(`
+      insert into "user" (id, name, email, email_verified, created_at, updated_at) values
+        ('noor', 'Noor', 'noor@example.org', false, now(), now()),
+        ('ans', 'Ans', 'ans@example.org', false, now(), now());
+      insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code, quiz_passed_at, updated_at)
+        values ('noor', 'Noor', '2002-02-02', 'NL', 'Utrecht', now(), '0.2', 'NOO234', '2026-10-01 09:00', '2026-10-01 09:00');
+      insert into point_event (user_id, kind, ref, points, at) values ('noor', 'quiz', '', 15, now());
+      insert into award (user_id, key, tier) values ('noor', 'quiz', 1);
+    `)
+    const before = await db.query<{ n: number }>(`select (select count(*) from profile) + (select count(*) from point_event) + (select count(*) from award) as n`)
+
+    // Twice: a second cold start (or a preview build) that runs it again changes nothing.
+    for (const statement of migrations[at].statements) await db.exec(statement)
+    for (const migration of migrations.slice(at)) for (const statement of migration.statements) await db.exec(statement)
+
+    const after = await db.query<{ n: number }>(`select (select count(*) from profile) + (select count(*) from point_event) + (select count(*) from award) as n`)
+    expect(after.rows[0].n).toEqual(before.rows[0].n)
+    const noor = await db.query<{ quiz: string; updated: string }>(
+      `select to_char(quiz_passed_at, 'YYYY-MM-DD HH24:MI') as quiz, to_char(updated_at, 'YYYY-MM-DD HH24:MI') as updated from profile where user_id = 'noor'`,
+    )
+    expect(noor.rows[0]).toEqual({ quiz: '2026-10-01 09:00', updated: '2026-10-01 09:00' })
+
+    // One row per lesson: the same lesson again is refused, and the time is filled in.
+    await db.exec(`insert into lesson_progress (user_id, lesson_id) values ('noor', 'hello'), ('noor', 'body'), ('ans', 'hello')`)
+    await expect(db.exec(`insert into lesson_progress (user_id, lesson_id) values ('noor', 'hello')`)).rejects.toThrow()
+    await expect(db.exec(`insert into lesson_progress (user_id, lesson_id) values ('niemand', 'hello')`)).rejects.toThrow()
+    const rows = await db.query<{ user_id: string; lesson_id: string; has_time: boolean }>(
+      `select user_id, lesson_id, completed_at is not null as has_time from lesson_progress order by user_id, lesson_id`,
+    )
+    expect(rows.rows).toEqual([
+      { user_id: 'ans', lesson_id: 'hello', has_time: true },
+      { user_id: 'noor', lesson_id: 'body', has_time: true },
+      { user_id: 'noor', lesson_id: 'hello', has_time: true },
+    ])
+
+    // Removing an account (GDPR) removes its lessons, and only its own.
+    await db.exec(`delete from "user" where id = 'noor'`)
+    const left = await db.query<{ user_id: string }>('select user_id from lesson_progress')
+    expect(left.rows).toEqual([{ user_id: 'ans' }])
+    await db.close()
+  }, 30_000)
+
   it('only ever adds: no drops or renames after the first migration', () => {
     for (const migration of migrations.slice(1)) {
       for (const statement of migration.statements) {

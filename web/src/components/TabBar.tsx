@@ -18,8 +18,9 @@ export interface Tab {
  */
 export function TabBar({ tabs, label }: { tabs: Tab[]; label: string }) {
   const pathname = usePathname()
-  // During a walk the screen is in focus mode: leaving the page would stop the GPS.
-  if (pathname.startsWith('/walk/') || pathname.startsWith('/follow/')) return null
+  // During a walk the screen is in focus mode: leaving the page would stop the GPS. A Hondenschool
+  // lesson is full screen too, with "Niet nu" as the way out.
+  if (pathname.startsWith('/walk/') || pathname.startsWith('/follow/') || pathname.startsWith('/school/')) return null
   return (
     <nav className="app-tabs" aria-label={label}>
       <div className="app-tabs-inner">

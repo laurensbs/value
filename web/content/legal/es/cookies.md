@@ -38,6 +38,7 @@ Rondje guarda algunas cosas solo en tu propio dispositivo, en el navegador o en 
 
 - **Registros de ánimo.** Cómo te sientes antes y después de un paseo. Estos datos se quedan en tu dispositivo y nunca llegan a Rondje.
 - **Una pregunta para más tarde.** Si eliges «Más tarde» cuando te preguntamos por las notificaciones o por poner Rondje en tu pantalla de inicio, tu navegador recuerda durante dos semanas no volver a preguntar todavía. Si eliges «Ya está», lo recuerda durante un año.
+- **La escuela canina.** Sin cuenta, tu navegador recuerda qué lecciones terminaste (`rondje.lessons`); con una cuenta pasan a tu cuenta y se borran de aquí. Durante el test de seguridad, tu navegador recuerda en qué pregunta estabas hasta que cierres la pestaña (`rondje.quiz`), para que puedas seguir después de una lección.
 - **Preferencias**, como la visualización o los ajustes que elijas [pendiente de verificar: cuáles].
 
 Puedes borrar estos datos tú mismo, por ejemplo eliminando los datos del sitio en tu navegador, o los datos de la app o la propia app. Ten en cuenta que tus registros de ánimo desaparecerán de verdad. Nosotros no tenemos ninguna copia.

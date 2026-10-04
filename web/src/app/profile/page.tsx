@@ -16,6 +16,8 @@ import type { Locale } from '@/i18n/config'
 import { inviteUrl } from '@/lib/invite'
 import { siteUrl } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
+import { LESSONS } from '@/lib/lessons'
+import { lessonsDoneBy } from '@/server/lessons'
 import { progressFor } from '@/server/progress'
 import { progressJson } from '@/server/progress-json'
 import { webPushKey } from '@/server/push'
@@ -53,7 +55,7 @@ export default async function ProfilePage() {
   const pushKey = webPushKey()
   const p = viewer.profile
   const db = await getDb()
-  const [native, t, locale, signals, progress, friends, [{ n: invited }]] = await Promise.all([
+  const [native, t, locale, signals, progress, friends, [{ n: invited }], lessons] = await Promise.all([
     isNativeRequest(),
     getTranslations(),
     getLocale() as Promise<Locale>,
@@ -61,6 +63,7 @@ export default async function ProfilePage() {
     progressFor(viewer).then(progressJson),
     dogFriendsOf(viewer.userId),
     p.referralCode ? db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode)) : Promise.resolve([{ n: 0 }]),
+    lessonsDoneBy(viewer.userId),
   ])
   const invite = inviteUrl(siteUrl(), p.referralCode ?? '')
   const walksTogether = friends.reduce((n, f) => n + f.walks, 0)
@@ -93,6 +96,7 @@ export default async function ProfilePage() {
             />
           ) : null}
           <HubRow href="/breathe" icon="breathe" title={t('profileHub.breatheTitle')} text={t('profileHub.breatheText')} tone="calm" />
+          <HubRow href="/school" icon="school" title={t('school.title')} text={t('profileHub.schoolText', { done: lessons.length, total: LESSONS.length })} tone="ball" />
           <HubRow
             href="/profile/quiz"
             icon="shield"

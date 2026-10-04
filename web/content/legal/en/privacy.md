@@ -54,6 +54,7 @@ Questions about privacy? Email us at {{contact}}. [To verify: whether a data pro
 **Progress and reminders**
 
 - your points, level and badges, worked out from what you did on Rondje (such as walks, the safety quiz or a photo for the owner). Only you can see them;
+- which dog school lessons you finished and when, without a score;
 - your weekly goal, if you choose one, and whether you want friendly reminders;
 - which reminders we sent you and when, so we never send too many.
 

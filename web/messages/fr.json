@@ -997,7 +997,170 @@
     "comesBack": "Cette question reviendra une fois encore plus tard.",
     "next": "Continuer",
     "later": "Plus tard",
-    "laterHint": "Sans le quiz, vous ne pouvez pas encore demander de première rencontre."
+    "laterHint": "Sans le quiz, vous ne pouvez pas encore demander de première rencontre.",
+    "honest": "Le quiz vous apprend les règles ; le propriétaire décide si vous pouvez promener seul.",
+    "lessonLink": "Lire la leçon « {title} »",
+    "schoolFirst": "D'abord l'école des chiens ? Cinq courtes leçons, environ 2 minutes chacune."
+  },
+  "school": {
+    "title": "École des chiens",
+    "metaDescription": "Cinq courtes leçons pour promener un chien en sécurité : dire bonjour, langage corporel, la première rencontre, chaud et froid, et en cas de souci.",
+    "lede": "Cinq courtes leçons pour promener en sécurité. Environ 2 minutes chacune.",
+    "guest": "La première leçon se fait sans compte.",
+    "pace": "Pas de points, rien ne presse : à votre rythme, aussi souvent que vous voulez.",
+    "count": "{done} leçons sur {total}",
+    "pathLabel": "Leçons",
+    "here": "On continue ici",
+    "stop": "{title}, leçon {n} sur {total}",
+    "stopDone": "{title}, leçon {n} sur {total}, terminée",
+    "stopNext": "{title}, leçon {n} sur {total}, la suivante",
+    "quizPassed": "Réussi",
+    "quizStopPassed": "{title}, réussi",
+    "notNow": "Pas maintenant",
+    "progress": "Progression dans cette leçon",
+    "next": "Continuer",
+    "comesBack": "Cette question revient une fois à la fin de la leçon.",
+    "hold": "Maintenez",
+    "held": "Terminé",
+    "holdHint": "Faites-le pour de vrai, dehors. Maintenez le bouton jusqu'à ce que le cercle soit plein.",
+    "done": "Leçon terminée !",
+    "doneCount": "{done} leçons sur {total} terminées",
+    "quizReady": "Prêt pour le quiz ? Vous êtes bien préparé.",
+    "toQuiz": "Vers le quiz",
+    "later": "Plus tard",
+    "nextLesson": "Leçon suivante : {title}",
+    "toPath": "Vers l'école des chiens",
+    "backToQuiz": "Retour au quiz",
+    "wallTitle": "Vous voulez continuer ?",
+    "wallText": "Avec un compte, vous pouvez faire le quiz et demander à promener un chien.",
+    "wallSignup": "Créer un compte",
+    "wallLogin": "J'ai déjà un compte",
+    "lessons": {
+      "hello": {
+        "title": "Dire bonjour",
+        "sniff": "On se présente à un chien avec la main. Laissez-le d'abord renifler calmement.",
+        "first": {
+          "q": "Vous voyez Bobbie pour la première fois. Que faites-vous ?",
+          "a0": "Garder la main basse et le laisser renifler",
+          "a1": "Lui caresser tout de suite la tête",
+          "why1": "Une main venue d'en haut, pour un chien, c'est quelque chose de grand qui arrive sur lui.",
+          "a2": "Le soulever pour un câlin",
+          "why2": "Être soulevé, c'est stressant pour un chien qui ne vous connaît pas encore.",
+          "explain": "Exactement ! Comme ça, il sait qui vous êtes."
+        },
+        "ask": "Un chien dans la rue ? Demandez toujours d'abord au propriétaire si vous pouvez le caresser.",
+        "away": {
+          "q": "Bobbie détourne la tête quand vous le caressez. Qu'est-ce que ça veut dire ?",
+          "a0": "Ça suffit pour l'instant, laissez-lui de l'espace",
+          "a1": "Il veut plus de caresses",
+          "why1": "Se détourner, c'est une façon polie de dire non.",
+          "explain": "Bien vu. Écouter un chien, c'est la moitié du travail."
+        }
+      },
+      "body": {
+        "title": "Langage corporel",
+        "signals": "Bâiller, se lécher les babines et détourner le regard veulent souvent dire : je ne suis pas à l'aise.",
+        "space": {
+          "q": "Quel chien veut un peu d'espace ?",
+          "a0": "Content",
+          "why0": "Ce chien est content. Regardez les yeux et la bouche.",
+          "a1": "Mal à l'aise",
+          "a2": "Endormi",
+          "why2": "Ce chien est juste fatigué.",
+          "explain": "Oui. Ses yeux regardent ailleurs et ses sourcils sont inquiets."
+        },
+        "then": {
+          "q": "Que faites-vous alors ?",
+          "a0": "Chercher un endroit plus calme",
+          "a1": "Continuer vers la foule",
+          "why1": "La foule rend les choses encore plus stressantes pour lui.",
+          "a2": "Le serrer fort dans vos bras",
+          "why2": "Pour beaucoup de chiens, un câlin, c'est comme être retenu.",
+          "explain": "Exactement. Le calme aide plus que l'attention."
+        },
+        "whole": "Remuer la queue ne veut pas toujours dire content. Regardez tout le chien : yeux, oreilles, bouche et queue."
+      },
+      "meet": {
+        "title": "La première rencontre",
+        "together": "La première fois, vous promenez toujours le chien avec le propriétaire.",
+        "id": "Apportez votre pièce d'identité. Le propriétaire la regarde, {app} n'en garde jamais de copie.",
+        "bring": {
+          "q": "Qu'apportez-vous à la première rencontre ?",
+          "a0": "Votre pièce d'identité",
+          "a1": "De l'argent pour le propriétaire",
+          "why1": "{app} est gratuit. L'argent n'a jamais sa place ici.",
+          "a2": "Un sachet de friandises",
+          "why2": "Des friandises seulement si le propriétaire est d'accord.",
+          "explain": "Oui. Comme ça, le propriétaire sait qui promène le chien."
+        },
+        "solo": {
+          "q": "Après la première rencontre. Quand pouvez-vous promener le chien seul ?",
+          "a0": "Quand le propriétaire vous fait confiance, a vu votre pièce d'identité en personne et que vous avez réussi le quiz",
+          "a1": "Tout de suite, vous le connaissez maintenant",
+          "why1": "C'est le propriétaire qui décide. Chien par chien.",
+          "explain": "C'est ça. Pas à pas, en sécurité pour tout le monde."
+        },
+        "leash": {
+          "q": "Le chien peut-il être lâché ?",
+          "a0": "Seulement si le propriétaire le dit clairement, et seulement là où c'est permis",
+          "a1": "Oui, s'il obéit bien",
+          "why1": "Même un chien qui obéit bien reste en laisse, sauf si le propriétaire dit autre chose.",
+          "explain": "Exactement. En cas de doute, il reste en laisse."
+        }
+      },
+      "weather": {
+        "title": "Chaud, froid et eau",
+        "hand": {
+          "text": "Posez votre main à plat sur le trottoir. Gardez-la 7 secondes.",
+          "after": "Trop chaud pour votre main ? Alors aussi pour ses pattes. Marchez dans l'herbe ou à l'ombre."
+        },
+        "hot": {
+          "q": "Il fait 28 degrés. Qu'est-ce qui convient ?",
+          "a0": "Une courte balade à l'ombre, avec de l'eau",
+          "a1": "Courir, comme ça c'est vite fini",
+          "why1": "Courir dans la chaleur est dur pour un chien.",
+          "a2": "Une longue balade au soleil",
+          "why2": "Le soleil et l'asphalte chaud, c'est trop pour ses pattes.",
+          "explain": "Exactement. Court, au frais et avec de l'eau."
+        },
+        "salt": "En hiver, le sel de déneigement pique les pattes. Essuyez-les après la balade.",
+        "dark": "Dans le noir ? Une lampe sur la laisse vous rend tous les deux plus visibles."
+      },
+      "help": {
+        "title": "S'il se passe quelque chose",
+        "sos": "Pendant la balade, le bouton « Besoin d'aide » est toujours en bas. Vous y trouvez le 112, le propriétaire et quoi faire.",
+        "loose": {
+          "q": "Le chien s'est échappé. Que faites-vous d'abord ?",
+          "a0": "Rester calme, ne pas courir après le chien et appeler tout de suite le propriétaire",
+          "a1": "Courir vite après lui",
+          "why1": "Courir en fait un jeu. Alors il s'enfuit plus vite.",
+          "a2": "Chercher d'abord soi-même, puis appeler le propriétaire",
+          "why2": "Appelez tout de suite le propriétaire. À deux, vous le retrouverez plus vite.",
+          "explain": "Oui. S'accroupir et l'appeler joyeusement aide aussi."
+        },
+        "bite": {
+          "q": "Le chien mord un autre chien. Que faites-vous ?",
+          "a0": "Mettre tout le monde en sécurité, échanger ses coordonnées, appeler le propriétaire et le signaler",
+          "a1": "Continuer vite son chemin",
+          "why1": "Partir n'aide personne. L'autre propriétaire a besoin de vos coordonnées.",
+          "explain": "Bien. Après la balade, vous le signalez avec le bouton « Signaler »."
+        },
+        "otherDog": {
+          "q": "Un autre chien vient vers vous. Que faites-vous ?",
+          "a0": "Garder ses distances et demander d'abord à l'autre propriétaire",
+          "a1": "Les laisser renifler",
+          "why1": "Tous les chiens n'aiment pas les chiens inconnus.",
+          "explain": "Bien joué. En cas de doute, continuez calmement."
+        },
+        "late": {
+          "q": "Vous rentrez plus tard que prévu. Que faites-vous ?",
+          "a0": "Prévenir tout de suite le propriétaire",
+          "a1": "Rien, l'appli le montre de toute façon",
+          "why1": "Un petit message évite les inquiétudes.",
+          "explain": "Exactement. Prévenir, c'est toujours bien."
+        }
+      }
+    }
   },
   "shelter": {
     "title": "Pour les refuges",
@@ -1221,7 +1384,9 @@
     "liability": "Qui est responsable de quoi ?",
     "liabilityText": "Rondje met les gens en relation et n'est pas lui-même partie à l'accord. Le propriétaire reste responsable des dommages causés par le chien et doit être assuré pour cela. Nous recommandons aux promeneurs de souscrire leur propre assurance responsabilité civile. Consultez les conditions pour tous les détails.",
     "report": "Vous avez vu ou vécu quelque chose ?",
-    "reportText": "Signalez-le avec le bouton « Signaler » sur un profil, un chien ou une balade. Nous essayons d'examiner chaque signalement sous 24 heures."
+    "reportText": "Signalez-le avec le bouton « Signaler » sur un profil, un chien ou une balade. Nous essayons d'examiner chaque signalement sous 24 heures.",
+    "schoolText": "Cinq courtes leçons pour promener en sécurité, environ 2 minutes chacune. La première se fait sans compte.",
+    "schoolLink": "Commencer par la leçon 1"
   },
   "report": {
     "title": "Signaler",
@@ -2298,7 +2463,8 @@
     "supportText": "Gratuit et sans publicité. Découvrez comment aider.",
     "tipText": "Vous connaissez un refuge ou quelqu'un avec un chien qui aurait besoin d'aide ?",
     "shelterText": "Vous travaillez dans un refuge ? Mettez vos chiens en ligne ici.",
-    "adminText": "Signalements, refuges, chiffres et le centre de lancement"
+    "adminText": "Signalements, refuges, chiffres et le centre de lancement",
+    "schoolText": "{done} leçons sur {total}, à votre rythme"
   },
   "shell": {
     "tabs": {

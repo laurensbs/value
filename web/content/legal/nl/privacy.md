@@ -54,6 +54,7 @@ Vragen over privacy? Mail ons via {{contact}}. [Te controleren: of een functiona
 **Voortgang en herinneringen**
 
 - je punten, niveau en penningen, berekend uit wat je op Rondje deed (zoals gelopen rondjes, de veiligheidsquiz of een foto voor de eigenaar). Alleen jij ziet ze;
+- welke lessen van de Hondenschool je hebt afgerond en wanneer, zonder score;
 - je weekdoel, als je er een kiest, en of je vriendelijke herinneringen wilt;
 - welke herinneringen we je stuurden en wanneer, zodat we er nooit te veel sturen.
 

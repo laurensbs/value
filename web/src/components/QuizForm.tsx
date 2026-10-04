@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { startTransition, useActionState, useEffect, useRef, useState } from 'react'
+import { startTransition, useActionState, useEffect, useMemo, useRef, useSyncExternalStore } from 'react'
+import { QUIZ_LESSON } from '@/lib/lessons'
 import { QUIZ } from '@/lib/quiz'
+import { freshQuiz, parseQuizProgress, type QuizProgress, readQuizStore, saveQuizProgress, subscribeQuizStore } from '@/lib/quiz-progress'
 import { playSound } from '@/lib/sounds'
 import { submitQuiz, type FormState } from '@/server/actions/profile'
 import { Icon } from './Icon'
@@ -22,17 +24,20 @@ async function send(prev: QuizState, data: FormData): Promise<QuizState> {
 /**
  * The safety quiz, calmly (besluit 4 okt 2026): one question at a time, no clock and no score. After
  * each answer you read why; a question you miss comes back at the end, until every one is right. Only
- * then are the answers sent, and the server checks them again (submitQuiz).
+ * then are the answers sent, and the server checks them again (submitQuiz). Where you are is kept for
+ * this tab (lib/quiz-progress.ts), so a detour through a lesson carries on at the same question.
+ * `back` is this quiz page's own address.
  */
-export function QuizForm({ next }: { next: string }) {
+export function QuizForm({ next, back }: { next: string; back: string }) {
   const t = useTranslations('quiz')
+  const ts = useTranslations('school')
   const te = useTranslations('errors')
   const [state, submit, pending] = useActionState<QuizState, FormData>(send, { ok: false })
-  const [queue, setQueue] = useState<string[]>(() => QUIZ.map((q) => q.id))
-  const [round, setRound] = useState(0)
-  const [answers, setAnswers] = useState<Record<string, number>>({})
-  const [choice, setChoice] = useState<number | null>(null)
-  const [checked, setChecked] = useState(false)
+  // The server renders the start; the browser then picks up where this tab was (if anywhere).
+  const raw = useSyncExternalStore(subscribeQuizStore, readQuizStore, () => null)
+  const progress = useMemo(() => parseQuizProgress(raw, back) ?? freshQuiz(back), [raw, back])
+  const { queue, round, answers, choice, checked } = progress
+  const update = (change: Partial<QuizProgress>) => saveQuizProgress({ ...progress, ...change })
   const heading = useRef<HTMLLegendElement>(null)
   const feedback = useRef<HTMLDivElement>(null)
   const done = useRef<HTMLHeadingElement>(null)
@@ -50,6 +55,8 @@ export function QuizForm({ next }: { next: string }) {
 
   useEffect(() => {
     if (state.ok) {
+      // Passed: nothing to come back to.
+      saveQuizProgress(null)
       done.current?.focus({ preventScroll: true })
       playSound('success')
     }
@@ -74,7 +81,7 @@ export function QuizForm({ next }: { next: string }) {
 
   function check() {
     if (choice === null || !question) return
-    setChecked(true)
+    update({ checked: true })
     // A soft sound for a right answer; a miss stays quiet.
     if (choice === question.correct) playSound('select')
   }
@@ -84,27 +91,32 @@ export function QuizForm({ next }: { next: string }) {
     const rest = queue.slice(1)
     if (right) {
       const all = { ...answers, [question.id]: choice }
-      setAnswers(all)
       if (rest.length === 0) {
+        update({ answers: all })
         const data = new FormData()
         for (const [id, answer] of Object.entries(all)) data.set(`q-${id}`, String(answer))
         startTransition(() => submit(data))
         return
       }
-      setQueue(rest)
+      update({ answers: all, queue: rest, choice: null, checked: false, round: round + 1 })
     } else {
       // A question you missed comes back once the others are done.
-      setQueue([...rest, question.id])
+      update({ queue: [...rest, question.id], choice: null, checked: false, round: round + 1 })
     }
-    setChoice(null)
-    setChecked(false)
-    setRound((n) => n + 1)
   }
 
   if (!question) return null
 
   return (
     <div className="quiz-flow stack">
+      {/* One paw per question, like the app: green once it was right, the current one a little bigger. Never red. */}
+      <div className="quiz-paws" aria-hidden="true">
+        {QUIZ.map((q) => (
+          <span key={q.id} className={`${q.id in answers ? 'is-right' : ''}${q.id === question.id ? ' is-now' : ''}`}>
+            <Icon name="paw" size={20} />
+          </span>
+        ))}
+      </div>
       <p className="muted small" aria-live="polite">
         {t('left', { n: queue.length })}
       </p>
@@ -124,7 +136,7 @@ export function QuizForm({ next }: { next: string }) {
           <div className="stack-s">
             {Array.from({ length: question.options }, (_, i) => (
               <label key={i} className={`check quiz-option${checked && i === question.correct ? ' is-right' : ''}${checked && i === choice && !right ? ' is-wrong' : ''}`}>
-                <input type="radio" name="answer" value={i} checked={choice === i} onChange={() => setChoice(i)} />
+                <input type="radio" name="answer" value={i} checked={choice === i} onChange={() => update({ choice: i })} />
                 <span>{t(`q.${question.id}.a${i}`)}</span>
               </label>
             ))}
@@ -136,6 +148,12 @@ export function QuizForm({ next }: { next: string }) {
             {right ? null : <p>{t('answerWas', { answer: t(`q.${question.id}.a${question.correct}`) })}</p>}
             <p>{t(`q.${question.id}.why`)}</p>
             {right ? null : <p className="muted small">{t('comesBack')}</p>}
+            {right || !QUIZ_LESSON[question.id] ? null : (
+              // The lesson that teaches this, and from there straight back to the quiz.
+              <Link href={`/school/${QUIZ_LESSON[question.id]}?back=${encodeURIComponent(back)}`} className="quiz-lesson-link">
+                {t('lessonLink', { title: ts(`lessons.${QUIZ_LESSON[question.id]}.title`) })}
+              </Link>
+            )}
           </div>
         ) : null}
         {state.error ? (

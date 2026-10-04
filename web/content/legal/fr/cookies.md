@@ -38,6 +38,7 @@ Rondje enregistre certaines choses uniquement sur votre propre appareil, dans le
 
 - **Bilans d'humeur.** Comment vous vous sentez avant et après une promenade. Ces données restent sur votre appareil et n'arrivent jamais chez Rondje.
 - **Une question pour plus tard.** Si vous choisissez « Plus tard » quand nous vous proposons les notifications ou de mettre Rondje sur votre écran d'accueil, votre navigateur retient pendant deux semaines de ne pas reposer la question. Si vous choisissez « C’est déjà fait », il le retient pendant un an.
+- **L'école des chiens.** Sans compte, votre navigateur retient les leçons que vous avez terminées (`rondje.lessons`) ; avec un compte, elles passent sur votre compte et sont effacées ici. Pendant le quiz de sécurité, votre navigateur retient à quelle question vous en étiez jusqu'à ce que vous fermiez l'onglet (`rondje.quiz`), pour que vous puissiez continuer après une leçon.
 - **Préférences**, comme l'affichage ou les réglages que vous choisissez [à vérifier : lesquels].
 
 Vous pouvez effacer ces données vous-même, par exemple en supprimant les données du site dans votre navigateur, ou les données de l'application ou l'application elle-même. Attention : vos bilans d'humeur disparaîtront alors vraiment. Nous n'en avons aucune copie.
