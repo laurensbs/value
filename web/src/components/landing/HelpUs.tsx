@@ -53,9 +53,10 @@ export async function HelpUs({ native }: { native: boolean }) {
             </p>
           </div>
         ) : null}
+        {/* ?bron= counts sign-ups that came through this block (lib/join.ts); the Whydonate link carries nothing. */}
         <div className="lp-help-actions">
           <SupportButton url={cfg.crowdfundingUrl} label={t('home.helpUs.give')} className="button primary lp-cta lp-help-give" />
-          <Link href="/aanmelden" className="lp-help-join">
+          <Link href="/aanmelden?bron=helpons" className="lp-help-join">
             {t('home.helpUs.join')} →
           </Link>
         </div>

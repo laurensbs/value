@@ -27,7 +27,7 @@ export async function NewestDogs({ dogs }: { dogs: NewestDog[] }) {
             {t('landing.dogs.emptyTitle')}
           </h2>
           <p className="muted">{t('landing.dogs.emptyText')}</p>
-          <Link href="/aanmelden" className="button primary lp-cta">
+          <Link href="/aanmelden?bron=voorpagina" className="button primary lp-cta">
             {t('landing.dogs.emptyCta')}
             <Icon name="arrow" size={18} />
           </Link>

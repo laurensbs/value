@@ -19,7 +19,7 @@ test('home: "Help ons!" with the crowdfunding, right after the hero, never in th
   await expect(give).toHaveAttribute('href', 'https://whydonate.com/nl/fundraising/example')
   await expect(give).toHaveAttribute('target', '_blank')
   await expect(give).toHaveAttribute('rel', /noopener/)
-  await expect(help.getByRole('link', { name: /of meld je aan/ })).toHaveAttribute('href', '/aanmelden')
+  await expect(help.getByRole('link', { name: /of meld je aan/ })).toHaveAttribute('href', '/aanmelden?bron=helpons')
   await expect(help.getByText(/naar Voorbeeld, die Rondje Mee bouwt/)).toBeVisible()
   // The numbers from content/crowdfunding.json, once it has a goal and an amount raised.
   const { progress } = campaign(crowdfunding)
