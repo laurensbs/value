@@ -19,7 +19,8 @@ export async function DogPeek({ items }: { items: DogListItem[] }) {
           <h2 id="lp-peek-title" className="lp-h2">
             {t('landing.dogs.title')}
           </h2>
-          <p className="lp-sub">{t('landing.dogs.lede')}</p>
+          {/* Only examples so far: say so, instead of "dogs waiting for a walk". */}
+          <p className="lp-sub">{items.every(({ dog }) => dog.isDemo) ? t('landing.dogs.ledeExamples') : t('landing.dogs.lede')}</p>
         </div>
         <Link href="/dogs" className="link-button lp-peek-all">
           {t('landing.dogs.all')} →

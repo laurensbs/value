@@ -29,7 +29,9 @@ test('a first meeting by phone: chosen in the form, shown everywhere, and never 
   await shot(walker.page, 'meet-01-form-phone')
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
-  await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
+  // The confirmation says what happens next for a call: first the call, then meeting in person.
+  await expect(walker.page.getByRole('heading', { name: 'Verstuurd naar Ria.' })).toBeVisible()
+  await expect(walker.page.getByText('Eerst bellen jullie even. Daarna spreken jullie af in het echt.')).toBeVisible()
 
   // The owner hears how, and accepts. A call gives no ID check and no solo walks.
   await owner.page.goto('/notifications')
@@ -37,7 +39,7 @@ test('a first meeting by phone: chosen in the form, shown everywhere, and never 
   await owner.page.goto('/requests?view=incoming')
   await expect(owner.page.locator('.pill.meet-via')).toHaveText('Eerst bellen')
   await owner.page.getByRole('button', { name: 'Accepteren' }).click()
-  await expect(owner.page.getByText('Geaccepteerd').first()).toBeVisible()
+  await expect(owner.page.getByText('Afgesproken', { exact: true }).first()).toBeVisible()
   await expect(owner.page.getByText(/Het ID bekijken en zelfstandig wandelen toestaan kan pas/)).toBeVisible()
   await expect(owner.page.getByLabel(/ID in het echt gezien/)).toHaveCount(0)
   // What to talk about on the phone ends with meeting in person, not with checking the ID.
@@ -45,6 +47,9 @@ test('a first meeting by phone: chosen in the form, shown everywhere, and never 
   await expect(owner.page.locator('.meet-check')).not.toContainText('Bekijk het ID')
   await shot(owner.page, 'meet-02-requests-incoming')
 
+  // The walker hears yes for the call, not for a walk.
+  await walker.page.goto('/notifications')
+  await expect(walker.page.getByText('Ja! Je belafspraak over Pip staat.')).toBeVisible()
   // The walker sees the number to call, no walk to start, and the next step: meeting in person.
   await walker.page.goto('/requests')
   await expect(walker.page.locator('.pill.meet-via')).toHaveText('Eerst bellen')

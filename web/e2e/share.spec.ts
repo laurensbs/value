@@ -75,7 +75,8 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
   await neighbour.page.getByLabel('Wachtwoord').fill('wandelen-123')
   await neighbour.page.getByRole('button', { name: 'Account maken' }).click()
   await expect(neighbour.page).toHaveURL(/\/onboarding/)
-  await onboard(neighbour.page, { birthDate: '1999-02-03', city: 'Utrecht', bio: 'Ik wandel graag.', phone: '', walker: true, owner: false })
+  // Back to Saar afterwards, so the last button says "carry on" rather than "show me the dogs".
+  await onboard(neighbour.page, { birthDate: '1999-02-03', city: 'Utrecht', bio: 'Ik wandel graag.', phone: '', walker: true, owner: false, next: true })
   await expect(neighbour.page).toHaveURL(new RegExp(`${dogPath}#plan$`))
   await expect(neighbour.page.getByRole('button', { name: 'Verstuur aanvraag' })).toBeVisible()
 

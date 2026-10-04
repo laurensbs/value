@@ -56,13 +56,13 @@ async function walkerOnAWalk(browser: Browser, id: string) {
   expect(await smallTargets(walker.page)).toEqual([])
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
-  await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
+  await expect(walker.page.getByRole('heading', { name: 'Verstuurd naar Ans.' })).toBeVisible()
 
   await owner.page.goto('/requests')
   await expect(owner.page.getByRole('button', { name: 'Accepteren' })).toBeVisible()
   expect(await smallTargets(owner.page)).toEqual([])
   await owner.page.getByRole('button', { name: 'Accepteren' }).click()
-  await expect(owner.page.getByText('Geaccepteerd').first()).toBeVisible()
+  await expect(owner.page.getByText('Afgesproken', { exact: true }).first()).toBeVisible()
 
   await walker.page.goto('/requests')
   await walker.page.getByRole('button', { name: 'Start rondje' }).click()
@@ -70,7 +70,6 @@ async function walkerOnAWalk(browser: Browser, id: string) {
   await expect(walker.page.getByLabel('Riem en tuig zitten goed vast')).toBeVisible()
   expect(await smallTargets(walker.page)).toEqual([])
   await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
-  await walker.page.getByLabel('Ik heb poepzakjes bij me').check()
   await walker.page.getByLabel('Mijn telefoon is opgeladen').check()
   await walker.page.getByRole('button', { name: 'Start het rondje' }).click()
   await expect(walker.page.getByRole('timer')).toBeVisible()

@@ -2003,6 +2003,338 @@ fieldset.form-section {
   border-radius: 14px;
 }
 
+/* ---------- Trust moments: sent, accepted, trust given (onderzoek §3.3, §3.4) ---------- */
+
+@keyframes moment-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes moment-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 8px));
+  }
+}
+
+@keyframes busy-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* While something is on its way, a small wheel inside the button; the label stays where it is. */
+.button[aria-busy='true']::after {
+  content: '';
+  flex: none;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: busy-spin 0.8s linear infinite;
+}
+
+/* "Verstuurd naar Ans.": the paw pops with the send sound (0-500 ms), the title follows at 150 ms, then
+   the three steps 80 ms apart. It stays until "Klaar"; both buttons work from the start. */
+.request-sent {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  animation: moment-rise var(--motion-scherm) var(--ease-scherm) backwards;
+  --rise: 16px;
+}
+
+.request-sent-paw {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--ball);
+  color: var(--on-ball);
+  animation: moment-pop var(--motion-pop) var(--ease-pop) backwards;
+}
+
+.request-sent-title {
+  font-size: 1.55rem;
+  outline: none;
+  animation: moment-rise var(--motion-scherm) var(--ease-scherm) 150ms backwards;
+  --rise: 8px;
+}
+
+.request-sent-eyebrow {
+  margin-top: 2px;
+  animation: moment-rise var(--motion-klein) var(--ease-klein) 230ms backwards;
+  --rise: 0px;
+}
+
+.request-sent-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.request-sent-steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  align-items: center;
+  animation: moment-rise var(--motion-klein) var(--ease-klein) calc(300ms + var(--n, 0) * 80ms) backwards;
+  --rise: 6px;
+}
+
+.request-sent-steps li:nth-child(2) {
+  --n: 1;
+}
+
+.request-sent-steps li:nth-child(3) {
+  --n: 2;
+}
+
+.request-sent-steps li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--grass-soft);
+  color: var(--grass);
+  font-weight: 750;
+}
+
+.request-sent-notify {
+  color: var(--muted);
+  animation: moment-rise var(--motion-klein) var(--ease-klein) 540ms backwards;
+  --rise: 0px;
+}
+
+.request-sent-actions {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.request-sent-actions .button {
+  min-height: 56px;
+}
+
+/* After "Klaar": one quiet line, so the form does not come back empty. */
+.request-sent-done {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--grass-soft);
+  outline: none;
+  animation: fade-in var(--motion-klein) ease-out backwards;
+}
+
+.request-sent-done p {
+  flex: 1 1 180px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.request-sent-done-icon,
+.accept-note-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--grass);
+  color: var(--on-grass);
+}
+
+/* Accept and decline side by side, two halves of 48 px. */
+.decide-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.decide-buttons .button {
+  min-height: 48px;
+}
+
+/* The status label changes colour when the answer comes in (klein). */
+.list-item.request .pill {
+  transition: background-color var(--motion-klein) var(--ease-klein), color var(--motion-klein) var(--ease-klein);
+}
+
+.list-item.request:has(.accept-reveal.is-new) .spread .pill {
+  animation: moment-pop var(--motion-klein) var(--ease-pop) backwards;
+}
+
+.accept-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--ball);
+  color: var(--on-ball);
+  font-weight: 650;
+  outline: none;
+}
+
+/* Right after accepting: the warm line, then the contact details and the rest slide in (scherm). */
+.accept-reveal.is-new > * {
+  animation: moment-rise var(--motion-scherm) var(--ease-scherm) backwards;
+  --rise: 8px;
+}
+
+.accept-reveal.is-new > :nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.accept-reveal.is-new > :nth-child(n + 3) {
+  animation-delay: 160ms;
+}
+
+.trust-form-title {
+  outline: none;
+}
+
+/* The trust ladder: first meeting, ID seen, walks on their own. */
+.trust-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.trust-steps li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.trust-steps li.done {
+  color: var(--grass);
+}
+
+.trust-step-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+}
+
+.trust-steps li.done .trust-step-mark {
+  border-color: var(--grass);
+  background: var(--grass);
+  color: var(--on-grass);
+}
+
+.trust-ladder-title {
+  font-size: 1.4rem;
+}
+
+.trust-ladder .trust-steps {
+  display: grid;
+  gap: 0;
+  font-size: 1.05rem;
+}
+
+.trust-ladder .trust-steps li {
+  position: relative;
+  min-height: 56px;
+  gap: 14px;
+}
+
+.trust-ladder .trust-step-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--surface);
+}
+
+/* The rail between the rungs. */
+.trust-ladder .trust-steps li + li::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: -10px;
+  width: 2px;
+  height: 20px;
+  background: var(--line);
+}
+
+.trust-ladder .trust-steps li.done + li.done::before {
+  background: var(--grass);
+}
+
+/* Each tick pops 120 ms after the one before; the success sound comes after the last one (about 600 ms). */
+.trust-steps.animate li.done .trust-step-mark {
+  animation: moment-pop var(--motion-pop) var(--ease-pop) calc(var(--n, 0) * 120ms) backwards;
+}
+
+.trust-ladder[open] {
+  animation: moment-rise var(--motion-scherm) var(--ease-scherm) backwards;
+  --rise: 24px;
+}
+
+.trust-off {
+  margin: 0;
+  font-weight: 600;
+}
+
+.dogs-empty {
+  display: grid;
+  justify-items: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button[aria-busy='true']::after {
+    animation: none !important;
+    border-right-color: currentColor;
+    opacity: 0.5;
+  }
+
+  /* Less motion: everything appears at once with a short fade; the sounds stay. */
+  .request-sent,
+  .request-sent-paw,
+  .request-sent-title,
+  .request-sent-eyebrow,
+  .request-sent-steps li,
+  .request-sent-notify,
+  .accept-reveal.is-new > *,
+  .trust-ladder[open] {
+    animation: fade-in var(--motion-klein) ease-out backwards !important;
+  }
+
+  .list-item.request:has(.accept-reveal.is-new) .spread .pill {
+    animation: none !important;
+  }
+
+  /* The ticks fade in 150 ms apart instead of popping. */
+  .trust-steps.animate li.done .trust-step-mark {
+    animation: fade-in var(--motion-klein) ease-out calc(var(--n, 0) * 150ms) backwards !important;
+  }
+}
+
 .before-walk {
   max-width: 460px;
 }

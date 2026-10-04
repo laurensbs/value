@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { DogCard } from '@/components/DogCard'
+import { DogFace } from '@/components/DogFace'
 import { DogsMap } from '@/components/DogsMap'
 import { Icon } from '@/components/Icon'
 import { FilterPill } from '@/components/discover/FilterPill'
@@ -9,6 +10,7 @@ import { ChallengeCard, FirstSteps, Greeting, LevelCard, TipCard, WelcomeCard } 
 import { OrgHeader } from '@/components/discover/OrgHeader'
 import { Sym, type SymName } from '@/components/discover/Sym'
 import { visitorCountry, visitorPosition } from '@/components/discover/visitor'
+import { lookFor } from '@/lib/avatar'
 import { COUNTRIES, countryInfo, isCountry, type Country } from '@/lib/countries'
 import { readableFirst } from '@/lib/story-language'
 import { challengesFor } from '@/server/challenges'
@@ -168,20 +170,35 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
         </nav>
 
         {items.length === 0 ? (
-          <div className="empty-card stack-s">
-            <p>{t('dogs.empty')}</p>
-            <div className="row">
-              <Link href="/shelters" className="button secondary small">
-                {t('dogs.findShelter')}
-              </Link>
-              <Link href="/profile#invite" className="button ghost small">
-                {t('dogs.inviteOwner')}
-              </Link>
-              <Link href="/suggest?kind=shelter" className="button ghost small">
-                {t('dogs.tipShelter')}
-              </Link>
+          // A dog, one honest sentence and what you can do about it (onderzoek §3.8, §5 #10). A filter or
+          // search that finds nothing says so, instead of claiming there are no dogs at all.
+          host || energy || q ? (
+            <div className="empty-card dogs-empty stack-s">
+              <DogFace look={lookFor({ id: 'empty-filter' })} size={88} />
+              <p>{t('dogs.emptyFiltered')}</p>
+              <div className="row">
+                <Link href={query({ host: undefined, energy: undefined, q: undefined })} className="button primary">
+                  {t('landing.dogs.all')}
+                </Link>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="empty-card dogs-empty stack-s">
+              <DogFace look={lookFor({ id: 'empty-dogs' })} size={88} />
+              <p>{t('dogs.empty')}</p>
+              <div className="row">
+                <Link href="/profile#invite" className="button primary">
+                  {t('dogs.sendLink')}
+                </Link>
+                <Link href="/suggest?kind=shelter" className="button secondary">
+                  {t('dogs.tipShelter')}
+                </Link>
+                <Link href="/shelters" className="button ghost">
+                  {t('dogs.findShelter')}
+                </Link>
+              </div>
+            </div>
+          )
         ) : mapView ? (
           <DogsMap
             label={t('dogs.title')}

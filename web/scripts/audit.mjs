@@ -160,7 +160,7 @@ for (const [label, device] of Object.entries(viewports)) {
     await page.getByLabel('Over jou').fill('Audit account')
     await next()
     await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
-    await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
+    await page.getByRole('button', { name: 'Laat me de honden zien' }).click()
     await page.waitForTimeout(2500)
   }
   for (const p of privatePaths) report[`${label} ${p} (signed in)`] = await check(page, p, label, 'in-')
