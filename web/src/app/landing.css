@@ -296,31 +296,7 @@
   }
 }
 
-.lp-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px 6px 9px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--lp-line);
-  color: var(--muted);
-  font-size: 0.74rem;
-  font-weight: 720;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.lp-kicker-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--ball);
-  box-shadow: 0 0 0 3px var(--grass-soft);
-}
-
 .lp-title {
-  margin-top: 14px;
   font-size: clamp(2.35rem, 6.2vw, 4.25rem);
   font-weight: 800;
   line-height: 1.02;
@@ -1925,4 +1901,251 @@
 
 .lp-tip .button {
   min-height: 44px;
+}
+
+/* ---------- Home: "Help ons!", the crowdfunding (components/landing/HelpUs.tsx) ----------
+   Big and warm, never pushy: a lime card, the money raised as the part of the dashed route already
+   walked, one clear button. No countdown, nothing that moves for long. Website only. */
+
+.lp-help {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  gap: 10px;
+  padding: 24px 22px 26px;
+  border-radius: 32px;
+  background:
+    radial-gradient(90% 70% at 100% 0%, color-mix(in oklab, var(--ball) 70%, transparent), transparent 70%),
+    color-mix(in oklab, var(--ball) 26%, var(--surface));
+  box-shadow: var(--lp-shadow);
+}
+
+.lp-help-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.lp-help-title {
+  font-size: clamp(2.6rem, 9vw, 4rem);
+  font-weight: 820;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.lp-help-lede {
+  max-width: 46ch;
+  font-size: 1.08rem;
+}
+
+.lp-help-progress {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.lp-help .lp-progress {
+  height: 14px;
+  background: color-mix(in oklab, var(--surface) 75%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--grass) 14%, transparent);
+}
+
+.lp-help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.lp-help-give {
+  min-height: 56px;
+  padding-inline: 28px;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 22px -12px color-mix(in oklab, var(--grass) 80%, transparent);
+}
+
+.lp-help-join {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--grass);
+  font-weight: 720;
+}
+
+@media (max-width: 559px) {
+  .lp-help-give {
+    flex: 1 1 100%;
+  }
+
+  .lp-help-join {
+    margin-inline: auto;
+  }
+}
+
+.lp-help-art {
+  --size: clamp(168px, 46vw, 220px);
+  position: relative;
+  order: -1;
+  justify-self: center;
+  width: var(--size);
+  height: var(--size);
+  margin: 4px 0 10px;
+}
+
+.lp-help-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.lp-help-ring .lp-ring-fill {
+  fill: color-mix(in oklab, var(--surface) 70%, transparent);
+}
+
+.lp-help-ring .lp-ring-dash {
+  stroke: color-mix(in oklab, var(--grass) 38%, transparent);
+}
+
+/* The part already walked: grows once, from the top, to the share raised. */
+.lp-help-walked {
+  fill: none;
+  stroke: var(--grass);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: var(--walked) 100;
+  animation: lp-help-walk 1.4s var(--ease-klein) 0.4s both;
+}
+
+@keyframes lp-help-walk {
+  from {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.lp-help-dog {
+  position: absolute;
+  inset: 21%;
+  rotate: -5deg;
+  animation: lp-deal 0.9s var(--lp-ease) 0.1s both;
+}
+
+.lp-help-paw.lp-paw-badge {
+  left: auto;
+  right: 4%;
+  top: 2%;
+  width: 24%;
+  height: 24%;
+}
+
+.lp-help-chip {
+  left: 0;
+  right: 0;
+  bottom: -4%;
+  width: max-content;
+  margin-inline: auto;
+  animation-delay: 0.6s;
+}
+
+@media (min-width: 900px) {
+  .lp-help {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: center;
+    gap: 36px;
+    padding: 44px 52px;
+  }
+
+  .lp-help-art {
+    --size: 270px;
+    order: 0;
+    margin: 0;
+  }
+}
+
+/* "Net aangemeld" before the first real dog: one invitation instead of example dogs. */
+.lp-new-empty {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  align-items: center;
+}
+
+.lp-new-empty-dog {
+  width: 108px;
+  height: 108px;
+  rotate: -6deg;
+}
+
+.lp-new-empty-copy {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+@media (min-width: 640px) {
+  .lp-new-empty {
+    grid-template-columns: 140px minmax(0, 1fr);
+    padding: 28px 32px;
+  }
+
+  .lp-new-empty-dog {
+    width: 128px;
+    height: 128px;
+    justify-self: center;
+  }
+}
+
+/* /about: the founder's story with his photo, the campaign (website only) and the help lines. */
+.about-story-head {
+  display: grid;
+  gap: 16px;
+}
+
+.about-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: var(--lp-shadow-dog);
+}
+
+@media (min-width: 640px) {
+  .about-story-head {
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: end;
+  }
+}
+
+.about-campaign {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: color-mix(in oklab, var(--ball) 24%, var(--surface));
+}
+
+.about-campaign p {
+  margin: 0;
+  flex: 1 1 220px;
+}
+
+.about-help p {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-help-walked,
+  .lp-help-dog {
+    animation: none;
+  }
 }

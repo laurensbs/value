@@ -1,37 +1,24 @@
 ---
 title: Waarom ik Rondje Mee begon
-published: "false"
+published: "true"
+photo: /about/laurens.jpg
+photoAlt: Laurens met zijn arm om een bruin-witte hond, samen op de achterbank van een auto
 ---
 
 <!--
-Dit is een sjabloon. Het verhaal staat nog nergens online: de pagina /about toont het pas als
-"published" hierboven op "true" staat. Laurens schrijft het zelf; vul hieronder je eigen woorden
-in en haal de schrijfvragen weg.
-
-Als je over somberheid of depressie schrijft (richtlijnen van 113 Zelfmoordpreventie voor media):
-- Vertel vooral wat hielp en wat je nu anders doet. Hoop en herstel helpen lezers het meest.
-- Geen details over methoden of over de zwaarste momenten.
-- Houd het bij je eigen ervaring; Rondje Mee is geen behandeling en belooft geen genezing.
-- Onder het verhaal staat automatisch hoe je 113 bereikt (113 of gratis 0800-0113).
-- Laat het verhaal lezen door iemand die je vertrouwt voordat je het publiceert.
-
-Foto: zet er alleen een foto bij waar je zelf achter staat, en alleen mensen of honden die toestemming gaven.
+Laurens' eigen woorden, ook openbaar op Whydonate (5 okt 2026). Vertalingen: content/about/en, es en fr.
+Wijzig je iets, houd je dan aan de richtlijnen van 113 Zelfmoordpreventie voor media: vertel wat hielp
+(hoop en herstel), geen details over de zwaarste momenten, alleen je eigen ervaring, en Rondje Mee is
+geen behandeling. Onder het verhaal zet de pagina zelf hoe je 113 bereikt (113 of gratis 0800-0113).
+Foto: alleen mensen en honden die toestemming gaven.
 -->
 
-## Hoe het begon
+Ik ben Laurens. Sinds mijn tiende heb ik te maken met depressie. Later werd er een zware depressie (major depression) bij me vastgesteld. Wat mij helpt, zijn honden. Een hond vraagt niets, maar neemt je wel mee naar buiten: even een rondje, frisse lucht, en iemand die blij is dat je er bent.
 
-[Schrijfvraag: wat speelde er in je leven toen je aan Rondje Mee begon te denken? Eén of twee alinea's, in je eigen woorden.]
+Daarom wil ik iets terugdoen. Veel mensen zitten te veel binnen, achter een scherm, en voelen zich alleen. En veel honden kunnen een extra wandeling goed gebruiken. Rondje Mee brengt ze samen: weg van je scherm, naar buiten, de natuur in, en in contact met een ander.
 
-## Wat honden voor mij betekenen
+Een rondje lost niet alles op, en Rondje Mee is geen behandeling. Het is wel een fijn, vast moment in de week.
 
-[Schrijfvraag: een concreet moment met een hond dat je is bijgebleven. Wat deed het met je?]
-
-## Waarom samen wandelen
-
-[Schrijfvraag: waarom juist jongeren en oudere buurtgenoten met elkaar verbinden, via de hond?]
-
-## Wat ik hoop
-
-[Schrijfvraag: hoe ziet Rondje Mee eruit als het lukt? Wat wil je dat een wandelaar, een eigenaar en een hond eraan overhouden?]
+Ik ontwikkel Rondje Mee zelf, en denk elke stap goed uit. Veiligheid eerst: je maakt altijd eerst samen kennis, de eigenaar ziet je ID in het echt, en pas daarna loop je zelf een rondje.
 
 — Laurens

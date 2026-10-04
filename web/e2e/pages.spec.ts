@@ -12,7 +12,7 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await page.goto('/over-ons')
   await expect(page).toHaveURL(/\/about$/)
   await expect(page.getByRole('heading', { name: /Samen een rondje/, level: 1 })).toBeVisible()
-  // The founder's story is still a template: nothing of it is shown until it is published.
+  // The founder's story is published (e2e/home.spec.ts); the template's writing prompts never show.
   await expect(page.getByText(/Schrijfvraag/)).toHaveCount(0)
   await shot(page, '30-about')
 

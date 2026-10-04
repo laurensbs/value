@@ -9,6 +9,7 @@ import * as s from '@/db/schema'
 import { removeDemoData } from '@/db/seed'
 import { auth } from '@/lib/auth'
 import { tipKey } from '@/lib/tips'
+import { dogsChanged } from '../newest-dogs'
 import { audit, notify } from '../notify'
 import { requireAdmin, requireViewer } from '../session'
 
@@ -43,6 +44,7 @@ export async function banUser(userId: string, reason: string): Promise<void> {
       ),
     )
   await db.update(s.dog).set({ status: 'hidden' }).where(eq(s.dog.ownerId, userId))
+  dogsChanged()
   // No more access to a shelter's dogs, requests and chats.
   const memberships = await db
     .delete(s.organizationMember)
@@ -94,6 +96,8 @@ export async function setOrganizationStatus(orgId: string, status: 'verified' | 
     }
   }
   await audit(db, admin.userId, `org.${status}`, 'organization', orgId)
+  // A shelter's dogs are public only while it is verified.
+  dogsChanged()
   revalidatePath('/admin')
 }
 
@@ -101,6 +105,7 @@ export async function hideDog(dogId: string): Promise<void> {
   const admin = await requireAdmin()
   const db = await getDb()
   await db.update(s.dog).set({ status: 'hidden' }).where(eq(s.dog.id, dogId))
+  dogsChanged()
   // A hidden dog can no longer be met or walked: open appointments end.
   await db
     .update(s.walkRequest)

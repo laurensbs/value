@@ -15,6 +15,7 @@ import { normalizeInstagram, normalizeWebsite, readOrgForm, type OrgDetails } fr
 import { isAllowedPhotoUrl } from '@/lib/photos'
 import { isAdult } from '@/lib/rules'
 import { zonedToUtc } from '@/lib/time'
+import { dogsChanged } from '../newest-dogs'
 import { audit, notify, notifyAdmins } from '../notify'
 import { actionViewer, isOrgMember } from '../session'
 import type { FormState } from './profile'
@@ -96,6 +97,7 @@ export async function updateOrganization(_prev: FormState, form: FormData): Prom
   const place = { country: values.country, city: values.city, lat: values.lat ?? org.lat, lng: values.lng ?? org.lng }
   if (place.country !== org.country || place.city !== org.city || place.lat !== org.lat || place.lng !== org.lng) {
     await db.update(s.dog).set(place).where(eq(s.dog.orgId, orgId))
+    dogsChanged()
   }
   await audit(db, viewer.userId, 'org.updated', 'organization', orgId)
   revalidatePath(`/shelter/${orgId}`)
@@ -133,6 +135,7 @@ export async function importDogs(_prev: FormState & { created?: number; errors?:
     })),
   )
   await audit(db, viewer.userId, 'org.import', 'organization', orgId, { created: dogs.length })
+  dogsChanged()
   revalidatePath(`/shelter/${orgId}`)
   return { ok: true, created: dogs.length, errors }
 }
@@ -385,6 +388,7 @@ export async function saveDraftDogs(
   if (published) {
     await audit(db, viewer.userId, 'org.dogs-published', 'organization', orgId, { published })
     revalidatePath('/dogs')
+    dogsChanged()
   }
   revalidatePath(`/shelter/${orgId}`)
   return { ok: true, published, missingName }

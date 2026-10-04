@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · a regular walk with a dog who's waiting for you",
-    "description": "{app} connects young adults with dogs from neighbours and shelters that could use an extra walk. Free and safe, in the Netherlands, Belgium and Spain."
+    "description": "{app} connects young adults with dogs from neighbours and shelters that could use an extra walk. Free and safe, starting in the Netherlands."
   },
   "nav": {
     "dogs": "Dogs",
@@ -94,7 +94,6 @@
     "contact": "Contact"
   },
   "home": {
-    "eyebrow": "Netherlands · Belgium · Spain",
     "title": "A regular walk with a dog <mark>who's waiting for you.</mark>",
     "lede": "Walk a regular round with the dog of someone nearby who can't walk far any more, or with a shelter dog. Free, and always together the first time.",
     "ctaDogs": "See dogs nearby",
@@ -119,8 +118,8 @@
     "safety5": "After every walk, both sides give private feedback. Concerns go to our team, not to the other person.",
     "safety6": "You can always report or block someone. Anyone who breaks the rules is removed from the platform.",
     "safetyMore": "Read how safety works",
-    "countriesTitle": "Now in three countries",
-    "countriesText": "Rondje Mee works in the Netherlands, Belgium and Spain, in Dutch, French, Spanish and English.",
+    "countriesTitle": "Starting in the Netherlands",
+    "countriesText": "We are starting in the Netherlands, around Tiel, Vijfheerenlanden and Gorinchem. You can already join in Belgium and Spain too, in Dutch, French, Spanish and English.",
     "freeTitle": "Free, and it'll stay that way",
     "freeText": "No ads, no subscription, and we never sell data. Rondje Mee runs on voluntary support, and later on partners and funds that stick to our rules.",
     "exampleDogs": "Examples, so you can see how it works",
@@ -129,7 +128,18 @@
     "impactTitle": "What we walked together",
     "impactWalks": "Walks",
     "impactKm": "Kilometres",
-    "impactDogs": "Dogs who got out"
+    "impactDogs": "Dogs who got out",
+    "helpUs": {
+      "eyebrow": "Fundraiser",
+      "title": "Help us!",
+      "lede": "{app} is free and will stay free. Your round helps get the app into the App Store and Google Play, and pays for the first year.",
+      "rounds": "{n, plural, =0 {Goal: {total} rounds} one {# of {total} rounds} other {# of {total} rounds}}",
+      "give": "Buy a round",
+      "join": "or sign up",
+      "note": "Through {platform}, to {operator}, who builds {app}.",
+      "more": "Where the money goes",
+      "chip": "{round} = 1 round"
+    }
   },
   "landing": {
     "pills": {
@@ -165,10 +175,12 @@
       }
     },
     "dogs": {
-      "title": "Who's coming along today?",
-      "lede": "A few dogs who are waiting for a walk.",
+      "title": "Just joined",
+      "lede": "The newest dogs who would love an extra walk.",
       "all": "See all dogs",
-      "ledeExamples": "These are examples, so you can see how it works."
+      "emptyTitle": "Do you have a dog who could use an extra walk?",
+      "emptyText": "Or do you know one, of a neighbour or your grandpa? With their permission, you can sign the dog up for them.",
+      "emptyCta": "Add your dog"
     },
     "how": {
       "eyebrow": "In four steps",
@@ -1325,6 +1337,7 @@
   },
   "directory": {
     "title": "Shelters in the Netherlands, Belgium and Spain",
+    "titleIn": "Shelters in {country, select, BE {Belgium} ES {Spain} other {the Netherlands}}",
     "lede": "Shelters with volunteer walkers. You'll find partners right here on Rondje Mee; with the others, you can volunteer through their own website.",
     "metaDescription": "Shelters with volunteer walkers. You'll find partners right here on {app}; with the others, you can volunteer through their own website.",
     "partner": "On Rondje Mee",
@@ -1840,7 +1853,8 @@
     },
     "contactTitle": "Contact",
     "contact": "Questions or ideas? The help page explains how to reach us. Is it about a person or a dog? Use the report button on their page.",
-    "contactEmail": "Questions, ideas or want to work together? Email us:"
+    "contactEmail": "Questions, ideas or want to work together? Email us:",
+    "campaign": "My story is also on {platform}, where you can buy a round."
   },
   "poster": {
     "title": "Poster for your shelter",
