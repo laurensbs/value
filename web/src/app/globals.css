@@ -2217,8 +2217,8 @@ fieldset.form-section {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 14px;
-  font-size: 0.9rem;
+  gap: 4px 12px;
+  font-size: 0.85rem;
   font-weight: 650;
 }
 
@@ -2237,8 +2237,8 @@ fieldset.form-section {
   display: grid;
   place-items: center;
   flex: none;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 2px solid var(--line);
 }

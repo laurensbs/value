@@ -281,7 +281,7 @@ function RequestSent({ dogName, ownerName, via, flagged }: { dogName: string; ow
       <p className="eyebrow request-sent-eyebrow" id="request-sent-next">
         {t('sentNext')}
       </p>
-      <ol className="request-sent-steps" aria-labelledby="request-sent-next">
+      <ol className="request-sent-steps" role="list" aria-labelledby="request-sent-next">
         <li>{t('sentStep1', { owner: ownerName })}</li>
         <li>{t('sentStep2', { owner: ownerName })}</li>
         <li>{t('sentStep3', { owner: ownerName, via: via === 'solo' ? 'other' : via })}</li>
