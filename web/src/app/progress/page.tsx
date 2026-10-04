@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { ChallengeCard } from '@/components/ChallengeCard'
+import { FirstSteps } from '@/components/discover/HomeCards'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
 import { Medal } from '@/components/Medal'
@@ -58,6 +59,11 @@ export default async function ProgressPage() {
           </p>
         </div>
       </header>
+
+      {/* Your first steps, all of them, until they are done. Vandaag shows only the next one. */}
+      <div id="steps">
+        <FirstSteps steps={json.steps} />
+      </div>
 
       <p className="notice">
         <Icon name="lock" size={18} />

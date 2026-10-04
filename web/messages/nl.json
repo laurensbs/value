@@ -447,7 +447,9 @@
     "tipShelter": "Tip een opvang",
     "new": "Nieuw",
     "emptyFiltered": "Geen honden die bij deze keuze passen. Probeer een andere, of bekijk alle honden.",
-    "sendLink": "Stuur je link"
+    "sendLink": "Stuur je link",
+    "viewLabel": "Lijst of kaart",
+    "mapNote": "Honden staan op hun buurt, nooit op een adres."
   },
   "dog": {
     "story": "Over {name}",

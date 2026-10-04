@@ -27,6 +27,12 @@ export interface LeafletMapProps {
   /** Zoom to show the whole route (for summaries). */
   fitToRoute?: boolean
   onPick?: (p: { lat: number; lng: number }) => void
+  /** A tap on a single marker selects it (the page shows its card) instead of opening a popup. */
+  onMarkerClick?: (id: string) => void
+  /** The selected marker, drawn a little bigger. */
+  selectedId?: string | null
+  /** Zoom buttons and the map credit at the top, for a map that runs under a bar at the bottom. */
+  controlsOnTop?: boolean
   className?: string
   ariaLabel: string
 }
@@ -61,7 +67,7 @@ function markerList(items: MapMarker[]): HTMLElement {
   return ul
 }
 
-function icon(kind: MapMarker['kind'], label: string): L.DivIcon {
+function icon(kind: MapMarker['kind'], label: string, selected = false): L.DivIcon {
   const safe = label.replace(/[<>&"]/g, '')
   if (kind === 'me' || kind === 'walker' || kind === 'pin') {
     return L.divIcon({ className: '', html: '<div class="map-pin-hit"><div class="map-pin"></div></div>', iconSize: [44, 44], iconAnchor: [22, 22] })
@@ -69,10 +75,15 @@ function icon(kind: MapMarker['kind'], label: string): L.DivIcon {
   const glyph = kind === 'shelter' ? '🏠' : '🐾'
   return L.divIcon({
     className: '',
-    html: `<div class="map-pin-hit"><div class="map-dog" title="${safe}"><span aria-hidden="true">${glyph}</span></div></div>`,
+    html: `<div class="map-pin-hit"><div class="map-dog${selected ? ' selected' : ''}" title="${safe}"><span aria-hidden="true">${glyph}</span></div></div>`,
     iconSize: [44, 44],
     iconAnchor: [22, 22],
   })
+}
+
+/** Less motion asked for: the map jumps instead of gliding. */
+function reducedMotion(): boolean {
+  return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 }
 
 export default function LeafletMap({
@@ -85,6 +96,9 @@ export default function LeafletMap({
   cluster = false,
   fitToRoute = false,
   onPick,
+  onMarkerClick,
+  selectedId = null,
+  controlsOnTop = false,
   className = 'map',
   ariaLabel,
 }: LeafletMapProps) {
@@ -94,13 +108,30 @@ export default function LeafletMap({
   const markerLayer = useRef<L.LayerGroup | null>(null)
   const routeLine = useRef<L.Polyline | null>(null)
   const pickRef = useRef(onPick)
+  const markerClickRef = useRef(onMarkerClick)
+  const selectedRef = useRef(selectedId)
+  /** The drawn single markers by id, to mark the selected one without drawing everything again. */
+  const drawn = useRef(new globalThis.Map<string, { marker: L.Marker; item: MapMarker }>())
   useEffect(() => {
     pickRef.current = onPick
+    markerClickRef.current = onMarkerClick
   })
 
   useEffect(() => {
     if (!el.current || map.current) return
-    const m = L.map(el.current, { zoomControl: true, attributionControl: true }).setView([center.lat, center.lng], zoom)
+    const still = reducedMotion()
+    const m = L.map(el.current, {
+      zoomControl: !controlsOnTop,
+      attributionControl: !controlsOnTop,
+      zoomAnimation: !still,
+      fadeAnimation: !still,
+      markerZoomAnimation: !still,
+      inertia: !still,
+    }).setView([center.lat, center.lng], zoom)
+    if (controlsOnTop) {
+      L.control.zoom({ position: 'topright' }).addTo(m)
+      L.control.attribution({ position: 'topleft' }).addTo(m)
+    }
     L.tileLayer(TILE_URL, { attribution: ATTRIBUTION, maxZoom: 19 }).addTo(m)
     markerLayer.current = L.layerGroup().addTo(m)
     m.on('click', (e: L.LeafletMouseEvent) => pickRef.current?.({ lat: e.latlng.lat, lng: e.latlng.lng }))
@@ -120,26 +151,39 @@ export default function LeafletMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Fit the view when the markers change (not when one is selected: the map stays where it is).
   useEffect(() => {
-    const layer = markerLayer.current
     const m = map.current
-    if (!layer || !m) return
+    if (!m) return
     if (fitToMarkers && markers.length > 1) {
       m.fitBounds(L.latLngBounds(markers.map((mk) => [mk.lat, mk.lng] as [number, number])), { padding: [40, 40], maxZoom: 15 })
     } else if (follow && markers.length > 0) {
       const last = markers[markers.length - 1]
       m.setView([last.lat, last.lng], Math.max(m.getZoom(), 15))
     }
+  }, [markers, fitToMarkers, follow])
+
+  useEffect(() => {
+    const layer = markerLayer.current
+    const m = map.current
+    if (!layer || !m) return
     const draw = () => {
       layer.clearLayers()
+      drawn.current.clear()
       // Which markers overlap depends on the zoom.
       const groups = cluster ? groupByOverlap(markers, (mk) => m.latLngToLayerPoint([mk.lat, mk.lng])) : markers.map((mk) => [mk])
       for (const items of groups) {
         const [first] = items
         if (items.length === 1) {
-          const marker = L.marker([first.lat, first.lng], { icon: icon(first.kind, first.label), title: first.label, keyboard: true })
-          if (first.href) marker.bindPopup(markerLink(first))
+          const marker = L.marker([first.lat, first.lng], { icon: icon(first.kind, first.label, first.id === selectedRef.current), title: first.label, keyboard: true })
+          if (markerClickRef.current) {
+            // A tap (or Enter on a focused marker, which Leaflet turns into a click) selects it.
+            marker.on('click', () => markerClickRef.current?.(first.id))
+          } else if (first.href) {
+            marker.bindPopup(markerLink(first))
+          }
           marker.addTo(layer)
+          drawn.current.set(first.id, { marker, item: first })
           continue
         }
         // Several in one spot: a tap zooms in until they come apart. When they share a place
@@ -166,7 +210,18 @@ export default function LeafletMap({
     return () => {
       m.off('zoomend', draw)
     }
-  }, [markers, fitToMarkers, follow, cluster, t])
+  }, [markers, cluster, t])
+
+  // The selected marker: only its look changes, so a marker that has the focus keeps it.
+  useEffect(() => {
+    const before = selectedRef.current
+    selectedRef.current = selectedId
+    for (const id of [before, selectedId]) {
+      if (!id) continue
+      const entry = drawn.current.get(id)
+      entry?.marker.getElement()?.querySelector('.map-dog')?.classList.toggle('selected', id === selectedId)
+    }
+  }, [selectedId])
 
   useEffect(() => {
     const m = map.current
