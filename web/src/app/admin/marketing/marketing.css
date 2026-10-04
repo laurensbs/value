@@ -108,6 +108,10 @@
 }
 
 .mk-week-q {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -255,6 +259,9 @@
 
 .mk-go {
   justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
   font-weight: 700;
 }
 

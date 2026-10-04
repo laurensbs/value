@@ -86,7 +86,9 @@ export function ResetPasswordForm({ token }: { token: string }) {
       </label>
       {state === 'invalid' ? (
         <p className="notice danger" role="alert">
-          {t('resetInvalid')} <Link href="/forgot-password">{t('forgotAgain')}</Link>
+          <span>
+            {t('resetInvalid')} <Link href="/forgot-password">{t('forgotAgain')}</Link>
+          </span>
         </p>
       ) : state === 'error' ? (
         <p className="notice danger" role="alert">

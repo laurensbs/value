@@ -352,7 +352,7 @@
 
 .admin-q-act {
   justify-self: start;
-  margin-top: 2px;
+  padding-block: 7px;
   color: var(--grass);
   font-weight: 700;
   font-size: 0.92rem;

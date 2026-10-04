@@ -5,8 +5,11 @@ import { Avatar } from '@/components/Avatar'
 import { Disclosure } from '@/components/Disclosure'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
+import { ShelterShare } from '@/components/ShelterShare'
 import { AttendanceButtons, CancelGroupWalkButton, GroupWalkForm, ImportForm, StaffForm } from '@/components/ShelterTools'
 import { ageBand } from '@/lib/rules'
+import { shareOffer } from '@/lib/shelter-share'
+import { siteUrl } from '@/lib/site'
 import { fromNow, nextWeekday } from '@/lib/time'
 import { isOrgMember, requireOnboarded } from '@/server/session'
 import { shelterDashboard } from '@/server/shelter'
@@ -42,6 +45,10 @@ export default async function ShelterDashboardPage({
     { key: 'walk', done: upcoming.length > 0, href: '#groepswandelingen' },
     { key: 'verified', done: org.status === 'verified', href: null },
   ]
+  // Once others can see the dogs or a walk to come: a ready message for volunteers, with the link to the shelter's page.
+  const shareUrl = `${siteUrl()}/dogs?org=${org.id}`
+  const times = org.walkingTimes.replace(/\s+/g, ' ').trim().replace(/[\s.,;:!]+$/, '')
+  const offer = shareOffer(org.status, active.length, walks.map((w) => w.startsAt))
 
   return (
     <div className="stack-l">
@@ -130,6 +137,10 @@ export default async function ShelterDashboardPage({
         </div>
       </div>
 
+      {offer ? (
+        <ShelterShare url={shareUrl} message={t('shelterShare.message', { name: org.name, hasTimes: times ? 'yes' : 'no', times, pick: offer, url: shareUrl })} />
+      ) : null}
+
       <section className="stack" id="honden">
         <div className="spread">
           <h2>{t('shelter.dogs')}</h2>
@@ -150,7 +161,9 @@ export default async function ShelterDashboardPage({
         ) : null}
         {drafts.length ? (
           <p className="notice">
-            {t('shelter.draftsWaiting', { n: drafts.length })} <Link href={`/shelter/${org.id}/dogs/bulk`}>{t('shelter.draftsOpen')}</Link>
+            <span>
+              {t('shelter.draftsWaiting', { n: drafts.length })} <Link href={`/shelter/${org.id}/dogs/bulk`}>{t('shelter.draftsOpen')}</Link>
+            </span>
           </p>
         ) : null}
         {dogs.length ? (

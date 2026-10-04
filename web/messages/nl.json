@@ -2173,6 +2173,14 @@
     "posterQr": "QR-code naar de pagina van {name} op Rondje",
     "posterCta": "Scan de code en maak kennis met {name}."
   },
+  "shelterShare": {
+    "title": "Vertel vrijwilligers over jullie honden",
+    "text": "Zet dit bericht op jullie website, in de nieuwsbrief of in de groep met vrijwilligers. Wie de link opent, ziet jullie honden en groepswandelingen en kan zich meteen aanmelden.",
+    "message": "Wandel mee met de honden van {name}! {hasTimes, select, yes {Wanneer: {times}. } other {}}De eerste keer loop je samen met iemand van ons, en ervaring is niet nodig. Gratis, voor iedereen van 18 jaar en ouder. Neem bij je eerste keer je ID mee. {pick, select, dog {Kies een hond en een moment: {url}} other {Meld je aan voor een groepswandeling: {url}}}",
+    "copyMessage": "Kopieer het bericht",
+    "copyLink": "Kopieer de link",
+    "linkCopied": "Link gekopieerd. Zet hem bijvoorbeeld achter een knop op jullie website."
+  },
   "sounds": {
     "toggle": "Geluidjes",
     "hint": "Zachte geluidjes bij belangrijke momenten, zoals een nieuw rondje of een nieuw level. Alleen op dit apparaat."

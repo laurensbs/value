@@ -131,7 +131,7 @@ export function BulkDogAdd({ orgId, initial, verified }: Props) {
               <div className="bulk-photo">
                 {d.photo ? <img src={d.photo} alt="" /> : null}
                 <button type="button" className="chip" onClick={() => remove(d.id)} aria-label={t('remove', { name: d.name || t('dogN', { n: i + 1 }) })}>
-                  <Icon name="trash" size={14} />
+                  <Icon name="trash" size={18} />
                 </button>
               </div>
               <div className="stack-s">

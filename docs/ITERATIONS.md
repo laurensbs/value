@@ -268,3 +268,27 @@ Screenshots maak je met `npm run screens` (licht en donker, mobiel en desktop).
 - Op `/admin` kijken of de serverregio bij de regio van de database past.
 - Opgeslagen honden en aanbevelingen. Daarvoor is een databasewijziging nodig, en daar beslist Laurens eerst over.
 - De database claimen en naar de EU verhuizen blijft bij Laurens.
+
+
+## Cyclus 8: opvangen werven zelf vrijwilligers, en de kopbalk past altijd (4 oktober 2026)
+
+**Gevraagd:** de dagelijkse verbeterronde. Ik keek als een gestreste student, een oudere eigenaar (of diens kind) en een opvangmedewerker, met het plan voor 90 dagen ernaast: in week 3 en 4 gaat de eerste opvang live, met een poster en een deeltekst.
+
+**Gebouwd:**
+- **Een kant-en-klaar bericht voor vrijwilligers** op het dashboard van een gecontroleerde opvang, met hun wandeltijden en de link naar hun honden. Ze kunnen het delen, het bericht kopiëren, of alleen de link pakken voor een knop op hun website. Tot nu toe moest Laurens die tekst per opvang zelf sturen (`MARKETING.md` §11). Zolang de opvang niet gecontroleerd is, staat het bericht er niet, want dan werkt de link nog niet. Heeft een opvang nog geen honden online maar wel een groepswandeling op de planning, dan nodigt het bericht uit voor die wandeling.
+- **De kopbalk op desktop toont dezelfde plekken als de tabbalk op de telefoon:** Vandaag, Ontdek (als je wandelt), Rondjes, Mijn honden of Mijn opvang, en Beheer voor beheerders. Groepswandelingen staan in Ontdek en bij Rondjes, net als in de app.
+- **Een hond toevoegen begint met de naam.** Op een telefoon stond het naamveld onder de knop Verder; nu staat het bovenaan en komen de foto's erna.
+- **De audit kijkt nu ook naar de pagina's van een opvang** (dashboard, gegevens, hond toevoegen, snel toevoegen met foto's, poster), naar alle onderdelen van Beheer, naar `/waarom`, `/contact`, `/flyer` en `/profile/friends`, en naar de kopbalk tussen 900 en 1280 px in alle vier de talen.
+
+**Gevonden en opgelost:**
+- Tussen 900 en 1100 px breed (een kleine laptop, of een iPad die gekanteld is) liep het menu bovenin over twee regels, en op 900 px schoof de pagina zelfs opzij. Opvangmedewerkers en beheerders hadden dat op elke breedte, in het Nederlands, Spaans en Frans. Nu past het menu overal op één regel, ingelogd en uitgelogd. Waar het krap is, toont de hulpknop daar alleen zijn icoon, zoals op de telefoon.
+- Een link in een melding stond in een eigen kolom naast de zin, in plaats van erachter. Dat gebeurde bij "Wachtwoord vergeten", bij een verlopen resetlink, bij een opvangtip die al bestaat en bij honden die als concept wachten.
+- Een paar tikdoelen waren te klein: de prullenbak op een foto bij snel toevoegen (34 bij 28 px), de bronlinks op `/waarom`, en de links in Beheer en de marketinghub.
+
+**Tests:** 485 unit-tests (nieuw: welke plekken iemand in de kopbalk en de tabbalk krijgt, en wanneer een opvang welk bericht krijgt), 24 end-to-endtests op een telefoon en 22 op desktop (nieuw: een gecontroleerde opvang deelt en kopieert het bericht en de link), een audit met axe en tikdoelen op 130 paginaweergaven waarvan alleen de lanceerlijst nog bevindingen heeft, 32 controles van de kopbalk (vier talen, vier breedtes, in- en uitgelogd), lint, typecheck en `next build`. Een losse meting voor vijf soorten gebruikers, vier talen en acht breedtes van 900 tot 1440 px, met ruimte voor een schuifbalk zoals op Windows: het menu staat overal op één regel en het logo houdt zijn maat.
+
+**Volgende stap:**
+- Bij snel toevoegen staat "Energie: gemiddeld" op een telefoon afgekapt in het keuzemenu. Die keuzes krijgen daar een eigen regel of een kortere tekst.
+- De lanceerlijst in Beheer heeft nog vakjes van 40 px. Die laat ik liggen tot Laurens besluit of de hub uit PR #6 de lanceerlijst vervangt.
+- De live site nalopen vanaf de Mac, e-mail instellen en het beheeradres bevestigen, en de serverregio naast de database leggen (zie cyclus 7).
+- De database claimen en naar de EU verhuizen blijft bij Laurens.

@@ -23,7 +23,9 @@ export default async function ResetPasswordPage({ searchParams }: { searchParams
           <ResetPasswordForm token={token} />
         ) : (
           <p className="notice danger" role="alert">
-            {t('resetInvalid')} <Link href="/forgot-password">{t('forgotAgain')}</Link>
+            <span>
+              {t('resetInvalid')} <Link href="/forgot-password">{t('forgotAgain')}</Link>
+            </span>
           </p>
         )}
       </div>

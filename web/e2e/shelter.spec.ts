@@ -7,7 +7,7 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   const orgName = `Dierenopvang Test ${id}`
 
   // --- Shelter staff member creates the shelter ---
-  const staff = await newPerson(browser)
+  const staff = await newPerson(browser, undefined, { permissions: ['geolocation', 'clipboard-read', 'clipboard-write'] })
   await signUp(staff.page, { name: 'Marieke', email: `marieke-${id}@e2e.test`, intent: 'shelter' })
   await onboard(staff.page, { birthDate: '1985-02-11', city: 'Utrecht', bio: 'Coördinator vrijwilligers.', phone: '030 123 4567', walker: false, owner: false })
   await expect(staff.page).toHaveURL(/\/shelter$/)
@@ -68,6 +68,8 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await staff.page.getByLabel('Verzamelpunt').fill('Bij de hoofdingang')
   await staff.page.getByRole('button', { name: 'Groepswandeling plannen' }).click()
   await expect(staff.page.getByText('Groepswandeling gepland.')).toBeVisible()
+  // Nothing to share yet: the link only works once the shelter is checked.
+  await expect(staff.page.getByRole('region', { name: 'Vertel vrijwilligers over jullie honden' })).toHaveCount(0)
   await shot(staff.page, '21-shelter-dashboard')
 
   // Not visible to the public before verification.
@@ -121,8 +123,20 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await walker.page.goto('/help')
   await shot(walker.page, '25-help')
 
-  // --- Staff sees the signup, checks the ID in person and marks attendance ---
+  // --- Verified: a ready message for volunteers, with the walking times and the link to the dogs ---
   await staff.page.goto(shelterPath)
+  const share = staff.page.getByRole('region', { name: 'Vertel vrijwilligers over jullie honden' })
+  const message = share.locator('.share-message')
+  await expect(message).toContainText(`Wandel mee met de honden van ${orgName}! Wanneer: Zaterdag en zondag 10:00–12:00. De eerste keer loop je samen met iemand van ons`)
+  await expect(message).toHaveText(new RegExp(`Kies een hond en een moment: http://localhost:\\d+/dogs\\?org=${orgId}$`))
+  await share.getByRole('button', { name: 'Kopieer de link' }).click()
+  await expect(share.getByText('Link gekopieerd.', { exact: false })).toBeVisible()
+  expect(await staff.page.evaluate(() => navigator.clipboard.readText())).toMatch(new RegExp(`^http://localhost:\\d+/dogs\\?org=${orgId}$`))
+  await share.getByRole('button', { name: 'Kopieer het bericht' }).click()
+  expect(await staff.page.evaluate(() => navigator.clipboard.readText())).toBe(await message.textContent())
+  await shot(staff.page, '25b-shelter-share')
+
+  // --- Staff sees the signup, checks the ID in person and marks attendance ---
   const signup = staff.page.getByRole('listitem').filter({ hasText: 'Sem' }).last()
   await expect(signup).toBeVisible()
   await signup.getByLabel('ID gezien').check()

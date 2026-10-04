@@ -33,6 +33,22 @@
   }
 }
 
+/* A small laptop or a tablet on its side: the places get the room. The language switch is in the
+   footer, and with five places (admins) the help pill shrinks to its icon, as on phones. */
+@media (min-width: 900px) and (max-width: 1099px) {
+  .app-header .header-lang {
+    display: none;
+  }
+
+  .app-header .header-inner:has(.nav > a:nth-child(5)) .help-pill {
+    padding: 8px;
+  }
+
+  .app-header .header-inner:has(.nav > a:nth-child(5)) .help-pill .label {
+    display: none;
+  }
+}
+
 .app-mode .main {
   padding-bottom: 32px;
 }

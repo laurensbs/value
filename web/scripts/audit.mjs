@@ -12,8 +12,11 @@ const [base = 'http://localhost:3100', out = 'audit'] = process.argv.slice(2)
 mkdirSync(out, { recursive: true })
 const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH || undefined })
 
-const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam']
-const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
+const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam', '/waarom', '/contact']
+const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/profile/friends', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/group-walks', '/flyer']
+const adminPaths = ['/admin', '/admin/moderation', '/admin/shelters', '/admin/tips', '/admin/numbers', '/admin/marketing', '/admin/launch']
+// A tiny valid PNG (1×1, white): enough to put a draft dog on the quick-add page.
+const PNG_1X1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4//8/AAX+Av4N70a4AAAAAElFTkSuQmCC', 'base64')
 const axeSource = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8')
 // Bars that stay put while the page scrolls under them: a control behind one is reached by scrolling.
 const BARS = '.header, .tabbar, .app-tabs, .active-walk, .form-actions, .onboarding-actions, .walk-actions, .bulk-actions, .chat-compose'
@@ -82,8 +85,8 @@ async function check(page, path, label, tag = '') {
       for (const el of document.querySelectorAll('a, button, input:not([type=hidden]), select, [role=button], summary')) {
         if (!visible(el)) continue
         const r = el.getBoundingClientRect()
-        // Inline links inside running text are exempt (WCAG 2.5.8).
-        if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li')) continue
+        // Inline links inside running text are exempt (WCAG 2.5.8), also in a checkbox's sentence.
+        if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li, label')) continue
         // Map attribution is a legal credit, not a control.
         if (el.closest('.leaflet-control-attribution')) continue
         if (el.type === 'checkbox' || el.type === 'radio') { if (el.closest('label')) continue }
@@ -112,12 +115,42 @@ async function check(page, path, label, tag = '') {
   return [...errors, ...new Set(found)]
 }
 
+/**
+ * The header from a small laptop up, in all four languages: the links stay on one line, the logo
+ * keeps its size and nothing runs off the screen. Scrollbars take no room here, so 17px of slack is
+ * asked for, the width of a classic scrollbar on Windows.
+ */
+async function headerFits(ctx, page, label, who) {
+  for (const lang of ['nl', 'en', 'es', 'fr']) {
+    await ctx.addCookies([{ name: 'NEXT_LOCALE', value: lang, url: base }])
+    for (const width of [900, 1024, 1100, 1280]) {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto(base + '/dogs', { waitUntil: 'networkidle' })
+      report[`${label} header ${lang} ${width}px (${who})`] = await page.evaluate(() => {
+        const issues = []
+        const inner = document.querySelector('.header .header-inner')
+        const tall = [...inner.querySelectorAll('.nav a')].filter((a) => a.getBoundingClientRect().height > 42)
+        if (tall.length) issues.push(`menu on two lines: ${tall.map((a) => a.textContent.trim()).join(', ')}`)
+        const parts = [...inner.children].filter((el) => getComputedStyle(el).display !== 'none').map((el) => el.getBoundingClientRect())
+        const slack = parts.slice(1).reduce((n, r, i) => n + r.left - parts[i].right - 18, 0)
+        if (slack < 17) issues.push(`header has only ${Math.round(slack)}px to spare`)
+        if ((inner.querySelector('.brand svg')?.getBoundingClientRect().width ?? 0) < 24) issues.push('logo squeezed')
+        if (document.documentElement.scrollWidth > window.innerWidth) issues.push(`horizontal overflow (${document.documentElement.scrollWidth}px)`)
+        return issues
+      })
+    }
+  }
+  await ctx.addCookies([{ name: 'NEXT_LOCALE', value: 'nl', url: base }])
+  await page.setViewportSize(viewports[label].viewport)
+}
+
 const report = {}
 for (const [label, device] of Object.entries(viewports)) {
   // Headless browsers refuse notifications up front; allowing them shows the push question like a fresh browser does.
   const ctx = await browser.newContext({ ...device, locale: 'nl-NL', geolocation: { latitude: 52.09, longitude: 5.12 }, permissions: ['geolocation', 'notifications'], extraHTTPHeaders: { 'x-forwarded-for': `10.9.${label.length}.${Math.floor(Math.random() * 250)}` } })
   const page = await ctx.newPage()
   for (const p of publicPaths) report[`${label} ${p}`] = await check(page, p, label)
+  if (label === 'desktop') await headerFits(ctx, page, label, 'signed out')
   // Sign in (or up) as the audit account.
   await page.goto(base + '/signup')
   await page.getByLabel('Voornaam').fill('Audit')
@@ -167,6 +200,29 @@ for (const [label, device] of Object.entries(viewports)) {
     dogPath = new URL(page.url()).pathname
   }
   for (const p of [dogPath, `/my-dogs/${dogPath.split('/').pop()}/poster`]) report[`${label} ${p} (signed in)`] = await check(page, p, label, 'in-')
+  for (const p of adminPaths) report[`${label} ${p} (signed in)`] = await check(page, p, label, 'in-')
+  // A shelter worker's pages: their shelter, adding dogs one by one or with a pile of photos, the poster.
+  await page.goto(base + '/shelter')
+  let shelterPath = (await page.locator('.list-item a[href^="/shelter/"]').count()) ? await page.locator('.list-item a[href^="/shelter/"]').first().getAttribute('href') : null
+  if (!shelterPath) {
+    await page.getByLabel('Naam van de opvang').fill('Dierenopvang Audit')
+    await page.getByLabel('Plaats').fill('Utrecht')
+    await page.getByLabel(/KvK-, KBO- of CIF-nummer/).fill('12345678')
+    await page.getByLabel('Hoeveel honden hebben jullie ongeveer?').fill('40')
+    await page.getByLabel('Wanneer kunnen vrijwilligers komen wandelen?').fill('Zaterdag en zondag 10:00–12:00')
+    await page.getByLabel('Nee, wij hebben koekjes').check()
+    await page.getByLabel('Naam contactpersoon').fill('Audit')
+    await page.getByLabel(/Ik mag deze opvang vertegenwoordigen/).check()
+    await page.getByRole('button', { name: 'Opvang aanmelden' }).click()
+    await page.waitForURL(/\/shelter\/[^/?]+\?created=1/)
+    shelterPath = new URL(page.url()).pathname
+    await page.goto(base + `${shelterPath}/dogs/bulk`)
+    await page.locator('input[type=file]').setInputFiles([{ name: 'Saar.png', mimeType: 'image/png', buffer: PNG_1X1 }])
+    await page.getByLabel('Naam van hond 1').waitFor()
+  }
+  for (const p of [shelterPath, `${shelterPath}/edit`, `${shelterPath}/dogs/new`, `${shelterPath}/dogs/bulk`, `${shelterPath}/poster`, '/shelter']) report[`${label} ${p} (signed in)`] = await check(page, p, label, 'in-')
+  // With every place this account has (walker, owner, shelter, admin).
+  if (label === 'desktop') await headerFits(ctx, page, label, 'signed in')
   await ctx.close()
 }
 await browser.close()
