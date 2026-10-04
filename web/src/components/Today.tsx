@@ -1,19 +1,21 @@
 import { and, eq, gte, inArray, sql } from 'drizzle-orm'
 import Link from 'next/link'
+import { cookies } from 'next/headers'
 import { getFormatter, getLocale, getTranslations } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { countryInfo, isCountry } from '@/lib/countries'
 import { formatDistance } from '@/lib/geo'
 import { shownCount } from '@/lib/nearby'
-import { nextSteps, type NextStep, type NextStepAppointment } from '@/lib/next-step'
+import { LATER_COOKIE, nextSteps, parseLater, pickStep, type NextStep, type NextStepAppointment } from '@/lib/next-step'
 import { isNewDog } from '@/lib/nudges'
 import { localParts, weekOf } from '@/lib/progress'
 import { APP_NAME } from '@/lib/site'
 import { TIME_ZONE, zonedToUtc } from '@/lib/time'
+import { pageNow } from '@/server/clock'
 import { progressFor, rolesOf } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
-import { incomingRequests, listDogs, myDogs, outgoingRequests, trustGrantsFor, walkersNear, type RequestRow } from '@/server/queries'
+import { incomingRequests, listDogs, myDogs, outgoingRequests, trustGrantsFor, upcomingGroupWalks, walkersNear, type RequestRow } from '@/server/queries'
 import type { OnboardedViewer } from '@/server/session'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
@@ -60,16 +62,20 @@ function whenText(at: Date, now: Date, locale: string): string {
  * challenge and the penningen on /progress; the push and home-screen questions on /requests.
  */
 export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welcome: boolean }) {
-  const now = new Date()
+  const now = await pageNow()
   const p = viewer.profile
   const hasOrg = viewer.orgs.length > 0
-  const { walker, owner } = rolesOf(p)
+  const roles = rolesOf(p)
+  const { owner } = roles
+  // Shelter staff did not choose to walk (rolesOf still counts them as walkers): no dogs to ask for here.
+  const staffOrg = hasOrg && !p.wantsToWalk && !owner ? viewer.orgs[0] : null
+  const walker = roles.walker && !staffOrg
   const country = isCountry(p.country) ? p.country : undefined
   const own = p.lat != null && p.lng != null ? { lat: p.lat, lng: p.lng } : null
   const near = own ?? (country ? countryInfo(country).center : null)
 
   // The first screen after opening the app: everything is asked at the same time.
-  const [t, tp, td, tn, tc, format, locale, progress, outgoing, incoming, dogs, nearby, dogStats, walkers] = await Promise.all([
+  const [t, tp, td, tn, tc, format, locale, progress, outgoing, incoming, dogs, nearby, dogStats, walkers, orgWalks, jar] = await Promise.all([
     getTranslations('today'),
     getTranslations('progress'),
     getTranslations('dogs'),
@@ -84,7 +90,11 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     walker ? listDogs({ country, near }, 8) : Promise.resolve([]),
     owner ? dogWeekStats(viewer.userId, now) : new Map<string, { week: number; walkers: number }>(),
     owner ? walkersNear(p, viewer.userId) : 0,
+    staffOrg ? upcomingGroupWalks({ orgId: staffOrg.id }) : Promise.resolve([]),
+    cookies(),
   ])
+  // What was put away with "Later" or "Nee, nu niet", so the right step shows from the first paint.
+  const stored = jar.get(LATER_COOKIE)?.value ?? '{}'
   const json = await progressJson(progress)
 
   // Two small questions on top of that: feedback already given, and trust already recorded.
@@ -116,8 +126,10 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const steps = nextSteps({
     now,
     userId: viewer.userId,
-    walker,
+    walker: roles.walker,
     owner,
+    wantsToWalk: p.wantsToWalk,
+    staffOrg: staffOrg ? { id: staffOrg.id, name: staffOrg.name, nextGroupWalk: orgWalks[0]?.startsAt ?? null } : null,
     quizPassed: Boolean(p.quizPassedAt),
     ownDogs: ownDogs.map((d) => ({ id: d.id, name: d.name, status: d.status, orgId: d.orgId, isDemo: d.isDemo })),
     outgoing: outgoing.map(appointment),
@@ -136,7 +148,15 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
   function cardStep(step: NextStep): CardStep {
     const base = { id: step.id, later: step.later, dismiss: step.dismiss }
-    const values = { dog: step.dog ?? '', walker: step.walker ?? '', count: step.count ?? 0, app: APP_NAME, when: step.at ? whenText(step.at, now, locale) : '' }
+    const values = {
+      dog: step.dog ?? '',
+      walker: step.walker ?? '',
+      count: step.count ?? 0,
+      app: APP_NAME,
+      org: step.org ?? '',
+      via: step.via ?? 'walk',
+      when: step.at ? whenText(step.at, now, locale) : '',
+    }
     const button = (label: string) => (step.href ? { label, href: step.href } : undefined)
     switch (step.kind) {
       case 'liveOwn':
@@ -171,13 +191,21 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
         return { ...base, title: tn('emptyTown.title'), text: tn('emptyTown.text'), button: button(tn('emptyTown.button')), secondary: { label: tn('emptyTown.tip'), href: '/suggest?kind=shelter' } }
       case 'ownerWaiting':
         return { ...base, text: tn('ownerWaiting.text', values), button: button(tn('ownerWaiting.button', values)) }
+      case 'shelter':
+        return step.at
+          ? { ...base, text: tn('shelter.next', values), button: button(tn('shelter.button', values)) }
+          : { ...base, text: tn('shelter.plan', values), button: button(tn('shelter.button', values)) }
       case 'night':
-        return { ...base, text: tn('night.text') }
+        return { ...base, text: tn('night.text'), detail: tip, button: button(tn('night.button')) }
       case 'done':
         return { ...base, text: tn('done.text'), detail: week ?? tip }
     }
   }
 
+  // The step the card shows (the same choice as in the browser), for the tip line below.
+  const shown = pickStep(card, parseLater(stored), now.getTime())
+  const kindOf = (id: string | undefined) => steps.find((step) => step.id === id)?.kind
+  const tipLine = owner && !roles.walker && !['done', 'night'].includes(kindOf(shown?.id) ?? '')
   const moment = levelMoment(progress, json)
   const hour = localParts(now).hour
 
@@ -199,7 +227,15 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
         </Link>
       </header>
 
-      <NextStepCard steps={card} now={now.getTime()} label={tn('title')} laterLabel={tn('later')} welcome={welcome ? t('welcomeTitle', { name: p.firstName }) : null} />
+      <NextStepCard
+        steps={card}
+        stored={stored}
+        now={now.getTime()}
+        label={tn('title')}
+        laterLabel={tn('later')}
+        welcome={welcome ? t('welcomeTitle', { name: p.firstName }) : null}
+        welcomeText={welcome ? t('welcomeText', { level: json.level.name }) : null}
+      />
 
       {/* Your dogs. Without one yet, the card above says how (and the Mijn honden tab is there). */}
       {owner && ownDogs.length ? (
@@ -238,6 +274,16 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
             ))}
           </ul>
         </section>
+      ) : null}
+
+      {/* Owners have no Ontdek tab with its tip: one quiet line here (the card's end has it otherwise). */}
+      {tipLine ? (
+        <p className="today-tip">
+          <Icon name="sparkle" size={16} />
+          <span>
+            <strong>{t('tipTitle')}:</strong> {tip}
+          </span>
+        </p>
       ) : null}
 
       {/* The dogs near you, straight under the card; the map is one tap away and fills the screen. */}

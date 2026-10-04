@@ -30,6 +30,13 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   const orgId = shelterPath.split('/').pop()!
   // The tabs now lead to the shelter.
   await expect(staff.page.locator(`nav[aria-label="Hoofdmenu"] a[href="${shelterPath}"]`)).toBeAttached()
+  // Vandaag for staff: one thing about their shelter, not the walkers' quiz or dogs to ask for.
+  await staff.page.goto('/')
+  const staffStep = staff.page.getByRole('region', { name: 'Eén ding nu' })
+  await expect(staffStep).toContainText(`Plan een groepswandeling bij ${orgName}`)
+  await expect(staffStep.getByRole('link', { name: `Naar ${orgName}` })).toHaveAttribute('href', shelterPath)
+  await expect(staff.page.locator('main')).not.toContainText(/veiligheidsquiz|Honden bij jou in de buurt/)
+  await staff.page.goto(shelterPath)
 
   // --- Bulk import from the downloadable template ---
   await staff.page.getByLabel('Of plak de inhoud hier').fill(readFileSync('public/rondje-honden-voorbeeld.csv', 'utf8'))

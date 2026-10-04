@@ -4836,6 +4836,25 @@ legend {
   gap: 4px;
 }
 
+/* Owners' tip of the day: one quiet line, no card. */
+.today-tip {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.today-tip > .icon {
+  flex: none;
+  margin-top: 3px;
+  color: var(--grass);
+}
+
+.today-tip strong {
+  color: var(--ink);
+}
+
 /* An example dog in Today's strip says so, like on the big cards. */
 .portrait-wrap .strip-tag {
   position: absolute;

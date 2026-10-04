@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { cookies } from 'next/headers'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { DogCard } from '@/components/DogCard'
 import { DogFace } from '@/components/DogFace'
@@ -15,7 +16,9 @@ import { lookFor } from '@/lib/avatar'
 import { COUNTRIES, countryInfo, isCountry, type Country } from '@/lib/countries'
 import { pageMetadata } from '@/lib/seo'
 import { formatDistance } from '@/lib/geo'
+import { LATER_COOKIE } from '@/lib/next-step'
 import { readableFirst } from '@/lib/story-language'
+import { pageNow } from '@/server/clock'
 import { rolesOf } from '@/server/progress'
 import { listDogs, myGroupSignups, publicOrg, upcomingGroupWalks } from '@/server/queries'
 import { getViewer, type OnboardedViewer } from '@/server/session'
@@ -110,8 +113,8 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
 
   const roles = member ? rolesOf(member.profile) : null
   // At most one line above the dogs: the quiz comes before any request (like Guus in the app).
-  const quizFirst = Boolean(member && roles?.walker && !member.profile.quizPassedAt && !orgId)
-  const renderedAt = new Date()
+  const quizFirst = Boolean(member && roles?.walker && member.profile.wantsToWalk !== false && !member.profile.quizPassedAt && !orgId)
+  const [renderedAt, jar] = quizFirst ? await Promise.all([pageNow(), cookies()]) : [new Date(), null]
   const title = org ? t('dogs.orgTitle', { name: org.name }) : t('dogs.title')
   // On the map, its card says what you need to know about a dog: no portrait or story to read yet.
   const mapCards = mapView
@@ -168,11 +171,11 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
           <nav className="segmented view-switch" aria-label={t('dogs.viewLabel')}>
             <Link href={query({ view: undefined })} replace aria-current={mapView ? undefined : 'page'}>
               <Sym name="list" size={18} />
-              {t('dogs.showList')}
+              <span className="view-label">{t('dogs.showList')}</span>
             </Link>
             <Link href={query({ view: 'map' })} replace aria-current={mapView ? 'page' : undefined}>
               <Sym name="map" size={18} />
-              {t('dogs.showMap')}
+              <span className="view-label">{t('dogs.showMap')}</span>
             </Link>
           </nav>
           {/* The filters and, after them, the countries: one row that scrolls sideways. */}
@@ -205,6 +208,7 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
         {quizFirst && !mapView ? (
           <NextStepCard
             compact
+            stored={jar?.get(LATER_COOKIE)?.value ?? '{}'}
             now={renderedAt.getTime()}
             label={t('nextStep.title')}
             laterLabel={t('nextStep.later')}

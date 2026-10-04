@@ -2076,7 +2076,8 @@
       }
     },
     "walkersNear": "{n, plural, one {# walker lives} other {# walkers live}} within 5 km of you.",
-    "walkersFew": "Few walkers live near you yet. <link>Tell your neighbours about {dog}</link> if you like."
+    "walkersFew": "Few walkers live near you yet. <link>Tell your neighbours about {dog}</link> if you like.",
+    "welcomeText": "You're now {level}, level 1."
   },
   "progress": {
     "title": "Your progress",
@@ -3566,9 +3567,9 @@
     "upcoming": {
       "eyebrow": "Your next appointment",
       "walk": "{when}: a walk with {dog}.",
-      "meet": "{when}: meeting {dog}.",
+      "meet": "{when}: meeting {dog}{via, select, home { (at home)} phone { (call first)} video { (video call first)} other {}}.",
       "walkOwner": "{when}: {walker} walks {dog}.",
-      "meetOwner": "{when}: {walker} comes to meet {dog}.",
+      "meetOwner": "{when}: {walker} meets {dog}{via, select, home { (at your home)} phone { (call first)} video { (video call first)} other {}}.",
       "button": "See your appointment"
     },
     "quiz": {
@@ -3613,11 +3614,17 @@
       "button": "See {dog}"
     },
     "night": {
-      "text": "It's late already. Planning can wait until tomorrow."
+      "text": "It's late already. Planning can wait until tomorrow.",
+      "button": "Read a lesson"
     },
     "done": {
       "text": "Nothing to do. Have a nice day."
     },
-    "week": "Your week: {done} of {goal}"
+    "week": "Your week: {done} of {goal}",
+    "shelter": {
+      "plan": "Plan a group walk at {org}, so walkers can join.",
+      "next": "{when}: group walk at {org}.",
+      "button": "Go to {org}"
+    }
   }
 }
