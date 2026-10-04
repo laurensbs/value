@@ -42,7 +42,7 @@ test('growth loop: a vote brings the shelter, and the voter hears when it joins 
   await expect(staff.page.getByText('Groepswandeling gepland.')).toBeVisible()
 
   await walker.page.goto('/notifications')
-  await expect(walker.page.getByText(`${shelterName} staat nu op Rondje. Bekijk de honden!`)).toBeVisible()
+  await expect(walker.page.getByText(`${shelterName} staat nu op Rondje Mee. Bekijk de honden!`)).toBeVisible()
   await expect(walker.page.getByText(`Er is een groepswandeling gepland bij ${shelterName}. Loop je mee?`)).toBeVisible()
   await shot(walker.page, '32-notifications-loop')
 

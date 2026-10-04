@@ -6,7 +6,7 @@ updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
-# Política de cookies de Rondje
+# Política de cookies de Rondje Mee
 
 ## 1. ¿Qué son las cookies?
 
@@ -14,30 +14,30 @@ Las cookies son pequeños archivos que una web guarda en tu dispositivo. Las app
 
 ## 2. Solo cookies técnicas
 
-Rondje **solo usa las cookies necesarias para que Rondje funcione**. No usamos cookies ni tecnologías similares para:
+Rondje Mee **solo usa las cookies necesarias para que Rondje Mee funcione**. No usamos cookies ni tecnologías similares para:
 
 - publicidad;
 - seguir tu navegación;
 - estadísticas o analítica de otras empresas;
 - botones de redes sociales que te rastrean.
 
-Las cookies técnicas no necesitan consentimiento. Por eso no verás un banner de cookies en Rondje. La ley lo permite en España (art. 22.2 de la LSSI), en los Países Bajos (art. 11.7a de la Telecommunicatiewet) y en Bélgica (art. 10/2 de la Ley de 13 de junio de 2005 relativa a las comunicaciones electrónicas [pendiente de verificar]). Si algún día usamos otras cookies, te pediremos antes tu consentimiento.
+Las cookies técnicas no necesitan consentimiento. Por eso no verás un banner de cookies en Rondje Mee. La ley lo permite en España (art. 22.2 de la LSSI), en los Países Bajos (art. 11.7a de la Telecommunicatiewet) y en Bélgica (art. 10/2 de la Ley de 13 de junio de 2005 relativa a las comunicaciones electrónicas [pendiente de verificar]). Si algún día usamos otras cookies, te pediremos antes tu consentimiento.
 
 ## 3. ¿Qué cookies usamos?
 
 | Cookie | Para qué | Duración |
 |---|---|---|
-| `__Secure-better-auth.session_token` | Mantener tu sesión iniciada y proteger tu cuenta | 7 días; se renueva mientras usas Rondje y se elimina al cerrar sesión |
+| `__Secure-better-auth.session_token` | Mantener tu sesión iniciada y proteger tu cuenta | 7 días; se renueva mientras usas Rondje Mee y se elimina al cerrar sesión |
 | `better-auth.state`, `better-auth-passkey` | Seguridad al iniciar sesión con Google, Apple o una passkey | Unos minutos |
-| `NEXT_LOCALE` | Recordar en qué idioma usas Rondje | 1 año |
+| `NEXT_LOCALE` | Recordar en qué idioma usas Rondje Mee | 1 año |
 | `rondje_ref` | Recordar con qué enlace de invitación llegaste, para que esa persona vea que te has unido [pendiente de verificar: funcional o requiere consentimiento] | 30 días |
 
 ## 4. Almacenamiento local en tu dispositivo
 
-Rondje guarda algunas cosas solo en tu propio dispositivo, en el navegador o en la app:
+Rondje Mee guarda algunas cosas solo en tu propio dispositivo, en el navegador o en la app:
 
-- **Registros de ánimo.** Cómo te sientes antes y después de un paseo. Estos datos se quedan en tu dispositivo y nunca llegan a Rondje.
-- **Una pregunta para más tarde.** Si eliges «Más tarde» cuando te preguntamos por las notificaciones o por poner Rondje en tu pantalla de inicio, tu navegador recuerda durante dos semanas no volver a preguntar todavía. Si eliges «Ya está», lo recuerda durante un año.
+- **Registros de ánimo.** Cómo te sientes antes y después de un paseo. Estos datos se quedan en tu dispositivo y nunca llegan a Rondje Mee.
+- **Una pregunta para más tarde.** Si eliges «Más tarde» cuando te preguntamos por las notificaciones o por poner Rondje Mee en tu pantalla de inicio, tu navegador recuerda durante dos semanas no volver a preguntar todavía. Si eliges «Ya está», lo recuerda durante un año.
 - **La escuela canina.** Sin cuenta, tu navegador recuerda qué lecciones terminaste (`rondje.lessons`); con una cuenta pasan a tu cuenta y se borran de aquí. Durante el test de seguridad, tu navegador recuerda en qué pregunta estabas hasta que cierres la pestaña (`rondje.quiz`), para que puedas seguir después de una lección.
 - **Preferencias**, como la visualización o los ajustes que elijas [pendiente de verificar: cuáles].
 
@@ -49,7 +49,7 @@ Para mostrar los mapas, tu dispositivo carga imágenes (teselas) de los servidor
 
 ## 6. Borrar o bloquear cookies
 
-Puedes borrar o bloquear las cookies en los ajustes de tu navegador. Si bloqueas la cookie de sesión, no podrás iniciar sesión y Rondje no funcionará bien.
+Puedes borrar o bloquear las cookies en los ajustes de tu navegador. Si bloqueas la cookie de sesión, no podrás iniciar sesión y Rondje Mee no funcionará bien.
 
 ## 7. Preguntas
 

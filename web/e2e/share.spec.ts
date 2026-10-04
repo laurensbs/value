@@ -33,7 +33,7 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
   await share.getByRole('link', { name: /Print een poster/ }).click()
   await expect(owner.page.getByRole('heading', { name: 'Poster voor Saar' })).toBeVisible()
   await expect(owner.page.getByRole('heading', { name: 'Saar zoekt een wandelmaatje' })).toBeVisible()
-  await expect(owner.page.getByRole('img', { name: 'QR-code naar de pagina van Saar op Rondje' })).toBeVisible()
+  await expect(owner.page.getByRole('img', { name: 'QR-code naar de pagina van Saar op Rondje Mee' })).toBeVisible()
   await expect(owner.page.locator('.poster-url')).toHaveText(link.replace(/^https?:\/\//, ''))
   await shot(owner.page, 'share-02-poster')
 

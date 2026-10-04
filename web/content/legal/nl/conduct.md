@@ -6,9 +6,9 @@ updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
-# Gedragscode van Rondje
+# Gedragscode van Rondje Mee
 
-Rondje werkt alleen als iedereen zich veilig voelt: wandelaars, eigenaren, opvangen en vooral de honden. Deze gedragscode hoort bij de algemene voorwaarden. Hij geldt voor iedereen die Rondje gebruikt.
+Rondje Mee werkt alleen als iedereen zich veilig voelt: wandelaars, eigenaren, opvangen en vooral de honden. Deze gedragscode hoort bij de algemene voorwaarden. Hij geldt voor iedereen die Rondje Mee gebruikt.
 
 ## 1. Voor iedereen
 
@@ -86,13 +86,13 @@ Rondje werkt alleen als iedereen zich veilig voelt: wandelaars, eigenaren, opvan
 ## 5. Respect tussen mensen
 
 - **Geen intimidatie.** Geen ongewenste toenadering, geen seksuele opmerkingen, geen bedreigingen. Een nee is een nee.
-- **Geen discriminatie.** Op Rondje is iedereen welkom, ongeacht afkomst, geloof, gender, seksuele oriëntatie, beperking of leeftijd (vanaf 18).
+- **Geen discriminatie.** Op Rondje Mee is iedereen welkom, ongeacht afkomst, geloof, gender, seksuele oriëntatie, beperking of leeftijd (vanaf 18).
 - **Respecteer privacy.**
   - Gebruik telefoonnummers en adressen alleen voor de wandeling.
   - Deel geen gegevens van anderen.
   - Maak geen kopie of foto van iemands identiteitsbewijs.
 - **Foto's.** Zet foto's of video's van de hond of van andere mensen alleen online met hun toestemming, of die van de eigenaar. Laat nooit zien waar de eigenaar woont.
-- **Contact buiten Rondje.** Houd het contact over de wandeling. Neem niet op een vervelende manier contact op als de ander dat niet wil.
+- **Contact buiten Rondje Mee.** Houd het contact over de wandeling. Neem niet op een vervelende manier contact op als de ander dat niet wil.
 
 ## 6. Nultolerantie
 

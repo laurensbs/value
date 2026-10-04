@@ -6,9 +6,9 @@ updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"
 ---
 
-# Code de conduite de Rondje
+# Code de conduite de Rondje Mee
 
-Rondje ne fonctionne que si tout le monde se sent en sécurité : les promeneurs, les propriétaires, les refuges et surtout les chiens. Ce code de conduite fait partie des conditions d'utilisation. Il s'applique à toute personne qui utilise Rondje.
+Rondje Mee ne fonctionne que si tout le monde se sent en sécurité : les promeneurs, les propriétaires, les refuges et surtout les chiens. Ce code de conduite fait partie des conditions d'utilisation. Il s'applique à toute personne qui utilise Rondje Mee.
 
 ## 1. Pour tout le monde
 
@@ -86,13 +86,13 @@ Rondje ne fonctionne que si tout le monde se sent en sécurité : les promeneurs
 ## 5. Respect entre les personnes
 
 - **Pas de harcèlement.** Pas d'avances non désirées, pas de remarques sexuelles, pas de menaces. Non, c'est non.
-- **Pas de discrimination.** Tout le monde est le bienvenu sur Rondje, quels que soient son origine, sa religion, son genre, son orientation sexuelle, son handicap ou son âge (à partir de 18 ans).
+- **Pas de discrimination.** Tout le monde est le bienvenu sur Rondje Mee, quels que soient son origine, sa religion, son genre, son orientation sexuelle, son handicap ou son âge (à partir de 18 ans).
 - **Respectez la vie privée.**
   - Utilisez les numéros de téléphone et les adresses uniquement pour la promenade.
   - Ne communiquez pas les données d'autres personnes.
   - Ne copiez ni ne photographiez jamais la pièce d'identité de quelqu'un.
 - **Photos.** Ne publiez en ligne des photos ou des vidéos du chien ou d'autres personnes qu'avec leur accord, ou celui du propriétaire. Ne montrez jamais où habite le propriétaire.
-- **Contacts en dehors de Rondje.** Limitez le contact à la promenade. N'insistez pas si l'autre personne ne souhaite pas de contact.
+- **Contacts en dehors de Rondje Mee.** Limitez le contact à la promenade. N'insistez pas si l'autre personne ne souhaite pas de contact.
 
 ## 6. Tolérance zéro
 

@@ -88,7 +88,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page).toHaveURL(/\/\?welcome=1$/)
   // With the app's tabs (shown on phones) straight away, not only after a reload.
   await expect(walker.page.locator('nav[aria-label="Hoofdmenu"]')).toBeAttached()
-  await expect(walker.page.getByRole('heading', { name: 'Welkom bij Rondje, Fleur!' })).toBeVisible()
+  await expect(walker.page.getByRole('heading', { name: 'Welkom bij Rondje Mee, Fleur!' })).toBeVisible()
   await expect(walker.page.getByRole('link', { name: 'Start' })).toHaveAttribute('href', '/profile/edit')
   await shot(walker.page, '05-today-walker')
   // Editing the profile offers the sentences that still fit; not another one about what she does.
@@ -311,7 +311,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   expect(profileForm.bioBlocks.map((b: { key: string }) => b.key)).not.toContain('ownerHelp')
   await app.dispose()
   await owner.page.goto(`/chat/${requestId}`)
-  await expect(owner.page.getByRole('note').filter({ hasText: 'Rondje is gratis' })).toBeVisible()
+  await expect(owner.page.getByRole('note').filter({ hasText: 'Rondje Mee is gratis' })).toBeVisible()
   await shot(owner.page, '07b-chat-warning')
 
   // --- Owner follows along live ---

@@ -4,7 +4,7 @@ import { addDog, newPerson, onboard, shot, signUp, unique } from './helpers'
 test('pages: support, about, robots, sitemap and short links', async ({ browser }) => {
   const { context, page } = await newPerson(browser)
   await page.goto('/support')
-  await expect(page.getByRole('heading', { name: 'Maak Rondje mogelijk', level: 1 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Maak Rondje Mee mogelijk', level: 1 })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Onze belofte' })).toBeVisible()
   await expect(page.getByText(/Samen ongeveer/)).toBeVisible()
   await shot(page, '29-support')
@@ -21,7 +21,7 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
 
   await page.goto('/flyer?for=owner')
   await expect(page.getByRole('heading', { name: /Kan uw hond wel een extra rondje/ })).toBeVisible()
-  await expect(page.getByRole('img', { name: 'QR-code naar Rondje' })).toBeVisible()
+  await expect(page.getByRole('img', { name: 'QR-code naar Rondje Mee' })).toBeVisible()
   await shot(page, '31-flyer')
 
   // Forgot password: linked from the login page; without an email service it says so instead of pretending.
@@ -76,8 +76,8 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   const block = /<script type="application\/ld\+json" nonce="([^"]*)">([^<]*)<\/script>/.exec(await home.text())
   expect(block?.[1]).toBe(nonce)
   expect(JSON.parse(block![2])['@graph'].map((t: { '@type': string; name: string }) => [t['@type'], t.name])).toEqual([
-    ['Organization', 'Rondje'],
-    ['WebSite', 'Rondje'],
+    ['Organization', 'Rondje Mee'],
+    ['WebSite', 'Rondje Mee'],
   ])
   // Logging in, signing up and example dogs are no answer to a search.
   for (const path of ['/login', '/signup', '/dogs/demo-noor']) {
@@ -99,22 +99,22 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
 test('support link: on the website when the recipient is named, never in the app', async ({ browser }) => {
   const web = await newPerson(browser)
   await web.page.goto('/support')
-  const link = web.page.getByRole('link', { name: /Steun Rondje via/ })
+  const link = web.page.getByRole('link', { name: /Steun Rondje Mee via/ })
   test.skip((await link.count()) === 0, 'Needs SUPPORT_URL and OPERATOR_NAME on the server (see playwright.config.ts)')
   await expect(link).toHaveAttribute('href', /patreon\.com/)
-  await expect(web.page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje mogelijk' })).toBeVisible()
+  await expect(web.page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje Mee mogelijk' })).toBeVisible()
 
   // The iOS and Android apps add "RondjeApp" to the user agent: no money anywhere.
   const app = await browser.newContext({ userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp' })
   const page = await app.newPage()
   await page.goto('/support')
-  await expect(page.getByRole('heading', { name: 'Maak Rondje mogelijk', level: 1 })).toBeVisible()
-  await expect(page.getByRole('link', { name: /Steun Rondje via/ })).toHaveCount(0)
+  await expect(page.getByRole('heading', { name: 'Maak Rondje Mee mogelijk', level: 1 })).toBeVisible()
+  await expect(page.getByRole('link', { name: /Steun Rondje Mee via/ })).toHaveCount(0)
   await expect(page.getByText(/Samen ongeveer/)).toHaveCount(0)
-  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje mogelijk' })).toHaveCount(0)
+  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Maak Rondje Mee mogelijk' })).toHaveCount(0)
   await page.goto('/')
   await expect(page.getByRole('link', { name: /Hoe we gratis blijven/ })).toHaveCount(0)
-  await expect(page.getByRole('link', { name: /Over Rondje/ }).first()).toBeVisible()
+  await expect(page.getByRole('link', { name: /Over Rondje Mee/ }).first()).toBeVisible()
 
   await web.context.close()
   await app.close()

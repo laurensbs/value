@@ -6,32 +6,32 @@ updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
-# Condiciones de uso de Rondje
+# Condiciones de uso de Rondje Mee
 
-Estas condiciones se aplican a todas las personas que usan Rondje: la web y la app para iOS y Android. Al crear una cuenta, las aceptas. También forman parte de ellas el **Código de conducta**, el **Protocolo de seguridad**, la **Política de privacidad** y la **Política de cookies**. Las protectoras deben cumplir además las **Condiciones para protectoras colaboradoras**.
+Estas condiciones se aplican a todas las personas que usan Rondje Mee: la web y la app para iOS y Android. Al crear una cuenta, las aceptas. También forman parte de ellas el **Código de conducta**, el **Protocolo de seguridad**, la **Política de privacidad** y la **Política de cookies**. Las protectoras deben cumplir además las **Condiciones para protectoras colaboradoras**.
 
 ## 1. Quiénes somos
 
-Rondje es un servicio de [Naam rechtspersoon, bijv. Stichting Rondje i.o.], inscrita en la Cámara de Comercio de los Países Bajos (KvK) con el número [KvK-nummer] y con domicilio en [adres] («Rondje» o «nosotros»).
+Rondje Mee es un servicio de [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], inscrita en la Cámara de Comercio de los Países Bajos (KvK) con el número [KvK-nummer] y con domicilio en [adres] («Rondje Mee» o «nosotros»).
 
 Puedes contactarnos en {{contact}}. Es también nuestro punto de contacto para usuarios y autoridades conforme al Reglamento de Servicios Digitales (DSA). Puedes escribirnos en neerlandés, inglés, español o francés.
 
-## 2. Qué es Rondje, y qué no es
+## 2. Qué es Rondje Mee, y qué no es
 
-Rondje es una plataforma online gratuita que pone en contacto a **paseantes** (personas adultas a las que les gustaría pasear a un perro) con **propietarios** (particulares, a menudo vecinos mayores o enfermos) y **protectoras** (entidades que acogen perros).
+Rondje Mee es una plataforma online gratuita que pone en contacto a **paseantes** (personas adultas a las que les gustaría pasear a un perro) con **propietarios** (particulares, a menudo vecinos mayores o enfermos) y **protectoras** (entidades que acogen perros).
 
-Rondje es un **intermediario**:
+Rondje Mee es un **intermediario**:
 
 - Los acuerdos sobre un paseo los hacéis entre vosotros. No somos parte de esos acuerdos.
-- Los paseantes son voluntarios que actúan a título particular, no para Rondje, ni como empleados ni en su nombre.
+- Los paseantes son voluntarios que actúan a título particular, no para Rondje Mee, ni como empleados ni en su nombre.
 - No somos propietarios ni poseedores de los perros. No revisamos a los perros ni supervisamos los paseos.
 - Sí ofrecemos herramientas de confianza y seguridad. Hacen los paseos más seguros, pero no pueden eliminar todos los riesgos.
 
-Rondje no es un servicio de paseo de perros, ni un veterinario, ni un servicio de ayuda, ni una terapia.
+Rondje Mee no es un servicio de paseo de perros, ni un veterinario, ni un servicio de ayuda, ni una terapia.
 
-## 3. Quién puede usar Rondje
+## 3. Quién puede usar Rondje Mee
 
-Debes tener **18 años o más** y usar Rondje como particular y para ti. Las protectoras usan una cuenta de entidad. Si te hemos expulsado antes, no puedes crear una cuenta nueva. Rondje está disponible para usuarios en los Países Bajos, Bélgica y España.
+Debes tener **18 años o más** y usar Rondje Mee como particular y para ti. Las protectoras usan una cuenta de entidad. Si te hemos expulsado antes, no puedes crear una cuenta nueva. Rondje Mee está disponible para usuarios en los Países Bajos, Bélgica y España.
 
 ## 4. Tu cuenta
 
@@ -52,10 +52,10 @@ Puedes tener más de una función.
 
 ## 6. Solicitudes, primer encuentro y confianza en solitario
 
-1. **Solicitud.** El paseante pide a través de Rondje un primer encuentro o un paseo. El propietario o la protectora acepta o rechaza. Nadie está obligado a aceptar.
+1. **Solicitud.** El paseante pide a través de Rondje Mee un primer encuentro o un paseo. El propietario o la protectora acepta o rechaza. Nadie está obligado a aceptar.
 2. **Datos de contacto.** Tras la aceptación, ambas partes ven el teléfono de la otra y los datos reservados necesarios, como el punto de encuentro. Úsalos solo para el paseo.
 3. **Primer encuentro.** La primera vez siempre es un primer encuentro, con el propietario o alguien de la protectora presente.
-4. **Comprobación de identidad.** En el primer encuentro, el paseante muestra un documento de identidad válido. El propietario o la protectora comprueba que el nombre, la foto y la edad coinciden, y lo marca en la app. Rondje no guarda ninguna copia. No le hagas fotos ni copias tú tampoco.
+4. **Comprobación de identidad.** En el primer encuentro, el paseante muestra un documento de identidad válido. El propietario o la protectora comprueba que el nombre, la foto y la edad coinciden, y lo marca en la app. Rondje Mee no guarda ninguna copia. No le hagas fotos ni copias tú tampoco.
 5. **Confianza en solitario.** Solo puedes pasear solo a un perro cuando el propietario o la protectora lo autoriza expresamente en la app. Vale solo para ese perro y puede retirarse en cualquier momento.
 6. **Test de seguridad.** Antes de tu primer paseo en solitario, haces un breve test en la app.
 7. **Las cuentas nuevas** solo pueden hacer, al principio, primeros encuentros y paseos supervisados. La app indica cuándo cambia esto.
@@ -67,13 +67,13 @@ Las protectoras pueden organizar paseos en grupo supervisados con plazas limitad
 
 ## 8. Sin dinero
 
-Rondje es gratuito para todos.
+Rondje Mee es gratuito para todos.
 
 - **No puedes pedir ni ofrecer dinero** por un paseo, tampoco propinas, tarjetas regalo u otros pagos.
 - Las bolsas para excrementos, la correa, el arnés, los premios y el agua los aporta el propietario o la protectora, según el perfil del perro.
 - Si alguien te pide dinero, un IBAN o un pago mediante un enlace, no respondas y denúncialo.
 - Los mensajes de las solicitudes se revisan automáticamente para detectar peticiones de pago, números de cuenta y enlaces. Si se detecta algo, verás un aviso y una persona del equipo lo revisará.
-- **Apoyo voluntario a Rondje.** Si nuestra web ofrece una forma de apoyar a Rondje (por ejemplo, a través de Patreon), se trata de una aportación voluntaria sin contraprestación: no recibes prioridad, funciones extra ni otras ventajas, y no influye en los emparejamientos, la visibilidad ni la moderación. Al pago se aplican también las condiciones de esa plataforma. La aportación no desgrava.
+- **Apoyo voluntario a Rondje Mee.** Si nuestra web ofrece una forma de apoyar a Rondje Mee (por ejemplo, a través de Patreon), se trata de una aportación voluntaria sin contraprestación: no recibes prioridad, funciones extra ni otras ventajas, y no influye en los emparejamientos, la visibilidad ni la moderación. Al pago se aplican también las condiciones de esa plataforma. La aportación no desgrava.
 
 ## 9. Qué esperamos de todos
 
@@ -82,7 +82,7 @@ Rondje es gratuito para todos.
 - Tratas a personas y animales con respeto. No toleramos el acoso, la discriminación, la violencia ni el maltrato animal.
 - Usas los datos de contacto de otras personas solo para el paseo y no los compartes con nadie.
 - No publicas nada ilícito ni que vulnere derechos de terceros.
-- No usas Rondje con fines comerciales, no burlas nuestra seguridad y no recopilas datos con bots o *scrapers*.
+- No usas Rondje Mee con fines comerciales, no burlas nuestra seguridad y no recopilas datos con bots o *scrapers*.
 
 ## 10. Normas adicionales para propietarios
 
@@ -96,7 +96,7 @@ Como propietario confirmas, al crear el perfil del perro y en todo momento, que:
 - indicas claramente si se le pueden dar premios y si tiene alergias;
 - el perro no puede ir suelto, salvo que lo autorices expresamente y la ley lo permita en ese lugar. Por defecto, ir suelto no está permitido.
 
-Tú decides quién pasea a tu perro. Rondje no toma esa decisión por ti.
+Tú decides quién pasea a tu perro. Rondje Mee no toma esa decisión por ti.
 
 ## 11. Normas adicionales para paseantes
 
@@ -108,7 +108,7 @@ Como paseante:
 - no llevas otros perros ni dejas el perro a nadie;
 - solo paseas si te encuentras bien, y nunca bajo los efectos del alcohol o las drogas;
 - inicias el paseo en la app para que funcione la ubicación en tiempo real;
-- comunicas cualquier incidente de inmediato al propietario o a la protectora, y a Rondje.
+- comunicas cualquier incidente de inmediato al propietario o a la protectora, y a Rondje Mee.
 
 Te recomendamos encarecidamente tener tu propio **seguro de responsabilidad civil** (ver apartado 15).
 
@@ -135,7 +135,7 @@ La ubicación en tiempo real depende de tu móvil, la batería y la cobertura. E
 
 ## 14. Valoraciones, denuncias y moderación
 
-**Valoración privada.** Después de cada paseo puedes dar una valoración privada. La otra persona nunca la ve. Solo la usa Rondje, para la seguridad y la moderación.
+**Valoración privada.** Después de cada paseo puedes dar una valoración privada. La otra persona nunca la ve. Solo la usa Rondje Mee, para la seguridad y la moderación.
 
 **Denunciar y bloquear.** Puedes denunciar en la app un perfil, un mensaje o un incidente, por ejemplo maltrato, situaciones inseguras, estafas, acoso o perfiles falsos. También puedes bloquear a alguien.
 
@@ -161,33 +161,33 @@ Seamos claros: pasear perros conlleva riesgos. Un perro puede morder, escaparse 
 
 - Los propietarios y las protectoras tienen un seguro de responsabilidad civil que cubre los daños causados por el perro, también cuando lo pasea otra persona. Compruébalo en tu póliza.
 - Recomendamos encarecidamente a los paseantes tener su propio seguro de responsabilidad civil. Ojo: muchas pólizas excluyen los daños a animales o bienes bajo tu custodia, como el propio perro o su correa.
-- Rondje no tiene un seguro para los paseos entre usuarios [pendiente de verificar], salvo que más adelante lo comuniquemos expresamente.
+- Rondje Mee no tiene un seguro para los paseos entre usuarios [pendiente de verificar], salvo que más adelante lo comuniquemos expresamente.
 
 **Nuestra responsabilidad**
 
-- Hacemos todo lo posible para que Rondje funcione de forma segura y correcta, pero no podemos garantizar que funcione siempre sin errores ni interrupciones.
+- Hacemos todo lo posible para que Rondje Mee funcione de forma segura y correcta, pero no podemos garantizar que funcione siempre sin errores ni interrupciones.
 - No respondemos de lo que los usuarios acuerden o hagan entre ellos, de lo que hagan los perros, ni de la exactitud de lo que los usuarios cuenten sobre sí mismos o su perro. Esto no se aplica si hemos actuado mal nosotros.
 - En la medida en que lo permita la ley, solo respondemos de los daños directos causados por nuestro propio incumplimiento, hasta un máximo de [bedrag] € por incidente [propuesta – pendiente de verificar].
-- Estas limitaciones **no** se aplican en caso de dolo o culpa grave de Rondje, ni a la muerte o las lesiones causadas por nuestra culpa, ni cuando lo prohíba la normativa imperativa de consumo. Tus derechos legales como consumidor se mantienen siempre.
+- Estas limitaciones **no** se aplican en caso de dolo o culpa grave de Rondje Mee, ni a la muerte o las lesiones causadas por nuestra culpa, ni cuando lo prohíba la normativa imperativa de consumo. Tus derechos legales como consumidor se mantienen siempre.
 
 ## 16. Tu contenido y nuestros derechos
 
 - Las fotos, historias y textos que publicas siguen siendo tuyos.
-- Nos concedes una licencia gratuita y no exclusiva para almacenar ese contenido, adaptarlo al formato de pantalla y mostrarlo, **solo para que Rondje funcione**. Por ejemplo, para mostrar el perfil de un perro o revisar una denuncia.
+- Nos concedes una licencia gratuita y no exclusiva para almacenar ese contenido, adaptarlo al formato de pantalla y mostrarlo, **solo para que Rondje Mee funcione**. Por ejemplo, para mostrar el perfil de un perro o revisar una denuncia.
 - La licencia termina cuando borras el contenido o tu cuenta. Las copias de seguridad se borran en 30 días. El contenido necesario para una denuncia abierta se conserva el tiempo necesario.
 - **No** usamos tu contenido para publicidad ni redes sociales sin tu consentimiento expreso y por separado.
 - Solo publicas contenido sobre el que tienes derechos. Si en una foto aparecen otras personas, necesitas su permiso.
-- El nombre Rondje, el logotipo, el software y el diseño son nuestros o de nuestros licenciantes.
+- El nombre Rondje Mee, el logotipo, el software y el diseño son nuestros o de nuestros licenciantes.
 
 ## 17. Limitación, suspensión o cierre de la cuenta
 
 - Puedes eliminar tu cuenta en cualquier momento desde la app. Después borraremos tus datos como indica la Política de privacidad.
 - Podemos suspender o cerrar definitivamente tu cuenta ante un incumplimiento grave o reiterado, si pones en peligro a personas o animales, o si la seguridad lo exige. Si publicas reiteradamente contenido manifiestamente ilícito, primero te avisaremos.
-- Si dejamos de ofrecer Rondje o lo cambiamos de forma importante, te avisaremos con al menos 30 días de antelación, salvo que no sea posible, por ejemplo ante un problema urgente de seguridad.
+- Si dejamos de ofrecer Rondje Mee o lo cambiamos de forma importante, te avisaremos con al menos 30 días de antelación, salvo que no sea posible, por ejemplo ante un problema urgente de seguridad.
 
 ## 18. Reclamaciones
 
-- ¿Una queja sobre Rondje? Escribe a {{contact}}. Responderemos en un plazo de 14 días [propuesta].
+- ¿Una queja sobre Rondje Mee? Escribe a {{contact}}. Responderemos en un plazo de 14 días [propuesta].
 - ¿No estás de acuerdo con una decisión sobre tu contenido, tu cuenta o tu denuncia? Reclama en un plazo de **6 meses** desde la app o por correo. Una persona que no participó en la primera decisión la revisará.
 - También puedes acudir a un órgano certificado de resolución extrajudicial de litigios conforme al DSA, o a los tribunales.
 - La plataforma europea de resolución de litigios en línea (ODR) dejó de funcionar en julio de 2025.
