@@ -1,3 +1,4 @@
+import { APP_NAME } from './site'
 import { TIME_ZONE } from './time'
 
 /** One appointment as an iCalendar file (RFC 5545), so it lands in any calendar app. */
@@ -98,7 +99,7 @@ export function foldLine(line: string): string {
   return parts.join('\r\n ')
 }
 
-export function calendarFile(event: CalendarEvent, product = 'Rondje'): string {
+export function calendarFile(event: CalendarEvent, product = APP_NAME): string {
   const end = new Date(event.start.getTime() + event.minutes * 60_000)
   // A weekly walk repeats at the same local time, also after summer or winter time starts. In UTC
   // every repeat would keep the first one's UTC hour and move an hour on the local clock.

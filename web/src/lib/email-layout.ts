@@ -1,3 +1,5 @@
+import { APP_NAME } from './site'
+
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
 
@@ -18,7 +20,7 @@ export function renderEmail({ heading, paragraphs, cta, footer }: EmailParts): {
     '<!doctype html><html><body style="margin:0;background:#f4f6f0;color:#16201a;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,Helvetica,Arial,sans-serif">',
     '<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">',
     '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:16px"><tr><td style="padding:28px">',
-    '<p style="margin:0 0 16px;font-weight:800;font-size:18px;color:#1f5a3d">Rondje</p>',
+    `<p style="margin:0 0 16px;font-weight:800;font-size:18px;color:#1f5a3d">${escapeHtml(APP_NAME)}</p>`,
     `<h1 style="margin:0 0 12px;font-size:22px;line-height:1.25">${escapeHtml(heading)}</h1>`,
     ...paragraphs.map(p),
     button,

@@ -4,7 +4,7 @@ import { Icon } from '@/components/Icon'
 import { PrintButton } from '@/components/PrintButton'
 import { QrCode } from '@/components/QrCode'
 import { inviteUrl } from '@/lib/invite'
-import { siteUrl } from '@/lib/site'
+import { APP_NAME, siteUrl } from '@/lib/site'
 import { getViewer } from '@/server/session'
 import { pageMetadata } from '@/lib/seo'
 
@@ -49,7 +49,7 @@ export default async function FlyerPage({ searchParams }: { searchParams: Promis
 
       <article className="poster">
         <header className="poster-head">
-          <p className="poster-org">Rondje</p>
+          <p className="poster-org">{APP_NAME}</p>
         </header>
         <h2 className="poster-title">{t(`${audience}.headline`)}</h2>
         <p className="poster-text">{t(`${audience}.text`)}</p>
