@@ -14,7 +14,11 @@ import { LandingIcon, PawMark } from '@/components/landing/LandingIcon'
 import { TRIO } from '@/components/landing/looks'
 import { IconTile, type Tone } from '@/components/landing/PageHero'
 import { PhoneShowcase } from '@/components/landing/PhoneShowcase'
+import { JsonLd } from '@/components/JsonLd'
 import { countryInfo, isCountry } from '@/lib/countries'
+import { pageMetadata, siteGraph } from '@/lib/seo'
+import { APP_NAME } from '@/lib/site'
+import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import { listDogs } from '@/server/queries'
 import { Today } from '@/components/Today'
@@ -31,10 +35,11 @@ const SAFETY: { key: 1 | 2 | 3 | 4 | 5 | 6; icon: ReactNode; tone: Tone }[] = [
 ]
 
 export async function generateMetadata() {
-  const viewer = await getViewer()
-  if (!viewer?.profile) return {}
-  const t = await getTranslations('today')
-  return { title: t('metaTitle') }
+  const [viewer, t] = await Promise.all([getViewer(), getTranslations()])
+  const description = t('meta.description', { app: APP_NAME })
+  // Members see Today here. Search engines and chat apps come without a session: they get the landing page.
+  if (viewer?.profile) return pageMetadata({ path: '/', title: t('today.metaTitle'), description })
+  return pageMetadata({ path: '/', title: t('meta.title', { app: APP_NAME }), absoluteTitle: true, description })
 }
 
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ welcome?: string }> }) {
@@ -56,6 +61,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
   return (
     <div className="lp">
+      <JsonLd data={siteGraph({ instagram: supportConfig().instagram })} />
       <section className="lp-hero">
         <div className="lp-hero-copy">
           <p className="lp-kicker">

@@ -1,5 +1,6 @@
 ---
 title: Código de conducta
+description: "Cómo nos tratamos entre personas y a los perros: honestidad, cumplir lo acordado, bienestar animal en el paseo, respeto y tolerancia cero."
 version: "0.1"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"

@@ -1,5 +1,6 @@
 ---
 title: Code of Conduct
+description: "How we treat each other and the dogs: be honest, keep your appointments, animal welfare on the walk, respect and zero tolerance."
 version: "0.1"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"

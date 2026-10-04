@@ -1,5 +1,6 @@
 ---
 title: Cookie Statement
+description: "We only use functional cookies and local storage: no ads, no tracking and no analytics by other companies."
 version: "0.1"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"

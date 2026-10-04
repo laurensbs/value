@@ -3,11 +3,12 @@ import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
+import { pageMetadata } from '@/lib/seo'
 import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('safety')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/safety', title: t('title'), description: t('lede') })
 }
 
 export default async function SafetyPage() {

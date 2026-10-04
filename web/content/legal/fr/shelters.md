@@ -1,5 +1,6 @@
 ---
 title: Conditions partenaires pour les refuges
+description: "Les conditions de partenariat pour les refuges : vérification, profils des chiens, rencontres et balades en groupe, assurance, données et photos."
 version: "0.1"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"

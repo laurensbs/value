@@ -1,5 +1,6 @@
 ---
 title: Code de conduite
+description: "Comment nous traitons les autres et les chiens : honnêteté, rendez-vous tenus, bien-être animal pendant la balade, respect et tolérance zéro."
 version: "0.1"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"

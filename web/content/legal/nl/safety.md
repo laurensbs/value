@@ -1,5 +1,6 @@
 ---
 title: Veiligheids- en incidentprotocol
+description: "Veilig wandelen, en wat je doet als er iets misgaat: voor en tijdens het rondje, belangrijke nummers, hulp voor jezelf en hoe je iets meldt."
 version: "0.1"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"

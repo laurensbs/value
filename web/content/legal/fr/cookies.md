@@ -1,5 +1,6 @@
 ---
 title: Politique en matière de cookies
+description: "Uniquement des cookies fonctionnels et le stockage local : pas de publicité, pas de suivi, pas d'analyse par d'autres entreprises."
 version: "0.1"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"

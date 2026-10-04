@@ -1,5 +1,6 @@
 ---
 title: Safety and Incident Protocol
+description: "Walking safely, and what to do if something goes wrong: before and during the walk, important numbers, help for yourself and how to report."
 version: "0.1"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"

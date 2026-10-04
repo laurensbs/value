@@ -1,5 +1,6 @@
 ---
 title: Politique de confidentialité
+description: "Les données personnelles que nous traitons, pourquoi et combien de temps, qui les voit et quels sont vos droits. Votre adresse exacte reste privée."
 version: "0.3"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"

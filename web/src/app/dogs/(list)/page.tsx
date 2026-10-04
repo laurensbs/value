@@ -10,6 +10,7 @@ import { OrgHeader } from '@/components/discover/OrgHeader'
 import { Sym, type SymName } from '@/components/discover/Sym'
 import { visitorCountry, visitorPosition } from '@/components/discover/visitor'
 import { COUNTRIES, countryInfo, isCountry, type Country } from '@/lib/countries'
+import { pageMetadata } from '@/lib/seo'
 import { readableFirst } from '@/lib/story-language'
 import { challengesFor } from '@/server/challenges'
 import { progressFor } from '@/server/progress'
@@ -23,9 +24,18 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const t = await getTranslations()
   const { org: orgId } = await searchParams
   const org = orgId ? await publicOrg(orgId.slice(0, 64)) : null
-  if (org) return { title: t('dogs.orgTitle', { name: org.name }), description: org.description.slice(0, 160) || t('dogs.lede') }
+  // Filters and a shelter's selection (?org=, ?q=, ?country=) are views of one page: the canonical is /dogs.
+  if (org) {
+    return pageMetadata({
+      path: '/dogs',
+      title: t('dogs.orgTitle', { name: org.name }),
+      description: org.description || t('dogs.lede'),
+      // An example shelter is made up: never in search results.
+      robots: org.isDemo ? 'noindex' : undefined,
+    })
+  }
   const viewer = await getViewer()
-  return { title: viewer?.profile ? t('shell.tabs.discover') : t('dogs.title'), description: t('dogs.lede') }
+  return pageMetadata({ path: '/dogs', title: viewer?.profile ? t('shell.tabs.discover') : t('dogs.title'), description: t('dogs.lede') })
 }
 
 const FILTERS: { key: 'all' | 'calm' | 'high' | 'owner' | 'shelter'; icon: SymName }[] = [

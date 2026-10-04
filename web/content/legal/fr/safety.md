@@ -1,5 +1,6 @@
 ---
 title: Protocole de sécurité et d'incident
+description: "Se promener en sécurité, et que faire en cas de problème : avant et pendant la balade, numéros utiles, aide pour vous et signalement."
 version: "0.1"
 updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"
