@@ -9,7 +9,7 @@ on:
     inputs:
       url:
         description: Base URL to check
-        default: https://rondje-five.vercel.app
+        default: https://rondjemee.nl
         required: true
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      BASE: ${{ inputs.url || 'https://rondje-five.vercel.app' }}
+      BASE: ${{ inputs.url || 'https://rondjemee.nl' }}
     steps:
       - name: Health
         run: |
