@@ -2,7 +2,6 @@ import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
-import { SupportButton } from '@/components/SupportButton'
 import { APP_NAME } from '@/lib/site'
 import { campaign, ROUND_EUR, roundsFor, supportConfig } from '@/lib/support'
 import crowdfunding from '../../../content/crowdfunding.json'
@@ -11,13 +10,18 @@ import { PawMark } from './LandingIcon'
 import { GOLDEN } from './looks'
 
 /**
- * "Help ons!": the crowdfunding, big and warm on the home page (Laurens, 5 okt 2026). Website only,
- * never in the apps, and only while a campaign link and its recipient are set (CROWDFUNDING_URL +
- * OPERATOR_NAME). The numbers come from content/crowdfunding.json; no countdown, no urgency.
+ * "Help ons!": the crowdfunding, big and warm on the home page (Laurens, 5 okt 2026), only while a
+ * campaign link and its recipient are set (CROWDFUNDING_URL + OPERATOR_NAME). The numbers come from
+ * content/crowdfunding.json; no countdown, no urgency.
+ *
+ * In the apps too (Laurens, 5 okt 2026), but low on the page (the home page places it) and nothing
+ * is paid inside the app: the button is a plain link to another site, which the Capacitor shell
+ * opens in Safari or the phone's browser (WebViewDelegationHandler on iOS, Bridge.launchIntent on
+ * Android). /support says nothing about money in the apps, so the link there is left out.
  */
 export async function HelpUs({ native }: { native: boolean }) {
   const cfg = supportConfig()
-  if (native || !cfg.crowdfundingUrl || !cfg.operator) return null
+  if (!cfg.crowdfundingUrl || !cfg.operator) return null
   const t = await getTranslations()
   const format = await getFormatter()
   const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
@@ -55,14 +59,21 @@ export async function HelpUs({ native }: { native: boolean }) {
         ) : null}
         {/* ?bron= counts sign-ups that came through this block (lib/join.ts); the Whydonate link carries nothing. */}
         <div className="lp-help-actions">
-          <SupportButton url={cfg.crowdfundingUrl} label={t('home.helpUs.give')} className="button primary lp-cta lp-help-give" />
+          <a href={cfg.crowdfundingUrl} target="_blank" rel="noopener noreferrer" className="button primary lp-cta lp-help-give">
+            <Icon name="heart" size={18} /> {t('home.helpUs.give')}
+          </a>
           <Link href="/aanmelden?bron=helpons" className="lp-help-join">
             {t('home.helpUs.join')} →
           </Link>
         </div>
         <p className="muted small">
-          {t('home.helpUs.note', { platform: cfg.crowdfundingPlatform ?? '', operator: cfg.operator, app: APP_NAME })}{' '}
-          <Link href="/support#crowdfunding">{t('home.helpUs.more')} →</Link>
+          {t('home.helpUs.note', { platform: cfg.crowdfundingPlatform ?? '', operator: cfg.operator, app: APP_NAME })}
+          {native ? null : (
+            <>
+              {' '}
+              <Link href="/support#crowdfunding">{t('home.helpUs.more')} →</Link>
+            </>
+          )}
         </p>
       </div>
       <HelpArt percent={progress?.percent ?? 0} chip={t('home.helpUs.chip', { round: euro(ROUND_EUR) })} />

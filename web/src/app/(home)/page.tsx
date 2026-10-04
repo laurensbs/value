@@ -91,7 +91,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         <DogStage />
       </section>
 
-      <HelpUs native={native} />
+      {/* On the website the crowdfunding comes right after the hero; in the apps low on the page (below). */}
+      {native ? null : <HelpUs native={false} />}
 
       <Chooser ownerHref={ownerHref} bothHref={bothHref} />
 
@@ -182,6 +183,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           </Link>
         </div>
       </section>
+
+      {native ? <HelpUs native /> : null}
     </div>
   )
 }
