@@ -1,3 +1,4 @@
+import '../progress.css'
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { ChallengeCard } from '@/components/ChallengeCard'
@@ -7,6 +8,7 @@ import { Icon } from '@/components/Icon'
 import { Medal } from '@/components/Medal'
 import { LevelUp } from '@/components/progress/LevelUp'
 import { WeekCard } from '@/components/WeekCard'
+import { WeeklyGoalPicker } from '@/components/WeeklyGoalPicker'
 import { bondFor, KIND_KEYS, LEVEL_KEYS, LEVELS, POINTS, type PointKind } from '@/lib/progress'
 import { challengesFor } from '@/server/challenges'
 import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
@@ -28,9 +30,10 @@ export default async function ProgressPage() {
   const viewer = await requireOnboarded('/progress')
   const now = new Date()
   const { walker, owner } = rolesOf(viewer.profile)
-  const [t, tt, format, progress, challenges, friends, impact] = await Promise.all([
+  const [t, tt, tf, format, progress, challenges, friends, impact] = await Promise.all([
     getTranslations('progress'),
     getTranslations('today'),
+    getTranslations('profile'),
     getFormatter(),
     progressFor(viewer, now),
     challengesFor(viewer, now),
@@ -77,6 +80,15 @@ export default async function ProgressPage() {
         {/* The week only counts once there is something to count: after your first walk. */}
         {walker && progress.activeWeeks > 0 ? (
           <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} />
+        ) : walker ? (
+          // Before the first walk: nothing to count yet, but the goal can be set or changed in one tap.
+          <section className="card stack-s goal-card" aria-labelledby="goal-title">
+            <h2 id="goal-title" className="small-title">
+              {tf('weeklyGoal')}
+            </h2>
+            <p className="muted small">{tf('weeklyGoalHint')}</p>
+            <WeeklyGoalPicker current={progress.weeklyGoal} />
+          </section>
         ) : null}
         <ChallengeCard challenges={challenges} />
       </div>

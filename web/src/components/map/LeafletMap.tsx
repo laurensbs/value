@@ -177,12 +177,20 @@ export default function LeafletMap({
         if (items.length === 1) {
           const marker = L.marker([first.lat, first.lng], { icon: icon(first.kind, first.label, first.id === selectedRef.current), title: first.label, keyboard: true })
           if (markerClickRef.current) {
-            // A tap (or Enter on a focused marker, which Leaflet turns into a click) selects it.
+            // A tap selects it. Leaflet 1.9 gives a focused marker no click on Enter (only popups
+            // listen to keys), so Enter and Space are handled on the marker's own element below.
             marker.on('click', () => markerClickRef.current?.(first.id))
           } else if (first.href) {
             marker.bindPopup(markerLink(first))
           }
           marker.addTo(layer)
+          if (markerClickRef.current) {
+            marker.getElement()?.addEventListener('keydown', (e) => {
+              if (e.key !== 'Enter' && e.key !== ' ') return
+              e.preventDefault()
+              markerClickRef.current?.(first.id)
+            })
+          }
           drawn.current.set(first.id, { marker, item: first })
           continue
         }

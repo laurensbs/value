@@ -1,7 +1,9 @@
 // "Eén ding nu": the one thing to do next, on top of Vandaag. A pure function of what the server
 // knows (appointments, quiz, own dogs, real dogs nearby), the same order as the iPhone app
 // (ios/Rondje/Core/NextStep.swift): what happens right now first, then what someone waits for,
-// then a calm suggestion, and always an honest end ("Niks te doen. Fijne dag.").
+// then a calm suggestion, and always an honest end ("Niks te doen. Fijne dag."). At night, steps
+// that involve other people wait until the morning; something calm for yourself (the quiz, a
+// lesson) is fine.
 // Example dogs never become a step. Scenarios: next-step.scenarios.json (also for the iPhone tests).
 
 import { localParts } from './progress'
@@ -40,6 +42,10 @@ export interface NextStepFacts {
   trust: Record<string, { idSeen: boolean; soloAllowed: boolean }>
   /** Dogs near you, nearest first. Your own are left out by the caller. */
   nearby: { id: string; name: string; isDemo: boolean; distanceM: number | null; city: string }[]
+  /** Said "I want to walk" at sign-up. Shelter staff did not, though rolesOf counts them as walkers. */
+  wantsToWalk?: boolean
+  /** The shelter you work for, with its next group walk. */
+  staffOrg?: { id: string; name: string; nextGroupWalk: Date | null } | null
 }
 
 export type NextStepKind =
@@ -58,6 +64,7 @@ export type NextStepKind =
   | 'nearby'
   | 'emptyTown'
   | 'ownerWaiting'
+  | 'shelter'
   | 'night'
   | 'done'
 
@@ -72,8 +79,11 @@ export interface NextStep {
   distanceM?: number | null
   city?: string
   at?: Date
-  /** The appointment is a first meeting (else a walk). */
+  /** The appointment is a first meeting (else a walk), and how it happens (walk, home, phone, video). */
   meet?: boolean
+  via?: string
+  /** The shelter's name. */
+  org?: string
   /** Feedback as the owner (else as the walker). */
   asOwner?: boolean
   href: string | null
@@ -91,7 +101,10 @@ export const LATER_DAYS = 7
 /** After twice "Later" a step does not come back. */
 export const LATER_MAX = 2
 
-/** Between 23:00 and 06:00 suggestions wait until the morning; what happens now still shows. */
+/**
+ * Between 23:00 and 06:00 (Dutch time) steps that involve other people (asking for a dog, planning
+ * another walk, telling the neighbours) wait until the morning; what happens now still shows.
+ */
 export function isNight(now: Date): boolean {
   const { hour } = localParts(now)
   return hour >= 23 || hour < 6
@@ -109,6 +122,9 @@ const real = (a: NextStepAppointment) => !a.dog.isDemo
  */
 export function nextSteps(f: NextStepFacts): NextStep[] {
   const now = f.now
+  // Shelter staff did not choose to walk; they get their shelter, not dogs to ask for.
+  const staff = Boolean(f.staffOrg) && !f.wantsToWalk && !f.owner
+  const walker = f.walker && !staff
   const out = f.outgoing.filter(real)
   const inc = f.incoming.filter(real)
   const steps: NextStep[] = []
@@ -156,51 +172,69 @@ export function nextSteps(f: NextStepFacts): NextStep[] {
     .sort(([a], [b]) => a.startsAt.getTime() - b.startsAt.getTime())[0]
   if (upcoming) {
     const [a, asOwner] = upcoming
-    add({ id: `upcoming.${a.id}`, kind: 'upcoming', dog: a.dog.name, walker: a.walkerName, at: a.startsAt, meet: a.kind === 'meet', asOwner, href: asOwner ? '/requests?view=incoming' : '/requests' })
+    add({
+      id: `upcoming.${a.id}`,
+      kind: 'upcoming',
+      dog: a.dog.name,
+      walker: a.walkerName,
+      at: a.startsAt,
+      meet: a.kind === 'meet',
+      via: a.meetVia,
+      asOwner,
+      href: asOwner ? '/requests?view=incoming' : '/requests',
+    })
   }
 
-  // From here on: suggestions. At night they wait until the morning.
-  const suggestions: NextStep[] = []
-  const suggest = (s: Omit<NextStep, 'later' | 'dismiss'>) => suggestions.push({ later: true, dismiss: false, ...s })
+  // From here on: suggestions. The ones with other people in them ("social") wait at night.
+  const suggestions: { step: NextStep; social: boolean }[] = []
+  const suggest = (s: Omit<NextStep, 'later' | 'dismiss'>, social = false) => suggestions.push({ step: { later: true, dismiss: false, ...s }, social })
   const ownDogs = f.ownDogs.filter((d) => !d.isDemo)
 
-  // 7. The safety quiz comes before any request (the server checks it too).
-  if (f.walker && !f.quizPassed) suggest({ id: 'quiz', kind: 'quiz', href: '/profile/quiz?next=%2F' })
-  // 8. No dog on Rondje yet.
+  // 7. Shelter staff: their shelter, with the next group walk or a nudge to plan one.
+  if (staff && f.staffOrg) {
+    suggest({ id: 'shelter', kind: 'shelter', org: f.staffOrg.name, at: f.staffOrg.nextGroupWalk ?? undefined, href: `/shelter/${f.staffOrg.id}` })
+  }
+  // 8. The safety quiz comes before any request (the server checks it too). Fine at night.
+  if (walker && !f.quizPassed) suggest({ id: 'quiz', kind: 'quiz', href: '/profile/quiz?next=%2F' })
+  // 9. No dog on Rondje yet.
   if (f.owner && ownDogs.length === 0) suggest({ id: 'addDog', kind: 'addDog', href: '/my-dogs/new' })
-  // 9. A request the owner is still looking at.
+  // 10. A request the owner is still looking at.
   const waiting = out.filter((a) => a.status === 'pending').sort((a, b) => a.startsAt.getTime() - b.startsAt.getTime())[0]
   if (waiting) suggest({ id: `waiting.${waiting.id}`, kind: 'waiting', dog: waiting.dog.name, href: '/requests' })
-  // 10. Another walk with a dog you walked in the last two weeks, when nothing is planned with it.
+  // 11. Another walk with a dog you walked in the last two weeks, when nothing is planned with it.
   const open = new Set(
     out.filter((a) => a.walkStatus !== 'ended' && (a.status === 'pending' || (a.status === 'accepted' && a.startsAt.getTime() > now.getTime()))).map((a) => a.dog.id),
   )
   const rebook = out
     .filter((a) => walkedLately(a, now) && !a.weekly && !open.has(a.dog.id))
     .sort((a, b) => b.startsAt.getTime() - a.startsAt.getTime())[0]
-  if (rebook) suggest({ id: 'rebook', kind: 'rebook', dog: rebook.dog.name, href: `/dogs/${rebook.dog.id}#plan` })
-  // 11. Your dog is online and nobody asked yet: tell the neighbours.
+  if (rebook) suggest({ id: 'rebook', kind: 'rebook', dog: rebook.dog.name, href: `/dogs/${rebook.dog.id}#plan` }, true)
+  // 12. Your dog is online and nobody asked yet: tell the neighbours.
   const asked = new Set(inc.map((a) => a.dog.id))
   const share = ownDogs.find((d) => d.status === 'active' && !d.orgId && !asked.has(d.id))
-  if (share) suggest({ id: `share.${share.id}`, kind: 'share', dog: share.name, href: `/dogs/${share.id}#share` })
-  // 12. Real dogs near you; the nearest first. 13. None: we start here.
-  if (f.walker) {
+  if (share) suggest({ id: `share.${share.id}`, kind: 'share', dog: share.name, href: `/dogs/${share.id}#share` }, true)
+  // 13. Real dogs near you; the nearest first. 14. None: we start here.
+  if (walker) {
     const near = f.nearby.filter((d) => !d.isDemo)
     if (near.length) {
       const [first] = near
-      suggest({ id: 'nearby', kind: 'nearby', dog: first.name, distanceM: first.distanceM, city: first.city, count: near.length - 1, href: `/dogs/${first.id}` })
+      suggest({ id: 'nearby', kind: 'nearby', dog: first.name, distanceM: first.distanceM, city: first.city, count: near.length - 1, href: `/dogs/${first.id}` }, true)
     }
   }
 
+  // At night the first step with other people in it becomes a calm end: it is late, planning can
+  // wait, and a walker can read a lesson in the meantime.
   const night = isNight(now)
-  if (suggestions.length && night) {
-    steps.push({ id: 'night', kind: 'night', href: null, later: false, dismiss: false })
-    return steps
+  for (const { step, social } of suggestions) {
+    if (night && social) {
+      steps.push({ id: 'night', kind: 'night', href: walker ? '/school' : null, later: false, dismiss: false })
+      return steps
+    }
+    steps.push(step)
   }
-  steps.push(...suggestions)
 
   // The end that is always there.
-  if (f.walker && !f.nearby.some((d) => !d.isDemo)) {
+  if (walker && !f.nearby.some((d) => !d.isDemo)) {
     steps.push({ id: 'emptyTown', kind: 'emptyTown', href: '/group-walks', later: false, dismiss: false })
   } else if (f.owner && ownDogs.some((d) => d.status === 'active')) {
     const dog = ownDogs.find((d) => d.status === 'active')!
@@ -212,8 +246,31 @@ export function nextSteps(f: NextStepFacts): NextStep[] {
 }
 
 // --- "Later" and "Nee, nu niet", remembered in this browser only ---
+// In a cookie, so the server already shows the right step (nothing jumps after the page loads).
+// The server only reads it to pick the step; it is never stored (cookie statement: rondje_later).
 
 export type LaterStore = Record<string, { until?: number; count?: number; closed?: boolean }>
+
+export const LATER_COOKIE = 'rondje_later'
+/** At most this many steps are remembered; the oldest go first. */
+const LATER_KEEP = 40
+
+/** The store from the cookie's (decoded) value; anything unreadable is an empty store. */
+export function parseLater(raw: string | null | undefined): LaterStore {
+  if (!raw) return {}
+  try {
+    const value: unknown = JSON.parse(raw)
+    return value && typeof value === 'object' && !Array.isArray(value) ? (value as LaterStore) : {}
+  } catch {
+    return {}
+  }
+}
+
+/** The store as it goes into the cookie: small, the most recent steps kept. */
+export function serializeLater(store: LaterStore): string {
+  const entries = Object.entries(store).sort(([, a], [, b]) => (b.until ?? Infinity) - (a.until ?? Infinity))
+  return JSON.stringify(Object.fromEntries(entries.slice(0, LATER_KEEP)))
+}
 
 /** Puts a step away for a week; the second time for good. */
 export function putLater(store: LaterStore, id: string, now = Date.now()): LaterStore {

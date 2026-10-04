@@ -366,7 +366,7 @@ export default async function DogPage({
             </div>
           ) : (
             // Often someone the owner sent the link to: an account first, then straight back here to plan.
-            <div className="card flat stack-s">
+            <div id="plan" className="card flat stack-s">
               <Link href={`/signup?intent=walker&next=${plan}`} className="button primary wide">
                 {t('request.signupFirst', { name: dog.name })}
               </Link>

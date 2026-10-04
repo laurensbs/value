@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { closeStep, isPutAway, LATER_DAYS, nextSteps, pickStep, putLater, type NextStepAppointment, type NextStepFacts } from './next-step'
+import { closeStep, isNight, isPutAway, LATER_DAYS, nextSteps, pickStep, putLater, type NextStepAppointment, type NextStepFacts } from './next-step'
 import data from './next-step.scenarios.json'
 
 type JsonAppointment = Partial<Omit<NextStepAppointment, 'dog' | 'startsAt'>> & { id: string; dog: { id: string; name: string; isDemo?: boolean }; startsInMin: number }
-type JsonFacts = Partial<Omit<NextStepFacts, 'now' | 'outgoing' | 'incoming' | 'ownDogs'>> & {
+type JsonFacts = Partial<Omit<NextStepFacts, 'now' | 'outgoing' | 'incoming' | 'ownDogs' | 'staffOrg'>> & {
   outgoing?: JsonAppointment[]
   incoming?: JsonAppointment[]
   ownDogs?: { id: string; name: string; status: string; orgId?: string | null; isDemo?: boolean }[]
+  staffOrg?: { id: string; name: string; nextGroupWalkInMin: number | null }
 }
 interface Scenario {
   name: string
@@ -16,6 +17,8 @@ interface Scenario {
   kinds?: string[]
   dog?: string
   id?: string
+  href?: string | null
+  via?: string
 }
 
 /** A scenario from the JSON file as the facts the function gets, with the defaults the file describes. */
@@ -48,6 +51,10 @@ function factsOf(s: Scenario): NextStepFacts {
     incoming: (f.incoming ?? []).map(appointment),
     trust: f.trust ?? {},
     nearby: f.nearby ?? [],
+    wantsToWalk: f.wantsToWalk,
+    staffOrg: f.staffOrg
+      ? { id: f.staffOrg.id, name: f.staffOrg.name, nextGroupWalk: f.staffOrg.nextGroupWalkInMin == null ? null : new Date(now.getTime() + f.staffOrg.nextGroupWalkInMin * 60_000) }
+      : null,
   }
 }
 
@@ -61,6 +68,8 @@ describe('Eén ding nu: the scenarios (next-step.scenarios.json)', () => {
       if (s.kinds) expect(steps.map((step) => step.kind)).toEqual(s.kinds)
       if (s.dog) expect(steps[0].dog).toBe(s.dog)
       if (s.id) expect(steps[0].id).toBe(s.id)
+      if (s.href !== undefined) expect(steps[0].href).toBe(s.href)
+      if (s.via) expect(steps[0].via).toBe(s.via)
     })
   }
 
@@ -86,6 +95,30 @@ describe('Eén ding nu: the scenarios (next-step.scenarios.json)', () => {
 
   it('has no weekly-goal step that counts down', () => {
     for (const s of scenarios) expect(nextSteps(factsOf(s)).map((step) => step.kind)).not.toContain('goal')
+  })
+})
+
+describe('the night (23:00 to 06:00, Dutch time)', () => {
+  const at = (iso: string) => isNight(new Date(iso))
+
+  it('starts at 23:00 and ends at 06:00, summer and winter time alike', () => {
+    expect(at('2026-10-05T22:59:00+02:00')).toBe(false)
+    expect(at('2026-10-05T23:00:00+02:00')).toBe(true)
+    expect(at('2026-10-06T03:00:00+02:00')).toBe(true)
+    expect(at('2026-10-06T05:59:00+02:00')).toBe(true)
+    expect(at('2026-10-06T06:00:00+02:00')).toBe(false)
+    expect(at('2026-12-15T22:30:00Z')).toBe(true) // 23:30 in Amsterdam (winter time)
+    expect(at('2026-12-15T05:30:00Z')).toBe(false) // 06:30 in Amsterdam
+  })
+
+  it('never hides what happens right now, and always leaves something to do', () => {
+    for (const s of scenarios.filter((x) => x.now && isNight(new Date(x.now)))) {
+      const steps = nextSteps(factsOf(s))
+      const live = steps.findIndex((step) => step.kind === 'live' || step.kind === 'liveOwn')
+      if (live >= 0) expect(live, s.name).toBe(0)
+      const last = steps.at(-1)!
+      if (last.kind === 'night' && factsOf(s).walker) expect(last.href, s.name).toBe('/school')
+    }
   })
 })
 
