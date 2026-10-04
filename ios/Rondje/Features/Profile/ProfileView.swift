@@ -18,6 +18,8 @@ struct ProfileView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     header
+                    // The first steps for walkers, until they are done (they used to stand on Ontdek).
+                    FirstSteps { model.perform(.quiz) }
                     if let p = progress.progress {
                         NavigationLink { BadgesView() } label: { LevelCard(progress: p) }
                             .buttonStyle(.plain)

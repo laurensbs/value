@@ -33,15 +33,25 @@ struct AppointmentsView: View {
                                 .padding(12)
                                 .background(Palette.warnSoft, in: .rect(cornerRadius: 14, style: .continuous))
                         }
-                        // Starting a walk is something walkers do: owners never see this hint.
-                        if !items.isEmpty && side == .walking {
-                            GuusHint(id: "appointments", text: L("Op de dag zelf start je hier je rondje. Een half uur van tevoren mag het al."))
-                        }
                         if model.role == .both || (model.role == .walker && !model.appointments.incoming.isEmpty) {
                             Picker("Weergave", selection: $side) {
                                 ForEach(Side.allCases) { Text($0.title).tag($0) }
                             }
                             .pickerStyle(.segmented)
+                            .controlSize(.large)
+                        }
+                        // Starting a walk is something walkers do: owners never see this hint.
+                        if !items.isEmpty && side == .walking {
+                            GuusHint(id: "appointments", text: L("Op de dag zelf start je hier je rondje. Een half uur van tevoren mag het al."))
+                        }
+                        // The week in review or the seintje offer (never both), for the walking side. They used
+                        // to stand above the dogs on Ontdek.
+                        if side == .walking && model.role != .owner {
+                            if WeekRecapCard.current(side: .walker) != nil {
+                                WeekRecapCard(side: .walker)
+                            } else if NudgeOfferCard.isShowing(walks: model.me?.trust?.walks ?? 0) {
+                                NudgeOfferCard()
+                            }
                         }
                         if items.isEmpty {
                             if side == .walking && model.role != .owner {

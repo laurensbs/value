@@ -1,10 +1,14 @@
 import MapKit
 import SwiftUI
 
-/// Dogs near you, as a list or on a map, plus supervised group walks at shelters.
+/// Dogs near you, as a list or on a map, plus supervised group walks at shelters. Content first:
+/// search, a List | Map switch and the filters stay on top; the dogs (or the map) fill the rest.
+/// At most one quiet line from Guus sits above the list; everything else lives under Jij, Afspraken
+/// or the Hondenschool.
 struct DiscoverView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openURL) private var openURL
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Namespace private var zoom
 
     @State private var dogs: [DogCard] = []
@@ -13,11 +17,17 @@ struct DiscoverView: View {
     @State private var error: String?
     /// The last load failed for lack of a connection (not on the server's side).
     @State private var offline = false
-    @State private var showMap = false
+    @State private var mode: Mode = .list
+    /// The dog whose pin was tapped on the map: shown as a small card at the bottom.
+    @State private var selected: String?
     @State private var filter: Filter = .all
     @State private var query = ""
     @State private var path = NavigationPath()
-    @State private var progress = ProgressStore.shared
+
+    enum Mode: String, CaseIterable, Identifiable {
+        case list, map
+        var id: String { rawValue }
+    }
 
     enum Filter: String, CaseIterable, Identifiable {
         case all, calm, high, owner, shelter
@@ -57,106 +67,107 @@ struct DiscoverView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            ScrollViewReader { proxy in
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 18) {
-                        header
-                        NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || !loading, nearbyFailed: error != nil)
-                        // One Guus at a time: next to the next step, at most the week in review or the seintje offer.
-                        if !NextStepCard.introPending {
-                            if WeekRecapCard.current(side: .walker) != nil {
-                                WeekRecapCard(side: .walker)
-                            } else if NudgeOfferCard.isShowing(walks: model.me?.trust?.walks ?? 0) {
-                                NudgeOfferCard()
-                            }
-                        }
-                        // The level and "Samen deze maand" live under Jij now; the dogs come first here.
-                        FirstSteps { model.perform(Keepsakes.shared.lessonsDone.count < 5 ? .lessons : .quiz) }
-                        if !NextStepCard.introPending {
-                            GuusHint(id: "discover", text: L("Tik op een hond om zijn verhaal te lezen. Begin gerust met Rustig."))
-                        }
-                        filters
-                            .id("filters")
-                        if showMap {
-                            DogsMap(dogs: visible) { path.append($0) }
-                                .frame(height: 460)
-                                .clipShape(.rect(cornerRadius: 28, style: .continuous))
-                                .transition(.scale(scale: 0.96).combined(with: .opacity))
-                        } else {
-                            list
-                        }
-                        if !groupWalks.isEmpty { groupWalksSection }
-                        DailyTip()
-                            .padding(.top, 8)
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 32)
+            Group {
+                switch mode {
+                case .list: listMode
+                case .map: mapMode
                 }
-                .screenBackground()
-                .refreshable { await load() }
-                .searchable(text: $query, prompt: L("Zoek op naam, ras of plaats"))
-                .navigationTitle("Ontdek")
-                .toolbarTitleDisplayMode(.inlineLarge)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            withAnimation(.snappy) { showMap.toggle() }
-                        } label: {
-                            Image(systemName: showMap ? "list.bullet" : "map")
-                                .contentTransition(.symbolEffect(.replace))
-                        }
-                        .accessibilityLabel(showMap ? L("Toon lijst") : L("Toon kaart"))
+            }
+            .safeAreaInset(edge: .top, spacing: 0) { controls }
+            .screenBackground()
+            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: L("Zoek op naam, ras of plaats"))
+            .navigationTitle("Ontdek")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: DogCard.self) { dog in
+                DogDetailView(dogId: dog.id, preview: dog)
+                    .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
+            }
+            .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
+            .onChange(of: model.pendingAction, initial: true) {
+                // Guus (or a notification) asked for calm dogs, or for one dog.
+                if let calm = model.take({ action -> Bool? in
+                    if case .discover(let calm) = action { return calm }
+                    return nil
+                }) {
+                    path = NavigationPath()
+                    withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) {
+                        mode = .list
+                        filter = calm ? .calm : .all
                     }
-                }
-                .navigationDestination(for: DogCard.self) { dog in
-                    DogDetailView(dogId: dog.id, preview: dog)
-                        .navigationTransition(.zoom(sourceID: dog.id, in: zoom))
-                }
-                .navigationDestination(for: String.self) { id in DogDetailView(dogId: id, preview: nil) }
-                .onChange(of: model.pendingAction, initial: true) {
-                    // Guus (or a notification) asked for calm dogs, or for one dog.
-                    if let calm = model.take({ action -> Bool? in
-                        if case .discover(let calm) = action { return calm }
-                        return nil
-                    }) {
-                        path = NavigationPath()
-                        withAnimation(.snappy) {
-                            showMap = false
-                            filter = calm ? .calm : .all
-                        }
-                        withAnimation(.snappy) { proxy.scrollTo("filters", anchor: .top) }
-                    } else if let id = model.take({ action -> String? in
-                        if case .dog(let id) = action { return id }
-                        return nil
-                    }) {
-                        path.append(id)
-                    }
+                } else if let id = model.take({ action -> String? in
+                    if case .dog(let id) = action { return id }
+                    return nil
+                }) {
+                    path.append(id)
                 }
             }
         }
-        .task { await progress.load() }
+        // The weekly goal in Guus's line comes from the progress.
+        .task { await ProgressStore.shared.load() }
         .task {
             // Ask once, with the purpose text from Info.plist; without it the list is sorted by your city.
             LocationService.shared.requestPermission()
             if dogs.isEmpty { await load() }
         }
         .onChange(of: LocationService.shared.allowed) { _, allowed in if allowed { Task { await load() } } }
+        .onChange(of: mode) { selected = nil }
         .sensoryFeedback(.selection, trigger: filter)
+        .sensoryFeedback(.selection, trigger: mode)
         .onChange(of: filter) { SoundFX.play(.select) }
     }
 
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(greeting).font(.title3.weight(.semibold)).foregroundStyle(Palette.muted)
-            Text("Wie gaat er vandaag mee?").font(.display(28))
+    /// The switch and the filters, pinned under the search field in both modes.
+    private var controls: some View {
+        VStack(spacing: 10) {
+            Picker("Weergave", selection: $mode.animation(Motion.or(Motion.scherm, reduce: reduceMotion))) {
+                Label("Lijst", systemImage: "list.bullet").tag(Mode.list)
+                Label("Kaart", systemImage: "map").tag(Mode.map)
+            }
+            .pickerStyle(.segmented)
+            .controlSize(.large)
+            .padding(.horizontal, 20)
+            filters
         }
         .padding(.top, 4)
+        .padding(.bottom, 8)
+        .background(Palette.paper)
     }
 
-    private var greeting: String {
-        let hour = Calendar.current.component(.hour, from: .now)
-        let part = hour < 12 ? L("Goedemorgen") : hour < 18 ? L("Goedemiddag") : L("Goedenavond")
-        return model.firstName.isEmpty ? part : L("\(part), \(model.firstName)")
+    private var listMode: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                NextStepCard(placement: .discover, nearbyDogs: dogs, nearbyLoaded: !dogs.isEmpty || !loading, nearbyFailed: error != nil, compact: true)
+                list
+                if !groupWalks.isEmpty { groupWalksSection }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 8)
+            .padding(.bottom, 32)
+        }
+        .refreshable { await load() }
+    }
+
+    /// The map fills everything under the controls; a tapped pin shows a small card at the bottom.
+    private var mapMode: some View {
+        ZStack(alignment: .bottom) {
+            DogsMap(dogs: visible, selection: $selected)
+                .ignoresSafeArea(edges: .bottom)
+            if let dog = visible.first(where: { $0.id == selected }) {
+                MapDogCard(dog: dog) { path.append(dog) }
+                    .id(dog.id)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 12)
+                    .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))
+            } else if !loading && visible.isEmpty {
+                Label(dogs.isEmpty ? L("Nog geen honden hier") : L("Geen honden gevonden"), systemImage: "pawprint")
+                    .font(.subheadline.weight(.semibold))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .glassy(cornerRadius: 20)
+                    .padding(.bottom, 16)
+            }
+        }
+        .animation(Motion.or(Motion.scherm, reduce: reduceMotion), value: selected)
     }
 
     private var filters: some View {
@@ -180,7 +191,7 @@ struct DiscoverView: View {
                 }
             }
         }
-        .scrollClipDisabled()
+        .contentMargins(.horizontal, 20, for: .scrollContent)
     }
 
     @ViewBuilder
@@ -334,9 +345,11 @@ struct DogCardView: View {
     }
 }
 
+/// The dogs as pins on their neighbourhood (never on an address). Tapping a pin selects it;
+/// tapping it again clears the selection.
 struct DogsMap: View {
     let dogs: [DogCard]
-    var onSelect: (DogCard) -> Void
+    @Binding var selection: String?
     @State private var camera: MapCameraPosition = .automatic
 
     var body: some View {
@@ -344,14 +357,10 @@ struct DogsMap: View {
             UserAnnotation()
             ForEach(dogs.filter { $0.coordinate != nil }) { dog in
                 Annotation(dog.name, coordinate: dog.coordinate!, anchor: .bottom) {
-                    Button { onSelect(dog) } label: {
-                        VStack(spacing: 2) {
-                            DogPortrait(look: dog.look, photoURL: dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 16)
-                                .frame(width: 52, height: 52)
-                                .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(.white, lineWidth: 3))
-                                .shadow(radius: 4, y: 2)
-                            Image(systemName: "triangle.fill").font(.system(size: 9)).foregroundStyle(.white).rotationEffect(.degrees(180)).offset(y: -4)
-                        }
+                    Button {
+                        selection = selection == dog.id ? nil : dog.id
+                    } label: {
+                        pin(dog, selected: selection == dog.id)
                     }
                     .buttonStyle(.plain)
                 }
@@ -359,13 +368,67 @@ struct DogsMap: View {
         }
         .mapStyle(.standard(pointsOfInterest: .including([.park])))
         .mapControls { MapUserLocationButton(); MapCompass() }
-        .overlay(alignment: .bottom) {
+        .sensoryFeedback(.selection, trigger: selection)
+        .overlay(alignment: .top) {
             Text("Honden staan op hun buurt, nooit op een adres.")
                 .font(.caption.weight(.medium))
                 .padding(.horizontal, 12).padding(.vertical, 8)
                 .glassy(cornerRadius: 14)
-                .padding(12)
+                .padding(.top, 8)
         }
+    }
+
+    private func pin(_ dog: DogCard, selected: Bool) -> some View {
+        VStack(spacing: 2) {
+            DogPortrait(look: dog.look, photoURL: dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 16)
+                .frame(width: selected ? 64 : 52, height: selected ? 64 : 52)
+                .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(selected ? Palette.ball : .white, lineWidth: 3))
+                .shadow(radius: 4, y: 2)
+            Image(systemName: "triangle.fill").font(.system(size: 9)).foregroundStyle(selected ? Palette.ball : .white).rotationEffect(.degrees(180)).offset(y: -4)
+        }
+        .animation(Motion.klein, value: selected)
+        .accessibilityLabel(dog.name)
+        .accessibilityAddTraits(selected ? [.isButton, .isSelected] : .isButton)
+    }
+}
+
+/// The small card for the pin that was tapped: who it is, how far, and one tap to the dog's page.
+struct MapDogCard: View {
+    let dog: DogCard
+    var open: () -> Void
+
+    var body: some View {
+        Button(action: open) {
+            HStack(spacing: 14) {
+                DogPortrait(look: dog.look, photoURL: dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 16)
+                    .frame(width: 64, height: 64)
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 6) {
+                        Text(dog.name).font(.headline).foregroundStyle(Palette.ink)
+                        if dog.isDemo { Chip(text: L("Voorbeeld"), tint: Palette.warn, soft: Palette.warnSoft) }
+                    }
+                    Text([dog.breed, Format.distance(dog.distanceM)].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · "))
+                        .font(.subheadline)
+                        .foregroundStyle(Palette.muted)
+                        .lineLimit(1)
+                    HStack(spacing: 6) {
+                        Chip(text: Labels.energy(dog.energy), symbol: "bolt.fill")
+                        Chip(text: L("\(dog.walkMinutes) min"), symbol: "timer", tint: Palette.calm, soft: Palette.calmSoft)
+                    }
+                }
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Palette.muted)
+            }
+            .padding(12)
+            .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
+            .shadow(color: .black.opacity(0.12), radius: 16, y: 6)
+            .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityHint(L("Opent de pagina van \(dog.name)"))
     }
 }
 

@@ -44,6 +44,8 @@ struct LessonsView: View {
                     .accessibilityHidden(true)
                 }
                 .padding(.bottom, 24)
+                // One calm tip a day about dogs, here with the lessons instead of above the dogs on Ontdek.
+                DailyTip()
             }
             .padding(20)
         }

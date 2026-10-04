@@ -11797,6 +11797,28 @@
         }
       }
     },
+    "Kaart" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte"
+          }
+        }
+      }
+    },
     "Ken je %@? Iemand uit de buurt loopt gratis een rondje met je hond. De eerste keer lopen jullie samen." : {
       "localizations" : {
         "en" : {
@@ -13157,6 +13179,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plutôt pas"
+          }
+        }
+      }
+    },
+    "Lijst" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste"
           }
         }
       }
@@ -15747,6 +15791,28 @@
         }
       }
     },
+    "Opent de pagina van %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens %@'s page"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre la página de %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre la page de %@"
+          }
+        }
+      }
+    },
     "Oplichting of geld" : {
       "localizations" : {
         "en" : {
@@ -18129,28 +18195,6 @@
         }
       }
     },
-    "Tik op een hond om zijn verhaal te lezen. Begin gerust met Rustig." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap a dog to read its story. Feel free to start with Calm."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca un perro para leer su historia. Puedes empezar por Tranquilo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touche un chien pour lire son histoire. Commence tranquillement par Calme."
-          }
-        }
-      }
-    },
     "Tip een opvang" : {
       "localizations" : {
         "en" : {
@@ -18235,50 +18279,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voir tous les chiens"
-          }
-        }
-      }
-    },
-    "Toon kaart" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show map"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar mapa"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher la carte"
-          }
-        }
-      }
-    },
-    "Toon lijst" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show list"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar lista"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher la liste"
           }
         }
       }
@@ -20695,28 +20695,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bon retour"
-          }
-        }
-      }
-    },
-    "Wie gaat er vandaag mee?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Who's coming along today?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Quién viene hoy de paseo?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Qui vient se promener aujourd'hui ?"
           }
         }
       }

@@ -13,3 +13,7 @@ T = {
     "sinds %@": ("since %@", "depuis %@", "desde %@"),
 }
 T["1 badge"] = ("1 badge", "1 badge", "1 insignia")
+# Ronde 2: Ontdek with a List | Map switch.
+T["Lijst"] = ("List", "Liste", "Lista")
+T["Kaart"] = ("Map", "Carte", "Mapa")
+T["Opent de pagina van %@"] = ("Opens %@'s page", "Ouvre la page de %@", "Abre la página de %@")
