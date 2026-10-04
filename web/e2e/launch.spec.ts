@@ -16,7 +16,7 @@ test('admin: launch hub with the waiting tasks, a ticked-off task, a contact and
   // Exactly four tasks wait for Laurens, the name first.
   const waiting = page.getByRole('list', { name: 'Wacht op Laurens' })
   await expect(waiting.getByRole('listitem')).toHaveCount(4)
-  await expect(waiting.getByRole('listitem').first()).toContainText('Naam: nieuwe ronde')
+  await expect(waiting.getByRole('listitem').first()).toContainText('Naam gekozen: Rondje Mee')
 
   // Ticking a task off is saved (on a reused server it may already be done: reopen it first).
   const reopen = page.getByRole('button', { name: 'Zet terug op open: Merkcheck op TMview' })
