@@ -2087,7 +2087,8 @@
       }
     },
     "walkersNear": "{n, plural, one {# wandelaar woont} other {# wandelaars wonen}} binnen 5 km van jou.",
-    "walkersFew": "Er wonen nog weinig wandelaars bij jou in de buurt. <link>Vertel je buren over {dog}</link> als je wilt."
+    "walkersFew": "Er wonen nog weinig wandelaars bij jou in de buurt. <link>Vertel je buren over {dog}</link> als je wilt.",
+    "welcomeText": "Je bent nu {level}, level 1."
   },
   "progress": {
     "title": "Jouw voortgang",
@@ -3577,9 +3578,9 @@
     "upcoming": {
       "eyebrow": "Je volgende afspraak",
       "walk": "{when}: een rondje met {dog}.",
-      "meet": "{when}: kennismaken met {dog}.",
+      "meet": "{when}: kennismaken met {dog}{via, select, home { (thuis)} phone { (eerst bellen)} video { (eerst videobellen)} other {}}.",
       "walkOwner": "{when}: {walker} loopt een rondje met {dog}.",
-      "meetOwner": "{when}: {walker} komt kennismaken met {dog}.",
+      "meetOwner": "{when}: {walker} maakt kennis met {dog}{via, select, home { (bij jou thuis)} phone { (eerst bellen)} video { (eerst videobellen)} other {}}.",
       "button": "Bekijk je afspraak"
     },
     "quiz": {
@@ -3624,11 +3625,17 @@
       "button": "Bekijk {dog}"
     },
     "night": {
-      "text": "Het is al laat. Plannen kan morgen ook."
+      "text": "Het is al laat. Plannen kan morgen ook.",
+      "button": "Lees een les"
     },
     "done": {
       "text": "Niks te doen. Fijne dag."
     },
-    "week": "Je week: {done} van {goal}"
+    "week": "Je week: {done} van {goal}",
+    "shelter": {
+      "plan": "Plan een groepswandeling bij {org}, dan kunnen wandelaars mee.",
+      "next": "{when}: groepswandeling bij {org}.",
+      "button": "Naar {org}"
+    }
   }
 }

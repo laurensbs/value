@@ -562,6 +562,9 @@
 }
 
 .next-line-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--grass);
   font-weight: 750;
 }
@@ -608,7 +611,7 @@
 .map-screen {
   position: relative;
   flex: 1;
-  min-height: 280px;
+  min-height: 120px;
   margin-inline: -16px;
 }
 
@@ -720,6 +723,103 @@
   .map.fill {
     border-radius: var(--radius-m);
     border: 1px solid var(--line);
+  }
+}
+
+/* Short screens (a small phone, a phone on its side): search and Lijst | Kaart share a row and the
+   dog card is one compact line, so the map still fills the rest without scrolling. */
+@media (max-height: 700px) {
+  .discover.map-mode {
+    gap: 8px;
+  }
+
+  .discover.map-mode .discover-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .discover.map-mode .searchbar {
+    flex: 1 1 140px;
+    min-height: 48px;
+  }
+
+  .discover.map-mode .view-switch {
+    flex: 0 0 auto;
+    align-self: center;
+  }
+
+  .discover.map-mode .view-switch a {
+    padding-inline: 12px;
+  }
+
+  .discover.map-mode .pill-row {
+    flex: 1 1 100%;
+  }
+
+  .map-card {
+    min-height: 0;
+    padding: 8px 12px 8px 8px;
+    gap: 10px;
+  }
+
+  /* DogPortrait sets its size inline; on a short screen the card's photo is smaller. */
+  .map-card > .dog-photo {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 14px;
+  }
+
+  .map-card .dcard-pills {
+    display: none;
+  }
+
+  .map-card-text strong {
+    font-size: 1.05rem;
+  }
+}
+
+/* Narrow and short: Lijst | Kaart as icons; the words stay for screen readers. */
+@media (max-height: 700px) and (max-width: 400px) {
+  .discover.map-mode .view-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* A phone on its side: everything in one row above the map. */
+@media (max-height: 500px) and (min-width: 560px) {
+  .discover.map-mode .searchbar {
+    flex: 0 1 240px;
+  }
+
+  .discover.map-mode .pill-row {
+    flex: 1 1 0;
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .discover.map-mode .pill-row > .filter-pills,
+  .discover.map-mode .pill-row > .country-pills {
+    flex-wrap: nowrap;
+  }
+
+  /* The card keeps left of the zoom buttons, which take the right edge of a low map. */
+  .map-overlay {
+    right: 76px;
+    justify-content: flex-start;
+  }
+
+  .map-card {
+    width: min(100%, 440px);
   }
 }
 

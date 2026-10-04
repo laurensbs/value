@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useSyncExternalStore } from 'react'
 import { MASCOT } from '@/lib/avatar'
-import { closeStep, pickStep, putLater, type LaterStore } from '@/lib/next-step'
+import { closeStep, LATER_COOKIE, parseLater, pickStep, putLater, serializeLater, type LaterStore } from '@/lib/next-step'
 import { DogFace } from './DogFace'
 import { Icon } from './Icon'
 
@@ -25,73 +25,70 @@ export interface CardStep {
   no?: string
 }
 
-// "Later" and "Nee, nu niet" are remembered in this browser only (the cookie statement names it).
-// Without storage, as in some private windows, they last until the page is left.
-const KEY = 'rondje.nextStep'
+// "Later" and "Nee, nu niet" are remembered in a cookie on this device (lib/next-step.ts), so the
+// server picks the same step and nothing jumps after the page loads. Without cookies, as in some
+// private windows, they last until the page is left.
 const listeners = new Set<() => void>()
-let memory = '{}'
+let memory: string | null = null
 
 function read(): string {
   try {
-    return localStorage.getItem(KEY) ?? memory
+    const found = document.cookie.split('; ').find((c) => c.startsWith(`${LATER_COOKIE}=`))
+    if (found) return decodeURIComponent(found.slice(LATER_COOKIE.length + 1))
   } catch {
-    return memory
+    // No cookies here: the in-memory copy below.
   }
+  return memory ?? '{}'
 }
 
 function write(store: LaterStore) {
-  memory = JSON.stringify(store)
+  memory = serializeLater(store)
   try {
-    localStorage.setItem(KEY, memory)
+    const secure = location.protocol === 'https:' ? '; Secure' : ''
+    document.cookie = `${LATER_COOKIE}=${encodeURIComponent(memory)}; Max-Age=31536000; Path=/; SameSite=Lax${secure}`
   } catch {
-    // No storage: the in-memory copy has it until the page is left.
+    // No cookies: the in-memory copy has it until the page is left.
   }
   for (const listener of listeners) listener()
 }
 
 function subscribe(listener: () => void) {
   listeners.add(listener)
-  window.addEventListener('storage', listener)
   return () => {
     listeners.delete(listener)
-    window.removeEventListener('storage', listener)
-  }
-}
-
-function parse(raw: string): LaterStore {
-  try {
-    const value: unknown = JSON.parse(raw)
-    return value && typeof value === 'object' ? (value as LaterStore) : {}
-  } catch {
-    return {}
   }
 }
 
 /**
  * "Eén ding nu": one big card on top of Vandaag with the one thing to do next and one button.
  * "Later" puts a suggestion away for a week (twice: for good); a talk-over after meeting someone
- * has "Nee, nu niet" instead, as big as "Bekijk". Nothing is sent anywhere.
+ * has "Nee, nu niet" instead, as big as "Bekijk". Nothing is sent to anyone.
  */
 export function NextStepCard({
   steps,
+  stored,
   now,
   label,
   laterLabel,
   welcome,
+  welcomeText,
   compact = false,
 }: {
   steps: CardStep[]
+  /** The cookie as the server read it, so the first paint already shows the right step. */
+  stored: string
   /** The moment the page was made, so the server and the browser pick the same step. */
   now: number
   label: string
   laterLabel: string
-  /** The first time after signing up: a welcome above the step. */
+  /** The first time after signing up: a welcome above the step, and a line about your level. */
   welcome?: string | null
+  welcomeText?: string | null
   /** One line above the dogs on Ontdek instead of the big card; gone once put away. */
   compact?: boolean
 }) {
-  const raw = useSyncExternalStore(subscribe, read, () => '{}')
-  const store = parse(raw)
+  const raw = useSyncExternalStore(subscribe, read, () => stored)
+  const store = parseLater(raw)
   const step = pickStep(steps, store, now) ?? (compact ? null : steps[steps.length - 1])
   if (!step) return null
 
@@ -109,7 +106,7 @@ export function NextStepCard({
           ) : null}
         </p>
         {step.later ? (
-          <button type="button" className="next-line-close" aria-label={laterLabel} title={laterLabel} onClick={() => write(putLater(parse(read()), step.id, Date.now()))}>
+          <button type="button" className="next-line-close" aria-label={laterLabel} title={laterLabel} onClick={() => write(putLater(parseLater(read()), step.id, Date.now()))}>
             <Icon name="close" size={20} />
           </button>
         ) : null}
@@ -124,6 +121,7 @@ export function NextStepCard({
         <p className="eyebrow">{step.eyebrow ?? label}</p>
       </div>
       {welcome ? <h2 className="next-step-welcome">{welcome}</h2> : null}
+      {welcome && welcomeText ? <p className="next-step-detail">{welcomeText}</p> : null}
       <div key={step.id} className="next-step-body">
         {step.title ? <p className="next-step-title">{step.title}</p> : null}
         <p className="next-step-text">{step.text}</p>
@@ -134,7 +132,7 @@ export function NextStepCard({
           <Link href={step.button.href} className="button primary big">
             {step.button.label}
           </Link>
-          <button type="button" className="button secondary big" onClick={() => write(closeStep(parse(read()), step.id))}>
+          <button type="button" className="button secondary big" onClick={() => write(closeStep(parseLater(read()), step.id))}>
             {step.no}
           </button>
         </div>
@@ -152,7 +150,7 @@ export function NextStepCard({
             </Link>
           ) : null}
           {step.later ? (
-            <button type="button" className="next-step-link" onClick={() => write(putLater(parse(read()), step.id, Date.now()))}>
+            <button type="button" className="next-step-link" onClick={() => write(putLater(parseLater(read()), step.id, Date.now()))}>
               {laterLabel}
             </button>
           ) : null}

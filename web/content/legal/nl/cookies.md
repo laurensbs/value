@@ -31,6 +31,7 @@ Voor functionele cookies is geen toestemming nodig. Daarom zie je bij Rondje Mee
 | `better-auth.state`, `better-auth-passkey` | Beveiliging tijdens inloggen met Google, Apple of een passkey | Een paar minuten |
 | `NEXT_LOCALE` | Onthouden in welke taal je Rondje Mee gebruikt | 1 jaar |
 | `rondje_ref` | Onthouden via wiens uitnodigingslink je kwam, zodat die persoon ziet dat je meedoet [te controleren: functioneel of toestemming nodig] | 30 dagen |
+| `rondje_later` | Welke stap van Eén ding nu je op Vandaag met "Later" (een week; na twee keer voorgoed) of "Nee, nu niet" wegzette, zodat de pagina meteen de juiste stap toont. We bewaren het nergens | 1 jaar |
 
 ## 4. Lokale opslag op je apparaat
 
@@ -39,7 +40,6 @@ Rondje Mee bewaart sommige dingen alleen op je eigen apparaat, in de browser of 
 - **Stemming-check-ins.** Hoe je je voelt voor en na een wandeling. Deze gegevens blijven op je apparaat en komen nooit bij Rondje Mee.
 - **Een vraag voor later.** Kies je bij de vraag over meldingen of over Rondje Mee op je beginscherm voor "Later", dan onthoudt je browser twee weken dat we het nog niet opnieuw vragen. Kies je "Staat er al op", dan onthoudt hij dat een jaar.
 - **De Hondenschool.** Zonder account onthoudt je browser welke lessen je hebt afgerond (`rondje.lessons`); met een account gaan ze naar je account en verdwijnen ze hier. Tijdens de veiligheidsquiz onthoudt je browser tot je het tabblad sluit bij welke vraag je was (`rondje.quiz`), zodat je na een les verder kunt.
-- **Eén ding nu.** Kies je op Vandaag bij de volgende stap voor "Later", dan onthoudt je browser een week dat we die stap even overslaan; na twee keer "Later" komt hij niet meer terug. "Nee, nu niet" na een kennismaking onthoudt hij voorgoed. Dit gaat nooit naar Rondje (`rondje.nextStep`).
 - **Voorkeuren**, zoals de weergave of instellingen die je kiest [te controleren: welke].
 
 Je kunt deze gegevens zelf wissen, bijvoorbeeld door de websitegegevens in je browser te verwijderen, of de app-gegevens of de app zelf. Let op: je check-ins zijn dan ook echt weg. Wij hebben er geen kopie van.

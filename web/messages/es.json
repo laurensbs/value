@@ -2087,7 +2087,8 @@
       }
     },
     "walkersNear": "{n, plural, one {# paseador vive} other {# paseadores viven}} a menos de 5 km de ti.",
-    "walkersFew": "Todavía viven pocos paseadores cerca de ti. <link>Habla de {dog} a tus vecinos</link> si quieres."
+    "walkersFew": "Todavía viven pocos paseadores cerca de ti. <link>Habla de {dog} a tus vecinos</link> si quieres.",
+    "welcomeText": "Ahora eres {level}, nivel 1."
   },
   "progress": {
     "title": "Tu progreso",
@@ -3577,9 +3578,9 @@
     "upcoming": {
       "eyebrow": "Tu próxima cita",
       "walk": "{when}: un paseo con {dog}.",
-      "meet": "{when}: conoces a {dog}.",
+      "meet": "{when}: conoces a {dog}{via, select, home { (en casa)} phone { (primero una llamada)} video { (primero una videollamada)} other {}}.",
       "walkOwner": "{when}: {walker} pasea a {dog}.",
-      "meetOwner": "{when}: {walker} viene a conocer a {dog}.",
+      "meetOwner": "{when}: {walker} conoce a {dog}{via, select, home { (en tu casa)} phone { (primero una llamada)} video { (primero una videollamada)} other {}}.",
       "button": "Ver tu cita"
     },
     "quiz": {
@@ -3624,11 +3625,17 @@
       "button": "Ver a {dog}"
     },
     "night": {
-      "text": "Ya es tarde. Planear puede esperar a mañana."
+      "text": "Ya es tarde. Planear puede esperar a mañana.",
+      "button": "Lee una lección"
     },
     "done": {
       "text": "Nada que hacer. Que tengas un buen día."
     },
-    "week": "Tu semana: {done} de {goal}"
+    "week": "Tu semana: {done} de {goal}",
+    "shelter": {
+      "plan": "Organiza un paseo en grupo en {org}, así pueden venir paseadores.",
+      "next": "{when}: paseo en grupo en {org}.",
+      "button": "Ir a {org}"
+    }
   }
 }
