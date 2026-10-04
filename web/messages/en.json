@@ -1839,7 +1839,6 @@
     "evening": "Good evening, {name}",
     "night": "Hi {name}",
     "welcomeTitle": "Welcome to Rondje, {name}!",
-    "welcomeText": "You're now {level}, level 1. Below are your first steps: each one brings you closer to your first walk.",
     "stepsTitle": "Your first steps",
     "stepsCount": "{done} of {total} done",
     "start": "Start",
@@ -1879,24 +1878,13 @@
         "hint": "Follow along live and get a report afterwards."
       }
     },
-    "next": "Your next appointment",
-    "nextWalk": "{when} · walk with {dog}",
-    "nextMeeting": "{when} · first meeting with {dog}{via, select, home { (at home)} phone { (call first)} video { (video call first)} other {}}",
-    "nextOpen": "View",
-    "pending": "{n, plural, one {# new request is waiting for your answer} other {# new requests are waiting for your answer}}",
-    "pendingOpen": "View requests",
     "nearTitle": "Dogs near you",
-    "nearEmpty": "No dogs near you yet. Know someone with a dog? Invite them with your own link.",
     "nearAll": "All dogs",
-    "nearInvite": "Invite someone",
     "myDogsTitle": "Your dogs",
     "dogWeek": "{n, plural, =0 {No walk yet this week} one {# walk this week} other {# walks this week}}",
     "dogFriends": "{n, plural, =0 {No walkers yet} one {# walker} other {# walkers}}",
     "addDog": "Add a dog",
     "tipTitle": "Tip of the day",
-    "badgesTitle": "Your badges",
-    "badgesAll": "All badges",
-    "badgesEmpty": "You'll earn your first badge with your first walk.",
     "together": "Together we've done {walks, plural, one {# walk} other {# walks}} with {dogs, plural, one {# dog} other {# dogs}}. You're part of it.",
     "tips": {
       "walker": {
@@ -2081,7 +2069,10 @@
     "mine": "{n, plural, =0 {Will you join in?} one {You did # of them} other {You did # of them}}",
     "done": "Done! Thank you, everyone.",
     "stats": "{dogs, plural, one {# dog} other {# dogs}} · {walkers, plural, one {# walker} other {# walkers}} · {km} km",
-    "private": "We only count walks, never who did them."
+    "private": "We only count walks, never who did them.",
+    "start": "We're starting here.",
+    "empty": "Join a group walk, or suggest a shelter.",
+    "totals": "{dogs, plural, one {# dog} other {# dogs}} · {km} km"
   },
   "pushAsk": {
     "title": "Shall I give you a heads-up?",
@@ -2317,11 +2308,6 @@
     "footerLine": "{name} is free and ad-free"
   },
   "discover": {
-    "title": "Who’s coming along today?",
-    "levelTop": "Top level. What a lot of walks!",
-    "badges": "{n, plural, =0 {No badges yet} one {# badge} other {# badges}}",
-    "together": "Together this month",
-    "mine": "{n} by you",
     "filters": {
       "owner": "Neighbourhood",
       "shelter": "Shelter"
@@ -3377,5 +3363,95 @@
   "loading": {
     "label": "Loading…",
     "slow": "This is taking longer than usual."
+  },
+  "nextStep": {
+    "title": "One thing now",
+    "later": "Later",
+    "liveOwn": {
+      "text": "{dog} is out now with {walker}.",
+      "button": "Watch live"
+    },
+    "live": {
+      "text": "You're out with {dog}.",
+      "button": "Back to your walk"
+    },
+    "start": {
+      "walk": "{when}: a walk with {dog}. Ready?",
+      "meet": "{when}: meeting {dog}. Bring your ID.",
+      "button": "Go to your appointment"
+    },
+    "decide": {
+      "text": "{count, plural, one {{walker} would like to walk {dog}.} other {# people would like to walk your dog.}}",
+      "detail": "Take a calm look at who it is first. You can chat first, too.",
+      "button": "{count, plural, one {See the request} other {See the requests}}"
+    },
+    "debrief": {
+      "text": "How was meeting {walker}?",
+      "detail": "Did you see their ID? Only give trust if it felt right.",
+      "button": "Have a look",
+      "no": "No, not now"
+    },
+    "feedback": {
+      "walker": "How did it go with {dog}? Two taps.",
+      "owner": "How was {dog} after the walk with {walker}?",
+      "detail": "Your answer stays with {app}.",
+      "button": "Tell us"
+    },
+    "upcoming": {
+      "eyebrow": "Your next appointment",
+      "walk": "{when}: a walk with {dog}.",
+      "meet": "{when}: meeting {dog}.",
+      "walkOwner": "{when}: {walker} walks {dog}.",
+      "meetOwner": "{when}: {walker} comes to meet {dog}.",
+      "button": "See your appointment"
+    },
+    "quiz": {
+      "text": "First the safety quiz, then you can ask for a dog.",
+      "detail": "Eight short questions, no time pressure.",
+      "button": "Start the quiz"
+    },
+    "addDog": {
+      "text": "Put your dog on {app}.",
+      "detail": "Step by step: a name, their character and when they can go for a walk.",
+      "button": "Add a dog"
+    },
+    "waiting": {
+      "text": "{dog}'s owner is still looking at your request.",
+      "detail": "You'll hear as soon as there's an answer.",
+      "button": "See your request"
+    },
+    "rebook": {
+      "text": "Another walk with {dog}?",
+      "detail": "A regular moment in the week works best for everyone.",
+      "button": "Plan a moment"
+    },
+    "share": {
+      "text": "Walkers nearby can find {dog} now.",
+      "detail": "Tell your neighbours too, and it'll go faster.",
+      "button": "Tell your neighbours about {dog}"
+    },
+    "nearby": {
+      "text": "{dog} lives {distance} from you and is looking for a walking buddy.",
+      "textCity": "{dog} from {city} is looking for a walking buddy.",
+      "detail": "{count, plural, =0 {Pick a moment that suits you.} one {There's # other dog nearby too.} other {There are # other dogs nearby too.}}",
+      "button": "See {dog}"
+    },
+    "emptyTown": {
+      "title": "We're starting here.",
+      "text": "No dogs live near you yet. Join a group walk, or suggest a shelter.",
+      "button": "Group walks",
+      "tip": "Suggest a shelter"
+    },
+    "ownerWaiting": {
+      "text": "{dog} is on. As soon as someone wants to walk, you'll hear.",
+      "button": "See {dog}"
+    },
+    "night": {
+      "text": "It's late already. Planning can wait until tomorrow."
+    },
+    "done": {
+      "text": "Nothing to do. Have a nice day."
+    },
+    "week": "Your week: {done} of {goal}"
   }
 }

@@ -1839,7 +1839,6 @@
     "evening": "Bonsoir, {name}",
     "night": "Salut, {name}",
     "welcomeTitle": "Bienvenue sur Rondje, {name} !",
-    "welcomeText": "Vous êtes maintenant {level}, niveau 1. Voici vos premiers pas : chacun vous rapproche de votre première balade.",
     "stepsTitle": "Vos premiers pas",
     "stepsCount": "{done} sur {total} faits",
     "start": "Commencer",
@@ -1879,24 +1878,13 @@
         "hint": "Suivez-la en direct et recevez un compte rendu après."
       }
     },
-    "next": "Votre prochain rendez-vous",
-    "nextWalk": "{when} · balade avec {dog}",
-    "nextMeeting": "{when} · première rencontre avec {dog}{via, select, home { (à domicile)} phone { (d'abord un appel)} video { (d'abord un appel vidéo)} other {}}",
-    "nextOpen": "Voir",
-    "pending": "{n, plural, one {# nouvelle demande attend votre réponse} other {# nouvelles demandes attendent votre réponse}}",
-    "pendingOpen": "Voir les demandes",
     "nearTitle": "Chiens près de chez vous",
-    "nearEmpty": "Pas encore de chiens près de chez vous. Vous connaissez quelqu'un avec un chien ? Invitez-le avec votre propre lien.",
     "nearAll": "Tous les chiens",
-    "nearInvite": "Inviter quelqu'un",
     "myDogsTitle": "Vos chiens",
     "dogWeek": "{n, plural, =0 {Pas encore de balade cette semaine} one {# balade cette semaine} other {# balades cette semaine}}",
     "dogFriends": "{n, plural, =0 {Pas encore de promeneurs} one {# promeneur} other {# promeneurs}}",
     "addDog": "Ajouter un chien",
     "tipTitle": "Le conseil du jour",
-    "badgesTitle": "Vos médailles",
-    "badgesAll": "Toutes les médailles",
-    "badgesEmpty": "Vous gagnerez votre première médaille avec votre première balade.",
     "together": "Ensemble, nous avons déjà fait {walks, plural, one {# balade} other {# balades}} avec {dogs, plural, one {# chien} other {# chiens}}. Vous en faites partie.",
     "tips": {
       "walker": {
@@ -2081,7 +2069,10 @@
     "mine": "{n, plural, =0 {Vous en faites une ?} one {Vous en avez fait #} other {Vous en avez fait #}}",
     "done": "Réussi ! Merci à tous.",
     "stats": "{dogs, plural, one {# chien} other {# chiens}} · {walkers, plural, one {# promeneur} other {# promeneurs}} · {km} km",
-    "private": "Nous comptons seulement les balades, jamais qui les a faites."
+    "private": "Nous comptons seulement les balades, jamais qui les a faites.",
+    "start": "On commence ici.",
+    "empty": "Rejoignez une balade en groupe, ou recommandez-nous un refuge.",
+    "totals": "{dogs, plural, one {# chien} other {# chiens}} · {km} km"
   },
   "pushAsk": {
     "title": "Un petit signal quand il y a du nouveau ?",
@@ -2317,11 +2308,6 @@
     "footerLine": "{name} est gratuit et sans publicité"
   },
   "discover": {
-    "title": "Qui vient se balader aujourd’hui ?",
-    "levelTop": "Niveau maximum. Que de balades !",
-    "badges": "{n, plural, =0 {Pas encore de médailles} one {# médaille} other {# médailles}}",
-    "together": "Ensemble ce mois-ci",
-    "mine": "Vous : {n}",
     "filters": {
       "owner": "Quartier",
       "shelter": "Refuge"
@@ -3377,5 +3363,95 @@
   "loading": {
     "label": "Chargement…",
     "slow": "C'est plus long que d'habitude."
+  },
+  "nextStep": {
+    "title": "Une chose maintenant",
+    "later": "Plus tard",
+    "liveOwn": {
+      "text": "{dog} est en balade avec {walker} en ce moment.",
+      "button": "Suivre en direct"
+    },
+    "live": {
+      "text": "Vous êtes en balade avec {dog}.",
+      "button": "Retour à votre balade"
+    },
+    "start": {
+      "walk": "{when} : une balade avec {dog}. On y va ?",
+      "meet": "{when} : rencontre avec {dog}. Prenez votre pièce d’identité.",
+      "button": "Voir votre rendez-vous"
+    },
+    "decide": {
+      "text": "{count, plural, one {{walker} aimerait promener {dog}.} other {# personnes aimeraient promener votre chien.}}",
+      "detail": "Regardez d’abord tranquillement qui c’est. Vous pouvez aussi discuter avant.",
+      "button": "{count, plural, one {Voir la demande} other {Voir les demandes}}"
+    },
+    "debrief": {
+      "text": "Comment s’est passée la rencontre avec {walker} ?",
+      "detail": "Avez-vous vu sa pièce d’identité ? Ne donnez votre confiance que si tout s’est bien passé.",
+      "button": "Voir",
+      "no": "Non, pas maintenant"
+    },
+    "feedback": {
+      "walker": "Comment ça s’est passé avec {dog} ? Deux petits clics.",
+      "owner": "Comment était {dog} après la balade avec {walker} ?",
+      "detail": "Seul {app} voit votre réponse.",
+      "button": "Racontez"
+    },
+    "upcoming": {
+      "eyebrow": "Votre prochain rendez-vous",
+      "walk": "{when} : une balade avec {dog}.",
+      "meet": "{when} : rencontre avec {dog}.",
+      "walkOwner": "{when} : {walker} promène {dog}.",
+      "meetOwner": "{when} : {walker} vient rencontrer {dog}.",
+      "button": "Voir votre rendez-vous"
+    },
+    "quiz": {
+      "text": "D’abord le quiz de sécurité, ensuite vous pouvez demander un chien.",
+      "detail": "Huit questions courtes, sans limite de temps.",
+      "button": "Commencer le quiz"
+    },
+    "addDog": {
+      "text": "Mettez votre chien sur {app}.",
+      "detail": "Étape par étape : un nom, son caractère et quand il peut se balader.",
+      "button": "Ajouter un chien"
+    },
+    "waiting": {
+      "text": "Le maître de {dog} regarde encore votre demande.",
+      "detail": "Nous vous prévenons dès qu’il y a une réponse.",
+      "button": "Voir votre demande"
+    },
+    "rebook": {
+      "text": "Une autre balade avec {dog} ?",
+      "detail": "Un moment fixe dans la semaine, c’est le plus agréable pour tout le monde.",
+      "button": "Choisir un moment"
+    },
+    "share": {
+      "text": "Les personnes qui promènent des chiens près de chez vous peuvent maintenant trouver {dog}.",
+      "detail": "Parlez-en aussi à vos voisins, ça ira plus vite.",
+      "button": "Parlez de {dog} à vos voisins"
+    },
+    "nearby": {
+      "text": "{dog} habite à {distance} de chez vous et cherche un compagnon de balade.",
+      "textCity": "{dog}, à {city}, cherche un compagnon de balade.",
+      "detail": "{count, plural, =0 {Choisissez un moment qui vous convient.} one {Il y a aussi # autre chien près de chez vous.} other {Il y a aussi # autres chiens près de chez vous.}}",
+      "button": "Voir {dog}"
+    },
+    "emptyTown": {
+      "title": "On commence ici.",
+      "text": "Aucun chien n’habite encore près de chez vous. Rejoignez une balade en groupe, ou recommandez-nous un refuge.",
+      "button": "Balades en groupe",
+      "tip": "Recommander un refuge"
+    },
+    "ownerWaiting": {
+      "text": "{dog} est en ligne. Dès que quelqu’un veut le promener, nous vous prévenons.",
+      "button": "Voir {dog}"
+    },
+    "night": {
+      "text": "Il est déjà tard. Ça peut attendre demain."
+    },
+    "done": {
+      "text": "Rien à faire. Belle journée !"
+    },
+    "week": "Votre semaine : {done} sur {goal}"
   }
 }

@@ -26,16 +26,14 @@ const PUSH_TEXTS = [
   'profile.alerts',
   'today.',
   'challenges.',
-  'discover.together',
-  'discover.mine',
   'progress.week',
   'progress.activeWeeks',
   'walkDone.',
-  // Not on the web yet: Guus and "één ding nu" are checked as soon as they get texts.
-  'guus.',
+  // "Eén ding nu" on Vandaag (lib/next-step.ts). Guus is not on the web yet: checked as soon as he gets texts.
   'nextStep.',
+  'guus.',
 ]
-const NOT_YET = new Set(['guus.', 'nextStep.'])
+const NOT_YET = new Set(['guus.'])
 
 function flatten(tree: Tree, prefix = ''): Record<string, string> {
   const out: Record<string, string> = {}
