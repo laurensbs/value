@@ -1,6 +1,6 @@
 'use server'
 
-import { and, count, eq, gt, inArray, lt, sql } from 'drizzle-orm'
+import { and, count, eq, gt, inArray, lt, notExists, sql } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { getDb } from '@/db'
@@ -204,10 +204,13 @@ export async function respondToRequest(requestId: string, decision: 'accept' | '
     if (solo) return { ok: false, error: forDecider(solo) }
   }
 
-  await db
+  // Only while it still waits for an answer: a walker who withdrew it at the same moment wins.
+  const [decided] = await db
     .update(s.walkRequest)
     .set({ status: decision === 'accept' ? 'accepted' : 'declined', decidedBy: viewer.userId, decidedAt: new Date() })
-    .where(eq(s.walkRequest.id, requestId))
+    .where(and(eq(s.walkRequest.id, requestId), eq(s.walkRequest.status, 'pending')))
+    .returning({ id: s.walkRequest.id })
+  if (!decided) return { ok: false, error: 'already-decided' }
   await notify(db, [row.request.walkerId], decision === 'accept' ? 'request-accepted' : 'request-declined', {
     requestId,
     dogName: row.dog.name,
@@ -232,7 +235,13 @@ export async function cancelRequest(requestId: string): Promise<FormState> {
   if (!isWalker && !canDecide(viewer, row.dog)) return { ok: false, error: 'forbidden' }
   if (!['pending', 'accepted'].includes(row.request.status)) return { ok: false, error: 'already-decided' }
 
-  await db.update(s.walkRequest).set({ status: 'cancelled' }).where(eq(s.walkRequest.id, requestId))
+  // Only while it is still open: an answer given at the same moment is not overwritten.
+  const [cancelled] = await db
+    .update(s.walkRequest)
+    .set({ status: 'cancelled' })
+    .where(and(eq(s.walkRequest.id, requestId), inArray(s.walkRequest.status, ['pending', 'accepted'])))
+    .returning({ id: s.walkRequest.id })
+  if (!cancelled) return { ok: false, error: 'already-decided' }
   await notify(db, isWalker ? await deciders(row.dog) : [row.request.walkerId], 'request-cancelled', {
     requestId,
     dogName: row.dog.name,
@@ -297,8 +306,10 @@ export async function setTrust(dogId: string, walkerId: string, input: { idSeen:
   const wasSolo = Boolean(before?.soloAllowed && before?.idSeen)
   const isSolo = soloAllowed && input.idSeen
   if (isSolo && !wasSolo) await notify(db, [walkerId], 'trust-granted', { dogId, dogName: dog.name })
-  // Taken back: solo walks still planned with this dog are off, and the walker hears it.
-  if (wasSolo && !isSolo) {
+  // Taken back (also an older row that said "solo" without the ID): solo walks still planned with this
+  // dog are off, and the walker hears it. A walk under way is left alone: it ends as it is, and a weekly
+  // one does not roll on (server/walks.ts checks the trust).
+  if (before?.soloAllowed && !isSolo) {
     const stopped = await db
       .update(s.walkRequest)
       .set({ status: 'cancelled' })
@@ -308,6 +319,12 @@ export async function setTrust(dogId: string, walkerId: string, input: { idSeen:
           eq(s.walkRequest.walkerId, walkerId),
           eq(s.walkRequest.kind, 'solo'),
           inArray(s.walkRequest.status, ['pending', 'accepted']),
+          notExists(
+            db
+              .select({ id: s.walk.id })
+              .from(s.walk)
+              .where(and(eq(s.walk.requestId, s.walkRequest.id), eq(s.walk.status, 'active'))),
+          ),
         ),
       )
       .returning({ id: s.walkRequest.id })

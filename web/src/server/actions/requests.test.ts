@@ -28,7 +28,7 @@ vi.mock('../session', () => ({
   isOrgMember: (v: { orgs: { id: string }[] }, orgId: string | null) => Boolean(orgId && v.orgs.some((o) => o.id === orgId)),
 }))
 
-const { createRequest, respondToRequest, setTrust } = await import('./requests')
+const { cancelRequest, createRequest, respondToRequest, setTrust } = await import('./requests')
 const { beginWalk, finishWalk } = await import('../walks')
 const { relationFor } = await import('../queries')
 
@@ -296,5 +296,59 @@ describe('solo walks need the trust, every time', () => {
     await soloRequest('weekly-3')
     current = 'fleur'
     expect((await createRequest({ ok: false }, form({ dogId: 'kees', kind: 'solo', time: '15:00' }))).ok).toBe(true)
+  })
+
+  it('taking solo walks back during a walk leaves that walk and its appointment alone', async () => {
+    await soloRequest('weekly-4')
+    const walk = await beginWalk('weekly-4', await viewer('fleur'))
+    expect(walk.ok).toBe(true)
+    current = 'ans'
+    notify.mockClear()
+    expect((await setTrust('kees', 'fleur', { idSeen: true, soloAllowed: false })).ok).toBe(true)
+    const status = async (id: string) => (await client.query<{ status: string }>('select status from walk_request where id = $1', [id])).rows[0].status
+    // The walk under way keeps its appointment (and with it the chat); planned ones are off.
+    expect(await status('weekly-4')).toBe('accepted')
+    expect(await status('weekly-3')).toBe('cancelled')
+    expect(notify).not.toHaveBeenCalledWith(db, ['fleur'], 'request-cancelled', expect.objectContaining({ requestId: 'weekly-4' }))
+    // When it ends, the weekly walk does not roll on: the trust is gone.
+    expect((await finishWalk(walk.walkId!, await viewer('fleur'))).ok).toBe(true)
+    expect(await status('weekly-4')).toBe('completed')
+  })
+
+  it('taking back an older "solo" row without the ID also stops the solo walks still planned', async () => {
+    await client.exec(`update trust_grant set solo_allowed = true, id_seen = false where dog_id = 'kees'`)
+    await soloRequest('weekly-5')
+    current = 'ans'
+    expect((await setTrust('kees', 'fleur', { idSeen: false, soloAllowed: false })).ok).toBe(true)
+    const [row] = (await client.query<{ status: string }>(`select status from walk_request where id = 'weekly-5'`)).rows
+    expect(row.status).toBe('cancelled')
+  })
+})
+
+describe('an answer and a withdrawal at the same moment', () => {
+  it('one of them wins; the other hears it, nothing is overwritten', async () => {
+    await db.insert(schema.walkRequest).values({
+      id: 'race-1',
+      dogId: 'kees',
+      walkerId: 'fleur',
+      kind: 'meet',
+      meetVia: 'walk',
+      startsAt: new Date(Date.now() + 2 * 24 * 3_600_000),
+      durationMin: 30,
+    })
+    current = 'ans'
+    const answer = respondToRequest('race-1', 'decline')
+    current = 'fleur'
+    const withdrawal = cancelRequest('race-1')
+    const results = await Promise.all([answer, withdrawal])
+    expect(results.filter((r) => r.ok)).toHaveLength(1)
+    expect(results.filter((r) => !r.ok)).toEqual([{ ok: false, error: 'already-decided' }])
+    const [row] = (await client.query<{ status: string }>(`select status from walk_request where id = 'race-1'`)).rows
+    expect(row.status).toBe(results[0].ok ? 'declined' : 'cancelled')
+  })
+
+  it('a late answer to a withdrawn request is refused', async () => {
+    current = 'ans'
+    expect(await respondToRequest('race-1', 'accept')).toEqual({ ok: false, error: 'already-decided' })
   })
 })
