@@ -930,9 +930,10 @@
     "alerts": "Notifications",
     "alertsText": "Messages, requests and appointments always reach you; extra nudges only if you turn them on below.",
     "reminders": "Extra nudges",
-    "remindersHint": "Only extras: your first steps, your town's challenge and new dogs near you. At most one a week; if three in a row lead to nothing, they switch off by themselves. Messages, requests and appointments always reach you, even with this off.",
+    "remindersHint": "Only extras: your first steps, your town's challenge and new dogs near you. At most one a week; if three in a row lead to nothing, they switch off by themselves.",
     "pushIos": "Heads-ups on your iPhone? They work once Rondje Mee is on your home screen:",
-    "pushIosInApp": "Heads-ups on your iPhone? First open Rondje Mee in Safari and put it on your home screen from there."
+    "pushIosInApp": "Heads-ups on your iPhone? First open Rondje Mee in Safari and put it on your home screen from there.",
+    "inviteShort": "Invite"
   },
   "quiz": {
     "title": "Safety quiz",
@@ -2470,14 +2471,16 @@
     "friendsCount": "{dogs, plural, one {# dog friend} other {# dog friends}} · {walks, plural, one {# walk} other {# walks}}",
     "breatheTitle": "Breathing minute",
     "breatheText": "One calm minute, before or after a walk",
-    "quizTodo": "Not done yet, needed for walking on your own",
+    "quizTodo": "Not done yet. Needed before you ask for a dog.",
     "moreTitle": "Help out",
     "inviteShort": "Know someone who loves walking, or someone with a dog? Share your own link.",
     "supportText": "Free and ad-free. See how you can help.",
     "tipText": "Know a shelter or someone with a dog who could use help?",
     "shelterText": "Work at a shelter? Put your dogs online here.",
     "adminText": "Reports, shelters, numbers and the launch hub",
-    "schoolText": "{done} of {total} lessons, at your own pace"
+    "schoolText": "{done} of {total} lessons, at your own pace",
+    "walkTitle": "Walking",
+    "accountTitle": "Account"
   },
   "shell": {
     "tabs": {
