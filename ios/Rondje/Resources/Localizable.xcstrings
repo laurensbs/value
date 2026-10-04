@@ -4033,24 +4033,24 @@
         }
       }
     },
-    "Dank je dat je het vertelt. Iemand van Rondje kijkt ernaar." : {
+    "Dank je dat je het vertelt. Iemand van %@ kijkt ernaar." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thank you for telling us. Someone from Rondje will look into it."
+            "value" : "Thank you for telling us. Someone from %@ will look into it."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gracias por contárnoslo. Alguien de Rondje lo revisará."
+            "value" : "Gracias por contárnoslo. Alguien de %@ lo revisará."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Merci de nous l'avoir dit. Quelqu'un de Rondje va s'en occuper."
+            "value" : "Merci de nous l'avoir dit. Quelqu'un de %@ va s'en occuper."
           }
         }
       }
@@ -11339,24 +11339,24 @@
         }
       }
     },
-    "Je melding is binnen. Iemand van Rondje neemt contact op als dat nodig is." : {
+    "Je melding is binnen. Iemand van %@ neemt contact op als dat nodig is." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your report is in. Someone from Rondje will get in touch if needed."
+            "value" : "Your report is in. Someone from %@ will get in touch if needed."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu aviso ha llegado. Alguien de Rondje se pondrá en contacto si hace falta."
+            "value" : "Tu aviso ha llegado. Alguien de %@ se pondrá en contacto si hace falta."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ton signalement est bien arrivé. Quelqu'un de Rondje te contactera si nécessaire."
+            "value" : "Ton signalement est bien arrivé. Quelqu'un de %@ te contactera si nécessaire."
           }
         }
       }

@@ -43,7 +43,7 @@ cd web && npx next dev -p 3100
 cd ios && ./build.sh
 ```
 
-Open daarna `ios/Rondje.xcodeproj` in Xcode en kies een iPhone-simulator. Debug-builds praten met `http://localhost:3100`, release-builds met `https://rondje-five.vercel.app`. De productie-API werkt pas als deze branch daar is uitgerold.
+Open daarna `ios/Rondje.xcodeproj` in Xcode en kies een iPhone-simulator. Debug-builds praten met `http://localhost:3100`, release-builds met `https://rondjemee.nl`. De productie-API werkt pas als deze branch daar is uitgerold.
 
 Voor een echte iPhone of de App Store: zet je team bij `DEVELOPMENT_TEAM` in `project.yml` en zet de App Group `group.app.rondje.mobile` aan in het Apple Developer-portaal.
 

@@ -33,10 +33,10 @@ T = {
     "Nee": ("No", "Non", "No"),
     "Nog iets?": ("Anything else?", "Autre chose ?", "¿Algo más?"),
     "Dank je.": ("Thank you.", "Merci.", "Gracias."),
-    "Dank je dat je het vertelt. Iemand van Rondje kijkt ernaar.": (
-        "Thank you for telling us. Someone from Rondje will look into it.",
-        "Merci de nous l'avoir dit. Quelqu'un de Rondje va s'en occuper.",
-        "Gracias por contárnoslo. Alguien de Rondje lo revisará."),
+    "Dank je dat je het vertelt. Iemand van %@ kijkt ernaar.": (
+        "Thank you for telling us. Someone from %@ will look into it.",
+        "Merci de nous l'avoir dit. Quelqu'un de %@ va s'en occuper.",
+        "Gracias por contárnoslo. Alguien de %@ lo revisará."),
 
     # Step 4: friendship and what comes next
     "Jullie vriendschap": ("Your friendship", "Votre amitié", "Vuestra amistad"),
@@ -65,10 +65,10 @@ T = {
     "Aangevraagd. De eigenaar beslist.": ("Requested. The owner decides.", "Demandé. Le propriétaire décide.", "Solicitado. El dueño decide."),
     "Dank je wel namens %@.": ("Thank you from %@.", "Merci de la part de %@.", "Gracias de parte de %@."),
     "Tot slot": ("Finally", "Pour finir", "Para terminar"),
-    "Je melding is binnen. Iemand van Rondje neemt contact op als dat nodig is.": (
-        "Your report is in. Someone from Rondje will get in touch if needed.",
-        "Ton signalement est bien arrivé. Quelqu'un de Rondje te contactera si nécessaire.",
-        "Tu aviso ha llegado. Alguien de Rondje se pondrá en contacto si hace falta."),
+    "Je melding is binnen. Iemand van %@ neemt contact op als dat nodig is.": (
+        "Your report is in. Someone from %@ will get in touch if needed.",
+        "Ton signalement est bien arrivé. Quelqu'un de %@ te contactera si nécessaire.",
+        "Tu aviso ha llegado. Alguien de %@ se pondrá en contacto si hace falta."),
     "Rust lekker uit. Je hebt het goed gedaan.": ("Have a good rest. You did well.", "Repose-toi bien. Tu as bien fait.", "Descansa bien. Lo has hecho bien."),
     "Het rondje is klaar": (
         "The walk is done",

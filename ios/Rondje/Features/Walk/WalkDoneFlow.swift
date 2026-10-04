@@ -577,7 +577,7 @@ struct WalkDoneFlow: View {
     private func feedbackDone(_ outcome: FeedbackOutcome) -> some View {
         switch outcome {
         case .calm:
-            Text("Dank je dat je het vertelt. Iemand van Rondje kijkt ernaar.")
+            Text("Dank je dat je het vertelt. Iemand van \(Brand.name) kijkt ernaar.")
                 .font(.body.weight(.semibold))
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -651,7 +651,7 @@ struct WalkDoneFlow: View {
                     .font(.display(30))
                     .accessibilityAddTraits(.isHeader)
                 nextCard {
-                    Text("Je melding is binnen. Iemand van Rondje neemt contact op als dat nodig is.")
+                    Text("Je melding is binnen. Iemand van \(Brand.name) neemt contact op als dat nodig is.")
                         .font(.body.weight(.semibold))
                 }
                 CoachBubble(mood: .calm, text: L("Rust lekker uit. Je hebt het goed gedaan."), guusSize: 56)

@@ -871,7 +871,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_DISPLAY_NAME = Rondje;
+				APP_DISPLAY_NAME = "Rondje Mee";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -922,7 +922,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				RONDJE_API_BASE_URL = "https:/$()/rondje-five.vercel.app";
+				RONDJE_API_BASE_URL = "https:/$()/rondjemee.nl";
 				RONDJE_APP_ENTITLEMENTS = Rondje/Resources/Rondje.entitlements;
 				RONDJE_BUNDLE_ID = app.rondje.mobile;
 				RONDJE_FEATURE_HEALTH = NO;
@@ -994,7 +994,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_DISPLAY_NAME = Rondje;
+				APP_DISPLAY_NAME = "Rondje Mee";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
