@@ -196,7 +196,7 @@ export function OnboardingFlow({ firstName, photoUrl, country: initialCountry, m
             aria-valuenow={number}
             aria-valuetext={t('flow.progress', { n: number, total })}
           >
-            <span style={{ width: `${(number / total) * 100}%` }} />
+            <span style={{ transform: `scaleX(${number / total})` }} />
           </div>
           <span className="muted small" aria-hidden="true">
             {number}/{total}

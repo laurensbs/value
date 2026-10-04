@@ -2,6 +2,7 @@ import 'server-only'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import type { MonthChallenges } from '@/lib/challenges'
 import { BADGES, recentKey, STEP_POINTS, tierColor } from '@/lib/progress'
+import type { Celebration } from '@/components/progress/LevelUp'
 import type { Progress } from './progress'
 
 // The progress and challenges as the iPhone app gets them (src/app/api/v1), with every text in the
@@ -61,6 +62,20 @@ export async function progressJson(p: Progress) {
       dogId: s.dog?.id ?? null,
       points: STEP_POINTS[s.key] ?? null,
     })),
+  }
+}
+
+/**
+ * A new level or badge to celebrate, or null. Shown in one place on the web: LevelUp (paws, no
+ * confetti), whether it comes after "Goed rondje!", on Today or on the progress page.
+ */
+export function levelMoment(p: Progress, json: Awaited<ReturnType<typeof progressJson>>): Celebration | null {
+  if (!p.levelUp && p.newAwards.length === 0) return null
+  return {
+    level: json.level.number,
+    name: json.level.name,
+    levelUp: p.levelUp,
+    awards: json.newAwards.map((a) => ({ key: a.key, title: a.title, color: a.color })),
   }
 }
 

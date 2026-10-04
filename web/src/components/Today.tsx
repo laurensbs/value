@@ -8,21 +8,21 @@ import { countryInfo, isCountry } from '@/lib/countries'
 import { formatDistance } from '@/lib/geo'
 import { shownCount } from '@/lib/nearby'
 import { BACK_AFTER_DAYS, isNewDog } from '@/lib/nudges'
-import { BADGES, bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
+import { bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
 import { zonedToUtc } from '@/lib/time'
 import { challengesFor } from '@/server/challenges'
 import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
-import { progressJson } from '@/server/progress-json'
+import { levelMoment, progressJson } from '@/server/progress-json'
 import { webPushKey } from '@/server/push'
 import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, walkersNear, type RequestRow } from '@/server/queries'
 import type { OnboardedViewer } from '@/server/session'
-import { Celebration } from './Celebration'
 import { ChallengeCard } from './ChallengeCard'
 import { DogFace } from './DogFace'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
 import { InstallAsk } from './InstallAsk'
 import { Medal } from './Medal'
+import { LevelUp } from './progress/LevelUp'
 import { PushAsk } from './PushAsk'
 import { WeekCard } from './WeekCard'
 
@@ -106,7 +106,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const day = dayOfYear(now)
   const tip = !walker || (owner && day % 2 === 1) ? t(`tips.owner.${(day % OWNER_TIPS) + 1}`) : t(`tips.walker.${(day % WALKER_TIPS) + 1}`)
 
-  const celebrate = progress.levelUp || progress.newAwards.length > 0
+  const moment = levelMoment(progress, json)
   const pushKey = webPushKey()
   const pushText = owner && ownDogs[0] ? tpa('dog', { dog: ownDogs[0].name }) : walker ? tpa('walker') : tpa('general')
 
@@ -348,13 +348,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       {impact.walks > 0 ? <p className="together muted small">{t('together', { walks: impact.walks, dogs: impact.dogs })}</p> : null}
 
-      {celebrate ? (
-        <Celebration
-          level={json.level.number}
-          levelUp={progress.levelUp ? json.level.name : null}
-          awards={json.newAwards.map((a) => ({ key: a.key, tier: a.tier, icon: a.icon ?? BADGES[0].icon, title: a.title, color: a.color }))}
-        />
-      ) : null}
+      {moment ? <LevelUp celebration={moment} /> : null}
     </div>
   )
 }

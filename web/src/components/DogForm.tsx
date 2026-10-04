@@ -273,7 +273,7 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
             aria-valuenow={index + 1}
             aria-valuetext={t('onboarding.flow.progress', { n: index + 1, total })}
           >
-            <span style={{ width: `${((index + 1) / total) * 100}%` }} />
+            <span style={{ transform: `scaleX(${(index + 1) / total})` }} />
           </div>
           <span className="muted small" aria-hidden="true">
             {index + 1}/{total}

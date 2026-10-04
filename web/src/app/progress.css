@@ -21,9 +21,11 @@
   stroke: color-mix(in oklab, var(--on-walk) 20%, transparent);
 }
 
+/* Exception to "only transform and opacity": a ring can only be drawn part-way with its stroke. It is a
+   small SVG that fills once, without layout. */
 .level-ring-fill {
   stroke: var(--ball);
-  animation: ring-fill 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+  animation: ring-fill 1.1s var(--ease-klein) 0.15s both;
 }
 
 @keyframes ring-fill {
@@ -62,7 +64,7 @@
 }
 
 .level-card.is-link {
-  transition: transform 0.15s ease, filter 0.15s ease;
+  transition: transform var(--motion-tik) var(--ease-tik), filter var(--motion-tik) var(--ease-tik);
 }
 
 .level-card.is-link:hover {
@@ -388,7 +390,7 @@
   border-radius: inherit;
   background: var(--grass);
   transform-origin: left center;
-  animation: bar-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+  animation: bar-grow 0.9s var(--ease-klein) 0.1s both;
 }
 
 .bar.big {
@@ -401,12 +403,6 @@
 
 .bar.big.done > span {
   background: var(--grass);
-}
-
-@keyframes bar-grow {
-  from {
-    transform: scaleX(0);
-  }
 }
 
 .challenge-eyebrow {
@@ -647,7 +643,7 @@
   background: var(--surface);
   color: var(--ink);
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform var(--motion-klein) var(--ease-klein);
 }
 
 .friend-card:hover {
@@ -844,6 +840,11 @@
   background: color-mix(in oklab, var(--surface) 90%, var(--ball));
   box-shadow: var(--shadow);
   text-align: center;
+  /* "Goed rondje!" in 0.9 s, as long as the finish sound (onderzoek §3.6): the card comes in (0-320 ms),
+     the paw pops (120-620 ms), the title (350 ms), the sentence (500 ms), then the faces one by one
+     (700-900 ms). The buttons work from the start; they only fade in with the card. */
+  animation: done-rise var(--motion-scherm) var(--ease-scherm) backwards;
+  --rise: 24px;
 }
 
 .walk-done-paw {
@@ -854,7 +855,7 @@
   border-radius: 50%;
   background: var(--ball);
   color: var(--on-ball);
-  animation: pop-in 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  animation: pop-in var(--motion-pop) var(--ease-pop) 120ms backwards;
 }
 
 .walk-done-paw path {
@@ -864,11 +865,15 @@
 .walk-done-title {
   font-size: clamp(2rem, 8vw, 2.6rem);
   font-weight: 780;
+  animation: done-rise var(--motion-klein) var(--ease-klein) 350ms backwards;
+  --rise: 8px;
 }
 
 .walk-done-text {
   color: var(--muted);
   font-size: 1.1rem;
+  animation: done-rise var(--motion-klein) var(--ease-klein) 500ms backwards;
+  --rise: 0px;
 }
 
 .walk-done-mood {
@@ -877,6 +882,44 @@
   width: 100%;
   margin-top: 6px;
   text-align: left;
+  animation: done-rise var(--motion-klein) var(--ease-klein) 650ms backwards;
+  --rise: 0px;
+}
+
+.walk-done .mood-faces button {
+  animation: done-rise var(--motion-klein) var(--ease-klein) calc(700ms + var(--n, 0) * 40ms) backwards;
+  --rise: 6px;
+}
+
+.walk-done .mood-faces button:nth-child(2) {
+  --n: 1;
+}
+
+.walk-done .mood-faces button:nth-child(3) {
+  --n: 2;
+}
+
+.walk-done .mood-faces button:nth-child(4) {
+  --n: 3;
+}
+
+.walk-done .mood-faces button:nth-child(5) {
+  --n: 4;
+}
+
+/* How far each part rises. Not inherited: the card's 24 px stays on the card, its title and the level
+   moment inside it rise their own 8 px (onderzoek §3.6, §3.7). */
+@property --rise {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 8px;
+}
+
+@keyframes done-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 8px));
+  }
 }
 
 .walk-done-mood .mood-reply {
@@ -922,7 +965,7 @@
   box-shadow: 0 1px 2px rgb(22 32 26 / 0.08);
   font-size: 1.9rem;
   line-height: 1;
-  transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), background 0.2s ease;
+  transition: transform var(--motion-klein) var(--ease-pop), background var(--motion-klein) var(--ease-klein);
 }
 
 .mood-faces button.on {
@@ -946,7 +989,7 @@
 
 @keyframes pop-in {
   from {
-    transform: scale(0.4);
+    transform: scale(var(--pop-from, 0.6));
     opacity: 0;
   }
 }
@@ -1000,7 +1043,10 @@
   font-family: var(--font-display);
   font-size: 4.4rem;
   font-weight: 800;
-  animation: pop-in 0.9s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  /* onderzoek §3.7: the ball pops a little longer than a paw, the paws fly out from 100 ms, the
+     name follows at 350 ms and the badges from 500 ms. */
+  animation: pop-in calc(var(--motion-pop) + 100ms) var(--ease-pop) both;
+  --pop-from: 0.3;
 }
 
 .level-up-paw {
@@ -1011,7 +1057,7 @@
   color: var(--ball);
   line-height: 0;
   opacity: 0;
-  animation: paw-burst 1.2s ease-out 0.15s both;
+  animation: paw-burst 900ms ease-out 100ms both;
 }
 
 .level-up-paw:nth-child(even) {
@@ -1028,7 +1074,7 @@
     opacity: 1;
   }
   to {
-    transform: rotate(calc(var(--i) * 30deg)) translateY(-135px);
+    transform: rotate(calc(var(--i) * 30deg)) translateY(-130px);
     opacity: 0;
   }
 }
@@ -1037,11 +1083,15 @@
   font-size: 1.25rem;
   font-weight: 600;
   opacity: 0.88;
+  animation: done-rise var(--motion-klein) var(--ease-klein) 350ms backwards;
+  --rise: 8px;
 }
 
 .level-up-name {
   color: var(--on-walk);
   font-size: clamp(2.3rem, 10vw, 3.2rem);
+  animation: done-rise var(--motion-klein) var(--ease-klein) 350ms backwards;
+  --rise: 8px;
 }
 
 .level-up-awards {
@@ -1060,6 +1110,19 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  animation: pop-in var(--motion-pop) var(--ease-pop) calc(500ms + var(--n, 0) * 80ms) backwards;
+}
+
+.level-up-awards li:nth-child(2) {
+  --n: 1;
+}
+
+.level-up-awards li:nth-child(3) {
+  --n: 2;
+}
+
+.level-up-awards li:nth-child(n + 4) {
+  --n: 3;
 }
 
 .level-up-button {
@@ -1071,8 +1134,23 @@
   .level-ring-fill,
   .bar > span,
   .walk-done-paw,
-  .level-up-ball {
+  .walk-done-title,
+  .walk-done-text,
+  .walk-done-mood,
+  .walk-done .mood-faces button,
+  .level-up-eyebrow,
+  .level-up-name,
+  .level-up-awards li {
     animation: none;
+  }
+
+  /* Less motion: "Goed rondje!" and the new level appear at once, with a short fade only. */
+  .walk-done {
+    animation: fade-in var(--motion-klein) ease-out backwards !important;
+  }
+
+  .level-up-ball {
+    animation: fade-in 250ms ease-out backwards !important;
   }
 
   .level-up-paw {

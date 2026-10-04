@@ -1308,7 +1308,9 @@
     "notFound": "This page doesn't exist (any more).",
     "generic": "Something went wrong. Please try again.",
     "home": "Go to the homepage",
-    "retry": "Try again"
+    "retry": "Try again",
+    "server": "Something went wrong on our side. Please try again in a moment.",
+    "offline": "That didn't work just now. Check your connection and try again."
   },
   "legal": {
     "fallback": "This text hasn't been translated yet. You're reading the Dutch version.",
@@ -2236,7 +2238,8 @@
     "feedback": "How did it go?",
     "done": "Done",
     "points": "+{n} points",
-    "breathe": "Want a calm moment? Try the breathing minute"
+    "breathe": "Want a calm moment? Try the breathing minute",
+    "textShort": "{dog} and you went out together. Thank you."
   },
   "profileHub": {
     "levelBadges": "{n, plural, =0 {No badges yet} one {# badge} other {# badges}}",
@@ -3321,5 +3324,9 @@
         "how": "Emails and call scripts for shelters, vets, associations and the local press. You send them yourself, from your own email."
       }
     }
+  },
+  "loading": {
+    "label": "Loading…",
+    "slow": "This is taking longer than usual."
   }
 }

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { newPerson, shot } from './helpers'
+import { addDog, newPerson, onboard, shot, signUp, unique } from './helpers'
 
 test('pages: support, about, robots, sitemap and short links', async ({ browser }) => {
   const { context, page } = await newPerson(browser)
@@ -42,6 +42,14 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await expect(page.getByRole('heading', { name: 'Altijd gratis, nooit advertenties' })).toBeVisible()
   await shot(page, '32-city')
   expect((await page.request.get('/cities/atlantis')).status()).toBe(404)
+  // Pages with a loading screen still answer with a real status: 404 for a dog that isn't there, and a
+  // redirect to the login page for a visitor.
+  expect((await page.request.get('/dogs/bestaat-niet')).status()).toBe(404)
+  for (const path of ['/requests', '/progress']) {
+    const response = await page.request.get(path, { maxRedirects: 0 })
+    expect(response.status()).toBe(307)
+    expect(response.headers().location).toContain('/login')
+  }
 
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
   expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/cities/amsterdam')
@@ -95,4 +103,43 @@ test('daily jobs answer: housekeeping, appointment and friendly reminders', asyn
     emailed: 0,
     reminders: { appointments: expect.any(Number), groupWalks: expect.any(Number), pushed: expect.any(Number), emailed: 0 },
   })
+})
+
+test('dog page: the portrait grows from the card, a paused dog answers 404', async ({ browser }) => {
+  const visitor = await newPerson(browser)
+  // The card's portrait and the page's share one name: opening a dog is one view transition, so the
+  // page must not fall back to a loading screen first (onderzoek §3.2 "Kaart → pagina").
+  await visitor.page.goto('/dogs')
+  await expect(visitor.page.locator('.dcard').first()).toBeVisible()
+  await visitor.page.evaluate(() => {
+    const w = window as unknown as { __vt: string[] }
+    w.__vt = []
+    const start = document.startViewTransition?.bind(document)
+    if (!start) return
+    document.startViewTransition = ((arg: Parameters<typeof start>[0]) => {
+      const transition = start(arg)
+      transition.ready
+        .then(() => w.__vt.push(...document.getAnimations().map((a) => (a.effect as KeyframeEffect | null)?.pseudoElement ?? '')))
+        .catch(() => undefined)
+      return transition
+    }) as typeof document.startViewTransition
+  })
+  await visitor.page.locator('.dcard').first().click()
+  await expect(visitor.page).toHaveURL(/\/dogs\/[^/?]+$/)
+  await expect.poll(() => visitor.page.evaluate(() => (window as unknown as { __vt: string[] }).__vt.join(' '))).toMatch(/::view-transition-group\(dog-/)
+
+  // A dog its owner paused is not there for others: a real 404, not a page that says so with 200.
+  const id = unique()
+  const owner = await newPerson(browser)
+  await signUp(owner.page, { name: 'Ans', email: `ans-pause-${id}@e2e.test`, intent: 'owner' })
+  await onboard(owner.page, { birthDate: '1951-04-02', city: 'Utrecht', bio: 'Ik ben Ans.', phone: '06 1234 5678', walker: false, owner: true })
+  await addDog(owner.page, 'Pip')
+  const dogUrl = new URL(owner.page.url()).pathname
+  expect((await visitor.page.request.get(dogUrl)).status()).toBe(200)
+  await owner.page.getByRole('button', { name: 'Even pauzeren' }).click()
+  await expect(owner.page.getByRole('button', { name: 'Weer zichtbaar maken' })).toBeVisible()
+  expect((await visitor.page.request.get(dogUrl)).status()).toBe(404)
+
+  await owner.context.close()
+  await visitor.context.close()
 })
