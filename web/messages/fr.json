@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · une balade régulière avec un chien qui vous attend",
-    "description": "{app} relie de jeunes adultes à des chiens de voisins ou de refuges en manque de balades. Gratuit et sûr, aux Pays-Bas, en Belgique et en Espagne."
+    "description": "{app} relie de jeunes adultes à des chiens de voisins ou de refuges en manque de balades. Gratuit et sûr, d’abord aux Pays-Bas."
   },
   "nav": {
     "dogs": "Chiens",
@@ -94,7 +94,6 @@
     "contact": "Contact"
   },
   "home": {
-    "eyebrow": "Pays-Bas · Belgique · Espagne",
     "title": "Une balade régulière avec un chien <mark>qui vous attend.</mark>",
     "lede": "Promenez régulièrement le chien d'un voisin qui ne peut plus marcher bien loin, ou un chien de refuge. Gratuit, et la première fois toujours ensemble.",
     "ctaDogs": "Voir les chiens près de chez vous",
@@ -119,8 +118,8 @@
     "safety5": "Après chaque balade, chacun donne son avis en privé. Les inquiétudes sont transmises à notre équipe, pas à l'autre personne.",
     "safety6": "Vous pouvez toujours signaler et bloquer. Quiconque ne respecte pas les règles est exclu de la plateforme.",
     "safetyMore": "Découvrez comment fonctionne la sécurité",
-    "countriesTitle": "Déjà dans trois pays",
-    "countriesText": "Rondje Mee fonctionne aux Pays-Bas, en Belgique et en Espagne, en néerlandais, français, espagnol et anglais.",
+    "countriesTitle": "D’abord aux Pays-Bas",
+    "countriesText": "Nous commençons aux Pays-Bas, autour de Tiel, Vijfheerenlanden et Gorinchem. En Belgique et en Espagne, vous pouvez déjà participer aussi, en néerlandais, français, espagnol et anglais.",
     "freeTitle": "Gratuit, et ça le restera",
     "freeText": "Pas de publicité, pas d'abonnement, et nous ne vendons jamais de données. Rondje Mee vit du soutien volontaire, et plus tard de partenaires et de fonds qui respectent nos règles.",
     "exampleDogs": "Des exemples, pour voir comment ça marche",
@@ -129,7 +128,18 @@
     "impactTitle": "Ce que nous avons marché ensemble",
     "impactWalks": "Promenades",
     "impactKm": "Kilomètres",
-    "impactDogs": "Chiens sortis"
+    "impactDogs": "Chiens sortis",
+    "helpUs": {
+      "eyebrow": "Collecte",
+      "title": "Aidez-nous !",
+      "lede": "{app} est gratuit et le restera. Avec votre balade, l’app arrive sur l’App Store et Google Play, et la première année est payée.",
+      "rounds": "{n, plural, =0 {Objectif : {total} balades} one {# balade sur {total}} other {# balades sur {total}}}",
+      "give": "Offrez une balade",
+      "join": "ou inscrivez-vous",
+      "note": "Via {platform}, à {operator}, qui crée {app}.",
+      "more": "Où va l’argent",
+      "chip": "{round} = 1 balade"
+    }
   },
   "landing": {
     "pills": {
@@ -165,10 +175,12 @@
       }
     },
     "dogs": {
-      "title": "Qui vient avec vous aujourd’hui ?",
-      "lede": "Quelques chiens qui attendent leur balade.",
+      "title": "Nouveaux venus",
+      "lede": "Les chiens arrivés le plus récemment, qui adoreraient une balade de plus.",
       "all": "Voir tous les chiens",
-      "ledeExamples": "Ce sont des exemples, pour que vous voyiez comment ça marche."
+      "emptyTitle": "Vous avez un chien qui profiterait d’une balade de plus ?",
+      "emptyText": "Ou vous en connaissez un, chez une voisine ou votre grand-père ? Avec leur accord, vous pouvez aussi l’inscrire pour eux.",
+      "emptyCta": "Inscrire votre chien"
     },
     "how": {
       "eyebrow": "En quatre étapes",
@@ -1325,6 +1337,7 @@
   },
   "directory": {
     "title": "Refuges aux Pays-Bas, en Belgique et en Espagne",
+    "titleIn": "Refuges {country, select, BE {en Belgique} ES {en Espagne} other {aux Pays-Bas}}",
     "lede": "Des refuges qui accueillent des bénévoles promeneurs. Les partenaires sont directement sur Rondje Mee ; pour les autres, vous pouvez devenir bénévole via leur propre site web.",
     "metaDescription": "Des refuges qui accueillent des bénévoles promeneurs. Les partenaires sont sur {app} ; pour les autres, devenez bénévole via leur site web.",
     "partner": "Sur Rondje Mee",
@@ -1829,7 +1842,8 @@
     },
     "contactTitle": "Contact",
     "contact": "Des questions ou des idées ? La page d'aide explique comment nous joindre. Il s'agit d'une personne ou d'un chien ? Utilisez le bouton de signalement sur sa page.",
-    "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :"
+    "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :",
+    "campaign": "Mon histoire est aussi sur {platform}, où vous pouvez offrir une balade."
   },
   "poster": {
     "title": "Affiche pour votre refuge",

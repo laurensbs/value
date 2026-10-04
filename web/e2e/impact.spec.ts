@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test'
+import crowdfunding from '../content/crowdfunding.json'
+import { campaign } from '../src/lib/support'
 import { newPerson, shot } from './helpers'
 
 const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp'
@@ -48,9 +50,10 @@ test('support page: monthly support, open about money, and an honest promise abo
   const monthly = page.getByRole('link', { name: /Steun Rondje Mee via/ })
   if (await monthly.count()) {
     await expect(monthly).toHaveAttribute('href', /patreon\.com/)
-    // No campaign link is configured in the tests, so no crowdfunding button and no progress bar.
-    await expect(page.getByRole('link', { name: /Doe mee via/ })).toHaveCount(0)
-    await expect(page.getByRole('progressbar')).toHaveCount(0)
+    // The tests set a (fake) campaign link too: the crowdfunding button, and a progress bar once
+    // content/crowdfunding.json has a goal and an amount raised.
+    await expect(page.getByRole('link', { name: 'Doe mee via Whydonate' })).toHaveAttribute('href', /^https:\/\/whydonate\.com\//)
+    await expect(page.getByRole('progressbar')).toHaveCount(campaign(crowdfunding).progress ? 1 : 0)
   }
   await shot(page, '41-support')
   await context.close()

@@ -9,6 +9,7 @@ import * as s from '@/db/schema'
 import { deleteOwnDogWithFiles } from '../blob-cleanup'
 import { audit } from '../notify'
 import { saveDogForm } from '../dog-core'
+import { dogsChanged } from '../newest-dogs'
 import { actionViewer, isOrgMember } from '../session'
 import type { FormState } from './profile'
 
@@ -16,6 +17,7 @@ export async function saveDog(_prev: FormState, form: FormData): Promise<FormSta
   const result = await saveDogForm(await actionViewer(), form)
   if (!result.ok) return result
   revalidatePath('/dogs')
+  dogsChanged()
   redirect(result.orgId ? `/shelter/${result.orgId}` : `/dogs/${result.dogId}?saved=1`)
 }
 
@@ -34,6 +36,7 @@ export async function setDogStatus(dogId: string, status: 'active' | 'paused' | 
   if (parsed.data === 'active' && !dog.name.trim()) return
   await db.update(s.dog).set({ status: parsed.data }).where(eq(s.dog.id, dog.id))
   await audit(db, viewer.userId, `dog.${parsed.data}`, 'dog', dog.id)
+  dogsChanged()
   revalidatePath(`/dogs/${dog.id}`)
   if (dog.orgId) revalidatePath(`/shelter/${dog.orgId}`)
 }
@@ -41,6 +44,6 @@ export async function setDogStatus(dogId: string, status: 'active' | 'paused' | 
 export async function deleteDog(dogId: string): Promise<void> {
   const viewer = await actionViewer()
   // The dog, its walks and their photos, also from Vercel Blob.
-  await deleteOwnDogWithFiles(String(dogId), viewer.userId)
+  if (await deleteOwnDogWithFiles(String(dogId), viewer.userId)) dogsChanged()
   redirect('/my-dogs')
 }

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · un paseo fijo con un perro que te espera",
-    "description": "{app} conecta a jóvenes con perros de vecinos y protectoras que agradecen un paseo extra. Gratis y seguro, en Países Bajos, Bélgica y España."
+    "description": "{app} conecta a jóvenes con perros de vecinos y protectoras que agradecen un paseo extra. Gratis y seguro, empezando por los Países Bajos."
   },
   "nav": {
     "dogs": "Perros",
@@ -94,7 +94,6 @@
     "contact": "Contacto"
   },
   "home": {
-    "eyebrow": "Países Bajos · Bélgica · España",
     "title": "Un paseo fijo con un perro <mark>que te espera.</mark>",
     "lede": "Pasea con regularidad al perro de alguien de tu barrio que ya no puede caminar mucho, o a un perro de una protectora. Gratis, y la primera vez siempre juntos.",
     "ctaDogs": "Ver perros cerca de ti",
@@ -119,8 +118,8 @@
     "safety5": "Después de cada paseo, ambas partes dan su opinión en privado. Las preocupaciones llegan a nuestro equipo, no a la otra persona.",
     "safety6": "Siempre puedes denunciar y bloquear. Quien no cumple las normas sale de la plataforma.",
     "safetyMore": "Descubre cómo funciona la seguridad",
-    "countriesTitle": "Ya en tres países",
-    "countriesText": "Rondje Mee funciona en los Países Bajos, Bélgica y España, en neerlandés, francés, español e inglés.",
+    "countriesTitle": "Empezamos en los Países Bajos",
+    "countriesText": "Empezamos en los Países Bajos, en la zona de Tiel, Vijfheerenlanden y Gorinchem. En Bélgica y España ya puedes participar también, en neerlandés, francés, español e inglés.",
     "freeTitle": "Gratis, y así seguirá",
     "freeText": "Sin anuncios, sin suscripción y nunca vendemos datos. Rondje Mee funciona con apoyo voluntario y, más adelante, con socios y fundaciones que respeten nuestras reglas.",
     "exampleDogs": "Ejemplos, para que veas cómo funciona",
@@ -129,7 +128,18 @@
     "impactTitle": "Lo que caminamos juntos",
     "impactWalks": "Paseos",
     "impactKm": "Kilómetros",
-    "impactDogs": "Perros que salieron"
+    "impactDogs": "Perros que salieron",
+    "helpUs": {
+      "eyebrow": "Recaudación",
+      "title": "¡Ayúdanos!",
+      "lede": "{app} es gratis y lo seguirá siendo. Con tu paseo, la app llega a la App Store y a Google Play, y el primer año queda pagado.",
+      "rounds": "{n, plural, =0 {Objetivo: {total} paseos} one {# de {total} paseos} other {# de {total} paseos}}",
+      "give": "Regala un paseo",
+      "join": "o regístrate",
+      "note": "A través de {platform}, para {operator}, que crea {app}.",
+      "more": "Adónde va el dinero",
+      "chip": "{round} = 1 paseo"
+    }
   },
   "landing": {
     "pills": {
@@ -165,10 +175,12 @@
       }
     },
     "dogs": {
-      "title": "¿Quién sale hoy contigo?",
-      "lede": "Algunos perros que esperan su paseo.",
+      "title": "Recién llegados",
+      "lede": "Los perros más nuevos a los que les encantaría un paseo extra.",
       "all": "Ver todos los perros",
-      "ledeExamples": "Son ejemplos, para que veas cómo funciona."
+      "emptyTitle": "¿Tienes un perro al que le vendría bien un paseo extra?",
+      "emptyText": "¿O conoces uno, de tu vecina o de tu abuelo? Con su permiso, también puedes darlo de alta por ellos.",
+      "emptyCta": "Da de alta a tu perro"
     },
     "how": {
       "eyebrow": "En cuatro pasos",
@@ -1325,6 +1337,7 @@
   },
   "directory": {
     "title": "Protectoras en los Países Bajos, Bélgica y España",
+    "titleIn": "Protectoras en {country, select, BE {Bélgica} ES {España} other {los Países Bajos}}",
     "lede": "Protectoras con voluntarios para pasear perros. Las colaboradoras las encuentras directamente en Rondje Mee; en las demás puedes hacer voluntariado a través de su propia web.",
     "metaDescription": "Protectoras con voluntarios para pasear perros. Las colaboradoras están en {app}; en las demás te apuntas como voluntario en su propia web.",
     "partner": "En Rondje Mee",
@@ -1829,7 +1842,8 @@
     },
     "contactTitle": "Contacto",
     "contact": "¿Preguntas o ideas? En la página de ayuda verás cómo contactarnos. ¿Se trata de una persona o un perro? Usa el botón de denuncia en su página.",
-    "contactEmail": "¿Preguntas, ideas o quieres colaborar? Escríbenos:"
+    "contactEmail": "¿Preguntas, ideas o quieres colaborar? Escríbenos:",
+    "campaign": "Mi historia también está en {platform}, donde puedes regalar un paseo."
   },
   "poster": {
     "title": "Cartel para vuestra protectora",
