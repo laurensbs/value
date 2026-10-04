@@ -129,3 +129,33 @@ export const PNG_1X1 = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4//8/AAX+Av4N70a4AAAAAElFTkSuQmCC',
   'base64',
 )
+
+/**
+ * Tap targets on this screen lower than 44 px. A chip or tick row is tapped through its whole label,
+ * so that is what counts; a link inside a sentence is exempt (WCAG 2.5.8), like in scripts/audit.mjs.
+ */
+export async function smallTargets(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    const small: string[] = []
+    const measured = new Set<Element>()
+    const root = document.querySelector('dialog[open]') ?? document.querySelector('main') ?? document.body
+    for (const el of root.querySelectorAll<HTMLElement>('a, button, input:not([type=hidden]), select, summary, [role=button]')) {
+      const box = el.getBoundingClientRect()
+      if (!box.width || !box.height || getComputedStyle(el).visibility === 'hidden') continue
+      if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li, label')) continue
+      if (el.closest('.leaflet-control-attribution')) continue
+      let target: Element = el
+      if (el instanceof HTMLInputElement && (el.type === 'checkbox' || el.type === 'radio')) {
+        const label = el.closest('label')
+        if (label) {
+          if (measured.has(label)) continue
+          measured.add(label)
+          target = label
+        }
+      }
+      const r = target.getBoundingClientRect()
+      if (r.height < 44) small.push(`<${target.tagName.toLowerCase()}> "${(target.textContent ?? '').trim().slice(0, 40)}" ${Math.round(r.width)}x${Math.round(r.height)}`)
+    }
+    return small
+  })
+}
