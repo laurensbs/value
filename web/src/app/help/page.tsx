@@ -5,10 +5,11 @@ import { CONTACT_PATH } from '@/lib/contact'
 import { COUNTRIES, COUNTRY_INFO, isCountry } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { getViewer } from '@/server/session'
+import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata() {
   const t = await getTranslations('help')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/help', title: t('title'), description: t('metaDescription') })
 }
 
 const tel = (n: string) => `tel:${n.replace(/[^\d+]/g, '')}`

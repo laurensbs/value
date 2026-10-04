@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Rondje · een vast rondje met een hond die op je wacht",
-    "description": "Rondje koppelt jongvolwassenen aan honden van buurtgenoten en opvangen die een extra wandeling goed kunnen gebruiken. Gratis en veilig, in Nederland, België en Spanje."
+    "title": "{app} · een vast rondje met een hond die op je wacht",
+    "description": "{app} koppelt jongvolwassenen aan honden van buren en opvangen die graag een extra rondje lopen. Gratis en veilig, in Nederland, België en Spanje."
   },
   "nav": {
     "dogs": "Honden",
@@ -1121,11 +1121,13 @@
     "level": "Niveau: {level}",
     "at": "Verzamelen: {place}",
     "idNote": "Neem een geldig identiteitsbewijs mee. De begeleider bekijkt het; Rondje bewaart geen kopie.",
-    "meetDogs": "Bekijk de honden van deze opvang"
+    "meetDogs": "Bekijk de honden van deze opvang",
+    "eventName": "Groepswandeling bij {shelter}"
   },
   "directory": {
     "title": "Opvangen in Nederland, België en Spanje",
     "lede": "Opvangen met wandelvrijwilligers. Partners zie je direct in Rondje; bij de andere kun je via hun eigen website vrijwilliger worden.",
+    "metaDescription": "Opvangen met wandelvrijwilligers. Partners zie je direct in {app}; bij de andere kun je via hun eigen website vrijwilliger worden.",
     "partner": "Op Rondje",
     "notPartner": "Nog niet op Rondje",
     "walking": "Heeft wandelvrijwilligers",
@@ -1146,6 +1148,7 @@
   "help": {
     "title": "Even niet oké?",
     "lede": "Een rondje buiten kan je dag goed doen, maar het vervangt geen hulp. Hier kun je altijd terecht, gratis en anoniem.",
+    "metaDescription": "Een rondje buiten kan je dag goed doen, maar het vervangt geen hulp. Hier kun je altijd terecht, gratis en anoniem.",
     "emergency": "Bij direct gevaar bel je {number}.",
     "lines": {
       "suicide": "Denk je aan zelfdoding? Dag en nacht bereikbaar.",
@@ -1406,6 +1409,7 @@
     "eyebrow": "Doorverwijzen",
     "title": "Tip een opvang",
     "lede": "Weet je een opvang of asiel waar honden wel een extra wandeling kunnen gebruiken? Laat het ons weten. Wij nemen zelf contact op met de opvang, nooit namens jou.",
+    "metaDescription": "Weet je een opvang of asiel waar honden een extra wandeling kunnen gebruiken? Laat het ons weten. Wij nemen zelf contact op, nooit namens jou.",
     "tabs": {
       "shelter": "Een opvang",
       "owner": "Iemand met een hond"
@@ -1447,6 +1451,7 @@
     "eyebrow": "Gratis, en dat blijft zo",
     "title": "Maak Rondje mogelijk",
     "lede": "Rondje is gratis voor wandelaars, eigenaren en opvangen, en dat blijft zo. Toch kost het geld om Rondje veilig en online te houden. Zo zit dat.",
+    "metaDescription": "{app} is gratis voor wandelaars, eigenaren en opvangen, en dat blijft zo. Toch kost het geld om {app} veilig en online te houden. Zo zit dat.",
     "promiseTitle": "Onze belofte",
     "promise": {
       "free": "Rondje blijft gratis voor iedereen: geen abonnement, geen betaalmuur, geen premiumversie.",
@@ -1590,6 +1595,7 @@
     "eyebrow": "Over Rondje",
     "title": "Samen een rondje, goed voor jou en voor een hond",
     "lede": "Rondje brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer goed kunnen uitlaten, en uit opvangen.",
+    "metaDescription": "{app} brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer kunnen uitlaten, en uit opvangen.",
     "whyTitle": "Waarom Rondje",
     "why1": "Veel jongeren willen graag naar buiten en houden van honden, maar kunnen er zelf geen hebben. Tegelijk zijn er ouderen en mensen die ziek zijn, die hun hond niet meer zo vaak kunnen uitlaten als ze zouden willen. En in opvangen wacht elke hond op een extra wandeling.",
     "why2": "Een vast rondje met een hond is goed voor iedereen: beweging, buitenlucht en een praatje met een buurtgenoot. Rondje maakt dat makkelijk, veilig en gratis.",
@@ -1754,8 +1760,9 @@
   "cities": {
     "title": "Honden uitlaten per stad",
     "lede": "Rondje werkt in elke stad. Per stad zie je welke opvangen er zijn, wanneer er groepswandelingen zijn en hoeveel honden op een rondje wachten.",
+    "indexDescription": "{app} werkt in elke stad. Per stad zie je welke opvangen er zijn, wanneer er groepswandelingen zijn en hoeveel honden op een rondje wachten.",
     "metaTitle": "Honden uitlaten in {city}",
-    "metaDescription": "Gratis een vast rondje lopen met een hond in {city}: honden van buurtgenoten en uit de opvang, groepswandelingen en een veilige kennismaking. Geen advertenties, geen abonnement.",
+    "metaDescription": "Gratis een vast rondje met een hond in {city}: van buren of uit de opvang, groepswandelingen en eerst kennismaken. Zonder advertenties.",
     "cityLede": "Wandel gratis met een hond uit {city}: van een buurtgenoot die zelf niet ver meer kan lopen, of uit de opvang. Eerst maak je samen kennis, daarna loop je een vast rondje.",
     "dogsWaiting": "{n, plural, =0 {Nog geen honden in {city} online. Meld de eerste aan, of kijk in de buurt.} one {# hond in {city} wacht op een rondje.} other {# honden in {city} wachten op een rondje.}}",
     "seeDogs": "Bekijk honden in {city}",
@@ -2813,6 +2820,7 @@
       "eyebrow": "Waarom",
       "title": "Samen naar buiten, voor mens en hond",
       "lede": "Een rondje met een hond is klein. Toch raakt het aan grote dingen: eenzaamheid, te weinig bewegen, en honden die meer aandacht kunnen gebruiken. Daarom bestaat {app}.",
+      "metaDescription": "Een rondje met een hond is klein, maar raakt aan grote dingen: eenzaamheid, te weinig bewegen en honden die meer aandacht kunnen gebruiken.",
       "factsTitle": "In cijfers",
       "factsLede": "Bij elk cijfer staat de bron en het jaar, zodat je het zelf kunt nakijken.",
       "mindTitle": "Buiten zijn, bewegen, en een hond die blij is dat je komt",

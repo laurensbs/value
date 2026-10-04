@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { contentSecurityPolicy, newNonce } from './csp'
+import { contentSecurityPolicy, newNonce, nonceFrom } from './csp'
 
 const directive = (policy: string, name: string) => policy.split('; ').find((d) => d.startsWith(`${name} `)) ?? ''
 
@@ -31,5 +31,14 @@ describe('newNonce', () => {
   it('is new every time', () => {
     expect(newNonce()).not.toBe(newNonce())
     expect(newNonce()).toMatch(/^[A-Za-z0-9+/=]{40,}$/)
+  })
+})
+
+describe('nonceFrom', () => {
+  it('reads the nonce back from a policy, and nothing from a page without one', () => {
+    const nonce = newNonce()
+    expect(nonceFrom(contentSecurityPolicy(nonce, { dev: false, https: true }))).toBe(nonce)
+    expect(nonceFrom(null)).toBeUndefined()
+    expect(nonceFrom("default-src 'self'")).toBeUndefined()
   })
 })

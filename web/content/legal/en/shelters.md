@@ -1,5 +1,6 @@
 ---
 title: Partner Terms for Shelters
+description: "The partner terms for shelters: verification, dog profiles, meetings and group walks, insurance, data and photos."
 version: "0.1"
 updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"

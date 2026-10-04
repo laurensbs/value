@@ -1,5 +1,6 @@
 ---
 title: Política de privacidad
+description: "Qué datos personales tratamos, por qué y durante cuánto tiempo, quién los ve y qué derechos tienes. Tu dirección exacta nunca es pública."
 version: "0.3"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"

@@ -12,7 +12,8 @@ import { ActiveWalkBanner } from '@/components/ActiveWalkBanner'
 import { Header } from '@/components/Header'
 import { OfflineReady } from '@/components/OfflineReady'
 import { TabBar, type Tab } from '@/components/TabBar'
-import { siteUrl } from '@/lib/site'
+import { clampDescription } from '@/lib/seo'
+import { APP_NAME, siteUrl } from '@/lib/site'
 import { fontVariables } from './fonts'
 import { unreadCounts } from '@/server/queries'
 import { rolesOf } from '@/server/progress'
@@ -21,16 +22,22 @@ import { activeWalkFor } from '@/server/walks'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta')
+  const title = t('title', { app: APP_NAME })
+  const description = clampDescription(t('description', { app: APP_NAME }))
+  // Google Search Console's ownership tag, only when the token is set in the environment.
+  const google = process.env.GOOGLE_SITE_VERIFICATION?.trim()
   return {
     metadataBase: new URL(siteUrl()),
-    title: { default: t('title'), template: '%s · Rondje' },
-    description: t('description'),
-    applicationName: 'Rondje',
+    title: { default: title, template: `%s · ${APP_NAME}` },
+    description,
+    applicationName: APP_NAME,
     manifest: '/manifest.webmanifest',
     icons: { icon: '/favicon.svg', apple: '/apple-touch-icon.png' },
-    openGraph: { title: t('title'), description: t('description'), images: ['/og.png'], siteName: 'Rondje', type: 'website' },
+    // Pages that matter for search engines set their own card and canonical address (lib/seo.ts).
+    openGraph: { title, description, images: ['/og.png'], siteName: APP_NAME, type: 'website' },
     twitter: { card: 'summary_large_image' },
-    appleWebApp: { capable: true, title: 'Rondje', statusBarStyle: 'default' },
+    appleWebApp: { capable: true, title: APP_NAME, statusBarStyle: 'default' },
+    ...(google ? { verification: { google } } : {}),
   }
 }
 

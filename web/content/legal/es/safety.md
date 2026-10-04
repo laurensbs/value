@@ -1,5 +1,6 @@
 ---
 title: Protocolo de seguridad e incidentes
+description: "Pasear con seguridad, y qué hacer si algo sale mal: antes y durante el paseo, números importantes, ayuda para ti y cómo avisarnos."
 version: "0.1"
 updated: "2026-10-02"
 status: "Borrador – pendiente de revisión jurídica"

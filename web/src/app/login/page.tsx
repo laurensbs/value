@@ -5,7 +5,8 @@ import { AuthForm } from '@/components/AuthForm'
 import { Logo } from '@/components/Logo'
 import type { SocialProvider } from '@/components/SocialButtons'
 import { enabledSocialProviders } from '@/lib/auth'
-import { safeNext } from '@/lib/site'
+import { pageMetadata } from '@/lib/seo'
+import { APP_NAME, safeNext } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
 
@@ -15,8 +16,9 @@ const NAMES: Record<SocialProvider, string> = { apple: 'Apple', google: 'Google'
 const CANCELLED = new Set(['access_denied', 'user_cancelled_authorize', 'user_cancelled_login'])
 
 export async function generateMetadata() {
-  const t = await getTranslations('auth')
-  return { title: t('loginTitle') }
+  const t = await getTranslations()
+  // A login form is no answer to a search: kept out of the results, its links are still followed.
+  return pageMetadata({ path: '/login', title: t('auth.loginTitle'), description: t('meta.description', { app: APP_NAME }), robots: 'noindex' })
 }
 
 export default async function LoginPage({

@@ -11,6 +11,7 @@ import { COUNTRY_INFO } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { APP_NAME } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
+import { pageMetadata } from '@/lib/seo'
 import '../landing.css'
 import '../impact.css'
 
@@ -22,7 +23,7 @@ const TOPIC_LOOK: Record<Topic, { icon: ReactNode; tone: Tone }> = {
 
 export async function generateMetadata() {
   const t = await getTranslations('impact.page')
-  return { title: t('title'), description: t('lede', { app: APP_NAME }) }
+  return pageMetadata({ path: '/waarom', title: t('title'), description: t('metaDescription') })
 }
 
 /** Why a walk together matters: checked numbers with sources, a calm word on wellbeing, the dogs, and what you can do. */

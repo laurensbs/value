@@ -9,6 +9,7 @@ import { campaign, supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
 import crowdfunding from '../../../content/crowdfunding.json'
+import { pageMetadata } from '@/lib/seo'
 import '../landing.css'
 import '../impact.css'
 
@@ -18,7 +19,7 @@ const perMonth = (c: Cost, v: number) => (c.per === 'month' ? v : c.per === 'yea
 
 export async function generateMetadata() {
   const t = await getTranslations('support')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/support', title: t('title'), description: t('metaDescription', { app: APP_NAME }) })
 }
 
 /** How Rondje stays free: the promise, what it costs, and how people can help (with or without money). */

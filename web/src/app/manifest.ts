@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { APP_NAME } from '@/lib/site'
 
 const ICON = [{ src: '/icon-192.png', sizes: '192x192', type: 'image/png' }]
 
@@ -12,8 +13,8 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const t = await getTranslations()
   return {
     id: '/dogs',
-    name: 'Rondje',
-    short_name: 'Rondje',
+    name: APP_NAME,
+    short_name: APP_NAME,
     description: t('manifest.description'),
     lang: await getLocale(),
     start_url: '/',

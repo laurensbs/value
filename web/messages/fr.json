@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Rondje · une balade régulière avec un chien qui vous attend",
-    "description": "Rondje met en relation de jeunes adultes et des chiens de voisins ou de refuges à qui une balade de plus ferait du bien. Gratuit et sûr, aux Pays-Bas, en Belgique et en Espagne."
+    "title": "{app} · une balade régulière avec un chien qui vous attend",
+    "description": "{app} relie de jeunes adultes à des chiens de voisins ou de refuges en manque de balades. Gratuit et sûr, aux Pays-Bas, en Belgique et en Espagne."
   },
   "nav": {
     "dogs": "Chiens",
@@ -1121,11 +1121,13 @@
     "level": "Niveau : {level}",
     "at": "Rendez-vous : {place}",
     "idNote": "Apportez une pièce d'identité valide. L'accompagnateur la vérifiera ; Rondje n'en garde aucune copie.",
-    "meetDogs": "Voir les chiens de ce refuge"
+    "meetDogs": "Voir les chiens de ce refuge",
+    "eventName": "Balade en groupe avec {shelter}"
   },
   "directory": {
     "title": "Refuges aux Pays-Bas, en Belgique et en Espagne",
     "lede": "Des refuges qui accueillent des bénévoles promeneurs. Les partenaires sont directement sur Rondje ; pour les autres, vous pouvez devenir bénévole via leur propre site web.",
+    "metaDescription": "Des refuges qui accueillent des bénévoles promeneurs. Les partenaires sont sur {app} ; pour les autres, devenez bénévole via leur site web.",
     "partner": "Sur Rondje",
     "notPartner": "Pas encore sur Rondje",
     "walking": "Accueille des bénévoles promeneurs",
@@ -1146,6 +1148,7 @@
   "help": {
     "title": "Ça ne va pas fort ?",
     "lede": "Une balade dehors peut faire du bien à votre journée, mais elle ne remplace pas une aide professionnelle. Ici, vous trouverez toujours du soutien, gratuitement et anonymement.",
+    "metaDescription": "Une balade dehors fait du bien, mais elle ne remplace pas une aide professionnelle. Ici, vous trouverez toujours du soutien, gratuit et anonyme.",
     "emergency": "En cas de danger immédiat, appelez le {number}.",
     "lines": {
       "suicide": "Vous pensez au suicide ? Joignable jour et nuit.",
@@ -1406,6 +1409,7 @@
     "eyebrow": "Recommander",
     "title": "Recommander un refuge",
     "lede": "Vous connaissez un refuge où les chiens auraient bien besoin d'une promenade de plus ? Dites-le-nous. Nous contactons le refuge nous-mêmes, jamais en votre nom.",
+    "metaDescription": "Vous connaissez un refuge où les chiens auraient besoin d'une promenade de plus ? Dites-le-nous. Nous le contactons nous-mêmes, jamais en votre nom.",
     "tabs": {
       "shelter": "Un refuge",
       "owner": "Quelqu'un avec un chien"
@@ -1447,6 +1451,7 @@
     "eyebrow": "Gratuit, et ça le restera",
     "title": "Rendre Rondje possible",
     "lede": "Rondje est gratuit pour les promeneurs, les propriétaires et les refuges, et le restera. Pourtant, garder Rondje sûr et en ligne coûte de l'argent. Voici comment.",
+    "metaDescription": "{app} est gratuit pour les promeneurs, les propriétaires et les refuges, et le restera. Mais rester sûr et en ligne coûte de l'argent.",
     "promiseTitle": "Notre promesse",
     "promise": {
       "free": "Rondje reste gratuit pour tout le monde : pas d'abonnement, pas de paywall, pas de version premium.",
@@ -1590,6 +1595,7 @@
     "eyebrow": "À propos de Rondje",
     "title": "Une promenade ensemble, bonne pour vous et pour un chien",
     "lede": "Rondje met en relation de jeunes adultes avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
+    "metaDescription": "{app} met en relation de jeunes adultes avec des chiens qui veulent sortir plus : de voisins qui ne peuvent plus les promener, et des refuges.",
     "whyTitle": "Pourquoi Rondje",
     "why1": "Beaucoup de jeunes aiment sortir et adorent les chiens, mais ne peuvent pas en avoir un. En même temps, des personnes âgées ou malades ne peuvent plus promener leur chien aussi souvent qu'elles le voudraient. Et dans les refuges, chaque chien attend une promenade de plus.",
     "why2": "Une promenade régulière avec un chien fait du bien à tout le monde : du mouvement, de l'air frais et un brin de causette avec un voisin. Rondje rend cela simple, sûr et gratuit.",
@@ -1754,8 +1760,9 @@
   "cities": {
     "title": "Promener un chien par ville",
     "lede": "Rondje fonctionne dans chaque ville. Pour chaque ville, vous voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent une promenade.",
+    "indexDescription": "{app} fonctionne dans chaque ville. Vous y voyez les refuges, les promenades en groupe prévues et le nombre de chiens qui attendent.",
     "metaTitle": "Promener un chien à {city}",
-    "metaDescription": "Promenez gratuitement et régulièrement un chien à {city} : chiens de voisins et de refuges, promenades en groupe et première rencontre en sécurité. Sans publicité, sans abonnement.",
+    "metaDescription": "Promenez gratuitement un chien à {city} : chiens de voisins ou de refuges, balades en groupe et première rencontre sûre. Sans publicité.",
     "cityLede": "Promenez gratuitement un chien de {city} : celui d'un voisin qui ne peut plus marcher loin, ou d'un refuge. D'abord une rencontre, ensuite une promenade régulière.",
     "dogsWaiting": "{n, plural, =0 {Pas encore de chiens de {city} en ligne. Inscrivez le premier ou regardez aux alentours.} one {# chien de {city} attend une promenade.} other {# chiens de {city} attendent une promenade.}}",
     "seeDogs": "Voir les chiens à {city}",
@@ -2813,6 +2820,7 @@
       "eyebrow": "Pourquoi",
       "title": "Sortir ensemble, pour les gens et les chiens",
       "lede": "Une promenade avec un chien, c’est peu de chose. Pourtant, cela touche à de grandes questions : la solitude, le manque de mouvement et des chiens qui auraient besoin de plus d’attention. C’est pour cela que {app} existe.",
+      "metaDescription": "Une promenade avec un chien, c’est peu de chose. Mais cela touche à la solitude, au manque de mouvement et à des chiens en manque d’attention.",
       "factsTitle": "En chiffres",
       "factsLede": "Chaque chiffre est accompagné de sa source et de son année, pour que vous puissiez le vérifier vous-même.",
       "mindTitle": "Être dehors, bouger, et un chien heureux de vous voir",

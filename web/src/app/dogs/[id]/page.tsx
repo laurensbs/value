@@ -13,6 +13,7 @@ import { Icon } from '@/components/Icon'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
 import { isNewDog } from '@/lib/nudges'
+import { pageMetadata } from '@/lib/seo'
 import { canRequestMeeting, canRequestSolo, openRequestConflict } from '@/lib/rules'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
 import { dogFacts, getDogDetail, myGroupSignups, openRequestsFor, walkerFacts } from '@/server/queries'
@@ -28,21 +29,18 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   // looking for, in the owner's language like the message they sent (chat apps fetch it without one).
   const owned = host.kind === 'owner'
   const t = await getTranslations({ locale: owned ? await localeOf(host.id) : await getLocale(), namespace: 'dogShare' })
-  const description = (dog.story || (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : '')).slice(0, 160)
+  const description = dog.story || (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : '') || dog.name
   const photo = dog.photos.find((src) => src.startsWith('https://'))
-  return {
+  return pageMetadata({
+    path: `/dogs/${dog.id}`,
     title: dog.name,
     description,
-    openGraph: {
-      title: owned ? t('posterHeadline', { name: dog.name }) : dog.name,
-      description,
-      images: [photo ?? '/og.png'],
-      siteName: 'Rondje',
-      type: 'website',
-    },
-    // A private owner's dog page names a first name and a city: keep it out of search engines.
-    ...(owned ? { robots: { index: false, follow: false } } : {}),
-  }
+    shareTitle: owned ? t('posterHeadline', { name: dog.name }) : dog.name,
+    images: [photo ?? '/og.png'],
+    // A private owner's dog page names a first name and a city: kept out of search engines, links too.
+    // An example dog is made up: out of search results as well, whoever it belongs to.
+    robots: owned ? 'none' : dog.isDemo ? 'noindex' : undefined,
+  })
 }
 
 export default async function DogPage({

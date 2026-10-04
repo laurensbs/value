@@ -1,5 +1,6 @@
 ---
 title: Privacyverklaring
+description: "Welke persoonsgegevens we verwerken, waarom en hoe lang, wie ze ziet en welke rechten je hebt. Je exacte adres is nooit openbaar."
 version: "0.3"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
