@@ -24,10 +24,12 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const t = await getTranslations()
   const { org: orgId } = await searchParams
   const org = orgId ? await publicOrg(orgId.slice(0, 64)) : null
-  // Filters and a shelter's selection (?org=, ?q=, ?country=) are views of one page: the canonical is /dogs.
+  // Filters (?q=, ?country=, ?view=) are views of one page: the canonical is /dogs. One shelter's dogs
+  // (?org=) are a page of their own, the one a shelter shares and prints on its poster.
   if (org) {
     return pageMetadata({
       path: '/dogs',
+      query: { org: org.id },
       title: t('dogs.orgTitle', { name: org.name }),
       description: org.description || t('dogs.lede'),
       // An example shelter is made up: never in search results.
