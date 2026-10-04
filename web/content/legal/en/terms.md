@@ -6,32 +6,32 @@ updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
-# Rondje Terms of Use
+# Rondje Mee Terms of Use
 
-These terms apply to everyone who uses Rondje: the website and the iOS and Android app. By creating an account, you agree to them. The **Code of Conduct**, the **Safety Protocol**, the **Privacy Policy** and the **Cookie Statement** are part of these terms. Shelters must also follow the **Partner Terms for Shelters**.
+These terms apply to everyone who uses Rondje Mee: the website and the iOS and Android app. By creating an account, you agree to them. The **Code of Conduct**, the **Safety Protocol**, the **Privacy Policy** and the **Cookie Statement** are part of these terms. Shelters must also follow the **Partner Terms for Shelters**.
 
 ## 1. Who we are
 
-Rondje is provided by [Naam rechtspersoon, bijv. Stichting Rondje i.o.], registered with the Dutch Chamber of Commerce (KvK) under number [KvK-nummer], with its address at [adres] ("Rondje", "we" or "us").
+Rondje Mee is provided by [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], registered with the Dutch Chamber of Commerce (KvK) under number [KvK-nummer], with its address at [adres] ("Rondje Mee", "we" or "us").
 
 You can reach us at {{contact}}. This is also our point of contact for users and public authorities under the Digital Services Act (DSA). You can write to us in Dutch, English, Spanish or French.
 
-## 2. What Rondje is, and what it is not
+## 2. What Rondje Mee is, and what it is not
 
-Rondje is a free online platform that connects **walkers** (adults who would like to walk a dog) with **owners** (private individuals, often older or ill neighbours) and **shelters** (organisations that take in dogs).
+Rondje Mee is a free online platform that connects **walkers** (adults who would like to walk a dog) with **owners** (private individuals, often older or ill neighbours) and **shelters** (organisations that take in dogs).
 
-Rondje is an **intermediary**:
+Rondje Mee is an **intermediary**:
 
 - You make arrangements about a walk with each other. We are not a party to those arrangements.
-- Walkers are volunteers acting in their own private capacity, not for, employed by or on behalf of Rondje.
+- Walkers are volunteers acting in their own private capacity, not for, employed by or on behalf of Rondje Mee.
 - We do not own or keep any of the dogs. We do not check dogs and we do not supervise walks.
 - We do provide tools for trust and safety. They make walks safer, but they cannot remove every risk.
 
-Rondje is not a dog-walking business, a vet, a support service or therapy.
+Rondje Mee is not a dog-walking business, a vet, a support service or therapy.
 
-## 3. Who can use Rondje
+## 3. Who can use Rondje Mee
 
-You must be **18 or older** and use Rondje as a private individual, for yourself. Shelters use an organisation account. If we have banned you before, you may not create a new account. Rondje is available to users in the Netherlands, Belgium and Spain.
+You must be **18 or older** and use Rondje Mee as a private individual, for yourself. Shelters use an organisation account. If we have banned you before, you may not create a new account. Rondje Mee is available to users in the Netherlands, Belgium and Spain.
 
 ## 4. Your account
 
@@ -52,10 +52,10 @@ You can have more than one role.
 
 ## 6. Requests, first meeting and solo trust
 
-1. **Request.** A walker uses Rondje to ask for a first meeting or a walk. The owner or shelter accepts or declines. No one is obliged to accept.
+1. **Request.** A walker uses Rondje Mee to ask for a first meeting or a walk. The owner or shelter accepts or declines. No one is obliged to accept.
 2. **Contact details.** Once accepted, both sides see each other's phone number and the protected details needed, such as the meeting point. Use them only for the walk.
 3. **First meeting.** The first time you meet is always a first meeting (*kennismaking*), with the owner or a shelter staff member present.
-4. **ID check.** At the first meeting, the walker shows a valid identity document. The owner or shelter checks that the name, photo and age match and ticks a box in the app. Rondje keeps no copy. Please do not take a photo or copy of it yourself either.
+4. **ID check.** At the first meeting, the walker shows a valid identity document. The owner or shelter checks that the name, photo and age match and ticks a box in the app. Rondje Mee keeps no copy. Please do not take a photo or copy of it yourself either.
 5. **Solo trust.** Walking a dog alone is only allowed once the owner or shelter has explicitly given permission in the app. This applies to that one dog only and can be withdrawn at any time.
 6. **Safety quiz.** Before you ask for a first meeting or join a group walk, you complete a short safety quiz.
 7. **New accounts** can at first only take part in first meetings and supervised walks. The app shows when this changes.
@@ -67,13 +67,13 @@ Shelters can schedule supervised group walks with a limited number of places. A 
 
 ## 8. No money
 
-Rondje is free for everyone.
+Rondje Mee is free for everyone.
 
 - You may **not ask for or offer money** for a walk, including tips, gift cards or any other payment.
 - Poop bags, leash, harness, treats and water are provided by the owner or shelter, as stated on the dog's profile.
 - If someone asks for money, bank details (IBAN) or a payment through a link, do not respond and report it to us.
 - Messages sent with requests are automatically checked for payment requests, bank account numbers and links. If something is found, you see a warning and a team member reviews it.
-- **Voluntary support for Rondje.** If our website offers a way to support Rondje (for example through Patreon), that is a voluntary contribution without anything in return: you get no priority, extra features or other benefits, and it has no influence on matching, visibility or moderation. The platform's own terms also apply to the payment. A contribution is not tax-deductible.
+- **Voluntary support for Rondje Mee.** If our website offers a way to support Rondje Mee (for example through Patreon), that is a voluntary contribution without anything in return: you get no priority, extra features or other benefits, and it has no influence on matching, visibility or moderation. The platform's own terms also apply to the payment. A contribution is not tax-deductible.
 
 ## 9. What we expect from everyone
 
@@ -82,7 +82,7 @@ Rondje is free for everyone.
 - You treat people and animals with respect. We do not tolerate harassment, discrimination, violence or animal abuse.
 - You use other people's contact details only for the walk and share them with no one.
 - You post nothing illegal and nothing that infringes the rights of others.
-- You do not use Rondje commercially, do not get around our security and do not collect data with bots or scrapers.
+- You do not use Rondje Mee commercially, do not get around our security and do not collect data with bots or scrapers.
 
 ## 10. Additional rules for owners
 
@@ -96,7 +96,7 @@ As an owner, you confirm when creating a dog profile, and on an ongoing basis, t
 - you clearly state whether treats are allowed and whether there are allergies;
 - the dog may not go off the leash, unless you explicitly allow it and it is legally allowed in that place. Off-leash is switched off by default.
 
-You decide who walks your dog. Rondje does not make that decision for you.
+You decide who walks your dog. Rondje Mee does not make that decision for you.
 
 ## 11. Additional rules for walkers
 
@@ -108,7 +108,7 @@ As a walker:
 - you do not bring other dogs and do not hand the dog over to anyone else;
 - you only walk if you are fit, and never under the influence of alcohol or drugs;
 - you start the walk in the app, so that live location works;
-- you report any incident immediately to the owner or shelter, and to Rondje.
+- you report any incident immediately to the owner or shelter, and to Rondje Mee.
 
 We strongly recommend that you have your own **personal liability insurance** (see section 15).
 
@@ -135,7 +135,7 @@ Live location depends on your phone, battery and network. It is a tool, not a gu
 
 ## 14. Feedback, reports and moderation
 
-**Feedback.** After each walk you can give private feedback. The other person never sees it. Only Rondje uses it, for safety and moderation.
+**Feedback.** After each walk you can give private feedback. The other person never sees it. Only Rondje Mee uses it, for safety and moderation.
 
 **Reporting and blocking.** You can use the app to report a profile, message or incident, for example abuse, an unsafe situation, a scam, harassment or a fake profile. You can also block someone.
 
@@ -161,33 +161,33 @@ Let's be honest: walking dogs involves risks. A dog can bite, run away or knock 
 
 - Owners and shelters must have liability insurance that covers damage caused by the dog, including when someone else walks it. Check this in your policy.
 - We strongly recommend that walkers have their own personal liability insurance. Please note: many policies do not cover damage to animals or things "in your custody", such as the dog itself or its leash.
-- Rondje has no insurance for walks between users [to verify], unless we expressly tell you otherwise later.
+- Rondje Mee has no insurance for walks between users [to verify], unless we expressly tell you otherwise later.
 
 **Our liability**
 
-- We do our best to offer Rondje in a safe and working state, but cannot guarantee that it will always work without errors or interruptions.
+- We do our best to offer Rondje Mee in a safe and working state, but cannot guarantee that it will always work without errors or interruptions.
 - We are not liable for what users agree or do with each other, for what dogs do, or for the accuracy of what users say about themselves or their dog. This does not apply where we ourselves have done something wrong.
 - To the extent permitted by law, we are only liable for direct damage caused by our own failure, up to a maximum of € [bedrag] per event [proposal – to verify].
-- These limitations do **not** apply in the case of intent or gross negligence on the part of Rondje, to death or personal injury caused by our fault, or where mandatory consumer law prohibits them. Your statutory rights as a consumer always remain in place.
+- These limitations do **not** apply in the case of intent or gross negligence on the part of Rondje Mee, to death or personal injury caused by our fault, or where mandatory consumer law prohibits them. Your statutory rights as a consumer always remain in place.
 
 ## 16. Your content and our rights
 
 - Photos, stories and texts you post remain yours.
-- You give us a free, non-exclusive licence to store that content, resize it for display and show it, **only to operate Rondje**. For example, to show a dog profile or to assess a report.
+- You give us a free, non-exclusive licence to store that content, resize it for display and show it, **only to operate Rondje Mee**. For example, to show a dog profile or to assess a report.
 - The licence ends when you delete the content or your account. Backups are cleared within 30 days. Content needed for an open report is kept for as long as necessary.
 - We do **not** use your content for advertising or social media without your separate, explicit consent.
 - You only post content you have the rights to. If other people appear in a photo, you need their permission.
-- The Rondje name, logo, software and design belong to us or our licensors.
+- The Rondje Mee name, logo, software and design belong to us or our licensors.
 
 ## 17. Restricting, suspending or closing an account
 
 - You can delete your account at any time in the app. We then delete your data as described in the Privacy Policy.
 - We may suspend or permanently close your account in the case of a serious or repeated breach, if you put people or animals at risk, or if safety requires it. If you repeatedly post manifestly illegal content, we will warn you first.
-- If we stop Rondje or change it significantly, we will tell you at least 30 days in advance, unless that is not possible, for example because of an urgent safety issue.
+- If we stop Rondje Mee or change it significantly, we will tell you at least 30 days in advance, unless that is not possible, for example because of an urgent safety issue.
 
 ## 18. Complaints and appeals
 
-- A complaint about Rondje? Email {{contact}}. We will respond within 14 days [proposal].
+- A complaint about Rondje Mee? Email {{contact}}. We will respond within 14 days [proposal].
 - Disagree with a decision about your content, your account or your report? Appeal within **6 months** through the app or by email. Someone who was not involved in the original decision will review it.
 - You can also use a certified out-of-court dispute settlement body under the DSA, or go to court.
 - The European ODR platform for online disputes was discontinued in July 2025.

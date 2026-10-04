@@ -15,8 +15,8 @@ test('iPhone: the steps to the home screen on Today and in the profile, and Safa
   await expect(fleur.page).toHaveURL(/\/\?welcome=1$/)
 
   // On iPhone a heads-up only works from the home screen, so Rondje shows the three taps and asks nothing else.
-  const ask = fleur.page.getByRole('region', { name: 'Zet je Rondje op je beginscherm?' })
-  await expect(ask).toContainText('Dan open je Rondje met één tik, net als een app, en kan ik je een seintje geven als er nieuws is.')
+  const ask = fleur.page.getByRole('region', { name: 'Zet Rondje Mee op je beginscherm?' })
+  await expect(ask).toContainText('Dan open je Rondje Mee met één tik, net als een app, en kan ik je een seintje geven als er nieuws is.')
   await expect(ask.getByRole('listitem')).toHaveText([/Tik op Delen/, 'Kies “Zet op beginscherm”', 'Tik op “Voeg toe”'])
   await expect(fleur.page.getByRole('region', { name: 'Zal ik je een seintje geven?' })).toHaveCount(0)
   await expect(ask.getByRole('button', { name: 'Staat er al op' })).toBeVisible()
@@ -27,7 +27,7 @@ test('iPhone: the steps to the home screen on Today and in the profile, and Safa
 
   // The profile explains why there is no switch for heads-ups yet, with the same steps.
   await fleur.page.goto('/profile')
-  await expect(fleur.page.getByText('Meldingen op je iPhone? Die werken zodra Rondje op je beginscherm staat:')).toBeVisible()
+  await expect(fleur.page.getByText('Meldingen op je iPhone? Die werken zodra Rondje Mee op je beginscherm staat:')).toBeVisible()
   await expect(fleur.page.getByText('Kies “Zet op beginscherm”')).toBeVisible()
   await shot(fleur.page, '21-install-profile')
 
@@ -36,8 +36,8 @@ test('iPhone: the steps to the home screen on Today and in the profile, and Safa
   await inApp.addCookies(await fleur.context.cookies())
   const page = await inApp.newPage()
   await page.goto('/')
-  const inAppAsk = page.getByRole('region', { name: 'Zet je Rondje op je beginscherm?' })
-  await expect(inAppAsk).toContainText('Open Rondje in Safari')
+  const inAppAsk = page.getByRole('region', { name: 'Zet Rondje Mee op je beginscherm?' })
+  await expect(inAppAsk).toContainText('Open Rondje Mee in Safari')
   await inAppAsk.getByRole('button', { name: 'Kopieer link' }).click()
   await expect(inAppAsk).toContainText('Gekopieerd. Plak de link in Safari.')
   await shot(page, '22-install-in-app')
@@ -66,13 +66,13 @@ test('Android: the push question first, then the browser installs Rondje after o
   const push = sam.page.getByRole('region', { name: 'Zal ik je een seintje geven?' })
   await expect(push).toBeVisible()
   await offer()
-  const install = sam.page.getByRole('region', { name: 'Zet je Rondje op je beginscherm?' })
+  const install = sam.page.getByRole('region', { name: 'Zet Rondje Mee op je beginscherm?' })
   await expect(install).toHaveCount(0)
   await push.getByRole('button', { name: 'Later' }).click()
   await offer()
-  await expect(install).toContainText('Dan open je Rondje met één tik, net als een app.')
+  await expect(install).toContainText('Dan open je Rondje Mee met één tik, net als een app.')
   await shot(sam.page, '23-install-android')
   await install.getByRole('button', { name: 'Ja, graag' }).click()
-  await expect(sam.page.getByText('Gelukt! Je vindt Rondje nu op je beginscherm.')).toBeVisible()
+  await expect(sam.page.getByText('Gelukt! Je vindt Rondje Mee nu op je beginscherm.')).toBeVisible()
   await sam.context.close()
 })

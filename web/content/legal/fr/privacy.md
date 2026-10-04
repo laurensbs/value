@@ -6,13 +6,13 @@ updated: "2026-10-02"
 status: "Projet – pas encore vérifié par un juriste"
 ---
 
-# Politique de confidentialité de Rondje
+# Politique de confidentialité de Rondje Mee
 
-Cette politique explique quelles données personnelles Rondje traite, pourquoi, pendant combien de temps, et quels sont vos droits. Elle s'applique au site web et à l'application Rondje.
+Cette politique explique quelles données personnelles Rondje Mee traite, pourquoi, pendant combien de temps, et quels sont vos droits. Elle s'applique au site web et à l'application Rondje Mee.
 
 ## 1. Qui est responsable ?
 
-Le responsable du traitement de vos données sur Rondje est [Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], numéro d'inscription à la Chambre de commerce néerlandaise (KvK) [KvK-nummer].
+Le responsable du traitement de vos données sur Rondje Mee est [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], numéro d'inscription à la Chambre de commerce néerlandaise (KvK) [KvK-nummer].
 
 Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier : si la désignation d'un délégué à la protection des données est obligatoire. Si oui, indiquer ici ses coordonnées.]
 
@@ -53,7 +53,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier :
 
 **Progression et rappels**
 
-- vos points, votre niveau et vos médailles, calculés à partir de ce que vous avez fait sur Rondje (balades, quiz de sécurité ou photo pour le propriétaire, par exemple). Vous seul(e) les voyez ;
+- vos points, votre niveau et vos médailles, calculés à partir de ce que vous avez fait sur Rondje Mee (balades, quiz de sécurité ou photo pour le propriétaire, par exemple). Vous seul(e) les voyez ;
 - les leçons de l'école des chiens que vous avez terminées et quand, sans score ;
 - votre objectif de la semaine, si vous en choisissez un, et si vous souhaitez des rappels bienveillants ;
 - les rappels que nous vous avons envoyés et quand, pour ne jamais en envoyer trop.
@@ -79,7 +79,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier :
 
 - nom de l'organisation, numéro KvK, BCE ou NIF (anciennement CIF), adresse, site web, Instagram, logo et photos ;
 - coordonnées publiques pour les promeneurs (e-mail et téléphone) et informations pratiques, comme les horaires de promenade ;
-- une personne de contact pour Rondje (nom, e-mail, téléphone). Ces données ne sont pas publiques : seuls les administrateurs de Rondje les voient, pour vérifier le refuge et pour les questions ;
+- une personne de contact pour Rondje Mee (nom, e-mail, téléphone). Ces données ne sont pas publiques : seuls les administrateurs de Rondje Mee les voient, pour vérifier le refuge et pour les questions ;
 - comptes du personnel.
 
 **Recommandations de refuges**
@@ -87,7 +87,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier :
 - quel refuge vous recommandez ou où vous voulez promener (nom, ville, site web), votre commentaire, et que la recommandation vient de vous ;
 - nous ne gardons jamais de données sur des particuliers que vous mentionnez. Vous voulez aider quelqu'un avec un chien ? Demandez-lui vous-même, et cette personne s'inscrit elle-même.
 
-**Données de santé.** Rondje ne vous pose pas de questions sur votre santé. N'indiquez pas non plus de données de santé dans votre profil ou dans l'histoire de votre chien, ni sur vous, ni sur d'autres personnes. Écrivez par exemple « je ne peux plus marcher longtemps » plutôt que de mentionner un diagnostic.
+**Données de santé.** Rondje Mee ne vous pose pas de questions sur votre santé. N'indiquez pas non plus de données de santé dans votre profil ou dans l'histoire de votre chien, ni sur vous, ni sur d'autres personnes. Écrivez par exemple « je ne peux plus marcher longtemps » plutôt que de mentionner un diagnostic.
 
 ## 4. Pourquoi utilisons-nous vos données, et sur quelle base légale ?
 
@@ -103,7 +103,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier :
 | Afficher les points, le niveau, les médailles et l'objectif de la semaine | Contrat |
 | Rappels bienveillants (un tous les trois jours au maximum) sur vos premières étapes, votre objectif de la semaine et le défi de votre ville | Intérêt légitime : vous aider à garder vos balades. Vous pouvez les désactiver à tout moment dans votre profil |
 | Vérifier les refuges | Contrat avec le refuge, et intérêt légitime : éviter les faux comptes |
-| Traiter les recommandations et votes pour des refuges : contacter nous-mêmes les refuges et vous prévenir quand ils nous rejoignent | Intérêt légitime : plus de refuges et de chiens sur Rondje. Vous pouvez toujours vous y opposer |
+| Traiter les recommandations et votes pour des refuges : contacter nous-mêmes les refuges et vous prévenir quand ils nous rejoignent | Intérêt légitime : plus de refuges et de chiens sur Rondje Mee. Vous pouvez toujours vous y opposer |
 | Sécurité, correction d'erreurs, sauvegardes | Intérêt légitime : une plateforme sûre et fonctionnelle |
 | E-mails de service (par exemple pour une nouvelle demande ou une modification des conditions) | Exécution du contrat |
 | Fonctions facultatives, comme les notifications push ou la connexion avec Google ou Apple | Consentement (que vous pouvez retirer à tout moment) ou exécution du contrat |
@@ -134,7 +134,7 @@ Lorsque nous nous fondons sur l'intérêt légitime, nous avons vérifié que ce
 - **Les autres utilisateurs** voient votre profil public : prénom, photo, âge ou année de naissance [à vérifier : quoi exactement], endroit approximatif, présentation, expérience et langues.
 - **Après l'acceptation** d'une demande, chacun voit aussi le numéro de téléphone de l'autre, et le promeneur voit les informations protégées que le propriétaire a rendues accessibles à cet effet.
 - **Les refuges** voient les données des promeneurs qui s'inscrivent chez eux et les présences aux promenades de groupe. Si un refuge utilise ces données dans sa propre gestion des bénévoles, il en est lui-même responsable.
-- **Les avis privés** ne sont jamais montrés à l'autre personne. Seul un nombre limité de membres de l'équipe Rondje peut les lire.
+- **Les avis privés** ne sont jamais montrés à l'autre personne. Seul un nombre limité de membres de l'équipe Rondje Mee peut les lire.
 - **Les autorités**, comme la police, ne reçoivent des données que lorsque la loi l'exige, ou lorsque la vie ou la sécurité de quelqu'un est en danger.
 
 ## 8. Sous-traitants et autres destinataires
@@ -222,11 +222,11 @@ Vous n'êtes pas satisfait de la manière dont nous traitons vos données ? Dite
 
 ## 14. Analyse d'impact (AIPD)
 
-Rondje traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje. C'est pourquoi nous réalisons une analyse d'impact relative à la protection des données (AIPD) avant le lancement du service, et nous la tenons à jour [à vérifier : état d'avancement].
+Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous réalisons une analyse d'impact relative à la protection des données (AIPD) avant le lancement du service, et nous la tenons à jour [à vérifier : état d'avancement].
 
 ## 15. Âge
 
-Rondje est réservé aux personnes de 18 ans et plus. Si nous constatons qu'une personne est plus jeune, nous fermons le compte et supprimons les données.
+Rondje Mee est réservé aux personnes de 18 ans et plus. Si nous constatons qu'une personne est plus jeune, nous fermons le compte et supprimons les données.
 
 ## 16. Modifications
 

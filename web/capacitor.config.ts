@@ -3,11 +3,11 @@ import type { CapacitorConfig } from '@capacitor/cli'
 // The iOS and Android apps are a native shell around the live website, so every
 // improvement ships to the apps without an App Store update. Set CAP_SERVER_URL to
 // point the shell at another deployment (for example a preview) before `npx cap sync`.
-const serverUrl = process.env.CAP_SERVER_URL ?? 'https://rondje-five.vercel.app'
+const serverUrl = process.env.CAP_SERVER_URL ?? 'https://rondjemee.nl'
 
 const config: CapacitorConfig = {
   appId: 'app.rondje.mobile',
-  appName: 'Rondje',
+  appName: 'Rondje Mee',
   webDir: 'native-shell',
   // Lets the website recognise the apps (src/server/native.ts): they never show ways to give money.
   appendUserAgent: 'RondjeApp',

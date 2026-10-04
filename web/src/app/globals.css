@@ -287,8 +287,23 @@ mark {
   white-space: nowrap;
 }
 
+.brand > span {
+  white-space: nowrap;
+}
+
+/* On a phone the name is a small stacked wordmark ("Rondje" over "Mee"), so the help, the language
+   switch and "Iniciar sesión" still fit next to it on one line. */
+@media (max-width: 459px) {
+  .brand > span {
+    width: min-content;
+    white-space: normal;
+    font-size: 1.12rem;
+    line-height: 0.95;
+  }
+}
+
 /* Signed out on a 320px phone: the logo without its name, so the language switch and "Se connecter"
-   fit next to it on one line (the link keeps "Rondje" as its name for screen readers). */
+   fit next to it on one line (the link keeps "Rondje Mee" as its name for screen readers). */
 @media (max-width: 359px) {
   .header-inner:has(> .header-actions > .button) .brand > span {
     display: none;

@@ -10,7 +10,7 @@ status: "Borrador – pendiente de revisión jurídica"
 
 Este protocolo te ayuda a pasear con seguridad y a actuar bien si algo sale mal. Se aplica a paseantes, propietarios y protectoras.
 
-**Importante:** Rondje no es un servicio de emergencias ni vigila los paseos las 24 horas. Si hay un peligro inmediato para las personas, llama siempre primero al **112**. No esperes a Rondje.
+**Importante:** Rondje Mee no es un servicio de emergencias ni vigila los paseos las 24 horas. Si hay un peligro inmediato para las personas, llama siempre primero al **112**. No esperes a Rondje Mee.
 
 ## 1. Antes del paseo
 
@@ -49,7 +49,7 @@ Este protocolo te ayuda a pasear con seguridad y a actuar bien si algo sale mal.
 5. Elige «perro escapado» en la app. Así el propietario sabe dónde viste al perro por última vez.
 6. Quédate cerca del lugar donde se escapó, salvo que el propietario te diga otra cosa.
 7. ¿Hay peligro para el tráfico o para las personas? Llama al **112**.
-8. Si el perro no vuelve en poco tiempo, el propietario denuncia la desaparición (ver los números del apartado 4). Avisa también a Rondje.
+8. Si el perro no vuelve en poco tiempo, el propietario denuncia la desaparición (ver los números del apartado 4). Avisa también a Rondje Mee.
 
 ### 3.2 Una mordedura o una lesión
 
@@ -93,7 +93,7 @@ Este protocolo te ayuda a pasear con seguridad y a actuar bien si algo sale mal.
 3. ¿Crees que hay una emergencia, como un accidente o un desmayo? Llama al **112** y da la última ubicación conocida.
 4. ¿Crees que el paseante no va a devolver al perro? Llama a la policía (ver apartado 4) y denúncialo en la app.
 
-Rondje solo ve la ubicación de alguien durante un paseo activo. Fuera de un paseo, no podemos localizar a nadie.
+Rondje Mee solo ve la ubicación de alguien durante un paseo activo. Fuera de un paseo, no podemos localizar a nadie.
 
 ### 3.6 Sospechas de maltrato o abandono
 
@@ -145,7 +145,7 @@ Rondje solo ve la ubicación de alguien durante un paseo activo. Fuera de un pas
 | Bélgica | Tele-Onthaal | 106 |
 | Bélgica | Télé-Accueil | 107 |
 
-## 6. Comunicar un incidente a Rondje
+## 6. Comunicar un incidente a Rondje Mee
 
 Comunica cualquier incidente o situación de riesgo con el botón **Denunciar** de la app, o escribe a {{contact}}. Indica:
 
@@ -154,7 +154,7 @@ Comunica cualquier incidente o situación de riesgo con el botón **Denunciar** 
 - si hubo lesiones o daños;
 - fotos, si las tienes.
 
-## 7. Qué hace Rondje
+## 7. Qué hace Rondje Mee
 
 - Confirmamos que hemos recibido tu aviso.
 - Intentamos revisar los avisos de seguridad **en 24 horas**. Es un objetivo, no una garantía.
@@ -164,4 +164,4 @@ Comunica cualquier incidente o situación de riesgo con el botón **Denunciar** 
 - Tomamos una decisión y la explicamos. Puedes reclamar.
 - Colaboramos con la policía y otras autoridades cuando la ley lo exige o cuando la vida o la seguridad de alguien está en peligro.
 
-Rondje no decide quién es responsable de los daños. Eso lo resuelven las personas implicadas entre sí y con sus aseguradoras.
+Rondje Mee no decide quién es responsable de los daños. Eso lo resuelven las personas implicadas entre sí y con sus aseguradoras.

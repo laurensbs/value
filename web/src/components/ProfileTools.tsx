@@ -6,6 +6,7 @@ import { useState, useSyncExternalStore, useTransition } from 'react'
 import { useForm } from '@/lib/use-form'
 import { authClient } from '@/lib/auth-client'
 import { isNativeApp } from '@/lib/native'
+import { APP_NAME } from '@/lib/site'
 import { deleteAccount, setEmailNotifications, setReminders, type FormState } from '@/server/actions/profile'
 import { Icon } from './Icon'
 import { SubmitButton } from './SubmitButton'
@@ -38,7 +39,7 @@ export function InviteLink({ url, message }: { url: string; message: string }) {
           <button
             type="button"
             className="button primary small"
-            onClick={() => navigator.share({ title: 'Rondje', text: message, url }).catch(() => undefined)}
+            onClick={() => navigator.share({ title: APP_NAME, text: message, url }).catch(() => undefined)}
           >
             <Icon name="share" size={16} /> {t('share')}
           </button>
@@ -63,7 +64,7 @@ export function PasskeyButton() {
           disabled={status === 'busy'}
           onClick={async () => {
             setStatus('busy')
-            const res = await authClient.passkey.addPasskey({ name: 'Rondje' })
+            const res = await authClient.passkey.addPasskey({ name: APP_NAME })
             setStatus(res?.error ? 'error' : 'done')
           }}
         >

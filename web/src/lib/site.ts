@@ -66,5 +66,5 @@ export function safeNext(value: unknown, fallback = '/dogs'): string {
   }
 }
 
-/** The app's name in one place, until the final name is chosen. */
-export const APP_NAME = 'Rondje'
+/** The app's name in one place: everything that shows the name reads it from here. */
+export const APP_NAME = 'Rondje Mee'

@@ -6,32 +6,32 @@ updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
-# Algemene voorwaarden van Rondje
+# Algemene voorwaarden van Rondje Mee
 
-Deze voorwaarden gelden voor iedereen die Rondje gebruikt: de website en de app voor iOS en Android. Door een account te maken ga je ermee akkoord. Bij deze voorwaarden horen ook de **Gedragscode**, het **Veiligheidsprotocol**, de **Privacyverklaring** en de **Cookieverklaring**. Voor opvangen gelden daarnaast de **Partnervoorwaarden voor opvangen**.
+Deze voorwaarden gelden voor iedereen die Rondje Mee gebruikt: de website en de app voor iOS en Android. Door een account te maken ga je ermee akkoord. Bij deze voorwaarden horen ook de **Gedragscode**, het **Veiligheidsprotocol**, de **Privacyverklaring** en de **Cookieverklaring**. Voor opvangen gelden daarnaast de **Partnervoorwaarden voor opvangen**.
 
 ## 1. Wie wij zijn
 
-Rondje wordt aangeboden door [Naam rechtspersoon, bijv. Stichting Rondje i.o.], ingeschreven bij de KvK onder nummer [KvK-nummer], gevestigd op [adres] ("Rondje", "wij" of "we").
+Rondje Mee wordt aangeboden door [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], ingeschreven bij de KvK onder nummer [KvK-nummer], gevestigd op [adres] ("Rondje Mee", "wij" of "we").
 
 Je bereikt ons via {{contact}}. Dit is ook ons contactpunt voor gebruikers en overheidsinstanties onder de Digital Services Act (DSA). Je kunt ons schrijven in het Nederlands, Engels, Spaans of Frans.
 
-## 2. Wat Rondje is, en wat niet
+## 2. Wat Rondje Mee is, en wat niet
 
-Rondje is een gratis online platform dat **wandelaars** (volwassenen die graag met een hond wandelen) in contact brengt met **eigenaren** (particulieren, vaak oudere of zieke buurtgenoten) en **opvangen** (organisaties die honden opvangen).
+Rondje Mee is een gratis online platform dat **wandelaars** (volwassenen die graag met een hond wandelen) in contact brengt met **eigenaren** (particulieren, vaak oudere of zieke buurtgenoten) en **opvangen** (organisaties die honden opvangen).
 
-Rondje is een **tussenpersoon**:
+Rondje Mee is een **tussenpersoon**:
 
 - Afspraken over een wandeling maak je met elkaar. Wij zijn geen partij bij die afspraken.
-- Wandelaars zijn vrijwilligers die op eigen titel handelen, niet voor, in dienst van of namens Rondje.
+- Wandelaars zijn vrijwilligers die op eigen titel handelen, niet voor, in dienst van of namens Rondje Mee.
 - Wij zijn geen eigenaar of houder van de honden. We controleren honden niet en houden geen toezicht op wandelingen.
 - Wij bieden wel hulpmiddelen voor vertrouwen en veiligheid. Die maken wandelen veiliger, maar kunnen niet elk risico wegnemen.
 
-Rondje is geen uitlaatservice, geen dierenarts, geen hulpverlener en geen therapie.
+Rondje Mee is geen uitlaatservice, geen dierenarts, geen hulpverlener en geen therapie.
 
-## 3. Wie Rondje mag gebruiken
+## 3. Wie Rondje Mee mag gebruiken
 
-Je moet **18 jaar of ouder** zijn en Rondje als particulier voor jezelf gebruiken. Opvangen gebruiken een organisatieaccount. Ben je eerder door ons uitgesloten? Dan mag je geen nieuw account maken. Rondje is er voor gebruikers in Nederland, België en Spanje.
+Je moet **18 jaar of ouder** zijn en Rondje Mee als particulier voor jezelf gebruiken. Opvangen gebruiken een organisatieaccount. Ben je eerder door ons uitgesloten? Dan mag je geen nieuw account maken. Rondje Mee is er voor gebruikers in Nederland, België en Spanje.
 
 ## 4. Je account
 
@@ -52,10 +52,10 @@ Je kunt meer dan één rol hebben.
 
 ## 6. Verzoeken, kennismaking en solo-vertrouwen
 
-1. **Verzoek.** Een wandelaar vraagt via Rondje om een kennismaking of wandeling. De eigenaar of opvang accepteert of weigert. Niemand is verplicht te accepteren.
+1. **Verzoek.** Een wandelaar vraagt via Rondje Mee om een kennismaking of wandeling. De eigenaar of opvang accepteert of weigert. Niemand is verplicht te accepteren.
 2. **Contactgegevens.** Na acceptatie zien beide kanten elkaars telefoonnummer en de afgeschermde gegevens die nodig zijn, zoals de afspraakplek. Gebruik ze alleen voor de wandeling.
 3. **Kennismaking.** De eerste ontmoeting is altijd een kennismaking, met de eigenaar of iemand van de opvang erbij.
-4. **ID-check.** Bij de kennismaking laat de wandelaar een geldig identiteitsbewijs zien. De eigenaar of opvang kijkt of naam, foto en leeftijd kloppen en vinkt dat aan in de app. Rondje bewaart geen kopie. Maak er ook zelf geen foto of kopie van.
+4. **ID-check.** Bij de kennismaking laat de wandelaar een geldig identiteitsbewijs zien. De eigenaar of opvang kijkt of naam, foto en leeftijd kloppen en vinkt dat aan in de app. Rondje Mee bewaart geen kopie. Maak er ook zelf geen foto of kopie van.
 5. **Solo-vertrouwen.** Alleen wandelen met een hond mag pas als de eigenaar of opvang daar in de app uitdrukkelijk toestemming voor geeft. Dat geldt alleen voor die ene hond en kan altijd worden ingetrokken.
 6. **Veiligheidsquiz.** Voordat je een kennismaking aanvraagt of meeloopt met een groepswandeling, doe je een korte veiligheidsquiz.
 7. **Nieuwe accounts** kunnen eerst alleen kennismakingen en begeleide wandelingen doen. Wanneer dat verandert, staat in de app.
@@ -67,13 +67,13 @@ Opvangen kunnen begeleide groepswandelingen plannen met een beperkt aantal plaat
 
 ## 8. Geen geld
 
-Rondje is gratis voor iedereen.
+Rondje Mee is gratis voor iedereen.
 
 - Je mag elkaar **geen geld vragen of aanbieden** voor een wandeling, ook geen fooien, cadeaubonnen of andere betalingen.
 - Poepzakjes, lijn, tuig, snoepjes en water komen van de eigenaar of opvang, zoals op het hondenprofiel staat.
 - Vraagt iemand om geld, een IBAN of een betaling via een link? Ga er niet op in en meld het ons.
 - Berichten bij verzoeken worden automatisch gecontroleerd op betaalverzoeken, rekeningnummers en links. Bij een treffer krijg je een waarschuwing en kijkt een medewerker mee.
-- **Vrijwillige steun aan Rondje.** Staat er op onze website een manier om Rondje te steunen (bijvoorbeeld via Patreon)? Dan is dat een vrijwillige bijdrage zonder tegenprestatie: je krijgt er geen voorrang, extra functies of andere voordelen voor, en het heeft geen invloed op koppelen, zichtbaarheid of moderatie. Voor de betaling gelden ook de voorwaarden van dat platform. Een bijdrage is niet fiscaal aftrekbaar.
+- **Vrijwillige steun aan Rondje Mee.** Staat er op onze website een manier om Rondje Mee te steunen (bijvoorbeeld via Patreon)? Dan is dat een vrijwillige bijdrage zonder tegenprestatie: je krijgt er geen voorrang, extra functies of andere voordelen voor, en het heeft geen invloed op koppelen, zichtbaarheid of moderatie. Voor de betaling gelden ook de voorwaarden van dat platform. Een bijdrage is niet fiscaal aftrekbaar.
 
 ## 9. Wat we van iedereen verwachten
 
@@ -82,7 +82,7 @@ Rondje is gratis voor iedereen.
 - Je behandelt mensen en dieren met respect. Intimidatie, discriminatie, geweld en dierenmishandeling tolereren we niet.
 - Je gebruikt contactgegevens van anderen alleen voor de wandeling en deelt ze met niemand.
 - Je plaatst niets onwettigs en niets dat inbreuk maakt op rechten van anderen.
-- Je gebruikt Rondje niet commercieel, omzeilt onze beveiliging niet en verzamelt geen gegevens met bots of scrapers.
+- Je gebruikt Rondje Mee niet commercieel, omzeilt onze beveiliging niet en verzamelt geen gegevens met bots of scrapers.
 
 ## 10. Extra afspraken voor eigenaren
 
@@ -96,7 +96,7 @@ Als eigenaar bevestig je, bij het maken van een hondenprofiel en daarna steeds, 
 - je duidelijk aangeeft of snoepjes mogen en of er allergieën zijn;
 - de hond niet los mag, tenzij je dat uitdrukkelijk toestaat en het wettelijk mag op die plek. Standaard staat loslopen uit.
 
-Je beslist zelf wie met je hond wandelt. Rondje neemt die beslissing niet van je over.
+Je beslist zelf wie met je hond wandelt. Rondje Mee neemt die beslissing niet van je over.
 
 ## 11. Extra afspraken voor wandelaars
 
@@ -108,7 +108,7 @@ Als wandelaar:
 - neem je geen andere honden mee en geef je de hond aan niemand anders;
 - wandel je alleen als je fit bent, en niet onder invloed van alcohol of drugs;
 - start je de wandeling in de app, zodat de live locatie werkt;
-- meld je elk incident meteen aan de eigenaar of opvang, en aan Rondje.
+- meld je elk incident meteen aan de eigenaar of opvang, en aan Rondje Mee.
 
 We raden je sterk aan een eigen **aansprakelijkheidsverzekering** te hebben (zie artikel 15).
 
@@ -135,7 +135,7 @@ Live locatie hangt af van je telefoon, batterij en netwerk. Het is een hulpmidde
 
 ## 14. Feedback, meldingen en moderatie
 
-**Feedback.** Na elke wandeling kun je privé feedback geven. De ander ziet die nooit. Alleen Rondje gebruikt die, voor veiligheid en moderatie.
+**Feedback.** Na elke wandeling kun je privé feedback geven. De ander ziet die nooit. Alleen Rondje Mee gebruikt die, voor veiligheid en moderatie.
 
 **Melden en blokkeren.** Je kunt in de app een profiel, bericht of gebeurtenis melden, bijvoorbeeld bij mishandeling, onveiligheid, oplichting, intimidatie of een nepprofiel. Je kunt iemand ook blokkeren.
 
@@ -161,33 +161,33 @@ Eerlijk is eerlijk: met honden wandelen heeft risico's. Een hond kan bijten, ont
 
 - Eigenaren en opvangen zorgen voor een aansprakelijkheidsverzekering die schade door de hond dekt, ook als iemand anders met de hond wandelt. Controleer dat in je polis.
 - Wandelaars raden we sterk aan een eigen aansprakelijkheidsverzekering voor particulieren te hebben. Let op: veel polissen dekken geen schade aan dieren of spullen die je "onder je hebt" (onder opzicht), zoals de hond zelf of zijn lijn.
-- Rondje heeft geen verzekering voor wandelingen van gebruikers [te controleren], tenzij we dat later uitdrukkelijk laten weten.
+- Rondje Mee heeft geen verzekering voor wandelingen van gebruikers [te controleren], tenzij we dat later uitdrukkelijk laten weten.
 
 **Onze aansprakelijkheid**
 
-- We doen ons best om Rondje veilig en goed werkend aan te bieden, maar kunnen niet garanderen dat het altijd foutloos of zonder onderbreking werkt.
+- We doen ons best om Rondje Mee veilig en goed werkend aan te bieden, maar kunnen niet garanderen dat het altijd foutloos of zonder onderbreking werkt.
 - We zijn niet aansprakelijk voor wat gebruikers met elkaar afspreken of doen, voor wat honden doen, of voor de juistheid van wat gebruikers over zichzelf of hun hond vertellen. Dat geldt niet als we zelf iets verkeerd hebben gedaan.
 - Voor zover de wet dat toestaat, zijn we alleen aansprakelijk voor directe schade door onze eigen tekortkoming, tot maximaal € [bedrag] per gebeurtenis [voorstel – te controleren].
-- Deze beperkingen gelden **niet** bij opzet of grove nalatigheid van Rondje, niet bij dood of letsel door onze schuld, en niet als dwingend consumentenrecht ze verbiedt. Je wettelijke rechten als consument blijven altijd gelden.
+- Deze beperkingen gelden **niet** bij opzet of grove nalatigheid van Rondje Mee, niet bij dood of letsel door onze schuld, en niet als dwingend consumentenrecht ze verbiedt. Je wettelijke rechten als consument blijven altijd gelden.
 
 ## 16. Jouw inhoud en onze rechten
 
 - Foto's, verhalen en teksten die je plaatst, blijven van jou.
-- Je geeft ons een gratis, niet-exclusieve licentie om die inhoud op te slaan, aan te passen aan het schermformaat en te tonen, **alleen om Rondje te laten werken**. Bijvoorbeeld om een hondenprofiel te tonen of een melding te beoordelen.
+- Je geeft ons een gratis, niet-exclusieve licentie om die inhoud op te slaan, aan te passen aan het schermformaat en te tonen, **alleen om Rondje Mee te laten werken**. Bijvoorbeeld om een hondenprofiel te tonen of een melding te beoordelen.
 - De licentie eindigt als je de inhoud of je account verwijdert. Back-ups verdwijnen binnen 30 dagen. Inhoud die nodig is voor een open melding, bewaren we zolang dat nodig is.
 - We gebruiken je inhoud **niet** voor reclame of sociale media zonder je aparte, uitdrukkelijke toestemming.
 - Je plaatst alleen inhoud waarvoor je de rechten hebt. Staan er andere mensen op een foto? Dan heb je hun toestemming nodig.
-- De naam Rondje, het logo, de software en het ontwerp zijn van ons of onze licentiegevers.
+- De naam Rondje Mee, het logo, de software en het ontwerp zijn van ons of onze licentiegevers.
 
 ## 17. Account beperken, schorsen of beëindigen
 
 - Je kunt je account altijd verwijderen in de app. Daarna verwijderen we je gegevens zoals in de Privacyverklaring staat.
 - Wij kunnen je account tijdelijk of definitief blokkeren bij een ernstige of herhaalde overtreding, als je mensen of dieren in gevaar brengt, of als de veiligheid dat vraagt. Bij herhaald plaatsen van duidelijk illegale inhoud waarschuwen we eerst.
-- Stoppen we met Rondje of veranderen we het flink? Dan laten we je dat minstens 30 dagen vooraf weten, behalve als dat niet kan, bijvoorbeeld bij een acuut veiligheidsprobleem.
+- Stoppen we met Rondje Mee of veranderen we het flink? Dan laten we je dat minstens 30 dagen vooraf weten, behalve als dat niet kan, bijvoorbeeld bij een acuut veiligheidsprobleem.
 
 ## 18. Klachten en bezwaar
 
-- Een klacht over Rondje? Mail naar {{contact}}. We reageren binnen 14 dagen [voorstel].
+- Een klacht over Rondje Mee? Mail naar {{contact}}. We reageren binnen 14 dagen [voorstel].
 - Oneens met een besluit over je inhoud, je account of je melding? Maak binnen **6 maanden** bezwaar via de app of per e-mail. Iemand die niet bij het eerste besluit betrokken was, bekijkt het opnieuw.
 - Je kunt ook naar een gecertificeerde instantie voor buitengerechtelijke geschilbeslechting volgens de DSA, of naar de rechter.
 - Het Europese ODR-platform voor online geschillen bestaat sinds juli 2025 niet meer.

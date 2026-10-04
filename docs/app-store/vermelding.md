@@ -1,34 +1,30 @@
 # App Store-vermelding (concept)
 
 > **Concept, nog naast de versie uit het claude.ai-project leggen** (`onderzoek/merk-en-app-store.md`).
-> Status: 3 oktober 2026. Nog niet ingediend. Indienen doet Laurens zelf.
+> Status: 4 oktober 2026. Naam gekozen: Rondje Mee. Nog niet ingediend. Indienen doet Laurens zelf.
 > Regels voor deze tekst: alleen functies die op het moment van indienen in de iOS-app zitten (zie de tabel onderaan), geen namen van organisaties waar geen afspraak mee is, en geen gezondheidsclaims. Wel: "samen wandelen kan je dag goed doen". Niet: "helpt tegen somberheid".
 
 ## Naam
 
-De naam is nog niet definitief. In de tekst hieronder staat daarom `{{NAAM}}`.
+Gekozen op 4 oktober 2026: **Rondje Mee** (10 tekens), met de ondertitel **Wandel met een buurhond** (23 tekens; Apple staat er 30 toe). Website en support: https://rondjemee.nl (rondjemee.com en www sturen door).
 
-| Optie | App Store | Merk (TMview) | Domein | Werkt in nl/en/es/fr |
-|---|---|---|---|---|
-| **Woofmigo** (advies) | geen app met deze naam gevonden | 0 treffers | .nl, .be, .app, .com vrij | ja |
-| Goed Rondje | vrij | 0 treffers | vrij | alleen nl/vl |
-| Rondje | bezet: minstens 9 apps, waaronder een wandelapp | 17 merken, niet in klasse 45 | alles bezet | alleen nl |
+Eerder overwogen: Woofmigo (vervallen, lijkt te veel op de Spaanse uitlaatapp Guaumigo), Goed Rondje, en Rondje (in de App Store al bezet).
 
-Voordat de naam vastligt, doet Laurens twee checks:
-1. In App Store Connect → Apps → + → Nieuwe app de naam invullen. Geen foutmelding betekent vrij.
-2. In TMview ook zoeken op "WOOF" en "MIGO" in klasse 9, 42 en 45.
+Voor het indienen doet Laurens nog twee checks:
+1. In App Store Connect → Apps → + → Nieuwe app "Rondje Mee" invullen. Geen foutmelding betekent vrij, en dan is de naam meteen van jou.
+2. In TMview zoeken op "Rondje Mee" en "Rondje" in klasse 9, 42 en 45.
 
 ## Nederlands
 
-**Naam (max. 30):** {{NAAM}}
+**Naam (max. 30):** Rondje Mee
 
-**Ondertitel (max. 30):** Wandel met een buurhond
+**Ondertitel (max. 30):** Wandel met een buurhond (23 tekens)
 
 **Promotietekst (max. 170):**
 Een vast rondje met een hond die dat goed kan gebruiken. Van een buurvrouw die zelf niet meer ver kan lopen, of uit de opvang. Altijd gratis, zonder advertenties.
 
 **Beschrijving:**
-Ken je dat gevoel na een wandeling? {{NAAM}} koppelt jongvolwassenen aan honden die een extra rondje goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in begeleide groepswandelingen. Samen buiten zijn kan je dag goed doen, en een hond is er altijd blij mee.
+Ken je dat gevoel na een wandeling? Rondje Mee koppelt jongvolwassenen aan honden die een extra rondje goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in begeleide groepswandelingen. Samen buiten zijn kan je dag goed doen, en een hond is er altijd blij mee.
 
 ZO WERKT HET
 • Je Vandaag-scherm begroet je met je level, de uitdaging van je stad en een tip van de dag.
@@ -54,9 +50,9 @@ EN VERDER
 • Levels en badges, die alleen jij ziet. Geen streaks en geen druk: elk rondje telt, ook na een pauze.
 • Een widget en een Live Activity voor je volgende rondje.
 
-{{NAAM}} is altijd gratis en zonder advertenties, gedragen door leden die het belangrijk vinden. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
+Rondje Mee is altijd gratis en zonder advertenties, gedragen door leden die het belangrijk vinden. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
 
-{{NAAM}} is geen hulpverlening en stelt geen diagnoses. Gaat het niet goed met je? In de app staat waar je terechtkunt.
+Rondje Mee is geen hulpverlening en stelt geen diagnoses. Gaat het niet goed met je? In de app staat waar je terechtkunt.
 
 **Trefwoorden (max. 100, komma's zonder spaties):**
 hond,wandelen,uitlaten,buurt,vrijwilliger,opvang,asiel,senioren,buurthulp,hondenuitlaat,student
@@ -66,20 +62,20 @@ De eerste versie. Ontdek honden in je buurt, maak kennis en loop je eerste rondj
 
 **Categorie:** Levensstijl (secundair: Sociaal netwerken)
 
-**Ondersteunings-URL:** https://rondje-five.vercel.app/contact
-**Privacybeleid-URL:** https://rondje-five.vercel.app/legal/privacy
+**Ondersteunings-URL:** https://rondjemee.nl/contact
+**Privacybeleid-URL:** https://rondjemee.nl/legal/privacy
 
 ## English
 
-**Name (max 30):** {{NAAM}}
+**Name (max 30):** Rondje Mee
 
-**Subtitle (max 30):** Walk a neighbour's dog
+**Subtitle (max 30):** Walk a neighbour's dog (22 characters)
 
 **Promotional text (max 170):**
 A regular walk with a dog that could use one. From a neighbour who can't walk far anymore, or from the shelter. Always free, no ads.
 
 **Description:**
-You know that feeling after a walk? {{NAAM}} connects young adults with dogs that could use an extra walk: dogs of neighbours who can no longer walk far, and shelter dogs on guided group walks. Getting outside together can make your day, and a dog is always happy you came.
+You know that feeling after a walk? Rondje Mee connects young adults with dogs that could use an extra walk: dogs of neighbours who can no longer walk far, and shelter dogs on guided group walks. Getting outside together can make your day, and a dog is always happy you came.
 
 HOW IT WORKS
 • Your Today screen greets you with your level, your city's challenge and a tip of the day.
@@ -105,9 +101,9 @@ AND MORE
 • Levels and badges that only you can see. No streaks and no pressure: every walk counts, even after a break.
 • A widget and a Live Activity for your next walk.
 
-{{NAAM}} is always free and ad-free, carried by members who care. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
+Rondje Mee is always free and ad-free, carried by members who care. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
 
-{{NAAM}} is not a care service and makes no diagnoses. Not feeling well? The app shows where to get help.
+Rondje Mee is not a care service and makes no diagnoses. Not feeling well? The app shows where to get help.
 
 **Keywords (max 100):**
 dog,walk,dogwalking,neighbour,volunteer,shelter,rescue,seniors,community,student,pets
@@ -135,9 +131,9 @@ The first version. Discover dogs near you, meet them and go on your first walk.
 | Geluidjes | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 | Apple Gezondheid (rondjes en ademminuten bewaren) | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 
-Wel noemen: "gedragen door leden" (zo betaalt Rondje zich; lid worden en geven gebeurt op de website, nooit in de app). Niet noemen: bedragen, doneren in de app, of namen van organisaties.
+Wel noemen: "gedragen door leden" (zo betaalt Rondje Mee zich; lid worden en geven gebeurt op de website, nooit in de app). Niet noemen: bedragen, doneren in de app, of namen van organisaties.
 
 ## Nog te beslissen door Laurens
-- De naam (zie boven).
+- ~~De naam~~: Rondje Mee, gekozen op 4 oktober 2026.
 - De leeftijdsclassificatie in App Store Connect. Er is chat met andere gebruikers, dus de vragenlijst komt waarschijnlijk uit op 17+. Dat past bij "vanaf 18".
 - Het privacylabel: welke gegevens worden verzameld (account, locatie tijdens een rondje, foto's, berichten). Met Apple Gezondheid: alleen op het toestel, niet naar onze server.

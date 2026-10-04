@@ -6,9 +6,9 @@ updated: "2026-10-02"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
-# Rondje Code of Conduct
+# Rondje Mee Code of Conduct
 
-Rondje only works if everyone feels safe: walkers, owners, shelters and, above all, the dogs. This code of conduct is part of the Terms of Use. It applies to everyone who uses Rondje.
+Rondje Mee only works if everyone feels safe: walkers, owners, shelters and, above all, the dogs. This code of conduct is part of the Terms of Use. It applies to everyone who uses Rondje Mee.
 
 ## 1. For everyone
 
@@ -86,13 +86,13 @@ Rondje only works if everyone feels safe: walkers, owners, shelters and, above a
 ## 5. Respect between people
 
 - **No harassment.** No unwanted advances, no sexual comments, no threats. No means no.
-- **No discrimination.** Everyone is welcome on Rondje, regardless of background, religion, gender, sexual orientation, disability or age (18+).
+- **No discrimination.** Everyone is welcome on Rondje Mee, regardless of background, religion, gender, sexual orientation, disability or age (18+).
 - **Respect privacy.**
   - Use phone numbers and addresses only for the walk.
   - Do not share other people's details.
   - Do not copy or photograph anyone's identity document.
 - **Photos.** Only post photos or videos of the dog or of other people online with their permission, or the owner's. Never show where the owner lives.
-- **Contact outside Rondje.** Keep contact about the walk. Do not keep contacting someone who does not want it.
+- **Contact outside Rondje Mee.** Keep contact about the walk. Do not keep contacting someone who does not want it.
 
 ## 6. Zero tolerance
 

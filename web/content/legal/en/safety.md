@@ -10,7 +10,7 @@ status: "Draft – not yet reviewed by a lawyer"
 
 This protocol helps you walk safely and act well if something does go wrong. It applies to walkers, owners and shelters.
 
-**Important:** Rondje is not an emergency service and does not monitor walks 24 hours a day. If people are in immediate danger, always call **112** first. Do not wait for Rondje.
+**Important:** Rondje Mee is not an emergency service and does not monitor walks 24 hours a day. If people are in immediate danger, always call **112** first. Do not wait for Rondje Mee.
 
 ## 1. Before the walk
 
@@ -49,7 +49,7 @@ This protocol helps you walk safely and act well if something does go wrong. It 
 5. Select "dog escaped" in the app. This shows the owner where you last saw the dog.
 6. Stay near the place where the dog ran off, unless the owner tells you otherwise.
 7. Is there danger to traffic or people? Call **112**.
-8. If the dog has not come back after a short time, the owner reports the dog as missing (see the numbers in section 4). Report it to Rondje as well.
+8. If the dog has not come back after a short time, the owner reports the dog as missing (see the numbers in section 4). Report it to Rondje Mee as well.
 
 ### 3.2 A bite or injury
 
@@ -93,7 +93,7 @@ Feeling low, stressed or struggling mentally? Talk about it. You will find helpl
 3. Do you think there is an emergency, such as an accident or the walker being unwell? Call **112** and give the last known location.
 4. Do you think the walker is not bringing the dog back? Call the police (see section 4) and report it in the app.
 
-Rondje can only see someone's location during an active walk. Outside a walk, we cannot locate anyone.
+Rondje Mee can only see someone's location during an active walk. Outside a walk, we cannot locate anyone.
 
 ### 3.6 You suspect abuse or neglect
 
@@ -145,7 +145,7 @@ Rondje can only see someone's location during an active walk. Outside a walk, we
 | Spain | Suicide prevention line (Línea 024) | 024 |
 | Spain | Teléfono de la Esperanza | 717 003 717 [to verify] |
 
-## 6. Reporting to Rondje
+## 6. Reporting to Rondje Mee
 
 Report every incident and every unsafe situation using the **Report** button in the app, or email {{contact}}. Please tell us:
 
@@ -154,7 +154,7 @@ Report every incident and every unsafe situation using the **Report** button in 
 - whether there was any injury or damage;
 - photos, if you have them.
 
-## 7. What Rondje does
+## 7. What Rondje Mee does
 
 - We confirm that we have received your report.
 - We aim to review safety reports **within 24 hours**. This is a target, not a guarantee.
@@ -164,4 +164,4 @@ Report every incident and every unsafe situation using the **Report** button in 
 - We make a decision and explain it. You can appeal.
 - We cooperate with the police and other authorities when the law requires it, or when someone's life or safety is at risk.
 
-Rondje does not decide who is liable for damage. That is for the people involved to settle with each other and their insurers.
+Rondje Mee does not decide who is liable for damage. That is for the people involved to settle with each other and their insurers.

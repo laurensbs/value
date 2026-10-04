@@ -10,7 +10,7 @@ import { db } from '@/db'
 import * as schema from '@/db/schema'
 import { passwordResetEmail, sendEmail, toLocale, verifyEmail } from '@/server/email'
 import { cleanAuthUser } from './photos'
-import { siteUrl, trustedOrigins } from './site'
+import { APP_NAME, siteUrl, trustedOrigins } from './site'
 
 const baseURL = siteUrl()
 
@@ -49,7 +49,7 @@ export const enabledSocialProviders = [...Object.keys(google), ...Object.keys(ap
 export const appleNativeEnabled = Boolean(Object.keys(apple).length && process.env.APPLE_APP_BUNDLE_ID)
 
 export const auth = betterAuth({
-  appName: 'Rondje',
+  appName: APP_NAME,
   baseURL,
   secret: process.env.BETTER_AUTH_SECRET ?? 'rondje-local-development-secret-change-me-0000',
   database: drizzleAdapter(db, { provider: 'pg', schema }),
@@ -107,7 +107,7 @@ export const auth = betterAuth({
     },
   },
   plugins: [
-    passkey({ rpID: new URL(baseURL).hostname, rpName: 'Rondje', origin: baseURL }),
+    passkey({ rpID: new URL(baseURL).hostname, rpName: APP_NAME, origin: baseURL }),
     // The native iOS app signs in with email and password and keeps the session token in the
     // Keychain; it sends it as "Authorization: Bearer …" instead of a cookie (src/server/api.ts).
     bearer({ requireSignature: true }),

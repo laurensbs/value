@@ -6,7 +6,7 @@ updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
-# Cookieverklaring van Rondje
+# Cookieverklaring van Rondje Mee
 
 ## 1. Wat zijn cookies?
 
@@ -14,30 +14,30 @@ Cookies zijn kleine bestanden die een website op je apparaat zet. Apps en websit
 
 ## 2. Alleen functionele cookies
 
-Rondje gebruikt **alleen cookies die nodig zijn om Rondje te laten werken**. We gebruiken geen cookies of technieken voor:
+Rondje Mee gebruikt **alleen cookies die nodig zijn om Rondje Mee te laten werken**. We gebruiken geen cookies of technieken voor:
 
 - advertenties;
 - het volgen van je surfgedrag;
 - statistieken of analyse door andere bedrijven;
 - social-media-knoppen die je volgen.
 
-Voor functionele cookies is geen toestemming nodig. Daarom zie je bij Rondje geen cookiebanner. De wet staat dit toe in Nederland (art. 11.7a Telecommunicatiewet), België (art. 10/2 van de wet van 13 juni 2005 betreffende de elektronische communicatie [te controleren]) en Spanje (art. 22.2 LSSI). Gaan we ooit andere cookies gebruiken? Dan vragen we eerst je toestemming.
+Voor functionele cookies is geen toestemming nodig. Daarom zie je bij Rondje Mee geen cookiebanner. De wet staat dit toe in Nederland (art. 11.7a Telecommunicatiewet), België (art. 10/2 van de wet van 13 juni 2005 betreffende de elektronische communicatie [te controleren]) en Spanje (art. 22.2 LSSI). Gaan we ooit andere cookies gebruiken? Dan vragen we eerst je toestemming.
 
 ## 3. Welke cookies gebruiken we?
 
 | Cookie | Waarvoor | Hoe lang |
 |---|---|---|
-| `__Secure-better-auth.session_token` | Je ingelogd houden en je account beveiligen | 7 dagen; wordt verlengd zolang je Rondje gebruikt, en verdwijnt als je uitlogt |
+| `__Secure-better-auth.session_token` | Je ingelogd houden en je account beveiligen | 7 dagen; wordt verlengd zolang je Rondje Mee gebruikt, en verdwijnt als je uitlogt |
 | `better-auth.state`, `better-auth-passkey` | Beveiliging tijdens inloggen met Google, Apple of een passkey | Een paar minuten |
-| `NEXT_LOCALE` | Onthouden in welke taal je Rondje gebruikt | 1 jaar |
+| `NEXT_LOCALE` | Onthouden in welke taal je Rondje Mee gebruikt | 1 jaar |
 | `rondje_ref` | Onthouden via wiens uitnodigingslink je kwam, zodat die persoon ziet dat je meedoet [te controleren: functioneel of toestemming nodig] | 30 dagen |
 
 ## 4. Lokale opslag op je apparaat
 
-Rondje bewaart sommige dingen alleen op je eigen apparaat, in de browser of in de app:
+Rondje Mee bewaart sommige dingen alleen op je eigen apparaat, in de browser of in de app:
 
-- **Stemming-check-ins.** Hoe je je voelt voor en na een wandeling. Deze gegevens blijven op je apparaat en komen nooit bij Rondje.
-- **Een vraag voor later.** Kies je bij de vraag over meldingen of over Rondje op je beginscherm voor "Later", dan onthoudt je browser twee weken dat we het nog niet opnieuw vragen. Kies je "Staat er al op", dan onthoudt hij dat een jaar.
+- **Stemming-check-ins.** Hoe je je voelt voor en na een wandeling. Deze gegevens blijven op je apparaat en komen nooit bij Rondje Mee.
+- **Een vraag voor later.** Kies je bij de vraag over meldingen of over Rondje Mee op je beginscherm voor "Later", dan onthoudt je browser twee weken dat we het nog niet opnieuw vragen. Kies je "Staat er al op", dan onthoudt hij dat een jaar.
 - **De Hondenschool.** Zonder account onthoudt je browser welke lessen je hebt afgerond (`rondje.lessons`); met een account gaan ze naar je account en verdwijnen ze hier. Tijdens de veiligheidsquiz onthoudt je browser tot je het tabblad sluit bij welke vraag je was (`rondje.quiz`), zodat je na een les verder kunt.
 - **Voorkeuren**, zoals de weergave of instellingen die je kiest [te controleren: welke].
 
@@ -49,7 +49,7 @@ Voor de kaarten laadt je apparaat kaartafbeeldingen (tiles) van de servers van d
 
 ## 6. Cookies verwijderen of blokkeren
 
-Je kunt cookies verwijderen of blokkeren in de instellingen van je browser. Blokkeer je de sessiecookie? Dan kun je niet inloggen en werkt Rondje niet goed.
+Je kunt cookies verwijderen of blokkeren in de instellingen van je browser. Blokkeer je de sessiecookie? Dan kun je niet inloggen en werkt Rondje Mee niet goed.
 
 ## 7. Vragen
 

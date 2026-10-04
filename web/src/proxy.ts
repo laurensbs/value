@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { contentSecurityPolicy, newNonce } from '@/lib/csp'
 
 /**
- * Production answers on several hostnames (rondje-five.vercel.app, the team alias,
+ * Production answers on several hostnames (rondjemee.nl, rondje-five.vercel.app, the team alias,
  * the branch alias). Logins, cookies and passkeys are tied to one origin, so every
  * page request on another production hostname is sent to the canonical one.
  */

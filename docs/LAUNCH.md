@@ -1,6 +1,6 @@
 # Zo start je met Rondje
 
-De website en de app zijn één en dezelfde: **https://rondje-five.vercel.app**. Op een telefoon kun je hem via "Zet op beginscherm" als app gebruiken. De iOS- en Android-apps (map `web/ios` en `web/android`) laden dezelfde site in een eigen app-schil.
+De website en de app zijn één en dezelfde: **https://rondjemee.nl**. Op een telefoon kun je hem via "Zet op beginscherm" als app gebruiken. De iOS- en Android-apps (map `web/ios` en `web/android`) laden dezelfde site in een eigen app-schil.
 
 ## Wat er al staat
 
@@ -29,7 +29,7 @@ De database is aangemaakt via neon.new: een gratis Neon-database die na 72 uur w
 
 ## 2. Jezelf beheerder maken
 
-1. Ga naar https://rondje-five.vercel.app/signup en maak een account met het e-mailadres dat in `ADMIN_EMAILS` staat.
+1. Ga naar https://rondjemee.nl/signup en maak een account met het e-mailadres dat in `ADMIN_EMAILS` staat.
 2. Vul je profiel in. Je ziet nu **Beheer** in het menu.
 3. Bij **Beheer → Instellingen** zie je wat gekoppeld is.
 4. Zodra er echte honden zijn: **Beheer → Voorbeelddata → Verwijder voorbeelddata**. De voorbeeldhonden zijn gemarkeerd en kunnen niet geboekt worden.
@@ -42,10 +42,10 @@ Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programme
 
    | Naam | Voorbeeld | Wat het doet |
    |---|---|---|
-   | `SUPPORT_URL` | `https://www.patreon.com/jouwnaam` | De knop "Steun Rondje via Patreon" op `/support`. Alleen https-links van Patreon, Ko-fi, Open Collective of Buy Me a Coffee werken. |
-   | `OPERATOR_NAME` | `Webstability` | Wie de bijdragen ontvangt en Rondje runt. **Zonder deze naam verschijnt de steunknop niet**: mensen moeten weten waar hun geld heen gaat. |
+   | `SUPPORT_URL` | `https://www.patreon.com/jouwnaam` | De knop "Steun Rondje Mee via Patreon" op `/support`. Alleen https-links van Patreon, Ko-fi, Open Collective of Buy Me a Coffee werken. |
+   | `OPERATOR_NAME` | `Webstability` | Wie de bijdragen ontvangt en Rondje Mee runt. **Zonder deze naam verschijnt de steunknop niet**: mensen moeten weten waar hun geld heen gaat. |
    | `INSTAGRAM_HANDLE` | `rondjeapp` | Link in de footer, op Over ons en bij "Deel je rondje". |
-   | `CONTACT_EMAIL` | een adres op een eigen domein (dat van de definitieve naam) | **Nodig vóór de lancering.** Het enige contactadres van Rondje: op `/contact` (de support-URL voor de App Store), in de juridische teksten (privacyverzoeken, klachten, DSA-contactpunt, onveilige situaties), op `/banned`, Over ons en Wachtwoord vergeten. Zonder deze variabele verwijzen die plekken naar `/contact`, waar staat dat het adres binnenkort komt. Dat is eerlijk, maar dan heeft een geblokkeerd account geen enkele weg om bezwaar te maken (de meldknop werkt voor hen niet) en is het DSA-contactpunt onbereikbaar: zet hem dus vóór je echte gebruikers toelaat. Zet hier nooit een adres op een domein dat niet van ons is. |
+   | `CONTACT_EMAIL` | een adres op `rondjemee.nl` (staat sinds 4 okt 2026 in Vercel) | **Nodig vóór de lancering.** Het enige contactadres van Rondje Mee: op `/contact` (de support-URL voor de App Store), in de juridische teksten (privacyverzoeken, klachten, DSA-contactpunt, onveilige situaties), op `/banned`, Over ons en Wachtwoord vergeten. Zonder deze variabele verwijzen die plekken naar `/contact`, waar staat dat het adres binnenkort komt. Dat is eerlijk, maar dan heeft een geblokkeerd account geen enkele weg om bezwaar te maken (de meldknop werkt voor hen niet) en is het DSA-contactpunt onbereikbaar: zet hem dus vóór je echte gebruikers toelaat. Zet hier nooit een adres op een domein dat niet van ons is. |
 
 2. **Deployments → Redeploy**, zodat de nieuwe waarden gelden.
 3. **Let op: Vercel-abonnement.** Het gratis Hobby-abonnement van Vercel is bedoeld voor niet-commercieel gebruik. Zodra je bijdragen vraagt, val je mogelijk daarbuiten. Controleer de voorwaarden van Vercel en neem zo nodig **Pro** (ongeveer $20 per maand) voordat je `SUPPORT_URL` zet.
@@ -55,7 +55,7 @@ Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programme
 
 1. Maak een account bij [Resend](https://resend.com) (het gratis abonnement is genoeg om te beginnen) en voeg je domein toe. Zet de DNS-records die Resend geeft bij je domeinregistrar. Nog geen eigen domein? Begin met stap 8 (eigen domein).
 2. Maak in Resend een API-sleutel (alleen "Sending access").
-3. Zet in Vercel `RESEND_API_KEY` (de sleutel) en `EMAIL_FROM`, bijvoorbeeld `Rondje <hallo@jouwdomein.nl>`, en redeploy.
+3. Zet in Vercel `RESEND_API_KEY` (de sleutel) en `EMAIL_FROM`, bijvoorbeeld `Rondje Mee <hallo@jouwdomein.nl>`, en redeploy.
 4. Test op `/forgot-password` met je eigen adres.
 
 Mensen kiezen in hun profiel of ze e-mail willen bij meldingen; de taal volgt hun taalkeuze.
@@ -112,8 +112,8 @@ Eén account voor de website en de iPhone-app: wie op beide plekken met hetzelfd
 1. [ ] **App ID** `app.rondje.mobile` (Identifiers → App IDs): zet **Sign in with Apple** aan. Dit is de iPhone-app; die logt in met het systeemscherm van Apple.
 2. [ ] **Services ID** (Identifiers → Services IDs), bijvoorbeeld `app.rondje.web`. Zet Sign in with Apple aan → Configure:
    - Primary App ID: `app.rondje.mobile`
-   - Domain: `rondje-five.vercel.app`
-   - Return URL: `https://rondje-five.vercel.app/api/auth/callback/apple`
+   - Domain: `rondjemee.nl`
+   - Return URL: `https://rondjemee.nl/api/auth/callback/apple`
 
    Deze Services ID is `APPLE_CLIENT_ID`. Hij is voor de website (en voor de app als het systeemscherm niet kan).
 3. [ ] **Sleutel** (Keys → +): vink Sign in with Apple aan, kies `app.rondje.mobile` als Primary App ID en download het `.p8`-bestand. Dat kan maar één keer: bewaar het in je wachtwoordkluis, **nooit in de repo**. Noteer de **Key ID** en je **Team ID** (rechtsboven op developer.apple.com).
@@ -128,10 +128,10 @@ Eén account voor de website en de iPhone-app: wie op beide plekken met hetzelfd
 
 **Google** (console.cloud.google.com)
 
-1. [ ] Maak een project (bijvoorbeeld "Rondje") → APIs & Services → **OAuth consent screen**: app-naam Rondje, je support-e-mail, links naar `https://rondje-five.vercel.app/legal/privacy` en `/legal/terms`. Scopes: alleen e-mail, profiel en openid. Zet hem daarna op **In production** (anders kunnen alleen testgebruikers inloggen).
+1. [ ] Maak een project (bijvoorbeeld "Rondje Mee") → APIs & Services → **OAuth consent screen**: app-naam Rondje Mee, je support-e-mail, links naar `https://rondjemee.nl/legal/privacy` en `/legal/terms`. Scopes: alleen e-mail, profiel en openid. Zet hem daarna op **In production** (anders kunnen alleen testgebruikers inloggen).
 2. [ ] Credentials → **Create OAuth client ID** → type **Web application**:
-   - Authorized JavaScript origin: `https://rondje-five.vercel.app`
-   - Authorized redirect URI: `https://rondje-five.vercel.app/api/auth/callback/google`
+   - Authorized JavaScript origin: `https://rondjemee.nl`
+   - Authorized redirect URI: `https://rondjemee.nl/api/auth/callback/google`
 3. [ ] Noteer Client ID en Client secret. De iPhone-app gebruikt dezelfde webclient (via de website), dus een aparte iOS-client is niet nodig.
 
 **In Vercel** (project `rondje` → Settings → Environment Variables, omgeving **Production**; voor previews alleen als je daar wilt testen)
@@ -144,7 +144,7 @@ Eén account voor de website en de iPhone-app: wie op beide plekken met hetzelfd
 | `APPLE_CLIENT_SECRET` | de uitvoer van het script |
 | `APPLE_APP_BUNDLE_ID` | `app.rondje.mobile` |
 
-Daarna **Redeploy** (Deployments → laatste productie-deploy → Redeploy). Controle: `https://rondje-five.vercel.app/api/v1/config` toont dan `"auth":{"providers":["google","apple"],"appleNative":true}`, en op `/login` staan de twee knoppen. Ook het beheerdersdashboard laat zien welke aanstaan.
+Daarna **Redeploy** (Deployments → laatste productie-deploy → Redeploy). Controle: `https://rondjemee.nl/api/v1/config` toont dan `"auth":{"providers":["google","apple"],"appleNative":true}`, en op `/login` staan de twee knoppen. Ook het beheerdersdashboard laat zien welke aanstaan.
 
 **Goed om te weten**
 
@@ -193,13 +193,12 @@ npx cap open android
 
 Druk in Android Studio op ▶︎. Voor de Play Store heb je een Play Console-account nodig (eenmalig $25).
 
-## 8. Eigen domein (optioneel)
+## 8. Eigen domein: rondjemee.nl
 
-Vercel → **Settings → Domains → Add** (een domein dat je zelf bezit, ongeveer €15 per jaar; let op: het .app-domein met de naam Rondje is van een ander bedrijf). Daarna:
+Het domein is gekocht (4 okt 2026): **https://rondjemee.nl** is het adres van de site, `rondjemee.com` en `www` sturen door. In de code staat het al: `server.url` in `web/capacitor.config.ts`, de knop in `web/native-shell/offline.html`, de controle in `.github/workflows/live.yml` en de release-build van de iPhone-app. Nog te doen in Vercel, zodra het domein bereikbaar is:
 
-- wordt alles automatisch het nieuwe domein (inloggen, links, passkeys)
-- verwijzen de andere adressen door
-- pas je `server.url` in `web/capacitor.config.ts` en de knop in `web/native-shell/offline.html` aan, en voer je `npx cap sync` uit
+- zet `BETTER_AUTH_URL` op `https://rondjemee.nl` en redeploy. Daarna wordt alles het nieuwe domein (inloggen, links, passkeys) en sturen de andere adressen, zoals rondje-five.vercel.app, door. Een passkey die op het oude adres is gemaakt, werkt op het nieuwe niet: log dan één keer in met je wachtwoord en voeg een nieuwe passkey toe
+- voer daarna voor de app-schillen `npx cap sync` uit
 
 ## 9. Lokaal ontwikkelen
 

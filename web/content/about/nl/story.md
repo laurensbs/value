@@ -1,5 +1,5 @@
 ---
-title: Waarom ik Rondje begon
+title: Waarom ik Rondje Mee begon
 published: "false"
 ---
 
@@ -11,7 +11,7 @@ in en haal de schrijfvragen weg.
 Als je over somberheid of depressie schrijft (richtlijnen van 113 Zelfmoordpreventie voor media):
 - Vertel vooral wat hielp en wat je nu anders doet. Hoop en herstel helpen lezers het meest.
 - Geen details over methoden of over de zwaarste momenten.
-- Houd het bij je eigen ervaring; Rondje is geen behandeling en belooft geen genezing.
+- Houd het bij je eigen ervaring; Rondje Mee is geen behandeling en belooft geen genezing.
 - Onder het verhaal staat automatisch hoe je 113 bereikt (113 of gratis 0800-0113).
 - Laat het verhaal lezen door iemand die je vertrouwt voordat je het publiceert.
 
@@ -20,7 +20,7 @@ Foto: zet er alleen een foto bij waar je zelf achter staat, en alleen mensen of 
 
 ## Hoe het begon
 
-[Schrijfvraag: wat speelde er in je leven toen je aan Rondje begon te denken? Eén of twee alinea's, in je eigen woorden.]
+[Schrijfvraag: wat speelde er in je leven toen je aan Rondje Mee begon te denken? Eén of twee alinea's, in je eigen woorden.]
 
 ## Wat honden voor mij betekenen
 
@@ -32,6 +32,6 @@ Foto: zet er alleen een foto bij waar je zelf achter staat, en alleen mensen of 
 
 ## Wat ik hoop
 
-[Schrijfvraag: hoe ziet Rondje eruit als het lukt? Wat wil je dat een wandelaar, een eigenaar en een hond eraan overhouden?]
+[Schrijfvraag: hoe ziet Rondje Mee eruit als het lukt? Wat wil je dat een wandelaar, een eigenaar en een hond eraan overhouden?]
 
 — Laurens
