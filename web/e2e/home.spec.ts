@@ -6,7 +6,7 @@ import { addDog, newPerson, onboard, shot, signUp, unique } from './helpers'
 const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp'
 const TIEL = { latitude: 51.8866, longitude: 5.4299 }
 
-test('home: "Help ons!" with the crowdfunding, right after the hero, never in the app', async ({ browser }) => {
+test('home: "Help ons!" with the crowdfunding, right after the hero; in the app low on the page, out to the browser', async ({ browser }) => {
   const { context, page } = await newPerson(browser)
   await page.goto('/')
   // No country badge above the hero (Laurens, 5 okt 2026): the Netherlands come first in the dogs and the copy.
@@ -21,6 +21,7 @@ test('home: "Help ons!" with the crowdfunding, right after the hero, never in th
   await expect(give).toHaveAttribute('rel', /noopener/)
   await expect(help.getByRole('link', { name: /of meld je aan/ })).toHaveAttribute('href', '/aanmelden?bron=helpons')
   await expect(help.getByText(/naar Voorbeeld, die Rondje Mee bouwt/)).toBeVisible()
+  await expect(help.getByRole('link', { name: /Waar het geld heen gaat/ })).toHaveAttribute('href', '/support#crowdfunding')
   // The numbers from content/crowdfunding.json, once it has a goal and an amount raised.
   const { progress } = campaign(crowdfunding)
   await expect(help.getByRole('progressbar')).toHaveCount(progress ? 1 : 0)
@@ -34,9 +35,19 @@ test('home: "Help ons!" with the crowdfunding, right after the hero, never in th
   const inApp = await app.newPage()
   await inApp.goto('/')
   await expect(inApp.getByRole('heading', { name: 'Wat brengt je hier?' })).toBeVisible()
-  await expect(inApp.locator('section#help-ons')).toHaveCount(0)
-  await expect(inApp.getByRole('link', { name: 'Geef een rondje' })).toHaveCount(0)
-  await expect(inApp.locator('a[href*="whydonate"]')).toHaveCount(0)
+  // In the app the block is there too, but last, after everything else on the page.
+  const appHelp = inApp.locator('section#help-ons')
+  await expect(appHelp.getByRole('heading', { name: 'Help ons!', level: 2 })).toBeVisible()
+  await expect(inApp.locator('.lp > section').last()).toHaveId('help-ons')
+  await expect(inApp.locator('.lp > section').nth(1)).not.toHaveId('help-ons')
+  // Nothing is paid inside the app: a plain link to another site, which the app shell opens in Safari or the browser.
+  const appGive = appHelp.getByRole('link', { name: 'Geef een rondje' })
+  await expect(appGive).toHaveAttribute('href', 'https://whydonate.com/nl/fundraising/example')
+  await expect(appGive).toHaveAttribute('target', '_blank')
+  await expect(appGive).toHaveAttribute('rel', /noopener/)
+  await expect(inApp.locator('a[href*="whydonate"]')).toHaveCount(1)
+  // /support says nothing about money in the app, so no link there from this block.
+  await expect(appHelp.getByRole('link', { name: /Waar het geld heen gaat/ })).toHaveCount(0)
   await app.close()
 })
 
