@@ -69,7 +69,12 @@ test('owner tells the neighbours: a ready message and a poster; a neighbour come
   const preview = await (await neighbour.page.request.get(dogPath, { headers: { 'Accept-Language': 'es-ES' } })).text()
   expect(preview).toMatch(/<meta property="og:title" content="Saar zoekt een wandelmaatje"/)
   await shot(neighbour.page, 'share-04-visitor')
-  await neighbour.page.getByRole('link', { name: 'Maak kennis met Saar' }).click()
+  // The same way twice: at hand at the bottom of the screen, and with a word of explanation under Saar's story.
+  const meet = neighbour.page.getByRole('link', { name: 'Maak kennis met Saar' })
+  await expect(meet).toHaveCount(2)
+  const atHand = neighbour.page.locator('.plan-bar').getByRole('link', { name: 'Maak kennis met Saar' })
+  await expect(atHand).toBeInViewport()
+  await atHand.click()
   await expect(neighbour.page).toHaveURL(/\/signup\?intent=walker&next=/)
   await neighbour.page.getByLabel('Voornaam').fill('Noor')
   await neighbour.page.getByLabel('E-mailadres').fill(`noor-${id}@e2e.test`)
