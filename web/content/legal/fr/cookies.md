@@ -2,7 +2,7 @@
 title: Politique en matière de cookies
 description: "Uniquement des cookies fonctionnels et le stockage local : pas de publicité, pas de suivi, pas d'analyse par d'autres entreprises."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-04"
 status: "Projet – pas encore vérifié par un juriste"
 ---
 
@@ -38,6 +38,7 @@ Rondje enregistre certaines choses uniquement sur votre propre appareil, dans le
 
 - **Bilans d'humeur.** Comment vous vous sentez avant et après une promenade. Ces données restent sur votre appareil et n'arrivent jamais chez Rondje.
 - **Une question pour plus tard.** Si vous choisissez « Plus tard » quand nous vous proposons les notifications ou de mettre Rondje sur votre écran d'accueil, votre navigateur retient pendant deux semaines de ne pas reposer la question. Si vous choisissez « C’est déjà fait », il le retient pendant un an.
+- **Une chose maintenant.** Si vous choisissez « Plus tard » pour la prochaine étape sur Aujourd’hui, votre navigateur retient pendant une semaine de sauter cette étape ; après deux fois « Plus tard », elle ne revient plus. « Non, pas maintenant » après une rencontre est retenu pour de bon. Cela n’est jamais envoyé à Rondje.
 - **Préférences**, comme l'affichage ou les réglages que vous choisissez [à vérifier : lesquels].
 
 Vous pouvez effacer ces données vous-même, par exemple en supprimant les données du site dans votre navigateur, ou les données de l'application ou l'application elle-même. Attention : vos bilans d'humeur disparaîtront alors vraiment. Nous n'en avons aucune copie.

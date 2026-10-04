@@ -2,7 +2,7 @@
 title: Cookie Statement
 description: "We only use functional cookies and local storage: no ads, no tracking and no analytics by other companies."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-04"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -38,6 +38,7 @@ Rondje stores some things only on your own device, in the browser or in the app:
 
 - **Mood check-ins.** How you feel before and after a walk. This data stays on your device and never reaches Rondje.
 - **A question for later.** If you choose "Later" when we ask about notifications or about putting Rondje on your home screen, your browser remembers for two weeks not to ask again yet. If you choose "It's already there", it remembers that for a year.
+- **One thing now.** If you choose "Later" for the next step on Today, your browser remembers for a week to skip that step; after "Later" twice it does not come back. "No, not now" after a first meeting is remembered for good. This never goes to Rondje.
 - **Preferences**, such as display options or settings you choose [to verify: which].
 
 You can delete this data yourself, for example by clearing the site data in your browser, or clearing the app data or deleting the app. Please note: your check-ins will then really be gone. We do not have a copy.
