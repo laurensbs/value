@@ -966,7 +966,7 @@
     "title": "For shelters",
     "lede": "Put your dogs online in one go, plan supervised group walks and get a regular group of young volunteers. Free.",
     "create": "Register a shelter",
-    "createLede": "We check every shelter before its dogs become visible. This usually takes less than two working days.",
+    "createLede": "We check every shelter before its dogs become visible. We try to do so within two working days.",
     "name": "Shelter name",
     "registrationNumber": "Chamber of Commerce number (KvK, KBO or CIF)",
     "address": "Address",
@@ -1026,7 +1026,7 @@
     "loginFirst": "First create your own account. Then register the shelter; it takes two minutes.",
     "finishProfile": "Finish your profile first",
     "where": "Where is the shelter?",
-    "created": "Your shelter has been registered. We'll get in touch within two working days to verify it.",
+    "created": "Your shelter has been registered. We try to get in touch within two working days to verify it.",
     "status": {
       "pending": "Under review",
       "verified": "Verified",
@@ -1044,7 +1044,7 @@
       "staff": "staff member"
     },
     "staffAdded": "Staff member added.",
-    "createdPending": "Your shelter is registered. We will check it within two working days. Add your dogs now: they become visible once the shelter is verified.",
+    "createdPending": "Your shelter is registered. We try to check it within two working days. Add your dogs now: they become visible once the shelter is verified.",
     "sections": {
       "about": "The shelter",
       "walking": "Walking with you",

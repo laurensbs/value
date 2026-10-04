@@ -572,7 +572,7 @@
     "emptyIncoming": "Todavía no hay solicitudes para tus perros.",
     "status": {
       "pending": "Esperando respuesta",
-      "accepted": "Confirmada",
+      "accepted": "Confirmado",
       "declined": "Rechazado",
       "cancelled": "Cancelado",
       "completed": "Realizado",
@@ -966,7 +966,7 @@
     "title": "Para protectoras",
     "lede": "Publica tus perros de una vez, organiza paseos en grupo acompañados y consigue un grupo fijo de voluntarios jóvenes. Gratis.",
     "create": "Inscribir una protectora",
-    "createLede": "Revisamos cada protectora antes de que sus perros sean visibles. Suele tardar menos de dos días laborables.",
+    "createLede": "Revisamos cada protectora antes de que sus perros sean visibles. Intentamos hacerlo en dos días laborables.",
     "name": "Nombre de la protectora",
     "registrationNumber": "Número de registro (KvK, KBO o CIF)",
     "address": "Dirección",
@@ -1026,7 +1026,7 @@
     "loginFirst": "Primero crea tu propia cuenta. Después inscribe la protectora; solo se tarda dos minutos.",
     "finishProfile": "Primero completa tu perfil",
     "where": "¿Dónde está la protectora?",
-    "created": "Tu protectora se ha inscrito. Nos pondremos en contacto contigo en un plazo de dos días laborables para verificarla.",
+    "created": "Tu protectora se ha inscrito. Intentaremos ponernos en contacto contigo en un plazo de dos días laborables para verificarla.",
     "status": {
       "pending": "En revisión",
       "verified": "Verificada",
@@ -1044,7 +1044,7 @@
       "staff": "miembro del equipo"
     },
     "staffAdded": "Persona añadida al equipo.",
-    "createdPending": "Tu protectora está registrada. La revisaremos en un plazo de dos días laborables. Añade ya tus perros: serán visibles en cuanto la protectora esté verificada.",
+    "createdPending": "Tu protectora está registrada. Intentaremos revisarla en un plazo de dos días laborables. Añade ya tus perros: serán visibles en cuanto la protectora esté verificada.",
     "sections": {
       "about": "La protectora",
       "walking": "Pasear con vosotros",

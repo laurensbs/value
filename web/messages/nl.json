@@ -966,7 +966,7 @@
     "title": "Voor opvangen",
     "lede": "Zet je honden in één keer online, plan begeleide groepswandelingen en krijg een vaste groep jonge vrijwilligers. Gratis.",
     "create": "Opvang aanmelden",
-    "createLede": "We controleren elke opvang voordat honden zichtbaar worden. Dat duurt meestal minder dan twee werkdagen.",
+    "createLede": "We controleren elke opvang voordat honden zichtbaar worden. We proberen dat binnen twee werkdagen te doen.",
     "name": "Naam van de opvang",
     "registrationNumber": "KvK-, KBO- of CIF-nummer",
     "address": "Adres",
@@ -1026,7 +1026,7 @@
     "loginFirst": "Maak eerst je eigen account. Daarna meld je de opvang aan; dat duurt twee minuten.",
     "finishProfile": "Maak eerst je profiel af",
     "where": "Waar is de opvang?",
-    "created": "Je opvang is aangemeld. We nemen binnen twee werkdagen contact op om hem te controleren.",
+    "created": "Je opvang is aangemeld. We proberen binnen twee werkdagen contact op te nemen om hem te controleren.",
     "status": {
       "pending": "Wordt gecontroleerd",
       "verified": "Geverifieerd",
@@ -1044,7 +1044,7 @@
       "staff": "medewerker"
     },
     "staffAdded": "Medewerker toegevoegd.",
-    "createdPending": "Je opvang is aangemeld. We controleren hem binnen twee werkdagen. Voeg alvast honden toe: ze worden zichtbaar zodra de opvang is geverifieerd.",
+    "createdPending": "Je opvang is aangemeld. We proberen hem binnen twee werkdagen te controleren. Voeg alvast honden toe: ze worden zichtbaar zodra de opvang is geverifieerd.",
     "sections": {
       "about": "De opvang",
       "walking": "Wandelen bij jullie",

@@ -966,7 +966,7 @@
     "title": "Pour les refuges",
     "lede": "Mettez vos chiens en ligne en une fois, organisez des balades en groupe encadrées et constituez un groupe fidèle de jeunes bénévoles. Gratuit.",
     "create": "Inscrire un refuge",
-    "createLede": "Nous vérifions chaque refuge avant que ses chiens soient visibles. Cela prend généralement moins de deux jours ouvrables.",
+    "createLede": "Nous vérifions chaque refuge avant que ses chiens soient visibles. Nous essayons de le faire sous deux jours ouvrables.",
     "name": "Nom du refuge",
     "registrationNumber": "Numéro d'entreprise (KvK, BCE/KBO ou CIF)",
     "address": "Adresse",
@@ -1026,7 +1026,7 @@
     "loginFirst": "Créez d'abord votre propre compte. Ensuite, inscrivez le refuge ; cela prend deux minutes.",
     "finishProfile": "Complétez d'abord votre profil",
     "where": "Où se trouve le refuge ?",
-    "created": "Votre refuge est inscrit. Nous vous contacterons sous deux jours ouvrables pour le vérifier.",
+    "created": "Votre refuge est inscrit. Nous essaierons de vous contacter sous deux jours ouvrables pour le vérifier.",
     "status": {
       "pending": "En cours de vérification",
       "verified": "Vérifié",
@@ -1044,7 +1044,7 @@
       "staff": "membre de l'équipe"
     },
     "staffAdded": "Membre de l'équipe ajouté.",
-    "createdPending": "Votre refuge est inscrit. Nous le vérifions sous deux jours ouvrables. Ajoutez déjà vos chiens : ils seront visibles dès que le refuge sera vérifié.",
+    "createdPending": "Votre refuge est inscrit. Nous essaierons de le vérifier sous deux jours ouvrables. Ajoutez déjà vos chiens : ils seront visibles dès que le refuge sera vérifié.",
     "sections": {
       "about": "Le refuge",
       "walking": "Promener chez vous",
