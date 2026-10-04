@@ -284,6 +284,17 @@
     "error": "Signing in with {provider} didn't work. Try again, or use your email address.",
     "linkNotice": "There's already a Rondje Mee account with this email address. Log in below with your password once and we'll link {provider} to it. After that you can also log in with {provider}."
   },
+  "join": {
+    "metaTitle": "Join",
+    "metaDescription": "Join Rondje Mee for free: walk a dog from your neighbourhood or a shelter, or find a regular walker for your own dog.",
+    "title": "Join Rondje Mee",
+    "lede": "What fits you?",
+    "walker": "I want to walk",
+    "owner": "I have a dog that could use an extra walk",
+    "shelter": "I work at an animal shelter",
+    "app": "Your account works right away in your browser. Later you sign in with the same account in the app for iPhone and Android.",
+    "trust": "Free · Always meet together first · 18+"
+  },
   "onboarding": {
     "title": "Tell us about yourself",
     "lede": "Owners don't hand their dog to just anyone. A photo and a few sentences really help.",

@@ -284,6 +284,17 @@
     "error": "No se pudo iniciar sesión con {provider}. Inténtalo de nuevo o usa tu correo electrónico.",
     "linkNotice": "Ya existe una cuenta de Rondje Mee con este correo electrónico. Inicia sesión abajo una vez con tu contraseña y vincularemos {provider} a tu cuenta. Después también podrás entrar con {provider}."
   },
+  "join": {
+    "metaTitle": "Únete",
+    "metaDescription": "Únete gratis a Rondje Mee: pasea a un perro de tu barrio o de una protectora, o encuentra un paseador fijo para tu propio perro.",
+    "title": "Únete a Rondje Mee",
+    "lede": "¿Qué encaja contigo?",
+    "walker": "Quiero pasear",
+    "owner": "Tengo un perro al que le vendría bien un paseo extra",
+    "shelter": "Trabajo en una protectora de animales",
+    "app": "Tu cuenta funciona enseguida en el navegador. Más adelante entras con la misma cuenta en la app para iPhone y Android.",
+    "trust": "Gratis · Siempre os conocéis primero en persona · 18+"
+  },
   "onboarding": {
     "title": "Cuéntanos algo sobre ti",
     "lede": "Los dueños no le dejan su perro a cualquiera. Una foto y unas frases ayudan mucho.",

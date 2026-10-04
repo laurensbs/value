@@ -1,0 +1,78 @@
+/* /aanmelden: one screen on a phone (390×844 without scrolling), the sign-up card with three big
+   choices in the look of the home page's "what brings you here?" (landing.css, .lp-choice). */
+
+.join {
+  padding-block: 4px 16px;
+}
+
+.join-card {
+  display: grid;
+  gap: 16px;
+  padding: 22px 18px;
+}
+
+.join-head {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.join-head h1 {
+  font-size: clamp(1.5rem, 6.4vw, 1.9rem);
+  line-height: 1.12;
+}
+
+.join-choices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.lp-choice.join-choice {
+  min-height: 64px;
+  padding: 10px 12px 10px 10px;
+  gap: 12px;
+  border-radius: 20px;
+}
+
+.join-choice-text {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  font-weight: 720;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.join-app {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: color-mix(in oklab, var(--grass) 9%, var(--surface));
+  line-height: 1.4;
+}
+
+.join-app .icon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--grass);
+}
+
+.join-login,
+.join-trust {
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-height: 600px) {
+  .join-card {
+    gap: 12px;
+    padding-block: 16px;
+  }
+}

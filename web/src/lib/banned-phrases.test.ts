@@ -19,6 +19,8 @@ type Locale = 'nl' | 'en' | 'es' | 'fr'
 const PUSH_TEXTS = [
   'notifications.kinds.',
   'notifications.stopped',
+  // The sign-up page (/aanmelden): an invitation, never a push.
+  'join.',
   'email.kinds.',
   'email.reminderFooter',
   'pushAsk.',
