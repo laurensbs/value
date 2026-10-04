@@ -97,6 +97,25 @@ test('shelter: sign up, import dogs from CSV, plan a group walk, admin verifies,
   await expect(visitor.page.getByText('Verzamelen: Bij de hoofdingang').first()).toBeVisible()
   await shot(visitor.page, '22b-shelter-public')
 
+  // --- Its city has something real now: Utrecht goes into search engines, with the walk as an event ---
+  await visitor.page.goto('/cities/utrecht')
+  await expect(visitor.page.getByText(orgName).first()).toBeVisible()
+  await expect(visitor.page.locator('meta[name="robots"]')).toHaveCount(0)
+  const structured = await visitor.page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((blocks) => blocks.flatMap((b) => [JSON.parse(b.textContent ?? '[]')].flat()))
+  expect(structured.map((t) => t['@type'])).toContain('BreadcrumbList')
+  expect(structured).toContainEqual(
+    expect.objectContaining({
+      '@type': 'Event',
+      name: `Groepswandeling bij ${orgName}`,
+      isAccessibleForFree: true,
+      location: expect.objectContaining({ '@type': 'Place', name: orgName }),
+      organizer: expect.objectContaining({ name: orgName }),
+    }),
+  )
+  expect(await (await visitor.page.request.get('/sitemap.xml')).text()).toContain('/cities/utrecht<')
+
   // --- A walker joins the group walk ---
   const walker = await newPerson(browser)
   await signUp(walker.page, { name: 'Sem', email: `sem-${id}@e2e.test` })

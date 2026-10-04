@@ -84,7 +84,7 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <div className="stack-l">
-      <JsonLd data={[breadcrumbs([{ name: t('cities.title'), path: '/cities' }, { name: city.name, path }]), ...events]} />
+      <JsonLd data={[breadcrumbs([{ name: t('cities.footerLink'), path: '/cities' }, { name: city.name, path }]), ...events]} />
       <nav aria-label={t('cities.all')}>
         <Link href="/cities" className="link-button">
           ← {t('cities.all')}

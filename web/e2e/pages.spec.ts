@@ -40,6 +40,14 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await expect(page.getByRole('heading', { name: 'Honden uitlaten in Amsterdam', level: 1 })).toBeVisible()
   await expect(page.getByText('Dierenopvangcentrum Amsterdam (DOA)')).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Altijd gratis, nooit advertenties' })).toBeVisible()
+  // Only example data here: the page is for visitors, search engines leave it out until something real is on it.
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', /\/cities\/amsterdam$/)
+  // Other cities: the nearest ones in the Netherlands, each a full tap target.
+  const otherCities = page.getByRole('navigation', { name: 'Andere steden' }).getByRole('link')
+  await expect(otherCities).toHaveCount(8)
+  await expect(otherCities.first()).toHaveText('Noordwijk')
+  for (const box of await otherCities.evaluateAll((links) => links.map((l) => l.getBoundingClientRect().height))) expect(box).toBeGreaterThanOrEqual(44)
   await shot(page, '32-city')
   expect((await page.request.get('/cities/atlantis')).status()).toBe(404)
   // Pages with a loading screen still answer with a real status: 404 for a dog that isn't there, and a
@@ -52,8 +60,26 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   }
 
   expect(await (await page.request.get('/robots.txt')).text()).toContain('Disallow: /admin')
-  expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/cities/amsterdam')
-  expect(await (await page.request.get('/sitemap.xml')).text()).toContain('/support')
+  const sitemap = await (await page.request.get('/sitemap.xml')).text()
+  expect(sitemap).toContain('/support')
+  expect(sitemap).toContain('<lastmod>')
+  // Example dogs, walks and shelters never put a city in the sitemap (Amsterdam has only a directory shelter).
+  for (const city of ['amsterdam', 'madrid', 'valencia', 'gent']) expect(sitemap).not.toContain(`/cities/${city}<`)
+
+  // Structured data on the home page, with this response's nonce: the name comes from one place.
+  const home = await page.request.get('/')
+  const nonce = /'nonce-([^']+)'/.exec(home.headers()['content-security-policy'] ?? '')?.[1]
+  const block = /<script type="application\/ld\+json" nonce="([^"]*)">([^<]*)<\/script>/.exec(await home.text())
+  expect(block?.[1]).toBe(nonce)
+  expect(JSON.parse(block![2])['@graph'].map((t: { '@type': string; name: string }) => [t['@type'], t.name])).toEqual([
+    ['Organization', 'Rondje'],
+    ['WebSite', 'Rondje'],
+  ])
+  // Logging in, signing up and example dogs are no answer to a search.
+  for (const path of ['/login', '/signup', '/dogs/demo-noor']) {
+    await page.goto(path)
+    await expect(page.locator('meta[name="robots"]'), path).toHaveAttribute('content', /^noindex/)
+  }
 
   // The app on the home screen opens on Today, in the visitor's language, with shortcuts on Android.
   const manifest = await (await page.request.get('/manifest.webmanifest', { headers: { 'accept-language': 'en' } })).json()
