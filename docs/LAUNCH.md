@@ -117,14 +117,9 @@ Eén account voor de website en de iPhone-app: wie op beide plekken met hetzelfd
 
    Deze Services ID is `APPLE_CLIENT_ID`. Hij is voor de website (en voor de app als het systeemscherm niet kan).
 3. [ ] **Sleutel** (Keys → +): vink Sign in with Apple aan, kies `app.rondje.mobile` als Primary App ID en download het `.p8`-bestand. Dat kan maar één keer: bewaar het in je wachtwoordkluis, **nooit in de repo**. Noteer de **Key ID** en je **Team ID** (rechtsboven op developer.apple.com).
-4. [ ] **Client secret maken** (op je eigen Mac, in `web/`):
+4. [ ] **Niets meer te maken.** Zet de hele inhoud van het `.p8`-bestand in Vercel als `APPLE_PRIVATE_KEY` (met de regels `-----BEGIN PRIVATE KEY-----` en `-----END PRIVATE KEY-----` erbij; op één regel of met `\n` erin mag ook), samen met `APPLE_KEY_ID` en `APPLE_TEAM_ID` (zie de tabel hieronder). De server maakt daar bij elke start zelf de "client secret" van die Apple vraagt (`web/src/lib/apple-secret.ts`). Die verloopt dus nooit: geen herinnering, geen script.
 
-   ```bash
-   node scripts/apple-client-secret.mjs --team <Team ID> --key-id <Key ID> \
-     --client-id app.rondje.web --key ~/Downloads/AuthKey_<Key ID>.p8
-   ```
-
-   De regel die het script print is `APPLE_CLIENT_SECRET`. Apple laat hem **maximaal 6 maanden** werken: zet meteen een herinnering in je agenda om er vóór de vervaldatum (het script noemt hem) een nieuwe te maken en in Vercel te zetten. Verloopt hij, dan werkt Apple-login op de website niet meer (in de app blijft het systeemscherm werken).
+   Liever geen sleutel in Vercel? Dan kan het oude script nog: `node scripts/apple-client-secret.mjs --team <Team ID> --key-id <Key ID> --client-id app.rondje.web --key ~/Downloads/AuthKey_<Key ID>.p8` (in `web/`) en de uitvoer als `APPLE_CLIENT_SECRET` zetten. Die werkt **maximaal 6 maanden**; daarna moet je een nieuwe maken. Staan beide er, dan wint de sleutel.
 
 **Google** (console.cloud.google.com)
 
@@ -141,10 +136,14 @@ Eén account voor de website en de iPhone-app: wie op beide plekken met hetzelfd
 | `GOOGLE_CLIENT_ID` | Client ID van de webclient |
 | `GOOGLE_CLIENT_SECRET` | Client secret van de webclient |
 | `APPLE_CLIENT_ID` | de Services ID, bijvoorbeeld `app.rondje.web` |
-| `APPLE_CLIENT_SECRET` | de uitvoer van het script |
+| `APPLE_PRIVATE_KEY` | de inhoud van `AuthKey_<Key ID>.p8` |
+| `APPLE_KEY_ID` | de Key ID van die sleutel (10 tekens) |
+| `APPLE_TEAM_ID` | je Team ID (10 tekens) |
 | `APPLE_APP_BUNDLE_ID` | `app.rondje.mobile` |
 
-Daarna **Redeploy** (Deployments → laatste productie-deploy → Redeploy). Controle: `https://rondjemee.nl/api/v1/config` toont dan `"auth":{"providers":["google","apple"],"appleNative":true}`, en op `/login` staan de twee knoppen. Ook het beheerdersdashboard laat zien welke aanstaan.
+Google en Apple staan los van elkaar: Google kan dus al aan terwijl het Apple Developer-account nog loopt (dan staat op de website alleen "Doorgaan met Google"). Let wel op voor de iPhone-app: App Store-regel 4.8 vraagt Apple erbij zodra Google in de app staat, dus zet Apple aan vóór je de app instuurt.
+
+Daarna **Redeploy** (Deployments → laatste productie-deploy → Redeploy). Is de sleutel onleesbaar of ontbreekt de Key ID of Team ID, dan blijft Apple uit en staat de reden in de Vercel-logs ("Sign in with Apple: …"). Controle: `https://rondjemee.nl/api/v1/config` toont dan `"auth":{"providers":["google","apple"],"appleNative":true}`, en op `/login` ("Welkom terug") en `/signup` ("Maak een account") staan de twee knoppen, Apple bovenaan. Ook het beheerdersdashboard laat zien welke aanstaan.
 
 **Goed om te weten**
 

@@ -31,7 +31,7 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 | `CRON_SECRET` | yes | Bearer token for the daily jobs `/api/cron/cleanup` and `/api/cron/nudges` (friendly reminders; Vercel Cron sends it). |
 | `BLOB_READ_WRITE_TOKEN` | recommended | Vercel Blob for photos. Without it, photos are stored inline (max 450 KB). |
 | `GOOGLE_CLIENT_ID`/`_SECRET` | optional | Google sign-in. |
-| `APPLE_CLIENT_ID`/`_SECRET`/`APPLE_APP_BUNDLE_ID` | optional | Sign in with Apple. |
+| `APPLE_CLIENT_ID` + `APPLE_PRIVATE_KEY` + `APPLE_KEY_ID` + `APPLE_TEAM_ID`, `APPLE_APP_BUNDLE_ID` | optional | Sign in with Apple. The server signs its own client secret from the `.p8` key on every start (`src/lib/apple-secret.ts`), so it never expires. A ready-made `APPLE_CLIENT_SECRET` (`scripts/apple-client-secret.mjs`, max 6 months) still works instead of the key. |
 | `BETTER_AUTH_URL` | optional | Canonical URL; defaults to the Vercel production domain. |
 | `NEXT_PUBLIC_TILE_URL` | optional | Map tiles; defaults to OpenStreetMap. Use a tile provider with an API key before heavy traffic. |
 | `SUPPORT_URL` + `OPERATOR_NAME` | optional | The support button on `/support` (https Patreon, Ko-fi, Open Collective or Buy Me a Coffee only). Shown only when both are set, and never in the apps. |

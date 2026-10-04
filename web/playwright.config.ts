@@ -1,9 +1,16 @@
+import { generateKeyPairSync } from 'node:crypto'
 import { defineConfig, devices } from '@playwright/test'
 import webpush from 'web-push'
 
 const PORT = Number(process.env.E2E_PORT ?? 3200)
 // Production sends web push, so the tests run with it too, on a throwaway key pair per run.
 const vapid = webpush.generateVAPIDKeys()
+// "Doorgaan met Apple": a throwaway key shaped like Apple's .p8 (P-256), pasted on one line with
+// "\n" in it like a dashboard might, so the server signs its own client secret (src/lib/apple-secret.ts).
+const appleKey = generateKeyPairSync('ec', { namedCurve: 'prime256v1' })
+  .privateKey.export({ format: 'pem', type: 'pkcs8' })
+  .toString()
+  .replace(/\n/g, '\\n')
 
 export default defineConfig({
   testDir: './e2e',
@@ -44,6 +51,14 @@ export default defineConfig({
           VAPID_PUBLIC_KEY: vapid.publicKey,
           VAPID_PRIVATE_KEY: vapid.privateKey,
           VAPID_SUBJECT: 'mailto:e2e@example.com',
+          // Fake Google and Apple clients: the buttons show on the website (never in the app shell)
+          // and send the browser to Google/Apple, which the tests stop right there (e2e/social-login.spec.ts).
+          GOOGLE_CLIENT_ID: 'e2e-client.apps.googleusercontent.com',
+          GOOGLE_CLIENT_SECRET: 'e2e-google-secret',
+          APPLE_CLIENT_ID: 'app.rondje.e2e',
+          APPLE_KEY_ID: 'E2EKEY1234',
+          APPLE_TEAM_ID: 'E2ETEAM123',
+          APPLE_PRIVATE_KEY: appleKey,
         },
       },
 })

@@ -62,7 +62,7 @@ Alleen in de simulator proberen kan zonder account: `xcodebuild … RONDJE_FEATU
 Staat standaard uit (`RONDJE_FEATURE_SOCIAL_LOGIN: NO` in `project.yml`). De knoppen verschijnen pas als die schakelaar op `YES` staat én de server de aanbieder noemt in `GET /api/v1/config` (`auth.providers`, en `auth.appleNative` voor het Apple-venster in de app).
 
 1. Apple Developer-account (betaald): zet bij de App ID `app.rondje.mobile` de capability **Sign in with Apple** aan.
-2. Server (Vercel): `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `APPLE_CLIENT_ID`, `APPLE_CLIENT_SECRET` en `APPLE_APP_BUNDLE_ID=app.rondje.mobile` (zie `web/README.md`).
+2. Server (Vercel): `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `APPLE_CLIENT_ID`, `APPLE_PRIVATE_KEY` + `APPLE_KEY_ID` + `APPLE_TEAM_ID` (of een kant-en-klare `APPLE_CLIENT_SECRET`) en `APPLE_APP_BUNDLE_ID=app.rondje.mobile` (zie `web/README.md`).
 3. In `project.yml`, onder `settings.base`:
    - `RONDJE_FEATURE_SOCIAL_LOGIN: YES`
    - `RONDJE_APP_ENTITLEMENTS: Rondje/Resources/Rondje.capabilities.entitlements` (dezelfde rechten als `Rondje.entitlements`, plus Sign in with Apple)

@@ -9,6 +9,7 @@ import { nativeHandoff } from '@/app/api/auth/native/handoff'
 import { db } from '@/db'
 import * as schema from '@/db/schema'
 import { passwordResetEmail, sendEmail, toLocale, verifyEmail } from '@/server/email'
+import { appleClientSecret } from './apple-secret'
 import { cleanAuthUser } from './photos'
 import { APP_NAME, siteUrl, trustedOrigins } from './site'
 
@@ -24,12 +25,23 @@ const google =
     ? { google: { clientId: process.env.GOOGLE_CLIENT_ID, clientSecret: process.env.GOOGLE_CLIENT_SECRET } }
     : {}
 
+// Signed here from the .p8 key (never runs out), or a ready-made APPLE_CLIENT_SECRET.
+const appleSecret = appleClientSecret(process.env)
+if (appleSecret.problem) {
+  // Shown in the Vercel logs; the value of the key itself is never logged.
+  console.error(
+    appleSecret.problem === 'incomplete-key'
+      ? 'Sign in with Apple: APPLE_PRIVATE_KEY is set, but APPLE_KEY_ID or APPLE_TEAM_ID is missing.'
+      : 'Sign in with Apple: APPLE_PRIVATE_KEY is not a readable .p8 key (paste the whole AuthKey_….p8 file).',
+  )
+}
+
 const apple =
-  process.env.APPLE_CLIENT_ID && process.env.APPLE_CLIENT_SECRET
+  process.env.APPLE_CLIENT_ID && appleSecret.secret
     ? {
         apple: {
           clientId: process.env.APPLE_CLIENT_ID,
-          clientSecret: process.env.APPLE_CLIENT_SECRET,
+          clientSecret: appleSecret.secret,
           appBundleIdentifier: process.env.APPLE_APP_BUNDLE_ID,
         },
       }

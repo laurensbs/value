@@ -2,6 +2,8 @@
 // Makes APPLE_CLIENT_SECRET for "Inloggen met Apple" on the website: a JWT signed with the .p8
 // key from the Apple Developer account. Runs locally, prints the secret, stores nothing.
 // Apple accepts at most 6 months, so make a new one before it expires (see docs/LAUNCH.md).
+// Usually not needed: with APPLE_PRIVATE_KEY + APPLE_KEY_ID + APPLE_TEAM_ID in Vercel the server
+// signs its own secret on every start (src/lib/apple-secret.ts), which never runs out.
 //
 //   node scripts/apple-client-secret.mjs --team ABCDE12345 --key-id XYZ987WVU6 \
 //     --client-id app.rondje.web --key ~/Downloads/AuthKey_XYZ987WVU6.p8
