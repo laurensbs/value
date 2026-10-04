@@ -54,6 +54,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}. [À vérifier :
 **Progression et rappels**
 
 - vos points, votre niveau et vos médailles, calculés à partir de ce que vous avez fait sur Rondje (balades, quiz de sécurité ou photo pour le propriétaire, par exemple). Vous seul(e) les voyez ;
+- les leçons de l'école des chiens que vous avez terminées et quand, sans score ;
 - votre objectif de la semaine, si vous en choisissez un, et si vous souhaitez des rappels bienveillants ;
 - les rappels que nous vous avons envoyés et quand, pour ne jamais en envoyer trop.
 

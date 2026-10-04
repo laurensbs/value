@@ -1095,7 +1095,7 @@
         },
         "solo": {
           "q": "Na de kennismaking. Wanneer mag je zelfstandig met de hond?",
-          "a0": "Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald",
+          "a0": "Als de eigenaar je vertrouwen geeft, je ID in het echt heeft gezien en je de quiz hebt gehaald",
           "a1": "Meteen, je kent hem nu",
           "why1": "De eigenaar beslist. Dat gaat per hond.",
           "explain": "Klopt. Stap voor stap, voor iedereen veilig."

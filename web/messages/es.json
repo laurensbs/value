@@ -1095,7 +1095,7 @@
         },
         "solo": {
           "q": "Después del primer encuentro. ¿Cuándo puedes pasear al perro solo?",
-          "a0": "Cuando el dueño confía en ti y aprobaste el test",
+          "a0": "Cuando el dueño confía en ti, ha visto tu documento en persona y aprobaste el test",
           "a1": "Enseguida, ya lo conoces",
           "why1": "Decide el dueño. Va perro a perro.",
           "explain": "Correcto. Paso a paso, seguro para todos."

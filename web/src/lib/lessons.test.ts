@@ -93,6 +93,21 @@ describe('the Hondenschool lessons', () => {
     })
   }
 
+  it('walking alone takes what rules.ts asks (canRequestSolo): the owner\'s trust, the ID seen in person, and the quiz', () => {
+    const solo = LESSONS.find((l) => l.id === 'meet')!.cards.find((c) => c.key === 'solo')!
+    expect(solo.kind === 'choice' && solo.correct).toBe(0)
+    const needs: Record<Locale, RegExp[]> = {
+      nl: [/vertrouwen/, /\bID\b.*in het echt/, /quiz/],
+      en: [/trusts you/, /\bID\b in person/, /quiz/],
+      es: [/confía en ti/, /documento en persona/, /test/],
+      fr: [/confiance/, /pièce d'identité en personne/, /quiz/],
+    }
+    for (const locale of ['nl', 'en', 'es', 'fr'] as Locale[]) {
+      const answer = flatten(all[locale])['school.lessons.meet.solo.a0']
+      for (const need of needs[locale]) expect(answer, locale).toMatch(need)
+    }
+  })
+
   it('the quiz says honestly what it is, and never that it cannot be guessed', () => {
     const flat = flatten(all.nl)
     expect(flat['quiz.honest']).toBe('De quiz leert je de regels; de eigenaar beslist of je alleen mag.')

@@ -44,6 +44,8 @@ const PUSH_TEXTS = [
   'nextStep.',
 ]
 const NOT_YET = new Set(['guus.', 'nextStep.'])
+/** The Hondenschool texts, which also get the "lessons" patterns (no points to earn, no XP, no hearts). */
+const LESSON_TEXTS = ['school.', 'quiz.honest', 'quiz.lessonLink', 'quiz.schoolFirst', 'profileHub.schoolText', 'safety.schoolText', 'safety.schoolLink']
 
 function flatten(tree: Tree, prefix = ''): Record<string, string> {
   const out: Record<string, string> = {}
@@ -75,11 +77,12 @@ function readings(message: string): string[] {
   return [...new Set(walk(parse(message, { ignoreTag: false })))]
 }
 
-const patterns = (locale: Locale) => [...banned.all, ...banned[locale]].map((p) => new RegExp(p, 'iu'))
+const patterns = (locale: Locale, lesson = false) =>
+  [...banned.all, ...banned[locale], ...(lesson ? [...banned.lessons.all, ...banned.lessons[locale]] : [])].map((p) => new RegExp(p, 'iu'))
 
-/** The banned phrases found in a text, if any. */
-function pressure(text: string, locale: Locale): string[] {
-  return patterns(locale)
+/** The banned phrases found in a text, if any. `lesson`: a Hondenschool text, with the extra lesson patterns. */
+function pressure(text: string, locale: Locale, lesson = false): string[] {
+  return patterns(locale, lesson)
     .filter((re) => re.test(text))
     .map((re) => re.source)
 }
@@ -94,7 +97,10 @@ describe('no pressure in texts that nudge', () => {
       for (const prefix of PUSH_TEXTS) {
         if (!NOT_YET.has(prefix)) expect(keys.some((k) => k.startsWith(prefix)), `${locale}: nothing under ${prefix}`).toBe(true)
       }
-      const found = keys.flatMap((key) => readings(flat[key]).flatMap((text) => pressure(text, locale).map((p) => `${key}: "${text}" (${p})`)))
+      const found = keys.flatMap((key) => {
+        const lesson = LESSON_TEXTS.some((p) => key.startsWith(p))
+        return readings(flat[key]).flatMap((text) => pressure(text, locale, lesson).map((p) => `${key}: "${text}" (${p})`))
+      })
       expect([...new Set(found)]).toEqual([])
     })
   }
@@ -118,6 +124,26 @@ describe('no pressure in texts that nudge', () => {
     }
   })
 
+  it('in a lesson: no points to earn, no XP and no hearts', () => {
+    const game: [Locale, string][] = [
+      ['nl', 'Verdien 10 punten met deze les!'],
+      ['nl', 'Punten verdienen met de Hondenschool'],
+      ['nl', 'Je hebt 3 hartjes.'],
+      ['en', 'Earn 10 XP for this lesson.'],
+      ['en', 'Earn points with every lesson.'],
+      ['en', 'You have 3 hearts.'],
+      ['es', '¡Gana 10 puntos con esta lección!'],
+      ['es', 'Te quedan corazones.'],
+      ['fr', 'Gagnez des points à chaque leçon.'],
+      ['fr', 'Il vous reste des cœurs.'],
+    ]
+    for (const [locale, message] of game) {
+      expect(readings(message).every((text) => pressure(text, locale, true).length > 0), `${locale}: ${message}`).toBe(true)
+    }
+    // Only in lessons: on the progress pages walks do give points.
+    expect(pressure('Zo verdien je punten', 'nl')).toEqual([])
+  })
+
   it('leaves calm texts alone', () => {
     const calm: [Locale, string][] = [
       ['nl', '{dogName} staat gewoon online, maar er wonen nog weinig wandelaars bij jou in de buurt.'],
@@ -132,8 +158,10 @@ describe('no pressure in texts that nudge', () => {
   })
 
   it('is one list that every language and the iPhone app can read', () => {
-    expect(Object.keys(banned).sort()).toEqual(['about', 'all', 'en', 'es', 'fr', 'nl'])
-    for (const list of [banned.all, banned.nl, banned.en, banned.es, banned.fr]) {
+    expect(Object.keys(banned).sort()).toEqual(['about', 'all', 'en', 'es', 'fr', 'lessons', 'nl'])
+    expect(Object.keys(banned.lessons).sort()).toEqual(['about', 'all', 'en', 'es', 'fr', 'nl'])
+    const { lessons } = banned
+    for (const list of [banned.all, banned.nl, banned.en, banned.es, banned.fr, lessons.all, lessons.nl, lessons.en, lessons.es, lessons.fr]) {
       expect(list.length).toBeGreaterThan(0)
       for (const p of list) expect(() => new RegExp(p, 'iu'), p).not.toThrow()
     }

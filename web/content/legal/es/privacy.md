@@ -54,6 +54,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 **Progreso y recordatorios**
 
 - tus puntos, nivel e insignias, calculados a partir de lo que hiciste en Rondje (como paseos, el test de seguridad o una foto para el propietario). Solo tú los ves;
+- qué lecciones de la escuela canina terminaste y cuándo, sin puntuación;
 - tu objetivo semanal, si eliges uno, y si quieres recordatorios amables;
 - qué recordatorios te enviamos y cuándo, para no enviarte nunca demasiados.
 

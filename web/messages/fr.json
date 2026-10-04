@@ -1007,7 +1007,7 @@
     "metaDescription": "Cinq courtes leçons pour promener un chien en sécurité : dire bonjour, langage corporel, la première rencontre, chaud et froid, et en cas de souci.",
     "lede": "Cinq courtes leçons pour promener en sécurité. Environ 2 minutes chacune.",
     "guest": "La première leçon se fait sans compte.",
-    "pace": "Pas de points et pas de presse : à votre rythme, aussi souvent que vous voulez.",
+    "pace": "Pas de points, rien ne presse : à votre rythme, aussi souvent que vous voulez.",
     "count": "{done} leçons sur {total}",
     "pathLabel": "Leçons",
     "here": "On continue ici",
@@ -1095,7 +1095,7 @@
         },
         "solo": {
           "q": "Après la première rencontre. Quand pouvez-vous promener le chien seul ?",
-          "a0": "Quand le propriétaire vous fait confiance et que vous avez réussi le quiz",
+          "a0": "Quand le propriétaire vous fait confiance, a vu votre pièce d'identité en personne et que vous avez réussi le quiz",
           "a1": "Tout de suite, vous le connaissez maintenant",
           "why1": "C'est le propriétaire qui décide. Chien par chien.",
           "explain": "C'est ça. Pas à pas, en sécurité pour tout le monde."

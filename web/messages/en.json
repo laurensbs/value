@@ -1095,7 +1095,7 @@
         },
         "solo": {
           "q": "After the first meeting. When may you walk the dog on your own?",
-          "a0": "When the owner trusts you and you passed the quiz",
+          "a0": "When the owner trusts you, has seen your ID in person and you passed the quiz",
           "a1": "Straight away, you know him now",
           "why1": "The owner decides. It goes dog by dog.",
           "explain": "Right. Step by step, safe for everyone."

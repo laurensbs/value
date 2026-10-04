@@ -129,15 +129,46 @@ test('Hondenschool: lesson 1 without an account, a miss comes back at the end, a
   // Eight paws, one per question, like the app; no clock.
   await expect(other.page.locator('.quiz-paws > span')).toHaveCount(8)
   await expect(other.page.getByRole('timer')).toHaveCount(0)
-  const heat = QUIZ.find((q) => q.id === 'heat')!
-  await other.page.locator(`input[name="answer"][value="${(heat.correct + 1) % heat.options}"]`).check()
-  await other.page.getByRole('button', { name: 'Kijk na' }).click()
-  const toLesson = other.page.getByRole('link', { name: 'Lees de les ‘Warm, koud en water’' })
-  await expect(toLesson).toBeVisible()
+  // Three right, the fourth missed: its explanation links to the lesson that teaches it.
+  const quiz = other.page
+  for (const q of QUIZ.slice(0, 3)) {
+    await quiz.locator(`input[name="answer"][value="${q.correct}"]`).check()
+    await quiz.getByRole('button', { name: 'Kijk na' }).click()
+    await quiz.getByRole('button', { name: 'Verder' }).click()
+  }
+  const fourth = QUIZ[3]
+  await quiz.locator(`input[name="answer"][value="${(fourth.correct + 1) % fourth.options}"]`).check()
+  await quiz.getByRole('button', { name: 'Kijk na' }).click()
+  await expect(quiz.getByText('Nog 5 vragen')).toBeVisible()
+  await expect(quiz.locator('.quiz-paws > .is-right')).toHaveCount(3)
+  const toLesson = quiz.getByRole('link', { name: 'Lees de les ‘Als er iets gebeurt’' })
   await toLesson.click()
-  await expect(other.page).toHaveURL(/\/school\/weather\?back=%2Fprofile%2Fquiz$/)
-  await other.page.getByRole('link', { name: 'Niet nu' }).click()
-  await expect(other.page).toHaveURL(/\/profile\/quiz$/)
+  await expect(quiz).toHaveURL(/\/school\/help\?back=%2Fprofile%2Fquiz$/)
+  await quiz.getByRole('link', { name: 'Niet nu' }).click()
+  await expect(quiz).toHaveURL(/\/profile\/quiz$/)
+  // Back where it was: the fourth question with its explanation, three paws green, not question 1 again.
+  const where = async () => {
+    await expect(quiz.getByText('Nog 5 vragen')).toBeVisible()
+    await expect(quiz.locator('.quiz-paws > .is-right')).toHaveCount(3)
+    await expect(quiz.getByRole('status').filter({ hasText: 'Niet helemaal.' })).toBeVisible()
+    await expect(quiz.locator('legend')).toHaveText(/Een andere hond komt op jullie af/)
+  }
+  await where()
+  // Also after a reload of the page (sessionStorage, this tab only).
+  await quiz.reload()
+  await where()
+  await quiz.getByRole('button', { name: 'Verder' }).click()
+  await expect(quiz.locator('legend')).toHaveText(/De hond is losgeschoten/)
+  // The rest right, the missed one last: passed, and the next visit starts at the beginning.
+  for (const q of [...QUIZ.slice(4), fourth]) {
+    await quiz.locator(`input[name="answer"][value="${q.correct}"]`).check()
+    await quiz.getByRole('button', { name: 'Kijk na' }).click()
+    await quiz.getByRole('button', { name: 'Verder' }).click()
+  }
+  await expect(quiz.getByRole('heading', { name: 'Gehaald!' })).toBeVisible()
+  await expect.poll(() => quiz.evaluate(() => sessionStorage.getItem('rondje.quiz'))).toBeNull()
+  await quiz.goto('/profile/quiz')
+  await expect(quiz.getByText('Nog 8 vragen')).toBeVisible()
 
   await guest.context.close()
   await other.context.close()
