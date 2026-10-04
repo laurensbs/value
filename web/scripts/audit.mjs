@@ -12,8 +12,8 @@ const [base = 'http://localhost:3100', out = 'audit'] = process.argv.slice(2)
 mkdirSync(out, { recursive: true })
 const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH || undefined })
 
-const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam']
-const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
+const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelters', '/group-walks', '/login', '/signup', '/forgot-password', '/help', '/safety', '/support', '/about', '/suggest', '/legal/terms', '/shelter', '/cities', '/cities/amsterdam', '/school', '/school/hello', '/school/body']
+const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/school', '/school/meet', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
 const axeSource = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8')
 // Bars that stay put while the page scrolls under them: a control behind one is reached by scrolling.
 const BARS = '.header, .tabbar, .app-tabs, .active-walk, .form-actions, .onboarding-actions, .walk-actions, .bulk-actions, .chat-compose'

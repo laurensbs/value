@@ -1,0 +1,548 @@
+/* ---------- The Hondenschool (onderzoek duolingo-zonder-druk §3.5) ----------
+   Mobile first: one card at a time, answers of at least 56 px, the next step always at the bottom of
+   the screen. Only transform and opacity move; with less motion everything only fades. */
+
+/* ----- The path ----- */
+
+.school-mark {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.school-count {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  color: var(--grass);
+  font-size: 0.95rem;
+}
+
+.school-count-bar,
+.lesson-bar {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.school-count-bar > span,
+.lesson-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--grass);
+  transform-origin: left center;
+  transition: transform var(--motion-scherm) var(--ease-scherm);
+}
+
+.school-count > span {
+  white-space: nowrap;
+}
+
+.school-path-wrap {
+  position: relative;
+}
+
+/* The dashed walking route from stop to stop, drawn once the stops are laid out. */
+.school-trail {
+  position: absolute;
+  inset: 0 auto auto 0;
+  pointer-events: none;
+  animation: fade-in var(--motion-scherm) ease-out backwards;
+}
+
+.school-trail path {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 8 12;
+}
+
+.school-path {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 8px 0 16px;
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+}
+
+.school-stop {
+  position: relative;
+  transform: translateX(var(--x, 0));
+}
+
+.school-stop-link {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+.school-stop-ball {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--muted);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 0.05);
+  transition: transform var(--motion-tik) var(--ease-tik);
+}
+
+.school-stop-link:active .school-stop-ball {
+  transform: scale(0.94);
+}
+
+.school-stop.is-done .school-stop-ball {
+  background: var(--grass);
+  border-color: var(--grass);
+  color: var(--on-grass);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 0.1);
+}
+
+.school-stop.is-next .school-stop-ball {
+  background: var(--ball);
+  border-color: var(--ball);
+  color: var(--on-ball);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 0.1);
+}
+
+/* A soft ring that keeps pulsing outward around the next stop; standing still with less motion. */
+.school-stop.is-next .school-stop-ball::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 5px solid var(--ball);
+  animation: school-pulse 1600ms ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes school-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  to {
+    transform: scale(1.38);
+    opacity: 0;
+  }
+}
+
+.school-stop-title {
+  display: grid;
+  max-width: 190px;
+  /* The route passes behind the title, not through it. */
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--paper);
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.school-stop.is-open .school-stop-title {
+  color: var(--muted);
+}
+
+.school-stop-title small {
+  color: var(--grass);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* "Hier verder", beside the next stop on the side with room. Outside the flow: it never moves anything. */
+.school-here {
+  position: absolute;
+  top: 26px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--grass-soft);
+  color: var(--grass);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.school-here.right {
+  left: calc(50% + 51px);
+}
+
+.school-here.left {
+  right: calc(50% + 51px);
+}
+
+/* Safety page and profile: the way in. */
+.school-teaser {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+/* ----- One lesson ----- */
+
+.lesson {
+  /* The next step stays at the bottom of the screen, also when a card is short. */
+  min-height: calc(100dvh - var(--header-h) - 40px - env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lesson-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lesson-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 8px 0 0;
+  color: var(--muted);
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lesson-bar {
+  height: 14px;
+}
+
+.lesson-name {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.lesson-card {
+  /* A fixed height, not "the rest of the screen": when Guus's answer appears below, nothing on the card moves. */
+  min-height: calc(100dvh - var(--header-h) - 290px - env(safe-area-inset-bottom, 0px));
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  padding-block: 8px;
+  text-align: center;
+  animation: moment-rise var(--motion-scherm) var(--ease-scherm) backwards;
+  --rise: 12px;
+}
+
+.lesson-sentence {
+  max-width: 30ch;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  outline: none;
+}
+
+.lesson-art {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.lesson-art.dog {
+  background: color-mix(in oklab, var(--tile, #f6ebcf) var(--tile-mix), var(--surface));
+}
+
+.lesson-art.icon {
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+.lesson-art.icon.sos {
+  background: #b3261e;
+  color: #ffffff;
+}
+
+.lesson-options {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.lesson-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  /* Room on the right for the mark, kept free from the start. */
+  padding: 14px 52px 14px 18px;
+  /* Always 2 px, also once marked right or wrong: the answers never change size. */
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 650;
+  line-height: 1.3;
+  text-align: left;
+  transition: transform var(--motion-tik) var(--ease-tik);
+}
+
+.lesson-option:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+.lesson-option:disabled {
+  cursor: default;
+}
+
+.lesson-option > span:not(.lesson-art):not(.lesson-mark) {
+  flex: 1;
+}
+
+.lesson-option.is-right {
+  border-color: var(--grass);
+  background: var(--grass-soft);
+}
+
+.lesson-option.is-wrong {
+  border-color: var(--warn);
+  background: var(--warn-soft);
+}
+
+.lesson-mark {
+  /* Outside the flow: a mark appearing never makes an answer taller. */
+  position: absolute;
+  top: calc(50% - 14px);
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface);
+  animation: fade-in var(--motion-klein) ease-out backwards;
+}
+
+.is-right > .lesson-mark {
+  color: var(--grass);
+}
+
+.is-wrong > .lesson-mark {
+  color: var(--warn);
+}
+
+/* Three dogs side by side: picture on top, the word below, the mark on the picture. */
+.lesson-options.pictures {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lesson-options.pictures .lesson-option {
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 4px 10px;
+  font-size: 0.86rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.lesson-options.pictures .lesson-art {
+  width: min(88px, 100%) !important;
+  height: auto !important;
+  aspect-ratio: 1;
+  border-radius: 20px;
+}
+
+.lesson-options.pictures .lesson-art svg {
+  width: 90%;
+  height: auto;
+}
+
+.lesson-options.pictures .lesson-mark {
+  top: 4px;
+  right: 4px;
+}
+
+/* The bottom of the screen: "Verder", or what Guus says about the answer. */
+.lesson-foot {
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  padding: 12px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(to top, var(--paper) 80%, transparent);
+}
+
+.lesson-button {
+  min-height: 56px;
+}
+
+.lesson-strip {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 20px;
+  background: var(--grass-soft);
+  outline: none;
+  animation: fade-in var(--motion-klein) ease-out backwards;
+}
+
+.lesson-strip.wrong {
+  background: var(--warn-soft);
+}
+
+.lesson-strip-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.lesson-strip-text p:first-child {
+  font-weight: 650;
+}
+
+.lesson-strip-guus {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: color-mix(in oklab, #f6ebcf var(--tile-mix), var(--surface));
+}
+
+/* Something to do for real: hold until the ring is full. */
+.hold {
+  align-items: center;
+}
+
+.hold-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 190px;
+  height: 190px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--grass);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.hold-button:disabled {
+  cursor: default;
+}
+
+.hold-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.hold-track,
+.hold-fill {
+  fill: none;
+  stroke-width: 12;
+}
+
+.hold-track {
+  stroke: var(--sunken);
+}
+
+.hold-fill {
+  stroke: var(--grass);
+  stroke-linecap: round;
+}
+
+.hold-label {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  color: var(--grass);
+}
+
+.hold-label strong {
+  color: var(--ink);
+}
+
+.hold-count {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The end of a lesson. */
+.lesson-done {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fade-in var(--motion-scherm) ease-out backwards;
+}
+
+.lesson-done > h2 {
+  font-size: 2rem;
+  outline: none;
+}
+
+.lesson-done > .stack-s,
+.lesson-done > .school-wall {
+  width: 100%;
+}
+
+.lesson-done-art {
+  animation: moment-pop var(--motion-pop) var(--ease-pop) backwards;
+}
+
+.school-wall {
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Less motion: cards, answers and the end only fade in; the next stop's ring stands still. */
+  .lesson-card,
+  .lesson-done-art,
+  .school-trail {
+    animation: fade-in var(--motion-klein) ease-out backwards !important;
+  }
+
+  .school-stop.is-next .school-stop-ball::after {
+    animation: none !important;
+    inset: -8px;
+    opacity: 0.6;
+  }
+
+  .school-stop-link:active .school-stop-ball,
+  .lesson-option:not(:disabled):active {
+    transform: none;
+  }
+}

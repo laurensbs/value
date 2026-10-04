@@ -17,15 +17,30 @@ export interface DogLook {
   collar: string
 }
 
+/**
+ * How the dog looks right now, the same as the iPhone app's DogMood (ios/Rondje/UI/DogFace.swift).
+ * Only the eyes, brows and mouth change; the dog stays itself. For now just the three the
+ * Hondenschool's body-language lesson needs; without a mood the face is as it always was.
+ */
+export type DogMood = 'neutral' | 'happy' | 'sleepy' | 'uneasy'
+
 interface Props {
   look: DogLook
   size?: number
   title?: string
+  mood?: DogMood
 }
 
 const INK = '#1d2421'
 const TAG = '#e9c46a'
 const INNER_EAR = '#e9b3a6'
+
+/** True for coats so dark that ink lines (closed eyes, worried brows) would vanish into them. */
+function isDark(css: string): boolean {
+  const v = /^#[0-9a-f]{6}$/i.test(css) ? parseInt(css.slice(1), 16) : NaN
+  if (Number.isNaN(v)) return false
+  return 0.299 * ((v >> 16) & 0xff) + 0.587 * ((v >> 8) & 0xff) + 0.114 * (v & 0xff) < 80
+}
 
 const HEADS: Record<HeadShape, { rx: number; ry: number; cy: number; muzzle: [number, number, number] }> = {
   round: { rx: 34, ry: 32, cy: 62, muzzle: [76, 18, 14] },
@@ -34,8 +49,11 @@ const HEADS: Record<HeadShape, { rx: number; ry: number; cy: number; muzzle: [nu
 }
 
 /** Flat front-facing dog portrait, drawn from a handful of traits. */
-export function DogFace({ look, size = 96, title }: Props) {
-  const { fur, ears, muzzle, earStyle, blaze, patch, brows, tongue, collar } = look
+export function DogFace({ look, size = 96, title, mood = 'neutral' }: Props) {
+  const { fur, ears, muzzle, earStyle, blaze, patch, brows, collar } = look
+  // Happy dogs show their tongue; the quieter moods never do.
+  const tongue = mood === 'happy' ? true : mood === 'neutral' ? look.tongue : false
+  const line = isDark(fur) ? '#c9beb8' : INK
   const { rx, ry, cy, muzzle: [mcy, mrx, mry] } = HEADS[look.head ?? 'round']
   const left = 60 - rx
   const right = 60 + rx
@@ -99,21 +117,60 @@ export function DogFace({ look, size = 96, title }: Props) {
           <ellipse cx={60 + eyeDx} cy={eyeY - 8} rx="3.4" ry="2.3" />
         </g>
       )}
-      <g fill={INK}>
-        <circle cx={60 - eyeDx} cy={eyeY} r="4.3" />
-        <circle cx={60 + eyeDx} cy={eyeY} r="4.3" />
-      </g>
-      <g fill="#fff">
-        <circle cx={60 - eyeDx + 1.5} cy={eyeY - 1.4} r="1.4" />
-        <circle cx={60 + eyeDx + 1.5} cy={eyeY - 1.4} r="1.4" />
-      </g>
+      {mood === 'happy' ? (
+        // Smiling eyes: two upward arcs.
+        <path
+          d={[60 - eyeDx, 60 + eyeDx].map((x) => `M${x - 4.5} ${eyeY + 2} Q${x} ${eyeY - 6} ${x + 4.5} ${eyeY + 2}`).join(' ')}
+          fill="none"
+          stroke={line}
+          strokeWidth="2.6"
+          strokeLinecap="round"
+        />
+      ) : mood === 'sleepy' ? (
+        // Closed eyes: two soft lids.
+        <path
+          d={[60 - eyeDx, 60 + eyeDx].map((x) => `M${x - 4} ${eyeY + 1} Q${x} ${eyeY + 3} ${x + 4} ${eyeY + 1}`).join(' ')}
+          fill="none"
+          stroke={line}
+          strokeWidth="2.4"
+          strokeLinecap="round"
+        />
+      ) : (
+        <>
+          {/* Uneasy: the white of the eye shows while the pupils look aside, under worried brows. */}
+          {mood === 'uneasy' ? (
+            <g fill="#fff">
+              <circle cx={60 - eyeDx} cy={eyeY} r="5.2" />
+              <circle cx={60 + eyeDx} cy={eyeY} r="5.2" />
+            </g>
+          ) : null}
+          <g fill={INK}>
+            <circle cx={60 - eyeDx - (mood === 'uneasy' ? 1.8 : 0)} cy={eyeY} r="4.3" />
+            <circle cx={60 + eyeDx - (mood === 'uneasy' ? 1.8 : 0)} cy={eyeY} r="4.3" />
+          </g>
+          <g fill="#fff">
+            <circle cx={60 - eyeDx + 1.5 - (mood === 'uneasy' ? 1.8 : 0)} cy={eyeY - 1.4} r="1.4" />
+            <circle cx={60 + eyeDx + 1.5 - (mood === 'uneasy' ? 1.8 : 0)} cy={eyeY - 1.4} r="1.4" />
+          </g>
+          {mood === 'uneasy' ? (
+            <path
+              d={`M${60 - eyeDx - 5} ${eyeY - 8} L${60 - eyeDx + 3} ${eyeY - 11} M${60 + eyeDx + 5} ${eyeY - 8} L${60 + eyeDx - 3} ${eyeY - 11}`}
+              fill="none"
+              stroke={line}
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          ) : null}
+        </>
+      )}
 
       <ellipse cx="60" cy={mcy} rx={mrx} ry={mry} fill={muzzle} />
       {tongue && <path d={`M55.5 ${mcy + 4.5} q4.5 11 9 0 z`} fill="#e8798a" />}
       <ellipse cx="60" cy={noseY} rx="7" ry="5" fill={INK} />
       <ellipse cx="58" cy={noseY - 1.6} rx="2.2" ry="1.2" fill="#fff" opacity="0.35" />
       <path
-        d={`M60 ${noseY + 5} v4 M60 ${noseY + 9} q-5 4 -9 1 M60 ${noseY + 9} q5 4 9 1`}
+        // Uneasy: a tight, flat mouth instead of the relaxed curves.
+        d={mood === 'uneasy' ? `M60 ${noseY + 5} v5 M55 ${noseY + 10} h10` : `M60 ${noseY + 5} v4 M60 ${noseY + 9} q-5 4 -9 1 M60 ${noseY + 9} q5 4 9 1`}
         fill="none"
         stroke={INK}
         strokeWidth="2"

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { startTransition, useActionState, useEffect, useRef, useState } from 'react'
+import { QUIZ_LESSON } from '@/lib/lessons'
 import { QUIZ } from '@/lib/quiz'
 import { playSound } from '@/lib/sounds'
 import { submitQuiz, type FormState } from '@/server/actions/profile'
@@ -24,8 +25,9 @@ async function send(prev: QuizState, data: FormData): Promise<QuizState> {
  * each answer you read why; a question you miss comes back at the end, until every one is right. Only
  * then are the answers sent, and the server checks them again (submitQuiz).
  */
-export function QuizForm({ next }: { next: string }) {
+export function QuizForm({ next, back }: { next: string; back: string }) {
   const t = useTranslations('quiz')
+  const ts = useTranslations('school')
   const te = useTranslations('errors')
   const [state, submit, pending] = useActionState<QuizState, FormData>(send, { ok: false })
   const [queue, setQueue] = useState<string[]>(() => QUIZ.map((q) => q.id))
@@ -136,6 +138,12 @@ export function QuizForm({ next }: { next: string }) {
             {right ? null : <p>{t('answerWas', { answer: t(`q.${question.id}.a${question.correct}`) })}</p>}
             <p>{t(`q.${question.id}.why`)}</p>
             {right ? null : <p className="muted small">{t('comesBack')}</p>}
+            {right || !QUIZ_LESSON[question.id] ? null : (
+              // The lesson that teaches this, and from there straight back to the quiz.
+              <Link href={`/school/${QUIZ_LESSON[question.id]}?back=${encodeURIComponent(back)}`} className="quiz-lesson-link">
+                {t('lessonLink', { title: ts(`lessons.${QUIZ_LESSON[question.id]}.title`) })}
+              </Link>
+            )}
           </div>
         ) : null}
         {state.error ? (

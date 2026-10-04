@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
+import { ProgressIcon } from '@/components/progress/ProgressIcon'
 import { pageMetadata } from '@/lib/seo'
 import '../landing.css'
 
@@ -28,6 +29,24 @@ export default async function SafetyPage() {
         lede={t('safety.lede')}
         art={{ dog: COLLIE, tone: 'green', badge: <Icon name="shield" /> }}
       />
+      {/* The Hondenschool: what anyone can do right now, lesson 1 even without an account. */}
+      <section className="lp-card soft-green lp-tip lp-touch">
+        <IconTile tone="green">
+          <ProgressIcon name="school" />
+        </IconTile>
+        <div>
+          <h2>{t('school.title')}</h2>
+          <p>{t('safety.schoolText')}</p>
+          <div className="row">
+            <Link href="/school/hello" className="button primary">
+              {t('safety.schoolLink')}
+            </Link>
+            <Link href="/school" className="button ghost">
+              {t('school.toPath')}
+            </Link>
+          </div>
+        </div>
+      </section>
       <section className="lp-card pad stack">
         <h2>{t('safety.levels')}</h2>
         <ol className="timeline">

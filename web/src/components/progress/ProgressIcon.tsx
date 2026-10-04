@@ -12,6 +12,8 @@ const EXTRA = {
   wave: 'M7 13V7.5a1.5 1.5 0 0 1 3 0V12M10 11V5.5a1.5 1.5 0 0 1 3 0V11M13 11V6.5a1.5 1.5 0 0 1 3 0V13M16 10.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-12.5 4.3L4.3 15a1.6 1.6 0 0 1 2.5-2l.2.2',
   walker: 'M13 4.5a1.5 1.5 0 1 0 0-.01M9.5 21l2.5-6 2.5 2.5V21M12 15l-1-5 3.5 1 2 3M11 10l-3.5 2V15',
   star: 'M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9L12 3.5Z',
+  // An open book: the Hondenschool.
+  school: 'M3 6.5c3-1.5 6-1.5 9 .5 3-2 6-2 9-.5V19c-3-1.5-6-1.5-9 .5-3-2-6-2-9-.5V6.5ZM12 7v12.5',
 } as const
 
 export type ProgressIconName = IconName | keyof typeof EXTRA

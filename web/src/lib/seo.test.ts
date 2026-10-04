@@ -138,6 +138,7 @@ describe('descriptions fit in a search result, in every language', () => {
     'help.metaDescription',
     'contact.lede',
     'safety.lede',
+    'school.metaDescription',
     'cities.indexDescription',
     'cities.metaDescription',
   ]

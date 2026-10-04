@@ -11,7 +11,7 @@ export type DogMood = 'neutral' | 'happy' | 'sleepy' | 'uneasy'
 /** The three dogs of the body-language lesson, the same as the app's IntroView looks. */
 export type LessonDog = 'golden' | 'border' | 'brown'
 
-export type LessonIcon = 'wave' | 'eye' | 'users' | 'sun' | 'help' | 'user' | 'id' | 'snow' | 'light' | 'alert'
+export type LessonIcon = 'wave' | 'eye' | 'users' | 'sun' | 'help' | 'user' | 'id' | 'snow' | 'light' | 'alert' | 'shield'
 
 export type LessonArt =
   | { kind: 'guus'; mood: DogMood }

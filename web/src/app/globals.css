@@ -2394,6 +2394,15 @@ fieldset.form-section {
   margin: 0;
 }
 
+/* To the Hondenschool lesson that teaches this: a whole line to tap, not a word in a sentence. */
+.quiz-lesson-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 650;
+  text-underline-offset: 3px;
+}
+
 .quiz-done {
   justify-items: start;
 }
