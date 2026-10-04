@@ -2171,11 +2171,11 @@ fieldset.form-section {
 }
 
 /* The status label changes colour when the answer comes in (klein). */
-.list-item.request .pill {
+.request-status {
   transition: background-color var(--motion-klein) var(--ease-klein), color var(--motion-klein) var(--ease-klein);
 }
 
-.list-item.request:has(.accept-reveal.is-new) .spread .pill {
+.list-item.request:has(.accept-reveal.is-new) .request-status {
   animation: moment-pop var(--motion-klein) var(--ease-pop) backwards;
 }
 
@@ -2325,7 +2325,7 @@ fieldset.form-section {
     animation: fade-in var(--motion-klein) ease-out backwards !important;
   }
 
-  .list-item.request:has(.accept-reveal.is-new) .spread .pill {
+  .list-item.request:has(.accept-reveal.is-new) .request-status {
     animation: none !important;
   }
 

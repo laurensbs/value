@@ -181,7 +181,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         <strong className="request-title">
                           {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
                         </strong>
-                        <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                       </div>
                       {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="muted small">
@@ -288,7 +288,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
                           </strong>
                         </span>
-                        <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                       </div>
                       {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="small">
