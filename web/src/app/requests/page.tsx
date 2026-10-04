@@ -4,14 +4,17 @@ import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
 import { MeetChecklist } from '@/components/MeetChecklist'
 import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
+import { InstallAsk } from '@/components/InstallAsk'
 import { PushAsk } from '@/components/PushAsk'
 import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
 import { canRequestSolo, canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { rolesOf } from '@/server/progress'
 import {
   hostContacts,
   incomingRequests,
+  myDogs,
   outgoingRequests,
   trustGrantsFor,
   trustSignals,
@@ -157,9 +160,19 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
     )
     return reason === 'needs-quiz' || reason === 'experience' || reason === 'ppp-licence' ? reason : null
   }
-  // Waiting for an answer is the moment a heads-up matters most.
+  // Requests and answers arrive here, so this is where Rondje asks once whether it may give a heads-up,
+  // and (on a phone) whether it may sit on the home screen. Waiting for an answer is when it matters most.
   const waitingFor = mineOpen.find((r) => r.request.status === 'pending')
   const pushKey = webPushKey()
+  const roles = rolesOf(viewer.profile)
+  const ownDog = roles.owner && !waitingFor ? (await myDogs(viewer)).find((d) => !d.isDemo) : undefined
+  const pushText = waitingFor
+    ? t('pushAsk.request', { dog: waitingFor.dog.name })
+    : ownDog
+      ? t('pushAsk.dog', { dog: ownDog.name })
+      : roles.walker
+        ? t('pushAsk.walker')
+        : t('pushAsk.general')
 
   return (
     <div className="stack-l">
@@ -181,7 +194,6 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
 
       {tab === 'mine' ? (
         <section className="stack">
-          {pushKey && waitingFor ? <PushAsk publicKey={pushKey} text={t('pushAsk.request', { dog: waitingFor.dog.name })} /> : null}
           {mineOpen.length === 0 ? (
             <div className="empty card flat stack-s">
               <p>{t('requests.empty')}</p>
@@ -422,6 +434,10 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
           ) : null}
         </section>
       )}
+
+      {/* After the list, so nothing above it moves when a question appears. */}
+      {pushKey ? <PushAsk publicKey={pushKey} text={pushText} /> : null}
+      <InstallAsk push={Boolean(pushKey)} />
     </div>
   )
 }

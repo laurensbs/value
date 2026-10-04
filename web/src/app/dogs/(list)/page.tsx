@@ -8,6 +8,7 @@ import { FilterPill } from '@/components/discover/FilterPill'
 import { GroupWalkRow } from '@/components/discover/GroupWalkRow'
 import { TipCard } from '@/components/discover/HomeCards'
 import { OrgHeader } from '@/components/discover/OrgHeader'
+import { NextStepCard } from '@/components/NextStepCard'
 import { Sym, type SymName } from '@/components/discover/Sym'
 import { visitorCountry, visitorPosition } from '@/components/discover/visitor'
 import { lookFor } from '@/lib/avatar'
@@ -108,6 +109,9 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
     key === 'all' ? t('dogs.host.all') : key === 'owner' || key === 'shelter' ? t(`discover.filters.${key}`) : t(`dogs.energy.${key}`)
 
   const roles = member ? rolesOf(member.profile) : null
+  // At most one line above the dogs: the quiz comes before any request (like Guus in the app).
+  const quizFirst = Boolean(member && roles?.walker && !member.profile.quizPassedAt && !orgId)
+  const renderedAt = new Date()
   const title = org ? t('dogs.orgTitle', { name: org.name }) : t('dogs.title')
   // On the map, its card says what you need to know about a dog: no portrait or story to read yet.
   const mapCards = mapView
@@ -148,7 +152,7 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
         />
       ) : null}
 
-      <section id="honden" className="discover-list" aria-label={title}>
+      <section id="honden" className="discover-list">
         <div className="discover-bar">
           {/* One text field: Enter (or the keyboard's search key) sends the form. */}
           <form className="searchbar" action="/dogs" method="get" role="search">
@@ -197,6 +201,25 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
             )}
           </div>
         </div>
+
+        {quizFirst && !mapView ? (
+          <NextStepCard
+            compact
+            now={renderedAt.getTime()}
+            label={t('nextStep.title')}
+            laterLabel={t('nextStep.later')}
+            steps={[
+              {
+                id: 'quiz',
+                later: true,
+                dismiss: false,
+                text: t('nextStep.quiz.text'),
+                detail: t('nextStep.quiz.detail'),
+                button: { label: t('nextStep.quiz.button'), href: '/profile/quiz?next=%2Fdogs' },
+              },
+            ]}
+          />
+        ) : null}
 
         {items.length === 0 ? (
           // A dog, one honest sentence and what you can do about it (onderzoek §3.8, §5 #10). A filter or

@@ -84,12 +84,15 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
     walker: true,
     owner: false,
   })
-  // New walkers start on their own home: a welcome, the first steps and the dogs nearby.
+  // New walkers start on their own home: a welcome and one thing to do now. The quiz is done, so
+  // that is a real dog nearby (Bello, or another real dog from an earlier test), never an example.
   await expect(walker.page).toHaveURL(/\/\?welcome=1$/)
   // With the app's tabs (shown on phones) straight away, not only after a reload.
   await expect(walker.page.locator('nav[aria-label="Hoofdmenu"]')).toBeAttached()
   await expect(walker.page.getByRole('heading', { name: 'Welkom bij Rondje Mee, Fleur!' })).toBeVisible()
-  await expect(walker.page.getByRole('link', { name: 'Start' })).toHaveAttribute('href', '/profile/edit')
+  const oneThing = walker.page.getByRole('region', { name: 'Eén ding nu' })
+  await expect(oneThing).toContainText('zoekt een wandelmaatje')
+  await expect(oneThing.getByRole('link', { name: /^Bekijk / })).toHaveAttribute('href', /^\/dogs\/(?!demo-)[^/]+$/)
   await shot(walker.page, '05-today-walker')
   // Editing the profile offers the sentences that still fit; not another one about what she does.
   await walker.page.goto('/profile/edit')
@@ -382,9 +385,14 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page.getByRole('heading', { name: /Fleur/ }).first()).toBeVisible()
   // The quiz was a calm step at sign-up: no party for it now.
   await expect(walker.page.getByRole('dialog', { name: 'Nieuwe penning!' })).toHaveCount(0)
-  await expect(walker.page.getByText('1 van 1 rondje').or(walker.page.getByText('Weekdoel gehaald!'))).toBeVisible()
+  // Feedback given: the one thing now is another walk with Bello.
+  const after = walker.page.getByRole('region', { name: 'Eén ding nu' })
+  await expect(after).toContainText('Nog een rondje met Bello?')
+  await expect(after.getByRole('link', { name: 'Plan een moment' })).toHaveAttribute('href', /#plan$/)
   await shot(walker.page, '11b-today-after-walk')
+  // The week shows on /progress, now that there is a walk to count.
   await walker.page.goto('/progress')
+  await expect(walker.page.getByText('1 van 1 rondje').or(walker.page.getByText('Weekdoel gehaald!'))).toBeVisible()
   await expect(walker.page.getByRole('heading', { name: 'Snuffelaar' })).toBeVisible()
   await expect(walker.page.getByText('Net kennisgemaakt')).toBeVisible()
   await shot(walker.page, '11c-progress')

@@ -206,7 +206,6 @@ mark {
   /* Endless motion stands still where it is at rest, not wherever a shortened run happens to stop. */
   .welcome-dogs > div,
   .live-dot::after,
-  .step-path li.current .step-dot::after,
   .level-path li.here .level-stone::after {
     animation: none !important;
   }
@@ -4515,6 +4514,22 @@ legend {
   font-size: clamp(1.7rem, 5vw, 2.3rem);
 }
 
+/* On a phone the greeting and the level share one line: only the ball, its name is in the label. */
+@media (max-width: 559px) {
+  .today-head {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .today-head .level-chip {
+    padding: 4px;
+  }
+
+  .today-head .level-chip-text {
+    display: none;
+  }
+}
+
 .level-chip {
   display: inline-flex;
   align-items: center;
@@ -4591,22 +4606,6 @@ legend {
   }
 }
 
-.next-card {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 14px;
-  align-items: center;
-  padding: 12px 16px 12px 12px;
-  border-radius: var(--radius-m);
-  background: var(--calm-soft);
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.next-card .dog-photo {
-  border-radius: 14px;
-}
-
 .push-ask {
   display: flex;
   gap: 14px;
@@ -4677,17 +4676,6 @@ legend {
   color: #1f5a3d;
 }
 
-.pending-card {
-  align-items: center;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.pending-card .link-button {
-  display: block;
-  padding: 2px 0 0;
-}
-
 .first-steps,
 .badges-card {
   display: grid;
@@ -4720,43 +4708,6 @@ legend {
   }
 }
 
-/* The first steps as a little walk: dots on a dashed route, the next one glowing. */
-.step-path {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-}
-
-.step-path li {
-  position: relative;
-  display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 12px;
-  padding-bottom: 16px;
-}
-
-.step-path li:last-child {
-  padding-bottom: 0;
-}
-
-.step-path li::before {
-  content: '';
-  position: absolute;
-  left: 15px;
-  top: 34px;
-  bottom: 2px;
-  border-left: 2px dashed var(--line);
-}
-
-.step-path li:last-child::before {
-  display: none;
-}
-
-.step-path li.done::before {
-  border-left-color: var(--grass);
-}
-
 .step-dot {
   width: 32px;
   height: 32px;
@@ -4768,23 +4719,8 @@ legend {
   color: var(--muted);
 }
 
-.step-path li.done .step-dot {
-  background: var(--grass);
-  border-color: var(--grass);
-  color: var(--on-grass);
-}
-
-.step-path li.current .step-dot {
-  position: relative;
-  isolation: isolate;
-  background: var(--ball);
-  border-color: var(--ball);
-  color: var(--on-ball);
-}
-
-/* The next step (and your level on the level path) glows a few times: a ring behind the dot that
+/* Your level on the level path glows a few times: a ring behind the dot that
    grows and fades, with transform and opacity only. */
-.step-path li.current .step-dot::after,
 .level-path li.here .level-stone::after {
   content: '';
   position: absolute;
@@ -4808,13 +4744,6 @@ legend {
   }
 }
 
-.step-body {
-  display: grid;
-  gap: 6px;
-  justify-items: start;
-  padding-top: 5px;
-}
-
 .step-title {
   display: flex;
   flex-wrap: wrap;
@@ -4823,9 +4752,117 @@ legend {
   font-weight: 650;
 }
 
-.step-path li.done .step-title {
+/* Eén ding nu: one card on top of Vandaag, one thing, one big button. */
+.next-step {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  border: 1px solid color-mix(in oklab, var(--grass) 22%, var(--line));
+  box-shadow: var(--soft-shadow);
+}
+
+.next-step-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.next-step-top .dog-face {
+  flex: none;
+}
+
+.next-step-welcome {
+  font-size: 1.35rem;
+}
+
+.next-step-body {
+  display: grid;
+  gap: 6px;
+  animation: fade-in var(--motion-klein) ease-out both;
+}
+
+.next-step-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 760;
+  color: var(--grass);
+}
+
+.next-step-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4.6vw, 1.6rem);
+  font-weight: 720;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.next-step-detail {
   color: var(--muted);
-  text-decoration: line-through;
+}
+
+.next-step .button.big {
+  width: 100%;
+  min-height: 56px;
+  font-size: 1.05rem;
+}
+
+/* Two answers of the same size ("Bekijk" and "Nee, nu niet"): no answer is pushed. */
+.next-step-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.next-step-more {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 20px;
+  margin-top: -4px;
+}
+
+.next-step-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* The dogs near you: the title, then the map and the whole list in one row of links under it. */
+.today-near .section-title {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.today-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+.today-links .link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* An example dog in Today's strip says so, like on the big cards. */
+.portrait-wrap .strip-tag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
 }
 
 .today-grid {
@@ -5119,40 +5156,12 @@ legend {
   outline-color: var(--line);
 }
 
-.medal-row {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
-  gap: 12px;
-}
-
-.medal-row li {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  text-align: center;
-}
-
 .tip-card {
   display: grid;
   gap: 6px;
   padding: 16px 18px;
   border-radius: var(--radius-m);
   background: color-mix(in oklab, var(--ball) 28%, var(--surface));
-}
-
-.tip-card .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--ink);
-}
-
-.tip-card .hand {
-  color: var(--ink);
-  font-size: 1.35rem;
 }
 
 .together {

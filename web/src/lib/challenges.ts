@@ -53,6 +53,17 @@ export function monthBounds(now: Date): { start: Date; end: Date; previous: Date
   }
 }
 
+/** Totals (dogs, kilometres) only from this many different walkers and dogs on: they never point at one person. */
+export const TOTALS_MIN = 5
+
+/**
+ * What the town's challenge may show. Nothing walked yet: no "0 van 10", but "We beginnen hier"
+ * with a way to start. Totals only with enough walkers and dogs; the number of walkers never.
+ */
+export function challengeView(c: Pick<Tally, 'walks' | 'walkers' | 'dogs'>): { empty: boolean; totals: boolean } {
+  return { empty: c.walks === 0, totals: c.walkers >= TOTALS_MIN && c.dogs >= TOTALS_MIN }
+}
+
 export function goalFor(previousWalks: number, minimum: number): number {
   return Math.max(minimum, Math.ceil((previousWalks * 1.25) / 10) * 10)
 }
