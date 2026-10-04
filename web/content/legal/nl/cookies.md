@@ -1,5 +1,6 @@
 ---
 title: Cookieverklaring
+description: "We gebruiken alleen functionele cookies en lokale opslag: geen advertenties, geen tracking en geen analyse door andere bedrijven."
 version: "0.1"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"

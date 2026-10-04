@@ -1,5 +1,6 @@
 ---
 title: Gedragscode
+description: "Hoe we met elkaar en met de honden omgaan: eerlijk zijn, afspraken nakomen, dierenwelzijn tijdens het rondje, respect en nultolerantie."
 version: "0.1"
 updated: "2026-10-02"
 status: "Concept – nog niet juridisch getoetst"

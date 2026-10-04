@@ -4,37 +4,40 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
+import { JsonLd } from '@/components/JsonLd'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
-import { citySlug } from '@/lib/cities'
+import { citySlug, nearbyCities } from '@/lib/cities'
 import { COUNTRY_INFO } from '@/lib/countries'
 import { DIRECTORY } from '@/lib/directory'
-import { siteUrl } from '@/lib/site'
-import { publicCities } from '@/server/cities'
+import { breadcrumbs, groupWalkEvent, pageMetadata } from '@/lib/seo'
+import { indexableCities, publicCities } from '@/server/cities'
 import { isNativeRequest } from '@/server/native'
 import { upcomingGroupWalks } from '@/server/queries'
 
 type Props = { params: Promise<{ slug: string }> }
 
-async function findCity(slug: string) {
-  return (await publicCities()).find((c) => c.slug === slug)
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const city = await findCity((await params).slug)
+  const { slug } = await params
+  const [cities, indexable] = await Promise.all([publicCities(), indexableCities()])
+  const city = cities.find((c) => c.slug === slug)
   if (!city) return {}
   const t = await getTranslations('cities')
-  return {
+  return pageMetadata({
+    path: `/cities/${city.slug}`,
     title: t('metaTitle', { city: city.name }),
     description: t('metaDescription', { city: city.name }),
-    alternates: { canonical: `${siteUrl()}/cities/${city.slug}` },
-  }
+    // Without a real dog, walk or partner shelter the page is only a template: visitors may use it,
+    // search engines get it once there is something on it (it is left out of the sitemap until then).
+    robots: indexable.has(city.slug) ? undefined : 'noindex',
+  })
 }
 
 /** A public page per city for search engines: shelters, group walks and how many dogs wait, never private dogs. */
 export default async function CityPage({ params }: Props) {
   const { slug } = await params
-  const city = await findCity(slug)
+  const [cities, indexable] = await Promise.all([publicCities(), indexableCities()])
+  const city = cities.find((c) => c.slug === slug)
   if (!city) notFound()
   const t = await getTranslations()
   const format = await getFormatter()
@@ -42,7 +45,15 @@ export default async function CityPage({ params }: Props) {
   const db = await getDb()
 
   const orgRows = await db
-    .select({ id: s.organization.id, name: s.organization.name, city: s.organization.city, directoryId: s.organization.directoryId })
+    .select({
+      id: s.organization.id,
+      name: s.organization.name,
+      city: s.organization.city,
+      website: s.organization.website,
+      logoUrl: s.organization.logoUrl,
+      coverUrl: s.organization.coverUrl,
+      directoryId: s.organization.directoryId,
+    })
     .from(s.organization)
     .where(and(eq(s.organization.status, 'verified'), eq(s.organization.country, city.country), eq(s.organization.isDemo, false)))
   const partners = orgRows.filter((o) => citySlug(o.city) === slug)
@@ -61,10 +72,35 @@ export default async function CityPage({ params }: Props) {
   const claimed = new Set(partners.map((p) => p.directoryId).filter(Boolean))
   const others = DIRECTORY.filter((d) => d.city && citySlug(d.city) === slug && !claimed.has(d.id))
   const walks = (await upcomingGroupWalks({ country: city.country })).filter((w) => !w.isDemo && citySlug(w.city) === slug).slice(0, 6)
-  const nearby = (await publicCities()).filter((c) => c.country === city.country && c.slug !== slug).slice(0, 12)
+  const nearby = nearbyCities(city, cities, new Set(indexable.keys()))
+
+  // Structured data: the way back to all cities, and each real group walk as an event at its shelter.
+  const path = `/cities/${city.slug}`
+  const shelterOf = new Map(partners.map((p) => [p.id, p]))
+  const walkAnchor = (id: string) => `groepswandeling-${id}`
+  const events = walks.flatMap((w) => {
+    const shelter = shelterOf.get(w.orgId)
+    if (!shelter) return []
+    const image = [shelter.coverUrl, shelter.logoUrl].find((src) => src?.startsWith('https://')) ?? null
+    return [
+      groupWalkEvent({
+        name: t('groupWalks.eventName', { shelter: shelter.name }),
+        description: w.notes || t('groupWalks.lede'),
+        startsAt: w.startsAt,
+        durationMin: w.durationMin,
+        path: `${path}#${walkAnchor(w.id)}`,
+        meetingPoint: w.meetingPoint,
+        city: city.name,
+        country: city.country,
+        image,
+        shelter,
+      }),
+    ]
+  })
 
   return (
     <div className="stack-l">
+      <JsonLd data={[breadcrumbs([{ name: t('cities.footerLink'), path: '/cities' }, { name: city.name, path }]), ...events]} />
       <nav aria-label={t('cities.all')}>
         <Link href="/cities" className="link-button">
           ← {t('cities.all')}
@@ -142,7 +178,7 @@ export default async function CityPage({ params }: Props) {
         {walks.length ? (
           <ul className="list">
             {walks.map((w) => (
-              <li key={w.id} className="list-item">
+              <li key={w.id} id={walkAnchor(w.id)} className="list-item">
                 <div className="time-badge" aria-hidden="true">
                   {format.dateTime(w.startsAt, { hour: '2-digit', minute: '2-digit' })}
                 </div>

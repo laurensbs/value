@@ -8,10 +8,11 @@ import { directoryEntry } from '@/lib/directory'
 import { inviteUrl } from '@/lib/invite'
 import { siteUrl } from '@/lib/site'
 import { getViewer } from '@/server/session'
+import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata() {
   const t = await getTranslations('suggest')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/suggest', title: t('title'), description: t('metaDescription') })
 }
 
 export default async function SuggestPage({ searchParams }: { searchParams: Promise<{ kind?: string; directory?: string }> }) {

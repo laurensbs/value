@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Rondje · un paseo fijo con un perro que te espera",
-    "description": "Rondje pone en contacto a jóvenes adultos con perros de vecinos y protectoras a los que les vendría muy bien un paseo extra. Gratis y seguro, en los Países Bajos, Bélgica y España."
+    "title": "{app} · un paseo fijo con un perro que te espera",
+    "description": "{app} conecta a jóvenes con perros de vecinos y protectoras que agradecen un paseo extra. Gratis y seguro, en Países Bajos, Bélgica y España."
   },
   "nav": {
     "dogs": "Perros",
@@ -1081,11 +1081,13 @@
     "level": "Nivel: {level}",
     "at": "Punto de encuentro: {place}",
     "idNote": "Lleva un documento de identidad válido. La persona responsable lo comprobará; Rondje no guarda ninguna copia.",
-    "meetDogs": "Ver los perros de esta protectora"
+    "meetDogs": "Ver los perros de esta protectora",
+    "eventName": "Paseo en grupo con {shelter}"
   },
   "directory": {
     "title": "Protectoras en los Países Bajos, Bélgica y España",
     "lede": "Protectoras con voluntarios para pasear perros. Las colaboradoras las encuentras directamente en Rondje; en las demás puedes hacer voluntariado a través de su propia web.",
+    "metaDescription": "Protectoras con voluntarios para pasear perros. Las colaboradoras están en {app}; en las demás te apuntas como voluntario en su propia web.",
     "partner": "En Rondje",
     "notPartner": "Aún no está en Rondje",
     "walking": "Tiene voluntarios de paseo",
@@ -1106,6 +1108,7 @@
   "help": {
     "title": "¿Un mal momento?",
     "lede": "Un paseo al aire libre puede alegrarte el día, pero no sustituye a la ayuda profesional. Aquí siempre puedes encontrar apoyo, gratis y de forma anónima.",
+    "metaDescription": "Un paseo al aire libre puede alegrarte el día, pero no sustituye a la ayuda profesional. Aquí siempre encuentras apoyo, gratis y anónimo.",
     "emergency": "Si hay un peligro inmediato, llama al {number}.",
     "lines": {
       "suicide": "¿Piensas en el suicidio? Disponible día y noche.",
@@ -1366,6 +1369,7 @@
     "eyebrow": "Recomendar",
     "title": "Recomienda una protectora",
     "lede": "¿Conoces una protectora donde a los perros les vendría bien un paseo más? Cuéntanoslo. Nosotros contactamos con la protectora, nunca en tu nombre.",
+    "metaDescription": "¿Conoces una protectora donde a los perros les vendría bien un paseo más? Cuéntanoslo. Nosotros contactamos con ella, nunca en tu nombre.",
     "tabs": {
       "shelter": "Una protectora",
       "owner": "Alguien con perro"
@@ -1407,6 +1411,7 @@
     "eyebrow": "Gratis, y así seguirá",
     "title": "Haz posible Rondje",
     "lede": "Rondje es gratis para paseadores, propietarios y protectoras, y así seguirá. Aun así, mantener Rondje seguro y en línea cuesta dinero. Te lo explicamos.",
+    "metaDescription": "{app} es gratis para paseadores, propietarios y protectoras, y así seguirá. Aun así, mantener {app} seguro y en línea cuesta dinero.",
     "promiseTitle": "Nuestra promesa",
     "promise": {
       "free": "Rondje sigue siendo gratis para todos: sin suscripción, sin muro de pago, sin versión premium.",
@@ -1550,6 +1555,7 @@
     "eyebrow": "Sobre Rondje",
     "title": "Un paseo juntos, bueno para ti y para un perro",
     "lede": "Rondje pone en contacto a jóvenes adultos con perros que quieren salir más: de vecinos que ya no pueden pasear bien a su perro, y de protectoras.",
+    "metaDescription": "{app} pone en contacto a jóvenes adultos con perros que quieren salir más: de vecinos que ya no pueden pasear bien a su perro, y de protectoras.",
     "whyTitle": "Por qué Rondje",
     "why1": "Muchos jóvenes quieren salir y adoran a los perros, pero no pueden tener uno. Al mismo tiempo, hay personas mayores o enfermas que no pueden pasear a su perro tanto como querrían. Y en las protectoras, cada perro espera un paseo más.",
     "why2": "Un paseo fijo con un perro es bueno para todos: ejercicio, aire libre y una charla con un vecino. Rondje lo hace fácil, seguro y gratis.",
@@ -1714,8 +1720,9 @@
   "cities": {
     "title": "Pasear perros por ciudad",
     "lede": "Rondje funciona en todas las ciudades. En cada una ves qué protectoras hay, cuándo hay paseos en grupo y cuántos perros esperan un paseo.",
+    "indexDescription": "{app} funciona en todas las ciudades. En cada una ves qué protectoras hay, cuándo hay paseos en grupo y cuántos perros esperan un paseo.",
     "metaTitle": "Pasear perros en {city}",
-    "metaDescription": "Pasea gratis y con regularidad a un perro en {city}: perros de vecinos y de protectoras, paseos en grupo y un primer encuentro seguro. Sin anuncios, sin suscripción.",
+    "metaDescription": "Pasea gratis a un perro en {city}: perros de vecinos y de protectoras, paseos en grupo y un primer encuentro seguro. Sin anuncios.",
     "cityLede": "Pasea gratis a un perro de {city}: de un vecino que ya no puede caminar lejos, o de una protectora. Primero os conocéis y después paseáis con regularidad.",
     "dogsWaiting": "{n, plural, =0 {Todavía no hay perros de {city} en línea. Añade el primero o mira cerca.} one {# perro de {city} espera un paseo.} other {# perros de {city} esperan un paseo.}}",
     "seeDogs": "Ver perros en {city}",
@@ -2773,6 +2780,7 @@
       "eyebrow": "Por qué",
       "title": "Salir juntos, por las personas y los perros",
       "lede": "Un paseo con un perro es algo pequeño. Aun así, toca cosas grandes: la soledad, moverse poco y perros que necesitan más atención. Por eso existe {app}.",
+      "metaDescription": "Un paseo con un perro es algo pequeño, pero toca cosas grandes: la soledad, moverse poco y perros que necesitan más atención.",
       "factsTitle": "En cifras",
       "factsLede": "Cada cifra lleva su fuente y su año, para que puedas comprobarla tú mismo.",
       "mindTitle": "Estar al aire libre, moverse y un perro que se alegra de verte",

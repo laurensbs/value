@@ -13,11 +13,13 @@ import { COUNTRIES, COUNTRY_INFO, isCountry } from '@/lib/countries'
 import { DIRECTORY } from '@/lib/directory'
 import { guessCountry } from '@/lib/guess-country'
 import { getSession, getViewer } from '@/server/session'
+import { pageMetadata } from '@/lib/seo'
+import { APP_NAME } from '@/lib/site'
 import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('directory')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/shelters', title: t('title'), description: t('metaDescription', { app: APP_NAME }) })
 }
 
 export default async function SheltersPage({ searchParams }: { searchParams: Promise<{ country?: string }> }) {

@@ -4,10 +4,12 @@ import { Icon } from '@/components/Icon'
 import { ShelterForm } from '@/components/ShelterTools'
 import { directoryEntry } from '@/lib/directory'
 import { getViewer } from '@/server/session'
+import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata() {
   const t = await getTranslations('shelter')
-  return { title: t('title'), description: t('lede') }
+  // ?claim=<directory id> pre-fills the form; search engines get the one page without it.
+  return pageMetadata({ path: '/shelter', title: t('title'), description: t('lede') })
 }
 
 export default async function ShelterLandingPage({ searchParams }: { searchParams: Promise<{ claim?: string }> }) {

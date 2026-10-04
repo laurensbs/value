@@ -5,6 +5,7 @@ import { AuthForm } from '@/components/AuthForm'
 import { Icon } from '@/components/Icon'
 import { Logo } from '@/components/Logo'
 import { enabledSocialProviders } from '@/lib/auth'
+import { pageMetadata } from '@/lib/seo'
 import { safeNext } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
 import { getViewer } from '@/server/session'
@@ -14,7 +15,8 @@ type Intent = (typeof INTENTS)[number]
 
 export async function generateMetadata() {
   const t = await getTranslations('auth')
-  return { title: t('signupTitle') }
+  // Like the login page: out of search results, links followed.
+  return pageMetadata({ path: '/signup', title: t('signupTitle'), description: t('signupLede'), robots: 'noindex' })
 }
 
 export default async function SignupPage({

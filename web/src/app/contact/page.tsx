@@ -6,11 +6,12 @@ import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { COUNTRY_INFO } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { supportConfig } from '@/lib/support'
+import { pageMetadata } from '@/lib/seo'
 import '../landing.css'
 
 export async function generateMetadata() {
   const t = await getTranslations('contact')
-  return { title: t('title'), description: t('lede') }
+  return pageMetadata({ path: '/contact', title: t('title'), description: t('lede') })
 }
 
 const tel = (n: string) => `tel:${n.replace(/[^\d+]/g, '')}`
