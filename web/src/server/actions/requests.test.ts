@@ -21,12 +21,15 @@ vi.mock('@/db', () => ({ getDb: async () => db }))
 const notify = vi.fn(async () => {})
 vi.mock('../notify', () => ({ notify, audit: async () => {} }))
 vi.mock('../session', () => ({
-  actionViewer: async () => viewer(current),
+  actionViewer: async () => {
+    if (current === 'nobody') throw new Error('not-signed-in')
+    return viewer(current)
+  },
   isOrgMember: (v: { orgs: { id: string }[] }, orgId: string | null) => Boolean(orgId && v.orgs.some((o) => o.id === orgId)),
 }))
 
-const { createRequest, setTrust } = await import('./requests')
-const { beginWalk } = await import('../walks')
+const { cancelRequest, createRequest, respondToRequest, setTrust } = await import('./requests')
+const { beginWalk, finishWalk } = await import('../walks')
 const { relationFor } = await import('../queries')
 
 async function dog(id: string) {
@@ -54,15 +57,19 @@ beforeAll(async () => {
   await client.exec(`
     insert into "user" (id, name, email, email_verified, created_at, updated_at) values
       ('ans', 'Ans', 'ans@example.org', false, now(), now()),
-      ('fleur', 'Fleur', 'fleur@example.org', false, now(), now());
+      ('fleur', 'Fleur', 'fleur@example.org', false, now(), now()),
+      ('noor', 'Noor', 'noor@example.org', false, now(), now());
     insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code, quiz_passed_at)
     values
       ('ans', 'Ans', '1951-04-02', 'NL', 'Utrecht', now(), '1', 'ANS234', null),
-      ('fleur', 'Fleur', '2003-06-15', 'NL', 'Utrecht', now(), '1', 'FLE234', now());
+      ('fleur', 'Fleur', '2003-06-15', 'NL', 'Utrecht', now(), '1', 'FLE234', now()),
+      ('noor', 'Noor', '2002-02-02', 'NL', 'Utrecht', now(), '1', 'NOO234', null);
     insert into organization (id, name, country, city, status) values ('opvang', 'Opvang', 'NL', 'Utrecht', 'verified');
     insert into dog (id, owner_id, org_id, name, country, city) values
       ('bello', 'ans', null, 'Bello', 'NL', 'Utrecht'),
       ('saar', 'ans', null, 'Saar', 'NL', 'Utrecht'),
+      ('max', 'ans', null, 'Max', 'NL', 'Utrecht'),
+      ('kees', 'ans', null, 'Kees', 'NL', 'Utrecht'),
       ('luna', null, 'opvang', 'Luna', 'NL', 'Utrecht');
   `)
 }, 30_000)
@@ -141,11 +148,24 @@ describe('after a first call', () => {
     ])
   })
 
-  it('once the visit in person is accepted, the owner can record trust', async () => {
+  it('a visit that is still to come does not count yet: the ID was not seen', async () => {
     await client.exec(`update walk_request set status = 'accepted' where dog_id = 'bello' and meet_via = 'home'`)
     expect((await relationFor(await viewer('fleur'), await dog('bello'))).hasAccepted).toBe(true)
     current = 'ans'
-    expect(await setTrust('bello', 'fleur', { idSeen: true, soloAllowed: true })).toEqual({ ok: true })
+    expect(await setTrust('bello', 'fleur', { idSeen: true, soloAllowed: false })).toEqual({ ok: false, error: 'meeting-ahead' })
+  })
+
+  it('once the visit took place, the owner can record trust', async () => {
+    await client.exec(`update walk_request set starts_at = now() - interval '2 hours' where dog_id = 'bello' and meet_via = 'home'`)
+    current = 'ans'
+    // Solo walks need the ID seen in person first (besluit 4 okt 2026), said to the owner.
+    expect(await setTrust('bello', 'fleur', { idSeen: false, soloAllowed: true })).toEqual({ ok: false, error: 'id-not-seen' })
+    expect(await setTrust('bello', 'fleur', { idSeen: true, soloAllowed: true })).toEqual({ ok: true, trust: { idSeen: true, soloAllowed: true } })
+    expect(notify).toHaveBeenCalledWith(db, ['fleur'], 'trust-granted', expect.objectContaining({ dogName: 'Bello' }))
+    // Saving the same again is no news for the walker.
+    notify.mockClear()
+    expect((await setTrust('bello', 'fleur', { idSeen: true, soloAllowed: true })).ok).toBe(true)
+    expect(notify).not.toHaveBeenCalled()
   })
 
   it('a regular walk is always a walk, never a call or a visit', async () => {
@@ -153,5 +173,182 @@ describe('after a first call', () => {
       expect(await createRequest({ ok: false }, form({ dogId: 'bello', kind: 'solo', meetVia: via }))).toEqual({ ok: false, error: 'meet-via' })
     }
     expect((await createRequest({ ok: false }, form({ dogId: 'bello', kind: 'solo' }))).ok).toBe(true)
+  })
+})
+
+describe('one open request per walker and dog', () => {
+  it('the same request sent again is the one already there: no second request, no second message', async () => {
+    const before = await requestsOf('saar')
+    notify.mockClear()
+    expect(await createRequest({ ok: false }, form({ dogId: 'saar' }))).toEqual({ ok: true, message: 'sent' })
+    expect(await requestsOf('saar')).toEqual(before)
+    expect(notify).not.toHaveBeenCalled()
+  })
+
+  it('another moment for the same dog waits until the open one is answered or past', async () => {
+    expect(await createRequest({ ok: false }, form({ dogId: 'saar', time: '11:00' }))).toEqual({ ok: false, error: 'already-open' })
+    await client.exec(`update walk_request set status = 'declined' where dog_id = 'saar'`)
+    expect((await createRequest({ ok: false }, form({ dogId: 'saar', time: '11:00' }))).ok).toBe(true)
+  })
+
+  it('a signed-out person hears that, instead of "something went wrong"', async () => {
+    current = 'nobody'
+    expect(await createRequest({ ok: false }, form({ dogId: 'saar' }))).toEqual({ ok: false, error: 'not-signed-in' })
+    expect(await setTrust('saar', 'fleur', { idSeen: true, soloAllowed: false })).toEqual({ ok: false, error: 'not-signed-in' })
+  })
+})
+
+describe('the safety quiz comes first (besluit 4 okt)', () => {
+  it('a walker without it cannot ask to meet', async () => {
+    current = 'noor'
+    expect(await createRequest({ ok: false }, form({ dogId: 'max' }))).toEqual({ ok: false, error: 'needs-quiz' })
+    expect(await requestsOf('max')).toEqual([])
+  })
+})
+
+describe('two requests at the same moment', () => {
+  it('only one gets in', async () => {
+    const results = await Promise.all([
+      createRequest({ ok: false }, form({ dogId: 'max', time: '10:00' })),
+      createRequest({ ok: false }, form({ dogId: 'max', time: '12:00' })),
+    ])
+    expect(results.filter((r) => r.ok)).toHaveLength(1)
+    expect(results.filter((r) => !r.ok)).toEqual([{ ok: false, error: 'already-open' }])
+    expect(await requestsOf('max')).toHaveLength(1)
+  })
+})
+
+describe('solo walks need the trust, every time', () => {
+  // Kees: Fleur met Ans and Kees on a walk together, two hours ago.
+  const minutes = (n: number) => new Date(Date.now() + n * 60_000)
+  async function soloRequest(id: string) {
+    await db.insert(schema.walkRequest).values({
+      id,
+      dogId: 'kees',
+      walkerId: 'fleur',
+      kind: 'solo',
+      meetVia: 'walk',
+      startsAt: minutes(5),
+      durationMin: 30,
+      weekly: id.startsWith('weekly'),
+      status: 'accepted',
+    })
+  }
+
+  beforeAll(async () => {
+    await db.insert(schema.walkRequest).values([
+      { id: 'kees-meet', dogId: 'kees', walkerId: 'fleur', kind: 'meet', meetVia: 'walk', startsAt: minutes(-120), durationMin: 30, status: 'accepted' },
+      { id: 'kees-ask', dogId: 'kees', walkerId: 'fleur', kind: 'solo', meetVia: 'walk', startsAt: minutes(24 * 60), durationMin: 30 },
+    ])
+  })
+
+  it('the owner cannot accept one without saying yes to solo walks first', async () => {
+    current = 'ans'
+    expect(await respondToRequest('kees-ask', 'accept')).toEqual({ ok: false, error: 'solo-not-allowed' })
+    // A row from before the ID rule: solo without the ID seen never counts.
+    await client.exec(`insert into trust_grant (dog_id, walker_id, granted_by, id_seen, solo_allowed) values ('kees', 'fleur', 'ans', false, true)`)
+    expect(await respondToRequest('kees-ask', 'accept')).toEqual({ ok: false, error: 'id-not-seen' })
+    expect((await relationFor(await viewer('fleur'), await dog('kees'))).soloAllowed).toBe(false)
+  })
+
+  it('a walk without the ID seen does not start', async () => {
+    await soloRequest('kees-now')
+    expect(await beginWalk('kees-now', await viewer('fleur'))).toEqual({ ok: false, error: 'needs-id' })
+  })
+
+  it('once the ID is seen, saying yes again is news, and the walk can start', async () => {
+    current = 'ans'
+    notify.mockClear()
+    expect((await setTrust('kees', 'fleur', { idSeen: true, soloAllowed: true })).ok).toBe(true)
+    expect(notify).toHaveBeenCalledWith(db, ['fleur'], 'trust-granted', expect.objectContaining({ dogName: 'Kees' }))
+    expect((await respondToRequest('kees-ask', 'accept')).ok).toBe(true)
+    const started = await beginWalk('kees-now', await viewer('fleur'))
+    expect(started.ok).toBe(true)
+    expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)
+  })
+
+  it('a weekly walk rolls on only while the trust holds', async () => {
+    await soloRequest('weekly-1')
+    const first = await beginWalk('weekly-1', await viewer('fleur'))
+    expect(first.ok).toBe(true)
+    // The ID tick was taken off in the meantime (an older row, or straight in the database).
+    await client.exec(`update trust_grant set id_seen = false where dog_id = 'kees'`)
+    expect((await finishWalk(first.walkId!, await viewer('fleur'))).ok).toBe(true)
+    const [row] = (await client.query<{ status: string }>(`select status from walk_request where id = 'weekly-1'`)).rows
+    expect(row.status).toBe('completed')
+    await client.exec(`update trust_grant set id_seen = true where dog_id = 'kees'`)
+  })
+
+  it('taking solo walks back stops every solo walk still planned, and the walker hears it', async () => {
+    await soloRequest('weekly-2')
+    current = 'ans'
+    notify.mockClear()
+    expect((await setTrust('kees', 'fleur', { idSeen: true, soloAllowed: false })).ok).toBe(true)
+    const rows = (await client.query<{ id: string; status: string }>(`select id, status from walk_request where id in ('weekly-2', 'kees-ask')`)).rows
+    expect(rows.map((r) => r.status)).toEqual(['cancelled', 'cancelled'])
+    expect(notify).toHaveBeenCalledWith(db, ['fleur'], 'request-cancelled', expect.objectContaining({ dogName: 'Kees' }))
+    expect(await beginWalk('weekly-2', await viewer('fleur'))).toEqual({ ok: false, error: 'not-now' })
+  })
+
+  it('an agreed weekly solo walk leaves room for an extra one', async () => {
+    current = 'ans'
+    expect((await setTrust('kees', 'fleur', { idSeen: true, soloAllowed: true })).ok).toBe(true)
+    await soloRequest('weekly-3')
+    current = 'fleur'
+    expect((await createRequest({ ok: false }, form({ dogId: 'kees', kind: 'solo', time: '15:00' }))).ok).toBe(true)
+  })
+
+  it('taking solo walks back during a walk leaves that walk and its appointment alone', async () => {
+    await soloRequest('weekly-4')
+    const walk = await beginWalk('weekly-4', await viewer('fleur'))
+    expect(walk.ok).toBe(true)
+    current = 'ans'
+    notify.mockClear()
+    expect((await setTrust('kees', 'fleur', { idSeen: true, soloAllowed: false })).ok).toBe(true)
+    const status = async (id: string) => (await client.query<{ status: string }>('select status from walk_request where id = $1', [id])).rows[0].status
+    // The walk under way keeps its appointment (and with it the chat); planned ones are off.
+    expect(await status('weekly-4')).toBe('accepted')
+    expect(await status('weekly-3')).toBe('cancelled')
+    expect(notify).not.toHaveBeenCalledWith(db, ['fleur'], 'request-cancelled', expect.objectContaining({ requestId: 'weekly-4' }))
+    // When it ends, the weekly walk does not roll on: the trust is gone.
+    expect((await finishWalk(walk.walkId!, await viewer('fleur'))).ok).toBe(true)
+    expect(await status('weekly-4')).toBe('completed')
+  })
+
+  it('taking back an older "solo" row without the ID also stops the solo walks still planned', async () => {
+    await client.exec(`update trust_grant set solo_allowed = true, id_seen = false where dog_id = 'kees'`)
+    await soloRequest('weekly-5')
+    current = 'ans'
+    expect((await setTrust('kees', 'fleur', { idSeen: false, soloAllowed: false })).ok).toBe(true)
+    const [row] = (await client.query<{ status: string }>(`select status from walk_request where id = 'weekly-5'`)).rows
+    expect(row.status).toBe('cancelled')
+  })
+})
+
+describe('an answer and a withdrawal at the same moment', () => {
+  it('one of them wins; the other hears it, nothing is overwritten', async () => {
+    await db.insert(schema.walkRequest).values({
+      id: 'race-1',
+      dogId: 'kees',
+      walkerId: 'fleur',
+      kind: 'meet',
+      meetVia: 'walk',
+      startsAt: new Date(Date.now() + 2 * 24 * 3_600_000),
+      durationMin: 30,
+    })
+    current = 'ans'
+    const answer = respondToRequest('race-1', 'decline')
+    current = 'fleur'
+    const withdrawal = cancelRequest('race-1')
+    const results = await Promise.all([answer, withdrawal])
+    expect(results.filter((r) => r.ok)).toHaveLength(1)
+    expect(results.filter((r) => !r.ok)).toEqual([{ ok: false, error: 'already-decided' }])
+    const [row] = (await client.query<{ status: string }>(`select status from walk_request where id = 'race-1'`)).rows
+    expect(row.status).toBe(results[0].ok ? 'declined' : 'cancelled')
+  })
+
+  it('a late answer to a withdrawn request is refused', async () => {
+    current = 'ans'
+    expect(await respondToRequest('race-1', 'accept')).toEqual({ ok: false, error: 'already-decided' })
   })
 })

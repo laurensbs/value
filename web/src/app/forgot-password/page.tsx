@@ -27,18 +27,21 @@ export default async function ForgotPasswordPage() {
           <ForgotPasswordForm />
         ) : (
           <p className="notice" role="status">
-            {t('forgotUnavailable')}
-            {contactEmail ? (
-              <>
-                {' '}
-                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-              </>
-            ) : (
-              <>
-                {' '}
-                <Link href={CONTACT_PATH}>{tf('contact')}</Link>
-              </>
-            )}
+            {/* One run of text, so the link stays a link in the sentence (a notice lays out its children side by side). */}
+            <span>
+              {t('forgotUnavailable')}
+              {contactEmail ? (
+                <>
+                  {' '}
+                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+                </>
+              ) : (
+                <>
+                  {' '}
+                  <Link href={CONTACT_PATH}>{tf('contact')}</Link>
+                </>
+              )}
+            </span>
           </p>
         )}
         <p className="muted">

@@ -235,6 +235,8 @@ export async function joinGroupWalk(groupWalkId: string): Promise<FormState> {
   if (!gw || gw.walk.status !== 'scheduled' || gw.org.status !== 'verified') return { ok: false, error: 'dog-unavailable' }
   if (gw.org.isDemo) return { ok: false, error: 'demo-dog' }
   if (gw.walk.level === 'experienced' && viewer.profile.experience === 'none') return { ok: false, error: 'experience' }
+  // Walkers do the safety quiz first (besluit 4 okt 2026); the shelter's own staff do not.
+  if (!viewer.profile.quizPassedAt && !viewer.orgs.some((o) => o.id === gw.org.id)) return { ok: false, error: 'needs-quiz' }
 
   const [{ n }] = await db
     .select({ n: count() })

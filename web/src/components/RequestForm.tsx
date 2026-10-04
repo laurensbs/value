@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { requestBlockKeys } from '@/lib/conversation'
 import { MEET_VIAS, type MeetVia } from '@/lib/rules'
 import { addSentence } from '@/lib/sentences'
@@ -10,6 +10,7 @@ import { playSound } from '@/lib/sounds'
 import { useForm } from '@/lib/use-form'
 import { createRequest } from '@/server/actions/requests'
 import type { FormState } from '@/server/actions/profile'
+import { ActionError, useActionErrorText } from './ActionError'
 import { Icon } from './Icon'
 import { MEET_VIA_ICONS } from './MeetVia'
 import { SubmitButton } from './SubmitButton'
@@ -26,6 +27,13 @@ export interface RequestMoment {
 interface Props {
   dogId: string
   dogName: string
+  /** The owner's first name, as on the dog page: the request goes to them. */
+  ownerName: string
+  /**
+   * A request or appointment with this dog that is still open (rules.ts openRequestConflict): then no
+   * form for a second one. Part of this component, so a confirmation just shown stays when the page refreshes.
+   */
+  open?: { pending: boolean; when: string } | null
   walkerName: string
   meetReason: string | null
   soloReason: string | null
@@ -39,10 +47,23 @@ interface Props {
  * owner's home, or a first call), one of the dog's own moments, and a message built from ready
  * sentences (each one can still be edited).
  */
-export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason, defaultDate, defaultTime, moments }: Props) {
+/**
+ * Sending without a connection (or a server that does not answer) keeps the form as it is, with one
+ * plain sentence under it, instead of the page-wide error (onderzoek §3.3, §3.8).
+ */
+async function sendRequest(prev: FormState, form: FormData): Promise<FormState> {
+  try {
+    return await createRequest(prev, form)
+  } catch {
+    return { ok: false, error: typeof navigator !== 'undefined' && !navigator.onLine ? 'offline' : 'server' }
+  }
+}
+
+export function RequestForm({ dogId, dogName, ownerName, open, walkerName, meetReason, soloReason, defaultDate, defaultTime, moments }: Props) {
   const t = useTranslations('request')
   const tm = useTranslations('meet')
-  const { state, pending, onSubmit } = useForm<FormState>(createRequest, { ok: false })
+  const errorText = useActionErrorText()
+  const { state, pending, onSubmit } = useForm<FormState>(sendRequest, { ok: false })
   const [kind, setKind] = useState<'meet' | 'solo'>(soloReason ? 'meet' : 'solo')
   const [meetVia, setMeetVia] = useState<MeetVia>('walk')
   const [date, setDate] = useState(defaultDate)
@@ -67,12 +88,18 @@ export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason
   }
 
   if (state.ok) {
+    return <RequestSent dogName={dogName} ownerName={ownerName} via={kind === 'solo' ? 'solo' : meetVia} flagged={state.message === 'sent-flagged'} />
+  }
+
+  if (open) {
     return (
-      <div className={`notice ${state.message === 'sent-flagged' ? 'warn' : 'success'}`} role="status">
-        <p>{state.message === 'sent-flagged' ? t('sentFlagged') : t('sent')}</p>
-        <Link href="/requests" className="link-button">
-          →
-        </Link>
+      <div className="card flat stack-s request-open">
+        <p>{open.pending ? t('openPending', { dog: dogName, owner: ownerName }) : t('openAccepted', { dog: dogName, when: open.when })}</p>
+        <div className="row">
+          <Link href="/requests" className="button primary">
+            {t('viewRequests')}
+          </Link>
+        </div>
       </div>
     )
   }
@@ -211,16 +238,83 @@ export function RequestForm({ dogId, dogName, walkerName, meetReason, soloReason
               })}
             </span>
           </label>
-          {state.error ? (
-            <p className="error-text" role="alert">
-              {t(`reasons.${state.error}`)}
-            </p>
-          ) : null}
+          {state.error ? <ActionError code={state.error} text={errorText(state.error)} /> : null}
           <SubmitButton className="button primary wide" pending={pending}>
             {t('submit')}
           </SubmitButton>
         </>
       )}
     </form>
+  )
+}
+
+/**
+ * Right after sending (onderzoek §3.3): the form becomes a confirmation that says what happens now, in
+ * three steps, and stays until "Klaar". The paw pops with the send sound; the text and the steps come in
+ * after it. With less motion everything fades in at once. "Klaar" folds it into one quiet line, so the
+ * form never comes back empty and invites a second request.
+ */
+function RequestSent({ dogName, ownerName, via, flagged }: { dogName: string; ownerName: string; via: MeetVia | 'solo'; flagged: boolean }) {
+  const t = useTranslations('request')
+  const [open, setOpen] = useState(true)
+  const title = useRef<HTMLHeadingElement>(null)
+  const after = useRef<HTMLDivElement>(null)
+
+  // Keyboard and screen reader users land on the confirmation, wherever the submit button was.
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    title.current?.focus({ preventScroll: true })
+    title.current?.closest('.request-sent')?.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' })
+  }, [])
+
+  useEffect(() => {
+    if (!open) after.current?.focus({ preventScroll: true })
+  }, [open])
+
+  if (!open) {
+    return (
+      <div className="request-sent-done" ref={after} tabIndex={-1}>
+        <span className="request-sent-done-icon" aria-hidden="true">
+          <Icon name="check" size={18} />
+        </span>
+        <p>{t('sent', { dog: dogName })}</p>
+        <Link href="/requests" className="button secondary">
+          {t('viewRequests')}
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <section className="request-sent card" aria-labelledby="request-sent-title">
+      <span className="request-sent-paw" aria-hidden="true">
+        <Icon name="paw" size={34} />
+      </span>
+      <h2 id="request-sent-title" className="request-sent-title" ref={title} tabIndex={-1}>
+        {t('sentTitle', { owner: ownerName })}
+      </h2>
+      <p className="eyebrow request-sent-eyebrow" id="request-sent-next">
+        {t('sentNext')}
+      </p>
+      <ol className="request-sent-steps" role="list" aria-labelledby="request-sent-next">
+        <li>{t('sentStep1', { owner: ownerName })}</li>
+        <li>{t('sentStep2', { owner: ownerName, kind: via === 'solo' ? 'solo' : 'meet' })}</li>
+        <li>{t('sentStep3', { owner: ownerName, via: via === 'solo' ? 'other' : via })}</li>
+      </ol>
+      <p className="request-sent-notify">{t('sentNotify', { owner: ownerName })}</p>
+      {flagged ? (
+        <p className="notice warn small" role="note">
+          <Icon name="alert" size={18} /> <span>{t('sentFlagged')}</span>
+        </p>
+      ) : null}
+      <div className="request-sent-actions">
+        <button type="button" className="button primary big wide" onClick={() => setOpen(false)}>
+          {t('done')}
+        </button>
+        <Link href="/requests" className="button secondary big wide">
+          {t('viewRequests')}
+        </Link>
+      </div>
+    </section>
   )
 }

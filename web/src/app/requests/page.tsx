@@ -5,10 +5,10 @@ import { Icon } from '@/components/Icon'
 import { MeetChecklist } from '@/components/MeetChecklist'
 import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
 import { PushAsk } from '@/components/PushAsk'
-import { CancelButton, DecideButtons, StartButton, TrustForm } from '@/components/RequestActions'
+import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
-import { canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { canRequestSolo, canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
 import {
   hostContacts,
   incomingRequests,
@@ -128,6 +128,35 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         .map(async ([side, r]) => [r.request.id, await meetChecklist(side, r.dog.name, r.walker.firstName, r.request.meetVia)] as const),
     ),
   )
+  // Walkers and dogs who met in person (rules.ts canRecordTrust): a walk together, or an accepted walk
+  // or home visit whose moment has come. Trust is about the two of them, not about one appointment:
+  // one form per pair, in its own section.
+  const metPairs = new Map<string, RequestRow>()
+  for (const r of incoming) {
+    const key = `${r.dog.id}:${r.walker.id}`
+    const met =
+      Boolean(r.walkId) ||
+      (isMeetVia(r.request.meetVia) && !isRemoteMeeting(r.request) && (r.request.status === 'completed' || (r.request.status === 'accepted' && r.request.startsAt <= now)))
+    if (met && !metPairs.has(key)) metPairs.set(key, r)
+  }
+  // What could still stop a solo walk once the owner allows it: the same rule the walker meets (rules.ts).
+  const soloCaveat = (r: RequestRow): SoloCaveat => {
+    const reason = canRequestSolo(
+      {
+        userId: r.walker.id,
+        onboarded: true,
+        banned: false,
+        birthDate: r.walker.birthDate,
+        quizPassed: signals.get(r.walker.id)?.quizPassed ?? false,
+        pppLicense: r.walker.pppLicense,
+        experience: r.walker.experience === 'none' || r.walker.experience === 'lots' ? r.walker.experience : 'some',
+        pendingRequests: 0,
+      },
+      { ownerId: r.dog.ownerId, orgId: r.dog.orgId, country: r.dog.country, status: 'active', isDemo: false, ppp: r.dog.ppp, level: r.dog.level === 'experienced' ? 'experienced' : 'starter' },
+      { isStaff: false, blocked: false, soloAllowed: true, idSeen: true },
+    )
+    return reason === 'needs-quiz' || reason === 'experience' || reason === 'ppp-licence' ? reason : null
+  }
   // Waiting for an answer is the moment a heads-up matters most.
   const waitingFor = mineOpen.find((r) => r.request.status === 'pending')
   const pushKey = webPushKey()
@@ -147,6 +176,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
             </Link>
           </nav>
         ) : null}
+        <DeclinedNote />
       </header>
 
       {tab === 'mine' ? (
@@ -181,7 +211,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         <strong className="request-title">
                           {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
                         </strong>
-                        <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                       </div>
                       {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="muted small">
@@ -276,7 +306,6 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
               {inOpen.map((r) => {
                 const accepted = r.request.status === 'accepted'
                 const active = r.walkStatus === 'active'
-                const grant = grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false }
                 const call = isRemoteMeeting(r.request)
                 return (
                   <li key={r.request.id} className="list-item request incoming">
@@ -288,7 +317,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
                           </strong>
                         </span>
-                        <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                       </div>
                       {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="small">
@@ -305,9 +334,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <Icon name="alert" size={16} /> {t('requests.flagged')}
                         </p>
                       ) : null}
-                      {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} /> : null}
+                      {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} /> : null}
                       {accepted ? (
-                        <>
+                        <AcceptReveal requestId={r.request.id} walkerName={r.walker.firstName}>
                           <Contact contact={{ name: r.walker.firstName, phone: r.walker.phone, email: r.walker.email }} label={t('requests.contact')} />
                           {meetings.has(r.request.id) ? (
                             <MeetChecklist requestId={r.request.id} title={t('meetCheck.title', { dog: r.dog.name })} items={meetings.get(r.request.id)!} />
@@ -320,15 +349,11 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           {call ? (
                             // A call never counts as meeting in person: no ID check, no solo walks from here.
                             <CallNote via={r.request.meetVia} text={`${callHow(r)} ${t('meet.afterCallHost', { dog: r.dog.name })}`} />
+                          ) : metPairs.has(`${r.dog.id}:${r.walker.id}`) ? (
+                            <p className="muted small">{t('requests.trustElsewhere', { walker: r.walker.firstName, dog: r.dog.name })}</p>
                           ) : (
-                            <TrustForm
-                              dogId={r.dog.id}
-                              dogName={r.dog.name}
-                              walkerId={r.walker.id}
-                              walkerName={r.walker.firstName}
-                              initial={grant}
-                              allowSolo={!r.dog.orgId}
-                            />
+                            // The ID is seen at the meeting itself: recording it waits until then.
+                            <p className="muted small">{t('requests.trustLater', { walker: r.walker.firstName })}</p>
                           )}
                           <div className="row">
                             {active && r.walkId ? (
@@ -339,7 +364,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             {!active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
                             {!active ? <CancelButton requestId={r.request.id} /> : null}
                           </div>
-                        </>
+                        </AcceptReveal>
                       ) : null}
                     </div>
                   </li>
@@ -347,6 +372,29 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
               })}
             </ul>
           )}
+          {metPairs.size ? (
+            <section className="stack-s trust-pairs" aria-labelledby="trust-pairs-title">
+              <h2 id="trust-pairs-title">{t('requests.trustTitle')}</h2>
+              <ul className="list">
+                {[...metPairs.values()].map((r) => (
+                  <li key={`${r.dog.id}:${r.walker.id}`} className="list-item trust-pair">
+                    <div className="grow stack-s">
+                      <TrustForm
+                        dogId={r.dog.id}
+                        dogName={r.dog.name}
+                        walkerId={r.walker.id}
+                        walkerName={r.walker.firstName}
+                        title={t('requests.trustPair', { walker: r.walker.firstName, dog: r.dog.name })}
+                        initial={grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false }}
+                        allowSolo={!r.dog.orgId}
+                        caveat={soloCaveat(r)}
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
           {inPast.length ? (
             <details className="past">
               <summary>{t('requests.past', { n: inPast.length })}</summary>

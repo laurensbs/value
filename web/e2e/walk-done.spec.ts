@@ -1,35 +1,5 @@
 import { expect, test, type Browser, type Page } from '@playwright/test'
-import { addDog, newPerson, onboard, signUp, soonSlot, unique } from './helpers'
-
-/**
- * Tap targets on this screen lower than 44 px. A chip or tick row is tapped through its whole label,
- * so that is what counts; a link inside a sentence is exempt (WCAG 2.5.8), like in scripts/audit.mjs.
- */
-async function smallTargets(page: Page): Promise<string[]> {
-  return page.evaluate(() => {
-    const small: string[] = []
-    const measured = new Set<Element>()
-    const root = document.querySelector('dialog[open]') ?? document.querySelector('main') ?? document.body
-    for (const el of root.querySelectorAll<HTMLElement>('a, button, input:not([type=hidden]), select, summary, [role=button]')) {
-      const box = el.getBoundingClientRect()
-      if (!box.width || !box.height || getComputedStyle(el).visibility === 'hidden') continue
-      if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li, label')) continue
-      if (el.closest('.leaflet-control-attribution')) continue
-      let target: Element = el
-      if (el instanceof HTMLInputElement && (el.type === 'checkbox' || el.type === 'radio')) {
-        const label = el.closest('label')
-        if (label) {
-          if (measured.has(label)) continue
-          measured.add(label)
-          target = label
-        }
-      }
-      const r = target.getBoundingClientRect()
-      if (r.height < 44) small.push(`<${target.tagName.toLowerCase()}> "${(target.textContent ?? '').trim().slice(0, 40)}" ${Math.round(r.width)}x${Math.round(r.height)}`)
-    }
-    return small
-  })
-}
+import { addDog, newPerson, onboard, signUp, smallTargets, soonSlot, unique } from './helpers'
 
 /** Owner puts Bello online, the walker asks to meet, the owner accepts, and the walker starts the walk. */
 async function walkerOnAWalk(browser: Browser, id: string) {
@@ -56,21 +26,22 @@ async function walkerOnAWalk(browser: Browser, id: string) {
   expect(await smallTargets(walker.page)).toEqual([])
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
-  await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
+  await expect(walker.page.getByRole('heading', { name: 'Verstuurd naar Ans.' })).toBeVisible()
 
   await owner.page.goto('/requests')
   await expect(owner.page.getByRole('button', { name: 'Accepteren' })).toBeVisible()
   expect(await smallTargets(owner.page)).toEqual([])
   await owner.page.getByRole('button', { name: 'Accepteren' }).click()
-  await expect(owner.page.getByText('Geaccepteerd').first()).toBeVisible()
+  await expect(owner.page.getByText('Afgesproken', { exact: true }).first()).toBeVisible()
 
   await walker.page.goto('/requests')
   await walker.page.getByRole('button', { name: 'Start rondje' }).click()
   // The checklist before the walk: every row is one big tap target.
   await expect(walker.page.getByLabel('Riem en tuig zitten goed vast')).toBeVisible()
+  // Bags and treats are the owner's: the walker is not asked about them.
+  await expect(walker.page.getByLabel(/poepzakjes/)).toHaveCount(0)
   expect(await smallTargets(walker.page)).toEqual([])
   await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
-  await walker.page.getByLabel('Ik heb poepzakjes bij me').check()
   await walker.page.getByLabel('Mijn telefoon is opgeladen').check()
   await walker.page.getByRole('button', { name: 'Start het rondje' }).click()
   await expect(walker.page.getByRole('timer')).toBeVisible()

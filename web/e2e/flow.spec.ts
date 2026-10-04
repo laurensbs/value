@@ -119,7 +119,7 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await shot(walker.page, '05-request-form')
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
-  await expect(walker.page.getByText(/Aanvraag verstuurd/)).toBeVisible()
+  await expect(walker.page.getByRole('heading', { name: 'Verstuurd naar Ans.' })).toBeVisible()
   await shot(walker.page, '05-request-sent')
 
   // --- Before deciding, the owner asks a question in the chat; no phone numbers needed yet ---
@@ -166,12 +166,11 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await owner.page.goto('/requests')
   await expect(owner.page.getByText('Fleur', { exact: true }).first()).toBeVisible()
   await owner.page.getByRole('button', { name: 'Accepteren' }).click()
-  await expect(owner.page.getByText('Geaccepteerd').first()).toBeVisible()
+  await expect(owner.page.getByText('Afgesproken', { exact: true }).first()).toBeVisible()
   await expect(owner.page.getByText(`fleur-${id}@e2e.test`)).toBeVisible()
-  await owner.page.getByLabel(/ID in het echt gezien/).check()
-  await owner.page.getByLabel(/mag zelfstandig met Bello wandelen/).check()
-  await owner.page.getByRole('button', { name: 'Bevestigen' }).click()
-  await expect(owner.page.getByText('Bijgewerkt.')).toBeVisible()
+  // The ID is seen at the meeting itself: recording it waits until the meeting took place.
+  await expect(owner.page.getByText('Na jullie kennismaking leg je hier vast of je het ID van Fleur in het echt hebt gezien.')).toBeVisible()
+  await expect(owner.page.getByLabel(/ID in het echt gezien/)).toHaveCount(0)
   // A first meeting comes with what to talk about. The ticks stay on this device.
   const ownerList = owner.page.locator('.meet-check')
   await expect(ownerList).toContainText('Kennismaken met Bello')
@@ -206,13 +205,23 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await stranger.dispose()
   await walker.page.getByRole('button', { name: 'Start rondje' }).click()
   await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
-  await walker.page.getByLabel('Ik heb poepzakjes bij me').check()
   await walker.page.getByLabel('Mijn telefoon is opgeladen').check()
   await shot(walker.page, '07-start-checklist')
   await walker.page.getByRole('button', { name: 'Start het rondje' }).click()
   await expect(walker.page).toHaveURL(/\/walk\/[^/?]+$/)
   const walkId = walker.page.url().split('/walk/')[1]
   await expect(walker.page.getByRole('timer')).toBeVisible()
+
+  // --- Walking together now: the owner records the ID seen and allows solo walks ---
+  await owner.page.goto('/requests?view=incoming')
+  const trustPair = owner.page.getByRole('region', { name: 'Na de kennismaking' })
+  await trustPair.getByLabel(/ID in het echt gezien/).check()
+  await trustPair.getByLabel(/mag zelfstandig met Bello wandelen/).check()
+  await trustPair.getByRole('button', { name: 'Bevestigen' }).click()
+  const ladder = owner.page.getByRole('dialog', { name: 'Fleur mag nu zelfstandig met Bello op pad.' })
+  await expect(ladder).toBeVisible()
+  await ladder.getByRole('button', { name: 'Klaar' }).click()
+  await expect(ladder).toHaveCount(0)
 
   // Walk a few hundred metres north-east.
   for (let i = 1; i <= 5; i++) {
@@ -368,20 +377,11 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await owner.page.getByRole('button', { name: 'Verstuur' }).click()
   await expect(owner.page.getByText(/Dank je. Als er iets is/)).toBeVisible()
 
-  // --- The walker passes the safety quiz and can now ask for a solo walk ---
-  await walker.page.goto('/profile/quiz')
-  const answers: Record<string, number> = { heat: 1, leash: 0, treats: 2, otherDogs: 1, escaped: 0, bite: 2, stress: 1, overdue: 0 }
-  for (const [q, a] of Object.entries(answers)) await walker.page.locator(`input[name="q-${q}"][value="${a}"]`).check()
-  await walker.page.getByRole('button', { name: 'Nakijken' }).click()
-  await expect(walker.page.getByText(/Gehaald!/)).toBeVisible()
-  await shot(walker.page, '11-quiz')
-  // Home again: the celebration was seen, the first steps moved on, and the week shows the walk.
+  // --- The walker did the safety quiz when signing up: home again, the week shows the walk ---
   await walker.page.goto('/')
   await expect(walker.page.getByRole('heading', { name: /Fleur/ }).first()).toBeVisible()
-  const quizParty = walker.page.getByRole('dialog', { name: 'Nieuwe penning!' })
-  await expect(quizParty).toBeVisible()
-  await expect(quizParty.getByText('Veiligheidsquiz gehaald')).toBeVisible()
-  await quizParty.getByRole('button', { name: 'Verder' }).click()
+  // The quiz was a calm step at sign-up: no party for it now.
+  await expect(walker.page.getByRole('dialog', { name: 'Nieuwe penning!' })).toHaveCount(0)
   await expect(walker.page.getByText('1 van 1 rondje').or(walker.page.getByText('Weekdoel gehaald!'))).toBeVisible()
   await shot(walker.page, '11b-today-after-walk')
   await walker.page.goto('/progress')

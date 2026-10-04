@@ -1,4 +1,5 @@
 import { expect, type Browser, type BrowserContextOptions, type Page } from '@playwright/test'
+import { QUIZ } from '../src/lib/quiz'
 
 /** With SHOTS=1, saves a full-page screenshot per step for design review (shots/<name>.png). */
 export async function shot(page: Page, name: string) {
@@ -49,7 +50,20 @@ export async function signUp(page: Page, opts: { name: string; email: string; in
  * a few words about yourself (typed, or ready sentences tapped), and the promises. Someone who
  * neither walks nor has a dog is treated as shelter staff.
  */
-export async function onboard(page: Page, opts: { birthDate: string; city: string; bio: string | string[]; phone: string; walker: boolean; owner: boolean }) {
+export async function onboard(
+  page: Page,
+  opts: {
+    birthDate: string
+    city: string
+    bio: string | string[]
+    phone: string
+    walker: boolean
+    owner: boolean
+    next?: boolean
+    /** Do the safety quiz that follows for walkers (default); false leaves it for later. */
+    quiz?: boolean
+  },
+) {
   const next = () => page.getByRole('button', { name: 'Verder' }).click()
   await page.getByRole('button', { name: 'Laten we beginnen' }).click()
   const role = opts.walker && opts.owner ? /^Allebei/ : opts.owner ? /^Ik heb een hond/ : opts.walker ? /^Ik wil wandelen/ : /^Ik werk bij een opvang/
@@ -77,9 +91,29 @@ export async function onboard(page: Page, opts: { birthDate: string; city: strin
   await page.getByLabel(/Telefoonnummer/).fill(opts.phone)
   await next()
   await page.getByLabel(/Ik ben 18 jaar of ouder/).check()
-  await page.getByRole('button', { name: 'Klaar, laten we gaan!' }).click()
+  // The last button says where it leads: the dogs for walkers, your own dog for owners, the shelter for shelter staff.
+  const finish = opts.walker ? 'Laat me de honden zien' : opts.owner ? 'Verder met mijn hond' : 'Verder met onze opvang'
+  await page.getByRole('button', { name: opts.next ? 'Klaar, ga verder' : finish }).click()
   // Wait until the profile is saved and we left onboarding, so the next step doesn't race the save.
   await page.waitForURL((url) => !url.pathname.startsWith('/onboarding'))
+  // Walkers do the safety quiz straight away (besluit 4 okt 2026); then on to where they were going.
+  if (opts.walker && (opts.quiz ?? true)) {
+    await expect(page).toHaveURL(/\/profile\/quiz\?next=/)
+    await passQuiz(page)
+  }
+}
+
+/** The calm quiz: one question at a time, every answer right the first time, then "Verder". */
+export async function passQuiz(page: Page) {
+  for (const q of QUIZ) {
+    await page.locator(`input[name="answer"][value="${q.correct}"]`).check()
+    await page.getByRole('button', { name: 'Kijk na' }).click()
+    await expect(page.getByRole('status').filter({ hasText: 'Klopt.' })).toBeVisible()
+    await page.getByRole('button', { name: 'Verder' }).click()
+  }
+  await expect(page.getByRole('heading', { name: 'Gehaald!' })).toBeVisible()
+  await page.getByRole('link', { name: 'Verder' }).click()
+  await page.waitForURL((url) => !url.pathname.startsWith('/profile/quiz'))
 }
 
 /** A dog put online in the fewest taps: a name, the suggested walk and town, and the two safety promises. */
@@ -124,3 +158,33 @@ export const PNG_1X1 = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4//8/AAX+Av4N70a4AAAAAElFTkSuQmCC',
   'base64',
 )
+
+/**
+ * Tap targets on this screen lower than 44 px. A chip or tick row is tapped through its whole label,
+ * so that is what counts; a link inside a sentence is exempt (WCAG 2.5.8), like in scripts/audit.mjs.
+ */
+export async function smallTargets(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    const small: string[] = []
+    const measured = new Set<Element>()
+    const root = document.querySelector('dialog[open]') ?? document.querySelector('main') ?? document.body
+    for (const el of root.querySelectorAll<HTMLElement>('a, button, input:not([type=hidden]), select, summary, [role=button]')) {
+      const box = el.getBoundingClientRect()
+      if (!box.width || !box.height || getComputedStyle(el).visibility === 'hidden') continue
+      if (el.tagName === 'A' && getComputedStyle(el).display === 'inline' && el.closest('p, li, label')) continue
+      if (el.closest('.leaflet-control-attribution')) continue
+      let target: Element = el
+      if (el instanceof HTMLInputElement && (el.type === 'checkbox' || el.type === 'radio')) {
+        const label = el.closest('label')
+        if (label) {
+          if (measured.has(label)) continue
+          measured.add(label)
+          target = label
+        }
+      }
+      const r = target.getBoundingClientRect()
+      if (r.height < 44) small.push(`<${target.tagName.toLowerCase()}> "${(target.textContent ?? '').trim().slice(0, 40)}" ${Math.round(r.width)}x${Math.round(r.height)}`)
+    }
+    return small
+  })
+}

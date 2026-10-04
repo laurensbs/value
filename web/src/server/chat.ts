@@ -88,7 +88,7 @@ export async function chatSuggestions(access: ChatAccess, sent: ChatMessage[], v
   const [grant] =
     side === 'walker' && moment === 'done'
       ? await db
-          .select({ soloAllowed: s.trustGrant.soloAllowed })
+          .select({ soloAllowed: s.trustGrant.soloAllowed, idSeen: s.trustGrant.idSeen })
           .from(s.trustGrant)
           .where(and(eq(s.trustGrant.dogId, access.dog.id), eq(s.trustGrant.walkerId, viewerId)))
       : []
@@ -98,7 +98,8 @@ export async function chatSuggestions(access: ChatAccess, sent: ChatMessage[], v
     kind: access.request.kind,
     shelter: Boolean(access.dog.orgId),
     weekly: access.request.weekly,
-    soloAllowed: grant?.soloAllowed ?? false,
+    // Solo walks count only with the ID seen in person (besluit 4 okt 2026).
+    soloAllowed: Boolean(grant?.soloAllowed && grant?.idSeen),
     meetVia: access.request.meetVia,
   })
     .map((key) => t(`${side}.${key}`, { dog: access.dog.name }))

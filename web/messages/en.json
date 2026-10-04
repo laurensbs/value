@@ -96,7 +96,7 @@
   "home": {
     "eyebrow": "Nederland · België · España",
     "title": "A regular walk with a dog <mark>who's waiting for you.</mark>",
-    "lede": "Rondje connects young adults with the dogs of neighbours who can't walk far any more, and with shelter dogs. Free, safe and good for you both.",
+    "lede": "Walk a regular round with the dog of someone nearby who can't walk far any more, or with a shelter dog. Free, and always together the first time.",
     "ctaDogs": "See dogs nearby",
     "ctaOwner": "Sign up a dog",
     "ctaShelter": "For shelters",
@@ -114,7 +114,7 @@
     "safetyTitle": "Trust is built step by step",
     "safety1": "The first time, you always walk together with the owner or the shelter.",
     "safety2": "ID is checked in person at the first meeting. Rondje doesn't keep a copy.",
-    "safety3": "Solo walks are only possible once the owner allows them for that dog, and after the safety quiz.",
+    "safety3": "Solo walks are only possible once the owner has seen your ID in person and allows them for that dog.",
     "safety4": "During the walk, the owner can see live where the dog is. The route is deleted after 30 days.",
     "safety5": "After every walk, both sides give private feedback. Concerns go to our team, not to the other person.",
     "safety6": "You can always report or block someone. Anyone who breaks the rules is removed from the platform.",
@@ -123,7 +123,7 @@
     "countriesText": "Rondje works in the Netherlands, Belgium and Spain, in Dutch, French, Spanish and English.",
     "freeTitle": "Free, and it'll stay that way",
     "freeText": "No ads, no subscription, and we never sell data. Rondje runs on voluntary support, and later on partners and funds that stick to our rules.",
-    "exampleDogs": "A few dogs waiting for a walk",
+    "exampleDogs": "Examples, so you can see how it works",
     "freeLink": "How we stay free",
     "freeLinkApp": "About Rondje",
     "impactTitle": "What we walked together",
@@ -167,7 +167,8 @@
     "dogs": {
       "title": "Who's coming along today?",
       "lede": "A few dogs who are waiting for a walk.",
-      "all": "See all dogs"
+      "all": "See all dogs",
+      "ledeExamples": "These are examples, so you can see how it works."
     },
     "how": {
       "eyebrow": "In four steps",
@@ -225,8 +226,8 @@
       "data": "We never sell data"
     },
     "closing": {
-      "title": "A dog is waiting for you",
-      "text": "Near you live dogs whose people can't walk far any more. One extra walk makes their day."
+      "title": "Maybe just around the corner",
+      "text": "Maybe someone near you can't walk far any more. One extra walk makes the day for dog and owner."
     },
     "pages": {
       "safety": "Safety",
@@ -321,7 +322,7 @@
       "next": "Continue",
       "skip": "Skip",
       "welcomeTitle": "Hi {name}, great to have you!",
-      "welcomeText": "A few quick questions, then we'll set Rondje up for you. Exactly the way you need it.",
+      "welcomeText": "A few quick questions. Then you'll see which dogs near you could use a walk, or put your own dog online.",
       "welcome1": "You choose what you want: walking, a dog, or both.",
       "welcome2": "We show dogs and people near you.",
       "welcome3": "It takes a minute. You can change everything later.",
@@ -352,7 +353,7 @@
       "goal2": "Twice a week",
       "goal2Text": "A regular buddy for a dog",
       "goal3": "Three times a week",
-      "goal3Text": "A true walker",
+      "goal3Text": "If you often have time",
       "goalRecommended": "Recommended",
       "goalLater": "Not sure yet",
       "profileTitle": "Show who you are",
@@ -363,7 +364,7 @@
       "promise1": "The first time, you always walk together with the owner or the shelter.",
       "promise2": "Your address is never shown, and your phone number only after an appointment.",
       "promise3": "Rondje is free and ad-free. Someone asking for money? Report it.",
-      "finish": "Done, let's go!",
+      "finish": "Show me the dogs",
       "needRole": "Choose what you'd like to do.",
       "needName": "Fill in your first name.",
       "needBirthDate": "Fill in your date of birth.",
@@ -373,7 +374,10 @@
       "welcomeTitleAnon": "Hi, great to have you!",
       "needExperience": "Pick what fits you best.",
       "promise1Owner": "The first time, a walker always walks together with you.",
-      "progressLabel": "Progress"
+      "progressLabel": "Progress",
+      "finishOwner": "On to my dog",
+      "finishShelter": "On to our shelter",
+      "finishNext": "Done, carry on"
     },
     "bioBlocksLabel": "Tap to add a sentence",
     "bioBlocks": {
@@ -426,7 +430,7 @@
     "showList": "List",
     "away": "{distance} away",
     "years": "{n, plural, one {# year} other {# years}}",
-    "empty": "No dogs here yet. Know someone whose dog would love to get out more? Or join a walk with a shelter nearby.",
+    "empty": "We've only just started here. Know someone whose dog would love to get out more? Send them your link, or suggest a shelter.",
     "inviteOwner": "Invite an owner",
     "findShelter": "Shelters nearby",
     "fromOwner": "Neighbourhood dog",
@@ -441,7 +445,9 @@
       "no": "Please don't give treats."
     },
     "tipShelter": "Suggest a shelter",
-    "new": "New"
+    "new": "New",
+    "emptyFiltered": "No dogs match this choice. Try another one, or see all dogs.",
+    "sendLink": "Send your link"
   },
   "dog": {
     "story": "About {name}",
@@ -508,8 +514,8 @@
     "messageHint": "Briefly introduce yourself. Don't agree on any payment: Rondje is free, and the owner provides bags and treats.",
     "rules": "I'll follow the <conduct>code of conduct</conduct>: on the leash, no treats without permission, and I'll report anything that happens straight away.",
     "submit": "Send request",
-    "sent": "Request sent. You'll get a notification as soon as there's a reply.",
-    "sentFlagged": "Request sent. Please note: messages about money, payment links or bank account numbers don't belong on Rondje and are checked.",
+    "sent": "Your request for {dog} is with your appointments.",
+    "sentFlagged": "Please note: messages about money, payment links or bank account numbers don't belong here and are checked.",
     "shelterNote": "Shelter dogs are walked in a supervised group. Choose a group walk below.",
     "reasons": {
       "not-onboarded": "Finish your profile first.",
@@ -534,7 +540,12 @@
       "full": "This group walk is full.",
       "not-signed-in": "Please log in first.",
       "meet-via": "This way of meeting isn't possible here. Choose walk together.",
-      "needs-in-person": "A call doesn't count as meeting in person. That's only possible once you've met."
+      "needs-in-person": "A call doesn't count as meeting in person. That's only possible once you've met.",
+      "needs-id": "The owner needs to see your ID in person first, when you meet.",
+      "already-open": "You already have an open request or appointment with this dog.",
+      "solo-not-allowed": "Solo walks are not switched on for this walker and dog. Switch them on under ‘After the first meeting’ first, or decline the request.",
+      "id-not-seen": "Solo walks are only possible once you've seen the walker's ID in person.",
+      "meeting-ahead": "This is possible after your first meeting, once you've seen the walker and their ID in person."
     },
     "messagePlaceholder": "Hi! I'm … and I'd love to walk {dog}.",
     "moments": "Times that suit {dog}",
@@ -548,7 +559,21 @@
       "outdoors": "I love being outdoors, even in the rain."
     },
     "signupFirst": "Meet {name}",
-    "signupFirstText": "Free. First you create an account, then you pick a moment to meet."
+    "signupFirstText": "Free. First you create an account, then you pick a moment to meet.",
+    "sentTitle": "Sent to {owner}.",
+    "sentNext": "What happens now",
+    "sentStep1": "{owner} gets your request.",
+    "sentStep2": "{kind, select, solo {If {owner} says yes, the walk is in your appointments.} other {If {owner} says yes, you'll both see each other's contact details.}}",
+    "sentStep3": "{via, select, walk {The first time, you walk together.} home {The first time, you visit {owner} at home.} phone {First you have a quick call. Then you meet in person.} video {First you have a quick video call. Then you meet in person.} other {You walk on your own. {owner} can follow along live.}}",
+    "sentNotify": "You'll get a notification as soon as {owner} replies.",
+    "done": "Done",
+    "viewRequests": "See your appointments",
+    "signedOut": "You're no longer signed in. Sign in again, then try once more.",
+    "bannedMore": "Read why",
+    "openPending": "Your request for {dog} is already with your appointments. You'll get a notification as soon as {owner} replies.",
+    "openAccepted": "You already have an appointment with {dog}: {when}.",
+    "quizFirst": "The quiz first (about 3 min)",
+    "quizFirstText": "Before you ask for a first meeting, you do a short safety quiz. Afterwards you come straight back to {dog}."
   },
   "requests": {
     "title": "Walks",
@@ -558,7 +583,7 @@
     "emptyIncoming": "No requests for your dogs yet.",
     "status": {
       "pending": "Waiting for a reply",
-      "accepted": "Accepted",
+      "accepted": "Confirmed",
       "declined": "Declined",
       "cancelled": "Cancelled",
       "completed": "Completed",
@@ -583,14 +608,37 @@
     "idSeen": "I've seen their ID in person (Rondje doesn't keep a copy)",
     "soloAllowed": "{name} may walk {dog} on their own",
     "saveTrust": "Confirm",
-    "trustSaved": "Updated.",
     "contact": "Contact",
     "meeting": "Where to meet",
     "cancelConfirm": "Cancel this walk?",
     "keep": "No, go back",
     "past": "Past walks ({n})",
     "startHint": "You can start from {n} minutes before the agreed time.",
-    "calendar": "Add to calendar"
+    "calendar": "Add to calendar",
+    "acceptedNote": "All set with {walker}! You can now see each other's contact details, and {walker} gets a notification.",
+    "ladderTitleSolo": "{walker} can now walk {dog} on their own.",
+    "ladderTitleId": "You've seen {walker}'s ID.",
+    "ladderTextSolo": "You can follow every walk live, and you can switch this off again at any time.",
+    "ladderTextId": "Would you like {walker} to walk {dog} on their own too? You can switch that on under ‘After the first meeting’, whenever you want.",
+    "ladderTextShelter": "Shelter dogs always walk in a supervised group.",
+    "ladderQuiz": "{walker} can ask for a solo walk once they have passed the safety quiz.",
+    "ladderLabel": "Trust, step by step",
+    "ladderMeet": "First meeting",
+    "ladderId": "ID seen",
+    "ladderSolo": "Can walk on their own",
+    "ladderDone": "done",
+    "ladderNotYet": "not yet",
+    "ladderClose": "Done",
+    "trustSoloOff": "{walker} no longer walks {dog} on their own.",
+    "trustIdOff": "The 'ID seen' tick is off again.",
+    "ladderExperience": "{dog} needs someone with dog experience. {walker}'s profile doesn't show that yet, so a solo walk can't be requested yet.",
+    "ladderPpp": "In Spain, {walker} can only walk {dog} alone with a PPP licence in their profile.",
+    "soloNeedsId": "Walking on their own can only be switched on once you've seen their ID in person.",
+    "soloOffWithId": "Without ‘ID seen’, {walker} can't walk {dog} on their own, so that is switched off too.",
+    "trustElsewhere": "What {walker} may do with {dog} is set below, under ‘After the first meeting’.",
+    "declinedNote": "You said no to {walker} for {dog}. {walker} gets a notification.",
+    "trustPair": "{walker} and {dog}",
+    "trustLater": "After your first meeting, you record here whether you've seen {walker}'s ID in person."
   },
   "meet": {
     "legend": "How would you like to meet?",
@@ -617,7 +665,6 @@
   "walk": {
     "before": "Before you set off",
     "checkLeash": "Leash and harness are securely fastened",
-    "checkBags": "I've got poo bags with me",
     "checkPhone": "My phone is charged",
     "locationNote": "During the walk, your phone shares your location with the owner. This stops as soon as you end the walk.",
     "start": "Start the walk",
@@ -876,69 +923,87 @@
   },
   "quiz": {
     "title": "Safety quiz",
-    "lede": "Eight questions about walking safely. All correct? Then you can request solo walks.",
+    "lede": "Eight short questions about walking safely. No rush: each question tells you why, and one you miss simply comes back. After that you can ask for a first meeting.",
     "submit": "Check answers",
-    "passed": "Passed! You can now request solo walks with owners who allow them.",
+    "passed": "You can now ask for a first meeting or join a group walk.",
     "failed": "Almost. Take another look at the questions in red.",
     "q": {
       "heat": {
         "q": "It's 28 degrees. What do you do?",
         "a0": "Just walk as usual, dogs cope well with heat",
         "a1": "A short walk in the shade, bring water, and feel the pavement with your hand to check it isn't too hot",
-        "a2": "Have a good run, so it's over sooner"
+        "a2": "Have a good run, so it's over sooner",
+        "why": "In warm weather, asphalt can get hot enough to hurt paws. Hold your hand on it for a moment: too hot for you is too hot for the dog. Shade and water help."
       },
       "leash": {
         "q": "Can the dog go off the leash?",
         "a0": "Only if the owner has explicitly allowed it, and only where it's permitted",
         "a1": "Yes, if it's quiet",
-        "a2": "Yes, if the dog listens well"
+        "a2": "Yes, if the dog listens well",
+        "why": "Off the lead only if the owner said so, and only where it is allowed. Even a dog that listens well can get a fright and run off."
       },
       "treats": {
         "q": "You have a treat in your pocket. Can you give it?",
         "a0": "Yes, dogs love treats",
         "a1": "Only a small piece",
-        "a2": "Only if the profile says it's allowed"
+        "a2": "Only if the profile says it's allowed",
+        "why": "Not every dog may have every treat, for example because of a diet. The dog's profile tells you what is fine."
       },
       "otherDogs": {
         "q": "Another dog comes towards you. What do you do?",
         "a0": "Let them have a good sniff",
         "a1": "Keep your distance, ask the other owner first, and calmly walk on if you're unsure",
-        "a2": "Pick the dog up"
+        "a2": "Pick the dog up",
+        "why": "Not every dog likes other dogs, even when it looks friendly. Keeping your distance and asking first avoids trouble."
       },
       "escaped": {
         "q": "The dog has got loose. What do you do first?",
         "a0": "Stay calm, don't chase or shout after the dog, and call the owner straight away",
         "a1": "Search yourself first, and only then call the owner",
-        "a2": "Go home and wait"
+        "a2": "Go home and wait",
+        "why": "Running and shouting after a dog often makes it worse. The owner knows what works, so you call right away."
       },
       "bite": {
         "q": "The dog bites another dog. What do you do?",
         "a0": "Walk on quickly",
         "a1": "Nothing, it happens",
-        "a2": "Make sure everyone is safe, exchange details, call the owner and report it in Rondje"
+        "a2": "Make sure everyone is safe, exchange details, call the owner and report it in Rondje",
+        "why": "Everyone safe first. Then exchange details, call the owner and report it, so everyone knows what happened."
       },
       "stress": {
         "q": "The dog yawns a lot, licks its lips and pulls away. What does that mean?",
         "a0": "It's hungry",
         "a1": "It's not feeling at ease; find a quieter spot",
-        "a2": "It wants to play"
+        "a2": "It wants to play",
+        "why": "Yawning, lip licking and pulling away show that a dog doesn't feel at ease. A quieter spot helps."
       },
       "overdue": {
         "q": "You're heading back later than agreed. What do you do?",
         "a0": "Let the owner know straight away",
         "a1": "Nothing, the app shows it anyway",
-        "a2": "Walk faster"
+        "a2": "Walk faster",
+        "why": "The owner is counting on you and wonders where you are. A quick message takes that worry away."
       }
     },
     "alreadyPassed": "You've already passed the quiz. You can always take it again.",
     "toDogs": "See the dogs",
-    "tryAgain": "Not quite. Take another look."
+    "tryAgain": "Not quite. Take another look.",
+    "done": "Passed!",
+    "left": "{n, plural, one {# question to go} other {# questions to go}}",
+    "check": "Check",
+    "right": "That's right.",
+    "notQuite": "Not quite.",
+    "answerWas": "The right answer: {answer}",
+    "comesBack": "This question comes back once more later.",
+    "next": "Continue",
+    "later": "Do it later",
+    "laterHint": "Without the quiz you can't ask for a first meeting yet."
   },
   "shelter": {
     "title": "For shelters",
     "lede": "Put your dogs online in one go, plan supervised group walks and get a regular group of young volunteers. Free.",
     "create": "Register a shelter",
-    "createLede": "We check every shelter before its dogs become visible. This usually takes less than two working days.",
+    "createLede": "We check every shelter before its dogs become visible. We try to do so within two working days.",
     "name": "Shelter name",
     "registrationNumber": "Chamber of Commerce number (KvK, KBO or CIF)",
     "address": "Address",
@@ -998,7 +1063,7 @@
     "loginFirst": "First create your own account. Then register the shelter; it takes two minutes.",
     "finishProfile": "Finish your profile first",
     "where": "Where is the shelter?",
-    "created": "Your shelter has been registered. We'll get in touch within two working days to verify it.",
+    "created": "Your shelter has been registered. We try to get in touch within two working days to verify it.",
     "status": {
       "pending": "Under review",
       "verified": "Verified",
@@ -1016,7 +1081,7 @@
       "staff": "staff member"
     },
     "staffAdded": "Staff member added.",
-    "createdPending": "Your shelter is registered. We will check it within two working days. Add your dogs now: they become visible once the shelter is verified.",
+    "createdPending": "Your shelter is registered. We try to check it within two working days. Add your dogs now: they become visible once the shelter is verified.",
     "sections": {
       "about": "The shelter",
       "walking": "Walking with you",
@@ -1054,7 +1119,7 @@
       "details": "Tell people about your shelter: logo, description and walking times",
       "dogs": "Put your dogs online",
       "walk": "Plan a first group walk",
-      "verified": "Rondje checks your shelter (usually within two working days)"
+      "verified": "We check your shelter (we try to do so within two working days)"
     },
     "checklistGo": "Do it →",
     "checklistDone": "done",
@@ -1134,7 +1199,7 @@
     "soonTitle": "Our email address will be here soon",
     "soonText": "We're still setting up our contact address. Until then, here is what you can already do:",
     "nowTitle": "What you can do now",
-    "report": "Is it about a profile, a dog or a walk? Use the ‘Report’ button on that page. We look within 24 hours.",
+    "report": "Is it about a profile, a dog or a walk? Use the ‘Report’ button on that page. We try to look within 24 hours.",
     "help": "Not okay right now? The help page lists free and anonymous help lines.",
     "helpLink": "Go to the help page",
     "suggest": "Want to suggest a shelter or share an idea? Use the tip form.",
@@ -1144,9 +1209,9 @@
     "title": "How Rondje handles safety",
     "lede": "People don't hand their dog to just anyone. That's why we build trust step by step, and keep the platform clean.",
     "levels": "Step by step",
-    "level1": "New account: you can request a first meeting or join a supervised group walk.",
+    "level1": "New account: the safety quiz first. Then you can request a first meeting or join a supervised group walk.",
     "level2": "After the first meeting: the owner has seen your ID in person and can allow solo walks for that one dog.",
-    "level3": "After the safety quiz: you can request solo walks with owners who allow them.",
+    "level3": "After that: request solo walks with owners who allow them for their dog.",
     "during": "During the walk",
     "duringText": "Your phone shares your location with the owner while the walk is on. If it runs over, you both get a notification. The help button shows you straight away who to call.",
     "after": "After the walk",
@@ -1156,7 +1221,7 @@
     "liability": "Who is responsible for what?",
     "liabilityText": "Rondje puts people in touch and is not itself a party to the arrangement. The owner remains liable for any damage the dog causes and must be insured for it. We recommend that walkers take out their own liability insurance. Read the terms for all the details.",
     "report": "Seen or experienced something?",
-    "reportText": "Report it using the ‘Report’ button on a profile, dog or walk. We'll look into it within 24 hours."
+    "reportText": "Report it using the ‘Report’ button on a profile, dog or walk. We try to look into it within 24 hours."
   },
   "report": {
     "title": "Report",
@@ -1171,7 +1236,7 @@
     },
     "description": "Tell us what happened",
     "submit": "Send report",
-    "done": "Thank you. We'll look into it within 24 hours. In an emergency, call 112.",
+    "done": "Thank you. We try to look into it within 24 hours. In an emergency, call 112.",
     "blockDone": "Blocked. You'll no longer see each other when planning walks.",
     "error": "Describe what happened in at least a few words.",
     "block": "Block this person",
@@ -1184,7 +1249,7 @@
     "markRead": "Mark all as read",
     "kinds": {
       "request-new": "{via, select, walk {{walkerName} would like to meet {dogName} on a walk.} home {{walkerName} would like to meet {dogName} at your home.} phone {{walkerName} would like to call first to get to know {dogName}.} video {{walkerName} would like a video call first to get to know {dogName}.} other {{walkerName} would like to walk {dogName}.}}",
-      "request-accepted": "{via, select, phone {Your call about {dogName} has been accepted.} video {Your video call about {dogName} has been accepted.} other {Your walk with {dogName} has been accepted.}}",
+      "request-accepted": "{via, select, walk {Yes! Your first meeting with {dogName} is on.} home {Yes! Your first meeting with {dogName} is on.} phone {Yes! Your call about {dogName} is on.} video {Yes! Your video call about {dogName} is on.} other {Yes! Your appointment with {dogName} is on.}}",
       "request-declined": "Unfortunately, your walk with {dogName} was declined.",
       "request-cancelled": "A walk has been cancelled.",
       "walk-started": "{walkerName} has set off with {dogName}. Follow along live.",
@@ -1655,8 +1720,8 @@
         "body": "{via, select, home {Look at the request in Rondje and let them know if it suits you. Meet during the day; family or a neighbour are welcome to join.} phone {Look at the request in Rondje and let them know if it suits you. A call doesn't count as meeting in person yet: after it, you meet with {dogName}.} video {Look at the request in Rondje and let them know if it suits you. A video call doesn't count as meeting in person yet: after it, you meet with {dogName}.} other {Look at the request in Rondje and let them know if it suits you. The first time, you always meet together.}}"
       },
       "request-accepted": {
-        "subject": "{via, select, phone {Your call about {dogName} has been accepted} video {Your video call about {dogName} has been accepted} other {Your appointment with {dogName} has been accepted}}",
-        "body": "{via, select, home {In Rondje you can now see where you meet and how to reach the owner. Meet during the day and let someone know where you are.} phone {In Rondje you can now see how to reach the owner. Agree in the chat who calls whom. After the call, you plan meeting in person.} video {Agree in Rondje's chat how you'll do the video call. After the call, you plan meeting in person.} other {In Rondje you can now see where you meet and how to reach the owner. The first time, you walk together.}}"
+        "subject": "{via, select, walk {Yes! Your first meeting with {dogName} is on} home {Yes! Your first meeting with {dogName} is on} phone {Yes! Your call about {dogName} is on} video {Yes! Your video call about {dogName} is on} other {Yes! Your appointment with {dogName} is on}}",
+        "body": "{via, select, home {In Rondje you can now see where you meet and how to reach the owner. Meet during the day and let someone know where you are.} phone {In Rondje you can now see how to reach the owner. Agree in the chat who calls whom. After the call, you plan meeting in person.} video {Agree in Rondje's chat how you'll do the video call. After the call, you plan meeting in person.} walk {In Rondje you can now see where you meet and how to reach the owner. The first time, you walk together.} other {You can now see where you meet and how to reach the owner. During the walk, the owner can follow along live.}}"
       },
       "walk-overdue": {
         "subject": "The walk with {dogName} is taking longer than planned",
@@ -1680,7 +1745,7 @@
       },
       "nudge-step": {
         "subject": "{step, select, about {Finish your profile} dog {Put your dog on Rondje} quiz {Your next step: the safety quiz} meet {Up for a first meeting?} other {Your next step on Rondje}}",
-        "body": "{step, select, about {A photo and a few lines about yourself help {role, select, owner {walkers} other {owners}} get to know you. It only takes a minute.} dog {Put your dog on Rondje so walkers nearby can offer a walk. The first time, you always meet together.} quiz {A few questions about walking safely, and you'll know what to look out for. After that you can also go out alone, if the owner agrees.} meet {See which dogs live near you and ask for a first meeting. The first time, you walk together with the owner.} other {Your next step on Rondje is ready.}}"
+        "body": "{step, select, about {A photo and a few lines about yourself help {role, select, owner {walkers} other {owners}} get to know you. It only takes a minute.} dog {Put your dog on Rondje so walkers nearby can offer a walk. The first time, you always meet together.} quiz {A few questions about walking safely, and you'll know what to look out for. After that you can ask for a first meeting.} meet {See which dogs live near you and ask for a first meeting. The first time, you walk together with the owner.} other {Your next step on Rondje is ready.}}"
       },
       "nudge-challenge": {
         "subject": "{city} goes for {goal} walks together",
@@ -1790,7 +1855,7 @@
       },
       "quiz": {
         "title": "Pass the safety quiz",
-        "hint": "Eight short questions. Needed to walk on your own."
+        "hint": "Eight short questions. Needed for your first meeting."
       },
       "meet": {
         "title": "Plan a first meeting",
@@ -1984,7 +2049,7 @@
       "levelUpText": "You're now {name}, level {n}.",
       "newBadge": "New badge!",
       "newBadges": "{n} new badges!",
-      "close": "Great!",
+      "close": "Continue",
       "allBadges": "See your badges"
     },
     "card": "See your progress",

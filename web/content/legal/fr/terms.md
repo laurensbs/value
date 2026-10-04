@@ -57,7 +57,7 @@ Vous pouvez avoir plusieurs rôles.
 3. **Première rencontre.** La première fois est toujours une première rencontre, en présence du propriétaire ou d'un membre du refuge.
 4. **Vérification d'identité.** Lors de la première rencontre, le promeneur montre une pièce d'identité valable. Le propriétaire ou le refuge vérifie que le nom, la photo et l'âge correspondent, puis coche une case dans l'application. Rondje ne conserve aucune copie. N'en faites pas non plus de photo ou de copie vous-même.
 5. **Confiance solo.** Promener un chien seul n'est permis qu'après l'autorisation expresse du propriétaire ou du refuge dans l'application. Elle ne vaut que pour ce chien précis et peut être retirée à tout moment.
-6. **Quiz de sécurité.** Avant votre première promenade en solo, vous répondez à un court quiz dans l'application.
+6. **Quiz de sécurité.** Avant de demander une première rencontre ou de rejoindre une balade en groupe, vous répondez à un court quiz de sécurité.
 7. **Les nouveaux comptes** ne peuvent d'abord faire que des premières rencontres et des promenades encadrées. L'application indique quand cela change.
 8. **Promenades régulières.** Vous pouvez convenir d'une promenade fixe chaque semaine. Empêché ? Annulez le plus tôt possible via l'application.
 

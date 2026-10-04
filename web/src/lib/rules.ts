@@ -27,6 +27,12 @@ export type Reason =
   | 'needs-in-person'
   | 'meet-via'
   | 'experience'
+  | 'needs-id'
+  | 'already-open'
+  // For the owner or shelter: what they tried does not fit the trust given so far.
+  | 'solo-not-allowed'
+  | 'id-not-seen'
+  | 'meeting-ahead'
 
 export interface WalkerFacts {
   userId: string
@@ -55,6 +61,8 @@ export interface Relation {
   blocked: boolean
   /** The owner granted solo walks with this dog. */
   soloAllowed: boolean
+  /** The owner (or shelter) saw the walker's ID in person. Needed before any solo walk (besluit 4 okt 2026). */
+  idSeen: boolean
 }
 
 /** Age in whole years on `now`, from an ISO date (YYYY-MM-DD). */
@@ -91,12 +99,37 @@ function baseChecks(w: WalkerFacts, d: DogFacts, r: Relation): Reason | null {
   return null
 }
 
-/** A first meeting (kennismaking): the owner or shelter staff is present. */
+/**
+ * A first meeting (kennismaking): the owner or shelter staff is present. Walkers do the safety quiz
+ * first (besluit 4 okt 2026); owners and shelter staff never ask for their own dog (baseChecks).
+ */
 export function canRequestMeeting(w: WalkerFacts, d: DogFacts, r: Relation): Reason | null {
   const base = baseChecks(w, d, r)
   if (base) return base
+  if (!w.quizPassed) return 'needs-quiz'
   if (w.pendingRequests >= MAX_PENDING_REQUESTS) return 'too-many-pending'
   return null
+}
+
+/**
+ * Whether a solo walk may happen, from the trust stored for this walker and dog: asked for, accepted,
+ * started or rolled on to next week. Never with a shelter dog, never without the owner's yes, and
+ * never without the ID seen in person. Anything that is not a solo walk is not about trust.
+ */
+export function soloTrustReason(
+  kind: string,
+  dog: Pick<DogFacts, 'orgId'>,
+  grant: { soloAllowed: boolean; idSeen: boolean } | null | undefined,
+): Reason | null {
+  if (kind !== 'solo') return null
+  if (dog.orgId || !grant?.soloAllowed) return 'needs-solo-trust'
+  if (!grant.idSeen) return 'needs-id'
+  return null
+}
+
+/** The same reasons, said to the owner or shelter who decides (accepting a solo walk, saving trust). */
+export function forDecider(reason: Reason): Reason {
+  return reason === 'needs-solo-trust' ? 'solo-not-allowed' : reason === 'needs-id' ? 'id-not-seen' : reason
 }
 
 /** A solo walk: only after the owner granted it for this dog, and after the safety quiz. */
@@ -105,6 +138,7 @@ export function canRequestSolo(w: WalkerFacts, d: DogFacts, r: Relation): Reason
   if (base) return base
   if (d.orgId) return 'needs-meeting'
   if (!r.soloAllowed) return 'needs-solo-trust'
+  if (!r.idSeen) return 'needs-id'
   if (!w.quizPassed) return 'needs-quiz'
   if (d.level === 'experienced' && w.experience === 'none') return 'experience'
   if (w.pendingRequests >= MAX_PENDING_REQUESTS) return 'too-many-pending'
@@ -146,14 +180,44 @@ export function checkMeetVia(kind: string, meetVia: string, dog: Pick<DogFacts, 
 }
 
 /**
- * Recording "ID seen in person" and allowing solo walks need a meeting in person: an accepted walk or
- * home visit, or a walk together. A phone or video call never counts, however it went.
+ * Recording "ID seen in person" and allowing solo walks need a meeting in person that took place: an
+ * accepted walk or home visit whose moment has come, or a walk together. A phone or video call never
+ * counts, however it went; a meeting that is still to come does not count yet.
  */
-export function canRecordTrust(requests: { status: string; meetVia: string }[], walks: number): Reason | null {
+export function canRecordTrust(requests: { status: string; meetVia: string; startsAt: Date }[], walks: number, now = new Date()): Reason | null {
   if (walks > 0) return null
-  const met = requests.filter((r) => r.status === 'accepted' || r.status === 'completed')
-  if (met.some((r) => isInPerson(r.meetVia))) return null
-  return met.length ? 'needs-in-person' : 'needs-meeting'
+  const agreed = requests.filter((r) => r.status === 'accepted' || r.status === 'completed')
+  const inPerson = agreed.filter((r) => isInPerson(r.meetVia))
+  if (inPerson.some((r) => r.status === 'completed' || r.startsAt.getTime() <= now.getTime())) return null
+  if (inPerson.length) return 'meeting-ahead'
+  return agreed.length ? 'needs-in-person' : 'needs-meeting'
+}
+
+/** Solo walks only with an ID seen in person: an owner cannot allow one without the other. */
+export function checkTrust(input: { idSeen: boolean; soloAllowed: boolean }): Reason | null {
+  return input.soloAllowed && !input.idSeen ? 'needs-id' : null
+}
+
+/**
+ * The open request a new one would duplicate: the same walker and dog, waiting for an answer or
+ * agreed, and not in the past. Two exceptions: an agreed first call is followed by planning to meet in
+ * person (createRequest closes the call once that is asked for), and an agreed weekly solo walk leaves
+ * room for an extra solo walk on another day.
+ */
+export function openRequestConflict<T extends { status: string; startsAt: Date; meetVia: string; kind: string; weekly: boolean }>(
+  existing: T[],
+  next: { kind: string; meetVia: string },
+  now = new Date(),
+): T | null {
+  return (
+    existing.find(
+      (e) =>
+        (e.status === 'pending' || e.status === 'accepted') &&
+        e.startsAt.getTime() > now.getTime() &&
+        !(e.status === 'accepted' && !isInPerson(e.meetVia) && next.kind === 'meet' && isInPerson(next.meetVia)) &&
+        !(e.status === 'accepted' && e.kind === 'solo' && e.weekly && next.kind === 'solo'),
+    ) ?? null
+  )
 }
 
 /** A walk (with live location) only starts from an accepted walk or visit in person, never from a call. */

@@ -5,7 +5,22 @@ import { useState, useTransition } from 'react'
 import { joinGroupWalk, leaveGroupWalk } from '@/server/actions/shelters'
 import { Icon } from './Icon'
 
-export function GroupWalkButton({ id, joined, full, signedIn, next = '/group-walks' }: { id: string; joined: boolean; full: boolean; signedIn: boolean; next?: string }) {
+export function GroupWalkButton({
+  id,
+  joined,
+  full,
+  signedIn,
+  needsQuiz = false,
+  next = '/group-walks',
+}: {
+  id: string
+  joined: boolean
+  full: boolean
+  signedIn: boolean
+  /** Walkers do the safety quiz before they join (besluit 4 okt 2026); it brings them back here. */
+  needsQuiz?: boolean
+  next?: string
+}) {
   const t = useTranslations()
   const [pending, start] = useTransition()
   const [isJoined, setJoined] = useState(joined)
@@ -18,6 +33,12 @@ export function GroupWalkButton({ id, joined, full, signedIn, next = '/group-wal
       </a>
     )
   }
+  const quiz = (
+    <a className="button secondary small" href={`/profile/quiz?next=${encodeURIComponent(next)}`}>
+      {t('request.quizFirst')}
+    </a>
+  )
+  if (needsQuiz && !isJoined) return quiz
   return (
     <div className="stack-s">
       <button
@@ -43,6 +64,7 @@ export function GroupWalkButton({ id, joined, full, signedIn, next = '/group-wal
         </a>
       ) : null}
       {error ? <span className="error-text">{t(`request.reasons.${error}`)}</span> : null}
+      {error === 'needs-quiz' ? quiz : null}
     </div>
   )
 }

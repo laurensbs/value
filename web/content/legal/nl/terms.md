@@ -57,7 +57,7 @@ Je kunt meer dan één rol hebben.
 3. **Kennismaking.** De eerste ontmoeting is altijd een kennismaking, met de eigenaar of iemand van de opvang erbij.
 4. **ID-check.** Bij de kennismaking laat de wandelaar een geldig identiteitsbewijs zien. De eigenaar of opvang kijkt of naam, foto en leeftijd kloppen en vinkt dat aan in de app. Rondje bewaart geen kopie. Maak er ook zelf geen foto of kopie van.
 5. **Solo-vertrouwen.** Alleen wandelen met een hond mag pas als de eigenaar of opvang daar in de app uitdrukkelijk toestemming voor geeft. Dat geldt alleen voor die ene hond en kan altijd worden ingetrokken.
-6. **Veiligheidsquiz.** Voor je eerste solowandeling doe je een korte quiz in de app.
+6. **Veiligheidsquiz.** Voordat je een kennismaking aanvraagt of meeloopt met een groepswandeling, doe je een korte veiligheidsquiz.
 7. **Nieuwe accounts** kunnen eerst alleen kennismakingen en begeleide wandelingen doen. Wanneer dat verandert, staat in de app.
 8. **Vaste wandelingen.** Je kunt een vaste wekelijkse wandeling afspreken. Kun je niet? Zeg zo snel mogelijk af via de app.
 
