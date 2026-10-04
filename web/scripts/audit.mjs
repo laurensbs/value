@@ -16,7 +16,7 @@ const publicPaths = ['/', '/dogs', '/dogs?view=map', '/dogs/demo-saar', '/shelte
 const privatePaths = ['/', '/?welcome=1', '/progress', '/onboarding', '/profile', '/profile/edit', '/profile/quiz', '/school', '/school/meet', '/my-dogs', '/my-dogs/new', '/requests', '/notifications', '/admin']
 const axeSource = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8')
 // Bars that stay put while the page scrolls under them: a control behind one is reached by scrolling.
-const BARS = '.header, .tabbar, .app-tabs, .active-walk, .form-actions, .onboarding-actions, .walk-actions, .bulk-actions, .chat-compose'
+const BARS = '.header, .tabbar, .app-tabs, .active-walk, .form-actions, .onboarding-actions, .walk-actions, .bulk-actions, .chat-compose, .plan-bar'
 
 /** axe-core in light and dark mode: names and roles for screen readers, contrast, target sizes. */
 async function axe(page) {

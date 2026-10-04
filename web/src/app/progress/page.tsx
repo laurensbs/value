@@ -136,8 +136,9 @@ export default async function ProgressPage() {
         </section>
       ) : null}
 
-      <section className="stack" aria-labelledby="path-title">
-        <h2 id="path-title">{t('pathTitle')}</h2>
+      {/* Reference, not news: the whole path and how points come in, folded until you want them. */}
+      <details className="fold">
+        <summary id="path-title">{t('pathTitle')}</summary>
         <ol className="level-path">
           {LEVEL_KEYS.map((key, i) => {
             const n = i + 1
@@ -153,10 +154,10 @@ export default async function ProgressPage() {
             )
           })}
         </ol>
-      </section>
+      </details>
 
-      <section className="card stack" aria-labelledby="earn-title">
-        <h2 id="earn-title">{t('earnTitle')}</h2>
+      <details className="fold">
+        <summary id="earn-title">{t('earnTitle')}</summary>
         <ul className="earn-list">
           {earn.map((kind) => (
             <li key={kind}>
@@ -166,7 +167,7 @@ export default async function ProgressPage() {
           ))}
         </ul>
         <p className="muted small">{t('earnNote')}</p>
-      </section>
+      </details>
 
       <section className="stack" aria-labelledby="recent-title">
         <h2 id="recent-title">{t('recentTitle')}</h2>

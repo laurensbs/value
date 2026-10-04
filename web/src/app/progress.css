@@ -1272,3 +1272,52 @@
     transition: none;
   }
 }
+
+/* A section folded until you open it: the summary is a full-width row with a chevron. */
+.fold {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 18px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 720;
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold > summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold > summary::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform var(--motion-klein) var(--ease-klein);
+}
+
+.fold[open] > summary::after {
+  transform: rotate(-135deg) translateY(-3px);
+}
+
+.fold > summary:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: -3px;
+  border-radius: var(--radius-m);
+}
+
+.fold > :not(summary) {
+  margin: 0 18px 18px;
+}
