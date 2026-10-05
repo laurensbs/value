@@ -104,6 +104,8 @@
     "how2": "Elige un perro y pide un primer encuentro. El dueño o la protectora siempre están presentes.",
     "how3": "¿Os lleváis bien? Entonces podrás pasear por tu cuenta. El dueño ve en directo por dónde vais.",
     "how4": "Haz un paseo fijo cada semana. Al terminar, nos cuentas en privado qué tal ha ido.",
+    "how3Off": "¿Os lleváis bien? Entonces paseáis juntos más a menudo. La ubicación en directo está desactivada por ahora, así que todavía no se puede pasear por tu cuenta.",
+    "how4Off": "Después de cada paseo, nos cuentas en privado qué tal ha ido.",
     "forWalkers": "Para paseadores",
     "forWalkersText": "Salir un rato, una cita fija y un perro que se alegra de verte. Desde los 18 años, sin coste.",
     "forOwners": "Para dueños",
@@ -115,6 +117,7 @@
     "safety2": "En el primer encuentro se comprueba el documento de identidad en persona. Rondje Mee no guarda ninguna copia.",
     "safety3": "Solo puedes pasear por tu cuenta cuando el dueño haya visto tu documento en persona y lo permita para ese perro.",
     "safety4": "Durante el paseo, el dueño ve en directo dónde está el perro. La ruta se borra a los 30 días.",
+    "safety4Off": "La ubicación en directo está desactivada por ahora. Hasta entonces paseas junto al dueño o la protectora, y no se guarda ninguna ruta.",
     "safety5": "Después de cada paseo, ambas partes dan su opinión en privado. Las preocupaciones llegan a nuestro equipo, no a la otra persona.",
     "safety6": "Siempre puedes denunciar y bloquear. Quien no cumple las normas sale de la plataforma.",
     "safetyMore": "Descubre cómo funciona la seguridad",
@@ -195,6 +198,7 @@
       "eyebrow": "En tu móvil",
       "title": "Todo lo que necesitas, en el bolsillo",
       "lede": "Descubre perros, planea un primer encuentro y salid juntos mientras el dueño lo sigue en directo.",
+      "ledeOff": "Descubre perros, planea un primer encuentro y salid juntos.",
       "soon": "Muy pronto en la App Store",
       "today": "Mientras tanto, {app} funciona en cualquier móvil, directamente en el navegador. Consejo: añade {app} a tu pantalla de inicio y se abrirá como una app.",
       "note": "Pantallas de la app para iPhone, con datos de ejemplo.",
@@ -210,7 +214,9 @@
       },
       "walk": {
         "title": "En directo",
+        "titleOff": "De paseo",
         "text": "Durante el paseo, el dueño lo sigue en el mapa. El botón SOS siempre está a mano.",
+        "textOff": "Durante el paseo ves el tiempo y llevas el informe del paseo. El botón SOS siempre está a mano.",
         "alt": "Un paseo con Bobbie en la app para iPhone: mapa, tiempo, distancia y un botón SOS"
       }
     },
@@ -220,6 +226,7 @@
       "t2": "Identificación en persona",
       "t3": "El dueño decide",
       "t4": "En directo",
+      "t4Off": "Juntos de paseo",
       "t5": "Opinión privada",
       "t6": "Siempre puedes avisar"
     },
@@ -571,7 +578,10 @@
       "already-open": "Ya tienes una solicitud o una cita abierta con este perro.",
       "solo-not-allowed": "Los paseos por su cuenta no están activados para esta persona y este perro. Actívalos primero en «Después del primer encuentro», o rechaza la solicitud.",
       "id-not-seen": "Los paseos por su cuenta solo son posibles cuando hayas visto en persona el documento de identidad de quien pasea.",
-      "meeting-ahead": "Esto es posible después de vuestro primer encuentro, cuando hayas visto en persona a quien pasea y su documento."
+      "meeting-ahead": "Esto es posible después de vuestro primer encuentro, cuando hayas visto en persona a quien pasea y su documento.",
+      "needs-terms": "Primero acepta las condiciones actualizadas, por favor.",
+      "live-location-off": "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible.",
+      "terms-changed": "Mientras tanto, las condiciones se han vuelto a actualizar. Echa un vistazo a la versión más reciente."
     },
     "messagePlaceholder": "¡Hola! Soy … y me encantaría pasear a {dog}.",
     "moments": "Momentos que le van bien a {dog}",
@@ -590,7 +600,7 @@
     "sentNext": "Qué pasa ahora",
     "sentStep1": "{owner} recibe tu solicitud.",
     "sentStep2": "{kind, select, solo {Si {owner} dice que sí, el paseo aparece en tus citas.} other {Si {owner} dice que sí, veréis los datos de contacto del otro.}}",
-    "sentStep3": "{via, select, walk {La primera vez paseáis juntos.} home {La primera vez vas a casa de {owner}.} phone {Primero habláis un momento por teléfono. Después quedáis en persona.} video {Primero hacéis una videollamada corta. Después quedáis en persona.} other {Paseas por tu cuenta. {owner} puede seguirlo en directo.}}",
+    "sentStep3": "{via, select, walk {La primera vez paseáis juntos.} home {La primera vez vas a casa de {owner}.} phone {Primero habláis un momento por teléfono. Después quedáis en persona.} video {Primero hacéis una videollamada corta. Después quedáis en persona.} solo {Paseas por tu cuenta. {owner} puede seguirlo en directo.} other {Paseas por tu cuenta.}}",
     "sentNotify": "Te avisaremos en cuanto {owner} responda.",
     "done": "Listo",
     "viewRequests": "Ver tus citas",
@@ -621,6 +631,7 @@
     "cancel": "Cancelar",
     "start": "Empezar paseo",
     "follow": "Seguir en directo",
+    "followWalk": "Ver el paseo",
     "resume": "Continuar paseo",
     "summary": "Ver paseo",
     "weekly": "Cada semana",
@@ -645,6 +656,7 @@
     "ladderTitleSolo": "{walker} ya puede pasear a {dog} por su cuenta.",
     "ladderTitleId": "Has visto el documento de identidad de {walker}.",
     "ladderTextSolo": "Puedes seguir cada paseo en directo, y puedes desactivarlo cuando quieras.",
+    "ladderTextSoloOff": "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible, y puedes desactivarlo cuando quieras.",
     "ladderTextId": "¿Quieres que {walker} también pasee a {dog} por su cuenta? Puedes activarlo en «Después del primer encuentro» cuando quieras.",
     "ladderTextShelter": "Los perros de protectora siempre pasean en un grupo acompañado.",
     "ladderQuiz": "{walker} podrá pedir un paseo por su cuenta en cuanto apruebe el test de seguridad.",
@@ -750,6 +762,7 @@
       "5": "Genial"
     },
     "follow": "Seguir en directo",
+    "followWalk": "Ver el paseo",
     "followLede": "Ves por dónde pasea {walker} con {dog} mientras dura el paseo.",
     "lastSeen": "Última ubicación: {time}",
     "notStarted": "El paseo todavía no ha empezado.",
@@ -778,6 +791,7 @@
     "photoError": "No se pudo enviar la foto. Inténtalo de nuevo.",
     "photoTooMany": "Has llegado al máximo de 12 fotos.",
     "photoHint": "El dueño ve tus fotos al instante. Se borran a los 30 días, igual que la ruta.",
+    "photoHintNoRoute": "El dueño ve tus fotos al instante. Se borran a los 30 días.",
     "photosTitle": "Fotos del paseo",
     "photoAlt": "Foto de {dogName} durante el paseo",
     "careTitle": "Informe del paseo",
@@ -787,7 +801,10 @@
     "careWater": "Bebió",
     "careUndo": "Quitar uno de {kind}",
     "careNone": "Aún nada anotado",
-    "careFailed": "No se ha guardado: no hay conexión. Toca otra vez cuando vuelvas a tener cobertura."
+    "careFailed": "No se ha guardado: no hay conexión. Toca otra vez cuando vuelvas a tener cobertura.",
+    "liveOff": "La ubicación en directo está desactivada por ahora. Tu recorrido no se registra ni se comparte; el tiempo, el informe del paseo y las fotos funcionan como siempre.",
+    "liveOffFollow": "La ubicación en directo está desactivada por ahora, así que aquí no hay mapa. Sí ves el tiempo, el informe del paseo y las fotos.",
+    "together": "Paseáis juntos, así que no hace falta mapa."
   },
   "myDogs": {
     "title": "Mis perros",
@@ -1405,6 +1422,7 @@
     "level3": "Después: pedir paseos por tu cuenta a los dueños que lo permitan para su perro.",
     "during": "Durante el paseo",
     "duringText": "Tu móvil comparte tu ubicación con el dueño mientras dura el paseo. Si se alarga, los dos recibís un aviso. Con el botón de ayuda ves al momento a quién llamar.",
+    "duringTextOff": "La ubicación en directo está desactivada por ahora, así que tu móvil no comparte ninguna ubicación. Hasta entonces paseas junto al dueño o la protectora. Con el botón de ayuda ves al momento a quién llamar.",
     "after": "Después del paseo",
     "afterText": "Ambas partes dan su opinión en privado. Si un perro acaba herido o estresado, o alguien no se ha sentido a salvo, nuestro equipo lo sabe al momento.",
     "fraud": "Fraude y abusos",
@@ -1445,10 +1463,10 @@
       "request-accepted": "{via, select, walk {¡Sí! Tu primer encuentro con {dogName} está confirmado.} home {¡Sí! Tu primer encuentro con {dogName} está confirmado.} phone {¡Sí! Tu llamada sobre {dogName} está confirmada.} video {¡Sí! Tu videollamada sobre {dogName} está confirmada.} other {¡Sí! Tu cita con {dogName} está confirmada.}}",
       "request-declined": "Lo sentimos, han rechazado tu paseo con {dogName}.",
       "request-cancelled": "Se ha cancelado un paseo.",
-      "walk-started": "{walkerName} ha salido con {dogName}. Sigue el paseo en directo.",
+      "walk-started": "{live, select, yes {{walkerName} ha salido con {dogName}. Sigue el paseo en directo.} other {{walkerName} ha salido con {dogName}.}}",
       "walk-ended": "{dogName} ya ha vuelto del paseo.",
       "walk-overdue": "El paseo con {dogName} está durando más de lo previsto.",
-      "trust-granted": "Ya puedes pasear a {dogName} por tu cuenta.",
+      "trust-granted": "{live, select, no {Ya puedes pasear a {dogName} por tu cuenta. La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza.} other {Ya puedes pasear a {dogName} por tu cuenta.}}",
       "group-signup": "{walkerName} se ha apuntado a un paseo en grupo.",
       "org-verified": "Tu protectora ha sido verificada. Tus perros ya son visibles.",
       "org-pending": "{orgName} se ha registrado como protectora. Revisa los datos.",
@@ -1695,7 +1713,8 @@
       },
       "maps": {
         "label": "Mapas",
-        "why": "El mapa y seguir un paseo en directo."
+        "why": "El mapa y seguir un paseo en directo.",
+        "whyOff": "El mapa con perros cerca."
       },
       "email": {
         "label": "Correo",
@@ -1893,7 +1912,8 @@
         "one": "Gratis, ahora y después",
         "two": "Siempre se conocen antes en persona",
         "three": "Quienes pasean tienen 18 años o más y hacen antes un test de seguridad",
-        "four": "Si quiere, puede ver en directo por dónde pasea su perro"
+        "four": "Si quiere, puede ver en directo por dónde pasea su perro",
+        "fourOff": "Usted decide quién pasea a su perro"
       },
       "family": "¿No tiene smartphone? Un familiar o vecino puede dar de alta a su perro, con su permiso.",
       "cta": "Escanee el código o entre en la web para dar de alta a su perro."
@@ -1928,11 +1948,11 @@
       },
       "request-accepted": {
         "subject": "{via, select, walk {¡Sí! Tu primer encuentro con {dogName} está confirmado} home {¡Sí! Tu primer encuentro con {dogName} está confirmado} phone {¡Sí! Tu llamada sobre {dogName} está confirmada} video {¡Sí! Tu videollamada sobre {dogName} está confirmada} other {¡Sí! Tu cita con {dogName} está confirmada}}",
-        "body": "{via, select, home {En Rondje Mee ya ves dónde quedáis y cómo contactar con el propietario. Quedad de día y avisa a alguien de dónde estás.} phone {En Rondje Mee ya ves cómo contactar con el propietario. Acordad en el chat quién llama a quién. Después de la llamada, planeas el encuentro en persona.} video {Acordad en el chat de Rondje Mee cómo haréis la videollamada. Después de la llamada, planeas el encuentro en persona.} walk {En Rondje Mee ya ves dónde quedáis y cómo contactar con el propietario. La primera vez paseáis juntos.} other {Ya ves dónde quedáis y cómo contactar con el propietario. Durante el paseo, el propietario puede seguirlo en directo.}}"
+        "body": "{via, select, home {En Rondje Mee ya ves dónde quedáis y cómo contactar con el propietario. Quedad de día y avisa a alguien de dónde estás.} phone {En Rondje Mee ya ves cómo contactar con el propietario. Acordad en el chat quién llama a quién. Después de la llamada, planeas el encuentro en persona.} video {Acordad en el chat de Rondje Mee cómo haréis la videollamada. Después de la llamada, planeas el encuentro en persona.} walk {En Rondje Mee ya ves dónde quedáis y cómo contactar con el propietario. La primera vez paseáis juntos.} other {Ya ves dónde quedáis y cómo contactar con el propietario.{live, select, yes { Durante el paseo, el propietario puede seguirlo en directo.} other {}}}}"
       },
       "walk-overdue": {
         "subject": "El paseo con {dogName} dura más de lo previsto",
-        "body": "El paseo se está alargando. Mira en Rondje Mee dónde están ahora o llama al paseador. En caso de emergencia, llama al 112."
+        "body": "{live, select, yes {El paseo se está alargando. Mira en Rondje Mee dónde están ahora o llama al paseador. En caso de emergencia, llama al 112.} other {El paseo se está alargando. Llama al paseador o envíale un mensaje en Rondje Mee. En caso de emergencia, llama al 112.}}"
       },
       "org-verified": {
         "subject": "Tu protectora ya está en Rondje Mee",
@@ -2079,7 +2099,7 @@
       },
       "dogWalk": {
         "title": "El primer paseo de tu perro",
-        "hint": "Lo sigues en directo y recibes un informe al final."
+        "hint": "Al terminar recibes un informe del paseo."
       }
     },
     "nearTitle": "Perros cerca de ti",
@@ -2109,7 +2129,7 @@
         "3": "Un momento fijo cada semana lo hace fácil, para ti, tu perro y quien pasea.",
         "4": "La primera vez paseáis juntos. Enseña cómo le gusta caminar a tu perro y dónde se para siempre.",
         "5": "Una foto de tu perro mirando a la cámara atrae a más paseadores que una de espaldas.",
-        "6": "Sigue el paseo en directo, o despreocúpate y lee el informe al final.",
+        "6": "Despreocúpate durante el paseo: al final lees el informe, con fotos si las hay.",
         "7": "Dile a quien pasea que estás contento. Un gracias mantiene a un compañero fijo.",
         "8": "¿Hay un tablón de anuncios en el súper? Un folleto con tu enlace trae paseadores de tu propio barrio."
       }
@@ -3507,7 +3527,7 @@
         "title": "Así lo hacemos seguro",
         "sub": "18 años o más · Primero os conocéis juntos · DNI visto en persona · Permiso por perro · Breve test de seguridad",
         "goal": "Confianza: muestra a dueños y familias cómo funciona paso a paso.",
-        "caption": "¿Dejar que un desconocido pasee a tu perro? Es normal pensárselo. Por eso en {app} todo va paso a paso:\n\n1. Los paseadores tienen 18 años o más y hacen un breve test de seguridad\n2. La primera vez siempre os conocéis juntos\n3. El dueño o la protectora ve el DNI en persona (no se guarda ninguna copia)\n4. Solo con permiso para cada perro pasea alguien por su cuenta\n5. Durante un paseo, el dueño puede seguirlo en directo si quiere\n\n{app} nunca pide dinero. ¿Preguntas? Déjalas abajo.",
+        "caption": "¿Dejar que un desconocido pasee a tu perro? Es normal pensárselo. Por eso en {app} todo va paso a paso:\n\n1. Los paseadores tienen 18 años o más y hacen un breve test de seguridad\n2. La primera vez siempre os conocéis juntos\n3. El dueño o la protectora ve el DNI en persona (no se guarda ninguna copia)\n4. Solo con permiso para cada perro pasea alguien por su cuenta\n{live, select, yes {5. Durante un paseo, el dueño puede seguirlo en directo si quiere} other {5. La ubicación en directo está desactivada por ahora, así que de momento paseáis juntos}}\n\n{app} nunca pide dinero. ¿Preguntas? Déjalas abajo.",
         "visual": "Carrusel: la imagen y después una diapositiva por paso."
       },
       "p11": {
@@ -3617,7 +3637,8 @@
     "later": "Más tarde",
     "liveOwn": {
       "text": "{dog} está de paseo ahora con {walker}.",
-      "button": "Míralo en directo"
+      "button": "Míralo en directo",
+      "buttonQuiet": "Ver el paseo"
     },
     "live": {
       "text": "Estás de paseo con {dog}.",
@@ -3707,5 +3728,19 @@
       "next": "{when}: paseo en grupo en {org}.",
       "button": "Ir a {org}"
     }
+  },
+  "termsUpdate": {
+    "title": "Hemos actualizado las condiciones",
+    "lede": "Lee con calma lo que cambia. Las nuevas condiciones se aplican para ti a partir del {date}. Desde entonces, te pedimos primero tu aceptación, antes de quedar para algo nuevo o empezar un paseo.",
+    "ledeRequired": "Las nuevas condiciones se aplican desde el {date}. Lee lo que cambia. Cuando las aceptes, podrás volver a quedar y empezar paseos.",
+    "read": "Leer las condiciones completas",
+    "review": "Ver qué cambia",
+    "accept": "Acepto",
+    "thanks": "Gracias. Hemos guardado tu aceptación.",
+    "rights": "¿No estás de acuerdo? Siempre puedes eliminar tu cuenta desde tu perfil (artículo 19 de las condiciones).",
+    "first": "Primero, las condiciones actualizadas",
+    "pageTitle": "Condiciones actualizadas",
+    "upToDate": "Ya has aceptado las condiciones más recientes.",
+    "onward": "Continuar"
   }
 }

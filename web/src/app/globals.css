@@ -730,6 +730,18 @@ mark {
   background: var(--grass-soft);
 }
 
+/* Changed terms (art. 19): a calm card with what changed, never a wall in front of the page. */
+.terms-update {
+  border-inline-start: 4px solid var(--calm);
+}
+
+.terms-changes {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-inline-start: 1.2em;
+}
+
 .help-pill {
   background: var(--calm-soft);
   color: var(--calm);
@@ -1314,6 +1326,11 @@ fieldset.field {
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   text-align: center;
+}
+
+/* Without live location there is no distance: two columns instead of three. */
+.walk-stats:has(> div:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .walk-stats div {

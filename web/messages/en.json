@@ -104,6 +104,8 @@
     "how2": "Choose a dog and request a first meeting. The owner or the shelter is always there.",
     "how3": "Hit it off? Then you can walk the dog on your own. The owner can see where you are, live.",
     "how4": "Go for a regular walk every week. Afterwards, tell us privately how it went.",
+    "how3Off": "Hit it off? Then you walk together more often. Live location is off for now, so walking the dog on your own isn't possible yet.",
+    "how4Off": "After every walk, tell us privately how it went.",
     "forWalkers": "For walkers",
     "forWalkersText": "Time outdoors, a regular plan and a dog who's happy to see you. Aged 18 and over, free of charge.",
     "forOwners": "For owners",
@@ -115,6 +117,7 @@
     "safety2": "ID is checked in person at the first meeting. Rondje Mee doesn't keep a copy.",
     "safety3": "Solo walks are only possible once the owner has seen your ID in person and allows them for that dog.",
     "safety4": "During the walk, the owner can see live where the dog is. The route is deleted after 30 days.",
+    "safety4Off": "Live location is off for now. Until then you walk together with the owner or the shelter, and no route is stored.",
     "safety5": "After every walk, both sides give private feedback. Concerns go to our team, not to the other person.",
     "safety6": "You can always report or block someone. Anyone who breaks the rules is removed from the platform.",
     "safetyMore": "Read how safety works",
@@ -195,6 +198,7 @@
       "eyebrow": "On your phone",
       "title": "Everything you need, right in your pocket",
       "lede": "Discover dogs, plan a first meeting and head out together, while the owner follows along live.",
+      "ledeOff": "Discover dogs, plan a first meeting and head out together.",
       "soon": "Coming soon to the App Store",
       "today": "Until then, {app} works on every phone, right in your browser. Tip: add {app} to your home screen and it opens like an app.",
       "note": "Screens from the iPhone app, with example data.",
@@ -210,7 +214,9 @@
       },
       "walk": {
         "title": "Follow along live",
+        "titleOff": "On the walk",
         "text": "During the walk the owner can follow along on the map. The SOS button is always within reach.",
+        "textOff": "During the walk you see the time and keep the walk report. The SOS button is always within reach.",
         "alt": "A walk with Bobbie in the iPhone app: map, time, distance and an SOS button"
       }
     },
@@ -220,6 +226,7 @@
       "t2": "ID checked in person",
       "t3": "The owner decides",
       "t4": "Follow along live",
+      "t4Off": "Out together",
       "t5": "Private feedback",
       "t6": "Report any time"
     },
@@ -571,7 +578,10 @@
       "already-open": "You already have an open request or appointment with this dog.",
       "solo-not-allowed": "Solo walks are not switched on for this walker and dog. Switch them on under ‘After the first meeting’ first, or decline the request.",
       "id-not-seen": "Solo walks are only possible once you've seen the walker's ID in person.",
-      "meeting-ahead": "This is possible after your first meeting, once you've seen the walker and their ID in person."
+      "meeting-ahead": "This is possible after your first meeting, once you've seen the walker and their ID in person.",
+      "needs-terms": "Please agree to the updated terms first.",
+      "live-location-off": "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible.",
+      "terms-changed": "The terms have been updated again in the meantime. Please take a look at the latest version."
     },
     "messagePlaceholder": "Hi! I'm … and I'd love to walk {dog}.",
     "moments": "Times that suit {dog}",
@@ -590,7 +600,7 @@
     "sentNext": "What happens now",
     "sentStep1": "{owner} gets your request.",
     "sentStep2": "{kind, select, solo {If {owner} says yes, the walk is in your appointments.} other {If {owner} says yes, you'll both see each other's contact details.}}",
-    "sentStep3": "{via, select, walk {The first time, you walk together.} home {The first time, you visit {owner} at home.} phone {First you have a quick call. Then you meet in person.} video {First you have a quick video call. Then you meet in person.} other {You walk on your own. {owner} can follow along live.}}",
+    "sentStep3": "{via, select, walk {The first time, you walk together.} home {The first time, you visit {owner} at home.} phone {First you have a quick call. Then you meet in person.} video {First you have a quick video call. Then you meet in person.} solo {You walk on your own. {owner} can follow along live.} other {You walk on your own.}}",
     "sentNotify": "You'll get a notification as soon as {owner} replies.",
     "done": "Done",
     "viewRequests": "See your appointments",
@@ -621,6 +631,7 @@
     "cancel": "Cancel",
     "start": "Start walk",
     "follow": "Follow live",
+    "followWalk": "View the walk",
     "resume": "Continue walk",
     "summary": "View walk",
     "weekly": "Every week",
@@ -645,6 +656,7 @@
     "ladderTitleSolo": "{walker} can now walk {dog} on their own.",
     "ladderTitleId": "You've seen {walker}'s ID.",
     "ladderTextSolo": "You can follow every walk live, and you can switch this off again at any time.",
+    "ladderTextSoloOff": "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible, and you can switch this off again at any time.",
     "ladderTextId": "Would you like {walker} to walk {dog} on their own too? You can switch that on under ‘After the first meeting’, whenever you want.",
     "ladderTextShelter": "Shelter dogs always walk in a supervised group.",
     "ladderQuiz": "{walker} can ask for a solo walk once they have passed the safety quiz.",
@@ -750,6 +762,7 @@
       "5": "Great"
     },
     "follow": "Follow live",
+    "followWalk": "View the walk",
     "followLede": "You can see where {walker} is walking with {dog} for as long as the walk lasts.",
     "lastSeen": "Last location: {time}",
     "notStarted": "The walk hasn't started yet.",
@@ -778,6 +791,7 @@
     "photoError": "The photo could not be sent. Please try again.",
     "photoTooMany": "You've reached the maximum of 12 photos.",
     "photoHint": "The owner sees your photos right away. They are deleted after 30 days, like the route.",
+    "photoHintNoRoute": "The owner sees your photos right away. They are deleted after 30 days.",
     "photosTitle": "Photos from the walk",
     "photoAlt": "Photo of {dogName} during the walk",
     "careTitle": "Walk report",
@@ -787,7 +801,10 @@
     "careWater": "Drank",
     "careUndo": "Take one back from {kind}",
     "careNone": "Nothing noted yet",
-    "careFailed": "Not saved: no connection. Tap again when you're back in range."
+    "careFailed": "Not saved: no connection. Tap again when you're back in range.",
+    "liveOff": "Live location is off for now. Your route is not tracked or shared; the time, the walk report and photos work as usual.",
+    "liveOffFollow": "Live location is off for now, so there is no map here. You still see the time, the walk report and the photos.",
+    "together": "You're walking together, so there's no need for a map."
   },
   "myDogs": {
     "title": "My dogs",
@@ -1405,6 +1422,7 @@
     "level3": "After that: request solo walks with owners who allow them for their dog.",
     "during": "During the walk",
     "duringText": "Your phone shares your location with the owner while the walk is on. If it runs over, you both get a notification. The help button shows you straight away who to call.",
+    "duringTextOff": "Live location is off for now, so your phone shares no location. Until then you walk together with the owner or the shelter. The help button shows you straight away who to call.",
     "after": "After the walk",
     "afterText": "Both sides give private feedback. Reports of an injured or stressed dog, or of someone feeling unsafe, go straight to our team.",
     "fraud": "Fraud and abuse",
@@ -1445,10 +1463,10 @@
       "request-accepted": "{via, select, walk {Yes! Your first meeting with {dogName} is on.} home {Yes! Your first meeting with {dogName} is on.} phone {Yes! Your call about {dogName} is on.} video {Yes! Your video call about {dogName} is on.} other {Yes! Your appointment with {dogName} is on.}}",
       "request-declined": "Unfortunately, your walk with {dogName} was declined.",
       "request-cancelled": "A walk has been cancelled.",
-      "walk-started": "{walkerName} has set off with {dogName}. Follow along live.",
+      "walk-started": "{live, select, yes {{walkerName} has set off with {dogName}. Follow along live.} other {{walkerName} has set off with {dogName}.}}",
       "walk-ended": "{dogName} is back from the walk.",
       "walk-overdue": "The walk with {dogName} is taking longer than planned.",
-      "trust-granted": "You can now walk {dogName} on your own.",
+      "trust-granted": "{live, select, no {You can now walk {dogName} on your own. Live location is off for now, so a walk alone doesn't start yet.} other {You can now walk {dogName} on your own.}}",
       "group-signup": "{walkerName} is joining a group walk.",
       "org-verified": "Your shelter has been verified. Your dogs are now visible.",
       "org-pending": "{orgName} signed up as a shelter. Please check the details.",
@@ -1695,7 +1713,8 @@
       },
       "maps": {
         "label": "Maps",
-        "why": "The map, and following a walk live."
+        "why": "The map, and following a walk live.",
+        "whyOff": "The map with dogs nearby."
       },
       "email": {
         "label": "Email",
@@ -1893,7 +1912,8 @@
         "one": "Free, now and later",
         "two": "Always meet together first",
         "three": "Walkers are 18 or older and take a safety quiz first",
-        "four": "If you like, you can see live where your dog is walking"
+        "four": "If you like, you can see live where your dog is walking",
+        "fourOff": "You decide who walks your dog"
       },
       "family": "No smartphone? A family member or neighbour can sign up your dog for you, with your permission.",
       "cta": "Scan the code or go to the website to sign up your dog."
@@ -1928,11 +1948,11 @@
       },
       "request-accepted": {
         "subject": "{via, select, walk {Yes! Your first meeting with {dogName} is on} home {Yes! Your first meeting with {dogName} is on} phone {Yes! Your call about {dogName} is on} video {Yes! Your video call about {dogName} is on} other {Yes! Your appointment with {dogName} is on}}",
-        "body": "{via, select, home {In Rondje Mee you can now see where you meet and how to reach the owner. Meet during the day and let someone know where you are.} phone {In Rondje Mee you can now see how to reach the owner. Agree in the chat who calls whom. After the call, you plan meeting in person.} video {Agree in Rondje Mee's chat how you'll do the video call. After the call, you plan meeting in person.} walk {In Rondje Mee you can now see where you meet and how to reach the owner. The first time, you walk together.} other {You can now see where you meet and how to reach the owner. During the walk, the owner can follow along live.}}"
+        "body": "{via, select, home {In Rondje Mee you can now see where you meet and how to reach the owner. Meet during the day and let someone know where you are.} phone {In Rondje Mee you can now see how to reach the owner. Agree in the chat who calls whom. After the call, you plan meeting in person.} video {Agree in Rondje Mee's chat how you'll do the video call. After the call, you plan meeting in person.} walk {In Rondje Mee you can now see where you meet and how to reach the owner. The first time, you walk together.} other {You can now see where you meet and how to reach the owner.{live, select, yes { During the walk, the owner can follow along live.} other {}}}}"
       },
       "walk-overdue": {
         "subject": "The walk with {dogName} is taking longer than planned",
-        "body": "The walk is running late. Check in Rondje Mee where they are now, or call the walker. In an emergency, call 112."
+        "body": "{live, select, yes {The walk is running late. Check in Rondje Mee where they are now, or call the walker. In an emergency, call 112.} other {The walk is running late. Call the walker, or send a message in Rondje Mee. In an emergency, call 112.}}"
       },
       "org-verified": {
         "subject": "Your shelter is on Rondje Mee",
@@ -2079,7 +2099,7 @@
       },
       "dogWalk": {
         "title": "Your dog's first walk",
-        "hint": "Follow along live and get a report afterwards."
+        "hint": "You get a report after the walk."
       }
     },
     "nearTitle": "Dogs near you",
@@ -2109,7 +2129,7 @@
         "3": "A fixed moment each week makes it easy, for you, your dog and the walker.",
         "4": "The first time, you walk together. Show how your dog likes to walk and where they always stop.",
         "5": "A photo of your dog looking into the camera attracts more walkers than one from behind.",
-        "6": "Follow the walk live, or let go and read the report afterwards.",
+        "6": "Feel free to let go during the walk: afterwards you read the report, with photos if there are any.",
         "7": "Let the walker know you're happy afterwards. A thank-you keeps a regular buddy.",
         "8": "Is there a notice board at the supermarket? A flyer with your link brings walkers from your own neighbourhood."
       }
@@ -3507,7 +3527,7 @@
         "title": "How we keep it safe",
         "sub": "18 or older · Meet together first · ID seen in person · Consent per dog · Short safety quiz",
         "goal": "Trust: show owners and families how it goes, step by step.",
-        "caption": "Letting a stranger walk your dog? Of course you think about that first. That is why {app} goes step by step:\n\n1. Walkers are 18 or older and do a short safety quiz\n2. The first time, you always meet together\n3. The owner or shelter sees the ID in person (no copy is kept)\n4. Only with consent per dog does someone walk on their own\n5. During a walk the owner can follow along live, if they want\n\n{app} never asks for money. Questions? Ask them below.",
+        "caption": "Letting a stranger walk your dog? Of course you think about that first. That is why {app} goes step by step:\n\n1. Walkers are 18 or older and do a short safety quiz\n2. The first time, you always meet together\n3. The owner or shelter sees the ID in person (no copy is kept)\n4. Only with consent per dog does someone walk on their own\n{live, select, yes {5. During a walk the owner can follow along live, if they want} other {5. Live location is off for now, so for now you walk together}}\n\n{app} never asks for money. Questions? Ask them below.",
         "visual": "Carousel: the image, then one slide per step."
       },
       "p11": {
@@ -3617,7 +3637,8 @@
     "later": "Later",
     "liveOwn": {
       "text": "{dog} is out now with {walker}.",
-      "button": "Watch live"
+      "button": "Watch live",
+      "buttonQuiet": "View the walk"
     },
     "live": {
       "text": "You're out with {dog}.",
@@ -3707,5 +3728,19 @@
       "next": "{when}: group walk at {org}.",
       "button": "Go to {org}"
     }
+  },
+  "termsUpdate": {
+    "title": "The terms have been updated",
+    "lede": "Take your time to read what changes. The new terms apply to you from {date}. From then on, we ask for your agreement first, before you arrange something new or start a walk.",
+    "ledeRequired": "The new terms have applied since {date}. Read what changes. Once you agree, you can make appointments and start walks again.",
+    "read": "Read the full terms",
+    "review": "See what changes",
+    "accept": "I agree",
+    "thanks": "Thank you. Your agreement has been saved.",
+    "rights": "Don't agree? You can always delete your account in your profile (article 19 of the terms).",
+    "first": "First the updated terms",
+    "pageTitle": "Updated terms",
+    "upToDate": "You have already agreed to the latest terms.",
+    "onward": "Continue"
   }
 }

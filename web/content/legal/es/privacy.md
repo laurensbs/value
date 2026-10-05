@@ -1,7 +1,7 @@
 ---
 title: Política de privacidad
 description: "Qué datos personales tratamos, por qué y durante cuánto tiempo, quién los ve y qué derechos tienes. Tu dirección exacta nunca es pública."
-version: "0.4"
+version: "0.5"
 updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
@@ -21,7 +21,7 @@ El responsable del tratamiento de tus datos en Rondje Mee es Laurens Bos, el cre
 - Recogemos los menos datos posibles.
 - Tu dirección exacta nunca es pública. Los demás solo ven la zona aproximada donde vives (redondeada a unos 500 metros).
 - La otra persona solo ve tu teléfono y tu correo electrónico cuando se ha aceptado una solicitud. Si te apuntas a un paseo en grupo de una protectora, esa protectora ve tu teléfono enseguida.
-- Solo compartimos tu ubicación durante un paseo que inicias tú. Borramos los recorridos a los 30 días.
+- Solo compartimos tu ubicación durante un paseo a solas con el perro que inicias tú, y solo si la ubicación en tiempo real está activada. Borramos los recorridos a los 30 días.
 - **No** guardamos copias de tu documento de identidad.
 - Tus registros de ánimo se quedan **solo en tu móvil**. Nunca los recibimos.
 - Sin publicidad, sin cookies de seguimiento, y nunca vendemos datos. Contamos las visitas a la web sin cookies y sin perfiles de visitantes.
@@ -69,7 +69,7 @@ El responsable del tratamiento de tus datos en Rondje Mee es Laurens Bos, el cre
 
 **Ubicación durante un paseo**
 
-- puntos GPS del móvil del paseante, con fecha y hora, solo durante un paseo activo.
+- puntos GPS del móvil del paseante, con fecha y hora, solo durante un paseo activo a solas con el perro, y solo si la ubicación en tiempo real está activada (ver apartado 5).
 
 **Datos técnicos**
 
@@ -116,9 +116,11 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 ## 5. Datos de ubicación
 
 - **Tu zona** solo se muestra redondeada a unos 500 metros. La dirección exacta o el punto de encuentro solo los ve la otra persona tras la aceptación, y solo si los indicas.
-- **La ubicación en tiempo real** solo se recoge cuando inicias un paseo como paseante, y hasta que lo terminas. Tu móvil te pedirá permiso. Puedes retirarlo en los ajustes del móvil, pero entonces el mapa en tiempo real no funcionará.
-- Durante el paseo, el propietario o la protectora del perro ve un mapa en tiempo real con el recorrido. Tú ves tu propio recorrido.
-- Si el paseo dura mucho más de lo previsto, el propietario o la protectora recibe un aviso.
+- **La ubicación en tiempo real** puede estar desactivada. Cuando está activada, solo la recogemos durante un paseo a solas con el perro: desde que lo inicias como paseante hasta que lo terminas. Tu móvil te pedirá permiso. Puedes retirarlo en los ajustes del móvil, pero entonces el mapa en tiempo real no funcionará.
+- En un primer encuentro y en un paseo en grupo nunca recogemos la ubicación: el propietario o la protectora va con vosotros.
+- Cuando la ubicación en tiempo real está activada, el propietario o la protectora del perro ve un mapa en tiempo real con el recorrido durante un paseo a solas con el perro. Tú ves tu propio recorrido.
+- Si un paseo a solas con el perro dura mucho más de lo previsto, el propietario o la protectora recibe un aviso.
+- **Mientras la EIPD no esté terminada** (ver apartado 14), la ubicación en tiempo real está desactivada para todos, y también después podemos desactivarla. Mientras esté desactivada, no recogemos ni guardamos ninguna ubicación, y el propietario o la protectora no ve ningún mapa en tiempo real. Entonces no se puede solicitar, aceptar ni iniciar un paseo a solas con el perro; un primer encuentro, sí. En Rondje Mee verás entonces que la ubicación en tiempo real está desactivada.
 - Borramos los puntos del recorrido a los **30 días**. Si hay una denuncia de incidente abierta, conservamos el recorrido de ese paseo hasta que se cierre.
 - No usamos los datos de ubicación para publicidad ni para elaborar perfiles, y nunca los vendemos.
 
@@ -229,7 +231,7 @@ Algunos datos no podemos borrarlos de inmediato, por ejemplo si son necesarios p
 
 ## 14. Evaluación de impacto (EIPD)
 
-Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso estamos preparando una evaluación de impacto relativa a la protección de datos (EIPD). Todavía no está terminada. La completaremos antes de que se haga el primer paseo de verdad con ubicación en tiempo real, y después la mantendremos actualizada. La ubicación en tiempo real funciona siempre como dice el apartado 5: solo durante un paseo que inicia el paseante, y los recorridos se borran a los 30 días.
+Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso estamos preparando una evaluación de impacto relativa a la protección de datos (EIPD). Todavía no está terminada. La completaremos antes de que se haga el primer paseo de verdad con ubicación en tiempo real, y después la mantendremos actualizada. Hasta entonces, la ubicación en tiempo real está desactivada (ver apartado 5). Cuando está activada, funciona siempre como dice el apartado 5: solo durante un paseo a solas con el perro que inicia el paseante, y los recorridos se borran a los 30 días.
 
 ## 15. Edad
 

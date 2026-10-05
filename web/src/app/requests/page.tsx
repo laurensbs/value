@@ -6,10 +6,11 @@ import { MeetChecklist } from '@/components/MeetChecklist'
 import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
 import { InstallAsk } from '@/components/InstallAsk'
 import { PushAsk } from '@/components/PushAsk'
+import { TermsNotice } from '@/components/TermsNotice'
 import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
-import { canRequestSolo, canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { canRequestSolo, canStartWalk, isInPerson, isMeetVia, liveLocationReason, START_WINDOW_BEFORE_MIN, walkHasLiveLocation } from '@/lib/rules'
 import { rolesOf } from '@/server/progress'
 import {
   hostContacts,
@@ -22,6 +23,7 @@ import {
   type RequestRow,
 } from '@/server/queries'
 import { meetChecklist, unreadChats } from '@/server/chat'
+import { liveLocationNow } from '@/server/live-location'
 import { webPushKey } from '@/server/push'
 import { requireOnboarded } from '@/server/session'
 
@@ -92,7 +94,12 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
   const format = await getFormatter()
   const now = new Date()
 
-  const [outgoing, incoming, unread] = await Promise.all([outgoingRequests(viewer.userId), incomingRequests(viewer), unreadChats(viewer.userId)])
+  const [outgoing, incoming, unread, liveLocation] = await Promise.all([
+    outgoingRequests(viewer.userId),
+    incomingRequests(viewer),
+    unreadChats(viewer.userId),
+    liveLocationNow(),
+  ])
   const hasIncoming = incoming.length > 0 || viewer.profile.hasDogs || viewer.orgs.length > 0
   const pendingIncoming = incoming.filter((r) => r.request.status === 'pending').length
   const openIncoming = incoming.filter((r) => OPEN.includes(r.request.status)).length
@@ -120,6 +127,8 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
   const callHow = (r: RequestRow) => t(r.request.meetVia === 'video' ? 'meet.videoHow' : 'meet.phoneHow')
 
   const mineOpen = outgoing.filter((r) => OPEN.includes(r.request.status))
+  // A walk this walker is going to start: once changed terms take effect, starting waits for the yes.
+  const upcomingWalk = mineOpen.some((r) => r.request.status === 'accepted' && isInPerson(r.request.meetVia))
   const minePast = outgoing.filter((r) => !OPEN.includes(r.request.status))
   const inOpen = incoming.filter((r) => OPEN.includes(r.request.status))
   const inPast = incoming.filter((r) => !OPEN.includes(r.request.status))
@@ -142,7 +151,16 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
       (isMeetVia(r.request.meetVia) && !isRemoteMeeting(r.request) && (r.request.status === 'completed' || (r.request.status === 'accepted' && r.request.startsAt <= now)))
     if (met && !metPairs.has(key)) metPairs.set(key, r)
   }
+  // A walk alone with the dog, asked for or agreed, while live location is off: it waits, and both sides
+  // read why on its card (rules.ts liveLocationReason). Walking together is not affected.
+  const paused = (r: RequestRow) => Boolean(liveLocationReason(r.request.kind, liveLocation)) && OPEN.includes(r.request.status)
+  const pausedNote = (
+    <p className="notice small solo-paused" role="note">
+      <Icon name="location" size={18} /> <span>{t('request.reasons.live-location-off')}</span>
+    </p>
+  )
   // What could still stop a solo walk once the owner allows it: the same rule the walker meets (rules.ts).
+  // Only the walker's own steps: whether live location is on is said on its own (TrustForm liveLocation).
   const soloCaveat = (r: RequestRow): SoloCaveat => {
     const reason = canRequestSolo(
       {
@@ -154,9 +172,12 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         pppLicense: r.walker.pppLicense,
         experience: r.walker.experience === 'none' || r.walker.experience === 'lots' ? r.walker.experience : 'some',
         pendingRequests: 0,
+        // The walker's own step, not something the owner can help with.
+        needsTerms: false,
       },
       { ownerId: r.dog.ownerId, orgId: r.dog.orgId, country: r.dog.country, status: 'active', isDemo: false, ppp: r.dog.ppp, level: r.dog.level === 'experienced' ? 'experienced' : 'starter' },
       { isStaff: false, blocked: false, soloAllowed: true, idSeen: true },
+      true,
     )
     return reason === 'needs-quiz' || reason === 'experience' || reason === 'ppp-licence' ? reason : null
   }
@@ -191,6 +212,10 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         ) : null}
         <DeclinedNote />
       </header>
+
+      {/* Changed terms that took effect: accepting, asking and starting wait for the yes. Before that day,
+          a walker with an accepted walk coming up hears about it here, not first at the owner's door. */}
+      <TermsNotice profile={viewer.profile} onlyRequired ahead={upcomingWalk} from="/requests" />
 
       {tab === 'mine' ? (
         <section className="stack">
@@ -247,6 +272,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <Icon name="shield" size={18} /> <span>{t('meet.homeSafety')}</span>
                         </p>
                       ) : null}
+                      {paused(r) && !active ? pausedNote : null}
                       <div className="row">
                         <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
                         {call ? (
@@ -261,10 +287,13 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             <span className="live-dot" aria-hidden="true" /> {t('requests.resume')}
                           </Link>
                         ) : accepted ? (
+                          // Live location off: a walk alone with the dog does not start; the note above says why
+                          // (rules.ts liveLocationReason). A first meeting never shares location: they walk together.
                           <StartButton
                             requestId={r.request.id}
-                            enabled={canStartWalk(r.request, viewer.userId, now)}
-                            hint={t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })}
+                            enabled={canStartWalk(r.request, viewer.userId, now) && !paused(r)}
+                            hint={paused(r) ? null : t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })}
+                            together={r.request.kind !== 'solo'}
                           />
                         ) : null}
                         {accepted && !active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
@@ -344,8 +373,13 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <Icon name="alert" size={16} /> {t('requests.flagged')}
                         </p>
                       ) : null}
-                      {/* One main action: yes or no. Chatting first stays one tap away, right under it. */}
-                      {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} /> : null}
+                      {/* A walk alone while live location is off: it waits, and says why (rules.ts liveLocationReason). */}
+                      {paused(r) && !active ? pausedNote : null}
+                      {/* One main action: yes or no. Chatting first stays one tap away, right under it. Saying yes to a
+                          walk alone waits while live location is off; saying no is always possible. */}
+                      {r.request.status === 'pending' ? (
+                        <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} canAccept={!paused(r)} />
+                      ) : null}
                       <div className="row">
                         <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
                       </div>
@@ -372,7 +406,14 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <div className="row">
                             {active && r.walkId ? (
                               <Link href={`/follow/${r.walkId}`} className="button primary">
-                                <span className="live-dot" aria-hidden="true" /> {t('requests.follow')}
+                                {/* "Live meekijken" only for a walk that shares location (rules.ts walkHasLiveLocation). */}
+                                {walkHasLiveLocation(r.request.kind, liveLocation) ? (
+                                  <>
+                                    <span className="live-dot" aria-hidden="true" /> {t('requests.follow')}
+                                  </>
+                                ) : (
+                                  t('requests.followWalk')
+                                )}
                               </Link>
                             ) : null}
                             {!active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
@@ -402,6 +443,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         initial={grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false }}
                         allowSolo={!r.dog.orgId}
                         caveat={soloCaveat(r)}
+                        liveLocation={liveLocation}
                       />
                     </div>
                   </li>

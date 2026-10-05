@@ -46,11 +46,28 @@ export function adminAccess(
 }
 
 /**
- * The terms someone accepts when they create a profile, stored with it (profile.termsVersion). Equal
- * to `version` in content/legal/<locale>/terms.md (checked in legal-placeholders.test.ts). Nobody is asked
- * to accept again when it goes up: there is no re-accept step yet.
+ * The terms someone accepts when they create a profile, stored with it (profile.termsVersion and
+ * termsAcceptedAt). Equal to `version` in content/legal/<locale>/terms.md (checked in
+ * legal-placeholders.test.ts). When it goes up, people who accepted an older version see what changed
+ * (content/legal/<locale>/terms-changes.md) and can agree again (lib/rules.ts termsReason).
  */
 export const TERMS_VERSION = '0.3'
+
+/**
+ * The day the in-app notice about TERMS_VERSION goes live: the deploy that shows people who accepted
+ * an older version what changed (on the profile, /profile/terms and /requests). Terms art. 19 counts
+ * its 30 days from here. Zet op de echte live-datum bij het mergen (YYYY-MM-DD).
+ */
+export const TERMS_NOTICE_FROM = '2026-10-05'
+
+/**
+ * The day TERMS_VERSION takes effect for people who accepted an older version (00:00 in Amsterdam).
+ * Terms art. 19 promises important changes at least 30 days ahead: at least TERMS_NOTICE_FROM plus
+ * 30 days (legal-placeholders.test.ts checks it), with a few days to spare. Until then nothing is
+ * blocked for them; from then on, making new appointments and starting a walk wait for their yes. New
+ * sign-ups accept the current version at once. Merged after 10 October 2026? Then move both days.
+ */
+export const TERMS_EFFECTIVE_AT = '2026-11-09'
 
 const SAME_SITE = 'https://same-site.invalid'
 

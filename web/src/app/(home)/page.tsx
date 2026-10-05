@@ -18,6 +18,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { pageMetadata, siteGraph } from '@/lib/seo'
 import { APP_NAME } from '@/lib/site'
 import { supportConfig } from '@/lib/support'
+import { liveLocationNow } from '@/server/live-location'
 import { isNativeRequest } from '@/server/native'
 import { newestRealDogs } from '@/server/newest-dogs'
 import { Today } from '@/components/Today'
@@ -50,7 +51,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
   }
   const t = await getTranslations()
   // The newest real dogs, the same for everyone: Netherlands first (lib/newest-dogs.ts), never examples.
-  const [native, dogs] = await Promise.all([isNativeRequest(), newestRealDogs()])
+  const [native, dogs, live] = await Promise.all([isNativeRequest(), newestRealDogs(), liveLocationNow()])
   const ownerHref = viewer?.profile ? '/my-dogs/new' : '/signup?intent=owner'
   const bothHref = viewer?.profile ? '/my-dogs/new' : `/signup?next=${encodeURIComponent('/my-dogs/new')}`
 
@@ -100,7 +101,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
       <HowItWorks />
 
-      {native ? null : <PhoneShowcase />}
+      {native ? null : <PhoneShowcase live={live} />}
 
       <section className="lp-safety" aria-labelledby="lp-safety-title">
         <div className="lp-section-head row-end">
@@ -119,8 +120,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
             <li key={s.key} className="lp-card lp-feature">
               <IconTile tone={s.tone}>{s.icon}</IconTile>
               <div>
-                <h3>{t(`landing.safety.t${s.key}`)}</h3>
-                <p>{t(`home.safety${s.key}`)}</p>
+                {/* Following a walk live only while live location is on (LIVE_LOCATION); otherwise what is true now. */}
+                <h3>{t(`landing.safety.t${s.key}${s.key === 4 && !live ? 'Off' : ''}`)}</h3>
+                <p>{t(`home.safety${s.key}${s.key === 4 && !live ? 'Off' : ''}`)}</p>
               </div>
             </li>
           ))}

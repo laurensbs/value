@@ -104,6 +104,8 @@
     "how2": "Choisissez un chien et demandez une première rencontre. Le propriétaire ou le refuge est toujours présent.",
     "how3": "Le courant passe ? Vous pourrez alors promener le chien en autonomie. Le propriétaire voit en direct où vous êtes.",
     "how4": "Faites une balade régulière chaque semaine. Ensuite, dites-nous en privé comment ça s'est passé.",
+    "how3Off": "Le courant passe ? Alors vous vous promenez ensemble plus souvent. La localisation en direct est désactivée pour le moment, donc la balade en autonomie n’est pas encore possible.",
+    "how4Off": "Après chaque balade, dites-nous en privé comment ça s'est passé.",
     "forWalkers": "Pour les promeneurs",
     "forWalkersText": "Prendre l'air, un rendez-vous régulier et un chien heureux de vous voir. Dès 18 ans, sans frais.",
     "forOwners": "Pour les propriétaires",
@@ -115,6 +117,7 @@
     "safety2": "La pièce d'identité est vérifiée en personne lors de la première rencontre. Rondje Mee n'en garde aucune copie.",
     "safety3": "Les balades en autonomie ne sont possibles qu’une fois que le propriétaire a vu votre pièce d’identité en personne et les autorise pour ce chien.",
     "safety4": "Pendant la balade, le propriétaire voit en direct où se trouve le chien. Le trajet est effacé après 30 jours.",
+    "safety4Off": "La localisation en direct est désactivée pour le moment. D’ici là, vous vous promenez avec le propriétaire ou le refuge, et aucun trajet n’est enregistré.",
     "safety5": "Après chaque balade, chacun donne son avis en privé. Les inquiétudes sont transmises à notre équipe, pas à l'autre personne.",
     "safety6": "Vous pouvez toujours signaler et bloquer. Quiconque ne respecte pas les règles est exclu de la plateforme.",
     "safetyMore": "Découvrez comment fonctionne la sécurité",
@@ -195,6 +198,7 @@
       "eyebrow": "Sur votre téléphone",
       "title": "Tout ce qu’il vous faut, dans votre poche",
       "lede": "Découvrez des chiens, planifiez une première rencontre et partez ensemble, pendant que le propriétaire suit la balade en direct.",
+      "ledeOff": "Découvrez des chiens, planifiez une première rencontre et partez ensemble.",
       "soon": "Bientôt sur l’App Store",
       "today": "En attendant, {app} fonctionne sur tous les téléphones, directement dans le navigateur. Astuce : ajoutez {app} à votre écran d’accueil, il s’ouvrira comme une app.",
       "note": "Écrans de l'app iPhone, avec des données d'exemple.",
@@ -210,7 +214,9 @@
       },
       "walk": {
         "title": "Suivi en direct",
+        "titleOff": "En balade",
         "text": "Pendant la balade, le propriétaire suit sur la carte. Le bouton SOS est toujours à portée de main.",
+        "textOff": "Pendant la balade, vous voyez le temps et tenez le compte rendu de la balade. Le bouton SOS est toujours à portée de main.",
         "alt": "Une balade avec Bobbie dans l'app iPhone : carte, durée, distance et bouton SOS"
       }
     },
@@ -220,6 +226,7 @@
       "t2": "Pièce d'identité en personne",
       "t3": "Le propriétaire décide",
       "t4": "Suivi en direct",
+      "t4Off": "Ensemble en balade",
       "t5": "Retour privé",
       "t6": "Signaler à tout moment"
     },
@@ -571,7 +578,10 @@
       "already-open": "Vous avez déjà une demande ou un rendez-vous en cours avec ce chien.",
       "solo-not-allowed": "Les balades en autonomie ne sont pas activées pour cette personne et ce chien. Activez-les d’abord sous « Après la première rencontre », ou refusez la demande.",
       "id-not-seen": "Les balades en autonomie ne sont possibles qu’après avoir vu en personne la pièce d’identité de la personne qui promène.",
-      "meeting-ahead": "C’est possible après votre rencontre, une fois que vous avez vu la personne et sa pièce d’identité en vrai."
+      "meeting-ahead": "C’est possible après votre rencontre, une fois que vous avez vu la personne et sa pièce d’identité en vrai.",
+      "needs-terms": "Merci d’accepter d’abord les conditions mises à jour.",
+      "live-location-off": "La localisation en direct est désactivée pour le moment, donc une balade seul ne démarre pas encore. Se promener ensemble reste possible.",
+      "terms-changed": "Les conditions ont de nouveau été mises à jour entre-temps. Jetez un œil à la dernière version."
     },
     "messagePlaceholder": "Bonjour ! Je suis … et j'aimerais beaucoup promener {dog}.",
     "moments": "Moments qui conviennent à {dog}",
@@ -590,7 +600,7 @@
     "sentNext": "Et maintenant",
     "sentStep1": "{owner} reçoit votre demande.",
     "sentStep2": "{kind, select, solo {Si {owner} dit oui, la balade apparaît dans vos rendez-vous.} other {Si {owner} dit oui, vous verrez chacun les coordonnées de l’autre.}}",
-    "sentStep3": "{via, select, walk {La première fois, vous vous promenez ensemble.} home {La première fois, vous passez chez {owner}.} phone {D’abord un petit appel. Ensuite, vous vous rencontrez en vrai.} video {D’abord un petit appel vidéo. Ensuite, vous vous rencontrez en vrai.} other {Vous vous promenez en autonomie. {owner} peut suivre en direct.}}",
+    "sentStep3": "{via, select, walk {La première fois, vous vous promenez ensemble.} home {La première fois, vous passez chez {owner}.} phone {D’abord un petit appel. Ensuite, vous vous rencontrez en vrai.} video {D’abord un petit appel vidéo. Ensuite, vous vous rencontrez en vrai.} solo {Vous vous promenez en autonomie. {owner} peut suivre en direct.} other {Vous vous promenez en autonomie.}}",
     "sentNotify": "Vous recevrez une notification dès que {owner} répondra.",
     "done": "Terminé",
     "viewRequests": "Voir vos rendez-vous",
@@ -621,6 +631,7 @@
     "cancel": "Annuler",
     "start": "Commencer la balade",
     "follow": "Suivre en direct",
+    "followWalk": "Voir la balade",
     "resume": "Reprendre la balade",
     "summary": "Voir la balade",
     "weekly": "Chaque semaine",
@@ -645,6 +656,7 @@
     "ladderTitleSolo": "{walker} peut désormais promener {dog} en autonomie.",
     "ladderTitleId": "Vous avez vu la pièce d’identité de {walker}.",
     "ladderTextSolo": "Vous pouvez suivre chaque balade en direct, et retirer cette autorisation à tout moment.",
+    "ladderTextSoloOff": "La localisation en direct est désactivée pour le moment, donc une balade seul ne démarre pas encore. Se promener ensemble reste possible, et vous pouvez retirer cette autorisation à tout moment.",
     "ladderTextId": "Vous voulez que {walker} promène aussi {dog} en autonomie ? Vous pouvez l’activer sous « Après la première rencontre », quand vous le souhaitez.",
     "ladderTextShelter": "Les chiens de refuge se promènent toujours en groupe encadré.",
     "ladderQuiz": "{walker} pourra demander une balade en autonomie dès que le quiz de sécurité sera réussi.",
@@ -750,6 +762,7 @@
       "5": "Super"
     },
     "follow": "Suivre en direct",
+    "followWalk": "Voir la balade",
     "followLede": "Vous voyez où {walker} se promène avec {dog} tant que la balade dure.",
     "lastSeen": "Dernière position : {time}",
     "notStarted": "La balade n'a pas encore commencé.",
@@ -778,6 +791,7 @@
     "photoError": "La photo n'a pas pu être envoyée. Réessayez.",
     "photoTooMany": "Vous avez atteint le maximum de 12 photos.",
     "photoHint": "Le propriétaire voit vos photos tout de suite. Elles sont supprimées après 30 jours, comme le trajet.",
+    "photoHintNoRoute": "Le propriétaire voit vos photos tout de suite. Elles sont supprimées après 30 jours.",
     "photosTitle": "Photos de la promenade",
     "photoAlt": "Photo de {dogName} pendant la promenade",
     "careTitle": "Compte rendu de la balade",
@@ -787,7 +801,10 @@
     "careWater": "A bu",
     "careUndo": "En retirer un de {kind}",
     "careNone": "Rien de noté pour l’instant",
-    "careFailed": "Non enregistré : pas de connexion. Touchez à nouveau quand vous avez du réseau."
+    "careFailed": "Non enregistré : pas de connexion. Touchez à nouveau quand vous avez du réseau.",
+    "liveOff": "La localisation en direct est désactivée pour le moment. Votre trajet n’est ni suivi ni partagé ; le temps, le compte rendu de la balade et les photos fonctionnent comme d’habitude.",
+    "liveOffFollow": "La localisation en direct est désactivée pour le moment, il n’y a donc pas de carte ici. Vous voyez quand même le temps, le compte rendu de la balade et les photos.",
+    "together": "Vous vous promenez ensemble, donc pas besoin de carte."
   },
   "myDogs": {
     "title": "Mes chiens",
@@ -1405,6 +1422,7 @@
     "level3": "Ensuite : demander des balades en autonomie aux propriétaires qui l’autorisent pour leur chien.",
     "during": "Pendant la balade",
     "duringText": "Votre téléphone partage votre position avec le propriétaire pendant toute la balade. Si elle dure plus longtemps que prévu, vous recevez tous les deux une notification. Le bouton d'aide vous montre tout de suite qui appeler.",
+    "duringTextOff": "La localisation en direct est désactivée pour le moment, donc votre téléphone ne partage aucune position. D’ici là, vous vous promenez avec le propriétaire ou le refuge. Le bouton d'aide vous montre tout de suite qui appeler.",
     "after": "Après la balade",
     "afterText": "Chacun donne son avis en privé. Si un chien est blessé ou stressé, ou si quelqu'un ne s'est pas senti en sécurité, notre équipe est prévenue immédiatement.",
     "fraud": "Fraude et abus",
@@ -1445,10 +1463,10 @@
       "request-accepted": "{via, select, walk {Oui ! Votre première rencontre avec {dogName} est confirmée.} home {Oui ! Votre première rencontre avec {dogName} est confirmée.} phone {Oui ! Votre appel au sujet de {dogName} est confirmé.} video {Oui ! Votre appel vidéo au sujet de {dogName} est confirmé.} other {Oui ! Votre rendez-vous avec {dogName} est confirmé.}}",
       "request-declined": "Malheureusement, votre rendez-vous avec {dogName} a été refusé.",
       "request-cancelled": "Un rendez-vous a été annulé.",
-      "walk-started": "{walkerName} a commencé la balade avec {dogName}. Suivez-la en direct.",
+      "walk-started": "{live, select, yes {{walkerName} a commencé la balade avec {dogName}. Suivez-la en direct.} other {{walkerName} a commencé la balade avec {dogName}.}}",
       "walk-ended": "La balade de {dogName} est terminée.",
       "walk-overdue": "La balade avec {dogName} dure plus longtemps que prévu.",
-      "trust-granted": "Vous pouvez désormais promener {dogName} en autonomie.",
+      "trust-granted": "{live, select, no {Vous pouvez désormais promener {dogName} en autonomie. La localisation en direct est désactivée pour le moment, donc une balade seul ne démarre pas encore.} other {Vous pouvez désormais promener {dogName} en autonomie.}}",
       "group-signup": "{walkerName} participe à une balade en groupe.",
       "org-verified": "Votre refuge a été vérifié. Vos chiens sont maintenant visibles.",
       "org-pending": "{orgName} s'est inscrit comme refuge. Vérifiez les informations.",
@@ -1695,7 +1713,8 @@
       },
       "maps": {
         "label": "Cartes",
-        "why": "La carte, et le suivi en direct d'une promenade."
+        "why": "La carte, et le suivi en direct d'une promenade.",
+        "whyOff": "La carte des chiens à proximité."
       },
       "email": {
         "label": "E-mail",
@@ -1893,7 +1912,8 @@
         "one": "Gratuit, maintenant et plus tard",
         "two": "Toujours une première rencontre ensemble",
         "three": "Les promeneurs ont 18 ans ou plus et passent d'abord un quiz de sécurité",
-        "four": "Si vous le souhaitez, vous voyez en direct où se promène votre chien"
+        "four": "Si vous le souhaitez, vous voyez en direct où se promène votre chien",
+        "fourOff": "Vous décidez qui promène votre chien"
       },
       "family": "Pas de smartphone ? Un proche ou un voisin peut inscrire votre chien pour vous, avec votre accord.",
       "cta": "Scannez le code ou allez sur le site pour inscrire votre chien."
@@ -1928,11 +1948,11 @@
       },
       "request-accepted": {
         "subject": "{via, select, walk {Oui ! Votre première rencontre avec {dogName} est confirmée} home {Oui ! Votre première rencontre avec {dogName} est confirmée} phone {Oui ! Votre appel au sujet de {dogName} est confirmé} video {Oui ! Votre appel vidéo au sujet de {dogName} est confirmé} other {Oui ! Votre rendez-vous avec {dogName} est confirmé}}",
-        "body": "{via, select, home {Dans Rondje Mee, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje Mee, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje Mee de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} walk {Dans Rondje Mee, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.} other {Vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Pendant la balade, le propriétaire peut suivre en direct.}}"
+        "body": "{via, select, home {Dans Rondje Mee, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. Rencontrez-vous en journée et prévenez quelqu'un de l'endroit où vous êtes.} phone {Dans Rondje Mee, vous voyez maintenant comment joindre le propriétaire. Convenez dans la discussion de qui appelle qui. Après l'appel, vous planifiez la rencontre en vrai.} video {Convenez dans la discussion de Rondje Mee de la façon de faire l'appel vidéo. Après l'appel, vous planifiez la rencontre en vrai.} walk {Dans Rondje Mee, vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire. La première fois, vous promenez ensemble.} other {Vous voyez maintenant où vous vous retrouvez et comment joindre le propriétaire.{live, select, yes { Pendant la balade, le propriétaire peut suivre en direct.} other {}}}}"
       },
       "walk-overdue": {
         "subject": "La promenade avec {dogName} dure plus longtemps que prévu",
-        "body": "La promenade se prolonge. Regardez dans Rondje Mee où ils sont, ou appelez le promeneur. En cas d'urgence, appelez le 112."
+        "body": "{live, select, yes {La promenade se prolonge. Regardez dans Rondje Mee où ils sont, ou appelez le promeneur. En cas d'urgence, appelez le 112.} other {La promenade se prolonge. Appelez le promeneur, ou envoyez-lui un message dans Rondje Mee. En cas d'urgence, appelez le 112.}}"
       },
       "org-verified": {
         "subject": "Votre refuge est sur Rondje Mee",
@@ -2079,7 +2099,7 @@
       },
       "dogWalk": {
         "title": "La première balade de votre chien",
-        "hint": "Suivez-la en direct et recevez un compte rendu après."
+        "hint": "Après la balade, vous recevez un compte rendu."
       }
     },
     "nearTitle": "Chiens près de chez vous",
@@ -2109,7 +2129,7 @@
         "3": "Un moment fixe chaque semaine, c'est plus simple, pour vous, votre chien et le promeneur.",
         "4": "La première fois, vous marchez ensemble. Montrez comment votre chien aime marcher et où il s'arrête toujours.",
         "5": "Une photo de votre chien qui regarde l'objectif attire plus de promeneurs qu'une photo de dos.",
-        "6": "Suivez la balade en direct, ou lâchez prise et lisez le compte rendu après.",
+        "6": "Lâchez prise pendant la balade : après, vous lisez le compte rendu, avec des photos s’il y en a.",
         "7": "Dites au promeneur que vous êtes content. Un merci garde un compagnon régulier.",
         "8": "Il y a un panneau d'affichage au supermarché ? Un flyer avec votre lien amène des promeneurs de votre quartier."
       }
@@ -3507,7 +3527,7 @@
         "title": "Comment on garde ça sûr",
         "sub": "18 ans ou plus · Rencontre ensemble d’abord · Pièce d’identité vue en personne · Accord pour chaque chien · Court quiz de sécurité",
         "goal": "Confiance : montrer aux propriétaires et aux familles comment ça se passe, étape par étape.",
-        "caption": "Laisser un inconnu promener ton chien ? Normal d’y réfléchir. C’est pour ça que {app} avance étape par étape :\n\n1. Les promeneurs ont 18 ans ou plus et font un court quiz de sécurité\n2. La première fois, on se rencontre toujours ensemble\n3. Le propriétaire ou le refuge voit la pièce d’identité en personne (aucune copie n’est gardée)\n4. Ce n’est qu’avec un accord pour chaque chien que quelqu’un promène seul\n5. Pendant une promenade, le propriétaire peut suivre en direct, s’il le souhaite\n\n{app} ne demande jamais d’argent. Des questions ? Pose-les ci-dessous.",
+        "caption": "Laisser un inconnu promener ton chien ? Normal d’y réfléchir. C’est pour ça que {app} avance étape par étape :\n\n1. Les promeneurs ont 18 ans ou plus et font un court quiz de sécurité\n2. La première fois, on se rencontre toujours ensemble\n3. Le propriétaire ou le refuge voit la pièce d’identité en personne (aucune copie n’est gardée)\n4. Ce n’est qu’avec un accord pour chaque chien que quelqu’un promène seul\n{live, select, yes {5. Pendant une promenade, le propriétaire peut suivre en direct, s’il le souhaite} other {5. La localisation en direct est désactivée pour le moment, donc pour l’instant vous vous promenez ensemble}}\n\n{app} ne demande jamais d’argent. Des questions ? Pose-les ci-dessous.",
         "visual": "Carrousel : l’image, puis une diapositive par étape."
       },
       "p11": {
@@ -3617,7 +3637,8 @@
     "later": "Plus tard",
     "liveOwn": {
       "text": "{dog} est en balade avec {walker} en ce moment.",
-      "button": "Suivre en direct"
+      "button": "Suivre en direct",
+      "buttonQuiet": "Voir la balade"
     },
     "live": {
       "text": "Vous êtes en balade avec {dog}.",
@@ -3707,5 +3728,19 @@
       "next": "{when} : balade en groupe à {org}.",
       "button": "Aller à {org}"
     }
+  },
+  "termsUpdate": {
+    "title": "Les conditions ont été mises à jour",
+    "lede": "Prenez le temps de lire ce qui change. Les nouvelles conditions s’appliquent pour vous à partir du {date}. Dès lors, nous vous demandons d’abord votre accord, avant de convenir de quelque chose de nouveau ou de commencer une balade.",
+    "ledeRequired": "Les nouvelles conditions s’appliquent depuis le {date}. Lisez ce qui change. Une fois que vous les acceptez, vous pouvez à nouveau prendre rendez-vous et commencer des balades.",
+    "read": "Lire les conditions complètes",
+    "review": "Voir ce qui change",
+    "accept": "J’accepte",
+    "thanks": "Merci. Votre accord est enregistré.",
+    "rights": "Vous n’êtes pas d’accord ? Vous pouvez toujours supprimer votre compte depuis votre profil (article 19 des conditions).",
+    "first": "D’abord les conditions mises à jour",
+    "pageTitle": "Conditions mises à jour",
+    "upToDate": "Vous avez déjà accepté les dernières conditions.",
+    "onward": "Continuer"
   }
 }

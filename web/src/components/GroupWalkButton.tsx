@@ -11,6 +11,7 @@ export function GroupWalkButton({
   full,
   signedIn,
   needsQuiz = false,
+  needsTerms = false,
   next = '/group-walks',
 }: {
   id: string
@@ -19,6 +20,8 @@ export function GroupWalkButton({
   signedIn: boolean
   /** Walkers do the safety quiz before they join (besluit 4 okt 2026); it brings them back here. */
   needsQuiz?: boolean
+  /** Changed terms that took effect wait for a yes first (lib/rules.ts termsReason); it brings them back here. */
+  needsTerms?: boolean
   next?: string
 }) {
   const t = useTranslations()
@@ -38,6 +41,12 @@ export function GroupWalkButton({
       {t('request.quizFirst')}
     </a>
   )
+  const terms = (
+    <a className="button secondary small" href={`/profile/terms?next=${encodeURIComponent(next)}`}>
+      {t('termsUpdate.first')}
+    </a>
+  )
+  if (needsTerms && !isJoined) return terms
   if (needsQuiz && !isJoined) return quiz
   return (
     <div className="stack-s">
@@ -64,7 +73,7 @@ export function GroupWalkButton({
         </a>
       ) : null}
       {error ? <span className="error-text">{t(`request.reasons.${error}`)}</span> : null}
-      {error === 'needs-quiz' ? quiz : null}
+      {error === 'needs-quiz' ? quiz : error === 'needs-terms' ? terms : null}
     </div>
   )
 }

@@ -1,8 +1,16 @@
 import { NextResponse } from 'next/server'
+import { LIVE_LOCATION_HEADER, liveLocationFor } from '@/lib/live-location'
+import { walkHasLiveLocation } from '@/lib/rules'
 import { getViewer } from '@/server/session'
 import { checkOverdue, pointsSince, walkAccess, walkPhotos } from '@/server/walks'
 
-/** Polled by the owner's live map (and the walker's own screen) every few seconds. */
+/**
+ * Polled by the owner's live map (and the walker's own screen) every few seconds. `liveLocation` says
+ * whether this walk collects location (lib/rules.ts walkHasLiveLocation): only a walk alone with the dog,
+ * with the switch on (LIVE_LOCATION). When false, no new points come in and the screens show no map.
+ * `kind` is the kind of walk ('meet' or 'solo', null when its request is gone), so a screen can say why:
+ * at a first meeting they walk together.
+ */
 export async function GET(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const viewer = await getViewer()
@@ -15,11 +23,14 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
   const after = Number(query.get('after') ?? 0) || 0
   const photosAfter = Number(query.get('photosAfter') ?? 0) || 0
   const points = await pointsSince(id, after)
-  const overdueMin = await checkOverdue(access.walk, access.dog)
+  const liveLocation = walkHasLiveLocation(access.kind, liveLocationFor(process.env, request.headers.get(LIVE_LOCATION_HEADER)))
+  const overdueMin = await checkOverdue(access.walk, access.dog, liveLocation)
   const photos = await walkPhotos(id, photosAfter)
   return NextResponse.json(
     {
       status: access.walk.status,
+      kind: access.kind,
+      liveLocation,
       startedAt: access.walk.startedAt,
       plannedEndAt: access.walk.plannedEndAt,
       endedAt: access.walk.endedAt,

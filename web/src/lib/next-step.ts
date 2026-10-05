@@ -7,7 +7,7 @@
 // Example dogs never become a step. Scenarios: next-step.scenarios.json (also for the iPhone tests).
 
 import { localParts } from './progress'
-import { canStartWalk, isInPerson } from './rules'
+import { canStartWalk, isInPerson, liveLocationReason, walkHasLiveLocation } from './rules'
 
 export interface NextStepAppointment {
   id: string
@@ -46,6 +46,12 @@ export interface NextStepFacts {
   wantsToWalk?: boolean
   /** The shelter you work for, with its next group walk. */
   staffOrg?: { id: string; name: string; nextGroupWalk: Date | null } | null
+  /**
+   * Live location switched on (LIVE_LOCATION, lib/live-location.ts). Off: a walk alone with the dog is
+   * not offered to start (it cannot, rules.ts liveLocationReason), and following a walk is not called
+   * live. Left out: on, as before (the scenarios shared with the iPhone app).
+   */
+  liveLocation?: boolean
 }
 
 export type NextStepKind =
@@ -86,6 +92,8 @@ export interface NextStep {
   org?: string
   /** Feedback as the owner (else as the walker). */
   asOwner?: boolean
+  /** Your dog's walk under way shares location, so it can be followed live (rules.ts walkHasLiveLocation). */
+  live?: boolean
   href: string | null
   /** "Later" may put it away for a week (and after twice, for good). */
   later: boolean
@@ -131,12 +139,24 @@ export function nextSteps(f: NextStepFacts): NextStep[] {
   const add = (s: Omit<NextStep, 'later' | 'dismiss'> & Partial<Pick<NextStep, 'later' | 'dismiss'>>) => steps.push({ later: false, dismiss: false, ...s })
 
   // 1. Right now: your dog is out with a walker, or you are out with a dog.
-  for (const a of inc) if (a.walkStatus === 'active' && a.walkId) add({ id: `liveOwn.${a.walkId}`, kind: 'liveOwn', dog: a.dog.name, walker: a.walkerName, href: `/follow/${a.walkId}` })
+  const switchedOn = f.liveLocation ?? true
+  for (const a of inc) {
+    if (a.walkStatus === 'active' && a.walkId) {
+      add({ id: `liveOwn.${a.walkId}`, kind: 'liveOwn', dog: a.dog.name, walker: a.walkerName, live: walkHasLiveLocation(a.kind, switchedOn), href: `/follow/${a.walkId}` })
+    }
+  }
   for (const a of out) if (a.walkStatus === 'active' && a.walkId) add({ id: `live.${a.walkId}`, kind: 'live', dog: a.dog.name, href: `/walk/${a.walkId}` })
 
   // 2. A walk or meeting that can start now (the same window as the start button).
+  // A walk alone with the dog while live location is off does not start: no "Klaar voor?" for it.
   const startable = out
-    .filter((a) => a.walkStatus !== 'active' && a.walkStatus !== 'ended' && canStartWalk({ status: a.status, startsAt: a.startsAt, walkerId: f.userId, meetVia: a.meetVia }, f.userId, now))
+    .filter(
+      (a) =>
+        a.walkStatus !== 'active' &&
+        a.walkStatus !== 'ended' &&
+        !liveLocationReason(a.kind, switchedOn) &&
+        canStartWalk({ status: a.status, startsAt: a.startsAt, walkerId: f.userId, meetVia: a.meetVia }, f.userId, now),
+    )
     .sort((a, b) => a.startsAt.getTime() - b.startsAt.getTime())
   for (const a of startable) add({ id: `start.${a.id}`, kind: 'start', dog: a.dog.name, at: a.startsAt, meet: a.kind === 'meet', href: '/requests' })
 

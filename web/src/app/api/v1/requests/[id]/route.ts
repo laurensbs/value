@@ -8,7 +8,11 @@ const bodySchema = z.discriminatedUnion('action', [
   z.object({ action: z.literal('trust'), dogId: z.string().min(1), walkerId: z.string().min(1), idSeen: z.boolean(), soloAllowed: z.boolean() }),
 ])
 
-/** Accept, decline or cancel an appointment, or (after meeting) record ID seen and allow solo walks. */
+/**
+ * Accept, decline or cancel an appointment, or (after meeting) record ID seen and allow solo walks.
+ * Accepting a walk alone while live location is switched off: 400 `{ error: 'live-location-off', message }`
+ * (declining and cancelling always work).
+ */
 export async function POST(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const viewer = await apiMember()
   if (viewer instanceof NextResponse) return viewer

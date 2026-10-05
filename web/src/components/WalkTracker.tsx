@@ -30,6 +30,14 @@ interface Props {
   fallbackCenter: { lat: number; lng: number }
   sos: React.ComponentProps<typeof SosSheet>
   locale: string
+  /**
+   * Whether this walk shares location (lib/rules.ts walkHasLiveLocation): only a walk alone with the dog,
+   * with LIVE_LOCATION on. Otherwise no GPS, nothing sent, no map, and a calm line that says why. The
+   * timer, the report, the photos and SOS work as always.
+   */
+  liveLocation?: boolean
+  /** A first meeting: they walk together, so there is no map to follow. */
+  together?: boolean
 }
 
 const FLUSH_EVERY_MS = 10_000
@@ -50,8 +58,22 @@ function clock(ms: number): string {
  * The walker's screen during a walk. It follows the phone's GPS, draws the route,
  * and sends new points to the server every ten seconds so the owner can follow along.
  * The screen is kept awake: web pages cannot track location while the phone is locked.
+ * Without live location (a first meeting, or the switch off) it does none of the location part (see `liveLocation`).
  */
-export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialRoute, initialPhotos, initialCare, fallbackCenter, sos, locale }: Props) {
+export function WalkTracker({
+  walkId,
+  dogName,
+  startedAt,
+  plannedEndAt,
+  initialRoute,
+  initialPhotos,
+  initialCare,
+  fallbackCenter,
+  sos,
+  locale,
+  liveLocation = false,
+  together = false,
+}: Props) {
   const [photos, setPhotos] = useState<WalkPhoto[]>(initialPhotos)
   const t = useTranslations('walk')
   const format = useFormatter()
@@ -65,7 +87,8 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
   const [ending, startEnding] = useTransition()
   const queue = useRef<Point[]>([])
   const last = useRef<Point | null>(initialRoute.at(-1) ?? null)
-  const stopped = useRef(false)
+  // Nothing to send without live location; the server would refuse it anyway (403 live-location-off).
+  const stopped = useRef(!liveLocation)
 
   const flush = useCallback(
     async (keepalive = false) => {
@@ -105,7 +128,7 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
 
   // GPS
   useEffect(() => {
-    if (!('geolocation' in navigator)) return
+    if (!liveLocation || !('geolocation' in navigator)) return
     const id = navigator.geolocation.watchPosition(
       (pos) => {
         setGps('ok')
@@ -127,7 +150,7 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
       { enableHighAccuracy: true, maximumAge: 3_000, timeout: 30_000 },
     )
     return () => navigator.geolocation.clearWatch(id)
-  }, [])
+  }, [liveLocation])
 
   // Upload every few seconds, and right away when the app goes to the background.
   useEffect(() => {
@@ -188,19 +211,24 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
     <div className="walk-layout">
       <section className="walk-screen" aria-live="off">
         <div className="spread">
-          <span className="live-label">
-            <span className="live-dot" aria-hidden="true" /> {t('live')}
-          </span>
+          {liveLocation ? (
+            <span className="live-label">
+              <span className="live-dot" aria-hidden="true" /> {t('live')}
+            </span>
+          ) : null}
           <span className="muted small">{t('with', { name: dogName })}</span>
         </div>
         <div className="timer" role="timer" aria-label={t('time')}>
           {clock(elapsed)}
         </div>
         <div className="walk-stats">
-          <div>
-            <strong>{formatWalkDistance(distance, locale)}</strong>
-            <span className="muted small">{t('distance')}</span>
-          </div>
+          {/* Without live location there is no route, so no distance either. */}
+          {liveLocation ? (
+            <div>
+              <strong>{formatWalkDistance(distance, locale)}</strong>
+              <span className="muted small">{t('distance')}</span>
+            </div>
+          ) : null}
           <div>
             <strong>{format.number(plannedMin)}′</strong>
             <span className="muted small">{t('planned')}</span>
@@ -217,7 +245,11 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
         ) : null}
       </section>
 
-      {gps === 'denied' ? (
+      {!liveLocation ? (
+        <p className="notice live-off" role="status">
+          {together ? t('together') : t('liveOff')}
+        </p>
+      ) : gps === 'denied' ? (
         <p className="notice danger" role="alert">
           {t('gpsDenied')}
         </p>
@@ -232,10 +264,12 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
       ) : null}
       {offline ? <p className="notice warn small">{t('offline')}</p> : null}
 
-      <Map center={here ?? fallbackCenter} zoom={16} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
+      {liveLocation ? (
+        <Map center={here ?? fallbackCenter} zoom={16} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
+      ) : null}
 
       <WalkCareButtons walkId={walkId} dogName={dogName} initial={initialCare} />
-      <WalkPhotoButton walkId={walkId} onSent={(p) => setPhotos((list) => [...list, p])} />
+      <WalkPhotoButton walkId={walkId} route={liveLocation} onSent={(p) => setPhotos((list) => [...list, p])} />
       <WalkPhotoStrip photos={photos} dogName={dogName} />
 
       <div className="walk-actions">
@@ -256,7 +290,7 @@ export function WalkTracker({ walkId, dogName, startedAt, plannedEndAt, initialR
         )}
       </div>
       {confirmEnd ? <p className="muted small">{t('endConfirm')}</p> : null}
-      <p className="muted small">{t('locationNote')}</p>
+      {liveLocation ? <p className="muted small">{t('locationNote')}</p> : null}
     </div>
   )
 }

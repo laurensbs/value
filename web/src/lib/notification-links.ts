@@ -7,6 +7,12 @@ export type NotificationData = {
   requestId?: string
   /** How a first meeting happens (walk, home, phone, video); left out for regular walks. */
   meetVia?: string
+  /**
+   * 'yes' when the walk shares live location (lib/rules.ts walkHasLiveLocation), 'no' when not: a first
+   * meeting, or live location switched off. Only then do texts say "kijk live mee". Older rows leave it
+   * out, and then no text promises anything live.
+   */
+  live?: string
   orgId?: string
   orgName?: string
   groupWalkId?: string
@@ -60,6 +66,7 @@ export function notificationValues(data: NotificationData): Record<string, strin
     day: data.day ?? 'other',
     time: data.time ?? '',
     via: data.meetVia ?? 'other',
+    live: data.live ?? 'other',
   }
 }
 
