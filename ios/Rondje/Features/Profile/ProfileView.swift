@@ -10,6 +10,8 @@ struct ProfileView: View {
     @State private var confirmSignOut = false
     @State private var deleting = false
     @State private var help = HelpUs.shared
+    /// The "terms updated" sheet, opened from the notice below the header.
+    @State private var terms: TermsRequest?
 
     private var walks: Bool { model.role != .owner }
 
@@ -18,6 +20,10 @@ struct ProfileView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     header
+                    // Changed terms: a quiet notice until the yes, the same before and after they apply.
+                    if let state = model.me?.termsState, state.needsYes {
+                        TermsNoticeCard(state: state) { terms = TermsRequest(model: model) }
+                    }
                     // The first steps for walkers, until they are done (they used to stand on Ontdek).
                     FirstSteps { model.perform(.quiz) }
                     if let p = progress.progress {
@@ -111,6 +117,7 @@ struct ProfileView: View {
                 Button("Uitloggen", role: .destructive) { Task { await model.signOut() } }
             }
             .sheet(isPresented: $deleting) { DeleteAccountSheet().presentationDetents([.medium]) }
+            .termsSheet($terms)
         }
     }
 
@@ -322,20 +329,33 @@ struct NotificationsView: View {
         }
     }
 
-    private func text(_ n: AppNotification) -> String {
+    private func text(_ n: AppNotification) -> String { Self.text(n) }
+
+    /// The sentence for a notification. "Kijk live mee" only for a walk that shared live location
+    /// (`live: "yes"`), so never for a first meeting or with live location off; older notifications
+    /// without it promise nothing live (web notification-links.ts). Kinds this version does not know
+    /// use the server's own sentence.
+    static func text(_ n: AppNotification) -> String {
         let dog = n.text("dogName"), walker = n.text("walkerName")
         switch n.kind {
         case "request-new": return L("\(walker) wil graag met \(dog) wandelen.")
         case "request-accepted": return L("Je afspraak met \(dog) is geaccepteerd.")
         case "request-declined": return L("Je aanvraag voor \(dog) is afgewezen.")
         case "request-cancelled": return L("De afspraak met \(dog) is geannuleerd.")
-        case "walk-started": return L("\(walker) is op pad met \(dog). Kijk live mee.")
+        case "walk-started":
+            return n.sharedLiveLocation ? L("\(walker) is op pad met \(dog). Kijk live mee.") : L("\(walker) is op pad met \(dog).")
         case "walk-ended": return L("\(dog) is weer thuis.")
         case "walk-overdue": return L("Het rondje met \(dog) loopt uit.")
         case "chat-message": return L("\(n.text("senderName")) stuurde een bericht over \(dog).")
-        case "trust-granted": return L("Je mag nu zelfstandig met \(dog) wandelen.")
+        case "trust-granted":
+            // Given while live location is off (`live: "no"`): the same calm words as the website.
+            return n.text("live") == "no"
+                ? L("Je mag nu zelfstandig met \(dog) wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet.")
+                : L("Je mag nu zelfstandig met \(dog) wandelen.")
         case "group-walk-new": return L("Er is een nieuwe groepswandeling bij een opvang.")
-        default: return L("Nieuwe melding")
+        default:
+            let server = n.serverText?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            return server.isEmpty ? L("Nieuwe melding") : server
         }
     }
 }

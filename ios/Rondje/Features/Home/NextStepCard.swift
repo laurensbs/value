@@ -22,6 +22,8 @@ struct NextStepCard: View {
     @State private var now = Date.now
     @State private var busy = false
     @State private var breathing: Appointment?
+    /// The server waits for the yes to the updated terms; after it, the walk starts.
+    @State private var terms: TermsRequest?
     /// Offer the breathing minute before a walk; switched off with "Niet meer tonen".
     @AppStorage("offerBreathing") private var offerBreathing = true
 
@@ -50,6 +52,7 @@ struct NextStepCard: View {
                 Task { await start(item) }
             }
         }
+        .termsSheet($terms)
     }
 
     private func card(_ step: NextStep) -> some View {
@@ -175,7 +178,8 @@ struct NextStepCard: View {
             nearbyFailed: nearbyFailed,
             noRebook: keepsakes.noRebookDogs,
             snoozed: keepsakes.activeSnoozes(now: now),
-            prepDone: Set(keepsakes.keys(withPrefix: "prepDone.").map { String($0.dropFirst("prepDone.".count)) })
+            prepDone: Set(keepsakes.keys(withPrefix: "prepDone.").map { String($0.dropFirst("prepDone.".count)) }),
+            liveLocation: ServerFeatures.shared.liveLocation
         )
     }
 
@@ -265,6 +269,11 @@ struct NextStepCard: View {
         do {
             try await WalkStarter.start(item, model: model, walk: walk)
             Haptics.success()
+        } catch let error as APIError where error.needsTerms {
+            terms = TermsRequest(model: model) { await start(item) }
+        } catch let error as APIError where error.liveLocationOff {
+            // Live location went off in the meantime: this walk alone waits. Calmly, not as an error.
+            await model.liveLocationPaused()
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)

@@ -423,6 +423,34 @@
         }
       }
     },
+    "%@ is op pad met %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is out with %@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ está de paseo con %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ est en balade avec %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ is op pad met %2$@."
+          }
+        }
+      }
+    },
     "%@ is op pad met %@. Kijk live mee." : {
       "localizations" : {
         "en" : {
@@ -2471,6 +2499,28 @@
         }
       }
     },
+    "Akkoord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I agree"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acepto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J'accepte"
+          }
+        }
+      }
+    },
     "Al een account? Log in" : {
       "localizations" : {
         "en" : {
@@ -3329,6 +3379,28 @@
         }
       }
     },
+    "Bekijk het rondje" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View the walk"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver el paseo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir la balade"
+          }
+        }
+      }
+    },
     "Bel" : {
       "localizations" : {
         "en" : {
@@ -4143,6 +4215,28 @@
         }
       }
     },
+    "Dank je. Je akkoord is opgeslagen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank you. Your agreement has been saved."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gracias. Hemos guardado tu aceptación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merci. Ton accord est enregistré."
+          }
+        }
+      }
+    },
     "Dat lukte even niet. Controleer je verbinding en probeer het opnieuw." : {
       "localizations" : {
         "en" : {
@@ -4721,6 +4815,28 @@
         }
       }
     },
+    "De nieuwe voorwaarden gelden sinds %@. Lees wat er verandert. Na je akkoord kun je weer afspraken maken en rondjes starten." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The new terms have applied since %@. Read what changes. Once you agree, you can make appointments and start walks again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las nuevas condiciones se aplican desde el %@. Lee lo que cambia. Cuando las aceptes, podrás volver a quedar y empezar paseos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les nouvelles conditions s'appliquent depuis le %@. Lis ce qui change. Une fois que tu les acceptes, tu peux à nouveau prendre rendez-vous et commencer des balades."
+          }
+        }
+      }
+    },
     "De overdracht ging goed" : {
       "localizations" : {
         "en" : {
@@ -4739,6 +4855,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La remise s'est bien passée"
+          }
+        }
+      }
+    },
+    "De voorwaarden zijn bijgewerkt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The terms have been updated"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hemos actualizado las condiciones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les conditions ont été mises à jour"
           }
         }
       }
@@ -6037,6 +6175,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faites d'abord connaissance au téléphone. Ensuite, vous vous rencontrez en vrai, avec le chien."
+          }
+        }
+      }
+    },
+    "Eerst graag je akkoord met de bijgewerkte voorwaarden." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please agree to the updated terms first."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Primero acepta las condiciones actualizadas, por favor."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merci d'accepter d'abord les conditions mises à jour."
           }
         }
       }
@@ -10867,6 +11027,28 @@
         }
       }
     },
+    "Je hebt de nieuwste voorwaarden al geaccepteerd." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have already agreed to the latest terms."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya has aceptado las condiciones más recientes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu as déjà accepté les dernières conditions."
+          }
+        }
+      }
+    },
     "Je hebt het ID van %@ gezien." : {
       "localizations" : {
         "en" : {
@@ -11285,6 +11467,28 @@
         }
       }
     },
+    "Je mag nu zelfstandig met %@ wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You may now walk %@ on your own. Live location is off for now, so a walk alone doesn't start yet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya puedes pasear a %@ por tu cuenta. La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu peux maintenant promener %@ seul·e. La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore."
+          }
+        }
+      }
+    },
     "Je melding is binnen. Iemand van %@ neemt contact op als dat nodig is." : {
       "localizations" : {
         "en" : {
@@ -11325,6 +11529,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "On compte tes points dès que tu es de nouveau connecté."
+          }
+        }
+      }
+    },
+    "Je route wordt niet bijgehouden of gedeeld. De tijd, het rondje-rapport en foto's werken gewoon." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your route is not tracked or shared. The time, the walk report and photos work as usual."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu recorrido no se registra ni se comparte. El tiempo, el informe del paseo y las fotos funcionan como siempre."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton trajet n'est ni suivi ni partagé. Le temps, le compte rendu de la balade et les photos fonctionnent comme d'habitude."
           }
         }
       }
@@ -11505,24 +11731,24 @@
         }
       }
     },
-    "Je ziet wie met je hond wil wandelen, en kijkt live mee." : {
+    "Je ziet wie met je hond wil wandelen, en jij beslist wie er komt." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You see who wants to walk your dog, and watch along live."
+            "value" : "You see who wants to walk your dog, and you decide who comes."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ves quién quiere pasear a tu perro y lo sigues en directo."
+            "value" : "Ves quién quiere pasear a tu perro, y tú decides quién viene."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu vois qui veut promener ton chien et tu suis en direct."
+            "value" : "Tu vois qui veut promener ton chien, et c'est toi qui décides qui vient."
           }
         }
       }
@@ -11811,6 +12037,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous faites une balade ensemble. Le propriétaire vous accompagne et vérifie ta pièce d'identité."
+          }
+        }
+      }
+    },
+    "Jullie lopen samen, dus er is geen kaart nodig." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're walking together, so there's no need for a map."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paseáis juntos, así que no hace falta mapa."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous vous promenez ensemble, donc pas besoin de carte."
           }
         }
       }
@@ -12563,6 +12811,28 @@
         }
       }
     },
+    "Klikt het? Dan lopen jullie vaker samen. Live locatie staat voorlopig uit, dus zelfstandig wandelen kan nog niet." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hit it off? Then you walk together more often. Live location is off for now, so walking on your own isn't possible yet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Os lleváis bien? Entonces paseáis juntos más a menudo. La ubicación en directo está desactivada por ahora, así que todavía no se puede pasear por tu cuenta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le courant passe ? Alors vous vous promenez ensemble plus souvent. La localisation en direct est désactivée pour le moment, donc la balade en solo n'est pas encore possible."
+          }
+        }
+      }
+    },
     "Klopt. Stap voor stap, voor iedereen veilig." : {
       "localizations" : {
         "en" : {
@@ -13025,6 +13295,116 @@
         }
       }
     },
+    "Lees de volledige voorwaarden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read the full terms"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leer las condiciones completas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lire les conditions complètes"
+          }
+        }
+      }
+    },
+    "Lees in rust wat er verandert." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take your time to read what changes."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lee con calma lo que cambia."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prends le temps de lire ce qui change."
+          }
+        }
+      }
+    },
+    "Lees in rust wat er verandert. De nieuwe voorwaarden gelden voor jou vanaf %@. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take your time to read what changes. The new terms apply to you from %@. From then on, we ask for your agreement first, before you arrange something new or start a walk."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lee con calma lo que cambia. Las nuevas condiciones se aplican para ti a partir del %@. A partir de entonces, te pedimos primero tu aceptación, antes de quedar para algo nuevo o empezar un paseo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prends le temps de lire ce qui change. Les nouvelles conditions s'appliquent pour toi à partir du %@. Dès lors, nous te demandons d'abord ton accord, avant de convenir de quelque chose de nouveau ou de commencer une balade."
+          }
+        }
+      }
+    },
+    "Lees wat er verandert" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read what changes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leer qué cambia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lire ce qui change"
+          }
+        }
+      }
+    },
+    "Lees wat er verandert. Na je akkoord kun je weer afspraken maken en rondjes starten." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read what changes. Once you agree, you can make appointments and start walks again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lee lo que cambia. Cuando las aceptes, podrás volver a quedar y empezar paseos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lis ce qui change. Une fois que tu les acceptes, tu peux à nouveau prendre rendez-vous et commencer des balades."
+          }
+        }
+      }
+    },
     "Leg je hand plat op de stoep. Houd hem er 7 seconden op." : {
       "localizations" : {
         "en" : {
@@ -13307,6 +13687,138 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En direct"
+          }
+        }
+      }
+    },
+    "Live locatie staat op dit moment uit, dus hier staat geen kaart. Je ziet wel de tijd, het rondje-rapport en de foto's." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now, so there is no map here. You still see the time, the walk report and the photos."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora, así que aquí no hay mapa. Sí ves el tiempo, el informe del paseo y las fotos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment, il n'y a donc pas de carte ici. Tu vois quand même le temps, le compte rendu de la balade et les photos."
+          }
+        }
+      }
+    },
+    "Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now: your phone does not share your location during this walk."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora: tu móvil no comparte tu ubicación durante este paseo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment : ton téléphone ne partage pas ta position pendant cette balade."
+          }
+        }
+      }
+    },
+    "Live locatie staat uit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación en directo desactivada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Localisation en direct désactivée"
+          }
+        }
+      }
+    },
+    "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible, and you can always switch this off again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible, y siempre puedes volver a desactivarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore. Se promener ensemble reste possible, et tu peux toujours retirer cette permission."
+          }
+        }
+      }
+    },
+    "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore. Se promener ensemble reste possible."
+          }
+        }
+      }
+    },
+    "Live locatie staat voorlopig uit. Tot die tijd lopen jullie samen, en bewaren we geen route." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now. Until then you walk together, and no route is stored."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora. Hasta entonces paseáis juntos, y no se guarda ninguna ruta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment. D'ici là, vous vous promenez ensemble, et aucun trajet n'est enregistré."
           }
         }
       }
@@ -14367,6 +14879,28 @@
         }
       }
     },
+    "Na je akkoord kun je weer afspraken maken en rondjes starten." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once you agree, you can make appointments and start walks again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando las aceptes, podrás volver a quedar y empezar paseos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une fois que tu les acceptes, tu peux à nouveau prendre rendez-vous et commencer des balades."
+          }
+        }
+      }
+    },
     "Na je eerste rondje krijgt de hond hier een eigen pagina." : {
       "localizations" : {
         "en" : {
@@ -14693,6 +15227,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas tout à fait."
+          }
+        }
+      }
+    },
+    "Niet akkoord? Je kunt je account altijd verwijderen onder Jij (artikel 19 van de voorwaarden)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't agree? You can always delete your account in the You tab (article 19 of the terms)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿No estás de acuerdo? Siempre puedes eliminar tu cuenta en la pestaña Tú (artículo 19 de las condiciones)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu n'es pas d'accord ? Tu peux toujours supprimer ton compte dans l'onglet Toi (article 19 des conditions)."
           }
         }
       }
@@ -15981,6 +16537,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvre la page de %@"
+          }
+        }
+      }
+    },
+    "Opent de website in je browser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the website in your browser"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre la web en tu navegador"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre le site dans ton navigateur"
           }
         }
       }
@@ -18279,6 +18857,28 @@
         }
       }
     },
+    "Tik om het rondje te bekijken" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to view the walk"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca para ver el paseo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touche pour voir la balade"
+          }
+        }
+      }
+    },
     "Tik om live mee te kijken" : {
       "localizations" : {
         "en" : {
@@ -19649,6 +20249,28 @@
         }
       }
     },
+    "Voor jou gelden ze vanaf %@. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For you, they apply from %@. From then on, we ask for your agreement first, before you arrange something new or start a walk."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para ti, se aplican a partir del %@. A partir de entonces, te pedimos primero tu aceptación, antes de quedar para algo nuevo o empezar un paseo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour toi, elles s'appliquent à partir du %@. Dès lors, nous te demandons d'abord ton accord, avant de convenir de quelque chose de nouveau ou de commencer une balade."
+          }
+        }
+      }
+    },
     "Voor wie" : {
       "localizations" : {
         "en" : {
@@ -20491,6 +21113,28 @@
         }
       }
     },
+    "We konden de wijzigingen nu niet laden. Probeer het later nog eens." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We couldn't load the changes just now. Please try again later."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hemos podido cargar los cambios ahora. Inténtalo de nuevo más tarde."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nous n'avons pas pu charger les changements pour l'instant. Réessaie plus tard."
+          }
+        }
+      }
+    },
     "We zijn hier net begonnen. Ken je iemand wiens hond vaker naar buiten wil? Stuur je link, of tip een opvang." : {
       "localizations" : {
         "en" : {
@@ -21109,6 +21753,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Di"
+          }
+        }
+      }
+    },
+    "Zo ben je bereikbaar voor de wandelaar tijdens het rondje." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So the walker can reach you during the walk."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Así el paseador puede contactar contigo durante el paseo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainsi, le promeneur peut te joindre pendant la balade."
           }
         }
       }

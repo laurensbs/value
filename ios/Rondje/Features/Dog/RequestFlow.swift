@@ -44,6 +44,11 @@ struct RequestFlow: View {
     /// The server answered "needs-quiz" (also when this app thought the quiz was done).
     @State private var serverNeedsQuiz = false
     @State private var quizOpen = false
+    /// The server waits for the yes to the updated terms; after it, the request goes out as written.
+    @State private var terms: TermsRequest?
+    /// The server answered 'live-location-off' to a walk alone: it cannot be asked for now. One calm
+    /// note instead of an error, and nothing to send.
+    @State private var liveLocationPaused = false
     /// The confirmation comes in piece by piece: the paper plane, the text, then the three steps.
     @State private var shown = 0
     @State private var toLessons = false
@@ -93,6 +98,7 @@ struct RequestFlow: View {
         .sheet(isPresented: $quizOpen, onDismiss: { if model.quizPassed { serverNeedsQuiz = false } }) {
             NavigationStack { QuizGameView(mode: .gate) }
         }
+        .termsSheet($terms)
         .sensoryFeedback(.selection, trigger: step)
         .onAppear(perform: prepare)
         .onDisappear(perform: finish)
@@ -160,6 +166,14 @@ struct RequestFlow: View {
                 default: promiseStep
                 }
                 ErrorText(message: error)
+                if liveLocationPaused {
+                    Label(LiveLocationPause.note, systemImage: "location.slash")
+                        .font(.subheadline)
+                        .foregroundStyle(Palette.ink)
+                        .padding(12)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Palette.calmSoft, in: .rect(cornerRadius: 14, style: .continuous))
+                }
             }
             .padding(24)
             .id(step)
@@ -399,7 +413,7 @@ struct RequestFlow: View {
                     }
                 }
                 .buttonStyle(.primary)
-                .disabled(busy || when == nil)
+                .disabled(busy || when == nil || liveLocationPaused)
             }
         }
         .padding(.horizontal, 24)
@@ -740,6 +754,17 @@ struct RequestFlow: View {
         } catch let error as APIError where error.code == "needs-quiz" {
             // The server wants the quiz first: show the way there instead of an error.
             withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { serverNeedsQuiz = true }
+        } catch let error as APIError where error.needsTerms {
+            // The updated terms apply: the calm sheet first; after the yes, this request goes out.
+            terms = TermsRequest(model: model) { await send() }
+        } catch let error as APIError where error.liveLocationOff {
+            // Live location is off, so a walk alone cannot be asked for now: said calmly, no error sound.
+            ServerFeatures.shared.liveLocationSwitchedOff()
+            withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) {
+                self.error = nil
+                liveLocationPaused = true
+            }
+            AccessibilityNotification.Announcement(LiveLocationPause.note).post()
         } catch {
             Haptics.error()
             withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) { self.error = error.plainText }

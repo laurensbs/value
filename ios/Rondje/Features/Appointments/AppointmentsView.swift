@@ -133,6 +133,8 @@ struct AppointmentCard: View {
     @State private var breathing = false
     /// After a first call: the dog's details, to plan meeting in person in the request sheet.
     @State private var planInPerson: DogDetail?
+    /// The server waits for the yes to the updated terms; after it, accepting or starting goes ahead.
+    @State private var terms: TermsRequest?
     /// Offer the breathing minute before a walk; switched off with "Niet meer tonen".
     @AppStorage("offerBreathing") private var offerBreathing = true
 
@@ -189,6 +191,7 @@ struct AppointmentCard: View {
                     .transition(opening)
             }
             PrepLink(item: item, asOwner: asOwner)
+            liveLocationNote
             actions
         }
         // Accepting: the label turns to "Afgesproken" (klein) and the contact details slide open (scherm).
@@ -205,7 +208,7 @@ struct AppointmentCard: View {
             }
         }
         .fullScreenCover(item: Binding(get: { following.map(FollowID.init) }, set: { following = $0?.id })) { f in
-            FollowWalkView(walkId: f.id, dogName: item.dog.name)
+            FollowWalkView(walkId: f.id, dogName: item.dog.name, kind: item.kind)
         }
         .sheet(item: Binding(get: { feedbackFor.map(FollowID.init) }, set: { feedbackFor = $0?.id })) { f in
             FeedbackSheet(walkId: f.id, role: asOwner ? .owner : .walker, dogName: item.dog.name)
@@ -228,6 +231,7 @@ struct AppointmentCard: View {
             )
                 .presentationDetents([.large])
         }
+        .termsSheet($terms)
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
             Button("Annuleer afspraak", role: .destructive) { Task { await act("cancel") } }
         } message: {
@@ -236,6 +240,27 @@ struct AppointmentCard: View {
     }
 
     private struct FollowID: Identifiable { let id: String }
+
+    /// Live location as the server last said it (features.liveLocation).
+    private var liveLocation: Bool { ServerFeatures.shared.liveLocation }
+    /// A walk alone with the dog that waits while live location is off: Start and Accepteer wait, and
+    /// the note says why, on both sides (Appointment.waitsForLiveLocation).
+    private var walkWaitsForLiveLocation: Bool { item.waitsForLiveLocation(liveLocation: liveLocation) }
+    /// Whether this walk, running now, shares where the walker is: only a walk alone with the dog, with
+    /// the switch on (WalkStarter.sharesLocation). Only then is there anything to watch live.
+    private var sharesLocation: Bool { WalkStarter.sharesLocation(kind: item.kind, liveLocation: liveLocation) }
+
+    /// One calm line (LiveLocationNote): a walk alone that waits, on every such card for both sides; and
+    /// around the start, for the walker, that a first meeting needs no map.
+    @ViewBuilder
+    private var liveLocationNote: some View {
+        if let note = LiveLocationNote.make(for: item, asOwner: asOwner, liveLocation: liveLocation) {
+            Label(note.text, systemImage: note.symbol)
+                .font(.footnote)
+                .foregroundStyle(Palette.muted)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
 
     /// Contact details and the meeting place open with opacity and 8 points of movement; only fading with Reduce Motion.
     private var opening: AnyTransition {
@@ -335,14 +360,21 @@ struct AppointmentCard: View {
         HStack(spacing: 10) {
             if asOwner {
                 if item.status == "pending" {
+                    // Saying no always works; saying yes to a walk alone waits while live location is off.
                     Button("Weiger") { Task { await act("decline") } }.buttonStyle(.secondary)
                     Button("Accepteer") { Task { await act("accept") } }.buttonStyle(.primary)
+                        .disabled(!item.canAccept(liveLocation: liveLocation))
                 } else if !item.isCall, item.status == "completed" || (item.status == "accepted" && item.startsAt < .now) {
                     // Only after meeting in person: ID seen, and maybe solo walks from now on. Never after a call.
                     Button("Vertrouwen", systemImage: "hand.thumbsup.fill") { trustSheet = true }.buttonStyle(.secondary)
                 }
                 if item.walkStatus == "active", let id = item.walkId {
-                    Button("Kijk live mee", systemImage: "dot.radiowaves.left.and.right") { following = id }.buttonStyle(.ball)
+                    // "Kijk live mee" only for a walk that shares where they are; never for a first meeting.
+                    if sharesLocation {
+                        Button("Kijk live mee", systemImage: "dot.radiowaves.left.and.right") { following = id }.buttonStyle(.ball)
+                    } else {
+                        Button("Bekijk het rondje", systemImage: "figure.walk") { following = id }.buttonStyle(.ball)
+                    }
                 } else if item.walkStatus == "ended", item.feedbackGiven != true, let id = item.walkId {
                     Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
                 }
@@ -362,7 +394,7 @@ struct AppointmentCard: View {
                         Label(item.walkStatus == "active" ? L("Ga verder met je rondje") : L("Start het rondje"), systemImage: "figure.walk")
                     }
                     .buttonStyle(.ball)
-                    .disabled(busy || walk.isActive)
+                    .disabled(busy || walk.isActive || walkWaitsForLiveLocation)
                 } else if item.walkStatus == "ended", item.feedbackGiven != true, let id = item.walkId {
                     Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
                 }
@@ -387,6 +419,12 @@ struct AppointmentCard: View {
             }
             await model.refreshAppointments()
             if action == "accept" { await Reminders.askIfNeeded() }
+        } catch let error as APIError where error.needsTerms {
+            // The updated terms apply: the calm sheet first, then the yes to this request goes ahead.
+            terms = TermsRequest(model: model) { await act(action) }
+        } catch let error as APIError where error.liveLocationOff {
+            // Live location went off in the meantime: this walk alone waits. Calmly, not as an error.
+            await model.liveLocationPaused()
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
@@ -410,6 +448,10 @@ struct AppointmentCard: View {
         do {
             try await WalkStarter.start(item, model: model, walk: walk)
             Haptics.success(.start)
+        } catch let error as APIError where error.needsTerms {
+            terms = TermsRequest(model: model) { await start() }
+        } catch let error as APIError where error.liveLocationOff {
+            await model.liveLocationPaused()
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
@@ -499,13 +541,21 @@ struct TrustSheet: View {
     private func headline(_ saved: Saved) -> (String, String?) {
         if saved.solo {
             return (L("\(walker.firstName) mag nu zelfstandig met \(item.dog.name) op pad."),
-                    L("Je kijkt bij elk rondje live mee, en je kunt dit altijd weer uitzetten."))
+                    Self.soloText(liveLocation: ServerFeatures.shared.liveLocation))
         }
         if saved.idSeen {
             return (L("Je hebt het ID van \(walker.firstName) gezien."),
                     item.dog.isShelter ? nil : L("Zelfstandig wandelen kun je later altijd nog toestaan."))
         }
         return (L("Jullie lopen voorlopig samen."), nil)
+    }
+
+    /// Under the ladder after allowing solo walks. Watching live only while live location is on; while it
+    /// is off, a walk alone waits, and the same calm words as the website say so (requests.ladderTextSoloOff).
+    static func soloText(liveLocation: Bool) -> String {
+        liveLocation
+            ? L("Je kijkt bij elk rondje live mee, en je kunt dit altijd weer uitzetten.")
+            : L("Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten.")
     }
 
     private func ladder(_ saved: Saved) -> some View {

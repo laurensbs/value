@@ -111,6 +111,28 @@
         }
       }
     },
+    "Jullie lopen samen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're walking together"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paseáis juntos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous vous promenez ensemble"
+          }
+        }
+      }
+    },
     "Kennismaken" : {
       "localizations" : {
         "en" : {
@@ -129,6 +151,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faire connaissance"
+          }
+        }
+      }
+    },
+    "Live locatie staat uit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación en directo desactivada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Localisation en direct désactivée"
           }
         }
       }

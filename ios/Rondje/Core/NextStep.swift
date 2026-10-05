@@ -48,6 +48,9 @@ struct NextStepContext: Sendable {
     var snoozed: Set<String> = []
     /// Appointment ids whose meeting prep is done.
     var prepDone: Set<String> = []
+    /// Live location on the server (features.liveLocation). While it is off, a walk alone with the dog
+    /// does not start, so Guus does not offer to start one, and nothing is "live" to watch.
+    var liveLocation = true
 }
 
 extension NextStep {
@@ -115,10 +118,12 @@ extension NextStep {
         // a. A walk of your own dog happening right now (only for people who walk and have a dog).
         if c.role == .both {
             for item in c.incoming where item.walkStatus == "active" {
+                // "Kijk live mee" only for a walk that shares where they are (never a first meeting).
+                let live = WalkStarter.sharesLocation(kind: item.kind, liveLocation: c.liveLocation)
                 list.append(Candidate(step: NextStep(
                     id: "live.\(item.id)", mood: .happy,
                     text: L("\(item.dog.name) is nu op pad met \(walkerName(item))."),
-                    button: L("Kijk live mee"), action: .follow(item.id), snoozable: false
+                    button: live ? L("Kijk live mee") : L("Bekijk het rondje"), action: .follow(item.id), snoozable: false
                 )))
             }
         }
@@ -126,6 +131,7 @@ extension NextStep {
         // b. A walk that can start now.
         let startable = outgoing
             .filter { $0.canStart(now: c.now) && $0.walkStatus != "ended" && $0.walkStatus != "active" }
+            .filter { !WalkStarter.blockedByLiveLocation($0, liveLocation: c.liveLocation) }
             .sorted { $0.startsAt < $1.startsAt }
         for item in startable {
             let at = when(item.startsAt, c)

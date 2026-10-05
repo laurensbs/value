@@ -10,6 +10,8 @@ struct DogDetailView: View {
     @State private var requestKind: RequestFlow.Kind?
     @State private var reporting = false
     @State private var quizOpen = false
+    /// The updated terms apply: after the yes, the page loads again and the request buttons are back.
+    @State private var terms: TermsRequest?
 
     var body: some View {
         ScrollView {
@@ -48,7 +50,9 @@ struct DogDetailView: View {
         }
         .safeAreaInset(edge: .bottom) { actionBar }
         .task { await load() }
-        .sheet(item: $requestKind) { kind in
+        // Loads again after the request sheet, also when nothing was sent: the server may have said that
+        // a walk alone waits for live location, and then the page follows.
+        .sheet(item: $requestKind, onDismiss: { Task { await load() } }) { kind in
             if let detail {
                 RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind, host: detail.host) { await load() }
                     .presentationDetents([.large])
@@ -63,6 +67,7 @@ struct DogDetailView: View {
         .sheet(isPresented: $quizOpen, onDismiss: { Task { await load() } }) {
             NavigationStack { QuizGameView(mode: .gate) }
         }
+        .termsSheet($terms)
     }
 
     private var look: DogLook { detail?.dog.look ?? preview?.look ?? .sample }
@@ -192,6 +197,19 @@ struct DogDetailView: View {
         }
     }
 
+    /// The updated terms apply and this person has not agreed yet ("needs-terms", before the quiz).
+    private func needsTerms(_ d: DogDetail) -> Bool {
+        d.canRequest.meet == "needs-terms" || d.canRequest.solo == "needs-terms"
+    }
+
+    /// While live location is off, a walk alone cannot be asked for ('live-location-off' in canRequest.solo).
+    /// Said calmly to someone who walked with this dog before, so a missing "Zelfstandig rondje" is no
+    /// riddle; someone new simply plans a first meeting, as always.
+    private func soloPaused(_ d: DogDetail) -> Bool {
+        d.canRequest.solo == LiveLocationPause.reason
+            && model.appointments.outgoing.contains { $0.dog.id == d.dog.id && ($0.kind == "solo" || $0.status == "completed") }
+    }
+
     /// The safety quiz comes before any request: then one friendly button instead of the form.
     /// The server says so too ("needs-quiz"), also to an app that does not know yet.
     private func needsQuiz(_ d: DogDetail) -> Bool {
@@ -202,11 +220,16 @@ struct DogDetailView: View {
     private var actionBar: some View {
         if let d = detail, !d.isMine, !d.host.isShelter {
             VStack(spacing: 8) {
-                if needsQuiz(d) {
+                if needsTerms(d) {
+                    TermsGate { terms = TermsRequest(model: model) { await load() } }
+                } else if needsQuiz(d) {
                     QuizGate { quizOpen = true }
                 } else {
                     if let reason = d.canRequest.meet {
                         Text(reasonText(reason)).font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+                    } else if soloPaused(d) {
+                        Label(LiveLocationPause.note, systemImage: "location.slash")
+                            .font(.footnote).foregroundStyle(Palette.muted)
                     }
                     HStack(spacing: 10) {
                         if d.canRequest.solo == nil {

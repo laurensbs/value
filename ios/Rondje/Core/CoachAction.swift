@@ -113,7 +113,7 @@ enum CoachRouter {
             }
         case .follow(let id):
             if let item = all.first(where: { $0.id == id }) {
-                FollowWalkView(walkId: item.walkId ?? "", dogName: item.dog.name)
+                FollowWalkView(walkId: item.walkId ?? "", dogName: item.dog.name, kind: item.kind)
             }
         case .quiz:
             NavigationStack { QuizView() }

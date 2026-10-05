@@ -7,6 +7,10 @@ struct WalkActivityAttributes: ActivityAttributes {
         var distanceM: Int
         var plannedEnd: Date
         var overdue: Bool
+        /// False while this walk shares no location: no distance, and no "the owner watches along".
+        var liveLocation: Bool? = nil
+        /// A first meeting: they walk together, so the Lock Screen says that instead of "live location is off".
+        var together: Bool? = nil
     }
 
     var walkId: String
