@@ -30,7 +30,7 @@ const DOGS: DogSeed[] = [
     id: 'demo-saar', ownerId: 'demo-ans', name: 'Saar', breed: 'Labrador', sex: 'female', ageYears: 9, size: 'large',
     energy: 'calm', level: 'starter', walkMinutes: 30, country: 'NL', city: 'Utrecht', lat: 52.095, lng: 5.13,
     story: 'Saar is gewend aan lange rondjes langs de Singel en mist ze. Ze is rustig, trekt nooit en blijft graag even staan bij de eendjes.',
-    needs: 'Twee extra rondjes per week houden Saar fit tot Ans weer verder kan lopen.',
+    needs: 'Twee extra rondjes per week houden Saar fit en vrolijk.',
     traits: ['Heel rustig', 'Trekt nooit', 'Dol op eendjes'], treats: 'own', treatsNote: 'Alleen de brokjes uit het blikje bij de deur.',
     provides: ['bags', 'leash', 'treats'], insuranceConfirmed: true, healthConfirmed: true,
     avatar: { fur: '#6e4632', ears: '#583624', muzzle: '#8d5e44', earStyle: 'floppy', collar: '#c0392b' },
