@@ -2885,7 +2885,8 @@
       "moderation": "Moderatie",
       "shelters": "Opvangen",
       "tips": "Tips",
-      "numbers": "Cijfers"
+      "numbers": "Cijfers",
+      "sources": "Bronnen"
     },
     "tiles": {
       "label": "Naar een onderdeel",
@@ -3017,7 +3018,48 @@
       "numbers": {
         "title": "Cijfers",
         "lede": "Hoe Rondje Mee groeit, waar nieuwe mensen vandaan komen en hoe alles is ingesteld.",
-        "weekly": "Cijfers per week in de lanceerhub"
+        "weekly": "Cijfers per week in de lanceerhub",
+        "bySource": "Per week, bron en rol"
+      },
+      "sources": {
+        "title": "Bronnen",
+        "lede": "Waar nieuwe mensen vandaan komen, per week en per rol, en hoeveel echte honden erbij kwamen. Alleen aantallen, de laatste 8 weken.",
+        "weeksTitle": "Aanmeldingen per week",
+        "sourcesTitle": "Per bron, 8 weken samen",
+        "detailTitle": "Per week en bron",
+        "week": "Week {week}",
+        "together": "Samen",
+        "none": "Geen aanmeldingen in deze 8 weken.",
+        "direct": "Direct",
+        "invite": "Uitnodiging",
+        "col": {
+          "week": "Week",
+          "source": "Bron",
+          "total": "Totaal",
+          "walker": "Wandelaar",
+          "owner": "Eigenaar",
+          "shelter": "Opvang",
+          "dogs": "Nieuwe honden"
+        },
+        "notesTitle": "Zo tellen we",
+        "notes": {
+          "signup": "Een aanmelding telt zodra iemand het profiel afmaakt. De bron is de code van de link waarmee iemand binnenkwam (/r/CODE of /aanmelden?bron=…); de browser onthoudt die 30 dagen.",
+          "sources": "Direct: zonder code. Uitnodiging: via de eigen link van iemand die al meedoet; die codes blijven privé.",
+          "roles": "Wie wandelt én een hond heeft, telt bij allebei; het totaal telt iedereen één keer. Opvang: wie bij een opvang hoort of zich als opvang aanmeldde. De rol is zoals die nu in het profiel staat.",
+          "real": "Voorbeelddata en beheerders tellen niet mee. Nieuwe honden: echte honden die online kwamen, zonder concepten en voorbeeldhonden."
+        },
+        "fund": {
+          "title": "Inzamelactie",
+          "progress": "{raised} van {goal}",
+          "percent": "{percent}% van het doel",
+          "updated": "Bijgewerkt op {date}",
+          "notUpdated": "Geen datum ingevuld",
+          "missing": "Geen doel ingevuld.",
+          "howTitle": "Zo werk je het bedrag bij",
+          "how": "Kijk op de actiepagina hoeveel er binnen is. Zet dat bedrag in hele euro's bij <code>raised</code> in <code>web/content/crowdfunding.json</code>, en de datum van vandaag bij <code>updated</code> (JJJJ-MM-DD). Dat gaat via een pull request; na het live zetten staat het nieuwe bedrag hier en overal waar de actie te zien is.",
+          "manual": "Het bedrag wordt met de hand bijgewerkt. Het echte bedrag staat altijd op de actiepagina.",
+          "open": "Open de actiepagina"
+        }
       }
     }
   },

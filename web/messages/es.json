@@ -2885,7 +2885,8 @@
       "moderation": "Moderación",
       "shelters": "Protectoras",
       "tips": "Sugerencias",
-      "numbers": "Cifras"
+      "numbers": "Cifras",
+      "sources": "Fuentes"
     },
     "tiles": {
       "label": "Ir a una sección",
@@ -3017,7 +3018,48 @@
       "numbers": {
         "title": "Cifras",
         "lede": "Cómo crece Rondje Mee, de dónde viene la gente nueva y cómo está configurado todo.",
-        "weekly": "Cifras por semana en el centro de lanzamiento"
+        "weekly": "Cifras por semana en el centro de lanzamiento",
+        "bySource": "Por semana, fuente y rol"
+      },
+      "sources": {
+        "title": "Fuentes",
+        "lede": "De dónde llegan las personas nuevas, por semana y por rol, y cuántos perros reales se añadieron. Solo cifras, las últimas 8 semanas.",
+        "weeksTitle": "Registros por semana",
+        "sourcesTitle": "Por fuente, 8 semanas en total",
+        "detailTitle": "Por semana y fuente",
+        "week": "Semana {week}",
+        "together": "En total",
+        "none": "Sin registros en estas 8 semanas.",
+        "direct": "Directo",
+        "invite": "Invitación",
+        "col": {
+          "week": "Semana",
+          "source": "Fuente",
+          "total": "Total",
+          "walker": "Paseador",
+          "owner": "Dueño",
+          "shelter": "Protectora",
+          "dogs": "Perros nuevos"
+        },
+        "notesTitle": "Cómo contamos",
+        "notes": {
+          "signup": "Un registro cuenta cuando alguien completa su perfil. La fuente es el código del enlace por el que entró (/r/CODE o /aanmelden?bron=…); el navegador lo recuerda 30 días.",
+          "sources": "Directo: sin código. Invitación: por el enlace personal de alguien que ya participa; esos códigos son privados.",
+          "roles": "Quien pasea y tiene perro cuenta en ambos; el total cuenta a cada persona una vez. Protectora: quien pertenece a una protectora o se registró como protectora. El rol es el que figura ahora en el perfil.",
+          "real": "Los datos de ejemplo y los administradores no cuentan. Perros nuevos: perros reales que se publicaron, sin borradores ni perros de ejemplo."
+        },
+        "fund": {
+          "title": "Recaudación",
+          "progress": "{raised} de {goal}",
+          "percent": "{percent} % del objetivo",
+          "updated": "Actualizado el {date}",
+          "notUpdated": "Sin fecha",
+          "missing": "No hay objetivo.",
+          "howTitle": "Cómo actualizar el importe",
+          "how": "Mira en la página de la campaña cuánto se ha recaudado. Pon ese importe en euros enteros en <code>raised</code> de <code>web/content/crowdfunding.json</code>, y la fecha de hoy en <code>updated</code> (AAAA-MM-DD). Se hace con un pull request; una vez publicado, el nuevo importe aparece aquí y en todos los sitios donde se muestra la campaña.",
+          "manual": "El importe se actualiza a mano. El importe real está siempre en la página de la campaña.",
+          "open": "Abrir la página de la campaña"
+        }
       }
     }
   },
