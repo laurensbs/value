@@ -84,6 +84,12 @@ struct AddDogView: View {
 
     private let provideOptions = ["bags", "leash", "harness", "treats", "water", "towel"]
 
+    /// Under the dog's story (DPIA maatregel M18): the story is on the public dog page, so it is about
+    /// the dog and gives away nothing about the owner. The same words as the website's dog form.
+    static var storyHint: String {
+        L("Dit verhaal is voor iedereen te zien. Schrijf over de hond, niet over jezelf: geen naam, adres of tijden waarop je thuis bent.")
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -118,6 +124,7 @@ struct AddDogView: View {
                 }
                 Section("Over de hond") {
                     TextField("Verhaal: wie is deze hond, en voor wie is het?", text: $story, axis: .vertical).lineLimit(3...6)
+                        .fieldNote(Self.storyHint)
                     TextField("Waar moet een wandelaar op letten?", text: $needs, axis: .vertical).lineLimit(2...4)
                     TextField("Kenmerken, met komma's (lief, snuffelaar)", text: $traits)
                 }

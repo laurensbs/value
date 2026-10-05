@@ -74,6 +74,29 @@ extension View {
     func screenBackground() -> some View {
         background(Palette.paper.ignoresSafeArea())
     }
+
+    /// A calm line right under a field or switch, like a hint under a box on the website. VoiceOver reads it
+    /// as the control's hint (the website's aria-describedby), never as part of its label, and only once.
+    func fieldNote(_ note: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            accessibilityHint(Text(verbatim: note))
+            FieldNoteText(note: note)
+        }
+    }
+}
+
+/// The text of `fieldNote`: small and muted, seen on screen but not a second VoiceOver stop.
+struct FieldNoteText: View {
+    let note: String
+
+    var body: some View {
+        Text(verbatim: note)
+            .font(.footnote)
+            .foregroundStyle(Palette.muted)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityHidden(true)
+    }
 }
 
 struct Chip: View {
