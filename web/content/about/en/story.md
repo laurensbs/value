@@ -13,6 +13,6 @@ That is why I want to give something back. Many people spend too much time indoo
 
 A walk does not solve everything, and Rondje Mee is not a treatment. It is a good, regular moment in the week.
 
-I develop Rondje Mee myself, and I think every step through. Safety first: you always meet first, the owner sees your ID in person, and only then do you walk on your own.
+I develop Rondje Mee myself, and I think every step through. Safety first: you always meet first and the owner sees your ID in person. Walking the dog on your own only comes after that, if the owner wants it and once live location is switched on.
 
 — Laurens

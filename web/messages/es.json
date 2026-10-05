@@ -960,9 +960,9 @@
     "flyer": "Imprime un folleto para tu barrio",
     "email": "Correo",
     "emailNotifications": "Enviarme un correo con los avisos importantes",
-    "emailNotificationsHint": "Una solicitud nueva, una cita aceptada o un paseo que se alarga. Desactivado: solo ves los avisos en Rondje Mee.",
+    "emailNotificationsHint": "Por ejemplo, una solicitud nueva o una cita aceptada. Desactivado: solo ves los avisos en Rondje Mee.",
     "pushNotifications": "Notificaciones push en este navegador",
-    "pushHint": "Un aviso cuando llega un mensaje, se acepta una solicitud o un paseo se alarga.",
+    "pushHint": "Por ejemplo, cuando llega un mensaje o se acepta una solicitud.",
     "pushBlocked": "Tu navegador bloquea las notificaciones de Rondje Mee. Actívalas en los ajustes del navegador.",
     "progressTitle": "Tu progreso",
     "weeklyGoal": "Objetivo semanal",
@@ -1868,7 +1868,7 @@
     "why3": "Rondje Mee no es asistencia ni terapia. ¿No te encuentras bien? En la página de ayuda verás adónde acudir.",
     "howTitle": "Cómo funciona",
     "how": {
-      "meet": "La primera vez siempre conoces al propietario y al perro juntos. Solo después puedes pasear a solas, si el propietario quiere.",
+      "meet": "La primera vez siempre conoces al propietario y al perro juntos. Pasear a solas llega después, si el propietario quiere y cuando la ubicación en directo esté activada.",
       "adults": "Todas las personas que pasean tienen 18 años o más y primero hacen un breve test de seguridad.",
       "shelters": "En las protectoras se pasea en paseos en grupo supervisados, en los horarios que elige la protectora.",
       "free": "Rondje Mee es gratis. Nadie pide ni paga dinero por un paseo."

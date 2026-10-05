@@ -960,9 +960,9 @@
     "flyer": "Imprimer un flyer pour votre quartier",
     "email": "E-mail",
     "emailNotifications": "M'envoyer un e-mail pour les notifications importantes",
-    "emailNotificationsHint": "Une nouvelle demande, un rendez-vous accepté ou une promenade qui dure. Désactivé : vous ne voyez les notifications que dans Rondje Mee.",
+    "emailNotificationsHint": "Par exemple une nouvelle demande ou un rendez-vous accepté. Désactivé : vous ne voyez les notifications que dans Rondje Mee.",
     "pushNotifications": "Notifications push dans ce navigateur",
-    "pushHint": "Une alerte pour un nouveau message, une demande acceptée ou une promenade qui dure.",
+    "pushHint": "Par exemple pour un nouveau message ou une demande acceptée.",
     "pushBlocked": "Votre navigateur bloque les notifications de Rondje Mee. Activez-les dans les réglages du navigateur.",
     "progressTitle": "Votre progression",
     "weeklyGoal": "Objectif de la semaine",
@@ -1868,7 +1868,7 @@
     "why3": "Rondje Mee n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
     "howTitle": "Comment ça marche",
     "how": {
-      "meet": "La première fois, vous rencontrez toujours le propriétaire et le chien ensemble. Ensuite seulement, vous pouvez promener seul, si le propriétaire le souhaite.",
+      "meet": "La première fois, vous rencontrez toujours le propriétaire et le chien ensemble. Promener seul ne vient qu’ensuite, si le propriétaire le souhaite et une fois la localisation en direct activée.",
       "adults": "Toute personne qui promène a 18 ans ou plus et passe d'abord un court quiz de sécurité.",
       "shelters": "Dans les refuges, on promène lors de promenades en groupe encadrées, aux moments choisis par le refuge.",
       "free": "Rondje Mee est gratuit. Personne ne demande ni ne paie d'argent pour une promenade."

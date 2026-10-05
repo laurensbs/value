@@ -960,9 +960,9 @@
     "flyer": "Print een flyer voor je buurt",
     "email": "E-mail",
     "emailNotifications": "Stuur me een e-mail bij belangrijke meldingen",
-    "emailNotificationsHint": "Een nieuwe aanvraag, een geaccepteerde afspraak of een rondje dat uitloopt. Uit: je ziet meldingen alleen in Rondje Mee.",
+    "emailNotificationsHint": "Bijvoorbeeld een nieuwe aanvraag of een geaccepteerde afspraak. Uit: je ziet meldingen alleen in Rondje Mee.",
     "pushNotifications": "Pushmeldingen in deze browser",
-    "pushHint": "Een melding bij een nieuw bericht, een geaccepteerde afspraak of een rondje dat uitloopt.",
+    "pushHint": "Bijvoorbeeld bij een nieuw bericht of een geaccepteerde afspraak.",
     "pushBlocked": "Je browser blokkeert meldingen voor Rondje Mee. Zet ze aan in de instellingen van je browser.",
     "progressTitle": "Jouw voortgang",
     "weeklyGoal": "Weekdoel",
@@ -1868,7 +1868,7 @@
     "why3": "Rondje Mee is geen hulpverlening of therapie. Gaat het niet goed met je? Op de hulppagina vind je waar je terechtkunt.",
     "howTitle": "Hoe het werkt",
     "how": {
-      "meet": "De eerste keer ontmoet je de eigenaar en de hond altijd samen. Pas daarna mag je alleen wandelen, als de eigenaar dat wil.",
+      "meet": "De eerste keer ontmoet je de eigenaar en de hond altijd samen. Alleen wandelen kan pas daarna, als de eigenaar dat wil en zodra live locatie aan staat.",
       "adults": "Iedereen die wandelt is 18 jaar of ouder en doet eerst een korte veiligheidsquiz.",
       "shelters": "Bij opvangen wandel je in begeleide groepswandelingen, op momenten die de opvang kiest.",
       "free": "Rondje Mee is gratis. Niemand vraagt of betaalt geld voor een wandeling."
