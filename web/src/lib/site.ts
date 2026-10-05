@@ -45,7 +45,12 @@ export function adminAccess(
   return user.emailVerified || !canEmail ? 'admin' : 'confirm'
 }
 
-export const TERMS_VERSION = '0.2'
+/**
+ * The terms someone accepts when they create a profile, stored with it (profile.termsVersion). Equal
+ * to `version` in content/legal/<locale>/terms.md (checked in legal-placeholders.test.ts). Nobody is asked
+ * to accept again when it goes up: there is no re-accept step yet.
+ */
+export const TERMS_VERSION = '0.3'
 
 const SAME_SITE = 'https://same-site.invalid'
 

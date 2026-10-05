@@ -9,13 +9,15 @@ import { claimRun } from '@/server/cron'
 
 /** Private feedback after a walk is kept for a year (privacy statement, section 10). */
 const FEEDBACK_RETENTION_DAYS = 365
+/** Reports are kept until two years after they were closed (privacy statement, section 10). */
+const REPORT_RETENTION_DAYS = 2 * 365
 const OPEN_TIPS = ['new', 'contacted']
 const daysAgo = (days: number) => new Date(Date.now() - days * 24 * 60 * 60_000)
 
 /**
  * Daily housekeeping (Vercel Cron): delete walk routes, end positions and walk photos (also from
  * Vercel Blob) after 30 days unless an open report needs them, expire old pending requests, close
- * walks left running, and delete old shelter tips, chat messages and private feedback.
+ * walks left running, and delete old shelter tips, chat messages, private feedback and closed reports.
  */
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET
@@ -77,6 +79,26 @@ export async function GET(request: Request) {
     )
     .returning({ id: s.feedback.id })
 
+  // Closed reports go two years after they were closed, with their lines in the audit log (who made
+  // or closed it, and the resolution). Open and reviewing reports always stay. A closed report
+  // without a closing date counts from the day it was made.
+  const reportCutoff = daysAgo(REPORT_RETENTION_DAYS)
+  const reports = await db
+    .delete(s.report)
+    .where(
+      and(
+        notInArray(s.report.status, OPEN_REPORT),
+        or(lt(s.report.resolvedAt, reportCutoff), and(isNull(s.report.resolvedAt), lt(s.report.createdAt, reportCutoff))),
+      ),
+    )
+    .returning({ id: s.report.id })
+  const reportLines = reports.length
+    ? await db
+        .delete(s.auditLog)
+        .where(and(eq(s.auditLog.targetType, 'report'), inArray(s.auditLog.targetId, reports.map((r) => r.id))))
+        .returning({ id: s.auditLog.id })
+    : []
+
   return NextResponse.json({
     routesDeletedForWalks: walks.walks,
     walkPointsDeleted: walks.points,
@@ -88,5 +110,7 @@ export async function GET(request: Request) {
     tipsDeleted: tips.length,
     chatMessagesDeleted: chats.length,
     feedbackDeleted: feedback.length,
+    reportsDeleted: reports.length,
+    reportLogLinesDeleted: reportLines.length,
   })
 }

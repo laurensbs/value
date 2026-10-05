@@ -1,7 +1,7 @@
 ---
 title: Algemene voorwaarden
 description: "De voorwaarden voor wandelaars, eigenaren en opvangen: wie mee mag doen, eerst kennismaken, geen geld, aansprakelijkheid en klachten."
-version: "0.2"
+version: "0.3"
 updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
@@ -40,7 +40,7 @@ Je moet **18 jaar of ouder** zijn en Rondje Mee als particulier voor jezelf gebr
 - Je hebt één account en deelt het met niemand. Houd je inloggegevens geheim en meld misbruik meteen.
 - Je bent verantwoordelijk voor wat er via je account gebeurt, tenzij je dat redelijkerwijs niet kon voorkomen.
 
-Anderen zien op je profiel onder meer je voornaam, foto en ongeveer waar je woont (afgerond op zo'n 500 meter). Je telefoonnummer zien ze pas als een verzoek is geaccepteerd. Zie de Privacyverklaring.
+Anderen zien op je profiel onder meer je voornaam, foto en ongeveer waar je woont (afgerond op zo'n 500 meter). Je telefoonnummer en e-mailadres zien ze pas als een verzoek is geaccepteerd. Meld je je aan voor een groepswandeling, dan ziet de opvang je telefoonnummer meteen. Zie de Privacyverklaring.
 
 ## 5. Rollen
 
@@ -53,7 +53,7 @@ Je kunt meer dan één rol hebben.
 ## 6. Verzoeken, kennismaking en solo-vertrouwen
 
 1. **Verzoek.** Een wandelaar vraagt via Rondje Mee om een kennismaking of wandeling. De eigenaar of opvang accepteert of weigert. Niemand is verplicht te accepteren.
-2. **Contactgegevens.** Na acceptatie zien beide kanten elkaars telefoonnummer en de afgeschermde gegevens die nodig zijn, zoals de afspraakplek. Gebruik ze alleen voor de wandeling.
+2. **Contactgegevens.** Na acceptatie zien beide kanten elkaars telefoonnummer en e-mailadres, en de afgeschermde gegevens die nodig zijn, zoals de afspraakplek. Gebruik ze alleen voor de wandeling.
 3. **Kennismaking.** De eerste ontmoeting is altijd een kennismaking, met de eigenaar of iemand van de opvang erbij.
 4. **ID-check.** Bij de kennismaking laat de wandelaar een geldig identiteitsbewijs zien. De eigenaar of opvang kijkt of naam, foto en leeftijd kloppen en vinkt dat aan in de app. Rondje Mee bewaart geen kopie. Maak er ook zelf geen foto of kopie van.
 5. **Solo-vertrouwen.** Alleen wandelen met een hond mag pas als de eigenaar of opvang daar in de app uitdrukkelijk toestemming voor geeft. Dat geldt alleen voor die ene hond en kan altijd worden ingetrokken.
@@ -73,7 +73,7 @@ Rondje Mee is gratis voor iedereen.
 - Poepzakjes, lijn, tuig, snoepjes en water komen van de eigenaar of opvang, zoals op het hondenprofiel staat.
 - Vraagt iemand om geld, een IBAN of een betaling via een link? Ga er niet op in en meld het ons.
 - Berichten bij verzoeken worden automatisch gecontroleerd op betaalverzoeken, rekeningnummers en links. Bij een treffer krijg je een waarschuwing en kijkt een medewerker mee.
-- **Vrijwillige steun aan Rondje Mee.** Staat er op onze website een manier om Rondje Mee te steunen (bijvoorbeeld via Patreon)? Dan is dat een vrijwillige bijdrage zonder tegenprestatie: je krijgt er geen voorrang, extra functies of andere voordelen voor, en het heeft geen invloed op koppelen, zichtbaarheid of moderatie. Voor de betaling gelden ook de voorwaarden van dat platform. Een bijdrage is niet fiscaal aftrekbaar.
+- **Vrijwillige steun aan Rondje Mee.** Je kunt Rondje Mee steunen met een gift via de inzamelactie op Whydonate. Het geld gaat naar Laurens Bos, de maker van Rondje Mee, voor de kosten van Rondje Mee. Een vaste maandelijkse bijdrage is er nu niet. Een gift is vrijwillig en zonder tegenprestatie: je krijgt er geen voorrang, extra functies of andere voordelen voor, en het heeft geen invloed op koppelen, zichtbaarheid of moderatie. Voor de betaling gelden ook de voorwaarden van Whydonate. Rondje Mee is geen stichting en geen goed doel met ANBI-status, dus een gift geeft geen belastingvoordeel. Komt er later een andere manier om te steunen, dan geldt daarvoor hetzelfde.
 
 ## 9. Wat we van iedereen verwachten
 

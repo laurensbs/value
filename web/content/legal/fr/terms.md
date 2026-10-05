@@ -1,7 +1,7 @@
 ---
 title: Conditions d'utilisation
 description: "Les conditions pour promeneurs, propriétaires et refuges : qui peut participer, se rencontrer d'abord, pas d'argent, responsabilité et plaintes."
-version: "0.2"
+version: "0.3"
 updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -40,7 +40,7 @@ Vous devez avoir **18 ans ou plus** et utiliser Rondje Mee en tant que particuli
 - Vous avez un seul compte et ne le partagez avec personne. Gardez vos identifiants secrets et signalez immédiatement tout abus.
 - Vous êtes responsable de ce qui se passe via votre compte, sauf si vous ne pouviez raisonnablement pas l'empêcher.
 
-Les autres voient notamment votre prénom, votre photo et l'endroit approximatif où vous habitez (arrondi à environ 500 mètres). Ils ne voient votre numéro de téléphone qu'après l'acceptation d'une demande. Voir la Politique de confidentialité.
+Les autres voient notamment votre prénom, votre photo et l'endroit approximatif où vous habitez (arrondi à environ 500 mètres). Ils ne voient votre numéro de téléphone et votre adresse e-mail qu'après l'acceptation d'une demande. Si vous vous inscrivez à une promenade de groupe, le refuge voit tout de suite votre numéro de téléphone. Voir la Politique de confidentialité.
 
 ## 5. Rôles
 
@@ -53,7 +53,7 @@ Vous pouvez avoir plusieurs rôles.
 ## 6. Demandes, première rencontre et confiance solo
 
 1. **Demande.** Le promeneur demande via Rondje Mee une première rencontre ou une promenade. Le propriétaire ou le refuge accepte ou refuse. Personne n'est obligé d'accepter.
-2. **Coordonnées.** Après acceptation, chacun voit le numéro de téléphone de l'autre et les informations protégées nécessaires, comme le lieu de rendez-vous. Utilisez-les uniquement pour la promenade.
+2. **Coordonnées.** Après acceptation, chacun voit le numéro de téléphone et l'adresse e-mail de l'autre, ainsi que les informations protégées nécessaires, comme le lieu de rendez-vous. Utilisez-les uniquement pour la promenade.
 3. **Première rencontre.** La première fois est toujours une première rencontre, en présence du propriétaire ou d'un membre du refuge.
 4. **Vérification d'identité.** Lors de la première rencontre, le promeneur montre une pièce d'identité valable. Le propriétaire ou le refuge vérifie que le nom, la photo et l'âge correspondent, puis coche une case dans l'application. Rondje Mee ne conserve aucune copie. N'en faites pas non plus de photo ou de copie vous-même.
 5. **Confiance solo.** Promener un chien seul n'est permis qu'après l'autorisation expresse du propriétaire ou du refuge dans l'application. Elle ne vaut que pour ce chien précis et peut être retirée à tout moment.
@@ -73,7 +73,7 @@ Rondje Mee est gratuit pour tout le monde.
 - Les sacs à crottes, la laisse, le harnais, les friandises et l'eau sont fournis par le propriétaire ou le refuge, comme indiqué sur le profil du chien.
 - Si quelqu'un vous demande de l'argent, un numéro IBAN ou un paiement via un lien, ne répondez pas et signalez-le-nous.
 - Les messages joints aux demandes sont contrôlés automatiquement pour repérer les demandes de paiement, les numéros de compte et les liens. En cas de détection, vous recevez un avertissement et un membre de l'équipe examine le message.
-- **Soutien volontaire à Rondje Mee.** Si notre site propose un moyen de soutenir Rondje Mee (par exemple via Patreon), il s'agit d'une contribution volontaire sans contrepartie : vous n'obtenez ni priorité, ni fonctions supplémentaires, ni autre avantage, et cela n'a aucune influence sur les mises en relation, la visibilité ou la modération. Les conditions de cette plateforme s'appliquent aussi au paiement. Une contribution n'est pas déductible des impôts.
+- **Soutien volontaire à Rondje Mee.** Vous pouvez soutenir Rondje Mee par un don via la collecte sur Whydonate. L'argent va à Laurens Bos, le créateur de Rondje Mee, pour les frais de Rondje Mee. Il n'existe pas de contribution mensuelle fixe pour le moment. Un don est volontaire et sans contrepartie : vous n'obtenez ni priorité, ni fonctions supplémentaires, ni autre avantage, et cela n'a aucune influence sur les mises en relation, la visibilité ou la modération. Les conditions de Whydonate s'appliquent aussi au paiement. Rondje Mee n'est ni une fondation ni un organisme d'intérêt général reconnu, donc un don ne donne droit à aucun avantage fiscal. Si un autre moyen de soutenir Rondje Mee est ajouté plus tard, la même règle s'applique.
 
 ## 9. Ce que nous attendons de chacun
 

@@ -25,6 +25,8 @@ Deze checklist hoort bij de conceptdocumenten van Rondje. Hij somt per land alle
 
 **Sinds 5 oktober 2026** staan deze markeringen en placeholders niet meer zichtbaar in de teksten op de site: ze zijn opgelost met neutrale formuleringen of weggehaald, en de aanbieder is Laurens Bos (bereikbaar via het contactadres, zonder adres of KvK-nummer). De test `web/src/lib/legal-placeholders.test.ts` bewaakt dat er geen nieuwe bijkomen. De inhoudelijke punten hieronder blijven open tot de jurist ze heeft getoetst.
 
+**Tweede ronde, 5 oktober 2026:** de teksten zeggen niets meer als feit dat (nog) niet klopt. De DPIA staat er als "nog niet klaar", Vercel Web Analytics (zonder cookies) staat in de privacy- en cookieverklaring, de regio's en doorgiftegronden van Vercel, Neon en Resend zijn nagekeken, het profiel noemt de geboortedatum en precies wat eigenaren en opvangen van een wandelaar zien, meldingen worden echt 2 jaar na afsluiten verwijderd (`web/src/app/api/cron/cleanup/route.ts`), en de steun loopt via Whydonate. De voorwaarden zijn nu versie 0.3. Alle wijzigingen, bronnen en open vragen: `~/Projecten/Rondje/_werk/jurist/wijzigingen-2026-10-05.md` (buiten de repo).
+
 **Belangrijk:** alle teksten zijn geschreven zonder toegang tot actuele bronnen (geen webonderzoek). Wetsartikelen, nummers en drempels moeten allemaal worden nagekeken.
 
 Prioriteit: **H** = hoog (vóór lancering oplossen), **M** = middel, **L** = laag.

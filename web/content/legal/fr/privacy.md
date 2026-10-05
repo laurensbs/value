@@ -1,7 +1,7 @@
 ---
 title: Politique de confidentialité
 description: "Les données personnelles que nous traitons, pourquoi et combien de temps, qui les voit et quels sont vos droits. Votre adresse exacte reste privée."
-version: "0.3"
+version: "0.4"
 updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -20,18 +20,18 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}.
 
 - Nous collectons le moins de données possible.
 - Votre adresse exacte n'est jamais publique. Les autres voient seulement l'endroit approximatif où vous habitez (arrondi à environ 500 mètres).
-- L'autre personne ne voit votre numéro de téléphone qu'après l'acceptation d'une demande.
+- L'autre personne ne voit votre numéro de téléphone et votre adresse e-mail qu'après l'acceptation d'une demande. Si vous vous inscrivez à une promenade de groupe d'un refuge, ce refuge voit tout de suite votre numéro de téléphone.
 - Nous ne partageons votre position que pendant une promenade que vous démarrez vous-même. Nous supprimons les trajets après 30 jours.
 - Nous ne conservons **aucune copie** de votre pièce d'identité.
 - Vos bilans d'humeur restent **uniquement sur votre téléphone**. Nous ne les recevons jamais.
-- Pas de publicité, pas de cookies de traçage, et nous ne vendons jamais de données.
+- Pas de publicité, pas de cookies de traçage, et nous ne vendons jamais de données. Nous comptons les visites du site sans cookies et sans profils de visiteurs.
 
 ## 3. Quelles données traitons-nous ?
 
 **Compte et profil**
 
 - adresse e-mail, mot de passe (conservé sous forme hachée) ou clé d'accès (*passkey* ; nous ne conservons que la clé publique), ou votre compte Google ou Apple si vous vous connectez ainsi ;
-- prénom, photo de profil, année de naissance, pays et ville ;
+- prénom, photo de profil, date de naissance (les autres ne voient que votre tranche d'âge), pays et ville ;
 - endroit approximatif où vous habitez, arrondi à environ 500 mètres ;
 - courte présentation, expérience avec les chiens, langues ;
 - numéro de téléphone.
@@ -73,7 +73,8 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}.
 
 **Données techniques**
 
-- adresse IP, type d'appareil et de navigateur, heures de connexion, messages d'erreur et journaux de sécurité.
+- adresse IP, type d'appareil et de navigateur, heures de connexion, messages d'erreur et journaux de sécurité ;
+- statistiques de visite du site, sans cookies : la page consultée, le site d'où vous venez, le pays, la région et la ville, et le type d'appareil, de navigateur et de système d'exploitation (voir l'article 8).
 
 **Refuges**
 
@@ -105,6 +106,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}.
 | Vérifier les refuges | Contrat avec le refuge, et intérêt légitime : éviter les faux comptes |
 | Traiter les recommandations et votes pour des refuges : contacter nous-mêmes les refuges et vous prévenir quand ils nous rejoignent | Intérêt légitime : plus de refuges et de chiens sur Rondje Mee. Vous pouvez toujours vous y opposer |
 | Sécurité, correction d'erreurs, sauvegardes | Intérêt légitime : une plateforme sûre et fonctionnelle |
+| Statistiques de visite du site : quelles pages sont consultées et comment les visiteurs nous trouvent, par exemple via une affiche ou Instagram | Intérêt légitime : améliorer le site et la façon dont nous présentons Rondje Mee. Sans cookies et sans profils de visiteurs |
 | E-mails de service (par exemple pour une nouvelle demande ou une modification des conditions) | Exécution du contrat |
 | Fonctions facultatives, comme les notifications push ou la connexion avec Google ou Apple | Consentement (que vous pouvez retirer à tout moment) ou exécution du contrat |
 | Répondre aux demandes de la police, de la justice ou des autorités de contrôle | Obligation légale |
@@ -124,16 +126,17 @@ Lorsque nous nous fondons sur l'intérêt légitime, nous avons vérifié que ce
 
 - Nous ne conservons **aucune copie ni photo de votre pièce d'identité**. Lors de la première rencontre, le propriétaire ou le refuge regarde votre pièce d'identité. Dans l'application, il coche seulement que la vérification a été faite.
 - Vos **bilans d'humeur** (comment vous vous sentez avant et après la promenade) sont enregistrés uniquement sur votre propre appareil. Ils n'arrivent jamais sur nos serveurs. Si vous supprimez l'application ou ses données, ils disparaissent.
-- Pas de publicité, pas de cookies de traçage, pas d'analyses par des tiers, pas de vente de données.
+- Pas de publicité, pas de cookies de traçage et pas de vente de données. Nous ne créons pas de profils de visiteurs et ne vous suivons pas sur d'autres sites. Nous comptons en revanche les visites du site, sans cookies (voir l'article 8).
 - **Pas de séries ni d'astuces addictives.** Vous seul(e) voyez vos points et médailles. Ils ne se perdent jamais et ne donnent aucune priorité. Les rappels ne vous menacent jamais de perdre quoi que ce soit.
 - Nous **ne lisons pas vos discussions**. Si un message parle d'argent ou contient un lien, le destinataire voit automatiquement un avertissement. Les administrateurs voient seulement que c'est arrivé et combien de fois, pas le texte.
 - Aucune décision vous concernant n'est prise uniquement par un ordinateur. Nos contrôles automatiques affichent un avertissement ou signalent un message. C'est une personne qui décide.
 
 ## 7. Qui voit vos données ?
 
-- **Les autres utilisateurs** voient votre profil public : prénom, photo, tranche d'âge (par exemple 25-34 ans), endroit approximatif, présentation, expérience et langues.
-- **Après l'acceptation** d'une demande, chacun voit aussi le numéro de téléphone de l'autre, et le promeneur voit les informations protégées que le propriétaire a rendues accessibles à cet effet.
-- **Les refuges** voient les données des promeneurs qui s'inscrivent chez eux et les présences aux promenades de groupe. Si un refuge utilise ces données dans sa propre gestion des bénévoles, il en est lui-même responsable.
+- **Les propriétaires et les refuges** voient, pour un promeneur qui leur envoie une demande : prénom, photo, tranche d'âge (par exemple 25-34 ans), commune, l'année de son arrivée sur Rondje Mee, expérience avec les chiens, ce qu'il a écrit sur lui-même et le message joint à la demande. Ils voient aussi ce que le promeneur a fait sur Rondje Mee : le nombre de promenades effectuées, combien de fois un propriétaire ou un refuge a vu sa pièce d'identité en personne, et s'il a réussi le quiz de sécurité. Ils ne voient jamais la date de naissance complète.
+- **Toute personne qui consulte le profil d'un chien** voit le prénom, la photo, la commune et la présentation du propriétaire, ainsi que l'emplacement du chien arrondi à environ 500 mètres.
+- **Après l'acceptation** d'une demande, chacun voit aussi le numéro de téléphone et l'adresse e-mail de l'autre, et le promeneur voit les informations protégées que le propriétaire a rendues accessibles à cet effet.
+- **Les refuges** voient, pour les promeneurs qui s'inscrivent à une promenade de groupe : prénom, photo, tranche d'âge et numéro de téléphone, et si le refuge a déjà vu leur pièce d'identité en personne. Le refuge enregistre aussi les présences. Si un refuge utilise ces données dans sa propre gestion des bénévoles, il en est lui-même responsable.
 - **Les avis privés** ne sont jamais montrés à l'autre personne. Seul un nombre limité de membres de l'équipe Rondje Mee peut les lire.
 - **Les autorités**, comme la police, ne reçoivent des données que lorsque la loi l'exige, ou lorsque la vie ou la sécurité de quelqu'un est en danger.
 
@@ -143,14 +146,16 @@ Nous travaillons avec les acteurs ci-dessous. Nous concluons un contrat de sous-
 
 | Acteur | Pour quoi | Où |
 |---|---|---|
-| Vercel Inc. | Hébergement du site, serveur de l'application et stockage des photos (Vercel Blob) | Région UE si possible ; Vercel est une société américaine |
-| Neon Inc. | Base de données (Postgres) | Région UE |
-| Resend Inc. (dès que l'e-mail est activé) | Envoi des e-mails : un nouveau mot de passe, et des notifications comme une nouvelle demande ou une promenade qui dure (désactivables dans votre profil) | États-Unis ; transfert fondé sur des clauses contractuelles types |
+| Vercel Inc. | Hébergement du site et du serveur de l'application, stockage des photos (Vercel Blob) et statistiques de visite du site (Vercel Web Analytics) | Le serveur de l'application tourne à Francfort (UE). Vercel est une société américaine et peut aussi traiter des données hors de l'UE, notamment aux États-Unis. Vercel adhère au cadre de protection des données UE-États-Unis (Data Privacy Framework) |
+| Neon, LLC (filiale de Databricks) | Base de données (Postgres) | Francfort (UE). Neon est une société américaine qui adhère au cadre de protection des données UE-États-Unis |
+| Resend Inc. (dès que l'e-mail est activé) | Envoi des e-mails : un nouveau mot de passe, et des notifications comme une nouvelle demande ou une promenade qui dure (désactivables dans votre profil) | États-Unis : Resend y conserve les données. Transfert fondé sur des clauses contractuelles types et sur le cadre de protection des données UE-États-Unis |
 | Google ou Apple | Connexion, uniquement si vous la choisissez | Sous la responsabilité de Google ou d'Apple |
 | Apple, Google ou Mozilla | Notifications push via votre téléphone ou navigateur, uniquement si vous les activez. Ils reçoivent le texte de la notification, ni trajets ni messages | Selon les conditions d'Apple, de Google ou de Mozilla |
-| OpenStreetMap Foundation | Images de cartes (tuiles) | Royaume-Uni |
+| OpenStreetMap Foundation | Images de cartes (tuiles) | La fondation est établie au Royaume-Uni. Les images passent par un réseau mondial de serveurs (un CDN) |
 
 **Cartes.** Lorsque vous ouvrez une carte, votre appareil charge des images depuis les serveurs de l'OpenStreetMap Foundation. Ces serveurs reçoivent votre adresse IP et des données techniques sur votre appareil. L'OpenStreetMap Foundation traite ces données selon sa propre politique de confidentialité.
+
+**Statistiques de visite.** Sur le site, nous comptons les visites avec Vercel Web Analytics. Nous voyons ainsi quelles pages sont consultées et comment les gens nous trouvent, par exemple via une affiche ou Instagram. Pour chaque visite, Vercel reçoit : la page, l'heure, le site d'où vous venez, le pays, la région et la ville, et le type d'appareil, de navigateur et de système d'exploitation. De l'adresse web, nous ne gardons que la page : le reste est supprimé, sauf les codes de campagne comme `utm_source`, et les identifiants dans l'adresse (comme celui d'un chien) sont remplacés par `:id`. Aucun cookie n'est déposé. Vercel reconnaît une visite grâce à un code calculé à partir de la requête de votre navigateur, et supprime ce code après 24 heures. Les comptages ne sont liés ni à vous, ni à votre compte, ni à votre adresse IP : nous ne voyons que des totaux, sans profils de visiteurs. Les pages d'administration ne sont pas comptées, et rien n'est compté dans l'application pour iPhone et Android.
 
 **Magasins d'applications.** Si vous téléchargez l'application sur l'App Store ou Google Play, Apple ou Google traitent des données selon leur propre politique de confidentialité.
 
@@ -172,14 +177,16 @@ Vous souhaitez en savoir plus sur ces garanties ? Écrivez-nous.
 | Données de compte et de profil, profils des chiens | Tant que votre compte existe. Après suppression, jusqu'à 30 jours de plus (sauvegardes) |
 | Points de trajet et photos des promenades | 30 jours. Plus longtemps uniquement si nécessaire pour un signalement en cours |
 | Avis privés | 1 an |
-| Signalements et données associées | Jusqu'à 2 ans après la clôture du signalement |
-| Données liées à une exclusion, pour éviter une nouvelle inscription | Aussi courte que possible : uniquement le temps nécessaire à cette fin |
+| Signalements et données associées | Jusqu'à 2 ans après la clôture du signalement. Ensuite, nous supprimons automatiquement le signalement, avec les lignes qui le concernent dans notre journal |
+| Une exclusion (le blocage d'un compte) et son motif | Tant que le compte existe |
 | Demandes | Tant que votre compte existe |
 | Messages de discussion entre promeneur et propriétaire ou refuge | 1 an |
 | Points, niveau, médailles et objectif de la semaine | Tant que votre compte existe |
 | Rappels envoyés | Comme notification dans votre compte tant qu'il existe. Pour ne pas en envoyer trop, nous ne regardons que la dernière année |
 | Recommandations et votes pour des refuges | Jusqu'à un an après leur traitement ; celles qui n'ont pas été traitées, après deux ans |
-| Journaux de sécurité | Aussi courte que possible : uniquement le temps nécessaire à la sécurité et à la correction d'erreurs |
+| Notre journal des actions sur Rondje Mee, comme un message signalé, une exclusion ou un refuge vérifié | Les lignes sur un signalement sont supprimées avec le signalement. Pour les autres lignes, nous n'avons pas encore de durée fixe |
+| Journaux techniques de l'hébergement | Vercel les conserve selon ses propres durées |
+| Statistiques de visite | Uniquement sous forme de totaux qui ne permettent pas de vous identifier. Le code avec lequel Vercel reconnaît une visite disparaît après 24 heures |
 | Bilans d'humeur | Pas chez nous. Uniquement sur votre appareil, jusqu'à ce que vous les supprimiez |
 
 Si la loi nous oblige à conserver des données plus longtemps, ou en cas de litige, nous ne le faisons que le temps nécessaire.
@@ -222,7 +229,7 @@ Vous n'êtes pas satisfait de la manière dont nous traitons vos données ? Dite
 
 ## 14. Analyse d'impact (AIPD)
 
-Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous réalisons une analyse d'impact relative à la protection des données (AIPD), et nous la tenons à jour.
+Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous préparons une analyse d'impact relative à la protection des données (AIPD). Elle n'est pas encore terminée. Nous la finaliserons avant que Rondje Mee ne soit ouvert à grande échelle avec la localisation en direct pendant les promenades, puis nous la tiendrons à jour. D'ici là, l'article 5 s'applique : localisation en direct uniquement pendant une promenade que le promeneur démarre lui-même, et suppression des trajets après 30 jours.
 
 ## 15. Âge
 

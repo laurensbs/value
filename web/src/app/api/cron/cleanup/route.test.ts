@@ -43,7 +43,7 @@ beforeAll(async () => {
 }, 30_000)
 
 beforeEach(async () => {
-  await client.exec(`delete from report; delete from walk; delete from suggestion;`)
+  await client.exec(`delete from report; delete from audit_log; delete from walk; delete from suggestion;`)
   del.mockReset()
   vi.stubEnv('BLOB_READ_WRITE_TOKEN', 'vercel_blob_rw_test_token')
   vi.stubEnv('CRON_SECRET', '')
@@ -119,6 +119,41 @@ describe('GET /api/cron/cleanup', () => {
     )
     expect(await (await run()).json()).toMatchObject({ tipsDeleted: 2 })
     expect(await ids('suggestion')).toEqual(['handled-lately', 'open-young'])
+  })
+
+  it('deletes closed reports two years after they were closed, with their audit lines; open ones always stay', async () => {
+    await client.query(
+      `insert into report (id, category, description, status, resolved_at, created_at) values
+         ('closed-long-ago', 'safety', 'x', 'closed', $1, $3),
+         ('closed-lately', 'safety', 'x', 'closed', $2, $3),
+         ('closed-undated-old', 'safety', 'x', 'closed', null, $1),
+         ('closed-undated-young', 'safety', 'x', 'closed', null, $2),
+         ('open-old', 'safety', 'x', 'open', null, $3),
+         ('reviewing-old', 'safety', 'x', 'reviewing', null, $3)`,
+      [ago(731), ago(700), ago(1000)],
+    )
+    await client.query(
+      `insert into audit_log (id, actor_id, action, target_type, target_id, data) values
+         ('a1', 'fleur', 'report.created', 'report', 'closed-long-ago', '{"category":"safety"}'),
+         ('a2', 'ans', 'report.closed', 'report', 'closed-long-ago', '{"resolution":"Besproken met beiden"}'),
+         ('a3', 'ans', 'report.closed', 'report', 'closed-lately', '{"resolution":"Gewaarschuwd"}'),
+         ('a4', 'fleur', 'report.created', 'report', 'open-old', null),
+         ('a5', 'ans', 'user.banned', 'user', 'closed-long-ago', null)`,
+    )
+
+    expect(await (await run()).json()).toMatchObject({ reportsDeleted: 2, reportLogLinesDeleted: 2 })
+    expect(await ids('report')).toEqual(['closed-lately', 'closed-undated-young', 'open-old', 'reviewing-old'])
+    // Only lines about the deleted reports go; a line about something else with the same id stays.
+    expect(await ids('audit_log')).toEqual(['a3', 'a4', 'a5'])
+  })
+
+  it('keeps the walk route of a closed report for 30 days only, like any other walk', async () => {
+    await walk('reported', 31)
+    await client.exec(`insert into report (id, walk_id, category, description, status, resolved_at) values ('r', 'reported', 'safety', 'x', 'closed', now())`)
+
+    expect(await (await run()).json()).toMatchObject({ routesDeletedForWalks: 1, reportsDeleted: 0 })
+    expect(await ids('walk_point', 'reported')).toEqual([])
+    expect(await ids('report')).toEqual(['r'])
   })
 
   it('needs the secret when one is set', async () => {

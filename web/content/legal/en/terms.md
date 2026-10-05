@@ -1,7 +1,7 @@
 ---
 title: Terms of Use
 description: "The terms for walkers, owners and shelters: who may take part, meeting first, no money, liability and complaints."
-version: "0.2"
+version: "0.3"
 updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -40,7 +40,7 @@ You must be **18 or older** and use Rondje Mee as a private individual, for your
 - You have one account and share it with no one. Keep your login details secret and report any misuse immediately.
 - You are responsible for what happens through your account, unless you could not reasonably have prevented it.
 
-Others can see, among other things, your first name, photo and roughly where you live (rounded to about 500 metres). They only see your phone number once a request has been accepted. See the Privacy Policy.
+Others can see, among other things, your first name, photo and roughly where you live (rounded to about 500 metres). They only see your phone number and email address once a request has been accepted. If you sign up for a group walk, the shelter sees your phone number straight away. See the Privacy Policy.
 
 ## 5. Roles
 
@@ -53,7 +53,7 @@ You can have more than one role.
 ## 6. Requests, first meeting and solo trust
 
 1. **Request.** A walker uses Rondje Mee to ask for a first meeting or a walk. The owner or shelter accepts or declines. No one is obliged to accept.
-2. **Contact details.** Once accepted, both sides see each other's phone number and the protected details needed, such as the meeting point. Use them only for the walk.
+2. **Contact details.** Once accepted, both sides see each other's phone number and email address, and the protected details needed, such as the meeting point. Use them only for the walk.
 3. **First meeting.** The first time you meet is always a first meeting (*kennismaking*), with the owner or a shelter staff member present.
 4. **ID check.** At the first meeting, the walker shows a valid identity document. The owner or shelter checks that the name, photo and age match and ticks a box in the app. Rondje Mee keeps no copy. Please do not take a photo or copy of it yourself either.
 5. **Solo trust.** Walking a dog alone is only allowed once the owner or shelter has explicitly given permission in the app. This applies to that one dog only and can be withdrawn at any time.
@@ -73,7 +73,7 @@ Rondje Mee is free for everyone.
 - Poop bags, leash, harness, treats and water are provided by the owner or shelter, as stated on the dog's profile.
 - If someone asks for money, bank details (IBAN) or a payment through a link, do not respond and report it to us.
 - Messages sent with requests are automatically checked for payment requests, bank account numbers and links. If something is found, you see a warning and a team member reviews it.
-- **Voluntary support for Rondje Mee.** If our website offers a way to support Rondje Mee (for example through Patreon), that is a voluntary contribution without anything in return: you get no priority, extra features or other benefits, and it has no influence on matching, visibility or moderation. The platform's own terms also apply to the payment. A contribution is not tax-deductible.
+- **Voluntary support for Rondje Mee.** You can support Rondje Mee with a gift through the fundraiser on Whydonate. The money goes to Laurens Bos, the maker of Rondje Mee, for the costs of Rondje Mee. There is no fixed monthly contribution at the moment. A gift is voluntary and without anything in return: you get no priority, extra features or other benefits, and it has no influence on matching, visibility or moderation. Whydonate's own terms also apply to the payment. Rondje Mee is not a foundation or a registered charity, so a gift gives you no tax benefit. If another way to support Rondje Mee is added later, the same applies to it.
 
 ## 9. What we expect from everyone
 
