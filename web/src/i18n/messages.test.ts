@@ -71,6 +71,12 @@ describe('interface translations', () => {
         expect(signature(message), `${locale}: ${key}`).toEqual(EUROS_NOT_ROUNDS[key] ?? signature(source[key]))
       }
     })
+    // /safety, after the walk: feedback about a hurt or stressed dog, or someone who felt unsafe, is stored
+    // for our team to review (server/actions/walks.ts submitFeedback, `flagged`). Nobody is alerted, so
+    // the text says where it goes ("komt meteen bij ons team"), not that the team knows at once.
+    it(`${locale} promises no instant alert to the team after a walk (/safety)`, () => {
+      expect(translated['safety.afterText'], locale).not.toMatch(/immediately|at once|al momento|enseguida|inmediatamente|immédiatement|tout de suite|prévenue/i)
+    })
     it(`${locale} names the crowdfunding in euros, never in walks ("€5 = 1 round", "600 rounds")`, () => {
       const texts = Object.entries(translated).filter(([key]) => CROWDFUNDING.some((prefix) => key.startsWith(prefix)))
       expect(texts.length).toBeGreaterThan(5)

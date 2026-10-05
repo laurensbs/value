@@ -50,8 +50,9 @@ const dogSchema = z.object({
 
 /**
  * A dog added for someone else (a neighbour, a grandparent) only goes online when its owner knows
- * and agrees (DPIA maatregel M5). Nothing about it is stored. The app does not send it: there a dog
- * is always its user's own.
+ * and agrees (DPIA maatregel M5). Nothing about it is stored. The dog form on the website and the app
+ * API (POST /api/v1/my-dogs, `forSomeone` + `ownerConsent`) both send it; an app version that sends
+ * neither adds a dog of its own.
  */
 export const forSomeoneSchema = z
   .object({ forSomeone: z.boolean(), ownerConsent: z.boolean() })

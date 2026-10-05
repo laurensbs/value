@@ -36,7 +36,7 @@ This protocol helps you walk safely and act well if something does go wrong. It 
 - **Start the walk in the app.** The owner or shelter then knows you are on your way, and you have the SOS screen at hand. For a group walk at a shelter you do not start anything in the app: the shelter walks along.
 - **Live location.** If live location is on and you walk alone with the dog, your phone shares your location with the owner until you end the walk. During a first meeting, during a group walk and when live location is off, you share no location.
 - **Running late?** Let the owner know. Rondje Mee sometimes sends an alert when a walk runs well over the planned time, but not always. So do not count on it.
-- **SOS screen.** Here you will find emergency numbers, a button to call the owner or shelter, what the dog's profile says about the vet, and the first steps if the dog runs off. The screen does not send anything to the owner or shelter by itself and does not share your location: you make the call yourself.
+- **SOS screen.** Here you will find emergency numbers, a button to call the owner or shelter (if their number is known), what the dog's profile says about the vet, and the first steps if the dog runs off. The screen does not send anything to the owner or shelter by itself and does not share your location: you make the call yourself.
 - **End the walk** in the app once you have brought the dog back.
 
 ## 3. What to do if…
@@ -46,7 +46,7 @@ This protocol helps you walk safely and act well if something does go wrong. It 
 1. Stay calm. Do not chase the dog, as it will often run further away.
 2. Call the dog's name in a cheerful voice. Crouch down or walk a few steps in the opposite direction. Many dogs will then come to you.
 3. Are treats allowed? Show them or rattle the bag.
-4. Call the owner or shelter immediately, for example with the button on the SOS screen. The owner knows the dog best.
+4. Call the owner or shelter immediately, for example with the button on the SOS screen (if their number is known). The owner knows the dog best.
 5. Tell them on the phone where and when you last saw the dog. The SOS screen does not send anything to the owner by itself and does not share your location: it shows the numbers and a few first steps.
 6. Stay near the place where the dog ran off, unless the owner tells you otherwise.
 7. Is there danger to traffic or people? Call **112**.

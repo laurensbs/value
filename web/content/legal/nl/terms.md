@@ -56,7 +56,7 @@ Je kunt meer dan één rol hebben.
 2. **Contactgegevens.** Na acceptatie zien beide kanten elkaars telefoonnummer en e-mailadres, en de afgeschermde gegevens die nodig zijn, zoals de afspraakplek. Gebruik ze alleen voor de wandeling.
 3. **Kennismaking.** De eerste ontmoeting is altijd een kennismaking, met de eigenaar of iemand van de opvang erbij.
 4. **ID-check.** Bij de kennismaking laat de wandelaar een geldig identiteitsbewijs zien. De eigenaar of opvang kijkt of naam, foto en leeftijd kloppen en vinkt dat aan in de app. Rondje Mee bewaart geen kopie. Maak er ook zelf geen foto of kopie van.
-5. **Solo-vertrouwen.** Alleen wandelen met een hond mag pas als de eigenaar of opvang daar in de app uitdrukkelijk toestemming voor geeft. Dat geldt alleen voor die ene hond en kan altijd worden ingetrokken. Een wandeling alleen met de hond kan bovendien alleen zolang live locatie aan staat (artikel 13).
+5. **Solo-vertrouwen.** Alleen wandelen met de hond van een eigenaar mag pas als die eigenaar daar in de app uitdrukkelijk toestemming voor geeft. Dat geldt alleen voor die ene hond en kan altijd worden ingetrokken. Een wandeling alleen met de hond kan bovendien alleen zolang live locatie aan staat (artikel 13). Met een hond van een opvang wandel je nooit alleen: daar is altijd iemand van de opvang bij, bij de kennismaking of in een begeleide groepswandeling (artikel 7).
 6. **Veiligheidsquiz.** Voordat je een kennismaking aanvraagt of meeloopt met een groepswandeling, doe je een korte veiligheidsquiz.
 7. **Nieuwe accounts** kunnen eerst alleen kennismakingen en begeleide wandelingen doen. Alleen wandelen kan pas met solo-vertrouwen (punt 5), en alleen zolang live locatie aan staat. Of het voor jou en een hond kan, zie je in de app.
 8. **Vaste wandelingen.** Een wandeling alleen met de hond kun je ook als vaste wekelijkse wandeling afspreken. Dat kan dus alleen met solo-vertrouwen en zolang live locatie aan staat. Kun je niet? Zeg zo snel mogelijk af via de app.
@@ -131,7 +131,7 @@ Live locatie kan aan of uit staan. Zolang de gegevensbeschermingseffectbeoordeli
 - Staat live locatie aan en start je als wandelaar een wandeling alleen met de hond, dan deelt je telefoon je locatie met de eigenaar, tot je de wandeling beëindigt. Alleen dan houden we bij waar je loopt. De eigenaar ziet dan een live kaart met de route. Jij ziet je eigen route.
 - Staat live locatie uit, dan houden we niet bij waar je loopt en ziet niemand een live kaart. Een wandeling alleen met de hond kun je dan niet aanvragen, accepteren of starten. Een kennismaking kan wel.
 - Duurt een wandeling veel langer dan gepland, dan stuurt Rondje Mee soms een melding, maar niet altijd. Reken er dus niet op.
-- Het SOS-scherm toont noodnummers, een knop om de eigenaar of opvang te bellen, wat er over de dierenarts op het hondenprofiel staat, en de eerste stappen als de hond wegloopt. Het SOS-scherm stuurt zelf niets naar de eigenaar of opvang en deelt geen locatie.
+- Het SOS-scherm toont noodnummers, een knop om de eigenaar of opvang te bellen (als het nummer bekend is), wat er over de dierenarts op het hondenprofiel staat, en de eerste stappen als de hond wegloopt. Het SOS-scherm stuurt zelf niets naar de eigenaar of opvang en deelt geen locatie.
 - Routes van wandelingen met live locatie verwijderen we na 30 dagen, behalve als ze nodig zijn voor een open melding.
 
 Staat live locatie aan, dan hangt ze af van je telefoon, batterij en netwerk. Het is een hulpmiddel, geen garantie. Bij gevaar bel je altijd eerst **112**.

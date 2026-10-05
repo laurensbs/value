@@ -1,7 +1,7 @@
 ---
 title: Partnervoorwaarden voor opvangen
 description: "De partnervoorwaarden voor opvangen: verificatie, hondenprofielen, kennismakingen en groepswandelingen, verzekering, gegevens en foto's."
-version: "0.1"
+version: "0.2"
 updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
@@ -36,11 +36,10 @@ Deze voorwaarden gelden voor dierenasielen, opvangen en andere organisaties die 
 - De opvang zorgt dat honden gechipt, geregistreerd en gevaccineerd zijn zoals de wet voorschrijft, en dat ze verzekerd zijn voor schade aan anderen.
 - In Spanje geeft de opvang aan welke honden als PPP-hond gelden, en volgt de opvang de regels die daarbij horen.
 
-## 4. Kennismakingen en solowandelingen
+## 4. Kennismakingen, en geen solowandelingen
 
 - Bij een kennismaking is altijd iemand van de opvang aanwezig. Die persoon doet de ID-check: kijken of naam, foto en leeftijd kloppen, en aanvinken in de app. Maak geen kopie of foto van het identiteitsbewijs.
-- De opvang geeft alleen solo-vertrouwen aan een wandelaar als dat verantwoord is voor die specifieke hond. De opvang kan het altijd intrekken.
-- De opvang mag strengere regels hanteren, zoals een minimumaantal begeleide wandelingen voordat iemand alleen mag.
+- Een wandelaar loopt nooit alleen met een hond van de opvang. Er is altijd iemand van de opvang bij: bij een kennismaking of in een begeleide groepswandeling (artikel 5). Solo-vertrouwen, waarmee een eigenaar iemand alleen met zijn hond laat wandelen, kan een opvang daarom niet geven.
 
 ## 5. Begeleide groepswandelingen
 

@@ -118,9 +118,9 @@ Gebruiken we een gerechtvaardigd belang? Dan hebben we afgewogen dat dat belang 
 - **Je woonplaats** tonen we alleen afgerond op zo'n 500 meter. Het exacte adres of de afspraakplek ziet de ander pas na acceptatie, en alleen als jij die invult.
 - **Live locatie** kan uit staan. Staat ze aan, dan verzamelen we haar alleen tijdens een wandeling alleen met de hond: vanaf het moment dat je die als wandelaar start, tot je haar beëindigt. Je telefoon vraagt hiervoor toestemming. Je kunt die toestemming in de instellingen van je telefoon intrekken, maar dan werkt de live kaart niet.
 - Bij een kennismaking en bij een groepswandeling verzamelen we nooit locatie: de eigenaar of de opvang loopt dan zelf mee.
-- Staat live locatie aan, dan ziet de eigenaar of opvang van de hond tijdens een wandeling alleen met de hond een live kaart met de route. Jij ziet je eigen route.
+- Staat live locatie aan, dan ziet de eigenaar van de hond tijdens een wandeling alleen met de hond een live kaart met de route. Jij ziet je eigen route.
 - Duurt een wandeling veel langer dan gepland, dan stuurt Rondje Mee soms een melding, maar niet altijd. Reken er dus niet op.
-- **Zolang de DPIA niet klaar is** (zie artikel 14), staat live locatie voor iedereen uit, en ook daarna kunnen we haar uitzetten. Staat ze uit, dan verzamelen en bewaren we geen locatie, en ziet de eigenaar of opvang geen live kaart. Een wandeling alleen met de hond kun je dan niet aanvragen, accepteren of starten; een kennismaking kan wel. In Rondje Mee zie je dan dat live locatie uit staat.
+- **Zolang de DPIA niet klaar is** (zie artikel 14), staat live locatie voor iedereen uit, en ook daarna kunnen we haar uitzetten. Staat ze uit, dan verzamelen en bewaren we geen locatie, en ziet de eigenaar geen live kaart. Een wandeling alleen met de hond kun je dan niet aanvragen, accepteren of starten; een kennismaking kan wel. In Rondje Mee zie je dan dat live locatie uit staat.
 - We verwijderen routepunten na **30 dagen**. Is er een open melding over een incident? Dan bewaren we de route van die wandeling tot de melding is afgehandeld.
 - We gebruiken locatiegegevens niet voor reclame of profilering, en we verkopen ze nooit.
 

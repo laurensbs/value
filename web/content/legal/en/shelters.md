@@ -1,7 +1,7 @@
 ---
 title: Partner Terms for Shelters
 description: "The partner terms for shelters: verification, dog profiles, meetings and group walks, insurance, data and photos."
-version: "0.1"
+version: "0.2"
 updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -36,11 +36,10 @@ These terms apply to animal shelters and other organisations that list dogs on R
 - The shelter makes sure dogs are microchipped, registered and vaccinated as required by law, and insured for damage caused to others.
 - In Spain, the shelter indicates which dogs are PPP dogs and follows the rules that apply to them.
 
-## 4. First meetings and solo walks
+## 4. First meetings, and no solo walks
 
 - A member of the shelter's staff is always present at a first meeting. That person carries out the ID check: checking that the name, photo and age match, and ticking the box in the app. Do not copy or photograph the identity document.
-- The shelter only grants solo trust to a walker if this is responsible for that specific dog. The shelter can withdraw it at any time.
-- The shelter may apply stricter rules, such as a minimum number of supervised walks before someone may walk alone.
+- A walker never walks a shelter dog alone. Someone from the shelter is always there: at a first meeting or on a supervised group walk (section 5). Solo trust, with which an owner lets someone walk their dog alone, is therefore not something a shelter can grant.
 
 ## 5. Supervised group walks
 

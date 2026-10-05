@@ -36,7 +36,7 @@ Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch i
 - **Start de wandeling in de app.** Dan weet de eigenaar of opvang dat je onderweg bent, en heb je het SOS-scherm bij de hand. Bij een groepswandeling van een opvang start je niets in de app: de opvang loopt mee.
 - **Live locatie.** Staat live locatie aan en wandel je alleen met de hond, dan deelt je telefoon je locatie met de eigenaar, tot je de wandeling beëindigt. Bij een kennismaking, bij een groepswandeling en als live locatie uit staat, deel je geen locatie.
 - **Loop je uit?** Laat het de eigenaar even weten. Rondje Mee stuurt soms een melding als een wandeling veel langer duurt dan gepland, maar niet altijd. Reken er dus niet op.
-- **SOS-scherm.** Hier vind je de noodnummers, een knop om de eigenaar of opvang te bellen, wat er over de dierenarts op het hondenprofiel staat, en de eerste stappen als de hond wegloopt. Het scherm stuurt zelf niets naar de eigenaar of opvang en deelt geen locatie: bellen doe je zelf.
+- **SOS-scherm.** Hier vind je de noodnummers, een knop om de eigenaar of opvang te bellen (als het nummer bekend is), wat er over de dierenarts op het hondenprofiel staat, en de eerste stappen als de hond wegloopt. Het scherm stuurt zelf niets naar de eigenaar of opvang en deelt geen locatie: bellen doe je zelf.
 - **Beëindig de wandeling** in de app als je de hond hebt teruggebracht.
 
 ## 3. Wat doe je als…
@@ -46,7 +46,7 @@ Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch i
 1. Blijf rustig. Ren niet achter de hond aan, want dan rent hij vaak harder weg.
 2. Roep de naam van de hond op een vrolijke toon. Ga door je knieën of loop een stukje de andere kant op. Veel honden komen dan naar je toe.
 3. Mogen er snoepjes? Laat ze zien of rammel ermee.
-4. Bel meteen de eigenaar of opvang, bijvoorbeeld met de knop in het SOS-scherm. De eigenaar kent de hond het best.
+4. Bel meteen de eigenaar of opvang, bijvoorbeeld met de knop in het SOS-scherm (als het nummer bekend is). De eigenaar kent de hond het best.
 5. Vertel aan de telefoon waar en wanneer je de hond voor het laatst zag. Het SOS-scherm stuurt zelf niets naar de eigenaar en deelt geen locatie: het toont de nummers en een paar eerste stappen.
 6. Blijf in de buurt van de plek waar de hond wegliep, tenzij de eigenaar iets anders zegt.
 7. Is er gevaar voor het verkeer of voor mensen? Bel **112**.

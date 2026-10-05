@@ -56,7 +56,7 @@ You can have more than one role.
 2. **Contact details.** Once accepted, both sides see each other's phone number and email address, and the protected details needed, such as the meeting point. Use them only for the walk.
 3. **First meeting.** The first time you meet is always a first meeting (*kennismaking*), with the owner or a shelter staff member present.
 4. **ID check.** At the first meeting, the walker shows a valid identity document. The owner or shelter checks that the name, photo and age match and ticks a box in the app. Rondje Mee keeps no copy. Please do not take a photo or copy of it yourself either.
-5. **Solo trust.** Walking a dog alone is only allowed once the owner or shelter has explicitly given permission in the app. This applies to that one dog only and can be withdrawn at any time. A walk alone with the dog is also only possible while live location is switched on (section 13).
+5. **Solo trust.** Walking an owner's dog alone is only allowed once that owner has explicitly given permission in the app. This applies to that one dog only and can be withdrawn at any time. A walk alone with the dog is also only possible while live location is switched on (section 13). You never walk a shelter's dog alone: someone from the shelter is always there, at the first meeting or on a supervised group walk (section 7).
 6. **Safety quiz.** Before you ask for a first meeting or join a group walk, you complete a short safety quiz.
 7. **New accounts** can at first only take part in first meetings and supervised walks. Walking a dog alone only becomes possible with solo trust (point 5), and only while live location is switched on. The app shows whether it is possible for you and a dog.
 8. **Recurring walks.** You can also arrange a walk alone with the dog as a fixed weekly walk. So this is only possible with solo trust and while live location is switched on. Can't make it? Cancel through the app as soon as possible.
@@ -131,7 +131,7 @@ Live location can be switched on or off. As long as the data protection impact a
 - If live location is on and you start a walk alone with the dog as a walker, your phone shares your location with the owner until you end the walk. This is the only time we keep track of where you walk. The owner then sees a live map with the route. You see your own route.
 - If live location is off, we do not keep track of where you walk and nobody sees a live map. You then cannot ask for, accept or start a walk alone with the dog. A first meeting is still possible.
 - If a walk runs well over the planned time, Rondje Mee sometimes sends an alert, but not always. So do not count on it.
-- The SOS screen shows emergency numbers, a button to call the owner or shelter, what the dog's profile says about the vet, and the first steps if the dog runs off. The SOS screen does not send anything to the owner or shelter by itself and does not share your location.
+- The SOS screen shows emergency numbers, a button to call the owner or shelter (if their number is known), what the dog's profile says about the vet, and the first steps if the dog runs off. The SOS screen does not send anything to the owner or shelter by itself and does not share your location.
 - We delete the routes of walks with live location after 30 days, unless they are needed for an open report.
 
 If live location is on, it depends on your phone, battery and network. It is a tool, not a guarantee. If there is danger, always call **112** first.

@@ -118,9 +118,9 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 - **Where you live** is only shown rounded to about 500 metres. The other person only sees the exact address or meeting point after acceptance, and only if you enter it.
 - **Live location** can be off. When it is on, we only collect it during a walk alone with the dog: from the moment you start it as a walker, until you end it. Your phone will ask for permission. You can withdraw that permission in your phone's settings, but the live map will then not work.
 - At a first meeting and on a group walk, we never collect location: the owner or the shelter walks along.
-- When live location is on, the dog's owner or shelter sees a live map with the route during a walk alone with the dog. You see your own route.
+- When live location is on, the dog's owner sees a live map with the route during a walk alone with the dog. You see your own route.
 - If a walk runs well over the planned time, Rondje Mee sometimes sends an alert, but not always. So do not count on it.
-- **Until the DPIA is finished** (see section 14), live location is off for everyone, and we can switch it off after that too. While it is off, we do not collect or store any location, and the owner or shelter sees no live map. A walk alone with the dog cannot be requested, accepted or started then; a first meeting can. Rondje Mee then tells you that live location is off.
+- **Until the DPIA is finished** (see section 14), live location is off for everyone, and we can switch it off after that too. While it is off, we do not collect or store any location, and the owner sees no live map. A walk alone with the dog cannot be requested, accepted or started then; a first meeting can. Rondje Mee then tells you that live location is off.
 - We delete route points after **30 days**. If there is an open incident report, we keep the route of that walk until the report has been closed.
 - We do not use location data for advertising or profiling, and we never sell it.
 

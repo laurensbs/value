@@ -36,7 +36,7 @@ Ce protocole vous aide à promener un chien en toute sécurité et à bien réag
 - **Démarrez la promenade dans l'application.** Le propriétaire ou le refuge sait alors que vous êtes en route, et vous avez l'écran SOS sous la main. Pour une promenade de groupe d'un refuge, vous ne démarrez rien dans l'application : le refuge marche avec vous.
 - **Localisation en direct.** Si elle est activée et que vous promenez le chien seul, votre téléphone partage votre position avec le propriétaire jusqu'à la fin de la promenade. Lors d'une première rencontre, d'une promenade de groupe et lorsqu'elle est désactivée, vous ne partagez aucune position.
 - **En retard ?** Prévenez le propriétaire. Rondje Mee envoie parfois une alerte quand une promenade dure nettement plus longtemps que prévu, mais pas toujours. N'y comptez donc pas.
-- **Écran SOS.** Vous y trouvez les numéros d'urgence, un bouton pour appeler le propriétaire ou le refuge, ce que le profil du chien indique sur le vétérinaire, et les premières étapes si le chien s'échappe. L'écran n'envoie rien de lui-même au propriétaire ou au refuge et ne partage pas votre position : c'est vous qui appelez.
+- **Écran SOS.** Vous y trouvez les numéros d'urgence, un bouton pour appeler le propriétaire ou le refuge (si le numéro est connu), ce que le profil du chien indique sur le vétérinaire, et les premières étapes si le chien s'échappe. L'écran n'envoie rien de lui-même au propriétaire ou au refuge et ne partage pas votre position : c'est vous qui appelez.
 - **Arrêtez la promenade** dans l'application une fois le chien ramené.
 
 ## 3. Que faire si…
@@ -46,7 +46,7 @@ Ce protocole vous aide à promener un chien en toute sécurité et à bien réag
 1. Restez calme. Ne courez pas après le chien : il s'éloignerait souvent encore plus.
 2. Appelez le chien par son nom d'une voix joyeuse. Accroupissez-vous ou faites quelques pas dans la direction opposée. Beaucoup de chiens reviennent alors vers vous.
 3. Les friandises sont permises ? Montrez-les ou secouez le sachet.
-4. Appelez immédiatement le propriétaire ou le refuge, par exemple avec le bouton de l'écran SOS. C'est le propriétaire qui connaît le mieux le chien.
+4. Appelez immédiatement le propriétaire ou le refuge, par exemple avec le bouton de l'écran SOS (si le numéro est connu). C'est le propriétaire qui connaît le mieux le chien.
 5. Dites-lui au téléphone où et quand vous avez vu le chien pour la dernière fois. L'écran SOS n'envoie rien de lui-même au propriétaire et ne partage pas votre position : il affiche les numéros et quelques premières étapes.
 6. Restez près de l'endroit où le chien s'est échappé, sauf si le propriétaire vous dit autre chose.
 7. Il y a un danger pour la circulation ou pour des personnes ? Appelez le **112**.

@@ -5,7 +5,7 @@ import { addDog, newPerson, onboard, shot, signUp, soonSlot, unique } from './he
 const AFTER = '2026-11-10T10:00:00+01:00'
 const TITLE = 'De voorwaarden zijn bijgewerkt'
 /** What 0.4 changes, and what 0.3 changed before it (content/legal/nl/terms-changes.md). */
-const NEW = 7
+const NEW = 8
 const OLDER = 6
 
 test('changed terms: a calm notice first, and once they take effect the yes before anything new', async ({ browser }) => {
@@ -176,7 +176,8 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   await expect(since03.getByText(/^Versie 0\.4 van de algemene voorwaarden vervangt versie 0\.3/)).toBeVisible()
   await expect(since03).not.toContainText('Accepteerde je een versie van vóór 0.3?')
   await expect(since03).not.toContainText('Laurens Bos')
-  await expect(since03.getByRole('listitem').nth(3)).toContainText('Er stond dat je in de app voor "hond ontsnapt" kon kiezen, maar die knop is er niet')
+  await expect(since03.getByRole('listitem').nth(2)).toContainText('Met een hond van een opvang wandel je nooit alleen.')
+  await expect(since03.getByRole('listitem').nth(4)).toContainText('Er stond dat je in de app voor "hond ontsnapt" kon kiezen, maar die knop is er niet')
   await shot(walker.page, 'terms-since-03')
   const me03 = await (await app.get('/api/v1/me', { headers: bearer })).json()
   expect(me03).toMatchObject({ termsVersion: '0.4', termsAccepted: false, termsRequired: false })
@@ -192,7 +193,7 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   await walker.context.close()
 })
 
-test('legal pages: terms 0.4, safety protocol 0.2 and privacy 0.6 promise nothing the app does not do', async ({ page }) => {
+test('legal pages: terms 0.4, safety protocol 0.2, privacy 0.6 and partner terms 0.2 promise nothing the app does not do', async ({ page }) => {
   await page.goto('/legal/terms')
   const terms = page.locator('article.legal')
   await expect(terms).toContainText('Versie 0.4')
@@ -203,6 +204,7 @@ test('legal pages: terms 0.4, safety protocol 0.2 and privacy 0.6 promise nothin
     'dan krijgt de eigenaar of opvang een melding',
     'Je kunt een vaste wekelijkse wandeling afspreken',
     'Anderen zien op je profiel onder meer je voornaam, foto en ongeveer waar je woont',
+    'mag pas als de eigenaar of opvang daar in de app',
   ]) {
     await expect(terms).not.toContainText(gone)
   }
@@ -212,6 +214,9 @@ test('legal pages: terms 0.4, safety protocol 0.2 and privacy 0.6 promise nothin
   // A ban by Rondje Mee, not someone blocking you (art. 14): that is what the dog page checks.
   await expect(terms).toContainText('niet geblokkeerd door Rondje Mee')
   await expect(terms).toContainText('Een wandeling alleen met de hond kan bovendien alleen zolang live locatie aan staat (artikel 13).')
+  // A shelter's dog never walks alone (setTrust, canRequestSolo), and the SOS call button needs a known number.
+  await expect(terms).toContainText('Met een hond van een opvang wandel je nooit alleen')
+  await expect(terms).toContainText('een knop om de eigenaar of opvang te bellen (als het nummer bekend is)')
   // Help lines stay where they were: 112 first, always.
   await expect(terms).toContainText('Bij gevaar bel je altijd eerst 112.')
 
@@ -236,9 +241,18 @@ test('legal pages: terms 0.4, safety protocol 0.2 and privacy 0.6 promise nothin
   await page.goto('/legal/privacy')
   const privacy = page.locator('article.legal')
   await expect(privacy).toContainText('Versie 0.6')
-  for (const gone of ['Dan krijgt de eigenaar of opvang een melding', 'Wie met een account een hondenprofiel bekijkt']) {
+  for (const gone of ['Dan krijgt de eigenaar of opvang een melding', 'Wie met een account een hondenprofiel bekijkt', 'de eigenaar of opvang van de hond']) {
     await expect(privacy).not.toContainText(gone)
   }
   await expect(privacy).toContainText('Duurt een wandeling veel langer dan gepland, dan stuurt Rondje Mee soms een melding, maar niet altijd. Reken er dus niet op.')
   await expect(privacy).toContainText('Wie geen lid is, ziet bij die hond alleen de hond, de woonplaats en dat er een eigenaar in de buurt is.')
+
+  // The partner terms for shelters: 0.1 was live, so 0.2; no shelter dog walks alone.
+  await page.goto('/legal/shelters')
+  const shelters = page.locator('article.legal')
+  await expect(shelters).toContainText('Versie 0.2')
+  await expect(shelters).toContainText('Een wandelaar loopt nooit alleen met een hond van de opvang.')
+  for (const gone of ['De opvang geeft alleen solo-vertrouwen', 'voordat iemand alleen mag']) {
+    await expect(shelters).not.toContainText(gone)
+  }
 })

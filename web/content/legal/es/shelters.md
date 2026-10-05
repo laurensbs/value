@@ -1,7 +1,7 @@
 ---
 title: Condiciones para protectoras colaboradoras
 description: "Las condiciones para protectoras colaboradoras: verificación, perfiles de perros, encuentros y paseos en grupo, seguro, datos y fotos."
-version: "0.1"
+version: "0.2"
 updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
@@ -36,11 +36,10 @@ Estas condiciones se aplican a las protectoras, refugios y otras entidades que p
 - La protectora se asegura de que los perros están identificados con microchip, registrados y vacunados según exija la ley, y asegurados por los daños a terceros.
 - En España, la protectora indica qué perros son PPP y cumple las normas aplicables.
 
-## 4. Primeros encuentros y paseos en solitario
+## 4. Primeros encuentros, y ningún paseo en solitario
 
 - En un primer encuentro siempre hay alguien de la protectora. Esa persona hace la comprobación de identidad: verifica que el nombre, la foto y la edad coinciden y lo marca en la app. No copies ni fotografíes el documento de identidad.
-- La protectora solo concede la confianza en solitario si es responsable hacerlo con ese perro concreto. Puede retirarla en cualquier momento.
-- La protectora puede aplicar normas más estrictas, como un número mínimo de paseos supervisados antes de que alguien pueda pasear solo.
+- Un paseante nunca pasea a solas a un perro de la protectora. Siempre hay alguien de la protectora: en un primer encuentro o en un paseo en grupo supervisado (apartado 5). Por eso una protectora no puede conceder la confianza en solitario, con la que un propietario deja que alguien pasee a solas a su perro.
 
 ## 5. Paseos en grupo supervisados
 
