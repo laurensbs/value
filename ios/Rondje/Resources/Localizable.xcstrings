@@ -9607,6 +9607,28 @@
         }
       }
     },
+    "Ik ben met pensioen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I'm retired."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me he jubilado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je suis à la retraite."
+          }
+        }
+      }
+    },
     "Ik ben student." : {
       "localizations" : {
         "en" : {
