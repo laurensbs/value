@@ -38,6 +38,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     { href: '/admin/shelters', label: t('shelters'), icon: 'building' },
     { href: '/admin/tips', label: t('tips'), icon: 'heart' },
     { href: '/admin/numbers', label: t('numbers'), icon: 'chart' },
+    { href: '/admin/sources', label: t('sources'), icon: 'users' },
   ]
   return (
     <div className="admin-hub">

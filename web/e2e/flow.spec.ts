@@ -1,7 +1,7 @@
 import { expect, request, test } from '@playwright/test'
 import { newPerson, onboard, PNG_1X1, shot, signUp, soonSlot, unique } from './helpers'
 
-test('owner and walker: meet request, accept, trust, live walk with GPS, follow along, private feedback', async ({ browser }) => {
+test('owner and walker: meet request, accept, trust, a first walk together, follow along, private feedback', async ({ browser }) => {
   // The whole journey of two people, celebrations included: longer than one page test, above all on a cold dev server.
   test.setTimeout(240_000)
   const id = unique()
@@ -209,6 +209,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   expect((await stranger.get(calendarUrl, { maxRedirects: 0 })).status()).toBe(307)
   await stranger.dispose()
   await walker.page.getByRole('button', { name: 'Start rondje' }).click()
+  // A first meeting: Ans walks along, so the phone shares no location (lib/rules.ts walkHasLiveLocation).
+  await expect(walker.page.getByText('Jullie lopen samen, dus er is geen kaart nodig.')).toBeVisible()
   await walker.page.getByLabel('Riem en tuig zitten goed vast').check()
   await walker.page.getByLabel('Mijn telefoon is opgeladen').check()
   await shot(walker.page, '07-start-checklist')
@@ -216,6 +218,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(walker.page).toHaveURL(/\/walk\/[^/?]+$/)
   const walkId = walker.page.url().split('/walk/')[1]
   await expect(walker.page.getByRole('timer')).toBeVisible()
+  await expect(walker.page.getByText('Jullie lopen samen, dus er is geen kaart nodig.')).toBeVisible()
+  await expect(walker.page.locator('.map')).toHaveCount(0)
 
   // --- Walking together now: the owner records the ID seen and allows solo walks ---
   await owner.page.goto('/requests?view=incoming')
@@ -229,13 +233,6 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(ladder).toBeVisible()
   await ladder.getByRole('button', { name: 'Klaar' }).click()
   await expect(ladder).toHaveCount(0)
-
-  // Walk a few hundred metres north-east.
-  for (let i = 1; i <= 5; i++) {
-    await walker.context.setGeolocation({ latitude: 52.0907 + i * 0.0006, longitude: 5.1214 + i * 0.0004 })
-    await walker.page.waitForTimeout(4_300)
-  }
-  await walker.page.waitForTimeout(10_500) // the next upload
 
   // The walker shares a photo along the way.
   await walker.page.getByLabel('Stuur een foto').setInputFiles({ name: 'bello.png', mimeType: 'image/png', buffer: PNG_1X1 })
@@ -321,11 +318,10 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(owner.page.getByRole('note').filter({ hasText: 'Rondje Mee is gratis' })).toBeVisible()
   await shot(owner.page, '07b-chat-warning')
 
-  // --- Owner follows along live ---
+  // --- Owner follows along: they walk together, so the time, the report and photos, without a map ---
   await owner.page.goto(`/follow/${walkId}`)
-  await expect(owner.page.getByText(/Je ziet waar Fleur met Bello loopt/)).toBeVisible()
-  await expect(owner.page.getByText(/Laatste locatie/)).toBeVisible()
-  await expect(owner.page.locator('path.route-line')).toHaveCount(1)
+  await expect(owner.page.getByText('Jullie lopen samen, dus er is geen kaart nodig.')).toBeVisible()
+  await expect(owner.page.locator('.map')).toHaveCount(0)
   await expect(owner.page.getByRole('link', { name: /Bel Fleur/ })).toBeVisible()
   await expect(owner.page.getByAltText('Foto van Bello tijdens het rondje')).toHaveCount(1)
   await expect(owner.page.getByRole('region', { name: 'Rondje-rapport' })).toContainText('2× Plas')

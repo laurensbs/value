@@ -10,6 +10,7 @@ import { COUNTRIES, isCountry } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { myGroupSignups, upcomingGroupWalks } from '@/server/queries'
 import { getViewer } from '@/server/session'
+import { termsBlock } from '@/server/terms'
 import { pageMetadata } from '@/lib/seo'
 import '../landing.css'
 
@@ -21,6 +22,7 @@ export async function generateMetadata() {
 export default async function GroupWalksPage({ searchParams }: { searchParams: Promise<{ country?: string }> }) {
   const sp = await searchParams
   const viewer = await getViewer()
+  const needsTerms = Boolean(await termsBlock(viewer?.profile))
   const country = isCountry(sp.country) ? sp.country : isCountry(viewer?.profile?.country) ? viewer.profile.country : await guessCountry()
   const [t, format, walks, joined] = await Promise.all([
     getTranslations(),
@@ -99,6 +101,7 @@ export default async function GroupWalksPage({ searchParams }: { searchParams: P
                         full={w.booked >= w.capacity}
                         signedIn={Boolean(viewer?.profile)}
                         needsQuiz={Boolean(viewer?.profile && !viewer.profile.quizPassedAt && !viewer.orgs.some((o) => o.id === w.orgId))}
+                        needsTerms={needsTerms}
                       />
                     </div>
                   </div>

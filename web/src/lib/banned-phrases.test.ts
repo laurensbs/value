@@ -48,6 +48,10 @@ const PUSH_TEXTS = [
   'safety.schoolLink',
   // "Eén ding nu" on Vandaag (lib/next-step.ts). Guus is not on the web yet: checked as soon as he gets texts.
   'nextStep.',
+  // Changed terms (art. 19): a calm notice and one "Akkoord", never a countdown or pressure.
+  'termsUpdate.',
+  'request.reasons.needs-terms',
+  'request.reasons.terms-changed',
   'guus.',
 ]
 const NOT_YET = new Set(['guus.'])

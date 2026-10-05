@@ -13,6 +13,7 @@ export async function OrgHeader({
   joined,
   signedIn,
   needsQuiz = false,
+  needsTerms = false,
 }: {
   org: Org
   walks: GroupWalks
@@ -20,6 +21,8 @@ export async function OrgHeader({
   signedIn: boolean
   /** A walker without the safety quiz: the quiz comes before joining (besluit 4 okt 2026). */
   needsQuiz?: boolean
+  /** Changed terms that took effect: the yes comes before joining (lib/rules.ts termsReason). */
+  needsTerms?: boolean
 }) {
   const t = await getTranslations()
   const format = await getFormatter()
@@ -82,7 +85,7 @@ export async function OrgHeader({
                   </span>
                   <span className="small">{t('groupWalks.spots', { left: Math.max(0, gw.capacity - gw.booked) })}</span>
                 </div>
-                <GroupWalkButton id={gw.id} joined={joined.has(gw.id)} full={gw.booked >= gw.capacity} signedIn={signedIn} needsQuiz={needsQuiz} next={`/dogs?org=${org.id}`} />
+                <GroupWalkButton id={gw.id} joined={joined.has(gw.id)} full={gw.booked >= gw.capacity} signedIn={signedIn} needsQuiz={needsQuiz} needsTerms={needsTerms} next={`/dogs?org=${org.id}`} />
               </li>
             ))}
           </ul>

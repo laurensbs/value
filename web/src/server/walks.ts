@@ -4,8 +4,10 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { routeLengthM } from '@/lib/geo'
 import { isAllowedPhotoUrl } from '@/lib/photos'
-import { canStartWalk, isInPerson, overdueMinutes, soloTrustReason } from '@/lib/rules'
+import { canStartWalk, isInPerson, liveLocationReason, overdueMinutes, soloTrustReason, walkHasLiveLocation } from '@/lib/rules'
+import { liveLocationNow } from './live-location'
 import { notify } from './notify'
+import { termsBlock } from './terms'
 import type { FormState } from './actions/profile'
 import type { OnboardedViewer, Viewer } from './session'
 
@@ -14,6 +16,8 @@ export type Walk = typeof s.walk.$inferSelect
 export interface WalkAccess {
   walk: Walk
   dog: typeof s.dog.$inferSelect
+  /** The kind of the request the walk came from ('meet' or 'solo'), or null when that request is gone. */
+  kind: string | null
   isWalker: boolean
   isWatcher: boolean
 }
@@ -22,9 +26,10 @@ export interface WalkAccess {
 export async function walkAccess(walkId: string, viewer: Viewer): Promise<WalkAccess | null> {
   const db = await getDb()
   const [row] = await db
-    .select({ walk: s.walk, dog: s.dog })
+    .select({ walk: s.walk, dog: s.dog, kind: s.walkRequest.kind })
     .from(s.walk)
     .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+    .leftJoin(s.walkRequest, eq(s.walkRequest.id, s.walk.requestId))
     .where(eq(s.walk.id, walkId))
   if (!row) return null
   const isWalker = row.walk.walkerId === viewer.userId
@@ -104,14 +109,17 @@ export async function watchers(dog: typeof s.dog.$inferSelect): Promise<string[]
   return rows.map((r) => r.id)
 }
 
-/** Sends one overdue alert per walk, to the walker and the watchers. */
-export async function checkOverdue(walk: Walk, dog: typeof s.dog.$inferSelect): Promise<number> {
+/**
+ * Sends one overdue alert per walk, to the walker and the watchers. `live`: whether this walk shares
+ * location right now (lib/rules.ts walkHasLiveLocation); only then does the email point to the map.
+ */
+export async function checkOverdue(walk: Walk, dog: typeof s.dog.$inferSelect, live: boolean): Promise<number> {
   if (walk.status !== 'active') return 0
   const over = overdueMinutes(walk.plannedEndAt)
   if (over > 0 && !walk.overdueNotifiedAt) {
     const db = await getDb()
     await db.update(s.walk).set({ overdueNotifiedAt: new Date() }).where(eq(s.walk.id, walk.id))
-    await notify(db, [walk.walkerId, ...(await watchers(dog))], 'walk-overdue', { walkId: walk.id, dogName: dog.name })
+    await notify(db, [walk.walkerId, ...(await watchers(dog))], 'walk-overdue', { walkId: walk.id, dogName: dog.name, live: live ? 'yes' : 'no' })
   }
   return over
 }
@@ -120,6 +128,8 @@ export interface ActiveWalk {
   walkId: string
   dogName: string
   role: 'walker' | 'watcher'
+  /** Whether this walk shares location (lib/rules.ts walkHasLiveLocation): only then does the bar say "live". */
+  live: boolean
 }
 
 /**
@@ -129,22 +139,27 @@ export interface ActiveWalk {
 export async function activeWalkFor(userId: string): Promise<ActiveWalk | null> {
   const db = await getDb()
   const myOrgs = db.select({ id: s.organizationMember.orgId }).from(s.organizationMember).where(eq(s.organizationMember.userId, userId))
-  const [[mine], [theirs]] = await Promise.all([
+  const columns = { walkId: s.walk.id, dogName: s.dog.name, kind: s.walkRequest.kind }
+  const [[mine], [theirs], switchedOn] = await Promise.all([
     db
-      .select({ walkId: s.walk.id, dogName: s.dog.name })
+      .select(columns)
       .from(s.walk)
       .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+      .leftJoin(s.walkRequest, eq(s.walkRequest.id, s.walk.requestId))
       .where(and(eq(s.walk.walkerId, userId), eq(s.walk.status, 'active')))
       .limit(1),
     db
-      .select({ walkId: s.walk.id, dogName: s.dog.name })
+      .select(columns)
       .from(s.walk)
       .innerJoin(s.dog, eq(s.dog.id, s.walk.dogId))
+      .leftJoin(s.walkRequest, eq(s.walkRequest.id, s.walk.requestId))
       .where(and(eq(s.walk.status, 'active'), or(eq(s.dog.ownerId, userId), inArray(s.dog.orgId, myOrgs))))
       .limit(1),
+    liveLocationNow(),
   ])
-  if (mine) return { ...mine, role: 'walker' }
-  return theirs ? { ...theirs, role: 'watcher' } : null
+  const found = mine ? { ...mine, role: 'walker' as const } : theirs ? { ...theirs, role: 'watcher' as const } : null
+  if (!found) return null
+  return { walkId: found.walkId, dogName: found.dogName, role: found.role, live: walkHasLiveLocation(found.kind, switchedOn) }
 }
 
 /** Whether a solo walk may go ahead with the trust stored right now (rules.ts soloTrustReason). */
@@ -158,8 +173,12 @@ async function soloTrustNow(kind: string, dog: { id: string; orgId: string | nul
   return soloTrustReason(kind, dog, grant)
 }
 
-/** Starts the walk for an accepted request, or returns the one already running. Shared with the app API. */
-export async function beginWalk(requestId: string, viewer: OnboardedViewer): Promise<FormState & { walkId?: string }> {
+/**
+ * Starts the walk for an accepted request, or returns the one already running. Shared with the app API.
+ * `liveLocation` says whether this walk collects location (lib/rules.ts walkHasLiveLocation): only a
+ * walk alone with the dog, with the switch on. Otherwise the phone sends no points.
+ */
+export async function beginWalk(requestId: string, viewer: OnboardedViewer): Promise<FormState & { walkId?: string; liveLocation?: boolean }> {
   const db = await getDb()
   const [row] = await db
     .select({ request: s.walkRequest, dog: s.dog })
@@ -170,15 +189,23 @@ export async function beginWalk(requestId: string, viewer: OnboardedViewer): Pro
   // A dog a moderator took offline is not walked.
   if (row.dog.status === 'hidden') return { ok: false, error: 'dog-unavailable' }
 
+  const switchedOn = await liveLocationNow()
+  const liveLocation = walkHasLiveLocation(row.request.kind, switchedOn)
   const existing = await db.select().from(s.walk).where(eq(s.walk.requestId, requestId))
   const active = existing.find((w) => w.status === 'active')
-  if (active && active.walkerId === viewer.userId) return { ok: true, walkId: active.id }
+  if (active && active.walkerId === viewer.userId) return { ok: true, walkId: active.id, liveLocation }
   // A first call is not a walk: no live location, ever (lib/rules.ts).
   if (!isInPerson(row.request.meetVia)) return { ok: false, error: 'needs-in-person' }
   if (!canStartWalk(row.request, viewer.userId)) return { ok: false, error: 'not-now' }
   // A solo walk starts only while the owner's yes and the ID seen still stand (also for a weekly one).
   const trust = await soloTrustNow(row.request.kind, row.dog, row.request.walkerId)
   if (trust) return { ok: false, error: trust }
+  // Live location switched off: only a walk with the owner or shelter there starts (rules.ts liveLocationReason).
+  const live = liveLocationReason(row.request.kind, switchedOn)
+  if (live) return { ok: false, error: live }
+  // Changed terms that took effect: the walker agrees to them first (rules.ts termsReason).
+  const terms = await termsBlock(viewer.profile)
+  if (terms) return { ok: false, error: terms }
 
   const id = crypto.randomUUID()
   const now = new Date()
@@ -190,8 +217,14 @@ export async function beginWalk(requestId: string, viewer: OnboardedViewer): Pro
     startedAt: now,
     plannedEndAt: new Date(now.getTime() + row.request.durationMin * 60_000),
   })
-  await notify(db, await watchers(row.dog), 'walk-started', { walkId: id, dogName: row.dog.name, walkerName: viewer.profile.firstName })
-  return { ok: true, walkId: id }
+  // "Kijk live mee" only for a walk that shares location: never a first meeting, never with the switch off.
+  await notify(db, await watchers(row.dog), 'walk-started', {
+    walkId: id,
+    dogName: row.dog.name,
+    walkerName: viewer.profile.firstName,
+    live: liveLocation ? 'yes' : 'no',
+  })
+  return { ok: true, walkId: id, liveLocation }
 }
 
 /** Ends an active walk: stores its length and rolls a weekly walk on. Shared with the app API. */

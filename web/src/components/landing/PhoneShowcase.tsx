@@ -11,9 +11,13 @@ const SHOTS = [
   { key: 'walk', src: '/app/wandelen.webp', icon: 'location' },
 ] as const
 
-/** Real screens from the iPhone app in drawn phone frames, with an honest note: the website works today. */
-export async function PhoneShowcase() {
+/**
+ * Real screens from the iPhone app in drawn phone frames, with an honest note: the website works today.
+ * `live`: live location switched on (LIVE_LOCATION). Off: nothing here promises following a walk live.
+ */
+export async function PhoneShowcase({ live }: { live: boolean }) {
   const t = await getTranslations()
+  const off = live ? '' : 'Off'
   return (
     <section className="lp-showcase" aria-labelledby="lp-showcase-title">
       <div className="lp-showcase-copy">
@@ -21,7 +25,7 @@ export async function PhoneShowcase() {
         <h2 id="lp-showcase-title" className="lp-h2">
           {t('landing.app.title')}
         </h2>
-        <p className="lp-showcase-lede">{t('landing.app.lede')}</p>
+        <p className="lp-showcase-lede">{t(`landing.app.lede${off}`)}</p>
         <ul className="lp-shot-legend">
           {SHOTS.map((s) => (
             <li key={s.key}>
@@ -29,7 +33,7 @@ export async function PhoneShowcase() {
                 <Icon name={s.icon} size={18} />
               </span>
               <span>
-                <strong>{t(`landing.app.${s.key}.title`)}</strong> {t(`landing.app.${s.key}.text`)}
+                <strong>{t(`landing.app.${s.key}.title${s.key === 'walk' ? off : ''}`)}</strong> {t(`landing.app.${s.key}.text${s.key === 'walk' ? off : ''}`)}
               </span>
             </li>
           ))}

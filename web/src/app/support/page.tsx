@@ -6,6 +6,7 @@ import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { SupportButton } from '@/components/SupportButton'
 import { APP_NAME } from '@/lib/site'
 import { appQuestion, campaign, roundsFor, showsRaised, supportConfig } from '@/lib/support'
+import { liveLocationNow } from '@/server/live-location'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
 import crowdfunding from '../../../content/crowdfunding.json'
@@ -27,6 +28,8 @@ export default async function SupportPage() {
   const t = await getTranslations()
   const format = await getFormatter()
   const native = await isNativeRequest()
+  // The map costs: following a walk live only while live location is on (LIVE_LOCATION).
+  const live = await liveLocationNow()
   const cfg = supportConfig()
   const drive = campaign(crowdfunding)
   // The amount raised once something came in; before that only the goal (in rounds in Dutch, in euros in the other languages).
@@ -102,7 +105,7 @@ export default async function SupportPage() {
                   <tr key={c.key}>
                     <th scope="row">
                       {t(`support.costs.${c.key}.label`)}
-                      <span className="muted small">{t(`support.costs.${c.key}.why`)}</span>
+                      <span className="muted small">{t(`support.costs.${c.key}.${c.key === 'maps' && !live ? 'whyOff' : 'why'}`)}</span>
                     </th>
                     <td>{amount(c)}</td>
                   </tr>

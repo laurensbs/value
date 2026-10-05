@@ -19,7 +19,7 @@ export function useActionErrorText() {
 
 /**
  * One plain sentence for what went wrong, with the way forward where there is one: signing in again,
- * why an account is blocked, or the appointment that is already there.
+ * why an account is blocked, the appointment that is already there, or the changed terms to agree to.
  */
 export function ActionError({ code, text }: { code: string; text: string }) {
   const t = useTranslations()
@@ -33,6 +33,9 @@ export function ActionError({ code, text }: { code: string; text: string }) {
         <Link href="/banned">{t('request.bannedMore')}</Link>
       ) : code === 'already-open' ? (
         <Link href="/requests">{t('request.viewRequests')}</Link>
+      ) : code === 'needs-terms' ? (
+        // The changed terms as a step of their own; "Akkoord" brings you back here.
+        <Link href={`/profile/terms?next=${encodeURIComponent(path)}`}>{t('termsUpdate.first')}</Link>
       ) : null}
     </p>
   )

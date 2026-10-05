@@ -2,7 +2,8 @@ import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { parseFrontMatter } from './front-matter'
-import { TERMS_VERSION } from './site'
+import { compareTermsVersions } from './rules'
+import { TERMS_EFFECTIVE_AT, TERMS_NOTICE_FROM, TERMS_VERSION } from './site'
 import { campaign } from './support'
 
 const CONTENT = path.join(process.cwd(), 'content')
@@ -106,6 +107,37 @@ describe('legal versions', () => {
       .filter((file) => path.basename(file, '.md') === doc)
       .map((file) => `${read(file).data.version} ${read(file).data.updated}`)
     expect(new Set(versions).size).toBe(1)
+  })
+})
+
+describe('changed terms (art. 19)', () => {
+  const changes = textFiles('legal').filter((file) => path.basename(file) === 'terms-changes.md')
+  const terms = textFiles('legal').filter((file) => path.basename(file) === 'terms.md')
+  const items = (file: string) => read(file).body.split('\n').filter((line) => line.startsWith('- '))
+
+  it('say what changed for the current version, in every language, with the same points', () => {
+    expect(changes).toHaveLength(4)
+    for (const file of changes) {
+      const { data } = read(file)
+      expect(data.version, file).toBe(TERMS_VERSION)
+      expect(compareTermsVersions(data.from, data.version), file).toBe(-1)
+      expect(data.title, file).toBeTruthy()
+      expect(items(file).length, file).toBeGreaterThan(0)
+    }
+    expect(new Set(changes.map((file) => items(file).length)).size).toBe(1)
+  })
+
+  // Art. 19: important changes are announced at least 30 days ahead, counted from the day the notice goes
+  // live in the app (TERMS_NOTICE_FROM, set to the real live day when merging).
+  const day = (value: string) => Date.parse(`${value}T00:00:00Z`)
+
+  it('take effect at least 30 days after the notice goes live (TERMS_NOTICE_FROM, TERMS_EFFECTIVE_AT)', () => {
+    for (const value of [TERMS_NOTICE_FROM, TERMS_EFFECTIVE_AT]) expect(value).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    expect((day(TERMS_EFFECTIVE_AT) - day(TERMS_NOTICE_FROM)) / 86_400_000).toBeGreaterThanOrEqual(30)
+  })
+
+  it('announce a text that already exists: the notice goes live on or after the terms changed', () => {
+    for (const file of terms) expect(day(TERMS_NOTICE_FROM), file).toBeGreaterThanOrEqual(day(read(file).data.updated))
   })
 })
 

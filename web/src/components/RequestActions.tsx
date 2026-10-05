@@ -57,7 +57,18 @@ function subscribeDeclined(listener: () => void) {
   return () => declinedListeners.delete(listener)
 }
 
-export function DecideButtons({ requestId, walkerName, dogName }: { requestId: string; walkerName: string; dogName: string }) {
+export function DecideButtons({
+  requestId,
+  walkerName,
+  dogName,
+  canAccept = true,
+}: {
+  requestId: string
+  walkerName: string
+  dogName: string
+  /** False while saying yes has to wait (a walk alone with live location off; the card says why). No stays possible. */
+  canAccept?: boolean
+}) {
   const t = useTranslations('requests')
   const { pending, errorLine, run } = useAction()
   const [choice, setChoice] = useState<'accept' | 'decline' | null>(null)
@@ -79,7 +90,7 @@ export function DecideButtons({ requestId, walkerName, dogName }: { requestId: s
   return (
     <div className="stack-s">
       <div className="decide-buttons">
-        <button type="button" className="button primary" disabled={pending} aria-busy={pending && choice === 'accept'} onClick={() => decide('accept')}>
+        <button type="button" className="button primary" disabled={pending || !canAccept} aria-busy={pending && choice === 'accept'} onClick={() => decide('accept')}>
           <Icon name="check" size={18} /> {t('accept')}
         </button>
         <button type="button" className="button ghost" disabled={pending} aria-busy={pending && choice === 'decline'} onClick={() => decide('decline')}>
@@ -167,7 +178,19 @@ export function CancelButton({ requestId }: { requestId: string }) {
   )
 }
 
-export function StartButton({ requestId, enabled, hint }: { requestId: string; enabled: boolean; hint: string }) {
+export function StartButton({
+  requestId,
+  enabled,
+  hint,
+  together = false,
+}: {
+  requestId: string
+  enabled: boolean
+  /** Why it cannot start yet; null when the card already says so (a walk alone with live location off). */
+  hint: string | null
+  /** A first meeting: they walk together, so no location is shared and the note says so (rules.ts walkHasLiveLocation). */
+  together?: boolean
+}) {
   const t = useTranslations('requests')
   const tw = useTranslations('walk')
   const { pending, errorLine, run } = useAction()
@@ -183,7 +206,7 @@ export function StartButton({ requestId, enabled, hint }: { requestId: string; e
         <button type="button" className="button primary" disabled={!enabled} onClick={() => setOpen(true)}>
           <Icon name="play" size={18} /> {t('start')}
         </button>
-        {!enabled ? <p className="muted small">{hint}</p> : null}
+        {!enabled && hint ? <p className="muted small">{hint}</p> : null}
       </div>
     )
   }
@@ -200,7 +223,7 @@ export function StartButton({ requestId, enabled, hint }: { requestId: string; e
           <span>{tw(c)}</span>
         </label>
       ))}
-      <p className="muted small">{tw('locationNote')}</p>
+      <p className="muted small">{tw(together ? 'together' : 'locationNote')}</p>
       <div className="row">
         <button type="button" className="button primary" disabled={!ready || pending} aria-busy={pending} onClick={() => run(() => startWalk(requestId))}>
           <Icon name="play" size={18} /> {tw('start')}
@@ -265,6 +288,7 @@ function TrustLadder({
   walkerName,
   dogName,
   caveat,
+  liveLocation,
   onClose,
 }: {
   trust: Trust
@@ -272,6 +296,8 @@ function TrustLadder({
   walkerName: string
   dogName: string
   caveat: SoloCaveat
+  /** Live location switched on: only then can the owner follow a walk alone live. Off: it says calmly that it waits. */
+  liveLocation: boolean
   onClose: () => void
 }) {
   const t = useTranslations('requests')
@@ -307,7 +333,15 @@ function TrustLadder({
         </h2>
         <TrustSteps trust={trust} allowSolo={allowSolo} animate />
         <div id={`${id}-text`} className="stack-s trust-ladder-text">
-          <p>{solo ? t('ladderTextSolo') : allowSolo ? t('ladderTextId', { walker: walkerName, dog: dogName }) : t('ladderTextShelter')}</p>
+          <p>
+            {solo
+              ? liveLocation
+                ? t('ladderTextSolo')
+                : t('ladderTextSoloOff')
+              : allowSolo
+                ? t('ladderTextId', { walker: walkerName, dog: dogName })
+                : t('ladderTextShelter')}
+          </p>
           {solo && caveatText ? <p className="muted small">{caveatText}</p> : null}
         </div>
         <button type="button" className="button primary big wide" onClick={() => ref.current?.close()} autoFocus>
@@ -332,6 +366,7 @@ export function TrustForm({
   initial,
   allowSolo,
   caveat,
+  liveLocation,
 }: {
   dogId: string
   dogName: string
@@ -343,6 +378,8 @@ export function TrustForm({
   initial: Trust
   allowSolo: boolean
   caveat: SoloCaveat
+  /** Live location switched on (LIVE_LOCATION). Allowing walks alone stays possible when it is off; they wait. */
+  liveLocation: boolean
 }) {
   const t = useTranslations('requests')
   const { pending, errorLine, run } = useAction()
@@ -434,6 +471,7 @@ export function TrustForm({
           walkerName={walkerName}
           dogName={dogName}
           caveat={caveat}
+          liveLocation={liveLocation}
           onClose={() => {
             setLadder(null)
             titleRef.current?.focus({ preventScroll: true })

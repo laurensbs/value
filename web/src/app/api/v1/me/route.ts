@@ -1,16 +1,23 @@
 import { NextResponse } from 'next/server'
+import { getLocale } from 'next-intl/server'
 import { ageBand, trustBadges } from '@/lib/rules'
 import { apiViewer, fail, json } from '@/server/api'
 import { deleteUserWithFiles } from '@/server/blob-cleanup'
 import { dogsChanged } from '@/server/newest-dogs'
 import { trustSignals, unreadCount } from '@/server/queries'
+import { termsForApp } from '@/server/terms'
 
-/** Who is signed in, their profile and their trust signals. */
+/**
+ * Who is signed in, their profile and their trust signals, and where they stand with the terms
+ * (server/terms.ts termsForApp): `termsVersion`, `termsAccepted`, `termsEffectiveAt`, `termsRequired`
+ * and `termsChanges` (only while they still have to agree; then the app shows the notice, and
+ * POST /api/v1/terms/accept records the yes).
+ */
 export async function GET() {
   const viewer = await apiViewer()
   if (viewer instanceof NextResponse) return viewer
   const p = viewer.profile
-  const signals = p ? await trustSignals(viewer.userId) : null
+  const [signals, terms] = await Promise.all([p ? trustSignals(viewer.userId) : null, termsForApp(p, await getLocale())])
   return json({
     user: { id: viewer.userId, email: viewer.email, name: viewer.name, isAdmin: viewer.isAdmin },
     profile: p && {
@@ -36,6 +43,7 @@ export async function GET() {
     trust: signals && { ...signals, badges: trustBadges(signals) },
     orgs: viewer.orgs,
     unread: await unreadCount(viewer.userId),
+    ...terms,
   })
 }
 

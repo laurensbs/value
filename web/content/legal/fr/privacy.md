@@ -1,7 +1,7 @@
 ---
 title: Politique de confidentialité
 description: "Les données personnelles que nous traitons, pourquoi et combien de temps, qui les voit et quels sont vos droits. Votre adresse exacte reste privée."
-version: "0.4"
+version: "0.5"
 updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -21,7 +21,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}.
 - Nous collectons le moins de données possible.
 - Votre adresse exacte n'est jamais publique. Les autres voient seulement l'endroit approximatif où vous habitez (arrondi à environ 500 mètres).
 - L'autre personne ne voit votre numéro de téléphone et votre adresse e-mail qu'après l'acceptation d'une demande. Si vous vous inscrivez à une promenade de groupe d'un refuge, ce refuge voit tout de suite votre numéro de téléphone.
-- Nous ne partageons votre position que pendant une promenade que vous démarrez vous-même. Nous supprimons les trajets après 30 jours.
+- Nous ne partageons votre position que pendant une promenade seul avec le chien que vous démarrez vous-même, et seulement si la localisation en direct est activée. Nous supprimons les trajets après 30 jours.
 - Nous ne conservons **aucune copie** de votre pièce d'identité.
 - Vos bilans d'humeur restent **uniquement sur votre téléphone**. Nous ne les recevons jamais.
 - Pas de publicité, pas de cookies de traçage, et nous ne vendons jamais de données. Nous comptons les visites du site sans cookies et sans profils de visiteurs.
@@ -69,7 +69,7 @@ Des questions sur la vie privée ? Écrivez-nous à {{contact}}.
 
 **Position pendant une promenade**
 
-- points GPS du téléphone du promeneur, avec l'heure, uniquement pendant une promenade active.
+- points GPS du téléphone du promeneur, avec l'heure, uniquement pendant une promenade active seul avec le chien, et seulement si la localisation en direct est activée (voir l'article 5).
 
 **Données techniques**
 
@@ -116,9 +116,11 @@ Lorsque nous nous fondons sur l'intérêt légitime, nous avons vérifié que ce
 ## 5. Données de localisation
 
 - **L'endroit où vous habitez** n'est affiché qu'arrondi à environ 500 mètres. L'adresse exacte ou le lieu de rendez-vous n'est visible par l'autre personne qu'après acceptation, et seulement si vous l'indiquez.
-- **La localisation en direct** n'est collectée que lorsque vous démarrez une promenade en tant que promeneur, et jusqu'à ce que vous l'arrêtiez. Votre téléphone vous demande votre autorisation. Vous pouvez la retirer dans les réglages de votre téléphone, mais la carte en direct ne fonctionnera alors plus.
-- Pendant la promenade, le propriétaire ou le refuge voit une carte en direct avec le trajet. Vous voyez votre propre trajet.
-- Si la promenade dure nettement plus longtemps que prévu, le propriétaire ou le refuge reçoit une alerte.
+- **La localisation en direct** peut être désactivée. Lorsqu'elle est activée, nous ne la collectons que pendant une promenade seul avec le chien : à partir du moment où vous la démarrez en tant que promeneur, et jusqu'à ce que vous l'arrêtiez. Votre téléphone vous demande votre autorisation. Vous pouvez la retirer dans les réglages de votre téléphone, mais la carte en direct ne fonctionnera alors plus.
+- Lors d'une première rencontre et d'une promenade de groupe, nous ne collectons jamais de position : le propriétaire ou le refuge marche avec vous.
+- Lorsque la localisation en direct est activée, le propriétaire ou le refuge voit une carte en direct avec le trajet pendant une promenade seul avec le chien. Vous voyez votre propre trajet.
+- Si une promenade seul avec le chien dure nettement plus longtemps que prévu, le propriétaire ou le refuge reçoit une alerte.
+- **Tant que l'AIPD n'est pas terminée** (voir l'article 14), la localisation en direct est désactivée pour tout le monde, et nous pouvons aussi la désactiver ensuite. Tant qu'elle est désactivée, nous ne collectons ni ne conservons aucune position, et le propriétaire ou le refuge ne voit aucune carte en direct. Une promenade seul avec le chien ne peut alors être ni demandée, ni acceptée, ni démarrée ; une première rencontre, si. Rondje Mee vous indique alors que la localisation en direct est désactivée.
 - Nous supprimons les points de trajet après **30 jours**. Si un signalement d'incident est en cours, nous conservons le trajet de cette promenade jusqu'à la clôture du signalement.
 - Nous n'utilisons pas les données de localisation pour de la publicité ou du profilage, et nous ne les vendons jamais.
 
@@ -134,7 +136,7 @@ Lorsque nous nous fondons sur l'intérêt légitime, nous avons vérifié que ce
 ## 7. Qui voit vos données ?
 
 - **Les propriétaires et les refuges** voient, pour un promeneur qui leur envoie une demande : prénom, photo, tranche d'âge (par exemple 25-34 ans), commune, l'année de son arrivée sur Rondje Mee, expérience avec les chiens, ce qu'il a écrit sur lui-même et le message joint à la demande. Ils voient aussi ce que le promeneur a fait sur Rondje Mee : le nombre de promenades effectuées, combien de fois un propriétaire ou un refuge a vu sa pièce d'identité en personne, et s'il a réussi le quiz de sécurité. Ils ne voient jamais la date de naissance complète.
-- **Toute personne qui consulte le profil d'un chien** voit le prénom, la photo, la commune et la présentation du propriétaire, ainsi que l'emplacement du chien arrondi à environ 500 mètres.
+- **Toute personne avec un compte qui consulte le profil d'un chien** voit le prénom, la photo, la commune, la présentation et les moments fixes du propriétaire, ainsi que l'emplacement du chien arrondi à environ 500 mètres. **Sans compte**, on ne voit que le chien, la commune et qu'un propriétaire habite près d'ici.
 - **Après l'acceptation** d'une demande, chacun voit aussi le numéro de téléphone et l'adresse e-mail de l'autre, et le promeneur voit les informations protégées que le propriétaire a rendues accessibles à cet effet.
 - **Les refuges** voient, pour les promeneurs qui s'inscrivent à une promenade de groupe : prénom, photo, tranche d'âge et numéro de téléphone, et si le refuge a déjà vu leur pièce d'identité en personne. Le refuge enregistre aussi les présences. Si un refuge utilise ces données dans sa propre gestion des bénévoles, il en est lui-même responsable.
 - **Les avis privés** ne sont jamais montrés à l'autre personne. Seul un nombre limité de membres de l'équipe Rondje Mee peut les lire.
@@ -229,7 +231,7 @@ Vous n'êtes pas satisfait de la manière dont nous traitons vos données ? Dite
 
 ## 14. Analyse d'impact (AIPD)
 
-Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous préparons une analyse d'impact relative à la protection des données (AIPD). Elle n'est pas encore terminée. Nous la finaliserons avant la première vraie promenade avec localisation en direct, puis nous la tiendrons à jour. La localisation en direct fonctionne toujours comme le prévoit l'article 5 : uniquement pendant une promenade que le promeneur démarre lui-même, et suppression des trajets après 30 jours.
+Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous préparons une analyse d'impact relative à la protection des données (AIPD). Elle n'est pas encore terminée. Nous la finaliserons avant la première vraie promenade avec localisation en direct, puis nous la tiendrons à jour. D'ici là, la localisation en direct est désactivée (voir l'article 5). Lorsqu'elle est activée, elle fonctionne toujours comme le prévoit l'article 5 : uniquement pendant une promenade seul avec le chien que le promeneur démarre lui-même, et suppression des trajets après 30 jours.
 
 ## 15. Âge
 

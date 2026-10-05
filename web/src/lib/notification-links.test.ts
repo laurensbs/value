@@ -26,6 +26,51 @@ describe('notification emails', () => {
   })
 })
 
+describe('following a walk live (lib/rules.ts walkHasLiveLocation)', () => {
+  // The words for "live" in each language: only a walk that shares location may use them.
+  const LIVE = /\blive\b|en directo|en direct/i
+  const translators = Object.entries({ nl, en, es, fr }).map(([locale, messages]) => {
+    const onError = (error: Error) => {
+      throw error
+    }
+    const t = createTranslator({ locale, messages: messages as Record<string, unknown>, namespace: 'notifications', onError }) as (key: string, values?: object) => string
+    const e = createTranslator({ locale, messages: messages as Record<string, unknown>, namespace: 'email', onError }) as (key: string, values?: object) => string
+    return { locale, t, e }
+  })
+
+  it('says "kijk live mee" only when the walk shares location; never at a first meeting or with it off', () => {
+    for (const { locale, t } of translators) {
+      const started = (data: NotificationData) => t('kinds.walk-started', notificationValues({ walkerName: 'Fleur', dogName: 'Bello', ...data }))
+      expect(started({ live: 'yes' }), locale).toMatch(LIVE)
+      expect(started({ live: 'no' }), locale).not.toMatch(LIVE)
+      // Older notifications without it promise nothing live.
+      expect(started({}), locale).not.toMatch(LIVE)
+      expect(started({}), locale).toContain('Fleur')
+    }
+  })
+
+  it('a yes to walks alone says honestly that they wait while live location is off', () => {
+    for (const { locale, t } of translators) {
+      const granted = (data: NotificationData) => t('kinds.trust-granted', notificationValues({ dogName: 'Bello', ...data }))
+      expect(granted({ live: 'no' }), locale).toMatch(LIVE)
+      expect(granted({ live: 'yes' }), locale).not.toMatch(LIVE)
+      expect(granted({}), locale).toBe(granted({ live: 'yes' }))
+    }
+  })
+
+  it('the emails point to the live map only for a walk that shares location', () => {
+    for (const { locale, e } of translators) {
+      const overdue = (data: NotificationData) => e('kinds.walk-overdue.body', notificationValues({ dogName: 'Bello', ...data }))
+      expect(overdue({ live: 'yes' }), locale).not.toBe(overdue({ live: 'no' }))
+      expect(overdue({}), locale).toBe(overdue({ live: 'no' }))
+      const accepted = (data: NotificationData) => e('kinds.request-accepted.body', notificationValues({ dogName: 'Bello', ...data }))
+      expect(accepted({ live: 'yes' }), locale).toMatch(LIVE)
+      expect(accepted({ live: 'no' }), locale).not.toMatch(LIVE)
+      expect(accepted({ meetVia: 'walk', live: 'yes' }), locale).not.toMatch(LIVE)
+    }
+  })
+})
+
 describe('seintjes', () => {
   const samples: [string, NotificationData][] = [
     ['nudge-step', { step: 'about' }],

@@ -10,6 +10,7 @@ vi.mock('next-intl/server', () => ({
 }))
 
 const { GET } = await import('./route')
+const { TERMS_VERSION } = await import('@/lib/site')
 
 const CAMPAIGN = 'https://whydonate.com/nl/fundraising/rondjemee'
 const NATIVE_IOS = { 'user-agent': 'RondjeApp/1 iOS', 'x-rondje-platform': 'ios' }
@@ -23,7 +24,7 @@ async function support(headers: Record<string, string>) {
 beforeEach(() => {
   vi.stubEnv('CROWDFUNDING_URL', CAMPAIGN)
   vi.stubEnv('OPERATOR_NAME', 'Laurens Bos')
-  for (const name of ['SUPPORT_IN_APP', 'SUPPORT_IN_APP_IOS', 'SUPPORT_IN_APP_ANDROID']) vi.stubEnv(name, undefined)
+  for (const name of ['SUPPORT_IN_APP', 'SUPPORT_IN_APP_IOS', 'SUPPORT_IN_APP_ANDROID', 'LIVE_LOCATION', 'TEST_CLOCK', 'VERCEL_ENV']) vi.stubEnv(name, undefined)
 })
 afterEach(() => vi.unstubAllEnvs())
 
@@ -52,5 +53,36 @@ describe('GET /api/v1/config', () => {
   it('leaves `support` out while there is no campaign with a named recipient', async () => {
     vi.stubEnv('OPERATOR_NAME', undefined)
     expect(await support(NATIVE_IOS)).toBeUndefined()
+  })
+})
+
+describe('GET /api/v1/config: live location and the terms', () => {
+  async function config(headers: Record<string, string> = NATIVE_IOS) {
+    const res = await GET(new Request('https://rondjemee.nl/api/v1/config', { headers }))
+    return (await res.json()) as { features: { liveLocation: boolean }; terms: { version: string; effectiveAt: string } }
+  }
+
+  it('says live location is off while LIVE_LOCATION is unset, and on only when it says so', async () => {
+    expect((await config()).features).toEqual({ liveLocation: false })
+    vi.stubEnv('LIVE_LOCATION', 'aan')
+    expect((await config()).features).toEqual({ liveLocation: true })
+    vi.stubEnv('LIVE_LOCATION', '0')
+    expect((await config()).features).toEqual({ liveLocation: false })
+  })
+
+  it('lets only a test server switch it off for one app, never production', async () => {
+    vi.stubEnv('LIVE_LOCATION', '1')
+    const off = { ...NATIVE_IOS, 'x-rondje-live-location': 'off' }
+    expect((await config(off)).features.liveLocation).toBe(true)
+    vi.stubEnv('TEST_CLOCK', '1')
+    expect((await config(off)).features.liveLocation).toBe(false)
+    vi.stubEnv('VERCEL_ENV', 'production')
+    expect((await config(off)).features.liveLocation).toBe(true)
+  })
+
+  it('names the current terms and the moment they take effect', async () => {
+    const { terms } = await config()
+    expect(terms.version).toBe(TERMS_VERSION)
+    expect(new Date(terms.effectiveAt).toISOString()).toBe(terms.effectiveAt)
   })
 })

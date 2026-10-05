@@ -13,10 +13,12 @@ import { Icon } from '@/components/Icon'
 import { PlanBar } from '@/components/PlanBar'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
+import { TermsNotice } from '@/components/TermsNotice'
 import { isNewDog } from '@/lib/nudges'
 import { pageMetadata } from '@/lib/seo'
-import { canRequestMeeting, canRequestSolo, openRequestConflict } from '@/lib/rules'
+import { canRequestMeeting, canRequestSolo, liveLocationReason, openRequestConflict } from '@/lib/rules'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
+import { liveLocationNow } from '@/server/live-location'
 import { dogFacts, getDogDetail, myGroupSignups, openRequestsFor, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
 import { dogShareFor, localeOf } from '@/server/share'
@@ -59,13 +61,14 @@ export default async function DogPage({
   const detail = await getDogDetail(id, viewer)
   if (!detail) notFound()
   const { dog, host, slots, groupWalks, canSeePrivate, isMine, relation, ownerShielded } = detail
-  const [t, format, facts, joined, share, open] = await Promise.all([
+  const [t, format, facts, joined, share, open, liveLocation] = await Promise.all([
     getTranslations(),
     getFormatter(),
     viewer?.profile ? walkerFacts(viewer) : null,
     viewer ? myGroupSignups(viewer.userId) : new Set<string>(),
     dogShareFor(detail, viewer),
     viewer?.profile && !isMine && host.kind === 'owner' ? openRequestsFor(viewer.userId, dog.id) : [],
+    liveLocationNow(),
   ])
   // Already a request or appointment with this dog: say so, instead of a form for a second one.
   // After an agreed first call the form stays, to plan meeting in person.
@@ -76,7 +79,8 @@ export default async function DogPage({
   let soloReason: string | null = 'not-signed-in'
   if (facts && relation) {
     meetReason = canRequestMeeting(facts, dogFacts(dog), relation)
-    soloReason = canRequestSolo(facts, dogFacts(dog), relation)
+    // While live location is off, a walk alone is not asked for: 'live-location-off' (rules.ts).
+    soloReason = canRequestSolo(facts, dogFacts(dog), relation, liveLocation)
   } else if (viewer) {
     meetReason = soloReason = 'not-onboarded'
   }
@@ -101,11 +105,13 @@ export default async function DogPage({
       ? null
       : !viewer
         ? { href: `/signup?intent=walker&next=${plan}`, label: t('request.signupFirst', { name: dog.name }) }
-        : meetReason === 'needs-quiz'
-          ? { href: `/profile/quiz?next=${plan}`, label: t('request.quizFirst') }
-          : meetReason === null || soloReason === null
-            ? { href: '#plan', label: t('request.title') }
-            : null
+        : meetReason === 'needs-terms'
+          ? { href: '#plan', label: t('termsUpdate.first') }
+          : meetReason === 'needs-quiz'
+            ? { href: `/profile/quiz?next=${plan}`, label: t('request.quizFirst') }
+            : meetReason === null || soloReason === null
+              ? { href: '#plan', label: t('request.title') }
+              : null
 
   return (
     <div className="dog-page">
@@ -313,6 +319,7 @@ export default async function DogPage({
                         full={gw.booked >= gw.capacity}
                         signedIn={Boolean(viewer?.profile)}
                         needsQuiz={Boolean(viewer?.profile && !viewer.profile.quizPassedAt)}
+                        needsTerms={Boolean(facts?.needsTerms)}
                         next={`/dogs/${dog.id}`}
                       />
                     )}
@@ -348,7 +355,12 @@ export default async function DogPage({
         ) : null}
 
         {!isMine && host.kind === 'owner' ? (
-          viewer && meetReason === 'needs-quiz' ? (
+          viewer?.profile && meetReason === 'needs-terms' ? (
+            // Changed terms that took effect: the yes first, right here; then the form (lib/rules.ts termsReason).
+            <div id="plan">
+              <TermsNotice profile={viewer.profile} />
+            </div>
+          ) : viewer && meetReason === 'needs-quiz' ? (
             // Walkers do the safety quiz before asking for anything; it brings them straight back here.
             <div id="plan" className="card flat stack-s quiz-first">
               <p>{t('request.quizFirstText', { dog: dog.name })}</p>
@@ -369,9 +381,12 @@ export default async function DogPage({
                   ? {
                       pending: openRequest.status === 'pending',
                       when: format.dateTime(openRequest.startsAt, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }),
+                      // A walk alone agreed while live location was on: it waits, and the card says so calmly.
+                      paused: Boolean(liveLocationReason(openRequest.kind, liveLocation)),
                     }
                   : null
               }
+              liveLocation={liveLocation}
               walkerName={viewer.profile?.firstName ?? ''}
               meetReason={meetReason}
               soloReason={soloReason}

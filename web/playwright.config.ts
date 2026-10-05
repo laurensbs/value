@@ -37,6 +37,9 @@ export default defineConfig({
           SEED_DEMO: '1',
           // Pages may take their "now" from the x-rondje-now header (lib/clock.ts); never in production.
           TEST_CLOCK: '1',
+          // Live location is off unless switched on (lib/live-location.ts). The test server switches it on;
+          // a test browser switches it off again with the header x-rondje-live-location: off, so both are tested.
+          LIVE_LOCATION: '1',
           ADMIN_EMAILS: 'admin@e2e.test',
           // Fake values, only to test that the support link shows on the website and never in the apps.
           SUPPORT_URL: 'https://www.patreon.com/example',

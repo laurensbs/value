@@ -9,6 +9,7 @@ import { NEAR_KM, nearness } from '@/lib/nearby'
 import { NUDGE_KINDS } from '@/lib/nudges'
 import type { DogFacts, Relation, TrustSignals, WalkerFacts } from '@/lib/rules'
 import type { Viewer } from './session'
+import { termsBlock } from './terms'
 
 export type Dog = typeof s.dog.$inferSelect
 
@@ -160,11 +161,14 @@ export async function trustSignals(userId: string): Promise<TrustSignals> {
 
 export async function walkerFacts(viewer: Viewer): Promise<WalkerFacts> {
   const db = await getDb()
-  const [pending] = await db
-    .select({ n: count() })
-    .from(s.walkRequest)
-    .where(and(eq(s.walkRequest.walkerId, viewer.userId), eq(s.walkRequest.status, 'pending')))
   const p = viewer.profile
+  const [[pending], terms] = await Promise.all([
+    db
+      .select({ n: count() })
+      .from(s.walkRequest)
+      .where(and(eq(s.walkRequest.walkerId, viewer.userId), eq(s.walkRequest.status, 'pending'))),
+    termsBlock(p),
+  ])
   return {
     userId: viewer.userId,
     onboarded: Boolean(p),
@@ -174,6 +178,7 @@ export async function walkerFacts(viewer: Viewer): Promise<WalkerFacts> {
     pppLicense: Boolean(p?.pppLicense),
     experience: (p?.experience as WalkerFacts['experience']) ?? 'none',
     pendingRequests: pending.n,
+    needsTerms: terms === 'needs-terms',
   }
 }
 
