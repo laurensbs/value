@@ -1,8 +1,8 @@
 ---
 title: Condiciones de uso
 description: "Las condiciones para paseadores, propietarios y protectoras: quién puede participar, conocerse primero, sin dinero, responsabilidad y quejas."
-version: "0.2"
-updated: "2026-10-02"
+version: "0.3"
+updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
@@ -12,7 +12,7 @@ Estas condiciones se aplican a todas las personas que usan Rondje Mee: la web y 
 
 ## 1. Quiénes somos
 
-Rondje Mee es un servicio de [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], inscrita en la Cámara de Comercio de los Países Bajos (KvK) con el número [KvK-nummer] y con domicilio en [adres] («Rondje Mee» o «nosotros»).
+Rondje Mee es un servicio de Laurens Bos, el creador de Rondje Mee («Rondje Mee» o «nosotros»).
 
 Puedes contactarnos en {{contact}}. Es también nuestro punto de contacto para usuarios y autoridades conforme al Reglamento de Servicios Digitales (DSA). Puedes escribirnos en neerlandés, inglés, español o francés.
 
@@ -40,7 +40,7 @@ Debes tener **18 años o más** y usar Rondje Mee como particular y para ti. Las
 - Tienes una sola cuenta y no la compartes. Mantén en secreto tus datos de acceso y avísanos de inmediato si hay un uso indebido.
 - Eres responsable de lo que ocurra a través de tu cuenta, salvo que no hubieras podido evitarlo razonablemente.
 
-Los demás ven, entre otras cosas, tu nombre, tu foto y la zona aproximada donde vives (redondeada a unos 500 metros). Solo ven tu teléfono cuando se ha aceptado una solicitud. Consulta la Política de privacidad.
+Los demás ven, entre otras cosas, tu nombre, tu foto y la zona aproximada donde vives (redondeada a unos 500 metros). Solo ven tu teléfono y tu correo electrónico cuando se ha aceptado una solicitud. Si te apuntas a un paseo en grupo, la protectora ve tu teléfono enseguida. Consulta la Política de privacidad.
 
 ## 5. Funciones
 
@@ -53,7 +53,7 @@ Puedes tener más de una función.
 ## 6. Solicitudes, primer encuentro y confianza en solitario
 
 1. **Solicitud.** El paseante pide a través de Rondje Mee un primer encuentro o un paseo. El propietario o la protectora acepta o rechaza. Nadie está obligado a aceptar.
-2. **Datos de contacto.** Tras la aceptación, ambas partes ven el teléfono de la otra y los datos reservados necesarios, como el punto de encuentro. Úsalos solo para el paseo.
+2. **Datos de contacto.** Tras la aceptación, ambas partes ven el teléfono y el correo electrónico de la otra, y los datos reservados necesarios, como el punto de encuentro. Úsalos solo para el paseo.
 3. **Primer encuentro.** La primera vez siempre es un primer encuentro, con el propietario o alguien de la protectora presente.
 4. **Comprobación de identidad.** En el primer encuentro, el paseante muestra un documento de identidad válido. El propietario o la protectora comprueba que el nombre, la foto y la edad coinciden, y lo marca en la app. Rondje Mee no guarda ninguna copia. No le hagas fotos ni copias tú tampoco.
 5. **Confianza en solitario.** Solo puedes pasear solo a un perro cuando el propietario o la protectora lo autoriza expresamente en la app. Vale solo para ese perro y puede retirarse en cualquier momento.
@@ -73,7 +73,7 @@ Rondje Mee es gratuito para todos.
 - Las bolsas para excrementos, la correa, el arnés, los premios y el agua los aporta el propietario o la protectora, según el perfil del perro.
 - Si alguien te pide dinero, un IBAN o un pago mediante un enlace, no respondas y denúncialo.
 - Los mensajes de las solicitudes se revisan automáticamente para detectar peticiones de pago, números de cuenta y enlaces. Si se detecta algo, verás un aviso y una persona del equipo lo revisará.
-- **Apoyo voluntario a Rondje Mee.** Si nuestra web ofrece una forma de apoyar a Rondje Mee (por ejemplo, a través de Patreon), se trata de una aportación voluntaria sin contraprestación: no recibes prioridad, funciones extra ni otras ventajas, y no influye en los emparejamientos, la visibilidad ni la moderación. Al pago se aplican también las condiciones de esa plataforma. La aportación no desgrava.
+- **Apoyo voluntario a Rondje Mee.** Puedes apoyar a Rondje Mee con un donativo a través de la campaña de recaudación en Whydonate. El dinero va a Laurens Bos, el creador de Rondje Mee, para los costes de Rondje Mee. Laurens Bos destina el 10 % de todos los donativos a causas solidarias para perros y personas del barrio, como se indica en la página de apoyo de la web; adónde va y cuánto exactamente se publicará allí en cuanto se haya transferido. Por ahora no existe una aportación mensual fija. Un donativo es voluntario y sin contraprestación: no recibes prioridad, funciones extra ni otras ventajas, y no influye en los emparejamientos, la visibilidad ni la moderación. Al pago se aplican también las condiciones de Whydonate. Rondje Mee no es una fundación ni una entidad benéfica reconocida, así que un donativo no da derecho a ventajas fiscales. Si más adelante hay otra forma de apoyar a Rondje Mee, se aplicará lo mismo.
 
 ## 9. Qué esperamos de todos
 
@@ -114,14 +114,14 @@ Te recomendamos encarecidamente tener tu propio **seguro de responsabilidad civi
 
 ## 12. España: perros potencialmente peligrosos (PPP)
 
-En España hay normas adicionales para los *perros potencialmente peligrosos* (PPP), sobre todo en la Ley 50/1999 y el Real Decreto 287/2002. También pueden aplicarse normas autonómicas y municipales [pendiente de verificar].
+En España hay normas adicionales para los *perros potencialmente peligrosos* (PPP), sobre todo en la Ley 50/1999 y el Real Decreto 287/2002. También pueden aplicarse normas autonómicas y municipales.
 
 - El propietario indica en el perfil si el perro es PPP y cumple las obligaciones del titular, como la inscripción en el registro y el seguro.
 - Un perro PPP solo puede pasearlo un paseante que confirme tener una **licencia administrativa** para la tenencia de animales potencialmente peligrosos en vigor. Debes llevarla contigo durante el paseo.
-- En lugares públicos, el perro lleva **bozal** y va sujeto con una **correa no extensible de 2 metros como máximo** [pendiente de verificar].
+- En lugares públicos, el perro lleva **bozal** y va sujeto con una **correa no extensible de 2 metros como máximo**.
 - **Solo un perro PPP por persona.**
 
-También se aplica la Ley 7/2023, de protección de los derechos y el bienestar de los animales. Esta ley prevé que los titulares de perros tengan un seguro de responsabilidad civil. Cuándo es exigible esa obligación depende de su desarrollo reglamentario [pendiente de verificar].
+También se aplica la Ley 7/2023, de protección de los derechos y el bienestar de los animales. Esta ley prevé que los titulares de perros tengan un seguro de responsabilidad civil. Cuándo es exigible esa obligación depende de su desarrollo reglamentario.
 
 ## 13. Ubicación en tiempo real durante el paseo
 
@@ -154,20 +154,20 @@ Seamos claros: pasear perros conlleva riesgos. Un perro puede morder, escaparse 
 **Daños causados por el perro**
 
 - **Países Bajos:** el poseedor del perro (normalmente el propietario o la protectora) responde en principio, aunque lo pasee otra persona (art. 6:179 del Código Civil neerlandés). Un paseante que cometa un error también puede ser responsable (art. 6:162 del Código Civil neerlandés).
-- **Bélgica:** desde el 1 de enero de 2025 se aplica el nuevo Libro 6 del Código Civil belga. La responsabilidad por animales está en el art. 6.17 [pendiente de verificar]. Quién es el guardián del perro durante un paseo depende de las circunstancias [pendiente de verificar].
-- **España:** el poseedor de un animal, o el que se sirve de él, es responsable de los perjuicios que cause (art. 1905 del Código Civil). Un paseante también podría quedar incluido [pendiente de verificar].
+- **Bélgica:** desde el 1 de enero de 2025 se aplica el nuevo Libro 6 del Código Civil belga. La responsabilidad por animales está en el art. 6.17. Quién es el guardián del perro durante un paseo depende de las circunstancias.
+- **España:** el poseedor de un animal, o el que se sirve de él, es responsable de los perjuicios que cause (art. 1905 del Código Civil). Un paseante también podría quedar incluido.
 
 **Seguros**
 
 - Los propietarios y las protectoras tienen un seguro de responsabilidad civil que cubre los daños causados por el perro, también cuando lo pasea otra persona. Compruébalo en tu póliza.
 - Recomendamos encarecidamente a los paseantes tener su propio seguro de responsabilidad civil. Ojo: muchas pólizas excluyen los daños a animales o bienes bajo tu custodia, como el propio perro o su correa.
-- Rondje Mee no tiene un seguro para los paseos entre usuarios [pendiente de verificar], salvo que más adelante lo comuniquemos expresamente.
+- Rondje Mee no tiene un seguro para los paseos entre usuarios, salvo que más adelante lo comuniquemos expresamente.
 
 **Nuestra responsabilidad**
 
 - Hacemos todo lo posible para que Rondje Mee funcione de forma segura y correcta, pero no podemos garantizar que funcione siempre sin errores ni interrupciones.
 - No respondemos de lo que los usuarios acuerden o hagan entre ellos, de lo que hagan los perros, ni de la exactitud de lo que los usuarios cuenten sobre sí mismos o su perro. Esto no se aplica si hemos actuado mal nosotros.
-- En la medida en que lo permita la ley, solo respondemos de los daños directos causados por nuestro propio incumplimiento, hasta un máximo de [bedrag] € por incidente [propuesta – pendiente de verificar].
+- En la medida en que lo permita la ley, solo respondemos de los daños directos causados por nuestro propio incumplimiento.
 - Estas limitaciones **no** se aplican en caso de dolo o culpa grave de Rondje Mee, ni a la muerte o las lesiones causadas por nuestra culpa, ni cuando lo prohíba la normativa imperativa de consumo. Tus derechos legales como consumidor se mantienen siempre.
 
 ## 16. Tu contenido y nuestros derechos
@@ -187,7 +187,7 @@ Seamos claros: pasear perros conlleva riesgos. Un perro puede morder, escaparse 
 
 ## 18. Reclamaciones
 
-- ¿Una queja sobre Rondje Mee? Escribe a {{contact}}. Responderemos en un plazo de 14 días [propuesta].
+- ¿Una queja sobre Rondje Mee? Escribe a {{contact}}. Responderemos en un plazo de 14 días.
 - ¿No estás de acuerdo con una decisión sobre tu contenido, tu cuenta o tu denuncia? Reclama en un plazo de **6 meses** desde la app o por correo. Una persona que no participó en la primera decisión la revisará.
 - También puedes acudir a un órgano certificado de resolución extrajudicial de litigios conforme al DSA, o a los tribunales.
 - La plataforma europea de resolución de litigios en línea (ODR) dejó de funcionar en julio de 2025.

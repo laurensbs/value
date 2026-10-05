@@ -1,8 +1,8 @@
 ---
 title: Privacy Policy
 description: "Which personal data we process, why and for how long, who sees it and what your rights are. Your exact address is never public."
-version: "0.3"
-updated: "2026-10-02"
+version: "0.4"
+updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -12,26 +12,26 @@ This policy explains which personal data Rondje Mee processes, why, for how long
 
 ## 1. Who is responsible?
 
-[Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], Chamber of Commerce (KvK) number [KvK-nummer], is the controller of your data on Rondje Mee.
+Laurens Bos, the maker of Rondje Mee, is the controller of your data on Rondje Mee.
 
-Questions about privacy? Email us at {{contact}}. [To verify: whether a data protection officer is required. If so, add their contact details here.]
+Questions about privacy? Email us at {{contact}}.
 
 ## 2. In short
 
 - We collect as little data as possible.
 - Your exact address is never public. Others only see roughly where you live (rounded to about 500 metres).
-- The other person only sees your phone number once a request has been accepted.
+- The other person only sees your phone number and email address once a request has been accepted. If you sign up for a shelter's group walk, that shelter sees your phone number straight away.
 - We only share your location during a walk that you start yourself. We delete routes after 30 days.
 - We do **not** keep a copy of your identity document.
 - Your mood check-ins stay **only on your own phone**. We never receive them.
-- No ads, no tracking cookies, and we never sell data.
+- No ads, no tracking cookies, and we never sell data. We count visits to the website without cookies and without visitor profiles.
 
 ## 3. What data do we process?
 
 **Account and profile**
 
 - email address, password (stored in hashed form) or passkey (we only store the public key), or your Google or Apple account if you sign in with it;
-- first name, profile photo, birth year, country and city;
+- first name, profile photo, date of birth (others only see your age group), country and city;
 - roughly where you live, rounded to about 500 metres;
 - short bio, experience with dogs, languages;
 - phone number.
@@ -73,7 +73,8 @@ Questions about privacy? Email us at {{contact}}. [To verify: whether a data pro
 
 **Technical data**
 
-- IP address, device and browser type, login times, error messages and security logs.
+- IP address, device and browser type, login times, error messages and security logs;
+- visitor statistics for the website, without cookies: which page you viewed, which website you came from, country, region and city, and the type of device, browser and operating system (see section 8).
 
 **Shelters**
 
@@ -105,6 +106,7 @@ Questions about privacy? Email us at {{contact}}. [To verify: whether a data pro
 | Verifying shelters | Contract with the shelter, and legitimate interest: preventing fake accounts |
 | Handling suggestions and votes for shelters: contacting shelters ourselves and telling you when they join | Legitimate interest: more shelters and dogs on Rondje Mee. You can always object |
 | Security, troubleshooting, backups | Legitimate interest: a safe and working platform |
+| Visitor statistics for the website: which pages are viewed and how visitors find us, for example through a poster or Instagram | Legitimate interest: improving the website and how we explain Rondje Mee. Without cookies and without visitor profiles |
 | Service emails (for example about a new request or a change to the terms) | Contract |
 | Optional features, such as push notifications or signing in with Google or Apple | Consent (which you can withdraw at any time) or contract |
 | Responding to police, judicial or regulatory requests | Legal obligation |
@@ -124,16 +126,17 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 
 - We do **not keep a copy or photo of your identity document**. At the first meeting, the owner or shelter looks at your ID. In the app, they only tick a box to confirm that the check was done.
 - Your **mood check-ins** (how you feel before and after a walk) are only stored on your own device. They never reach our servers. If you delete the app or its data, they are gone.
-- No ads, no tracking cookies, no third-party analytics, no selling of data.
+- No ads, no tracking cookies and no selling of data. We do not build visitor profiles and do not follow you on other websites. We do count visits to the website, without cookies (see section 8).
 - **No streaks or addictive tricks.** Only you can see your points and badges. They are never lost and never give priority. Reminders never threaten you with losing anything.
 - We **don't read your chats**. If a message is about money or contains a link, the receiver automatically sees a warning. Admins only see that it happened and how often, not the text.
 - No decisions about you made solely by a computer. Our automated checks show a warning or flag a message. A person decides.
 
 ## 7. Who can see your data?
 
-- **Other users** see your public profile: first name, photo, age or birth year [to verify: which exactly], roughly where you live, bio, experience and languages.
-- **Once a request is accepted**, both sides also see each other's phone number, and the walker sees the protected details that the owner has released for that purpose.
-- **Shelters** see the details of walkers who sign up with them, and attendance at group walks. If a shelter uses that data in its own volunteer records, the shelter is responsible for that itself.
+- **Owners and shelters** see the following about a walker who sends them a request: first name, photo, age group (for example 25-34 years), town, the year they joined Rondje Mee, experience with dogs, what they wrote about themselves and the message with the request. They also see what the walker did on Rondje Mee: the number of walks completed, how often an owner or shelter saw their ID in person, and whether they passed the safety quiz. They never see the full date of birth.
+- **Anyone viewing a dog profile** sees the owner's first name, photo, town and what they wrote about themselves, and the dog's location rounded to about 500 metres.
+- **Once a request is accepted**, both sides also see each other's phone number and email address, and the walker sees the protected details that the owner has released for that purpose.
+- **Shelters** see the following about walkers who sign up for a group walk: first name, photo, age group and phone number, and whether the shelter has already seen their ID in person. The shelter also records attendance. If a shelter uses that data in its own volunteer records, the shelter is responsible for that itself.
 - **Private feedback** is never shown to the other person. Only a limited number of Rondje Mee team members can read it.
 - **Authorities** such as the police only receive data where the law requires it, or where someone's life or safety is at risk.
 
@@ -143,14 +146,16 @@ We work with the parties below. We sign a data processing agreement with our pro
 
 | Party | What | Where |
 |---|---|---|
-| Vercel Inc. | Hosting of the website, app server and photo storage (Vercel Blob) | EU region where possible; Vercel is a US company [to verify: regions] |
-| Neon Inc. | Database (Postgres) | EU region [to verify: which] |
-| Resend Inc. (once email is switched on) | Sending emails: a new password, and notifications such as a new request or a walk that runs late (you can turn these off in your profile) | USA; transfer based on standard contractual clauses [to be checked] |
+| Vercel Inc. | Hosting of the website and app server, photo storage (Vercel Blob) and visitor statistics for the website (Vercel Web Analytics) | The app server runs in Frankfurt (EU). Vercel is a US company and may also process data outside the EU, including in the US. Vercel participates in the EU-U.S. Data Privacy Framework |
+| Neon, LLC (part of Databricks) | Database (Postgres) | Frankfurt (EU). Neon is a US company and participates in the EU-U.S. Data Privacy Framework |
+| Resend Inc. (once email is switched on) | Sending emails: a new password, and notifications such as a new request or a walk that runs late (you can turn these off in your profile) | USA: Resend stores the data there. Transfer based on standard contractual clauses and the EU-U.S. Data Privacy Framework |
 | Google or Apple | Sign-in, only if you choose it | Google or Apple's own responsibility |
 | Apple, Google or Mozilla | Push notifications through your phone or browser, only if you turn them on. They receive the notification text, no routes or messages | Apple's, Google's or Mozilla's own terms |
-| OpenStreetMap Foundation | Map images (tiles) | United Kingdom [to verify] |
+| OpenStreetMap Foundation | Map images (tiles) | The foundation is based in the United Kingdom. The map images are delivered through a worldwide network of servers (a CDN) |
 
-**Maps.** When you open a map, your device loads map images from the OpenStreetMap Foundation's servers. Those servers receive your IP address and technical data about your device. The OpenStreetMap Foundation is responsible for this itself [to verify] and has its own privacy policy.
+**Maps.** When you open a map, your device loads map images from the OpenStreetMap Foundation's servers. Those servers receive your IP address and technical data about your device. The OpenStreetMap Foundation processes this data under its own privacy policy.
+
+**Visitor statistics.** On the website we count visits with Vercel Web Analytics. This shows us which pages are viewed and how people find us, for example through a poster or Instagram. For each visit, Vercel receives: the page, the time, the website you came from, country, region and city, and the type of device, browser and operating system. Of the web address we only keep the page: the rest is dropped, except campaign codes such as `utm_source`, and IDs in the address (such as a dog's) are replaced with `:id`. No cookies are set. Vercel recognises a visit by a code calculated from your browser's request, and discards that code after 24 hours. The counts are not linked to you, your account or your IP address: we only see totals, no visitor profiles. Admin pages are not counted, and nothing is counted in the iPhone and Android apps.
 
 **App stores.** If you download the app from the App Store or Google Play, Apple or Google process data under their own privacy policies.
 
@@ -158,10 +163,10 @@ We work with the parties below. We sign a data processing agreement with our pro
 
 We store data in the EU wherever possible. Some service providers are US companies. As a result, data may end up in the United States, for example during maintenance or support. In that case we ensure appropriate safeguards:
 
-- the EU-US Data Privacy Framework, if the provider is certified under it [to verify for each provider];
+- the EU-US Data Privacy Framework, if the provider is certified under it;
 - or the European Commission's standard contractual clauses, with supplementary measures where necessary.
 
-For the United Kingdom, an adequacy decision of the European Commission applies [to verify: validity].
+For the United Kingdom, an adequacy decision of the European Commission applies.
 
 Would you like to know more about these safeguards? Email us.
 
@@ -172,14 +177,16 @@ Would you like to know more about these safeguards? Email us.
 | Account and profile data, dog profiles | As long as your account exists. After deletion, up to 30 more days (backups) |
 | Walk route points and photos | 30 days. Longer only if needed for an open report |
 | Private feedback | 1 year |
-| Reports and related data | Up to 2 years after the report is closed [proposal] |
-| Data about a ban, to prevent someone from signing up again | [proposal: as short as possible, e.g. 2 years – to verify] |
-| Requests | [retention period to be decided] |
+| Reports and related data | Up to 2 years after the report is closed. After that we delete the report automatically, together with the entries about it in our log |
+| A ban (a blocked account) and the reason for it | As long as the account exists |
+| Requests | As long as your account exists |
 | Chat messages between walker and owner or shelter | 1 year |
 | Points, level, badges and weekly goal | As long as your account exists |
 | Reminders we sent | As a notification in your account for as long as it exists. To avoid sending too many, we only look at the last year |
 | Suggestions and votes for shelters | Up to a year after we handled them; suggestions nothing happened with after two years |
-| Security logs | [retention period to be decided, e.g. 90 days] |
+| Our log of actions on Rondje Mee, such as a flagged message, a ban or a verified shelter | Entries about a report are deleted together with the report. We do not yet have a fixed period for the other entries |
+| Technical logs of our hosting | Vercel keeps them according to its own retention periods |
+| Visitor statistics | Only as totals that cannot be traced back to you. The code Vercel uses to recognise a visit is discarded after 24 hours |
 | Mood check-ins | Not with us. Only on your own device, until you delete them |
 
 If we must keep data longer because the law requires it, or for a legal dispute, we only do so for as long as necessary.
@@ -222,7 +229,7 @@ Not happy with how we handle your data? Please tell us first. You can also alway
 
 ## 14. Data protection impact assessment (DPIA)
 
-Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we carry out a data protection impact assessment (DPIA) before launching the service, and keep it up to date [to verify: status].
+Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are preparing a data protection impact assessment (DPIA). It is not finished yet. We will complete it before the first real walk with live location takes place, and keep it up to date after that. Live location always works as described in section 5: only during a walk that the walker starts, and routes are deleted after 30 days.
 
 ## 15. Age
 

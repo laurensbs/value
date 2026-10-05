@@ -1,8 +1,8 @@
 ---
 title: Terms of Use
 description: "The terms for walkers, owners and shelters: who may take part, meeting first, no money, liability and complaints."
-version: "0.2"
-updated: "2026-10-02"
+version: "0.3"
+updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -12,7 +12,7 @@ These terms apply to everyone who uses Rondje Mee: the website and the iOS and A
 
 ## 1. Who we are
 
-Rondje Mee is provided by [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], registered with the Dutch Chamber of Commerce (KvK) under number [KvK-nummer], with its address at [adres] ("Rondje Mee", "we" or "us").
+Rondje Mee is provided by Laurens Bos, the maker of Rondje Mee ("Rondje Mee", "we" or "us").
 
 You can reach us at {{contact}}. This is also our point of contact for users and public authorities under the Digital Services Act (DSA). You can write to us in Dutch, English, Spanish or French.
 
@@ -40,7 +40,7 @@ You must be **18 or older** and use Rondje Mee as a private individual, for your
 - You have one account and share it with no one. Keep your login details secret and report any misuse immediately.
 - You are responsible for what happens through your account, unless you could not reasonably have prevented it.
 
-Others can see, among other things, your first name, photo and roughly where you live (rounded to about 500 metres). They only see your phone number once a request has been accepted. See the Privacy Policy.
+Others can see, among other things, your first name, photo and roughly where you live (rounded to about 500 metres). They only see your phone number and email address once a request has been accepted. If you sign up for a group walk, the shelter sees your phone number straight away. See the Privacy Policy.
 
 ## 5. Roles
 
@@ -53,7 +53,7 @@ You can have more than one role.
 ## 6. Requests, first meeting and solo trust
 
 1. **Request.** A walker uses Rondje Mee to ask for a first meeting or a walk. The owner or shelter accepts or declines. No one is obliged to accept.
-2. **Contact details.** Once accepted, both sides see each other's phone number and the protected details needed, such as the meeting point. Use them only for the walk.
+2. **Contact details.** Once accepted, both sides see each other's phone number and email address, and the protected details needed, such as the meeting point. Use them only for the walk.
 3. **First meeting.** The first time you meet is always a first meeting (*kennismaking*), with the owner or a shelter staff member present.
 4. **ID check.** At the first meeting, the walker shows a valid identity document. The owner or shelter checks that the name, photo and age match and ticks a box in the app. Rondje Mee keeps no copy. Please do not take a photo or copy of it yourself either.
 5. **Solo trust.** Walking a dog alone is only allowed once the owner or shelter has explicitly given permission in the app. This applies to that one dog only and can be withdrawn at any time.
@@ -73,7 +73,7 @@ Rondje Mee is free for everyone.
 - Poop bags, leash, harness, treats and water are provided by the owner or shelter, as stated on the dog's profile.
 - If someone asks for money, bank details (IBAN) or a payment through a link, do not respond and report it to us.
 - Messages sent with requests are automatically checked for payment requests, bank account numbers and links. If something is found, you see a warning and a team member reviews it.
-- **Voluntary support for Rondje Mee.** If our website offers a way to support Rondje Mee (for example through Patreon), that is a voluntary contribution without anything in return: you get no priority, extra features or other benefits, and it has no influence on matching, visibility or moderation. The platform's own terms also apply to the payment. A contribution is not tax-deductible.
+- **Voluntary support for Rondje Mee.** You can support Rondje Mee with a gift through the fundraiser on Whydonate. The money goes to Laurens Bos, the maker of Rondje Mee, for the costs of Rondje Mee. Laurens Bos passes 10% of all gifts on to good causes for dogs and people in the neighbourhood, as stated on the support page of the website; where it goes and exactly how much will be listed there once it has been transferred. There is no fixed monthly contribution at the moment. A gift is voluntary and without anything in return: you get no priority, extra features or other benefits, and it has no influence on matching, visibility or moderation. Whydonate's own terms also apply to the payment. Rondje Mee is not a foundation or a registered charity, so a gift gives you no tax benefit. If another way to support Rondje Mee is added later, the same applies to it.
 
 ## 9. What we expect from everyone
 
@@ -114,14 +114,14 @@ We strongly recommend that you have your own **personal liability insurance** (s
 
 ## 12. Spain: potentially dangerous dogs (PPP)
 
-In Spain, extra rules apply to *perros potencialmente peligrosos* (PPP), mainly under Ley 50/1999 and Real Decreto 287/2002. Regional and municipal rules may also apply [to verify].
+In Spain, extra rules apply to *perros potencialmente peligrosos* (PPP), mainly under Ley 50/1999 and Real Decreto 287/2002. Regional and municipal rules may also apply.
 
 - The owner states on the profile whether the dog is a PPP dog, and meets the keeper's obligations, such as registration and insurance.
 - A PPP dog may only be walked by a walker who confirms they hold a **valid PPP licence** (*licencia administrativa*). You carry it with you during the walk.
-- In public places the dog wears a **muzzle** and is kept on a non-extendable **leash of no more than 2 metres** [to verify].
+- In public places the dog wears a **muzzle** and is kept on a non-extendable **leash of no more than 2 metres**.
 - **No more than one PPP dog per person.**
 
-Ley 7/2023 on the rights and welfare of animals also applies. Under this law, dog keepers must have liability insurance. Exactly when this obligation takes effect depends on further implementing rules [to verify].
+Ley 7/2023 on the rights and welfare of animals also applies. Under this law, dog keepers must have liability insurance. Exactly when this obligation takes effect depends on further implementing rules.
 
 ## 13. Live location during a walk
 
@@ -154,20 +154,20 @@ Let's be honest: walking dogs involves risks. A dog can bite, run away or knock 
 **Damage caused by the dog**
 
 - **Netherlands:** the possessor of the dog (usually the owner or the shelter) is in principle liable, even when someone else is walking it (art. 6:179 Dutch Civil Code). A walker who makes a mistake may also be liable (art. 6:162 Dutch Civil Code).
-- **Belgium:** since 1 January 2025, the new Book 6 of the Civil Code applies. Liability for animals is set out in art. 6.17 [to verify]. Who counts as the custodian of the dog during a walk depends on the circumstances [to verify].
-- **Spain:** the possessor of an animal, or whoever makes use of it, is liable for the damage it causes (art. 1905 Spanish Civil Code). A walker may also fall under this rule [to verify].
+- **Belgium:** since 1 January 2025, the new Book 6 of the Civil Code applies. Liability for animals is set out in art. 6.17. Who counts as the custodian of the dog during a walk depends on the circumstances.
+- **Spain:** the possessor of an animal, or whoever makes use of it, is liable for the damage it causes (art. 1905 Spanish Civil Code). A walker may also fall under this rule.
 
 **Insurance**
 
 - Owners and shelters must have liability insurance that covers damage caused by the dog, including when someone else walks it. Check this in your policy.
 - We strongly recommend that walkers have their own personal liability insurance. Please note: many policies do not cover damage to animals or things "in your custody", such as the dog itself or its leash.
-- Rondje Mee has no insurance for walks between users [to verify], unless we expressly tell you otherwise later.
+- Rondje Mee has no insurance for walks between users, unless we expressly tell you otherwise later.
 
 **Our liability**
 
 - We do our best to offer Rondje Mee in a safe and working state, but cannot guarantee that it will always work without errors or interruptions.
 - We are not liable for what users agree or do with each other, for what dogs do, or for the accuracy of what users say about themselves or their dog. This does not apply where we ourselves have done something wrong.
-- To the extent permitted by law, we are only liable for direct damage caused by our own failure, up to a maximum of € [bedrag] per event [proposal – to verify].
+- To the extent permitted by law, we are only liable for direct damage caused by our own failure.
 - These limitations do **not** apply in the case of intent or gross negligence on the part of Rondje Mee, to death or personal injury caused by our fault, or where mandatory consumer law prohibits them. Your statutory rights as a consumer always remain in place.
 
 ## 16. Your content and our rights
@@ -187,7 +187,7 @@ Let's be honest: walking dogs involves risks. A dog can bite, run away or knock 
 
 ## 18. Complaints and appeals
 
-- A complaint about Rondje Mee? Email {{contact}}. We will respond within 14 days [proposal].
+- A complaint about Rondje Mee? Email {{contact}}. We will respond within 14 days.
 - Disagree with a decision about your content, your account or your report? Appeal within **6 months** through the app or by email. Someone who was not involved in the original decision will review it.
 - You can also use a certified out-of-court dispute settlement body under the DSA, or go to court.
 - The European ODR platform for online disputes was discontinued in July 2025.

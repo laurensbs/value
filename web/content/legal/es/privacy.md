@@ -1,8 +1,8 @@
 ---
 title: Política de privacidad
 description: "Qué datos personales tratamos, por qué y durante cuánto tiempo, quién los ve y qué derechos tienes. Tu dirección exacta nunca es pública."
-version: "0.3"
-updated: "2026-10-02"
+version: "0.4"
+updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
@@ -12,26 +12,26 @@ En esta política te explicamos qué datos personales trata Rondje Mee, para qu�
 
 ## 1. ¿Quién es el responsable del tratamiento?
 
-El responsable del tratamiento de tus datos en Rondje Mee es [Naam rechtspersoon, bijv. Stichting Rondje Mee i.o.], [adres], con número de la Cámara de Comercio neerlandesa (KvK) [KvK-nummer].
+El responsable del tratamiento de tus datos en Rondje Mee es Laurens Bos, el creador de Rondje Mee.
 
-¿Preguntas sobre privacidad? Escríbenos a {{contact}}. [Pendiente de verificar: si es obligatorio nombrar un delegado de protección de datos. En ese caso, indicar aquí sus datos de contacto.]
+¿Preguntas sobre privacidad? Escríbenos a {{contact}}.
 
 ## 2. En resumen
 
 - Recogemos los menos datos posibles.
 - Tu dirección exacta nunca es pública. Los demás solo ven la zona aproximada donde vives (redondeada a unos 500 metros).
-- La otra persona solo ve tu teléfono cuando se ha aceptado una solicitud.
+- La otra persona solo ve tu teléfono y tu correo electrónico cuando se ha aceptado una solicitud. Si te apuntas a un paseo en grupo de una protectora, esa protectora ve tu teléfono enseguida.
 - Solo compartimos tu ubicación durante un paseo que inicias tú. Borramos los recorridos a los 30 días.
 - **No** guardamos copias de tu documento de identidad.
 - Tus registros de ánimo se quedan **solo en tu móvil**. Nunca los recibimos.
-- Sin publicidad, sin cookies de seguimiento, y nunca vendemos datos.
+- Sin publicidad, sin cookies de seguimiento, y nunca vendemos datos. Contamos las visitas a la web sin cookies y sin perfiles de visitantes.
 
 ## 3. ¿Qué datos tratamos?
 
 **Cuenta y perfil**
 
 - correo electrónico, contraseña (guardada cifrada mediante *hash*) o llave de acceso (*passkey*; solo guardamos la clave pública), o tu cuenta de Google o Apple si la usas para iniciar sesión;
-- nombre, foto de perfil, año de nacimiento, país y ciudad;
+- nombre, foto de perfil, fecha de nacimiento (los demás solo ven tu franja de edad), país y ciudad;
 - zona aproximada donde vives, redondeada a unos 500 metros;
 - breve presentación, experiencia con perros, idiomas;
 - número de teléfono.
@@ -73,7 +73,8 @@ El responsable del tratamiento de tus datos en Rondje Mee es [Naam rechtspersoon
 
 **Datos técnicos**
 
-- dirección IP, tipo de dispositivo y navegador, inicios de sesión, mensajes de error y registros de seguridad.
+- dirección IP, tipo de dispositivo y navegador, inicios de sesión, mensajes de error y registros de seguridad;
+- estadísticas de visitas a la web, sin cookies: qué página viste, desde qué web llegaste, país, región y ciudad, y el tipo de dispositivo, navegador y sistema operativo (ver el apartado 8).
 
 **Protectoras**
 
@@ -105,6 +106,7 @@ El responsable del tratamiento de tus datos en Rondje Mee es [Naam rechtspersoon
 | Verificar protectoras | Contrato con la protectora, e interés legítimo: evitar cuentas falsas |
 | Gestionar recomendaciones y votos de protectoras: contactar nosotros con ellas y avisarte cuando se unan | Interés legítimo: más protectoras y perros en Rondje Mee. Puedes oponerte siempre |
 | Seguridad, resolución de errores, copias de seguridad | Interés legítimo: una plataforma segura y que funcione |
+| Estadísticas de visitas a la web: qué páginas se ven y cómo nos encuentran los visitantes, por ejemplo a través de un cartel o de Instagram | Interés legítimo: mejorar la web y cómo explicamos Rondje Mee. Sin cookies y sin perfiles de visitantes |
 | Correos de servicio (por ejemplo, una nueva solicitud o un cambio en las condiciones) | Ejecución del contrato |
 | Funciones opcionales, como notificaciones *push* o iniciar sesión con Google o Apple | Consentimiento (que puedes retirar en cualquier momento) o ejecución del contrato |
 | Atender requerimientos de la policía, los juzgados o las autoridades de control | Obligación legal |
@@ -124,16 +126,17 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 
 - **No guardamos copias ni fotos de tu documento de identidad.** En el primer encuentro, el propietario o la protectora mira tu documento. En la app solo marca que la comprobación se ha hecho.
 - Tus **registros de ánimo** (cómo te sientes antes y después del paseo) solo se guardan en tu propio dispositivo. Nunca llegan a nuestros servidores. Si borras la app o sus datos, desaparecen.
-- Sin publicidad, sin cookies de seguimiento, sin analítica de terceros y sin venta de datos.
+- Sin publicidad, sin cookies de seguimiento y sin venta de datos. No creamos perfiles de visitantes ni te seguimos en otras webs. Sí contamos las visitas a la web, sin cookies (ver el apartado 8).
 - **Sin rachas ni trucos adictivos.** Solo tú ves tus puntos e insignias. Nunca se pierden y nunca dan prioridad. Los recordatorios nunca te amenazan con perder nada.
 - **No leemos tus chats.** Si un mensaje habla de dinero o contiene un enlace, quien lo recibe ve automáticamente un aviso. Los administradores solo ven que ocurrió y cuántas veces, no el texto.
 - No tomamos decisiones sobre ti basadas únicamente en un tratamiento automatizado. Nuestras revisiones automáticas muestran un aviso o marcan un mensaje. Decide una persona.
 
 ## 7. ¿Quién ve tus datos?
 
-- **Otros usuarios** ven tu perfil público: nombre, foto, edad o año de nacimiento [pendiente de verificar: qué exactamente], zona aproximada, presentación, experiencia e idiomas.
-- **Tras aceptar** una solicitud, ambas partes ven también el teléfono de la otra, y el paseante ve los datos reservados que el propietario haya habilitado para ello.
-- **Las protectoras** ven los datos de los paseantes que se apuntan con ellas y la asistencia a los paseos en grupo. Si una protectora usa esos datos en su propia gestión de voluntariado, es responsable de ello.
+- **Los propietarios y las protectoras** ven de un paseante que les envía una solicitud: nombre, foto, franja de edad (por ejemplo, 25-34 años), localidad, desde qué año está en Rondje Mee, experiencia con perros, lo que escribió sobre sí mismo y el mensaje de la solicitud. También ven lo que el paseante hizo en Rondje Mee: el número de paseos realizados, cuántas veces un propietario o una protectora vio su documento de identidad en persona y si aprobó el test de seguridad. Nunca ven la fecha de nacimiento completa.
+- **Quien ve el perfil de un perro** ve del propietario el nombre, la foto, la localidad y lo que escribió sobre sí mismo, y la ubicación del perro redondeada a unos 500 metros.
+- **Tras aceptar** una solicitud, ambas partes ven también el teléfono y el correo electrónico de la otra, y el paseante ve los datos reservados que el propietario haya habilitado para ello.
+- **Las protectoras** ven de los paseantes que se apuntan a un paseo en grupo: nombre, foto, franja de edad y teléfono, y si la protectora ya vio su documento de identidad en persona. La protectora también registra la asistencia. Si una protectora usa esos datos en su propia gestión de voluntariado, es responsable de ello.
 - **Las valoraciones privadas** nunca las ve la otra persona. Solo puede leerlas un número limitado de personas del equipo de Rondje Mee.
 - **Las autoridades**, como la policía, solo reciben datos cuando la ley lo exige o cuando la vida o la seguridad de alguien está en peligro.
 
@@ -143,14 +146,16 @@ Trabajamos con las siguientes entidades. Con los encargados del tratamiento firm
 
 | Entidad | Para qué | Dónde |
 |---|---|---|
-| Vercel Inc. | Alojamiento de la web, servidor de la app y almacenamiento de fotos (Vercel Blob) | Región de la UE cuando sea posible; Vercel es una empresa estadounidense [pendiente de verificar: regiones] |
-| Neon Inc. | Base de datos (Postgres) | Región de la UE [pendiente de verificar: cuál] |
-| Resend Inc. (cuando el correo esté activado) | Envío de correos: una contraseña nueva y avisos como una solicitud nueva o un paseo que se alarga (puedes desactivarlos en tu perfil) | EE. UU.; transferencia basada en cláusulas contractuales tipo [por verificar] |
+| Vercel Inc. | Alojamiento de la web y del servidor de la app, almacenamiento de fotos (Vercel Blob) y estadísticas de visitas a la web (Vercel Web Analytics) | El servidor de la app funciona en Fráncfort (UE). Vercel es una empresa estadounidense y también puede tratar datos fuera de la UE, entre otros lugares en EE. UU. Vercel está adherida al Marco de Privacidad de Datos UE-EE. UU. |
+| Neon, LLC (parte de Databricks) | Base de datos (Postgres) | Fráncfort (UE). Neon es una empresa estadounidense adherida al Marco de Privacidad de Datos UE-EE. UU. |
+| Resend Inc. (cuando el correo esté activado) | Envío de correos: una contraseña nueva y avisos como una solicitud nueva o un paseo que se alarga (puedes desactivarlos en tu perfil) | EE. UU.: Resend guarda allí los datos. Transferencia basada en cláusulas contractuales tipo y en el Marco de Privacidad de Datos UE-EE. UU. |
 | Google o Apple | Inicio de sesión, solo si lo eliges | Bajo la responsabilidad de Google o Apple |
 | Apple, Google o Mozilla | Notificaciones *push* a través de tu teléfono o navegador, solo si las activas. Reciben el texto del aviso, no rutas ni mensajes | Según las condiciones de Apple, Google o Mozilla |
-| OpenStreetMap Foundation | Imágenes de mapas (teselas) | Reino Unido [pendiente de verificar] |
+| OpenStreetMap Foundation | Imágenes de mapas (teselas) | La fundación tiene su sede en el Reino Unido. Las imágenes llegan a través de una red mundial de servidores (una CDN) |
 
-**Mapas.** Al abrir un mapa, tu dispositivo carga imágenes de los servidores de la OpenStreetMap Foundation. Esos servidores reciben tu dirección IP y datos técnicos de tu dispositivo. La OpenStreetMap Foundation es responsable de ese tratamiento [pendiente de verificar] y tiene su propia política de privacidad.
+**Mapas.** Al abrir un mapa, tu dispositivo carga imágenes de los servidores de la OpenStreetMap Foundation. Esos servidores reciben tu dirección IP y datos técnicos de tu dispositivo. La OpenStreetMap Foundation trata esos datos según su propia política de privacidad.
+
+**Estadísticas de visitas.** En la web contamos las visitas con Vercel Web Analytics. Así vemos qué páginas se ven y cómo nos encuentra la gente, por ejemplo a través de un cartel o de Instagram. Por cada visita, Vercel recibe: la página, la hora, la web desde la que llegaste, país, región y ciudad, y el tipo de dispositivo, navegador y sistema operativo. De la dirección web solo conservamos la página: el resto se elimina, salvo los códigos de campaña como `utm_source`, y los identificadores de la dirección (como el de un perro) se sustituyen por `:id`. No se instalan cookies. Vercel reconoce una visita mediante un código calculado a partir de la petición de tu navegador, y lo descarta a las 24 horas. Los recuentos no están vinculados a ti, a tu cuenta ni a tu dirección IP: solo vemos totales, sin perfiles de visitantes. Las páginas de administración no cuentan, y en la app para iPhone y Android no contamos nada.
 
 **Tiendas de aplicaciones.** Si descargas la app en App Store o Google Play, Apple o Google tratan datos según sus propias políticas de privacidad.
 
@@ -158,10 +163,10 @@ Trabajamos con las siguientes entidades. Con los encargados del tratamiento firm
 
 Guardamos los datos en la UE siempre que es posible. Algunos proveedores son empresas estadounidenses, por lo que los datos podrían llegar a Estados Unidos, por ejemplo durante tareas de mantenimiento o soporte. En ese caso aplicamos garantías adecuadas:
 
-- el Marco de Privacidad de Datos UE-EE. UU. (*Data Privacy Framework*), si el proveedor está adherido [pendiente de verificar para cada proveedor];
+- el Marco de Privacidad de Datos UE-EE. UU. (*Data Privacy Framework*), si el proveedor está adherido;
 - o las cláusulas contractuales tipo de la Comisión Europea, con medidas adicionales cuando sea necesario.
 
-Para el Reino Unido existe una decisión de adecuación de la Comisión Europea [pendiente de verificar: vigencia].
+Para el Reino Unido existe una decisión de adecuación de la Comisión Europea.
 
 ¿Quieres saber más sobre estas garantías? Escríbenos.
 
@@ -172,14 +177,16 @@ Para el Reino Unido existe una decisión de adecuación de la Comisión Europea 
 | Datos de cuenta y perfil, perfiles de perros | Mientras exista tu cuenta. Tras eliminarla, hasta 30 días más (copias de seguridad) |
 | Puntos de recorrido y fotos de los paseos | 30 días. Más tiempo solo si hace falta para una denuncia abierta |
 | Valoraciones privadas | 1 año |
-| Denuncias y datos relacionados | Hasta 2 años después de cerrar la denuncia [propuesta] |
-| Datos sobre una expulsión, para evitar que alguien vuelva a registrarse | [propuesta: lo más breve posible, p. ej. 2 años – pendiente de verificar] |
-| Solicitudes | [plazo por determinar] |
+| Denuncias y datos relacionados | Hasta 2 años después de cerrar la denuncia. Después borramos la denuncia automáticamente, junto con sus entradas en nuestro registro |
+| Una expulsión (el bloqueo de una cuenta) y su motivo | Mientras exista la cuenta |
+| Solicitudes | Mientras exista tu cuenta |
 | Mensajes de chat entre paseante y propietario o protectora | 1 año |
 | Puntos, nivel, insignias y objetivo semanal | Mientras exista tu cuenta |
 | Recordatorios enviados | Como aviso en tu cuenta mientras exista. Para no enviar demasiados, solo miramos el último año |
 | Recomendaciones y votos de protectoras | Hasta un año después de gestionarlas; las que no se gestionaron, a los dos años |
-| Registros de seguridad | [plazo por determinar, p. ej. 90 días] |
+| Nuestro registro de acciones en Rondje Mee, como un mensaje marcado, una expulsión o una protectora verificada | Las entradas sobre una denuncia se borran junto con la denuncia. Para las demás entradas aún no tenemos un plazo fijo |
+| Registros técnicos del alojamiento | Vercel los conserva según sus propios plazos |
+| Estadísticas de visitas | Solo como totales que no permiten identificarte. El código con el que Vercel reconoce una visita desaparece a las 24 horas |
 | Registros de ánimo | No los tenemos. Solo en tu dispositivo, hasta que los borres |
 
 Si la ley nos obliga a conservar datos más tiempo, o para un litigio, solo lo haremos el tiempo necesario.
@@ -222,7 +229,7 @@ Algunos datos no podemos borrarlos de inmediato, por ejemplo si son necesarios p
 
 ## 14. Evaluación de impacto (EIPD)
 
-Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso realizamos una evaluación de impacto relativa a la protección de datos (EIPD) antes de lanzar el servicio, y la mantenemos actualizada [pendiente de verificar: estado].
+Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso estamos preparando una evaluación de impacto relativa a la protección de datos (EIPD). Todavía no está terminada. La completaremos antes de que se haga el primer paseo de verdad con ubicación en tiempo real, y después la mantendremos actualizada. La ubicación en tiempo real funciona siempre como dice el apartado 5: solo durante un paseo que inicia el paseante, y los recorridos se borran a los 30 días.
 
 ## 15. Edad
 

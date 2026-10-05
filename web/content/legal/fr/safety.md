@@ -2,7 +2,7 @@
 title: Protocole de sécurité et d'incident
 description: "Se promener en sécurité, et que faire en cas de problème : avant et pendant la balade, numéros utiles, aide pour vous et signalement."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
 
@@ -67,7 +67,7 @@ Ce protocole vous aide à promener un chien en toute sécurité et à bien réag
 2. Appelez le propriétaire ou le refuge, et le vétérinaire depuis l'écran SOS.
 3. Aux Pays-Bas, vous pouvez aussi appeler le **144** pour un animal en détresse.
 
-**Toujours :** signalez ensuite l'incident dans l'application. En Espagne, une morsure peut entraîner une mise en observation obligatoire du chien par un vétérinaire [à vérifier].
+**Toujours :** signalez ensuite l'incident dans l'application. En Espagne, une morsure peut entraîner une mise en observation obligatoire du chien par un vétérinaire.
 
 ### 3.3 Un accident de la circulation
 
@@ -98,7 +98,7 @@ Rondje Mee ne voit la position de quelqu'un que pendant une promenade active. En
 ### 3.6 Vous soupçonnez une maltraitance ou une négligence
 
 - **Envers un animal :** l'animal est en danger immédiat ? En Belgique, appelez la police (**101**) ou le service du bien-être animal de votre région. Aux Pays-Bas, appelez le **144**. En Espagne, appelez la Guardia Civil (SEPRONA, **062**) ou le **112**.
-- **Envers une personne**, par exemple un propriétaire âgé : en cas de danger immédiat, appelez le **112**. Aux Pays-Bas, vous pouvez aussi contacter Veilig Thuis (0800-2000) [à vérifier].
+- **Envers une personne**, par exemple un propriétaire âgé : en cas de danger immédiat, appelez le **112**. Aux Pays-Bas, vous pouvez aussi contacter Veilig Thuis (0800-2000).
 - N'entrez pas en confrontation. Notez ce que vous avez vu et quand.
 - Signalez-le toujours aussi dans l'application.
 
@@ -110,8 +110,8 @@ Rondje Mee ne voit la position de quelqu'un que pendant une promenade active. En
 |---|---|
 | Urgence | 112 |
 | Police, hors urgence | 101 |
-| Chien perdu ou trouvé | DogID (dogid.be) [à vérifier], la commune et le refuge le plus proche |
-| Bien-être animal | Wallonie : Service public de Wallonie, Bien-être animal ; Bruxelles : Bruxelles Environnement ; Flandre : service Bien-être animal du gouvernement flamand [à vérifier] |
+| Chien perdu ou trouvé | DogID (dogid.be), la commune et le refuge le plus proche |
+| Bien-être animal | Wallonie : Service public de Wallonie, Bien-être animal ; Bruxelles : Bruxelles Environnement ; Flandre : service Bien-être animal du gouvernement flamand |
 
 **Pays-Bas**
 
@@ -128,8 +128,8 @@ Rondje Mee ne voit la position de quelqu'un que pendant une promenade active. En
 |---|---|
 | Urgence | 112 |
 | Guardia Civil, y compris pour le bien-être animal (SEPRONA) | 062 |
-| Police locale | Variable selon la commune, souvent 092 [à vérifier] |
-| Chien perdu ou trouvé | REIAC (reiac.es) [à vérifier], la commune et la *protectora* la plus proche |
+| Police locale | Variable selon la commune, souvent 092 |
+| Chien perdu ou trouvé | REIAC (reiac.es), la commune et la *protectora* la plus proche |
 
 ## 5. De l'aide si vous n'allez pas bien
 
@@ -140,10 +140,10 @@ Rondje Mee ne voit la position de quelqu'un que pendant une promenade active. En
 | Belgique | Zelfmoordlijn (en néerlandais) | 1813 |
 | Belgique | Tele-Onthaal (en néerlandais) | 106 |
 | Pays-Bas | 113 Zelfmoordpreventie | 113 ou 0800-0113 |
-| Pays-Bas | MIND Hulplijn | 0900-1450 [à vérifier] |
+| Pays-Bas | MIND Hulplijn | 0900-1450 |
 | Pays-Bas | De Kindertelefoon (moins de 18 ans) | 0800-0432 |
 | Espagne | Ligne de prévention du suicide (Línea 024) | 024 |
-| Espagne | Teléfono de la Esperanza | 717 003 717 [à vérifier] |
+| Espagne | Teléfono de la Esperanza | 717 003 717 |
 
 ## 6. Signaler un incident à Rondje Mee
 

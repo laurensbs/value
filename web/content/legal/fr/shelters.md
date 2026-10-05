@@ -2,7 +2,7 @@
 title: Conditions partenaires pour les refuges
 description: "Les conditions de partenariat pour les refuges : vérification, profils des chiens, rencontres et balades en groupe, assurance, données et photos."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
 
@@ -16,7 +16,7 @@ Ces conditions s'appliquent aux refuges, asiles et autres organisations qui publ
   - Pays-Bas : numéro KvK (Chambre de commerce) ;
   - Belgique : numéro d'entreprise (BCE) ;
   - Espagne : NIF (anciennement CIF).
-- Nous pouvons aussi demander un enregistrement ou un agrément en tant que refuge, s'il est obligatoire dans votre pays ou votre région [à vérifier par pays et par région].
+- Nous pouvons aussi demander un enregistrement ou un agrément en tant que refuge, s'il est obligatoire dans votre pays ou votre région.
 - Le refuge désigne une personne de contact habilitée à agir au nom de l'organisation.
 - Rondje Mee peut refuser une demande ou retirer une vérification, par exemple si des informations sont inexactes ou si un agrément prend fin. Nous expliquons pourquoi.
 
@@ -54,7 +54,7 @@ Ces conditions s'appliquent aux refuges, asiles et autres organisations qui publ
 
 - Le refuge dispose d'une assurance responsabilité civile qui couvre les dommages causés par ses chiens, y compris lorsqu'un promeneur passe par Rondje Mee pour promener un chien.
 - Le refuge décide si les promeneurs venus par Rondje Mee relèvent de sa politique et de son assurance bénévoles. Le refuge explique clairement aux promeneurs ce qui est couvert et ce qui ne l'est pas.
-- Tenez compte des règles sur le volontariat dans votre pays, comme la loi belge du 3 juillet 2005 relative aux droits des volontaires ou la Ley 45/2015 del Voluntariado en Espagne. Elles peuvent imposer des obligations, comme une assurance ou l'information des volontaires [à vérifier].
+- Tenez compte des règles sur le volontariat dans votre pays, comme la loi belge du 3 juillet 2005 relative aux droits des volontaires ou la Ley 45/2015 del Voluntariado en Espagne. Elles peuvent imposer des obligations, comme une assurance ou l'information des volontaires.
 - Le refuge peut avoir son propre règlement interne. Indiquez-le clairement sur le profil du refuge ou du chien.
 
 ## 7. Annulations
@@ -65,14 +65,13 @@ Ces conditions s'appliquent aux refuges, asiles et autres organisations qui publ
 
 ## 8. Pas d'argent
 
-- Le refuge ne demande pas d'argent aux promeneurs pour les promenades organisées via Rondje Mee, ni sous forme de contribution, de cotisation ou de caution [à vérifier : comment traiter les cotisations existantes des clubs de promenade].
+- Le refuge ne demande pas d'argent aux promeneurs pour les promenades organisées via Rondje Mee, ni sous forme de contribution, de cotisation ou de caution.
 - N'utilisez pas Rondje Mee pour collecter des fonds ou faire de la publicité, sauf si nous l'avons convenu ensemble par écrit.
 
 ## 9. Protection des données
 
 - **Rondje Mee** est responsable du traitement des données de la plateforme.
 - **Le refuge** est un responsable du traitement distinct pour sa propre gestion des bénévoles, et pour les données qu'il reçoit via Rondje Mee et utilise ensuite pour ses propres besoins.
-- [À vérifier : si l'enregistrement des présences constitue un traitement pour le compte du refuge, nécessitant un contrat de sous-traitance.]
 - Le refuge n'utilise les données des promeneurs que pour les promenades et l'encadrement. Pas pour des lettres d'information, des collectes de fonds ou d'autres finalités, sauf si le promeneur y a consenti.
 - Le refuge protège bien les données et limite l'accès aux membres du personnel qui en ont besoin.
 - Si le refuge soupçonne une fuite de données ou une utilisation abusive de données via Rondje Mee, il nous prévient le plus tôt possible, et au plus tard dans les 24 heures.

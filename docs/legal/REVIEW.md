@@ -23,6 +23,12 @@ Deze checklist hoort bij de conceptdocumenten van Rondje. Hij somt per land alle
 
 **Markeringen in de teksten:** `[te controleren]` / `[to verify]` / `[pendiente de verificar]` / `[à vérifier]` = onzeker of niet nagekeken. `[voorstel]` = een keuze die nog bevestigd moet worden. Placeholders tussen blokhaken (zoals `[KvK-nummer]`, `[bedrag]`) moeten worden ingevuld.
 
+**Sinds 5 oktober 2026** staan deze markeringen en placeholders niet meer zichtbaar in de teksten op de site: ze zijn opgelost met neutrale formuleringen of weggehaald, en de aanbieder is Laurens Bos (bereikbaar via het contactadres, zonder adres of KvK-nummer). De test `web/src/lib/legal-placeholders.test.ts` bewaakt dat er geen nieuwe bijkomen. De inhoudelijke punten hieronder blijven open tot de jurist ze heeft getoetst.
+
+**Tweede ronde, 5 oktober 2026:** de teksten zeggen niets meer als feit dat (nog) niet klopt. De DPIA staat er als "nog niet klaar", Vercel Web Analytics (zonder cookies) staat in de privacy- en cookieverklaring, de regio's en doorgiftegronden van Vercel, Neon en Resend zijn nagekeken, het profiel noemt de geboortedatum en precies wat eigenaren en opvangen van een wandelaar zien, meldingen worden echt 2 jaar na afsluiten verwijderd (`web/src/app/api/cron/cleanup/route.ts`), en de steun loopt via Whydonate. De voorwaarden zijn nu versie 0.3. Alle wijzigingen, bronnen en open vragen: `~/Projecten/Rondje/_werk/jurist/wijzigingen-2026-10-05.md` (buiten de repo).
+
+**Derde ronde, 5 oktober 2026:** de DPIA is af vóór de eerste echte wandeling met live locatie (privacy art. 14, was "voordat Rondje Mee breed live gaat"), en voorwaarden art. 8 zegt nu ook dat 10% van alle giften naar goede doelen voor honden en mensen in de buurt gaat, zoals op /support (`web/content/crowdfunding.json`, `shareToCausesPercent`; de test bewaakt dat de voorwaarden hetzelfde getal noemen). Versies blijven 0.3 (voorwaarden) en 0.4 (privacy): die zijn nog niet live geweest.
+
 **Belangrijk:** alle teksten zijn geschreven zonder toegang tot actuele bronnen (geen webonderzoek). Wetsartikelen, nummers en drempels moeten allemaal worden nagekeken.
 
 Prioriteit: **H** = hoog (vóór lancering oplossen), **M** = middel, **L** = laag.
@@ -208,7 +214,7 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 
 ## 6. Privacy (AVG)
 
-- [ ] **H** **DPIA** vóór lancering. Criteria: locatiegegevens, systematische monitoring (live volgen), kwetsbare betrokkenen (ouderen, zieken), nieuwe technologie. Controleer de DPIA-lijst van de AP [te controleren].
+- [ ] **H** **DPIA** vóór de eerste echte wandeling met live locatie (zo belooft privacy art. 14 het nu). Criteria: locatiegegevens, systematische monitoring (live volgen), kwetsbare betrokkenen (ouderen, zieken), nieuwe technologie. Controleer de DPIA-lijst van de AP [te controleren].
 - [ ] **H** **Grondslag voor live locatie:** overeenkomst plus gerechtvaardigd belang. Is dit houdbaar, of is toestemming nodig? Toets ook art. 11.7a Telecommunicatiewet en art. 5 lid 3 ePrivacy-richtlijn (toegang tot apparaatlocatie: strikt noodzakelijk voor een dienst waar de gebruiker om vraagt).
 - [ ] **H** **Strafrechtelijke gegevens** (art. 10 AVG, art. 33 UAVG): meldingen over mishandeling, oplichting of geweld bevatten beschuldigingen van strafbare feiten. Is het bijhouden van uitsluitingen een "zwarte lijst"? Zo ja: gelden de uitzonderingen in de UAVG, of is een vergunning van de AP nodig? Ook voor de bewaring van uitsluitingsgegevens (voorstel: 2 jaar).
 - [ ] **H** **Inzagerecht versus privé-feedback en meldingen:** feedback over iemand is diens persoonsgegeven. Bij een inzageverzoek kan die zichtbaar worden. Beleid nodig: beperkingen op grond van rechten van anderen (art. 15 lid 4 AVG, art. 41 UAVG) en bescherming van de identiteit van melders.

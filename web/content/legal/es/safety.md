@@ -2,7 +2,7 @@
 title: Protocolo de seguridad e incidentes
 description: "Pasear con seguridad, y qué hacer si algo sale mal: antes y durante el paseo, números importantes, ayuda para ti y cómo avisarnos."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
@@ -67,7 +67,7 @@ Este protocolo te ayuda a pasear con seguridad y a actuar bien si algo sale mal.
 2. Llama al propietario o a la protectora, y al veterinario desde la pantalla SOS.
 3. En los Países Bajos también puedes llamar al **144** si un animal está en apuros.
 
-**Siempre:** después, comunica el incidente en la app. En España, una mordedura puede dar lugar a una observación veterinaria obligatoria del perro [pendiente de verificar].
+**Siempre:** después, comunica el incidente en la app. En España, una mordedura puede dar lugar a una observación veterinaria obligatoria del perro.
 
 ### 3.3 Un accidente de tráfico
 
@@ -98,7 +98,7 @@ Rondje Mee solo ve la ubicación de alguien durante un paseo activo. Fuera de un
 ### 3.6 Sospechas de maltrato o abandono
 
 - **De un animal:** ¿está en peligro inmediato? En España llama a la Guardia Civil (SEPRONA, **062**) o al **112**. En los Países Bajos, al **144**. En Bélgica, a la policía (**101**) o al servicio de bienestar animal de tu región.
-- **De una persona**, por ejemplo un propietario mayor: si hay peligro inmediato, llama al **112**. En los Países Bajos también puedes contactar con Veilig Thuis (0800-2000) [pendiente de verificar].
+- **De una persona**, por ejemplo un propietario mayor: si hay peligro inmediato, llama al **112**. En los Países Bajos también puedes contactar con Veilig Thuis (0800-2000).
 - No te enfrentes a nadie. Anota lo que viste y cuándo.
 - Comunícalo siempre también en la app.
 
@@ -110,8 +110,8 @@ Rondje Mee solo ve la ubicación de alguien durante un paseo activo. Fuera de un
 |---|---|
 | Emergencias | 112 |
 | Guardia Civil, también para bienestar animal (SEPRONA) | 062 |
-| Policía Local | Varía según el municipio, a menudo 092 [pendiente de verificar] |
-| Perro perdido o encontrado | REIAC (reiac.es) [pendiente de verificar], el ayuntamiento y la protectora de la zona |
+| Policía Local | Varía según el municipio, a menudo 092 |
+| Perro perdido o encontrado | REIAC (reiac.es), el ayuntamiento y la protectora de la zona |
 
 **Países Bajos**
 
@@ -128,17 +128,17 @@ Rondje Mee solo ve la ubicación de alguien durante un paseo activo. Fuera de un
 |---|---|
 | Emergencias | 112 |
 | Policía, sin urgencia | 101 |
-| Perro perdido o encontrado | DogID (dogid.be) [pendiente de verificar], el ayuntamiento y el refugio de la zona |
-| Bienestar animal | Flandes: servicio de bienestar animal del Gobierno flamenco; Bruselas: Bruxelles Environnement / Leefmilieu Brussel; Valonia: Service public de Wallonie, Bien-être animal [pendiente de verificar] |
+| Perro perdido o encontrado | DogID (dogid.be), el ayuntamiento y el refugio de la zona |
+| Bienestar animal | Flandes: servicio de bienestar animal del Gobierno flamenco; Bruselas: Bruxelles Environnement / Leefmilieu Brussel; Valonia: Service public de Wallonie, Bien-être animal |
 
 ## 5. Ayuda si no te encuentras bien
 
 | País | Línea de ayuda | Número |
 |---|---|---|
 | España | Línea de atención a la conducta suicida | 024 |
-| España | Teléfono de la Esperanza | 717 003 717 [pendiente de verificar] |
+| España | Teléfono de la Esperanza | 717 003 717 |
 | Países Bajos | 113 Zelfmoordpreventie | 113 o 0800-0113 |
-| Países Bajos | MIND Hulplijn | 0900-1450 [pendiente de verificar] |
+| Países Bajos | MIND Hulplijn | 0900-1450 |
 | Países Bajos | De Kindertelefoon (menores de 18) | 0800-0432 |
 | Bélgica | Zelfmoordlijn | 1813 |
 | Bélgica | Centre de Prévention du Suicide | 0800 32 123 |

@@ -2,7 +2,7 @@
 title: Safety and Incident Protocol
 description: "Walking safely, and what to do if something goes wrong: before and during the walk, important numbers, help for yourself and how to report."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -67,7 +67,7 @@ This protocol helps you walk safely and act well if something does go wrong. It 
 2. Call the owner or shelter, and the vet from the SOS screen.
 3. In the Netherlands, you can also call **144** for an animal in need.
 
-**Always:** report the incident in the app afterwards. In Spain, a bite may lead to a mandatory veterinary observation of the dog [to verify].
+**Always:** report the incident in the app afterwards. In Spain, a bite may lead to a mandatory veterinary observation of the dog.
 
 ### 3.3 A traffic accident
 
@@ -98,7 +98,7 @@ Rondje Mee can only see someone's location during an active walk. Outside a walk
 ### 3.6 You suspect abuse or neglect
 
 - **Of an animal:** is the animal in immediate danger? In the Netherlands call **144**, in Belgium the police (**101**) or your region's animal welfare service, and in Spain the Guardia Civil (SEPRONA, **062**) or **112**.
-- **Of a person**, for example an older owner: if there is immediate danger, call **112**. In the Netherlands you can also contact Veilig Thuis (0800-2000) [to verify].
+- **Of a person**, for example an older owner: if there is immediate danger, call **112**. In the Netherlands you can also contact Veilig Thuis (0800-2000).
 - Do not confront anyone. Write down what you saw and when.
 - Always report it in the app as well.
 
@@ -119,8 +119,8 @@ Rondje Mee can only see someone's location during an active walk. Outside a walk
 |---|---|
 | Emergency | 112 |
 | Police, non-emergency | 101 |
-| Lost or found dog | DogID (dogid.be) [to verify], the municipality and the local shelter |
-| Animal welfare | Flanders: Animal Welfare Department of the Flemish government; Brussels: Brussels Environment; Wallonia: Service public de Wallonie, Bien-être animal [to verify] |
+| Lost or found dog | DogID (dogid.be), the municipality and the local shelter |
+| Animal welfare | Flanders: Animal Welfare Department of the Flemish government; Brussels: Brussels Environment; Wallonia: Service public de Wallonie, Bien-être animal |
 
 **Spain**
 
@@ -128,22 +128,22 @@ Rondje Mee can only see someone's location during an active walk. Outside a walk
 |---|---|
 | Emergency | 112 |
 | Guardia Civil, including animal welfare (SEPRONA) | 062 |
-| Local police | Varies by municipality, often 092 [to verify] |
-| Lost or found dog | REIAC (reiac.es) [to verify], the municipality and the local *protectora* |
+| Local police | Varies by municipality, often 092 |
+| Lost or found dog | REIAC (reiac.es), the municipality and the local *protectora* |
 
 ## 5. Help if you are not feeling well
 
 | Country | Helpline | Number |
 |---|---|---|
 | Netherlands | 113 Suicide Prevention | 113 or 0800-0113 |
-| Netherlands | MIND Hulplijn | 0900-1450 [to verify] |
+| Netherlands | MIND Hulplijn | 0900-1450 |
 | Netherlands | De Kindertelefoon (for young people under 18) | 0800-0432 |
 | Belgium | Zelfmoordlijn | 1813 |
 | Belgium | Centre de Prévention du Suicide | 0800 32 123 |
 | Belgium | Tele-Onthaal | 106 |
 | Belgium | Télé-Accueil | 107 |
 | Spain | Suicide prevention line (Línea 024) | 024 |
-| Spain | Teléfono de la Esperanza | 717 003 717 [to verify] |
+| Spain | Teléfono de la Esperanza | 717 003 717 |
 
 ## 6. Reporting to Rondje Mee
 

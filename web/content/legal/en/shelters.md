@@ -2,7 +2,7 @@
 title: Partner Terms for Shelters
 description: "The partner terms for shelters: verification, dog profiles, meetings and group walks, insurance, data and photos."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -16,7 +16,7 @@ These terms apply to animal shelters and other organisations that list dogs on R
   - Netherlands: Chamber of Commerce (KvK) number;
   - Belgium: enterprise number (KBO/BCE);
   - Spain: NIF (formerly CIF).
-- We may also ask for a registration or licence as a shelter, if this is required in your country or region [to verify per country and region].
+- We may also ask for a registration or licence as a shelter, if this is required in your country or region.
 - The shelter appoints a contact person who is authorised to act on behalf of the organisation.
 - Rondje Mee may refuse an application or withdraw a verification, for example if information is incorrect or a licence lapses. We will explain why.
 
@@ -54,7 +54,7 @@ These terms apply to animal shelters and other organisations that list dogs on R
 
 - The shelter has liability insurance that covers damage caused by its dogs, including when a walker is walking a dog through Rondje Mee.
 - The shelter decides whether walkers who come through Rondje Mee fall under its volunteer policy and volunteer insurance. The shelter tells walkers clearly what is and is not covered.
-- Be aware of the rules on volunteering in your country, such as the Belgian Volunteers Act (Act of 3 July 2005) or the Spanish Ley 45/2015 del Voluntariado. These may impose obligations, such as insurance or providing information to volunteers [to verify].
+- Be aware of the rules on volunteering in your country, such as the Belgian Volunteers Act (Act of 3 July 2005) or the Spanish Ley 45/2015 del Voluntariado. These may impose obligations, such as insurance or providing information to volunteers.
 - The shelter may have its own house rules. Make them clear on the shelter's or the dog's profile.
 
 ## 7. Cancellations
@@ -65,14 +65,13 @@ These terms apply to animal shelters and other organisations that list dogs on R
 
 ## 8. No money
 
-- The shelter does not ask walkers for money for walks arranged through Rondje Mee, including as a contribution, membership fee or deposit [to verify: how to handle existing walking club memberships].
+- The shelter does not ask walkers for money for walks arranged through Rondje Mee, including as a contribution, membership fee or deposit.
 - Do not use Rondje Mee for fundraising or advertising, unless we have agreed on this together in writing.
 
 ## 9. Data protection
 
 - **Rondje Mee** is the controller for the data on the platform.
 - **The shelter** is an independent controller for its own volunteer records, and for data it receives through Rondje Mee and uses for its own purposes.
-- [To verify: whether attendance registration for the shelter is processing on its behalf, requiring a data processing agreement.]
 - The shelter uses walkers' data only for walks and supervision. Not for newsletters, fundraising or other purposes, unless the walker has consented to this.
 - The shelter keeps the data secure and limits access to staff who need it.
 - If the shelter suspects a data breach or misuse of data through Rondje Mee, it informs us as soon as possible and within 24 hours at the latest.

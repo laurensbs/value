@@ -2,7 +2,7 @@
 title: Partnervoorwaarden voor opvangen
 description: "De partnervoorwaarden voor opvangen: verificatie, hondenprofielen, kennismakingen en groepswandelingen, verzekering, gegevens en foto's."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
@@ -16,7 +16,7 @@ Deze voorwaarden gelden voor dierenasielen, opvangen en andere organisaties die 
   - Nederland: KvK-nummer;
   - België: ondernemingsnummer (KBO);
   - Spanje: NIF (vroeger CIF).
-- We kunnen ook vragen naar een registratie of erkenning als opvang, als die in jouw land of regio verplicht is [te controleren per land en regio].
+- We kunnen ook vragen naar een registratie of erkenning als opvang, als die in jouw land of regio verplicht is.
 - De opvang wijst een contactpersoon aan die bevoegd is om namens de organisatie te handelen.
 - Rondje Mee mag een aanvraag weigeren of een verificatie intrekken, bijvoorbeeld als gegevens niet kloppen of als een erkenning vervalt. We leggen uit waarom.
 
@@ -54,7 +54,7 @@ Deze voorwaarden gelden voor dierenasielen, opvangen en andere organisaties die 
 
 - De opvang heeft een aansprakelijkheidsverzekering die schade door haar honden dekt, ook als een wandelaar via Rondje Mee met de hond loopt.
 - De opvang bepaalt zelf of wandelaars via Rondje Mee onder haar vrijwilligersbeleid en vrijwilligersverzekering vallen. De opvang vertelt wandelaars duidelijk wat wel en niet verzekerd is.
-- Let op de regels voor vrijwilligers in jouw land, bijvoorbeeld de Belgische vrijwilligerswet (Wet van 3 juli 2005) of de Spaanse Ley 45/2015 del Voluntariado. Die kunnen verplichtingen opleggen, zoals een verzekering of informatie aan vrijwilligers [te controleren].
+- Let op de regels voor vrijwilligers in jouw land, bijvoorbeeld de Belgische vrijwilligerswet (Wet van 3 juli 2005) of de Spaanse Ley 45/2015 del Voluntariado. Die kunnen verplichtingen opleggen, zoals een verzekering of informatie aan vrijwilligers.
 - De opvang mag eigen huisregels hebben. Zet die duidelijk in het profiel van de opvang of van de hond.
 
 ## 7. Afzeggingen
@@ -65,14 +65,13 @@ Deze voorwaarden gelden voor dierenasielen, opvangen en andere organisaties die 
 
 ## 8. Geen geld
 
-- De opvang vraagt wandelaars geen geld voor wandelingen via Rondje Mee, ook niet als bijdrage, lidmaatschap of borg [te controleren: hoe om te gaan met bestaande lidmaatschappen van wandelclubs].
+- De opvang vraagt wandelaars geen geld voor wandelingen via Rondje Mee, ook niet als bijdrage, lidmaatschap of borg.
 - Gebruik Rondje Mee niet voor fondsenwerving of reclame, tenzij we daar samen schriftelijk afspraken over maken.
 
 ## 9. Gegevensbescherming
 
 - **Rondje Mee** is verwerkingsverantwoordelijke voor de gegevens op het platform.
 - **De opvang** is een zelfstandige verwerkingsverantwoordelijke voor haar eigen vrijwilligersadministratie, en voor gegevens die zij via Rondje Mee ontvangt en zelf verder gebruikt.
-- [Te controleren: of de aanwezigheidsregistratie voor de opvang een verwerking in opdracht is, waarvoor een verwerkersovereenkomst nodig is.]
 - De opvang gebruikt gegevens van wandelaars alleen voor de wandelingen en de begeleiding. Niet voor nieuwsbrieven, fondsenwerving of andere doelen, tenzij de wandelaar daar zelf toestemming voor geeft.
 - De opvang beveiligt de gegevens goed en beperkt de toegang tot medewerkers die het nodig hebben.
 - Vermoedt de opvang een datalek of misbruik van gegevens via Rondje Mee? Meld het ons dan zo snel mogelijk, en uiterlijk binnen 24 uur.

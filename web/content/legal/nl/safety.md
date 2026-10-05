@@ -2,7 +2,7 @@
 title: Veiligheids- en incidentprotocol
 description: "Veilig wandelen, en wat je doet als er iets misgaat: voor en tijdens het rondje, belangrijke nummers, hulp voor jezelf en hoe je iets meldt."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
@@ -67,7 +67,7 @@ Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch i
 2. Bel de eigenaar of opvang, en de dierenarts via het SOS-scherm.
 3. In Nederland kun je bij een dier in nood ook **144** bellen.
 
-**Altijd:** meld het incident daarna in de app. In Spanje kan na een beet een verplichte controle van de hond door een dierenarts gelden [te controleren].
+**Altijd:** meld het incident daarna in de app. In Spanje kan na een beet een verplichte controle van de hond door een dierenarts gelden.
 
 ### 3.3 Een verkeersongeval
 
@@ -98,7 +98,7 @@ Rondje Mee kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten
 ### 3.6 Je vermoedt mishandeling of verwaarlozing
 
 - **Van een dier:** is het dier in acuut gevaar? Bel in Nederland **144**, in België de politie (**101**) of de dierenwelzijnsdienst van je gewest, en in Spanje de Guardia Civil (SEPRONA, **062**) of **112**.
-- **Van een mens**, bijvoorbeeld een oudere eigenaar: bel bij direct gevaar **112**. In Nederland kun je ook terecht bij Veilig Thuis (0800-2000) [te controleren].
+- **Van een mens**, bijvoorbeeld een oudere eigenaar: bel bij direct gevaar **112**. In Nederland kun je ook terecht bij Veilig Thuis (0800-2000).
 - Ga geen confrontatie aan. Schrijf op wat je zag en wanneer.
 - Meld het altijd ook in de app.
 
@@ -119,8 +119,8 @@ Rondje Mee kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten
 |---|---|
 | Noodgeval | 112 |
 | Politie, geen spoed | 101 |
-| Hond vermist of gevonden | DogID (dogid.be) [te controleren], de gemeente en de opvang in de buurt |
-| Dierenwelzijn | Vlaanderen: Dienst Dierenwelzijn van de Vlaamse overheid; Brussel: Leefmilieu Brussel; Wallonië: Service public de Wallonie, Bien-être animal [te controleren] |
+| Hond vermist of gevonden | DogID (dogid.be), de gemeente en de opvang in de buurt |
+| Dierenwelzijn | Vlaanderen: Dienst Dierenwelzijn van de Vlaamse overheid; Brussel: Leefmilieu Brussel; Wallonië: Service public de Wallonie, Bien-être animal |
 
 **Spanje**
 
@@ -128,22 +128,22 @@ Rondje Mee kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten
 |---|---|
 | Noodgeval | 112 |
 | Guardia Civil, ook voor dierenwelzijn (SEPRONA) | 062 |
-| Lokale politie | Verschilt per gemeente, vaak 092 [te controleren] |
-| Hond vermist of gevonden | REIAC (reiac.es) [te controleren], de gemeente en de protectora in de buurt |
+| Lokale politie | Verschilt per gemeente, vaak 092 |
+| Hond vermist of gevonden | REIAC (reiac.es), de gemeente en de protectora in de buurt |
 
 ## 5. Hulp als het niet goed met je gaat
 
 | Land | Hulplijn | Nummer |
 |---|---|---|
 | Nederland | 113 Zelfmoordpreventie | 113 of 0800-0113 |
-| Nederland | MIND Hulplijn | 0900-1450 [te controleren] |
+| Nederland | MIND Hulplijn | 0900-1450 |
 | Nederland | De Kindertelefoon (voor jongeren onder de 18) | 0800-0432 |
 | België | Zelfmoordlijn | 1813 |
 | België | Centre de Prévention du Suicide | 0800 32 123 |
 | België | Tele-Onthaal | 106 |
 | België | Télé-Accueil | 107 |
 | Spanje | Línea de atención a la conducta suicida | 024 |
-| Spanje | Teléfono de la Esperanza | 717 003 717 [te controleren] |
+| Spanje | Teléfono de la Esperanza | 717 003 717 |
 
 ## 6. Melden bij Rondje Mee
 
