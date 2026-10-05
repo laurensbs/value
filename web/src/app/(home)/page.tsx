@@ -99,7 +99,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
       <NewestDogs dogs={dogs} />
 
-      <HowItWorks />
+      <HowItWorks live={live} />
 
       {native ? null : <PhoneShowcase live={live} />}
 

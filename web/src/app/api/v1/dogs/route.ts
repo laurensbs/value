@@ -24,6 +24,10 @@ export async function GET(request: Request) {
     level: q.get('level') ?? undefined,
     host: host === 'owner' || host === 'shelter' ? host : undefined,
     q: q.get('q')?.trim().slice(0, 60) || undefined,
+    // Like the website: an account without a finished profile (18+, terms) is not a member yet, so it
+    // sees no private owner, no spot on the map, and no order by exact distance (DPIA maatregel M4).
+    // Banned accounts never get here (apiActive).
+    visitor: !viewer.profile,
   })
   // Your own dogs are not in your list of dogs to walk.
   const mine = new Set(viewer.orgs.map((o) => o.id))

@@ -25,7 +25,10 @@ const OWNERS = [
 
 type DogSeed = Omit<typeof s.dog.$inferInsert, 'createdAt' | 'updatedAt'> & { slots?: [number, string][] }
 
-const DOGS: DogSeed[] = [
+// A dog's story and needs are public, also without an account. Like the hint under the story field
+// says, they tell about the dog, never about the owner: no name, health or days at home (DPIA maatregel
+// M18). drizzle/0013_demo_texts.sql gave example dogs already in a database these same texts.
+export const DOGS: DogSeed[] = [
   {
     id: 'demo-saar', ownerId: 'demo-ans', name: 'Saar', breed: 'Labrador', sex: 'female', ageYears: 9, size: 'large',
     energy: 'calm', level: 'starter', walkMinutes: 30, country: 'NL', city: 'Utrecht', lat: 52.095, lng: 5.13,
@@ -39,7 +42,7 @@ const DOGS: DogSeed[] = [
   {
     id: 'demo-pip', ownerId: 'demo-henk', name: 'Pip', breed: 'Teckel', sex: 'male', ageYears: 11, size: 'small',
     energy: 'calm', level: 'starter', walkMinutes: 20, country: 'NL', city: 'Utrecht', lat: 52.09, lng: 5.105,
-    story: 'Henk heeft COPD. Een blokje om lukt nog, het park niet meer. Pip kijkt elke middag naar de deur.',
+    story: 'Pip is een rustige oude teckel met een grote neus. Het park is zijn favoriete rondje, en elke duif krijgt een blafje.',
     needs: 'Eén kort rondje per dag is genoeg.', traits: ['Blaft naar duiven', 'Draagt een jasje bij regen'],
     treats: 'yes', provides: ['bags', 'leash', 'harness'], insuranceConfirmed: true, healthConfirmed: true,
     avatar: { fur: '#2b2220', ears: '#1c1513', muzzle: '#b4733f', earStyle: 'floppy', head: 'narrow', brows: '#b4733f', collar: '#d9a400' },
@@ -48,8 +51,8 @@ const DOGS: DogSeed[] = [
   {
     id: 'demo-tess', ownerId: 'demo-marian', name: 'Tess', breed: 'Golden retriever', sex: 'female', ageYears: 6, size: 'large',
     energy: 'medium', level: 'starter', walkMinutes: 35, country: 'NL', city: 'Utrecht', lat: 52.08, lng: 5.115,
-    story: 'Marian is midden in een chemokuur en te moe om Tess uit te laten. Een vaste wandelaar geeft rust.',
-    needs: 'Voor een paar maanden, op dinsdag en vrijdag.', traits: ['Vriendelijk tegen iedereen', 'Zwemt graag'],
+    story: 'Tess is een vriendelijke golden retriever die iedereen begroet. Ze zwemt graag en is blij met een vaste wandelaar.',
+    needs: 'Voor een paar maanden, twee keer per week.', traits: ['Vriendelijk tegen iedereen', 'Zwemt graag'],
     treats: 'no', treatsNote: 'Gevoelige maag.', provides: ['bags', 'leash', 'towel'], insuranceConfirmed: true, healthConfirmed: true,
     avatar: { fur: '#e8bf7a', ears: '#d6a55a', muzzle: '#f5dfb5', earStyle: 'floppy', tongue: true, collar: '#2d5d8a' },
     slots: [[2, '11:00'], [5, '11:00']],
@@ -73,7 +76,7 @@ const DOGS: DogSeed[] = [
   {
     id: 'demo-bolle', ownerId: 'demo-paul', name: 'Bolle', breed: 'Franse bulldog', sex: 'male', ageYears: 5, size: 'small',
     energy: 'calm', level: 'starter', walkMinutes: 20, country: 'BE', city: 'Gent', lat: 51.055, lng: 3.72,
-    story: 'Paul loopt met een rollator. Het rondje naar het Citadelpark lukt niet meer, het praatje na afloop mist hij het meest.',
+    story: 'Bolle is een gezellige Franse bulldog. Het Citadelpark is zijn lievelingsrondje, en een aai van een voorbijganger vindt hij het allermooist.',
     needs: 'Korte, rustige rondjes. Bij warm weer liever in de ochtend.', traits: ['Snurkt', 'Dol op aandacht'],
     treats: 'own', provides: ['bags', 'leash'], insuranceConfirmed: true, healthConfirmed: true,
     avatar: { fur: '#d6b48c', ears: '#c29a6c', muzzle: '#5b4a41', earStyle: 'bat', head: 'wide', collar: '#d9a400' },
@@ -82,7 +85,7 @@ const DOGS: DogSeed[] = [
   {
     id: 'demo-luna', ownerId: 'demo-carmen', name: 'Luna', breed: 'Border collie (mestiza)', sex: 'female', ageYears: 3, size: 'medium',
     energy: 'high', level: 'experienced', walkMinutes: 60, country: 'ES', city: 'Madrid', lat: 40.42, lng: -3.705,
-    story: 'Carmen ya no puede seguir el ritmo de Luna. En el Retiro, Luna es feliz con una pelota.',
+    story: 'Luna tiene energía de sobra y aprende rápido. En el Retiro es feliz con una pelota.',
     needs: 'Mucho movimiento, idealmente por la mañana.', traits: ['Muy lista', 'Obedece bien'],
     treats: 'yes', provides: ['bags', 'leash', 'water'], insuranceConfirmed: true, healthConfirmed: true,
     avatar: { fur: '#20242a', ears: '#20242a', muzzle: '#ffffff', earStyle: 'pointy', blaze: '#ffffff', tongue: true, collar: '#d9f05a' },

@@ -92,6 +92,13 @@
       "when": 1791136599514,
       "tag": "0012_lesson_progress",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1791216240952,
+      "tag": "0013_demo_texts",
+      "breakpoints": true
     }
   ]
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useState, useSyncExternalStore } from 'react'
+import { useId, useState, useSyncExternalStore } from 'react'
 import { Disclosure } from './Disclosure'
 import { Icon } from './Icon'
 
@@ -31,6 +31,7 @@ function parse(raw: string): string[] {
 export function MeetChecklist({ requestId, title, items }: { requestId: string; title: string; items: { key: string; text: string }[] }) {
   const t = useTranslations('meetCheck')
   const tr = useTranslations('requests')
+  const hintId = useId()
   const storageKey = `rondje.meetCheck.${requestId}`
   const stored = useSyncExternalStore(noop, () => read(storageKey), () => '[]')
   // After the first tick this device's list is the truth, also when storage is not available.
@@ -63,24 +64,23 @@ export function MeetChecklist({ requestId, title, items }: { requestId: string; 
       <ul className="checklist">
         {items.map((item) => {
           const on = done.includes(item.key)
+          // How to look at an ID: only looking, nothing kept (DPIA maatregel M6). Under the item and
+          // linked to its checkbox as a description, so it is not part of the checkbox's name (like TrustForm).
+          const hint = item.key === 'id' ? tr('idHow') : null
           return (
             <li key={item.key} className={on ? 'done' : undefined}>
               <label>
-                <input type="checkbox" checked={on} onChange={() => toggle(item.key)} />
+                <input type="checkbox" checked={on} onChange={() => toggle(item.key)} aria-describedby={hint ? `${hintId}-${item.key}` : undefined} />
                 <span className="tick" aria-hidden="true">
                   <Icon name="check" size={14} />
                 </span>
-                <span className="label">
-                  {item.text}
-                  {/* How to look at an ID: only looking, nothing kept (DPIA maatregel M6). */}
-                  {item.key === 'id' ? (
-                    <>
-                      {' '}
-                      <span className="checklist-hint">{tr('idHow')}</span>
-                    </>
-                  ) : null}
-                </span>
+                <span className="label">{item.text}</span>
               </label>
+              {hint ? (
+                <p className="checklist-hint" id={`${hintId}-${item.key}`}>
+                  {hint}
+                </p>
+              ) : null}
             </li>
           )
         })}

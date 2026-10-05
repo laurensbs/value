@@ -116,10 +116,15 @@ struct AddDogView: View {
                     Picker("Voor wie", selection: $level) { Text("Voor iedereen").tag("starter"); Text("Met ervaring").tag("experienced") }
                     Stepper("Rondje van \(walkMinutes) minuten", value: $walkMinutes, in: 10...180, step: 5)
                 }
-                Section("Over de hond") {
+                Section {
                     TextField("Verhaal: wie is deze hond, en voor wie is het?", text: $story, axis: .vertical).lineLimit(3...6)
                     TextField("Waar moet een wandelaar op letten?", text: $needs, axis: .vertical).lineLimit(2...4)
                     TextField("Kenmerken, met komma's (lief, snuffelaar)", text: $traits)
+                } header: {
+                    Text("Over de hond")
+                } footer: {
+                    // The story is public, also without an account (DPIA maatregel M18; the same words as on the web).
+                    Text("Dit verhaal is voor iedereen te zien. Schrijf over de hond, niet over jezelf: geen naam, adres of tijden waarop je thuis bent.")
                 }
                 Section("Afspraken") {
                     Picker("Koekjes", selection: $treats) { Text("Mogen").tag("yes"); Text("Alleen van mij").tag("own"); Text("Liever niet").tag("no") }

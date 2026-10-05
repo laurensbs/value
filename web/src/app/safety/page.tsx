@@ -54,7 +54,8 @@ export default async function SafetyPage() {
         <ol className="timeline">
           <li>{t('safety.level1')}</li>
           <li>{t('safety.level2')}</li>
-          <li>{t('safety.level3')}</li>
+          {/* A walk alone only starts while live location is on (LIVE_LOCATION, lib/rules.ts canRequestSolo). */}
+          <li>{t(live ? 'safety.level3' : 'safety.level3Off')}</li>
         </ol>
       </section>
       <div className="safety-grid">

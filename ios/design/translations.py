@@ -101,6 +101,7 @@ T = {
     "Dit is een voorbeeld; hiervoor kun je geen afspraak maken.": ("This is an example; you can't make an appointment for it.", "Ceci est un exemple ; tu ne peux pas prendre rendez-vous.", "Esto es un ejemplo; no puedes pedir cita."),
     "Dit is een voorbeeldhond. Echte honden uit je buurt komen hier vanzelf bij.": ("This is an example dog. Real dogs from your area will appear here by themselves.", "Ceci est un chien d'exemple. Les vrais chiens de ton quartier apparaîtront ici.", "Este es un perro de ejemplo. Los perros reales de tu zona aparecerán aquí."),
     "Dit is je eigen hond.": ("This is your own dog.", "C'est ton propre chien.", "Este es tu propio perro."),
+    "Dit verhaal is voor iedereen te zien. Schrijf over de hond, niet over jezelf: geen naam, adres of tijden waarop je thuis bent.": ("Anyone can read this story. Write about the dog, not yourself: no name, address or times when you are home.", "Tout le monde peut lire cette histoire. Parle du chien, pas de toi : ni nom, ni adresse, ni heures où tu es chez toi.", "Cualquiera puede leer esta historia. Escribe sobre el perro, no sobre ti: sin nombre, dirección ni horas en las que estás en casa."),
     "Dit zien alleen wandelaars met een geaccepteerde afspraak.": ("Only walkers with an accepted appointment see this.", "Seuls les promeneurs avec un rendez-vous accepté voient ceci.", "Solo lo ven los paseadores con una cita aceptada."),
     "Doe mee": ("Join", "Participer", "Apuntarme"),
     "Doe mee met %@": ("Join %@", "Rejoins %@", "Únete a %@"),
