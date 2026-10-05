@@ -19,6 +19,6 @@ Daarom wil ik iets terugdoen. Veel mensen zitten te veel binnen, achter een sche
 
 Een rondje lost niet alles op, en Rondje Mee is geen behandeling. Het is wel een fijn, vast moment in de week.
 
-Ik ontwikkel Rondje Mee zelf, en denk elke stap goed uit. Veiligheid eerst: je maakt altijd eerst samen kennis, de eigenaar ziet je ID in het echt, en pas daarna loop je zelf een rondje.
+Ik ontwikkel Rondje Mee zelf, en denk elke stap goed uit. Veiligheid eerst: je maakt altijd eerst samen kennis, de eigenaar ziet je ID in het echt, en pas daarna loop je zelf een rondje, als de eigenaar dat wil en zolang live locatie aan staat.
 
 — Laurens

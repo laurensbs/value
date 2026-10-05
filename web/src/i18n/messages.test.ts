@@ -77,6 +77,16 @@ describe('interface translations', () => {
     it(`${locale} promises no instant alert to the team after a walk (/safety)`, () => {
       expect(translated['safety.afterText'], locale).not.toMatch(/immediately|at once|al momento|enseguida|inmediatamente|immédiatement|tout de suite|prévenue/i)
     })
+    // Walking alone needs the owner's yes and live location (terms 0.4 art. 6.5): /about says both, and the
+    // notification hints name no overdue alert, which only comes sometimes (terms art. 13).
+    it(`${locale} ties walking alone to live location and promises no overdue alert (/about, profile)`, () => {
+      for (const messages of [source, translated]) {
+        expect(messages['about.how.meet'], locale).toMatch(/live|en directo|en direct/i)
+        for (const key of ['profile.pushHint', 'profile.emailNotificationsHint']) {
+          expect(messages[key], `${locale}: ${key}`).not.toMatch(/uitloopt|runs late|se alarga|qui dure/i)
+        }
+      }
+    })
     it(`${locale} names the crowdfunding in euros, never in walks ("€5 = 1 round", "600 rounds")`, () => {
       const texts = Object.entries(translated).filter(([key]) => CROWDFUNDING.some((prefix) => key.startsWith(prefix)))
       expect(texts.length).toBeGreaterThan(5)

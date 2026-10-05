@@ -960,9 +960,9 @@
     "flyer": "Print a flyer for your neighbourhood",
     "email": "Email",
     "emailNotifications": "Email me about important notifications",
-    "emailNotificationsHint": "A new request, an accepted appointment or a walk that runs late. Off: you only see notifications in Rondje Mee.",
+    "emailNotificationsHint": "For example a new request or an accepted appointment. Off: you only see notifications in Rondje Mee.",
     "pushNotifications": "Push notifications in this browser",
-    "pushHint": "A heads-up for a new message, an accepted request or a walk that runs late.",
+    "pushHint": "For example a new message or an accepted request.",
     "pushBlocked": "Your browser blocks notifications from Rondje Mee. Turn them on in your browser settings.",
     "progressTitle": "Your progress",
     "weeklyGoal": "Weekly goal",
@@ -1149,7 +1149,7 @@
         },
         "solo": {
           "q": "After the first meeting. When may you walk the dog on your own?",
-          "a0": "When the owner trusts you, has seen your ID in person and you passed the quiz",
+          "a0": "When the owner trusts you, has seen your ID in person, you passed the quiz and live location is on",
           "a1": "Straight away, you know him now",
           "why1": "The owner decides. It goes dog by dog.",
           "explain": "Right. Step by step, safe for everyone."
@@ -1868,7 +1868,7 @@
     "why3": "Rondje Mee is not care or therapy. Not feeling well? The help page shows where you can turn.",
     "howTitle": "How it works",
     "how": {
-      "meet": "The first time, you always meet the owner and the dog together. Only after that may you walk alone, if the owner agrees.",
+      "meet": "The first time, you always meet the owner and the dog together. Only after that may you walk alone, if the owner agrees and while live location is on.",
       "adults": "Everyone who walks is 18 or older and first takes a short safety quiz.",
       "shelters": "At shelters you walk in supervised group walks, at times the shelter chooses.",
       "free": "Rondje Mee is free. Nobody asks for or pays money for a walk."

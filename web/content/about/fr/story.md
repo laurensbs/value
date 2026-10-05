@@ -13,6 +13,6 @@ C’est pour cela que je veux rendre quelque chose. Beaucoup de gens passent tro
 
 Une balade ne résout pas tout, et Rondje Mee n’est pas un traitement. C’est en revanche un bon moment, régulier, dans la semaine.
 
-Je développe Rondje Mee moi-même, et je réfléchis bien à chaque étape. La sécurité d’abord : vous faites toujours connaissance ensemble avant, le propriétaire voit votre pièce d’identité en personne, et ce n’est qu’ensuite que vous partez seul en balade.
+Je développe Rondje Mee moi-même, et je réfléchis bien à chaque étape. La sécurité d’abord : vous faites toujours connaissance ensemble avant, le propriétaire voit votre pièce d’identité en personne, et ce n’est qu’ensuite que vous partez seul en balade, si le propriétaire le souhaite et tant que la localisation en direct est activée.
 
 — Laurens
