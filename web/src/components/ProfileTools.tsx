@@ -49,6 +49,37 @@ export function InviteLink({ url, message }: { url: string; message: string }) {
   )
 }
 
+/**
+ * "Nodig uit" in the profile's head: the phone's own share sheet where there is one, otherwise the
+ * link is copied. If even that fails, it leads to the invite card with the link to copy by hand.
+ */
+export function InviteButton({ url, message, label, title }: { url: string; message: string; label: string; title: string }) {
+  const t = useTranslations('common')
+  const [copied, setCopied] = useState(false)
+
+  async function invite() {
+    if (typeof navigator.share === 'function') {
+      await navigator.share({ title, text: message, url }).catch(() => undefined)
+      return
+    }
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      location.hash = 'invite'
+      document.getElementById('invite-url')?.focus()
+    }
+  }
+
+  return (
+    <button type="button" className="button secondary" onClick={invite}>
+      <Icon name={copied ? 'check' : 'share'} size={18} />
+      <span aria-live="polite">{copied ? t('copied') : label}</span>
+    </button>
+  )
+}
+
 export function PasskeyButton() {
   const t = useTranslations('auth')
   const native = useSyncExternalStore(noop, isNativeApp, () => false)

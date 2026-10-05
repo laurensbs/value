@@ -2,7 +2,7 @@
 title: Cookieverklaring
 description: "We gebruiken alleen functionele cookies en lokale opslag: geen advertenties, geen tracking en geen analyse door andere bedrijven."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-04"
 status: "Concept – nog niet juridisch getoetst"
 ---
 
@@ -31,6 +31,7 @@ Voor functionele cookies is geen toestemming nodig. Daarom zie je bij Rondje Mee
 | `better-auth.state`, `better-auth-passkey` | Beveiliging tijdens inloggen met Google, Apple of een passkey | Een paar minuten |
 | `NEXT_LOCALE` | Onthouden in welke taal je Rondje Mee gebruikt | 1 jaar |
 | `rondje_ref` | Onthouden via wiens uitnodigingslink je kwam, zodat die persoon ziet dat je meedoet [te controleren: functioneel of toestemming nodig] | 30 dagen |
+| `rondje_later` | Welke stap van Eén ding nu je op Vandaag met "Later" (een week; na twee keer voorgoed) of "Nee, nu niet" wegzette, zodat de pagina meteen de juiste stap toont. We bewaren het nergens | 1 jaar |
 
 ## 4. Lokale opslag op je apparaat
 

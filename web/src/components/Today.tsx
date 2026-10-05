@@ -1,33 +1,33 @@
 import { and, eq, gte, inArray, sql } from 'drizzle-orm'
 import Link from 'next/link'
+import { cookies } from 'next/headers'
 import { getFormatter, getLocale, getTranslations } from 'next-intl/server'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
-import { MASCOT } from '@/lib/avatar'
 import { countryInfo, isCountry } from '@/lib/countries'
 import { formatDistance } from '@/lib/geo'
 import { shownCount } from '@/lib/nearby'
+import { LATER_COOKIE, nextSteps, parseLater, pickStep, type NextStep, type NextStepAppointment } from '@/lib/next-step'
 import { isNewDog } from '@/lib/nudges'
-import { localParts, STEP_POINTS, weekOf } from '@/lib/progress'
-import { zonedToUtc } from '@/lib/time'
-import { challengesFor } from '@/server/challenges'
+import { localParts, weekOf } from '@/lib/progress'
+import { APP_NAME } from '@/lib/site'
+import { TIME_ZONE, zonedToUtc } from '@/lib/time'
+import { pageNow } from '@/server/clock'
 import { progressFor, rolesOf } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
-import { webPushKey } from '@/server/push'
-import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, walkersNear, type RequestRow } from '@/server/queries'
+import { incomingRequests, listDogs, myDogs, outgoingRequests, trustGrantsFor, upcomingGroupWalks, walkersNear, type RequestRow } from '@/server/queries'
 import type { OnboardedViewer } from '@/server/session'
-import { ChallengeCard } from './ChallengeCard'
-import { DogFace } from './DogFace'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
-import { InstallAsk } from './InstallAsk'
-import { Medal } from './Medal'
+import { NextStepCard, type CardStep } from './NextStepCard'
 import { LevelUp } from './progress/LevelUp'
-import { PushAsk } from './PushAsk'
-import { WeekCard } from './WeekCard'
 
 const WALKER_TIPS = 10
 const OWNER_TIPS = 8
+/** A dog this close is "in de buurt" for the one thing to do now. */
+const NEAR_STEP_M = 15_000
+
+const sameTown = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase()
 
 function greetingKey(hour: number): 'morning' | 'afternoon' | 'evening' | 'night' {
   if (hour >= 5 && hour < 12) return 'morning'
@@ -42,67 +42,172 @@ function dayOfYear(now: Date): number {
   return Math.round((Date.UTC(p.year, p.month - 1, p.day) - Date.UTC(p.year, 0, 0)) / 86_400_000)
 }
 
-/** The next accepted meeting or walk, as walker or as host, from half an hour ago on. */
-function nextAppointment(rows: RequestRow[], now: Date): RequestRow | null {
-  const from = now.getTime() - 30 * 60_000
-  return (
-    rows
-      .filter((r) => r.request.status === 'accepted' && r.request.startsAt.getTime() >= from && r.walkStatus !== 'ended')
-      .sort((a, b) => a.request.startsAt.getTime() - b.request.startsAt.getTime())[0] ?? null
-  )
+/** "Vandaag 18:00", "Morgen 18:00" or "Zaterdag 10 oktober om 18:00", to start a sentence with. */
+function whenText(at: Date, now: Date, locale: string): string {
+  const day = (d: Date) => {
+    const p = localParts(d)
+    return Date.UTC(p.year, p.month - 1, p.day) / 86_400_000
+  }
+  const diff = day(at) - day(now)
+  const text =
+    diff === 0 || diff === 1
+      ? `${new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(diff, 'day')} ${new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit', timeZone: TIME_ZONE }).format(at)}`
+      : new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: TIME_ZONE }).format(at)
+  return text.charAt(0).toLocaleUpperCase(locale) + text.slice(1)
 }
 
 /**
- * The home screen for members: what to do next, this week, and the town's challenge, adapted to
- * whether someone walks, has a dog, or both. Everything is pre-chewed: one obvious next step.
+ * Vandaag: one card with the one thing to do next (lib/next-step.ts), and under it your dogs and
+ * the dogs near you. Everything else has its own place: your first steps, the week, the town's
+ * challenge and the penningen on /progress; the push and home-screen questions on /requests.
  */
 export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welcome: boolean }) {
-  const now = new Date()
+  const now = await pageNow()
   const p = viewer.profile
   const hasOrg = viewer.orgs.length > 0
-  const { walker, owner } = rolesOf(p)
+  const roles = rolesOf(p)
+  const { owner } = roles
+  // Shelter staff did not choose to walk (rolesOf still counts them as walkers): no dogs to ask for here.
+  const staffOrg = hasOrg && !p.wantsToWalk && !owner ? viewer.orgs[0] : null
+  const walker = roles.walker && !staffOrg
   const country = isCountry(p.country) ? p.country : undefined
-  const near = p.lat != null && p.lng != null ? { lat: p.lat, lng: p.lng } : country ? countryInfo(country).center : null
+  const own = p.lat != null && p.lng != null ? { lat: p.lat, lng: p.lng } : null
+  const near = own ?? (country ? countryInfo(country).center : null)
 
   // The first screen after opening the app: everything is asked at the same time.
-  const [t, tp, td, tpa, format, locale, progress, challenges, outgoing, incoming, dogs, nearby, impact, dogStats, walkers] = await Promise.all([
+  const [t, tp, td, tn, tc, format, locale, progress, outgoing, incoming, dogs, nearby, dogStats, walkers, orgWalks, jar] = await Promise.all([
     getTranslations('today'),
     getTranslations('progress'),
     getTranslations('dogs'),
-    getTranslations('pushAsk'),
+    getTranslations('nextStep'),
+    getTranslations('common'),
     getFormatter(),
     getLocale(),
     progressFor(viewer, now),
-    challengesFor(viewer, now),
     walker ? outgoingRequests(viewer.userId) : Promise.resolve([]),
     owner || hasOrg ? incomingRequests(viewer) : Promise.resolve([]),
     owner ? myDogs(viewer) : Promise.resolve([]),
     walker ? listDogs({ country, near }, 8) : Promise.resolve([]),
-    impactTotals(),
     owner ? dogWeekStats(viewer.userId, now) : new Map<string, { week: number; walkers: number }>(),
     owner ? walkersNear(p, viewer.userId) : 0,
+    staffOrg ? upcomingGroupWalks({ orgId: staffOrg.id }) : Promise.resolve([]),
+    cookies(),
   ])
+  // What was put away with "Later" or "Nee, nu niet", so the right step shows from the first paint.
+  const stored = jar.get(LATER_COOKIE)?.value ?? '{}'
   const json = await progressJson(progress)
 
+  // Two small questions on top of that: feedback already given, and trust already recorded.
+  const endedWalks = [...outgoing, ...incoming].filter((r) => r.walkStatus === 'ended' && r.walkId).map((r) => r.walkId!)
+  const [given, trust] = await Promise.all([feedbackGiven(viewer.userId, endedWalks), trustGrantsFor([...new Set(incoming.map((r) => r.dog.id))])])
+
   const ownDogs = dogs.filter((d) => !d.isDemo)
+  const myOrgs = new Set(viewer.orgs.map((o) => o.id))
+  const nearbyDogs = nearby.filter((item) => item.dog.ownerId !== viewer.userId && !(item.dog.orgId && myOrgs.has(item.dog.orgId))).slice(0, 6)
   // Owners see how many walkers live nearby; with only a few, a nudge to tell the neighbours instead.
   const walkersNearby = shownCount(walkers)
   const shareDog = ownDogs.find((d) => d.status === 'active' && !d.orgId) ?? null
-  const nearbyDogs = nearby.filter((item) => item.dog.ownerId !== viewer.userId).slice(0, 6)
-  const next = nextAppointment([...outgoing, ...incoming], now)
-  const pending = incoming.filter((r) => r.request.status === 'pending').length
 
-  const hour = localParts(now).hour
-  const stepsLeft = json.steps.filter((step) => !step.done)
-  const nextStep = stepsLeft[0] ?? null
-  const earned = json.badges.filter((b) => b.tier > 0)
-  const recentBadges = [...earned].sort((a, b) => String(b.earnedAt ?? '').localeCompare(String(a.earnedAt ?? ''))).slice(0, 4)
+  const appointment = (r: RequestRow): NextStepAppointment => ({
+    id: r.request.id,
+    dog: { id: r.dog.id, name: r.dog.name, isDemo: r.dog.isDemo },
+    walkerId: r.walker.id,
+    walkerName: r.walker.firstName,
+    kind: r.request.kind,
+    meetVia: r.request.meetVia,
+    status: r.request.status,
+    startsAt: r.request.startsAt,
+    durationMin: r.request.durationMin,
+    weekly: r.request.weekly,
+    walkId: r.walkId,
+    walkStatus: r.walkStatus,
+    feedbackGiven: Boolean(r.walkId && given.has(r.walkId)),
+  })
+  const steps = nextSteps({
+    now,
+    userId: viewer.userId,
+    walker: roles.walker,
+    owner,
+    wantsToWalk: p.wantsToWalk,
+    staffOrg: staffOrg ? { id: staffOrg.id, name: staffOrg.name, nextGroupWalk: orgWalks[0]?.startsAt ?? null } : null,
+    quizPassed: Boolean(p.quizPassedAt),
+    ownDogs: ownDogs.map((d) => ({ id: d.id, name: d.name, status: d.status, orgId: d.orgId, isDemo: d.isDemo })),
+    outgoing: outgoing.map(appointment),
+    incoming: incoming.map(appointment),
+    trust: Object.fromEntries(trust),
+    // "In de buurt" for a step: within 15 km of your own location, or in your town when we only guess where you are.
+    nearby: nearbyDogs
+      .filter(({ dog, distanceM }) => (own ? distanceM != null && distanceM <= NEAR_STEP_M : sameTown(dog.city, p.city)))
+      .map(({ dog, distanceM }) => ({ id: dog.id, name: dog.name, isDemo: dog.isDemo, distanceM: own ? distanceM : null, city: dog.city })),
+  })
+
   const day = dayOfYear(now)
   const tip = !walker || (owner && day % 2 === 1) ? t(`tips.owner.${(day % OWNER_TIPS) + 1}`) : t(`tips.walker.${(day % WALKER_TIPS) + 1}`)
+  const week = progress.weeklyGoal != null && progress.walksThisWeek > 0 ? tn('week', { done: progress.walksThisWeek, goal: progress.weeklyGoal }) : null
+  const card = steps.map((step) => cardStep(step))
 
+  function cardStep(step: NextStep): CardStep {
+    const base = { id: step.id, later: step.later, dismiss: step.dismiss }
+    const values = {
+      dog: step.dog ?? '',
+      walker: step.walker ?? '',
+      count: step.count ?? 0,
+      app: APP_NAME,
+      org: step.org ?? '',
+      via: step.via ?? 'walk',
+      when: step.at ? whenText(step.at, now, locale) : '',
+    }
+    const button = (label: string) => (step.href ? { label, href: step.href } : undefined)
+    switch (step.kind) {
+      case 'liveOwn':
+      case 'live':
+        return { ...base, text: tn(`${step.kind}.text`, values), button: button(tn(`${step.kind}.button`)) }
+      case 'quiz':
+      case 'addDog':
+      case 'waiting':
+      case 'rebook':
+      case 'share':
+        return { ...base, text: tn(`${step.kind}.text`, values), detail: tn(`${step.kind}.detail`, values), button: button(tn(`${step.kind}.button`, values)) }
+      case 'start':
+        return { ...base, text: tn(step.meet ? 'start.meet' : 'start.walk', values), button: button(tn('start.button')) }
+      case 'decide':
+        return { ...base, text: tn('decide.text', values), detail: tn('decide.detail'), button: button(tn('decide.button', values)) }
+      case 'debrief':
+        return { ...base, text: tn('debrief.text', values), detail: tn('debrief.detail'), button: button(tn('debrief.button')), no: tn('debrief.no') }
+      case 'feedback':
+        return { ...base, text: tn(step.asOwner ? 'feedback.owner' : 'feedback.walker', values), detail: tn('feedback.detail', values), button: button(tn('feedback.button')) }
+      case 'upcoming': {
+        const key = `${step.meet ? 'meet' : 'walk'}${step.asOwner ? 'Owner' : ''}`
+        return { ...base, eyebrow: tn('upcoming.eyebrow'), text: tn(`upcoming.${key}`, values), button: button(tn('upcoming.button')) }
+      }
+      case 'nearby':
+        return {
+          ...base,
+          text: step.distanceM != null ? tn('nearby.text', { ...values, distance: formatDistance(step.distanceM, locale) }) : tn('nearby.textCity', { ...values, city: step.city ?? '' }),
+          detail: tn('nearby.detail', values),
+          button: button(tn('nearby.button', values)),
+        }
+      case 'emptyTown':
+        return { ...base, title: tn('emptyTown.title'), text: tn('emptyTown.text'), button: button(tn('emptyTown.button')), secondary: { label: tn('emptyTown.tip'), href: '/suggest?kind=shelter' } }
+      case 'ownerWaiting':
+        return { ...base, text: tn('ownerWaiting.text', values), button: button(tn('ownerWaiting.button', values)) }
+      case 'shelter':
+        return step.at
+          ? { ...base, text: tn('shelter.next', values), button: button(tn('shelter.button', values)) }
+          : { ...base, text: tn('shelter.plan', values), button: button(tn('shelter.button', values)) }
+      case 'night':
+        return { ...base, text: tn('night.text'), detail: tip, button: button(tn('night.button')) }
+      case 'done':
+        return { ...base, text: tn('done.text'), detail: week ?? tip }
+    }
+  }
+
+  // The step the card shows (the same choice as in the browser), for the tip line below.
+  const shown = pickStep(card, parseLater(stored), now.getTime())
+  const kindOf = (id: string | undefined) => steps.find((step) => step.id === id)?.kind
+  const tipLine = owner && !roles.walker && !['done', 'night'].includes(kindOf(shown?.id) ?? '')
   const moment = levelMoment(progress, json)
-  const pushKey = webPushKey()
-  const pushText = owner && ownDogs[0] ? tpa('dog', { dog: ownDogs[0].name }) : walker ? tpa('walker') : tpa('general')
+  const hour = localParts(now).hour
 
   return (
     <div className="today">
@@ -122,92 +227,18 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
         </Link>
       </header>
 
-      {welcome ? (
-        <section className="welcome-card" aria-labelledby="welcome-title">
-          <DogFace look={MASCOT} size={72} />
-          <div className="stack-s">
-            <h2 id="welcome-title">{t('welcomeTitle', { name: p.firstName })}</h2>
-            <p>{t('welcomeText', { level: json.level.name })}</p>
-          </div>
-        </section>
-      ) : null}
+      <NextStepCard
+        steps={card}
+        stored={stored}
+        now={now.getTime()}
+        label={tn('title')}
+        laterLabel={tn('later')}
+        welcome={welcome ? t('welcomeTitle', { name: p.firstName }) : null}
+        welcomeText={welcome ? t('welcomeText', { level: json.level.name }) : null}
+      />
 
-      {next ? (
-        <Link href={next.request.kind === 'meet' || next.walkStatus !== 'active' ? '/requests' : `/walk/${next.walkId}`} className="next-card">
-          <DogPortrait dog={next.dog} size={56} decorative />
-          <span className="stack-s">
-            <span className="eyebrow">{t('next')}</span>
-            <strong>
-              {t(next.request.kind === 'meet' ? 'nextMeeting' : 'nextWalk', {
-                when: format.dateTime(next.request.startsAt, { weekday: 'long', hour: '2-digit', minute: '2-digit' }),
-                dog: next.dog.name,
-                via: next.request.meetVia,
-              })}
-            </strong>
-          </span>
-          <Icon name="arrow" size={20} />
-        </Link>
-      ) : null}
-
-      {pending > 0 ? (
-        <Link href="/requests" className="notice warn pending-card">
-          <Icon name="bell" size={20} />
-          <span>
-            <strong>{t('pending', { n: pending })}</strong>
-            <span className="link-button">{t('pendingOpen')}</span>
-          </span>
-        </Link>
-      ) : null}
-
-      {nextStep ? (
-        <section className="card first-steps" aria-labelledby="steps-title">
-          <div className="spread">
-            <h2 id="steps-title" className="small-title">
-              {t('stepsTitle')}
-            </h2>
-            <span className="muted small">{t('stepsCount', { done: json.steps.length - stepsLeft.length, total: json.steps.length })}</span>
-          </div>
-          <div className="steps-bar" aria-hidden="true">
-            <span style={{ width: `${((json.steps.length - stepsLeft.length) / json.steps.length) * 100}%` }} />
-          </div>
-          <ol className="step-path">
-            {json.steps.map((step) => {
-              const current = step.key === nextStep.key
-              return (
-                <li key={step.key} className={step.done ? 'done' : current ? 'current' : undefined}>
-                  <span className="step-dot" aria-hidden="true">
-                    {step.done ? <Icon name="check" size={16} /> : current ? <Icon name="paw" size={16} /> : null}
-                  </span>
-                  <div className="step-body">
-                    <span className="step-title">
-                      {step.done ? <span className="visually-hidden">✓ </span> : null}
-                      {step.title}
-                      {!step.done && STEP_POINTS[step.key] ? <span className="pill ball">+{STEP_POINTS[step.key]}</span> : null}
-                    </span>
-                    {current ? <span className="muted small">{step.hint}</span> : null}
-                    {current ? (
-                      <Link href={step.href} className="button primary small">
-                        {step.action ?? t('start')}
-                        <Icon name="arrow" size={16} />
-                      </Link>
-                    ) : null}
-                  </div>
-                </li>
-              )
-            })}
-          </ol>
-        </section>
-      ) : null}
-
-      {pushKey ? <PushAsk publicKey={pushKey} text={pushText} /> : null}
-      <InstallAsk push={Boolean(pushKey)} />
-
-      <div className="today-grid">
-        {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
-        <ChallengeCard challenges={challenges} />
-      </div>
-
-      {owner ? (
+      {/* Your dogs. Without one yet, the card above says how (and the Mijn honden tab is there). */}
+      {owner && ownDogs.length ? (
         <section className="stack" aria-labelledby="my-dogs-title">
           <div className="section-title">
             <h2 id="my-dogs-title">{t('myDogsTitle')}</h2>
@@ -228,107 +259,78 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               </span>
             </p>
           ) : null}
-          {ownDogs.length ? (
-            <ul className="mini-dogs">
-              {ownDogs.map((dog) => (
-                <li key={dog.id}>
-                  <Link href={`/dogs/${dog.id}`} className="mini-dog">
-                    <DogPortrait dog={dog} size={64} decorative />
-                    <span className="stack-s">
-                      <strong>{dog.name}</strong>
-                      <span className="muted small">{t('dogWeek', { n: dogStats.get(dog.id)?.week ?? 0 })}</span>
-                      <span className="muted small">{t('dogFriends', { n: dogStats.get(dog.id)?.walkers ?? 0 })}</span>
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <Link href="/my-dogs/new" className="card add-dog-card">
-              <span className="option-icon">
-                <Icon name="plus" />
-              </span>
-              <span>
-                <strong>{t('steps.dog.title')}</strong>
-                <span className="muted small">{t('steps.dog.hint')}</span>
-              </span>
-            </Link>
-          )}
-        </section>
-      ) : null}
-
-      {walker ? (
-        <section className="stack" aria-labelledby="near-title">
-          <div className="section-title">
-            <h2 id="near-title">{t('nearTitle')}</h2>
-            <Link href="/dogs" className="link-button small">
-              {t('nearAll')}
-            </Link>
-          </div>
-          {nearbyDogs.length ? (
-            <ul className="dog-strip">
-              {nearbyDogs.map(({ dog, distanceM }) => (
-                <li key={dog.id}>
-                  <Link href={`/dogs/${dog.id}`} className="strip-dog">
-                    <span className="portrait-wrap">
-                      <DogPortrait dog={dog} size={132} decorative />
-                      {isNewDog(dog, now) ? <span className="new-sticker">{td('new')}</span> : null}
-                    </span>
+          <ul className="mini-dogs">
+            {ownDogs.map((dog) => (
+              <li key={dog.id}>
+                <Link href={`/dogs/${dog.id}`} className="mini-dog">
+                  <DogPortrait dog={dog} size={64} decorative />
+                  <span className="stack-s">
                     <strong>{dog.name}</strong>
-                    <span className="muted small">{distanceM != null && !dog.isDemo ? td('away', { distance: formatDistance(distanceM, locale) }) : dog.city}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="card flat stack-s">
-              <p className="muted">{t('nearEmpty')}</p>
-              <Link href="/profile#invite" className="link-button">
-                {t('nearInvite')}
-              </Link>
-            </div>
-          )}
-        </section>
-      ) : null}
-
-      <section className="card badges-card" aria-labelledby="badges-title">
-        <div className="section-title">
-          <h2 id="badges-title" className="small-title">
-            {t('badgesTitle')}
-          </h2>
-          <Link href="/progress" className="link-button small">
-            {t('badgesAll')}
-          </Link>
-        </div>
-        {recentBadges.length ? (
-          <ul className="medal-row">
-            {recentBadges.map((b) => (
-              <li key={b.key}>
-                <Medal icon={b.icon} color={b.color} size={52} />
-                <span className="small">{b.name}</span>
+                    <span className="muted small">{t('dogWeek', { n: dogStats.get(dog.id)?.week ?? 0 })}</span>
+                    <span className="muted small">{t('dogFriends', { n: dogStats.get(dog.id)?.walkers ?? 0 })}</span>
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
-        ) : (
-          <div className="row">
-            <Medal icon="paw" color={null} size={52} />
-            <p className="muted small">{t('badgesEmpty')}</p>
-          </div>
-        )}
-      </section>
+        </section>
+      ) : null}
 
-      <section className="tip-card" aria-labelledby="tip-title">
-        <p id="tip-title" className="eyebrow">
-          <Icon name="sparkle" size={14} /> {t('tipTitle')}
+      {/* Owners have no Ontdek tab with its tip: one quiet line here (the card's end has it otherwise). */}
+      {tipLine ? (
+        <p className="today-tip">
+          <Icon name="sparkle" size={16} />
+          <span>
+            <strong>{t('tipTitle')}:</strong> {tip}
+          </span>
         </p>
-        <p className="hand">{tip}</p>
-      </section>
+      ) : null}
 
-      {impact.walks > 0 ? <p className="together muted small">{t('together', { walks: impact.walks, dogs: impact.dogs })}</p> : null}
+      {/* The dogs near you, straight under the card; the map is one tap away and fills the screen. */}
+      {walker && nearbyDogs.length ? (
+        <section className="stack today-near" aria-labelledby="near-title">
+          <div className="section-title">
+            <h2 id="near-title">{t('nearTitle')}</h2>
+            <span className="today-links">
+              <Link href="/dogs?view=map" className="link-button small">
+                <Icon name="map" size={16} /> {td('showMap')}
+              </Link>
+              <Link href="/dogs" className="link-button small">
+                {t('nearAll')}
+              </Link>
+            </span>
+          </div>
+          <ul className="dog-strip">
+            {nearbyDogs.map(({ dog, distanceM }) => (
+              <li key={dog.id}>
+                <Link href={`/dogs/${dog.id}`} className="strip-dog">
+                  <span className="portrait-wrap">
+                    <DogPortrait dog={dog} size={132} decorative />
+                    {dog.isDemo ? <span className="dcard-tag strip-tag">{tc('example')}</span> : isNewDog(dog, now) ? <span className="new-sticker">{td('new')}</span> : null}
+                  </span>
+                  <strong>{dog.name}</strong>
+                  <span className="muted small">{distanceM != null && own && !dog.isDemo ? td('away', { distance: formatDistance(distanceM, locale) }) : dog.city}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       {moment ? <LevelUp celebration={moment} /> : null}
     </div>
   )
+}
+
+/** The ended walks (of these) that you already told about. */
+async function feedbackGiven(userId: string, walkIds: string[]): Promise<Set<string>> {
+  if (walkIds.length === 0) return new Set()
+  const db = await getDb()
+  const rows = await db
+    .select({ walkId: s.feedback.walkId })
+    .from(s.feedback)
+    .where(and(eq(s.feedback.fromUserId, userId), inArray(s.feedback.walkId, walkIds)))
+  return new Set(rows.map((r) => r.walkId))
 }
 
 /** For each of your own dogs: walks this week and how many different people ever walked it. */

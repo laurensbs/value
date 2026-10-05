@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { apiMember, dogLook, fail, json } from '@/server/api'
 import { saveDogForm } from '@/server/dog-core'
+import { dogsChanged } from '@/server/newest-dogs'
 import { myDogs } from '@/server/queries'
 
 const TEXT = ['id', 'name', 'breed', 'sex', 'ageYears', 'size', 'energy', 'level', 'story', 'needs', 'treats', 'treatsNote', 'walkMinutes', 'country', 'city', 'lat', 'lng', 'meetingInfo', 'vetInfo', 'chipNumber', 'biteNote']
@@ -32,5 +33,8 @@ export async function POST(request: Request) {
   // Dogs from the app always belong to the person themselves, never to a shelter.
   form.delete('orgId')
   const result = await saveDogForm(viewer, form)
-  return result.ok ? json({ ok: true, dogId: result.dogId }, 201) : fail(result.error ?? 'invalid')
+  if (!result.ok) return fail(result.error ?? 'invalid')
+  // A dog added or changed in the app shows on the home page at once, like on the website.
+  dogsChanged()
+  return json({ ok: true, dogId: result.dogId }, 201)
 }

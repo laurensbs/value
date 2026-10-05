@@ -2,7 +2,7 @@
 title: Cookie Statement
 description: "We only use functional cookies and local storage: no ads, no tracking and no analytics by other companies."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-04"
 status: "Draft – not yet reviewed by a lawyer"
 ---
 
@@ -31,6 +31,7 @@ Functional cookies do not require consent. That is why you will not see a cookie
 | `better-auth.state`, `better-auth-passkey` | Security while signing in with Google, Apple or a passkey | A few minutes |
 | `NEXT_LOCALE` | Remembering which language you use Rondje Mee in | 1 year |
 | `rondje_ref` | Remembering whose invite link you followed, so that person can see you joined [to verify: functional or consent needed] | 30 days |
+| `rondje_later` | Which step of One thing now on Today you put away with "Later" (a week; after twice, for good) or "No, not now", so the page shows the right step straight away. We do not store it anywhere | 1 year |
 
 ## 4. Local storage on your device
 

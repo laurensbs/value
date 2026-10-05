@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { ageBand, trustBadges } from '@/lib/rules'
 import { apiViewer, fail, json } from '@/server/api'
 import { deleteUserWithFiles } from '@/server/blob-cleanup'
+import { dogsChanged } from '@/server/newest-dogs'
 import { trustSignals, unreadCount } from '@/server/queries'
 
 /** Who is signed in, their profile and their trust signals. */
@@ -46,5 +47,7 @@ export async function DELETE(request: Request) {
   const confirm = String(body?.confirm ?? '').trim().toUpperCase()
   if (confirm !== 'VERWIJDER' && confirm !== 'DELETE') return fail('invalid')
   await deleteUserWithFiles(viewer.userId)
+  // Their dogs leave the home page at once, not after the cache expires.
+  dogsChanged()
   return json({ ok: true })
 }

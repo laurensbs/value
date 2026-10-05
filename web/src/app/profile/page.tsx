@@ -5,8 +5,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { HelpUsRow } from '@/components/HelpUsInApp'
 import { Icon } from '@/components/Icon'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { DeleteAccountForm, EmailNotificationsToggle, InviteLink, PasskeyButton, RemindersToggle, SignOutButton } from '@/components/ProfileTools'
-import { LevelCard } from '@/components/progress/LevelCard'
+import { DeleteAccountForm, EmailNotificationsToggle, InviteButton, InviteLink, PasskeyButton, RemindersToggle, SignOutButton } from '@/components/ProfileTools'
 import { ProgressIcon, type ProgressIconName } from '@/components/progress/ProgressIcon'
 import { PushToggle } from '@/components/PushToggle'
 import { SoundToggle } from '@/components/SoundToggle'
@@ -15,7 +14,7 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import type { Locale } from '@/i18n/config'
 import { inviteUrl } from '@/lib/invite'
-import { siteUrl } from '@/lib/site'
+import { APP_NAME, siteUrl } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
 import { LESSONS } from '@/lib/lessons'
 import { lessonsDoneBy } from '@/server/lessons'
@@ -67,25 +66,52 @@ export default async function ProfilePage() {
     lessonsDoneBy(viewer.userId),
   ])
   const invite = inviteUrl(siteUrl(), p.referralCode ?? '')
+  const inviteMessage = t('profile.inviteMessage', { url: invite })
   const walksTogether = friends.reduce((n, f) => n + f.walks, 0)
+  const badges = progress.badges.filter((b) => b.tier > 0).length
+  // Level, points and penningen in one line (the level's number is in the ball next to it); the whole
+  // story is one tap away on /progress.
+  // No penningen yet: nothing to count, so the line stays short.
+  const stats = [progress.level.name, t('progress.points', { n: progress.points }), badges ? t('profileHub.levelBadges', { n: badges }) : null].filter(Boolean).join(' · ')
 
   return (
     <div className="narrow-page stack-l profile-hub">
-      <header className="spread">
-        <h1>{t('profile.title')}</h1>
-        <Link href="/profile/edit" className="button secondary small">
-          <Icon name="edit" size={16} /> {t('profile.edit')}
-        </Link>
-      </header>
+      <h1 className="visually-hidden">{t('profile.title')}</h1>
 
-      <section className="stack" aria-label={t('profile.public')}>
-        <div className="stack-s">
-          <h2 className="eyebrow">{t('profile.public')}</h2>
-          <div className="card">
-            <WalkerCard walker={p} signals={signals} />
-          </div>
+      {/* You, as others see you, with what you do here most: edit it, or invite someone. */}
+      <section className="card profile-head" aria-labelledby="profile-public">
+        <h2 id="profile-public" className="eyebrow">
+          {t('profile.public')}
+        </h2>
+        <WalkerCard walker={p} signals={signals} />
+        <div className="profile-actions">
+          <Link href="/profile/edit" className="button primary">
+            <Icon name="edit" size={18} /> {t('profile.edit')}
+          </Link>
+          <InviteButton url={invite} message={inviteMessage} label={t('profile.inviteShort')} title={APP_NAME} />
         </div>
-        <LevelCard progress={progress} link />
+        <Link href="/progress" className="profile-stats" aria-label={`${t('profile.progressTitle')}: ${t('progress.levelN', { n: progress.level.number })}, ${stats}`}>
+          <span className="level-badge" style={{ '--p': progress.level.progress } as React.CSSProperties} aria-hidden="true">
+            {progress.level.number}
+          </span>
+          <span className="profile-stats-text">{stats}</span>
+          <span className="hub-chevron" aria-hidden="true">
+            <ProgressIcon name="chevron" size={18} />
+          </span>
+        </Link>
+      </section>
+
+      {/* On a phone the header has no menu: this is the way into Beheer and the launch hub. */}
+      {viewer.isAdmin || viewer.adminUnconfirmed ? (
+        <ul className="hub-list">
+          <HubRow href="/admin" icon="key" title={t('nav.admin')} text={t('profileHub.adminText')} tone="calm" />
+        </ul>
+      ) : null}
+
+      <section className="profile-group" aria-labelledby="walk-title">
+        <h2 id="walk-title" className="group-title">
+          {t('profileHub.walkTitle')}
+        </h2>
         <ul className="hub-list">
           {progress.roles.walker || friends.length ? (
             <HubRow
@@ -96,20 +122,23 @@ export default async function ProfilePage() {
               tone="ball"
             />
           ) : null}
-          <HubRow href="/breathe" icon="breathe" title={t('profileHub.breatheTitle')} text={t('profileHub.breatheText')} tone="calm" />
           <HubRow href="/school" icon="school" title={t('school.title')} text={t('profileHub.schoolText', { done: lessons.length, total: LESSONS.length })} tone="ball" />
           <HubRow
             href="/profile/quiz"
             icon="shield"
             title={t('profile.quiz')}
             text={p.quizPassedAt ? t('profile.quizDone') : t('profileHub.quizTodo')}
-            tone={p.quizPassedAt ? undefined : 'warn'}
+            // Only a walker needs it before asking for a dog: no warning colour for an owner.
+            tone={p.quizPassedAt || !progress.roles.walker ? undefined : 'warn'}
           />
+          <HubRow href="/breathe" icon="breathe" title={t('profileHub.breatheTitle')} text={t('profileHub.breatheText')} tone="calm" />
         </ul>
       </section>
 
-      <section className="stack" aria-labelledby="more-title">
-        <h2 id="more-title">{t('profileHub.moreTitle')}</h2>
+      <section className="profile-group" aria-labelledby="more-title">
+        <h2 id="more-title" className="group-title">
+          {t('profileHub.moreTitle')}
+        </h2>
         <div id="invite" className="card stack-s more-invite">
           <div className="hub-row-head">
             <span className="hub-icon ball" aria-hidden="true">
@@ -120,7 +149,7 @@ export default async function ProfilePage() {
               <span>{t('profileHub.inviteShort')}</span>
             </span>
           </div>
-          <InviteLink url={invite} message={t('profile.inviteMessage', { url: invite })} />
+          <InviteLink url={invite} message={inviteMessage} />
           <p className="muted small">
             {t('profile.invited', { n: invited })}{' '}
             <Link href="/flyer" className="link-button small">
@@ -135,62 +164,60 @@ export default async function ProfilePage() {
         </ul>
       </section>
 
-      {/* On a phone the header has no menu: this is the way into Beheer and the launch hub. */}
-      {viewer.isAdmin || viewer.adminUnconfirmed ? (
-        <ul className="hub-list">
-          <HubRow href="/admin" icon="key" title={t('nav.admin')} text={t('profileHub.adminText')} tone="calm" />
-        </ul>
-      ) : null}
-
-      {/* Everything about notifications in one place, with one sentence on what you do and do not get. */}
-      <section id="alerts" className="stack" aria-labelledby="alerts-title">
-        <h2 id="alerts-title">{t('profile.alerts')}</h2>
-        <div className="card stack">
-          <p className="muted small">{t('profile.alertsText')}</p>
-          {pushKey ? <PushToggle publicKey={pushKey} /> : null}
-          <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
-          <RemindersToggle on={viewer.profile.reminders} />
-        </div>
-      </section>
-
-      <section className="stack" aria-labelledby="settings-title">
-        <h2 id="settings-title">{t('profile.settings')}</h2>
-        <div className="card stack">
-          <div className="spread">
-            <strong>{t('profile.language')}</strong>
+      <section className="profile-group" aria-labelledby="settings-title">
+        <h2 id="settings-title" className="group-title">
+          {t('profile.settings')}
+        </h2>
+        <div className="card settings-card">
+          {/* Everything about notifications in one place, with one sentence on what you do and do not get. */}
+          <section id="alerts" className="stack" aria-labelledby="alerts-title">
+            <h3 id="alerts-title">{t('profile.alerts')}</h3>
+            <p className="muted small">{t('profile.alertsText')}</p>
+            {pushKey ? <PushToggle publicKey={pushKey} /> : null}
+            <EmailNotificationsToggle on={viewer.profile.emailNotifications} />
+            <RemindersToggle on={viewer.profile.reminders} />
+          </section>
+          <div className="settings-row spread">
+            <h3>{t('profile.language')}</h3>
             <LanguageSwitcher current={locale} label={t('profile.language')} />
           </div>
-          <div className="stack-s">
-            <strong>{t('profile.passkeys')}</strong>
+          <div className="settings-row stack-s">
+            <h3>{t('profile.passkeys')}</h3>
             <PasskeyButton />
           </div>
-          <SoundToggle />
+          <div className="settings-row">
+            <SoundToggle />
+          </div>
         </div>
       </section>
 
-      <section className="stack" aria-labelledby="privacy-title">
-        <h2 id="privacy-title">{t('profile.privacy')}</h2>
-        <div className="card stack">
-          <p className="muted small">{t('profile.privacyText')}</p>
-          <div className="row">
-            <a href="/api/me/export" className="button secondary small" download>
-              <Icon name="download" size={16} /> {t('profile.export')}
-            </a>
-            <Link href="/legal/privacy" className="button ghost small">
-              {t('footer.privacy')}
-            </Link>
-          </div>
-          <details className="danger-zone">
+      <section className="profile-group" aria-labelledby="account-title">
+        <h2 id="account-title" className="group-title">
+          {t('profileHub.accountTitle')}
+        </h2>
+        <div className="card settings-card">
+          <section className="stack-s" aria-labelledby="privacy-title">
+            <h3 id="privacy-title">{t('profile.privacy')}</h3>
+            <p className="muted small">{t('profile.privacyText')}</p>
+            <div className="row">
+              <a href="/api/me/export" className="button secondary small" download>
+                <Icon name="download" size={16} /> {t('profile.export')}
+              </a>
+              <Link href="/legal/privacy" className="button ghost small">
+                {t('footer.privacy')}
+              </Link>
+            </div>
+          </section>
+          <details className="settings-row danger-zone">
             <summary>{t('profile.deleteTitle')}</summary>
             <DeleteAccountForm />
           </details>
         </div>
+        {/* In the apps only: "Help ons via Whydonate", at the bottom of the profile just above signing
+            out, one tap to the campaign in the phone's browser. */}
+        <HelpUsRow native={native} />
+        <SignOutButton label={t('nav.logout')} />
       </section>
-
-      {/* In the apps only: "Help ons via Whydonate", low on the page, one tap to the campaign in the browser. */}
-      <HelpUsRow native={native} />
-
-      <SignOutButton label={t('nav.logout')} />
     </div>
   )
 }
