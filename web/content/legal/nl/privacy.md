@@ -136,7 +136,7 @@ Gebruiken we een gerechtvaardigd belang? Dan hebben we afgewogen dat dat belang 
 ## 7. Wie ziet je gegevens?
 
 - **Eigenaren en opvangen** zien van een wandelaar die hun een verzoek stuurt: voornaam, foto, leeftijdsgroep (bijvoorbeeld 25-34 jaar), woonplaats, sinds welk jaar die op Rondje Mee zit, ervaring met honden, de tekst over zichzelf en het bericht bij het verzoek. Ze zien ook wat de wandelaar op Rondje Mee deed: het aantal gelopen wandelingen, hoe vaak een eigenaar of opvang het ID in het echt zag, en of de veiligheidsquiz gehaald is. De volledige geboortedatum zien ze nooit.
-- **Wie een hondenprofiel bekijkt**, ziet van de eigenaar de voornaam, foto, woonplaats en de tekst over zichzelf, en de plek van de hond afgerond op zo'n 500 meter.
+- **Wie met een account een hondenprofiel bekijkt**, ziet van de eigenaar de voornaam, foto, woonplaats, de tekst over zichzelf en de vaste momenten, en de plek van de hond afgerond op zo'n 500 meter. **Zonder account** zie je alleen de hond, de woonplaats en dat er een eigenaar in de buurt is.
 - **Na acceptatie** van een verzoek zien beide kanten ook elkaars telefoonnummer en e-mailadres, en de wandelaar ziet de afgeschermde gegevens die de eigenaar daarvoor heeft vrijgegeven.
 - **Opvangen** zien van wandelaars die zich aanmelden voor een groepswandeling: voornaam, foto, leeftijdsgroep en telefoonnummer, en of de opvang hun ID al in het echt zag. De opvang houdt ook de aanwezigheid bij. Gebruikt een opvang die gegevens in de eigen vrijwilligersadministratie? Dan is de opvang daarvoor zelf verantwoordelijk.
 - **Privé-feedback** ziet de ander nooit. Alleen een beperkt aantal medewerkers van Rondje Mee kan die lezen.

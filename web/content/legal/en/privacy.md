@@ -136,7 +136,7 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 ## 7. Who can see your data?
 
 - **Owners and shelters** see the following about a walker who sends them a request: first name, photo, age group (for example 25-34 years), town, the year they joined Rondje Mee, experience with dogs, what they wrote about themselves and the message with the request. They also see what the walker did on Rondje Mee: the number of walks completed, how often an owner or shelter saw their ID in person, and whether they passed the safety quiz. They never see the full date of birth.
-- **Anyone viewing a dog profile** sees the owner's first name, photo, town and what they wrote about themselves, and the dog's location rounded to about 500 metres.
+- **Anyone with an account viewing a dog profile** sees the owner's first name, photo, town, what they wrote about themselves and their regular times, and the dog's location rounded to about 500 metres. **Without an account** you only see the dog, the town and that an owner lives nearby.
 - **Once a request is accepted**, both sides also see each other's phone number and email address, and the walker sees the protected details that the owner has released for that purpose.
 - **Shelters** see the following about walkers who sign up for a group walk: first name, photo, age group and phone number, and whether the shelter has already seen their ID in person. The shelter also records attendance. If a shelter uses that data in its own volunteer records, the shelter is responsible for that itself.
 - **Private feedback** is never shown to the other person. Only a limited number of Rondje Mee team members can read it.

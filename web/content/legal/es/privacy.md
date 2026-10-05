@@ -136,7 +136,7 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 ## 7. ¿Quién ve tus datos?
 
 - **Los propietarios y las protectoras** ven de un paseante que les envía una solicitud: nombre, foto, franja de edad (por ejemplo, 25-34 años), localidad, desde qué año está en Rondje Mee, experiencia con perros, lo que escribió sobre sí mismo y el mensaje de la solicitud. También ven lo que el paseante hizo en Rondje Mee: el número de paseos realizados, cuántas veces un propietario o una protectora vio su documento de identidad en persona y si aprobó el test de seguridad. Nunca ven la fecha de nacimiento completa.
-- **Quien ve el perfil de un perro** ve del propietario el nombre, la foto, la localidad y lo que escribió sobre sí mismo, y la ubicación del perro redondeada a unos 500 metros.
+- **Quien ve el perfil de un perro con una cuenta** ve del propietario el nombre, la foto, la localidad, lo que escribió sobre sí mismo y sus horarios fijos, y la ubicación del perro redondeada a unos 500 metros. **Sin cuenta** solo se ve el perro, la localidad y que hay un propietario cerca.
 - **Tras aceptar** una solicitud, ambas partes ven también el teléfono y el correo electrónico de la otra, y el paseante ve los datos reservados que el propietario haya habilitado para ello.
 - **Las protectoras** ven de los paseantes que se apuntan a un paseo en grupo: nombre, foto, franja de edad y teléfono, y si la protectora ya vio su documento de identidad en persona. La protectora también registra la asistencia. Si una protectora usa esos datos en su propia gestión de voluntariado, es responsable de ello.
 - **Las valoraciones privadas** nunca las ve la otra persona. Solo puede leerlas un número limitado de personas del equipo de Rondje Mee.

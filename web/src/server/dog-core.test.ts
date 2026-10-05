@@ -18,7 +18,7 @@ const later: Promise<unknown>[] = []
 vi.mock('next/server', () => ({ after: (task: () => Promise<unknown>) => void later.push(task()) }))
 const flush = async () => void (await Promise.all(later.splice(0)))
 
-const { saveDogForm } = await import('./dog-core')
+const { forSomeoneSchema, saveDogForm } = await import('./dog-core')
 
 const file = (user: string, name: string) => `https://abc123.public.blob.vercel-storage.com/photos/${user}/${name}.jpg`
 const viewer = (userId: string, orgs: string[] = []) =>
@@ -90,5 +90,33 @@ describe('saveDogForm and Vercel Blob', () => {
     expect(await saveDogForm(viewer('staf'), dogForm('bello', []), { deleteBlobs })).toMatchObject({ ok: false, error: 'forbidden' })
     await flush()
     expect(deleteBlobs).not.toHaveBeenCalled()
+  })
+})
+
+describe('adding a dog for someone else (DPIA maatregel M5)', () => {
+  const newDog = (extra: Record<string, string>) => {
+    const form = dogForm('', [])
+    form.delete('id')
+    form.set('name', 'Bobbie')
+    for (const [key, value] of Object.entries(extra)) form.set(key, value)
+    return form
+  }
+  const bobbies = async () => (await client.query(`select count(*)::int as n from dog where name = 'Bobbie'`)).rows[0]
+
+  it('needs the box that the owner knows and agrees', async () => {
+    expect(await saveDogForm(viewer('ans'), newDog({ forSomeone: 'on' }))).toEqual({ ok: false, error: 'owner-consent' })
+    expect(await bobbies()).toEqual({ n: 0 })
+  })
+
+  it('goes online with that box ticked, or for your own dog without it', async () => {
+    expect(await saveDogForm(viewer('ans'), newDog({ forSomeone: 'on', ownerConsent: 'on' }))).toMatchObject({ ok: true })
+    expect(await saveDogForm(viewer('ans'), newDog({}))).toMatchObject({ ok: true })
+    expect(await bobbies()).toEqual({ n: 2 })
+  })
+
+  it('is checked by the schema itself', () => {
+    expect(forSomeoneSchema.safeParse({ forSomeone: true, ownerConsent: false }).success).toBe(false)
+    expect(forSomeoneSchema.safeParse({ forSomeone: true, ownerConsent: true }).success).toBe(true)
+    expect(forSomeoneSchema.safeParse({ forSomeone: false, ownerConsent: false }).success).toBe(true)
   })
 })

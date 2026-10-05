@@ -480,7 +480,8 @@
     "emptyFiltered": "Ningún perro coincide con esta elección. Prueba otra, o mira todos los perros.",
     "sendLink": "Envía tu enlace",
     "viewLabel": "Lista o mapa",
-    "mapNote": "Los perros aparecen en su barrio, nunca en una dirección."
+    "mapNote": "Los perros aparecen en su barrio, nunca en una dirección.",
+    "mapNoteVisitor": "Los perros del barrio aparecen en el mapa cuando inicias sesión."
   },
   "dog": {
     "story": "Sobre {name}",
@@ -532,7 +533,9 @@
     "website": "Web",
     "hiddenByModerator": "Ocultado por Rondje Mee",
     "savedWalkers": "{n, plural, one {# paseador vive} other {# paseadores viven}} a menos de 5 km. Esta semana verán a {name} como perro nuevo.",
-    "savedShare": "Habla de {name} a tus vecinos: <link>aquí tienes un mensaje para compartir</link>."
+    "savedShare": "Habla de {name} a tus vecinos: <link>aquí tienes un mensaje para compartir</link>.",
+    "ownerNearby": "Dueño en la zona",
+    "ownerNearbyText": "En {city}. Verás su nombre y sus horarios fijos cuando inicies sesión: así protegemos al dueño."
   },
   "request": {
     "title": "Organiza un paseo",
@@ -676,7 +679,8 @@
     "trustElsewhere": "Lo que {walker} puede hacer con {dog} se ajusta abajo, en «Después del primer encuentro».",
     "declinedNote": "Has dicho que no a {walker} para {dog}. {walker} recibe un aviso.",
     "trustPair": "{walker} y {dog}",
-    "trustLater": "Después de vuestro primer encuentro, aquí indicas si has visto en persona el documento de {walker}."
+    "trustLater": "Después de vuestro primer encuentro, aquí indicas si has visto en persona el documento de {walker}.",
+    "idHow": "Mira la foto, el nombre y la fecha de nacimiento. No hagas ninguna foto ni apuntes nada, tampoco el número del DNI o NIE."
   },
   "meet": {
     "legend": "¿Cómo os vais a conocer?",
@@ -812,7 +816,7 @@
     "empty": "Todavía no has inscrito ningún perro. También puedes inscribir el perro de tu abuela, de tu vecino o de otra persona.",
     "newTitle": "Inscribir un perro",
     "editTitle": "Editar a {name}",
-    "forSomeone": "¿Inscribes el perro de otra persona? Pide permiso primero y pon sus datos en «Dónde quedar».",
+    "forSomeone": "Inscribo el perro de otra persona",
     "sections": {
       "basics": "El perro",
       "character": "Carácter",
@@ -849,7 +853,8 @@
       "confirmations": "Confirma el seguro y la salud de tu perro.",
       "bite-note": "Cuenta brevemente qué pasó.",
       "invalid": "Revisa los campos obligatorios.",
-      "forbidden": "Este perro no es tuyo."
+      "forbidden": "Este perro no es tuyo.",
+      "owner-consent": "Marca la casilla para confirmar que el dueño lo sabe y está de acuerdo."
     },
     "privateHint": "Solo lo ven las personas con las que hayas aceptado un paseo.",
     "providesHint": "El dueño se encarga de las bolsas y los premios. Así, quien pasea no tiene que pagar nada.",
@@ -913,7 +918,9 @@
       "work": "Por mi trabajo tengo poco tiempo durante el día, así que un paseo extra es bienvenido.",
       "mobility": "A mí me cuesta más caminar, así que un paseo extra es bienvenido.",
       "regular": "Buscamos a alguien fijo para unas cuantas veces por semana."
-    }
+    },
+    "ownerConsent": "El dueño lo sabe y está de acuerdo",
+    "forSomeoneHint": "Pon su nombre y su teléfono aquí abajo, junto al lugar donde quedáis. Solo se muestra cuando se ha aceptado un paseo."
   },
   "profile": {
     "title": "Perfil",
@@ -2428,7 +2435,7 @@
     "copied": "Copiado. Pégalo donde quieras.",
     "copyFailed": "No se pudo copiar. Selecciona el texto de arriba y cópialo tú.",
     "poster": "¿Mejor en papel? Imprime un cartel",
-    "privacy": "Quien abra el enlace verá la misma página de {name} que ve todo el mundo en Rondje Mee. Tu dirección y tu teléfono siguen siendo privados hasta que aceptes una cita.",
+    "privacy": "Quien abra el enlace sin cuenta verá a {name}, la localidad y que hay un dueño cerca; tu nombre y tus horarios fijos, solo después de registrarse. Tu dirección y tu teléfono siguen siendo privados hasta que aceptes una cita.",
     "posterMetaTitle": "Cartel para tu perro",
     "posterTitle": "Cartel para {name}",
     "posterLede": "Imprime el cartel y cuélgalo donde lo vean tus vecinos: en el supermercado, la biblioteca, el veterinario o tu portal. Pregunta antes si se puede.",

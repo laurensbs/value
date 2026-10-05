@@ -86,7 +86,8 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
   const plain = !orgId && !q
 
   const [found, org, groupWalks] = await Promise.all([
-    listDogs({ country: orgId ? undefined : country, near, host, energy, orgId, q }),
+    // Without an account, dogs of private owners have no spot on the map (getDogDetail, DPIA maatregel M4).
+    listDogs({ country: orgId ? undefined : country, near, host, energy, orgId, q, visitor: !member }),
     orgId ? publicOrg(orgId) : null,
     plain && !mapView ? upcomingGroupWalks({ country }) : [],
   ])
@@ -262,7 +263,7 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
         ) : mapView ? (
           <DogsMap
             label={title}
-            note={t('dogs.mapNote')}
+            note={member ? t('dogs.mapNote') : t('dogs.mapNoteVisitor')}
             center={near}
             cards={mapCards}
             markers={items

@@ -480,7 +480,8 @@
     "emptyFiltered": "Geen honden die bij deze keuze passen. Probeer een andere, of bekijk alle honden.",
     "sendLink": "Stuur je link",
     "viewLabel": "Lijst of kaart",
-    "mapNote": "Honden staan op hun buurt, nooit op een adres."
+    "mapNote": "Honden staan op hun buurt, nooit op een adres.",
+    "mapNoteVisitor": "Honden uit de buurt zie je op de kaart als je bent ingelogd."
   },
   "dog": {
     "story": "Over {name}",
@@ -532,7 +533,9 @@
     "website": "Website",
     "hiddenByModerator": "Verborgen door Rondje Mee",
     "savedWalkers": "{n, plural, one {# wandelaar woont} other {# wandelaars wonen}} binnen 5 km. Deze week zien ze {name} als nieuwe hond.",
-    "savedShare": "Vertel je buren over {name}: <link>hier staat een bericht om te delen</link>."
+    "savedShare": "Vertel je buren over {name}: <link>hier staat een bericht om te delen</link>.",
+    "ownerNearby": "Eigenaar in de buurt",
+    "ownerNearbyText": "In {city}. De voornaam en de vaste momenten zie je als je bent ingelogd: zo beschermen we de eigenaar."
   },
   "request": {
     "title": "Plan een afspraak",
@@ -676,7 +679,8 @@
     "trustElsewhere": "Wat {walker} met {dog} mag, regel je hieronder bij ‘Na de kennismaking’.",
     "declinedNote": "Je zei nee tegen {walker} voor {dog}. {walker} krijgt een melding.",
     "trustPair": "{walker} en {dog}",
-    "trustLater": "Na jullie kennismaking leg je hier vast of je het ID van {walker} in het echt hebt gezien."
+    "trustLater": "Na jullie kennismaking leg je hier vast of je het ID van {walker} in het echt hebt gezien.",
+    "idHow": "Kijk naar foto, naam en geboortedatum. Maak geen foto en schrijf niets over, ook geen BSN."
   },
   "meet": {
     "legend": "Hoe maken jullie kennis?",
@@ -812,7 +816,7 @@
     "empty": "Je hebt nog geen hond aangemeld. Je kunt ook een hond aanmelden voor je oma, je buurman of iemand anders.",
     "newTitle": "Hond aanmelden",
     "editTitle": "{name} bewerken",
-    "forSomeone": "Meld je een hond aan voor iemand anders? Vraag eerst toestemming en zet hun gegevens bij ‘Afspreken’.",
+    "forSomeone": "Ik meld deze hond aan voor iemand anders",
     "sections": {
       "basics": "De hond",
       "character": "Karakter",
@@ -849,7 +853,8 @@
       "confirmations": "Bevestig de verzekering en de gezondheid van je hond.",
       "bite-note": "Vertel kort wat er gebeurde.",
       "invalid": "Controleer de verplichte velden.",
-      "forbidden": "Dit is niet jouw hond."
+      "forbidden": "Dit is niet jouw hond.",
+      "owner-consent": "Vink aan dat de eigenaar ervan weet en het goed vindt."
     },
     "privateHint": "Dit zien alleen wandelaars met wie je een afspraak hebt geaccepteerd.",
     "providesHint": "Zakjes en koekjes regelt de eigenaar. Zo hoeft een wandelaar nergens voor te betalen.",
@@ -913,7 +918,9 @@
       "work": "Door mijn werk heb ik overdag weinig tijd, dus een extra rondje is welkom.",
       "mobility": "Zelf loop ik minder makkelijk, dus een extra rondje is welkom.",
       "regular": "We zoeken een vast maatje voor een paar keer per week."
-    }
+    },
+    "ownerConsent": "De eigenaar weet ervan en vindt het goed",
+    "forSomeoneHint": "Zet hun naam en telefoonnummer hieronder, bij de plek waar jullie afspreken. Dat ziet een wandelaar pas na een geaccepteerde afspraak."
   },
   "profile": {
     "title": "Profiel",
@@ -2428,7 +2435,7 @@
     "copied": "Gekopieerd. Plak het waar je wilt.",
     "copyFailed": "Kopiëren lukte niet. Selecteer de tekst hierboven en kopieer hem zelf.",
     "poster": "Liever op papier? Print een poster",
-    "privacy": "Wie de link opent, ziet dezelfde pagina van {name} als iedereen op Rondje Mee. Je adres en telefoonnummer blijven privé tot je een afspraak accepteert.",
+    "privacy": "Wie de link zonder account opent, ziet {name}, de plaats en dat er een eigenaar in de buurt is; je voornaam en vaste momenten pas na aanmelden. Je adres en telefoonnummer blijven privé tot je een afspraak accepteert.",
     "posterMetaTitle": "Poster voor je hond",
     "posterTitle": "Poster voor {name}",
     "posterLede": "Print de poster en hang hem op waar buren hem zien: bij de supermarkt, de bibliotheek, de dierenarts of in je portiek. Vraag wel even of het mag.",

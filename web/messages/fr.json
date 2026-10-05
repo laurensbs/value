@@ -480,7 +480,8 @@
     "emptyFiltered": "Aucun chien ne correspond à ce choix. Essayez-en un autre, ou voyez tous les chiens.",
     "sendLink": "Envoyez votre lien",
     "viewLabel": "Liste ou carte",
-    "mapNote": "Les chiens apparaissent sur leur quartier, jamais sur une adresse."
+    "mapNote": "Les chiens apparaissent sur leur quartier, jamais sur une adresse.",
+    "mapNoteVisitor": "Les chiens du quartier apparaissent sur la carte une fois connecté."
   },
   "dog": {
     "story": "À propos de {name}",
@@ -532,7 +533,9 @@
     "website": "Site web",
     "hiddenByModerator": "Masqué par Rondje Mee",
     "savedWalkers": "{n, plural, one {# promeneur habite} other {# promeneurs habitent}} à moins de 5 km. Cette semaine, ils verront {name} parmi les nouveaux chiens.",
-    "savedShare": "Parlez de {name} à vos voisins : <link>voici un message à partager</link>."
+    "savedShare": "Parlez de {name} à vos voisins : <link>voici un message à partager</link>.",
+    "ownerNearby": "Propriétaire du quartier",
+    "ownerNearbyText": "À {city}. Vous verrez son prénom et ses horaires fixes une fois connecté : c'est ainsi que nous protégeons le propriétaire."
   },
   "request": {
     "title": "Prendre rendez-vous",
@@ -676,7 +679,8 @@
     "trustElsewhere": "Ce que {walker} peut faire avec {dog} se règle plus bas, sous « Après la première rencontre ».",
     "declinedNote": "Vous avez dit non à {walker} pour {dog}. {walker} reçoit une notification.",
     "trustPair": "{walker} et {dog}",
-    "trustLater": "Après votre rencontre, vous indiquez ici si vous avez vu en personne la pièce d’identité de {walker}."
+    "trustLater": "Après votre rencontre, vous indiquez ici si vous avez vu en personne la pièce d’identité de {walker}.",
+    "idHow": "Regardez la photo, le nom et la date de naissance. Ne prenez pas de photo et ne notez rien, pas même le numéro de la pièce d'identité."
   },
   "meet": {
     "legend": "Comment souhaitez-vous faire connaissance ?",
@@ -812,7 +816,7 @@
     "empty": "Vous n'avez pas encore inscrit de chien. Vous pouvez aussi inscrire le chien de votre grand-mère, de votre voisin ou de quelqu'un d'autre.",
     "newTitle": "Inscrire un chien",
     "editTitle": "Modifier {name}",
-    "forSomeone": "Vous inscrivez le chien de quelqu'un d'autre ? Demandez d'abord son accord et indiquez ses coordonnées dans « Lieu de rendez-vous ».",
+    "forSomeone": "J'inscris ce chien pour quelqu'un d'autre",
     "sections": {
       "basics": "Le chien",
       "character": "Caractère",
@@ -849,7 +853,8 @@
       "confirmations": "Confirmez l'assurance et la santé de votre chien.",
       "bite-note": "Décrivez brièvement ce qui s'est passé.",
       "invalid": "Vérifiez les champs obligatoires.",
-      "forbidden": "Ce chien n'est pas le vôtre."
+      "forbidden": "Ce chien n'est pas le vôtre.",
+      "owner-consent": "Cochez la case pour confirmer que le propriétaire est au courant et d'accord."
     },
     "privateHint": "Visible uniquement par les promeneurs avec qui vous avez accepté un rendez-vous.",
     "providesHint": "Le propriétaire fournit les sacs et les friandises. Ainsi, le promeneur n'a rien à payer.",
@@ -913,7 +918,9 @@
       "work": "Mon travail me laisse peu de temps en journée, alors une balade en plus est la bienvenue.",
       "mobility": "Je marche moins facilement moi-même, alors une balade en plus est la bienvenue.",
       "regular": "Nous cherchons quelqu'un de régulier pour quelques fois par semaine."
-    }
+    },
+    "ownerConsent": "Le propriétaire est au courant et d'accord",
+    "forSomeoneHint": "Indiquez son nom et son numéro de téléphone ci-dessous, avec le lieu de rendez-vous. Visible uniquement après l'acceptation d'un rendez-vous."
   },
   "profile": {
     "title": "Profil",
@@ -2428,7 +2435,7 @@
     "copied": "Copié. Collez-le où vous voulez.",
     "copyFailed": "La copie n'a pas fonctionné. Sélectionnez le texte ci-dessus et copiez-le vous-même.",
     "poster": "Plutôt sur papier ? Imprimez une affiche",
-    "privacy": "Les personnes qui ouvrent le lien voient la même page de {name} que tout le monde sur Rondje Mee. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
+    "privacy": "Les personnes qui ouvrent le lien sans compte voient {name}, la ville et qu'un propriétaire habite près d'ici ; votre prénom et vos moments fixes, seulement après inscription. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
     "posterMetaTitle": "Affiche pour votre chien",
     "posterTitle": "Affiche pour {name}",
     "posterLede": "Imprimez l'affiche et accrochez-la là où vos voisins la verront : au supermarché, à la bibliothèque, chez le vétérinaire ou dans votre hall d'immeuble. Demandez d'abord si c'est permis.",

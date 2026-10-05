@@ -25,6 +25,7 @@ import { dogShareFor, localeOf } from '@/server/share'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
+  // As someone without an account sees the page, like a chat app fetching the link: never the owner's name.
   const detail = await getDogDetail(id, null)
   if (!detail) return {}
   const { dog, host } = detail
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   // looking for, in the owner's language like the message they sent (chat apps fetch it without one).
   const owned = host.kind === 'owner'
   const t = await getTranslations({ locale: owned ? await localeOf(host.id) : await getLocale(), namespace: 'dogShare' })
-  const description = dog.story || (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : '') || dog.name
+  // A private owner's own words stay off link previews: they can say when someone is home, or who they are.
+  const description = (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : dog.story) || dog.name
   const photo = dog.photos.find((src) => src.startsWith('https://'))
   return pageMetadata({
     path: `/dogs/${dog.id}`,
@@ -40,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     description,
     shareTitle: owned ? t('posterHeadline', { name: dog.name }) : dog.name,
     images: [photo ?? '/og.png'],
-    // A private owner's dog page names a first name and a city: kept out of search engines, links too.
+    // A private owner's dog: kept out of search engines, links too. The dog and its town are enough to go on.
     // An example dog is made up: out of search results as well, whoever it belongs to.
     robots: owned ? 'none' : dog.isDemo ? 'noindex' : undefined,
   })
@@ -58,7 +60,7 @@ export default async function DogPage({
   const viewer = await getViewer()
   const detail = await getDogDetail(id, viewer)
   if (!detail) notFound()
-  const { dog, host, slots, groupWalks, canSeePrivate, isMine, relation } = detail
+  const { dog, host, slots, groupWalks, canSeePrivate, isMine, relation, ownerShielded } = detail
   const [t, format, facts, joined, share, open, liveLocation] = await Promise.all([
     getTranslations(),
     getFormatter(),
@@ -171,41 +173,55 @@ export default async function DogPage({
 
         {share ? <DogShare dogId={dog.id} name={dog.name} message={share.message} /> : null}
 
-        <div className="host card row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
-          <Avatar name={host.name} src={host.photoUrl} size="medium" />
-          <div className="stack-s" style={{ minWidth: 0 }}>
-            <strong>
-              {host.kind === 'shelter'
-                ? t('dog.hostShelter', { name: host.name, city: host.city })
-                : t('dog.hostOwner', { name: host.name, city: host.city })}
-            </strong>
-            {host.kind === 'shelter' && host.verified ? (
-              <span className="pill blue">
-                <Icon name="shield" size={13} /> {t('common.verified')}
-              </span>
-            ) : null}
-            {host.bio ? <p className="muted small">{host.bio}</p> : null}
-            {host.walkingTimes ? (
-              <p className="small">
-                <strong>{t('dog.walkingTimes')}:</strong> {host.walkingTimes}
-              </p>
-            ) : null}
-            {host.website || host.instagram ? (
-              <div className="row">
-                {host.website ? (
-                  <a href={host.website} target="_blank" rel="noopener noreferrer" className="link-button small">
-                    <Icon name="globe" size={15} /> {t('dog.website')}
-                  </a>
-                ) : null}
-                {host.instagram ? (
-                  <a href={`https://www.instagram.com/${host.instagram}/`} target="_blank" rel="noopener noreferrer" className="link-button small">
-                    @{host.instagram}
-                  </a>
-                ) : null}
-              </div>
-            ) : null}
+        {ownerShielded ? (
+          // Without an account, a private owner is "an owner nearby": who they are and when the dog
+          // walks only show once you are signed in (getDogDetail, DPIA maatregel M4).
+          <div className="host card row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
+            <span className="avatar" style={{ width: 44, height: 44 }} aria-hidden="true">
+              <Icon name="home" size={22} />
+            </span>
+            <div className="stack-s" style={{ minWidth: 0 }}>
+              <strong>{t('dog.ownerNearby')}</strong>
+              <p className="muted small">{t('dog.ownerNearbyText', { city: host.city })}</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="host card row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
+            <Avatar name={host.name} src={host.photoUrl} size="medium" />
+            <div className="stack-s" style={{ minWidth: 0 }}>
+              <strong>
+                {host.kind === 'shelter'
+                  ? t('dog.hostShelter', { name: host.name, city: host.city })
+                  : t('dog.hostOwner', { name: host.name, city: host.city })}
+              </strong>
+              {host.kind === 'shelter' && host.verified ? (
+                <span className="pill blue">
+                  <Icon name="shield" size={13} /> {t('common.verified')}
+                </span>
+              ) : null}
+              {host.bio ? <p className="muted small">{host.bio}</p> : null}
+              {host.walkingTimes ? (
+                <p className="small">
+                  <strong>{t('dog.walkingTimes')}:</strong> {host.walkingTimes}
+                </p>
+              ) : null}
+              {host.website || host.instagram ? (
+                <div className="row">
+                  {host.website ? (
+                    <a href={host.website} target="_blank" rel="noopener noreferrer" className="link-button small">
+                      <Icon name="globe" size={15} /> {t('dog.website')}
+                    </a>
+                  ) : null}
+                  {host.instagram ? (
+                    <a href={`https://www.instagram.com/${host.instagram}/`} target="_blank" rel="noopener noreferrer" className="link-button small">
+                      @{host.instagram}
+                    </a>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        )}
 
         {dog.story ? (
           <section className="stack-s">
@@ -265,7 +281,7 @@ export default async function DogPage({
           ) : null}
         </section>
 
-        {host.kind === 'owner' ? (
+        {ownerShielded ? null : host.kind === 'owner' ? (
           <section className="stack-s">
             <h2>{t('dog.slots')}</h2>
             {slots.length ? (
