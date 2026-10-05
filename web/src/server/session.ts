@@ -3,11 +3,10 @@ import { eq } from 'drizzle-orm'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
-import { getDb } from '@/db'
+import { getDb, isThrowawayTestServer } from '@/db'
 import * as s from '@/db/schema'
 import { auth } from '@/lib/auth'
 import { adminAccess, safeNext } from '@/lib/site'
-import { emailEnabled } from './email'
 
 export type Profile = typeof s.profile.$inferSelect
 
@@ -57,7 +56,7 @@ export const getViewer = cache(async (): Promise<Viewer | null> => {
       .innerJoin(s.organization, eq(s.organization.id, s.organizationMember.orgId))
       .where(eq(s.organizationMember.userId, session.user.id)),
   ])
-  const access = adminAccess({ ...session.user, role: (session.user as { role?: string }).role }, emailEnabled())
+  const access = adminAccess({ ...session.user, role: (session.user as { role?: string }).role }, isThrowawayTestServer())
   return {
     userId: session.user.id,
     email: session.user.email,

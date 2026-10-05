@@ -6,6 +6,7 @@ import { drizzle as drizzleNeon } from 'drizzle-orm/neon-serverless'
 import { drizzle as drizzlePg } from 'drizzle-orm/node-postgres'
 import { drizzle as drizzlePglite } from 'drizzle-orm/pglite'
 import pg from 'pg'
+import { isTestServer } from '@/lib/clock'
 import migrations from './migrations.json'
 import { shouldMigrate } from './preview'
 import * as schema from './schema'
@@ -74,6 +75,15 @@ export function isDemoMode(): boolean {
 
 export function dbMode(): DbState['mode'] {
   return state.mode
+}
+
+/**
+ * A test server (lib/clock.ts isTestServer: TEST_CLOCK=1, never production) on an embedded database:
+ * end-to-end tests and npm run audit. Nothing real is stored there and there is no inbox, so an address
+ * on ADMIN_EMAILS counts without confirmation (lib/site.ts adminAccess). Never with a real database.
+ */
+export function isThrowawayTestServer(): boolean {
+  return state.mode === 'pglite' && isTestServer(process.env)
 }
 
 async function migrate(): Promise<void> {

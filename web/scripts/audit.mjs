@@ -3,7 +3,7 @@
 // blocks, tap targets lower than 44px (mobile), unlabeled controls, images without alt, slow pages,
 // and axe-core's WCAG 2.2 AA and best-practice rules in light and dark mode. Writes a
 // screenshot per page.
-// Usage: node scripts/audit.mjs <baseUrl> <outDir>   (server needs ADMIN_EMAILS to include audit@rondje.test)
+// Usage: node scripts/audit.mjs <baseUrl> <outDir>   (test server on PGlite with TEST_CLOCK=1 and ADMIN_EMAILS including audit@rondje.test)
 import { chromium } from '@playwright/test'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'

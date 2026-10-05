@@ -5,13 +5,25 @@ import { Icon } from '@/components/Icon'
 import { SubmitButton } from '@/components/SubmitButton'
 import { sendAdminConfirmation } from '@/server/actions/admin'
 import { adminHub } from '@/server/admin-hub'
+import { emailEnabled } from '@/server/email'
 import { requireAdmin, requireViewer } from '@/server/session'
 
 type Params = { sent?: string; failed?: string; error?: string }
 
-/** On ADMIN_EMAILS, but the address is not confirmed yet: one email first, then this page opens. */
+/**
+ * On ADMIN_EMAILS, but the address is not confirmed yet: one email first, then this page opens.
+ * While Rondje sends no email that cannot be done: then only the admin role opens Beheer.
+ */
 async function ConfirmAddress({ email, params }: { email: string; params: Params }) {
   const t = await getTranslations('admin.confirm')
+  if (!emailEnabled()) {
+    return (
+      <div className="narrow-page stack">
+        <h1>{t('title')}</h1>
+        <p>{t('noEmail')}</p>
+      </div>
+    )
+  }
   return (
     <div className="narrow-page stack">
       <h1>{t('title')}</h1>
