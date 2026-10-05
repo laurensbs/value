@@ -17,9 +17,12 @@ struct ActiveWalkView: View {
     @State private var moodBefore: Int?
     @State private var error: String?
 
+    /// The map only while this walk shares where you are; after the end, as the walk was.
+    private var showsMap: Bool { finished?.info.sharesLocation ?? walk.sharesLocation }
+
     var body: some View {
         ZStack(alignment: .bottom) {
-            if walk.sharesLocation {
+            if showsMap {
                 Map(position: $camera) {
                     UserAnnotation()
                     if walk.route.count > 1 {

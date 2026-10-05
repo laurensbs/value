@@ -54,8 +54,8 @@ struct TermsUpdateSheet: View {
 
     private var state: TermsState { model.me?.termsState ?? .agreed }
     private var changes: TermsChanges? { model.me?.termsChanges }
-    /// Loaded and agreed already, for example on the website.
-    private var upToDate: Bool { loaded && model.me?.termsAccepted == true && !state.needsYes }
+    /// Loaded and agreed already, for example on the website (not by a yes in this sheet: that one just closes).
+    private var upToDate: Bool { loaded && !agreement.agreed && model.me?.termsAccepted == true && !state.needsYes }
 
     var body: some View {
         NavigationStack {
@@ -140,7 +140,8 @@ struct TermsUpdateSheet: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Palette.calmSoft, in: .rect(cornerRadius: 14, style: .continuous))
             }
-            if upToDate {
+            if upToDate || agreement.agreed {
+                // Also after a yes here, should the sheet still be up: it only closes, nothing is sent again.
                 Button("Verder") {
                     agreement.alreadyAgreed()
                     dismiss()
