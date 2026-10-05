@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · un paseo fijo con un perro que te espera",
-    "description": "{app} conecta a jóvenes con perros de vecinos y protectoras que agradecen un paseo extra. Gratis y seguro, empezando por los Países Bajos."
+    "description": "{app} conecta a mayores de 18 años con perros de vecinos y protectoras que agradecen un paseo extra. Gratis y seguro, empezando por los Países Bajos."
   },
   "nav": {
     "dogs": "Perros",
@@ -109,7 +109,7 @@
     "forOwners": "Para dueños",
     "forOwnersText": "¿Ya no puedes caminar mucho? Tú decides quién pasea a tu perro, cuánto tiempo y si puede recibir premios. Tu familia también puede inscribirte.",
     "forShelters": "Para protectoras",
-    "forSheltersText": "Publica todos tus perros de una vez, organiza paseos en grupo acompañados y consigue un grupo fijo de voluntarios jóvenes.",
+    "forSheltersText": "Publica todos tus perros de una vez, organiza paseos en grupo acompañados y consigue un grupo fijo de voluntarios de la zona.",
     "safetyTitle": "La confianza se construye paso a paso",
     "safety1": "La primera vez siempre paseas junto al dueño o la protectora.",
     "safety2": "En el primer encuentro se comprueba el documento de identidad en persona. Rondje Mee no guarda ninguna copia.",
@@ -1191,7 +1191,7 @@
   },
   "shelter": {
     "title": "Para protectoras",
-    "lede": "Publica tus perros de una vez, organiza paseos en grupo acompañados y consigue un grupo fijo de voluntarios jóvenes. Gratis.",
+    "lede": "Publica tus perros de una vez, organiza paseos en grupo acompañados y consigue un grupo fijo de voluntarios de la zona. Gratis.",
     "create": "Inscribir una protectora",
     "createLede": "Revisamos cada protectora antes de que sus perros sean visibles. Intentamos hacerlo en dos días laborables.",
     "name": "Nombre de la protectora",
@@ -1248,8 +1248,8 @@
     "benefit2": "Programa paseos con un número máximo de plazas. Los voluntarios se apuntan desde la app.",
     "benefit3Title": "Tú tienes el control",
     "benefit3": "En el paseo compruebas el documento de identidad de los nuevos voluntarios y apuntas quién vino y quién no.",
-    "benefit4Title": "Un grupo fijo de paseadores jóvenes",
-    "benefit4": "Rondje Mee encuentra paseadores de 18 a 30 años con ganas de salir más a menudo. Gratis y sin suscripción.",
+    "benefit4Title": "Un grupo fijo de paseadores",
+    "benefit4": "Rondje Mee encuentra paseadores de 18 años o más con ganas de salir más a menudo, de estudiantes a jubilados. Gratis y sin suscripción.",
     "loginFirst": "Primero crea tu propia cuenta. Después inscribe la protectora; solo se tarda dos minutos.",
     "finishProfile": "Primero completa tu perfil",
     "where": "¿Dónde está la protectora?",
@@ -1660,7 +1660,7 @@
     "ownerStep2": "Ayúdale a registrarse: también puedes dar de alta un perro para otra persona, si está de acuerdo.",
     "ownerAddDog": "Dar de alta un perro para otra persona",
     "ownerStep3": "O envía tu propio enlace de invitación con este mensaje:",
-    "ownerMessage": "Conozco una app gratuita con la que gente joven del barrio pasea a tu perro. Siempre os conocéis antes en persona. Échale un vistazo: {url}",
+    "ownerMessage": "Conozco una app gratuita con la que gente del barrio pasea a tu perro. Siempre os conocéis antes en persona. Échale un vistazo: {url}",
     "ownerSignup": "Crea una cuenta para obtener tu enlace",
     "ownerPrivacy": "Tu enlace solo muestra que alguien llegó a través de ti. Nunca pedimos datos de otras personas.",
     "ownerFlyer": "O cuelga un folleto en tu barrio, en el súper o en el veterinario"
@@ -1751,7 +1751,7 @@
     "faq": {
       "free": {
         "q": "¿Por qué es gratis Rondje Mee?",
-        "a": "Porque el dinero nunca debe impedir salir juntos a la calle, ni a los jóvenes ni a las personas mayores con perro. Por eso nadie paga por usar Rondje Mee."
+        "a": "Porque el dinero nunca debe impedir salir juntos a la calle, ni a quienes pasean ni a las personas mayores con perro. Por eso nadie paga por usar Rondje Mee."
       },
       "where": {
         "q": "¿Adónde va mi aportación?",
@@ -1825,10 +1825,10 @@
   "about": {
     "eyebrow": "Sobre Rondje Mee",
     "title": "Un paseo juntos, bueno para ti y para un perro",
-    "lede": "Rondje Mee pone en contacto a jóvenes adultos con perros que quieren salir más: de vecinos que ya no pueden pasear bien a su perro, y de protectoras.",
-    "metaDescription": "{app} pone en contacto a jóvenes adultos con perros que quieren salir más: de vecinos que ya no pueden pasear bien a su perro, y de protectoras.",
+    "lede": "Rondje Mee pone en contacto a personas de 18 años o más con perros que quieren salir más: de vecinos que ya no pueden pasear bien a su perro, y de protectoras.",
+    "metaDescription": "{app} pone en contacto a mayores de 18 años con perros que quieren salir más: de vecinos que ya no pueden pasear bien a su perro, y de protectoras.",
     "whyTitle": "Por qué Rondje Mee",
-    "why1": "Muchos jóvenes quieren salir y adoran a los perros, pero no pueden tener uno. Al mismo tiempo, hay personas mayores o enfermas que no pueden pasear a su perro tanto como querrían. Y en las protectoras, cada perro espera un paseo más.",
+    "why1": "Mucha gente quiere salir y adora a los perros, pero no puede tener uno. Al mismo tiempo, hay personas mayores o enfermas que no pueden pasear a su perro tanto como querrían. Y en las protectoras, cada perro espera un paseo más.",
     "why2": "Un paseo fijo con un perro es bueno para todos: ejercicio, aire libre y una charla con un vecino. Rondje Mee lo hace fácil, seguro y gratis.",
     "why3": "Rondje Mee no es asistencia ni terapia. ¿No te encuentras bien? En la página de ayuda verás adónde acudir.",
     "howTitle": "Cómo funciona",
@@ -1888,7 +1888,7 @@
     "footer": "Rondje Mee es gratis y lo seguirá siendo. Rondje Mee pone en contacto a las personas y no es parte de sus acuerdos.",
     "owner": {
       "headline": "¿A su perro le vendría bien un paseo más?",
-      "text": "¿Le cuesta sacar al perro? Una persona joven del barrio pasea a su perro de forma regular y gratis. Siempre se conocen antes en persona, y usted decide lo que se permite.",
+      "text": "¿Le cuesta sacar al perro? Alguien del barrio pasea a su perro de forma regular y gratis. Siempre se conocen antes en persona, y usted decide lo que se permite.",
       "points": {
         "one": "Gratis, ahora y después",
         "two": "Siempre se conocen antes en persona",
@@ -3055,7 +3055,7 @@
       "dogsTitle": "Perros que esperan un paseo",
       "dogs1": "Hay personas que ya no pueden pasear a su perro tan a menudo como quisieran, porque se hacen mayores, están enfermas o les cuesta caminar. Su perro echa de menos el ejercicio, y ellas a veces echan de menos una charla.",
       "dogs2": "En las protectoras, los perros esperan un nuevo hogar. Un paseo fuera de la protectora es un cambio agradable para ellos. Con perros de protectora, en {app} siempre paseas en paseos de grupo guiados.",
-      "dogs3": "{app} une a esos perros con jóvenes adultos a los que les encanta salir, pero que no pueden tener perro. Con seguridad, paso a paso y gratis.",
+      "dogs3": "{app} une a esos perros con personas a las que les encanta salir, pero que no pueden tener perro. Con seguridad, paso a paso y gratis.",
       "safetyLink": "Así cuidamos la seguridad",
       "doTitle": "Qué puedes hacer tú",
       "do": {
@@ -3327,8 +3327,8 @@
       },
       "walker": {
         "title": "Paseador",
-        "who": "Alguien de 18 a 30 años a quien le encantan los perros",
-        "goal": "Objetivo: entender qué hacen ahora los jóvenes cuando echan de menos un perro y qué les frena.",
+        "who": "Alguien de 18 años o más a quien le encantan los perros, joven o mayor",
+        "goal": "Objetivo: entender qué hace ahora la gente cuando echa de menos un perro y qué la frena.",
         "q1": "¿Cuándo paseaste un perro por última vez? ¿Cómo surgió?",
         "q2": "¿Has buscado alguna vez una forma de estar con perros sin tener uno? ¿Qué encontraste y por qué empezaste o no?",
         "q3": "¿Cómo es una semana normal? ¿Dónde cabría una hora fija?",
@@ -3409,20 +3409,20 @@
         "title": "Semana 1",
         "sub": "Estoy creando una app gratis para que el perro de la abuela salga más",
         "goal": "Primera prueba de mercado: construir en público. Los comentarios te dicen si hay demanda.",
-        "caption": "Semana 1: estoy creando una app gratis para que el perro de la abuela salga más a menudo.\n\nMuchas personas mayores ya no pueden sacar ellas mismas a su perro. Muchos jóvenes adoran los perros pero (aún) no pueden tener uno. {app} los une, y la primera vez el dueño siempre está presente.\n\nUna pregunta para ti: ¿conoces a alguien cuyo perro querría salir más? Cuéntamelo en los comentarios.\n\n#construirenpublico #perros #pasear",
+        "caption": "Semana 1: estoy creando una app gratis para que el perro de la abuela salga más a menudo.\n\nMuchas personas mayores ya no pueden sacar ellas mismas a su perro. Y mucha gente adora los perros pero (aún) no puede tener uno. {app} los une, y la primera vez el dueño siempre está presente.\n\nUna pregunta para ti: ¿conoces a alguien cuyo perro querría salir más? Cuéntamelo en los comentarios.\n\n#construirenpublico #perros #pasear",
         "visual": "Grabación de pantalla de la app con voz en off (guion A en docs/GROWTH.md); la imagen como portada. Comentario fijado: ‘Lo construyo en público. Una novedad cada semana. No vendo nada.’"
       },
       "p03": {
         "title": "¿A su perro le vendría bien un paseo más?",
-        "sub": "Gratis, con un joven del barrio. Primero se conocen juntos.",
+        "sub": "Gratis, con alguien del barrio. Primero se conocen juntos.",
         "goal": "Oferta: llegar a los dueños y a sus familias en el barrio.",
-        "caption": "¡Hola, vecinos! ¿Conocen a alguien cuyo perro necesitaría un paseo más? Por ejemplo porque caminar cuesta un poco más, tras una operación, o porque los días se hacen largos.\n\nCon {app}, un joven (18+) del barrio da gratis un paseo fijo con el perro. La primera vez siempre se conocen juntos, y usted decide qué se permite. {app} nunca pide dinero.\n\n¿Sin smartphone? Un familiar o un vecino puede apuntar al perro por usted, con su permiso: {link}",
+        "caption": "¡Hola, vecinos! ¿Conocen a alguien cuyo perro necesitaría un paseo más? Por ejemplo porque caminar cuesta un poco más, tras una operación, o porque los días se hacen largos.\n\nCon {app}, alguien del barrio (18+) da gratis un paseo fijo con el perro. La primera vez siempre se conocen juntos, y usted decide qué se permite. {app} nunca pide dinero.\n\n¿Sin smartphone? Un familiar o un vecino puede apuntar al perro por usted, con su permiso: {link}",
         "visual": "La imagen, o una foto del folleto impreso para dueños. Pregunta antes a quien administra el grupo si puedes compartirlo."
       },
       "p04": {
         "title": "¿Sin perro propio? ¿Con ganas de salir?",
         "sub": "Da gratis un paseo fijo con un perro de tu barrio",
-        "goal": "Demanda: conseguir paseadores de 18 a 30 años, en una ciudad que ya tiene perros.",
+        "goal": "Demanda: conseguir paseadores de 18 años o más, en una ciudad que ya tiene perros.",
         "caption": "¿Te encantan los perros pero (aún) no encaja uno en tu vida? Con {app} das gratis un paseo fijo con un perro de tu barrio, por ejemplo el de alguien que ya no puede caminar mucho.\n\nAsí funciona:\n1. Creas un perfil (18+) y haces un breve test de seguridad\n2. Primero conoces al dueño, juntos\n3. Después es vuestro paseo fijo\n\nPasear juntos puede alegrarte el día, y para el perro es una fiesta. Enlace en la bio.\n\n#vidauniversitaria #perros #pasear #airelibre",
         "visual": "La imagen como primera diapositiva y después los tres pasos, uno por diapositiva."
       },
@@ -3435,9 +3435,9 @@
       },
       "p06": {
         "title": "Se busca: la primera protectora",
-        "sub": "Para paseos en grupo supervisados con voluntarios jóvenes, gratis",
+        "sub": "Para paseos en grupo supervisados con voluntarios, gratis",
         "goal": "Socios: encontrar una protectora, una entidad social o una universidad para el primer piloto.",
-        "caption": "Estoy creando {app}: una plataforma gratuita que pone en contacto a jóvenes (18–30) con perros a los que les vendría bien un paseo más. Perros de vecinos mayores o enfermos, y perros de protectoras en paseos en grupo supervisados.\n\nDónde está, con honestidad: la plataforma funciona y los pasos de seguridad están incluidos (conocerse primero juntos, DNI visto en persona, permiso por perro, un test breve). Todavía no hay parejas reales paseando.\n\nLo que busco:\n• una protectora que quiera probarlo con algunos perros para principiantes\n• una entidad social o un equipo de barrio que conozca a dueños mayores\n• un docente o investigador que quiera pensar en una medición sencilla\n\n¿Conoces a alguien? Una presentación o un comentario ayudan muchísimo. {link}\n\n#voluntariado #bienestaranimal #barrio #impactosocial",
+        "caption": "Estoy creando {app}: una plataforma gratuita que pone en contacto a personas de 18 años o más con perros a los que les vendría bien un paseo más. Perros de vecinos mayores o enfermos, y perros de protectoras en paseos en grupo supervisados.\n\nDónde está, con honestidad: la plataforma funciona y los pasos de seguridad están incluidos (conocerse primero juntos, DNI visto en persona, permiso por perro, un test breve). Todavía no hay parejas reales paseando.\n\nLo que busco:\n• una protectora que quiera probarlo con algunos perros para principiantes\n• una entidad social o un equipo de barrio que conozca a dueños mayores\n• un docente o investigador que quiera pensar en una medición sencilla\n\n¿Conoces a alguien? Una presentación o un comentario ayudan muchísimo. {link}\n\n#voluntariado #bienestaranimal #barrio #impactosocial",
         "visual": "La imagen con la publicación. No etiquetes organizaciones sin que lo sepan."
       },
       "p07": {
@@ -3451,7 +3451,7 @@
         "title": "Para el perro de tu abuela, tu vecino o tu madre",
         "sub": "Apunta a un perro, también por otra persona (con su permiso)",
         "goal": "Oferta a través de la familia: quien no usa la app también puede participar.",
-        "caption": "¿Tu madre, tu abuela o tu vecino tienen un perro al que le gustaría salir más? Con {app}, un joven del barrio da gratis un paseo fijo con ese perro.\n\nEl dueño no necesita usar ninguna app: tú puedes apuntar al perro, con su permiso. El primer encuentro es siempre juntos, y {app} nunca pide dinero. {link}",
+        "caption": "¿Tu madre, tu abuela o tu vecino tienen un perro al que le gustaría salir más? Con {app}, alguien del barrio da gratis un paseo fijo con ese perro.\n\nEl dueño no necesita usar ninguna app: tú puedes apuntar al perro, con su permiso. El primer encuentro es siempre juntos, y {app} nunca pide dinero. {link}",
         "visual": "La imagen con dos perros dibujados. Pregunta antes a quien administra el grupo si puedes compartirlo."
       },
       "p09": {
@@ -3540,7 +3540,7 @@
       },
       "flyerWalker": {
         "title": "Folleto para paseadores",
-        "how": "Cuélgalo en la universidad, la biblioteca o en un piso de estudiantes, mejor en una ciudad que ya tenga perros. Funciona mejor en época de exámenes."
+        "how": "Cuélgalo en la biblioteca, el centro cívico, el supermercado o la universidad, mejor en una ciudad que ya tenga perros. En la universidad funciona mejor en época de exámenes."
       },
       "poster": {
         "title": "Póster para una protectora",

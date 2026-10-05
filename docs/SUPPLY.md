@@ -27,10 +27,10 @@ Concept van 2 oktober 2026. Er is nog niets verspreid of verstuurd: flyers, post
 
 ## Samenwerken met OOPOEH, niet concurreren
 
-OOPOEH koppelt 55-plussers aan huisdieren in de buurt. Eigenaren betalen een bijdrage en gemeenten financieren de lokale coördinatie (zie [`research/honden-jongeren.md`](research/honden-jongeren.md)). Rondje richt zich op wandelaars van 18 tot 30 en is gratis. Dat is een aanvulling, en zo breng je het ook: zet Rondje nooit neer als "een gratis OOPOEH".
+OOPOEH koppelt 55-plussers aan huisdieren in de buurt. Eigenaren betalen een bijdrage en gemeenten financieren de lokale coördinatie (zie [`research/honden-jongeren.md`](research/honden-jongeren.md)). Rondje is er voor wandelaars vanaf 18 jaar, zonder bovengrens, en is gratis. Dat overlapt deels met OOPOEH, dus breng het als aanvulling: zet Rondje nooit neer als "een gratis OOPOEH".
 
 Voorstel voor een eerste gesprek:
-- **Naar elkaar doorverwijzen.** Een energieke hond die meer nodig heeft dan een rustige wandeling, of een stad waar OOPOEH niet actief is: naar Rondje. Iemand van 55+ die wil helpen: naar OOPOEH.
+- **Naar elkaar doorverwijzen.** Een energieke hond die meer nodig heeft dan een rustige wandeling, of een stad waar OOPOEH niet actief is: naar Rondje. Iemand van 55+ die ook voor een kat of ander huisdier wil zorgen, of liever met een vaste coördinator werkt: naar OOPOEH.
 - **Niet werven in elkaars koppels.**
 - **Samen meten:** dezelfde vragen over eenzaamheid en beweging, zodat gemeenten en fondsen kunnen vergelijken.
 - **Eén gezamenlijke pilot** in een stad waar OOPOEH al actief is.

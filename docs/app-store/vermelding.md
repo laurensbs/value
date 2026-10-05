@@ -24,7 +24,7 @@ Voor het indienen doet Laurens nog twee checks:
 Een vast rondje met een hond die dat goed kan gebruiken. Van een buurvrouw die zelf niet meer ver kan lopen, of uit de opvang. Altijd gratis, zonder advertenties.
 
 **Beschrijving:**
-Ken je dat gevoel na een wandeling? Rondje Mee koppelt jongvolwassenen aan honden die een extra rondje goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in begeleide groepswandelingen. Samen buiten zijn kan je dag goed doen, en een hond is er altijd blij mee.
+Ken je dat gevoel na een wandeling? Rondje Mee koppelt wandelaars aan honden die een extra rondje goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in begeleide groepswandelingen. Samen buiten zijn kan je dag goed doen, en een hond is er altijd blij mee.
 
 ZO WERKT HET
 • Je Vandaag-scherm begroet je met je level, de uitdaging van je stad en een tip van de dag.
@@ -75,7 +75,7 @@ De eerste versie. Ontdek honden in je buurt, maak kennis en loop je eerste rondj
 A regular walk with a dog that could use one. From a neighbour who can't walk far anymore, or from the shelter. Always free, no ads.
 
 **Description:**
-You know that feeling after a walk? Rondje Mee connects young adults with dogs that could use an extra walk: dogs of neighbours who can no longer walk far, and shelter dogs on guided group walks. Getting outside together can make your day, and a dog is always happy you came.
+You know that feeling after a walk? Rondje Mee connects walkers with dogs that could use an extra walk: dogs of neighbours who can no longer walk far, and shelter dogs on guided group walks. Getting outside together can make your day, and a dog is always happy you came.
 
 HOW IT WORKS
 • Your Today screen greets you with your level, your city's challenge and a tip of the day.

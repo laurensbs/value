@@ -27,10 +27,10 @@ export const TEMPLATES: Template[] = [
     audience: 'shelter',
     lang: 'nl',
     kind: 'mail',
-    subject: 'Extra wandelingen voor uw honden, met jonge vrijwilligers (gratis)',
+    subject: 'Extra wandelingen voor uw honden, met vrijwilligers uit de buurt (gratis)',
     body: `Beste {naam},
 
-Ik ben {afzender} van {app}: een gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling goed kunnen gebruiken. Ik zou graag samenwerken met {organisatie}.
+Ik ben {afzender} van {app}: een gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling goed kunnen gebruiken. Ik zou graag samenwerken met {organisatie}.
 
 - U bepaalt welke honden meedoen en welke wandelaars komen.
 - Er wordt gewandeld in kleine groepen, altijd onder begeleiding, op momenten die u kiest.
@@ -66,7 +66,7 @@ Met vriendelijke groet,
     subject: '',
     body: `"Goedemorgen, u spreekt met {afzender} van {app}. Spreek ik met {naam}, of met wie de vrijwilligers coördineert? Heeft u één minuut?
 
-{app} is een gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling kunnen gebruiken. Bij opvangen gaat dat in kleine groepen, altijd onder begeleiding, op momenten die u kiest. U bepaalt welke honden meedoen en wie er mag komen. Uw begeleider controleert bij het eerste bezoek het ID en ziet tijdens de wandeling de route live. Inschrijven en aanwezigheid regelen wij.
+{app} is een gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling kunnen gebruiken. Bij opvangen gaat dat in kleine groepen, altijd onder begeleiding, op momenten die u kiest. U bepaalt welke honden meedoen en wie er mag komen. Uw begeleider controleert bij het eerste bezoek het ID en ziet tijdens de wandeling de route live. Inschrijven en aanwezigheid regelen wij.
 
 Ik bel om te horen of dit bij {organisatie} past. Heeft u twintig minuten voor een gesprek, bijvoorbeeld {dagen}?"
 
@@ -78,10 +78,10 @@ Ik bel om te horen of dit bij {organisatie} past. Heeft u twintig minuten voor e
     audience: 'shelter',
     lang: 'fr',
     kind: 'mail',
-    subject: 'Des promenades en plus pour vos chiens, avec de jeunes bénévoles (gratuit)',
+    subject: 'Des promenades en plus pour vos chiens, avec des bénévoles des environs (gratuit)',
     body: `Bonjour {naam},
 
-Je suis {afzender}, de {app} : une plateforme gratuite qui met en relation des jeunes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. J'aimerais beaucoup collaborer avec {organisatie}.
+Je suis {afzender}, de {app} : une plateforme gratuite qui met en relation des personnes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. J'aimerais beaucoup collaborer avec {organisatie}.
 
 - Vous choisissez les chiens qui participent et les promeneurs qui viennent.
 - Les promenades se font en petits groupes, toujours encadrés, aux moments que vous fixez.
@@ -117,7 +117,7 @@ Bien cordialement,
     subject: '',
     body: `« Bonjour, {afzender}, de {app}. Je parle bien à {naam}, ou à la personne responsable des bénévoles ? Vous avez une minute ?
 
-{app} est une plateforme gratuite qui met en relation des jeunes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. Avec les refuges, cela se fait en petits groupes, toujours encadrés, aux moments que vous choisissez. Vous décidez quels chiens participent et qui peut venir. Votre encadrant vérifie la pièce d'identité à la première visite et voit l'itinéraire en direct pendant la promenade. Nous gérons les inscriptions et les présences.
+{app} est une plateforme gratuite qui met en relation des personnes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. Avec les refuges, cela se fait en petits groupes, toujours encadrés, aux moments que vous choisissez. Vous décidez quels chiens participent et qui peut venir. Votre encadrant vérifie la pièce d'identité à la première visite et voit l'itinéraire en direct pendant la promenade. Nous gérons les inscriptions et les présences.
 
 Je vous appelle pour savoir si cela pourrait convenir à {organisatie}. Auriez-vous 20 minutes pour en parler, par exemple {dagen} ? »
 
@@ -129,10 +129,10 @@ Je vous appelle pour savoir si cela pourrait convenir à {organisatie}. Auriez-v
     audience: 'shelter',
     lang: 'es',
     kind: 'mail',
-    subject: 'Más paseos para vuestros perros, con voluntarios jóvenes (gratis)',
+    subject: 'Más paseos para vuestros perros, con voluntarios de la zona (gratis)',
     body: `Hola, {naam}:
 
-Soy {afzender}, de {app}: una plataforma gratuita que pone en contacto a jóvenes mayores de 18 años con perros que necesitan un paseo más. Me encantaría colaborar con {organisatie}.
+Soy {afzender}, de {app}: una plataforma gratuita que pone en contacto a personas de 18 años o más con perros que necesitan un paseo más. Me encantaría colaborar con {organisatie}.
 
 - Vosotros decidís qué perros participan y qué voluntarios vienen.
 - Los paseos son en grupos pequeños, siempre supervisados, en los horarios que elijáis.
@@ -169,7 +169,7 @@ Un saludo,
     subject: '',
     body: `«Hola, buenos días. Soy {afzender}, de {app}. ¿Hablo con {naam}, o con quien coordina el voluntariado? ¿Tienes un minuto?
 
-{app} es una plataforma gratuita que pone en contacto a jóvenes mayores de 18 años con perros que necesitan un paseo más. Con las protectoras funciona con paseos en grupos pequeños, siempre supervisados, en los horarios que elijáis. Vosotros decidís qué perros participan y quién viene. Vuestro responsable comprueba el DNI o NIE en la primera visita y ve la ruta en directo durante el paseo. Nosotros nos encargamos de las inscripciones y la asistencia.
+{app} es una plataforma gratuita que pone en contacto a personas de 18 años o más con perros que necesitan un paseo más. Con las protectoras funciona con paseos en grupos pequeños, siempre supervisados, en los horarios que elijáis. Vosotros decidís qué perros participan y quién viene. Vuestro responsable comprueba el DNI o NIE en la primera visita y ve la ruta en directo durante el paseo. Nosotros nos encargamos de las inscripciones y la asistencia.
 
 Te llamo para saber si podría encajar con {organisatie}. ¿Tendrías 20 minutos para hablarlo, por ejemplo {dagen}?»
 
@@ -186,7 +186,7 @@ Te llamo para saber si podría encajar con {organisatie}. ¿Tendrías 20 minutos
     subject: 'Mag ik een flyer bij u neerleggen? Gratis hulp bij het uitlaten, nieuw in {stad}',
     body: `Beste {naam},
 
-Ik ben {afzender} en ik ben net begonnen met {app}: een nieuw, gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling goed kunnen gebruiken. Vaak gaat het om honden van buurtgenoten die zelf niet meer ver kunnen lopen, bijvoorbeeld door hun leeftijd of na een operatie.
+Ik ben {afzender} en ik ben net begonnen met {app}: een nieuw, gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling goed kunnen gebruiken. Vaak gaat het om honden van buurtgenoten die zelf niet meer ver kunnen lopen, bijvoorbeeld door hun leeftijd of na een operatie.
 
 Bij {organisatie} ziet u vast weleens een baasje dat de hond niet meer zo vaak buiten krijgt als het zou willen. Daarom een vraag: mag ik een flyer neerleggen of een poster ophangen in de wachtruimte?
 
@@ -227,7 +227,7 @@ Met vriendelijke groet,
     subject: 'Voor jullie leden: gratis een vast rondje met een hond uit de buurt',
     body: `Hoi {naam},
 
-Ik ben {afzender} en ik ben net begonnen met {app}: een nieuw, gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in {stad}.
+Ik ben {afzender} en ik ben net begonnen met {app}: een nieuw, gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in {stad}.
 
 Veel studenten missen de hond van thuis. Misschien is dit iets voor de leden van {organisatie}: een vast rondje in de week, gratis, met een hond die er blij mee is. En samen buiten zijn kan je dag goed doen.
 
@@ -261,7 +261,7 @@ Groetjes,
     subject: '',
     body: `Hoi buren! Ik ben {afzender} uit {stad}. Kent u iemand in de buurt wiens hond vaker naar buiten wil, maar die zelf niet meer zo ver kan lopen? Of wilt u zelf graag een vast rondje met een hond?
 
-Daarvoor is {app}: een nieuw, gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden van buurtgenoten. De eigenaar bepaalt wie er wandelt, en de eerste keer loop je altijd samen.
+Daarvoor is {app}: een nieuw, gratis platform dat mensen vanaf 18 jaar koppelt aan honden van buurtgenoten. De eigenaar bepaalt wie er wandelt, en de eerste keer loop je altijd samen.
 
 Kijk gerust: {link}
 Vragen mag altijd, hier of als u me tegenkomt.`,
@@ -274,7 +274,7 @@ Vragen mag altijd, hier of als u me tegenkomt.`,
     subject: 'Gezocht: honden die een extra rondje kunnen gebruiken (gratis)',
     body: `Hallo allemaal,
 
-Ik ben {afzender} en woon in {stad}. Ik ben net begonnen met {app}: een gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden van buurtgenoten die zelf niet meer zo ver kunnen lopen.
+Ik ben {afzender} en woon in {stad}. Ik ben net begonnen met {app}: een gratis platform dat mensen vanaf 18 jaar koppelt aan honden van buurtgenoten die zelf niet meer zo ver kunnen lopen.
 
 Zo gaat het:
 - De eigenaar bepaalt wie er wandelt, hoe lang en wanneer.
@@ -296,7 +296,7 @@ Groet,
     subject: 'Nieuw in {stad}: gratis wandelen met de hond van een buurtgenoot',
     body: `Beste {naam},
 
-Ik ben {afzender} en ik ben net begonnen met {app}: een nieuw, gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang, die in kleine, begeleide groepjes wandelen.
+Ik ben {afzender} en ik ben net begonnen met {app}: een nieuw, gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang, die in kleine, begeleide groepjes wandelen.
 
 Misschien is dit een verhaal voor {organisatie}. Wat het misschien interessant maakt:
 - Het is gratis en zonder advertenties, en we beginnen nu in {stad}.

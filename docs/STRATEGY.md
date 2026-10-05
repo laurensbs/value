@@ -18,7 +18,7 @@ Score van 1 tot 5, met gewicht tussen haakjes.
 
 ## 2. De keuze: Rondje
 
-**Rondje koppelt jongvolwassenen (18–30) aan een hond die een extra wandeling goed kan gebruiken.** Het gaat vooral om honden van oudere of zieke buurtgenoten, en daarnaast om opvanghonden tijdens begeleide groepswandelingen. Het is gratis voor iedereen.
+**Rondje koppelt mensen vanaf 18 jaar aan een hond die een extra wandeling goed kan gebruiken.** Het gaat vooral om honden van oudere of zieke buurtgenoten, en daarnaast om opvanghonden tijdens begeleide groepswandelingen. Het is gratis voor iedereen.
 
 **Waarom de andere afvallen:**
 - **Mentale-gezondheidsapp:** de belangrijkste lessen gaan wel mee in Rondje (doorverwijzen, geen AI-chat, privacy). Maar een losse app concurreert met In je bol en vraagt een organisatie met 24/7 moderatie.
@@ -39,14 +39,14 @@ Stel: het is oktober 2027 en Rondje is mislukt. De meest waarschijnlijke oorzake
 ## 4. Het model op één pagina
 
 **Probleem en doelgroep**
-- **Wandelaars:** jongvolwassenen van 18–30, met studenten als begin. 23% van de 16–25-jarigen is sterk eenzaam en 53% van de studenten heeft veel stress. Ze willen naar buiten en houden van honden, maar kunnen er geen hebben.
+- **Wandelaars:** iedereen vanaf 18 jaar, zonder bovengrens (besluit Laurens, 6 oktober 2026; eerst was dit 18–30). Studenten zijn een makkelijk begin, maar werkenden en gepensioneerden lopen net zo goed een vast rondje. Eenzaamheid speelt op elke leeftijd: bijna 10% van de Nederlanders van 15 jaar en ouder voelt zich sterk eenzaam, bij 16–25-jarigen is dat 23%, en 53% van de studenten heeft veel stress. Veel mensen willen naar buiten en houden van honden, maar kunnen er geen hebben.
 - **Eigenaren:** ouderen of zieken die hun hond niet meer goed kunnen uitlaten, en vaak zelf ook eenzaam zijn. Daarnaast opvangen met honden die meer wandelingen nodig hebben.
 
 **Bestaand landschap**
 - BorrowMyDoggy is betaald en Brits.
 - OOPOEH is alleen voor 55+.
 - Pawshake en Rover zijn commercieel.
-- **Wat Rondje toevoegt, in één zin:** een gratis, veilig vast rondje dat een jongere en een oudere buurtgenoot met elkaar verbindt via de hond.
+- **Wat Rondje toevoegt, in één zin:** een gratis, veilig vast rondje dat een wandelaar en een oudere buurtgenoot met elkaar verbindt via de hond.
 
 **MVP (5 functies)**
 1. **Honden in de buurt ontdekken**, met verhaal, energie, niveau en waarom een rondje telt.

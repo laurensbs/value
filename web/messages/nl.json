@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · een vast rondje met een hond die op je wacht",
-    "description": "{app} koppelt jongvolwassenen aan honden van buren en opvangen die graag een extra rondje lopen. Gratis en veilig, eerst in Nederland."
+    "description": "{app} koppelt mensen vanaf 18 jaar aan honden van buren en opvangen die graag een extra rondje lopen. Gratis en veilig, eerst in Nederland."
   },
   "nav": {
     "dogs": "Honden",
@@ -109,7 +109,7 @@
     "forOwners": "Voor eigenaren",
     "forOwnersText": "Kun je zelf niet ver meer lopen? Jij bepaalt wie met je hond loopt, hoe lang, en of er koekjes mee mogen. Familie kan je ook aanmelden.",
     "forShelters": "Voor opvangen",
-    "forSheltersText": "Zet al je honden in één keer online, plan begeleide groepswandelingen en krijg een vaste groep jonge vrijwilligers.",
+    "forSheltersText": "Zet al je honden in één keer online, plan begeleide groepswandelingen en krijg een vaste groep vrijwilligers uit de buurt.",
     "safetyTitle": "Vertrouwen bouw je op, stap voor stap",
     "safety1": "De eerste keer loop je altijd samen met de eigenaar of de opvang.",
     "safety2": "Het ID wordt bij de kennismaking in het echt bekeken. Rondje Mee bewaart geen kopie.",
@@ -1191,7 +1191,7 @@
   },
   "shelter": {
     "title": "Voor opvangen",
-    "lede": "Zet je honden in één keer online, plan begeleide groepswandelingen en krijg een vaste groep jonge vrijwilligers. Gratis.",
+    "lede": "Zet je honden in één keer online, plan begeleide groepswandelingen en krijg een vaste groep vrijwilligers uit de buurt. Gratis.",
     "create": "Opvang aanmelden",
     "createLede": "We controleren elke opvang voordat honden zichtbaar worden. We proberen dat binnen twee werkdagen te doen.",
     "name": "Naam van de opvang",
@@ -1248,8 +1248,8 @@
     "benefit2": "Plan wandelmomenten met een maximum aantal plekken. Vrijwilligers melden zich aan in de app.",
     "benefit3Title": "Jij houdt de regie",
     "benefit3": "Bij de wandeling bekijk je het ID van nieuwe vrijwilligers en noteer je wie er was en wie niet kwam.",
-    "benefit4Title": "Een vaste groep jonge wandelaars",
-    "benefit4": "Rondje Mee vindt wandelaars van 18 tot 30 die graag vaker naar buiten willen. Gratis, zonder abonnement.",
+    "benefit4Title": "Een vaste groep wandelaars",
+    "benefit4": "Rondje Mee vindt wandelaars vanaf 18 jaar die graag vaker naar buiten willen, van student tot gepensioneerde. Gratis, zonder abonnement.",
     "loginFirst": "Maak eerst je eigen account. Daarna meld je de opvang aan; dat duurt twee minuten.",
     "finishProfile": "Maak eerst je profiel af",
     "where": "Waar is de opvang?",
@@ -1660,7 +1660,7 @@
     "ownerStep2": "Help met aanmelden: je kunt een hond ook aanmelden voor iemand anders, als die dat goed vindt.",
     "ownerAddDog": "Hond aanmelden voor iemand anders",
     "ownerStep3": "Of stuur je eigen uitnodigingslink, met dit berichtje:",
-    "ownerMessage": "Ik ken een gratis app waarmee jonge mensen uit de buurt je hond uitlaten. Jullie maken altijd eerst samen kennis. Kijk maar: {url}",
+    "ownerMessage": "Ik ken een gratis app waarmee mensen uit de buurt je hond uitlaten. Jullie maken altijd eerst samen kennis. Kijk maar: {url}",
     "ownerSignup": "Maak een account om je link te krijgen",
     "ownerPrivacy": "Je link laat alleen zien dat iemand via jou kwam. We vragen niemand om gegevens van anderen.",
     "ownerFlyer": "Of hang een flyer op in je buurt, bij de supermarkt of de dierenarts"
@@ -1751,7 +1751,7 @@
     "faq": {
       "free": {
         "q": "Waarom is Rondje Mee gratis?",
-        "a": "Omdat geld geen drempel mag zijn om samen naar buiten te gaan, voor jongeren en voor ouderen met een hond. Daarom vragen we niemand te betalen om Rondje Mee te gebruiken."
+        "a": "Omdat geld geen drempel mag zijn om samen naar buiten te gaan, voor wandelaars en voor ouderen met een hond. Daarom vragen we niemand te betalen om Rondje Mee te gebruiken."
       },
       "where": {
         "q": "Waar gaat mijn bijdrage naartoe?",
@@ -1825,10 +1825,10 @@
   "about": {
     "eyebrow": "Over Rondje Mee",
     "title": "Samen een rondje, goed voor jou en voor een hond",
-    "lede": "Rondje Mee brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer goed kunnen uitlaten, en uit opvangen.",
-    "metaDescription": "{app} brengt jongvolwassenen in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer kunnen uitlaten, en uit opvangen.",
+    "lede": "Rondje Mee brengt mensen vanaf 18 jaar in contact met honden die vaker naar buiten willen: van buren die hun hond niet meer goed kunnen uitlaten, en uit opvangen.",
+    "metaDescription": "{app} brengt mensen vanaf 18 jaar samen met honden die vaker naar buiten willen: van buren die hun hond niet meer kunnen uitlaten, en uit opvangen.",
     "whyTitle": "Waarom Rondje Mee",
-    "why1": "Veel jongeren willen graag naar buiten en houden van honden, maar kunnen er zelf geen hebben. Tegelijk zijn er ouderen en mensen die ziek zijn, die hun hond niet meer zo vaak kunnen uitlaten als ze zouden willen. En in opvangen wacht elke hond op een extra wandeling.",
+    "why1": "Veel mensen willen graag naar buiten en houden van honden, maar kunnen er zelf geen hebben. Tegelijk zijn er ouderen en mensen die ziek zijn, die hun hond niet meer zo vaak kunnen uitlaten als ze zouden willen. En in opvangen wacht elke hond op een extra wandeling.",
     "why2": "Een vast rondje met een hond is goed voor iedereen: beweging, buitenlucht en een praatje met een buurtgenoot. Rondje Mee maakt dat makkelijk, veilig en gratis.",
     "why3": "Rondje Mee is geen hulpverlening of therapie. Gaat het niet goed met je? Op de hulppagina vind je waar je terechtkunt.",
     "howTitle": "Hoe het werkt",
@@ -1888,7 +1888,7 @@
     "footer": "Rondje Mee is gratis en blijft gratis. Rondje Mee brengt mensen met elkaar in contact en is zelf geen partij bij de afspraken.",
     "owner": {
       "headline": "Kan uw hond wel een extra rondje gebruiken?",
-      "text": "Lukt het niet meer zo goed om de hond uit te laten? Een jongere uit de buurt loopt gratis een vast rondje met uw hond. U leert elkaar eerst samen kennen, en u bepaalt wat er mag.",
+      "text": "Lukt het niet meer zo goed om de hond uit te laten? Iemand uit de buurt loopt gratis een vast rondje met uw hond. U leert elkaar eerst samen kennen, en u bepaalt wat er mag.",
       "points": {
         "one": "Gratis, nu en later",
         "two": "Altijd eerst samen kennismaken",
@@ -3055,7 +3055,7 @@
       "dogsTitle": "Honden die op een rondje wachten",
       "dogs1": "Sommige mensen kunnen hun hond niet meer zo vaak uitlaten als ze zouden willen, omdat ze ouder worden, ziek zijn of slecht ter been. Hun hond mist dan beweging, en zij missen soms een praatje.",
       "dogs2": "In opvangen wachten honden op een nieuw thuis. Een wandeling buiten de opvang is voor hen een fijne afwisseling. Met opvanghonden wandel je bij {app} altijd in begeleide groepswandelingen.",
-      "dogs3": "{app} brengt die honden samen met jongvolwassenen die graag naar buiten gaan, maar zelf geen hond kunnen hebben. Veilig, stap voor stap, en gratis.",
+      "dogs3": "{app} brengt die honden samen met mensen die graag naar buiten gaan, maar zelf geen hond kunnen hebben. Veilig, stap voor stap, en gratis.",
       "safetyLink": "Zo regelen we veiligheid",
       "doTitle": "Wat jij kunt doen",
       "do": {
@@ -3327,8 +3327,8 @@
       },
       "walker": {
         "title": "Wandelaar",
-        "who": "Iemand van 18 tot 30 die van honden houdt",
-        "goal": "Doel: begrijpen wat jongeren nu doen als ze een hond missen, en wat ze tegenhoudt.",
+        "who": "Iemand vanaf 18 jaar die van honden houdt, jong of ouder",
+        "goal": "Doel: begrijpen wat mensen nu doen als ze een hond missen, en wat ze tegenhoudt.",
         "q1": "Wanneer liep je voor het laatst met een hond? Hoe kwam dat zo?",
         "q2": "Heb je ooit gezocht naar een manier om met honden om te gaan zonder er zelf een te hebben? Wat vond je, en waarom ben je wel of niet begonnen?",
         "q3": "Hoe ziet een gewone week eruit? Waar zou een vast uurtje in passen?",
@@ -3409,20 +3409,20 @@
         "title": "Week 1",
         "sub": "Ik bouw een gratis app zodat oma’s hond weer vaker naar buiten kan",
         "goal": "Eerste markttest: bouwen in het openbaar. Reacties vertellen je of er vraag is.",
-        "caption": "Week 1: ik bouw een gratis app zodat oma’s hond weer vaker naar buiten kan.\n\nVeel ouderen kunnen hun hond niet meer zelf uitlaten. Veel jongeren houden van honden, maar kunnen er (nog) geen hebben. {app} brengt ze samen, en de eerste keer is de eigenaar er altijd bij.\n\nVraag aan jou: ken jij iemand wiens hond vaker naar buiten zou willen? Vertel het in de reacties.\n\n#bouweninhetopenbaar #honden #wandelen",
+        "caption": "Week 1: ik bouw een gratis app zodat oma’s hond weer vaker naar buiten kan.\n\nVeel ouderen kunnen hun hond niet meer zelf uitlaten. En veel mensen houden van honden, maar kunnen er (nog) geen hebben. {app} brengt ze samen, en de eerste keer is de eigenaar er altijd bij.\n\nVraag aan jou: ken jij iemand wiens hond vaker naar buiten zou willen? Vertel het in de reacties.\n\n#bouweninhetopenbaar #honden #wandelen",
         "visual": "Schermopname van de app met voice-over (script A in docs/GROWTH.md); de afbeelding als cover. Vastgepinde reactie: ‘Ik bouw dit in het openbaar. Elke week een update. Ik verkoop niets.’"
       },
       "p03": {
         "title": "Kan uw hond wel een extra rondje gebruiken?",
-        "sub": "Gratis, met een jongere uit de buurt. Eerst samen kennismaken.",
+        "sub": "Gratis, met iemand uit de buurt. Eerst samen kennismaken.",
         "goal": "Aanbod: eigenaren en hun familie in de buurt bereiken.",
-        "caption": "Hallo buren! Kent u iemand wiens hond wel een extra rondje kan gebruiken? Bijvoorbeeld omdat lopen wat moeilijker gaat, na een operatie, of omdat de dagen lang zijn.\n\nVia {app} loopt een jongere (18+) uit de buurt gratis een vast rondje met de hond. De eerste keer maakt u altijd samen kennis, en u bepaalt wat er mag. {app} vraagt nooit om geld.\n\nGeen smartphone? Een familielid of buur kan de hond met toestemming voor u aanmelden: {link}",
+        "caption": "Hallo buren! Kent u iemand wiens hond wel een extra rondje kan gebruiken? Bijvoorbeeld omdat lopen wat moeilijker gaat, na een operatie, of omdat de dagen lang zijn.\n\nVia {app} loopt iemand uit de buurt (18+) gratis een vast rondje met de hond. De eerste keer maakt u altijd samen kennis, en u bepaalt wat er mag. {app} vraagt nooit om geld.\n\nGeen smartphone? Een familielid of buur kan de hond met toestemming voor u aanmelden: {link}",
         "visual": "De afbeelding, of een foto van de geprinte flyer voor eigenaren. Vraag eerst de beheerder van de groep of je dit mag delen."
       },
       "p04": {
         "title": "Geen eigen hond? Wel zin in buiten?",
         "sub": "Loop gratis een vast rondje met een hond uit je buurt",
-        "goal": "Vraag: wandelaars van 18 tot 30 werven, in een stad waar al honden zijn.",
+        "goal": "Vraag: wandelaars vanaf 18 jaar werven, in een stad waar al honden zijn.",
         "caption": "Hou je van honden, maar past er (nog) geen bij je leven? Met {app} loop je gratis een vast rondje met een hond uit je buurt, bijvoorbeeld van iemand die zelf niet ver meer kan lopen.\n\nZo gaat het:\n1. Je maakt een profiel (18+) en doet een korte veiligheidsquiz\n2. Je maakt eerst samen kennis met de eigenaar\n3. Daarna is het jullie vaste rondje\n\nSamen wandelen kan je dag goed doen, en voor de hond is het een feestje. Link in bio.\n\n#studentenleven #honden #wandelen #buiten",
         "visual": "De afbeelding als eerste slide, daarna de drie stappen als losse slides."
       },
@@ -3435,9 +3435,9 @@
       },
       "p06": {
         "title": "Gezocht: de eerste opvang",
-        "sub": "Voor begeleide groepswandelingen met jonge vrijwilligers, gratis",
+        "sub": "Voor begeleide groepswandelingen met vrijwilligers, gratis",
         "goal": "Partners: een opvang, welzijnsorganisatie of hogeschool vinden voor de eerste pilot.",
-        "caption": "Ik bouw {app}: een gratis platform dat jongvolwassenen (18–30) koppelt aan honden die een extra wandeling goed kunnen gebruiken. Honden van oudere of zieke buurtgenoten, en opvanghonden in begeleide groepswandelingen.\n\nWaar het nu staat, eerlijk: het platform is live en de veiligheidsstappen zitten erin (eerst samen kennismaken, ID in het echt gezien, toestemming per hond, een korte quiz). Er lopen nog geen echte koppels.\n\nWat ik zoek:\n• een dierenopvang die het met een paar starterhonden wil proberen\n• een welzijnsorganisatie of wijkteam dat oudere hondenbezitters kent\n• een docent of onderzoeker die wil meedenken over een eenvoudige meting\n\nKen je iemand? Een introductie of een reactie helpt enorm. {link}\n\n#vrijwilligerswerk #dierenwelzijn #buurt #socialimpact",
+        "caption": "Ik bouw {app}: een gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling goed kunnen gebruiken. Honden van oudere of zieke buurtgenoten, en opvanghonden in begeleide groepswandelingen.\n\nWaar het nu staat, eerlijk: het platform is live en de veiligheidsstappen zitten erin (eerst samen kennismaken, ID in het echt gezien, toestemming per hond, een korte quiz). Er lopen nog geen echte koppels.\n\nWat ik zoek:\n• een dierenopvang die het met een paar starterhonden wil proberen\n• een welzijnsorganisatie of wijkteam dat oudere hondenbezitters kent\n• een docent of onderzoeker die wil meedenken over een eenvoudige meting\n\nKen je iemand? Een introductie of een reactie helpt enorm. {link}\n\n#vrijwilligerswerk #dierenwelzijn #buurt #socialimpact",
         "visual": "De afbeelding bij de post. Tag geen organisaties zonder dat ze ervan weten."
       },
       "p07": {
@@ -3451,7 +3451,7 @@
         "title": "Voor de hond van je oma, je buurman of je moeder",
         "sub": "Meld een hond aan, ook voor een ander (met toestemming)",
         "goal": "Aanbod via familie: wie de app zelf niet gebruikt, kan toch meedoen.",
-        "caption": "Heeft je moeder, oma of buurman een hond die vaker naar buiten zou willen? Met {app} loopt een jongere uit de buurt gratis een vast rondje met die hond.\n\nDe eigenaar hoeft zelf geen app te gebruiken: jij kunt de hond met toestemming aanmelden. De eerste kennismaking is altijd samen, en {app} vraagt nooit om geld. {link}",
+        "caption": "Heeft je moeder, oma of buurman een hond die vaker naar buiten zou willen? Met {app} loopt iemand uit de buurt gratis een vast rondje met die hond.\n\nDe eigenaar hoeft zelf geen app te gebruiken: jij kunt de hond met toestemming aanmelden. De eerste kennismaking is altijd samen, en {app} vraagt nooit om geld. {link}",
         "visual": "De afbeelding met twee getekende honden. Vraag eerst de beheerder van de groep of je dit mag delen."
       },
       "p09": {
@@ -3540,7 +3540,7 @@
       },
       "flyerWalker": {
         "title": "Flyer voor wandelaars",
-        "how": "Hang hem op bij de hogeschool, de bibliotheek of in een studentenhuis, liefst in een stad waar al honden zijn. Rond de tentamens werkt hij het best."
+        "how": "Hang hem op bij de bibliotheek, het buurthuis, de supermarkt of de hogeschool, liefst in een stad waar al honden zijn. Bij een hogeschool werkt hij het best rond de tentamens."
       },
       "poster": {
         "title": "Poster voor een opvang",
