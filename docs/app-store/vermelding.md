@@ -54,7 +54,7 @@ EN VERDER
 • Levels en badges, die alleen jij ziet. Geen streaks en geen druk: elk rondje telt, ook na een pauze.
 • Een widget en een Live Activity voor je volgende rondje.
 
-{{NAAM}} is altijd gratis en zonder advertenties, gedragen door leden die het belangrijk vinden. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
+{{NAAM}} is altijd gratis en zonder advertenties. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
 
 {{NAAM}} is geen hulpverlening en stelt geen diagnoses. Gaat het niet goed met je? In de app staat waar je terechtkunt.
 
@@ -105,7 +105,7 @@ AND MORE
 • Levels and badges that only you can see. No streaks and no pressure: every walk counts, even after a break.
 • A widget and a Live Activity for your next walk.
 
-{{NAAM}} is always free and ad-free, carried by members who care. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
+{{NAAM}} is always free and ad-free. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
 
 {{NAAM}} is not a care service and makes no diagnoses. Not feeling well? The app shows where to get help.
 
@@ -135,7 +135,7 @@ The first version. Discover dogs near you, meet them and go on your first walk.
 | Geluidjes | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 | Apple Gezondheid (rondjes en ademminuten bewaren) | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 
-Wel noemen: "gedragen door leden" (zo betaalt Rondje zich; lid worden en geven gebeurt op de website, nooit in de app). Niet noemen: bedragen, doneren in de app, of namen van organisaties.
+Niet noemen: leden of lidmaatschap (dat bestaat niet meer), "aftrekbaar", doneren of betalen in de app, bedragen, of namen van organisaties. Helpen gaat via de crowdfunding op Whydonate, in Safari: in de app is dat één rij laag onder Jij ("Help ons via Whydonate", in het Engels "Support us via Whydonate"). Die rij blijft zichtbaar tijdens de review en staat uitgelegd in de review-notitie (`indienen.md` §5); de server zet hem alleen voorgoed uit met `SUPPORT_IN_APP_IOS=0` als Apple hem niet accepteert.
 
 ## Nog te beslissen door Laurens
 - De naam (zie boven).

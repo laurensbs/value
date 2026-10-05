@@ -38,6 +38,10 @@ extension Error {
 final class APIClient: Sendable {
     static let shared = APIClient()
 
+    /// How the app names itself to the server on every call. The server reads X-Rondje-Platform to pick
+    /// the switches for the iPhone app, such as SUPPORT_IN_APP_IOS (web/src/lib/app-platform.ts).
+    static let identity = ["User-Agent": "RondjeApp/1 iOS", "X-Rondje-Platform": "ios"]
+
     private let session: URLSession
     private let decoder: JSONDecoder
     private let encoder = JSONEncoder()
@@ -186,6 +190,7 @@ final class APIClient: Sendable {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue(AppLanguage.code, forHTTPHeaderField: "Accept-Language")
+        for (field, value) in Self.identity { request.setValue(value, forHTTPHeaderField: field) }
         request.httpBody = body
         struct Uploaded: Decodable { var url: String }
         do {
@@ -243,7 +248,7 @@ final class APIClient: Sendable {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         // The language the app is shown in (also a per-app choice in Settings), so server texts match the screen.
         request.setValue(AppLanguage.code, forHTTPHeaderField: "Accept-Language")
-        request.setValue("RondjeApp/1 iOS", forHTTPHeaderField: "User-Agent")
+        for (field, value) in Self.identity { request.setValue(value, forHTTPHeaderField: field) }
         if authorized, let token = Keychain.load() {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }

@@ -9,7 +9,7 @@ struct ProfileView: View {
     @State private var progress = ProgressStore.shared
     @State private var confirmSignOut = false
     @State private var deleting = false
-    @State private var membership = false
+    @State private var help = HelpUs.shared
 
     private var walks: Bool { model.role != .owner }
 
@@ -78,11 +78,16 @@ struct ProfileView: View {
                     }
                     HealthSettings()
                     RowGroup(title: L("Over \(Brand.name)")) {
-                        Button { membership = true } label: {
-                            ProfileRow(symbol: "heart.fill", title: L("Word lid van \(Brand.name)"), detail: L("Help een rondje: gratis voor iedereen, zonder reclame."))
-                        }
                         Button { openURL(Brand.web("/safety")) } label: { ProfileRow(symbol: "shield.lefthalf.filled", title: L("Veiligheid"), external: true) }
                         Button { openURL(Brand.web("/legal/privacy")) } label: { ProfileRow(symbol: "hand.raised.fill", title: L("Privacy en voorwaarden"), external: true) }
+                        // Help ons: one tap straight to the campaign page in the browser, never a sheet in
+                        // between and never paying inside the app. Only when the server allows it (HelpUs.swift).
+                        if let link = help.link {
+                            Button { openURL(link.url) } label: {
+                                ProfileRow(symbol: "heart.fill", title: link.title, detail: link.subtitle(), external: true)
+                            }
+                            .accessibilityHint(link.hint)
+                        }
                     }
                     RowGroup(title: L("Account")) {
                         Button { confirmSignOut = true } label: { ProfileRow(symbol: "rectangle.portrait.and.arrow.right", title: L("Uitloggen")) }
@@ -96,13 +101,16 @@ struct ProfileView: View {
             }
             .screenBackground()
             .navigationTitle("Jij")
-            .refreshable { await model.refreshMe() }
+            .refreshable {
+                await model.refreshMe()
+                await help.load(force: true)
+            }
             .task { await progress.load() }
+            .task { await help.load() }
             .confirmationDialog("Uitloggen?", isPresented: $confirmSignOut, titleVisibility: .visible) {
                 Button("Uitloggen", role: .destructive) { Task { await model.signOut() } }
             }
             .sheet(isPresented: $deleting) { DeleteAccountSheet().presentationDetents([.medium]) }
-            .sheet(isPresented: $membership) { MembershipView().presentationDetents([.large]).presentationCornerRadius(32) }
         }
     }
 
