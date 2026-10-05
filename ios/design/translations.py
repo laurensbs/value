@@ -514,14 +514,16 @@ T = {
         "To send the owner a photo during a walk. Only the photos you send go to the owner.",
         "Pour envoyer une photo au propriétaire pendant une balade. Seules les photos que tu envoies lui parviennent.",
         "Para enviar una foto al dueño durante un paseo. Solo le llegan las fotos que tú envíes."),
+    # Live watching only on a walk alone with the dog, and only while live location is switched on (LIVE_LOCATION,
+    # off in production by default): these texts must be true in both states (App Store guideline 2.3, 5.1.1).
     "NSLocationAlwaysAndWhenInUseUsageDescription": (
-        "Only during a walk: so the route keeps going with your phone in your pocket, and the owner can watch along. It stops as soon as the walk ends.",
-        "Uniquement pendant une balade : pour que le parcours continue avec ton téléphone dans la poche et que le propriétaire puisse suivre. Cela s'arrête dès la fin de la balade.",
-        "Solo durante un paseo: para que la ruta siga con el móvil en el bolsillo y el dueño pueda seguirla. Se detiene en cuanto termina el paseo."),
+        "Only during a walk alone with the dog, when live location is switched on: so the route keeps going with your phone in your pocket, and the owner can watch along. It stops as soon as the walk ends.",
+        "Uniquement pendant une balade en solo avec le chien, quand la localisation en direct est activée : pour que le parcours continue avec ton téléphone dans la poche et que le propriétaire puisse suivre. Cela s'arrête dès la fin de la balade.",
+        "Solo durante un paseo a solas con el perro, cuando la ubicación en directo está activada: para que la ruta siga con el móvil en el bolsillo y el dueño pueda seguirla. Se detiene en cuanto termina el paseo."),
     "NSLocationWhenInUseUsageDescription": (
-        "So you see dogs near you, and during a walk the owner can watch live. Your exact location is never shown on your profile.",
-        "Pour voir les chiens près de chez toi, et pendant une balade le propriétaire peut suivre en direct. Ta position exacte n'apparaît jamais sur ton profil.",
-        "Para ver perros cerca de ti, y durante un paseo el dueño puede seguirlo en directo. Tu ubicación exacta nunca aparece en tu perfil."),
+        "So you see dogs near you; for that, your location is rounded to about 1 km. The owner can only watch live on a walk alone with the dog, when live location is switched on. Your exact location is never shown on your profile.",
+        "Pour voir les chiens près de chez toi ; pour cela, ta position est arrondie à environ 1 km. Le propriétaire ne peut suivre en direct que pendant une balade en solo avec le chien, quand la localisation en direct est activée. Ta position exacte n'apparaît jamais sur ton profil.",
+        "Para ver perros cerca de ti; para ello, tu ubicación se redondea a aproximadamente 1 km. El dueño solo puede seguirlo en directo en un paseo a solas con el perro, cuando la ubicación en directo está activada. Tu ubicación exacta nunca aparece en tu perfil."),
     # --- parity: geluid en gezondheid ---
     "Geluidjes": ("Sounds", "Petits sons", "Sonidos"),
     "Zachte geluidjes bij belangrijke momenten. Staat je iPhone op stil, dan hoor je niets.": (

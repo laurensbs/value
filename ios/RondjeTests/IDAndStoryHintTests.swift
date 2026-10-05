@@ -114,7 +114,7 @@ struct IDAndStoryHintTests {
 
     @Test func theStoryFieldReadsTheHintAsItsHint() async throws {
         let nodes = try await AXProbe.nodes(
-            Form { TextField(L("Verhaal: wie is deze hond, en voor wie is het?"), text: .constant(""), axis: .vertical).fieldNote(AddDogView.storyHint) }
+            Form { TextField(AddDogView.storyPlaceholder, text: .constant(""), axis: .vertical).fieldNote(AddDogView.storyHint) }
         )
         #expect(nodes.contains { $0.hint == AddDogView.storyHint }, "\(nodes)")
         #expect(!nodes.contains { $0.label.contains(AddDogView.storyHint) }, "\(nodes)")
