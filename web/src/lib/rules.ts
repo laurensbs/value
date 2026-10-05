@@ -28,7 +28,8 @@ export type Reason =
   | 'needs-quiz'
   // The terms changed and have taken effect: agree to the new ones first (art. 19).
   | 'needs-terms'
-  // Live location is switched off (LIVE_LOCATION): a walk alone with the dog cannot start.
+  // Live location is switched off (LIVE_LOCATION): a walk alone with the dog cannot be asked for,
+  // accepted or started. Walking together (a first meeting) still can.
   | 'live-location-off'
   | 'needs-solo-trust'
   | 'needs-in-person'
@@ -142,11 +143,19 @@ export function forDecider(reason: Reason): Reason {
   return reason === 'needs-solo-trust' ? 'solo-not-allowed' : reason === 'needs-id' ? 'id-not-seen' : reason
 }
 
-/** A solo walk: only after the owner granted it for this dog, and after the safety quiz. */
-export function canRequestSolo(w: WalkerFacts, d: DogFacts, r: Relation): Reason | null {
+/**
+ * A solo walk: only after the owner granted it for this dog, and after the safety quiz. And only while
+ * live location is switched on (`liveLocation`, LIVE_LOCATION in lib/live-location.ts): the live map is
+ * how the owner follows a walk alone with the dog (safety protocol art. 2 and 3.5). While it is off, a
+ * walk alone is not asked for at all, so it never becomes an appointment that cannot start; this comes
+ * before the trust steps, so nobody works towards something that cannot happen now. Walking together
+ * (canRequestMeeting) is not affected.
+ */
+export function canRequestSolo(w: WalkerFacts, d: DogFacts, r: Relation, liveLocation: boolean): Reason | null {
   const base = baseChecks(w, d, r)
   if (base) return base
   if (d.orgId) return 'needs-meeting'
+  if (!liveLocation) return 'live-location-off'
   if (!r.soloAllowed) return 'needs-solo-trust'
   if (!r.idSeen) return 'needs-id'
   if (w.needsTerms) return 'needs-terms'
@@ -258,9 +267,11 @@ export function walkHasLiveLocation(kind: string | null | undefined, liveLocatio
 /**
  * Live location switched off for everyone (LIVE_LOCATION, lib/live-location.ts): a first meeting, with
  * the owner or shelter there (terms art. 6.3), still starts and ends: the timer, the report and the
- * photos work without location. A walk alone with the dog cannot start, because the live map is how the
- * owner follows it and finds the walker when something is wrong (safety protocol art. 2 and 3.5).
- * Ending a walk is always possible.
+ * photos work without location. A walk alone with the dog cannot be asked for (canRequestSolo), accepted
+ * or started, because the live map is how the owner follows it and finds the walker when something is
+ * wrong (safety protocol art. 2 and 3.5). One agreed while it was on stays agreed, with a calm note for
+ * both sides, and starts again once the switch is back on. Declining, cancelling and ending a walk are
+ * always possible.
  */
 export function liveLocationReason(kind: string, liveLocation: boolean): Reason | null {
   return kind === 'solo' && !liveLocation ? 'live-location-off' : null

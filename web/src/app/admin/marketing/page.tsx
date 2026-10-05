@@ -11,6 +11,7 @@ import { Questions, ThisWeek } from '@/components/marketing-hub/Questions'
 import { Icon } from '@/components/Icon'
 import { isLocale, LOCALES, type Locale } from '@/i18n/config'
 import { APP_NAME, siteUrl } from '@/lib/site'
+import { liveLocationNow } from '@/server/live-location'
 import { marketingData } from '@/server/marketing'
 import { requireAdmin } from '@/server/session'
 
@@ -29,6 +30,8 @@ export default async function MarketingPage() {
   const [t, locale, data] = await Promise.all([getTranslations('marketing'), getLocale(), marketingData()])
   const ui: Locale = isLocale(locale) ? locale : 'nl'
   const site = siteUrl()
+  // A post never promises following a walk live while live location is off (LIVE_LOCATION).
+  const live = await liveLocationNow()
   const byLang = await Promise.all(LOCALES.map((l) => getTranslations({ locale: l, namespace: 'marketing' })))
   const tl = Object.fromEntries(LOCALES.map((l, i) => [l, byLang[i]])) as Record<Locale, (typeof byLang)[number]>
 
@@ -44,7 +47,7 @@ export default async function MarketingPage() {
       goal: t(`posts.${post.id}.goal`),
       visual: t(`posts.${post.id}.visual`),
       texts: Object.fromEntries(
-        LOCALES.map((l) => [l, { title: tl[l](`posts.${post.id}.title`, { app: APP_NAME }), caption: tl[l](`posts.${post.id}.caption`, { app: APP_NAME, link }) }]),
+        LOCALES.map((l) => [l, { title: tl[l](`posts.${post.id}.title`, { app: APP_NAME }), caption: tl[l](`posts.${post.id}.caption`, { app: APP_NAME, link, live: live ? 'yes' : 'no' }) }]),
       ) as PostJson['texts'],
     }
   })

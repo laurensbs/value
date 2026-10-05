@@ -110,6 +110,13 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
 
   // --- The app records the yes for the version it showed ---
   expect((await back()).ok()).toBe(true)
+  // The version is required: a yes must say which text it is for.
+  for (const data of [{}, { version: '' }]) {
+    const unsaid = await app.post('/api/v1/terms/accept', { data, headers: bearer })
+    expect(unsaid.status()).toBe(400)
+    expect((await unsaid.json()).error).toBe('invalid')
+  }
+  expect((await (await app.get('/api/v1/me', { headers: bearer })).json()).termsAccepted).toBe(false)
   const stale = await app.post('/api/v1/terms/accept', { data: { version: '0.2' }, headers: bearer })
   expect(stale.status()).toBe(409)
   expect(await stale.json()).toEqual({ error: 'terms-changed', message: 'De voorwaarden zijn intussen opnieuw bijgewerkt. Kijk even naar de nieuwste versie.' })

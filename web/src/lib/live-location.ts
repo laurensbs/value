@@ -12,8 +12,9 @@ import { switchOn } from './support'
  *
  * Off means: the server stores no location points (POST /api/walks/<id>/points answers 403
  * `live-location-off`), the walk screens show no live map and say calmly that live location is off for
- * now, and a walk alone with the dog cannot start (lib/rules.ts liveLocationReason). A first meeting
- * still starts and ends as before. The apps read the switch from /api/v1/config as
+ * now, and a walk alone with the dog cannot be asked for, accepted or started (lib/rules.ts
+ * canRequestSolo and liveLocationReason); one agreed while it was on waits, with a calm note for both
+ * sides. A first meeting still starts and ends as before. The apps read the switch from /api/v1/config as
  * `features.liveLocation`.
  *
  * Privacy art. 14: the DPIA is finished before the first real walk with live location. Until then it

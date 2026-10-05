@@ -21,7 +21,7 @@ Questions about privacy? Email us at {{contact}}.
 - We collect as little data as possible.
 - Your exact address is never public. Others only see roughly where you live (rounded to about 500 metres).
 - The other person only sees your phone number and email address once a request has been accepted. If you sign up for a shelter's group walk, that shelter sees your phone number straight away.
-- We only share your location during a walk that you start yourself. We delete routes after 30 days.
+- We only share your location during a walk alone with the dog that you start yourself, and only while live location is on. We delete routes after 30 days.
 - We do **not** keep a copy of your identity document.
 - Your mood check-ins stay **only on your own phone**. We never receive them.
 - No ads, no tracking cookies, and we never sell data. We count visits to the website without cookies and without visitor profiles.
@@ -69,7 +69,7 @@ Questions about privacy? Email us at {{contact}}.
 
 **Location during a walk**
 
-- GPS points from the walker's phone, with a timestamp, only during an active walk.
+- GPS points from the walker's phone, with a timestamp, only during an active walk alone with the dog, and only while live location is on (see section 5).
 
 **Technical data**
 
@@ -116,11 +116,11 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 ## 5. Location data
 
 - **Where you live** is only shown rounded to about 500 metres. The other person only sees the exact address or meeting point after acceptance, and only if you enter it.
-- **Live location** is only collected during a walk alone with the dog: from the moment you start it as a walker, until you end it. Your phone will ask for permission. You can withdraw that permission in your phone's settings, but the live map will then not work.
+- **Live location** can be off. When it is on, we only collect it during a walk alone with the dog: from the moment you start it as a walker, until you end it. Your phone will ask for permission. You can withdraw that permission in your phone's settings, but the live map will then not work.
 - At a first meeting and on a group walk, we never collect location: the owner or the shelter walks along.
-- During a walk alone with the dog, the dog's owner or shelter sees a live map with the route. You see your own route.
-- If a walk runs well over the planned time, the owner or shelter receives an alert.
-- **Live location is off for now.** Until the DPIA is finished (see section 14), live location is off for everyone, and we can switch it off after that too. While it is off, we do not collect or store any location, and the owner or shelter sees no live map. A walk alone with the dog does not start then; a first meeting does. The walk screen tells you that live location is off.
+- When live location is on, the dog's owner or shelter sees a live map with the route during a walk alone with the dog. You see your own route.
+- If a walk alone with the dog runs well over the planned time, the owner or shelter receives an alert.
+- **Until the DPIA is finished** (see section 14), live location is off for everyone, and we can switch it off after that too. While it is off, we do not collect or store any location, and the owner or shelter sees no live map. A walk alone with the dog cannot be requested, accepted or started then; a first meeting can. Rondje Mee then tells you that live location is off.
 - We delete route points after **30 days**. If there is an open incident report, we keep the route of that walk until the report has been closed.
 - We do not use location data for advertising or profiling, and we never sell it.
 

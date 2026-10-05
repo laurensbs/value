@@ -13,6 +13,7 @@ import { localParts, weekOf } from '@/lib/progress'
 import { APP_NAME } from '@/lib/site'
 import { TIME_ZONE, zonedToUtc } from '@/lib/time'
 import { pageNow } from '@/server/clock'
+import { liveLocationNow } from '@/server/live-location'
 import { progressFor, rolesOf } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
 import { incomingRequests, listDogs, myDogs, outgoingRequests, trustGrantsFor, upcomingGroupWalks, walkersNear, type RequestRow } from '@/server/queries'
@@ -75,7 +76,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const near = own ?? (country ? countryInfo(country).center : null)
 
   // The first screen after opening the app: everything is asked at the same time.
-  const [t, tp, td, tn, tc, format, locale, progress, outgoing, incoming, dogs, nearby, dogStats, walkers, orgWalks, jar] = await Promise.all([
+  const [t, tp, td, tn, tc, format, locale, progress, outgoing, incoming, dogs, nearby, dogStats, walkers, orgWalks, jar, liveLocation] = await Promise.all([
     getTranslations('today'),
     getTranslations('progress'),
     getTranslations('dogs'),
@@ -92,6 +93,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     owner ? walkersNear(p, viewer.userId) : 0,
     staffOrg ? upcomingGroupWalks({ orgId: staffOrg.id }) : Promise.resolve([]),
     cookies(),
+    liveLocationNow(),
   ])
   // What was put away with "Later" or "Nee, nu niet", so the right step shows from the first paint.
   const stored = jar.get(LATER_COOKIE)?.value ?? '{}'
@@ -135,6 +137,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     outgoing: outgoing.map(appointment),
     incoming: incoming.map(appointment),
     trust: Object.fromEntries(trust),
+    liveLocation,
     // "In de buurt" for a step: within 15 km of your own location, or in your town when we only guess where you are.
     nearby: nearbyDogs
       .filter(({ dog, distanceM }) => (own ? distanceM != null && distanceM <= NEAR_STEP_M : sameTown(dog.city, p.city)))
@@ -160,8 +163,10 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     const button = (label: string) => (step.href ? { label, href: step.href } : undefined)
     switch (step.kind) {
       case 'liveOwn':
+        // "Kijk live mee" only for a walk that shares location; otherwise the walk is simply there to see.
+        return { ...base, text: tn('liveOwn.text', values), button: button(tn(step.live ? 'liveOwn.button' : 'liveOwn.buttonQuiet')) }
       case 'live':
-        return { ...base, text: tn(`${step.kind}.text`, values), button: button(tn(`${step.kind}.button`)) }
+        return { ...base, text: tn('live.text', values), button: button(tn('live.button')) }
       case 'quiz':
       case 'addDog':
       case 'waiting':

@@ -6,6 +6,7 @@ import { QrCode } from '@/components/QrCode'
 import { Wordmark } from '@/components/Wordmark'
 import { inviteUrl } from '@/lib/invite'
 import { APP_NAME, siteUrl } from '@/lib/site'
+import { liveLocationNow } from '@/server/live-location'
 import { getViewer } from '@/server/session'
 import { pageMetadata } from '@/lib/seo'
 
@@ -21,8 +22,7 @@ export async function generateMetadata() {
 export default async function FlyerPage({ searchParams }: { searchParams: Promise<{ for?: string }> }) {
   const sp = await searchParams
   const audience = sp.for === 'walker' ? 'walker' : 'owner'
-  const viewer = await getViewer()
-  const t = await getTranslations('flyer')
+  const [viewer, t, live] = await Promise.all([getViewer(), getTranslations('flyer'), liveLocationNow()])
   const code = viewer?.profile?.referralCode
   const url = code
     ? inviteUrl(siteUrl(), code, audience === 'owner' ? 'owner' : undefined)
@@ -59,7 +59,8 @@ export default async function FlyerPage({ searchParams }: { searchParams: Promis
         <ul className="check-list poster-list">
           {(['one', 'two', 'three', 'four'] as const).map((k) => (
             <li key={k}>
-              <Icon name="check" size={18} /> <span>{t(`${audience}.points.${k}`)}</span>
+              {/* Seeing the dog's walk live only while live location is on (LIVE_LOCATION); otherwise what is true now. */}
+              <Icon name="check" size={18} /> <span>{t(`${audience}.points.${k}${audience === 'owner' && k === 'four' && !live ? 'Off' : ''}`)}</span>
             </li>
           ))}
         </ul>

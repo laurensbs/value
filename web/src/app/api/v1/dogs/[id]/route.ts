@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
 import { apiActive, dogLook, fail, json } from '@/server/api'
+import { liveLocationNow } from '@/server/live-location'
 import { dogFacts, getDogDetail, myGroupSignups, walkerFacts } from '@/server/queries'
 import { dogShareFor } from '@/server/share'
 
-/** One dog, with what the viewer may do next. Private details only after an accepted request. */
+/**
+ * One dog, with what the viewer may do next. Private details only after an accepted request.
+ * `canRequest.solo` is 'live-location-off' while live location is switched off (lib/rules.ts
+ * canRequestSolo): a walk alone with the dog cannot be asked for then; `canRequest.meet` is not affected.
+ */
 export async function GET(_request: Request, ctx: { params: Promise<{ id: string }> }) {
   const viewer = await apiActive()
   if (viewer instanceof NextResponse) return viewer
@@ -13,17 +18,18 @@ export async function GET(_request: Request, ctx: { params: Promise<{ id: string
   if (!detail) return fail('dog-unavailable', 404)
   const d = detail.dog
 
-  const [facts, booked, share] = await Promise.all([
+  const [facts, booked, share, liveLocation] = await Promise.all([
     viewer.profile ? walkerFacts(viewer) : null,
     myGroupSignups(viewer.userId),
     // The owner's own dog, online: the same ready message for the neighbours as on the website.
     dogShareFor(detail, viewer),
+    liveLocationNow(),
   ])
   let canMeet: string | null = 'not-onboarded'
   let canSolo: string | null = 'not-onboarded'
   if (facts && detail.relation) {
     canMeet = canRequestMeeting(facts, dogFacts(d), detail.relation)
-    canSolo = canRequestSolo(facts, dogFacts(d), detail.relation)
+    canSolo = canRequestSolo(facts, dogFacts(d), detail.relation, liveLocation)
   }
 
   return json({

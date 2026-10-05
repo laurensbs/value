@@ -269,7 +269,7 @@ export function WalkTracker({
       ) : null}
 
       <WalkCareButtons walkId={walkId} dogName={dogName} initial={initialCare} />
-      <WalkPhotoButton walkId={walkId} onSent={(p) => setPhotos((list) => [...list, p])} />
+      <WalkPhotoButton walkId={walkId} route={liveLocation} onSent={(p) => setPhotos((list) => [...list, p])} />
       <WalkPhotoStrip photos={photos} dogName={dogName} />
 
       <div className="walk-actions">

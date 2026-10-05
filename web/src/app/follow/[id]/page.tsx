@@ -14,7 +14,8 @@ import { pointsSince, walkAccess, walkPhotos } from '@/server/walks'
 
 export async function generateMetadata() {
   const t = await getTranslations('walk')
-  return { title: t('follow') }
+  // Not every walk can be followed live (a first meeting, or live location off): a title that fits all.
+  return { title: t('followWalk') }
 }
 
 export default async function FollowPage({ params }: { params: Promise<{ id: string }> }) {
@@ -48,10 +49,12 @@ export default async function FollowPage({ params }: { params: Promise<{ id: str
     .from(s.profile)
     .where(eq(s.profile.userId, walk.walkerId))
   const t = await getTranslations('walk')
+  // Only a walk alone with the dog has a live map; at a first meeting they walk together (lib/rules.ts).
+  const liveLocation = walkHasLiveLocation(access.kind, await liveLocationNow())
 
   return (
     <div className="stack">
-      <h1 className="visually-hidden">{t('follow')}</h1>
+      <h1 className="visually-hidden">{liveLocation ? t('follow') : t('followWalk')}</h1>
       <WalkFollower
         walkId={walk.id}
         dogName={dog.name}
@@ -64,8 +67,7 @@ export default async function FollowPage({ params }: { params: Promise<{ id: str
         initialPhotos={(await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))}
         fallbackCenter={center}
         locale={await getLocale()}
-        // Only a walk alone with the dog has a live map; at a first meeting they walk together (lib/rules.ts).
-        liveLocation={walkHasLiveLocation(access.kind, await liveLocationNow())}
+        liveLocation={liveLocation}
         together={access.kind === 'meet'}
       />
       <div className="walk-layout">

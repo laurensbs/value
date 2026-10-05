@@ -33,7 +33,14 @@ interface Props {
    * A request or appointment with this dog that is still open (rules.ts openRequestConflict): then no
    * form for a second one. Part of this component, so a confirmation just shown stays when the page refreshes.
    */
-  open?: { pending: boolean; when: string } | null
+  open?: {
+    pending: boolean
+    when: string
+    /** A walk alone with the dog while live location is off: it does not start yet (rules.ts liveLocationReason). */
+    paused?: boolean
+  } | null
+  /** Live location switched on (LIVE_LOCATION): only then does a sent solo request say the owner can follow it live. */
+  liveLocation: boolean
   walkerName: string
   meetReason: string | null
   soloReason: string | null
@@ -59,7 +66,7 @@ async function sendRequest(prev: FormState, form: FormData): Promise<FormState> 
   }
 }
 
-export function RequestForm({ dogId, dogName, ownerName, open, walkerName, meetReason, soloReason, defaultDate, defaultTime, moments }: Props) {
+export function RequestForm({ dogId, dogName, ownerName, open, liveLocation, walkerName, meetReason, soloReason, defaultDate, defaultTime, moments }: Props) {
   const t = useTranslations('request')
   const tm = useTranslations('meet')
   const errorText = useActionErrorText()
@@ -88,13 +95,20 @@ export function RequestForm({ dogId, dogName, ownerName, open, walkerName, meetR
   }
 
   if (state.ok) {
-    return <RequestSent dogName={dogName} ownerName={ownerName} via={kind === 'solo' ? 'solo' : meetVia} flagged={state.message === 'sent-flagged'} />
+    return (
+      <RequestSent dogName={dogName} ownerName={ownerName} via={kind === 'solo' ? 'solo' : meetVia} live={liveLocation} flagged={state.message === 'sent-flagged'} />
+    )
   }
 
   if (open) {
     return (
       <div className="card flat stack-s request-open">
         <p>{open.pending ? t('openPending', { dog: dogName, owner: ownerName }) : t('openAccepted', { dog: dogName, when: open.when })}</p>
+        {open.paused ? (
+          <p className="notice small" role="note">
+            {t('reasons.live-location-off')}
+          </p>
+        ) : null}
         <div className="row">
           <Link href="/requests" className="button primary">
             {t('viewRequests')}
@@ -254,7 +268,20 @@ export function RequestForm({ dogId, dogName, ownerName, open, walkerName, meetR
  * after it. With less motion everything fades in at once. "Klaar" folds it into one quiet line, so the
  * form never comes back empty and invites a second request.
  */
-function RequestSent({ dogName, ownerName, via, flagged }: { dogName: string; ownerName: string; via: MeetVia | 'solo'; flagged: boolean }) {
+function RequestSent({
+  dogName,
+  ownerName,
+  via,
+  live,
+  flagged,
+}: {
+  dogName: string
+  ownerName: string
+  via: MeetVia | 'solo'
+  /** Live location switched on: a walk alone says the owner can follow it live; otherwise it says nothing about that. */
+  live: boolean
+  flagged: boolean
+}) {
   const t = useTranslations('request')
   const [open, setOpen] = useState(true)
   const title = useRef<HTMLHeadingElement>(null)
@@ -299,7 +326,7 @@ function RequestSent({ dogName, ownerName, via, flagged }: { dogName: string; ow
       <ol className="request-sent-steps" role="list" aria-labelledby="request-sent-next">
         <li>{t('sentStep1', { owner: ownerName })}</li>
         <li>{t('sentStep2', { owner: ownerName, kind: via === 'solo' ? 'solo' : 'meet' })}</li>
-        <li>{t('sentStep3', { owner: ownerName, via: via === 'solo' ? 'other' : via })}</li>
+        <li>{t('sentStep3', { owner: ownerName, via: via === 'solo' ? (live ? 'solo' : 'other') : via })}</li>
       </ol>
       <p className="request-sent-notify">{t('sentNotify', { owner: ownerName })}</p>
       {flagged ? (

@@ -38,8 +38,11 @@ export function WalkPhotoStrip({ photos, dogName }: { photos: WalkPhoto[]; dogNa
   )
 }
 
-/** The walker's camera button: take a photo, shrink it, and share it with the owner. */
-export function WalkPhotoButton({ walkId, onSent }: { walkId: string; onSent: (photo: WalkPhoto) => void }) {
+/**
+ * The walker's camera button: take a photo, shrink it, and share it with the owner. `route`: this walk
+ * keeps a route (live location), so the hint may say photos are deleted "like the route".
+ */
+export function WalkPhotoButton({ walkId, route, onSent }: { walkId: string; route: boolean; onSent: (photo: WalkPhoto) => void }) {
   const t = useTranslations('walk')
   const input = useRef<HTMLInputElement>(null)
   const [pending, start] = useTransition()
@@ -80,7 +83,7 @@ export function WalkPhotoButton({ walkId, onSent }: { walkId: string; onSent: (p
         />
       </label>
       <p className="muted small" role="status">
-        {status === 'sent' ? t('photoSent') : status === 'error' ? t('photoError') : status === 'too-many' ? t('photoTooMany') : t('photoHint')}
+        {status === 'sent' ? t('photoSent') : status === 'error' ? t('photoError') : status === 'too-many' ? t('photoTooMany') : t(route ? 'photoHint' : 'photoHintNoRoute')}
       </p>
     </div>
   )

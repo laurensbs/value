@@ -1,4 +1,5 @@
 import { PGlite } from '@electric-sql/pglite'
+import { eq } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/pglite'
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import migrations from '@/db/migrations.json'
@@ -416,6 +417,10 @@ describe('changed terms that took effect (art. 19)', () => {
   })
 
   it('agreeing records the version and the moment, and only for the version that was shown', async () => {
+    // Without the version nobody can tell which text the yes is for.
+    expect(await acceptCurrentTerms('lies', await profileOf('lies'), undefined)).toEqual({ ok: false, error: 'invalid' })
+    expect(await acceptCurrentTerms('lies', await profileOf('lies'), '')).toEqual({ ok: false, error: 'invalid' })
+    expect(await acceptCurrentTerms('lies', await profileOf('lies'), 3)).toEqual({ ok: false, error: 'invalid' })
     expect(await acceptCurrentTerms('lies', await profileOf('lies'), '0.1')).toEqual({ ok: false, error: 'terms-changed' })
     expect((await profileOf('lies')).termsVersion).toBe('0.2')
     const done = await acceptCurrentTerms('lies', await profileOf('lies'), TERMS_VERSION)
@@ -458,15 +463,20 @@ describe('live location switched off (LIVE_LOCATION)', () => {
 
   it('a walk with the owner there still starts and ends, without location', async () => {
     liveOn = false
+    notify.mockClear()
     const started = await beginWalk('pip-meet', await viewer('fleur'))
     expect(started).toMatchObject({ ok: true, liveLocation: false })
+    // The owner hears that they set off, never "kijk live mee".
+    expect(notify).toHaveBeenCalledWith(db, ['ans'], 'walk-started', expect.objectContaining({ dogName: 'Pip', live: 'no' }))
     expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)
   })
 
   it('a first meeting never collects location, even with the switch on', async () => {
     liveOn = true
+    notify.mockClear()
     const started = await beginWalk('pip-meet-on', await viewer('fleur'))
     expect(started).toMatchObject({ ok: true, liveLocation: false })
+    expect(notify).toHaveBeenCalledWith(db, ['ans'], 'walk-started', expect.objectContaining({ live: 'no' }))
     // Starting again returns the walk that runs, with the same answer.
     expect(await beginWalk('pip-meet-on', await viewer('fleur'))).toEqual({ ok: true, walkId: started.walkId, liveLocation: false })
     expect((await walkAccess(started.walkId!, await viewer('fleur')))?.kind).toBe('meet')
@@ -477,11 +487,99 @@ describe('live location switched off (LIVE_LOCATION)', () => {
     liveOn = false
     expect(await beginWalk('pip-solo', await viewer('fleur'))).toEqual({ ok: false, error: 'live-location-off' })
     liveOn = true
+    notify.mockClear()
     const started = await beginWalk('pip-solo', await viewer('fleur'))
     expect(started).toMatchObject({ ok: true, liveLocation: true })
+    // Only a walk that shares location says "kijk live mee".
+    expect(notify).toHaveBeenCalledWith(db, ['ans'], 'walk-started', expect.objectContaining({ live: 'yes' }))
     expect((await walkAccess(started.walkId!, await viewer('fleur')))?.kind).toBe('solo')
     // Switched off during the walk: ending it is always possible.
     liveOn = false
     expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)
+  })
+})
+
+describe('live location switched off: a walk alone never becomes an appointment that cannot start', () => {
+  const minutes = (n: number) => new Date(Date.now() + n * 60_000)
+
+  beforeAll(async () => {
+    // Roos: Fleur may walk Roos on her own (ID seen, solo allowed), nothing asked yet.
+    // Tess: Fleur and Ans met on a walk together two hours ago; Ans has not said anything about trust yet.
+    await client.exec(`
+      insert into dog (id, owner_id, org_id, name, country, city) values ('roos', 'ans', null, 'Roos', 'NL', 'Utrecht'), ('tess', 'ans', null, 'Tess', 'NL', 'Utrecht');
+      insert into trust_grant (dog_id, walker_id, granted_by, id_seen, solo_allowed) values ('roos', 'fleur', 'ans', true, true);
+    `)
+    await db.insert(schema.walkRequest).values({
+      id: 'tess-meet',
+      dogId: 'tess',
+      walkerId: 'fleur',
+      kind: 'meet',
+      meetVia: 'walk',
+      startsAt: minutes(-120),
+      durationMin: 30,
+      status: 'accepted',
+    })
+  })
+
+  afterAll(() => {
+    liveOn = true
+  })
+
+  it('a walk alone cannot be asked for, with the calm reason; walking together can', async () => {
+    liveOn = false
+    current = 'fleur'
+    notify.mockClear()
+    expect(await createRequest({ ok: false }, form({ dogId: 'roos', kind: 'solo' }))).toEqual({ ok: false, error: 'live-location-off' })
+    expect(await createRequest({ ok: false }, form({ dogId: 'roos', kind: 'solo', weekly: 'on' }))).toEqual({ ok: false, error: 'live-location-off' })
+    expect(await requestsOf('roos')).toEqual([])
+    expect(notify).not.toHaveBeenCalled()
+    // A first meeting is not affected.
+    expect(await createRequest({ ok: false }, form({ dogId: 'roos', kind: 'meet', time: '09:00' }))).toEqual({ ok: true, message: 'sent' })
+    expect(await requestsOf('roos')).toMatchObject([{ kind: 'meet', status: 'pending' }])
+    await client.exec(`update walk_request set status = 'cancelled' where dog_id = 'roos'`)
+  })
+
+  it('with the switch on, the same walk alone is asked for as before', async () => {
+    liveOn = true
+    current = 'fleur'
+    expect(await createRequest({ ok: false }, form({ dogId: 'roos', kind: 'solo', time: '11:00' }))).toEqual({ ok: true, message: 'sent' })
+    expect((await requestsOf('roos')).filter((r) => r.status === 'pending')).toMatchObject([{ kind: 'solo' }])
+  })
+
+  it('the owner cannot say yes to it while it is off, and can always say no', async () => {
+    const [asked] = (await requestsOf('roos')).filter((r) => r.kind === 'solo' && r.status === 'pending')
+    await db.insert(schema.walkRequest).values({ id: 'roos-other', dogId: 'roos', walkerId: 'fleur', kind: 'solo', meetVia: 'walk', startsAt: minutes(3 * 24 * 60), durationMin: 30 })
+    liveOn = false
+    current = 'ans'
+    notify.mockClear()
+    expect(await respondToRequest(asked.id, 'accept')).toEqual({ ok: false, error: 'live-location-off' })
+    expect((await requestsOf('roos')).find((r) => r.id === asked.id)?.status).toBe('pending')
+    expect(notify).not.toHaveBeenCalled()
+    expect(await respondToRequest('roos-other', 'decline')).toEqual({ ok: true })
+    // Back on: the yes goes through, and the walker's email may say the owner follows it live.
+    liveOn = true
+    expect(await respondToRequest(asked.id, 'accept')).toEqual({ ok: true })
+    expect(notify).toHaveBeenCalledWith(db, ['fleur'], 'request-accepted', expect.objectContaining({ dogName: 'Roos', live: 'yes' }))
+  })
+
+  it('a walk alone agreed while it was on waits while it is off, and the walker can still cancel it', async () => {
+    const [agreed] = (await requestsOf('roos')).filter((r) => r.kind === 'solo' && r.status === 'accepted')
+    // It is time: the walk could start now, if live location were on.
+    await db.update(schema.walkRequest).set({ startsAt: minutes(5) }).where(eq(schema.walkRequest.id, agreed.id))
+    liveOn = false
+    expect(await beginWalk(agreed.id, await viewer('fleur'))).toEqual({ ok: false, error: 'live-location-off' })
+    current = 'fleur'
+    expect(await cancelRequest(agreed.id)).toEqual({ ok: true })
+  })
+
+  it('allowing walks alone stays possible; the news says honestly that they wait', async () => {
+    liveOn = false
+    current = 'ans'
+    notify.mockClear()
+    expect(await setTrust('tess', 'fleur', { idSeen: true, soloAllowed: true })).toEqual({ ok: true, trust: { idSeen: true, soloAllowed: true } })
+    expect(notify).toHaveBeenCalledWith(db, ['fleur'], 'trust-granted', expect.objectContaining({ dogName: 'Tess', live: 'no' }))
+    // And the walker still cannot ask for one, however much trust there is.
+    current = 'fleur'
+    expect(await createRequest({ ok: false }, form({ dogId: 'tess', kind: 'solo' }))).toEqual({ ok: false, error: 'live-location-off' })
   })
 })

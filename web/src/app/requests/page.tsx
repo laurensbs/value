@@ -10,7 +10,7 @@ import { TermsNotice } from '@/components/TermsNotice'
 import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
-import { canRequestSolo, canStartWalk, isInPerson, isMeetVia, liveLocationReason, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { canRequestSolo, canStartWalk, isInPerson, isMeetVia, liveLocationReason, START_WINDOW_BEFORE_MIN, walkHasLiveLocation } from '@/lib/rules'
 import { rolesOf } from '@/server/progress'
 import {
   hostContacts,
@@ -151,7 +151,16 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
       (isMeetVia(r.request.meetVia) && !isRemoteMeeting(r.request) && (r.request.status === 'completed' || (r.request.status === 'accepted' && r.request.startsAt <= now)))
     if (met && !metPairs.has(key)) metPairs.set(key, r)
   }
+  // A walk alone with the dog, asked for or agreed, while live location is off: it waits, and both sides
+  // read why on its card (rules.ts liveLocationReason). Walking together is not affected.
+  const paused = (r: RequestRow) => Boolean(liveLocationReason(r.request.kind, liveLocation)) && OPEN.includes(r.request.status)
+  const pausedNote = (
+    <p className="notice small solo-paused" role="note">
+      <Icon name="location" size={18} /> <span>{t('request.reasons.live-location-off')}</span>
+    </p>
+  )
   // What could still stop a solo walk once the owner allows it: the same rule the walker meets (rules.ts).
+  // Only the walker's own steps: whether live location is on is said on its own (TrustForm liveLocation).
   const soloCaveat = (r: RequestRow): SoloCaveat => {
     const reason = canRequestSolo(
       {
@@ -168,6 +177,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
       },
       { ownerId: r.dog.ownerId, orgId: r.dog.orgId, country: r.dog.country, status: 'active', isDemo: false, ppp: r.dog.ppp, level: r.dog.level === 'experienced' ? 'experienced' : 'starter' },
       { isStaff: false, blocked: false, soloAllowed: true, idSeen: true },
+      true,
     )
     return reason === 'needs-quiz' || reason === 'experience' || reason === 'ppp-licence' ? reason : null
   }
@@ -262,6 +272,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <Icon name="shield" size={18} /> <span>{t('meet.homeSafety')}</span>
                         </p>
                       ) : null}
+                      {paused(r) && !active ? pausedNote : null}
                       <div className="row">
                         <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
                         {call ? (
@@ -276,16 +287,12 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             <span className="live-dot" aria-hidden="true" /> {t('requests.resume')}
                           </Link>
                         ) : accepted ? (
-                          // Live location off: a walk alone with the dog does not start (rules.ts liveLocationReason).
-                          // A first meeting never shares location: they walk together (rules.ts walkHasLiveLocation).
+                          // Live location off: a walk alone with the dog does not start; the note above says why
+                          // (rules.ts liveLocationReason). A first meeting never shares location: they walk together.
                           <StartButton
                             requestId={r.request.id}
-                            enabled={canStartWalk(r.request, viewer.userId, now) && !liveLocationReason(r.request.kind, liveLocation)}
-                            hint={
-                              liveLocationReason(r.request.kind, liveLocation)
-                                ? t('request.reasons.live-location-off')
-                                : t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })
-                            }
+                            enabled={canStartWalk(r.request, viewer.userId, now) && !paused(r)}
+                            hint={paused(r) ? null : t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })}
                             together={r.request.kind !== 'solo'}
                           />
                         ) : null}
@@ -366,8 +373,13 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <Icon name="alert" size={16} /> {t('requests.flagged')}
                         </p>
                       ) : null}
-                      {/* One main action: yes or no. Chatting first stays one tap away, right under it. */}
-                      {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} /> : null}
+                      {/* A walk alone while live location is off: it waits, and says why (rules.ts liveLocationReason). */}
+                      {paused(r) && !active ? pausedNote : null}
+                      {/* One main action: yes or no. Chatting first stays one tap away, right under it. Saying yes to a
+                          walk alone waits while live location is off; saying no is always possible. */}
+                      {r.request.status === 'pending' ? (
+                        <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} canAccept={!paused(r)} />
+                      ) : null}
                       <div className="row">
                         <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
                       </div>
@@ -394,7 +406,14 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <div className="row">
                             {active && r.walkId ? (
                               <Link href={`/follow/${r.walkId}`} className="button primary">
-                                <span className="live-dot" aria-hidden="true" /> {t('requests.follow')}
+                                {/* "Live meekijken" only for a walk that shares location (rules.ts walkHasLiveLocation). */}
+                                {walkHasLiveLocation(r.request.kind, liveLocation) ? (
+                                  <>
+                                    <span className="live-dot" aria-hidden="true" /> {t('requests.follow')}
+                                  </>
+                                ) : (
+                                  t('requests.followWalk')
+                                )}
                               </Link>
                             ) : null}
                             {!active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
@@ -424,6 +443,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         initial={grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false }}
                         allowSolo={!r.dog.orgId}
                         caveat={soloCaveat(r)}
+                        liveLocation={liveLocation}
                       />
                     </div>
                   </li>

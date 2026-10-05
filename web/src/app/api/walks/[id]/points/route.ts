@@ -60,6 +60,7 @@ export async function POST(request: Request, ctx: { params: Promise<{ id: string
     const last = points[points.length - 1]
     await db.update(s.walk).set({ lastLat: last.lat, lastLng: last.lng, lastAt: new Date(last.t) }).where(eq(s.walk.id, id))
   }
-  const overdue = await checkOverdue(access.walk, access.dog)
+  // Only a walk that shares location gets here (the check above).
+  const overdue = await checkOverdue(access.walk, access.dog, true)
   return NextResponse.json({ status: 'active', accepted: points.length, overdueMin: overdue })
 }

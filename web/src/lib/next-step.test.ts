@@ -98,6 +98,57 @@ describe('Eén ding nu: the scenarios (next-step.scenarios.json)', () => {
   })
 })
 
+describe('live location switched off (LIVE_LOCATION)', () => {
+  const now = new Date(data.now)
+  const soon = (id: string, kind: string): NextStepAppointment => ({
+    id,
+    dog: { id: `dog-${id}`, name: id === 'solo' ? 'Pip' : 'Bello', isDemo: false },
+    walkerId: 'me',
+    walkerName: 'Sam',
+    kind,
+    meetVia: 'walk',
+    status: 'accepted',
+    startsAt: new Date(now.getTime() + 10 * 60_000),
+    durationMin: 45,
+    weekly: false,
+    walkId: null,
+    walkStatus: null,
+    feedbackGiven: false,
+  })
+  const facts = (over: Partial<NextStepFacts>): NextStepFacts => ({
+    now,
+    userId: 'me',
+    walker: true,
+    owner: false,
+    quizPassed: true,
+    ownDogs: [],
+    outgoing: [],
+    incoming: [],
+    trust: {},
+    nearby: [],
+    ...over,
+  })
+
+  it('offers no "Klaar voor?" for a walk alone that cannot start; walking together can', () => {
+    const outgoing = [soon('solo', 'solo'), soon('meet', 'meet')]
+    const off = nextSteps(facts({ outgoing, liveLocation: false })).filter((step) => step.kind === 'start')
+    expect(off.map((step) => step.id)).toEqual(['start.meet'])
+    const on = nextSteps(facts({ outgoing, liveLocation: true })).filter((step) => step.kind === 'start')
+    expect(on.map((step) => step.id).sort()).toEqual(['start.meet', 'start.solo'])
+    // Left out: on, as before (the scenarios shared with the iPhone app).
+    expect(nextSteps(facts({ outgoing })).filter((step) => step.kind === 'start')).toHaveLength(2)
+  })
+
+  it('calls following your dog live only for a walk that shares location', () => {
+    const walking = (kind: string) => ({ ...soon(kind, kind), walkerId: 'w1', walkId: `walk-${kind}`, walkStatus: 'active' })
+    const own = (kind: string, liveLocation: boolean) =>
+      nextSteps(facts({ walker: false, owner: true, incoming: [walking(kind)], liveLocation })).find((step) => step.kind === 'liveOwn')
+    expect(own('solo', true)?.live).toBe(true)
+    expect(own('solo', false)?.live).toBe(false)
+    expect(own('meet', true)?.live).toBe(false)
+  })
+})
+
 describe('the night (23:00 to 06:00, Dutch time)', () => {
   const at = (iso: string) => isNight(new Date(iso))
 

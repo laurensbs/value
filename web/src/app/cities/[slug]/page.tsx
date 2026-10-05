@@ -12,6 +12,7 @@ import { COUNTRY_INFO } from '@/lib/countries'
 import { DIRECTORY } from '@/lib/directory'
 import { breadcrumbs, groupWalkEvent, pageMetadata } from '@/lib/seo'
 import { indexableCities, publicCities } from '@/server/cities'
+import { liveLocationNow } from '@/server/live-location'
 import { isNativeRequest } from '@/server/native'
 import { upcomingGroupWalks } from '@/server/queries'
 
@@ -42,6 +43,8 @@ export default async function CityPage({ params }: Props) {
   const t = await getTranslations()
   const format = await getFormatter()
   const native = await isNativeRequest()
+  // Walking alone (and a fixed weekly walk) only while live location is on (LIVE_LOCATION, lib/rules.ts).
+  const off = (await liveLocationNow()) ? '' : 'Off'
   const db = await getDb()
 
   const orgRows = await db
@@ -204,8 +207,8 @@ export default async function CityPage({ params }: Props) {
         <ol className="steps">
           <li>{t('home.how1')}</li>
           <li>{t('home.how2')}</li>
-          <li>{t('home.how3')}</li>
-          <li>{t('home.how4')}</li>
+          <li>{t(`home.how3${off}`)}</li>
+          <li>{t(`home.how4${off}`)}</li>
         </ol>
         <p className="small">
           <Link href="/safety">{t('home.safetyMore')}</Link>

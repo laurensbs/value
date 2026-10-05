@@ -13,12 +13,15 @@ import {
   checkTrust,
   forDecider,
   isInPerson,
+  liveLocationReason,
   MEET_VIAS,
   openRequestConflict,
   scanText,
   soloTrustReason,
+  walkHasLiveLocation,
 } from '@/lib/rules'
 import { zonedToUtc } from '@/lib/time'
+import { liveLocationNow } from '../live-location'
 import { audit, notify } from '../notify'
 import { dogFacts, relationFor, trustGrantOf, walkerFacts } from '../queries'
 import { actionViewer, isOrgMember, type OnboardedViewer } from '../session'
@@ -100,8 +103,11 @@ export async function createRequest(_prev: FormState, form: FormData): Promise<F
 
   const facts = await walkerFacts(viewer)
   const relation = await relationFor(viewer, dog)
+  // A walk alone with the dog only while live location is on (rules.ts canRequestSolo): 'live-location-off'.
   const reason =
-    r.kind === 'solo' ? canRequestSolo(facts, dogFacts(dog), relation) : canRequestMeeting(facts, dogFacts(dog), relation)
+    r.kind === 'solo'
+      ? canRequestSolo(facts, dogFacts(dog), relation, await liveLocationNow())
+      : canRequestMeeting(facts, dogFacts(dog), relation)
   // Every rule holds for a request sent again too; only a full list may still hold this very request.
   if (reason && reason !== 'too-many-pending') return { ok: false, error: reason }
   // Only a first meeting with a private owner's dog can be a home visit or a call (lib/rules.ts).
@@ -199,7 +205,12 @@ export async function respondToRequest(requestId: string, decision: 'accept' | '
   if (row.request.status !== 'pending') return { ok: false, error: 'already-decided' }
   // A dog a moderator took offline cannot get new appointments; saying no stays possible.
   if (decision === 'accept' && row.dog.status === 'hidden') return { ok: false, error: 'dog-unavailable' }
+  const switchedOn = row.request.kind === 'solo' ? await liveLocationNow() : false
   if (decision === 'accept') {
+    // Live location switched off: a walk alone with the dog is not agreed now, so it never becomes an
+    // appointment that cannot start (rules.ts liveLocationReason). Saying no stays possible.
+    const live = liveLocationReason(row.request.kind, switchedOn)
+    if (live) return { ok: false, error: live }
     // Changed terms that took effect: the owner agrees to them before saying yes (rules.ts termsReason).
     const terms = await termsBlock(viewer.profile)
     if (terms) return { ok: false, error: terms }
@@ -219,6 +230,8 @@ export async function respondToRequest(requestId: string, decision: 'accept' | '
     requestId,
     dogName: row.dog.name,
     ...(row.request.kind === 'meet' ? { meetVia: row.request.meetVia } : {}),
+    // Whether the email may say the owner can follow the walk live (lib/notification-links.ts).
+    ...(row.request.kind === 'solo' ? { live: walkHasLiveLocation(row.request.kind, switchedOn) ? 'yes' : 'no' } : {}),
   })
   revalidatePath('/requests')
   return { ok: true }
@@ -309,7 +322,8 @@ export async function setTrust(dogId: string, walkerId: string, input: { idSeen:
   // ID rule, a row could say "solo" without the ID: that never counted, so it is no step back either.
   const wasSolo = Boolean(before?.soloAllowed && before?.idSeen)
   const isSolo = soloAllowed && input.idSeen
-  if (isSolo && !wasSolo) await notify(db, [walkerId], 'trust-granted', { dogId, dogName: dog.name })
+  // While live location is off, the news says honestly that a walk alone does not start yet.
+  if (isSolo && !wasSolo) await notify(db, [walkerId], 'trust-granted', { dogId, dogName: dog.name, live: (await liveLocationNow()) ? 'yes' : 'no' })
   // Taken back (also an older row that said "solo" without the ID): solo walks still planned with this
   // dog are off, and the walker hears it. A walk under way is left alone: it ends as it is, and a weekly
   // one does not roll on (server/walks.ts checks the trust).

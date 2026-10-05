@@ -9,8 +9,9 @@ import { useActionErrorText } from './ActionError'
 
 /**
  * The calm step for changed terms (art. 19): what changed, the full text, and one "Akkoord". The list is
- * always unfolded right above the button, so nobody agrees without seeing what changes. No wall in front
- * of the page: before the new terms take effect it is only information; after that it is the step before
+ * always unfolded right above the button, so nobody agrees without seeing what changes; without a list
+ * (no text of the changes) there is no "Akkoord" either, only the full terms. No wall in front of the
+ * page: before the new terms take effect it is only information; after that it is the step before
  * making new appointments (`required`). After the yes the page is drawn again, or goes on to `next`.
  */
 export function TermsUpdate({
@@ -60,36 +61,38 @@ export function TermsUpdate({
       <p>
         <Link href="/legal/terms">{t('read')}</Link>
       </p>
-      <div className="row">
-        <button
-          type="button"
-          className="button primary"
-          disabled={pending}
-          aria-busy={pending}
-          onClick={() =>
-            start(async () => {
-              setError(null)
-              let result: { ok: boolean; error?: string }
-              try {
-                result = await acceptTerms(version)
-              } catch {
-                result = { ok: false, error: navigator.onLine ? 'server' : 'offline' }
-              }
-              if (!result.ok) {
-                setError(result.error ?? 'invalid')
-                // Changed again in the meantime: show the newest changes.
-                if (result.error === 'terms-changed') router.refresh()
-                return
-              }
-              setDone(true)
-              if (next) router.push(next)
-              else router.refresh()
-            })
-          }
-        >
-          {t('accept')}
-        </button>
-      </div>
+      {items.length ? (
+        <div className="row">
+          <button
+            type="button"
+            className="button primary"
+            disabled={pending}
+            aria-busy={pending}
+            onClick={() =>
+              start(async () => {
+                setError(null)
+                let result: { ok: boolean; error?: string }
+                try {
+                  result = await acceptTerms(version)
+                } catch {
+                  result = { ok: false, error: navigator.onLine ? 'server' : 'offline' }
+                }
+                if (!result.ok) {
+                  setError(result.error ?? 'invalid')
+                  // Changed again in the meantime: show the newest changes.
+                  if (result.error === 'terms-changed') router.refresh()
+                  return
+                }
+                setDone(true)
+                if (next) router.push(next)
+                else router.refresh()
+              })
+            }
+          >
+            {t('accept')}
+          </button>
+        </div>
+      ) : null}
       {error ? (
         <p className="error-text" role="alert">
           {errorText(error)}

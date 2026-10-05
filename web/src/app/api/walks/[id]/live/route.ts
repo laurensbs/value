@@ -23,13 +23,14 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
   const after = Number(query.get('after') ?? 0) || 0
   const photosAfter = Number(query.get('photosAfter') ?? 0) || 0
   const points = await pointsSince(id, after)
-  const overdueMin = await checkOverdue(access.walk, access.dog)
+  const liveLocation = walkHasLiveLocation(access.kind, liveLocationFor(process.env, request.headers.get(LIVE_LOCATION_HEADER)))
+  const overdueMin = await checkOverdue(access.walk, access.dog, liveLocation)
   const photos = await walkPhotos(id, photosAfter)
   return NextResponse.json(
     {
       status: access.walk.status,
       kind: access.kind,
-      liveLocation: walkHasLiveLocation(access.kind, liveLocationFor(process.env, request.headers.get(LIVE_LOCATION_HEADER))),
+      liveLocation,
       startedAt: access.walk.startedAt,
       plannedEndAt: access.walk.plannedEndAt,
       endedAt: access.walk.endedAt,

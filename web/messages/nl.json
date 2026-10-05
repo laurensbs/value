@@ -104,6 +104,8 @@
     "how2": "Kies een hond en vraag een kennismaking aan. De eigenaar of de opvang is er altijd bij.",
     "how3": "Klikt het? Dan mag je zelfstandig wandelen. De eigenaar ziet live waar jullie lopen.",
     "how4": "Loop een vast rondje per week. Na afloop geef je privé door hoe het ging.",
+    "how3Off": "Klikt het? Dan lopen jullie vaker samen. Live locatie staat voorlopig uit, dus zelfstandig wandelen kan nog niet.",
+    "how4Off": "Na elk rondje geef je privé door hoe het ging.",
     "forWalkers": "Voor wandelaars",
     "forWalkersText": "Even naar buiten, een vaste afspraak en een hond die blij is dat je komt. Vanaf 18 jaar, zonder kosten.",
     "forOwners": "Voor eigenaren",
@@ -115,6 +117,7 @@
     "safety2": "Het ID wordt bij de kennismaking in het echt bekeken. Rondje Mee bewaart geen kopie.",
     "safety3": "Zelfstandig wandelen kan pas als de eigenaar je ID in het echt heeft gezien en het voor die hond toestaat.",
     "safety4": "Tijdens het rondje ziet de eigenaar live waar de hond is. Na 30 dagen wordt de route gewist.",
+    "safety4Off": "Live locatie staat voorlopig uit. Tot die tijd loop je samen met de eigenaar of de opvang, en bewaren we geen route.",
     "safety5": "Na elk rondje geven beide kanten privé feedback. Zorgen komen bij ons team terecht, niet bij de ander.",
     "safety6": "Melden en blokkeren kan altijd. Wie zich niet aan de regels houdt, verdwijnt van het platform.",
     "safetyMore": "Lees hoe veiligheid werkt",
@@ -195,6 +198,7 @@
       "eyebrow": "Op je telefoon",
       "title": "Alles wat je nodig hebt, in je broekzak",
       "lede": "Honden ontdekken, een kennismaking plannen en samen op pad, terwijl de eigenaar live meekijkt.",
+      "ledeOff": "Honden ontdekken, een kennismaking plannen en samen op pad.",
       "soon": "Binnenkort in de App Store",
       "today": "Tot die tijd werkt {app} op elke telefoon, gewoon in je browser. Tip: zet {app} op je beginscherm, dan opent het als een app.",
       "note": "Schermen uit de iPhone-app, met voorbeeldgegevens.",
@@ -210,7 +214,9 @@
       },
       "walk": {
         "title": "Live meekijken",
+        "titleOff": "Op pad",
         "text": "Tijdens het rondje kijkt de eigenaar mee op de kaart. De SOS-knop zit altijd binnen handbereik.",
+        "textOff": "Tijdens het rondje zie je de tijd en houd je het rondje-rapport bij. De SOS-knop zit altijd binnen handbereik.",
         "alt": "Een rondje met Bobbie in de iPhone-app: kaart, tijd, afstand en een SOS-knop"
       }
     },
@@ -220,6 +226,7 @@
       "t2": "ID in het echt",
       "t3": "De eigenaar beslist",
       "t4": "Live meekijken",
+      "t4Off": "Samen op pad",
       "t5": "Privé terugkoppeling",
       "t6": "Melden kan altijd"
     },
@@ -573,7 +580,7 @@
       "id-not-seen": "Zelfstandig wandelen kan pas als je het ID van de wandelaar in het echt hebt gezien.",
       "meeting-ahead": "Dit kan na jullie kennismaking, als je de wandelaar en het ID in het echt hebt gezien.",
       "needs-terms": "Eerst graag je akkoord met de bijgewerkte voorwaarden.",
-      "live-location-off": "Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel.",
+      "live-location-off": "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel.",
       "terms-changed": "De voorwaarden zijn intussen opnieuw bijgewerkt. Kijk even naar de nieuwste versie."
     },
     "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
@@ -593,7 +600,7 @@
     "sentNext": "Wat er nu gebeurt",
     "sentStep1": "{owner} krijgt je aanvraag.",
     "sentStep2": "{kind, select, solo {Zegt {owner} ja, dan staat het rondje in je afspraken.} other {Zegt {owner} ja, dan zien jullie elkaars contactgegevens.}}",
-    "sentStep3": "{via, select, walk {De eerste keer lopen jullie samen.} home {De eerste keer kom je bij {owner} thuis langs.} phone {Eerst bellen jullie even. Daarna spreken jullie af in het echt.} video {Eerst videobellen jullie even. Daarna spreken jullie af in het echt.} other {Je loopt het rondje zelfstandig. {owner} kan live meekijken.}}",
+    "sentStep3": "{via, select, walk {De eerste keer lopen jullie samen.} home {De eerste keer kom je bij {owner} thuis langs.} phone {Eerst bellen jullie even. Daarna spreken jullie af in het echt.} video {Eerst videobellen jullie even. Daarna spreken jullie af in het echt.} solo {Je loopt het rondje zelfstandig. {owner} kan live meekijken.} other {Je loopt het rondje zelfstandig.}}",
     "sentNotify": "Je krijgt een melding zodra {owner} antwoordt.",
     "done": "Klaar",
     "viewRequests": "Bekijk je afspraken",
@@ -624,6 +631,7 @@
     "cancel": "Intrekken",
     "start": "Start rondje",
     "follow": "Live meekijken",
+    "followWalk": "Bekijk het rondje",
     "resume": "Ga verder met rondje",
     "summary": "Bekijk rondje",
     "weekly": "Elke week",
@@ -648,6 +656,7 @@
     "ladderTitleSolo": "{walker} mag nu zelfstandig met {dog} op pad.",
     "ladderTitleId": "Je hebt het ID van {walker} gezien.",
     "ladderTextSolo": "Je kunt bij elk rondje live meekijken, en je kunt dit altijd weer uitzetten.",
+    "ladderTextSoloOff": "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten.",
     "ladderTextId": "Wil je dat {walker} ook zelfstandig met {dog} loopt? Dat zet je aan bij ‘Na de kennismaking’, wanneer jij dat wilt.",
     "ladderTextShelter": "Opvanghonden lopen altijd mee in een begeleide groep.",
     "ladderQuiz": "Een zelfstandig rondje aanvragen kan {walker} zodra de veiligheidsquiz gehaald is.",
@@ -753,6 +762,7 @@
       "5": "Top"
     },
     "follow": "Live meekijken",
+    "followWalk": "Bekijk het rondje",
     "followLede": "Je ziet waar {walker} met {dog} loopt zolang het rondje duurt.",
     "lastSeen": "Laatste locatie {time}",
     "notStarted": "Het rondje is nog niet begonnen.",
@@ -781,6 +791,7 @@
     "photoError": "De foto kon niet worden verstuurd. Probeer het nog eens.",
     "photoTooMany": "Je hebt het maximum van 12 foto's bereikt.",
     "photoHint": "De eigenaar ziet je foto's meteen. Ze worden na 30 dagen gewist, net als de route.",
+    "photoHintNoRoute": "De eigenaar ziet je foto's meteen. Ze worden na 30 dagen gewist.",
     "photosTitle": "Foto's van het rondje",
     "photoAlt": "Foto van {dogName} tijdens het rondje",
     "careTitle": "Rondje-rapport",
@@ -1411,6 +1422,7 @@
     "level3": "Daarna: zelfstandige rondjes aanvragen bij eigenaren die dat voor hun hond toestaan.",
     "during": "Tijdens het rondje",
     "duringText": "Je telefoon deelt je locatie met de eigenaar zolang het rondje loopt. Loopt het uit, dan krijgen jullie allebei een melding. Met de hulpknop zie je meteen wie je moet bellen.",
+    "duringTextOff": "Live locatie staat voorlopig uit, dus je telefoon deelt geen locatie. Tot die tijd loop je samen met de eigenaar of de opvang. Met de hulpknop zie je meteen wie je moet bellen.",
     "after": "Na het rondje",
     "afterText": "Beide kanten geven privé feedback. Een gewonde of gestreste hond, of iemand die zich onveilig voelde, komt meteen bij ons team.",
     "fraud": "Fraude en misbruik",
@@ -1451,10 +1463,10 @@
       "request-accepted": "{via, select, walk {Ja! Je kennismaking met {dogName} staat.} home {Ja! Je kennismaking met {dogName} staat.} phone {Ja! Je belafspraak over {dogName} staat.} video {Ja! Je videogesprek over {dogName} staat.} other {Ja! Je afspraak met {dogName} staat.}}",
       "request-declined": "Je afspraak met {dogName} is helaas afgewezen.",
       "request-cancelled": "Een afspraak is ingetrokken.",
-      "walk-started": "{walkerName} is vertrokken met {dogName}. Kijk live mee.",
+      "walk-started": "{live, select, yes {{walkerName} is vertrokken met {dogName}. Kijk live mee.} other {{walkerName} is vertrokken met {dogName}.}}",
       "walk-ended": "{dogName} is terug van het rondje.",
       "walk-overdue": "Het rondje met {dogName} duurt langer dan gepland.",
-      "trust-granted": "Je mag nu zelfstandig met {dogName} wandelen.",
+      "trust-granted": "{live, select, no {Je mag nu zelfstandig met {dogName} wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet.} other {Je mag nu zelfstandig met {dogName} wandelen.}}",
       "group-signup": "{walkerName} loopt mee met een groepswandeling.",
       "org-verified": "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.",
       "org-pending": "{orgName} heeft zich aangemeld als opvang. Controleer de gegevens.",
@@ -1701,7 +1713,8 @@
       },
       "maps": {
         "label": "Kaarten",
-        "why": "De kaart, en live meekijken tijdens een rondje."
+        "why": "De kaart, en live meekijken tijdens een rondje.",
+        "whyOff": "De kaart met honden in de buurt."
       },
       "email": {
         "label": "E-mail",
@@ -1899,7 +1912,8 @@
         "one": "Gratis, nu en later",
         "two": "Altijd eerst samen kennismaken",
         "three": "Wandelaars zijn 18 jaar of ouder en doen eerst een veiligheidsquiz",
-        "four": "Als u wilt, ziet u live waar uw hond loopt"
+        "four": "Als u wilt, ziet u live waar uw hond loopt",
+        "fourOff": "U beslist zelf wie er met uw hond loopt"
       },
       "family": "Geen smartphone? Een familielid of buur kan uw hond met uw toestemming voor u aanmelden.",
       "cta": "Scan de code of ga naar de website om uw hond aan te melden."
@@ -1934,11 +1948,11 @@
       },
       "request-accepted": {
         "subject": "{via, select, walk {Ja! Je kennismaking met {dogName} staat} home {Ja! Je kennismaking met {dogName} staat} phone {Ja! Je belafspraak over {dogName} staat} video {Ja! Je videogesprek over {dogName} staat} other {Ja! Je afspraak met {dogName} staat}}",
-        "body": "{via, select, home {In Rondje Mee zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. Spreek overdag af en laat iemand weten waar je bent.} phone {In Rondje Mee zie je nu hoe je de eigenaar bereikt. Spreek in de chat af wie wie belt. Na het gesprek plan je de kennismaking in het echt.} video {Spreek in de chat van Rondje Mee af hoe jullie videobellen. Na het gesprek plan je de kennismaking in het echt.} walk {In Rondje Mee zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen.} other {Je ziet nu waar jullie afspreken en hoe je de eigenaar bereikt. Tijdens het rondje kan de eigenaar live meekijken.}}"
+        "body": "{via, select, home {In Rondje Mee zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. Spreek overdag af en laat iemand weten waar je bent.} phone {In Rondje Mee zie je nu hoe je de eigenaar bereikt. Spreek in de chat af wie wie belt. Na het gesprek plan je de kennismaking in het echt.} video {Spreek in de chat van Rondje Mee af hoe jullie videobellen. Na het gesprek plan je de kennismaking in het echt.} walk {In Rondje Mee zie je nu waar jullie afspreken en hoe je de eigenaar bereikt. De eerste keer lopen jullie samen.} other {Je ziet nu waar jullie afspreken en hoe je de eigenaar bereikt.{live, select, yes { Tijdens het rondje kan de eigenaar live meekijken.} other {}}}}"
       },
       "walk-overdue": {
         "subject": "Het rondje met {dogName} duurt langer dan gepland",
-        "body": "Het rondje loopt uit. Kijk in Rondje Mee waar ze nu zijn, of bel de wandelaar. Is er nood? Bel 112."
+        "body": "{live, select, yes {Het rondje loopt uit. Kijk in Rondje Mee waar ze nu zijn, of bel de wandelaar. Is er nood? Bel 112.} other {Het rondje loopt uit. Bel de wandelaar, of stuur een bericht in Rondje Mee. Is er nood? Bel 112.}}"
       },
       "org-verified": {
         "subject": "Je opvang staat op Rondje Mee",
@@ -2085,7 +2099,7 @@
       },
       "dogWalk": {
         "title": "Het eerste rondje van je hond",
-        "hint": "Je kijkt live mee en krijgt na afloop een verslag."
+        "hint": "Na afloop krijg je een verslag van het rondje."
       }
     },
     "nearTitle": "Honden bij jou in de buurt",
@@ -2115,7 +2129,7 @@
         "3": "Een vast moment in de week maakt het makkelijk, voor jou, je hond en de wandelaar.",
         "4": "De eerste keer lopen jullie samen. Laat zien hoe je hond graag loopt en waar hij altijd even stopt.",
         "5": "Een foto waarop je hond in de camera kijkt, trekt meer wandelaars dan een foto van achteren.",
-        "6": "Kijk live mee tijdens het rondje, of laat het los en lees na afloop het verslag.",
+        "6": "Laat het rondje gerust los: na afloop lees je het verslag, met foto's als die er zijn.",
         "7": "Laat de wandelaar na afloop weten dat je blij bent. Een bedankje houdt een vast maatje vast.",
         "8": "Hangt er een prikbord in de supermarkt? Een flyer met jouw link brengt wandelaars uit je eigen buurt."
       }
@@ -3471,7 +3485,7 @@
         "title": "Zo houden we het veilig",
         "sub": "18 jaar of ouder · Eerst samen kennismaken · ID in het echt gezien · Toestemming per hond · Korte veiligheidsquiz",
         "goal": "Vertrouwen: laat eigenaren en familie zien hoe het stap voor stap gaat.",
-        "caption": "Een onbekende met je hond laten wandelen? Logisch dat je daar even over nadenkt. Daarom gaat het bij {app} stap voor stap:\n\n1. Wandelaars zijn 18 of ouder en doen een korte veiligheidsquiz\n2. De eerste keer maak je altijd samen kennis\n3. De eigenaar of opvang ziet het ID in het echt (er wordt geen kopie bewaard)\n4. Alleen met toestemming per hond loopt iemand zelfstandig\n5. Tijdens een rondje kan de eigenaar live meekijken, als hij dat wil\n\n{app} vraagt nooit om geld. Vragen? Stel ze hieronder.",
+        "caption": "Een onbekende met je hond laten wandelen? Logisch dat je daar even over nadenkt. Daarom gaat het bij {app} stap voor stap:\n\n1. Wandelaars zijn 18 of ouder en doen een korte veiligheidsquiz\n2. De eerste keer maak je altijd samen kennis\n3. De eigenaar of opvang ziet het ID in het echt (er wordt geen kopie bewaard)\n4. Alleen met toestemming per hond loopt iemand zelfstandig\n{live, select, yes {5. Tijdens een rondje kan de eigenaar live meekijken, als hij dat wil} other {5. Live locatie staat voorlopig uit, dus voorlopig lopen jullie samen}}\n\n{app} vraagt nooit om geld. Vragen? Stel ze hieronder.",
         "visual": "Carrousel: de afbeelding, daarna één slide per stap."
       },
       "p11": {
@@ -3581,7 +3595,8 @@
     "later": "Later",
     "liveOwn": {
       "text": "{dog} is nu op pad met {walker}.",
-      "button": "Kijk live mee"
+      "button": "Kijk live mee",
+      "buttonQuiet": "Bekijk het rondje"
     },
     "live": {
       "text": "Je bent op pad met {dog}.",

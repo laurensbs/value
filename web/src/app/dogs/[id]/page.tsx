@@ -16,8 +16,9 @@ import { RequestForm } from '@/components/RequestForm'
 import { TermsNotice } from '@/components/TermsNotice'
 import { isNewDog } from '@/lib/nudges'
 import { pageMetadata } from '@/lib/seo'
-import { canRequestMeeting, canRequestSolo, openRequestConflict } from '@/lib/rules'
+import { canRequestMeeting, canRequestSolo, liveLocationReason, openRequestConflict } from '@/lib/rules'
 import { fromNow, nextWeekday, toZonedParts } from '@/lib/time'
+import { liveLocationNow } from '@/server/live-location'
 import { dogFacts, getDogDetail, myGroupSignups, openRequestsFor, walkerFacts } from '@/server/queries'
 import { getViewer } from '@/server/session'
 import { dogShareFor, localeOf } from '@/server/share'
@@ -58,13 +59,14 @@ export default async function DogPage({
   const detail = await getDogDetail(id, viewer)
   if (!detail) notFound()
   const { dog, host, slots, groupWalks, canSeePrivate, isMine, relation } = detail
-  const [t, format, facts, joined, share, open] = await Promise.all([
+  const [t, format, facts, joined, share, open, liveLocation] = await Promise.all([
     getTranslations(),
     getFormatter(),
     viewer?.profile ? walkerFacts(viewer) : null,
     viewer ? myGroupSignups(viewer.userId) : new Set<string>(),
     dogShareFor(detail, viewer),
     viewer?.profile && !isMine && host.kind === 'owner' ? openRequestsFor(viewer.userId, dog.id) : [],
+    liveLocationNow(),
   ])
   // Already a request or appointment with this dog: say so, instead of a form for a second one.
   // After an agreed first call the form stays, to plan meeting in person.
@@ -75,7 +77,8 @@ export default async function DogPage({
   let soloReason: string | null = 'not-signed-in'
   if (facts && relation) {
     meetReason = canRequestMeeting(facts, dogFacts(dog), relation)
-    soloReason = canRequestSolo(facts, dogFacts(dog), relation)
+    // While live location is off, a walk alone is not asked for: 'live-location-off' (rules.ts).
+    soloReason = canRequestSolo(facts, dogFacts(dog), relation, liveLocation)
   } else if (viewer) {
     meetReason = soloReason = 'not-onboarded'
   }
@@ -362,9 +365,12 @@ export default async function DogPage({
                   ? {
                       pending: openRequest.status === 'pending',
                       when: format.dateTime(openRequest.startsAt, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }),
+                      // A walk alone agreed while live location was on: it waits, and the card says so calmly.
+                      paused: Boolean(liveLocationReason(openRequest.kind, liveLocation)),
                     }
                   : null
               }
+              liveLocation={liveLocation}
               walkerName={viewer.profile?.firstName ?? ''}
               meetReason={meetReason}
               soloReason={soloReason}

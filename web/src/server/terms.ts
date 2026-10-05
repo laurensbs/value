@@ -75,16 +75,18 @@ export async function termsForApp(profile: { termsVersion: string } | null | und
 }
 
 /**
- * Records the yes to the current terms, with the moment. `version` is the version the person was shown:
- * a yes to anything else is refused ('terms-changed'), so nobody agrees to a text they did not see.
- * Agreeing again when already up to date changes nothing.
+ * Records the yes to the current terms, with the moment. `version` is the version the person was shown,
+ * and it is required: without it nobody can tell which text the yes is for ('invalid'), and a yes to any
+ * other version is refused ('terms-changed'), so nobody agrees to a text they did not see. Agreeing
+ * again when already up to date changes nothing.
  */
 export async function acceptCurrentTerms(
   userId: string,
   profile: { termsVersion: string; termsAcceptedAt: Date },
   version: unknown,
-): Promise<{ ok: true; termsVersion: string; termsAcceptedAt: Date } | { ok: false; error: 'terms-changed' }> {
-  if (version !== undefined && version !== TERMS_VERSION) return { ok: false, error: 'terms-changed' }
+): Promise<{ ok: true; termsVersion: string; termsAcceptedAt: Date } | { ok: false; error: 'invalid' | 'terms-changed' }> {
+  if (typeof version !== 'string' || !version.trim()) return { ok: false, error: 'invalid' }
+  if (version !== TERMS_VERSION) return { ok: false, error: 'terms-changed' }
   if (!termsOutdated(profile.termsVersion)) return { ok: true, termsVersion: profile.termsVersion, termsAcceptedAt: profile.termsAcceptedAt }
   const termsAcceptedAt = new Date()
   const db = await getDb()

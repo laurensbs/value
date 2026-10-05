@@ -5,6 +5,7 @@ import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { ProgressIcon } from '@/components/progress/ProgressIcon'
 import { pageMetadata } from '@/lib/seo'
+import { liveLocationNow } from '@/server/live-location'
 import '../landing.css'
 
 export async function generateMetadata() {
@@ -13,9 +14,10 @@ export async function generateMetadata() {
 }
 
 export default async function SafetyPage() {
-  const t = await getTranslations()
+  const [t, live] = await Promise.all([getTranslations(), liveLocationNow()])
   const blocks = [
-    { icon: 'route', tone: 'green', title: t('safety.during'), text: t('safety.duringText') },
+    // Sharing location during a walk only while live location is on (LIVE_LOCATION); otherwise what is true now.
+    { icon: 'route', tone: 'green', title: t('safety.during'), text: t(live ? 'safety.duringText' : 'safety.duringTextOff') },
     { icon: 'chat', tone: 'blue', title: t('safety.after'), text: t('safety.afterText') },
     { icon: 'lock', tone: 'warm', title: t('safety.fraud'), text: t('safety.fraudText') },
     { icon: 'shield', tone: 'green', title: t('safety.liability'), text: t('safety.liabilityText') },

@@ -101,16 +101,19 @@ describe('first meeting', () => {
   })
 })
 
+/** Live location switched on (LIVE_LOCATION); off is tested in 'live location switched off'. */
+const ON = true
+
 describe('solo walk', () => {
   it('needs solo trust from the owner and the quiz', () => {
-    expect(canRequestSolo(walker, dog, rel)).toBe('needs-solo-trust')
-    expect(canRequestSolo({ ...walker, quizPassed: false }, dog, { ...rel, soloAllowed: true, idSeen: true })).toBe('needs-quiz')
-    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true, idSeen: true })).toBeNull()
+    expect(canRequestSolo(walker, dog, rel, ON)).toBe('needs-solo-trust')
+    expect(canRequestSolo({ ...walker, quizPassed: false }, dog, { ...rel, soloAllowed: true, idSeen: true }, ON)).toBe('needs-quiz')
+    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true, idSeen: true }, ON)).toBeNull()
   })
 
   it('needs the ID seen in person, even when the owner allowed it', () => {
-    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true, idSeen: false })).toBe('needs-id')
-    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: false, idSeen: true })).toBe('needs-solo-trust')
+    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true, idSeen: false }, ON)).toBe('needs-id')
+    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: false, idSeen: true }, ON)).toBe('needs-solo-trust')
   })
 
   it('is checked again from the stored trust when it is accepted, started or rolled on', () => {
@@ -133,14 +136,14 @@ describe('solo walk', () => {
   })
 
   it('is never possible with shelter dogs (always supervised)', () => {
-    expect(canRequestSolo(walker, { ...dog, ownerId: null, orgId: 'org' }, { ...rel, soloAllowed: true, idSeen: true })).toBe(
+    expect(canRequestSolo(walker, { ...dog, ownerId: null, orgId: 'org' }, { ...rel, soloAllowed: true, idSeen: true }, ON)).toBe(
       'needs-meeting',
     )
   })
 
   it('keeps experienced dogs away from walkers without dog experience', () => {
     expect(
-      canRequestSolo({ ...walker, experience: 'none' }, { ...dog, level: 'experienced' }, { ...rel, soloAllowed: true, idSeen: true }),
+      canRequestSolo({ ...walker, experience: 'none' }, { ...dog, level: 'experienced' }, { ...rel, soloAllowed: true, idSeen: true }, ON),
     ).toBe('experience')
   })
 })
@@ -352,8 +355,8 @@ describe('changed terms (art. 19)', () => {
     expect(canRequestMeeting(later, dog, rel)).toBe('needs-terms')
     expect(canRequestMeeting({ ...later, quizPassed: false }, dog, rel)).toBe('needs-terms')
     expect(canRequestMeeting(later, { ...dog, isDemo: true }, rel)).toBe('demo-dog')
-    expect(canRequestSolo(later, dog, { ...rel, soloAllowed: true, idSeen: true })).toBe('needs-terms')
-    expect(canRequestSolo(later, dog, rel)).toBe('needs-solo-trust')
+    expect(canRequestSolo(later, dog, { ...rel, soloAllowed: true, idSeen: true }, ON)).toBe('needs-terms')
+    expect(canRequestSolo(later, dog, rel, ON)).toBe('needs-solo-trust')
   })
 })
 
@@ -363,6 +366,28 @@ describe('live location switched off', () => {
     expect(liveLocationReason('meet', false)).toBeNull()
     expect(liveLocationReason('solo', true)).toBeNull()
     expect(liveLocationReason('meet', true)).toBeNull()
+  })
+
+  it('a walk alone cannot be asked for, even with every trust step done', () => {
+    const trusted = { ...rel, soloAllowed: true, idSeen: true }
+    expect(canRequestSolo(walker, dog, trusted, false)).toBe('live-location-off')
+    expect(canRequestSolo(walker, dog, trusted, true)).toBeNull()
+  })
+
+  it('says so before the trust steps, so nobody works towards a walk alone that cannot happen now', () => {
+    expect(canRequestSolo(walker, dog, rel, false)).toBe('live-location-off')
+    expect(canRequestSolo(walker, dog, { ...rel, soloAllowed: true, idSeen: false }, false)).toBe('live-location-off')
+    expect(canRequestSolo({ ...walker, quizPassed: false, needsTerms: true }, dog, rel, false)).toBe('live-location-off')
+  })
+
+  it('what is about the person or the dog still comes first, and a shelter dog is never walked alone', () => {
+    expect(canRequestSolo({ ...walker, banned: true }, dog, rel, false)).toBe('banned')
+    expect(canRequestSolo(walker, { ...dog, isDemo: true }, rel, false)).toBe('demo-dog')
+    expect(canRequestSolo(walker, { ...dog, ownerId: null, orgId: 'org' }, rel, false)).toBe('needs-meeting')
+  })
+
+  it('walking together is not affected', () => {
+    expect(canRequestMeeting(walker, dog, rel)).toBeNull()
   })
 })
 

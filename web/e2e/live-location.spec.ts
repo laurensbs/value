@@ -8,7 +8,7 @@ import { addDog, newPerson, onboard, shot, signUp, soonSlot, unique } from './he
  */
 const OFF = { 'x-rondje-live-location': 'off' }
 const TOGETHER = 'Jullie lopen samen, dus er is geen kaart nodig.'
-const SOLO_OFF = 'Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel.'
+const SOLO_OFF = 'Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel.'
 
 async function appFor(origin: string, email: string): Promise<{ app: APIRequestContext; bearer: Record<string, string> }> {
   const app = await request.newContext({ baseURL: origin, extraHTTPHeaders: { 'x-forwarded-for': `10.248.${Math.floor(Math.random() * 250)}.${1 + Math.floor(Math.random() * 250)}` } })
@@ -82,31 +82,95 @@ test('live location: never at a first meeting, only on a walk alone with the dog
   await expect(owner.page.locator('.live-label')).toHaveCount(0)
   await shot(owner.page, 'meet-together-owner')
 
+  // Ans heard that they set off, without "kijk live mee": she walks along.
+  const notes = async () =>
+    (await (await ans.app.get('/api/v1/notifications', { headers: ans.bearer })).json()).notifications as { kind: string; text: string; data: { live?: string } }[]
+  const firstStart = (await notes()).find((n) => n.kind === 'walk-started')!
+  expect(firstStart).toMatchObject({ text: 'Fleur is vertrokken met Bello.', data: { live: 'no' } })
+
   // Ending the walk works as always.
   await walker.page.getByRole('button', { name: 'Rondje klaar' }).click()
   await walker.page.getByRole('button', { name: 'Ja, rondje klaar' }).click()
   await expect(walker.page.getByRole('heading', { name: 'Goed rondje!', level: 1 })).toBeVisible()
 
-  // --- A walk alone with Bello, while live location is off: agreed, but it does not start ---
-  const trust = await ans.app.post(`/api/v1/requests/${meet.id}`, {
-    data: { action: 'trust', dogId, walkerId: meet.walker.id, idSeen: true, soloAllowed: true },
-    headers: ans.bearer,
-  })
-  expect(trust.ok()).toBe(true)
+  // --- A walk alone with Bello, while live location is off: it cannot be asked for or agreed ---
+  // Ans may still allow walks alone; the moment says calmly that they wait while live location is off.
+  await owner.page.setExtraHTTPHeaders(OFF)
+  await owner.page.goto('/requests?view=incoming')
+  await owner.page.getByLabel(/ID in het echt gezien/).check()
+  await owner.page.getByLabel(/mag zelfstandig met Bello wandelen/).check()
+  await owner.page.getByRole('button', { name: 'Bevestigen' }).click()
+  const ladder = owner.page.getByRole('dialog', { name: 'Fleur mag nu zelfstandig met Bello op pad.' })
+  await expect(ladder).toContainText('Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten.')
+  await expect(ladder).not.toContainText('live meekijken')
+  await ladder.getByRole('button', { name: 'Klaar' }).click()
+  await owner.page.setExtraHTTPHeaders({})
+  const granted = (await (await fleur.app.get('/api/v1/notifications', { headers: fleur.bearer })).json()).notifications.find((n: { kind: string }) => n.kind === 'trust-granted')
+  expect(granted).toMatchObject({ text: 'Je mag nu zelfstandig met Bello wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet.', data: { live: 'no' } })
   const solo = soonSlot()
-  expect((await fleur.app.post('/api/v1/requests', { data: { dogId, kind: 'solo', date: solo.date, time: solo.time, message: '' }, headers: fleur.bearer })).status()).toBe(201)
+  const soloAsk = { dogId, kind: 'solo', date: solo.date, time: solo.time, message: '' }
+
+  // The app hears it on the dog, and a request is refused with the calm reason; walking together still can.
+  const dogOff = await (await fleur.app.get(`/api/v1/dogs/${dogId}`, { headers: { ...fleur.bearer, ...OFF } })).json()
+  expect(dogOff.canRequest).toEqual({ meet: null, solo: 'live-location-off' })
+  expect((await (await fleur.app.get(`/api/v1/dogs/${dogId}`, { headers: fleur.bearer })).json()).canRequest).toEqual({ meet: null, solo: null })
+  const refusedAsk = await fleur.app.post('/api/v1/requests', { data: soloAsk, headers: { ...fleur.bearer, ...OFF } })
+  expect(refusedAsk.status()).toBe(400)
+  expect(await refusedAsk.json()).toEqual({ error: 'live-location-off', message: SOLO_OFF })
+
+  // On the website the dog page says so as well, and offers walking together.
+  await walker.page.setExtraHTTPHeaders(OFF)
+  await walker.page.goto(`/dogs/${dogId}`)
+  await expect(walker.page.getByRole('radio', { name: 'Kennismaking' })).toBeChecked()
+  await walker.page.getByRole('radio', { name: 'Zelfstandig rondje' }).check()
+  await expect(walker.page.getByText(SOLO_OFF)).toBeVisible()
+  await expect(walker.page.getByRole('button', { name: 'Verstuur aanvraag' })).toHaveCount(0)
+  await shot(walker.page, 'live-off-ask')
+  await walker.page.setExtraHTTPHeaders({})
+
+  // Asked while it was on; Ans cannot say yes while it is off, and reads why on the card.
+  expect((await fleur.app.post('/api/v1/requests', { data: soloAsk, headers: fleur.bearer })).status()).toBe(201)
   const soloRequest = (await incoming()).find((r) => r.kind === 'solo' && r.status === 'pending')!
+  const notYet = await ans.app.post(`/api/v1/requests/${soloRequest.id}`, { data: { action: 'accept' }, headers: { ...ans.bearer, ...OFF } })
+  expect(notYet.status()).toBe(400)
+  expect(await notYet.json()).toEqual({ error: 'live-location-off', message: SOLO_OFF })
+  await owner.page.setExtraHTTPHeaders(OFF)
+  await owner.page.goto('/requests?view=incoming')
+  const soloCard = owner.page.locator('.list-item.request.incoming').filter({ hasText: 'Zelfstandig rondje' })
+  await expect(soloCard.getByText(SOLO_OFF)).toBeVisible()
+  await expect(soloCard.getByRole('button', { name: 'Accepteren' })).toBeDisabled()
+  await expect(soloCard.getByRole('button', { name: 'Afwijzen' })).toBeEnabled()
+  await owner.page.setExtraHTTPHeaders({})
+  await owner.page.goto('/requests?view=incoming')
+  await expect(soloCard.getByText(SOLO_OFF)).toHaveCount(0)
   expect((await ans.app.post(`/api/v1/requests/${soloRequest.id}`, { data: { action: 'accept' }, headers: ans.bearer })).ok()).toBe(true)
 
+  // --- Agreed while it was on, and now it is off: it waits, and both sides read why ---
   await walker.page.setExtraHTTPHeaders(OFF)
   await walker.page.goto('/requests')
-  await expect(walker.page.getByRole('button', { name: 'Start rondje' })).toBeDisabled()
-  await expect(walker.page.getByText(SOLO_OFF)).toBeVisible()
+  const mine = walker.page.locator('.list-item.request').filter({ hasText: 'Zelfstandig rondje' })
+  await expect(mine.getByRole('button', { name: 'Start rondje' })).toBeDisabled()
+  await expect(mine.getByText(SOLO_OFF)).toBeVisible()
   await shot(walker.page, 'live-off-solo')
+  await walker.page.goto(`/dogs/${dogId}`)
+  await expect(walker.page.getByText(SOLO_OFF)).toBeVisible()
+  await walker.page.setExtraHTTPHeaders({})
+  await owner.page.setExtraHTTPHeaders(OFF)
+  await owner.page.goto('/requests?view=incoming')
+  await expect(soloCard.getByText(SOLO_OFF)).toBeVisible()
+  await shot(owner.page, 'live-off-solo-owner')
+  await owner.page.setExtraHTTPHeaders({})
+  // The app gets the same note on both sides, and only while it is off.
+  const listed = async (who: typeof fleur, headers: Record<string, string>) => (await (await who.app.get('/api/v1/requests', { headers: { ...who.bearer, ...headers } })).json())
+  const pausedNote = { reason: 'live-location-off', message: SOLO_OFF }
+  expect((await listed(fleur, OFF)).outgoing.find((r: { id: string }) => r.id === soloRequest.id).paused).toEqual(pausedNote)
+  expect((await listed(ans, OFF)).incoming.find((r: { id: string }) => r.id === soloRequest.id).paused).toEqual(pausedNote)
+  expect((await listed(fleur, {})).outgoing.find((r: { id: string }) => r.id === soloRequest.id).paused).toBeNull()
+  // A first meeting never waits for it.
+  expect((await listed(fleur, OFF)).outgoing.find((r: { id: string }) => r.id === meet.id).paused).toBeNull()
   const notNow = await fleur.app.post('/api/v1/walks', { data: { requestId: soloRequest.id }, headers: { ...fleur.bearer, ...OFF } })
   expect(notNow.status()).toBe(400)
   expect(await notNow.json()).toEqual({ error: 'live-location-off', message: SOLO_OFF })
-  await walker.page.setExtraHTTPHeaders({})
 
   // --- With live location on, the same walk starts, shares the route, and Ans follows it on the map ---
   await walker.page.goto('/requests')
@@ -133,6 +197,12 @@ test('live location: never at a first meeting, only on a walk alone with the dog
   expect(await (await walker.page.request.get(`/api/walks/${soloWalk}/live`)).json()).toMatchObject({ kind: 'solo', liveLocation: true })
   expect(await (await walker.page.request.post(`/api/walks/${soloWalk}/points`, { data: point() })).json()).toMatchObject({ status: 'active', accepted: 1 })
   expect(await (await fleur.app.post('/api/v1/walks', { data: { requestId: soloRequest.id }, headers: fleur.bearer })).json()).toEqual({ walkId: soloWalk, liveLocation: true })
+
+  // Now Ans may follow along live, and hears so.
+  expect((await notes()).find((n) => n.kind === 'walk-started' && n.text !== firstStart.text)).toMatchObject({
+    text: 'Fleur is vertrokken met Bello. Kijk live mee.',
+    data: { live: 'yes' },
+  })
 
   await owner.page.goto(`/follow/${soloWalk}`)
   await expect(owner.page.getByText(/Je ziet waar Fleur met Bello loopt/)).toBeVisible()

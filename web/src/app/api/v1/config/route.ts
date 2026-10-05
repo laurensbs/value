@@ -28,7 +28,8 @@ import crowdfunding from '../../../../../content/crowdfunding.json'
  *
  * `features.liveLocation` is the switch for live location (LIVE_LOCATION, lib/live-location.ts), off
  * unless it is switched on. Off: the app collects and sends no location during walks, shows no live
- * map, and says so calmly; a walk alone with the dog cannot start ('live-location-off'). On: still only
+ * map, and says so calmly; a walk alone with the dog cannot be asked for, accepted or started
+ * ('live-location-off'; `paused` in GET /api/v1/requests, `canRequest.solo` in /api/v1/dogs/<id>). On: still only
  * a walk alone with the dog collects location, never a first meeting (lib/rules.ts walkHasLiveLocation);
  * per walk, `liveLocation` in POST /api/v1/walks and GET /api/walks/<id>/live says so.
  *
