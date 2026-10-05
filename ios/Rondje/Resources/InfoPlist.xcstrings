@@ -154,25 +154,25 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Only during a walk: so the route keeps going with your phone in your pocket, and the owner can watch along. It stops as soon as the walk ends."
+            "value": "Only during a walk alone with the dog, when live location is switched on: so the route keeps going with your phone in your pocket, and the owner can watch along. It stops as soon as the walk ends."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Solo durante un paseo: para que la ruta siga con el móvil en el bolsillo y el dueño pueda seguirla. Se detiene en cuanto termina el paseo."
+            "value": "Solo durante un paseo a solas con el perro, cuando la ubicación en directo está activada: para que la ruta siga con el móvil en el bolsillo y el dueño pueda seguirla. Se detiene en cuanto termina el paseo."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Uniquement pendant une balade : pour que le parcours continue avec ton téléphone dans la poche et que le propriétaire puisse suivre. Cela s'arrête dès la fin de la balade."
+            "value": "Uniquement pendant une balade en solo avec le chien, quand la localisation en direct est activée : pour que le parcours continue avec ton téléphone dans la poche et que le propriétaire puisse suivre. Cela s'arrête dès la fin de la balade."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alleen tijdens een rondje: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen."
+            "value": "Alleen tijdens een rondje alleen met de hond, als live locatie aan staat: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen."
           }
         }
       }
@@ -183,25 +183,25 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "So you see dogs near you, and during a walk the owner can watch live. Your exact location is never shown on your profile."
+            "value": "So you see dogs near you; for that, your location is rounded to about 1 km. The owner can only watch live on a walk alone with the dog, when live location is switched on. Your exact location is never shown on your profile."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Para ver perros cerca de ti, y durante un paseo el dueño puede seguirlo en directo. Tu ubicación exacta nunca aparece en tu perfil."
+            "value": "Para ver perros cerca de ti; para ello, tu ubicación se redondea a aproximadamente 1 km. El dueño solo puede seguirlo en directo en un paseo a solas con el perro, cuando la ubicación en directo está activada. Tu ubicación exacta nunca aparece en tu perfil."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pour voir les chiens près de chez toi, et pendant une balade le propriétaire peut suivre en direct. Ta position exacte n'apparaît jamais sur ton profil."
+            "value": "Pour voir les chiens près de chez toi ; pour cela, ta position est arrondie à environ 1 km. Le propriétaire ne peut suivre en direct que pendant une balade en solo avec le chien, quand la localisation en direct est activée. Ta position exacte n'apparaît jamais sur ton profil."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zo zie je honden bij jou in de buurt, en tijdens een rondje kan de eigenaar live meekijken. Je precieze plek wordt nooit op je profiel getoond."
+            "value": "Zo zie je honden bij jou in de buurt; je plek wordt daarvoor afgerond op ongeveer 1 km. De eigenaar kan alleen live meekijken bij een rondje alleen met de hond, als live locatie aan staat. Je precieze plek wordt nooit op je profiel getoond."
           }
         }
       }

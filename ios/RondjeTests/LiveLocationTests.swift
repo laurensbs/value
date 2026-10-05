@@ -552,3 +552,80 @@ struct LiveLocationPauseTests {
         }
     }
 }
+
+/// The texts iOS shows with the location prompt (Info.plist, InfoPlist.xcstrings). The reviewer sees the
+/// When-In-Use prompt as soon as Ontdek opens, also while live location is off, so the text must be true in
+/// both states: live watching only on a walk alone with the dog, and only while live location is on.
+@Suite("The location prompt's texts")
+struct LocationPurposeTests {
+    static let whenInUse = "NSLocationWhenInUseUsageDescription"
+    static let always = "NSLocationAlwaysAndWhenInUseUsageDescription"
+
+    static let expected: [String: [String: String]] = [
+        whenInUse: [
+            "nl": "Zo zie je honden bij jou in de buurt; je plek wordt daarvoor afgerond op ongeveer 1 km. De eigenaar kan alleen live meekijken bij een rondje alleen met de hond, als live locatie aan staat. Je precieze plek wordt nooit op je profiel getoond.",
+            "en": "So you see dogs near you; for that, your location is rounded to about 1 km. The owner can only watch live on a walk alone with the dog, when live location is switched on. Your exact location is never shown on your profile.",
+            "fr": "Pour voir les chiens près de chez toi ; pour cela, ta position est arrondie à environ 1 km. Le propriétaire ne peut suivre en direct que pendant une balade en solo avec le chien, quand la localisation en direct est activée. Ta position exacte n'apparaît jamais sur ton profil.",
+            "es": "Para ver perros cerca de ti; para ello, tu ubicación se redondea a aproximadamente 1 km. El dueño solo puede seguirlo en directo en un paseo a solas con el perro, cuando la ubicación en directo está activada. Tu ubicación exacta nunca aparece en tu perfil.",
+        ],
+        always: [
+            "nl": "Alleen tijdens een rondje alleen met de hond, als live locatie aan staat: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen.",
+            "en": "Only during a walk alone with the dog, when live location is switched on: so the route keeps going with your phone in your pocket, and the owner can watch along. It stops as soon as the walk ends.",
+            "fr": "Uniquement pendant une balade en solo avec le chien, quand la localisation en direct est activée : pour que le parcours continue avec ton téléphone dans la poche et que le propriétaire puisse suivre. Cela s'arrête dès la fin de la balade.",
+            "es": "Solo durante un paseo a solas con el perro, cuando la ubicación en directo está activada: para que la ruta siga con el móvil en el bolsillo y el dueño pueda seguirla. Se detiene en cuanto termina el paseo.",
+        ],
+    ]
+
+    /// The words that make each text conditional, per language.
+    static let onlyWhenOn = [
+        "nl": ["rondje alleen met de hond", "als live locatie aan staat"],
+        "en": ["walk alone with the dog", "when live location is switched on"],
+        "fr": ["balade en solo avec le chien", "quand la localisation en direct est activée"],
+        "es": ["paseo a solas con el perro", "cuando la ubicación en directo está activada"],
+    ]
+
+    private func text(_ key: String, _ lang: String) throws -> String {
+        let path = try #require(Bundle.main.path(forResource: lang, ofType: "lproj"), "\(lang).lproj")
+        return try #require(Bundle(path: path)).localizedString(forKey: key, value: "", table: "InfoPlist")
+    }
+
+    @Test func theDutchBaseIsTheSameText() {
+        for key in [Self.whenInUse, Self.always] {
+            #expect(Bundle.main.object(forInfoDictionaryKey: key) as? String == Self.expected[key]?["nl"], "\(key)")
+        }
+    }
+
+    @Test func everyLanguageHasTheNewText() throws {
+        for (key, languages) in Self.expected {
+            for (lang, value) in languages {
+                #expect(try text(key, lang) == value, "\(lang): \(key)")
+            }
+        }
+    }
+
+    @Test func liveWatchingIsOnlyPromisedOnAWalkAloneWhileItIsOn() throws {
+        for key in [Self.whenInUse, Self.always] {
+            for (lang, words) in Self.onlyWhenOn {
+                let value = try text(key, lang)
+                for word in words { #expect(value.contains(word), "\(lang): \(key) lacks '\(word)'") }
+            }
+        }
+        // The old unconditional promises are gone.
+        let old = ["tijdens een rondje kan de eigenaar live meekijken", "during a walk the owner can watch live",
+                   "Only during a walk:", "Alleen tijdens een rondje:"]
+        for key in [Self.whenInUse, Self.always] {
+            for lang in ["nl", "en", "fr", "es"] {
+                let value = try text(key, lang)
+                for line in old { #expect(!value.contains(line), "\(lang): \(key)") }
+            }
+        }
+    }
+
+    @Test func theFrenchSaysTu() throws {
+        let vous = #"\b(vous|votre|vos)\b"#
+        for key in [Self.whenInUse, Self.always] {
+            let value = try text(key, "fr")
+            #expect(value.range(of: vous, options: [.regularExpression, .caseInsensitive]) == nil, "\(value)")
+        }
+    }
+}
