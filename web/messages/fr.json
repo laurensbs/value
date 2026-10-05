@@ -1432,7 +1432,7 @@
     "level3": "Ensuite : demander des balades en autonomie aux propriétaires qui l’autorisent pour leur chien.",
     "level3Off": "Ensuite : des balades en autonomie avec les propriétaires qui l’autorisent pour leur chien. La localisation en direct est désactivée pour le moment, donc une balade seul ne démarre pas encore. Se promener ensemble reste possible.",
     "during": "Pendant la balade",
-    "duringText": "Votre téléphone partage votre position avec le propriétaire pendant toute la balade. Si elle dure plus longtemps que prévu, vous recevez tous les deux une notification. Le bouton d'aide vous montre tout de suite qui appeler.",
+    "duringText": "Si vous promenez le chien seul, votre téléphone partage votre position avec le propriétaire pendant toute la balade. Vous êtes en retard ? Prévenez le propriétaire : une notification de Rondje Mee n'arrive pas toujours. Le bouton d'aide vous montre tout de suite qui appeler.",
     "duringTextOff": "La localisation en direct est désactivée pour le moment, donc votre téléphone ne partage aucune position. D’ici là, vous vous promenez avec le propriétaire ou le refuge. Le bouton d'aide vous montre tout de suite qui appeler.",
     "after": "Après la balade",
     "afterText": "Chacun donne son avis en privé. Si un chien est blessé ou stressé, ou si quelqu'un ne s'est pas senti en sécurité, notre équipe est prévenue immédiatement.",
