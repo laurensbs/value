@@ -216,6 +216,8 @@ export default async function ShelterDashboardPage({
                   ) : (
                     <p className="muted small">{t('shelter.noSignups')}</p>
                   )}
+                  {/* Next to "ID gezien": only looking, nothing kept (DPIA maatregel M6). */}
+                  {w.signups.length ? <p className="muted small">{t('requests.idHow')}</p> : null}
                   <div>
                     <CancelGroupWalkButton groupWalkId={w.id} />
                   </div>

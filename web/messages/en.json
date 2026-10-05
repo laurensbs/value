@@ -473,7 +473,8 @@
     "emptyFiltered": "No dogs match this choice. Try another one, or see all dogs.",
     "sendLink": "Send your link",
     "viewLabel": "List or map",
-    "mapNote": "Dogs show on their neighbourhood, never on an address."
+    "mapNote": "Dogs show on their neighbourhood, never on an address.",
+    "mapNoteVisitor": "Neighbourhood dogs show on the map once you're signed in."
   },
   "dog": {
     "story": "About {name}",
@@ -525,7 +526,9 @@
     "website": "Website",
     "hiddenByModerator": "Hidden by Rondje Mee",
     "savedWalkers": "{n, plural, one {# walker lives} other {# walkers live}} within 5 km. This week they'll see {name} as a new dog.",
-    "savedShare": "Tell your neighbours about {name}: <link>here's a message to share</link>."
+    "savedShare": "Tell your neighbours about {name}: <link>here's a message to share</link>.",
+    "ownerNearby": "Owner nearby",
+    "ownerNearbyText": "In {city}. You'll see their first name and regular times once you're signed in: that's how we protect the owner."
   },
   "request": {
     "title": "Plan a walk",
@@ -664,7 +667,8 @@
     "trustElsewhere": "What {walker} may do with {dog} is set below, under ‘After the first meeting’.",
     "declinedNote": "You said no to {walker} for {dog}. {walker} gets a notification.",
     "trustPair": "{walker} and {dog}",
-    "trustLater": "After your first meeting, you record here whether you've seen {walker}'s ID in person."
+    "trustLater": "After your first meeting, you record here whether you've seen {walker}'s ID in person.",
+    "idHow": "Look at the photo, name and date of birth. Don't take a photo or write anything down, not even the ID number."
   },
   "meet": {
     "legend": "How would you like to meet?",
@@ -795,7 +799,7 @@
     "empty": "You haven't signed up a dog yet. You can also sign up a dog for your grandma, your neighbour or someone else.",
     "newTitle": "Sign up a dog",
     "editTitle": "Edit {name}",
-    "forSomeone": "Signing up a dog for someone else? Ask their permission first and add their details under ‘Where to meet’.",
+    "forSomeone": "I'm signing up this dog for someone else",
     "sections": {
       "basics": "The dog",
       "character": "Personality",
@@ -832,7 +836,8 @@
       "confirmations": "Please confirm the insurance and your dog's health.",
       "bite-note": "Briefly describe what happened.",
       "invalid": "Check the required fields.",
-      "forbidden": "This isn't your dog."
+      "forbidden": "This isn't your dog.",
+      "owner-consent": "Tick the box to confirm the owner knows about it and is happy with it."
     },
     "privateHint": "Only walkers whose walk you've accepted can see this.",
     "providesHint": "The owner takes care of bags and treats, so a walker never has to pay for anything.",
@@ -896,7 +901,9 @@
       "work": "My work leaves me little time during the day, so an extra walk is welcome.",
       "mobility": "I don't walk as easily myself, so an extra walk is welcome.",
       "regular": "We're looking for a regular buddy a few times a week."
-    }
+    },
+    "ownerConsent": "The owner knows about it and is happy with it",
+    "forSomeoneHint": "Add their name and phone number below, with where you meet. A walker only sees this once a walk has been accepted."
   },
   "profile": {
     "title": "Profile",

@@ -10,7 +10,7 @@ const db = drizzle({ client, schema })
 vi.mock('server-only', () => ({}))
 vi.mock('@/db', () => ({ getDb: async () => db }))
 
-const { getDogDetail, incomingRequests, notificationsFor, outgoingRequests, unreadCount, unreadCounts, walkersNear } = await import('./queries')
+const { getDogDetail, incomingRequests, listDogs, notificationsFor, outgoingRequests, unreadCount, unreadCounts, walkersNear } = await import('./queries')
 
 async function viewer(userId: string) {
   const p = await db.query.profile.findFirst({ where: (t, { eq }) => eq(t.userId, userId) })
@@ -122,5 +122,59 @@ describe('notifications', () => {
     expect(await unreadCounts('fleur')).toEqual({ all: 4, walks: 1 })
     expect(await unreadCount('fleur')).toBe(4)
     expect(await unreadCount('fleur', { reminders: false })).toBe(1)
+  })
+})
+
+describe('a private owner, seen without an account (DPIA maatregel M4)', () => {
+  beforeAll(async () => {
+    await client.exec(`
+      update profile set bio = 'Ik ben Ans en ik woon hier al veertig jaar.', photo_url = 'https://example.org/ans.jpg' where user_id = 'ans';
+      update dog set lat = 52.095, lng = 5.13, status = 'active' where id = 'bello';
+      insert into dog_slot (id, dog_id, weekday, time) values ('bello-1', 'bello', 2, '07:45');
+      insert into organization (id, name, country, city, status, description) values ('zuid', 'Opvang Zuid', 'NL', 'Utrecht', 'verified', 'Wij wandelen op zaterdag.');
+      insert into dog (id, org_id, name, country, city, lat, lng) values ('rex', 'zuid', 'Rex', 'NL', 'Utrecht', 52.07, 5.14);
+    `)
+  })
+
+  it('shows the dog, its town and an owner nearby: not who the owner is, when the dog walks, or its spot', async () => {
+    const detail = await getDogDetail('bello', null)
+    expect(detail?.ownerShielded).toBe(true)
+    expect(detail?.dog.name).toBe('Bello')
+    expect(detail?.host).toMatchObject({ kind: 'owner', name: '', photoUrl: null, city: 'Utrecht', phone: null, email: null })
+    expect(detail?.host.bio).toBeUndefined()
+    expect(detail?.slots).toEqual([])
+    expect([detail?.dog.lat, detail?.dog.lng]).toEqual([null, null])
+    expect(JSON.stringify(detail)).not.toMatch(/Ans|veertig|ans\.jpg|07:45|52\.095/)
+  })
+
+  it('signed in, the same page shows the owner as before', async () => {
+    const detail = await getDogDetail('bello', await viewer('fleur'))
+    expect(detail?.ownerShielded).toBe(false)
+    expect(detail?.host).toMatchObject({ name: 'Ans', photoUrl: 'https://example.org/ans.jpg', bio: 'Ik ben Ans en ik woon hier al veertig jaar.' })
+    expect(detail?.slots).toEqual([{ weekday: 2, time: '07:45' }])
+    expect(detail?.dog.lat).toBe(52.095)
+  })
+
+  it('leaves a shelter dog as it is', async () => {
+    const [visitor, member] = await Promise.all([getDogDetail('rex', null), getDogDetail('rex', await viewer('fleur'))])
+    expect(visitor?.ownerShielded).toBe(false)
+    expect(visitor?.host).toEqual(member?.host)
+    expect(visitor?.host).toMatchObject({ kind: 'shelter', name: 'Opvang Zuid', bio: 'Wij wandelen op zaterdag.' })
+    expect(visitor?.dog.lat).toBe(52.07)
+  })
+
+  it('in the list of dogs too: no owner name or photo, and no spot on the map', async () => {
+    const near = { lat: 52.09, lng: 5.12 }
+    const visitor = await listDogs({ country: 'NL', near, visitor: true })
+    const bello = visitor.find((i) => i.dog.id === 'bello')!
+    expect(bello.host).toEqual({ kind: 'owner', id: 'ans', name: '', photoUrl: null, city: 'Utrecht', verified: false })
+    expect([bello.dog.lat, bello.dog.lng]).toEqual([null, null])
+    // Still nearest first, from the spot the visitor cannot see.
+    expect(bello.distanceM).toBeGreaterThan(0)
+    expect(visitor.find((i) => i.dog.id === 'rex')?.dog.lat).toBe(52.07)
+
+    const member = (await listDogs({ country: 'NL', near })).find((i) => i.dog.id === 'bello')!
+    expect(member.host).toMatchObject({ name: 'Ans', photoUrl: 'https://example.org/ans.jpg' })
+    expect(member.dog.lat).toBe(52.095)
   })
 })

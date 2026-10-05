@@ -180,6 +180,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   await expect(ownerList).toContainText('0 van 5')
   await ownerList.getByLabel(/Bekijk het ID van Fleur in het echt/).check()
   await expect(ownerList).toContainText('1 van 5')
+  // How to look at an ID: only looking, nothing kept (DPIA maatregel M6).
+  await expect(ownerList).toContainText('Kijk naar foto, naam en geboortedatum. Maak geen foto en schrijf niets over, ook geen BSN.')
   await owner.page.reload()
   await expect(owner.page.locator('.meet-check')).toContainText('1 van 5')
   await expect(owner.page.locator('.meet-check').getByLabel(/Bekijk het ID van Fleur/)).toBeChecked()
@@ -218,6 +220,8 @@ test('owner and walker: meet request, accept, trust, live walk with GPS, follow 
   // --- Walking together now: the owner records the ID seen and allows solo walks ---
   await owner.page.goto('/requests?view=incoming')
   const trustPair = owner.page.getByRole('region', { name: 'Na de kennismaking' })
+  // Next to the box, how to look: and the box says so to a screen reader too.
+  await expect(trustPair.getByLabel(/ID in het echt gezien/)).toHaveAccessibleDescription('Kijk naar foto, naam en geboortedatum. Maak geen foto en schrijf niets over, ook geen BSN.')
   await trustPair.getByLabel(/ID in het echt gezien/).check()
   await trustPair.getByLabel(/mag zelfstandig met Bello wandelen/).check()
   await trustPair.getByRole('button', { name: 'Bevestigen' }).click()

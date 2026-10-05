@@ -30,6 +30,7 @@ function parse(raw: string): string[] {
  */
 export function MeetChecklist({ requestId, title, items }: { requestId: string; title: string; items: { key: string; text: string }[] }) {
   const t = useTranslations('meetCheck')
+  const tr = useTranslations('requests')
   const storageKey = `rondje.meetCheck.${requestId}`
   const stored = useSyncExternalStore(noop, () => read(storageKey), () => '[]')
   // After the first tick this device's list is the truth, also when storage is not available.
@@ -69,7 +70,16 @@ export function MeetChecklist({ requestId, title, items }: { requestId: string; 
                 <span className="tick" aria-hidden="true">
                   <Icon name="check" size={14} />
                 </span>
-                <span className="label">{item.text}</span>
+                <span className="label">
+                  {item.text}
+                  {/* How to look at an ID: only looking, nothing kept (DPIA maatregel M6). */}
+                  {item.key === 'id' ? (
+                    <>
+                      {' '}
+                      <span className="checklist-hint">{tr('idHow')}</span>
+                    </>
+                  ) : null}
+                </span>
               </label>
             </li>
           )

@@ -35,6 +35,17 @@ export interface DogFilters {
   host?: 'owner' | 'shelter'
   orgId?: string
   q?: string
+  /** Someone without an account: a private owner stays out of sight (shieldedOwner). */
+  visitor?: boolean
+}
+
+/**
+ * A private owner as someone without an account sees them (DPIA R3, maatregel M4): an owner nearby,
+ * in the dog's town. Not their first name, photo or words about themselves. The id stays: it is never
+ * shown, and the link preview uses it for the owner's language.
+ */
+export function shieldedOwner(id: string, city: string): HostPublic {
+  return { kind: 'owner', id, name: '', photoUrl: null, city, verified: false }
 }
 
 const PUBLIC_DOG_STATUSES = ['active']
@@ -74,16 +85,24 @@ export async function listDogs(filters: DogFilters, limit = 60): Promise<DogList
   const items = rows
     // Shelter dogs are only public once the shelter is verified.
     .filter((r) => !r.dog.orgId || r.orgStatus === 'verified')
-    .map((r): DogListItem => ({
-      dog: r.dog,
-      host: r.dog.orgId
-        ? { kind: 'shelter', id: r.dog.orgId, name: r.orgName ?? '', photoUrl: r.orgLogo ?? null, city: r.orgCity ?? r.dog.city, verified: true }
-        : { kind: 'owner', id: r.dog.ownerId ?? '', name: r.ownerName ?? '', photoUrl: r.ownerPhoto ?? null, city: r.ownerCity ?? r.dog.city, verified: false },
-      distanceM:
-        filters.near && r.dog.lat != null && r.dog.lng != null
-          ? distanceM(filters.near, { lat: r.dog.lat, lng: r.dog.lng })
-          : null,
-    }))
+    .map((r): DogListItem => {
+      const distance = filters.near && r.dog.lat != null && r.dog.lng != null ? distanceM(filters.near, { lat: r.dog.lat, lng: r.dog.lng }) : null
+      if (r.dog.orgId) {
+        return {
+          dog: r.dog,
+          host: { kind: 'shelter', id: r.dog.orgId, name: r.orgName ?? '', photoUrl: r.orgLogo ?? null, city: r.orgCity ?? r.dog.city, verified: true },
+          distanceM: distance,
+        }
+      }
+      // Without an account a private owner's dog has no spot on the map: about 500 m is close to
+      // their home. The order (nearest first) still uses it; the distance is only printed for members.
+      if (filters.visitor) return { dog: { ...r.dog, lat: null, lng: null }, host: shieldedOwner(r.dog.ownerId ?? '', r.dog.city), distanceM: distance }
+      return {
+        dog: r.dog,
+        host: { kind: 'owner', id: r.dog.ownerId ?? '', name: r.ownerName ?? '', photoUrl: r.ownerPhoto ?? null, city: r.ownerCity ?? r.dog.city, verified: false },
+        distanceM: distance,
+      }
+    })
 
   items.sort((a, b) => {
     if (a.dog.isDemo !== b.dog.isDemo) return a.dog.isDemo ? 1 : -1
@@ -240,6 +259,11 @@ export interface DogDetail {
   groupWalks: { id: string; startsAt: Date; durationMin: number; capacity: number; booked: number; level: string; meetingPoint: string }[]
   /** The viewer may see meeting details, vet info and contact details. */
   canSeePrivate: boolean
+  /**
+   * Someone without an account looks at a private owner's dog: the owner is only "an owner nearby"
+   * (shieldedOwner), without weekly moments and without the dog's spot on the map.
+   */
+  ownerShielded: boolean
   isMine: boolean
   /** How the signed-in viewer relates to this dog (null when signed out). */
   relation: DogRelation | null
@@ -306,7 +330,16 @@ export async function getDogDetail(id: string, viewer: Viewer | null): Promise<D
     host.phone = null
     host.email = null
   }
-  return { dog, host, slots, groupWalks, canSeePrivate, isMine, relation }
+  // Without an account: the dog, its town and "an owner nearby" (DPIA R3, maatregel M4). Not who the
+  // owner is, not the weekly moments (when they are home without their dog), and not the dog's spot
+  // to about 500 m. Left out here, so no page, link preview or payload can show them by accident.
+  const ownerShielded = !viewer && host.kind === 'owner'
+  if (ownerShielded) {
+    host = { ...shieldedOwner(host.id, dog.city), phone: null, email: null }
+    dog.lat = null
+    dog.lng = null
+  }
+  return { dog, host, slots: ownerShielded ? [] : slots, groupWalks, canSeePrivate, isMine, relation, ownerShielded }
 }
 
 /** A verified shelter's public face, for its page of dogs. Never includes the private coordinator. */

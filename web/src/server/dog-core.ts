@@ -13,6 +13,9 @@ import { isOrgMember, type OnboardedViewer } from './session'
 
 // Saving a dog: shared by the website's dog form and the app API (src/app/api/v1/my-dogs).
 
+/** The error when a dog is added for someone else without confirming that they know and agree. */
+export const OWNER_CONSENT = 'owner-consent'
+
 const dogSchema = z.object({
   name: z.string().trim().min(1).max(60),
   breed: z.string().trim().max(80).default(''),
@@ -44,6 +47,15 @@ const dogSchema = z.object({
   photos: z.array(z.string().max(600_000)).max(6),
   slots: z.array(z.object({ weekday: z.number().int().min(1).max(7), time: z.string().regex(/^\d{2}:\d{2}$/) })).max(21),
 })
+
+/**
+ * A dog added for someone else (a neighbour, a grandparent) only goes online when its owner knows
+ * and agrees (DPIA maatregel M5). Nothing about it is stored. The app does not send it: there a dog
+ * is always its user's own.
+ */
+export const forSomeoneSchema = z
+  .object({ forSomeone: z.boolean(), ownerConsent: z.boolean() })
+  .refine((v) => !v.forSomeone || v.ownerConsent, { path: ['ownerConsent'], message: OWNER_CONSENT })
 
 function parseJsonArray(value: FormDataEntryValue | null): unknown[] {
   try {
@@ -97,6 +109,9 @@ export async function saveDogForm(
   if (!parsed.success) return { ok: false, error: 'invalid' }
   const d = parsed.data
   if (!d.insuranceConfirmed || !d.healthConfirmed) return { ok: false, error: 'confirmations' }
+  if (!forSomeoneSchema.safeParse({ forSomeone: form.get('forSomeone') === 'on', ownerConsent: form.get('ownerConsent') === 'on' }).success) {
+    return { ok: false, error: OWNER_CONSENT }
+  }
   if (d.biteHistory && d.biteNote.length < 5) return { ok: false, error: 'bite-note' }
 
   const db = await getDb()

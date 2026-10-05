@@ -381,9 +381,18 @@ export function TrustForm({
       </strong>
       <TrustSteps trust={initial} allowSolo={allowSolo} />
       <label className="check">
-        <input type="checkbox" checked={value.idSeen} onChange={(e) => edit({ ...value, idSeen: e.target.checked })} />
+        <input
+          type="checkbox"
+          checked={value.idSeen}
+          aria-describedby={`${dogId}-${walkerId}-id-how`}
+          onChange={(e) => edit({ ...value, idSeen: e.target.checked })}
+        />
         <span>{t('idSeen')}</span>
       </label>
+      {/* Only looking: Rondje Mee keeps no copy, and the owner should not either (DPIA maatregel M6). */}
+      <p className="muted small" id={`${dogId}-${walkerId}-id-how`}>
+        {t('idHow')}
+      </p>
       {allowSolo ? (
         <>
           <label className={`check${value.idSeen ? '' : ' is-disabled'}`}>

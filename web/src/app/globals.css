@@ -3482,6 +3482,15 @@ legend {
   text-decoration: line-through;
 }
 
+/* A line of advice under an item: inline-block, so a ticked item does not strike it through. */
+.checklist-hint {
+  display: inline-block;
+  width: 100%;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.9em;
+}
+
 /* What to talk about when meeting: a list to tick off on the spot. */
 .meet-check {
   display: grid;

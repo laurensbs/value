@@ -89,7 +89,10 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
   const [minutes, setMinutes] = useState(String(initial.walkMinutes))
   const [traits, setTraits] = useState(initial.traits.join(', '))
   const [story, setStory] = useState(initial.story)
+  const [forSomeone, setForSomeone] = useState(false)
   const isShelter = Boolean(orgId)
+  // Adding a dog for someone else (a neighbour, a grandparent) asks whether they know (DPIA maatregel M5).
+  const askForSomeone = !isShelter && !initial.id
   const point = initial.lat != null && initial.lng != null && country === initial.country ? { lat: initial.lat, lng: initial.lng } : null
 
   // Steps: only used when `stepped`. The full form shows the story with the character.
@@ -132,6 +135,8 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
       }
       case 'where':
         return String(data.get('city') ?? '').trim() ? null : 'needCity'
+      case 'private':
+        return data.get('forSomeone') === 'on' && data.get('ownerConsent') !== 'on' ? 'owner-consent' : null
       case 'safety':
         if (data.get('insuranceConfirmed') !== 'on' || data.get('healthConfirmed') !== 'on') return 'confirmations'
         return data.get('biteHistory') === 'on' && String(data.get('biteNote') ?? '').trim().length < 5 ? 'bite-note' : null
@@ -279,8 +284,6 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
             {index + 1}/{total}
           </span>
         </div>
-      ) : !isShelter && !initial.id ? (
-        <p className="notice small">{t('myDogs.forSomeone')}</p>
       ) : null}
 
       {section(
@@ -480,7 +483,23 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
       {section(
         'private',
         <>
-          {stepped && !isShelter ? <p className="notice small">{t('myDogs.forSomeone')}</p> : null}
+          {askForSomeone ? (
+            <div className="stack-s">
+              <label className="check">
+                <input type="checkbox" name="forSomeone" checked={forSomeone} onChange={(e) => setForSomeone(e.target.checked)} />
+                <span>{t('myDogs.forSomeone')}</span>
+              </label>
+              {forSomeone ? (
+                <>
+                  <label className="check">
+                    <input type="checkbox" name="ownerConsent" required />
+                    <span>{t('myDogs.ownerConsent')}</span>
+                  </label>
+                  <p className="hint">{t('myDogs.forSomeoneHint')}</p>
+                </>
+              ) : null}
+            </div>
+          ) : null}
           <label className="field">
             <span>{t('myDogs.meetingInfo')}</span>
             <textarea className="textarea short" name="meetingInfo" defaultValue={initial.meetingInfo} maxLength={600} />
