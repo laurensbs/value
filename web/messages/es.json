@@ -1811,6 +1811,10 @@
         "q": "¿Vosotros también donáis a causas solidarias?"
       },
       "once": {
+        "q": "¿Puedo apoyar también cada mes?",
+        "a": "No, ahora no hay una aportación mensual fija. Puedes apoyar a {app} con un donativo único a través de {platform}, de la cantidad que quieras. El dinero va a {operator}, para los costes de {app}.{percent, select, none {} other { De todos los donativos, {operator} destina el {percent} % a causas solidarias para perros y personas del barrio.}} Un donativo no desgrava. Y no tienes que dar nada para usar {app}."
+      },
+      "onceMonthly": {
         "q": "¿Qué diferencia hay entre apoyar cada mes y el crowdfunding?",
         "a": "Una aportación mensual ayuda a cubrir los costes fijos, como el alojamiento web y los mapas. El crowdfunding es una campaña única para costes únicos, como las apps y la revisión legal. Ambas van a {operator}."
       }
@@ -1822,7 +1826,7 @@
     "monthlyText": "Una pequeña aportación fija al mes cubre los costes fijos, como el alojamiento web y los mapas. Así {app} sigue siendo gratis para todos.",
     "oncePill": "Una vez",
     "onceTitle": "Súmate al crowdfunding",
-    "onceText": "¿Prefieres dar una sola vez? Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
+    "onceText": "Da una sola vez, lo que tú quieras. Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
     "onceGive": "Ayúdanos vía {platform}",
     "progress": "{raised} de {goal} recaudados",
     "goalRounds": "Objetivo: {goal}",

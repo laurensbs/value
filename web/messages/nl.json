@@ -1811,6 +1811,10 @@
         "q": "Geven jullie zelf ook aan goede doelen?"
       },
       "once": {
+        "q": "Kan ik ook elke maand steunen?",
+        "a": "Nee, een vaste maandelijkse bijdrage is er nu niet. Je kunt {app} steunen met een eenmalige gift via {platform}, zo groot of klein als je wilt. Het geld gaat naar {operator}, voor de kosten van {app}.{percent, select, none {} other { Van alle giften geeft {operator} {percent}% door aan goede doelen voor honden en mensen in de buurt.}} Een gift is niet fiscaal aftrekbaar. En je hoeft niets te geven om {app} te gebruiken."
+      },
+      "onceMonthly": {
         "q": "Wat is het verschil tussen maandelijks steunen en de crowdfunding?",
         "a": "Een maandelijkse bijdrage helpt de vaste kosten te dekken, zoals hosting en kaarten. De crowdfunding is een eenmalige actie voor eenmalige kosten, zoals de apps en de juridische check. Beide gaan naar {operator}."
       }
@@ -1822,7 +1826,7 @@
     "monthlyText": "Een kleine vaste bijdrage per maand dekt de vaste kosten, zoals hosting en kaarten. Zo blijft {app} gratis voor iedereen.",
     "oncePill": "Eenmalig",
     "onceTitle": "Doe mee aan de crowdfunding",
-    "onceText": "Liever één keer iets geven? Met de crowdfunding betalen we de eenmalige kosten, zoals de apps in de App Store en Google Play, de juridische check en flyers voor opvangen.",
+    "onceText": "Eén keer iets geven, zo groot of klein als je wilt. Met de crowdfunding betalen we de eenmalige kosten, zoals de apps in de App Store en Google Play, de juridische check en flyers voor opvangen.",
     "onceGive": "Geef een rondje via {platform}",
     "progress": "{raised} van {goal} opgehaald",
     "goalRounds": "Doel: {total, plural, one {# rondje} other {# rondjes}}",

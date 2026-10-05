@@ -45,9 +45,14 @@ export default async function SupportPage() {
   // it, and in which app when the switch is off for the other one (SUPPORT_IN_APP_IOS / _ANDROID), but
   // only while the row really shows: a campaign link, a named recipient and the switch on (appQuestion).
   const { key: appFaq, apps } = appQuestion(process.env, crowdfunding)
+  // The campaign: a one-off gift (terms art. 8: no monthly contribution now). Only if a monthly link is
+  // set as well (SUPPORT_URL) does the question compare the two, as the page then offers both.
+  const onceFaq = cfg.url ? 'onceMonthly' : 'once'
   const faq = native
     ? (['free', 'sponsors'] as const)
-    : ([...(['free', 'where', 'tax', 'perks', appFaq, 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
+    : ([...(['free', 'where', 'tax', 'perks', appFaq, 'share'] as const), ...(cfg.crowdfundingUrl ? [onceFaq] : []), 'sponsors'] as const)
+  // The share for good causes in the answer about giving once; "none" leaves that sentence out.
+  const percent = drive.shareToCausesPercent !== null ? format.number(drive.shareToCausesPercent) : 'none'
   const total = costs.items.reduce((sum, c) => ({ min: sum.min + perMonth(c, c.min), max: sum.max + perMonth(c, c.max) }), { min: 0, max: 0 })
   // The amount stays on one line; "per maand" may move under it on a small phone.
   const amount = (c: Cost) => (
@@ -267,7 +272,7 @@ export default async function SupportPage() {
             <summary>
               <strong>{t(`support.faq.${k}.q`, { app: APP_NAME })}</strong>
             </summary>
-            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME, platform: cfg.crowdfundingPlatform ?? '', apps })}</p>
+            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME, platform: cfg.crowdfundingPlatform ?? '', apps, percent })}</p>
           </details>
         ))}
       </section>

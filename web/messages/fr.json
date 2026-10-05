@@ -1811,6 +1811,10 @@
         "q": "Donnez-vous vous-mêmes à de bonnes causes ?"
       },
       "once": {
+        "q": "Puis-je aussi soutenir chaque mois ?",
+        "a": "Non, il n’y a pas de contribution mensuelle fixe pour l’instant. Vous pouvez soutenir {app} par un don unique via {platform}, du montant que vous voulez. L’argent va à {operator}, pour les frais de {app}.{percent, select, none {} other { Sur tous les dons, {operator} reverse {percent} % à de bonnes causes pour les chiens et les gens du quartier.}} Un don n’est pas déductible des impôts. Et vous n’avez rien à donner pour utiliser {app}."
+      },
+      "onceMonthly": {
         "q": "Quelle est la différence entre le soutien mensuel et le financement participatif ?",
         "a": "Une contribution mensuelle aide à couvrir les frais fixes, comme l’hébergement et les cartes. Le financement participatif est une campagne ponctuelle pour des frais ponctuels, comme les applis et la vérification juridique. Les deux vont à {operator}."
       }
@@ -1822,7 +1826,7 @@
     "monthlyText": "Une petite contribution régulière chaque mois couvre les frais fixes, comme l’hébergement et les cartes. Ainsi, {app} reste gratuit pour tout le monde.",
     "oncePill": "Ponctuel",
     "onceTitle": "Participer au financement participatif",
-    "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
+    "onceText": "Donnez une seule fois, le montant que vous voulez. Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
     "onceGive": "Aidez-nous via {platform}",
     "progress": "{raised} récoltés sur {goal}",
     "goalRounds": "Objectif : {goal}",

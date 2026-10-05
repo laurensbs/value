@@ -1811,6 +1811,10 @@
         "q": "Do you give to good causes yourselves?"
       },
       "once": {
+        "q": "Can I also support every month?",
+        "a": "No, there is no fixed monthly contribution at the moment. You can support {app} with a one-off gift through {platform}, as large or small as you like. The money goes to {operator}, for the costs of {app}.{percent, select, none {} other { Of all gifts, {operator} passes {percent}% on to good causes for dogs and people in the neighbourhood.}} A gift is not tax-deductible. And you do not need to give anything to use {app}."
+      },
+      "onceMonthly": {
         "q": "What is the difference between monthly support and the crowdfunding?",
         "a": "A monthly contribution helps cover the running costs, like hosting and maps. The crowdfunding is a one-off campaign for one-off costs, like the apps and the legal check. Both go to {operator}."
       }
@@ -1822,7 +1826,7 @@
     "monthlyText": "A small regular amount each month covers the running costs, like hosting and maps. That keeps {app} free for everyone.",
     "oncePill": "One-off",
     "onceTitle": "Join the crowdfunding",
-    "onceText": "Rather give once? The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
+    "onceText": "Give once, as much or as little as you like. The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
     "onceGive": "Support us via {platform}",
     "progress": "{raised} of {goal} raised",
     "goalRounds": "Goal: {goal}",
