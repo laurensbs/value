@@ -13,6 +13,6 @@ Por eso quiero devolver algo. Mucha gente pasa demasiado tiempo en casa, delante
 
 Un paseo no lo soluciona todo, y Rondje Mee no es un tratamiento. Pero sí es un momento agradable y fijo en la semana.
 
-Desarrollo Rondje Mee yo mismo y pienso bien cada paso. La seguridad, lo primero: siempre os conocéis antes en persona y el dueño comprueba tu documento de identidad en persona. Pasear solo con el perro llega después, si el dueño quiere y cuando la ubicación en directo esté activada.
+Desarrollo Rondje Mee yo mismo y pienso bien cada paso. La seguridad, lo primero: siempre os conocéis antes en persona, el dueño comprueba tu documento de identidad en persona y solo después sales a pasear por tu cuenta, si el dueño quiere y mientras la ubicación en directo esté activada.
 
 — Laurens

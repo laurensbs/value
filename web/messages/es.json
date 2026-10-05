@@ -1149,7 +1149,7 @@
         },
         "solo": {
           "q": "Después del primer encuentro. ¿Cuándo puedes pasear al perro solo?",
-          "a0": "Cuando el dueño confía en ti, ha visto tu documento en persona y aprobaste el test",
+          "a0": "Cuando el dueño confía en ti, ha visto tu documento en persona, aprobaste el test y la ubicación en directo está activada",
           "a1": "Enseguida, ya lo conoces",
           "why1": "Decide el dueño. Va perro a perro.",
           "explain": "Correcto. Paso a paso, seguro para todos."
@@ -1868,7 +1868,7 @@
     "why3": "Rondje Mee no es asistencia ni terapia. ¿No te encuentras bien? En la página de ayuda verás adónde acudir.",
     "howTitle": "Cómo funciona",
     "how": {
-      "meet": "La primera vez siempre conoces al propietario y al perro juntos. Pasear a solas llega después, si el propietario quiere y cuando la ubicación en directo esté activada.",
+      "meet": "La primera vez siempre conoces al propietario y al perro juntos. Solo después puedes pasear a solas, si el propietario quiere y mientras la ubicación en directo esté activada.",
       "adults": "Todas las personas que pasean tienen 18 años o más y primero hacen un breve test de seguridad.",
       "shelters": "En las protectoras se pasea en paseos en grupo supervisados, en los horarios que elige la protectora.",
       "free": "Rondje Mee es gratis. Nadie pide ni paga dinero por un paseo."

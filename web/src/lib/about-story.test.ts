@@ -8,7 +8,8 @@ describe('/about story', () => {
   for (const locale of ['nl', 'en', 'es', 'fr']) {
     it(`${locale} ties walking alone to live location`, () => {
       const story = readFileSync(join(process.cwd(), 'content/about', locale, 'story.md'), 'utf8')
-      expect(story).not.toMatch(/pas daarna loop je zelf|only then do you walk on your own|solo después sales a pasear|ce n’est qu’ensuite que vous partez seul/i)
+      // The old ending stopped right after walking alone: now the condition follows it.
+      expect(story).not.toMatch(/(zelf een rondje|walk on your own|por tu cuenta|seul en balade)\.$/m)
       expect(story).toMatch(/live|en directo|en direct/i)
     })
   }

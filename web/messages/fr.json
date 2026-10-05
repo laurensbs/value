@@ -1149,7 +1149,7 @@
         },
         "solo": {
           "q": "Après la première rencontre. Quand pouvez-vous promener le chien seul ?",
-          "a0": "Quand le propriétaire vous fait confiance, a vu votre pièce d'identité en personne et que vous avez réussi le quiz",
+          "a0": "Quand le propriétaire vous fait confiance, a vu votre pièce d'identité en personne, que vous avez réussi le quiz et que la localisation en direct est activée",
           "a1": "Tout de suite, vous le connaissez maintenant",
           "why1": "C'est le propriétaire qui décide. Chien par chien.",
           "explain": "C'est ça. Pas à pas, en sécurité pour tout le monde."
@@ -1868,7 +1868,7 @@
     "why3": "Rondje Mee n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
     "howTitle": "Comment ça marche",
     "how": {
-      "meet": "La première fois, vous rencontrez toujours le propriétaire et le chien ensemble. Promener seul ne vient qu’ensuite, si le propriétaire le souhaite et une fois la localisation en direct activée.",
+      "meet": "La première fois, vous rencontrez toujours le propriétaire et le chien ensemble. Ensuite seulement, vous pouvez promener le chien seul, si le propriétaire le souhaite et tant que la localisation en direct est activée.",
       "adults": "Toute personne qui promène a 18 ans ou plus et passe d'abord un court quiz de sécurité.",
       "shelters": "Dans les refuges, on promène lors de promenades en groupe encadrées, aux moments choisis par le refuge.",
       "free": "Rondje Mee est gratuit. Personne ne demande ni ne paie d'argent pour une promenade."
