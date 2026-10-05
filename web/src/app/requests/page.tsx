@@ -6,10 +6,11 @@ import { MeetChecklist } from '@/components/MeetChecklist'
 import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
 import { InstallAsk } from '@/components/InstallAsk'
 import { PushAsk } from '@/components/PushAsk'
+import { TermsNotice } from '@/components/TermsNotice'
 import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
-import { canRequestSolo, canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { canRequestSolo, canStartWalk, isMeetVia, liveLocationReason, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
 import { rolesOf } from '@/server/progress'
 import {
   hostContacts,
@@ -22,6 +23,7 @@ import {
   type RequestRow,
 } from '@/server/queries'
 import { meetChecklist, unreadChats } from '@/server/chat'
+import { liveLocationNow } from '@/server/live-location'
 import { webPushKey } from '@/server/push'
 import { requireOnboarded } from '@/server/session'
 
@@ -92,7 +94,12 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
   const format = await getFormatter()
   const now = new Date()
 
-  const [outgoing, incoming, unread] = await Promise.all([outgoingRequests(viewer.userId), incomingRequests(viewer), unreadChats(viewer.userId)])
+  const [outgoing, incoming, unread, liveLocation] = await Promise.all([
+    outgoingRequests(viewer.userId),
+    incomingRequests(viewer),
+    unreadChats(viewer.userId),
+    liveLocationNow(),
+  ])
   const hasIncoming = incoming.length > 0 || viewer.profile.hasDogs || viewer.orgs.length > 0
   const pendingIncoming = incoming.filter((r) => r.request.status === 'pending').length
   const openIncoming = incoming.filter((r) => OPEN.includes(r.request.status)).length
@@ -154,6 +161,8 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         pppLicense: r.walker.pppLicense,
         experience: r.walker.experience === 'none' || r.walker.experience === 'lots' ? r.walker.experience : 'some',
         pendingRequests: 0,
+        // The walker's own step, not something the owner can help with.
+        needsTerms: false,
       },
       { ownerId: r.dog.ownerId, orgId: r.dog.orgId, country: r.dog.country, status: 'active', isDemo: false, ppp: r.dog.ppp, level: r.dog.level === 'experienced' ? 'experienced' : 'starter' },
       { isStaff: false, blocked: false, soloAllowed: true, idSeen: true },
@@ -191,6 +200,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         ) : null}
         <DeclinedNote />
       </header>
+
+      {/* Changed terms that took effect: accepting, asking and starting wait for the yes. */}
+      <TermsNotice profile={viewer.profile} onlyRequired />
 
       {tab === 'mine' ? (
         <section className="stack">
@@ -261,10 +273,16 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             <span className="live-dot" aria-hidden="true" /> {t('requests.resume')}
                           </Link>
                         ) : accepted ? (
+                          // Live location off: a walk alone with the dog does not start (rules.ts liveLocationReason).
                           <StartButton
                             requestId={r.request.id}
-                            enabled={canStartWalk(r.request, viewer.userId, now)}
-                            hint={t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })}
+                            enabled={canStartWalk(r.request, viewer.userId, now) && !liveLocationReason(r.request.kind, liveLocation)}
+                            hint={
+                              liveLocationReason(r.request.kind, liveLocation)
+                                ? t('request.reasons.live-location-off')
+                                : t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })
+                            }
+                            liveLocation={liveLocation}
                           />
                         ) : null}
                         {accepted && !active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}

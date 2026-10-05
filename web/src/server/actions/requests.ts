@@ -22,6 +22,7 @@ import { zonedToUtc } from '@/lib/time'
 import { audit, notify } from '../notify'
 import { dogFacts, relationFor, trustGrantOf, walkerFacts } from '../queries'
 import { actionViewer, isOrgMember, type OnboardedViewer } from '../session'
+import { termsBlock } from '../terms'
 import type { FormState } from './profile'
 
 const requestSchema = z.object({
@@ -198,8 +199,11 @@ export async function respondToRequest(requestId: string, decision: 'accept' | '
   if (row.request.status !== 'pending') return { ok: false, error: 'already-decided' }
   // A dog a moderator took offline cannot get new appointments; saying no stays possible.
   if (decision === 'accept' && row.dog.status === 'hidden') return { ok: false, error: 'dog-unavailable' }
-  // A solo walk is accepted only while the trust for it holds: allowed, with the ID seen in person.
   if (decision === 'accept') {
+    // Changed terms that took effect: the owner agrees to them before saying yes (rules.ts termsReason).
+    const terms = await termsBlock(viewer.profile)
+    if (terms) return { ok: false, error: terms }
+    // A solo walk is accepted only while the trust for it holds: allowed, with the ID seen in person.
     const solo = soloTrustReason(row.request.kind, row.dog, await trustGrantOf(row.dog.id, row.request.walkerId))
     if (solo) return { ok: false, error: forDecider(solo) }
   }

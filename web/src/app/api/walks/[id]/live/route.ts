@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server'
+import { LIVE_LOCATION_HEADER, liveLocationFor } from '@/lib/live-location'
 import { getViewer } from '@/server/session'
 import { checkOverdue, pointsSince, walkAccess, walkPhotos } from '@/server/walks'
 
-/** Polled by the owner's live map (and the walker's own screen) every few seconds. */
+/**
+ * Polled by the owner's live map (and the walker's own screen) every few seconds. `liveLocation` is
+ * false while live location is switched off (LIVE_LOCATION): then no new points come in, and the
+ * screens show no map.
+ */
 export async function GET(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const viewer = await getViewer()
@@ -20,6 +25,7 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
   return NextResponse.json(
     {
       status: access.walk.status,
+      liveLocation: liveLocationFor(process.env, request.headers.get(LIVE_LOCATION_HEADER)),
       startedAt: access.walk.startedAt,
       plannedEndAt: access.walk.plannedEndAt,
       endedAt: access.walk.endedAt,

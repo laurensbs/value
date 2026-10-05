@@ -7,6 +7,7 @@ import { WalkSummary } from '@/components/WalkSummary'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { countryInfo } from '@/lib/countries'
+import { liveLocationNow } from '@/server/live-location'
 import { requireOnboarded } from '@/server/session'
 import { pointsSince, walkAccess, walkPhotos } from '@/server/walks'
 
@@ -62,6 +63,7 @@ export default async function FollowPage({ params }: { params: Promise<{ id: str
         initialPhotos={(await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))}
         fallbackCenter={center}
         locale={await getLocale()}
+        liveLocation={await liveLocationNow()}
       />
       <div className="walk-layout">
         <ReportButton walkId={walk.id} subjectUserId={walk.walkerId} dogId={dog.id} />

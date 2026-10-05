@@ -4,6 +4,8 @@ import { z } from 'zod'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { isValidLatLng } from '@/lib/geo'
+import { LIVE_LOCATION_HEADER, liveLocationFor } from '@/lib/live-location'
+import { fail } from '@/server/api'
 import { getViewer } from '@/server/session'
 import { checkOverdue, walkAccess } from '@/server/walks'
 
@@ -21,7 +23,11 @@ const bodySchema = z.object({
     .max(120),
 })
 
-/** The walker's phone posts GPS fixes here while a walk is active. */
+/**
+ * The walker's phone posts GPS fixes here while a walk is active. With live location switched off
+ * (LIVE_LOCATION, lib/live-location.ts) nothing is stored: 403 `live-location-off`, on which the
+ * website's tracker stops sending.
+ */
 export async function POST(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const viewer = await getViewer()
@@ -29,6 +35,7 @@ export async function POST(request: Request, ctx: { params: Promise<{ id: string
   const access = await walkAccess(id, viewer)
   if (!access?.isWalker) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   if (access.walk.status !== 'active') return NextResponse.json({ status: access.walk.status })
+  if (!liveLocationFor(process.env, request.headers.get(LIVE_LOCATION_HEADER))) return fail('live-location-off', 403)
 
   const parsed = bodySchema.safeParse(await request.json().catch(() => null))
   if (!parsed.success) return NextResponse.json({ error: 'invalid' }, { status: 400 })

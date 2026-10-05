@@ -571,7 +571,10 @@
       "already-open": "You already have an open request or appointment with this dog.",
       "solo-not-allowed": "Solo walks are not switched on for this walker and dog. Switch them on under ‘After the first meeting’ first, or decline the request.",
       "id-not-seen": "Solo walks are only possible once you've seen the walker's ID in person.",
-      "meeting-ahead": "This is possible after your first meeting, once you've seen the walker and their ID in person."
+      "meeting-ahead": "This is possible after your first meeting, once you've seen the walker and their ID in person.",
+      "needs-terms": "Please agree to the updated terms first.",
+      "live-location-off": "Live location is off for now, and a walk alone with the dog does not start without it. A first meeting, together with the owner, is possible.",
+      "terms-changed": "The terms have been updated again in the meantime. Please take a look at the latest version."
     },
     "messagePlaceholder": "Hi! I'm … and I'd love to walk {dog}.",
     "moments": "Times that suit {dog}",
@@ -787,7 +790,10 @@
     "careWater": "Drank",
     "careUndo": "Take one back from {kind}",
     "careNone": "Nothing noted yet",
-    "careFailed": "Not saved: no connection. Tap again when you're back in range."
+    "careFailed": "Not saved: no connection. Tap again when you're back in range.",
+    "liveOff": "Live location is off for now. Your route is not tracked or shared; the time, the walk report and photos work as usual.",
+    "liveOffFollow": "Live location is off for now, so there is no map here. You still see the time, the walk report and the photos.",
+    "liveOffStart": "Live location is off for now: your phone does not share your location during this walk."
   },
   "myDogs": {
     "title": "My dogs",
@@ -3665,5 +3671,18 @@
       "next": "{when}: group walk at {org}.",
       "button": "Go to {org}"
     }
+  },
+  "termsUpdate": {
+    "title": "The terms have been updated",
+    "lede": "Take your time to read what changes. For you, the new terms apply from {date}; until then, everything stays as it was.",
+    "ledeRequired": "The new terms have applied since {date}. Read what changes. Once you agree, you can make appointments and start walks again.",
+    "read": "Read the full terms",
+    "accept": "I agree",
+    "thanks": "Thank you. Your agreement has been saved.",
+    "rights": "Don't agree? You can always delete your account in your profile (article 19 of the terms).",
+    "first": "First the updated terms",
+    "pageTitle": "Updated terms",
+    "upToDate": "You have already agreed to the latest terms.",
+    "onward": "Continue"
   }
 }

@@ -4,8 +4,10 @@ import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { routeLengthM } from '@/lib/geo'
 import { isAllowedPhotoUrl } from '@/lib/photos'
-import { canStartWalk, isInPerson, overdueMinutes, soloTrustReason } from '@/lib/rules'
+import { canStartWalk, isInPerson, liveLocationReason, overdueMinutes, soloTrustReason } from '@/lib/rules'
+import { liveLocationNow } from './live-location'
 import { notify } from './notify'
+import { termsBlock } from './terms'
 import type { FormState } from './actions/profile'
 import type { OnboardedViewer, Viewer } from './session'
 
@@ -179,6 +181,12 @@ export async function beginWalk(requestId: string, viewer: OnboardedViewer): Pro
   // A solo walk starts only while the owner's yes and the ID seen still stand (also for a weekly one).
   const trust = await soloTrustNow(row.request.kind, row.dog, row.request.walkerId)
   if (trust) return { ok: false, error: trust }
+  // Live location switched off: only a walk with the owner or shelter there starts (rules.ts liveLocationReason).
+  const live = liveLocationReason(row.request.kind, await liveLocationNow())
+  if (live) return { ok: false, error: live }
+  // Changed terms that took effect: the walker agrees to them first (rules.ts termsReason).
+  const terms = await termsBlock(viewer.profile)
+  if (terms) return { ok: false, error: terms }
 
   const id = crypto.randomUUID()
   const now = new Date()

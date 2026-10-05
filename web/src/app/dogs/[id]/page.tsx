@@ -13,6 +13,7 @@ import { Icon } from '@/components/Icon'
 import { PlanBar } from '@/components/PlanBar'
 import { ReportButton } from '@/components/ReportButton'
 import { RequestForm } from '@/components/RequestForm'
+import { TermsNotice } from '@/components/TermsNotice'
 import { isNewDog } from '@/lib/nudges'
 import { pageMetadata } from '@/lib/seo'
 import { canRequestMeeting, canRequestSolo, openRequestConflict } from '@/lib/rules'
@@ -99,11 +100,13 @@ export default async function DogPage({
       ? null
       : !viewer
         ? { href: `/signup?intent=walker&next=${plan}`, label: t('request.signupFirst', { name: dog.name }) }
-        : meetReason === 'needs-quiz'
-          ? { href: `/profile/quiz?next=${plan}`, label: t('request.quizFirst') }
-          : meetReason === null || soloReason === null
-            ? { href: '#plan', label: t('request.title') }
-            : null
+        : meetReason === 'needs-terms'
+          ? { href: '#plan', label: t('termsUpdate.first') }
+          : meetReason === 'needs-quiz'
+            ? { href: `/profile/quiz?next=${plan}`, label: t('request.quizFirst') }
+            : meetReason === null || soloReason === null
+              ? { href: '#plan', label: t('request.title') }
+              : null
 
   return (
     <div className="dog-page">
@@ -297,6 +300,7 @@ export default async function DogPage({
                         full={gw.booked >= gw.capacity}
                         signedIn={Boolean(viewer?.profile)}
                         needsQuiz={Boolean(viewer?.profile && !viewer.profile.quizPassedAt)}
+                        needsTerms={Boolean(facts?.needsTerms)}
                         next={`/dogs/${dog.id}`}
                       />
                     )}
@@ -332,7 +336,12 @@ export default async function DogPage({
         ) : null}
 
         {!isMine && host.kind === 'owner' ? (
-          viewer && meetReason === 'needs-quiz' ? (
+          viewer?.profile && meetReason === 'needs-terms' ? (
+            // Changed terms that took effect: the yes first, right here; then the form (lib/rules.ts termsReason).
+            <div id="plan">
+              <TermsNotice profile={viewer.profile} />
+            </div>
+          ) : viewer && meetReason === 'needs-quiz' ? (
             // Walkers do the safety quiz before asking for anything; it brings them straight back here.
             <div id="plan" className="card flat stack-s quiz-first">
               <p>{t('request.quizFirstText', { dog: dog.name })}</p>

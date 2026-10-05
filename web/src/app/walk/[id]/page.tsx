@@ -5,6 +5,7 @@ import { WalkTracker } from '@/components/WalkTracker'
 import { countryInfo } from '@/lib/countries'
 import { progressFor } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
+import { liveLocationNow } from '@/server/live-location'
 import { hostContacts } from '@/server/queries'
 import { requireOnboarded, type OnboardedViewer } from '@/server/session'
 import { pointsSince, walkAccess, walkPhotos } from '@/server/walks'
@@ -65,6 +66,7 @@ export default async function WalkPage({
       initialPhotos={(await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))}
       fallbackCenter={center}
       locale={await getLocale()}
+      liveLocation={await liveLocationNow()}
       sos={{
         emergency: info.emergency,
         animal: info.animalEmergency,

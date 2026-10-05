@@ -1,7 +1,7 @@
 ---
 title: Privacyverklaring
 description: "Welke persoonsgegevens we verwerken, waarom en hoe lang, wie ze ziet en welke rechten je hebt. Je exacte adres is nooit openbaar."
-version: "0.4"
+version: "0.5"
 updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
@@ -119,6 +119,7 @@ Gebruiken we een gerechtvaardigd belang? Dan hebben we afgewogen dat dat belang 
 - **Live locatie** verzamelen we alleen als je als wandelaar een wandeling start, en tot je die beëindigt. Je telefoon vraagt hiervoor toestemming. Je kunt die toestemming in de instellingen van je telefoon intrekken, maar dan werkt de live kaart niet.
 - De eigenaar of opvang van de hond ziet tijdens de wandeling een live kaart met de route. Jij ziet je eigen route.
 - Duurt de wandeling veel langer dan gepland? Dan krijgt de eigenaar of opvang een melding.
+- **Live locatie kan uit staan.** We kunnen live locatie voor iedereen uitzetten, bijvoorbeeld zolang de DPIA niet klaar is (zie artikel 14). Staat ze uit, dan verzamelen en bewaren we tijdens een wandeling geen locatie, en ziet de eigenaar of opvang geen live kaart. Dan start alleen een wandeling waar de eigenaar of iemand van de opvang zelf bij is, zoals de kennismaking. Bij de wandeling zie je dat live locatie uit staat.
 - We verwijderen routepunten na **30 dagen**. Is er een open melding over een incident? Dan bewaren we de route van die wandeling tot de melding is afgehandeld.
 - We gebruiken locatiegegevens niet voor reclame of profilering, en we verkopen ze nooit.
 
@@ -229,7 +230,7 @@ Ben je niet tevreden over hoe we met je gegevens omgaan? Laat het ons eerst wete
 
 ## 14. Gegevensbeschermingseffectbeoordeling (DPIA)
 
-Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom maken we een gegevensbeschermingseffectbeoordeling (DPIA). Die is nog niet klaar. We ronden haar af voordat de eerste echte wandeling met live locatie plaatsvindt, en daarna houden we haar actueel. Live locatie werkt altijd zoals in artikel 5 staat: alleen tijdens een wandeling die de wandelaar zelf start, en routes verwijderen we na 30 dagen.
+Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom maken we een gegevensbeschermingseffectbeoordeling (DPIA). Die is nog niet klaar. We ronden haar af voordat de eerste echte wandeling met live locatie plaatsvindt, en daarna houden we haar actueel. Tot die tijd kunnen we live locatie helemaal uitzetten (zie artikel 5). Staat ze aan, dan werkt ze altijd zoals in artikel 5 staat: alleen tijdens een wandeling die de wandelaar zelf start, en routes verwijderen we na 30 dagen.
 
 ## 15. Leeftijd
 

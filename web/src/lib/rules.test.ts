@@ -34,6 +34,7 @@ const walker: WalkerFacts = {
   pppLicense: false,
   experience: 'some',
   pendingRequests: 0,
+  needsTerms: false,
 }
 
 const dog: DogFacts = {

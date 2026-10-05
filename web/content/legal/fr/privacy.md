@@ -1,7 +1,7 @@
 ---
 title: Politique de confidentialité
 description: "Les données personnelles que nous traitons, pourquoi et combien de temps, qui les voit et quels sont vos droits. Votre adresse exacte reste privée."
-version: "0.4"
+version: "0.5"
 updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -119,6 +119,7 @@ Lorsque nous nous fondons sur l'intérêt légitime, nous avons vérifié que ce
 - **La localisation en direct** n'est collectée que lorsque vous démarrez une promenade en tant que promeneur, et jusqu'à ce que vous l'arrêtiez. Votre téléphone vous demande votre autorisation. Vous pouvez la retirer dans les réglages de votre téléphone, mais la carte en direct ne fonctionnera alors plus.
 - Pendant la promenade, le propriétaire ou le refuge voit une carte en direct avec le trajet. Vous voyez votre propre trajet.
 - Si la promenade dure nettement plus longtemps que prévu, le propriétaire ou le refuge reçoit une alerte.
+- **La localisation en direct peut être désactivée.** Nous pouvons désactiver la localisation en direct pour tout le monde, par exemple tant que l'AIPD n'est pas terminée (voir l'article 14). Tant qu'elle est désactivée, nous ne collectons ni ne conservons aucune position pendant une promenade, et le propriétaire ou le refuge ne voit aucune carte en direct. Seule une promenade où le propriétaire ou quelqu'un du refuge est présent, comme la première rencontre, peut alors démarrer. L'écran de la promenade vous indique que la localisation en direct est désactivée.
 - Nous supprimons les points de trajet après **30 jours**. Si un signalement d'incident est en cours, nous conservons le trajet de cette promenade jusqu'à la clôture du signalement.
 - Nous n'utilisons pas les données de localisation pour de la publicité ou du profilage, et nous ne les vendons jamais.
 
@@ -229,7 +230,7 @@ Vous n'êtes pas satisfait de la manière dont nous traitons vos données ? Dite
 
 ## 14. Analyse d'impact (AIPD)
 
-Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous préparons une analyse d'impact relative à la protection des données (AIPD). Elle n'est pas encore terminée. Nous la finaliserons avant la première vraie promenade avec localisation en direct, puis nous la tiendrons à jour. La localisation en direct fonctionne toujours comme le prévoit l'article 5 : uniquement pendant une promenade que le promeneur démarre lui-même, et suppression des trajets après 30 jours.
+Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous préparons une analyse d'impact relative à la protection des données (AIPD). Elle n'est pas encore terminée. Nous la finaliserons avant la première vraie promenade avec localisation en direct, puis nous la tiendrons à jour. D'ici là, nous pouvons désactiver complètement la localisation en direct (voir l'article 5). Lorsqu'elle est activée, elle fonctionne toujours comme le prévoit l'article 5 : uniquement pendant une promenade que le promeneur démarre lui-même, et suppression des trajets après 30 jours.
 
 ## 15. Âge
 

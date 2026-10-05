@@ -37,12 +37,30 @@ interface Props {
   initialCare: CareCounts
   fallbackCenter: { lat: number; lng: number }
   locale: string
+  /** False while live location is switched off (LIVE_LOCATION): no map, and a calm line that says so. */
+  liveLocation?: boolean
 }
 
 const POLL_MS = 5_000
 
-/** The owner's live view: the route so far, where the walker is now, and when they were last seen. */
-export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, startedAt, plannedEndAt, initialRoute, initialPhotos, initialCare, fallbackCenter, locale }: Props) {
+/**
+ * The owner's live view: the route so far, where the walker is now, and when they were last seen. With
+ * live location switched off: the time, the report and the photos, without a map.
+ */
+export function WalkFollower({
+  walkId,
+  dogName,
+  walkerName,
+  walkerPhone,
+  startedAt,
+  plannedEndAt,
+  initialRoute,
+  initialPhotos,
+  initialCare,
+  fallbackCenter,
+  locale,
+  liveLocation = true,
+}: Props) {
   const [care, setCare] = useState<CareCounts>(initialCare)
   const [photos, setPhotos] = useState<WalkPhoto[]>(initialPhotos)
   const lastPhotoAt = useRef(initialPhotos.at(-1)?.t ?? 0)
@@ -96,37 +114,49 @@ export function WalkFollower({ walkId, dogName, walkerName, walkerPhone, started
     <div className="walk-layout">
       <section className="walk-screen">
         <div className="spread">
-          <span className="live-label">
-            <span className="live-dot" aria-hidden="true" /> {t('live')}
-          </span>
-          <span className="muted small">{t('followLede', { walker: walkerName, dog: dogName })}</span>
+          {liveLocation ? (
+            <span className="live-label">
+              <span className="live-dot" aria-hidden="true" /> {t('live')}
+            </span>
+          ) : null}
+          <span className="muted small">{liveLocation ? t('followLede', { walker: walkerName, dog: dogName }) : t('with', { name: dogName })}</span>
         </div>
         <div className="walk-stats">
           <div>
             <strong>{elapsedMin}′</strong>
             <span className="muted small">{t('time')}</span>
           </div>
-          <div>
-            <strong>{formatWalkDistance(routeLengthM(route), locale)}</strong>
-            <span className="muted small">{t('distance')}</span>
-          </div>
+          {liveLocation ? (
+            <div>
+              <strong>{formatWalkDistance(routeLengthM(route), locale)}</strong>
+              <span className="muted small">{t('distance')}</span>
+            </div>
+          ) : null}
           <div>
             <strong>{format.dateTime(new Date(plannedEndAt), { hour: '2-digit', minute: '2-digit' })}</strong>
             <span className="muted small">{t('backAt')}</span>
           </div>
         </div>
-        <p className="muted small" aria-live="polite">
-          {lastAt
-            ? t('lastSeen', { time: staleMin && staleMin > 0 ? t('minutesAgo', { n: staleMin }) : t('justNow') })
-            : t('waiting')}
-        </p>
+        {liveLocation ? (
+          <p className="muted small" aria-live="polite">
+            {lastAt
+              ? t('lastSeen', { time: staleMin && staleMin > 0 ? t('minutesAgo', { n: staleMin }) : t('justNow') })
+              : t('waiting')}
+          </p>
+        ) : null}
         {overdue > 0 ? (
           <p className="notice warn small" role="status">
             {t('overdue', { n: overdue })}
           </p>
         ) : null}
       </section>
-      <Map center={here ?? fallbackCenter} zoom={15} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
+      {liveLocation ? (
+        <Map center={here ?? fallbackCenter} zoom={15} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
+      ) : (
+        <p className="notice live-off" role="status">
+          {t('liveOffFollow')}
+        </p>
+      )}
       <WalkCareTally care={care} />
       <WalkPhotoStrip photos={photos} dogName={dogName} />
       {phone ? (

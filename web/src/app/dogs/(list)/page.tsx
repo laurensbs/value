@@ -19,6 +19,7 @@ import { formatDistance } from '@/lib/geo'
 import { LATER_COOKIE } from '@/lib/next-step'
 import { readableFirst } from '@/lib/story-language'
 import { pageNow } from '@/server/clock'
+import { termsBlock } from '@/server/terms'
 import { rolesOf } from '@/server/progress'
 import { listDogs, myGroupSignups, publicOrg, upcomingGroupWalks } from '@/server/queries'
 import { getViewer, type OnboardedViewer } from '@/server/session'
@@ -115,6 +116,8 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
   // At most one line above the dogs: the quiz comes before any request (like Guus in the app).
   const quizFirst = Boolean(member && roles?.walker && member.profile.wantsToWalk !== false && !member.profile.quizPassedAt && !orgId)
   const [renderedAt, jar] = quizFirst ? await Promise.all([pageNow(), cookies()]) : [new Date(), null]
+  // A shelter's group walks: changed terms that took effect wait for a yes first (lib/rules.ts termsReason).
+  const needsTerms = org ? Boolean(await termsBlock(viewer?.profile)) : false
   const title = org ? t('dogs.orgTitle', { name: org.name }) : t('dogs.title')
   // On the map, its card says what you need to know about a dog: no portrait or story to read yet.
   const mapCards = mapView
@@ -152,6 +155,7 @@ export default async function DogsPage({ searchParams }: { searchParams: Promise
           joined={joined}
           signedIn={Boolean(viewer?.profile)}
           needsQuiz={Boolean(viewer?.profile && !viewer.profile.quizPassedAt && !myOrgs.has(org.id))}
+          needsTerms={needsTerms}
         />
       ) : null}
 

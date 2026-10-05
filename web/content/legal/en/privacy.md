@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 description: "Which personal data we process, why and for how long, who sees it and what your rights are. Your exact address is never public."
-version: "0.4"
+version: "0.5"
 updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -119,6 +119,7 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 - **Live location** is only collected when you start a walk as a walker, and until you end it. Your phone will ask for permission. You can withdraw that permission in your phone's settings, but the live map will then not work.
 - During the walk, the dog's owner or shelter sees a live map with the route. You see your own route.
 - If a walk runs well over the planned time, the owner or shelter receives an alert.
+- **Live location can be off.** We can switch live location off for everyone, for example while the DPIA is not finished (see section 14). While it is off, we do not collect or store any location during a walk, and the owner or shelter sees no live map. Then only a walk where the owner or someone from the shelter is present, such as the first meeting, can start. The walk screen tells you that live location is off.
 - We delete route points after **30 days**. If there is an open incident report, we keep the route of that walk until the report has been closed.
 - We do not use location data for advertising or profiling, and we never sell it.
 
@@ -229,7 +230,7 @@ Not happy with how we handle your data? Please tell us first. You can also alway
 
 ## 14. Data protection impact assessment (DPIA)
 
-Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are preparing a data protection impact assessment (DPIA). It is not finished yet. We will complete it before the first real walk with live location takes place, and keep it up to date after that. Live location always works as described in section 5: only during a walk that the walker starts, and routes are deleted after 30 days.
+Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are preparing a data protection impact assessment (DPIA). It is not finished yet. We will complete it before the first real walk with live location takes place, and keep it up to date after that. Until then, we can switch live location off completely (see section 5). When it is on, it always works as described in section 5: only during a walk that the walker starts, and routes are deleted after 30 days.
 
 ## 15. Age
 

@@ -167,7 +167,18 @@ export function CancelButton({ requestId }: { requestId: string }) {
   )
 }
 
-export function StartButton({ requestId, enabled, hint }: { requestId: string; enabled: boolean; hint: string }) {
+export function StartButton({
+  requestId,
+  enabled,
+  hint,
+  liveLocation = true,
+}: {
+  requestId: string
+  enabled: boolean
+  hint: string
+  /** False while live location is switched off (LIVE_LOCATION): the note says no location is shared. */
+  liveLocation?: boolean
+}) {
   const t = useTranslations('requests')
   const tw = useTranslations('walk')
   const { pending, errorLine, run } = useAction()
@@ -200,7 +211,7 @@ export function StartButton({ requestId, enabled, hint }: { requestId: string; e
           <span>{tw(c)}</span>
         </label>
       ))}
-      <p className="muted small">{tw('locationNote')}</p>
+      <p className="muted small">{tw(liveLocation ? 'locationNote' : 'liveOffStart')}</p>
       <div className="row">
         <button type="button" className="button primary" disabled={!ready || pending} aria-busy={pending} onClick={() => run(() => startWalk(requestId))}>
           <Icon name="play" size={18} /> {tw('start')}

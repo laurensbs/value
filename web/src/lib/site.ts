@@ -46,11 +46,22 @@ export function adminAccess(
 }
 
 /**
- * The terms someone accepts when they create a profile, stored with it (profile.termsVersion). Equal
- * to `version` in content/legal/<locale>/terms.md (checked in legal-placeholders.test.ts). Nobody is asked
- * to accept again when it goes up: there is no re-accept step yet.
+ * The terms someone accepts when they create a profile, stored with it (profile.termsVersion and
+ * termsAcceptedAt). Equal to `version` in content/legal/<locale>/terms.md (checked in
+ * legal-placeholders.test.ts). When it goes up, people who accepted an older version see what changed
+ * (content/legal/<locale>/terms-changes.md) and can agree again (lib/rules.ts termsReason).
  */
 export const TERMS_VERSION = '0.3'
+
+/**
+ * The day TERMS_VERSION takes effect for people who accepted an older version (00:00 in Amsterdam).
+ * Terms art. 19 promises important changes at least 30 days ahead: this day is the day the change is
+ * announced in the app (the notice on Vandaag and the profile, from the deploy) plus 30 days, with a
+ * few days to spare. Until then nothing changes for them; from then on, making new appointments waits
+ * for their yes. New sign-ups accept the current version at once. Live later than 10 October 2026?
+ * Then move this day along (legal-placeholders.test.ts checks it against the terms' `updated` date).
+ */
+export const TERMS_EFFECTIVE_AT = '2026-11-09'
 
 const SAME_SITE = 'https://same-site.invalid'
 

@@ -21,6 +21,7 @@ import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
 import { NextStepCard, type CardStep } from './NextStepCard'
 import { LevelUp } from './progress/LevelUp'
+import { TermsNotice } from './TermsNotice'
 
 const WALKER_TIPS = 10
 const OWNER_TIPS = 8
@@ -226,6 +227,9 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
           </span>
         </Link>
       </header>
+
+      {/* Changed terms (art. 19): a calm notice above the one thing to do, never a wall in front of the page. */}
+      <TermsNotice profile={p} />
 
       <NextStepCard
         steps={card}

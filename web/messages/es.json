@@ -571,7 +571,10 @@
       "already-open": "Ya tienes una solicitud o una cita abierta con este perro.",
       "solo-not-allowed": "Los paseos por su cuenta no están activados para esta persona y este perro. Actívalos primero en «Después del primer encuentro», o rechaza la solicitud.",
       "id-not-seen": "Los paseos por su cuenta solo son posibles cuando hayas visto en persona el documento de identidad de quien pasea.",
-      "meeting-ahead": "Esto es posible después de vuestro primer encuentro, cuando hayas visto en persona a quien pasea y su documento."
+      "meeting-ahead": "Esto es posible después de vuestro primer encuentro, cuando hayas visto en persona a quien pasea y su documento.",
+      "needs-terms": "Primero acepta las condiciones actualizadas, por favor.",
+      "live-location-off": "La ubicación en directo está desactivada por ahora, y sin ella no empieza un paseo a solas con el perro. Un primer encuentro, junto con el dueño, sí es posible.",
+      "terms-changed": "Mientras tanto, las condiciones se han vuelto a actualizar. Echa un vistazo a la versión más reciente."
     },
     "messagePlaceholder": "¡Hola! Soy … y me encantaría pasear a {dog}.",
     "moments": "Momentos que le van bien a {dog}",
@@ -787,7 +790,10 @@
     "careWater": "Bebió",
     "careUndo": "Quitar uno de {kind}",
     "careNone": "Aún nada anotado",
-    "careFailed": "No se ha guardado: no hay conexión. Toca otra vez cuando vuelvas a tener cobertura."
+    "careFailed": "No se ha guardado: no hay conexión. Toca otra vez cuando vuelvas a tener cobertura.",
+    "liveOff": "La ubicación en directo está desactivada por ahora. Tu recorrido no se registra ni se comparte; el tiempo, el informe del paseo y las fotos funcionan como siempre.",
+    "liveOffFollow": "La ubicación en directo está desactivada por ahora, así que aquí no hay mapa. Sí ves el tiempo, el informe del paseo y las fotos.",
+    "liveOffStart": "La ubicación en directo está desactivada por ahora: tu móvil no comparte tu ubicación durante este paseo."
   },
   "myDogs": {
     "title": "Mis perros",
@@ -3665,5 +3671,18 @@
       "next": "{when}: paseo en grupo en {org}.",
       "button": "Ir a {org}"
     }
+  },
+  "termsUpdate": {
+    "title": "Hemos actualizado las condiciones",
+    "lede": "Lee con calma lo que cambia. Para ti, las nuevas condiciones se aplican a partir del {date}; hasta entonces, todo sigue igual.",
+    "ledeRequired": "Las nuevas condiciones se aplican desde el {date}. Lee lo que cambia. Cuando las aceptes, podrás volver a quedar y empezar paseos.",
+    "read": "Leer las condiciones completas",
+    "accept": "Acepto",
+    "thanks": "Gracias. Hemos guardado tu aceptación.",
+    "rights": "¿No estás de acuerdo? Siempre puedes eliminar tu cuenta desde tu perfil (artículo 19 de las condiciones).",
+    "first": "Primero, las condiciones actualizadas",
+    "pageTitle": "Condiciones actualizadas",
+    "upToDate": "Ya has aceptado las condiciones más recientes.",
+    "onward": "Continuar"
   }
 }

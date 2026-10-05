@@ -1,5 +1,8 @@
 // Safety rules of the platform. Pure functions, enforced on the server and unit-tested.
 
+import { TERMS_EFFECTIVE_AT, TERMS_VERSION } from './site'
+import { zonedToUtc } from './time'
+
 export const MIN_AGE = 18
 export const MAX_PENDING_REQUESTS = 5
 export const OVERDUE_GRACE_MIN = 20
@@ -23,6 +26,10 @@ export type Reason =
   | 'ppp-licence'
   | 'needs-meeting'
   | 'needs-quiz'
+  // The terms changed and have taken effect: agree to the new ones first (art. 19).
+  | 'needs-terms'
+  // Live location is switched off (LIVE_LOCATION): a walk alone with the dog cannot start.
+  | 'live-location-off'
   | 'needs-solo-trust'
   | 'needs-in-person'
   | 'meet-via'
@@ -43,6 +50,8 @@ export interface WalkerFacts {
   pppLicense: boolean
   experience: 'none' | 'some' | 'lots'
   pendingRequests: number
+  /** The terms changed, took effect, and this person has not agreed to the new ones yet (termsReason). */
+  needsTerms: boolean
 }
 
 export interface DogFacts {
@@ -106,6 +115,7 @@ function baseChecks(w: WalkerFacts, d: DogFacts, r: Relation): Reason | null {
 export function canRequestMeeting(w: WalkerFacts, d: DogFacts, r: Relation): Reason | null {
   const base = baseChecks(w, d, r)
   if (base) return base
+  if (w.needsTerms) return 'needs-terms'
   if (!w.quizPassed) return 'needs-quiz'
   if (w.pendingRequests >= MAX_PENDING_REQUESTS) return 'too-many-pending'
   return null
@@ -139,6 +149,7 @@ export function canRequestSolo(w: WalkerFacts, d: DogFacts, r: Relation): Reason
   if (d.orgId) return 'needs-meeting'
   if (!r.soloAllowed) return 'needs-solo-trust'
   if (!r.idSeen) return 'needs-id'
+  if (w.needsTerms) return 'needs-terms'
   if (!w.quizPassed) return 'needs-quiz'
   if (d.level === 'experienced' && w.experience === 'none') return 'experience'
   if (w.pendingRequests >= MAX_PENDING_REQUESTS) return 'too-many-pending'
@@ -232,10 +243,63 @@ export function canStartWalk(
   return diffMin >= -START_WINDOW_BEFORE_MIN && diffMin <= START_WINDOW_AFTER_MIN
 }
 
+/**
+ * Live location can be switched off for everyone (LIVE_LOCATION, lib/live-location.ts). A walk where
+ * the owner or shelter is there, the first meeting (terms art. 6.3), can still start and end: the
+ * timer, the report and the photos work without location. A walk alone with the dog cannot start, because
+ * the live map is how the owner follows it and finds the walker when something is wrong (safety
+ * protocol art. 2 and 3.5). Ending a walk is always possible.
+ */
+export function liveLocationReason(kind: string, liveLocation: boolean): Reason | null {
+  return kind === 'solo' && !liveLocation ? 'live-location-off' : null
+}
+
 /** Minutes past the planned end (beyond a grace period), or 0. */
 export function overdueMinutes(plannedEndAt: Date, now = new Date()): number {
   const over = (now.getTime() - plannedEndAt.getTime()) / 60_000 - OVERDUE_GRACE_MIN
   return over > 0 ? Math.floor(over) : 0
+}
+
+// --- Changed terms (terms art. 19) ---
+
+/**
+ * Orders two terms versions: "0.2" < "0.3" < "0.10" < "1". Anything that is not a version number
+ * (the example accounts have "demo") comes before every real version.
+ */
+export function compareTermsVersions(a: string, b: string): number {
+  const parse = (v: string) => (/^\d+(\.\d+)*$/.test(v.trim()) ? v.trim().split('.').map(Number) : null)
+  const x = parse(a)
+  const y = parse(b)
+  if (!x || !y) return x ? 1 : y ? -1 : 0
+  for (let i = 0; i < Math.max(x.length, y.length); i++) {
+    const diff = (x[i] ?? 0) - (y[i] ?? 0)
+    if (diff) return Math.sign(diff)
+  }
+  return 0
+}
+
+/** Someone agreed to an older version than the current terms (or to none we know): they see what changed. */
+export function termsOutdated(accepted: string | null | undefined, current = TERMS_VERSION): boolean {
+  return !accepted || compareTermsVersions(accepted, current) < 0
+}
+
+/** The moment TERMS_EFFECTIVE_AT starts: 00:00 in Amsterdam. */
+export function termsEffectiveAt(day = TERMS_EFFECTIVE_AT): Date {
+  return zonedToUtc(day, '00:00')
+}
+
+/**
+ * Changed terms bind nobody before they take effect (art. 19: announced at least 30 days ahead). Until
+ * then everything works as before, with a calm notice. From that day on, someone who has not agreed yet
+ * agrees first, before anything new that commits them or someone else: asking for a meeting or a walk,
+ * accepting one, starting a walk, joining a group walk. Declining, cancelling and ending stay possible.
+ */
+export function termsReason(
+  accepted: string | null | undefined,
+  now = new Date(),
+  terms: { version: string; effectiveAt: Date } = { version: TERMS_VERSION, effectiveAt: termsEffectiveAt() },
+): Reason | null {
+  return termsOutdated(accepted, terms.version) && now.getTime() >= terms.effectiveAt.getTime() ? 'needs-terms' : null
 }
 
 // --- Risky content in free text (scams, moving off-platform too early) ---

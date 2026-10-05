@@ -571,7 +571,10 @@
       "already-open": "Je hebt al een aanvraag of afspraak met deze hond open staan.",
       "solo-not-allowed": "Zelfstandig wandelen staat voor deze wandelaar en hond niet aan. Zet het eerst aan bij ‘Na de kennismaking’, of wijs de aanvraag af.",
       "id-not-seen": "Zelfstandig wandelen kan pas als je het ID van de wandelaar in het echt hebt gezien.",
-      "meeting-ahead": "Dit kan na jullie kennismaking, als je de wandelaar en het ID in het echt hebt gezien."
+      "meeting-ahead": "Dit kan na jullie kennismaking, als je de wandelaar en het ID in het echt hebt gezien.",
+      "needs-terms": "Eerst graag je akkoord met de bijgewerkte voorwaarden.",
+      "live-location-off": "Live locatie staat op dit moment uit, en zonder live locatie start een rondje alleen met de hond niet. Een kennismaking, samen met de eigenaar, kan wel.",
+      "terms-changed": "De voorwaarden zijn intussen opnieuw bijgewerkt. Kijk even naar de nieuwste versie."
     },
     "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
     "moments": "Momenten die {dog} goed uitkomen",
@@ -787,7 +790,10 @@
     "careWater": "Gedronken",
     "careUndo": "Eentje terug bij {kind}",
     "careNone": "Nog niks genoteerd",
-    "careFailed": "Niet opgeslagen: geen verbinding. Tik nog een keer als je weer bereik hebt."
+    "careFailed": "Niet opgeslagen: geen verbinding. Tik nog een keer als je weer bereik hebt.",
+    "liveOff": "Live locatie staat op dit moment uit. Je route wordt niet bijgehouden of gedeeld; de tijd, het rondje-rapport en foto's werken gewoon.",
+    "liveOffFollow": "Live locatie staat op dit moment uit, dus hier staat geen kaart. Je ziet wel de tijd, het rondje-rapport en de foto's.",
+    "liveOffStart": "Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie."
   },
   "myDogs": {
     "title": "Mijn honden",
@@ -3665,5 +3671,18 @@
       "next": "{when}: groepswandeling bij {org}.",
       "button": "Naar {org}"
     }
+  },
+  "termsUpdate": {
+    "title": "De voorwaarden zijn bijgewerkt",
+    "lede": "Lees in rust wat er verandert. Voor jou gelden de nieuwe voorwaarden vanaf {date}; tot die tijd blijft alles zoals het was.",
+    "ledeRequired": "De nieuwe voorwaarden gelden sinds {date}. Lees wat er verandert. Na je akkoord kun je weer afspraken maken en rondjes starten.",
+    "read": "Lees de volledige voorwaarden",
+    "accept": "Akkoord",
+    "thanks": "Dank je. Je akkoord is opgeslagen.",
+    "rights": "Niet akkoord? Je kunt je account altijd verwijderen in je profiel (artikel 19 van de voorwaarden).",
+    "first": "Eerst de bijgewerkte voorwaarden",
+    "pageTitle": "Bijgewerkte voorwaarden",
+    "upToDate": "Je hebt de nieuwste voorwaarden al geaccepteerd.",
+    "onward": "Verder"
   }
 }
