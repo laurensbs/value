@@ -149,6 +149,9 @@ export default async function NumbersPage() {
             ))}
           </ul>
         )}
+        <p className="small">
+          <Link href="/admin/sources">{th('bySource')} →</Link>
+        </p>
       </section>
 
       <section id="instellingen" className="card stack-s admin-anchor">
