@@ -14,10 +14,13 @@ export async function TermsNotice({
   profile,
   next,
   onlyRequired = false,
+  collapsed = false,
 }: {
   profile: { termsVersion: string } | null
   next?: string
   onlyRequired?: boolean
+  /** The list of changes folded, to open with a tap (Vandaag, the profile). */
+  collapsed?: boolean
 }) {
   if (!profile || !termsOutdated(profile.termsVersion)) return null
   const effectiveAt = termsEffectiveAt()
@@ -33,6 +36,7 @@ export async function TermsNotice({
       date={format.dateTime(effectiveAt, { day: 'numeric', month: 'long', year: 'numeric' })}
       required={required}
       next={next}
+      collapsed={collapsed}
     />
   )
 }

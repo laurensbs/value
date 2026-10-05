@@ -742,6 +742,19 @@ mark {
   padding-inline-start: 1.2em;
 }
 
+.terms-details > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--calm);
+}
+
+.terms-details[open] > summary {
+  margin-bottom: 8px;
+}
+
 .help-pill {
   background: var(--calm-soft);
   color: var(--calm);

@@ -229,7 +229,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
       </header>
 
       {/* Changed terms (art. 19): a calm notice above the one thing to do, never a wall in front of the page. */}
-      <TermsNotice profile={p} />
+      <TermsNotice profile={p} collapsed />
 
       <NextStepCard
         steps={card}

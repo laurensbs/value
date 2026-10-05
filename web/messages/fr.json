@@ -3683,6 +3683,7 @@
     "first": "D’abord les conditions mises à jour",
     "pageTitle": "Conditions mises à jour",
     "upToDate": "Vous avez déjà accepté les dernières conditions.",
-    "onward": "Continuer"
+    "onward": "Continuer",
+    "whatChanges": "Ce qui change ({n} points)"
   }
 }

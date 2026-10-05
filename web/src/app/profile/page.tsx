@@ -80,7 +80,7 @@ export default async function ProfilePage() {
       <h1 className="visually-hidden">{t('profile.title')}</h1>
 
       {/* Changed terms (art. 19): what changed, and one "Akkoord". */}
-      <TermsNotice profile={p} />
+      <TermsNotice profile={p} collapsed />
 
       {/* You, as others see you, with what you do here most: edit it, or invite someone. */}
       <section className="card profile-head" aria-labelledby="profile-public">

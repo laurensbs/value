@@ -3683,6 +3683,7 @@
     "first": "Eerst de bijgewerkte voorwaarden",
     "pageTitle": "Bijgewerkte voorwaarden",
     "upToDate": "Je hebt de nieuwste voorwaarden al geaccepteerd.",
-    "onward": "Verder"
+    "onward": "Verder",
+    "whatChanges": "Wat er verandert ({n} punten)"
   }
 }

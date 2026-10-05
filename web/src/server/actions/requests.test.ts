@@ -28,9 +28,19 @@ vi.mock('../session', () => ({
   isOrgMember: (v: { orgs: { id: string }[] }, orgId: string | null) => Boolean(orgId && v.orgs.some((o) => o.id === orgId)),
 }))
 
+// "Now" for the terms rule (server/clock.ts reads its test header only inside a request), and the
+// live location switch (server/live-location.ts reads LIVE_LOCATION and a test header).
+let clockNow = new Date()
+vi.mock('../clock', () => ({ pageNow: async () => clockNow }))
+let liveOn = true
+vi.mock('../live-location', () => ({ liveLocationNow: async () => liveOn }))
+
 const { cancelRequest, createRequest, respondToRequest, setTrust } = await import('./requests')
 const { beginWalk, finishWalk } = await import('../walks')
 const { relationFor } = await import('../queries')
+const { acceptCurrentTerms } = await import('../terms')
+const { termsEffectiveAt } = await import('@/lib/rules')
+const { TERMS_VERSION } = await import('@/lib/site')
 
 async function dog(id: string) {
   return (await db.query.dog.findFirst({ where: (t, { eq }) => eq(t.id, id) }))!
@@ -350,5 +360,116 @@ describe('an answer and a withdrawal at the same moment', () => {
   it('a late answer to a withdrawn request is refused', async () => {
     current = 'ans'
     expect(await respondToRequest('race-1', 'accept')).toEqual({ ok: false, error: 'already-decided' })
+  })
+})
+
+describe('changed terms that took effect (art. 19)', () => {
+  const minutes = (n: number) => new Date(Date.now() + n * 60_000)
+  const before = () => new Date(termsEffectiveAt().getTime() - 60_000)
+  const after = () => new Date(termsEffectiveAt().getTime() + 60_000)
+  const profileOf = async (userId: string) => (await viewer(userId)).profile
+
+  beforeAll(async () => {
+    // Lies signed up under the previous terms (0.2) and did the quiz.
+    await client.exec(`
+      insert into "user" (id, name, email, email_verified, created_at, updated_at) values ('lies', 'Lies', 'lies@example.org', false, now(), now());
+      insert into profile (user_id, first_name, birth_date, country, city, terms_accepted_at, terms_version, referral_code, quiz_passed_at)
+      values ('lies', 'Lies', '1999-03-03', 'NL', 'Utrecht', now() - interval '30 days', '0.2', 'LIE234', now());
+      insert into dog (id, owner_id, org_id, name, country, city) values ('fien', 'ans', null, 'Fien', 'NL', 'Utrecht'), ('guus', 'ans', null, 'Guus', 'NL', 'Utrecht');
+    `)
+    await db.insert(schema.walkRequest).values([
+      { id: 'lies-meet', dogId: 'guus', walkerId: 'lies', kind: 'meet', meetVia: 'walk', startsAt: minutes(5), durationMin: 30, status: 'accepted' },
+      { id: 'fleur-fien-1', dogId: 'fien', walkerId: 'fleur', kind: 'meet', meetVia: 'walk', startsAt: minutes(24 * 60), durationMin: 30 },
+      { id: 'noor-fien', dogId: 'fien', walkerId: 'noor', kind: 'meet', meetVia: 'walk', startsAt: minutes(25 * 60), durationMin: 30 },
+    ])
+  })
+
+  afterAll(() => {
+    clockNow = new Date()
+  })
+
+  it('before the day they take effect nothing waits: the notice is only information', async () => {
+    current = 'lies'
+    clockNow = before()
+    expect((await createRequest({ ok: false }, form({ dogId: 'fien' }))).ok).toBe(true)
+  })
+
+  it('from that day on, asking for a meeting waits for the yes, with its own reason', async () => {
+    current = 'lies'
+    clockNow = after()
+    expect(await createRequest({ ok: false }, form({ dogId: 'bello', time: '11:00' }))).toEqual({ ok: false, error: 'needs-terms' })
+  })
+
+  it('a walk does not start before the yes', async () => {
+    clockNow = after()
+    expect(await beginWalk('lies-meet', await viewer('lies'))).toEqual({ ok: false, error: 'needs-terms' })
+  })
+
+  it('an owner accepts only after agreeing, and can always say no', async () => {
+    await client.exec(`update profile set terms_version = '0.2' where user_id = 'ans'`)
+    current = 'ans'
+    clockNow = after()
+    expect(await respondToRequest('fleur-fien-1', 'accept')).toEqual({ ok: false, error: 'needs-terms' })
+    expect((await respondToRequest('noor-fien', 'decline')).ok).toBe(true)
+    await client.exec(`update profile set terms_version = '1' where user_id = 'ans'`)
+    expect((await respondToRequest('fleur-fien-1', 'accept')).ok).toBe(true)
+  })
+
+  it('agreeing records the version and the moment, and only for the version that was shown', async () => {
+    expect(await acceptCurrentTerms('lies', await profileOf('lies'), '0.1')).toEqual({ ok: false, error: 'terms-changed' })
+    expect((await profileOf('lies')).termsVersion).toBe('0.2')
+    const done = await acceptCurrentTerms('lies', await profileOf('lies'), TERMS_VERSION)
+    expect(done).toMatchObject({ ok: true, termsVersion: TERMS_VERSION })
+    const p = await profileOf('lies')
+    expect(p.termsVersion).toBe(TERMS_VERSION)
+    expect(Math.abs(p.termsAcceptedAt.getTime() - Date.now())).toBeLessThan(60_000)
+    // Agreeing again changes nothing.
+    expect(await acceptCurrentTerms('lies', p, TERMS_VERSION)).toEqual({ ok: true, termsVersion: TERMS_VERSION, termsAcceptedAt: p.termsAcceptedAt })
+  })
+
+  it('after the yes everything works again', async () => {
+    current = 'lies'
+    clockNow = after()
+    const started = await beginWalk('lies-meet', await viewer('lies'))
+    expect(started.ok).toBe(true)
+    expect((await finishWalk(started.walkId!, await viewer('lies'))).ok).toBe(true)
+  })
+})
+
+describe('live location switched off (LIVE_LOCATION)', () => {
+  const minutes = (n: number) => new Date(Date.now() + n * 60_000)
+
+  beforeAll(async () => {
+    // Pip: Fleur may walk Pip on her own (ID seen, solo allowed); one walk together and one alone are agreed.
+    await client.exec(`
+      insert into dog (id, owner_id, org_id, name, country, city) values ('pip', 'ans', null, 'Pip', 'NL', 'Utrecht');
+      insert into trust_grant (dog_id, walker_id, granted_by, id_seen, solo_allowed) values ('pip', 'fleur', 'ans', true, true);
+    `)
+    await db.insert(schema.walkRequest).values([
+      { id: 'pip-meet', dogId: 'pip', walkerId: 'fleur', kind: 'meet', meetVia: 'walk', startsAt: minutes(5), durationMin: 30, status: 'accepted' },
+      { id: 'pip-solo', dogId: 'pip', walkerId: 'fleur', kind: 'solo', meetVia: 'walk', startsAt: minutes(10), durationMin: 30, status: 'accepted' },
+    ])
+  })
+
+  afterAll(() => {
+    liveOn = true
+  })
+
+  it('a walk with the owner there still starts and ends', async () => {
+    liveOn = false
+    const started = await beginWalk('pip-meet', await viewer('fleur'))
+    expect(started.ok).toBe(true)
+    expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)
+  })
+
+  it('a walk alone with the dog does not start, and starts again once it is back on', async () => {
+    liveOn = false
+    expect(await beginWalk('pip-solo', await viewer('fleur'))).toEqual({ ok: false, error: 'live-location-off' })
+    liveOn = true
+    const started = await beginWalk('pip-solo', await viewer('fleur'))
+    expect(started.ok).toBe(true)
+    // Switched off during the walk: ending it is always possible.
+    liveOn = false
+    expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)
   })
 })

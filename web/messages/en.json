@@ -3683,6 +3683,7 @@
     "first": "First the updated terms",
     "pageTitle": "Updated terms",
     "upToDate": "You have already agreed to the latest terms.",
-    "onward": "Continue"
+    "onward": "Continue",
+    "whatChanges": "What changes ({n} points)"
   }
 }

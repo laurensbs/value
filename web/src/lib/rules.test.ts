@@ -6,22 +6,28 @@ import {
   canRequestSolo,
   canStartWalk,
   checkMeetVia,
+  compareTermsVersions,
   checkTrust,
   forDecider,
   feedbackNeedsReview,
   isAdult,
   isInPerson,
   isMeetVia,
+  liveLocationReason,
   meetViaOptions,
   openRequestConflict,
   overdueMinutes,
   scanText,
   soloTrustReason,
+  termsEffectiveAt,
+  termsOutdated,
+  termsReason,
   trustBadges,
   type DogFacts,
   type Relation,
   type WalkerFacts,
 } from './rules'
+import { TERMS_EFFECTIVE_AT, TERMS_VERSION } from './site'
 
 const now = new Date('2026-10-02T12:00:00')
 
@@ -300,5 +306,61 @@ describe('trust badges', () => {
       'quiz',
       'regular',
     ])
+  })
+})
+
+describe('changed terms (art. 19)', () => {
+  it('orders versions as numbers, and anything else before every version', () => {
+    expect(compareTermsVersions('0.2', '0.3')).toBe(-1)
+    expect(compareTermsVersions('0.3', '0.3')).toBe(0)
+    expect(compareTermsVersions('0.10', '0.9')).toBe(1)
+    expect(compareTermsVersions('1', '0.3')).toBe(1)
+    expect(compareTermsVersions('0.3.0', '0.3')).toBe(0)
+    expect(compareTermsVersions('demo', '0.3')).toBe(-1)
+    expect(compareTermsVersions('0.1', 'demo')).toBe(1)
+  })
+
+  it('sees who agreed to an older version, or to none we know', () => {
+    expect(termsOutdated('0.2', '0.3')).toBe(true)
+    expect(termsOutdated('0.3', '0.3')).toBe(false)
+    expect(termsOutdated('1', '0.3')).toBe(false)
+    expect(termsOutdated('demo', '0.3')).toBe(true)
+    expect(termsOutdated(null, '0.3')).toBe(true)
+    expect(termsOutdated(TERMS_VERSION)).toBe(false)
+  })
+
+  it('takes effect at midnight in Amsterdam on TERMS_EFFECTIVE_AT', () => {
+    expect(termsEffectiveAt('2026-11-09').toISOString()).toBe('2026-11-08T23:00:00.000Z')
+    expect(termsEffectiveAt('2026-07-01').toISOString()).toBe('2026-06-30T22:00:00.000Z')
+    expect(termsEffectiveAt().toISOString()).toBe(termsEffectiveAt(TERMS_EFFECTIVE_AT).toISOString())
+  })
+
+  it('waits for the yes only from the day the new terms take effect', () => {
+    const terms = { version: '0.3', effectiveAt: new Date('2026-11-08T23:00:00Z') }
+    // Announced: a notice, nothing waits yet.
+    expect(termsReason('0.2', new Date('2026-11-08T22:59:59Z'), terms)).toBeNull()
+    // Taken effect: asking, accepting, starting and joining wait for the yes.
+    expect(termsReason('0.2', new Date('2026-11-08T23:00:00Z'), terms)).toBe('needs-terms')
+    expect(termsReason('0.2', new Date('2027-01-01T12:00:00Z'), terms)).toBe('needs-terms')
+    // Agreed to the new terms (at sign-up or afterwards): nothing waits.
+    expect(termsReason('0.3', new Date('2027-01-01T12:00:00Z'), terms)).toBeNull()
+  })
+
+  it('comes before the quiz for a first meeting and a solo walk, after what is about the dog', () => {
+    const later = { ...walker, needsTerms: true }
+    expect(canRequestMeeting(later, dog, rel)).toBe('needs-terms')
+    expect(canRequestMeeting({ ...later, quizPassed: false }, dog, rel)).toBe('needs-terms')
+    expect(canRequestMeeting(later, { ...dog, isDemo: true }, rel)).toBe('demo-dog')
+    expect(canRequestSolo(later, dog, { ...rel, soloAllowed: true, idSeen: true })).toBe('needs-terms')
+    expect(canRequestSolo(later, dog, rel)).toBe('needs-solo-trust')
+  })
+})
+
+describe('live location switched off', () => {
+  it('stops a walk alone with the dog, never a first meeting with the owner there', () => {
+    expect(liveLocationReason('solo', false)).toBe('live-location-off')
+    expect(liveLocationReason('meet', false)).toBeNull()
+    expect(liveLocationReason('solo', true)).toBeNull()
+    expect(liveLocationReason('meet', true)).toBeNull()
   })
 })
