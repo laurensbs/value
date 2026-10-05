@@ -589,9 +589,14 @@ struct LocationPurposeTests {
         return try #require(Bundle(path: path)).localizedString(forKey: key, value: "", table: "InfoPlist")
     }
 
-    @Test func theDutchBaseIsTheSameText() {
+    /// Info.plist itself, via `infoDictionary`. Not `object(forInfoDictionaryKey:)`: that returns the text
+    /// for the language the app runs in (InfoPlist.strings), so with `-testLanguage en` it gave the English.
+    @Test func theDutchBaseIsTheSameText() throws {
         for key in [Self.whenInUse, Self.always] {
-            #expect(Bundle.main.object(forInfoDictionaryKey: key) as? String == Self.expected[key]?["nl"], "\(key)")
+            let base = try #require(Bundle.main.infoDictionary?[key] as? String, "\(key)")
+            #expect(base == Self.expected[key]?["nl"], "\(key)")
+            // The Dutch table that a Dutch iPhone shows says the same.
+            #expect(try text(key, "nl") == base, "\(key)")
         }
     }
 

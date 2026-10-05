@@ -5,6 +5,7 @@
 > Regels voor deze tekst: alleen functies die op het moment van indienen in de iOS-app zitten (zie de tabel onderaan), geen namen van organisaties waar geen afspraak mee is, en geen gezondheidsclaims. Wel: "samen wandelen kan je dag goed doen". Niet: "helpt tegen somberheid".
 > Voor wie: iedereen vanaf 18 jaar, zonder bovengrens (besluit van Laurens, oktober 2026). Schrijf dus niet "jongvolwassenen" of "18 tot 30"; "vanaf 18 jaar" of gewoon "wandelaars" is goed.
 > Live locatie staat op de server standaard uit (`LIVE_LOCATION`, in productie uit tot de DPIA klaar is). De tekst moet in beide standen kloppen (richtlijn 2.3): noem live meekijken alleen als "bij een rondje alleen, als live locatie aan staat". Een kennismaking en een groepswandeling delen nooit een locatie. Beloof dus geen kaart en geen afstand tijdens of na het rondje, en geen vast wekelijks rondje (dat kan alleen bij een rondje alleen).
+> Twee afrondingen, noem ze samen: wat de server bewaart (je buurt, de plek van een hond) is afgerond op ongeveer 500 meter, en de positie waarmee de iPhone honden in de buurt zoekt, rondt de telefoon al af op ongeveer 1 km (dat noemt ook de locatievraag van iOS). Feedback na een rondje ziet alleen {{NAAM}}, nooit de ander ("Alleen Rondje Mee ziet dit, nooit de ander" in de app): schrijf dus niet dat jullie elkaar feedback geven.
 
 ## Naam
 
@@ -38,12 +39,12 @@ ZO WERKT HET
 • Vraag een kennismaking aan. De eerste keer loop je altijd samen met de eigenaar of de opvang.
 • Klikt het? Dan spreken jullie een volgend rondje af, en houd je contact in de chat bij je afspraak.
 • Tijdens het rondje heb je een SOS-scherm bij de hand: 112, de eigenaar, de dierenarts en wat je doet als er iets gebeurt.
-• Na afloop zie je hoe lang je liep, en geven jullie elkaar privé feedback.
+• Na afloop zie je hoe lang je liep, en geef je feedback die alleen {{NAAM}} ziet, nooit de ander.
 
 VEILIG, STAP VOOR STAP
 • Je wandelt pas alleen met een hond als de eigenaar dat voor die hond toestaat, en na een korte veiligheidsquiz. Bij een rondje alleen ziet de eigenaar live waar de hond is, als live locatie aan staat.
 • Het ID wordt bij de kennismaking in het echt bekeken. Wij bewaren geen kopie.
-• Je locatie is afgerond tot ongeveer 500 meter. Routes worden na 30 dagen gewist.
+• Je buurt en de plek van een hond worden afgerond op ongeveer 500 meter. Om honden in de buurt te zoeken, rondt je telefoon je positie af op ongeveer 1 km. Routes worden na 30 dagen gewist.
 • Melden en blokkeren kan altijd.
 
 VOOR EIGENAREN
@@ -89,12 +90,12 @@ HOW IT WORKS
 • Ask for an introduction. The first time, you always walk together with the owner or the shelter.
 • Got along? Plan your next walk together, and stay in touch in the chat for your appointment.
 • During the walk an SOS screen is always at hand: 112, the owner, the vet and what to do if something happens.
-• Afterwards you see how long you walked, and you give each other private feedback.
+• Afterwards you see how long you walked, and you give feedback that only {{NAAM}} sees, never the other person.
 
 SAFE, STEP BY STEP
 • You only walk a dog alone when the owner allows it for that dog, and after a short safety quiz. On a walk alone, the owner sees live where the dog is, when live location is switched on.
 • ID is checked in person at the introduction. We never keep a copy.
-• Your location is rounded to about 500 metres. Routes are deleted after 30 days.
+• Your neighbourhood and a dog's spot are rounded to about 500 metres. To find dogs near you, your phone rounds your position to about 1 km. Routes are deleted after 30 days.
 • You can always report and block.
 
 FOR OWNERS

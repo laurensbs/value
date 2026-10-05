@@ -75,6 +75,9 @@ struct DogForSomeone: Equatable {
     /// Your own dog needs nothing more; a dog for someone else waits for the owner's consent.
     var isSettled: Bool { !on || ownerConsent }
 
+    /// Under the consent switch while it is off, so a greyed-out Bewaar has a visible reason.
+    var reminder: String? { isSettled ? nil : Self.missingConsent }
+
     /// Switching "for someone else" off also clears the consent, as on the website (its box goes away).
     mutating func set(_ value: Bool) {
         on = value
@@ -85,6 +88,34 @@ struct DogForSomeone: Equatable {
     /// form's "on"; older servers ignore both fields.
     var forSomeoneField: Bool { on }
     var ownerConsentField: Bool { on && ownerConsent }
+}
+
+/// The two switches under Privé in "Hond toevoegen": the website's explainer under the consent switch and,
+/// while that switch is off, the line that says why Bewaar waits.
+struct ForSomeoneRows: View {
+    @Binding var value: DogForSomeone
+
+    var body: some View {
+        Toggle(DogForSomeone.label, isOn: Binding(
+            get: { value.on },
+            set: { on in withAnimation { value.set(on) } }
+        ))
+        if value.on {
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(DogForSomeone.consentLabel, isOn: $value.ownerConsent.animation())
+                    .fieldNote(DogForSomeone.hint)
+                if let reminder = value.reminder {
+                    Label(reminder, systemImage: "info.circle")
+                        .font(.footnote)
+                        .foregroundStyle(Palette.calm)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            // The line under this row starts where the switch's text starts, not at the icon's text.
+            .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
+        }
+    }
 }
 
 struct AddDogView: View {
@@ -144,7 +175,10 @@ struct AddDogView: View {
         !name.isEmpty && insurance && health && !(biteHistory && biteNote.count < 5) && forSomeone.isSettled
     }
 
-    /// A calm sentence for a failed save. The server has no text of its own for a missing consent.
+    /// A calm sentence for a failed save. For a missing consent the server does answer with a message
+    /// (`{"error":"owner-consent","message":…}`), but that is the website's line about ticking a box
+    /// (myDogs.errors.owner-consent), or its generic error on a server without that line. The app has a
+    /// switch, so it says its own line.
     static func saveMessage(for error: Error) -> String {
         if (error as? APIError)?.code == DogForSomeone.errorCode { return DogForSomeone.missingConsent }
         return error.plainText
@@ -200,14 +234,7 @@ struct AddDogView: View {
                     }
                 }
                 Section {
-                    Toggle(DogForSomeone.label, isOn: Binding(
-                        get: { forSomeone.on },
-                        set: { value in withAnimation { forSomeone.set(value) } }
-                    ))
-                    if forSomeone.on {
-                        Toggle(DogForSomeone.consentLabel, isOn: $forSomeone.ownerConsent)
-                            .fieldNote(DogForSomeone.hint)
-                    }
+                    ForSomeoneRows(value: $forSomeone)
                     TextField("Afspreekplek (bijv. bij de groene voordeur)", text: $meetingInfo, axis: .vertical)
                     TextField("Dierenarts (naam en telefoon)", text: $vetInfo)
                 } header: {
@@ -229,7 +256,8 @@ struct AddDogView: View {
                     // Once "what happened" is open, its own note says this (and why), so not twice.
                     if !biteHistory { Text("Een hond die ooit beet, is alleen voor wandelaars met ervaring.") }
                 }
-                if let error { Text(error).foregroundStyle(Palette.danger) }
+                // A missing consent is said under the consent switch (ForSomeoneRows), not twice.
+                if let error, error != DogForSomeone.missingConsent { Text(error).foregroundStyle(Palette.danger) }
             }
             .tint(Palette.grass)
             .onChange(of: pick) { _, items in Task { await loadPhotos(items) } }
@@ -294,8 +322,8 @@ struct AddDogView: View {
             await saved()
             dismiss()
         } catch {
-            // A missing consent: show the switch it is about, with a calm line.
-            if (error as? APIError)?.code == DogForSomeone.errorCode { withAnimation { forSomeone.on = true } }
+            // A missing consent: show the switch it is about, off, so the calm line under it says what to do.
+            if (error as? APIError)?.code == DogForSomeone.errorCode { withAnimation { forSomeone = DogForSomeone(on: true) } }
             self.error = Self.saveMessage(for: error)
         }
     }

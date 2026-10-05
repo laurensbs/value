@@ -109,10 +109,41 @@ struct ForSomeoneTests {
     // MARK: The server's answer
 
     @Test func aMissingConsentGetsACalmLine() {
-        // The server has no text of its own for this code, so it would send its generic error.
-        let error = APIError.server(code: "owner-consent", message: "Er ging iets mis. Probeer het opnieuw.")
-        #expect(AddDogView.saveMessage(for: error) == DogForSomeone.missingConsent)
+        // The server answers {"error":"owner-consent","message":…}: the website's line about ticking a box
+        // (myDogs.errors.owner-consent in the web PR for the app API), or its generic error on a server
+        // without that line. The app has a switch, so it uses its own line either way.
+        for message in ["Vink aan dat de eigenaar ervan weet en het goed vindt.", "Er ging iets mis. Probeer het opnieuw."] {
+            let error = APIError.server(code: "owner-consent", message: message)
+            #expect(AddDogView.saveMessage(for: error) == DogForSomeone.missingConsent)
+        }
         #expect(DogForSomeone.errorCode == "owner-consent")
+    }
+
+    // MARK: Why Bewaar waits
+
+    @Test func theReminderShowsOnlyWhileTheConsentIsOff() {
+        #expect(DogForSomeone().reminder == nil)
+        #expect(DogForSomeone(on: true, ownerConsent: false).reminder == DogForSomeone.missingConsent)
+        #expect(DogForSomeone(on: true, ownerConsent: true).reminder == nil)
+        // Exactly when Bewaar waits for the consent.
+        for dog in [DogForSomeone(), DogForSomeone(on: true), DogForSomeone(on: true, ownerConsent: true), DogForSomeone(on: false, ownerConsent: true)] {
+            #expect((dog.reminder != nil) == !canSave(forSomeone: dog), "\(dog)")
+        }
+    }
+
+    @Test func theReminderIsOnScreenUnderTheConsentSwitch() async throws {
+        let waiting = try await AXProbe.nodes(Form { ForSomeoneRows(value: .constant(DogForSomeone(on: true))) })
+        #expect(waiting.contains { $0.label.contains(DogForSomeone.missingConsent) }, "\(waiting)")
+        // The switch still reads the website's explainer as its hint.
+        #expect(waiting.contains { $0.label.contains(DogForSomeone.consentLabel) && $0.hint == DogForSomeone.hint }, "\(waiting)")
+
+        let agreed = try await AXProbe.nodes(Form { ForSomeoneRows(value: .constant(DogForSomeone(on: true, ownerConsent: true))) })
+        #expect(!agreed.contains { $0.label.contains(DogForSomeone.missingConsent) }, "\(agreed)")
+        #expect(agreed.contains { $0.label.contains(DogForSomeone.consentLabel) }, "\(agreed)")
+
+        let own = try await AXProbe.nodes(Form { ForSomeoneRows(value: .constant(DogForSomeone())) })
+        #expect(!own.contains { $0.label.contains(DogForSomeone.missingConsent) }, "\(own)")
+        #expect(!own.contains { $0.label.contains(DogForSomeone.consentLabel) }, "\(own)")
     }
 
     @Test func otherErrorsStayAsTheyWere() {
