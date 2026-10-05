@@ -20,7 +20,8 @@ struct FollowWalkView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack(alignment: .bottom) {
+            // Without a map, the walk's details stand at the top, where the map would have been.
+            ZStack(alignment: showsMap ? .bottom : .top) {
                 if showsMap {
                     Map(position: $camera) {
                         if coordinates.count > 1 {
