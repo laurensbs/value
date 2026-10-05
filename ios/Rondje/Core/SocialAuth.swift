@@ -9,8 +9,24 @@ import Security
 // this app can exchange: it holds the PKCE verifier behind the challenge it sent at the start.
 
 /// The public settings from GET /api/v1/config. Older servers send no `auth`: then e-mail only.
+/// And no `support`: then no "Help ons" row (HelpUs.swift).
 struct AppConfig: Decodable, Sendable {
     var auth: AuthOptions?
+    var support: SupportOptions?
+
+    init(auth: AuthOptions? = nil, support: SupportOptions? = nil) {
+        self.auth = auth
+        self.support = support
+    }
+
+    private enum CodingKeys: String, CodingKey { case auth, support }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        auth = try c.decodeIfPresent(AuthOptions.self, forKey: .auth)
+        // Whatever is wrong with `support` only hides that row; signing in keeps working.
+        support = try? c.decodeIfPresent(SupportOptions.self, forKey: .support)
+    }
 }
 
 struct AuthOptions: Decodable, Equatable, Sendable {

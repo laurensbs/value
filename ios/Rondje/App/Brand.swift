@@ -26,26 +26,4 @@ enum Brand {
     static func web(_ path: String) -> URL {
         baseURL.appending(path: path.hasPrefix("/") ? String(path.dropFirst()) : path)
     }
-
-    /// The kind of causes members' gifts should go to later. No agreement with any organisation
-    /// exists yet, so the app names kinds of causes, never organisations.
-    static let causes: [Cause] = [
-        Cause(
-            name: L("Dierenopvangen"),
-            symbol: "pawprint.fill",
-            line: L("Opvangen die honden een nieuwe kans geven, met eten, zorg en wandelingen.")
-        ),
-        Cause(
-            name: L("Ouderen in de buurt"),
-            symbol: "house.fill",
-            line: L("Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven.")
-        ),
-    ]
-
-    struct Cause: Identifiable, Hashable {
-        var id: String { name }
-        let name: String
-        let symbol: String
-        let line: String
-    }
 }

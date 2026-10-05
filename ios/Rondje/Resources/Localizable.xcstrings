@@ -323,28 +323,6 @@
         }
       }
     },
-    "%@ is gratis voor wandelaars, eigenaren en opvangen. Leden houden het veilig en online, en een deel gaat naar goede doelen." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ is free for walkers, owners and shelters. Members keep it safe and online, and part goes to good causes."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ es gratis para paseadores, dueños y refugios. Los socios lo mantienen seguro y en línea, y una parte va a buenas causas."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ est gratuit pour les promeneurs, les propriétaires et les refuges. Les membres le gardent sûr et en ligne, et une partie va à de bonnes causes."
-          }
-        }
-      }
-    },
     "%@ is gratis. Geld hoort er nooit bij." : {
       "localizations" : {
         "en" : {
@@ -5051,28 +5029,6 @@
         }
       }
     },
-    "Dierenopvangen" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Animal shelters"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protectoras de animales"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Refuges pour animaux"
-          }
-        }
-      }
-    },
     "Dit bericht gaat over geld. %@ is gratis: betaal nooit iets." : {
       "localizations" : {
         "en" : {
@@ -7295,50 +7251,6 @@
         }
       }
     },
-    "Geen abonnement, geen betaalmuur, geen premiumversie." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No subscription, no paywall, no premium version."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin suscripción, sin muro de pago, sin versión premium."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas d'abonnement, pas de paywall, pas de version premium."
-          }
-        }
-      }
-    },
-    "Geen advertenties in %@." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No ads in %@."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin anuncios en %@."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas de publicité dans %@."
-          }
-        }
-      }
-    },
     "Geen foto? Dan tekenen we een portret van je hond." : {
       "localizations" : {
         "en" : {
@@ -8153,28 +8065,6 @@
         }
       }
     },
-    "Gratis, en dat blijft zo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Free, and it will stay that way"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gratis, y así seguirá"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gratuit, et ça le restera"
-          }
-        }
-      }
-    },
     "Groepswandelingen" : {
       "localizations" : {
         "en" : {
@@ -8391,50 +8281,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A déjà mordu. %@"
-          }
-        }
-      }
-    },
-    "Help een rondje" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Help a walk"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ayuda a un paseo"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aide une balade"
-          }
-        }
-      }
-    },
-    "Help een rondje: gratis voor iedereen, zonder reclame." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Help a walk: free for everyone, without ads."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ayuda a un paseo: gratis para todos, sin anuncios."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aide une balade : gratuit pour tous, sans pub."
           }
         }
       }
@@ -10365,28 +10211,6 @@
         }
       }
     },
-    "In de app kan dat later, zodra %@ een stichting met ANBI-status is. Dan is je gift ook aftrekbaar." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In the app this will be possible later, once %@ is a foundation with ANBI status (Dutch charity status). Then your gift is tax-deductible too."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En la app será posible más adelante, cuando %@ sea una fundación con estatus ANBI (estatus benéfico neerlandés). Entonces tu donación también será deducible."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dans l'app, ce sera possible plus tard, quand %@ sera une fondation au statut ANBI (statut caritatif néerlandais). Ton don sera alors aussi déductible."
-          }
-        }
-      }
-    },
     "In de winter prikt strooizout in pootjes. Even afvegen na het rondje." : {
       "localizations" : {
         "en" : {
@@ -10449,28 +10273,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En Espagne, tu ne peux promener un chien PPP qu'avec une licence valide."
-          }
-        }
-      }
-    },
-    "Initiatieven die ervoor zorgen dat ouderen met een hond langer zelfstandig kunnen blijven." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Initiatives that help older people with a dog stay independent for longer."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iniciativas que ayudan a las personas mayores con perro a seguir siendo independientes más tiempo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Des initiatives qui aident les aînés avec un chien à rester autonomes plus longtemps."
           }
         }
       }
@@ -13057,28 +12859,6 @@
         }
       }
     },
-    "Leden krijgen geen voorrang: iedereen gebruikt %@ op dezelfde manier." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Members get no priority: everyone uses %@ the same way."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los socios no tienen prioridad: todos usan %@ igual."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les membres n'ont aucune priorité : tout le monde utilise %@ de la même façon."
-          }
-        }
-      }
-    },
     "Leeftijd: %lld jaar" : {
       "localizations" : {
         "en" : {
@@ -13339,28 +13119,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Langage corporel"
-          }
-        }
-      }
-    },
-    "Lid worden gaat via de website" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Becoming a member happens on the website"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hacerse socio se hace en la web"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'adhésion se fait sur le site web"
           }
         }
       }
@@ -15863,28 +15621,6 @@
         }
       }
     },
-    "Onze belofte" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Our promise"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nuestra promesa"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notre promesse"
-          }
-        }
-      }
-    },
     "Ook een hond die goed luistert blijft aan de lijn, tenzij de eigenaar iets anders zegt." : {
       "localizations" : {
         "en" : {
@@ -16193,28 +15929,6 @@
         }
       }
     },
-    "Opvangen die honden een nieuwe kans geven, met eten, zorg en wandelingen." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Shelters that give dogs a new chance, with food, care and walks."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protectoras que dan a los perros una nueva oportunidad, con comida, cuidados y paseos."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Des refuges qui donnent une nouvelle chance aux chiens : nourriture, soins et balades."
-          }
-        }
-      }
-    },
     "Oren naar achteren en een lage staart? Geef de hond wat ruimte en praat rustig." : {
       "localizations" : {
         "en" : {
@@ -16233,28 +15947,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oreilles en arrière et queue basse ? Laisse de l'espace au chien et parle calmement."
-          }
-        }
-      }
-    },
-    "Ouderen in de buurt" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Older neighbours"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mayores del barrio"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les aînés du quartier"
           }
         }
       }
@@ -20105,28 +19797,6 @@
         }
       }
     },
-    "Waar we aan willen bijdragen" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "What we want to contribute to"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A qué queremos contribuir"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ce à quoi nous voulons contribuer"
-          }
-        }
-      }
-    },
     "Waar woon je?" : {
       "localizations" : {
         "en" : {
@@ -20677,50 +20347,6 @@
         }
       }
     },
-    "We maken hier nog afspraken over. Zodra die rond zijn, zie je hier precies welke organisaties het zijn en waar je bijdrage heen gaat." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "We are still making arrangements. Once they are settled, you will see exactly which organisations they are and where your contribution goes."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Todavía estamos cerrando acuerdos. En cuanto estén listos, verás aquí exactamente qué organizaciones son y adónde va tu aportación."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nous sommes encore en train de nous organiser. Dès que ce sera réglé, tu verras ici précisément de quelles organisations il s'agit et où va ta contribution."
-          }
-        }
-      }
-    },
-    "We verkopen nooit gegevens." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "We never sell data."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nunca vendemos datos."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nous ne vendons jamais de données."
-          }
-        }
-      }
-    },
     "We zijn hier net begonnen. Ken je iemand wiens hond vaker naar buiten wil? Stuur je link, of tip een opvang." : {
       "localizations" : {
         "en" : {
@@ -21025,28 +20651,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Me"
-          }
-        }
-      }
-    },
-    "Word lid van %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Become a member of %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hazte socio de %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deviens membre de %@"
           }
         }
       }
