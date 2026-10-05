@@ -3,6 +3,7 @@
 > **Concept, nog naast de versie uit het claude.ai-project leggen** (`onderzoek/merk-en-app-store.md`).
 > Status: 3 oktober 2026. Nog niet ingediend. Indienen doet Laurens zelf.
 > Regels voor deze tekst: alleen functies die op het moment van indienen in de iOS-app zitten (zie de tabel onderaan), geen namen van organisaties waar geen afspraak mee is, en geen gezondheidsclaims. Wel: "samen wandelen kan je dag goed doen". Niet: "helpt tegen somberheid".
+> Voor wie: iedereen vanaf 18 jaar, zonder bovengrens (besluit van Laurens, oktober 2026). Schrijf dus niet "jongvolwassenen" of "18 tot 30"; "vanaf 18 jaar" of gewoon "wandelaars" is goed.
 
 ## Naam
 
@@ -28,7 +29,7 @@ Voordat de naam vastligt, doet Laurens twee checks:
 Een vast rondje met een hond die dat goed kan gebruiken. Van een buurvrouw die zelf niet meer ver kan lopen, of uit de opvang. Altijd gratis, zonder advertenties.
 
 **Beschrijving:**
-Ken je dat gevoel na een wandeling? {{NAAM}} koppelt jongvolwassenen aan honden die een extra rondje goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in begeleide groepswandelingen. Samen buiten zijn kan je dag goed doen, en een hond is er altijd blij mee.
+Ken je dat gevoel na een wandeling? {{NAAM}} koppelt je aan honden die een extra rondje goed kunnen gebruiken. Het gaat om honden van buurtgenoten die zelf niet meer ver kunnen lopen, en om honden uit de opvang in begeleide groepswandelingen. Samen buiten zijn kan je dag goed doen, en een hond is er altijd blij mee.
 
 ZO WERKT HET
 • Je Vandaag-scherm begroet je met je level, de uitdaging van je stad en een tip van de dag.
@@ -54,7 +55,7 @@ EN VERDER
 • Levels en badges, die alleen jij ziet. Geen streaks en geen druk: elk rondje telt, ook na een pauze.
 • Een widget en een Live Activity voor je volgende rondje.
 
-{{NAAM}} is altijd gratis en zonder advertenties. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
+{{NAAM}} is altijd gratis en zonder advertenties. We verkopen nooit gegevens. Voor iedereen vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
 
 {{NAAM}} is geen hulpverlening en stelt geen diagnoses. Gaat het niet goed met je? In de app staat waar je terechtkunt.
 
@@ -79,7 +80,7 @@ De eerste versie. Ontdek honden in je buurt, maak kennis en loop je eerste rondj
 A regular walk with a dog that could use one. From a neighbour who can't walk far anymore, or from the shelter. Always free, no ads.
 
 **Description:**
-You know that feeling after a walk? {{NAAM}} connects young adults with dogs that could use an extra walk: dogs of neighbours who can no longer walk far, and shelter dogs on guided group walks. Getting outside together can make your day, and a dog is always happy you came.
+You know that feeling after a walk? {{NAAM}} connects you with dogs that could use an extra walk: dogs of neighbours who can no longer walk far, and shelter dogs on guided group walks. Getting outside together can make your day, and a dog is always happy you came.
 
 HOW IT WORKS
 • Your Today screen greets you with your level, your city's challenge and a tip of the day.
@@ -105,7 +106,7 @@ AND MORE
 • Levels and badges that only you can see. No streaks and no pressure: every walk counts, even after a break.
 • A widget and a Live Activity for your next walk.
 
-{{NAAM}} is always free and ad-free. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
+{{NAAM}} is always free and ad-free. We never sell data. For everyone aged 18 and over. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
 
 {{NAAM}} is not a care service and makes no diagnoses. Not feeling well? The app shows where to get help.
 
