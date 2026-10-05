@@ -7212,19 +7212,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Buy a round from %@"
+            "value" : "From %@"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Regala un paseo desde %@"
+            "value" : "Desde %@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Offre une balade dès %@"
+            "value" : "Dès %@"
           }
         }
       }
@@ -7234,25 +7234,53 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Buy a round from %1$@ · %2$@ of %3$@"
+            "value" : "From %1$@ · %2$@ of %3$@"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Regala un paseo desde %1$@ · %2$@ de %3$@"
+            "value" : "Desde %1$@ · %2$@ de %3$@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Offre une balade dès %1$@ · %2$@ sur %3$@"
+            "value" : "Dès %1$@ · %2$@ sur %3$@"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Geef een rondje vanaf %1$@ · %2$@ van %3$@"
+          }
+        }
+      }
+    },
+    "Geef een rondje vanaf %@ · Doel: %@ rondjes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From %1$@ · Goal: %2$@ rounds"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desde %1$@ · Objetivo: %2$@ paseos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dès %1$@ · Objectif : %2$@ balades"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Geef een rondje vanaf %1$@ · Doel: %2$@ rondjes"
           }
         }
       }
@@ -8340,13 +8368,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Help us via %@"
+            "value" : "Support us via %@"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ayúdanos en %@"
+            "value" : "Ayúdanos vía %@"
           }
         },
         "fr" : {

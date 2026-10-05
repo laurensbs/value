@@ -135,7 +135,7 @@ The first version. Discover dogs near you, meet them and go on your first walk.
 | Geluidjes | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 | Apple Gezondheid (rondjes en ademminuten bewaren) | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 
-Niet noemen: leden of lidmaatschap (dat bestaat niet meer), "aftrekbaar", doneren of betalen in de app, bedragen, of namen van organisaties. Helpen gaat via de crowdfunding op Whydonate, in Safari: in de app is dat één rij laag onder Jij ("Help ons via Whydonate"), die de server met `SUPPORT_IN_APP=0` uitzet.
+Niet noemen: leden of lidmaatschap (dat bestaat niet meer), "aftrekbaar", doneren of betalen in de app, bedragen, of namen van organisaties. Helpen gaat via de crowdfunding op Whydonate, in Safari: in de app is dat één rij laag onder Jij ("Help ons via Whydonate", in het Engels "Support us via Whydonate"). Die rij blijft zichtbaar tijdens de review en staat uitgelegd in de review-notitie (`indienen.md` §5); de server zet hem alleen voorgoed uit met `SUPPORT_IN_APP_IOS=0` als Apple hem niet accepteert.
 
 ## Nog te beslissen door Laurens
 - De naam (zie boven).

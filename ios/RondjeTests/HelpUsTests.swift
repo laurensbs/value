@@ -52,7 +52,7 @@ struct HelpUsTests {
     }
 
     @Test func supportInAppZeroHidesTheRow() throws {
-        // SUPPORT_IN_APP=0 on the server: the block is there, the row is not.
+        // SUPPORT_IN_APP_IOS=0 (or SUPPORT_IN_APP=0) on the server: the block is there, the row is not.
         let off = try config(Self.server(inApp: false))
         #expect(off.support != nil)
         #expect(off.support?.inApp == false)
@@ -69,7 +69,7 @@ struct HelpUsTests {
     }
 
     @Test func theServerSwitchHidesEveryEntry() throws {
-        // SUPPORT_IN_APP=0, or an inApp the app does not understand: no row.
+        // The switch off on the server, or an inApp the app does not understand: no row.
         for off in ["false", "0", #""0""#, "null", #""nee""#, "{}"] {
             #expect(try link(#"{"inApp":\#(off),"crowdfundingUrl":"\#(Self.campaign)"}"#) == nil, "inApp \(off)")
         }
@@ -88,6 +88,33 @@ struct HelpUsTests {
     }
 
     // MARK: Where the tap goes
+
+    /// CROWDFUNDING_PLATFORMS in web/src/lib/support.ts (branch claude/help-ons-app, 5 October 2026),
+    /// copied by hand: the app accepts exactly the platforms the website accepts for CROWDFUNDING_URL,
+    /// so the row never names a platform the website would refuse. Change the two together.
+    private static let webCrowdfundingPlatforms: [String: String] = [
+        "whydonate.com": "Whydonate",
+        "whydonate.nl": "Whydonate",
+        "gofundme.com": "GoFundMe",
+        "doneeractie.nl": "Doneeractie",
+        "kickstarter.com": "Kickstarter",
+        "ulule.com": "Ulule",
+        "goteo.org": "Goteo",
+        "verkami.com": "Verkami",
+    ]
+
+    @Test func knowsTheSamePlatformsAsTheWebsite() {
+        #expect(HelpUsLink.platforms == Self.webCrowdfundingPlatforms)
+    }
+
+    @Test func theAppNamesItselfAsTheIPhoneApp() throws {
+        // The server picks SUPPORT_IN_APP_IOS by this header (web/src/lib/app-platform.ts), and still
+        // recognises the app by "RondjeApp" in the user agent (web/src/server/native.ts).
+        #expect(APIClient.identity["X-Rondje-Platform"] == "ios")
+        let agent = try #require(APIClient.identity["User-Agent"])
+        #expect(agent.range(of: #"\bRondjeApp\b"#, options: .regularExpression) != nil)
+        #expect(agent.contains("iOS"))
+    }
 
     @Test func onlyHttpsLinksToKnownPlatforms() throws {
         let allowed = [
@@ -143,6 +170,18 @@ struct HelpUsTests {
         #expect(plain(5, "es_ES") == "5 €")
     }
 
+    @Test func beforeTheFirstEuroOnlyTheGoalInRounds() throws {
+        let nl = Locale(identifier: "nl_NL")
+        let row = try #require(HelpUsLink(SupportOptions(inApp: true, crowdfundingUrl: Self.campaign, goal: 3000, raised: 0)))
+        let text = row.subtitle(locale: nl)
+        let plain = try #require(HelpUsLink(SupportOptions(inApp: true, crowdfundingUrl: Self.campaign))).subtitle(locale: nl)
+        // "Geef een rondje vanaf € 5 · Doel: 600 rondjes", never "€ 0 van € 3.000".
+        #expect(text.hasPrefix(plain), "\(text)")
+        #expect(text.contains("600"), "\(text)")
+        #expect(!text.contains(HelpUsLink.euros(0, locale: nl)), "\(text)")
+        #expect(!text.contains(HelpUsLink.euros(3000, locale: nl)), "\(text)")
+    }
+
     @Test func subtitleSaysFromFiveEurosAndThenTheProgress() throws {
         let nl = Locale(identifier: "nl_NL")
         let five = HelpUsLink.euros(5, locale: nl)
@@ -162,7 +201,20 @@ struct HelpUsTests {
 
     // MARK: The copy
 
-    private static let rowKeys = ["Help ons via %@", "Opent %@ in je browser", "Geef een rondje vanaf %@", "Geef een rondje vanaf %@ · %@ van %@"]
+    private static let rowKeys = [
+        "Help ons via %@", "Opent %@ in je browser", "Geef een rondje vanaf %@", "Geef een rondje vanaf %@ · %@ van %@",
+        "Geef een rondje vanaf %@ · Doel: %@ rondjes",
+    ]
+
+    @Test func theEnglishDoesNotReadLikeBuyingSomething() throws {
+        let path = try #require(Bundle.main.path(forResource: "en", ofType: "lproj"))
+        let bundle = try #require(Bundle(path: path))
+        for key in Self.rowKeys {
+            let value = bundle.localizedString(forKey: key, value: "", table: nil)
+            #expect(value.range(of: #"\b(buy|purchase|order|price)\b"#, options: [.regularExpression, .caseInsensitive]) == nil, "\(value)")
+        }
+        #expect(bundle.localizedString(forKey: "Help ons via %@", value: "", table: nil) == "Support us via %@")
+    }
 
     /// No membership, no tax deduction (Rondje has no ANBI status), no pressure, no health claims.
     private static func breaksTheRules(_ text: String) -> Bool {

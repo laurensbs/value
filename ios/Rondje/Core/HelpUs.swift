@@ -2,14 +2,16 @@ import Foundation
 
 // "Help ons": one quiet row low under Jij that opens the crowdfunding page (Whydonate) in Safari,
 // in one tap. Giving never happens inside the app: no checkout, no web view, no sheet in between.
-// The server decides whether the row shows at all. GET /api/v1/config sends `support` with `inApp`
-// (SUPPORT_IN_APP on the server; "0" turns every entry in the apps off, for example during App
-// Review). Older servers send no `support`, and then there is no row.
+// The server decides whether the row shows at all. GET /api/v1/config sends `support` with `inApp`:
+// SUPPORT_IN_APP_IOS on the server (it follows SUPPORT_IN_APP until it is set; the app names itself
+// with X-Rondje-Platform: ios, APIClient). "0" takes the row out of the iPhone app, for good if Apple
+// does not accept it; it is never for hiding the row during App Review (docs/app-store/indienen.md).
+// Older servers send no `support`, and then there is no row.
 
 /// `support` in GET /api/v1/config. Every field is optional and read leniently, so whatever the
 /// server sends here can only hide the row, never break the rest of the config (the sign-in buttons).
 struct SupportOptions: Decodable, Equatable, Sendable {
-    /// The server allows an entry in the app (SUPPORT_IN_APP). Missing counts as no.
+    /// The server allows an entry in the iPhone app (SUPPORT_IN_APP_IOS). Missing counts as no.
     var inApp = false
     /// The campaign page, for example https://whydonate.com/nl/fundraising/rondjemee.
     var crowdfundingUrl: String?
@@ -36,7 +38,7 @@ struct SupportOptions: Decodable, Equatable, Sendable {
         raised = Self.euros(c, .raised) ?? progress.flatMap { Self.euros($0, .raised) }
     }
 
-    /// true, 1 or "1" (how SUPPORT_IN_APP is written) mean on; anything else means off.
+    /// true, 1 or "1" mean on; anything else means off. (The server sends a JSON boolean.)
     private static func flag(_ c: KeyedDecodingContainer<Keys>, _ key: Keys) -> Bool {
         if let value = try? c.decodeIfPresent(Bool.self, forKey: key) { return value }
         if let value = try? c.decodeIfPresent(Int.self, forKey: key) { return value == 1 }
@@ -106,11 +108,16 @@ struct HelpUsLink: Equatable, Sendable {
     /// For VoiceOver: the tap leaves the app.
     var hint: String { L("Opent \(platform) in je browser") }
 
-    /// "Geef een rondje vanaf €5", plus "· €120 van €3.000" when the server sends the numbers. The same
-    /// words as the row in the website's app shell (helpApp in web/messages): no countdown, no "nog maar".
+    /// "Geef een rondje vanaf €5", plus "· €120 van €3.000" once something came in, and before that
+    /// "· Doel: 600 rondjes" (never "€0 van €3.000"). The same words as the row in the website's app
+    /// shell (helpApp in web/messages): no countdown, no "nog maar".
     func subtitle(locale: Locale = .current) -> String {
         let from = Self.euros(Self.smallestGift, locale: locale)
         guard let progress else { return L("Geef een rondje vanaf \(from)") }
+        guard progress.raised > 0 else {
+            let rounds = (progress.goal / Self.smallestGift).formatted(.number.locale(locale))
+            return L("Geef een rondje vanaf \(from) · Doel: \(rounds) rondjes")
+        }
         let raised = Self.euros(progress.raised, locale: locale), goal = Self.euros(progress.goal, locale: locale)
         return L("Geef een rondje vanaf \(from) · \(raised) van \(goal)")
     }
@@ -126,7 +133,7 @@ struct HelpUsLink: Equatable, Sendable {
 }
 
 /// Whether to show the row, from the server's config. Loaded when Jij opens and on pull to refresh,
-/// at most every few minutes, so switching SUPPORT_IN_APP off reaches the app quickly.
+/// at most every few minutes, so switching SUPPORT_IN_APP_IOS off reaches the app quickly.
 @MainActor
 @Observable
 final class HelpUs {
