@@ -116,10 +116,11 @@ Gebruiken we een gerechtvaardigd belang? Dan hebben we afgewogen dat dat belang 
 ## 5. Locatiegegevens
 
 - **Je woonplaats** tonen we alleen afgerond op zo'n 500 meter. Het exacte adres of de afspraakplek ziet de ander pas na acceptatie, en alleen als jij die invult.
-- **Live locatie** verzamelen we alleen als je als wandelaar een wandeling start, en tot je die beëindigt. Je telefoon vraagt hiervoor toestemming. Je kunt die toestemming in de instellingen van je telefoon intrekken, maar dan werkt de live kaart niet.
-- De eigenaar of opvang van de hond ziet tijdens de wandeling een live kaart met de route. Jij ziet je eigen route.
+- **Live locatie** verzamelen we alleen tijdens een wandeling alleen met de hond: vanaf het moment dat je die als wandelaar start, tot je haar beëindigt. Je telefoon vraagt hiervoor toestemming. Je kunt die toestemming in de instellingen van je telefoon intrekken, maar dan werkt de live kaart niet.
+- Bij een kennismaking en bij een groepswandeling verzamelen we nooit locatie: de eigenaar of de opvang loopt dan zelf mee.
+- De eigenaar of opvang van de hond ziet tijdens een wandeling alleen met de hond een live kaart met de route. Jij ziet je eigen route.
 - Duurt de wandeling veel langer dan gepland? Dan krijgt de eigenaar of opvang een melding.
-- **Live locatie kan uit staan.** We kunnen live locatie voor iedereen uitzetten, bijvoorbeeld zolang de DPIA niet klaar is (zie artikel 14). Staat ze uit, dan verzamelen en bewaren we tijdens een wandeling geen locatie, en ziet de eigenaar of opvang geen live kaart. Dan start alleen een wandeling waar de eigenaar of iemand van de opvang zelf bij is, zoals de kennismaking. Bij de wandeling zie je dat live locatie uit staat.
+- **Live locatie staat voorlopig uit.** Zolang de DPIA niet klaar is (zie artikel 14), staat live locatie voor iedereen uit, en ook daarna kunnen we haar uitzetten. Staat ze uit, dan verzamelen en bewaren we geen locatie, en ziet de eigenaar of opvang geen live kaart. Een wandeling alleen met de hond start dan niet; een kennismaking wel. Bij de wandeling zie je dat live locatie uit staat.
 - We verwijderen routepunten na **30 dagen**. Is er een open melding over een incident? Dan bewaren we de route van die wandeling tot de melding is afgehandeld.
 - We gebruiken locatiegegevens niet voor reclame of profilering, en we verkopen ze nooit.
 
@@ -230,7 +231,7 @@ Ben je niet tevreden over hoe we met je gegevens omgaan? Laat het ons eerst wete
 
 ## 14. Gegevensbeschermingseffectbeoordeling (DPIA)
 
-Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom maken we een gegevensbeschermingseffectbeoordeling (DPIA). Die is nog niet klaar. We ronden haar af voordat de eerste echte wandeling met live locatie plaatsvindt, en daarna houden we haar actueel. Tot die tijd kunnen we live locatie helemaal uitzetten (zie artikel 5). Staat ze aan, dan werkt ze altijd zoals in artikel 5 staat: alleen tijdens een wandeling die de wandelaar zelf start, en routes verwijderen we na 30 dagen.
+Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom maken we een gegevensbeschermingseffectbeoordeling (DPIA). Die is nog niet klaar. We ronden haar af voordat de eerste echte wandeling met live locatie plaatsvindt, en daarna houden we haar actueel. Tot die tijd staat live locatie uit (zie artikel 5). Staat ze aan, dan werkt ze altijd zoals in artikel 5 staat: alleen tijdens een wandeling alleen met de hond die de wandelaar zelf start, en routes verwijderen we na 30 dagen.
 
 ## 15. Leeftijd
 

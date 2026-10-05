@@ -79,8 +79,8 @@ export default async function ProfilePage() {
     <div className="narrow-page stack-l profile-hub">
       <h1 className="visually-hidden">{t('profile.title')}</h1>
 
-      {/* Changed terms (art. 19): what changed, and one "Akkoord". */}
-      <TermsNotice profile={p} collapsed />
+      {/* Changed terms (art. 19): a short card; the list and "Akkoord" are on /profile/terms, together. */}
+      <TermsNotice profile={p} short from="/profile" />
 
       {/* You, as others see you, with what you do here most: edit it, or invite someone. */}
       <section className="card profile-head" aria-labelledby="profile-public">

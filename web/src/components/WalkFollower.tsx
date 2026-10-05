@@ -37,15 +37,20 @@ interface Props {
   initialCare: CareCounts
   fallbackCenter: { lat: number; lng: number }
   locale: string
-  /** False while live location is switched off (LIVE_LOCATION): no map, and a calm line that says so. */
+  /**
+   * Whether this walk shares location (lib/rules.ts walkHasLiveLocation): only a walk alone with the dog,
+   * with LIVE_LOCATION on. Otherwise no map, and a calm line that says why.
+   */
   liveLocation?: boolean
+  /** A first meeting: they walk together, so there is no map to follow. */
+  together?: boolean
 }
 
 const POLL_MS = 5_000
 
 /**
- * The owner's live view: the route so far, where the walker is now, and when they were last seen. With
- * live location switched off: the time, the report and the photos, without a map.
+ * The owner's live view: the route so far, where the walker is now, and when they were last seen. Without
+ * live location (a first meeting, or the switch off): the time, the report and the photos, without a map.
  */
 export function WalkFollower({
   walkId,
@@ -59,7 +64,8 @@ export function WalkFollower({
   initialCare,
   fallbackCenter,
   locale,
-  liveLocation = true,
+  liveLocation = false,
+  together = false,
 }: Props) {
   const [care, setCare] = useState<CareCounts>(initialCare)
   const [photos, setPhotos] = useState<WalkPhoto[]>(initialPhotos)
@@ -154,7 +160,7 @@ export function WalkFollower({
         <Map center={here ?? fallbackCenter} zoom={15} markers={markers} route={route} follow className="map tall" ariaLabel={t('mapLabel')} />
       ) : (
         <p className="notice live-off" role="status">
-          {t('liveOffFollow')}
+          {together ? t('together') : t('liveOffFollow')}
         </p>
       )}
       <WalkCareTally care={care} />

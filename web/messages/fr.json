@@ -573,7 +573,7 @@
       "id-not-seen": "Les balades en autonomie ne sont possibles qu’après avoir vu en personne la pièce d’identité de la personne qui promène.",
       "meeting-ahead": "C’est possible après votre rencontre, une fois que vous avez vu la personne et sa pièce d’identité en vrai.",
       "needs-terms": "Merci d’accepter d’abord les conditions mises à jour.",
-      "live-location-off": "La localisation en direct est désactivée pour le moment, et sans elle une balade seul avec le chien ne démarre pas. Une première rencontre, avec le propriétaire, reste possible.",
+      "live-location-off": "La localisation en direct est désactivée pour le moment, donc une balade seul avec le chien ne démarre pas encore. Se promener avec le propriétaire reste possible.",
       "terms-changed": "Les conditions ont de nouveau été mises à jour entre-temps. Jetez un œil à la dernière version."
     },
     "messagePlaceholder": "Bonjour ! Je suis … et j'aimerais beaucoup promener {dog}.",
@@ -793,7 +793,7 @@
     "careFailed": "Non enregistré : pas de connexion. Touchez à nouveau quand vous avez du réseau.",
     "liveOff": "La localisation en direct est désactivée pour le moment. Votre trajet n’est ni suivi ni partagé ; le temps, le compte rendu de la balade et les photos fonctionnent comme d’habitude.",
     "liveOffFollow": "La localisation en direct est désactivée pour le moment, il n’y a donc pas de carte ici. Vous voyez quand même le temps, le compte rendu de la balade et les photos.",
-    "liveOffStart": "La localisation en direct est désactivée pour le moment : votre téléphone ne partage pas votre position pendant cette balade."
+    "together": "Vous vous promenez ensemble, donc pas besoin de carte."
   },
   "myDogs": {
     "title": "Mes chiens",
@@ -3674,16 +3674,16 @@
   },
   "termsUpdate": {
     "title": "Les conditions ont été mises à jour",
-    "lede": "Prenez le temps de lire ce qui change. Pour vous, les nouvelles conditions s’appliquent à partir du {date} ; d’ici là, rien ne change.",
+    "lede": "Prenez le temps de lire ce qui change. Les nouvelles conditions s’appliquent pour vous à partir du {date}. Dès lors, nous vous demandons d’abord votre accord, avant de convenir de quelque chose de nouveau ou de commencer une balade.",
     "ledeRequired": "Les nouvelles conditions s’appliquent depuis le {date}. Lisez ce qui change. Une fois que vous les acceptez, vous pouvez à nouveau prendre rendez-vous et commencer des balades.",
     "read": "Lire les conditions complètes",
+    "review": "Voir ce qui change",
     "accept": "J’accepte",
     "thanks": "Merci. Votre accord est enregistré.",
     "rights": "Vous n’êtes pas d’accord ? Vous pouvez toujours supprimer votre compte depuis votre profil (article 19 des conditions).",
     "first": "D’abord les conditions mises à jour",
     "pageTitle": "Conditions mises à jour",
     "upToDate": "Vous avez déjà accepté les dernières conditions.",
-    "onward": "Continuer",
-    "whatChanges": "Ce qui change ({n} points)"
+    "onward": "Continuer"
   }
 }

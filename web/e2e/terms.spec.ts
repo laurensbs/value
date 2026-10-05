@@ -27,23 +27,36 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   const back = () => walker.page.request.post('/api/test/terms-version', { data: { version: '0.2' } })
   expect((await back()).ok()).toBe(true)
 
-  // --- Announced: a calm notice on Vandaag and the profile; nothing waits yet ---
+  // --- Announced: nothing on Vandaag, a short card on the profile, and the list with "Akkoord" on a page of its own ---
   await walker.page.goto('/')
+  await expect(walker.page.locator('.today-head')).toBeVisible()
+  await expect(walker.page.getByRole('region', { name: TITLE })).toHaveCount(0)
+  // Without a walk coming up, Rondjes stays quiet too until the day.
+  await walker.page.goto('/requests')
+  await expect(walker.page.getByRole('heading', { name: 'Rondjes', level: 1 })).toBeVisible()
+  await expect(walker.page.getByRole('region', { name: TITLE })).toHaveCount(0)
+  await walker.page.goto('/profile')
+  const card = walker.page.getByRole('region', { name: TITLE })
+  await expect(card).toContainText('De nieuwe voorwaarden gelden voor jou vanaf 9 november 2026. Vanaf dan vragen we eerst je akkoord')
+  await expect(card).not.toContainText('blijft alles zoals het was')
+  // No "Akkoord" without the list in view: the card leads to the page where both are.
+  await expect(card.getByRole('listitem')).toHaveCount(0)
+  await expect(card.getByRole('button', { name: 'Akkoord' })).toHaveCount(0)
+  const review = card.getByRole('link', { name: 'Bekijk wat er verandert' })
+  await expect(review).toHaveAttribute('href', '/profile/terms?next=%2Fprofile')
+  await shot(walker.page, 'terms-profile')
+  await review.click()
+  await expect(walker.page).toHaveURL(/\/profile\/terms\?next=%2Fprofile$/)
   const notice = walker.page.getByRole('region', { name: TITLE })
-  await expect(notice).toBeVisible()
-  await expect(notice).toContainText('Voor jou gelden de nieuwe voorwaarden vanaf 9 november 2026; tot die tijd blijft alles zoals het was.')
-  // The list folds open with a tap, so Vandaag stays calm.
-  await expect(notice.getByRole('listitem')).toHaveCount(0)
-  await notice.getByText('Wat er verandert (6 punten)').click()
   await expect(notice.getByRole('listitem')).toHaveCount(6)
   await expect(notice.getByRole('listitem').first()).toHaveText('Rondje Mee wordt aangeboden door Laurens Bos, de maker van Rondje Mee. Je bereikt ons via hetzelfde contactadres als eerst (artikel 1).')
+  // Honest about what is not new, and about what was not checked.
+  await expect(notice.getByRole('listitem').nth(1)).toContainText('Zo werkt Rondje Mee al sinds 2 oktober 2026')
+  await expect(notice.getByRole('listitem').last()).toContainText('De voorwaarden zijn nog een concept: een jurist heeft ze nog niet nagekeken.')
+  await expect(notice).not.toContainText('hebben we nagekeken')
   await expect(notice.getByRole('link', { name: 'Lees de volledige voorwaarden' })).toHaveAttribute('href', '/legal/terms')
   await expect(notice.getByRole('button', { name: 'Akkoord' })).toBeVisible()
-  await shot(walker.page, 'terms-today')
-  // No wall in front of the page: the one thing to do is still there.
-  await expect(walker.page.locator('.today-head')).toBeVisible()
-  await walker.page.goto('/profile')
-  await expect(walker.page.getByRole('region', { name: TITLE })).toBeVisible()
+  await shot(walker.page, 'terms-step')
   // Asking for a meeting works as before.
   await walker.page.goto(dogUrl)
   await expect(walker.page.getByRole('button', { name: 'Verstuur aanvraag' })).toBeVisible()
@@ -81,8 +94,8 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   await walker.page.getByLabel(/Ik houd me aan de/).check()
   await walker.page.getByRole('button', { name: 'Verstuur aanvraag' }).click()
   await expect(walker.page.getByRole('heading', { name: 'Verstuurd naar Ans.' })).toBeVisible()
-  await walker.page.goto('/')
-  await expect(walker.page.locator('.today-head')).toBeVisible()
+  await walker.page.goto('/profile')
+  await expect(walker.page.locator('.profile-head')).toBeVisible()
   await expect(walker.page.getByRole('region', { name: TITLE })).toHaveCount(0)
   expect(await (await app.get('/api/v1/me', { headers: later })).json()).toMatchObject({ termsAccepted: true, termsRequired: false, termsChanges: null })
 
@@ -107,6 +120,29 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   expect(body).toMatchObject({ ok: true, termsVersion: '0.3' })
   expect(Math.abs(Date.parse(body.termsAcceptedAt) - Date.now())).toBeLessThan(5 * 60_000)
   expect((await (await app.get('/api/v1/me', { headers: later })).json()).termsAccepted).toBe(true)
+
+  // --- Before the day, a walker with an accepted walk coming up reads it on Rondjes, not first at the owner's door ---
+  const ansApp = await request.newContext({ baseURL: new URL(walker.page.url()).origin, extraHTTPHeaders: { 'x-forwarded-for': `10.249.${Math.floor(Math.random() * 250)}.2` } })
+  const ansSignIn = await ansApp.post('/api/auth/sign-in/email', { data: { email: `ans-${id}@e2e.test`, password: 'wandelen-123' } })
+  const ansBearer = { Authorization: `Bearer ${ansSignIn.headers()['set-auth-token']}` }
+  const asked = ((await (await ansApp.get('/api/v1/requests', { headers: ansBearer })).json()).incoming as { id: string; status: string }[]).find((r) => r.status === 'pending')!
+  expect((await ansApp.post(`/api/v1/requests/${asked.id}`, { data: { action: 'accept' }, headers: ansBearer })).ok()).toBe(true)
+  await ansApp.dispose()
+  expect((await back()).ok()).toBe(true)
+  await walker.context.setExtraHTTPHeaders({})
+  await walker.page.goto('/requests')
+  const ahead = walker.page.getByRole('region', { name: TITLE })
+  await expect(ahead).toContainText('De nieuwe voorwaarden gelden voor jou vanaf 9 november 2026. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start.')
+  await expect(ahead.getByRole('button', { name: 'Akkoord' })).toHaveCount(0)
+  await expect(ahead.getByRole('link', { name: 'Bekijk wat er verandert' })).toHaveAttribute('href', '/profile/terms?next=%2Frequests')
+  await shot(walker.page, 'terms-requests-ahead')
+  // From the day on, the step itself, right there.
+  await walker.context.setExtraHTTPHeaders({ 'x-rondje-now': AFTER })
+  await walker.page.goto('/requests')
+  const due = walker.page.getByRole('region', { name: TITLE })
+  await expect(due).toContainText('De nieuwe voorwaarden gelden sinds 9 november 2026.')
+  await expect(due.getByRole('listitem')).toHaveCount(6)
+  await expect(due.getByRole('button', { name: 'Akkoord' })).toBeVisible()
   await app.dispose()
 
   await owner.context.close()

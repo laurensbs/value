@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server'
 import { LIVE_LOCATION_HEADER, liveLocationFor } from '@/lib/live-location'
+import { walkHasLiveLocation } from '@/lib/rules'
 import { getViewer } from '@/server/session'
 import { checkOverdue, pointsSince, walkAccess, walkPhotos } from '@/server/walks'
 
 /**
- * Polled by the owner's live map (and the walker's own screen) every few seconds. `liveLocation` is
- * false while live location is switched off (LIVE_LOCATION): then no new points come in, and the
- * screens show no map.
+ * Polled by the owner's live map (and the walker's own screen) every few seconds. `liveLocation` says
+ * whether this walk collects location (lib/rules.ts walkHasLiveLocation): only a walk alone with the dog,
+ * with the switch on (LIVE_LOCATION). When false, no new points come in and the screens show no map.
+ * `kind` is the kind of walk ('meet' or 'solo', null when its request is gone), so a screen can say why:
+ * at a first meeting they walk together.
  */
 export async function GET(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
@@ -25,7 +28,8 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
   return NextResponse.json(
     {
       status: access.walk.status,
-      liveLocation: liveLocationFor(process.env, request.headers.get(LIVE_LOCATION_HEADER)),
+      kind: access.kind,
+      liveLocation: walkHasLiveLocation(access.kind, liveLocationFor(process.env, request.headers.get(LIVE_LOCATION_HEADER))),
       startedAt: access.walk.startedAt,
       plannedEndAt: access.walk.plannedEndAt,
       endedAt: access.walk.endedAt,

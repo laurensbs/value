@@ -23,6 +23,7 @@ import {
   termsOutdated,
   termsReason,
   trustBadges,
+  walkHasLiveLocation,
   type DogFacts,
   type Relation,
   type WalkerFacts,
@@ -362,5 +363,22 @@ describe('live location switched off', () => {
     expect(liveLocationReason('meet', false)).toBeNull()
     expect(liveLocationReason('solo', true)).toBeNull()
     expect(liveLocationReason('meet', true)).toBeNull()
+  })
+})
+
+describe('which walks collect live location', () => {
+  it('only a walk alone with the dog, and only with the switch on', () => {
+    expect(walkHasLiveLocation('solo', true)).toBe(true)
+    expect(walkHasLiveLocation('solo', false)).toBe(false)
+  })
+
+  it('never a first meeting or anything else, even with the switch on', () => {
+    expect(walkHasLiveLocation('meet', true)).toBe(false)
+    expect(walkHasLiveLocation('meet', false)).toBe(false)
+    expect(walkHasLiveLocation('group', true)).toBe(false)
+    // A walk whose request is gone: no kind, so nothing is collected.
+    expect(walkHasLiveLocation(null, true)).toBe(false)
+    expect(walkHasLiveLocation(undefined, true)).toBe(false)
+    expect(walkHasLiveLocation('Solo', true)).toBe(false)
   })
 })

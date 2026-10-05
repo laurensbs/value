@@ -116,10 +116,11 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 ## 5. Location data
 
 - **Where you live** is only shown rounded to about 500 metres. The other person only sees the exact address or meeting point after acceptance, and only if you enter it.
-- **Live location** is only collected when you start a walk as a walker, and until you end it. Your phone will ask for permission. You can withdraw that permission in your phone's settings, but the live map will then not work.
-- During the walk, the dog's owner or shelter sees a live map with the route. You see your own route.
+- **Live location** is only collected during a walk alone with the dog: from the moment you start it as a walker, until you end it. Your phone will ask for permission. You can withdraw that permission in your phone's settings, but the live map will then not work.
+- At a first meeting and on a group walk, we never collect location: the owner or the shelter walks along.
+- During a walk alone with the dog, the dog's owner or shelter sees a live map with the route. You see your own route.
 - If a walk runs well over the planned time, the owner or shelter receives an alert.
-- **Live location can be off.** We can switch live location off for everyone, for example while the DPIA is not finished (see section 14). While it is off, we do not collect or store any location during a walk, and the owner or shelter sees no live map. Then only a walk where the owner or someone from the shelter is present, such as the first meeting, can start. The walk screen tells you that live location is off.
+- **Live location is off for now.** Until the DPIA is finished (see section 14), live location is off for everyone, and we can switch it off after that too. While it is off, we do not collect or store any location, and the owner or shelter sees no live map. A walk alone with the dog does not start then; a first meeting does. The walk screen tells you that live location is off.
 - We delete route points after **30 days**. If there is an open incident report, we keep the route of that walk until the report has been closed.
 - We do not use location data for advertising or profiling, and we never sell it.
 
@@ -230,7 +231,7 @@ Not happy with how we handle your data? Please tell us first. You can also alway
 
 ## 14. Data protection impact assessment (DPIA)
 
-Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are preparing a data protection impact assessment (DPIA). It is not finished yet. We will complete it before the first real walk with live location takes place, and keep it up to date after that. Until then, we can switch live location off completely (see section 5). When it is on, it always works as described in section 5: only during a walk that the walker starts, and routes are deleted after 30 days.
+Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are preparing a data protection impact assessment (DPIA). It is not finished yet. We will complete it before the first real walk with live location takes place, and keep it up to date after that. Until then, live location is off (see section 5). When it is on, it always works as described in section 5: only during a walk alone with the dog that the walker starts, and routes are deleted after 30 days.
 
 ## 15. Age
 

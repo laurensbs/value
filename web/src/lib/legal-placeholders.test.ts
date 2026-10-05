@@ -3,7 +3,7 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { parseFrontMatter } from './front-matter'
 import { compareTermsVersions } from './rules'
-import { TERMS_EFFECTIVE_AT, TERMS_VERSION } from './site'
+import { TERMS_EFFECTIVE_AT, TERMS_NOTICE_FROM, TERMS_VERSION } from './site'
 import { campaign } from './support'
 
 const CONTENT = path.join(process.cwd(), 'content')
@@ -127,10 +127,17 @@ describe('changed terms (art. 19)', () => {
     expect(new Set(changes.map((file) => items(file).length)).size).toBe(1)
   })
 
-  it('take effect at least 30 days after the terms changed (TERMS_EFFECTIVE_AT)', () => {
-    const updated = Date.parse(`${read(terms[0]).data.updated}T00:00:00Z`)
-    const effective = Date.parse(`${TERMS_EFFECTIVE_AT}T00:00:00Z`)
-    expect((effective - updated) / 86_400_000).toBeGreaterThanOrEqual(30)
+  // Art. 19: important changes are announced at least 30 days ahead, counted from the day the notice goes
+  // live in the app (TERMS_NOTICE_FROM, set to the real live day when merging).
+  const day = (value: string) => Date.parse(`${value}T00:00:00Z`)
+
+  it('take effect at least 30 days after the notice goes live (TERMS_NOTICE_FROM, TERMS_EFFECTIVE_AT)', () => {
+    for (const value of [TERMS_NOTICE_FROM, TERMS_EFFECTIVE_AT]) expect(value).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    expect((day(TERMS_EFFECTIVE_AT) - day(TERMS_NOTICE_FROM)) / 86_400_000).toBeGreaterThanOrEqual(30)
+  })
+
+  it('announce a text that already exists: the notice goes live on or after the terms changed', () => {
+    for (const file of terms) expect(day(TERMS_NOTICE_FROM), file).toBeGreaterThanOrEqual(day(read(file).data.updated))
   })
 })
 

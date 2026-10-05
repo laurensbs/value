@@ -36,7 +36,7 @@ let liveOn = true
 vi.mock('../live-location', () => ({ liveLocationNow: async () => liveOn }))
 
 const { cancelRequest, createRequest, respondToRequest, setTrust } = await import('./requests')
-const { beginWalk, finishWalk } = await import('../walks')
+const { beginWalk, finishWalk, walkAccess } = await import('../walks')
 const { relationFor } = await import('../queries')
 const { acceptCurrentTerms } = await import('../terms')
 const { termsEffectiveAt } = await import('@/lib/rules')
@@ -448,6 +448,7 @@ describe('live location switched off (LIVE_LOCATION)', () => {
     await db.insert(schema.walkRequest).values([
       { id: 'pip-meet', dogId: 'pip', walkerId: 'fleur', kind: 'meet', meetVia: 'walk', startsAt: minutes(5), durationMin: 30, status: 'accepted' },
       { id: 'pip-solo', dogId: 'pip', walkerId: 'fleur', kind: 'solo', meetVia: 'walk', startsAt: minutes(10), durationMin: 30, status: 'accepted' },
+      { id: 'pip-meet-on', dogId: 'pip', walkerId: 'fleur', kind: 'meet', meetVia: 'walk', startsAt: minutes(15), durationMin: 30, status: 'accepted' },
     ])
   })
 
@@ -455,10 +456,20 @@ describe('live location switched off (LIVE_LOCATION)', () => {
     liveOn = true
   })
 
-  it('a walk with the owner there still starts and ends', async () => {
+  it('a walk with the owner there still starts and ends, without location', async () => {
     liveOn = false
     const started = await beginWalk('pip-meet', await viewer('fleur'))
-    expect(started.ok).toBe(true)
+    expect(started).toMatchObject({ ok: true, liveLocation: false })
+    expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)
+  })
+
+  it('a first meeting never collects location, even with the switch on', async () => {
+    liveOn = true
+    const started = await beginWalk('pip-meet-on', await viewer('fleur'))
+    expect(started).toMatchObject({ ok: true, liveLocation: false })
+    // Starting again returns the walk that runs, with the same answer.
+    expect(await beginWalk('pip-meet-on', await viewer('fleur'))).toEqual({ ok: true, walkId: started.walkId, liveLocation: false })
+    expect((await walkAccess(started.walkId!, await viewer('fleur')))?.kind).toBe('meet')
     expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)
   })
 
@@ -467,7 +478,8 @@ describe('live location switched off (LIVE_LOCATION)', () => {
     expect(await beginWalk('pip-solo', await viewer('fleur'))).toEqual({ ok: false, error: 'live-location-off' })
     liveOn = true
     const started = await beginWalk('pip-solo', await viewer('fleur'))
-    expect(started.ok).toBe(true)
+    expect(started).toMatchObject({ ok: true, liveLocation: true })
+    expect((await walkAccess(started.walkId!, await viewer('fleur')))?.kind).toBe('solo')
     // Switched off during the walk: ending it is always possible.
     liveOn = false
     expect((await finishWalk(started.walkId!, await viewer('fleur'))).ok).toBe(true)

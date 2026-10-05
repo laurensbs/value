@@ -7,6 +7,7 @@ import { WalkSummary } from '@/components/WalkSummary'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { countryInfo } from '@/lib/countries'
+import { walkHasLiveLocation } from '@/lib/rules'
 import { liveLocationNow } from '@/server/live-location'
 import { requireOnboarded } from '@/server/session'
 import { pointsSince, walkAccess, walkPhotos } from '@/server/walks'
@@ -63,7 +64,9 @@ export default async function FollowPage({ params }: { params: Promise<{ id: str
         initialPhotos={(await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))}
         fallbackCenter={center}
         locale={await getLocale()}
-        liveLocation={await liveLocationNow()}
+        // Only a walk alone with the dog has a live map; at a first meeting they walk together (lib/rules.ts).
+        liveLocation={walkHasLiveLocation(access.kind, await liveLocationNow())}
+        together={access.kind === 'meet'}
       />
       <div className="walk-layout">
         <ReportButton walkId={walk.id} subjectUserId={walk.walkerId} dogId={dog.id} />

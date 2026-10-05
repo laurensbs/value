@@ -573,7 +573,7 @@
       "id-not-seen": "Zelfstandig wandelen kan pas als je het ID van de wandelaar in het echt hebt gezien.",
       "meeting-ahead": "Dit kan na jullie kennismaking, als je de wandelaar en het ID in het echt hebt gezien.",
       "needs-terms": "Eerst graag je akkoord met de bijgewerkte voorwaarden.",
-      "live-location-off": "Live locatie staat op dit moment uit, en zonder live locatie start een rondje alleen met de hond niet. Een kennismaking, samen met de eigenaar, kan wel.",
+      "live-location-off": "Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel.",
       "terms-changed": "De voorwaarden zijn intussen opnieuw bijgewerkt. Kijk even naar de nieuwste versie."
     },
     "messagePlaceholder": "Hoi! Ik ben … en ik loop graag een rondje met {dog}.",
@@ -793,7 +793,7 @@
     "careFailed": "Niet opgeslagen: geen verbinding. Tik nog een keer als je weer bereik hebt.",
     "liveOff": "Live locatie staat op dit moment uit. Je route wordt niet bijgehouden of gedeeld; de tijd, het rondje-rapport en foto's werken gewoon.",
     "liveOffFollow": "Live locatie staat op dit moment uit, dus hier staat geen kaart. Je ziet wel de tijd, het rondje-rapport en de foto's.",
-    "liveOffStart": "Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie."
+    "together": "Jullie lopen samen, dus er is geen kaart nodig."
   },
   "myDogs": {
     "title": "Mijn honden",
@@ -3674,16 +3674,16 @@
   },
   "termsUpdate": {
     "title": "De voorwaarden zijn bijgewerkt",
-    "lede": "Lees in rust wat er verandert. Voor jou gelden de nieuwe voorwaarden vanaf {date}; tot die tijd blijft alles zoals het was.",
+    "lede": "Lees in rust wat er verandert. De nieuwe voorwaarden gelden voor jou vanaf {date}. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start.",
     "ledeRequired": "De nieuwe voorwaarden gelden sinds {date}. Lees wat er verandert. Na je akkoord kun je weer afspraken maken en rondjes starten.",
     "read": "Lees de volledige voorwaarden",
+    "review": "Bekijk wat er verandert",
     "accept": "Akkoord",
     "thanks": "Dank je. Je akkoord is opgeslagen.",
     "rights": "Niet akkoord? Je kunt je account altijd verwijderen in je profiel (artikel 19 van de voorwaarden).",
     "first": "Eerst de bijgewerkte voorwaarden",
     "pageTitle": "Bijgewerkte voorwaarden",
     "upToDate": "Je hebt de nieuwste voorwaarden al geaccepteerd.",
-    "onward": "Verder",
-    "whatChanges": "Wat er verandert ({n} punten)"
+    "onward": "Verder"
   }
 }

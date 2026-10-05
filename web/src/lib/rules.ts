@@ -244,11 +244,23 @@ export function canStartWalk(
 }
 
 /**
- * Live location can be switched off for everyone (LIVE_LOCATION, lib/live-location.ts). A walk where
- * the owner or shelter is there, the first meeting (terms art. 6.3), can still start and end: the
- * timer, the report and the photos work without location. A walk alone with the dog cannot start, because
- * the live map is how the owner follows it and finds the walker when something is wrong (safety
- * protocol art. 2 and 3.5). Ending a walk is always possible.
+ * Whether a walk collects live location: only a walk alone with the dog (kind 'solo'), and only while
+ * live location is switched on (LIVE_LOCATION, lib/live-location.ts). At a first meeting the owner or
+ * shelter walks along, so there is nothing to follow on a map; a group walk never starts a walk in the
+ * app at all. Neither ever collects GPS, whatever the switch says. A walk without a known kind (its
+ * request is gone) collects nothing either. The points route (POST /api/walks/<id>/points) and the walk
+ * screens both go by this.
+ */
+export function walkHasLiveLocation(kind: string | null | undefined, liveLocation: boolean): boolean {
+  return kind === 'solo' && liveLocation
+}
+
+/**
+ * Live location switched off for everyone (LIVE_LOCATION, lib/live-location.ts): a first meeting, with
+ * the owner or shelter there (terms art. 6.3), still starts and ends: the timer, the report and the
+ * photos work without location. A walk alone with the dog cannot start, because the live map is how the
+ * owner follows it and finds the walker when something is wrong (safety protocol art. 2 and 3.5).
+ * Ending a walk is always possible.
  */
 export function liveLocationReason(kind: string, liveLocation: boolean): Reason | null {
   return kind === 'solo' && !liveLocation ? 'live-location-off' : null

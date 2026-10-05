@@ -31,10 +31,13 @@ interface Props {
   sos: React.ComponentProps<typeof SosSheet>
   locale: string
   /**
-   * False while live location is switched off (LIVE_LOCATION): no GPS, nothing sent, no map, and a calm
-   * line that says so. The timer, the report, the photos and SOS work as always.
+   * Whether this walk shares location (lib/rules.ts walkHasLiveLocation): only a walk alone with the dog,
+   * with LIVE_LOCATION on. Otherwise no GPS, nothing sent, no map, and a calm line that says why. The
+   * timer, the report, the photos and SOS work as always.
    */
   liveLocation?: boolean
+  /** A first meeting: they walk together, so there is no map to follow. */
+  together?: boolean
 }
 
 const FLUSH_EVERY_MS = 10_000
@@ -55,7 +58,7 @@ function clock(ms: number): string {
  * The walker's screen during a walk. It follows the phone's GPS, draws the route,
  * and sends new points to the server every ten seconds so the owner can follow along.
  * The screen is kept awake: web pages cannot track location while the phone is locked.
- * With live location switched off it does none of the location part (see `liveLocation`).
+ * Without live location (a first meeting, or the switch off) it does none of the location part (see `liveLocation`).
  */
 export function WalkTracker({
   walkId,
@@ -68,7 +71,8 @@ export function WalkTracker({
   fallbackCenter,
   sos,
   locale,
-  liveLocation = true,
+  liveLocation = false,
+  together = false,
 }: Props) {
   const [photos, setPhotos] = useState<WalkPhoto[]>(initialPhotos)
   const t = useTranslations('walk')
@@ -83,7 +87,7 @@ export function WalkTracker({
   const [ending, startEnding] = useTransition()
   const queue = useRef<Point[]>([])
   const last = useRef<Point | null>(initialRoute.at(-1) ?? null)
-  // Nothing to send while live location is off; the server would refuse it anyway (403 live-location-off).
+  // Nothing to send without live location; the server would refuse it anyway (403 live-location-off).
   const stopped = useRef(!liveLocation)
 
   const flush = useCallback(
@@ -243,7 +247,7 @@ export function WalkTracker({
 
       {!liveLocation ? (
         <p className="notice live-off" role="status">
-          {t('liveOff')}
+          {together ? t('together') : t('liveOff')}
         </p>
       ) : gps === 'denied' ? (
         <p className="notice danger" role="alert">

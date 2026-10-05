@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { WalkSummary } from '@/components/WalkSummary'
 import { WalkTracker } from '@/components/WalkTracker'
 import { countryInfo } from '@/lib/countries'
+import { walkHasLiveLocation } from '@/lib/rules'
 import { progressFor } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
 import { liveLocationNow } from '@/server/live-location'
@@ -66,7 +67,9 @@ export default async function WalkPage({
       initialPhotos={(await walkPhotos(walk.id)).map((p) => ({ id: p.id, url: p.url, t: p.t.getTime() }))}
       fallbackCenter={center}
       locale={await getLocale()}
-      liveLocation={await liveLocationNow()}
+      // Only a walk alone with the dog has a live map; at a first meeting they walk together (lib/rules.ts).
+      liveLocation={walkHasLiveLocation(access.kind, await liveLocationNow())}
+      together={access.kind === 'meet'}
       sos={{
         emergency: info.emergency,
         animal: info.animalEmergency,

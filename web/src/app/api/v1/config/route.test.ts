@@ -62,15 +62,16 @@ describe('GET /api/v1/config: live location and the terms', () => {
     return (await res.json()) as { features: { liveLocation: boolean }; terms: { version: string; effectiveAt: string } }
   }
 
-  it('says live location is on while LIVE_LOCATION is unset, and off when it says so', async () => {
-    expect((await config()).features).toEqual({ liveLocation: true })
-    vi.stubEnv('LIVE_LOCATION', '0')
+  it('says live location is off while LIVE_LOCATION is unset, and on only when it says so', async () => {
     expect((await config()).features).toEqual({ liveLocation: false })
     vi.stubEnv('LIVE_LOCATION', 'aan')
     expect((await config()).features).toEqual({ liveLocation: true })
+    vi.stubEnv('LIVE_LOCATION', '0')
+    expect((await config()).features).toEqual({ liveLocation: false })
   })
 
   it('lets only a test server switch it off for one app, never production', async () => {
+    vi.stubEnv('LIVE_LOCATION', '1')
     const off = { ...NATIVE_IOS, 'x-rondje-live-location': 'off' }
     expect((await config(off)).features.liveLocation).toBe(true)
     vi.stubEnv('TEST_CLOCK', '1')

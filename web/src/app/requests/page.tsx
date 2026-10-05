@@ -10,7 +10,7 @@ import { TermsNotice } from '@/components/TermsNotice'
 import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
-import { canRequestSolo, canStartWalk, isMeetVia, liveLocationReason, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { canRequestSolo, canStartWalk, isInPerson, isMeetVia, liveLocationReason, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
 import { rolesOf } from '@/server/progress'
 import {
   hostContacts,
@@ -127,6 +127,8 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
   const callHow = (r: RequestRow) => t(r.request.meetVia === 'video' ? 'meet.videoHow' : 'meet.phoneHow')
 
   const mineOpen = outgoing.filter((r) => OPEN.includes(r.request.status))
+  // A walk this walker is going to start: once changed terms take effect, starting waits for the yes.
+  const upcomingWalk = mineOpen.some((r) => r.request.status === 'accepted' && isInPerson(r.request.meetVia))
   const minePast = outgoing.filter((r) => !OPEN.includes(r.request.status))
   const inOpen = incoming.filter((r) => OPEN.includes(r.request.status))
   const inPast = incoming.filter((r) => !OPEN.includes(r.request.status))
@@ -201,8 +203,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         <DeclinedNote />
       </header>
 
-      {/* Changed terms that took effect: accepting, asking and starting wait for the yes. */}
-      <TermsNotice profile={viewer.profile} onlyRequired />
+      {/* Changed terms that took effect: accepting, asking and starting wait for the yes. Before that day,
+          a walker with an accepted walk coming up hears about it here, not first at the owner's door. */}
+      <TermsNotice profile={viewer.profile} onlyRequired ahead={upcomingWalk} from="/requests" />
 
       {tab === 'mine' ? (
         <section className="stack">
@@ -274,6 +277,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           </Link>
                         ) : accepted ? (
                           // Live location off: a walk alone with the dog does not start (rules.ts liveLocationReason).
+                          // A first meeting never shares location: they walk together (rules.ts walkHasLiveLocation).
                           <StartButton
                             requestId={r.request.id}
                             enabled={canStartWalk(r.request, viewer.userId, now) && !liveLocationReason(r.request.kind, liveLocation)}
@@ -282,7 +286,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                                 ? t('request.reasons.live-location-off')
                                 : t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })
                             }
-                            liveLocation={liveLocation}
+                            together={r.request.kind !== 'solo'}
                           />
                         ) : null}
                         {accepted && !active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}

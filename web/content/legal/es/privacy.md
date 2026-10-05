@@ -116,10 +116,11 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 ## 5. Datos de ubicación
 
 - **Tu zona** solo se muestra redondeada a unos 500 metros. La dirección exacta o el punto de encuentro solo los ve la otra persona tras la aceptación, y solo si los indicas.
-- **La ubicación en tiempo real** solo se recoge cuando inicias un paseo como paseante, y hasta que lo terminas. Tu móvil te pedirá permiso. Puedes retirarlo en los ajustes del móvil, pero entonces el mapa en tiempo real no funcionará.
-- Durante el paseo, el propietario o la protectora del perro ve un mapa en tiempo real con el recorrido. Tú ves tu propio recorrido.
+- **La ubicación en tiempo real** solo se recoge durante un paseo a solas con el perro: desde que lo inicias como paseante hasta que lo terminas. Tu móvil te pedirá permiso. Puedes retirarlo en los ajustes del móvil, pero entonces el mapa en tiempo real no funcionará.
+- En un primer encuentro y en un paseo en grupo nunca recogemos la ubicación: el propietario o la protectora va con vosotros.
+- Durante un paseo a solas con el perro, el propietario o la protectora del perro ve un mapa en tiempo real con el recorrido. Tú ves tu propio recorrido.
 - Si el paseo dura mucho más de lo previsto, el propietario o la protectora recibe un aviso.
-- **La ubicación en tiempo real puede estar desactivada.** Podemos desactivar la ubicación en tiempo real para todos, por ejemplo mientras la EIPD no esté terminada (ver apartado 14). Mientras esté desactivada, no recogemos ni guardamos ninguna ubicación durante un paseo, y el propietario o la protectora no ve ningún mapa en tiempo real. Entonces solo puede empezar un paseo en el que esté presente el propietario o alguien de la protectora, como el primer encuentro. En la pantalla del paseo verás que la ubicación en tiempo real está desactivada.
+- **La ubicación en tiempo real está desactivada por ahora.** Mientras la EIPD no esté terminada (ver apartado 14), la ubicación en tiempo real está desactivada para todos, y también después podemos desactivarla. Mientras esté desactivada, no recogemos ni guardamos ninguna ubicación, y el propietario o la protectora no ve ningún mapa en tiempo real. Entonces no empieza un paseo a solas con el perro; un primer encuentro, sí. En la pantalla del paseo verás que la ubicación en tiempo real está desactivada.
 - Borramos los puntos del recorrido a los **30 días**. Si hay una denuncia de incidente abierta, conservamos el recorrido de ese paseo hasta que se cierre.
 - No usamos los datos de ubicación para publicidad ni para elaborar perfiles, y nunca los vendemos.
 
@@ -230,7 +231,7 @@ Algunos datos no podemos borrarlos de inmediato, por ejemplo si son necesarios p
 
 ## 14. Evaluación de impacto (EIPD)
 
-Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso estamos preparando una evaluación de impacto relativa a la protección de datos (EIPD). Todavía no está terminada. La completaremos antes de que se haga el primer paseo de verdad con ubicación en tiempo real, y después la mantendremos actualizada. Hasta entonces, podemos desactivar del todo la ubicación en tiempo real (ver apartado 5). Cuando está activada, funciona siempre como dice el apartado 5: solo durante un paseo que inicia el paseante, y los recorridos se borran a los 30 días.
+Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso estamos preparando una evaluación de impacto relativa a la protección de datos (EIPD). Todavía no está terminada. La completaremos antes de que se haga el primer paseo de verdad con ubicación en tiempo real, y después la mantendremos actualizada. Hasta entonces, la ubicación en tiempo real está desactivada (ver apartado 5). Cuando está activada, funciona siempre como dice el apartado 5: solo durante un paseo a solas con el perro que inicia el paseante, y los recorridos se borran a los 30 días.
 
 ## 15. Edad
 

@@ -26,9 +26,11 @@ import crowdfunding from '../../../../../content/crowdfunding.json'
  * Vercel); `auth.appleNative` says the system Apple sheet works (identity token to
  * /api/auth/sign-in/social). Google, and Apple without it, go through /api/auth/native/start.
  *
- * `features.liveLocation` is false while live location is switched off (LIVE_LOCATION,
- * lib/live-location.ts): then the app collects and sends no location during walks, shows no live map,
- * and says so calmly; a walk alone with the dog cannot start ('live-location-off').
+ * `features.liveLocation` is the switch for live location (LIVE_LOCATION, lib/live-location.ts), off
+ * unless it is switched on. Off: the app collects and sends no location during walks, shows no live
+ * map, and says so calmly; a walk alone with the dog cannot start ('live-location-off'). On: still only
+ * a walk alone with the dog collects location, never a first meeting (lib/rules.ts walkHasLiveLocation);
+ * per walk, `liveLocation` in POST /api/v1/walks and GET /api/walks/<id>/live says so.
  *
  * `terms` is the current version of the terms and the moment it takes effect for people who agreed to
  * an older one (terms art. 19). Where someone stands is in /api/v1/me.

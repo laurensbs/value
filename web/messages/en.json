@@ -573,7 +573,7 @@
       "id-not-seen": "Solo walks are only possible once you've seen the walker's ID in person.",
       "meeting-ahead": "This is possible after your first meeting, once you've seen the walker and their ID in person.",
       "needs-terms": "Please agree to the updated terms first.",
-      "live-location-off": "Live location is off for now, and a walk alone with the dog does not start without it. A first meeting, together with the owner, is possible.",
+      "live-location-off": "Live location is off for now, so a walk alone with the dog doesn't start yet. Walking together with the owner is possible.",
       "terms-changed": "The terms have been updated again in the meantime. Please take a look at the latest version."
     },
     "messagePlaceholder": "Hi! I'm … and I'd love to walk {dog}.",
@@ -793,7 +793,7 @@
     "careFailed": "Not saved: no connection. Tap again when you're back in range.",
     "liveOff": "Live location is off for now. Your route is not tracked or shared; the time, the walk report and photos work as usual.",
     "liveOffFollow": "Live location is off for now, so there is no map here. You still see the time, the walk report and the photos.",
-    "liveOffStart": "Live location is off for now: your phone does not share your location during this walk."
+    "together": "You're walking together, so there's no need for a map."
   },
   "myDogs": {
     "title": "My dogs",
@@ -3674,16 +3674,16 @@
   },
   "termsUpdate": {
     "title": "The terms have been updated",
-    "lede": "Take your time to read what changes. For you, the new terms apply from {date}; until then, everything stays as it was.",
+    "lede": "Take your time to read what changes. The new terms apply to you from {date}. From then on, we ask for your agreement first, before you arrange something new or start a walk.",
     "ledeRequired": "The new terms have applied since {date}. Read what changes. Once you agree, you can make appointments and start walks again.",
     "read": "Read the full terms",
+    "review": "See what changes",
     "accept": "I agree",
     "thanks": "Thank you. Your agreement has been saved.",
     "rights": "Don't agree? You can always delete your account in your profile (article 19 of the terms).",
     "first": "First the updated terms",
     "pageTitle": "Updated terms",
     "upToDate": "You have already agreed to the latest terms.",
-    "onward": "Continue",
-    "whatChanges": "What changes ({n} points)"
+    "onward": "Continue"
   }
 }
