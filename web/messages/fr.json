@@ -2885,7 +2885,8 @@
       "moderation": "Modération",
       "shelters": "Refuges",
       "tips": "Suggestions",
-      "numbers": "Chiffres"
+      "numbers": "Chiffres",
+      "sources": "Sources"
     },
     "tiles": {
       "label": "Aller à une rubrique",
@@ -3017,7 +3018,48 @@
       "numbers": {
         "title": "Chiffres",
         "lede": "Comment Rondje Mee grandit, d’où viennent les nouveaux et comment tout est configuré.",
-        "weekly": "Chiffres par semaine dans le centre de lancement"
+        "weekly": "Chiffres par semaine dans le centre de lancement",
+        "bySource": "Par semaine, source et rôle"
+      },
+      "sources": {
+        "title": "Sources",
+        "lede": "D'où viennent les nouvelles personnes, par semaine et par rôle, et combien de vrais chiens ont été ajoutés. Uniquement des chiffres, les 8 dernières semaines.",
+        "weeksTitle": "Inscriptions par semaine",
+        "sourcesTitle": "Par source, 8 semaines au total",
+        "detailTitle": "Par semaine et par source",
+        "week": "Semaine {week}",
+        "together": "Ensemble",
+        "none": "Aucune inscription ces 8 semaines.",
+        "direct": "Direct",
+        "invite": "Invitation",
+        "col": {
+          "week": "Semaine",
+          "source": "Source",
+          "total": "Total",
+          "walker": "Promeneur",
+          "owner": "Propriétaire",
+          "shelter": "Refuge",
+          "dogs": "Nouveaux chiens"
+        },
+        "notesTitle": "Comment nous comptons",
+        "notes": {
+          "signup": "Une inscription compte dès que quelqu'un termine son profil. La source est le code du lien par lequel la personne est arrivée (/r/CODE ou /aanmelden?bron=…) ; le navigateur le garde 30 jours.",
+          "sources": "Direct : sans code. Invitation : via le lien personnel de quelqu'un qui participe déjà ; ces codes restent privés.",
+          "roles": "Une personne qui promène et a un chien compte pour les deux ; le total compte chacun une fois. Refuge : quelqu'un qui fait partie d'un refuge ou s'est inscrit comme refuge. Le rôle est celui qui figure aujourd'hui dans le profil.",
+          "real": "Les données d'exemple et les administrateurs ne comptent pas. Nouveaux chiens : de vrais chiens mis en ligne, sans brouillons ni chiens d'exemple."
+        },
+        "fund": {
+          "title": "Collecte",
+          "progress": "{raised} sur {goal}",
+          "percent": "{percent} % de l'objectif",
+          "updated": "Mis à jour le {date}",
+          "notUpdated": "Pas de date",
+          "missing": "Aucun objectif.",
+          "howTitle": "Mettre le montant à jour",
+          "how": "Regardez sur la page de la collecte combien a été reçu. Indiquez ce montant en euros entiers dans <code>raised</code> de <code>web/content/crowdfunding.json</code>, et la date du jour dans <code>updated</code> (AAAA-MM-JJ). Cela passe par une pull request ; une fois en ligne, le nouveau montant s'affiche ici et partout où la collecte apparaît.",
+          "manual": "Le montant est mis à jour à la main. Le vrai montant figure toujours sur la page de la collecte.",
+          "open": "Ouvrir la page de la collecte"
+        }
       }
     }
   },

@@ -12,7 +12,7 @@ Dit plan zet alles in één volgorde, met doelen en geld. De uitwerking staat el
 | Partners en concept-mails | [`PARTNERS.md`](PARTNERS.md) |
 | Video-ideeën en scripts | [`GROWTH.md`](GROWTH.md) |
 | Het Instagram-account | [`INSTAGRAM.md`](INSTAGRAM.md) |
-| In de app: campagnebouwer, postplanner met deelbeelden, campagnelinks, cijfers, opvangen en de lanceerlijst | Beheer: `/admin/marketing`, `/admin/numbers`, `/admin/shelters`, `/admin/launch` |
+| In de app: campagnebouwer, postplanner met deelbeelden, campagnelinks, cijfers, opvangen en de lanceerlijst | Beheer: `/admin/marketing`, `/admin/numbers`, `/admin/sources`, `/admin/shelters`, `/admin/launch` |
 | Toestemming voor foto en video | [`legal/media-consent.md`](legal/media-consent.md) |
 | Juridische open punten per land | [`legal/REVIEW.md`](legal/REVIEW.md) |
 
@@ -361,7 +361,7 @@ De kosten komen uit `web/content/costs.json`. Op `/support` is dat ongeveer €1
 
 **Wat je met de hand bijhoudt:** alles wat Beheer niet zelf toont. Maak één spreadsheet met een rij per week en deze kolommen: week · honden opvang · honden eigenaar · opvangen live · wandelaars · kennismakingen · rondjes vaste koppels · groepswandelingen (gehouden, bezetting) · retentie · top 3 codes · top 3 stemmen · Patreon netto · kosten · open meldingen · incidenten · jouw uren. Elke zondag 15 minuten. De Instagram-cijfers staan in [`INSTAGRAM.md`](INSTAGRAM.md) §14.
 
-**Zo tellen de codes:** een link `/r/CODE` onthoudt de code 30 dagen in de browser. De aanmelding telt pas als iemand zijn profiel afmaakt, in dezelfde browser. Wie in Instagram op de link tikt en later in Safari een account maakt, telt dus niet mee. De echte aantallen liggen hoger dan wat Beheer toont.
+**Zo tellen de codes:** een link `/r/CODE` onthoudt de code 30 dagen in de browser. De aanmelding telt pas als iemand zijn profiel afmaakt, in dezelfde browser. Wie in Instagram op de link tikt en later in Safari een account maakt, telt dus niet mee. De echte aantallen liggen hoger dan wat Beheer toont. Per week, per code en per rol (wandelaar, eigenaar, opvang) staan ze in Beheer → **Bronnen** (`/admin/sources`), samen met de nieuwe echte honden en de stand van de inzamelactie.
 
 **Wensen voor later** (er is geen code aangepast):
 - een `/r/CODE`-link die doorstuurt naar een opvangpagina, zodat ook de opvangposter (QR naar `/dogs?org=ID`) meetelt;

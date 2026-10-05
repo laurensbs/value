@@ -2885,7 +2885,8 @@
       "moderation": "Moderation",
       "shelters": "Shelters",
       "tips": "Tips",
-      "numbers": "Numbers"
+      "numbers": "Numbers",
+      "sources": "Sources"
     },
     "tiles": {
       "label": "Go to a section",
@@ -3017,7 +3018,48 @@
       "numbers": {
         "title": "Numbers",
         "lede": "How Rondje Mee grows, where new people come from and how everything is set up.",
-        "weekly": "Numbers per week in the launch hub"
+        "weekly": "Numbers per week in the launch hub",
+        "bySource": "Per week, source and role"
+      },
+      "sources": {
+        "title": "Sources",
+        "lede": "Where new people come from, per week and per role, and how many real dogs were added. Counts only, the last 8 weeks.",
+        "weeksTitle": "Sign-ups per week",
+        "sourcesTitle": "Per source, 8 weeks together",
+        "detailTitle": "Per week and source",
+        "week": "Week {week}",
+        "together": "Together",
+        "none": "No sign-ups in these 8 weeks.",
+        "direct": "Direct",
+        "invite": "Invitation",
+        "col": {
+          "week": "Week",
+          "source": "Source",
+          "total": "Total",
+          "walker": "Walker",
+          "owner": "Owner",
+          "shelter": "Shelter",
+          "dogs": "New dogs"
+        },
+        "notesTitle": "How we count",
+        "notes": {
+          "signup": "A sign-up counts once someone finishes their profile. The source is the code of the link they came in through (/r/CODE or /aanmelden?bron=…); the browser remembers it for 30 days.",
+          "sources": "Direct: no code. Invitation: through the personal link of someone who already takes part; those codes stay private.",
+          "roles": "Someone who walks and has a dog counts for both; the total counts everyone once. Shelter: someone at a shelter, or who signed up as a shelter. The role is as the profile says now.",
+          "real": "Example data and admins never count. New dogs: real dogs that went online, without drafts or example dogs."
+        },
+        "fund": {
+          "title": "Fundraiser",
+          "progress": "{raised} of {goal}",
+          "percent": "{percent}% of the goal",
+          "updated": "Updated on {date}",
+          "notUpdated": "No date filled in",
+          "missing": "No goal filled in.",
+          "howTitle": "How to update the amount",
+          "how": "Check on the campaign page how much has come in. Put that amount in whole euros at <code>raised</code> in <code>web/content/crowdfunding.json</code>, and today's date at <code>updated</code> (YYYY-MM-DD). That goes through a pull request; once it is live, the new amount shows here and everywhere the campaign is shown.",
+          "manual": "The amount is updated by hand. The real amount is always on the campaign page.",
+          "open": "Open the campaign page"
+        }
       }
     }
   },

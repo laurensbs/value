@@ -1,0 +1,181 @@
+/* Bronnen (/admin/sources): calm count tables and the crowdfunding bar. Mobile first (375 px): a
+   table scrolls sideways inside its own box, never the page. Only design tokens from globals.css,
+   so light and dark both work. */
+
+.src-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.src-table {
+  width: 100%;
+  /* Separate borders: with collapsed ones a sticky cell loses its line. */
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.src-table th,
+.src-table td {
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.src-table th:first-child {
+  padding-left: 10px;
+  text-align: left;
+}
+
+.src-table tr > :last-child {
+  padding-right: 10px;
+}
+
+/* On a narrow phone the headings ("Nieuwe honden") and the date range may wrap, so all columns fit. */
+.src-table thead th {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+  line-height: 1.25;
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+.src-table tbody th[scope='row'] {
+  white-space: normal;
+}
+
+/* When a table does scroll sideways, the week or source stays in view. */
+.src-table th[scope='row'],
+.src-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--surface);
+}
+
+.src-table tbody th {
+  font-weight: 600;
+}
+
+.src-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.src-table tfoot th,
+.src-table tfoot td {
+  border-top: 1px solid var(--line);
+  border-bottom: 0;
+  font-weight: 750;
+}
+
+.src-table code {
+  font-size: 0.8rem;
+}
+
+.src-week,
+.src-range {
+  display: block;
+}
+
+.src-week {
+  white-space: nowrap;
+}
+
+.src-range {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.src-range-start {
+  display: none;
+}
+
+@media (max-width: 399px) {
+  .src-range-full {
+    display: none;
+  }
+
+  .src-range-start {
+    display: inline;
+  }
+}
+
+.src-zero {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.src-strong {
+  font-weight: 750;
+}
+
+/* The dogs are not sign-ups: a quiet line keeps them apart. */
+.src-dogs {
+  border-left: 1px solid var(--line);
+}
+
+/* Per week and source: one group per week, its name on a soft band. */
+.src-group th {
+  background: var(--paper);
+  font-weight: 700;
+  text-align: left;
+}
+
+.src-group .src-range {
+  display: inline;
+  margin-left: 6px;
+}
+
+.src-table tbody + tbody tr.src-group > * {
+  border-top: 1px solid var(--line);
+}
+
+.src-detail summary {
+  width: fit-content;
+  /* A tap target of at least 44 px, keeping the disclosure marker. */
+  padding-block: 11px;
+  color: var(--grass);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.src-detail[open] summary {
+  margin-bottom: 8px;
+}
+
+.src-notes {
+  margin: 0;
+  padding-left: 1.1em;
+  display: grid;
+  gap: 6px;
+}
+
+.src-progress {
+  height: 12px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.src-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--grass);
+}
+
+.src-fund-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 12px;
+  margin: 0;
+}
