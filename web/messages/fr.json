@@ -192,7 +192,8 @@
       "s1": "Présentez-vous",
       "s2": "Choisissez un chien",
       "s3": "D'abord, une rencontre ensemble",
-      "s4": "Votre balade régulière"
+      "s4": "Votre balade régulière",
+      "s4Off": "Après la balade"
     },
     "app": {
       "eyebrow": "Sur votre téléphone",
@@ -680,7 +681,7 @@
     "declinedNote": "Vous avez dit non à {walker} pour {dog}. {walker} reçoit une notification.",
     "trustPair": "{walker} et {dog}",
     "trustLater": "Après votre rencontre, vous indiquez ici si vous avez vu en personne la pièce d’identité de {walker}.",
-    "idHow": "Regardez la photo, le nom et la date de naissance. Ne prenez pas de photo et ne notez rien, pas même le numéro de la pièce d'identité."
+    "idHow": "Regardez la photo, le nom et la date de naissance. Ne prenez pas de photo et ne notez rien, pas même le numéro de la pièce d’identité."
   },
   "meet": {
     "legend": "Comment souhaitez-vous faire connaissance ?",
@@ -832,7 +833,9 @@
     "age": "Âge (ans)",
     "story": "Son histoire",
     "storyHint": "Qui est votre chien, et pourquoi une balade de plus lui ferait du bien ?",
+    "storyPublic": "Tout le monde peut lire cette histoire. Parlez du chien, pas de vous : ni nom, ni adresse, ni heures où vous êtes chez vous.",
     "needs": "Qu'est-ce qui l'aiderait le plus ?",
+    "needsPublic": "Tout le monde peut aussi lire ceci. Parlez seulement du chien.",
     "traits": "Particularités",
     "traitsHint": "Séparées par des virgules, par exemple : ne tire pas, s'entend bien avec les chats, a peur des vélos",
     "walkMinutes": "Durée (minutes)",
@@ -915,8 +918,8 @@
       "young": "{name} est jeune et déborde d'énergie.",
       "dogs": "{name} aime les autres chiens.",
       "people": "{name} adore les gens.",
-      "work": "Mon travail me laisse peu de temps en journée, alors une balade en plus est la bienvenue.",
-      "mobility": "Je marche moins facilement moi-même, alors une balade en plus est la bienvenue.",
+      "work": "{name} aurait bien besoin d'un peu plus d'exercice, alors une balade en plus est la bienvenue.",
+      "mobility": "{name} trouve notre petit tour habituel un peu court, alors une balade en plus est la bienvenue.",
       "regular": "Nous cherchons quelqu'un de régulier pour quelques fois par semaine."
     },
     "ownerConsent": "Le propriétaire est au courant et d'accord",
@@ -1427,6 +1430,7 @@
     "level1": "Nouveau compte : d’abord le quiz de sécurité. Ensuite, vous pouvez demander une première rencontre ou participer à une balade en groupe encadrée.",
     "level2": "Après la première rencontre : le propriétaire a vu votre pièce d'identité en personne et peut autoriser les balades en autonomie pour ce chien-là.",
     "level3": "Ensuite : demander des balades en autonomie aux propriétaires qui l’autorisent pour leur chien.",
+    "level3Off": "Ensuite : des balades en autonomie avec les propriétaires qui l’autorisent pour leur chien. La localisation en direct est désactivée pour le moment, donc une balade seul ne démarre pas encore. Se promener ensemble reste possible.",
     "during": "Pendant la balade",
     "duringText": "Votre téléphone partage votre position avec le propriétaire pendant toute la balade. Si elle dure plus longtemps que prévu, vous recevez tous les deux une notification. Le bouton d'aide vous montre tout de suite qui appeler.",
     "duringTextOff": "La localisation en direct est désactivée pour le moment, donc votre téléphone ne partage aucune position. D’ici là, vous vous promenez avec le propriétaire ou le refuge. Le bouton d'aide vous montre tout de suite qui appeler.",

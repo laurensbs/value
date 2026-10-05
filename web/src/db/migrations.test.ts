@@ -1,6 +1,7 @@
 import { PGlite } from '@electric-sql/pglite'
 import { describe, expect, it } from 'vitest'
 import migrations from './migrations.json'
+import { DOGS } from './seed'
 
 /** Production already has 0000 with real rows; every later migration must apply on top of that. */
 describe('database migrations', () => {
@@ -138,6 +139,74 @@ describe('database migrations', () => {
     expect(left.rows).toEqual([{ user_id: 'ans' }])
     await db.close()
   }, 30_000)
+
+  it('0013 gives example dogs the new texts: only unedited examples change, real dogs never, and twice is harmless', async () => {
+    const db = new PGlite()
+    const at = migrations.findIndex((m) => m.tag === '0013_demo_texts')
+    expect(at).toBeGreaterThan(0)
+    for (const migration of migrations.slice(0, at)) for (const statement of migration.statements) await db.exec(statement)
+
+    // The example texts production was seeded with (seed.ts before 5 Oct 2026): they named the owner.
+    const old = {
+      saar: 'Ans loopt sinds haar nieuwe heup alleen nog kleine stukjes. Saar is gewend aan lange rondjes langs de Singel en mist ze.',
+      saarNeeds: 'Twee extra rondjes per week houden Saar fit tot Ans weer verder kan lopen.',
+      pip: 'Henk heeft COPD. Een blokje om lukt nog, het park niet meer. Pip kijkt elke middag naar de deur.',
+      tess: 'Marian is midden in een chemokuur en te moe om Tess uit te laten. Een vaste wandelaar geeft rust.',
+      tessNeeds: 'Voor een paar maanden, op dinsdag en vrijdag.',
+      bolle: 'Paul loopt met een rollator. Het rondje naar het Citadelpark lukt niet meer, het praatje na afloop mist hij het meest.',
+      luna: 'Carmen ya no puede seguir el ritmo de Luna. En el Retiro, Luna es feliz con una pelota.',
+    }
+    const dogs: [id: string, isDemo: boolean, story: string, needs: string][] = [
+      ['demo-saar', true, old.saar, old.saarNeeds],
+      ['demo-tess', true, old.tess, old.tessNeeds],
+      ['demo-luna', true, old.luna, 'Mucho movimiento, idealmente por la mañana.'],
+      // An example text an admin already changed: left as it is.
+      ['demo-pip', true, 'Pip is al elf jaar mijn maatje.', 'Eén kort rondje per dag is genoeg.'],
+      // A real dog with an example id, or with the exact example text, or an example not in the list: never touched.
+      ['demo-bolle', false, old.bolle, ''],
+      ['echt-1', false, old.saar, old.saarNeeds],
+      ['demo-mo', true, old.pip, old.tessNeeds],
+    ]
+    for (const [id, isDemo, story, needs] of dogs) {
+      await db.query(`insert into dog (id, name, country, city, story, needs, is_demo, updated_at) values ($1, $1, 'NL', 'Utrecht', $2, $3, $4, '2026-10-02 10:00')`, [
+        id,
+        story,
+        needs,
+        isDemo,
+      ])
+    }
+
+    // Twice: a second cold start runs it again and changes nothing more.
+    for (const migration of migrations.slice(at)) for (const statement of migration.statements) await db.exec(statement)
+    for (const statement of migrations[at].statements) await db.exec(statement)
+
+    const rows = await db.query<{ id: string; story: string; needs: string; updated: string }>(
+      `select id, story, needs, to_char(updated_at, 'YYYY-MM-DD HH24:MI') as updated from dog order by id`,
+    )
+    const byId = Object.fromEntries(rows.rows.map((r) => [r.id, r]))
+    const seeded = (id: string) => DOGS.find((d) => d.id === id)!
+    // The new texts are exactly the ones a fresh database gets from seed.ts.
+    expect(byId['demo-saar']).toMatchObject({ story: seeded('demo-saar').story, needs: seeded('demo-saar').needs })
+    expect(byId['demo-tess']).toMatchObject({ story: seeded('demo-tess').story, needs: seeded('demo-tess').needs })
+    expect(byId['demo-luna']).toMatchObject({ story: seeded('demo-luna').story, needs: 'Mucho movimiento, idealmente por la mañana.' })
+    expect(byId['demo-pip']).toMatchObject({ story: 'Pip is al elf jaar mijn maatje.', needs: 'Eén kort rondje per dag is genoeg.' })
+    expect(byId['demo-bolle']).toMatchObject({ story: old.bolle, needs: '' })
+    expect(byId['echt-1']).toMatchObject({ story: old.saar, needs: old.saarNeeds })
+    expect(byId['demo-mo']).toMatchObject({ story: old.pip, needs: old.tessNeeds })
+    // Rows are not rewritten otherwise: "last changed" stays as it was.
+    expect(rows.rows.map((r) => r.updated)).toEqual(rows.rows.map(() => '2026-10-02 10:00'))
+    await db.close()
+  }, 30_000)
+
+  it('the example dogs in seed.ts tell about the dog, never about their made-up owner', () => {
+    const owners = ['Ans', 'Henk', 'Marian', 'Paul', 'Carmen']
+    for (const dog of DOGS) {
+      const text = [dog.story, dog.needs, dog.treatsNote, ...(dog.traits ?? [])].join(' ')
+      for (const name of owners) expect(text, `${dog.id} ${name}`).not.toMatch(new RegExp(`\\b${name}\\b`))
+      // Nor their health, or when someone is at home.
+      expect(text, dog.id).not.toMatch(/COPD|chemo|heup|rollator|ritmo|dinsdag|vrijdag|elke middag/i)
+    }
+  })
 
   it('only ever adds: no drops or renames after the first migration', () => {
     for (const migration of migrations.slice(1)) {

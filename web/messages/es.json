@@ -192,7 +192,8 @@
       "s1": "Cuéntanos quién eres",
       "s2": "Elige un perro",
       "s3": "Primero, un encuentro juntos",
-      "s4": "Tu paseo fijo"
+      "s4": "Tu paseo fijo",
+      "s4Off": "Después del paseo"
     },
     "app": {
       "eyebrow": "En tu móvil",
@@ -832,7 +833,9 @@
     "age": "Edad (años)",
     "story": "Su historia",
     "storyHint": "¿Cómo es tu perro y por qué le vendría bien un paseo extra?",
+    "storyPublic": "Cualquiera puede leer esta historia. Escribe sobre el perro, no sobre ti: sin nombre, dirección ni horas en las que estás en casa.",
     "needs": "¿Qué es lo que más le ayudaría?",
+    "needsPublic": "Esto también lo puede leer cualquiera. Habla solo del perro.",
     "traits": "Rasgos",
     "traitsHint": "Separados por comas, por ejemplo: no tira, se lleva bien con gatos, le dan miedo las bicis",
     "walkMinutes": "Duración (minutos)",
@@ -915,8 +918,8 @@
       "young": "{name} es joven y tiene mucha energía.",
       "dogs": "A {name} le gustan los otros perros.",
       "people": "A {name} le encanta la gente.",
-      "work": "Por mi trabajo tengo poco tiempo durante el día, así que un paseo extra es bienvenido.",
-      "mobility": "A mí me cuesta más caminar, así que un paseo extra es bienvenido.",
+      "work": "A {name} le vendría bien moverse un poco más, así que un paseo extra es bienvenido.",
+      "mobility": "A {name} nuestra vuelta de siempre se le queda corta, así que un paseo extra es bienvenido.",
       "regular": "Buscamos a alguien fijo para unas cuantas veces por semana."
     },
     "ownerConsent": "El dueño lo sabe y está de acuerdo",
@@ -1427,6 +1430,7 @@
     "level1": "Cuenta nueva: primero el test de seguridad. Después puedes pedir un primer encuentro o unirte a un paseo en grupo acompañado.",
     "level2": "Después del primer encuentro: el dueño ha visto tu documento de identidad en persona y puede permitir paseos por tu cuenta con ese perro en concreto.",
     "level3": "Después: pedir paseos por tu cuenta a los dueños que lo permitan para su perro.",
+    "level3Off": "Después: paseos por tu cuenta con los dueños que lo permitan para su perro. La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible.",
     "during": "Durante el paseo",
     "duringText": "Tu móvil comparte tu ubicación con el dueño mientras dura el paseo. Si se alarga, los dos recibís un aviso. Con el botón de ayuda ves al momento a quién llamar.",
     "duringTextOff": "La ubicación en directo está desactivada por ahora, así que tu móvil no comparte ninguna ubicación. Hasta entonces paseas junto al dueño o la protectora. Con el botón de ayuda ves al momento a quién llamar.",

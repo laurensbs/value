@@ -182,12 +182,33 @@ describe('a private owner, seen without an account (DPIA maatregel M4)', () => {
     const bello = visitor.find((i) => i.dog.id === 'bello')!
     expect(bello.host).toEqual({ kind: 'owner', id: 'ans', name: '', photoUrl: null, city: 'Utrecht', verified: false })
     expect([bello.dog.lat, bello.dog.lng]).toEqual([null, null])
-    // Still nearest first, from the spot the visitor cannot see.
-    expect(bello.distanceM).toBeGreaterThan(0)
+    // No exact distance goes out for a visitor, not even one that is never printed.
+    expect(visitor.map((i) => i.distanceM)).toEqual(visitor.map(() => null))
     expect(visitor.find((i) => i.dog.id === 'rex')?.dog.lat).toBe(52.07)
 
     const member = (await listDogs({ country: 'NL', near })).find((i) => i.dog.id === 'bello')!
     expect(member.host).toMatchObject({ name: 'Ans', photoUrl: 'https://example.org/ans.jpg' })
     expect(member.dog.lat).toBe(52.095)
+    expect(member.distanceM).toBeGreaterThan(0)
+  })
+
+  it('in the list, a visitor’s order says nothing about where in town a dog lives: newest first within about 5 km', async () => {
+    // Bello (oldest, ±0.7 km), Rex (shelter, ±2.6 km) and Tobi (newest, ±4.2 km) share a grid cell of about
+    // 5 km with the visitor; Kai is only ±1.3 km away, but just across the line into the next cell west.
+    await client.exec(`
+      insert into dog (id, owner_id, name, country, city, lat, lng, created_at) values
+        ('tobi', 'ans', 'Tobi', 'NL', 'Utrecht', 52.1, 5.18, now() + interval '1 hour'),
+        ('kai', 'ans', 'Kai', 'NL', 'Utrecht', 52.08, 5.11, now() + interval '2 hours');
+    `)
+    const near = { lat: 52.09, lng: 5.12 }
+    const ids = (items: { dog: { id: string } }[]) => items.map((i) => i.dog.id)
+    expect(ids(await listDogs({ country: 'NL', near, visitor: true }))).toEqual(['tobi', 'rex', 'bello', 'kai'])
+    // Wherever in that cell the visitor seems to be, the order stays the same.
+    expect(ids(await listDogs({ country: 'NL', near: { lat: 52.06, lng: 5.185 }, visitor: true }))).toEqual(['tobi', 'rex', 'bello', 'kai'])
+    // Members: nearest first by the exact distance, as before.
+    expect(ids(await listDogs({ country: 'NL', near }))).toEqual(['bello', 'kai', 'rex', 'tobi'])
+    // Without a position at all: newest first for a visitor.
+    expect(ids(await listDogs({ country: 'NL', visitor: true }))).toEqual(['kai', 'tobi', 'rex', 'bello'])
+    await client.exec(`delete from dog where id in ('tobi', 'kai')`)
   })
 })

@@ -4,14 +4,19 @@ import { DogTile } from './DogTile'
 import { LandingIcon, PawMark } from './LandingIcon'
 import { BEAGLE } from './looks'
 
-/** "How it works" as four small illustrated scenes on one dashed walking route. */
-export async function HowItWorks() {
+/**
+ * "How it works" as four small illustrated scenes on one dashed walking route. Walking alone, a fixed
+ * weekly walk and following it live only while live location is on (`live`, LIVE_LOCATION in
+ * lib/live-location.ts); otherwise steps 3 and 4 say what is true now, like the town pages.
+ */
+export async function HowItWorks({ live }: { live: boolean }) {
   const t = await getTranslations()
+  const off = live ? '' : 'Off'
   const steps = [
     { n: 1, title: t('landing.how.s1'), text: t('home.how1'), art: <ProfileArt /> },
     { n: 2, title: t('landing.how.s2'), text: t('home.how2'), art: <DogArt /> },
-    { n: 3, title: t('landing.how.s3'), text: t('home.how3'), art: <MeetArt /> },
-    { n: 4, title: t('landing.how.s4'), text: t('home.how4'), art: <RouteArt /> },
+    { n: 3, title: t('landing.how.s3'), text: t(`home.how3${off}`), art: <MeetArt /> },
+    { n: 4, title: t(`landing.how.s4${off}`), text: t(`home.how4${off}`), art: <RouteArt /> },
   ]
   return (
     <section className="lp-how" aria-labelledby="lp-how-title">

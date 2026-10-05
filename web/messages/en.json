@@ -192,7 +192,8 @@
       "s1": "Tell us who you are",
       "s2": "Pick a dog",
       "s3": "Meet together first",
-      "s4": "Your regular walk"
+      "s4": "Your regular walk",
+      "s4Off": "After the walk"
     },
     "app": {
       "eyebrow": "On your phone",
@@ -832,7 +833,9 @@
     "age": "Age (years)",
     "story": "The story",
     "storyHint": "Who is your dog, and why would an extra walk be nice?",
+    "storyPublic": "Anyone can read this story. Write about the dog, not yourself: no name, address or times when you are home.",
     "needs": "What would help most?",
+    "needsPublic": "Anyone can read this too. Keep it about the dog.",
     "traits": "Traits",
     "traitsHint": "Separated by commas, for example: doesn't pull, fine with cats, scared of bikes",
     "walkMinutes": "How long (minutes)",
@@ -915,8 +918,8 @@
       "young": "{name} is young and has lots of energy.",
       "dogs": "{name} likes other dogs.",
       "people": "{name} loves people.",
-      "work": "My work leaves me little time during the day, so an extra walk is welcome.",
-      "mobility": "I don't walk as easily myself, so an extra walk is welcome.",
+      "work": "{name} could do with a bit more exercise, so an extra walk is welcome.",
+      "mobility": "{name} finds our usual loop a bit short, so an extra walk is welcome.",
       "regular": "We're looking for a regular buddy a few times a week."
     },
     "ownerConsent": "The owner knows about it and is happy with it",
@@ -1427,6 +1430,7 @@
     "level1": "New account: the safety quiz first. Then you can request a first meeting or join a supervised group walk.",
     "level2": "After the first meeting: the owner has seen your ID in person and can allow solo walks for that one dog.",
     "level3": "After that: request solo walks with owners who allow them for their dog.",
+    "level3Off": "After that: solo walks with owners who allow them for their dog. Live location is off for now, so a walk alone doesn't start yet. Walking together is possible.",
     "during": "During the walk",
     "duringText": "Your phone shares your location with the owner while the walk is on. If it runs over, you both get a notification. The help button shows you straight away who to call.",
     "duringTextOff": "Live location is off for now, so your phone shares no location. Until then you walk together with the owner or the shelter. The help button shows you straight away who to call.",

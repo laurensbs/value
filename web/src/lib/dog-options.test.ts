@@ -82,4 +82,18 @@ describe('dog form texts', () => {
       for (const key of ['characterTitle', 'storyTitle', 'storyText', 'walkTitle', 'whereTitle', 'safetyText', 'publish']) expect(t(`steps.${key}`, { name: 'Bello' }), `${locale} ${key}`).toContain('Bello')
     }
   })
+
+  it('ready sentences go public with the story: about the dog, never when the owner is home or how they are (M18)', () => {
+    for (const [locale, messages] of Object.entries({ nl, en, es, fr })) {
+      const t = createTranslator({ locale, messages: messages as Record<string, unknown>, namespace: 'myDogs' }) as (key: string, values?: object) => string
+      for (const key of ['work', 'mobility'] as const) {
+        const sentence = t(`storyBlocks.${key}`, { name: 'Bello' })
+        expect(sentence, `${locale} ${key}`).toContain('Bello')
+        expect(sentence, `${locale} ${key}`).not.toMatch(/werk|overdag|zelf loop|work|during the day|myself|trabajo|durante el día|me cuesta|travail|en journée|moi-même/i)
+      }
+      // The hint under the story says so, in every language.
+      expect(t('storyPublic'), locale).toBeTruthy()
+      expect(t('needsPublic'), locale).toBeTruthy()
+    }
+  })
 })

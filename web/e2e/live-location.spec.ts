@@ -224,3 +224,26 @@ test('live location: never at a first meeting, only on a walk alone with the dog
   await owner.context.close()
   await walker.context.close()
 })
+
+test('the home and safety pages say what is true now: no walk alone while live location is off', async ({ browser }) => {
+  const visitor = await newPerson(browser, undefined, { viewport: { width: 375, height: 812 } })
+  const page = visitor.page
+  const steps = page.locator('ol.timeline')
+  const how = page.locator('.lp-how')
+  await page.goto('/safety')
+  await expect(steps).toContainText('Daarna: zelfstandige rondjes aanvragen bij eigenaren die dat voor hun hond toestaan.')
+  await page.goto('/')
+  await expect(how).toContainText('Klikt het? Dan mag je zelfstandig wandelen. De eigenaar ziet live waar jullie lopen.')
+  await expect(how).toContainText('Je vaste rondje')
+
+  await page.setExtraHTTPHeaders(OFF)
+  await page.goto('/safety')
+  await expect(steps).toContainText('Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel.')
+  await expect(steps).not.toContainText('rondjes aanvragen')
+  await page.goto('/')
+  await expect(how).toContainText('Klikt het? Dan lopen jullie vaker samen. Live locatie staat voorlopig uit, dus zelfstandig wandelen kan nog niet.')
+  await expect(how).toContainText('Na het rondje')
+  await expect(how).not.toContainText('ziet live')
+  await expect(how).not.toContainText('Je vaste rondje')
+  await visitor.context.close()
+})

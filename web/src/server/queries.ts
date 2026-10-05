@@ -4,6 +4,7 @@ import { and, asc, between, count, desc, eq, gt, gte, inArray, isNull, like, ne,
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import { citySlug } from '@/lib/cities'
+import { cellDistanceM, compareForMember, compareForVisitor, type DogRank } from '@/lib/dog-order'
 import { distanceM, type LatLng } from '@/lib/geo'
 import { NEAR_KM, nearness } from '@/lib/nearby'
 import { NUDGE_KINDS } from '@/lib/nudges'
@@ -36,7 +37,10 @@ export interface DogFilters {
   host?: 'owner' | 'shelter'
   orgId?: string
   q?: string
-  /** Someone without an account: a private owner stays out of sight (shieldedOwner). */
+  /**
+   * Not a member (no account, not onboarded, or banned): a private owner stays out of sight
+   * (shieldedOwner), and the order never uses an exact distance (lib/dog-order.ts).
+   */
   visitor?: boolean
 }
 
@@ -83,34 +87,40 @@ export async function listDogs(filters: DogFilters, limit = 60): Promise<DogList
     .orderBy(desc(s.dog.createdAt))
     .limit(400)
 
+  const visitor = Boolean(filters.visitor)
   const items = rows
     // Shelter dogs are only public once the shelter is verified.
     .filter((r) => !r.dog.orgId || r.orgStatus === 'verified')
-    .map((r): DogListItem => {
-      const distance = filters.near && r.dog.lat != null && r.dog.lng != null ? distanceM(filters.near, { lat: r.dog.lat, lng: r.dog.lng }) : null
+    .map((r): { item: DogListItem; rank: DogRank } => {
+      const at = r.dog.lat != null && r.dog.lng != null ? { lat: r.dog.lat, lng: r.dog.lng } : null
+      // Without an account, no exact distance at all: not in the order, not in what goes out (lib/dog-order.ts).
+      const distance = !visitor && filters.near && at ? distanceM(filters.near, at) : null
+      const rank = { isDemo: r.dog.isDemo, createdAt: r.dog.createdAt, distance: visitor ? cellDistanceM(filters.near, at) : distance }
       if (r.dog.orgId) {
         return {
-          dog: r.dog,
-          host: { kind: 'shelter', id: r.dog.orgId, name: r.orgName ?? '', photoUrl: r.orgLogo ?? null, city: r.orgCity ?? r.dog.city, verified: true },
-          distanceM: distance,
+          item: {
+            dog: r.dog,
+            host: { kind: 'shelter', id: r.dog.orgId, name: r.orgName ?? '', photoUrl: r.orgLogo ?? null, city: r.orgCity ?? r.dog.city, verified: true },
+            distanceM: distance,
+          },
+          rank,
         }
       }
       // Without an account a private owner's dog has no spot on the map: about 500 m is close to
-      // their home. The order (nearest first) still uses it; the distance is only printed for members.
-      if (filters.visitor) return { dog: { ...r.dog, lat: null, lng: null }, host: shieldedOwner(r.dog.ownerId ?? '', r.dog.city), distanceM: distance }
+      // their home. The order only goes by its part of the country (a grid of about 5 km), then newest.
+      if (visitor) return { item: { dog: { ...r.dog, lat: null, lng: null }, host: shieldedOwner(r.dog.ownerId ?? '', r.dog.city), distanceM: null }, rank }
       return {
-        dog: r.dog,
-        host: { kind: 'owner', id: r.dog.ownerId ?? '', name: r.ownerName ?? '', photoUrl: r.ownerPhoto ?? null, city: r.ownerCity ?? r.dog.city, verified: false },
-        distanceM: distance,
+        item: {
+          dog: r.dog,
+          host: { kind: 'owner', id: r.dog.ownerId ?? '', name: r.ownerName ?? '', photoUrl: r.ownerPhoto ?? null, city: r.ownerCity ?? r.dog.city, verified: false },
+          distanceM: distance,
+        },
+        rank,
       }
     })
 
-  items.sort((a, b) => {
-    if (a.dog.isDemo !== b.dog.isDemo) return a.dog.isDemo ? 1 : -1
-    if (a.distanceM != null && b.distanceM != null) return a.distanceM - b.distanceM
-    return 0
-  })
-  return items.slice(0, limit)
+  items.sort((a, b) => (visitor ? compareForVisitor : compareForMember)(a.rank, b.rank))
+  return items.slice(0, limit).map(({ item }) => item)
 }
 
 /**

@@ -3499,11 +3499,12 @@ legend {
   text-decoration: line-through;
 }
 
-/* A line of advice under an item: inline-block, so a ticked item does not strike it through. */
+/* A line of advice under an item, outside its label: it describes the checkbox (aria-describedby)
+   instead of being part of its name. Lined up with the item's text, past the tick (24px + 10px gap),
+   and never struck through when the item is ticked. */
 .checklist-hint {
-  display: inline-block;
-  width: 100%;
-  margin-top: 2px;
+  margin: 0;
+  padding-inline-start: 34px;
   color: var(--muted);
   font-size: 0.9em;
 }
@@ -3529,6 +3530,13 @@ legend {
 
 .meet-check > summary::-webkit-details-marker {
   display: none;
+}
+
+/* Each item: the line to tick on top, and any advice (.checklist-hint) under it. */
+.meet-check .checklist li {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
 }
 
 .meet-check .checklist label {

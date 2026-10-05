@@ -180,8 +180,12 @@ test('owner and walker: meet request, accept, trust, a first walk together, foll
   await expect(ownerList).toContainText('0 van 5')
   await ownerList.getByLabel(/Bekijk het ID van Fleur in het echt/).check()
   await expect(ownerList).toContainText('1 van 5')
-  // How to look at an ID: only looking, nothing kept (DPIA maatregel M6).
+  // How to look at an ID: only looking, nothing kept (DPIA maatregel M6). It describes the checkbox,
+  // and is not part of its name.
   await expect(ownerList).toContainText('Kijk naar foto, naam en geboortedatum. Maak geen foto en schrijf niets over, ook geen BSN.')
+  const idItem = ownerList.getByRole('checkbox', { name: /Bekijk het ID van Fleur in het echt/ })
+  await expect(idItem).toHaveAccessibleDescription('Kijk naar foto, naam en geboortedatum. Maak geen foto en schrijf niets over, ook geen BSN.')
+  await expect(idItem).not.toHaveAccessibleName(/BSN/)
   await owner.page.reload()
   await expect(owner.page.locator('.meet-check')).toContainText('1 van 5')
   await expect(owner.page.locator('.meet-check').getByLabel(/Bekijk het ID van Fleur/)).toBeChecked()

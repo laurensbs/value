@@ -192,7 +192,8 @@
       "s1": "Vertel wie je bent",
       "s2": "Kies een hond",
       "s3": "Eerst samen kennismaken",
-      "s4": "Je vaste rondje"
+      "s4": "Je vaste rondje",
+      "s4Off": "Na het rondje"
     },
     "app": {
       "eyebrow": "Op je telefoon",
@@ -832,7 +833,9 @@
     "age": "Leeftijd (jaar)",
     "story": "Het verhaal",
     "storyHint": "Wie is je hond, en waarom is een extra rondje fijn?",
+    "storyPublic": "Dit verhaal is voor iedereen te zien. Schrijf over de hond, niet over jezelf: geen naam, adres of tijden waarop je thuis bent.",
     "needs": "Wat helpt het meest?",
+    "needsPublic": "Ook dit is voor iedereen te zien. Houd het bij de hond.",
     "traits": "Kenmerken",
     "traitsHint": "Gescheiden door komma's, bijvoorbeeld: trekt niet, kan met katten, bang voor fietsen",
     "walkMinutes": "Hoe lang (minuten)",
@@ -915,8 +918,8 @@
       "young": "{name} is jong en heeft veel energie.",
       "dogs": "{name} vindt andere honden leuk.",
       "people": "{name} is dol op mensen.",
-      "work": "Door mijn werk heb ik overdag weinig tijd, dus een extra rondje is welkom.",
-      "mobility": "Zelf loop ik minder makkelijk, dus een extra rondje is welkom.",
+      "work": "{name} kan best wat meer beweging gebruiken, dus een extra rondje is welkom.",
+      "mobility": "{name} vindt ons vaste blokje om wat kort, dus een extra rondje is welkom.",
       "regular": "We zoeken een vast maatje voor een paar keer per week."
     },
     "ownerConsent": "De eigenaar weet ervan en vindt het goed",
@@ -1427,6 +1430,7 @@
     "level1": "Nieuw account: eerst de veiligheidsquiz. Daarna kun je een kennismaking aanvragen of meelopen met een begeleide groepswandeling.",
     "level2": "Na de kennismaking: de eigenaar heeft je ID in het echt gezien en kan zelfstandig wandelen voor die ene hond toestaan.",
     "level3": "Daarna: zelfstandige rondjes aanvragen bij eigenaren die dat voor hun hond toestaan.",
+    "level3Off": "Daarna: zelfstandige rondjes bij eigenaren die dat voor hun hond toestaan. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel.",
     "during": "Tijdens het rondje",
     "duringText": "Je telefoon deelt je locatie met de eigenaar zolang het rondje loopt. Loopt het uit, dan krijgen jullie allebei een melding. Met de hulpknop zie je meteen wie je moet bellen.",
     "duringTextOff": "Live locatie staat voorlopig uit, dus je telefoon deelt geen locatie. Tot die tijd loop je samen met de eigenaar of de opvang. Met de hulpknop zie je meteen wie je moet bellen.",

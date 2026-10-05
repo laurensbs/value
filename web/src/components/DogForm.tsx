@@ -221,7 +221,15 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
           onChange={(e) => setStory(e.target.value)}
           maxLength={STORY_MAX}
           placeholder={t('myDogs.storyHint')}
+          aria-describedby={isShelter ? undefined : 'dog-story-public'}
         />
+        {/* A private owner's story is public, also without an account: about the dog, never when
+            someone is home (DPIA maatregel M18). A shelter's own address and hours are public anyway. */}
+        {isShelter ? null : (
+          <p id="dog-story-public" className="hint">
+            {t('myDogs.storyPublic')}
+          </p>
+        )}
         {/* Below the box, so each tapped sentence shows up right above the next ones. */}
         {blocks.length ? (
           <div className="chip-row sentences" role="group" aria-label={t('request.blocksLabel')}>
@@ -233,12 +241,25 @@ export function DogForm({ initial, orgId, cancelHref, stepped = false, welcome }
           </div>
         ) : null}
       </div>
-      <label className="field">
-        <span>
+      <div className="field">
+        <label htmlFor="dog-needs">
           {t('myDogs.needs')} <span className="muted">({t('common.optional')})</span>
-        </span>
-        <textarea className="textarea short" name="needs" defaultValue={initial.needs} maxLength={600} />
-      </label>
+        </label>
+        <textarea
+          id="dog-needs"
+          className="textarea short"
+          name="needs"
+          defaultValue={initial.needs}
+          maxLength={600}
+          aria-describedby={isShelter ? undefined : 'dog-needs-public'}
+        />
+        {/* Shown next to the story on the dog's page, to anyone: the same care, said shorter. */}
+        {isShelter ? null : (
+          <p id="dog-needs-public" className="hint">
+            {t('myDogs.needsPublic')}
+          </p>
+        )}
+      </div>
     </>
   )
 
