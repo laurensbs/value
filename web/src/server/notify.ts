@@ -1,5 +1,5 @@
 import 'server-only'
-import { eq, inArray, sql } from 'drizzle-orm'
+import { eq, inArray, or, sql } from 'drizzle-orm'
 import { type Db, isThrowawayTestServer } from '@/db'
 import * as s from '@/db/schema'
 import { adminAccess, adminEmails } from '@/lib/site'
@@ -57,17 +57,16 @@ async function emailNotification(db: Db, userIds: string[], kind: NotificationKi
 }
 
 /**
- * Rondje's own admins (ADMIN_EMAILS), for things only they can act on, like checking a new shelter.
- * Only accounts that really are admin (lib/site.ts adminAccess): not someone who signed up first with
- * an address on the list without confirming it.
+ * Rondje's own admins, for things only they can act on, like checking a new shelter: the admin role,
+ * and addresses on ADMIN_EMAILS. Only accounts that really are admin (lib/site.ts adminAccess): not
+ * someone who signed up first with an address on the list without confirming it.
  */
 export async function notifyAdmins(db: Db, kind: NotificationKind, data: Record<string, string | number | null>): Promise<void> {
   const emails = adminEmails()
-  if (emails.length === 0) return
   const people = await db
     .select({ id: s.user.id, email: s.user.email, emailVerified: s.user.emailVerified, role: s.user.role })
     .from(s.user)
-    .where(inArray(sql`lower(${s.user.email})`, emails))
+    .where(emails.length ? or(eq(s.user.role, 'admin'), inArray(sql`lower(${s.user.email})`, emails)) : eq(s.user.role, 'admin'))
   const throwaway = isThrowawayTestServer()
   await notify(db, people.filter((p) => adminAccess(p, throwaway) === 'admin').map((p) => p.id), kind, data)
 }
