@@ -108,15 +108,22 @@ struct HelpUsLink: Equatable, Sendable {
     /// For VoiceOver: the tap leaves the app.
     var hint: String { L("Opent \(platform) in je browser") }
 
-    /// "Geef een rondje vanaf €5", plus "· €120 van €3.000" once something came in, and before that
-    /// "· Doel: 600 rondjes" (never "€0 van €3.000"). The same words as the row in the website's app
-    /// shell (helpApp in web/messages): no countdown, no "nog maar".
-    func subtitle(locale: Locale = .current) -> String {
+    /// "Geef een rondje vanaf €5", plus "· €120 van €3.000" once something came in, and before that the
+    /// goal (never "€0 van €3.000"). Dutch keeps the pun of "Geef een rondje" and counts the goal in
+    /// rounds of €5 ("· Doel: 600 rondjes"); English, French and Spanish name it in euros ("From €5 ·
+    /// Goal: €3,000"), so nothing there reads like a price per walk (Laurens, 5 okt 2026). The same words
+    /// as the row in the website's app shell (helpApp in web/messages): no countdown, no "nog maar".
+    /// `language` is the app's language (AppLanguage), `locale` how amounts are written.
+    func subtitle(locale: Locale = .current, language: String = AppLanguage.code) -> String {
         let from = Self.euros(Self.smallestGift, locale: locale)
         guard let progress else { return L("Geef een rondje vanaf \(from)") }
         guard progress.raised > 0 else {
-            let rounds = (progress.goal / Self.smallestGift).formatted(.number.locale(locale))
-            return L("Geef een rondje vanaf \(from) · Doel: \(rounds) rondjes")
+            if language == "nl" {
+                // Dutch only, so on purpose not in the string catalog: no other language counts in rounds.
+                let rounds = (progress.goal / Self.smallestGift).formatted(.number.locale(locale))
+                return "Geef een rondje vanaf \(from) · Doel: \(rounds) rondjes"
+            }
+            return L("Geef een rondje vanaf \(from) · Doel: \(Self.euros(progress.goal, locale: locale))")
         }
         let raised = Self.euros(progress.raised, locale: locale), goal = Self.euros(progress.goal, locale: locale)
         return L("Geef een rondje vanaf \(from) · \(raised) van \(goal)")

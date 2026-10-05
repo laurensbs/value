@@ -7257,30 +7257,30 @@
         }
       }
     },
-    "Geef een rondje vanaf %@ · Doel: %@ rondjes" : {
+    "Geef een rondje vanaf %@ · Doel: %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "From %1$@ · Goal: %2$@ rounds"
+            "value" : "From %1$@ · Goal: %2$@"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desde %1$@ · Objetivo: %2$@ paseos"
+            "value" : "Desde %1$@ · Objetivo: %2$@"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dès %1$@ · Objectif : %2$@ balades"
+            "value" : "Dès %1$@ · Objectif : %2$@"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Geef een rondje vanaf %1$@ · Doel: %2$@ rondjes"
+            "value" : "Geef een rondje vanaf %1$@ · Doel: %2$@"
           }
         }
       }

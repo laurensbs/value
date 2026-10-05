@@ -170,16 +170,54 @@ struct HelpUsTests {
         #expect(plain(5, "es_ES") == "5 €")
     }
 
-    @Test func beforeTheFirstEuroOnlyTheGoalInRounds() throws {
+    /// Formatters use (narrow) no-break spaces; compare with plain ones.
+    private static func plain(_ text: String) -> String {
+        text.replacingOccurrences(of: "\u{00A0}", with: " ").replacingOccurrences(of: "\u{202F}", with: " ")
+    }
+
+    @Test func beforeTheFirstEuroInDutchTheGoalInRounds() throws {
         let nl = Locale(identifier: "nl_NL")
         let row = try #require(HelpUsLink(SupportOptions(inApp: true, crowdfundingUrl: Self.campaign, goal: 3000, raised: 0)))
-        let text = row.subtitle(locale: nl)
-        let plain = try #require(HelpUsLink(SupportOptions(inApp: true, crowdfundingUrl: Self.campaign))).subtitle(locale: nl)
         // "Geef een rondje vanaf € 5 · Doel: 600 rondjes", never "€ 0 van € 3.000".
-        #expect(text.hasPrefix(plain), "\(text)")
-        #expect(text.contains("600"), "\(text)")
+        let text = row.subtitle(locale: nl, language: "nl")
+        #expect(Self.plain(text) == "Geef een rondje vanaf € 5 · Doel: 600 rondjes", "\(text)")
         #expect(!text.contains(HelpUsLink.euros(0, locale: nl)), "\(text)")
         #expect(!text.contains(HelpUsLink.euros(3000, locale: nl)), "\(text)")
+    }
+
+    /// In English, French and Spanish the goal is in euros and the gift "from €5": nothing reads like a
+    /// price per walk ("€5 = 1 round", "600 rounds"). Laurens, 5 okt 2026.
+    @Test func beforeTheFirstEuroElsewhereTheGoalInEuros() throws {
+        let row = try #require(HelpUsLink(SupportOptions(inApp: true, crowdfundingUrl: Self.campaign, goal: 3000, raised: 0)))
+        for (language, identifier) in [("en", "en_GB"), ("fr", "fr_FR"), ("es", "es_ES")] {
+            let locale = Locale(identifier: identifier)
+            let text = row.subtitle(locale: locale, language: language)
+            let plain = try #require(HelpUsLink(SupportOptions(inApp: true, crowdfundingUrl: Self.campaign))).subtitle(locale: locale, language: language)
+            #expect(text.hasPrefix(plain), "\(language): \(text)")
+            #expect(text.contains(HelpUsLink.euros(3000, locale: locale)), "\(language): \(text)")
+            #expect(!text.contains("600"), "\(language): \(text)")
+            // (The words come from the simulator's own language; "rondjes" is the Dutch goal.)
+            #expect(text.range(of: #"\b(rondjes|rounds?|balades?|paseos?)\b"#, options: [.regularExpression, .caseInsensitive]) == nil, "\(language): \(text)")
+        }
+    }
+
+    /// The translations themselves, whatever language this simulator runs in.
+    @Test func noPricePerWalkInEnglishFrenchOrSpanish() throws {
+        let walks = #"\b(rounds?|walks?|balades?|paseos?|rondjes?)\b|=\s*1\b"#
+        for lang in ["en", "fr", "es"] {
+            let path = try #require(Bundle.main.path(forResource: lang, ofType: "lproj"), "\(lang).lproj")
+            let bundle = try #require(Bundle(path: path))
+            for key in Self.rowKeys {
+                let value = bundle.localizedString(forKey: key, value: "", table: nil)
+                #expect(value.range(of: walks, options: [.regularExpression, .caseInsensitive]) == nil, "\(lang): \(value)")
+            }
+            let goal = bundle.localizedString(forKey: "Geef een rondje vanaf %@ · Doel: %@", value: "", table: nil)
+            #expect(goal.contains("%2$@"), "\(lang): \(goal)")
+            // The goal in rondjes is Dutch only and never in the catalog.
+            let table = try #require(bundle.path(forResource: "Localizable", ofType: "strings"))
+            let strings = try #require(NSDictionary(contentsOfFile: table) as? [String: String])
+            #expect(strings["Geef een rondje vanaf %@ · Doel: %@ rondjes"] == nil, "\(lang)")
+        }
     }
 
     @Test func subtitleSaysFromFiveEurosAndThenTheProgress() throws {
@@ -203,7 +241,7 @@ struct HelpUsTests {
 
     private static let rowKeys = [
         "Help ons via %@", "Opent %@ in je browser", "Geef een rondje vanaf %@", "Geef een rondje vanaf %@ · %@ van %@",
-        "Geef een rondje vanaf %@ · Doel: %@ rondjes",
+        "Geef een rondje vanaf %@ · Doel: %@",
     ]
 
     @Test func theEnglishDoesNotReadLikeBuyingSomething() throws {
