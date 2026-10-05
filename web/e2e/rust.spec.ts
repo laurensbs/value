@@ -11,16 +11,19 @@ test('a new walker: seintjes off, no countdowns, one block for notifications', a
   await signUp(page, { name: 'Sanne', email: `sanne-${id}@e2e.test` })
   await onboard(page, { birthDate: '2001-02-02', city: 'Utrecht', bio: 'Ik wandel graag in het park.', phone: '', walker: true, owner: false })
 
-  // Vandaag: the challenge without "Nog # dagen", the week card without "Nog # rondjes voor je weekdoel".
+  // Vandaag: one thing to do, no challenge or week card with numbers, nothing that counts down.
   await page.goto('/')
+  await expect(page.getByRole('region', { name: 'Eén ding nu' })).toBeVisible()
+  await expect(page.locator('main')).not.toContainText(/Nog \d+ dag|voor je weekdoel|0 van \d/)
+
+  // /progress: the challenge without "Nog # dagen" and without how many walkers; no week card before
+  // the first walk; no badge for walks after dark, for more different walkers, or for inviting people.
+  await page.goto('/progress')
   const challenge = page.locator('#challenge')
   await expect(challenge).toBeVisible()
-  await expect(challenge).not.toContainText(/Nog \d+ dag/)
-  await expect(page.getByRole('region', { name: 'Deze week' })).toContainText('0 van 1 rondje')
+  await expect(challenge).not.toContainText(/Nog \d+ dag|wandelaar/)
+  await expect(page.getByRole('region', { name: 'Deze week' })).toHaveCount(0)
   await expect(page.locator('main')).not.toContainText(/voor je weekdoel/)
-
-  // /progress: no badge for walks after dark, for more different walkers, or for inviting people.
-  await page.goto('/progress')
   const badges = page.getByRole('region', { name: 'Penningen', exact: true })
   await expect(badges).toBeVisible()
   for (const name of ['Avondrondje', 'Vriendenkring', 'Ambassadeur']) await expect(badges).not.toContainText(name)

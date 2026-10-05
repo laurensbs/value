@@ -2,7 +2,7 @@
 title: Política de cookies
 description: "Solo usamos cookies funcionales y almacenamiento local: sin anuncios, sin seguimiento y sin análisis de otras empresas."
 version: "0.1"
-updated: "2026-10-02"
+updated: "2026-10-04"
 status: "Borrador – pendiente de revisión jurídica"
 ---
 
@@ -31,6 +31,7 @@ Las cookies técnicas no necesitan consentimiento. Por eso no verás un banner d
 | `better-auth.state`, `better-auth-passkey` | Seguridad al iniciar sesión con Google, Apple o una passkey | Unos minutos |
 | `NEXT_LOCALE` | Recordar en qué idioma usas Rondje Mee | 1 año |
 | `rondje_ref` | Recordar con qué enlace de invitación llegaste, para que esa persona vea que te has unido [pendiente de verificar: funcional o requiere consentimiento] | 30 días |
+| `rondje_later` | Qué paso de Una cosa ahora en Hoy apartaste con «Más tarde» (una semana; después de dos veces, para siempre) o «Ahora no», para que la página muestre enseguida el paso correcto. No lo guardamos en ningún sitio | 1 año |
 
 ## 4. Almacenamiento local en tu dispositivo
 

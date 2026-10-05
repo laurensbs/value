@@ -214,6 +214,104 @@
   line-height: 0;
 }
 
+/* The profile's head: you as others see you, the two things you do here most, your numbers in one line. */
+.profile-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.profile-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+.profile-actions .button {
+  width: 100%;
+  padding-inline: 10px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.profile-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  margin: 0 -8px -6px;
+  padding: 6px 8px;
+  border-radius: 16px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 0.95rem;
+}
+
+.profile-stats:hover {
+  background: color-mix(in oklab, var(--sunken) 55%, transparent);
+}
+
+.profile-stats:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: 0;
+}
+
+.profile-stats .level-badge {
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+}
+
+.profile-stats-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Groups with a heading, like the lists in the app: Wandelen, Help mee, Instellingen, Account. */
+.profile-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group-title {
+  padding-inline: 4px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  padding-block: 4px;
+}
+
+.settings-card > * {
+  padding-block: 14px;
+}
+
+.settings-card > * + * {
+  border-top: 1px solid var(--line);
+}
+
+.settings-card h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.settings-card .danger-zone summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 .more-invite .input {
   font-size: 0.85rem;
 }
@@ -1173,4 +1271,53 @@
   .friend-card {
     transition: none;
   }
+}
+
+/* A section folded until you open it: the summary is a full-width row with a chevron. */
+.fold {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 18px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 720;
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold > summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold > summary::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform var(--motion-klein) var(--ease-klein);
+}
+
+.fold[open] > summary::after {
+  transform: rotate(-135deg) translateY(-3px);
+}
+
+.fold > summary:focus-visible {
+  outline: 3px solid var(--calm);
+  outline-offset: -3px;
+  border-radius: var(--radius-m);
+}
+
+.fold > :not(summary) {
+  margin: 0 18px 18px;
 }
