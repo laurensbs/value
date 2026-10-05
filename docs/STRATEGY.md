@@ -39,7 +39,7 @@ Stel: het is oktober 2027 en Rondje is mislukt. De meest waarschijnlijke oorzake
 ## 4. Het model op één pagina
 
 **Probleem en doelgroep**
-- **Wandelaars:** iedereen vanaf 18 jaar, zonder bovengrens (besluit Laurens, 6 oktober 2026; eerst was dit 18–30). Studenten zijn een makkelijk begin, maar werkenden en gepensioneerden lopen net zo goed een vast rondje. Eenzaamheid speelt op elke leeftijd: bijna 10% van de Nederlanders van 15 jaar en ouder voelt zich sterk eenzaam, bij 16–25-jarigen is dat 23%, en 53% van de studenten heeft veel stress. Veel mensen willen naar buiten en houden van honden, maar kunnen er geen hebben.
+- **Wandelaars:** iedereen vanaf 18 jaar, zonder bovengrens (besluit Laurens, 5 oktober 2026; eerst was dit 18–30). Studenten zijn een makkelijk begin, maar werkenden en gepensioneerden lopen net zo goed een vast rondje. Eenzaamheid speelt op elke leeftijd: bijna 10% van de Nederlanders van 15 jaar en ouder voelt zich sterk eenzaam (CBS, 2024); de GGD-monitor, die anders meet, komt bij 16–25-jarigen op 23%. Ook 53% van de studenten heeft veel stress. Veel mensen willen naar buiten en houden van honden, maar kunnen er geen hebben.
 - **Eigenaren:** ouderen of zieken die hun hond niet meer goed kunnen uitlaten, en vaak zelf ook eenzaam zijn. Daarnaast opvangen met honden die meer wandelingen nodig hebben.
 
 **Bestaand landschap**

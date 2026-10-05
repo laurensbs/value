@@ -3327,7 +3327,7 @@
       },
       "walker": {
         "title": "Wandelaar",
-        "who": "Iemand vanaf 18 jaar die van honden houdt, jong of ouder",
+        "who": "Iemand vanaf 18 jaar die van honden houdt; spreek een mix van studenten, werkenden en gepensioneerden",
         "goal": "Doel: begrijpen wat mensen nu doen als ze een hond missen, en wat ze tegenhoudt.",
         "q1": "Wanneer liep je voor het laatst met een hond? Hoe kwam dat zo?",
         "q2": "Heb je ooit gezocht naar een manier om met honden om te gaan zonder er zelf een te hebben? Wat vond je, en waarom ben je wel of niet begonnen?",
@@ -3423,7 +3423,7 @@
         "title": "Geen eigen hond? Wel zin in buiten?",
         "sub": "Loop gratis een vast rondje met een hond uit je buurt",
         "goal": "Vraag: wandelaars vanaf 18 jaar werven, in een stad waar al honden zijn.",
-        "caption": "Hou je van honden, maar past er (nog) geen bij je leven? Met {app} loop je gratis een vast rondje met een hond uit je buurt, bijvoorbeeld van iemand die zelf niet ver meer kan lopen.\n\nZo gaat het:\n1. Je maakt een profiel (18+) en doet een korte veiligheidsquiz\n2. Je maakt eerst samen kennis met de eigenaar\n3. Daarna is het jullie vaste rondje\n\nSamen wandelen kan je dag goed doen, en voor de hond is het een feestje. Link in bio.\n\n#studentenleven #honden #wandelen #buiten",
+        "caption": "Hou je van honden, maar past er (nog) geen bij je leven? Met {app} loop je gratis een vast rondje met een hond uit je buurt, bijvoorbeeld van iemand die zelf niet ver meer kan lopen.\n\nZo gaat het:\n1. Je maakt een profiel (18+) en doet een korte veiligheidsquiz\n2. Je maakt eerst samen kennis met de eigenaar\n3. Daarna is het jullie vaste rondje\n\nSamen wandelen kan je dag goed doen, en voor de hond is het een feestje. Link in bio.\n\n#vrijwilligerswerk #honden #wandelen #buiten",
         "visual": "De afbeelding als eerste slide, daarna de drie stappen als losse slides."
       },
       "p05": {

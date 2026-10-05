@@ -1249,7 +1249,7 @@
     "benefit3Title": "Vous gardez la main",
     "benefit3": "Lors de la balade, vous vérifiez la pièce d'identité des nouveaux bénévoles et notez qui était là et qui n'est pas venu.",
     "benefit4Title": "Un groupe fidèle de promeneurs",
-    "benefit4": "Rondje Mee trouve des promeneurs de 18 ans et plus qui ont envie de sortir plus souvent, de l’étudiant au retraité. Gratuit, sans abonnement.",
+    "benefit4": "Rondje Mee trouve des promeneurs de 18 ans et plus qui ont envie de sortir plus souvent, de l'étudiant au retraité. Gratuit, sans abonnement.",
     "loginFirst": "Créez d'abord votre propre compte. Ensuite, inscrivez le refuge ; cela prend deux minutes.",
     "finishProfile": "Complétez d'abord votre profil",
     "where": "Où se trouve le refuge ?",
@@ -3327,7 +3327,7 @@
       },
       "walker": {
         "title": "Promeneur",
-        "who": "Quelqu’un de 18 ans ou plus qui adore les chiens, jeune ou moins jeune",
+        "who": "Quelqu'un de 18 ans ou plus qui adore les chiens ; parle à des étudiants, des actifs et des retraités",
         "goal": "But : comprendre ce que font les gens aujourd’hui quand un chien leur manque, et ce qui les freine.",
         "q1": "Quand as-tu promené un chien pour la dernière fois ? Comment c’est arrivé ?",
         "q2": "As-tu déjà cherché un moyen de passer du temps avec des chiens sans en avoir un ? Qu’as-tu trouvé, et pourquoi as-tu commencé ou pas ?",
@@ -3423,7 +3423,7 @@
         "title": "Pas de chien à toi ? Envie de sortir ?",
         "sub": "Fais gratuitement une promenade régulière avec un chien de ton quartier",
         "goal": "Demande : recruter des promeneurs de 18 ans et plus, dans une ville qui a déjà des chiens.",
-        "caption": "Tu adores les chiens, mais il n’y a pas (encore) de place pour un chien dans ta vie ? Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier, par exemple celui de quelqu’un qui ne peut plus marcher loin.\n\nComment ça se passe :\n1. Tu crées un profil (18+) et tu fais un court quiz de sécurité\n2. Tu rencontres d’abord le propriétaire, ensemble\n3. Ensuite, c’est votre promenade régulière\n\nMarcher ensemble peut faire du bien à ta journée, et pour le chien c’est la fête. Lien en bio.\n\n#viedétudiant #chiens #promenade #dehors",
+        "caption": "Tu adores les chiens, mais il n’y a pas (encore) de place pour un chien dans ta vie ? Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier, par exemple celui de quelqu’un qui ne peut plus marcher loin.\n\nComment ça se passe :\n1. Tu crées un profil (18+) et tu fais un court quiz de sécurité\n2. Tu rencontres d’abord le propriétaire, ensemble\n3. Ensuite, c’est votre promenade régulière\n\nMarcher ensemble peut faire du bien à ta journée, et pour le chien c’est la fête. Lien en bio.\n\n#bénévolat #chiens #promenade #dehors",
         "visual": "L’image en première diapositive, puis les trois étapes, une par diapositive."
       },
       "p05": {

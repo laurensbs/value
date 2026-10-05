@@ -47,7 +47,7 @@ Dat is het model waarmee OOPOEH draait: gemeenten, fondsen (NutsOhra, DOEN) en i
 >
 > Waarom ik u mail:
 > - Bijna een kwart van de 16- tot 25-jarigen voelt zich sterk eenzaam (GGD, 2024). Veel ouderen met een hond missen hun dagelijkse rondje, en het praatje dat erbij hoort.
-> - OOPOEH laat zien dat dit werkt met 55-plussers. Een gratis versie voor iedereen vanaf 18 jaar, met ook opvanghonden, bestaat nog niet.
+> - OOPOEH laat zien dat dit werkt met 55-plussers. Rondje Mee vult dat aan: gratis, met wandelaars van elke leeftijd vanaf 18, en ook voor opvanghonden.
 > - U kent de mensen in de wijk. Ik wil niemand via een app benaderen die daar niet op zit te wachten.
 >
 > Mijn voorstel is een kleine pilot van 8 weken in [wijk], met 5 eigenaren en 10 wandelaars. Ik regel de werving van wandelaars, de matching en een eenvoudige meting (eenzaamheid, beweging, tevredenheid). U helpt met het vinden van eigenaren en met de intake.

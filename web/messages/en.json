@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · a regular walk with a dog who's waiting for you",
-    "description": "{app} connects people aged 18 and over with dogs from neighbours and shelters that could use an extra walk. Free and safe, first in the Netherlands."
+    "description": "{app} connects people aged 18 and over with dogs from neighbours and shelters that could use an extra walk. Free, safe, starting in the Netherlands."
   },
   "nav": {
     "dogs": "Dogs",
@@ -3327,7 +3327,7 @@
       },
       "walker": {
         "title": "Walker",
-        "who": "Someone aged 18 or over who loves dogs, younger or older",
+        "who": "Someone aged 18 or over who loves dogs; talk to a mix of students, working people and retirees",
         "goal": "Goal: understand what people do now when they miss a dog, and what holds them back.",
         "q1": "When did you last walk a dog? How did that come about?",
         "q2": "Have you ever looked for a way to spend time with dogs without having one? What did you find, and why did you start or not?",
@@ -3423,7 +3423,7 @@
         "title": "No dog of your own? Fancy going outside?",
         "sub": "Take a regular walk with a dog from your neighbourhood, for free",
         "goal": "Demand: recruit walkers aged 18 and over, in a city that already has dogs.",
-        "caption": "Love dogs, but there is no room for one in your life (yet)? With {app} you take a regular walk with a dog from your neighbourhood for free, for example the dog of someone who can no longer walk far.\n\nHow it goes:\n1. You make a profile (18+) and do a short safety quiz\n2. You meet the owner together first\n3. After that it is your regular walk\n\nWalking together can do your day good, and for the dog it is a treat. Link in bio.\n\n#studentlife #dogs #walking #outdoors",
+        "caption": "Love dogs, but there is no room for one in your life (yet)? With {app} you take a regular walk with a dog from your neighbourhood for free, for example the dog of someone who can no longer walk far.\n\nHow it goes:\n1. You make a profile (18+) and do a short safety quiz\n2. You meet the owner together first\n3. After that it is your regular walk\n\nWalking together can do your day good, and for the dog it is a treat. Link in bio.\n\n#volunteering #dogs #walking #outdoors",
         "visual": "The image as the first slide, then the three steps as separate slides."
       },
       "p05": {

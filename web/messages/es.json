@@ -1249,7 +1249,7 @@
     "benefit3Title": "Tú tienes el control",
     "benefit3": "En el paseo compruebas el documento de identidad de los nuevos voluntarios y apuntas quién vino y quién no.",
     "benefit4Title": "Un grupo fijo de paseadores",
-    "benefit4": "Rondje Mee encuentra paseadores de 18 años o más con ganas de salir más a menudo, de estudiantes a jubilados. Gratis y sin suscripción.",
+    "benefit4": "Rondje Mee encuentra paseadores de 18 años o más con ganas de salir más a menudo, desde estudiantes hasta jubilados. Gratis y sin suscripción.",
     "loginFirst": "Primero crea tu propia cuenta. Después inscribe la protectora; solo se tarda dos minutos.",
     "finishProfile": "Primero completa tu perfil",
     "where": "¿Dónde está la protectora?",
@@ -3327,7 +3327,7 @@
       },
       "walker": {
         "title": "Paseador",
-        "who": "Alguien de 18 años o más a quien le encantan los perros, joven o mayor",
+        "who": "Alguien de 18 años o más a quien le encantan los perros; habla con estudiantes, gente que trabaja y jubilados",
         "goal": "Objetivo: entender qué hace ahora la gente cuando echa de menos un perro y qué la frena.",
         "q1": "¿Cuándo paseaste un perro por última vez? ¿Cómo surgió?",
         "q2": "¿Has buscado alguna vez una forma de estar con perros sin tener uno? ¿Qué encontraste y por qué empezaste o no?",
@@ -3423,7 +3423,7 @@
         "title": "¿Sin perro propio? ¿Con ganas de salir?",
         "sub": "Da gratis un paseo fijo con un perro de tu barrio",
         "goal": "Demanda: conseguir paseadores de 18 años o más, en una ciudad que ya tiene perros.",
-        "caption": "¿Te encantan los perros pero (aún) no encaja uno en tu vida? Con {app} das gratis un paseo fijo con un perro de tu barrio, por ejemplo el de alguien que ya no puede caminar mucho.\n\nAsí funciona:\n1. Creas un perfil (18+) y haces un breve test de seguridad\n2. Primero conoces al dueño, juntos\n3. Después es vuestro paseo fijo\n\nPasear juntos puede alegrarte el día, y para el perro es una fiesta. Enlace en la bio.\n\n#vidauniversitaria #perros #pasear #airelibre",
+        "caption": "¿Te encantan los perros pero (aún) no encaja uno en tu vida? Con {app} das gratis un paseo fijo con un perro de tu barrio, por ejemplo el de alguien que ya no puede caminar mucho.\n\nAsí funciona:\n1. Creas un perfil (18+) y haces un breve test de seguridad\n2. Primero conoces al dueño, juntos\n3. Después es vuestro paseo fijo\n\nPasear juntos puede alegrarte el día, y para el perro es una fiesta. Enlace en la bio.\n\n#voluntariado #perros #pasear #airelibre",
         "visual": "La imagen como primera diapositiva y después los tres pasos, uno por diapositiva."
       },
       "p05": {
