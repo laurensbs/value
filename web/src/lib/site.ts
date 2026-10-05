@@ -32,17 +32,20 @@ export function adminEmails(): string[] {
 }
 
 /**
- * Admin rights come from the admin role, or from an address on ADMIN_EMAILS. Once Rondje can send
- * email, an address on the list counts only after its owner confirmed it ("confirm"): otherwise
- * anyone could sign up first with an admin's address and be an admin.
+ * Admin rights come from the admin role, or from an address on ADMIN_EMAILS once its owner confirmed
+ * it (a link in that inbox: the confirmation on /admin or a password reset, or Google/Apple). Until
+ * then the list only gives "confirm": otherwise anyone could sign up first with an admin's address
+ * and be an admin. That also holds while Rondje sends no email: then only the role counts.
+ * `throwaway`: a test server with its own embedded database (db/index.ts isThrowawayTestServer), which
+ * has no inbox and no real data; only there does the list count without confirmation.
  */
 export function adminAccess(
   user: { email: string; emailVerified: boolean; role?: string | null },
-  canEmail: boolean,
+  throwaway = false,
 ): 'admin' | 'confirm' | null {
   if (user.role === 'admin') return 'admin'
   if (!adminEmails().includes(user.email.toLowerCase())) return null
-  return user.emailVerified || !canEmail ? 'admin' : 'confirm'
+  return user.emailVerified || throwaway ? 'admin' : 'confirm'
 }
 
 /**

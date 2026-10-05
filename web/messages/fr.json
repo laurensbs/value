@@ -1577,7 +1577,8 @@
       "send": "Envoyer l'e-mail",
       "sent": "Envoyé. Ouvrez l'e-mail et touchez le bouton : vous reviendrez ici.",
       "failed": "L'envoi n'a pas fonctionné. Réessayez dans un instant.",
-      "expired": "Ce lien ne fonctionne plus. Envoyez un nouvel e-mail ci-dessous."
+      "expired": "Ce lien ne fonctionne plus. Envoyez un nouvel e-mail ci-dessous.",
+      "noEmail": "Rondje Mee n’envoie pas encore d’e-mails, la confirmation n’est donc pas possible pour l’instant. D’ici là, Gestion ne s’ouvre qu’aux comptes ayant le rôle d’administrateur."
     },
     "region": "Rapidité",
     "regionSame": "l'app ({app}) et la base de données ({db}) sont dans la même région.",

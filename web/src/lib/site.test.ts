@@ -30,20 +30,31 @@ describe('safeNext', () => {
 describe('adminAccess', () => {
   afterEach(() => vi.unstubAllEnvs())
 
-  it('gives admin rights by address only once the address is confirmed, when email works', () => {
+  it('never makes an unconfirmed address on ADMIN_EMAILS an admin, also while Rondje sends no email', () => {
     vi.stubEnv('ADMIN_EMAILS', ' Boss@Example.org , helper@example.org')
-    expect(adminAccess({ email: 'boss@example.org', emailVerified: true }, true)).toBe('admin')
-    expect(adminAccess({ email: 'BOSS@example.org', emailVerified: false }, true)).toBe('confirm')
-    // Without email there is no way to confirm: the list alone decides, as before.
-    expect(adminAccess({ email: 'helper@example.org', emailVerified: false }, false)).toBe('admin')
+    // Someone who signed up first with an admin's address, without a link from that inbox.
+    expect(adminAccess({ email: 'BOSS@example.org', emailVerified: false })).toBe('confirm')
+    expect(adminAccess({ email: 'helper@example.org', emailVerified: false, role: 'user' })).toBe('confirm')
   })
 
-  it('never for addresses that are not on the list, and always for the admin role', () => {
+  it('gives admin rights by address once the address is confirmed, and always for the admin role', () => {
+    vi.stubEnv('ADMIN_EMAILS', ' Boss@Example.org , helper@example.org')
+    expect(adminAccess({ email: 'boss@example.org', emailVerified: true })).toBe('admin')
+    expect(adminAccess({ email: 'helper@example.org', emailVerified: false, role: 'admin' })).toBe('admin')
+    expect(adminAccess({ email: 'someone@example.org', emailVerified: false, role: 'admin' })).toBe('admin')
+  })
+
+  it('never for addresses that are not on the list', () => {
     vi.stubEnv('ADMIN_EMAILS', 'boss@example.org')
-    expect(adminAccess({ email: 'someone@example.org', emailVerified: true }, true)).toBeNull()
-    expect(adminAccess({ email: 'boss@example.org.evil.example', emailVerified: true }, false)).toBeNull()
-    expect(adminAccess({ email: 'someone@example.org', emailVerified: false, role: 'admin' }, true)).toBe('admin')
+    expect(adminAccess({ email: 'someone@example.org', emailVerified: true })).toBeNull()
+    expect(adminAccess({ email: 'boss@example.org.evil.example', emailVerified: true }, true)).toBeNull()
     vi.stubEnv('ADMIN_EMAILS', '')
-    expect(adminAccess({ email: 'boss@example.org', emailVerified: true }, true)).toBeNull()
+    expect(adminAccess({ email: 'boss@example.org', emailVerified: true })).toBeNull()
+  })
+
+  it('lets the list count without confirmation only on a throwaway test server', () => {
+    vi.stubEnv('ADMIN_EMAILS', 'admin@e2e.test')
+    expect(adminAccess({ email: 'admin@e2e.test', emailVerified: false }, true)).toBe('admin')
+    expect(adminAccess({ email: 'admin@e2e.test', emailVerified: false }, false)).toBe('confirm')
   })
 })

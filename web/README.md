@@ -15,7 +15,7 @@ npm run lint && npm run typecheck
 npm run audit -- http://localhost:3100 audit   # mobile + desktop check of every page, signed out and in
 ```
 
-`npm run audit` needs a running server whose `ADMIN_EMAILS` includes `audit@rondje.test`. It reports horizontal overflow, page errors, tap targets under 44 px on a touch phone, unlabeled form fields and slow pages, and saves a screenshot per page.
+`npm run audit` needs a running test server on PGlite whose `ADMIN_EMAILS` includes `audit@rondje.test`, with `TEST_CLOCK=1` (only such a throwaway server trusts the list without a confirmed address). It reports horizontal overflow, page errors, tap targets under 44 px on a touch phone, unlabeled form fields and slow pages, and saves a screenshot per page.
 
 No database server is needed locally: without `DATABASE_URL` the app runs on PGlite (`.pglite/`, or in memory with `PGLITE_DIR=memory`). Migrations run automatically on the first request, and example dogs, owners and shelters are seeded into an empty database (marked as examples, removable in Admin). Set `SEED_DEMO=0` to skip them.
 
@@ -27,7 +27,7 @@ If Playwright cannot find Chromium, set `PW_CHROMIUM_PATH=/path/to/chrome`. Set 
 |---|---|---|
 | `DATABASE_URL` or `POSTGRES_URL` | production | Postgres. Neon hosts use the Neon serverless driver, others use node-postgres. |
 | `BETTER_AUTH_SECRET` | production | Signs sessions. The app refuses to start in production without it. |
-| `ADMIN_EMAILS` | yes | Comma-separated emails that get `/admin`. |
+| `ADMIN_EMAILS` | yes | Comma-separated emails that may get `/admin`, once that address is confirmed through a link in its inbox (needs email) or Google/Apple. While email is off, only the `admin` role in the database opens `/admin`. |
 | `CRON_SECRET` | yes | Bearer token for the daily jobs `/api/cron/cleanup` and `/api/cron/nudges` (friendly reminders; Vercel Cron sends it). |
 | `BLOB_READ_WRITE_TOKEN` | recommended | Vercel Blob for photos. Without it, photos are stored inline (max 450 KB). |
 | `GOOGLE_CLIENT_ID`/`_SECRET` | optional | Google sign-in. |

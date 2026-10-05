@@ -1577,7 +1577,8 @@
       "send": "Enviar el correo",
       "sent": "Enviado. Abre el correo y toca el botón; así volverás aquí.",
       "failed": "No se pudo enviar. Inténtalo de nuevo en un momento.",
-      "expired": "Ese enlace ya no funciona. Envía un correo nuevo aquí abajo."
+      "expired": "Ese enlace ya no funciona. Envía un correo nuevo aquí abajo.",
+      "noEmail": "Rondje Mee todavía no envía correos, así que ahora no se puede confirmar. Hasta entonces, Gestión solo se abre para cuentas con el rol de administrador."
     },
     "region": "Velocidad",
     "regionSame": "la app ({app}) y la base de datos ({db}) están en la misma región.",
