@@ -3600,6 +3600,28 @@
         }
       }
     },
+    "Bevestig eerst dat de eigenaar ervan weet en het goed vindt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First confirm that the owner knows about it and is happy with it."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirma primero que el dueño lo sabe y está de acuerdo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirme d'abord que le propriétaire est au courant et d'accord."
+          }
+        }
+      }
+    },
     "Bewaar" : {
       "localizations" : {
         "en" : {
@@ -4592,6 +4614,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le maître de %@ regarde encore ta demande. Je te tiens au courant."
+          }
+        }
+      }
+    },
+    "De eigenaar weet ervan en vindt het goed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The owner knows about it and is happy with it"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El dueño lo sabe y está de acuerdo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le propriétaire est au courant et d'accord"
           }
         }
       }
@@ -6022,6 +6066,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'honnêteté, c'est la sécurité"
+          }
+        }
+      }
+    },
+    "Eerlijkheid beschermt je hond en de wandelaar. Honden met een bijtgeschiedenis gaan alleen mee met ervaren wandelaars." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Honesty protects your dog and the walker. Dogs with a history of biting only go out with experienced walkers."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La sinceridad protege a tu perro y a quien lo pasea. Los perros con antecedentes de mordeduras solo salen con paseadores con experiencia."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'honnêteté protège ton chien et le promeneur. Les chiens qui ont déjà mordu ne sortent qu'avec des promeneurs expérimentés."
           }
         }
       }
@@ -10248,6 +10314,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Un autre moment me va aussi."
+          }
+        }
+      }
+    },
+    "Ik meld deze hond aan voor iemand anders" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I'm signing up this dog for someone else"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inscribo el perro de otra persona"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J'inscris ce chien pour quelqu'un d'autre"
           }
         }
       }
@@ -16344,6 +16432,28 @@
         }
       }
     },
+    "Ook dit is voor iedereen te zien. Houd het bij de hond." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anyone can read this too. Keep it about the dog."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esto también lo puede leer cualquiera. Habla solo del perro."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout le monde peut aussi lire ceci. Parle seulement du chien."
+          }
+        }
+      }
+    },
     "Ook een hond die goed luistert blijft aan de lijn, tenzij de eigenaar iets anders zegt." : {
       "localizations" : {
         "en" : {
@@ -19673,6 +19783,7 @@
       }
     },
     "Verhaal: wie is deze hond, en voor wie is het?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -21400,6 +21511,28 @@
         }
       }
     },
+    "Wie is je hond, en waarom is een extra rondje fijn?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Who is your dog, and why would an extra walk be nice?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo es tu perro y por qué le vendría bien un paseo extra?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qui est ton chien, et pourquoi une balade de plus lui ferait du bien ?"
+          }
+        }
+      }
+    },
     "Wie wil er met %@ wandelen?" : {
       "localizations" : {
         "en" : {
@@ -21616,6 +21749,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tu pourras toujours autoriser les balades en solo plus tard."
+          }
+        }
+      }
+    },
+    "Zet hun naam en telefoonnummer hieronder, bij de plek waar jullie afspreken. Dat ziet een wandelaar pas na een geaccepteerde afspraak." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add their name and phone number below, with where you meet. A walker only sees this once a walk has been accepted."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pon su nombre y su teléfono aquí abajo, junto al lugar donde quedáis. Solo se muestra cuando se ha aceptado un paseo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indique son nom et son numéro de téléphone ci-dessous, avec le lieu de rendez-vous. Visible uniquement après l'acceptation d'un rendez-vous."
           }
         }
       }

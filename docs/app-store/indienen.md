@@ -22,11 +22,13 @@ In `screenshots/6.9/` (1320×2868, voor 6,9-inch iPhones) en `screenshots/6.5/` 
 | 1 | Welkom | Gratis, geen reclame, 18+ |
 | 2 | Ontdek | Honden in de buurt met afstand |
 | 3 | Niveau en uitdaging | Vandaag-scherm met level, uitdaging en tip |
-| 4 | Wandelen | Live rondje met kaart |
+| 4 | Thuis voor eigenaren | Een aanvraag voor een kennismaking, met Guus die de volgende stap laat zien (`04-9-thuis-eigenaar.jpg`) |
 | 5 | Na het rondje | "Goed rondje!" met stemming (alleen op het toestel) |
 | 6 | Vriendenboek | Elke hond waarmee je liep |
 
-De schermen tonen verzonnen voorbeelddata (Sam, Bobbie, "Voorbeeld"). Dat mag. Maak nieuwe screenshots als het ontwerp verandert.
+De schermen tonen verzonnen voorbeelddata (Sam, Bobbie, Ria, Lotte, "Voorbeeld"). Dat mag. Maak nieuwe screenshots als het ontwerp verandert.
+
+Geen screenshot met een live kaart of afstand tijdens het rondje: live locatie staat in productie standaard uit (`LIVE_LOCATION`) en geldt alleen voor een rondje alleen met de hond. Elk screenshot moet kloppen in beide standen van die schakelaar (richtlijn 2.3). Het oude screenshot 4 ("Live rondje met kaart") is daarom vervangen door Thuis voor eigenaren, gemaakt op 5 oktober 2026 op de "iPhone 17"-simulator tegen een lokale server met verzonnen accounts.
 
 ## 3. Privacylabel (App Privacy in App Store Connect)
 
@@ -37,7 +39,7 @@ De schermen tonen verzonnen voorbeelddata (Sam, Bobbie, "Voorbeeld"). Dat mag. M
 | Contactgegevens: naam | ja | ja | App-functionaliteit |
 | Contactgegevens: e-mailadres | ja | ja | App-functionaliteit (inloggen, meldingen) |
 | Contactgegevens: telefoonnummer | ja (optioneel) | ja | App-functionaliteit (contact na acceptatie) |
-| Locatie: precieze locatie | ja, alleen tijdens een rondje | ja | App-functionaliteit (live meekijken; routes na 30 dagen gewist) |
+| Locatie: precieze locatie | ja, alleen tijdens een rondje alleen met de hond, als live locatie aan staat | ja | App-functionaliteit (de eigenaar kijkt live mee; routes na 30 dagen gewist). Vul dit ook in zolang live locatie op de server uit staat: de schakelaar kan aan zonder nieuwe app-versie |
 | Locatie: grove locatie | ja (afgerond tot ~500 m) | ja | App-functionaliteit (honden in de buurt) |
 | Gebruikersinhoud: foto's | ja | ja | App-functionaliteit (profiel, honden, wandelfoto's) |
 | Gebruikersinhoud: berichten | ja | ja | App-functionaliteit (chat per afspraak) |
@@ -82,7 +84,7 @@ De schermen tonen verzonnen voorbeelddata (Sam, Bobbie, "Voorbeeld"). Dat mag. M
 | **Geld inzamelen vanuit de app** | 3.1.1, 3.2.2, 2.3.1 | ⚠️ In de apps staan precies twee rustige ingangen, nooit bovenaan: de rij "Help ons via Whydonate" laag onder Jij en het blok "Help ons!" onderaan de voorpagina (alleen in de schil om de website; de native app heeft alleen de rij). Geen footerlink. Ze openen de crowdfunding in Safari: geen betaling, geen webview of tussenscherm in de app, en geven levert niets op in de app. Volgens 3.2.2 mag een gratis app geld voor een inzameling alleen buiten de app ophalen, bijvoorbeeld via Safari; dat doen deze ingangen, maar Apple beslist per geval. Rondje Mee is (nog) geen erkende stichting en zegt dat nergens; een gift is niet aftrekbaar. **De ingangen blijven zichtbaar tijdens de review** en staan uitgelegd in de review-notitie (§5). Zet ze nooit uit om ze voor de reviewers te verbergen en daarna weer aan: een functie die Apple niet te zien krijgt en die daarna wel verschijnt, is een verborgen functie (2.3.1), en dat kan het hele ontwikkelaarsaccount kosten. Wijst Apple ze af: `SUPPORT_IN_APP_IOS=0`, voorgoed (§5). |
 | Apple Gezondheid zonder duidelijk doel | 5.1.3, 2.5.1 | ✅ Staat uit (`RONDJE_FEATURE_HEALTH: NO`). Zet je het aan: privacybeleid aanvullen en in de review-notitie uitleggen waar de koppeling zit. |
 | Gezondheidsclaims | 1.4.1 | ✅ Geen claims in app en vermelding ("kan je dag goed doen"); hulplijnen zichtbaar |
-| Locatie op de achtergrond | 5.1.1, 2.5.4 | De app vraagt `UIBackgroundModes: location` (alleen tijdens een rondje). Zet in de review-notitie: "background location is only used during an active walk so the owner can follow along; it stops when the walk ends". |
+| Locatie op de achtergrond | 5.1.1, 2.5.4 | De app vraagt `UIBackgroundModes: location`, alleen voor een rondje alleen met de hond en alleen als live locatie op de server aan staat. Zet in de review-notitie: "Background location is only used during a walk alone with the dog, so the owner can follow along, and only while live location is switched on on our server. It stops when the walk ends. A first meeting and a shelter group walk never use location. Live location is switched off for all users until our privacy assessment is finished; while it is off, the app asks for no location during walks and a walk alone cannot be requested, so you will not see the location prompt." Klopt die laatste zin niet meer (live locatie staat aan bij het indienen), laat hem dan weg. |
 | Export-compliance | | Alleen standaard HTTPS → "Uses encryption: Yes, only exempt (standard) encryption" |
 
 ## 7. Na goedkeuring
