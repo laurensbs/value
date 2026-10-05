@@ -25,11 +25,11 @@ Deze checklist hoort bij de conceptdocumenten van Rondje Mee (aanbieder: Laurens
 
 **Sinds 5 oktober 2026** staan deze markeringen en placeholders niet meer zichtbaar in de teksten op de site: ze zijn opgelost met neutrale formuleringen of weggehaald, en de aanbieder is Laurens Bos (bereikbaar via het contactadres, zonder adres of KvK-nummer). De test `web/src/lib/legal-placeholders.test.ts` bewaakt dat er geen nieuwe bijkomen. De inhoudelijke punten hieronder blijven open tot de jurist ze heeft getoetst.
 
-**Tweede ronde, 5 oktober 2026:** de teksten zeggen niets meer als feit dat (nog) niet klopt. De DPIA staat er als "nog niet klaar", Vercel Web Analytics (zonder cookies) staat in de privacy- en cookieverklaring, de regio's en doorgiftegronden van Vercel, Neon en Resend zijn nagekeken, het profiel noemt de geboortedatum en precies wat eigenaren en opvangen van een wandelaar zien, meldingen worden echt 2 jaar na afsluiten verwijderd (`web/src/app/api/cron/cleanup/route.ts`), en de steun loopt via Whydonate. De voorwaarden zijn nu versie 0.3. Alle wijzigingen, bronnen en open vragen: `~/Projecten/Rondje/_werk/jurist/wijzigingen-2026-10-05.md` (buiten de repo).
+**Tweede ronde, 5 oktober 2026:** de teksten zeggen niets meer als feit dat (nog) niet klopt. De DPIA staat er als "nog niet klaar", Vercel Web Analytics (zonder cookies) staat in de privacy- en cookieverklaring, de regio's en doorgiftegronden van Vercel, Neon en Resend zijn nagekeken, het profiel noemt de geboortedatum en precies wat eigenaren en opvangen van een wandelaar zien, meldingen worden echt 2 jaar na afsluiten verwijderd (`web/src/app/api/cron/cleanup/route.ts`), en de steun loopt via Whydonate. De voorwaarden werden in deze ronde versie 0.3 (nu 0.4, zie de vijfde ronde). Alle wijzigingen, bronnen en open vragen: de bijlage wijzigingen-2026-10-05.md.
 
-**Derde ronde, 5 oktober 2026:** de DPIA is af vóór de eerste echte wandeling met live locatie (privacy art. 14, was "voordat Rondje Mee breed live gaat"), en voorwaarden art. 8 zegt nu ook dat 10% van alle giften naar goede doelen voor honden en mensen in de buurt gaat, zoals op /support (`web/content/crowdfunding.json`, `shareToCausesPercent`; de test bewaakt dat de voorwaarden hetzelfde getal noemen). Versies blijven 0.3 (voorwaarden) en 0.4 (privacy): die zijn nog niet live geweest.
+**Derde ronde, 5 oktober 2026:** de DPIA is af vóór de eerste echte wandeling met live locatie (privacy art. 14, was "voordat Rondje Mee breed live gaat"), en voorwaarden art. 8 zegt nu ook dat 10% van alle giften naar goede doelen voor honden en mensen in de buurt gaat, zoals op /support (`web/content/crowdfunding.json`, `shareToCausesPercent`; de test bewaakt dat de voorwaarden hetzelfde getal noemen). De versies bleven in deze ronde 0.3 (voorwaarden) en 0.4 (privacy), want die stonden toen nog niet live. Nu staan voorwaarden 0.4 en privacy 0.6 live (zie de vijfde ronde).
 
-**Vierde ronde, 5 oktober 2026 (branch `claude/voorwaarden-opnieuw`):** wie de vorige voorwaarden (0.2) accepteerde, ziet rustig wat er in 0.3 verandert (`web/content/legal/{taal}/terms-changes.md`): een korte kaart in het profiel, en de lijst met wijzigingen, een link naar de hele tekst en één knop "Akkoord" samen op `/profile/terms` (versie en moment worden opgeslagen). "Akkoord" staat nooit zonder de lijst in beeld, en Vandaag blijft leeg. De wijzigingslijst zegt eerlijk dat het e-mailadres na acceptatie en het telefoonnummer bij een groepswandeling al sinds 2 oktober zo werken (0.3 beschrijft het nu goed), en dat de voorwaarden nog een concept zijn dat een jurist nog niet heeft nagekeken. De meldingsdatum staat als `TERMS_NOTICE_FROM` naast `TERMS_EFFECTIVE_AT` in `web/src/lib/site.ts` (nu 5 oktober en 9 november 2026); een test bewaakt dat er minstens 30 dagen tussen zitten (art. 19). Wie later mergt dan 10 oktober, schuift beide datums op. Vanaf de ingangsdatum wachten nieuwe afspraken (aanvragen, accepteren, een rondje starten, aanmelden voor een groepswandeling) op dat akkoord; afwijzen, annuleren en een rondje beëindigen blijven altijd kunnen. Wie een geaccepteerd rondje heeft staan, ziet het vóór die dag al op Rondjes. Nieuwe accounts accepteren de huidige versie bij het aanmelden. Daarnaast de schakelaar `LIVE_LOCATION`, **standaard uit** (privacy by default): alleen `1`/`true`/`on`/`ja`/`aan` zet hem aan. Ook aan verzamelt alleen een rondje alleen met de hond locatie; een kennismaking en een groepswandeling nooit, want de eigenaar of opvang loopt mee (`walkHasLiveLocation` in `web/src/lib/rules.ts`). Uit: geen locatie opslaan, geen live kaart, en een rondje alleen met de hond kan niet worden aangevraagd, geaccepteerd of gestart (`live-location-off`, ook via de app-API); een rondje alleen dat al stond toen hij nog aan was, wacht, met een rustige regel voor wandelaar en eigenaar. Teksten die live meekijken beloven (de voorpagina, /safety, de flyer, /support, meldingen en e-mails) zeggen het alleen nog als de schakelaar aan staat, en "Kijk live mee" alleen bij een rondje dat locatie deelt. De privacyverklaring (versie 0.5; 0.4 staat al live) klopt in beide standen: art. 5 zegt dat live locatie uit kan staan, dat ze uit staat zolang de DPIA niet klaar is, en wat er dan niet kan; art. 2 en 3 noemen alleen een wandeling alleen met de hond met live locatie aan; art. 14 belooft dat ze tot de DPIA uit blijft. Het akkoord via de app vraagt verplicht de getoonde versie (`POST /api/v1/terms/accept` zonder versie: 400), en "Akkoord" staat er niet zonder lijst met wijzigingen. **Open voor de volgende versie van de voorwaarden (0.4) en het veiligheidsprotocol:** voorwaarden art. 11 en 13 en veiligheidsprotocol art. 2 zeggen nog dat je locatie bij elke wandeling gedeeld wordt; in werkelijkheid gebeurt dat minder (alleen een rondje alleen met de hond, en nu helemaal niet). Dat is in het voordeel van de gebruiker, maar de jurist kan de tekst gelijktrekken. Vraag (h) is in de code beantwoord met "melding vooraf én een nieuwe akkoordvraag"; de jurist kan toetsen of dat volstaat.
+**Vierde ronde, 5 oktober 2026 (branch `claude/voorwaarden-opnieuw`):** wie de vorige voorwaarden (0.2) accepteerde, ziet rustig wat er in 0.3 verandert (`web/content/legal/{taal}/terms-changes.md`): een korte kaart in het profiel, en de lijst met wijzigingen, een link naar de hele tekst en één knop "Akkoord" samen op `/profile/terms` (versie en moment worden opgeslagen). "Akkoord" staat nooit zonder de lijst in beeld, en Vandaag blijft leeg. De wijzigingslijst zegt eerlijk dat het e-mailadres na acceptatie en het telefoonnummer bij een groepswandeling al sinds 2 oktober zo werken (0.3 beschrijft het nu goed), en dat de voorwaarden nog een concept zijn dat een jurist nog niet heeft nagekeken. De meldingsdatum staat als `TERMS_NOTICE_FROM` naast `TERMS_EFFECTIVE_AT` in `web/src/lib/site.ts` (nu 5 oktober en 9 november 2026); een test bewaakt dat er minstens 30 dagen tussen zitten (art. 19). Wie later mergt dan 10 oktober, schuift beide datums op. Vanaf de ingangsdatum wachten nieuwe afspraken (aanvragen, accepteren, een rondje starten, aanmelden voor een groepswandeling) op dat akkoord; afwijzen, annuleren en een rondje beëindigen blijven altijd kunnen. Wie een geaccepteerd rondje heeft staan, ziet het vóór die dag al op Rondjes. Nieuwe accounts accepteren de huidige versie bij het aanmelden. Daarnaast de schakelaar `LIVE_LOCATION`, **standaard uit** (privacy by default): alleen `1`/`true`/`on`/`ja`/`aan` zet hem aan. Ook aan verzamelt alleen een rondje alleen met de hond locatie; een kennismaking en een groepswandeling nooit, want de eigenaar of opvang loopt mee (`walkHasLiveLocation` in `web/src/lib/rules.ts`). Uit: geen locatie opslaan, geen live kaart, en een rondje alleen met de hond kan niet worden aangevraagd, geaccepteerd of gestart (`live-location-off`, ook via de app-API); een rondje alleen dat al stond toen hij nog aan was, wacht, met een rustige regel voor wandelaar en eigenaar. Teksten die live meekijken beloven (de voorpagina, /safety, de flyer, /support, meldingen en e-mails) zeggen het alleen nog als de schakelaar aan staat, en "Kijk live mee" alleen bij een rondje dat locatie deelt. De privacyverklaring (versie 0.5; toen stond 0.4 live) klopt in beide standen: art. 5 zegt dat live locatie uit kan staan, dat ze uit staat zolang de DPIA niet klaar is, en wat er dan niet kan; art. 2 en 3 noemen alleen een wandeling alleen met de hond met live locatie aan; art. 14 belooft dat ze tot de DPIA uit blijft. Het akkoord via de app vraagt verplicht de getoonde versie (`POST /api/v1/terms/accept` zonder versie: 400), en "Akkoord" staat er niet zonder lijst met wijzigingen. **Open voor de volgende versie van de voorwaarden (0.4) en het veiligheidsprotocol:** voorwaarden art. 11 en 13 en veiligheidsprotocol art. 2 zeggen nog dat je locatie bij elke wandeling gedeeld wordt; in werkelijkheid gebeurt dat minder (alleen een rondje alleen met de hond, en nu helemaal niet). Dat is in het voordeel van de gebruiker, maar de jurist kan de tekst gelijktrekken. *(Opgelost in de vijfde ronde, hieronder.)* Vraag (h) is in de code beantwoord met "melding vooraf én een nieuwe akkoordvraag"; de jurist kan toetsen of dat volstaat.
 
 **Vijfde ronde, 5 oktober 2026 (branch `claude/voorwaarden-04`):** voorwaarden **0.4** en veiligheidsprotocol **0.2**, in vier talen. Het open punt uit de vierde ronde is opgelost: elke zin klopt nu met live locatie aan én uit. Er komt geen verplichting bij, behalve voor wie alleen de Spaanse tekst las (art. 6.6, zie hieronder). Voorwaarden art. 11 en 13 en protocol art. 2: locatie alleen bij een wandeling alleen met de hond terwijl live locatie aan staat, nooit bij een kennismaking of groepswandeling; zolang de DPIA niet klaar is, staat ze uit. Geen belofte meer van een melding als een wandeling uitloopt: `checkOverdue` (`web/src/server/walks.ts`) draait alleen als de telefoon van de wandelaar routepunten stuurt of iemand de volgpagina open heeft, er is geen cron. Het SOS-scherm staat er zoals het is: noodnummers, een belknop naar eigenaar of opvang (alleen als het nummer bekend is: het telefoonnummer van de eigenaar is niet verplicht, `SosSheet.tsx`), wat het hondenprofiel over de dierenarts zegt en de eerste stappen; het stuurt zelf niets en deelt geen locatie (protocol 3.1 stap 5 noemde een knop "hond ontsnapt" die niet bestaat; nu: bel meteen de eigenaar en vertel waar je de hond het laatst zag). Art. 6.5, 6.7 en 6.8: alleen wandelen en een vaste wekelijkse wandeling kunnen alleen zolang live locatie aan staat. Art. 4: wat leden (ingelogd, profiel af, niet geblokkeerd door Rondje Mee) en niet-leden zien sinds #42 en #44. In en/es/fr staat daar "not suspended", "la cuenta no suspendida" en "non suspendus": zo heet een blokkade door Rondje Mee in art. 14 en 17 van die talen, terwijl "block", "bloquear" en "bloquer" daar betekenen dat een gebruiker iemand anders blokkeert (de code kijkt alleen naar `bannedAt`, `getDogDetail` in `web/src/server/queries.ts`). Protocol 3.5 en 7: de live kaart en het bewaren van een route alleen als live locatie aan stond. De privacyverklaring gaat mee naar **0.6**: art. 5 belooft geen melding meer als een wandeling uitloopt (dezelfde zin als voorwaarden art. 13: soms, niet altijd), en art. 7 zegt net als voorwaarden art. 4 dat alleen leden de eigenaar bij de hond zien (0.5 zei nog "met een account"). De wijzigingslijst van 0.4 verwijst naar beide artikelen. `web/src/lib/legal-truth.test.ts` controleert voorwaarden, protocol, privacyverklaring en wijzigingslijst in vier talen. In het Spaans zei art. 6.6 nog dat de quiz pas vóór de eerste solowandeling komt; nu staat er, zoals in de andere talen en in de code sinds 4 oktober, vóór een kennismaking of groepswandeling. Voor wie alleen de Spaanse tekst las, komt de quiz daardoor eerder: op papier is dat wel een nieuwe verplichting (de code vraagt het al sinds 4 oktober), en daarom staat het met zoveel woorden in `es/terms-changes.md`. Opvanghonden: voorwaarden art. 6.5, partnervoorwaarden art. 4 en privacy art. 5 zeiden dat ook een opvang solo-vertrouwen kon geven en een live kaart zag. Dat kon nooit (`setTrust` in `web/src/server/actions/requests.ts` zet `soloAllowed` voor een opvanghond altijd uit, `canRequestSolo` in `web/src/lib/rules.ts` geeft `needs-meeting`): een opvanghond loopt alleen met iemand van de opvang erbij, bij de kennismaking of in een begeleide groepswandeling. De partnervoorwaarden stonden al live als 0.1 en gaan daarom naar **0.2** (zonder eigen wijzigingsmelding of akkoord; de wijzigingslijst van voorwaarden 0.4 noemt het, net als de privacyverklaring en het protocol). Wie 0.3 accepteerde (wie zich op 5 oktober aanmeldde of al akkoord gaf) ziet alleen wat 0.4 verandert; wie 0.2 of ouder accepteerde, ziet eerst 0.4 en daaronder 0.3, elk met een eigen zin (`termsChanges` in `web/src/server/terms.ts`; oudere versies staan onder een eigen kop in `terms-changes.md`, ook in `/api/v1/me`). `TERMS_NOTICE_FROM` blijft 5 oktober en `TERMS_EFFECTIVE_AT` 9 november 2026: één melding en één ingangsdatum voor beide versies, en vóór die dag wordt niemand tegengehouden. Gaat dit na 5 oktober live, zet `TERMS_NOTICE_FROM` dan op de echte live-datum; na 10 oktober ook `TERMS_EFFECTIVE_AT`. **Voor de jurist:** telt 0.4 als "belangrijke wijziging" (art. 19), terwijl alles beschrijft hoe het al werkt? En volstaat de melding in `es/terms-changes.md` voor de Spaanse correctie van art. 6.6, die de quiz voor wie alleen de Spaanse tekst las naar voren haalt?
 
@@ -40,31 +40,31 @@ Prioriteit: **H** = hoog (vóór lancering oplossen), **M** = middel, **L** = la
 ## 1. Samenvatting: de grootste risico's
 
 1. **Aansprakelijkheid kan bij de wandelaar komen te liggen, die vaak niet verzekerd is (H).** In België ("bewaarder", nieuw Boek 6 BW) en Spanje (art. 1905 CC: "el que se sirve de él") kan de wandelaar zelf risicoaansprakelijk zijn. Particuliere aansprakelijkheidspolissen sluiten schade aan zaken of dieren "onder opzicht" vaak uit. Zo ontstaan onverzekerde vrijwilligers en ontevreden eigenaren.
-2. **Herkwalificatie van Rondje als organisator van vrijwilligerswerk (H).** Hoe meer Rondje stuurt (quiz, beperkingen, solo-vertrouwen, moderatie), hoe meer het lijkt op een organisatie die vrijwilligers inzet. Gevolgen: de Belgische vrijwilligerswet (aansprakelijkheid en verplichte verzekering), art. 6:170 BW (ondergeschikten) en de Spaanse Ley 45/2015.
-3. **Eigen zorgplicht van Rondje en beperkte exoneratie (H).** Veiligheidsfuncties wekken verwachtingen. Een beperking van aansprakelijkheid tegenover consumenten staat onder druk: art. 6:237 sub f BW (grijze lijst), art. VI.83 WER (zwarte lijst), art. 86 TRLGDCU.
+2. **Herkwalificatie van Rondje Mee als organisator van vrijwilligerswerk (H).** Hoe meer Rondje Mee stuurt (quiz, beperkingen, solo-vertrouwen, moderatie), hoe meer het lijkt op een organisatie die vrijwilligers inzet. Gevolgen: de Belgische vrijwilligerswet (aansprakelijkheid en verplichte verzekering), art. 6:170 BW (ondergeschikten) en de Spaanse Ley 45/2015.
+3. **Eigen zorgplicht van Rondje Mee en beperkte exoneratie (H).** Veiligheidsfuncties wekken verwachtingen. Een beperking van aansprakelijkheid tegenover consumenten staat onder druk: art. 6:237 sub f BW (grijze lijst), art. VI.83 WER (zwarte lijst), art. 86 TRLGDCU.
 4. **Privacy: live locatie, kwetsbare gebruikers, meldingen met beschuldigingen van strafbare feiten (H).** Een DPIA is nodig vóór lancering. Ook nodig: een toets aan art. 10 AVG en art. 33 UAVG voor uitsluitingslijsten, en een beleid voor inzageverzoeken versus privé-feedback.
-5. **Spanje: PPP-honden en Ley 7/2023 (H).** De PPP-vergunning is zelf verklaard. De regels verschillen per regio. De verzekeringsplicht uit Ley 7/2023 hangt af van uitvoeringsregels. Rondje faciliteert dus mogelijk overtredingen.
+5. **Spanje: PPP-honden en Ley 7/2023 (H).** De PPP-vergunning is zelf verklaard. De regels verschillen per regio. De verzekeringsplicht uit Ley 7/2023 hangt af van uitvoeringsregels. Rondje Mee faciliteert dus mogelijk overtredingen.
 
-Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-bestaande rechtspersoon handelt, loopt persoonlijk risico. **Niet lanceren vóór de oprichting.**
+Daarnaast: er is geen rechtspersoon. Sinds 5 oktober 2026 is Laurens Bos als persoon de aanbieder (voorwaarden art. 1) en de verwerkingsverantwoordelijke (privacyverklaring art. 1), zonder KvK-nummer of adres op de site, en de site staat live op rondjemee.nl. Wat dat betekent voor zijn persoonlijke aansprakelijkheid, staat als vraag bij 3.5.
 
 ## 2. Algemeen (alle landen)
 
-### 2.1 Positie van Rondje als tussenpersoon
+### 2.1 Positie van Rondje Mee als tussenpersoon
 
 - [ ] **H** Toets of de positionering "zuiver tussenpersoon, geen partij bij de afspraak" standhoudt, gezien de veiligheidsfuncties: kennismakingsplicht, quiz, beperkingen voor nieuwe accounts, PPP-filter, live locatie en moderatie.
 - [ ] **H** Toets het risico op een eigen onrechtmatige daad door onvoldoende veiligheidsmaatregelen (zorgplicht, Kelderluik-criteria) en hoe dat zich verhoudt tot het streven om binnen 24 uur te reageren op meldingen.
 - [ ] **M** Toets of de hosting-vrijstelling (art. 6 DSA) iets toevoegt. Die geldt voor aansprakelijkheid voor inhoud, niet voor fysieke incidenten.
-- [ ] **M** Communicatie en marketing: gebruik geen claims als "geverifieerde wandelaars" of "veilig". Rondje bewaart geen ID en de check doet de eigenaar. Anders dreigt misleiding (oneerlijke handelspraktijken, Richtlijn 2005/29/EG).
+- [ ] **M** Communicatie en marketing: gebruik geen claims als "geverifieerde wandelaars" of "veilig". Rondje Mee bewaart geen ID en de check doet de eigenaar. Anders dreigt misleiding (oneerlijke handelspraktijken, Richtlijn 2005/29/EG).
 
 ### 2.2 Consumentenrecht bij een gratis dienst
 
-- [ ] **H** Toets of de oneerlijkebedingenrichtlijn (93/13/EEG) en de nationale regels van toepassing zijn op een gratis dienst van een stichting. Aanname in de teksten: ja, voor de zekerheid.
+- [ ] **H** Toets of de oneerlijkebedingenrichtlijn (93/13/EEG) en de nationale regels van toepassing zijn op een gratis dienst die een particulier (Laurens Bos) aanbiedt. Aanname in de teksten: ja, voor de zekerheid.
 - [ ] **M** Toets of de richtlijn digitale inhoud (2019/770) van toepassing is, omdat gebruikers persoonsgegevens verstrekken. In Nederland is die omgezet in titel 7.1A BW [te controleren]. Gevolgen: conformiteit, updates, beëindiging.
 - [ ] **M** Toets of de informatieplichten en het herroepingsrecht bij overeenkomsten op afstand gelden voor diensten waarvoor met gegevens wordt "betaald" (Omnibusrichtlijn 2019/2161). Moet er informatie over herroeping in de app staan?
 - [ ] **M** Toets de acceptatieflow: actief aanvinken, opslaan van de geaccepteerde versie, en de voorwaarden vooraf ter hand stellen (art. 6:233 sub b en 6:234 BW, Spaanse Ley 7/1998 sobre condiciones generales).
 - [ ] **M** Wijzigingsbeding (art. 19 van de voorwaarden): toets het aan art. 6:237 BW en art. VI.83 WER. Dat laatste vereist mogelijk geldige redenen die in de overeenkomst staan [te controleren]. Toets ook art. 85 TRLGDCU.
 - [ ] **M** Taalclausule ("de Nederlandse tekst geldt, tenzij ongunstiger voor de consument"): is die werkbaar en toelaatbaar in BE en ES?
-- [ ] **L** Termijn voor klachten (14 dagen) en voor opzegging door Rondje (30 dagen): akkoord?
+- [ ] **L** Termijn voor klachten (14 dagen) en voor opzegging door Rondje Mee (30 dagen): akkoord?
 
 ### 2.3 Rechtskeuze en bevoegde rechter
 
@@ -74,7 +74,7 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
 
 ### 2.4 Digital Services Act (Verordening (EU) 2022/2065)
 
-- [ ] **H** Kwalificatie: Rondje is een hostingdienst en waarschijnlijk een "onlineplatform", omdat profielen aan het publiek worden verspreid (iedereen kan een account maken) [te controleren].
+- [ ] **H** Kwalificatie: Rondje Mee is een hostingdienst en waarschijnlijk een "onlineplatform", omdat profielen aan het publiek worden verspreid (iedereen kan een account maken) [te controleren].
 - [ ] **H** Verplichtingen voor alle aanbieders, ook micro- en kleine ondernemingen:
   - contactpunten voor autoriteiten en gebruikers (art. 11 en 12);
   - voorwaarden met informatie over moderatie (art. 14);
@@ -84,15 +84,15 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
   
   Controleer of de teksten (voorwaarden art. 14) volledig zijn.
 - [ ] **M** Motivering (art. 17): de voorwaarden noemen als uitzonderingen alleen een verbod van de wet of van een bevoegde instantie. De naam van de melder wordt alleen genoemd als dat strikt nodig is (art. 17 lid 3 sub b). Klopt dit, en kan dit ook bij meldingen over stalking of geweld?
-- [ ] **M** Vrijstelling voor micro- en kleine ondernemingen (art. 19, Aanbeveling 2003/361/EG). Die geldt voor afdeling 3, behalve art. 24 lid 3. Rondje biedt intern klachtafhandeling (art. 20) en buitengerechtelijke geschilbeslechting (art. 21) toch vrijwillig aan. Keuze bevestigen: houden we dit aan? Dan moeten we het ook echt kunnen waarmaken.
+- [ ] **M** Vrijstelling voor micro- en kleine ondernemingen (art. 19, Aanbeveling 2003/361/EG). Die geldt voor afdeling 3, behalve art. 24 lid 3. Rondje Mee biedt intern klachtafhandeling (art. 20) en buitengerechtelijke geschilbeslechting (art. 21) toch vrijwillig aan. Keuze bevestigen: houden we dit aan? Dan moeten we het ook echt kunnen waarmaken.
 - [ ] **M** Transparantieverslag (art. 15): vrijstelling voor micro- en kleine ondernemingen (art. 15 lid 2) [te controleren].
 - [ ] **L** Bevoegde Digitaledienstencoördinator: in Nederland de ACM [te controleren]. In België het BIPT en in Spanje de CNMC [te controleren], maar het land van vestiging is leidend.
 - [ ] **L** De matching (honden in de buurt) is een aanbevelingssysteem. Art. 27 geldt niet voor kleine platforms, maar uitleg over de hoofdparameters (afstand, beschikbaarheid, ervaringsniveau) is goed voor de transparantie.
-- [ ] **L** P2B-verordening (2019/1150): is die van toepassing op opvangen als zakelijke gebruikers? Waarschijnlijk niet, want opvangen bieden via Rondje geen goederen of diensten aan consumenten aan [te controleren].
+- [ ] **L** P2B-verordening (2019/1150): is die van toepassing op opvangen als zakelijke gebruikers? Waarschijnlijk niet, want opvangen bieden via Rondje Mee geen goederen of diensten aan consumenten aan [te controleren].
 
 ### 2.5 Overige EU-regels
 
-- [ ] **M** Nieuwe productaansprakelijkheidsrichtlijn (EU) 2024/2853: software is een product, voor producten die na 9 december 2026 in de handel worden gebracht. Valt een gratis app van een stichting daaronder ("in het kader van een handelsactiviteit")? Relevant als bijvoorbeeld het SOS-scherm of de live locatie faalt.
+- [ ] **M** Nieuwe productaansprakelijkheidsrichtlijn (EU) 2024/2853: software is een product, voor producten die na 9 december 2026 in de handel worden gebracht. Valt een gratis app die een particulier aanbiedt (Laurens Bos, met giften via Whydonate) daaronder ("in het kader van een handelsactiviteit")? Relevant als bijvoorbeeld het SOS-scherm of de live locatie faalt.
 - [ ] **L** AI-verordening: de berichtcontrole is gebaseerd op regels, niet op AI [te controleren in de code]. Gaat dit veranderen? Dan opnieuw toetsen.
 - [ ] **L** European Accessibility Act: waarschijnlijk niet van toepassing (geen e-commerce, vrijstelling voor micro-ondernemingen) [te controleren]. Toegankelijkheid blijft wel goed ontwerp.
 
@@ -100,7 +100,7 @@ Daarnaast: de rechtspersoon bestaat nog niet ("i.o."). Wie namens een niet-besta
 
 De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte lessen; de veiligheidsquiz is verplicht vóór een aanvraag. De teksten staan in `web/messages/{taal}.json` onder `school.lessons` en `quiz`, en in de app in `ios/Rondje/Features/Lessons/LessonContent.swift`.
 
-- [ ] **H** **Laten nalezen door een opvang of dierenarts** vóór lancering, vooral de les **"Warm, koud en water"** (hitte: de hand 7 seconden op de stoep, "kort rondje in de schaduw, met water" bij 28 graden, strooizout) en de vragen over **loslaten** (les "De kennismaking": "alleen als de eigenaar het uitdrukkelijk zegt, en alleen waar het mag") en een **ontsnapte of bijtende hond** (les "Als er iets gebeurt"). Kloppen de adviezen, zijn ze volledig genoeg, en wekken ze geen verwachting die Rondje niet kan waarmaken?
+- [ ] **H** **Laten nalezen door een opvang of dierenarts** vóór lancering, vooral de les **"Warm, koud en water"** (hitte: de hand 7 seconden op de stoep, "kort rondje in de schaduw, met water" bij 28 graden, strooizout) en de vragen over **loslaten** (les "De kennismaking": "alleen als de eigenaar het uitdrukkelijk zegt, en alleen waar het mag") en een **ontsnapte of bijtende hond** (les "Als er iets gebeurt"). Kloppen de adviezen, zijn ze volledig genoeg, en wekken ze geen verwachting die Rondje Mee niet kan waarmaken?
 - [ ] **M** **Geen schijnzekerheid:** de quiz heeft 8 vaste vragen en geeft aan welke fout waren, dus iedereen haalt hem. De teksten zeggen daarom: "De quiz leert je de regels; de eigenaar beslist of je alleen mag." Toets of dat (en de lessen zelf) niet als garantie of screening wordt opgevat (zie risico 2 en 3 in §1).
 - [ ] **L** De lessen geven geen punten en ontsluiten niets; ze zijn een vrijwillige uitleg.
 
@@ -111,16 +111,16 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 - [ ] **H** Art. 6:179 BW: de bezitter (eigenaar of opvang) is risicoaansprakelijk, ook als iemand anders de hond uitlaat. De wandelaar is aansprakelijk bij eigen fout (art. 6:162 BW). Toets of de teksten dit juist en volledig weergeven.
 - [ ] **H** Kan een gebeten wandelaar de eigenaar aanspreken op grond van art. 6:179 BW, en speelt eigen schuld (art. 6:101 BW) een rol als je de hond onder je hoede hebt? [jurisprudentie te controleren]
 - [ ] **M** Art. 6:181 BW (dier gebruikt in de uitoefening van een bedrijf): geldt dit voor opvangen? Dan is de opvang aansprakelijk [te controleren].
-- [ ] **H** Art. 6:170 BW: kunnen wandelaars worden gezien als "ondergeschikten" van Rondje (of van een opvang) als er een gezagsverhouding is? Hoe voorkomen we dat zonder de veiligheidsmaatregelen af te zwakken?
-- [ ] **H** Exoneratie (voorwaarden art. 15): de beperking tot directe schade en een maximum van € [bedrag] valt onder art. 6:237 sub f BW (grijze lijst) en art. 6:248 lid 2 BW. Advies gevraagd: maximum schrappen voor consumenten, of verantwoorden omdat de dienst gratis is? Dood, letsel, opzet en grove schuld zijn al uitgezonderd.
-- [ ] **M** De teksten zeggen dat eigenaren een aansprakelijkheidsverzekering moeten hebben "waar verplicht of gebruikelijk". In Nederland is die niet wettelijk verplicht. Is "verplicht via de voorwaarden" redelijk en handhaafbaar? Rondje kan het niet controleren.
+- [ ] **H** Art. 6:170 BW: kunnen wandelaars worden gezien als "ondergeschikten" van Rondje Mee (of van een opvang) als er een gezagsverhouding is? Hoe voorkomen we dat zonder de veiligheidsmaatregelen af te zwakken?
+- [ ] **H** Exoneratie (voorwaarden art. 15): "Voor zover de wet dat toestaat, zijn we alleen aansprakelijk voor directe schade door onze eigen tekortkoming." Dat valt onder art. 6:237 sub f BW (grijze lijst) en art. 6:248 lid 2 BW. Het maximum van € [bedrag] per gebeurtenis is op 5 oktober 2026 geschrapt (sinds versie 0.3). Advies gevraagd: is de beperking tot directe schade houdbaar tegenover consumenten, ook omdat de dienst gratis is? Dood, letsel, opzet en grove schuld zijn al uitgezonderd.
+- [ ] **M** De teksten zeggen dat eigenaren een aansprakelijkheidsverzekering moeten hebben "waar verplicht of gebruikelijk". In Nederland is die niet wettelijk verplicht. Is "verplicht via de voorwaarden" redelijk en handhaafbaar? Rondje Mee kan het niet controleren.
 
 ### 3.2 Verzekering
 
 - [ ] **H** AVP (aansprakelijkheidsverzekering particulieren) van de eigenaar: dekt die schade door de hond als iemand anders de hond uitlaat? En neemt de verzekeraar daarna regres op de wandelaar?
 - [ ] **H** AVP van de wandelaar: de uitsluiting "onder opzicht" voor schade aan de hond zelf of aan spullen (lijn, tuig). Wie betaalt de dierenarts als de wandelaar iets fout doet?
-- [ ] **H** VNG-vrijwilligersverzekering (via gemeenten): vallen wandelaars via een platform daaronder? Meestal alleen bij georganiseerd vrijwilligerswerk; soms ook informele vrijwilligers [te controleren per gemeente]. Afweging: dekking tegenover het risico dat Rondje als organisator wordt gezien (zie 3.1).
-- [ ] **M** Opties voor een collectieve polis: een collectieve aansprakelijkheids- en ongevallenpolis voor wandelaars, betaald door een partner (zie `docs/PARTNERS.md`). Ook voor Rondje zelf: een bedrijfsaansprakelijkheidsverzekering (AVB) met dekking voor platformactiviteiten, een bestuurdersaansprakelijkheidsverzekering en eventueel een cyberverzekering.
+- [ ] **H** VNG-vrijwilligersverzekering (via gemeenten): vallen wandelaars via een platform daaronder? Meestal alleen bij georganiseerd vrijwilligerswerk; soms ook informele vrijwilligers [te controleren per gemeente]. Afweging: dekking tegenover het risico dat Rondje Mee als organisator wordt gezien (zie 3.1).
+- [ ] **M** Opties voor een collectieve polis: een collectieve aansprakelijkheids- en ongevallenpolis voor wandelaars, betaald door een partner (zie `docs/PARTNERS.md`). Ook voor Rondje Mee zelf: een bedrijfsaansprakelijkheidsverzekering (AVB) met dekking voor platformactiviteiten, een bestuurdersaansprakelijkheidsverzekering en eventueel een cyberverzekering.
 - [ ] **M** Ongevallenverzekering voor letsel van de wandelaar zelf (bijvoorbeeld een val door een trekkende hond). Aansprakelijkheid dekt dit vaak niet.
 
 ### 3.3 Dieren- en gemeenteregels
@@ -132,7 +132,7 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 ### 3.4 ID-check, screening en BSN
 
 - [ ] **H** Procedure voor de ID-check: wat kijkt de eigenaar na (naam, foto, leeftijd), en wat niet? Geen kopie, geen foto en geen nummers noteren. Het BSN mag niet worden verwerkt (art. 46 UAVG). Advies: een korte schriftelijke instructie in de app, en een vastgelegde procedure voor opvangen (die vallen wel onder de AVG).
-- [ ] **M** Wie is aansprakelijk als de ID-check niet of slecht gebeurt? De teksten leggen de check bij de eigenaar. Toets of Rondje hier verwachtingen wekt.
+- [ ] **M** Wie is aansprakelijk als de ID-check niet of slecht gebeurt? De teksten leggen de check bij de eigenaar. Toets of Rondje Mee hier verwachtingen wekt.
 - [ ] **L** VOG: een verplichte VOG voor wandelaars bij kwetsbare eigenaren? De Regeling gratis VOG geldt voor organisaties met preventiebeleid. Is dat proportioneel en haalbaar?
 
 ### 3.5 Organisatie en registraties
@@ -142,9 +142,9 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
   - **Bv:** makkelijker voor investeringen en commerciële partnerschappen.
   
   Bij beide: bestuursaansprakelijkheid en governance.
-- [ ] **H** "Stichting Rondje i.o." bestaat nog niet. Wie handelt namens een niet-bestaande rechtspersoon, kan persoonlijk aansprakelijk zijn [te controleren]. Lanceer pas na oprichting, en vul dan KvK-nummer en adres in.
+- [ ] **H** Er is geen stichting of andere rechtspersoon. Sinds 5 oktober 2026 is Laurens Bos als persoon de aanbieder (voorwaarden art. 1) en de verwerkingsverantwoordelijke (privacyverklaring art. 1), zonder KvK-nummer of adres op de site; de site staat live. Toets wat dat betekent voor zijn persoonlijke aansprakelijkheid, en wat er moet veranderen als er later een stichting of bv komt [te controleren].
 - [ ] **M** Inschrijving in het Handelsregister en het UBO-register. ANBI-aanvraag (optioneel). Voor het platform zelf is geen vergunning nodig [te controleren].
-- [ ] **M** Merk "Rondje": onderzoek bij het BOIP (Benelux) en het EUIPO, klassen 9 (app), 42 (platform/SaaS) en 45 (online sociale diensten), eventueel ook 35 en 44. "Rondje" is een gewoon Nederlands woord ("een rondje met de hond"). Het kan daarom beschrijvend zijn voor uitlaatdiensten in de Benelux. Controleer ook de domeinnaam en handelsnaamrecht.
+- [ ] **M** Merk "Rondje Mee": onderzoek bij het BOIP (Benelux) en het EUIPO, klassen 9 (app), 42 (platform/SaaS) en 45 (online sociale diensten), eventueel ook 35 en 44. "Rondje" is een gewoon Nederlands woord ("een rondje met de hond"). De naam kan daarom beschrijvend zijn voor uitlaatdiensten in de Benelux. Controleer ook de domeinnaam en handelsnaamrecht.
 - [ ] **L** App stores: leeftijdsclassificatie (18+), de privacylabels, en de eis van Apple dat je je account in de app kunt verwijderen. Dat laatste zit al in de teksten.
 
 ## 4. België
@@ -159,8 +159,8 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 
 ### 4.2 Vrijwilligers
 
-- [ ] **H** Vrijwilligerswet (wet van 3 juli 2005): een organisatie die vrijwilligers inzet, heeft een informatieplicht, is burgerrechtelijk aansprakelijk voor schade door de vrijwilliger, en moet een verzekering afsluiten. Zijn wandelaars "vrijwilligers van Rondje"? Aanname: nee, want ze wandelen voor een particulier en Rondje bemiddelt alleen. Bij opvangen: de opvang is de organisatie. Bevestigen.
-- [ ] **M** Gratis vrijwilligersverzekering via de provincies of de Vlaamse overheid voor kleinere organisaties [te controleren]: een optie voor opvangen of voor Rondje?
+- [ ] **H** Vrijwilligerswet (wet van 3 juli 2005): een organisatie die vrijwilligers inzet, heeft een informatieplicht, is burgerrechtelijk aansprakelijk voor schade door de vrijwilliger, en moet een verzekering afsluiten. Zijn wandelaars "vrijwilligers van Rondje Mee"? Aanname: nee, want ze wandelen voor een particulier en Rondje Mee bemiddelt alleen. Bij opvangen: de opvang is de organisatie. Bevestigen.
+- [ ] **M** Gratis vrijwilligersverzekering via de provincies of de Vlaamse overheid voor kleinere organisaties [te controleren]: een optie voor opvangen of voor Rondje Mee?
 
 ### 4.3 Dierenwelzijn per gewest
 
@@ -178,7 +178,7 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 
 - [ ] **L** Cookies: art. 10/2 van de wet van 13 juni 2005 betreffende de elektronische communicatie [artikelnummer te controleren].
 - [ ] **L** De Gegevensbeschermingsautoriteit is bevoegd voor klachten. De leidende toezichthouder is waarschijnlijk de AP (vestiging in Nederland, one-stop-shop).
-- [ ] **L** Hoeft Rondje zich in België te registreren als het daar geen vestiging heeft? Aanname: nee [te controleren].
+- [ ] **L** Hoeft Rondje Mee zich in België te registreren als het daar geen vestiging heeft? Aanname: nee [te controleren].
 
 ## 5. Spanje
 
@@ -193,7 +193,7 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 - [ ] **H** Moet iedere persoon die een PPP-hond op straat begeleidt zelf een licencia administrativa hebben en die bij zich dragen? Aanname in de teksten: ja [te controleren, onder meer art. 9 RD 287/2002].
 - [ ] **H** Eisen voor de vergunning (18+, geen veroordelingen, verklaring van fysieke en psychologische geschiktheid, aansprakelijkheidsverzekering, minimumdekking [te controleren]). Geldigheid (looptijd, en of de vergunning in heel Spanje geldt) [te controleren].
 - [ ] **H** Muilkorf, een niet-uitrolbare lijn van maximaal 2 meter, en maximaal één PPP-hond per persoon [te controleren].
-- [ ] **H** Rondje vertrouwt op de verklaring van de wandelaar. Is dat genoeg, of moet Rondje de vergunning controleren? Dat betekent wel extra gegevensverwerking (vergunningnummer, geldigheid).
+- [ ] **H** Rondje Mee vertrouwt op de verklaring van de wandelaar. Is dat genoeg, of moet Rondje Mee de vergunning controleren? Dat betekent wel extra gegevensverwerking (vergunningnummer, geldigheid).
 - [ ] **M** Regionale lijsten van PPP-rassen en extra regionale regels (bijvoorbeeld Catalonië en Baskenland) [te controleren].
 
 ### 5.3 Ley 7/2023 (bescherming van de rechten en het welzijn van dieren)
@@ -207,7 +207,7 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 
 ### 5.4 Protectoras en vrijwilligers
 
-- [ ] **M** Ley 45/2015 del Voluntariado en regionale vrijwilligerswetten: een protectora met vrijwilligers moet hen verzekeren [te controleren]. Vallen wandelaars via Rondje daaronder?
+- [ ] **M** Ley 45/2015 del Voluntariado en regionale vrijwilligerswetten: een protectora met vrijwilligers moet hen verzekeren [te controleren]. Vallen wandelaars via Rondje Mee daaronder?
 - [ ] **M** Register van dierenbeschermingsorganisaties (Ley 7/2023) [te controleren]: kunnen we dat gebruiken bij de verificatie?
 - [ ] **L** Verificatie met het NIF (vroeger CIF): klopt de terminologie?
 
@@ -229,16 +229,17 @@ De Hondenschool (`/school` op de website en in de iPhone-app) heeft vijf korte l
 - [ ] **M** **Gezondheidsgegevens** (art. 9 AVG): hondenverhalen van zieke of oudere eigenaren kunnen gezondheidsgegevens bevatten. De teksten vragen gebruikers dat niet te doen. Is moderatie of een waarschuwing in het invoerveld nodig?
 - [ ] **M** **Afgeronde locatie (500 m):** in dunbevolkte gebieden kan iemand toch herleidbaar zijn. Ook herhaald opvragen kan de echte locatie verraden. Overweeg een grotere afronding buiten de stad, en vaste rasterpunten in plaats van willekeurige verschuiving.
 - [ ] **M** **Functionaris gegevensbescherming:** waarschijnlijk niet verplicht bij de start (geen grootschalige monitoring). Opnieuw beoordelen bij groei.
+- [ ] **M** **Beheerderstoegang tot live kaart en route:** een beheerder kan elke wandeling openen, ook de live kaart en de route (`walkAccess` in `web/src/server/walks.ts` telt `viewer.isAdmin` mee), en dat wordt niet gelogd. Privacyverklaring art. 5 (versie 0.6) noemt alleen de eigenaar. Toets de grondslag, en wat de privacyverklaring hierover moet zeggen (concept-DPIA: R10, M3, M8 en J7).
 - [ ] **M** **Rolverdeling met opvangen:** zelfstandig verantwoordelijke of verwerker voor de aanwezigheidsregistratie? Is een verwerkersovereenkomst nodig?
 - [ ] **L** Verwerkingsregister (art. 30), datalekprocedure, privacy by design. Pushmeldingen: welke dienst (APNs, FCM) en welke gegevens [te controleren].
 - [ ] **L** Lettertypes en andere externe bronnen: laad niets van derden (zoals Google Fonts) zonder noodzaak. Het prototype bundelt de lettertypes al.
-- [ ] **M** **Contactpersoon van een opvang** (naam, e-mail, telefoon): alleen zichtbaar voor beheerders. Grondslag: gerechtvaardigd belang (de opvang controleren en bereiken). Staat in de privacyverklaring (versie 0.2); controleer of de medewerker zelf geïnformeerd moet worden (art. 14 AVG) als een collega hem opgeeft.
+- [ ] **M** **Contactpersoon van een opvang** (naam, e-mail, telefoon): alleen zichtbaar voor beheerders. Grondslag: gerechtvaardigd belang (de opvang controleren en bereiken). Staat in de privacyverklaring (art. 3, sinds versie 0.2; live is nu versie 0.6); controleer of de medewerker zelf geïnformeerd moet worden (art. 14 AVG) als een collega hem opgeeft.
 - [ ] **L** **Hondenschool-voortgang** (tabel `lesson_progress`, sinds 4 okt 2026): alleen welke les iemand afrondde en wanneer, geen score. Zonder account blijft het in de browser (localStorage) tot iemand een account heeft. Gaat mee in de gegevensexport en weg met het account. Noemen in de privacyverklaring?
 - [ ] **M** **Tips en stemmen voor opvangen:** alleen gegevens over de organisatie, plus wie de tip gaf. Grondslag: gerechtvaardigd belang. Bewaartermijn: een jaar na afhandeling, niet afgehandeld na twee jaar (automatisch). Over particulieren slaan we bewust niets op (art. 14 AVG): toets of het vrije toelichtingsveld met de automatische weigering van telefoonnummers en e-mailadressen genoeg is.
 
 ### 6.1 Steun via Whydonate (giften aan Laurens Bos, 10% naar goede doelen)
 
-Sinds 5 oktober 2026 loopt steun alleen via een eenmalige gift op de inzamelactie bij Whydonate (`CROWDFUNDING_URL`). Er is geen maandelijkse bijdrage en geen Patreon meer: voorwaarden art. 8 zegt dat er nu geen vaste maandelijkse bijdrage is, en `SUPPORT_URL` blijft in productie leeg (`docs/DECISIONS.md`, keuze 29 en 39).
+Sinds 5 oktober 2026 loopt steun alleen via een eenmalige gift op de inzamelactie bij Whydonate (`CROWDFUNDING_URL`). Er is geen maandelijkse bijdrage: voorwaarden art. 8 en `/support` zeggen dat er nu geen vaste maandelijkse bijdrage is (het donatieformulier van Whydonate biedt wel nog Maandelijks en Jaarlijks, stand 5 oktober 2026), en `SUPPORT_URL` blijft in productie leeg (`docs/DECISIONS.md`, keuze 29 en 39).
 
 - [ ] **H** **Ontvanger:** giften gaan naar Laurens Bos als persoon (`OPERATOR_NAME`), dezelfde als de aanbieder in voorwaarden art. 1 en de verantwoordelijke in de privacyverklaring. Toets of dat zo kan zolang er geen rechtspersoon is, en wat er verandert als er later een stichting of bv komt.
 - [ ] **H** **Belasting:** een gift zonder tegenprestatie aan een particulier die een eigen project draait. Is dat inkomen (winst of resultaat uit overige werkzaamheden) of een schenking bij de ontvanger? Laat een boekhouder meekijken [te controleren]. Rondje Mee zegt overal dat een gift niet fiscaal aftrekbaar is (geen stichting, geen ANBI) en geen voordelen geeft.
@@ -249,38 +250,40 @@ Sinds 5 oktober 2026 loopt steun alleen via een eenmalige gift op de inzamelacti
 
 ## 7. Leeftijd (18+)
 
-- [ ] **M** Leeftijdscontrole: het geboortejaar is zelf ingevuld, en de echte controle is de ID-check bij de kennismaking. Tot dat moment kan een minderjarige wel een account maken en verzoeken sturen. Is dat acceptabel? Opties: de leeftijdssignalen van Apple en Google gebruiken [te controleren], of contact pas na de ID-check toestaan.
+- [ ] **M** Leeftijdscontrole: de geboortedatum is zelf ingevuld, en de echte controle is de ID-check bij de kennismaking. Tot dat moment kan een minderjarige wel een account maken en verzoeken sturen. Is dat acceptabel? Opties: de leeftijdssignalen van Apple en Google gebruiken [te controleren], of contact pas na de ID-check toestaan.
 - [ ] **L** Wat doen we als blijkt dat iemand jonger is: account sluiten en gegevens verwijderen? Dit staat al in de privacyverklaring.
 
 ## 8. Openstaande placeholders
 
-- [ ] Naam rechtspersoon, KvK-nummer, adres, e-mailadres (ook als DSA-contactpunt). Stem dit af op `OPERATOR_NAME` en `CONTACT_EMAIL` in Vercel (zie `LAUNCH.md` stap 3).
-- [ ] Maximum aansprakelijkheid `[bedrag]`, of schrappen (zie 3.1).
-- [ ] E-mailprovider (naam, land, verwerkersovereenkomst).
-- [ ] Regio's van Vercel, Vercel Blob en Neon.
+Afgevinkt = op 5 oktober 2026 besloten of nagekeken. Wat de jurist daarvan nog moet toetsen, staat bij het genoemde punt.
+
+- [x] Naam, adres en e-mailadres van de aanbieder (ook als DSA-contactpunt). *Besloten 5 okt:* Laurens Bos als persoon (voorwaarden art. 1, privacyverklaring art. 1), zonder KvK-nummer of adres op de site, bereikbaar via hallo@rondjemee.nl (`OPERATOR_NAME` en `CONTACT_EMAIL` in Vercel). Of dat genoeg is: zie 3.5.
+- [x] Maximum aansprakelijkheid `[bedrag]`: geschrapt op 5 oktober 2026 (voorwaarden art. 15). Toets van wat er nu staat: zie 3.1.
+- [x] E-mailprovider: Resend Inc. (VS), in de privacyverklaring art. 8 en 9, met standaardcontractbepalingen en het EU-VS Data Privacy Framework. E-mail staat in productie uit. De verwerkersovereenkomst moet nog worden bewaard (concept-DPIA, M7).
+- [x] Regio's: serverfuncties en de Blob-store `rondje-photos` in Frankfurt (`fra1`), database bij Neon in Frankfurt (eu-central-1). Nagekeken op 5 oktober 2026; de regio van Neon niet in de Neon-console zelf (zie 6, doorgifte naar de VS).
 - [ ] Cookienamen en bewaarduur; of er een beveiligingscookie (CSRF) is.
 - [ ] Bewaartermijnen voor berichten, logs en uitsluitingen.
-- [ ] Welke profielvelden openbaar zijn: leeftijd of geboortejaar?
+- [x] Leeftijd: anderen zien alleen een leeftijdsgroep (18–24, 25–34, 35–49, 50+), nooit de geboortedatum (`ageBand` in `web/src/lib/rules.ts`; privacyverklaring art. 3 en 7).
 - [ ] Wanneer de beperking voor nieuwe accounts vervalt.
-- [ ] Of Rondje zelf een verzekering voor wandelingen afsluit.
+- [ ] Of Rondje Mee zelf een verzekering voor wandelingen afsluit.
 
 ## 9. Wat de app al technisch afdwingt
 
-**Status (2 oktober 2026):** de webapp in `web/` dwingt de regels hieronder af op de server, niet alleen in het scherm. De regels staan in `web/src/lib/rules.ts` met unit-tests, en twee end-to-endtests doorlopen de hele flow (`web/e2e/`). Nuances die de teksten moeten volgen:
+**Status (2 oktober 2026, bijgewerkt op 5 oktober 2026):** de webapp in `web/` dwingt de regels hieronder af op de server, niet alleen in het scherm. De regels staan in `web/src/lib/rules.ts` met unit-tests, en twee end-to-endtests doorlopen de hele flow (`web/e2e/`). Nuances die de teksten moeten volgen:
 
 - **Leeftijd:** de volledige geboortedatum is verplicht, niet alleen het jaar. Onder de 18 kan het profiel niet worden afgerond, en een account zonder profiel kan niets aanvragen. Anderen zien alleen een leeftijdsgroep (18–24, 25–34 …).
 - **Opvangen:** een opvang kan alvast honden invoeren, maar die worden pas openbaar na verificatie door een beheerder. Het registratienummer wordt met de hand gecontroleerd, niet automatisch.
-- **Kennismaking:** een zelfstandig rondje kan technisch pas na een geaccepteerde kennismaking én expliciete toestemming van de eigenaar voor die hond. Of de eigenaar er bij de kennismaking echt bij is, berust op de afspraak.
-- **Opvanghonden:** alleen in begeleide groepswandelingen. Zelfstandig wandelen met een opvanghond is technisch uitgesloten.
-- **Ervaring:** honden met het niveau "met ervaring", waaronder alle honden met een bijtgeschiedenis, zijn niet te boeken voor wandelaars zonder ervaring.
-- **Te laat terug:** na 20 minuten boven de geplande tijd krijgen wandelaar en eigenaar een melding in de app. Er zijn nog geen sms- of pushmeldingen.
+- **Kennismaking:** een zelfstandig rondje kan technisch pas na een kennismaking in het echt, "ID gezien" én expliciete toestemming van de eigenaar voor die hond, en alleen zolang live locatie aan staat (`LIVE_LOCATION`, standaard uit; `canRequestSolo` in `web/src/lib/rules.ts`). Nu staat ze uit, dus nu kan er geen zelfstandig rondje. Of de eigenaar er bij de kennismaking echt bij is, berust op de afspraak.
+- **Opvanghonden:** nooit alleen. Zelfstandig wandelen met een opvanghond is technisch uitgesloten: een opvang kan geen solo-vertrouwen geven (`setTrust` in `web/src/server/actions/requests.ts`), en `canRequestSolo` geeft voor een opvanghond `needs-meeting`. Een kennismaking met een opvanghond kan wel. Dat er dan echt iemand van de opvang bij is, berust op de afspraak (partnervoorwaarden art. 4), net als bij een eigenaar. Alleen een rondje alleen met de hond deelt locatie (`walkHasLiveLocation`), dus van de gebruikers ziet alleen een eigenaar een live kaart. Een beheerder kan wel elke wandeling openen, ook de live kaart en de route (`walkAccess` in `web/src/server/walks.ts` telt `viewer.isAdmin` mee); privacyverklaring art. 5 noemt dat niet (zie 6).
+- **Ervaring:** honden met het niveau "met ervaring", waaronder alle honden met een bijtgeschiedenis, kunnen wandelaars zonder ervaring niet zelfstandig wandelen. Een kennismaking aanvragen kan wel (`canRequestSolo` en `canRequestMeeting` in `web/src/lib/rules.ts`).
+- **Te laat terug:** loopt een wandeling meer dan 20 minuten uit, dan krijgen wandelaar en eigenaar soms een melding, niet altijd: `checkOverdue` (`web/src/server/walks.ts`) draait alleen als de telefoon van de wandelaar routepunten stuurt of iemand de volgpagina open heeft; er is geen geplande taak. De melding komt in de app, en via `notify` ook als pushmelding in de browser (webpush) voor wie dat aanzette, zodra de sleutels `VAPID_*` gezet zijn. E-mail en pushmeldingen op de iPhone gaan alleen als hun sleutels gezet zijn; sms is er niet. Zo staat het sinds 5 oktober ook in voorwaarden art. 13 en privacyverklaring art. 5: "soms een melding, maar niet altijd".
 - **Chipnummer:** wordt nooit aan wandelaars getoond, ook niet na acceptatie.
 - **Cookies:** de echte cookienamen staan nu in `cookies.md`. Beoordeel of `rondje_ref` (uitnodigingslink) functioneel is.
 - **Gegevens:** "Download mijn gegevens" (JSON) en "Account verwijderen" werken. Verwijderen wist ook honden, afspraken en routes. Meldingen blijven bewaard zonder koppeling aan het verwijderde account.
 
 **Toegang en accounts**
 
-- Geboortejaar verplicht. Wie jonger is dan 18, kan geen account maken.
+- Geboortedatum verplicht. Wie jonger is dan 18, kan het profiel niet afronden en dus niets aanvragen.
 - Opvangen kunnen pas honden plaatsen na verificatie met KvK-, KBO- of NIF-nummer.
 - Nieuwe accounts kunnen eerst alleen kennismakingen en begeleide wandelingen doen.
 - Limieten op het aantal verzoeken.
@@ -289,8 +292,8 @@ Sinds 5 oktober 2026 loopt steun alleen via een eenmalige gift op de inzamelacti
 **Verzoeken en wandelingen**
 
 - De eerste ontmoeting is altijd een kennismaking, met eigenaar of opvang erbij.
-- De eigenaar of opvang vinkt de ID-check aan. Er is geen functie om een ID te uploaden. Rondje slaat geen kopie op.
-- Een solowandeling kan alleen na expliciet solo-vertrouwen van de eigenaar, per hond. Met een opvanghond nooit.
+- De eigenaar of opvang vinkt de ID-check aan. Er is geen functie om een ID te uploaden. Rondje Mee slaat geen kopie op.
+- Een solowandeling kan alleen na expliciet solo-vertrouwen van de eigenaar, per hond, na "ID gezien", en alleen zolang live locatie aan staat. Met een opvanghond nooit.
 - Vóór een kennismaking of groepswandeling: de veiligheidsquiz (sinds 4 oktober 2026).
 - Loslopen staat standaard uit.
 - Spanje: PPP-honden zijn alleen te boeken voor wandelaars die een geldige PPP-vergunning bevestigen.
@@ -300,7 +303,7 @@ Sinds 5 oktober 2026 loopt steun alleen via een eenmalige gift op de inzamelacti
 
 - Telefoonnummer, afspraakplek of adres en dierenarts zijn pas zichtbaar na acceptatie. Sommige velden (zoals het chipnummer) worden nooit getoond [te controleren welke].
 - De woonplaats wordt afgerond op zo'n 500 meter.
-- Live locatie alleen tijdens een actieve wandeling.
+- Live locatie alleen tijdens een wandeling alleen met de hond, en alleen als `LIVE_LOCATION` aan staat (standaard uit). Nooit bij een kennismaking of groepswandeling.
 - Routes worden na 30 dagen automatisch verwijderd, behalve bij een open melding.
 - Stemming-check-ins blijven alleen op het apparaat.
 - Privé-feedback is nooit zichtbaar voor de ander.
@@ -319,6 +322,7 @@ Sinds 5 oktober 2026 loopt steun alleen via een eenmalige gift op de inzamelacti
 - of de informatie over gedrag en bijtgeschiedenis klopt;
 - of de wandelaar echt een PPP-vergunning heeft;
 - of de ID-check zorgvuldig is gedaan;
+- of de eigenaar of iemand van de opvang er bij de kennismaking echt bij is;
 - of de hond echt aan de lijn blijft en alleen toegestane snoepjes krijgt;
 - of de wandelaar fit en nuchter is.
 
