@@ -144,7 +144,10 @@ export async function addDog(page: Page, name: string) {
   await expect(page).toHaveURL(/\/dogs\/[^/?]+\?saved=1$/)
 }
 
-/** Signs in as the e2e admin (ADMIN_EMAILS in playwright.config.ts). On a reused server the account may already exist. */
+/**
+ * Signs in as the e2e admin (ADMIN_EMAILS in playwright.config.ts; only a throwaway test server trusts that list
+ * without a confirmed address, db/index.ts isThrowawayTestServer). On a reused server the account may already exist.
+ */
 export async function signInAdmin(browser: Browser) {
   const admin = await newPerson(browser)
   const page = admin.page

@@ -1577,7 +1577,8 @@
       "send": "Stuur de mail",
       "sent": "Verstuurd. Open de mail en tik op de knop, dan kom je hier terug.",
       "failed": "Versturen lukte niet. Probeer het zo nog eens.",
-      "expired": "Die link werkt niet meer. Stuur hieronder een nieuwe mail."
+      "expired": "Die link werkt niet meer. Stuur hieronder een nieuwe mail.",
+      "noEmail": "Rondje Mee verstuurt nog geen mail, dus bevestigen kan nu niet. Tot die tijd opent Beheer alleen voor accounts met de beheerdersrol."
     },
     "region": "Snelheid",
     "regionSame": "app ({app}) en database ({db}) staan in dezelfde regio.",

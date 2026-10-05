@@ -1577,7 +1577,8 @@
       "send": "Send the email",
       "sent": "Sent. Open the email and tap the button, and you'll come back here.",
       "failed": "Sending didn't work. Try again in a moment.",
-      "expired": "That link doesn't work anymore. Send a new email below."
+      "expired": "That link doesn't work anymore. Send a new email below.",
+      "noEmail": "Rondje Mee doesn't send email yet, so confirming isn't possible right now. Until then, Admin opens only for accounts with the admin role."
     },
     "region": "Speed",
     "regionSame": "app ({app}) and database ({db}) are in the same region.",
