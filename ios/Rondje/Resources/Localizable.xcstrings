@@ -3068,28 +3068,6 @@
         }
       }
     },
-    "Dit verhaal is voor iedereen te zien. Schrijf over de hond, niet over jezelf: geen naam, adres of tijden waarop je thuis bent." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anyone can read this story. Write about the dog, not yourself: no name, address or times when you are home."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cualquiera puede leer esta historia. Escribe sobre el perro, no sobre ti: sin nombre, dirección ni horas en las que estás en casa."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout le monde peut lire cette histoire. Parle du chien, pas de toi : ni nom, ni adresse, ni heures où tu es chez toi."
-          }
-        }
-      }
-    },
     "Dit zien alleen wandelaars met een geaccepteerde afspraak." : {
       "localizations" : {
         "en" : {
