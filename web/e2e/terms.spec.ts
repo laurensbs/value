@@ -4,6 +4,9 @@ import { addDog, newPerson, onboard, shot, signUp, soonSlot, unique } from './he
 /** A moment after the new terms take effect (TERMS_EFFECTIVE_AT, 9 November 2026, in Amsterdam). */
 const AFTER = '2026-11-10T10:00:00+01:00'
 const TITLE = 'De voorwaarden zijn bijgewerkt'
+/** What 0.4 changes, and what 0.3 changed before it (content/legal/nl/terms-changes.md). */
+const NEW = 7
+const OLDER = 6
 
 test('changed terms: a calm notice first, and once they take effect the yes before anything new', async ({ browser }) => {
   test.setTimeout(240_000)
@@ -23,7 +26,7 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   const walker = await newPerson(browser)
   await signUp(walker.page, { name: 'Noor', email: `noor-${id}@e2e.test` })
   await onboard(walker.page, { birthDate: '2002-02-02', city: 'Utrecht', bio: 'Ik wandel graag.', phone: '', walker: true, owner: false })
-  // Noor agreed to the previous version (0.2), as if she signed up before the terms changed (a test server only).
+  // Noor agreed to version 0.2, as if she signed up before the terms changed twice (a test server only).
   const back = () => walker.page.request.post('/api/test/terms-version', { data: { version: '0.2' } })
   expect((await back()).ok()).toBe(true)
 
@@ -48,10 +51,15 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   await review.click()
   await expect(walker.page).toHaveURL(/\/profile\/terms\?next=%2Fprofile$/)
   const notice = walker.page.getByRole('region', { name: TITLE })
-  await expect(notice.getByRole('listitem')).toHaveCount(6)
-  await expect(notice.getByRole('listitem').first()).toHaveText('Rondje Mee wordt aangeboden door Laurens Bos, de maker van Rondje Mee. Je bereikt ons via hetzelfde contactadres als eerst (artikel 1).')
+  // She skipped a version: what 0.4 changes first, then what 0.3 changed, each with its own sentence.
+  await expect(notice.getByRole('listitem')).toHaveCount(NEW + OLDER)
+  await expect(notice.getByText(/^Versie 0\.4 van de algemene voorwaarden vervangt versie 0\.3/)).toBeVisible()
+  await expect(notice.getByText('Accepteerde je een versie van vóór 0.3? Dan verandert er ook dit, uit versie 0.3:')).toBeVisible()
+  await expect(notice.getByRole('listitem').first()).toContainText('Live locatie kan aan of uit staan.')
+  await expect(notice.getByRole('listitem').nth(NEW)).toHaveText('Rondje Mee wordt aangeboden door Laurens Bos, de maker van Rondje Mee. Je bereikt ons via hetzelfde contactadres als eerst (artikel 1).')
   // Honest about what is not new, and about what was not checked.
-  await expect(notice.getByRole('listitem').nth(1)).toContainText('Zo werkt Rondje Mee al sinds 2 oktober 2026')
+  await expect(notice.getByRole('listitem').nth(NEW + 1)).toContainText('Zo werkt Rondje Mee al sinds 2 oktober 2026')
+  await expect(notice.getByRole('listitem').nth(NEW - 1)).toHaveText('De voorwaarden en het veiligheidsprotocol zijn nog een concept: een jurist heeft ze nog niet nagekeken.')
   await expect(notice.getByRole('listitem').last()).toContainText('De voorwaarden zijn nog een concept: een jurist heeft ze nog niet nagekeken.')
   await expect(notice).not.toContainText('hebben we nagekeken')
   await expect(notice.getByRole('link', { name: 'Lees de volledige voorwaarden' })).toHaveAttribute('href', '/legal/terms')
@@ -66,9 +74,14 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   const signIn = await app.post('/api/auth/sign-in/email', { data: { email: `noor-${id}@e2e.test`, password: 'wandelen-123' } })
   const bearer = { Authorization: `Bearer ${signIn.headers()['set-auth-token']}`, 'Accept-Language': 'nl-NL' }
   const me = await (await app.get('/api/v1/me', { headers: bearer })).json()
-  expect(me).toMatchObject({ termsVersion: '0.3', termsAccepted: false, termsRequired: false, termsEffectiveAt: '2026-11-08T23:00:00.000Z' })
-  expect(me.termsChanges).toMatchObject({ version: '0.3', from: '0.2', title: 'Wat er verandert in de voorwaarden', url: '/legal/terms' })
-  expect(me.termsChanges.items).toHaveLength(6)
+  expect(me).toMatchObject({ termsVersion: '0.4', termsAccepted: false, termsRequired: false, termsEffectiveAt: '2026-11-08T23:00:00.000Z' })
+  expect(me.termsChanges).toMatchObject({ version: '0.4', from: '0.2', title: 'Wat er verandert in de voorwaarden', url: '/legal/terms' })
+  expect(me.termsChanges.intro).toMatch(/^Versie 0\.4 van de algemene voorwaarden vervangt de versie die je eerder accepteerde\./)
+  expect(me.termsChanges.items).toHaveLength(NEW + OLDER)
+  expect(me.termsChanges.sections.map((part: { version: string; items: string[] }) => [part.version, part.items.length])).toEqual([
+    ['0.4', NEW],
+    ['0.3', OLDER],
+  ])
 
   // --- Taken effect: a new appointment waits for the yes, in the app and on the website ---
   const later = { ...bearer, 'x-rondje-now': AFTER }
@@ -84,7 +97,7 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   const step = plan.getByRole('region', { name: TITLE })
   await expect(step).toContainText('De nieuwe voorwaarden gelden sinds 9 november 2026.')
   // Here, where it is the step before asking, the changes are open right away.
-  await expect(step.getByRole('listitem')).toHaveCount(6)
+  await expect(step.getByRole('listitem')).toHaveCount(NEW + OLDER)
   await expect(walker.page.getByRole('button', { name: 'Verstuur aanvraag' })).toHaveCount(0)
   await step.scrollIntoViewIfNeeded()
   await shot(walker.page, 'terms-dog-step')
@@ -117,14 +130,17 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
     expect((await unsaid.json()).error).toBe('invalid')
   }
   expect((await (await app.get('/api/v1/me', { headers: bearer })).json()).termsAccepted).toBe(false)
-  const stale = await app.post('/api/v1/terms/accept', { data: { version: '0.2' }, headers: bearer })
-  expect(stale.status()).toBe(409)
-  expect(await stale.json()).toEqual({ error: 'terms-changed', message: 'De voorwaarden zijn intussen opnieuw bijgewerkt. Kijk even naar de nieuwste versie.' })
+  // An app that still shows the list of 0.3 (or older) cannot say yes to 0.4 with it.
+  for (const version of ['0.2', '0.3']) {
+    const stale = await app.post('/api/v1/terms/accept', { data: { version }, headers: bearer })
+    expect(stale.status()).toBe(409)
+    expect(await stale.json()).toEqual({ error: 'terms-changed', message: 'De voorwaarden zijn intussen opnieuw bijgewerkt. Kijk even naar de nieuwste versie.' })
+  }
   expect((await (await app.get('/api/v1/me', { headers: bearer })).json()).termsAccepted).toBe(false)
-  const agreed = await app.post('/api/v1/terms/accept', { data: { version: '0.3' }, headers: bearer })
+  const agreed = await app.post('/api/v1/terms/accept', { data: { version: '0.4' }, headers: bearer })
   expect(agreed.status()).toBe(200)
   const body = await agreed.json()
-  expect(body).toMatchObject({ ok: true, termsVersion: '0.3' })
+  expect(body).toMatchObject({ ok: true, termsVersion: '0.4' })
   expect(Math.abs(Date.parse(body.termsAcceptedAt) - Date.now())).toBeLessThan(5 * 60_000)
   expect((await (await app.get('/api/v1/me', { headers: later })).json()).termsAccepted).toBe(true)
 
@@ -148,10 +164,69 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   await walker.page.goto('/requests')
   const due = walker.page.getByRole('region', { name: TITLE })
   await expect(due).toContainText('De nieuwe voorwaarden gelden sinds 9 november 2026.')
-  await expect(due.getByRole('listitem')).toHaveCount(6)
+  await expect(due.getByRole('listitem')).toHaveCount(NEW + OLDER)
   await expect(due.getByRole('button', { name: 'Akkoord' })).toBeVisible()
+
+  // --- Agreed to 0.3 (everyone who signed up or said yes on 5 October): only what 0.4 changes ---
+  await walker.context.setExtraHTTPHeaders({})
+  expect((await walker.page.request.post('/api/test/terms-version', { data: { version: '0.3' } })).ok()).toBe(true)
+  await walker.page.goto('/profile/terms')
+  const since03 = walker.page.getByRole('region', { name: TITLE })
+  await expect(since03.getByRole('listitem')).toHaveCount(NEW)
+  await expect(since03.getByText(/^Versie 0\.4 van de algemene voorwaarden vervangt versie 0\.3/)).toBeVisible()
+  await expect(since03).not.toContainText('Accepteerde je een versie van vóór 0.3?')
+  await expect(since03).not.toContainText('Laurens Bos')
+  await expect(since03.getByRole('listitem').nth(3)).toContainText('Er stond dat je in de app voor "hond ontsnapt" kon kiezen, maar die knop is er niet')
+  await shot(walker.page, 'terms-since-03')
+  const me03 = await (await app.get('/api/v1/me', { headers: bearer })).json()
+  expect(me03).toMatchObject({ termsVersion: '0.4', termsAccepted: false, termsRequired: false })
+  expect(me03.termsChanges).toMatchObject({ version: '0.4', from: '0.3' })
+  expect(me03.termsChanges.intro).toMatch(/^Versie 0\.4 van de algemene voorwaarden vervangt versie 0\.3/)
+  expect(me03.termsChanges.items).toHaveLength(NEW)
+  expect((await (await app.get('/api/v1/me', { headers: { ...bearer, 'x-rondje-now': AFTER } })).json()).termsRequired).toBe(true)
+  expect((await app.post('/api/v1/terms/accept', { data: { version: '0.4' }, headers: bearer })).status()).toBe(200)
+  expect(await (await app.get('/api/v1/me', { headers: bearer })).json()).toMatchObject({ termsAccepted: true, termsChanges: null })
   await app.dispose()
 
   await owner.context.close()
   await walker.context.close()
+})
+
+test('legal pages: terms 0.4 and safety protocol 0.2 promise nothing the app does not do', async ({ page }) => {
+  await page.goto('/legal/terms')
+  const terms = page.locator('article.legal')
+  await expect(terms).toContainText('Versie 0.4')
+  for (const gone of [
+    'zodat de live locatie werkt',
+    'Alleen dan verzamelen we locatie',
+    'De eigenaar of opvang ziet een live kaart met de route',
+    'dan krijgt de eigenaar of opvang een melding',
+    'Je kunt een vaste wekelijkse wandeling afspreken',
+    'Anderen zien op je profiel onder meer je voornaam, foto en ongeveer waar je woont',
+  ]) {
+    await expect(terms).not.toContainText(gone)
+  }
+  await expect(terms).toContainText('Live locatie kan aan of uit staan.')
+  await expect(terms).toContainText('Het SOS-scherm stuurt zelf niets naar de eigenaar of opvang en deelt geen locatie.')
+  await expect(terms).toContainText('Wie geen lid is, ziet bij die hond alleen de hond, de woonplaats en dat er een eigenaar in de buurt is.')
+  await expect(terms).toContainText('Een wandeling alleen met de hond kan bovendien alleen zolang live locatie aan staat (artikel 13).')
+  // Help lines stay where they were: 112 first, always.
+  await expect(terms).toContainText('Bij gevaar bel je altijd eerst 112.')
+
+  await page.goto('/legal/safety')
+  const safety = page.locator('article.legal')
+  await expect(safety).toContainText('Versie 0.2')
+  for (const gone of [
+    'Je live locatie wordt dan gedeeld met de eigenaar of opvang',
+    'dan krijgt de eigenaar of opvang een melding',
+    'Kies in de app voor "hond ontsnapt"',
+    'Kijk op de live kaart waar de wandelaar is en of er beweging is.',
+    'Rondje Mee kan iemands locatie alleen zien tijdens een actieve wandeling',
+  ]) {
+    await expect(safety).not.toContainText(gone)
+  }
+  await expect(safety).toContainText('Vertel aan de telefoon waar en wanneer je de hond voor het laatst zag.')
+  await expect(safety).toContainText('Staat live locatie uit, dan is er geen kaart.')
+  await expect(safety).toContainText('113 Zelfmoordpreventie')
+  await shot(page, 'legal-safety-02')
 })

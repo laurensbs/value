@@ -1,7 +1,7 @@
 ---
 title: Protocole de sécurité et d'incident
 description: "Se promener en sécurité, et que faire en cas de problème : avant et pendant la balade, numéros utiles, aide pour vous et signalement."
-version: "0.1"
+version: "0.2"
 updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -33,9 +33,10 @@ Ce protocole vous aide à promener un chien en toute sécurité et à bien réag
 
 ## 2. Pendant la promenade
 
-- **Démarrez la promenade dans l'application.** Votre position en direct est alors partagée avec le propriétaire ou le refuge jusqu'à la fin de la promenade.
-- **En retard ?** Si la promenade dure nettement plus longtemps que prévu, le propriétaire ou le refuge reçoit une alerte. Si vous allez être en retard, prévenez le propriétaire.
-- **Écran SOS.** Vous y trouvez les numéros d'urgence, le numéro du propriétaire et du vétérinaire, et les étapes à suivre si le chien s'échappe.
+- **Démarrez la promenade dans l'application.** Le propriétaire ou le refuge sait alors que vous êtes en route, et vous avez l'écran SOS sous la main. Pour une promenade de groupe d'un refuge, vous ne démarrez rien dans l'application : le refuge marche avec vous.
+- **Localisation en direct.** Si elle est activée et que vous promenez le chien seul, votre téléphone partage votre position avec le propriétaire jusqu'à la fin de la promenade. Lors d'une première rencontre, d'une promenade de groupe et lorsqu'elle est désactivée, vous ne partagez aucune position.
+- **En retard ?** Prévenez le propriétaire. Rondje Mee envoie parfois une alerte quand une promenade dure nettement plus longtemps que prévu, mais pas toujours. N'y comptez donc pas.
+- **Écran SOS.** Vous y trouvez les numéros d'urgence, un bouton pour appeler le propriétaire ou le refuge, ce que le profil du chien indique sur le vétérinaire, et les premières étapes si le chien s'échappe. L'écran n'envoie rien de lui-même au propriétaire ou au refuge et ne partage pas votre position : c'est vous qui appelez.
 - **Arrêtez la promenade** dans l'application une fois le chien ramené.
 
 ## 3. Que faire si…
@@ -45,8 +46,8 @@ Ce protocole vous aide à promener un chien en toute sécurité et à bien réag
 1. Restez calme. Ne courez pas après le chien : il s'éloignerait souvent encore plus.
 2. Appelez le chien par son nom d'une voix joyeuse. Accroupissez-vous ou faites quelques pas dans la direction opposée. Beaucoup de chiens reviennent alors vers vous.
 3. Les friandises sont permises ? Montrez-les ou secouez le sachet.
-4. Appelez immédiatement le propriétaire ou le refuge depuis l'écran SOS. C'est le propriétaire qui connaît le mieux le chien.
-5. Choisissez « chien échappé » dans l'application. Le propriétaire voit ainsi où vous avez vu le chien pour la dernière fois.
+4. Appelez immédiatement le propriétaire ou le refuge, par exemple avec le bouton de l'écran SOS. C'est le propriétaire qui connaît le mieux le chien.
+5. Dites-lui au téléphone où et quand vous avez vu le chien pour la dernière fois. L'écran SOS n'envoie rien de lui-même au propriétaire et ne partage pas votre position : il affiche les numéros et quelques premières étapes.
 6. Restez près de l'endroit où le chien s'est échappé, sauf si le propriétaire vous dit autre chose.
 7. Il y a un danger pour la circulation ou pour des personnes ? Appelez le **112**.
 8. Si le chien n'est pas revenu après peu de temps, le propriétaire déclare sa disparition (voir les numéros à l'article 4). Signalez-le aussi à Rondje Mee.
@@ -64,7 +65,7 @@ Ce protocole vous aide à promener un chien en toute sécurité et à bien réag
 **Le chien est blessé ?**
 
 1. Mettez le chien et vous-même en sécurité. Un chien blessé peut mordre à cause de la douleur.
-2. Appelez le propriétaire ou le refuge, et le vétérinaire depuis l'écran SOS.
+2. Appelez le propriétaire ou le refuge, et le vétérinaire. Ce que le propriétaire a indiqué sur le vétérinaire se trouve sur l'écran SOS.
 3. Aux Pays-Bas, vous pouvez aussi appeler le **144** pour un animal en détresse.
 
 **Toujours :** signalez ensuite l'incident dans l'application. En Espagne, une morsure peut entraîner une mise en observation obligatoire du chien par un vétérinaire.
@@ -88,12 +89,12 @@ Vous vous sentez déprimé, stressé ou cela ne va pas moralement ? Parlez-en. V
 
 ### 3.5 Le propriétaire n'arrive pas à joindre le promeneur
 
-1. Regardez sur la carte en direct où se trouve le promeneur et s'il se déplace.
+1. La localisation en direct est activée et quelqu'un promène votre chien seul ? Regardez alors sur la carte en direct où se trouve le promeneur et s'il se déplace. Si elle est désactivée, il n'y a pas de carte.
 2. Appelez ou envoyez un message au promeneur. Attendez quelques minutes : sa batterie est peut-être vide ou le réseau mauvais.
-3. Vous pensez à une urgence, comme un accident ou un malaise ? Appelez le **112** et donnez la dernière position connue.
+3. Vous pensez à une urgence, comme un accident ou un malaise ? Appelez le **112** et dites où le promeneur comptait marcher, ainsi que la dernière position connue si vous l'avez vue sur la carte en direct.
 4. Vous pensez que le promeneur ne ramènera pas le chien ? Appelez la police (voir l'article 4) et signalez-le dans l'application.
 
-Rondje Mee ne voit la position de quelqu'un que pendant une promenade active. En dehors d'une promenade, nous ne pouvons localiser personne.
+Rondje Mee ne sait où se trouve quelqu'un que pendant une promenade seul avec le chien, et seulement si la localisation en direct est activée. Sinon, nous ne pouvons localiser personne.
 
 ### 3.6 Vous soupçonnez une maltraitance ou une négligence
 
@@ -159,7 +160,7 @@ Signalez chaque incident et chaque situation dangereuse avec le bouton **Signale
 - Nous confirmons la réception de votre signalement.
 - Nous visons à examiner les signalements liés à la sécurité **dans les 24 heures**. C'est un objectif, pas une garantie.
 - Pendant l'examen, nous pouvons limiter ou suspendre temporairement des comptes.
-- Nous conservons le trajet de la promenade tant que le signalement est en cours.
+- La localisation en direct était activée pendant la promenade ? Nous conservons alors le trajet tant que le signalement est en cours.
 - Dans la mesure du possible, nous entendons les deux parties. Nous ne partageons jamais votre avis privé avec l'autre personne.
 - Nous prenons une décision et l'expliquons. Vous pouvez la contester.
 - Nous coopérons avec la police et les autres autorités lorsque la loi l'exige, ou lorsque la vie ou la sécurité de quelqu'un est en danger.

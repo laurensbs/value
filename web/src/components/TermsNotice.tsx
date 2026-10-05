@@ -60,12 +60,12 @@ export async function TermsNotice({
     )
   }
 
-  const changes = await termsChanges(locale)
+  // Only what changed since the version this person agreed to: someone on 0.3 does not read 0.3's list again.
+  const changes = await termsChanges(locale, profile.termsVersion)
   return (
     <TermsUpdate
       version={TERMS_VERSION}
-      intro={changes?.intro ?? ''}
-      items={changes?.items ?? []}
+      sections={changes?.sections ?? []}
       date={date}
       required={required}
       next={next}

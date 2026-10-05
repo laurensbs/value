@@ -10,21 +10,22 @@ import { useActionErrorText } from './ActionError'
 /**
  * The calm step for changed terms (art. 19): what changed, the full text, and one "Akkoord". The list is
  * always unfolded right above the button, so nobody agrees without seeing what changes; without a list
- * (no text of the changes) there is no "Akkoord" either, only the full terms. No wall in front of the
- * page: before the new terms take effect it is only information; after that it is the step before
- * making new appointments (`required`). After the yes the page is drawn again, or goes on to `next`.
+ * (no text of the changes) there is no "Akkoord" either, only the full terms. Someone who skipped a
+ * version sees one part per version, newest first, each with its own sentence (server/terms.ts). No
+ * wall in front of the page: before the new terms take effect it is only information; after that it is
+ * the step before making new appointments (`required`). After the yes the page is drawn again, or goes
+ * on to `next`.
  */
 export function TermsUpdate({
   version,
-  intro,
-  items,
+  sections,
   date,
   required,
   next,
 }: {
   version: string
-  intro: string
-  items: string[]
+  /** What changed since the version this person agreed to, one part per version (server/terms.ts termsChanges). */
+  sections: { version: string; intro: string; items: string[] }[]
   /** The day the new terms take effect, written out ("9 november 2026"). */
   date: string
   required: boolean
@@ -37,6 +38,7 @@ export function TermsUpdate({
   const [pending, start] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [done, setDone] = useState(false)
+  const hasList = sections.some((s) => s.items.length > 0)
 
   if (done) {
     return (
@@ -50,18 +52,22 @@ export function TermsUpdate({
     <section className="card stack-s terms-update" aria-labelledby={titleId}>
       <h2 id={titleId}>{t('title')}</h2>
       <p>{required ? t('ledeRequired', { date }) : t('lede', { date })}</p>
-      {intro ? <p className="muted small">{intro}</p> : null}
-      {items.length ? (
-        <ul className="terms-changes">
-          {items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      ) : null}
+      {sections.map((section) => (
+        <div key={section.version} className="stack-s">
+          {section.intro ? <p className="muted small">{section.intro}</p> : null}
+          {section.items.length ? (
+            <ul className="terms-changes">
+              {section.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      ))}
       <p>
         <Link href="/legal/terms">{t('read')}</Link>
       </p>
-      {items.length ? (
+      {hasList ? (
         <div className="row">
           <button
             type="button"

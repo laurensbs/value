@@ -10,16 +10,35 @@ import { pageNow } from './clock'
 // Changed terms (art. 19): the notice, agreeing again, and the step that waits for it. The rule itself
 // is lib/rules.ts termsReason; the website and the app API (src/app/api/v1) both come through here.
 
-/** What changed since the previous version, from content/legal/<locale>/terms-changes.md. */
-export interface TermsChanges {
-  /** The version these changes lead to (TERMS_VERSION), and the one before. */
+/** What changed in one version of the terms, from one part of content/legal/<locale>/terms-changes.md. */
+export interface TermsChangesSection {
+  /** The version these changes lead to, and the one before. */
   version: string
   from: string
-  title: string
-  /** The sentence above the list. */
+  /** The sentence above this part of the list. */
   intro: string
   /** One change per item, in plain text (no markdown). */
   items: string[]
+}
+
+/**
+ * What changed since the version someone accepted, from content/legal/<locale>/terms-changes.md. The
+ * text above the first "## " heading is the newest version (its front matter has `version` and
+ * `from`); each "## " heading after it is an older version, with both numbers in the heading
+ * ("## Versie 0.3 (vervangt 0.2)"). Someone who accepted 0.3 sees only what 0.4 changed; someone on
+ * 0.2, an unknown version or none sees every part, so nobody agrees to changes they never saw.
+ */
+export interface TermsChanges {
+  /** The version these changes lead to (TERMS_VERSION), and the oldest version the list starts from. */
+  version: string
+  from: string
+  title: string
+  /** The sentence above the list: the newest part's own, or `introAll` when older parts are in it too. */
+  intro: string
+  /** Every change in one list, newest version first, in plain text (no markdown): what the app shows. */
+  items: string[]
+  /** The same changes per version, each with its own sentence above it: what the website shows. */
+  sections: TermsChangesSection[]
   /** The full terms on the website. */
   url: string
 }
@@ -32,22 +51,45 @@ const plain = (text: string) =>
     .replace(/\s+/g, ' ')
     .trim()
 
-/** The changes in the reader's language (Dutch as fallback), or null when there is no such text. */
-export async function termsChanges(locale: string): Promise<TermsChanges | null> {
-  const text = await loadText('legal', 'terms-changes', locale)
-  if (!text) return null
-  const blocks = text.body.split(/\r?\n\s*\r?\n/).map((b) => b.trim()).filter(Boolean)
+/** The sentence and the list items of one part of the text. */
+function part(text: string, version: string, from: string): TermsChangesSection {
+  const blocks = text.split(/\r?\n\s*\r?\n/).map((b) => b.trim()).filter(Boolean)
   const items = blocks
     .flatMap((b) => b.split(/\r?\n(?=[-*] )/))
     .filter((b) => /^[-*] /.test(b))
     .map((b) => plain(b.slice(2)))
   const intro = blocks.find((b) => !/^[-*#] /.test(b)) ?? ''
+  return { version, from, intro: plain(intro), items }
+}
+
+const VERSION_NUMBER = /\d+(?:\.\d+)+/g
+
+/**
+ * The changes in the reader's language (Dutch as fallback) since `accepted`, the version this person
+ * agreed to, or null when there is no such text. Without `accepted` (or with an unknown one): every part.
+ */
+export async function termsChanges(locale: string, accepted?: string | null): Promise<TermsChanges | null> {
+  const text = await loadText('legal', 'terms-changes', locale)
+  if (!text) return null
+  const [head, ...older] = text.body.split(/^##[ \t]+/m)
+  const newest = part(head, text.data.version ?? TERMS_VERSION, text.data.from ?? '')
+  const earlier = older
+    .map((chunk) => {
+      const [heading, ...rest] = chunk.split(/\r?\n/)
+      const [version = '', from = ''] = heading.match(VERSION_NUMBER) ?? []
+      return part(rest.join('\n'), version, from)
+    })
+    // A part only counts with both version numbers in its heading, and only for someone who agreed to an older one.
+    .filter((s) => s.version && s.from && termsOutdated(accepted, s.version))
+  const sections = [newest, ...earlier].filter((s) => s.items.length)
+  const oldest = sections.at(-1) ?? newest
   return {
-    version: text.data.version ?? TERMS_VERSION,
-    from: text.data.from ?? '',
+    version: newest.version,
+    from: oldest.from,
     title: text.data.title ?? '',
-    intro: plain(intro),
-    items,
+    intro: sections.length > 1 ? plain(text.data.introAll ?? '') || newest.intro : newest.intro,
+    items: sections.flatMap((s) => s.items),
+    sections,
     url: '/legal/terms',
   }
 }
@@ -70,7 +112,7 @@ export async function termsForApp(profile: { termsVersion: string } | null | und
     termsAccepted: Boolean(profile) && !outdated,
     termsEffectiveAt: termsEffectiveAt().toISOString(),
     termsRequired: Boolean(await termsBlock(profile)),
-    termsChanges: outdated ? await termsChanges(locale) : null,
+    termsChanges: outdated ? await termsChanges(locale, profile?.termsVersion) : null,
   }
 }
 

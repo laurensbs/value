@@ -1,7 +1,7 @@
 ---
 title: Condiciones de uso
 description: "Las condiciones para paseadores, propietarios y protectoras: quién puede participar, conocerse primero, sin dinero, responsabilidad y quejas."
-version: "0.3"
+version: "0.4"
 updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
@@ -40,7 +40,7 @@ Debes tener **18 años o más** y usar Rondje Mee como particular y para ti. Las
 - Tienes una sola cuenta y no la compartes. Mantén en secreto tus datos de acceso y avísanos de inmediato si hay un uso indebido.
 - Eres responsable de lo que ocurra a través de tu cuenta, salvo que no hubieras podido evitarlo razonablemente.
 
-Los demás ven, entre otras cosas, tu nombre, tu foto y la zona aproximada donde vives (redondeada a unos 500 metros). Solo ven tu teléfono y tu correo electrónico cuando se ha aceptado una solicitud. Si te apuntas a un paseo en grupo, la protectora ve tu teléfono enseguida. Consulta la Política de privacidad.
+Lo que los demás ven de ti depende de quién mire. Los propietarios y las protectoras ven, entre otras cosas, el nombre, la foto, la franja de edad y la localidad del paseante que les envía una solicitud. En la página del perro de un propietario, los miembros de Rondje Mee (con la sesión iniciada, el perfil completado y sin bloqueo) ven, entre otras cosas, el nombre, la foto y la localidad del propietario, y la ubicación del perro redondeada a unos 500 metros. Quien no es miembro solo ve el perro, la localidad y que hay un propietario cerca. La otra persona solo ve tu teléfono y tu correo electrónico cuando se ha aceptado una solicitud. Si te apuntas a un paseo en grupo, la protectora ve tu teléfono enseguida. Consulta la Política de privacidad.
 
 ## 5. Funciones
 
@@ -56,10 +56,10 @@ Puedes tener más de una función.
 2. **Datos de contacto.** Tras la aceptación, ambas partes ven el teléfono y el correo electrónico de la otra, y los datos reservados necesarios, como el punto de encuentro. Úsalos solo para el paseo.
 3. **Primer encuentro.** La primera vez siempre es un primer encuentro, con el propietario o alguien de la protectora presente.
 4. **Comprobación de identidad.** En el primer encuentro, el paseante muestra un documento de identidad válido. El propietario o la protectora comprueba que el nombre, la foto y la edad coinciden, y lo marca en la app. Rondje Mee no guarda ninguna copia. No le hagas fotos ni copias tú tampoco.
-5. **Confianza en solitario.** Solo puedes pasear solo a un perro cuando el propietario o la protectora lo autoriza expresamente en la app. Vale solo para ese perro y puede retirarse en cualquier momento.
-6. **Test de seguridad.** Antes de tu primer paseo en solitario, haces un breve test en la app.
-7. **Las cuentas nuevas** solo pueden hacer, al principio, primeros encuentros y paseos supervisados. La app indica cuándo cambia esto.
-8. **Paseos periódicos.** Podéis acordar un paseo fijo semanal. ¿No puedes ir? Cancela cuanto antes desde la app.
+5. **Confianza en solitario.** Solo puedes pasear solo a un perro cuando el propietario o la protectora lo autoriza expresamente en la app. Vale solo para ese perro y puede retirarse en cualquier momento. Además, un paseo a solas con el perro solo es posible mientras la ubicación en tiempo real esté activada (apartado 13).
+6. **Test de seguridad.** Antes de pedir un primer encuentro o de apuntarte a un paseo en grupo, haces un breve test de seguridad.
+7. **Las cuentas nuevas** solo pueden hacer, al principio, primeros encuentros y paseos supervisados. Pasear a un perro a solas solo es posible con confianza en solitario (punto 5), y solo mientras la ubicación en tiempo real esté activada. La app te indica si es posible para ti y un perro.
+8. **Paseos periódicos.** Un paseo a solas con el perro también se puede acordar como paseo fijo semanal. Por tanto, solo es posible con confianza en solitario y mientras la ubicación en tiempo real esté activada. ¿No puedes ir? Cancela cuanto antes desde la app.
 
 ## 7. Paseos en grupo en protectoras
 
@@ -107,7 +107,7 @@ Como paseante:
 - solo das premios si está permitido, y solo los autorizados;
 - no llevas otros perros ni dejas el perro a nadie;
 - solo paseas si te encuentras bien, y nunca bajo los efectos del alcohol o las drogas;
-- inicias el paseo en la app para que funcione la ubicación en tiempo real;
+- inicias en la app el paseo acordado a través de Rondje Mee, para que el propietario o la protectora sepa que estás en camino (no hace falta en un paseo en grupo de una protectora);
 - comunicas cualquier incidente de inmediato al propietario o a la protectora, y a Rondje Mee.
 
 Te recomendamos encarecidamente tener tu propio **seguro de responsabilidad civil** (ver apartado 15).
@@ -125,13 +125,16 @@ También se aplica la Ley 7/2023, de protección de los derechos y el bienestar 
 
 ## 13. Ubicación en tiempo real durante el paseo
 
-- Cuando inicias un paseo como paseante, tu móvil comparte tu ubicación con el propietario o la protectora hasta que lo terminas. Solo entonces recogemos la ubicación.
-- El propietario o la protectora ve un mapa en tiempo real con el recorrido. Tú ves tu propio recorrido.
-- Si el paseo dura mucho más de lo previsto, el propietario o la protectora recibe un aviso.
-- La pantalla SOS muestra los números de emergencia, los teléfonos del propietario y del veterinario, y qué hacer si el perro se escapa.
-- Borramos los recorridos a los 30 días, salvo que sean necesarios para una denuncia abierta.
+La ubicación en tiempo real puede estar activada o desactivada. Mientras la evaluación de impacto relativa a la protección de datos (EIPD) no esté terminada, está desactivada para todos (ver la Política de privacidad). En Rondje Mee verás cuándo está desactivada.
 
-La ubicación en tiempo real depende de tu móvil, la batería y la cobertura. Es una ayuda, no una garantía. Ante un peligro, llama siempre primero al **112**.
+- La ubicación en tiempo real solo forma parte de un paseo a solas con el perro. En un primer encuentro y en un paseo en grupo nunca registramos por dónde caminas: el propietario o la protectora va contigo.
+- Si la ubicación en tiempo real está activada y, como paseante, inicias un paseo a solas con el perro, tu móvil comparte tu ubicación con el propietario hasta que terminas el paseo. Solo entonces registramos por dónde caminas. El propietario ve entonces un mapa en tiempo real con el recorrido. Tú ves tu propio recorrido.
+- Si la ubicación en tiempo real está desactivada, no registramos por dónde caminas y nadie ve un mapa en tiempo real. Entonces no puedes pedir, aceptar ni iniciar un paseo a solas con el perro. Un primer encuentro, sí.
+- Si un paseo dura mucho más de lo previsto, Rondje Mee a veces envía un aviso, pero no siempre. Así que no cuentes con ello.
+- La pantalla SOS muestra los números de emergencia, un botón para llamar al propietario o a la protectora, lo que dice el perfil del perro sobre el veterinario y los primeros pasos si el perro se escapa. La pantalla SOS no envía nada por sí sola al propietario ni a la protectora y no comparte tu ubicación.
+- Borramos los recorridos de los paseos con ubicación en tiempo real a los 30 días, salvo que sean necesarios para una denuncia abierta.
+
+Si la ubicación en tiempo real está activada, depende de tu móvil, la batería y la cobertura. Es una ayuda, no una garantía. Ante un peligro, llama siempre primero al **112**.
 
 ## 14. Valoraciones, denuncias y moderación
 

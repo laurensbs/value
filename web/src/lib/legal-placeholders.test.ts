@@ -127,6 +127,21 @@ describe('changed terms (art. 19)', () => {
     expect(new Set(changes.map((file) => items(file).length)).size).toBe(1)
   })
 
+  // Older versions stay in the file under a "## " heading with both numbers ("## Versie 0.3 (vervangt 0.2)"),
+  // so someone who skipped a version sees every change since theirs (server/terms.ts termsChanges).
+  it('keep the older versions as one chain, newest first, with a sentence for the whole list', () => {
+    for (const file of changes) {
+      const { data, body } = read(file)
+      const chain = [[data.version, data.from], ...[...body.matchAll(/^##[ \t]+(.*)$/gm)].map((m) => m[1].match(/\d+(?:\.\d+)+/g) ?? [])]
+      for (const [i, [version, from]] of chain.entries()) {
+        expect(compareTermsVersions(from, version), `${file} part ${i}`).toBe(-1)
+        if (i > 0) expect(version, `${file} part ${i}`).toBe(chain[i - 1][1])
+      }
+      if (chain.length > 1) expect(data.introAll, file).toBeTruthy()
+    }
+    expect(new Set(changes.map((file) => (read(file).body.match(/^##[ \t]/gm) ?? []).length)).size).toBe(1)
+  })
+
   // Art. 19: important changes are announced at least 30 days ahead, counted from the day the notice goes
   // live in the app (TERMS_NOTICE_FROM, set to the real live day when merging).
   const day = (value: string) => Date.parse(`${value}T00:00:00Z`)
