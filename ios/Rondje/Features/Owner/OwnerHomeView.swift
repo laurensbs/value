@@ -116,13 +116,17 @@ struct OwnerHomeView: View {
             HStack(spacing: 14) {
                 DogPortrait(look: item.dog.look, photoURL: item.dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 18)
                     .frame(width: 60, height: 60)
+                // "Live" only for a walk that shares where they are: a walk alone with the dog, with live
+                // location on (WalkStarter.sharesLocation). Never for a first meeting.
+                let live = WalkStarter.sharesLocation(kind: item.kind, liveLocation: ServerFeatures.shared.liveLocation)
                 VStack(alignment: .leading, spacing: 2) {
-                    Label("Live", systemImage: "dot.radiowaves.left.and.right")
+                    Label(live ? L("Live") : L("Onderweg"), systemImage: live ? "dot.radiowaves.left.and.right" : "figure.walk")
                         .font(.caption.weight(.bold)).foregroundStyle(Palette.onBall)
                         .symbolEffect(.pulse)
                     Text("\(item.dog.name) is op pad met \(item.walker?.firstName ?? L("de wandelaar"))")
                         .font(.headline).foregroundStyle(Palette.onBall)
-                    Text("Tik om live mee te kijken").font(.subheadline).foregroundStyle(Palette.onBall.opacity(0.8))
+                    Text(live ? L("Tik om live mee te kijken") : L("Tik om het rondje te bekijken"))
+                        .font(.subheadline).foregroundStyle(Palette.onBall.opacity(0.8))
                 }
                 Spacer()
                 Image(systemName: "chevron.right").foregroundStyle(Palette.onBall)

@@ -50,7 +50,9 @@ struct DogDetailView: View {
         }
         .safeAreaInset(edge: .bottom) { actionBar }
         .task { await load() }
-        .sheet(item: $requestKind) { kind in
+        // Loads again after the request sheet, also when nothing was sent: the server may have said that
+        // a walk alone waits for live location, and then the page follows.
+        .sheet(item: $requestKind, onDismiss: { Task { await load() } }) { kind in
             if let detail {
                 RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind, host: detail.host) { await load() }
                     .presentationDetents([.large])
@@ -200,6 +202,14 @@ struct DogDetailView: View {
         d.canRequest.meet == "needs-terms" || d.canRequest.solo == "needs-terms"
     }
 
+    /// While live location is off, a walk alone cannot be asked for ('live-location-off' in canRequest.solo).
+    /// Said calmly to someone who walked with this dog before, so a missing "Zelfstandig rondje" is no
+    /// riddle; someone new simply plans a first meeting, as always.
+    private func soloPaused(_ d: DogDetail) -> Bool {
+        d.canRequest.solo == LiveLocationPause.reason
+            && model.appointments.outgoing.contains { $0.dog.id == d.dog.id && ($0.kind == "solo" || $0.status == "completed") }
+    }
+
     /// The safety quiz comes before any request: then one friendly button instead of the form.
     /// The server says so too ("needs-quiz"), also to an app that does not know yet.
     private func needsQuiz(_ d: DogDetail) -> Bool {
@@ -217,6 +227,9 @@ struct DogDetailView: View {
                 } else {
                     if let reason = d.canRequest.meet {
                         Text(reasonText(reason)).font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+                    } else if soloPaused(d) {
+                        Label(LiveLocationPause.note, systemImage: "location.slash")
+                            .font(.footnote).foregroundStyle(Palette.muted)
                     }
                     HStack(spacing: 10) {
                         if d.canRequest.solo == nil {

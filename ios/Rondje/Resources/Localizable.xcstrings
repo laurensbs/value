@@ -423,6 +423,34 @@
         }
       }
     },
+    "%@ is op pad met %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is out with %@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ está de paseo con %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ est en balade avec %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ is op pad met %2$@."
+          }
+        }
+      }
+    },
     "%@ is op pad met %@. Kijk live mee." : {
       "localizations" : {
         "en" : {
@@ -3347,6 +3375,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jette un œil. Ne fais ni copie ni photo."
+          }
+        }
+      }
+    },
+    "Bekijk het rondje" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View the walk"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver el paseo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir la balade"
           }
         }
       }
@@ -11417,6 +11467,28 @@
         }
       }
     },
+    "Je mag nu zelfstandig met %@ wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You may now walk %@ on your own. Live location is off for now, so a walk alone doesn't start yet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya puedes pasear a %@ por tu cuenta. La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu peux maintenant promener %@ seul·e. La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore."
+          }
+        }
+      }
+    },
     "Je melding is binnen. Iemand van %@ neemt contact op als dat nodig is." : {
       "localizations" : {
         "en" : {
@@ -11659,24 +11731,24 @@
         }
       }
     },
-    "Je ziet wie met je hond wil wandelen, en kijkt live mee." : {
+    "Je ziet wie met je hond wil wandelen, en jij beslist wie er komt." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You see who wants to walk your dog, and watch along live."
+            "value" : "You see who wants to walk your dog, and you decide who comes."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ves quién quiere pasear a tu perro y lo sigues en directo."
+            "value" : "Ves quién quiere pasear a tu perro, y tú decides quién viene."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu vois qui veut promener ton chien et tu suis en direct."
+            "value" : "Tu vois qui veut promener ton chien, et c'est toi qui décides qui vient."
           }
         }
       }
@@ -12739,6 +12811,28 @@
         }
       }
     },
+    "Klikt het? Dan lopen jullie vaker samen. Live locatie staat voorlopig uit, dus zelfstandig wandelen kan nog niet." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hit it off? Then you walk together more often. Live location is off for now, so walking on your own isn't possible yet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Os lleváis bien? Entonces paseáis juntos más a menudo. La ubicación en directo está desactivada por ahora, así que todavía no se puede pasear por tu cuenta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le courant passe ? Alors vous vous promenez ensemble plus souvent. La localisation en direct est désactivée pour le moment, donc la balade en solo n'est pas encore possible."
+          }
+        }
+      }
+    },
     "Klopt. Stap voor stap, voor iedereen veilig." : {
       "localizations" : {
         "en" : {
@@ -13663,24 +13757,68 @@
         }
       }
     },
-    "Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel." : {
+    "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Live location is off for now, so a walk alone with the dog doesn't start yet. Walking together with the owner is possible."
+            "value" : "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible, and you can always switch this off again."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La ubicación en directo está desactivada por ahora, así que todavía no empieza un paseo a solas con el perro. Pasear junto con el dueño sí es posible."
+            "value" : "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible, y siempre puedes volver a desactivarlo."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La localisation en direct est désactivée pour le moment, donc une balade seul avec le chien ne démarre pas encore. Se promener avec le propriétaire reste possible."
+            "value" : "La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore. Se promener ensemble reste possible, et tu peux toujours retirer cette permission."
+          }
+        }
+      }
+    },
+    "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore. Se promener ensemble reste possible."
+          }
+        }
+      }
+    },
+    "Live locatie staat voorlopig uit. Tot die tijd lopen jullie samen, en bewaren we geen route." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now. Until then you walk together, and no route is stored."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora. Hasta entonces paseáis juntos, y no se guarda ninguna ruta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment. D'ici là, vous vous promenez ensemble, et aucun trajet n'est enregistré."
           }
         }
       }
@@ -18719,6 +18857,28 @@
         }
       }
     },
+    "Tik om het rondje te bekijken" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to view the walk"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca para ver el paseo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touche pour voir la balade"
+          }
+        }
+      }
+    },
     "Tik om live mee te kijken" : {
       "localizations" : {
         "en" : {
@@ -21593,6 +21753,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Di"
+          }
+        }
+      }
+    },
+    "Zo ben je bereikbaar voor de wandelaar tijdens het rondje." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So the walker can reach you during the walk."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Así el paseador puede contactar contigo durante el paseo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainsi, le promeneur peut te joindre pendant la balade."
           }
         }
       }

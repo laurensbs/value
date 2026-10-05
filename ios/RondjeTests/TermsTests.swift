@@ -194,9 +194,19 @@ struct TermsTests {
         "Live locatie staat uit",
         "Je route wordt niet bijgehouden of gedeeld. De tijd, het rondje-rapport en foto's werken gewoon.",
         "Live locatie staat op dit moment uit, dus hier staat geen kaart. Je ziet wel de tijd, het rondje-rapport en de foto's.",
-        "Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel.",
+        "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel.",
         "Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie.",
         "Jullie lopen samen, dus er is geen kaart nodig.",
+        // Nothing promises watching live while there is nothing live to see (LiveLocationTests).
+        "Bekijk het rondje",
+        "Tik om het rondje te bekijken",
+        "%@ is op pad met %@.",
+        "Je mag nu zelfstandig met %@ wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet.",
+        "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten.",
+        "Zo ben je bereikbaar voor de wandelaar tijdens het rondje.",
+        "Klikt het? Dan lopen jullie vaker samen. Live locatie staat voorlopig uit, dus zelfstandig wandelen kan nog niet.",
+        "Live locatie staat voorlopig uit. Tot die tijd lopen jullie samen, en bewaren we geen route.",
+        "Je ziet wie met je hond wil wandelen, en jij beslist wie er komt.",
     ]
 
     /// Calm words only, in every language: nothing that hurries, counts down, blames or promises health

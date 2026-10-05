@@ -15,7 +15,9 @@ struct PrepItem: Identifiable, Hashable {
 /// The checklist is optional and never blocks anything; the ticks stay on this phone.
 enum MeetingPrep {
     /// The checklist for this appointment: walker or owner, first meeting or a walk on your own.
-    static func items(for item: Appointment, asOwner: Bool) -> [PrepItem] {
+    /// `liveLocation`: the server's switch. Only with it on does the owner's list promise watching live;
+    /// the item ids never change with it, so the ticks stay.
+    static func items(for item: Appointment, asOwner: Bool, liveLocation: Bool = false) -> [PrepItem] {
         let dog = item.dog.name
         let walker = item.walker?.firstName ?? L("de wandelaar")
         switch (asOwner, item.isMeeting) {
@@ -66,7 +68,10 @@ enum MeetingPrep {
                 PrepItem(id: "ready", title: L("Riem, zakjes en een koekje bij de deur"), detail: nil, symbol: "bag.fill"),
                 PrepItem(id: "tell", title: L("Vertel waar \(dog) van schrikt"), detail: nil, symbol: "text.bubble.fill"),
                 PrepItem(id: "phone", title: L("Houd je telefoon bij de hand"),
-                         detail: L("Je kunt live meekijken zodra het rondje start."), symbol: "iphone"),
+                         detail: liveLocation && !item.isMeeting
+                            ? L("Je kunt live meekijken zodra het rondje start.")
+                            : L("Zo ben je bereikbaar voor de wandelaar tijdens het rondje."),
+                         symbol: "iphone"),
             ]
         }
     }
@@ -140,7 +145,7 @@ struct MeetingPrepView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private var items: [PrepItem] { MeetingPrep.items(for: item, asOwner: asOwner) }
+    private var items: [PrepItem] { MeetingPrep.items(for: item, asOwner: asOwner, liveLocation: ServerFeatures.shared.liveLocation) }
     private var ticked: Set<String> { Keepsakes.shared.checks(MeetingPrep.list(item.id)) }
 
     var body: some View {

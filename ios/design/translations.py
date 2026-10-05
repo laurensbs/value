@@ -444,7 +444,6 @@ T = {
     "Geef vertrouwen": ("Give trust", "Accorde ta confiance", "Da tu confianza"),
     "Je krijgt een melding als iemand wil wandelen.": ("You'll get a notification when someone wants to walk.", "Tu reçois une notification quand quelqu'un veut promener.", "Recibirás un aviso cuando alguien quiera pasear."),
     "Je ziet honden in de buurt en plant rondjes.": ("You see dogs nearby and plan walks.", "Tu vois les chiens du quartier et prévois des balades.", "Ves perros cerca y planificas paseos."),
-    "Je ziet wie met je hond wil wandelen, en kijkt live mee.": ("You see who wants to walk your dog, and watch along live.", "Tu vois qui veut promener ton chien et tu suis en direct.", "Ves quién quiere pasear a tu perro y lo sigues en directo."),
     "Jouw honden": ("Your dogs", "Tes chiens", "Tus perros"),
     "Kijk wie het is en kies een moment om kennis te maken.": ("See who it is and pick a time to meet.", "Regarde qui c'est et choisis un moment pour faire connaissance.", "Mira quién es y elige un momento para conoceros."),
     "Leg zakjes, riem en een koekje klaar bij de deur. Dan is de overdracht zo gedaan.": ("Put bags, leash and a treat by the door. Then the handover is quick.", "Prépare sacs, laisse et une friandise près de la porte. La remise sera rapide.", "Deja bolsas, correa y una golosina junto a la puerta. Así la entrega es rápida."),

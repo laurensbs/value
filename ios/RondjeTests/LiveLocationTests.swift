@@ -339,3 +339,216 @@ struct LiveLocationTests {
         #expect(try JSONDecoder().decode(WalkTracker.Info.self, from: data).liveLocation == false)
     }
 }
+
+/// A walk alone with the dog while live location is off (web branch claude/voorwaarden-opnieuw, 0d0b376):
+/// it cannot be asked for, accepted or started; both sides read one calm note on its card, from the
+/// request on; and nothing promises watching live while there is nothing live to see.
+@Suite("Een rondje alleen wacht op live locatie")
+struct LiveLocationPauseTests {
+    private static let now = Date(timeIntervalSince1970: 1_791_201_600)
+
+    /// Three days ahead by default: far outside the window in which a walk can start.
+    private func appointment(_ id: String = "a", kind: String = "solo", status: String = "accepted", in minutes: Double = 3 * 24 * 60,
+                             walkStatus: String? = nil, paused: Appointment.Paused? = nil) -> Appointment {
+        Appointment(
+            id: id, kind: kind, status: status, startsAt: Self.now.addingTimeInterval(minutes * 60), durationMin: 30, weekly: true, message: "", flags: [],
+            walkId: walkStatus == nil ? nil : "w-\(id)", walkStatus: walkStatus, feedbackGiven: nil,
+            dog: .init(id: "d-\(id)", name: "Bobbie", photos: [], look: .sample, city: "Utrecht", isShelter: false, meetingInfo: ""),
+            host: nil,
+            walker: .init(id: "u-\(id)", firstName: "Sanne", photoUrl: nil, bio: "", experience: "some", ageBand: "18-25", city: "Utrecht", phone: nil, email: nil),
+            trust: nil, paused: paused
+        )
+    }
+
+    // MARK: What the server says
+
+    /// The appointment as GET /api/v1/requests sends it, with `paused` set to `value` (nil: left out).
+    private func decoded(paused value: Any?) throws -> Appointment {
+        var object = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(appointment())) as? [String: Any])
+        object["paused"] = value
+        return try JSONDecoder().decode(Appointment.self, from: JSONSerialization.data(withJSONObject: object))
+    }
+
+    @Test func theServerSaysWhichWalksWait() throws {
+        // As the website sends it (api/v1/requests/route.ts): { reason, message }, or null.
+        let paused = try decoded(paused: ["reason": "live-location-off", "message": "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel."])
+        #expect(paused.paused?.reason == LiveLocationPause.reason)
+        #expect(paused.paused?.message?.hasPrefix("Live locatie") == true)
+        #expect(paused.waitsForLiveLocation(liveLocation: true))
+        // Null, or an older server without the field: the phone's switch decides.
+        for value in [NSNull(), nil] as [Any?] {
+            let item = try decoded(paused: value)
+            #expect(item.paused == nil)
+            #expect(!item.waitsForLiveLocation(liveLocation: true))
+            #expect(item.waitsForLiveLocation(liveLocation: false))
+        }
+        // Something odd never hides the appointment, and never counts as paused.
+        for odd in ["ja", 1, ["message": "?"]] as [Any] {
+            let item = try decoded(paused: odd)
+            #expect(item.id == "a")
+            #expect(!item.waitsForLiveLocation(liveLocation: true), "\(odd)")
+        }
+    }
+
+    @Test func theErrorIsRecognised() {
+        #expect(APIError.server(code: "live-location-off", message: LiveLocationPause.note).liveLocationOff)
+        #expect(!APIError.server(code: "needs-terms", message: "").liveLocationOff)
+        #expect(!APIError.offline.liveLocationOff)
+    }
+
+    @MainActor
+    @Test func theAnswerIsRememberedStraightAway() throws {
+        let name = "rondje.tests.features.\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: name))
+        defer { defaults.removePersistentDomain(forName: name) }
+        let features = ServerFeatures(defaults: defaults)
+        #expect(features.liveLocation)
+        features.liveLocationSwitchedOff()
+        #expect(features.liveLocation == false)
+        #expect(ServerFeatures(defaults: defaults).liveLocation == false)
+    }
+
+    // MARK: Which walks wait
+
+    @Test func onlyAnOpenWalkAloneWaits() {
+        // Asked for or agreed, and not running: it waits while live location is off.
+        #expect(appointment(status: "accepted").waitsForLiveLocation(liveLocation: false))
+        #expect(appointment(status: "pending").waitsForLiveLocation(liveLocation: false))
+        #expect(!appointment(status: "accepted").waitsForLiveLocation(liveLocation: true))
+        // A walk already running goes on; one that is over, declined or cancelled has nothing to wait for.
+        #expect(!appointment(walkStatus: "active").waitsForLiveLocation(liveLocation: false))
+        for status in ["completed", "declined", "cancelled"] {
+            #expect(!appointment(status: status).waitsForLiveLocation(liveLocation: false), "\(status)")
+        }
+        // Walking together never waits, whatever is said.
+        #expect(!appointment(kind: "meet").waitsForLiveLocation(liveLocation: false))
+        #expect(!appointment(kind: "meet", paused: .init()).waitsForLiveLocation(liveLocation: false))
+        // The server's word counts even when this phone has not heard of the switch yet.
+        #expect(appointment(paused: .init()).waitsForLiveLocation(liveLocation: true))
+        #expect(WalkStarter.blockedByLiveLocation(appointment(paused: .init()), liveLocation: true))
+    }
+
+    @Test func yesWaitsNoNeverDoes() {
+        // The owner's Accepteer waits for a walk alone while the switch is off; Weiger is always there.
+        #expect(!appointment(status: "pending").canAccept(liveLocation: false))
+        #expect(!appointment(status: "pending", paused: .init()).canAccept(liveLocation: true))
+        #expect(appointment(status: "pending").canAccept(liveLocation: true))
+        #expect(appointment(kind: "meet", status: "pending").canAccept(liveLocation: false))
+        #expect(!appointment(status: "accepted").canAccept(liveLocation: true))
+    }
+
+    // MARK: The note on the card
+
+    @Test func bothSidesReadTheNoteOnEveryWalkThatWaits() {
+        let note = LiveLocationNote(text: LiveLocationPause.note, symbol: "location.slash")
+        for item in [appointment(status: "accepted"), appointment(status: "pending"), appointment(in: 10), appointment(in: -24 * 60)] {
+            for asOwner in [false, true] {
+                // Not only in the half hour before the start, and not only for the walker.
+                #expect(LiveLocationNote.make(for: item, asOwner: asOwner, liveLocation: false, now: Self.now) == note, "\(item.status) owner: \(asOwner)")
+                #expect(LiveLocationNote.make(for: item, asOwner: asOwner, liveLocation: true, now: Self.now) == nil)
+            }
+        }
+        // The server's word is enough.
+        #expect(LiveLocationNote.make(for: appointment(paused: .init()), asOwner: true, liveLocation: true, now: Self.now) == note)
+    }
+
+    @Test func aFirstMeetingNeverReadsThatItWaits() {
+        let far = appointment(kind: "meet")
+        for asOwner in [false, true] {
+            #expect(LiveLocationNote.make(for: far, asOwner: asOwner, liveLocation: false, now: Self.now) == nil)
+        }
+        // Around the start the walker reads that they walk together, with the switch on or off.
+        let soon = appointment(kind: "meet", in: 10)
+        for live in [true, false] {
+            let walker = LiveLocationNote.make(for: soon, asOwner: false, liveLocation: live, now: Self.now)
+            #expect(walker?.text == L("Jullie lopen samen, dus er is geen kaart nodig."))
+            #expect(walker?.text != LiveLocationPause.note)
+            #expect(LiveLocationNote.make(for: soon, asOwner: true, liveLocation: live, now: Self.now) == nil)
+        }
+    }
+
+    @Test func aWalkAloneAlreadyRunningSaysItSharesNothing() {
+        let running = appointment(in: -5, walkStatus: "active")
+        let walker = LiveLocationNote.make(for: running, asOwner: false, liveLocation: false, now: Self.now)
+        #expect(walker?.text == L("Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie."))
+        #expect(LiveLocationNote.make(for: running, asOwner: false, liveLocation: true, now: Self.now) == nil)
+    }
+
+    // MARK: Nothing promises watching live
+
+    private func notification(_ kind: String, _ data: [String: String], text: String? = nil) throws -> AppNotification {
+        var object: [String: Any] = ["id": "n1", "kind": kind, "data": data, "read": false, "createdAt": 0]
+        if let text { object["text"] = text }
+        return try JSONDecoder().decode(AppNotification.self, from: JSONSerialization.data(withJSONObject: object))
+    }
+
+    @MainActor
+    @Test func notificationsOnlySayLiveForAWalkThatShared() throws {
+        let walker = "Sanne", dog = "Bobbie"
+        let live = try notification("walk-started", ["walkerName": walker, "dogName": dog, "live": "yes"])
+        #expect(NotificationsView.text(live) == L("\(walker) is op pad met \(dog). Kijk live mee."))
+        // A first meeting or live location off ("no"), and older notifications without it: nothing live.
+        for data in [["live": "no"], [:]] {
+            let quiet = try notification("walk-started", data.merging(["walkerName": walker, "dogName": dog]) { $1 })
+            #expect(NotificationsView.text(quiet) == L("\(walker) is op pad met \(dog)."), "\(data)")
+        }
+        // Trust given while live location is off says calmly that a walk alone does not start yet.
+        let off = try notification("trust-granted", ["dogName": dog, "live": "no"])
+        #expect(NotificationsView.text(off) == L("Je mag nu zelfstandig met \(dog) wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet."))
+        #expect(NotificationsView.text(try notification("trust-granted", ["dogName": dog, "live": "yes"])) == L("Je mag nu zelfstandig met \(dog) wandelen."))
+        #expect(NotificationsView.text(try notification("trust-granted", ["dogName": dog])) == L("Je mag nu zelfstandig met \(dog) wandelen."))
+        // A kind this version does not know: the server's own sentence (in the app's language).
+        let unknown = try notification("org-verified", [:], text: "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.")
+        #expect(unknown.serverText == "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.")
+        #expect(NotificationsView.text(unknown) == "Je opvang is geverifieerd. Je honden zijn nu zichtbaar.")
+        #expect(NotificationsView.text(try notification("org-verified", [:])) == L("Nieuwe melding"))
+    }
+
+    @Test func guusOnlySaysWatchLiveForAWalkThatShares() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Europe/Amsterdam")!
+        var c = NextStepContext(now: Self.now, calendar: calendar, placement: .discover, role: .both, firstName: "Sam", country: "NL", quizPassed: true)
+        c.incoming = [appointment("s", in: -5, walkStatus: "active")]
+        #expect(NextStep.compute(c).action == .follow("s"))
+        #expect(NextStep.compute(c).button == L("Kijk live mee"))
+        c.liveLocation = false
+        #expect(NextStep.compute(c).button == L("Bekijk het rondje"))
+        // A first meeting: never "live", also with the switch on.
+        c.liveLocation = true
+        c.incoming = [appointment("m", kind: "meet", in: -5, walkStatus: "active")]
+        #expect(NextStep.compute(c).action == .follow("m"))
+        #expect(NextStep.compute(c).button == L("Bekijk het rondje"))
+    }
+
+    @Test func theOwnersChecklistOnlyPromisesLiveWhileItIsOn() {
+        let solo = appointment()
+        let on = MeetingPrep.items(for: solo, asOwner: true, liveLocation: true).first { $0.id == "phone" }
+        let off = MeetingPrep.items(for: solo, asOwner: true, liveLocation: false).first { $0.id == "phone" }
+        #expect(on?.detail == L("Je kunt live meekijken zodra het rondje start."))
+        #expect(off?.detail == L("Zo ben je bereikbaar voor de wandelaar tijdens het rondje."))
+        // The same items either way, so the ticks stay.
+        #expect(MeetingPrep.items(for: solo, asOwner: true, liveLocation: true).map(\.id) == MeetingPrep.items(for: solo, asOwner: true, liveLocation: false).map(\.id))
+    }
+
+    @MainActor
+    @Test func theLadderOnlyPromisesLiveWhileItIsOn() {
+        #expect(TrustSheet.soloText(liveLocation: true) == L("Je kijkt bij elk rondje live mee, en je kunt dit altijd weer uitzetten."))
+        let off = TrustSheet.soloText(liveLocation: false)
+        #expect(off == L("Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten."))
+        #expect(!TermsTests.breaksTheRules(off))
+    }
+
+    @Test func theNoteIsTheWebsitesWordsInEveryLanguage() throws {
+        // web/messages/*.json request.reasons.live-location-off (French with "en solo", like the rest of the app).
+        let expected = [
+            "en": "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible.",
+            "es": "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible.",
+            "fr": "La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore. Se promener ensemble reste possible.",
+        ]
+        let key = "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel."
+        for (lang, text) in expected {
+            let path = try #require(Bundle.main.path(forResource: lang, ofType: "lproj"), "\(lang).lproj")
+            #expect(try #require(Bundle(path: path)).localizedString(forKey: key, value: "", table: nil) == text, "\(lang)")
+        }
+    }
+}

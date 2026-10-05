@@ -271,6 +271,9 @@ struct NextStepCard: View {
             Haptics.success()
         } catch let error as APIError where error.needsTerms {
             terms = TermsRequest(model: model) { await start(item) }
+        } catch let error as APIError where error.liveLocationOff {
+            // Live location went off in the meantime: this walk alone waits. Calmly, not as an error.
+            await model.liveLocationPaused()
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)

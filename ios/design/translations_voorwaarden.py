@@ -60,10 +60,12 @@ T = {
         "Live location is off for now, so there is no map here. You still see the time, the walk report and the photos.",
         "La localisation en direct est désactivée pour le moment, il n'y a donc pas de carte ici. Tu vois quand même le temps, le compte rendu de la balade et les photos.",
         "La ubicación en directo está desactivada por ahora, así que aquí no hay mapa. Sí ves el tiempo, el informe del paseo y las fotos."),
-    "Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel.": (
-        "Live location is off for now, so a walk alone with the dog doesn't start yet. Walking together with the owner is possible.",
-        "La localisation en direct est désactivée pour le moment, donc une balade seul avec le chien ne démarre pas encore. Se promener avec le propriétaire reste possible.",
-        "La ubicación en directo está desactivada por ahora, así que todavía no empieza un paseo a solas con el perro. Pasear junto con el dueño sí es posible."),
+    # A walk alone that waits (request.reasons.live-location-off on the website, `paused` in the API): on
+    # both cards, on the dog page and as the answer to a request, accepting or starting.
+    "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel.": (
+        "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible.",
+        "La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore. Se promener ensemble reste possible.",
+        "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible."),
     "Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie.": (
         "Live location is off for now: your phone does not share your location during this walk.",
         "La localisation en direct est désactivée pour le moment : ton téléphone ne partage pas ta position pendant cette balade.",
@@ -76,4 +78,34 @@ T = {
         "Paseáis juntos, así que no hace falta mapa."),
     # The same, short, on the Lock Screen.
     "Jullie lopen samen": ("You're walking together", "Vous vous promenez ensemble", "Paseáis juntos"),
+
+    # Nothing promises watching live unless the walk shares where they are (a walk alone, switch on).
+    "Bekijk het rondje": ("View the walk", "Voir la balade", "Ver el paseo"),
+    "Tik om het rondje te bekijken": ("Tap to view the walk", "Touche pour voir la balade", "Toca para ver el paseo"),
+    "%@ is op pad met %@.": ("%@ is out with %@.", "%@ est en balade avec %@.", "%@ está de paseo con %@."),
+    "Je mag nu zelfstandig met %@ wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet.": (
+        "You may now walk %@ on your own. Live location is off for now, so a walk alone doesn't start yet.",
+        "Tu peux maintenant promener %@ seul·e. La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore.",
+        "Ya puedes pasear a %@ por tu cuenta. La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza."),
+    "Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel, en je kunt dit altijd weer uitzetten.": (
+        "Live location is off for now, so a walk alone doesn't start yet. Walking together is possible, and you can always switch this off again.",
+        "La localisation en direct est désactivée pour le moment, donc une balade en solo ne démarre pas encore. Se promener ensemble reste possible, et tu peux toujours retirer cette permission.",
+        "La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible, y siempre puedes volver a desactivarlo."),
+    "Zo ben je bereikbaar voor de wandelaar tijdens het rondje.": (
+        "So the walker can reach you during the walk.",
+        "Ainsi, le promeneur peut te joindre pendant la balade.",
+        "Así el paseador puede contactar contigo durante el paseo."),
+    "Klikt het? Dan lopen jullie vaker samen. Live locatie staat voorlopig uit, dus zelfstandig wandelen kan nog niet.": (
+        "Hit it off? Then you walk together more often. Live location is off for now, so walking on your own isn't possible yet.",
+        "Le courant passe ? Alors vous vous promenez ensemble plus souvent. La localisation en direct est désactivée pour le moment, donc la balade en solo n'est pas encore possible.",
+        "¿Os lleváis bien? Entonces paseáis juntos más a menudo. La ubicación en directo está desactivada por ahora, así que todavía no se puede pasear por tu cuenta."),
+    "Live locatie staat voorlopig uit. Tot die tijd lopen jullie samen, en bewaren we geen route.": (
+        "Live location is off for now. Until then you walk together, and no route is stored.",
+        "La localisation en direct est désactivée pour le moment. D'ici là, vous vous promenez ensemble, et aucun trajet n'est enregistré.",
+        "La ubicación en directo está desactivada por ahora. Hasta entonces paseáis juntos, y no se guarda ninguna ruta."),
+    # True whether live location is on or off.
+    "Je ziet wie met je hond wil wandelen, en jij beslist wie er komt.": (
+        "You see who wants to walk your dog, and you decide who comes.",
+        "Tu vois qui veut promener ton chien, et c'est toi qui décides qui vient.",
+        "Ves quién quiere pasear a tu perro, y tú decides quién viene."),
 }

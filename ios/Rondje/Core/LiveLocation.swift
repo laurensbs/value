@@ -5,8 +5,9 @@ import Foundation
 // (privacy art. 14). GET /api/v1/config says so as `features.liveLocation`. Off means: the app asks for
 // no location permission for a walk, starts no GPS and no background location, sends no points, and
 // shows no map or distance; it says so calmly instead. A first meeting (the owner or shelter is there)
-// still starts; a walk alone with the dog does not ('live-location-off' from the server, and the Start
-// button says why). Older servers send no `features`, and they always had it on.
+// still starts; a walk alone with the dog cannot be asked for, accepted or started ('live-location-off'
+// from the server), and its card says why on both sides (LiveLocationPause, below). Older servers send no
+// `features`, and they always had it on.
 //
 // Even with the switch on, only a walk alone with the dog shares where the walker is (web lib/rules.ts
 // walkHasLiveLocation, WalkStarter.sharesLocation). A first meeting never does: "Jullie lopen samen, dus
@@ -63,7 +64,17 @@ final class ServerFeatures {
     }
 
     func apply(_ config: AppConfig) {
-        liveLocation = config.liveLocation
+        set(liveLocation: config.liveLocation)
+    }
+
+    /// The server just answered 'live-location-off' (a request, accepting or starting a walk alone):
+    /// remembered straight away, without another call, so every card says it from now on.
+    func liveLocationSwitchedOff() {
+        set(liveLocation: false)
+    }
+
+    private func set(liveLocation: Bool) {
+        self.liveLocation = liveLocation
         defaults.set(liveLocation, forKey: Self.liveLocationKey)
         loadedAt = .now
     }
@@ -74,5 +85,85 @@ final class ServerFeatures {
         // No connection: keep the last answer.
         guard let config = try? await APIClient.shared.config() else { return }
         apply(config)
+    }
+}
+
+// MARK: A walk alone that waits
+
+// While live location is off, a walk alone with the dog cannot be asked for, accepted or started (web
+// lib/rules.ts canRequestSolo and liveLocationReason; the server answers 'live-location-off'). One agreed
+// while it was on stays agreed: both sides read one calm note on its card, Start and Accepteer wait, and
+// Weiger and Annuleer always work. A first meeting (walking together) is never affected.
+
+enum LiveLocationPause {
+    /// The server's reason ('live-location-off': `paused`, `canRequest.solo` and the errors).
+    static let reason = "live-location-off"
+
+    /// The note both sides read, the same words as the website (request.reasons.live-location-off).
+    static var note: String {
+        L("Live locatie staat voorlopig uit, dus een rondje alleen start nog niet. Samen lopen kan wel.")
+    }
+}
+
+extension APIError {
+    /// The server says live location is off, so this walk alone cannot be asked for, accepted or started.
+    var liveLocationOff: Bool { code == LiveLocationPause.reason }
+}
+
+extension Appointment {
+    /// `paused` in GET /api/v1/requests: `{ reason, message }`, or null. Read leniently: anything without a
+    /// reason counts as not paused, so an odd value never hides an appointment.
+    struct Paused: Codable, Hashable, Sendable {
+        var reason: String
+        var message: String?
+
+        init(reason: String = LiveLocationPause.reason, message: String? = nil) {
+            self.reason = reason
+            self.message = message
+        }
+
+        private enum CodingKeys: String, CodingKey { case reason, message }
+
+        init(from decoder: Decoder) throws {
+            let c = try? decoder.container(keyedBy: CodingKeys.self)
+            reason = (try? c?.decodeIfPresent(String.self, forKey: .reason)) ?? ""
+            message = (try? c?.decodeIfPresent(String.self, forKey: .message)) ?? nil
+        }
+    }
+
+    /// A walk alone with the dog, asked for or agreed and not running yet, that waits because live location
+    /// is off. The server says so per appointment (`paused`); an older server does not, and then the switch
+    /// as this phone last heard it decides with the same rule. Either one is enough: privacy first.
+    func waitsForLiveLocation(liveLocation: Bool) -> Bool {
+        guard kind == "solo", isOpen, walkStatus != "active" else { return false }
+        return paused?.reason.isEmpty == false || !liveLocation
+    }
+
+    /// Saying yes to this request now. A walk alone waits while live location is off; saying no never waits.
+    func canAccept(liveLocation: Bool) -> Bool {
+        status == "pending" && !waitsForLiveLocation(liveLocation: liveLocation)
+    }
+}
+
+/// The calm line about live location on an appointment card.
+struct LiveLocationNote: Equatable {
+    var text: String
+    var symbol: String
+
+    /// A walk alone that waits: on every such card, for the walker and the owner alike, from the request
+    /// on. Around the start, for the walker only: a first meeting shares no location (they walk together),
+    /// and a walk alone already running while the switch is off shares none either.
+    static func make(for item: Appointment, asOwner: Bool, liveLocation: Bool, now: Date = .now) -> LiveLocationNote? {
+        if item.waitsForLiveLocation(liveLocation: liveLocation) {
+            return LiveLocationNote(text: LiveLocationPause.note, symbol: "location.slash")
+        }
+        guard !asOwner, !item.isCall, item.canStart(now: now), item.walkStatus != "ended" else { return nil }
+        if item.isMeeting {
+            return LiveLocationNote(text: L("Jullie lopen samen, dus er is geen kaart nodig."), symbol: "figure.2")
+        }
+        if !liveLocation {
+            return LiveLocationNote(text: L("Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie."), symbol: "location.slash")
+        }
+        return nil
     }
 }

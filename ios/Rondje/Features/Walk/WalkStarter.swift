@@ -42,7 +42,8 @@ enum WalkStarter {
 
     /// A walk alone with the dog does not start while live location is off: the live map is how the
     /// owner follows it (safety protocol art. 2 and 3.5). A walk already running can always go on.
+    /// The server's `paused` counts too (Appointment.waitsForLiveLocation).
     nonisolated static func blockedByLiveLocation(_ item: Appointment, liveLocation: Bool) -> Bool {
-        !liveLocation && item.kind == "solo" && item.walkStatus != "active"
+        item.waitsForLiveLocation(liveLocation: liveLocation)
     }
 }

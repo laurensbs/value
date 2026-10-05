@@ -91,7 +91,8 @@ struct FollowWalkView: View {
                 .glassy(cornerRadius: 28)
                 .padding()
             }
-            .navigationTitle("\(dogName) live")
+            // "live" in the title only while there is something live to see.
+            .navigationTitle(showsMap ? L("\(dogName) live") : dogName)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Sluit", systemImage: "xmark") { dismiss() } } }
             .task { await poll() }

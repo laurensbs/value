@@ -163,6 +163,9 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
     var host: Contact?
     var walker: Walker?
     var trust: Trust?
+    /// A walk alone with the dog that waits while live location is off (`paused` in GET /api/v1/requests).
+    /// Missing from older servers; see `waitsForLiveLocation`.
+    var paused: Paused? = nil
 
     var isMeeting: Bool { kind == "meet" }
     var isOpen: Bool { status == "pending" || status == "accepted" }
@@ -297,11 +300,19 @@ struct AppNotification: Codable, Identifiable, Sendable {
     var data: [String: JSONValue]
     var read: Bool
     var createdAt: Date
+    /// The server's own sentence, in the app's language (`text`). Missing from older servers.
+    var serverText: String? = nil
+
+    private enum CodingKeys: String, CodingKey { case id, kind, data, read, createdAt, serverText = "text" }
 
     func text(_ key: String) -> String {
         if case .string(let s) = data[key] { return s }
         return ""
     }
+
+    /// Whether this walk shared live location (`live` in the data: "yes" or "no"). Only "yes" counts:
+    /// older notifications leave it out, and then no text promises anything live (web notification-links.ts).
+    var sharedLiveLocation: Bool { text("live") == "yes" }
 }
 
 struct NotificationsResponse: Codable, Sendable { var notifications: [AppNotification] }
