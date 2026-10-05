@@ -107,9 +107,11 @@ struct MeetingPrepTests {
                 for info in ["Bij het hek van het park", ""] {
                     let item = appointment(meet: meet, meetingInfo: info, walker: walker)
                     for asOwner in [false, true] {
-                        for prep in MeetingPrep.items(for: item, asOwner: asOwner) {
-                            lines.append(prep.title)
-                            if let detail = prep.detail { lines.append(detail) }
+                        for live in [true, false] {
+                            for prep in MeetingPrep.items(for: item, asOwner: asOwner, liveLocation: live) {
+                                lines.append(prep.title)
+                                if let detail = prep.detail { lines.append(detail) }
+                            }
                         }
                         lines.append(MeetingPrep.intro(for: item, asOwner: asOwner))
                         let text = PrepReminder.text(for: item, asOwner: asOwner)

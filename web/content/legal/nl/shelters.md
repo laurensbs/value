@@ -100,4 +100,4 @@ Deze voorwaarden gelden voor dierenasielen, opvangen en andere organisaties die 
 
 ## 13. Contact
 
-Vragen over deze partnervoorwaarden? Mail naar [e-mail: hallo@rondje.app].
+Vragen over deze partnervoorwaarden? Mail naar {{contact}}.

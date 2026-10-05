@@ -13,7 +13,7 @@ En esta política te explicamos qué datos personales trata Rondje, para qué, d
 
 El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bijv. Stichting Rondje i.o.], [adres], con número de la Cámara de Comercio neerlandesa (KvK) [KvK-nummer].
 
-¿Preguntas sobre privacidad? Escríbenos a [e-mail: hallo@rondje.app]. [Pendiente de verificar: si es obligatorio nombrar un delegado de protección de datos. En ese caso, indicar aquí sus datos de contacto.]
+¿Preguntas sobre privacidad? Escríbenos a {{contact}}. [Pendiente de verificar: si es obligatorio nombrar un delegado de protección de datos. En ese caso, indicar aquí sus datos de contacto.]
 
 ## 2. En resumen
 
@@ -93,7 +93,7 @@ El responsable del tratamiento de tus datos en Rondje es [Naam rechtspersoon, bi
 |---|---|
 | Crear y gestionar tu cuenta, iniciar sesión | Ejecución del contrato |
 | Mostrar perfiles y poner en contacto a paseantes y perros | Ejecución del contrato |
-| Gestionar solicitudes, primeros encuentros y paseos, y compartir los datos de contacto tras la aceptación | Ejecución del contrato |
+| Gestionar solicitudes, primeros encuentros y paseos, con un recordatorio previo (también para los paseos en grupo), y compartir los datos de contacto tras la aceptación | Ejecución del contrato |
 | Ubicación en tiempo real durante el paseo, aviso de retraso, pantalla SOS | Ejecución del contrato, e interés legítimo nuestro y de propietarios y paseantes en la seguridad |
 | Registrar la comprobación de identidad, test de seguridad, limitaciones de cuentas nuevas | Interés legítimo: la seguridad de personas y animales |
 | Valoraciones privadas, denuncias, moderación, bloqueos y expulsiones | Interés legítimo: seguridad y prevención de abusos. En parte, obligación legal (DSA) |
@@ -206,7 +206,7 @@ Tienes derecho a:
 - **oponerte** al tratamiento basado en el interés legítimo;
 - retirar tu consentimiento, cuando el tratamiento se base en él.
 
-Envía tu solicitud desde la app o a [e-mail: hallo@rondje.app]. Responderemos en el plazo de un mes. A veces te pediremos primero que demuestres que la cuenta es tuya.
+Envía tu solicitud desde la app o a {{contact}}. Responderemos en el plazo de un mes. A veces te pediremos primero que demuestres que la cuenta es tuya.
 
 Algunos datos no podemos borrarlos de inmediato, por ejemplo si son necesarios para una denuncia abierta sobre la seguridad de otras personas. En ese caso te lo explicaremos.
 

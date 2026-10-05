@@ -27,7 +27,8 @@ struct HomecomingCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             header
-            if let care = live?.care { CareSummary(care: care) }
+            // Only when something was counted: "0× plas" says nothing.
+            if let care = live?.care, care.pee + care.poo + care.water > 0 { CareSummary(care: care) }
             if let photos = live?.photos, !photos.isEmpty { PhotoStrip(photos: photos) }
             thanks
             if item.feedbackGiven != true {
@@ -43,7 +44,10 @@ struct HomecomingCard: View {
         .task(id: walkId) { await load() }
         .onChange(of: item.feedbackGiven) { finishIfDone() }
         .sheet(isPresented: $chatting) {
-            ChatView(requestId: item.id, title: walker, suggestions: RequestSuggestions.chatReplies(for: item, asOwner: true))
+            ChatView(
+                requestId: item.id, title: walker, otherUserId: item.walker?.id, dogId: item.dog.id,
+                suggestions: RequestSuggestions.chatReplies(for: item, asOwner: true)
+            )
                 .presentationDetents([.large])
         }
         .sheet(isPresented: $feedback, onDismiss: { Task { await model.refreshAppointments() } }) {
@@ -94,33 +98,38 @@ struct HomecomingCard: View {
                 Text("Bedank \(walker)")
                     .font(.caption.weight(.bold))
                     .foregroundStyle(Palette.onBall.opacity(0.75))
-                FlowLayout(spacing: 8) {
-                    ForEach(RequestSuggestions.thanks(dogName: item.dog.name, weekly: item.weekly), id: \.self) { line in
-                        Button { Task { await thank(line) } } label: {
-                            Text(line)
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(Palette.onBall)
-                                .padding(.horizontal, 14)
-                                .frame(minHeight: 44)
-                                .background(Color.white.opacity(0.6), in: .capsule)
-                                .contentShape(.capsule)
+                // One row that scrolls sideways, instead of a stack of full-width sentences.
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(RequestSuggestions.thanks(dogName: item.dog.name, weekly: item.weekly), id: \.self) { line in
+                            Button { Task { await thank(line) } } label: { chip(Text(line)) }
+                                .buttonStyle(.plain)
+                                .disabled(sending)
+                        }
+                        Button { chatting = true } label: {
+                            chip(Label("Zelf iets schrijven", systemImage: "square.and.pencil"))
                         }
                         .buttonStyle(.plain)
                     }
                 }
-                .disabled(sending)
+                // Scrolls from edge to edge of the card, and starts in line with the text.
+                .contentMargins(.horizontal, 18, for: .scrollContent)
+                .padding(.horizontal, -18)
                 .opacity(sending ? 0.6 : 1)
-                Button { chatting = true } label: {
-                    Label("Zelf iets schrijven", systemImage: "square.and.pencil")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Palette.onBall)
-                        .frame(minHeight: 44)
-                        .contentShape(.rect)
-                }
-                .buttonStyle(.plain)
             }
             .transition(.opacity)
         }
+    }
+
+    private func chip(_ content: some View) -> some View {
+        content
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(Palette.onBall)
+            .lineLimit(1)
+            .padding(.horizontal, 14)
+            .frame(minHeight: 44)
+            .background(Color.white.opacity(0.6), in: .capsule)
+            .contentShape(.capsule)
     }
 
     // MARK: Actions
@@ -141,7 +150,7 @@ struct HomecomingCard: View {
             model.celebrate(.tap)
             finishIfDone()
         } catch {
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 

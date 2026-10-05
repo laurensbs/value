@@ -25,14 +25,19 @@ struct OwnerHomeView: View {
                         Text(headline).font(.display(28))
                     }
 
-                    NextStepCard(placement: .home, myDogsCount: loaded ? dogs.count : nil, addDog: { adding = true })
-                    WeekRecapCard(side: .owner)
-
+                    // A dog out on a walk right now comes first: that is the moment that matters.
                     ForEach(live) { item in liveCard(item) }
+
+                    NextStepCard(placement: .home, myDogsCount: loaded ? dogs.count : nil, addDog: { adding = true })
+                    // One Guus at a time: the week in review waits until Guus has said hello.
+                    if !NextStepCard.introPending { WeekRecapCard(side: .owner) }
+
                     ForEach(model.appointments.incoming.filter { HomecomingCard.shouldShow($0) }) { HomecomingCard(item: $0) }
 
                     OwnerSteps(hasDog: !dogs.isEmpty, loaded: loaded) { adding = true }
-                    GuusHint(id: "owner", text: L("Hier zie je wie met je hond wil wandelen. Jij beslist altijd zelf."))
+                    if !NextStepCard.introPending {
+                        GuusHint(id: "owner", text: L("Hier zie je wie met je hond wil wandelen. Jij beslist altijd zelf."))
+                    }
 
                     if !pending.isEmpty {
                         SectionTitle(title: L("Aanvragen"), subtitle: L("Kijk wie het is en kies een moment om kennis te maken."))
@@ -74,8 +79,8 @@ struct OwnerHomeView: View {
                     }
                     .scrollClipDisabled()
 
-                    if let c = ProgressStore.shared.challenges { ChallengeCard(challenges: c) }
                     OwnerTip()
+                        .padding(.top, 8)
                 }
                 .padding(20)
                 .padding(.bottom, 20)
@@ -88,7 +93,7 @@ struct OwnerHomeView: View {
             .task { await load() }
             .sheet(isPresented: $adding) { AddDogView { await load() }.presentationDetents([.large]) }
             .fullScreenCover(item: $following) { item in
-                FollowWalkView(walkId: item.walkId ?? "", dogName: item.dog.name)
+                FollowWalkView(walkId: item.walkId ?? "", dogName: item.dog.name, kind: item.kind)
             }
         }
     }
@@ -111,13 +116,17 @@ struct OwnerHomeView: View {
             HStack(spacing: 14) {
                 DogPortrait(look: item.dog.look, photoURL: item.dog.photos.first.flatMap(URL.init(string:)), cornerRadius: 18)
                     .frame(width: 60, height: 60)
+                // "Live" only for a walk that shares where they are: a walk alone with the dog, with live
+                // location on (WalkStarter.sharesLocation). Never for a first meeting.
+                let live = WalkStarter.sharesLocation(kind: item.kind, liveLocation: ServerFeatures.shared.liveLocation)
                 VStack(alignment: .leading, spacing: 2) {
-                    Label("Live", systemImage: "dot.radiowaves.left.and.right")
+                    Label(live ? L("Live") : L("Onderweg"), systemImage: live ? "dot.radiowaves.left.and.right" : "figure.walk")
                         .font(.caption.weight(.bold)).foregroundStyle(Palette.onBall)
                         .symbolEffect(.pulse)
                     Text("\(item.dog.name) is op pad met \(item.walker?.firstName ?? L("de wandelaar"))")
                         .font(.headline).foregroundStyle(Palette.onBall)
-                    Text("Tik om live mee te kijken").font(.subheadline).foregroundStyle(Palette.onBall.opacity(0.8))
+                    Text(live ? L("Tik om live mee te kijken") : L("Tik om het rondje te bekijken"))
+                        .font(.subheadline).foregroundStyle(Palette.onBall.opacity(0.8))
                 }
                 Spacer()
                 Image(systemName: "chevron.right").foregroundStyle(Palette.onBall)
@@ -143,64 +152,23 @@ private struct OwnerSteps: View {
     let loaded: Bool
     var addDog: () -> Void
 
-    private struct Step: Identifiable { let id: Int; let title: String; let hint: String; let done: Bool; let symbol: String }
-
-    private var steps: [Step] {
+    private var steps: [ChecklistStep] {
         let incoming = model.appointments.incoming
         let met = incoming.contains { $0.status == "completed" || ($0.status == "accepted" && $0.startsAt < .now) }
         let trusted = incoming.contains { $0.trust?.soloAllowed == true }
         return [
-            Step(id: 0, title: L("Zet je hond erop"), hint: L("Een foto en een paar zinnen over wie hij is."), done: hasDog, symbol: "pawprint.fill"),
-            Step(id: 1, title: L("Accepteer een kennismaking"), hint: L("Je krijgt een melding als iemand wil wandelen."), done: incoming.contains { $0.status != "pending" && $0.status != "declined" }, symbol: "person.2.fill"),
-            Step(id: 2, title: L("Maak kennis, samen op pad"), hint: L("De eerste keer loop je mee en bekijk je het ID."), done: met, symbol: "figure.walk"),
-            Step(id: 3, title: L("Geef vertrouwen"), hint: L("Daarna mag de wandelaar zelfstandig met je hond."), done: trusted, symbol: "hand.thumbsup.fill"),
+            ChecklistStep(id: 0, title: L("Zet je hond erop"), hint: L("Een foto en een paar zinnen over wie hij is."), done: hasDog, symbol: "pawprint.fill"),
+            ChecklistStep(id: 1, title: L("Accepteer een kennismaking"), hint: L("Je krijgt een melding als iemand wil wandelen."), done: incoming.contains { $0.status != "pending" && $0.status != "declined" }, symbol: "person.2.fill"),
+            ChecklistStep(id: 2, title: L("Maak kennis, samen op pad"), hint: L("De eerste keer loop je mee en bekijk je het ID."), done: met, symbol: "figure.walk"),
+            ChecklistStep(id: 3, title: L("Geef vertrouwen"), hint: L("Daarna mag de wandelaar zelfstandig met je hond."), done: trusted, symbol: "hand.thumbsup.fill"),
         ]
     }
 
     var body: some View {
         let all = steps
-        let done = all.filter(\.done).count
-        if loaded, done < all.count {
-            VStack(alignment: .leading, spacing: 14) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Zo werkt het voor eigenaren").font(.headline)
-                        Text("\(done) van \(all.count) gedaan").font(.subheadline).foregroundStyle(Palette.muted)
-                    }
-                    Spacer()
-                    ZStack {
-                        Circle().stroke(Palette.line, lineWidth: 6)
-                        Circle().trim(from: 0, to: CGFloat(done) / CGFloat(all.count))
-                            .stroke(Palette.grass, style: StrokeStyle(lineWidth: 6, lineCap: .round))
-                            .rotationEffect(.degrees(-90))
-                        Image(systemName: "house.fill").foregroundStyle(Palette.grass)
-                    }
-                    .frame(width: 46, height: 46)
-                }
-                ForEach(all) { step in
-                    let next = !step.done && all.first(where: { !$0.done })?.id == step.id
-                    HStack(alignment: .top, spacing: 12) {
-                        Image(systemName: step.done ? "checkmark" : step.symbol)
-                            .font(.subheadline.weight(.bold))
-                            .foregroundStyle(step.done ? Palette.onGrass : (next ? Palette.onBall : Palette.muted))
-                            .frame(width: 34, height: 34)
-                            .background(step.done ? Palette.grass : (next ? Palette.ball : Palette.sunken), in: .circle)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(step.title).font(.subheadline.weight(.semibold))
-                                .strikethrough(step.done, color: Palette.muted)
-                                .foregroundStyle(step.done ? Palette.muted : Palette.ink)
-                            if next { Text(step.hint).font(.footnote).foregroundStyle(Palette.muted) }
-                        }
-                        Spacer()
-                        if next && step.id == 0 {
-                            Button("Toevoegen") { addDog() }.buttonStyle(.borderedProminent).tint(Palette.grass).font(.footnote.weight(.bold))
-                        }
-                    }
-                }
-            }
-            .padding(18)
-            .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
-            .overlay(RoundedRectangle(cornerRadius: 24, style: .continuous).strokeBorder(Palette.grass.opacity(0.25), lineWidth: 1))
+        if loaded, all.contains(where: { !$0.done }) {
+            ChecklistCard(title: L("Zo werkt het voor eigenaren"), symbol: "house.fill", steps: all,
+                          action: (step: 0, title: L("Toevoegen"), run: addDog))
         }
     }
 }

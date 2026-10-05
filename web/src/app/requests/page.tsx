@@ -2,9 +2,13 @@ import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
+import { MeetChecklist } from '@/components/MeetChecklist'
+import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
+import { PushAsk } from '@/components/PushAsk'
 import { CancelButton, DecideButtons, StartButton, TrustForm } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
-import { canStartWalk, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { isRemoteMeeting } from '@/lib/conversation'
+import { canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
 import {
   hostContacts,
   incomingRequests,
@@ -14,7 +18,8 @@ import {
   type HostContact,
   type RequestRow,
 } from '@/server/queries'
-import { unreadChats } from '@/server/chat'
+import { meetChecklist, unreadChats } from '@/server/chat'
+import { webPushKey } from '@/server/push'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -28,12 +33,30 @@ function statusPill(status: string) {
   return status === 'accepted' ? 'green' : status === 'pending' ? 'warn' : status === 'completed' ? 'blue' : ''
 }
 
+/** A first call or video call: how to reach each other, and that it is not yet meeting in person. */
+function CallNote({ via, text }: { via: string; text: string }) {
+  return (
+    <p className="notice small" role="note">
+      <Icon name={isMeetVia(via) ? MEET_VIA_ICONS[via] : 'phone'} size={18} /> <span>{text}</span>
+    </p>
+  )
+}
+
 function ChatLink({ requestId, label, unread }: { requestId: string; label: string; unread: boolean }) {
   return (
     <Link href={`/chat/${requestId}`} className="button secondary">
       <Icon name="chat" size={16} /> {label}
       {unread ? <span className="unread-dot" aria-hidden="true" /> : null}
     </Link>
+  )
+}
+
+/** The appointment as a calendar file, with a reminder an hour before. */
+function CalendarLink({ requestId, label }: { requestId: string; label: string }) {
+  return (
+    <a href={`/requests/${requestId}/calendar.ics`} className="button ghost">
+      <Icon name="calendar" size={16} /> {label}
+    </a>
   )
 }
 
@@ -79,18 +102,35 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
         ? 'incoming'
         : 'mine'
 
-  const contacts = await hostContacts(outgoing.filter((r) => OPEN.includes(r.request.status) || r.request.status === 'completed').map((r) => r.dog))
-  const grants = await trustGrantsFor([...new Set(incoming.map((r) => r.dog.id))])
   const walkerIds = [...new Set(incoming.map((r) => r.walker.id))]
-  const signals = new Map(await Promise.all(walkerIds.map(async (id) => [id, await trustSignals(id)] as const)))
+  const [contacts, grants, signals] = await Promise.all([
+    hostContacts(outgoing.filter((r) => (OPEN.includes(r.request.status) || r.request.status === 'completed') && !r.blocked).map((r) => r.dog)),
+    trustGrantsFor([...new Set(incoming.map((r) => r.dog.id))]),
+    Promise.all(walkerIds.map(async (id) => [id, await trustSignals(id)] as const)).then((entries) => new Map(entries)),
+  ])
 
   const when = (r: RequestRow) =>
     format.dateTime(r.request.startsAt, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })
+  // A first call that took place shows as a call, not as a walk.
+  const statusText = (r: RequestRow) =>
+    t(`requests.status.${r.request.status === 'completed' && isRemoteMeeting(r.request) ? 'talked' : r.request.status}`)
+  const callHow = (r: RequestRow) => t(r.request.meetVia === 'video' ? 'meet.videoHow' : 'meet.phoneHow')
 
   const mineOpen = outgoing.filter((r) => OPEN.includes(r.request.status))
   const minePast = outgoing.filter((r) => !OPEN.includes(r.request.status))
   const inOpen = incoming.filter((r) => OPEN.includes(r.request.status))
   const inPast = incoming.filter((r) => !OPEN.includes(r.request.status))
+  // A first meeting gets a list of what to talk about, for each side.
+  const meetings = new Map(
+    await Promise.all(
+      [...mineOpen.map((r) => ['walker', r] as const), ...inOpen.map((r) => ['host', r] as const)]
+        .filter(([, r]) => r.request.kind === 'meet' && r.request.status === 'accepted' && r.walkStatus !== 'active')
+        .map(async ([side, r]) => [r.request.id, await meetChecklist(side, r.dog.name, r.walker.firstName, r.request.meetVia)] as const),
+    ),
+  )
+  // Waiting for an answer is the moment a heads-up matters most.
+  const waitingFor = mineOpen.find((r) => r.request.status === 'pending')
+  const pushKey = webPushKey()
 
   return (
     <div className="stack-l">
@@ -111,6 +151,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
 
       {tab === 'mine' ? (
         <section className="stack">
+          {pushKey && waitingFor ? <PushAsk publicKey={pushKey} text={t('pushAsk.request', { dog: waitingFor.dog.name })} /> : null}
           {mineOpen.length === 0 ? (
             <div className="empty card flat stack-s">
               <p>{t('requests.empty')}</p>
@@ -129,6 +170,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                 const contact = contacts.get(r.dog.id)
                 const accepted = r.request.status === 'accepted'
                 const active = r.walkStatus === 'active'
+                const call = isRemoteMeeting(r.request)
                 return (
                   <li key={r.request.id} className="list-item request">
                     <Link href={`/dogs/${r.dog.id}`} className="request-dog">
@@ -139,15 +181,16 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         <strong className="request-title">
                           {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
                         </strong>
-                        <span className={`pill ${statusPill(r.request.status)}`}>{t(`requests.status.${r.request.status}`)}</span>
+                        <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                       </div>
+                      {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="muted small">
                         <Icon name="calendar" size={14} /> {when(r)} · {t('common.minutes', { n: r.request.durationMin })}
                         {r.request.weekly ? ` · ${t('requests.weekly')}` : ''}
                       </p>
                       {accepted && contact ? (
                         <>
-                          {r.dog.meetingInfo ? (
+                          {r.dog.meetingInfo && !call ? (
                             <p className="small">
                               <strong>{t('requests.meeting')}:</strong> {r.dog.meetingInfo}
                             </p>
@@ -155,9 +198,22 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                           <Contact contact={contact} label={t('requests.contact')} />
                         </>
                       ) : null}
+                      {call ? <CallNote via={r.request.meetVia} text={accepted ? `${callHow(r)} ${t('meet.afterCallWalker', { dog: r.dog.name })}` : t('meet.remoteNote')} /> : null}
+                      {r.request.meetVia === 'home' && r.request.kind === 'meet' ? (
+                        <p className="notice small" role="note">
+                          <Icon name="shield" size={18} /> <span>{t('meet.homeSafety')}</span>
+                        </p>
+                      ) : null}
                       <div className="row">
                         <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
-                        {active && r.walkId ? (
+                        {call ? (
+                          // After a call, meeting in person comes next: walking together is already chosen.
+                          accepted ? (
+                            <Link href={`/dogs/${r.dog.id}#plan`} className="button primary">
+                              <Icon name="paw" size={18} /> {t('meet.planInPerson')}
+                            </Link>
+                          ) : null
+                        ) : active && r.walkId ? (
                           <Link href={`/walk/${r.walkId}`} className="button primary">
                             <span className="live-dot" aria-hidden="true" /> {t('requests.resume')}
                           </Link>
@@ -168,8 +224,12 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             hint={t('requests.startHint', { n: START_WINDOW_BEFORE_MIN })}
                           />
                         ) : null}
+                        {accepted && !active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
                         {!active ? <CancelButton requestId={r.request.id} /> : null}
                       </div>
+                      {meetings.has(r.request.id) ? (
+                        <MeetChecklist requestId={r.request.id} title={t('meetCheck.title', { dog: r.dog.name })} items={meetings.get(r.request.id)!} />
+                      ) : null}
                     </div>
                   </li>
                 )
@@ -192,7 +252,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         {t('requests.summary')}
                       </Link>
                     ) : (
-                      <span className={`pill ${statusPill(r.request.status)}`}>{t(`requests.status.${r.request.status}`)}</span>
+                      <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                     )}
                   </li>
                 ))}
@@ -217,6 +277,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                 const accepted = r.request.status === 'accepted'
                 const active = r.walkStatus === 'active'
                 const grant = grants.get(`${r.dog.id}:${r.walker.id}`) ?? { idSeen: false, soloAllowed: false }
+                const call = isRemoteMeeting(r.request)
                 return (
                   <li key={r.request.id} className="list-item request incoming">
                     <div className="grow stack">
@@ -227,8 +288,9 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                             {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
                           </strong>
                         </span>
-                        <span className={`pill ${statusPill(r.request.status)}`}>{t(`requests.status.${r.request.status}`)}</span>
+                        <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                       </div>
+                      {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="small">
                         <Icon name="calendar" size={14} /> {when(r)} · {t('common.minutes', { n: r.request.durationMin })}
                         {r.request.weekly ? ` · ${t('requests.weekly')}` : ''}
@@ -247,20 +309,34 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                       {accepted ? (
                         <>
                           <Contact contact={{ name: r.walker.firstName, phone: r.walker.phone, email: r.walker.email }} label={t('requests.contact')} />
-                          <TrustForm
-                            dogId={r.dog.id}
-                            dogName={r.dog.name}
-                            walkerId={r.walker.id}
-                            walkerName={r.walker.firstName}
-                            initial={grant}
-                            allowSolo={!r.dog.orgId}
-                          />
+                          {meetings.has(r.request.id) ? (
+                            <MeetChecklist requestId={r.request.id} title={t('meetCheck.title', { dog: r.dog.name })} items={meetings.get(r.request.id)!} />
+                          ) : null}
+                          {r.request.meetVia === 'home' && r.request.kind === 'meet' ? (
+                            <p className="notice small" role="note">
+                              <Icon name="shield" size={18} /> <span>{t('meet.homeSafety')}</span>
+                            </p>
+                          ) : null}
+                          {call ? (
+                            // A call never counts as meeting in person: no ID check, no solo walks from here.
+                            <CallNote via={r.request.meetVia} text={`${callHow(r)} ${t('meet.afterCallHost', { dog: r.dog.name })}`} />
+                          ) : (
+                            <TrustForm
+                              dogId={r.dog.id}
+                              dogName={r.dog.name}
+                              walkerId={r.walker.id}
+                              walkerName={r.walker.firstName}
+                              initial={grant}
+                              allowSolo={!r.dog.orgId}
+                            />
+                          )}
                           <div className="row">
                             {active && r.walkId ? (
                               <Link href={`/follow/${r.walkId}`} className="button primary">
                                 <span className="live-dot" aria-hidden="true" /> {t('requests.follow')}
                               </Link>
                             ) : null}
+                            {!active ? <CalendarLink requestId={r.request.id} label={t('requests.calendar')} /> : null}
                             {!active ? <CancelButton requestId={r.request.id} /> : null}
                           </div>
                         </>
@@ -289,7 +365,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                         {t('requests.summary')}
                       </Link>
                     ) : (
-                      <span className={`pill ${statusPill(r.request.status)}`}>{t(`requests.status.${r.request.status}`)}</span>
+                      <span className={`pill ${statusPill(r.request.status)}`}>{statusText(r)}</span>
                     )}
                   </li>
                 ))}

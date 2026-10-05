@@ -5,6 +5,7 @@ struct ReportSheet: View {
     var dogId: String? = nil
     var subjectUserId: String? = nil
     var walkId: String? = nil
+    var orgId: String? = nil
 
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -44,7 +45,7 @@ struct ReportSheet: View {
         }
     }
 
-    private struct Payload: Encodable { var category, description: String; var dogId, subjectUserId, walkId: String? }
+    private struct Payload: Encodable { var category, description: String; var dogId, subjectUserId, walkId, orgId: String? }
 
     /// After a report Guus never suggests this dog again, and a walk with a report ends calmly
     /// (no confetti, no rebook offer). Kept on this phone only.
@@ -63,7 +64,7 @@ struct ReportSheet: View {
         busy = true
         defer { busy = false }
         do {
-            let _: OK = try await APIClient.shared.post("/api/v1/reports", Payload(category: category, description: text, dogId: dogId, subjectUserId: subjectUserId, walkId: walkId))
+            let _: OK = try await APIClient.shared.post("/api/v1/reports", Payload(category: category, description: text, dogId: dogId, subjectUserId: subjectUserId, walkId: walkId, orgId: orgId))
             if block, let subjectUserId {
                 let _: OK = try await APIClient.shared.post("/api/v1/blocks", ["userId": subjectUserId])
             }
@@ -72,7 +73,7 @@ struct ReportSheet: View {
             model.show(L("Bedankt. We kijken ernaar."), symbol: "shield.lefthalf.filled")
             dismiss()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

@@ -27,6 +27,8 @@ Drie ideeën zijn onderzocht en gescoord: honden + jongeren, een mentale-gezondh
 | [`docs/LAUNCH.md`](docs/LAUNCH.md) | **Zo start je**: database claimen, beheerder worden, EU-database, Google/Apple-login, iOS en Android bouwen |
 | [`docs/OUTREACH.md`](docs/OUTREACH.md) en [`docs/SUPPLY.md`](docs/SUPPLY.md) | Opvangen en eigenaren werven: aanpak, mails in drie talen, plan voor 30 dagen |
 | [`ios/README.md`](ios/README.md) | **De native iPhone-app** (SwiftUI): wat hij doet, veiligheid, zelf bouwen |
+| [`docs/MARKETING.md`](docs/MARKETING.md) | Het marketingplan: positionering, aanbod eerst, kanalen, lanceervolgorde per land, geld zonder de rode lijnen te breken, KPI's en 90 dagen |
+| [`docs/INSTAGRAM.md`](docs/INSTAGRAM.md) | Startpakket voor Instagram: naam, bio's in vier talen, de eerste 9 posts, Reels, stories, toestemming en DM-sjablonen |
 | [`docs/legal/REVIEW.md`](docs/legal/REVIEW.md) | Checklist voor de jurist per land; de juridische teksten zelf staan in `web/content/legal/` |
 
 ## Wat het platform doet (`web/`)

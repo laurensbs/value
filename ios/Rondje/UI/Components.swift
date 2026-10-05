@@ -14,7 +14,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .foregroundStyle(foreground)
             .background(tint.opacity(isEnabled ? 1 : 0.4), in: .capsule)
             .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(.spring(duration: 0.25, bounce: 0.4), value: configuration.isPressed)
+            .animation(Motion.tik, value: configuration.isPressed)
     }
 }
 
@@ -26,7 +26,7 @@ struct SecondaryButtonStyle: ButtonStyle {
             .foregroundStyle(Palette.ink)
             .background(Palette.sunken, in: .capsule)
             .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(.spring(duration: 0.25, bounce: 0.4), value: configuration.isPressed)
+            .animation(Motion.tik, value: configuration.isPressed)
     }
 }
 
@@ -74,6 +74,29 @@ extension View {
     func screenBackground() -> some View {
         background(Palette.paper.ignoresSafeArea())
     }
+
+    /// A calm line right under a field or switch, like a hint under a box on the website. VoiceOver reads it
+    /// as the control's hint (the website's aria-describedby), never as part of its label, and only once.
+    func fieldNote(_ note: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            accessibilityHint(Text(verbatim: note))
+            FieldNoteText(note: note)
+        }
+    }
+}
+
+/// The text of `fieldNote`: small and muted, seen on screen but not a second VoiceOver stop.
+struct FieldNoteText: View {
+    let note: String
+
+    var body: some View {
+        Text(verbatim: note)
+            .font(.footnote)
+            .foregroundStyle(Palette.muted)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityHidden(true)
+    }
 }
 
 struct Chip: View {
@@ -108,12 +131,15 @@ struct SectionTitle: View {
     }
 }
 
-struct EmptyState: View {
+/// Guus, one honest sentence and a button (or, as `accessory`, a share link and a second button).
+struct EmptyState<Accessory: View>: View {
     var symbol: String
     var title: String
     var text: String
     var actionTitle: String? = nil
     var action: (() -> Void)? = nil
+    @ViewBuilder var accessory: Accessory
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: 10) {
@@ -126,7 +152,7 @@ struct EmptyState: View {
                     .frame(width: 36, height: 36)
                     .background(Palette.ball, in: .circle)
                     .offset(x: 8, y: 8)
-                    .symbolEffect(.bounce, options: .nonRepeating)
+                    .symbolEffect(.bounce, options: .nonRepeating, isActive: !reduceMotion)
             }
             .padding(.bottom, 6)
             Text(title).font(.headline)
@@ -136,9 +162,16 @@ struct EmptyState: View {
                     .buttonStyle(.primary)
                     .padding(.top, 6)
             }
+            accessory
         }
         .padding(28)
         .frame(maxWidth: .infinity)
+    }
+}
+
+extension EmptyState where Accessory == EmptyView {
+    init(symbol: String, title: String, text: String, actionTitle: String? = nil, action: (() -> Void)? = nil) {
+        self.init(symbol: symbol, title: title, text: text, actionTitle: actionTitle, action: action) { EmptyView() }
     }
 }
 
@@ -197,10 +230,10 @@ enum Labels {
     static func status(_ v: String) -> (String, Color, Color) {
         switch v {
         case "pending": (L("Wacht op antwoord"), Palette.warn, Palette.warnSoft)
-        case "accepted": ("Geaccepteerd", Palette.grass, Palette.grassSoft)
-        case "declined": ("Afgewezen", Palette.danger, Palette.dangerSoft)
-        case "completed": ("Gelopen", Palette.calm, Palette.calmSoft)
-        case "cancelled": ("Geannuleerd", Palette.muted, Palette.sunken)
+        case "accepted": (L("Afgesproken"), Palette.grass, Palette.grassSoft)
+        case "declined": (L("Afgewezen"), Palette.danger, Palette.dangerSoft)
+        case "completed": (L("Gelopen"), Palette.calm, Palette.calmSoft)
+        case "cancelled": (L("Geannuleerd"), Palette.muted, Palette.sunken)
         default: (v, Palette.muted, Palette.sunken)
         }
     }
@@ -209,7 +242,7 @@ enum Labels {
         case "id-seen": (L("ID gezien"), "person.text.rectangle.fill")
         case "quiz": (L("Quiz gehaald"), "checkmark.seal.fill")
         case "regular": (L("Vaste wandelaar"), "star.fill")
-        default: ("Nieuw", "leaf.fill")
+        default: (L("Nieuw"), "leaf.fill")
         }
     }
     static func weekday(_ n: Int) -> String {

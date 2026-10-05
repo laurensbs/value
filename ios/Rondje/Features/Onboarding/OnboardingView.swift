@@ -60,7 +60,7 @@ struct OnboardingView: View {
                 Button {
                     next()
                 } label: {
-                    if busy { ProgressView().tint(Palette.onGrass) } else { Text(step == steps - 1 ? L("Klaar, laat me honden zien") : L("Verder")) }
+                    if busy { ProgressView().tint(Palette.onGrass) } else { Text(step == steps - 1 && !wantsToWalk ? L("Laat me de honden zien") : L("Verder")) }
                 }
                 .buttonStyle(.primary)
                 .disabled(!canContinue || busy)
@@ -244,10 +244,12 @@ struct OnboardingView: View {
                 lat: position?.lat, lng: position?.lng, wantsToWalk: wantsToWalk, hasDogs: hasDogs, termsAccepted: termsAccepted
             ))
             Haptics.success()
+            // A walker does the safety quiz next, before the app (RootView); an owner goes straight in.
+            if wantsToWalk { Keepsakes.shared.mark("onboarding.quiz") }
             await model.refreshMe()
         } catch {
             Haptics.error()
-            withAnimation { self.error = error.localizedDescription }
+            withAnimation { self.error = error.plainText }
         }
     }
 }

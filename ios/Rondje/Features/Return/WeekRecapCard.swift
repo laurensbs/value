@@ -28,12 +28,17 @@ struct WeekRecapCard: View {
         }
     }
 
+    /// This week's recap, unless it was put away with "Fijn".
+    @MainActor static func current(side: Side, now: Date = .now) -> Recap? {
+        guard let recap = recap(entries: WalkLog.entries, moods: MoodStore.entries, now: now, calendar: .current, side: side,
+                                activeWeeks: ProgressStore.shared.progress?.week?.activeWeeks),
+              !Keepsakes.shared.has("recap." + recap.key) else { return nil }
+        return recap
+    }
+
     @ViewBuilder
     private func card(now: Date) -> some View {
-        let keepsakes = Keepsakes.shared
-        if let recap = Self.recap(entries: WalkLog.entries, moods: MoodStore.entries, now: now, calendar: .current, side: side,
-                                  activeWeeks: ProgressStore.shared.progress?.week?.activeWeeks),
-           !keepsakes.has("recap." + recap.key) {
+        if let recap = Self.current(side: side, now: now) {
             CoachBubble(
                 mood: .proud,
                 text: recap.lines[0],

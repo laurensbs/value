@@ -1,0 +1,267 @@
+/* Why it matters: the home page band with checked numbers, the /waarom page, and the money parts of /support
+   (monthly support, crowdfunding, being open about money). Same look as landing.css; every class starts with "im-". */
+
+/* ---------- Numbers with a source ---------- */
+
+.im-stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .im-stats.wide {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .im-band .im-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+.im-stat {
+  --im-tint: var(--sunken);
+  --im-ink: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px 14px 14px;
+  border-radius: 20px;
+  background: var(--im-tint);
+}
+
+.im-topic-people {
+  --im-tint: var(--calm-soft);
+  --im-ink: var(--calm);
+}
+
+.im-topic-outside {
+  --im-tint: var(--grass-soft);
+  --im-ink: var(--grass);
+}
+
+.im-topic-dogs {
+  --im-tint: var(--warn-soft);
+  --im-ink: var(--warn);
+}
+
+.im-stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 7vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  color: var(--im-ink);
+  overflow-wrap: anywhere;
+}
+
+.im-stat-label {
+  font-size: 0.9rem;
+  line-height: 1.35;
+  font-weight: 560;
+}
+
+/* A source link at the foot of a card: small text, but a full 44px to tap. */
+.im-stat-source {
+  display: flex;
+  align-items: flex-end;
+  min-height: 44px;
+  margin-top: auto;
+  padding-top: 4px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--muted) 45%, transparent);
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.im-stat-source:hover {
+  color: var(--ink);
+}
+
+/* ---------- Home: together for a better world ---------- */
+
+.im-band {
+  display: grid;
+  gap: 18px;
+}
+
+.im-band-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.im-band-adds {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  padding: 20px;
+  border-radius: var(--lp-radius, 24px);
+  border: 2px dashed color-mix(in oklab, var(--grass) 30%, transparent);
+  background: var(--surface);
+}
+
+.im-band-adds p {
+  max-width: 62ch;
+  font-size: 1.04rem;
+}
+
+.im-band-adds .lp-ctas {
+  width: 100%;
+}
+
+.im-band-paw {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--ball);
+  color: var(--on-ball);
+}
+
+@media (max-width: 899px) {
+  .im-band-paw {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .im-band-adds {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px 20px;
+    padding: 24px 28px;
+  }
+
+  .im-band-adds .lp-ctas {
+    width: auto;
+    flex-wrap: nowrap;
+  }
+
+  .im-band-adds .link-button {
+    grid-column: 2 / -1;
+  }
+}
+
+/* ---------- /waarom ---------- */
+
+.im-topic-title {
+  font-size: 1.1rem;
+  font-weight: 720;
+}
+
+.im-help {
+  background: var(--surface);
+}
+
+.im-help p {
+  margin: 0;
+}
+
+.im-help-line {
+  font-weight: 680;
+}
+
+.im-sources ol {
+  margin: 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: 12px;
+}
+
+.im-sources li {
+  padding-left: 4px;
+}
+
+.im-sources li > span {
+  display: block;
+}
+
+.im-sources li > span + span {
+  margin-top: 2px;
+}
+
+/* ---------- /support: ways to give, and being open about money ---------- */
+
+.im-give {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+.im-give-option {
+  align-content: start;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.im-give-option h3 {
+  font-size: 1.15rem;
+  font-weight: 720;
+}
+
+.im-give-option .muted.small {
+  margin-top: auto;
+}
+
+.im-progress {
+  height: 12px;
+}
+
+.im-progress > span {
+  background: var(--grass);
+}
+
+.im-progress-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 12px;
+}
+
+.im-open {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.im-open > div {
+  display: grid;
+  gap: 4px;
+}
+
+.im-open > div + div {
+  padding-top: 14px;
+  border-top: 1px solid var(--lp-line, var(--line));
+}
+
+.im-open dt {
+  font-weight: 720;
+}
+
+.im-open dd {
+  margin: 0;
+}
+
+.im-tip-title {
+  font-size: 1.2rem;
+}
+
+.benefits.im-do {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}

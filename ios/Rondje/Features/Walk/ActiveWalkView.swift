@@ -2,9 +2,12 @@ import MapKit
 import SwiftUI
 
 /// Full screen during a walk: the route, time and distance, SOS, and a deliberate way to end.
+/// A walk that shares no location (a first meeting, or live location switched off) has no map and no
+/// distance, and the screen says why calmly.
 struct ActiveWalkView: View {
     @Environment(WalkTracker.self) private var walk
     @Environment(AppModel.self) private var model
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var camera: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
     @State private var sos = false
     @State private var ending = false
@@ -15,22 +18,30 @@ struct ActiveWalkView: View {
     @State private var moodBefore: Int?
     @State private var error: String?
 
+    /// The map only while this walk shares where you are; after the end, as the walk was.
+    private var showsMap: Bool { finished?.info.sharesLocation ?? walk.sharesLocation }
+
     var body: some View {
         ZStack(alignment: .bottom) {
-            Map(position: $camera) {
-                UserAnnotation()
-                if walk.route.count > 1 {
-                    MapPolyline(coordinates: walk.route)
-                        .stroke(Palette.route, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+            if showsMap {
+                Map(position: $camera) {
+                    UserAnnotation()
+                    if walk.route.count > 1 {
+                        MapPolyline(coordinates: walk.route)
+                            .stroke(Palette.route, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+                    }
                 }
+                .mapStyle(.standard(pointsOfInterest: .including([.park])))
+                .mapControls { MapUserLocationButton() }
+                .ignoresSafeArea()
+            } else {
+                // No map: nothing on this screen knows or shows where you are.
+                Palette.paper.ignoresSafeArea()
             }
-            .mapStyle(.standard(pointsOfInterest: .including([.park])))
-            .mapControls { MapUserLocationButton() }
-            .ignoresSafeArea()
 
             if let finished {
                 WalkDoneFlow(info: finished.info, distance: finished.distance, care: care, photoCount: photos.count)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))
             } else if let info = walk.info {
                 panel(info)
             }
@@ -38,27 +49,41 @@ struct ActiveWalkView: View {
         .overlay(alignment: .top) {
             if finished == nil, let info = walk.info {
                 VStack(spacing: 8) {
-                    HStack {
-                        DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("Rondje met \(info.dogName)").font(.headline)
-                            if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
-                                Button("Locatie staat uit. Zet hem aan") { openSettings() }
-                                    .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
-                            } else {
-                                Text(walk.signalWeak ? L("Zwak GPS-signaal") : L("De eigenaar kan live meekijken"))
-                                    .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("Rondje met \(info.dogName)").font(.headline)
+                                if !walk.sharesLocation, info.together {
+                                    Text("Jullie lopen samen, dus er is geen kaart nodig.")
+                                        .font(.caption).foregroundStyle(Palette.muted)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                } else if !walk.sharesLocation {
+                                    Text("Live locatie staat uit").font(.caption).foregroundStyle(Palette.muted)
+                                } else if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
+                                    Button("Locatie staat uit. Zet hem aan") { openSettings() }
+                                        .font(.caption.weight(.semibold)).foregroundStyle(Palette.danger)
+                                } else {
+                                    Text(walk.signalWeak ? L("Zwak GPS-signaal") : L("De eigenaar kan live meekijken"))
+                                        .font(.caption).foregroundStyle(walk.signalWeak ? Palette.warn : Palette.muted)
+                                }
                             }
+                            Spacer()
+                            Button {
+                                sos = true
+                            } label: {
+                                Text("SOS").font(.headline.weight(.heavy)).foregroundStyle(.white)
+                                    .frame(width: 56, height: 44)
+                                    .background(Palette.danger, in: .capsule)
+                            }
+                            .accessibilityLabel("Hulp nodig")
                         }
-                        Spacer()
-                        Button {
-                            sos = true
-                        } label: {
-                            Text("SOS").font(.headline.weight(.heavy)).foregroundStyle(.white)
-                                .frame(width: 56, height: 44)
-                                .background(Palette.danger, in: .capsule)
+                        if !walk.sharesLocation, !info.together {
+                            Text("Je route wordt niet bijgehouden of gedeeld. De tijd, het rondje-rapport en foto's werken gewoon.")
+                                .font(.footnote)
+                                .foregroundStyle(Palette.muted)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
-                        .accessibilityLabel("Hulp nodig")
                     }
                     .padding(12)
                     .glassy(cornerRadius: 24)
@@ -72,7 +97,7 @@ struct ActiveWalkView: View {
         .sheet(isPresented: $sos) {
             if let info = walk.info { SOSSheet(info: info).presentationDetents([.large]) }
         }
-        .animation(.spring(duration: 0.5), value: finished?.info.walkId)
+        .animation(Motion.or(Motion.scherm, reduce: reduceMotion), value: finished?.info.walkId)
         .interactiveDismissDisabled()
     }
 
@@ -86,12 +111,15 @@ struct ActiveWalkView: View {
                         .contentTransition(.numericText())
                 }
                 Spacer()
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text("Afstand").font(.caption).foregroundStyle(Palette.muted)
-                    Text(Format.distance(walk.distanceM))
-                        .font(.display(32).monospacedDigit())
-                        .contentTransition(.numericText(value: walk.distanceM))
-                        .animation(.snappy, value: walk.distanceM)
+                // Without live location nothing is measured, so there is no distance to show.
+                if walk.sharesLocation {
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text("Afstand").font(.caption).foregroundStyle(Palette.muted)
+                        Text(Format.distance(walk.distanceM))
+                            .font(.display(32).monospacedDigit())
+                            .contentTransition(.numericText(value: walk.distanceM))
+                            .animation(.snappy, value: walk.distanceM)
+                    }
                 }
             }
             if walk.overdueMin > 0 {
@@ -125,6 +153,9 @@ struct ActiveWalkView: View {
             if let live: LiveWalk = try? await APIClient.shared.get("/api/walks/\(info.walkId)/live?after=999999999") {
                 care = live.care ?? Care()
                 photos = live.photos ?? []
+                // A first meeting, or switched off on the server since the walk started: stop recording
+                // where you are.
+                walk.apply(live)
             }
         }
         .glassy(cornerRadius: 32)
@@ -169,7 +200,8 @@ struct ActiveWalkView: View {
             let distance = try await walk.finish()
             WalkLog.record(WalkLogEntry(walkId: info.walkId, dogId: model.appointments.outgoing.first { $0.walkId == info.walkId }?.dog.id, dogName: info.dogName, look: info.look, side: "walker", person: nil, distanceM: distance, minutes: max(1, Int(Date.now.timeIntervalSince(info.startedAt) / 60)), photos: photos.count, date: info.startedAt))
             let endedAt = Date.now
-            Haptics.success(.finish)
+            // Felt and heard once, here: the done screen itself stays quiet. After an SOS report, only a soft tap.
+            if Keepsakes.shared.reported(walkId: info.walkId) { Haptics.tap() } else { Haptics.success(.finish) }
             finished = (info, distance)
             let route = walk.locations
             Task {
@@ -180,7 +212,7 @@ struct ActiveWalkView: View {
             await model.refreshAppointments()
         } catch {
             Haptics.error()
-            self.error = error.localizedDescription
+            self.error = error.plainText
             holdProgress = 0
         }
     }
@@ -316,7 +348,7 @@ struct FeedbackSheet: View {
             close()
             Task { await model.refreshAppointments() }
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

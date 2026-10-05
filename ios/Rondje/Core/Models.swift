@@ -123,6 +123,9 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
         var city: String
         var isShelter: Bool
         var meetingInfo: String
+        /// The owner (a person) or the shelter, to report or block from the chat. Missing from older servers.
+        var ownerId: String?
+        var orgId: String?
     }
     struct Contact: Codable, Hashable, Sendable {
         var kind: String
@@ -145,6 +148,8 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
 
     var id: String
     var kind: String
+    /// How a first meeting happens: walk, home, phone or video. Missing from older servers: then a walk.
+    var meetVia: String?
     var status: String
     var startsAt: Date
     var durationMin: Int
@@ -158,15 +163,54 @@ struct Appointment: Codable, Identifiable, Hashable, Sendable {
     var host: Contact?
     var walker: Walker?
     var trust: Trust?
+    /// A walk alone with the dog that waits while live location is off (`paused` in GET /api/v1/requests).
+    /// Missing from older servers; see `waitsForLiveLocation`.
+    var paused: Paused? = nil
 
     var isMeeting: Bool { kind == "meet" }
     var isOpen: Bool { status == "pending" || status == "accepted" }
+    var via: MeetVia { MeetVia(rawValue: meetVia ?? "walk") ?? .walk }
+    /// A first call (phone or video): never counts as meeting in person (lib/rules.ts).
+    var isCall: Bool { isMeeting && !via.inPerson }
 
-    /// A walk can be started from 30 minutes before until 2 hours after the appointment (lib/rules.ts).
+    /// A walk can be started from 30 minutes before until 2 hours after the appointment (lib/rules.ts),
+    /// and never from a first call.
     func canStart(now: Date = .now) -> Bool {
-        guard status == "accepted" else { return false }
+        guard status == "accepted", !isCall else { return false }
         let diff = now.timeIntervalSince(startsAt) / 60
         return diff >= -30 && diff <= 120
+    }
+}
+
+/// How a first meeting happens, as on the website (lib/rules.ts: MEET_VIAS). Only walking together
+/// and a visit at home are in person; after a call, the next step is meeting in person.
+enum MeetVia: String, CaseIterable, Identifiable, Codable, Sendable {
+    case walk, home, phone, video
+    var id: String { rawValue }
+    var inPerson: Bool { self == .walk || self == .home }
+    var symbol: String {
+        switch self {
+        case .walk: "figure.walk"
+        case .home: "house.fill"
+        case .phone: "phone.fill"
+        case .video: "video.fill"
+        }
+    }
+    var title: String {
+        switch self {
+        case .walk: L("Samen wandelen")
+        case .home: L("Bij de eigenaar thuis")
+        case .phone: L("Eerst bellen")
+        case .video: L("Eerst videobellen")
+        }
+    }
+    var hint: String {
+        switch self {
+        case .walk: L("Jullie lopen samen een rondje. De eigenaar loopt mee en bekijkt je ID.")
+        case .home: L("Je komt langs bij de eigenaar en de hond. De eigenaar bekijkt je ID.")
+        case .phone: L("Eerst even kennismaken aan de telefoon. Daarna spreken jullie af in het echt, met de hond erbij.")
+        case .video: L("Eerst kennismaken in een videogesprek. Daarna spreken jullie af in het echt, met de hond erbij.")
+        }
     }
 }
 
@@ -208,6 +252,36 @@ struct Me: Codable, Sendable {
     var trust: Trust?
     var orgs: [Org]
     var unread: Int
+    /// Where this person stands with the terms (server/terms.ts termsForApp; Terms.swift). Missing from
+    /// older servers: then the app asks nothing.
+    var termsVersion: String? = nil
+    var termsAccepted: Bool? = nil
+    var termsEffectiveAt: Date? = nil
+    var termsRequired: Bool? = nil
+    /// Only while the yes is still needed: what changed.
+    var termsChanges: TermsChanges? = nil
+}
+
+extension Me {
+    private enum Keys: String, CodingKey {
+        case user, profile, trust, orgs, unread, termsVersion, termsAccepted, termsEffectiveAt, termsRequired, termsChanges
+    }
+
+    /// The account fields as before; the terms fields leniently, so whatever is odd about them can
+    /// never stop the app from knowing who is signed in.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: Keys.self)
+        user = try c.decode(User.self, forKey: .user)
+        profile = try c.decodeIfPresent(Profile.self, forKey: .profile)
+        trust = try c.decodeIfPresent(Trust.self, forKey: .trust)
+        orgs = try c.decode([Org].self, forKey: .orgs)
+        unread = try c.decode(Int.self, forKey: .unread)
+        termsVersion = (try? c.decodeIfPresent(String.self, forKey: .termsVersion)) ?? nil
+        termsAccepted = (try? c.decodeIfPresent(Bool.self, forKey: .termsAccepted)) ?? nil
+        termsEffectiveAt = (try? c.decodeIfPresent(Date.self, forKey: .termsEffectiveAt)) ?? nil
+        termsRequired = (try? c.decodeIfPresent(Bool.self, forKey: .termsRequired)) ?? nil
+        termsChanges = (try? c.decodeIfPresent(TermsChanges.self, forKey: .termsChanges)) ?? nil
+    }
 }
 
 struct Quiz: Codable, Sendable {
@@ -226,11 +300,19 @@ struct AppNotification: Codable, Identifiable, Sendable {
     var data: [String: JSONValue]
     var read: Bool
     var createdAt: Date
+    /// The server's own sentence, in the app's language (`text`). Missing from older servers.
+    var serverText: String? = nil
+
+    private enum CodingKeys: String, CodingKey { case id, kind, data, read, createdAt, serverText = "text" }
 
     func text(_ key: String) -> String {
         if case .string(let s) = data[key] { return s }
         return ""
     }
+
+    /// Whether this walk shared live location (`live` in the data: "yes" or "no"). Only "yes" counts:
+    /// older notifications leave it out, and then no text promises anything live (web notification-links.ts).
+    var sharedLiveLocation: Bool { text("live") == "yes" }
 }
 
 struct NotificationsResponse: Codable, Sendable { var notifications: [AppNotification] }
@@ -260,6 +342,48 @@ struct LiveWalk: Codable, Sendable {
     var care: Care?
     var photos: [WalkPhoto]?
     var points: [LivePoint]
+    /// Whether this walk collects location (web lib/rules.ts walkHasLiveLocation): only a walk alone with
+    /// the dog, with LIVE_LOCATION on. False: no map, no new points. Missing from older servers; there it
+    /// was on, or the switch for everyone.
+    var liveLocation: Bool?
+    /// "meet" (a first meeting: they walk together, so no map) or "solo". Missing from older servers, and
+    /// null when the request is gone.
+    var kind: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case status, startedAt, plannedEndAt, endedAt, lastAt, overdueMin, care, photos, points, liveLocation, kind
+    }
+
+    init(status: String, startedAt: Date, plannedEndAt: Date, endedAt: Date? = nil, lastAt: Date? = nil, overdueMin: Int = 0,
+         care: Care? = nil, photos: [WalkPhoto]? = nil, points: [LivePoint] = [], liveLocation: Bool? = nil, kind: String? = nil) {
+        self.status = status
+        self.startedAt = startedAt
+        self.plannedEndAt = plannedEndAt
+        self.endedAt = endedAt
+        self.lastAt = lastAt
+        self.overdueMin = overdueMin
+        self.care = care
+        self.photos = photos
+        self.points = points
+        self.liveLocation = liveLocation
+        self.kind = kind
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        status = try c.decode(String.self, forKey: .status)
+        startedAt = try c.decode(Date.self, forKey: .startedAt)
+        plannedEndAt = try c.decode(Date.self, forKey: .plannedEndAt)
+        endedAt = try c.decodeIfPresent(Date.self, forKey: .endedAt)
+        lastAt = try c.decodeIfPresent(Date.self, forKey: .lastAt)
+        overdueMin = try c.decode(Int.self, forKey: .overdueMin)
+        care = try c.decodeIfPresent(Care.self, forKey: .care)
+        photos = try c.decodeIfPresent([WalkPhoto].self, forKey: .photos)
+        points = try c.decode([LivePoint].self, forKey: .points)
+        // The newer fields are read leniently: something odd in them never breaks watching a walk.
+        liveLocation = (try? c.decodeIfPresent(Bool.self, forKey: .liveLocation)) ?? nil
+        kind = (try? c.decodeIfPresent(String.self, forKey: .kind)) ?? nil
+    }
 }
 
 /// The walk report: how often the dog peed, pooped and drank (0 to 20 each).
@@ -283,7 +407,26 @@ struct WalkPhoto: Codable, Identifiable, Hashable, Sendable {
     var t: Double
 }
 
-struct WalkStarted: Codable, Sendable { var walkId: String }
+/// The answer to POST /api/v1/walks. `liveLocation`: whether this walk shares where the walker is (only
+/// a walk alone with the dog, with the switch on); when false the phone sends no points and shows no map.
+/// Missing from older servers (WalkStarter.sharesLocation decides then), and read leniently.
+struct WalkStarted: Codable, Sendable {
+    var walkId: String
+    var liveLocation: Bool?
+
+    init(walkId: String, liveLocation: Bool? = nil) {
+        self.walkId = walkId
+        self.liveLocation = liveLocation
+    }
+
+    private enum CodingKeys: String, CodingKey { case walkId, liveLocation }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        walkId = try c.decode(String.self, forKey: .walkId)
+        liveLocation = (try? c.decodeIfPresent(Bool.self, forKey: .liveLocation)) ?? nil
+    }
+}
 struct WalkEnded: Codable, Sendable { var ok: Bool; var distanceM: Int }
 struct OK: Codable, Sendable { var ok: Bool? }
 

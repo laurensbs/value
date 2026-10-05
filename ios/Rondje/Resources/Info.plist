@@ -27,6 +27,8 @@
 		<string>fr</string>
 		<string>es</string>
 	</array>
+	<key>UIPrefersShowingLanguageSettings</key>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -38,9 +40,9 @@
 	<key>RondjeFeatureSocialLogin</key>
 	<string>$(RONDJE_FEATURE_SOCIAL_LOGIN)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Zo zie je honden bij jou in de buurt, en tijdens een rondje kan de eigenaar live meekijken. Je precieze plek wordt nooit op je profiel getoond.</string>
+	<string>Zo zie je honden bij jou in de buurt; je plek wordt daarvoor afgerond op ongeveer 1 km. De eigenaar kan alleen live meekijken bij een rondje alleen met de hond, als live locatie aan staat. Je precieze plek wordt nooit op je profiel getoond.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Alleen tijdens een rondje: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen.</string>
+	<string>Alleen tijdens een rondje alleen met de hond, als live locatie aan staat: zo loopt de route door als je telefoon in je zak zit, en kan de eigenaar meekijken. Na het rondje stopt het meteen.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Om tijdens een rondje een foto naar de eigenaar te sturen. Alleen de foto's die jij verstuurt, gaan naar de eigenaar.</string>
 	<key>NSHealthUpdateUsageDescription</key>

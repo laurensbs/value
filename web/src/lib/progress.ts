@@ -302,6 +302,8 @@ export interface StepFacts {
   /** A walker met one of your dogs (a request was accepted). */
   dogMet: boolean
   dogWalks: number
+  /** An owner's dog that is online while no request waits for an answer: the one to tell the neighbours about. */
+  shareDog?: { id: string; name: string } | null
 }
 
 export type StepKey = 'account' | 'about' | 'dog' | 'quiz' | 'meet' | 'walk' | 'dogMet' | 'dogWalk'
@@ -310,6 +312,8 @@ export interface Step {
   key: StepKey
   done: boolean
   href: string
+  /** Waiting for a first walker: the step is to tell the neighbours about this dog. */
+  dog?: { id: string; name: string }
 }
 
 /** The first things to do, depending on why someone is here. The first step is already done. */
@@ -326,7 +330,12 @@ export function firstSteps(f: StepFacts, roles: Roles): Step[] {
       { key: 'walk', done: f.walks > 0, href: '/requests' },
     )
   } else {
-    steps.push({ key: 'dogMet', done: f.dogMet, href: '/requests' }, { key: 'dogWalk', done: f.dogWalks > 0, href: '/requests' })
+    // Until a walker comes along, telling the neighbours about the dog is what an owner can do.
+    const share = !f.dogMet && f.shareDog ? f.shareDog : null
+    steps.push(
+      share ? { key: 'dogMet', done: false, href: `/dogs/${share.id}#share`, dog: share } : { key: 'dogMet', done: f.dogMet, href: '/requests' },
+      { key: 'dogWalk', done: f.dogWalks > 0, href: '/requests' },
+    )
   }
   return steps
 }

@@ -10,8 +10,8 @@ enum APIError: LocalizedError, Equatable {
         switch self {
         case .server(_, let message): message
         case .unauthorized: L("Log opnieuw in om verder te gaan.")
-        case .offline: L("Geen verbinding. Controleer je internet en probeer het opnieuw.")
-        case .unexpected: L("Er ging iets mis. Probeer het opnieuw.")
+        case .offline: L("Dat lukte even niet. Controleer je verbinding en probeer het opnieuw.")
+        case .unexpected: L("Er ging iets mis aan onze kant. Probeer het zo nog eens.")
         }
     }
 
@@ -21,10 +21,26 @@ enum APIError: LocalizedError, Equatable {
     }
 }
 
+extension Error {
+    /// A plain sentence for people, never the system's technical text. The server's own messages are
+    /// written for people already; anything else becomes "no connection" or "something on our side".
+    var plainText: String {
+        let error = self as? APIError ?? (self is URLError ? .offline : .unexpected)
+        return error.errorDescription ?? ""
+    }
+
+    /// No connection (as opposed to a problem on the server's side).
+    var isOffline: Bool { (self as? APIError) == .offline || self is URLError }
+}
+
 /// Talks to the Rondje API over HTTPS with the session token from the Keychain.
 /// It only ever talks to Brand.baseURL, and never logs tokens or personal data.
 final class APIClient: Sendable {
     static let shared = APIClient()
+
+    /// How the app names itself to the server on every call. The server reads X-Rondje-Platform to pick
+    /// the switches for the iPhone app, such as SUPPORT_IN_APP_IOS (web/src/lib/app-platform.ts).
+    static let identity = ["User-Agent": "RondjeApp/1 iOS", "X-Rondje-Platform": "ios"]
 
     private let session: URLSession
     private let decoder: JSONDecoder
@@ -173,6 +189,8 @@ final class APIClient: Sendable {
         request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(AppLanguage.code, forHTTPHeaderField: "Accept-Language")
+        for (field, value) in Self.identity { request.setValue(value, forHTTPHeaderField: field) }
         request.httpBody = body
         struct Uploaded: Decodable { var url: String }
         do {
@@ -228,8 +246,9 @@ final class APIClient: Sendable {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue(Locale.preferredLanguages.first ?? "nl", forHTTPHeaderField: "Accept-Language")
-        request.setValue("RondjeApp/1 iOS", forHTTPHeaderField: "User-Agent")
+        // The language the app is shown in (also a per-app choice in Settings), so server texts match the screen.
+        request.setValue(AppLanguage.code, forHTTPHeaderField: "Accept-Language")
+        for (field, value) in Self.identity { request.setValue(value, forHTTPHeaderField: field) }
         if authorized, let token = Keychain.load() {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }

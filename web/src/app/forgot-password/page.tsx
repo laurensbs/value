@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { Logo } from '@/components/Logo'
 import { ForgotPasswordForm } from '@/components/PasswordReset'
+import { CONTACT_PATH } from '@/lib/contact'
 import { supportConfig } from '@/lib/support'
 import { emailEnabled } from '@/server/email'
 
@@ -12,6 +13,7 @@ export async function generateMetadata() {
 
 export default async function ForgotPasswordPage() {
   const t = await getTranslations('auth')
+  const tf = await getTranslations('footer')
   const { contactEmail } = supportConfig()
   return (
     <div className="auth">
@@ -31,7 +33,12 @@ export default async function ForgotPasswordPage() {
                 {' '}
                 <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
               </>
-            ) : null}
+            ) : (
+              <>
+                {' '}
+                <Link href={CONTACT_PATH}>{tf('contact')}</Link>
+              </>
+            )}
           </p>
         )}
         <p className="muted">

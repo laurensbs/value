@@ -48,22 +48,22 @@ export default async function ShelterLandingPage({ searchParams }: { searchParam
       <ul className="benefits">
         <li className="card">
           <Icon name="upload" />
-          <h3>{t('shelter.benefit1Title')}</h3>
+          <h2>{t('shelter.benefit1Title')}</h2>
           <p className="muted small">{t('shelter.benefit1')}</p>
         </li>
         <li className="card">
           <Icon name="users" />
-          <h3>{t('shelter.benefit2Title')}</h3>
+          <h2>{t('shelter.benefit2Title')}</h2>
           <p className="muted small">{t('shelter.benefit2')}</p>
         </li>
         <li className="card">
           <Icon name="shield" />
-          <h3>{t('shelter.benefit3Title')}</h3>
+          <h2>{t('shelter.benefit3Title')}</h2>
           <p className="muted small">{t('shelter.benefit3')}</p>
         </li>
         <li className="card">
           <Icon name="heart" />
-          <h3>{t('shelter.benefit4Title')}</h3>
+          <h2>{t('shelter.benefit4Title')}</h2>
           <p className="muted small">{t('shelter.benefit4')}</p>
         </li>
       </ul>

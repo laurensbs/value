@@ -13,6 +13,7 @@ import { WalkerCard } from '@/components/WalkerCard'
 import { getDb } from '@/db'
 import * as s from '@/db/schema'
 import type { Locale } from '@/i18n/config'
+import { inviteUrl } from '@/lib/invite'
 import { siteUrl } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
 import { progressFor } from '@/server/progress'
@@ -50,18 +51,18 @@ function HubRow({ href, icon, title, text, tone }: { href: string; icon: Progres
 export default async function ProfilePage() {
   const viewer = await requireOnboarded('/profile')
   const pushKey = webPushKey()
-  const native = await isNativeRequest()
   const p = viewer.profile
-  const t = await getTranslations()
-  const locale = (await getLocale()) as Locale
   const db = await getDb()
-  const [signals, progress, friends, [{ n: invited }]] = await Promise.all([
+  const [native, t, locale, signals, progress, friends, [{ n: invited }]] = await Promise.all([
+    isNativeRequest(),
+    getTranslations(),
+    getLocale() as Promise<Locale>,
     trustSignals(viewer.userId),
     progressFor(viewer).then(progressJson),
     dogFriendsOf(viewer.userId),
     p.referralCode ? db.select({ n: count() }).from(s.profile).where(eq(s.profile.referredBy, p.referralCode)) : Promise.resolve([{ n: 0 }]),
   ])
-  const inviteUrl = `${siteUrl()}/r/${p.referralCode ?? ''}`
+  const invite = inviteUrl(siteUrl(), p.referralCode ?? '')
   const walksTogether = friends.reduce((n, f) => n + f.walks, 0)
 
   return (
@@ -114,7 +115,7 @@ export default async function ProfilePage() {
               <span>{t('profileHub.inviteShort')}</span>
             </span>
           </div>
-          <InviteLink url={inviteUrl} message={t('profile.inviteMessage', { url: inviteUrl })} />
+          <InviteLink url={invite} message={t('profile.inviteMessage', { url: invite })} />
           <p className="muted small">
             {t('profile.invited', { n: invited })}{' '}
             <Link href="/flyer" className="link-button small">
@@ -128,6 +129,13 @@ export default async function ProfilePage() {
           {viewer.orgs.length === 0 ? <HubRow href="/shelter" icon="building" title={t('shelter.title')} text={t('profileHub.shelterText')} /> : null}
         </ul>
       </section>
+
+      {/* On a phone the header has no menu: this is the way into Beheer and the launch hub. */}
+      {viewer.isAdmin || viewer.adminUnconfirmed ? (
+        <ul className="hub-list">
+          <HubRow href="/admin" icon="key" title={t('nav.admin')} text={t('profileHub.adminText')} tone="calm" />
+        </ul>
+      ) : null}
 
       <section className="stack" aria-labelledby="settings-title">
         <h2 id="settings-title">{t('profile.settings')}</h2>

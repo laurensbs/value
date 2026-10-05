@@ -260,17 +260,15 @@ struct NextStepTests {
         #expect(NextStep.compute(c).id == "start.a6")
     }
 
-    @Test func schoolBeforeTheQuizAndThenWaiting() {
+    @Test func theQuizComesFirstAndThenWaiting() {
         var c = context()
         c.quizPassed = false
-        c.lessonsDone = 2
+        // Before any dog: the quiz is needed for every request, so it comes before Guus's picks.
+        c.nearbyDogs = [dog("near")]
+        #expect(NextStep.compute(c).id == "quiz")
+
         let request = appointment("r1", kind: "meet", status: "pending", startsAt: Self.now.addingTimeInterval(2 * 86_400))
         c.outgoing = [request]
-        let lessons = NextStep.compute(c)
-        #expect(lessons.id == "lessons")
-        #expect(lessons.action == .lessons)
-
-        c.lessonsDone = 5
         let quiz = NextStep.compute(c)
         #expect(quiz.id == "quiz")
         #expect(quiz.action == .quiz)
@@ -352,12 +350,11 @@ struct NextStepTests {
             let request = appointment("r1", status: "pending", startsAt: now.addingTimeInterval(2 * 86_400), dogId: "d4")
             let startHere = appointment("a1", startsAt: now.addingTimeInterval(10 * 60))
             for role in [NextStepRole.walker, .both] {
-                for lessons in [0, 5] {
+                for weekWalks in [0, 2] {
                     var c = context(role: role, now: now)
                     c.quizPassed = false
-                    c.lessonsDone = lessons
                     c.weekGoal = 3
-                    c.weekWalks = lessons == 0 ? 2 : 0
+                    c.weekWalks = weekWalks
                     c.incoming = [live]
                     c.outgoing = [startHere, meetNow, endedHere, soon, rebookable, request]
                     contexts.append(c)
@@ -399,7 +396,7 @@ struct NextStepTests {
     @Test func everyLineFollowsGuussRules() {
         let steps = everyStep
         let ids = Set(steps.map { $0.id.split(separator: ".").first.map(String.init) ?? $0.id })
-        for kind in ["live", "start", "feedback", "prep", "picks", "lessons", "quiz", "waiting", "rebook", "goal",
+        for kind in ["live", "start", "feedback", "prep", "picks", "quiz", "waiting", "rebook", "goal",
                      "pending", "trust", "adddog", "owner", "night", "done"] {
             #expect(ids.contains(kind), "no \(kind) step in the fixtures")
         }

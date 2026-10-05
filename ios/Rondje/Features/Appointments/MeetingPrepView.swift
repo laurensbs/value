@@ -8,6 +8,16 @@ struct PrepItem: Identifiable, Hashable {
     let title: String
     let detail: String?
     let symbol: String
+    /// Shown under the title like `detail`, but read by VoiceOver as the row's hint, not as its label.
+    var hint: String? = nil
+}
+
+/// How to look at an ID (DPIA maatregel M6): only looking, nothing kept. The same words as the website
+/// (requests.idHow), under "ID gezien" in Vertrouwen and under the ID item of the owner's meeting checklist.
+enum IDCheck {
+    static var how: String {
+        L("Kijk naar foto, naam en geboortedatum. Maak geen foto en schrijf niets over, ook geen BSN.")
+    }
 }
 
 /// Meeting prep for both sides, in bite-size steps. It repeats the fixed rules in the moment itself:
@@ -15,7 +25,9 @@ struct PrepItem: Identifiable, Hashable {
 /// The checklist is optional and never blocks anything; the ticks stay on this phone.
 enum MeetingPrep {
     /// The checklist for this appointment: walker or owner, first meeting or a walk on your own.
-    static func items(for item: Appointment, asOwner: Bool) -> [PrepItem] {
+    /// `liveLocation`: the server's switch. Only with it on does the owner's list promise watching live;
+    /// the item ids never change with it, so the ticks stay.
+    static func items(for item: Appointment, asOwner: Bool, liveLocation: Bool = false) -> [PrepItem] {
         let dog = item.dog.name
         let walker = item.walker?.firstName ?? L("de wandelaar")
         switch (asOwner, item.isMeeting) {
@@ -53,8 +65,9 @@ enum MeetingPrep {
         case (true, true):
             return [
                 PrepItem(id: "ready", title: L("Riem en zakjes klaar"), detail: nil, symbol: "bag.fill"),
-                PrepItem(id: "id", title: L("Vraag naar het ID"),
-                         detail: L("Bekijk het even. Maak geen kopie of foto."), symbol: "person.text.rectangle.fill"),
+                // The owner is the one who looks, so the how-to sits here (like the website's checklist).
+                PrepItem(id: "id", title: L("Vraag naar het ID"), detail: nil,
+                         symbol: "person.text.rectangle.fill", hint: IDCheck.how),
                 PrepItem(id: "walk", title: L("Loop samen een rondje"),
                          detail: L("Zo zie je hoe \(walker) met \(dog) omgaat."), symbol: "figure.2"),
                 PrepItem(id: "trust", title: L("Na afloop: Vertrouwen"),
@@ -66,7 +79,10 @@ enum MeetingPrep {
                 PrepItem(id: "ready", title: L("Riem, zakjes en een koekje bij de deur"), detail: nil, symbol: "bag.fill"),
                 PrepItem(id: "tell", title: L("Vertel waar \(dog) van schrikt"), detail: nil, symbol: "text.bubble.fill"),
                 PrepItem(id: "phone", title: L("Houd je telefoon bij de hand"),
-                         detail: L("Je kunt live meekijken zodra het rondje start."), symbol: "iphone"),
+                         detail: liveLocation && !item.isMeeting
+                            ? L("Je kunt live meekijken zodra het rondje start.")
+                            : L("Zo ben je bereikbaar voor de wandelaar tijdens het rondje."),
+                         symbol: "iphone"),
             ]
         }
     }
@@ -140,7 +156,7 @@ struct MeetingPrepView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private var items: [PrepItem] { MeetingPrep.items(for: item, asOwner: asOwner) }
+    private var items: [PrepItem] { MeetingPrep.items(for: item, asOwner: asOwner, liveLocation: ServerFeatures.shared.liveLocation) }
     private var ticked: Set<String> { Keepsakes.shared.checks(MeetingPrep.list(item.id)) }
 
     var body: some View {
@@ -168,7 +184,7 @@ struct MeetingPrepView: View {
 
                     VStack(spacing: 10) {
                         ForEach(items) { prep in
-                            row(prep, done: ticked.contains(prep.id))
+                            PrepRow(prep: prep, done: ticked.contains(prep.id)) { toggle(prep) }
                         }
                     }
 
@@ -188,8 +204,28 @@ struct MeetingPrepView: View {
         }
     }
 
-    private func row(_ prep: PrepItem, done: Bool) -> some View {
-        Button { toggle(prep) } label: {
+    private func toggle(_ prep: PrepItem) {
+        Haptics.tap()
+        let complete = withAnimation(reduceMotion ? .easeInOut(duration: 0.2) : .spring(duration: 0.35, bounce: 0.5)) {
+            MeetingPrep.toggle(prep.id, for: item, asOwner: asOwner)
+        }
+        if complete {
+            model.celebrate(.wag(MeetingPrep.ready), once: "prep." + item.id)
+        }
+    }
+}
+
+/// One item of the checklist: a big tick row. A `hint` shows under the title like a detail, and VoiceOver
+/// reads it as the row's hint, after its label and state.
+struct PrepRow: View {
+    let prep: PrepItem
+    let done: Bool
+    let toggle: () -> Void
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        Button(action: toggle) {
             HStack(spacing: 14) {
                 Image(systemName: prep.symbol)
                     .font(.title3.weight(.semibold))
@@ -204,6 +240,12 @@ struct MeetingPrepView: View {
                         Text(detail)
                             .font(.subheadline)
                             .foregroundStyle(Palette.muted)
+                    }
+                    if let hint = prep.hint {
+                        Text(verbatim: hint)
+                            .font(.subheadline)
+                            .foregroundStyle(Palette.muted)
+                            .accessibilityHidden(true)
                     }
                 }
                 .multilineTextAlignment(.leading)
@@ -227,16 +269,7 @@ struct MeetingPrepView: View {
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(done ? .isSelected : [])
-    }
-
-    private func toggle(_ prep: PrepItem) {
-        Haptics.tap()
-        let complete = withAnimation(reduceMotion ? .easeInOut(duration: 0.2) : .spring(duration: 0.35, bounce: 0.5)) {
-            MeetingPrep.toggle(prep.id, for: item, asOwner: asOwner)
-        }
-        if complete {
-            model.celebrate(.wag(MeetingPrep.ready), once: "prep." + item.id)
-        }
+        .accessibilityHint(Text(verbatim: prep.hint ?? ""))
     }
 }
 

@@ -24,6 +24,8 @@ export type Reason =
   | 'needs-meeting'
   | 'needs-quiz'
   | 'needs-solo-trust'
+  | 'needs-in-person'
+  | 'meet-via'
   | 'experience'
 
 export interface WalkerFacts {
@@ -109,12 +111,59 @@ export function canRequestSolo(w: WalkerFacts, d: DogFacts, r: Relation): Reason
   return null
 }
 
+// --- How a first meeting (kennismaking) happens ---
+
+/**
+ * Ways to get to know each other: walking together or a visit at the owner's home (both in person),
+ * or first a phone or video call. Only a first meeting can be a visit or a call; a walk is a walk.
+ */
+export const MEET_VIAS = ['walk', 'home', 'phone', 'video'] as const
+export type MeetVia = (typeof MEET_VIAS)[number]
+
+export function isMeetVia(value: unknown): value is MeetVia {
+  return typeof value === 'string' && (MEET_VIAS as readonly string[]).includes(value)
+}
+
+/**
+ * Walker, owner and dog in the same place: only then can the owner see the walker's ID. Anything
+ * else (a call, or an unknown value) is not in person.
+ */
+export function isInPerson(meetVia: string): boolean {
+  return meetVia === 'walk' || meetVia === 'home'
+}
+
+/**
+ * The ways a request may take. A private owner chooses from all four for a first meeting. A shelter
+ * meets on its own location, during a walk; a solo walk is always a walk.
+ */
+export function meetViaOptions(kind: string, dog: Pick<DogFacts, 'orgId'>): MeetVia[] {
+  if (kind !== 'meet' || dog.orgId) return ['walk']
+  return [...MEET_VIAS]
+}
+
+export function checkMeetVia(kind: string, meetVia: string, dog: Pick<DogFacts, 'orgId'>): Reason | null {
+  return (meetViaOptions(kind, dog) as string[]).includes(meetVia) ? null : 'meet-via'
+}
+
+/**
+ * Recording "ID seen in person" and allowing solo walks need a meeting in person: an accepted walk or
+ * home visit, or a walk together. A phone or video call never counts, however it went.
+ */
+export function canRecordTrust(requests: { status: string; meetVia: string }[], walks: number): Reason | null {
+  if (walks > 0) return null
+  const met = requests.filter((r) => r.status === 'accepted' || r.status === 'completed')
+  if (met.some((r) => isInPerson(r.meetVia))) return null
+  return met.length ? 'needs-in-person' : 'needs-meeting'
+}
+
+/** A walk (with live location) only starts from an accepted walk or visit in person, never from a call. */
 export function canStartWalk(
-  request: { status: string; startsAt: Date; walkerId: string },
+  request: { status: string; startsAt: Date; walkerId: string; meetVia: string },
   userId: string,
   now = new Date(),
 ): boolean {
   if (request.status !== 'accepted' || request.walkerId !== userId) return false
+  if (!isInPerson(request.meetVia)) return false
   const diffMin = (now.getTime() - request.startsAt.getTime()) / 60_000
   return diffMin >= -START_WINDOW_BEFORE_MIN && diffMin <= START_WINDOW_AFTER_MIN
 }

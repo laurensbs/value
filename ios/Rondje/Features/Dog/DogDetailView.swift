@@ -9,6 +9,9 @@ struct DogDetailView: View {
     @State private var error: String?
     @State private var requestKind: RequestFlow.Kind?
     @State private var reporting = false
+    @State private var quizOpen = false
+    /// The updated terms apply: after the yes, the page loads again and the request buttons are back.
+    @State private var terms: TermsRequest?
 
     var body: some View {
         ScrollView {
@@ -17,7 +20,10 @@ struct DogDetailView: View {
                 if let detail {
                     content(detail)
                 } else if let error {
-                    EmptyState(symbol: "exclamationmark.triangle", title: L("Niet gelukt"), text: error)
+                    EmptyState(
+                        symbol: "exclamationmark.triangle", title: L("Niet gelukt"), text: error,
+                        actionTitle: L("Probeer opnieuw"), action: { Task { await load(retry: true) } }
+                    )
                 } else {
                     ProgressView().frame(maxWidth: .infinity).padding(40)
                 }
@@ -44,9 +50,11 @@ struct DogDetailView: View {
         }
         .safeAreaInset(edge: .bottom) { actionBar }
         .task { await load() }
-        .sheet(item: $requestKind) { kind in
+        // Loads again after the request sheet, also when nothing was sent: the server may have said that
+        // a walk alone waits for live location, and then the page follows.
+        .sheet(item: $requestKind, onDismiss: { Task { await load() } }) { kind in
             if let detail {
-                RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind) { await load() }
+                RequestFlow(dog: detail.dog, slots: detail.slots, kind: kind, host: detail.host) { await load() }
                     .presentationDetents([.large])
                     .presentationCornerRadius(32)
             }
@@ -55,6 +63,11 @@ struct DogDetailView: View {
             ReportSheet(dogId: dogId, subjectUserId: detail?.host.kind == "owner" ? detail?.host.id : nil)
                 .presentationDetents([.medium, .large])
         }
+        // After passing, the page loads again: then the server allows the request and the form button is back.
+        .sheet(isPresented: $quizOpen, onDismiss: { Task { await load() } }) {
+            NavigationStack { QuizGameView(mode: .gate) }
+        }
+        .termsSheet($terms)
     }
 
     private var look: DogLook { detail?.dog.look ?? preview?.look ?? .sample }
@@ -93,23 +106,25 @@ struct DogDetailView: View {
                     .padding(14).background(Palette.warnSoft, in: .rect(cornerRadius: 16, style: .continuous))
             }
 
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
-                fact("bolt.fill", L("Energie"), Labels.energy(d.dog.energy))
-                fact("ruler", L("Formaat"), Labels.size(d.dog.size))
-                fact("timer", L("Rondje"), L("\(d.dog.walkMinutes) minuten"))
-                fact("star.fill", L("Niveau"), Labels.level(d.dog.level))
-            }
-
-            if !d.dog.story.isEmpty {
-                Card {
-                    Text("Over \(d.dog.name)").font(.headline)
-                    Text(d.dog.story).foregroundStyle(Palette.ink)
+            // The four facts on one card, instead of four separate tiles.
+            Card {
+                LazyVGrid(columns: [GridItem(.flexible(), alignment: .leading), GridItem(.flexible(), alignment: .leading)], spacing: 14) {
+                    fact("bolt.fill", L("Energie"), Labels.energy(d.dog.energy))
+                    fact("ruler", L("Formaat"), Labels.size(d.dog.size))
+                    fact("timer", L("Rondje"), L("\(d.dog.walkMinutes) minuten"))
+                    fact("star.fill", L("Niveau"), Labels.level(d.dog.level))
                 }
             }
 
-            if !d.dog.traits.isEmpty {
-                FlowLayout(spacing: 8) {
-                    ForEach(d.dog.traits, id: \.self) { Chip(text: $0) }
+            if !d.dog.story.isEmpty || !d.dog.traits.isEmpty {
+                Card {
+                    Text("Over \(d.dog.name)").font(.headline)
+                    if !d.dog.story.isEmpty { Text(d.dog.story).foregroundStyle(Palette.ink) }
+                    if !d.dog.traits.isEmpty {
+                        FlowLayout(spacing: 8) {
+                            ForEach(d.dog.traits, id: \.self) { Chip(text: $0) }
+                        }
+                    }
                 }
             }
 
@@ -127,18 +142,16 @@ struct DogDetailView: View {
                 if d.dog.ppp && d.dog.country == "ES" {
                     info("doc.text.fill", L("PPP-hond: in Spanje alleen met licentie"), tint: Palette.warn)
                 }
-            }
-
-            hostCard(d)
-
-            if !d.slots.isEmpty {
-                Card {
-                    Text("Vaste momenten").font(.headline)
+                // The regular moments belong with the practical things, not on a card of their own.
+                if !d.slots.isEmpty {
+                    Text("Vaste momenten").font(.subheadline.weight(.semibold)).padding(.top, 4)
                     ForEach(d.slots, id: \.self) { slot in
                         info("clock", L("\(Labels.weekday(slot.weekday).capitalized) om \(slot.time)"))
                     }
                 }
             }
+
+            hostCard(d)
 
             if d.canSeePrivate && (!d.dog.meetingInfo.isEmpty || !d.dog.vetInfo.isEmpty) {
                 Card {
@@ -184,20 +197,48 @@ struct DogDetailView: View {
         }
     }
 
+    /// The updated terms apply and this person has not agreed yet ("needs-terms", before the quiz).
+    private func needsTerms(_ d: DogDetail) -> Bool {
+        d.canRequest.meet == "needs-terms" || d.canRequest.solo == "needs-terms"
+    }
+
+    /// While live location is off, a walk alone cannot be asked for ('live-location-off' in canRequest.solo).
+    /// Said calmly to someone who walked with this dog before, so a missing "Zelfstandig rondje" is no
+    /// riddle; someone new simply plans a first meeting, as always.
+    private func soloPaused(_ d: DogDetail) -> Bool {
+        d.canRequest.solo == LiveLocationPause.reason
+            && model.appointments.outgoing.contains { $0.dog.id == d.dog.id && ($0.kind == "solo" || $0.status == "completed") }
+    }
+
+    /// The safety quiz comes before any request: then one friendly button instead of the form.
+    /// The server says so too ("needs-quiz"), also to an app that does not know yet.
+    private func needsQuiz(_ d: DogDetail) -> Bool {
+        d.canRequest.meet == "needs-quiz" || (!model.quizPassed && d.canRequest.meet == nil)
+    }
+
     @ViewBuilder
     private var actionBar: some View {
         if let d = detail, !d.isMine, !d.host.isShelter {
             VStack(spacing: 8) {
-                if let reason = d.canRequest.meet {
-                    Text(reasonText(reason)).font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
-                }
-                HStack(spacing: 10) {
-                    if d.canRequest.solo == nil {
-                        Button("Zelfstandig rondje") { requestKind = .solo }.buttonStyle(.ball)
+                if needsTerms(d) {
+                    TermsGate { terms = TermsRequest(model: model) { await load() } }
+                } else if needsQuiz(d) {
+                    QuizGate { quizOpen = true }
+                } else {
+                    if let reason = d.canRequest.meet {
+                        Text(reasonText(reason)).font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+                    } else if soloPaused(d) {
+                        Label(LiveLocationPause.note, systemImage: "location.slash")
+                            .font(.footnote).foregroundStyle(Palette.muted)
                     }
-                    Button(d.canRequest.solo == nil ? L("Kennismaken") : L("Plan een kennismaking")) { requestKind = .meet }
-                        .buttonStyle(.primary)
-                        .disabled(d.canRequest.meet != nil)
+                    HStack(spacing: 10) {
+                        if d.canRequest.solo == nil {
+                            Button("Zelfstandig rondje") { requestKind = .solo }.buttonStyle(.ball)
+                        }
+                        Button(d.canRequest.solo == nil ? L("Kennismaken") : L("Plan een kennismaking")) { requestKind = .meet }
+                            .buttonStyle(.primary)
+                            .disabled(d.canRequest.meet != nil)
+                    }
                 }
             }
             .padding(.horizontal, 20)
@@ -218,26 +259,32 @@ struct DogDetailView: View {
     }
 
     private func fact(_ symbol: String, _ title: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Image(systemName: symbol).foregroundStyle(Palette.grass).frame(height: 24)
-            Text(title).font(.caption).foregroundStyle(Palette.muted)
-            Text(value).font(.subheadline.weight(.semibold))
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: symbol).foregroundStyle(Palette.grass).frame(width: 22)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.caption).foregroundStyle(Palette.muted)
+                Text(value).font(.subheadline.weight(.semibold))
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(14)
-        .background(Palette.surface, in: .rect(cornerRadius: 18, style: .continuous))
+        .accessibilityElement(children: .combine)
     }
 
     private func info(_ symbol: String, _ text: String, tint: Color = Palette.grass) -> some View {
         Label { Text(text).font(.subheadline) } icon: { Image(systemName: symbol).foregroundStyle(tint) }
     }
 
-    private func load() async {
+    /// `retry`: the person tapped "Probeer opnieuw", so a new failure is felt once.
+    private func load(retry: Bool = false) async {
         do {
             let d: DogDetail = try await APIClient.shared.get("/api/v1/dogs/\(dogId)")
-            withAnimation(.smooth) { detail = d }
+            withAnimation(Motion.scherm) {
+                detail = d
+                error = nil
+            }
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
+            if retry { Haptics.error() }
         }
     }
 }

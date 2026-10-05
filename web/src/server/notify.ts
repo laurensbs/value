@@ -12,6 +12,7 @@ export type NotificationKind =
   | 'request-accepted'
   | 'request-declined'
   | 'request-cancelled'
+  | 'request-reminder'
   | 'walk-started'
   | 'walk-ended'
   | 'walk-photo'
@@ -22,6 +23,7 @@ export type NotificationKind =
   | 'org-pending'
   | 'shelter-joined'
   | 'group-walk-new'
+  | 'group-walk-reminder'
   | 'chat-message'
 
 export async function notify(

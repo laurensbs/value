@@ -203,6 +203,11 @@ export const walkRequest = pgTable(
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
     kind: text('kind').notNull(),
+    /**
+     * How a first meeting happens: walk (together), home (a visit at the owner's), phone or video
+     * (a first call, which never counts as meeting in person). Regular walks are always "walk".
+     */
+    meetVia: text('meet_via').notNull().default('walk'),
     startsAt: timestamp('starts_at').notNull(),
     durationMin: integer('duration_min').notNull(),
     weekly: boolean('weekly').notNull().default(false),

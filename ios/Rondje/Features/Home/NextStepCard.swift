@@ -13,6 +13,8 @@ struct NextStepCard: View {
     var myDogsCount: Int? = nil
     /// Opens the screen's own "add a dog" sheet, so the screen can reload its dogs afterwards.
     var addDog: (() -> Void)? = nil
+    /// One quiet line instead of the big card: on Ontdek the dogs come first.
+    var compact = false
 
     @Environment(AppModel.self) private var model
     @Environment(WalkTracker.self) private var walk
@@ -20,25 +22,19 @@ struct NextStepCard: View {
     @State private var now = Date.now
     @State private var busy = false
     @State private var breathing: Appointment?
+    /// The server waits for the yes to the updated terms; after it, the walk starts.
+    @State private var terms: TermsRequest?
     /// Offer the breathing minute before a walk; switched off with "Niet meer tonen".
     @AppStorage("offerBreathing") private var offerBreathing = true
 
     var body: some View {
         let step = current
-        VStack(alignment: .leading, spacing: 10) {
-            if Keepsakes.shared.has("welcomeBack") {
-                Label("Fijn je weer te zien! Alles staat er nog precies zo.", systemImage: "hand.wave.fill")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Palette.grass)
-                    .transition(.opacity)
+        Group {
+            if compact {
+                if Self.showsLine(step) { line(step) }
+            } else {
+                card(step)
             }
-            ZStack {
-                bubble(step)
-                    .id(step.id)
-                    .transition(reduceMotion ? AnyTransition.opacity : AnyTransition.push(from: .trailing))
-            }
-            .clipped()
-            .animation(reduceMotion ? .easeInOut : .snappy, value: step.id)
         }
         .onAppear { now = .now }
         .onDisappear { Keepsakes.shared.unmark("welcomeBack") }
@@ -56,13 +52,92 @@ struct NextStepCard: View {
                 Task { await start(item) }
             }
         }
+        .termsSheet($terms)
+    }
+
+    private func card(_ step: NextStep) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            if Keepsakes.shared.has("welcomeBack") {
+                Label("Fijn je weer te zien! Alles staat er nog precies zo.", systemImage: "hand.wave.fill")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Palette.grass)
+                    .transition(.opacity)
+            }
+            ZStack {
+                bubble(step)
+                    .id(step.id)
+                    .transition(reduceMotion ? AnyTransition.opacity : AnyTransition.push(from: .trailing))
+            }
+            .clipped()
+            .animation(Motion.or(Motion.scherm, reduce: reduceMotion), value: step.id)
+        }
+    }
+
+    /// The compact line only says something worth a tap or worth knowing: "done" and "night" stay away,
+    /// and so do Guus's picks, because the dogs are right under the line.
+    static func showsLine(_ step: NextStep) -> Bool {
+        step.id != "picks" && (step.action != nil || step.id == "waiting")
+    }
+
+    /// Guus, the step in one or two lines, and the whole row is the button. "Later" is the small cross.
+    private func line(_ step: NextStep) -> some View {
+        HStack(spacing: 12) {
+            Button {
+                if let action = step.action { go(action) }
+            } label: {
+                HStack(spacing: 12) {
+                    if Keepsakes.shared.coachOn {
+                        Guus(mood: step.mood, size: 40, hop: false)
+                            .accessibilityHidden(true)
+                    }
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(step.text)
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Palette.ink)
+                            .lineLimit(3)
+                        if let button = step.button {
+                            Text(button)
+                                .font(.subheadline.weight(.bold))
+                                .foregroundStyle(Palette.grass)
+                        }
+                    }
+                    .multilineTextAlignment(.leading)
+                    Spacer(minLength: 0)
+                }
+                .frame(minHeight: 44)
+                .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
+            .disabled(step.action == nil)
+            if step.snoozable {
+                Button { later(step) } label: {
+                    Image(systemName: "xmark")
+                        .font(.footnote.weight(.bold))
+                        .foregroundStyle(Palette.muted)
+                        .frame(width: 44, height: 44)
+                        .contentShape(.rect)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L("Later"))
+            }
+        }
+        .padding(.leading, 12)
+        .padding(.vertical, 8)
+        .padding(.trailing, step.snoozable ? 0 : 12)
+        .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
+        .id(step.id)
+        .transition(.opacity)
+        .animation(Motion.or(Motion.klein, reduce: reduceMotion), value: step.id)
     }
 
     // MARK: Step
 
+    /// Guus has not introduced himself yet: then he is the only one talking on the screen.
+    @MainActor static var introPending: Bool { Keepsakes.shared.coachOn && !Keepsakes.shared.has("met.guus") }
+
     private var current: NextStep {
-        let keepsakes = Keepsakes.shared
-        if keepsakes.coachOn && !keepsakes.has("met.guus") {
+        // The compact line has no room for an introduction; Guus says hello on the big card (Thuis).
+        if Self.introPending && !compact {
             let name = model.firstName
             return NextStep(
                 id: "intro", mood: .happy,
@@ -98,13 +173,13 @@ struct NextStepCard: View {
             myDogsCount: myDogsCount,
             weekGoal: week?.goal,
             weekWalks: week?.walks ?? 0,
-            lessonsDone: keepsakes.lessonsDone.count,
             nearbyDogs: nearbyDogs,
             nearbyLoaded: nearbyLoaded,
             nearbyFailed: nearbyFailed,
             noRebook: keepsakes.noRebookDogs,
             snoozed: keepsakes.activeSnoozes(now: now),
-            prepDone: Set(keepsakes.keys(withPrefix: "prepDone.").map { String($0.dropFirst("prepDone.".count)) })
+            prepDone: Set(keepsakes.keys(withPrefix: "prepDone.").map { String($0.dropFirst("prepDone.".count)) }),
+            liveLocation: ServerFeatures.shared.liveLocation
         )
     }
 
@@ -194,9 +269,14 @@ struct NextStepCard: View {
         do {
             try await WalkStarter.start(item, model: model, walk: walk)
             Haptics.success()
+        } catch let error as APIError where error.needsTerms {
+            terms = TermsRequest(model: model) { await start(item) }
+        } catch let error as APIError where error.liveLocationOff {
+            // Live location went off in the meantime: this walk alone waits. Calmly, not as an error.
+            await model.liveLocationPaused()
         } catch {
             Haptics.error()
-            model.show(error.localizedDescription, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
+            model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
         }
     }
 }

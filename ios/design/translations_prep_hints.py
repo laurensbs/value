@@ -104,10 +104,6 @@ T = {
         "Prepara la correa y las bolsas, y pide el documento."),
 
     # Guus's first-visit hints
-    "Tik op een hond om zijn verhaal te lezen. Begin gerust met Rustig.": (
-        "Tap a dog to read its story. Feel free to start with Calm.",
-        "Touche un chien pour lire son histoire. Commence tranquillement par Calme.",
-        "Toca un perro para leer su historia. Puedes empezar por Tranquilo."),
     "Eerst maak je kennis. De eigenaar loopt mee en bekijkt je ID.": (
         "First you meet. The owner walks along and looks at your ID.",
         "D'abord, vous faites connaissance. Le propriétaire marche avec toi et regarde ta pièce d'identité.",

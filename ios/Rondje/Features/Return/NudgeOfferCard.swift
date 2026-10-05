@@ -5,6 +5,12 @@ import SwiftUI
 struct NudgeOfferCard: View {
     @Environment(AppModel.self) private var model
 
+    /// Whether the card has something to say right now.
+    @MainActor static func isShowing(walks: Int) -> Bool {
+        let settings = Nudges.settings
+        return settings.stoppedByGuus || (!settings.offered && !settings.enabled && walks >= 1)
+    }
+
     var body: some View {
         let settings = Nudges.settings
         if settings.stoppedByGuus {

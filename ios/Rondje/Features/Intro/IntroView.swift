@@ -27,10 +27,12 @@ struct IntroView: View {
                  text: L("Je loopt de eerste keer samen met de eigenaar. Zo leer je de hond kennen en weet iedereen waar hij aan toe is."),
                  looks: [Self.border], tint: Palette.calmSoft, symbol: "person.2.fill"),
             Page(id: 3, title: L("Samen op pad"),
-                 text: L("Daarna wandel je zelfstandig. De eigenaar kijkt live mee, en jij stuurt een foto of een plasje door."),
+                 text: liveLocation
+                    ? L("Daarna wandel je zelfstandig. De eigenaar kijkt live mee, en jij stuurt een foto of een plasje door.")
+                    : L("Klikt het? Dan lopen jullie vaker samen. Live locatie staat voorlopig uit, dus zelfstandig wandelen kan nog niet."),
                  looks: [Self.brown], tint: Palette.warnSoft, symbol: "figure.walk"),
-            Page(id: 4, title: L("Goed voor jullie allebei"),
-                 text: L("Samen buiten zijn met een hond kan je dag goed doen. Het is gratis, zonder reclame, en veilig."),
+            Page(id: 4, title: L("Even naar buiten"),
+                 text: L("Een vaste afspraak, en een hond die blij is dat je komt. Gratis en zonder reclame."),
                  looks: [Self.golden, Self.brown], tint: Palette.grassSoft, symbol: "heart.fill"),
         ]
     }
@@ -43,9 +45,13 @@ struct IntroView: View {
             Page(id: 2, title: L("Jij beslist"),
                  text: L("Je kiest zelf wie er komt. De eerste keer loop je samen en zie je het ID van de wandelaar."),
                  looks: [Self.border], tint: Palette.calmSoft, symbol: "hand.raised.fill"),
-            Page(id: 3, title: L("Kijk live mee"),
-                 text: L("Tijdens het rondje zie je waar ze lopen, krijg je een foto, en hoor je of je hond heeft geplast."),
-                 looks: [Self.brown], tint: Palette.warnSoft, symbol: "dot.radiowaves.left.and.right"),
+            liveLocation
+                ? Page(id: 3, title: L("Kijk live mee"),
+                       text: L("Tijdens het rondje zie je waar ze lopen, krijg je een foto, en hoor je of je hond heeft geplast."),
+                       looks: [Self.brown], tint: Palette.warnSoft, symbol: "dot.radiowaves.left.and.right")
+                : Page(id: 3, title: L("Samen op pad"),
+                       text: L("Live locatie staat voorlopig uit. Tot die tijd lopen jullie samen, en bewaren we geen route."),
+                       looks: [Self.brown], tint: Palette.warnSoft, symbol: "figure.2"),
             Page(id: 4, title: L("Gratis en veilig"),
                  text: L("Geen kosten, geen reclame. Wandelaars zijn 18+, en alles wat niet klopt kun je melden."),
                  looks: [Self.golden, Self.brown], tint: Palette.grassSoft, symbol: "checkmark.shield.fill"),
@@ -53,6 +59,9 @@ struct IntroView: View {
     }
 
     private var pages: [Page] { role == "owner" ? ownerPages : walkerPages }
+    /// Watching live and walking alone only while the server's switch is on (features.liveLocation);
+    /// loaded when the intro opens, long before page 3.
+    private var liveLocation: Bool { ServerFeatures.shared.liveLocation }
     private var total: Int { pages.count + 1 }
 
     var body: some View {
@@ -108,6 +117,8 @@ struct IntroView: View {
         }
         .screenBackground()
         .sensoryFeedback(.selection, trigger: page)
+        // Whether walks share a live location: page 3 only promises watching live while it is on.
+        .task { await ServerFeatures.shared.refresh() }
     }
 
     private var choice: some View {

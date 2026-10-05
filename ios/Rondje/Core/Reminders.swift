@@ -24,7 +24,10 @@ enum Reminders {
         guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
 
         var wanted: [String: UNNotificationRequest] = [:]
-        for item in appointments.outgoing + appointments.incoming where item.status == "accepted" {
+        // A walk alone that waits for live location does not start: no "zo meteen" for it, on either side.
+        let liveLocation = ServerFeatures.shared.liveLocation
+        for item in appointments.outgoing + appointments.incoming
+        where item.status == "accepted" && !item.waitsForLiveLocation(liveLocation: liveLocation) {
             // The evening before a first meeting: one calm note to get ready (it opens the prep checklist).
             if item.isMeeting, let evening = PrepReminder.fireDate(startsAt: item.startsAt, now: .now, calendar: .current) {
                 let asOwner = appointments.incoming.contains { $0.id == item.id }

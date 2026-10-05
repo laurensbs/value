@@ -14,11 +14,6 @@ T = {
     "Veiligheidsquiz, volgende": ("Safety quiz, next", "Quiz sécurité, le suivant", "Test de seguridad, el siguiente"),
     "Gehaald": ("Passed", "Réussi", "Aprobado"),
     "Hier verder": ("Continue here", "On continue ici", "Sigue aquí"),
-    "Hondenschool en quiz": ("Dog school and quiz", "École des chiens et quiz", "Escuela canina y test"),
-    "Vijf mini-lessen van 2 minuten, dan de quiz.": (
-        "Five 2-minute mini lessons, then the quiz.",
-        "Cinq mini-leçons de 2 minutes, puis le quiz.",
-        "Cinco minilecciones de 2 minutos y luego el test."),
 
     # Player
     "Sluit": ("Close", "Fermer", "Cerrar"),
@@ -37,28 +32,10 @@ T = {
     "Later": ("Later", "Plus tard", "Más tarde"),
 
     # Quiz game
-    "Acht vragen, ongeveer 3 minuten. Geen tijdsdruk.": (
-        "Eight questions, about 3 minutes. No time pressure.",
-        "Huit questions, environ 3 minutes. Sans pression.",
-        "Ocho preguntas, unos 3 minutos. Sin prisas."),
-    "Je deed alle vijf de lessen. Je bent goed voorbereid.": (
-        "You did all five lessons. You're well prepared.",
-        "Tu as fait les cinq leçons. Tu es bien préparé.",
-        "Hiciste las cinco lecciones. Estás bien preparado."),
     "Begin": ("Start", "Commencer", "Empezar"),
     "Eerst de Hondenschool?": ("Dog school first?", "D'abord l'école des chiens ?", "¿Primero la escuela canina?"),
-    "Bijna! Kijk vraag %lld nog even na.": ("Almost! Have another look at question %lld.", "Presque ! Regarde encore la question %lld.", "¡Casi! Revisa otra vez la pregunta %lld."),
-    "Bijna! Kijk deze nog even na.": ("Almost! Have another look at this one.", "Presque ! Regarde encore celle-ci.", "¡Casi! Revisa esta otra vez."),
-    "Vraag %lld van %lld": ("Question %lld of %lld", "Question %lld sur %lld", "Pregunta %lld de %lld"),
-    "%lld beantwoord": ("%lld answered", "%lld répondues", "%lld respondidas"),
-    "Vorige": ("Previous", "Précédente", "Anterior"),
     "Volgende": ("Next", "Suivante", "Siguiente"),
-    "Even kijken…": ("Let's see…", "Voyons voir…", "A ver…"),
     "Gehaald!": ("Passed!", "Réussi !", "¡Aprobado!"),
-    "Je mag nu zelfstandige rondjes aanvragen bij eigenaren die dat toestaan.": (
-        "You can now request solo walks with owners who allow it.",
-        "Tu peux maintenant demander des balades en solo aux propriétaires qui l'acceptent.",
-        "Ya puedes pedir paseos en solitario a los dueños que lo permiten."),
     "+%lld punten": ("+%lld points", "+%lld points", "+%lld puntos"),
     "Probeer opnieuw": ("Try again", "Réessayer", "Reintentar"),
 
@@ -167,10 +144,10 @@ T = {
         "After the first meeting. When may you walk the dog on your own?",
         "Après la rencontre. Quand peux-tu promener le chien seul ?",
         "Después del primer encuentro. ¿Cuándo puedes pasear al perro solo?"),
-    "Als de eigenaar je vertrouwen geeft en je de quiz hebt gehaald": (
-        "When the owner trusts you and you passed the quiz",
-        "Quand le propriétaire te fait confiance et que tu as réussi le quiz",
-        "Cuando el dueño confía en ti y aprobaste el test"),
+    "Als de eigenaar je vertrouwen geeft, je ID in het echt heeft gezien, je de quiz hebt gehaald en live locatie aan staat": (
+        "When the owner trusts you, has seen your ID in person, you passed the quiz and live location is on",
+        "Quand le propriétaire te fait confiance, a vu ta pièce d'identité en personne, que tu as réussi le quiz et que la localisation en direct est activée",
+        "Cuando el dueño confía en ti, ha visto tu documento en persona, aprobaste el test y la ubicación en directo está activada"),
     "Meteen, je kent hem nu": ("Straight away, you know him now", "Tout de suite, tu le connais maintenant", "Enseguida, ya lo conoces"),
     "De eigenaar beslist. Dat gaat per hond.": ("The owner decides. It goes dog by dog.", "C'est le propriétaire qui décide. Chien par chien.", "Decide el dueño. Va perro a perro."),
     "Klopt. Stap voor stap, voor iedereen veilig.": ("Right. Step by step, safe for everyone.", "C'est ça. Pas à pas, en sécurité pour tout le monde.", "Correcto. Paso a paso, seguro para todos."),

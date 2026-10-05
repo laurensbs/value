@@ -13,7 +13,7 @@ Estas condiciones se aplican a todas las personas que usan Rondje: la web y la a
 
 Rondje es un servicio de [Naam rechtspersoon, bijv. Stichting Rondje i.o.], inscrita en la Cámara de Comercio de los Países Bajos (KvK) con el número [KvK-nummer] y con domicilio en [adres] («Rondje» o «nosotros»).
 
-Puedes contactarnos en [e-mail: hallo@rondje.app]. Es también nuestro punto de contacto para usuarios y autoridades conforme al Reglamento de Servicios Digitales (DSA). Puedes escribirnos en neerlandés, inglés, español o francés.
+Puedes contactarnos en {{contact}}. Es también nuestro punto de contacto para usuarios y autoridades conforme al Reglamento de Servicios Digitales (DSA). Puedes escribirnos en neerlandés, inglés, español o francés.
 
 ## 2. Qué es Rondje, y qué no es
 
@@ -186,7 +186,7 @@ Seamos claros: pasear perros conlleva riesgos. Un perro puede morder, escaparse 
 
 ## 18. Reclamaciones
 
-- ¿Una queja sobre Rondje? Escribe a [e-mail: hallo@rondje.app]. Responderemos en un plazo de 14 días [propuesta].
+- ¿Una queja sobre Rondje? Escribe a {{contact}}. Responderemos en un plazo de 14 días [propuesta].
 - ¿No estás de acuerdo con una decisión sobre tu contenido, tu cuenta o tu denuncia? Reclama en un plazo de **6 meses** desde la app o por correo. Una persona que no participó en la primera decisión la revisará.
 - También puedes acudir a un órgano certificado de resolución extrajudicial de litigios conforme al DSA, o a los tribunales.
 - La plataforma europea de resolución de litigios en línea (ODR) dejó de funcionar en julio de 2025.

@@ -5,6 +5,7 @@ import { useMemo, useOptimistic, useRef, useState, useTransition } from 'react'
 import { Icon } from '@/components/Icon'
 import { deleteContact, setContactStatus } from '@/server/actions/launch'
 import { ContactForm } from './ContactForm'
+import { ImportContacts } from './ImportContacts'
 import { PrepareShelters } from './PrepareShelters'
 import { clipboardText, fillTemplate, isEmail, mailtoHref, placeholdersIn, segments, type Placeholder, type Values } from './mail'
 import { AUDIENCES, CONTACT_STATUSES, type Audience, type ContactJson, type ContactStatus } from './audiences'
@@ -259,6 +260,7 @@ function Contacts({ contacts, onWrite }: { contacts: ContactJson[]; onWrite: (c:
   const t = useTranslations('launch')
   const [filter, setFilter] = useState<Audience | 'all'>('all')
   const [adding, setAdding] = useState(false)
+  const [importing, setImporting] = useState(false)
   const shown = filter === 'all' ? contacts : contacts.filter((c) => c.audience === filter)
   const counts = useMemo(
     () => Object.fromEntries(CONTACT_STATUSES.map((s) => [s, contacts.filter((c) => c.status === s).length])) as Record<ContactStatus, number>,
@@ -270,9 +272,30 @@ function Contacts({ contacts, onWrite }: { contacts: ContactJson[]; onWrite: (c:
       <div className="stack-s">
         <div className="spread">
           <h2 id="launch-contacts-title">{t('contacts.title')}</h2>
-          <button type="button" className="button secondary small" aria-expanded={adding} onClick={() => setAdding((a) => !a)}>
-            <Icon name={adding ? 'close' : 'plus'} size={16} /> {adding ? t('contacts.close') : t('contacts.add')}
-          </button>
+          <div className="launch-contacts-tools">
+            <button
+              type="button"
+              className="button ghost small"
+              aria-expanded={importing}
+              onClick={() => {
+                setImporting((open) => !open)
+                setAdding(false)
+              }}
+            >
+              <Icon name={importing ? 'close' : 'upload'} size={16} /> {importing ? t('contacts.close') : t('import.button')}
+            </button>
+            <button
+              type="button"
+              className="button secondary small"
+              aria-expanded={adding}
+              onClick={() => {
+                setAdding((a) => !a)
+                setImporting(false)
+              }}
+            >
+              <Icon name={adding ? 'close' : 'plus'} size={16} /> {adding ? t('contacts.close') : t('contacts.add')}
+            </button>
+          </div>
         </div>
         <p className="muted small">{t('contacts.hint')}</p>
         <PrepareShelters />
@@ -288,6 +311,12 @@ function Contacts({ contacts, onWrite }: { contacts: ContactJson[]; onWrite: (c:
       {adding ? (
         <div className="card">
           <ContactForm audience={filter === 'all' ? 'shelter' : filter} />
+        </div>
+      ) : null}
+
+      {importing ? (
+        <div className="card">
+          <ImportContacts contacts={contacts} />
         </div>
       ) : null}
 

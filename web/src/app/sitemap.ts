@@ -3,7 +3,7 @@ import { LEGAL_DOCS } from '@/lib/legal'
 import { siteUrl } from '@/lib/site'
 import { publicCities } from '@/server/cities'
 
-const PAGES = ['', '/dogs', '/shelters', '/group-walks', '/shelter', '/about', '/support', '/suggest', '/flyer', '/help', '/safety', '/cities']
+const PAGES = ['', '/dogs', '/shelters', '/group-walks', '/shelter', '/about', '/waarom', '/support', '/suggest', '/flyer', '/help', '/contact', '/safety', '/cities']
 
 /** The public pages and one page per city. Dog pages are left out on purpose: private owners' pages are not for search engines. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

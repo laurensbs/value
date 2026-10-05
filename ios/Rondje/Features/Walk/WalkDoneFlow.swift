@@ -146,7 +146,7 @@ struct WalkDoneFlow: View {
         .task { await start() }
         .sheet(item: $offer) { offer in
             if let detail {
-                RequestFlow(dog: detail.dog, slots: detail.slots, kind: offer.kind, prefill: offer.prefill) {
+                RequestFlow(dog: detail.dog, slots: detail.slots, kind: offer.kind, host: detail.host, prefill: offer.prefill) {
                     requested = true
                 }
             }
@@ -164,7 +164,7 @@ struct WalkDoneFlow: View {
                         .frame(height: 5)
                 }
             }
-            .animation(.snappy, value: index)
+            .animation(Motion.klein, value: index)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(L("Stap \(index + 1) van \(steps.count)"))
             Button { dismiss() } label: {
@@ -223,7 +223,7 @@ struct WalkDoneFlow: View {
     private func next() {
         guard !isLast else { return }
         Haptics.tap()
-        withAnimation(reduceMotion ? .easeInOut(duration: 0.25) : .spring(duration: 0.45)) { index += 1 }
+        withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { index += 1 }
     }
 
     // MARK: Step 1: the walk
@@ -242,12 +242,15 @@ struct WalkDoneFlow: View {
                 .font(.display(34))
                 .multilineTextAlignment(.center)
                 .accessibilityAddTraits(.isHeader)
-            Text(L("\(dogName) en jij liepen \(Format.distance(Double(distance))) in \(minutes) minuten."))
+            // Under 50 m (GPS that barely moved) the walk is still a walk: no "0 m".
+            Text(distance < 50
+                 ? L("\(dogName) en jij zijn samen op pad geweest. Dank je wel.")
+                 : L("\(dogName) en jij liepen \(Format.distance(Double(distance))) in \(minutes) minuten."))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Palette.onWalk.opacity(0.9))
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 96), spacing: 10)], spacing: 10) {
                 tile(L("Tijd"), value: minutes) { L("\($0) min") }
-                tile(L("Afstand"), value: distance) { Format.distance(Double($0)) }
+                if distance >= 50 { tile(L("Afstand"), value: distance) { Format.distance(Double($0)) } }
                 if care.pee > 0 { tile(L("Plasjes"), value: care.pee) }
                 if care.poo > 0 { tile(L("Poepjes"), value: care.poo) }
                 if photoCount > 0 { tile(L("Foto's"), value: photoCount) }
@@ -265,7 +268,7 @@ struct WalkDoneFlow: View {
                     .transition(.opacity)
             }
         }
-        .animation(.smooth, value: moodAfter)
+        .animation(Motion.klein, value: moodAfter)
     }
 
     private func tile(_ title: String, value: Int, format: @escaping (Int) -> String = { "\($0)" }) -> some View {
@@ -360,7 +363,7 @@ struct WalkDoneFlow: View {
         HStack(spacing: 10) {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(Palette.ball)
-                .symbolEffect(.bounce, options: .nonRepeating, value: revealed)
+                .symbolEffect(.bounce, options: .nonRepeating, value: reduceMotion ? 0 : revealed)
             Text(label)
                 .font(.body.weight(.semibold))
                 .multilineTextAlignment(.leading)
@@ -389,7 +392,7 @@ struct WalkDoneFlow: View {
             .scaleEffect(ringPop ? 1.12 : 1)
             .accessibilityHidden(true)
             if let newLevel {
-                Text(L("Nieuw niveau: \(newLevel)!"))
+                Text(L("Nieuw level: \(newLevel)!"))
                     .font(.headline)
                     .foregroundStyle(Palette.ball)
                     .transition(.scale.combined(with: .opacity))
@@ -400,7 +403,7 @@ struct WalkDoneFlow: View {
                 if let next = after.level.next, let nextName = after.level.nextName {
                     Text("Nog \(max(0, next - after.points)) punten tot \(nextName)")
                 } else {
-                    Text("Hoogste niveau. Wat een rondjes!")
+                    Text("Hoogste level. Wat een rondjes!")
                 }
             }
             .font(.subheadline)
@@ -424,22 +427,28 @@ struct WalkDoneFlow: View {
         let list = model.offline ? [] : rows
 
         if reduceMotion {
+            // Nothing moves, but the moment is still felt, once.
             revealed = list.count
             showTotal = !list.isEmpty
             ringLevel = after.level.number
             ring = target
-            if leveledUp { newLevel = after.level.name }
+            if leveledUp {
+                newLevel = after.level.name
+                Haptics.pop()
+            } else if !list.isEmpty {
+                Haptics.tap()
+            }
             return
         }
         for i in list.indices {
             try? await Task.sleep(for: .seconds(0.15))
             guard !Task.isCancelled else { return }
-            withAnimation(.spring(duration: 0.35, bounce: 0.35)) { revealed = i + 1 }
+            withAnimation(Motion.pop) { revealed = i + 1 }
             Haptics.tap()
         }
         if !list.isEmpty {
             try? await Task.sleep(for: .seconds(0.15))
-            withAnimation(.smooth) { showTotal = true }
+            withAnimation(Motion.klein) { showTotal = true }
         }
         try? await Task.sleep(for: .seconds(0.5))
         guard !Task.isCancelled else { return }
@@ -447,13 +456,13 @@ struct WalkDoneFlow: View {
             withAnimation(.easeInOut(duration: 0.8)) { ring = 1 }
             try? await Task.sleep(for: .seconds(0.85))
             Haptics.pop()
-            withAnimation(.spring(duration: 0.3, bounce: 0.6)) {
+            withAnimation(Motion.pop) {
                 ringPop = true
                 ringLevel = after.level.number
                 newLevel = after.level.name
             }
             try? await Task.sleep(for: .seconds(0.3))
-            withAnimation(.spring(duration: 0.3)) { ringPop = false }
+            withAnimation(Motion.klein) { ringPop = false }
             ring = 0
             withAnimation(.easeInOut(duration: 0.8)) { ring = target }
         } else {
@@ -499,14 +508,14 @@ struct WalkDoneFlow: View {
                             .frame(maxWidth: .infinity, minHeight: 104)
                             .padding(.horizontal, 8)
                             .background(chosen ? Palette.ball : Palette.surface.opacity(0.12), in: .rect(cornerRadius: 18, style: .continuous))
-                            .scaleEffect(chosen ? 1.03 : 1)
+                            .scaleEffect(chosen && !reduceMotion ? 1.03 : 1)
                             .contentShape(.rect(cornerRadius: 18))
                         }
                         .buttonStyle(.plain)
                         .accessibilityAddTraits(chosen ? .isSelected : [])
                     }
                 }
-                .animation(.spring(duration: 0.3, bounce: 0.4), value: behaviour)
+                .animation(Motion.or(Motion.klein, reduce: reduceMotion), value: behaviour)
                 yesNo(L("De overdracht ging goed"), $handoverOk)
                 yesNo(L("Ik voelde me veilig"), $feltSafe)
                 if noteOpen {
@@ -517,7 +526,7 @@ struct WalkDoneFlow: View {
                         .background(Palette.surface, in: .rect(cornerRadius: 14, style: .continuous))
                         .transition(.opacity)
                 } else {
-                    Button { withAnimation(.smooth) { noteOpen = true } } label: {
+                    Button { withAnimation(Motion.klein) { noteOpen = true } } label: {
                         Label("Nog iets?", systemImage: "plus.bubble")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(Palette.onWalk)
@@ -551,7 +560,7 @@ struct WalkDoneFlow: View {
     private func pill(_ title: String, on: Bool, action: @escaping () -> Void) -> some View {
         Button {
             Haptics.tap()
-            withAnimation(.snappy) { action() }
+            withAnimation(Motion.klein) { action() }
         } label: {
             Text(title)
                 .font(.subheadline.weight(.semibold))
@@ -568,7 +577,7 @@ struct WalkDoneFlow: View {
     private func feedbackDone(_ outcome: FeedbackOutcome) -> some View {
         switch outcome {
         case .calm:
-            Text("Dank je dat je het vertelt. Iemand van Rondje kijkt ernaar.")
+            Text("Dank je dat je het vertelt. Iemand van \(Brand.name) kijkt ernaar.")
                 .font(.body.weight(.semibold))
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -608,13 +617,13 @@ struct WalkDoneFlow: View {
             } else {
                 Haptics.success()
             }
-            withAnimation(.spring(duration: 0.45, bounce: 0.5)) { sent = worrying ? .calm : .thanks }
+            withAnimation(Motion.or(Motion.pop, reduce: reduceMotion)) { sent = worrying ? .calm : .thanks }
             feedbackError = nil
             // So the 'Vertel het' step for this walk goes away.
             Task { await model.refreshAppointments() }
         } catch {
             Haptics.error()
-            withAnimation(.snappy) { feedbackError = error.localizedDescription }
+            withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) { feedbackError = error.plainText }
         }
     }
 
@@ -642,7 +651,7 @@ struct WalkDoneFlow: View {
                     .font(.display(30))
                     .accessibilityAddTraits(.isHeader)
                 nextCard {
-                    Text("Je melding is binnen. Iemand van Rondje neemt contact op als dat nodig is.")
+                    Text("Je melding is binnen. Iemand van \(Brand.name) neemt contact op als dat nodig is.")
                         .font(.body.weight(.semibold))
                 }
                 CoachBubble(mood: .calm, text: L("Rust lekker uit. Je hebt het goed gedaan."), guusSize: 56)
@@ -792,7 +801,7 @@ struct WalkDoneFlow: View {
     private func notNow(_ dogId: String) -> some View {
         Button {
             Keepsakes.shared.snooze("rebook." + dogId, until: .now.addingTimeInterval(14 * 86_400))
-            withAnimation(.smooth) { offerHidden = true }
+            withAnimation(Motion.weg) { offerHidden = true }
         } label: {
             Text("Nu niet")
                 .font(.body.weight(.semibold))
@@ -828,7 +837,7 @@ struct WalkDoneFlow: View {
         guard !started else { return }
         started = true
         before = ProgressStore.shared.progress
-        if reported { Haptics.tap() } else { Haptics.success() }
+        // No haptic here: ActiveWalkView already gave the one for the end of the walk (with "finish").
         appointment = lookup()
         markReportedDog()
         if appointment?.feedbackGiven == true { skipFeedback = true }
@@ -861,7 +870,7 @@ struct WalkDoneFlow: View {
 
     private func loadFriends() async {
         if let response: DogFriendsResponse = try? await APIClient.shared.get("/api/v1/me/dogs") {
-            withAnimation(.smooth) { friends = response.dogs }
+            withAnimation(Motion.scherm) { friends = response.dogs }
         }
     }
 
@@ -875,7 +884,7 @@ struct WalkDoneFlow: View {
         }
         guard let appointment, !appointment.isMeeting, !appointment.weekly else { return }
         if let loaded: DogDetail = try? await APIClient.shared.get("/api/v1/dogs/\(appointment.dog.id)") {
-            withAnimation(.smooth) { detail = loaded }
+            withAnimation(Motion.scherm) { detail = loaded }
         }
     }
 }
@@ -900,7 +909,7 @@ private struct CountUp: View {
                 for i in 1...steps {
                     try? await Task.sleep(for: .milliseconds(50))
                     guard !Task.isCancelled else { return }
-                    withAnimation(.snappy(duration: 0.2)) { shown = value * i / steps }
+                    withAnimation(Motion.klein) { shown = value * i / steps }
                 }
             }
     }

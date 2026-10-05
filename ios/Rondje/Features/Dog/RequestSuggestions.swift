@@ -92,6 +92,7 @@ enum RequestSuggestions {
             L("Ik kan meestal 's avonds."),
             L("Ik kan meestal overdag."),
             L("Ik ben student."),
+            L("Ik ben met pensioen."),
             L("Ik had vroeger zelf een hond."),
             L("Ik wandel graag in het park."),
         ]

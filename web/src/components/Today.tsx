@@ -6,20 +6,24 @@ import * as s from '@/db/schema'
 import { MASCOT } from '@/lib/avatar'
 import { countryInfo, isCountry } from '@/lib/countries'
 import { formatDistance } from '@/lib/geo'
-import { BACK_AFTER_DAYS } from '@/lib/nudges'
-import { BADGES, bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
+import { shownCount } from '@/lib/nearby'
+import { BACK_AFTER_DAYS, isNewDog } from '@/lib/nudges'
+import { bondFor, localParts, STEP_POINTS, weekOf } from '@/lib/progress'
 import { zonedToUtc } from '@/lib/time'
 import { challengesFor } from '@/server/challenges'
-import { dogFriendsFor, progressFor } from '@/server/progress'
-import { progressJson } from '@/server/progress-json'
-import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, type RequestRow } from '@/server/queries'
+import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
+import { levelMoment, progressJson } from '@/server/progress-json'
+import { webPushKey } from '@/server/push'
+import { impactTotals, incomingRequests, listDogs, myDogs, outgoingRequests, walkersNear, type RequestRow } from '@/server/queries'
 import type { OnboardedViewer } from '@/server/session'
-import { Celebration } from './Celebration'
 import { ChallengeCard } from './ChallengeCard'
 import { DogFace } from './DogFace'
 import { DogPortrait } from './DogPortrait'
 import { Icon } from './Icon'
+import { InstallAsk } from './InstallAsk'
 import { Medal } from './Medal'
+import { LevelUp } from './progress/LevelUp'
+import { PushAsk } from './PushAsk'
 import { WeekCard } from './WeekCard'
 
 const WALKER_TIPS = 10
@@ -54,21 +58,21 @@ function nextAppointment(rows: RequestRow[], now: Date): RequestRow | null {
  */
 export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welcome: boolean }) {
   const now = new Date()
-  const t = await getTranslations('today')
-  const tp = await getTranslations('progress')
-  const td = await getTranslations('dogs')
-  const format = await getFormatter()
-  const locale = await getLocale()
   const p = viewer.profile
   const hasOrg = viewer.orgs.length > 0
-
-  const progress = await progressFor(viewer, now)
-  const { walker, owner } = progress.roles
+  const { walker, owner } = rolesOf(p)
   const country = isCountry(p.country) ? p.country : undefined
   const near = p.lat != null && p.lng != null ? { lat: p.lat, lng: p.lng } : country ? countryInfo(country).center : null
 
-  const [json, challenges, outgoing, incoming, dogs, nearby, impact, friends] = await Promise.all([
-    progressJson(progress),
+  // The first screen after opening the app: everything is asked at the same time.
+  const [t, tp, td, tpa, format, locale, progress, challenges, outgoing, incoming, dogs, nearby, impact, friends, dogStats, walkers] = await Promise.all([
+    getTranslations('today'),
+    getTranslations('progress'),
+    getTranslations('dogs'),
+    getTranslations('pushAsk'),
+    getFormatter(),
+    getLocale(),
+    progressFor(viewer, now),
     challengesFor(viewer, now),
     walker ? outgoingRequests(viewer.userId) : Promise.resolve([]),
     owner || hasOrg ? incomingRequests(viewer) : Promise.resolve([]),
@@ -76,13 +80,15 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
     walker ? listDogs({ country, near }, 8) : Promise.resolve([]),
     impactTotals(),
     walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
+    owner ? dogWeekStats(viewer.userId, now) : new Map<string, { week: number; walkers: number }>(),
+    owner ? walkersNear(p, viewer.userId) : 0,
   ])
+  const json = await progressJson(progress)
 
   const ownDogs = dogs.filter((d) => !d.isDemo)
-  const dogStats = await dogWeekStats(
-    ownDogs.map((d) => d.id),
-    now,
-  )
+  // Owners see how many walkers live nearby; with only a few, a nudge to tell the neighbours instead.
+  const walkersNearby = shownCount(walkers)
+  const shareDog = ownDogs.find((d) => d.status === 'active' && !d.orgId) ?? null
   const nearbyDogs = nearby.filter((item) => item.dog.ownerId !== viewer.userId).slice(0, 6)
   const next = nextAppointment([...outgoing, ...incoming], now)
   const pending = incoming.filter((r) => r.request.status === 'pending').length
@@ -100,7 +106,9 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
   const day = dayOfYear(now)
   const tip = !walker || (owner && day % 2 === 1) ? t(`tips.owner.${(day % OWNER_TIPS) + 1}`) : t(`tips.walker.${(day % WALKER_TIPS) + 1}`)
 
-  const celebrate = progress.levelUp || progress.newAwards.length > 0
+  const moment = levelMoment(progress, json)
+  const pushKey = webPushKey()
+  const pushText = owner && ownDogs[0] ? tpa('dog', { dog: ownDogs[0].name }) : walker ? tpa('walker') : tpa('general')
 
   return (
     <div className="today">
@@ -132,13 +140,14 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       {next ? (
         <Link href={next.request.kind === 'meet' || next.walkStatus !== 'active' ? '/requests' : `/walk/${next.walkId}`} className="next-card">
-          <DogPortrait dog={next.dog} size={56} />
+          <DogPortrait dog={next.dog} size={56} decorative />
           <span className="stack-s">
             <span className="eyebrow">{t('next')}</span>
             <strong>
               {t(next.request.kind === 'meet' ? 'nextMeeting' : 'nextWalk', {
                 when: format.dateTime(next.request.startsAt, { weekday: 'long', hour: '2-digit', minute: '2-digit' }),
                 dog: next.dog.name,
+                via: next.request.meetVia,
               })}
             </strong>
           </span>
@@ -148,7 +157,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
 
       {backFriend ? (
         <section className="card back-card" aria-labelledby="back-title">
-          <DogPortrait dog={backFriend.dog} size={72} />
+          <DogPortrait dog={backFriend.dog} size={72} decorative />
           <div className="stack-s">
             <h2 id="back-title" className="small-title">
               {t('backTitle')}
@@ -200,7 +209,7 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
                     {current ? <span className="muted small">{step.hint}</span> : null}
                     {current ? (
                       <Link href={step.href} className="button primary small">
-                        {t('start')}
+                        {step.action ?? t('start')}
                         <Icon name="arrow" size={16} />
                       </Link>
                     ) : null}
@@ -211,6 +220,9 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
           </ol>
         </section>
       ) : null}
+
+      {pushKey ? <PushAsk publicKey={pushKey} text={pushText} /> : null}
+      <InstallAsk push={Boolean(pushKey)} />
 
       <div className="today-grid">
         {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
@@ -225,12 +237,25 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               <Icon name="plus" size={16} /> {t('addDog')}
             </Link>
           </div>
+          {walkersNearby != null ? (
+            <p className="walkers-near muted small">
+              <Icon name="users" size={16} />
+              {t('walkersNear', { n: walkersNearby })}
+            </p>
+          ) : shareDog ? (
+            <p className="walkers-near muted small">
+              <Icon name="users" size={16} />
+              <span>
+                {t.rich('walkersFew', { dog: shareDog.name, link: (chunks) => <Link href={`/dogs/${shareDog.id}#share`}>{chunks}</Link> })}
+              </span>
+            </p>
+          ) : null}
           {ownDogs.length ? (
             <ul className="mini-dogs">
               {ownDogs.map((dog) => (
                 <li key={dog.id}>
                   <Link href={`/dogs/${dog.id}`} className="mini-dog">
-                    <DogPortrait dog={dog} size={64} />
+                    <DogPortrait dog={dog} size={64} decorative />
                     <span className="stack-s">
                       <strong>{dog.name}</strong>
                       <span className="muted small">{t('dogWeek', { n: dogStats.get(dog.id)?.week ?? 0 })}</span>
@@ -267,7 +292,10 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
               {nearbyDogs.map(({ dog, distanceM }) => (
                 <li key={dog.id}>
                   <Link href={`/dogs/${dog.id}`} className="strip-dog">
-                    <DogPortrait dog={dog} size={132} />
+                    <span className="portrait-wrap">
+                      <DogPortrait dog={dog} size={132} decorative />
+                      {isNewDog(dog, now) ? <span className="new-sticker">{td('new')}</span> : null}
+                    </span>
                     <strong>{dog.name}</strong>
                     <span className="muted small">{distanceM != null && !dog.isDemo ? td('away', { distance: formatDistance(distanceM, locale) }) : dog.city}</span>
                   </Link>
@@ -318,24 +346,18 @@ export async function Today({ viewer, welcome }: { viewer: OnboardedViewer; welc
         <p className="hand">{tip}</p>
       </section>
 
-      {impact.walks > 0 ? <p className="together muted small">{t('together', { walks: format.number(impact.walks), dogs: format.number(impact.dogs) })}</p> : null}
+      {impact.walks > 0 ? <p className="together muted small">{t('together', { walks: impact.walks, dogs: impact.dogs })}</p> : null}
 
-      {celebrate ? (
-        <Celebration
-          level={json.level.number}
-          levelUp={progress.levelUp ? json.level.name : null}
-          awards={json.newAwards.map((a) => ({ key: a.key, tier: a.tier, icon: a.icon ?? BADGES[0].icon, title: a.title, color: a.color }))}
-        />
-      ) : null}
+      {moment ? <LevelUp celebration={moment} /> : null}
     </div>
   )
 }
 
-/** For each of your dogs: walks this week and how many different people ever walked it. */
-async function dogWeekStats(dogIds: string[], now: Date): Promise<Map<string, { week: number; walkers: number }>> {
-  if (dogIds.length === 0) return new Map()
+/** For each of your own dogs: walks this week and how many different people ever walked it. */
+async function dogWeekStats(ownerId: string, now: Date): Promise<Map<string, { week: number; walkers: number }>> {
   const db = await getDb()
   const monday = zonedToUtc(weekOf(now), '00:00')
+  const ownDogs = db.select({ id: s.dog.id }).from(s.dog).where(and(eq(s.dog.ownerId, ownerId), eq(s.dog.isDemo, false)))
   const rows = await db
     .select({
       dogId: s.walk.dogId,
@@ -343,7 +365,7 @@ async function dogWeekStats(dogIds: string[], now: Date): Promise<Map<string, { 
       walkers: sql<number>`count(distinct ${s.walk.walkerId})`.mapWith(Number),
     })
     .from(s.walk)
-    .where(and(inArray(s.walk.dogId, dogIds), eq(s.walk.status, 'ended')))
+    .where(and(inArray(s.walk.dogId, ownDogs), eq(s.walk.status, 'ended')))
     .groupBy(s.walk.dogId)
   return new Map(rows.map((r) => [r.dogId, { week: r.week, walkers: r.walkers }]))
 }

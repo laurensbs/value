@@ -146,7 +146,7 @@ Rondje solo ve la ubicación de alguien durante un paseo activo. Fuera de un pas
 
 ## 6. Comunicar un incidente a Rondje
 
-Comunica cualquier incidente o situación de riesgo con el botón **Denunciar** de la app, o escribe a [e-mail: hallo@rondje.app]. Indica:
+Comunica cualquier incidente o situación de riesgo con el botón **Denunciar** de la app, o escribe a {{contact}}. Indica:
 
 - qué pasó, cuándo y dónde;
 - quiénes estaban implicados;

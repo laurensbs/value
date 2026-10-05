@@ -1,28 +1,35 @@
 import SwiftUI
 
+/// Jij: who you are and everything about your account, in a few short groups. The main actions
+/// (editing your profile, inviting someone) sit in the header; the rest is one tap away.
 struct ProfileView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openURL) private var openURL
+    @Environment(\.dynamicTypeSize) private var typeSize
+    @State private var progress = ProgressStore.shared
     @State private var confirmSignOut = false
     @State private var deleting = false
+    @State private var help = HelpUs.shared
+    /// The "terms updated" sheet, opened from the notice below the header.
+    @State private var terms: TermsRequest?
+
+    private var walks: Bool { model.role != .owner }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 18) {
+                VStack(alignment: .leading, spacing: 22) {
                     header
-                    MembershipCard()
-                    if let code = model.me?.profile?.referralCode {
-                        ShareLink(
-                            item: Brand.share("/r/\(code)"),
-                            subject: Text("Wandel je mee?"),
-                            message: Text("Ik wandel met honden uit de buurt via \(Brand.name). Gratis, en je helpt er iemand mee. Doe je mee?")
-                        ) {
-                            Label("Nodig vrienden uit", systemImage: "person.2.wave.2.fill")
-                        }
-                        .buttonStyle(.secondary)
+                    // Changed terms: a quiet notice until the yes, the same before and after they apply.
+                    if let state = model.me?.termsState, state.needsYes {
+                        TermsNoticeCard(state: state) { terms = TermsRequest(model: model) }
                     }
-                    if model.role != .owner, let trust = model.me?.trust { stats(trust) }
+                    // The first steps for walkers, until they are done (they used to stand on Ontdek).
+                    FirstSteps { model.perform(.quiz) }
+                    if let p = progress.progress {
+                        NavigationLink { BadgesView() } label: { LevelCard(progress: p) }
+                            .buttonStyle(.plain)
+                    }
                     if let lift = MoodStore.averageLift, lift > 0 {
                         Label(L("Na een rondje voel je je gemiddeld beter dan ervoor. Alleen jij ziet dit."), systemImage: "sun.max.fill")
                             .font(.subheadline)
@@ -31,61 +38,142 @@ struct ProfileView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .background(Palette.grassSoft, in: .rect(cornerRadius: 18, style: .continuous))
                     }
-                    DeviceSettingsView()
-                    links
+                    RowGroup {
+                        NavigationLink { NotificationsView() } label: {
+                            ProfileRow(symbol: "bell.fill", title: L("Meldingen"), detail: (model.me?.unread ?? 0) > 0 ? L("\(model.me?.unread ?? 0) nieuw") : nil)
+                        }
+                        NavigationLink { MyDogsView() } label: {
+                            ProfileRow(symbol: "pawprint.fill", title: L("Mijn honden"), detail: L("Voor jezelf, de buren of opa en oma"))
+                        }
+                    }
+                    if walks {
+                        RowGroup(title: L("Wandelen")) {
+                            NavigationLink { LessonsView() } label: {
+                                ProfileRow(symbol: "graduationcap.fill", title: L("Hondenschool"), detail: L("\(Keepsakes.shared.lessonsDone.count) van 5 lessen"))
+                            }
+                            NavigationLink { QuizView() } label: {
+                                ProfileRow(symbol: "checkmark.seal.fill", title: L("Veiligheidsquiz"),
+                                           detail: model.quizPassed ? L("Gehaald") : L("Nodig voor elke aanvraag"))
+                            }
+                            NavigationLink { DogFriendsView() } label: {
+                                ProfileRow(symbol: "book.fill", title: L("Hondenvriendenboek"), detail: L("Alle honden met wie je liep"))
+                            }
+                        }
+                    }
+                    RowGroup(title: L("Instellingen")) {
+                        LanguageRow()
+                        // Seintjes are about walking other people's dogs, so only for people who walk.
+                        if walks {
+                            NavigationLink { NudgeSettingsView() } label: {
+                                ProfileRow(symbol: "bell.badge.fill", title: L("Seintjes"), detail: Nudges.settings.enabled ? L("Aan") : L("Uit"))
+                            }
+                        }
+                        SoundsToggle()
+                        SettingToggle(symbol: "pawprint.circle.fill", title: L("Guus mag tips geven"),
+                                      detail: L("Guus is de hond die je steeds de volgende stap laat zien."),
+                                      isOn: Binding(get: { Keepsakes.shared.coachOn }, set: { Keepsakes.shared.coachOn = $0 }))
+                        Button {
+                            Keepsakes.shared.resetHints()
+                            model.show(L("Guus legt het straks weer uit"))
+                        } label: {
+                            ProfileRow(symbol: "arrow.counterclockwise", title: L("Laat Guus alles opnieuw uitleggen"))
+                        }
+                        NavigationLink { RoleView() } label: {
+                            ProfileRow(symbol: "arrow.left.arrow.right", title: L("Wat doe je op \(Brand.name)?"), detail: roleText)
+                        }
+                    }
+                    HealthSettings()
+                    RowGroup(title: L("Over \(Brand.name)")) {
+                        Button { openURL(Brand.web("/safety")) } label: { ProfileRow(symbol: "shield.lefthalf.filled", title: L("Veiligheid"), external: true) }
+                        Button { openURL(Brand.web("/legal/privacy")) } label: { ProfileRow(symbol: "hand.raised.fill", title: L("Privacy en voorwaarden"), external: true) }
+                        // Help ons: one tap straight to the campaign page in the browser, never a sheet in
+                        // between and never paying inside the app. Only when the server allows it (HelpUs.swift).
+                        if let link = help.link {
+                            Button { openURL(link.url) } label: {
+                                ProfileRow(symbol: "heart.fill", title: link.title, detail: link.subtitle(), external: true)
+                            }
+                            .accessibilityHint(link.hint)
+                        }
+                    }
+                    RowGroup(title: L("Account")) {
+                        Button { confirmSignOut = true } label: { ProfileRow(symbol: "rectangle.portrait.and.arrow.right", title: L("Uitloggen")) }
+                        Button { deleting = true } label: { ProfileRow(symbol: "trash", title: L("Account verwijderen"), tint: Palette.danger) }
+                    }
                     Text("\(Brand.name) \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")
                         .font(.caption).foregroundStyle(Palette.muted)
+                        .frame(maxWidth: .infinity)
                 }
                 .padding(20)
             }
             .screenBackground()
             .navigationTitle("Jij")
-            .refreshable { await model.refreshMe() }
+            .refreshable {
+                await model.refreshMe()
+                await help.load(force: true)
+            }
+            .task { await progress.load() }
+            .task { await help.load() }
             .confirmationDialog("Uitloggen?", isPresented: $confirmSignOut, titleVisibility: .visible) {
                 Button("Uitloggen", role: .destructive) { Task { await model.signOut() } }
             }
             .sheet(isPresented: $deleting) { DeleteAccountSheet().presentationDetents([.medium]) }
+            .termsSheet($terms)
         }
     }
 
+    /// Who you are, your numbers in one line, and the two things you do here most: edit and invite.
     private var header: some View {
-        HStack(spacing: 16) {
-            Avatar(url: model.me?.profile?.photoUrl, name: model.firstName, size: 76)
-            VStack(alignment: .leading, spacing: 6) {
-                Text(model.firstName).font(.display(26))
-                if let p = model.me?.profile {
-                    Text("\(p.ageBand) jaar · \(p.city)").font(.subheadline).foregroundStyle(Palette.muted)
-                }
-                if let badges = model.me?.trust?.badges {
-                    HStack(spacing: 6) {
-                        ForEach(badges, id: \.self) { b in
-                            let label = Labels.badge(b)
-                            Chip(text: label.0, symbol: label.1, tint: Palette.calm, soft: Palette.calmSoft)
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(alignment: .center, spacing: 16) {
+                Avatar(url: model.me?.profile?.photoUrl, name: model.firstName, size: 76)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(model.firstName).font(.display(26))
+                    if let p = model.me?.profile {
+                        Text("\(p.ageBand) jaar · \(p.city)").font(.subheadline).foregroundStyle(Palette.muted)
+                    }
+                    if walks, let t = model.me?.trust {
+                        Text(stats(t)).font(.subheadline).foregroundStyle(Palette.muted)
+                    }
+                    if let badges = model.me?.trust?.badges, !badges.isEmpty {
+                        FlowLayout(spacing: 6) {
+                            ForEach(badges, id: \.self) { b in
+                                let label = Labels.badge(b)
+                                Chip(text: label.0, symbol: label.1, tint: Palette.calm, soft: Palette.calmSoft)
+                            }
                         }
+                        .padding(.top, 2)
                     }
                 }
+                Spacer(minLength: 0)
             }
-            Spacer()
+            let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))
+            layout {
+                NavigationLink { EditProfileView() } label: {
+                    Label("Profiel bewerken", systemImage: "pencil")
+                }
+                .buttonStyle(.secondary)
+                if let code = model.me?.profile?.referralCode {
+                    ShareLink(
+                        item: Brand.share("/r/\(code)"),
+                        subject: Text("Wandel je mee?"),
+                        message: Text("Ik wandel met honden uit de buurt via \(Brand.name). Gratis, en je helpt er iemand mee. Doe je mee?")
+                    ) {
+                        Label("Nodig uit", systemImage: "person.2.wave.2.fill")
+                    }
+                    .buttonStyle(.secondary)
+                }
+            }
         }
     }
 
-    private func stats(_ t: Me.Trust) -> some View {
-        HStack(spacing: 10) {
-            stat("\(t.walks)", t.walks == 1 ? "rondje" : "rondjes", "figure.walk")
-            stat("\(t.idChecks)", L("keer ID gezien"), "person.text.rectangle")
-            stat("\(t.memberSinceYear)", L("lid sinds"), "calendar")
-        }
-    }
-
-    private func stat(_ value: String, _ label: String, _ symbol: String) -> some View {
-        VStack(spacing: 4) {
-            Image(systemName: symbol).foregroundStyle(Palette.grass).frame(height: 24)
-            Text(value).font(.display(22)).contentTransition(.numericText())
-            Text(label).font(.caption).foregroundStyle(Palette.muted)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
+    /// "3 rondjes · 2× ID gezien · sinds 2026": the three numbers that used to be three tiles.
+    /// An ID that was never seen yet says nothing, so it is left out.
+    private func stats(_ t: Me.Trust) -> String {
+        [
+            t.walks == 1 ? L("1 rondje") : L("\(t.walks) rondjes"),
+            t.idChecks > 0 ? L("\(t.idChecks)× ID gezien") : nil,
+            L("sinds \(String(t.memberSinceYear))"),
+        ].compactMap { $0 }.joined(separator: " · ")
     }
 
     private var roleText: String {
@@ -95,81 +183,44 @@ struct ProfileView: View {
         case .both: L("Allebei")
         }
     }
+}
 
-    private var links: some View {
-        VStack(spacing: 0) {
-            NavigationLink { BadgesView() } label: {
-                row("rosette", L("Jouw niveau en badges"), ProgressStore.shared.progress.map { "\($0.level.name) · \($0.points) " + L("punten") })
+/// A group of rows on one card, with an optional heading above it. Dividers go between the rows.
+struct RowGroup<Content: View>: View {
+    var title: String? = nil
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if let title {
+                Text(title)
+                    .font(.headline)
+                    .padding(.horizontal, 4)
+                    .accessibilityAddTraits(.isHeader)
             }
-            Divider().padding(.leading, 56)
-            NavigationLink { RoleView() } label: {
-                row("arrow.left.arrow.right", L("Wat doe je op Rondje?"), roleText)
-            }
-            Divider().padding(.leading, 56)
-            if model.role != .owner {
-            NavigationLink { DogFriendsView() } label: {
-                row("book.fill", L("Hondenvriendenboek"), L("Alle honden met wie je liep"))
-            }
-            Divider().padding(.leading, 56)
-            NavigationLink { LessonsView() } label: {
-                row("graduationcap.fill", L("Hondenschool"), L("\(Keepsakes.shared.lessonsDone.count) van 5 lessen"))
-            }
-            Divider().padding(.leading, 56)
-            NavigationLink { QuizView() } label: {
-                row("checkmark.seal.fill", L("Veiligheidsquiz"), model.me?.profile?.quizPassed == true ? L("Gehaald") : L("Nodig voor zelfstandige rondjes"))
-            }
-            Divider().padding(.leading, 56)
-            }
-            NavigationLink { MyDogsView() } label: { row("pawprint.fill", L("Mijn honden"), L("Voor jezelf, de buren of opa en oma")) }
-            Divider().padding(.leading, 56)
-            NavigationLink { NotificationsView() } label: {
-                row("bell.fill", L("Meldingen"), (model.me?.unread ?? 0) > 0 ? L("\(model.me!.unread) nieuw") : nil)
-            }
-            Divider().padding(.leading, 56)
-            // Seintjes are about walking other people's dogs, so only for people who walk.
-            if model.role != .owner {
-                NavigationLink { NudgeSettingsView() } label: {
-                    row("bell.badge.fill", L("Seintjes"), Nudges.settings.enabled ? L("Aan") : L("Uit"))
-                }
-                Divider().padding(.leading, 56)
-            }
-            NavigationLink { EditProfileView() } label: { row("pencil", L("Profiel bewerken"), nil) }
-            Divider().padding(.leading, 56)
-            Toggle(isOn: Binding(get: { Keepsakes.shared.coachOn }, set: { Keepsakes.shared.coachOn = $0 })) {
-                HStack(spacing: 14) {
-                    Image(systemName: "pawprint.circle.fill")
-                        .frame(width: 28)
-                        .foregroundStyle(Palette.grass)
-                    VStack(alignment: .leading, spacing: 1) {
-                        Text("Guus mag tips geven").foregroundStyle(Palette.ink)
-                        Text("Guus is de hond die je steeds de volgende stap laat zien.").font(.caption).foregroundStyle(Palette.muted)
+            VStack(spacing: 0) {
+                Group(subviews: content) { rows in
+                    ForEach(Array(rows.enumerated()), id: \.element.id) { index, row in
+                        if index > 0 { Divider().padding(.leading, 58) }
+                        row
                     }
                 }
             }
-            .tint(Palette.grass)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
-            Divider().padding(.leading, 56)
-            Button {
-                Keepsakes.shared.resetHints()
-                model.show(L("Guus legt het straks weer uit"))
-            } label: {
-                row("arrow.counterclockwise", L("Laat Guus alles opnieuw uitleggen"), nil)
-            }
-            Divider().padding(.leading, 56)
-            Button { openURL(Brand.web("/safety")) } label: { row("shield.lefthalf.filled", L("Veiligheid"), nil, external: true) }
-            Divider().padding(.leading, 56)
-            Button { openURL(Brand.web("/legal/privacy")) } label: { row("hand.raised.fill", L("Privacy en voorwaarden"), nil, external: true) }
-            Divider().padding(.leading, 56)
-            Button { confirmSignOut = true } label: { row("rectangle.portrait.and.arrow.right", L("Uitloggen"), nil) }
-            Divider().padding(.leading, 56)
-            Button { deleting = true } label: { row("trash", L("Account verwijderen"), nil, tint: Palette.danger) }
+            .buttonStyle(.plain)
+            .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
         }
-        .buttonStyle(.plain)
-        .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
     }
+}
 
-    private func row(_ symbol: String, _ title: String, _ detail: String?, external: Bool = false, tint: Color = Palette.ink) -> some View {
+/// One row under Jij: an icon, a title, maybe a short line, and where it goes.
+struct ProfileRow: View {
+    var symbol: String
+    var title: String
+    var detail: String? = nil
+    var external = false
+    var tint: Color = Palette.ink
+
+    var body: some View {
         HStack(spacing: 14) {
             Image(systemName: symbol)
                 .frame(width: 28)
@@ -178,13 +229,15 @@ struct ProfileView: View {
                 Text(title).foregroundStyle(tint)
                 if let detail { Text(detail).font(.caption).foregroundStyle(Palette.muted) }
             }
-            Spacer()
+            .multilineTextAlignment(.leading)
+            Spacer(minLength: 8)
             Image(systemName: external ? "arrow.up.right" : "chevron.right")
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(Palette.muted)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
+        .frame(minHeight: 44)
         .contentShape(.rect)
     }
 }
@@ -222,7 +275,7 @@ struct DeleteAccountSheet: View {
             dismiss()
             model.reset()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }
@@ -276,20 +329,33 @@ struct NotificationsView: View {
         }
     }
 
-    private func text(_ n: AppNotification) -> String {
+    private func text(_ n: AppNotification) -> String { Self.text(n) }
+
+    /// The sentence for a notification. "Kijk live mee" only for a walk that shared live location
+    /// (`live: "yes"`), so never for a first meeting or with live location off; older notifications
+    /// without it promise nothing live (web notification-links.ts). Kinds this version does not know
+    /// use the server's own sentence.
+    static func text(_ n: AppNotification) -> String {
         let dog = n.text("dogName"), walker = n.text("walkerName")
         switch n.kind {
         case "request-new": return L("\(walker) wil graag met \(dog) wandelen.")
         case "request-accepted": return L("Je afspraak met \(dog) is geaccepteerd.")
         case "request-declined": return L("Je aanvraag voor \(dog) is afgewezen.")
         case "request-cancelled": return L("De afspraak met \(dog) is geannuleerd.")
-        case "walk-started": return L("\(walker) is op pad met \(dog). Kijk live mee.")
+        case "walk-started":
+            return n.sharedLiveLocation ? L("\(walker) is op pad met \(dog). Kijk live mee.") : L("\(walker) is op pad met \(dog).")
         case "walk-ended": return L("\(dog) is weer thuis.")
         case "walk-overdue": return L("Het rondje met \(dog) loopt uit.")
         case "chat-message": return L("\(n.text("senderName")) stuurde een bericht over \(dog).")
-        case "trust-granted": return L("Je mag nu zelfstandig met \(dog) wandelen.")
+        case "trust-granted":
+            // Given while live location is off (`live: "no"`): the same calm words as the website.
+            return n.text("live") == "no"
+                ? L("Je mag nu zelfstandig met \(dog) wandelen. Live locatie staat voorlopig uit, dus een rondje alleen start nog niet.")
+                : L("Je mag nu zelfstandig met \(dog) wandelen.")
         case "group-walk-new": return L("Er is een nieuwe groepswandeling bij een opvang.")
-        default: return L("Nieuwe melding")
+        default:
+            let server = n.serverText?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            return server.isEmpty ? L("Nieuwe melding") : server
         }
     }
 }

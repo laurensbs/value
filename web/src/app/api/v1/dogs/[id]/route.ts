@@ -1,26 +1,30 @@
 import { NextResponse } from 'next/server'
 import { canRequestMeeting, canRequestSolo } from '@/lib/rules'
-import { apiViewer, dogLook, fail, json } from '@/server/api'
-import { dogFacts, getDogDetail, myGroupSignups, relationFor, walkerFacts } from '@/server/queries'
+import { apiActive, dogLook, fail, json } from '@/server/api'
+import { dogFacts, getDogDetail, myGroupSignups, walkerFacts } from '@/server/queries'
+import { dogShareFor } from '@/server/share'
 
 /** One dog, with what the viewer may do next. Private details only after an accepted request. */
 export async function GET(_request: Request, ctx: { params: Promise<{ id: string }> }) {
-  const viewer = await apiViewer()
+  const viewer = await apiActive()
   if (viewer instanceof NextResponse) return viewer
   const { id } = await ctx.params
   const detail = await getDogDetail(id, viewer)
   if (!detail) return fail('dog-unavailable', 404)
   const d = detail.dog
 
+  const [facts, booked, share] = await Promise.all([
+    viewer.profile ? walkerFacts(viewer) : null,
+    myGroupSignups(viewer.userId),
+    // The owner's own dog, online: the same ready message for the neighbours as on the website.
+    dogShareFor(detail, viewer),
+  ])
   let canMeet: string | null = 'not-onboarded'
   let canSolo: string | null = 'not-onboarded'
-  if (viewer.profile) {
-    const facts = await walkerFacts(viewer)
-    const relation = await relationFor(viewer, d)
-    canMeet = canRequestMeeting(facts, dogFacts(d), relation)
-    canSolo = canRequestSolo(facts, dogFacts(d), relation)
+  if (facts && detail.relation) {
+    canMeet = canRequestMeeting(facts, dogFacts(d), detail.relation)
+    canSolo = canRequestSolo(facts, dogFacts(d), detail.relation)
   }
-  const booked = await myGroupSignups(viewer.userId)
 
   return json({
     dog: {
@@ -60,5 +64,6 @@ export async function GET(_request: Request, ctx: { params: Promise<{ id: string
     canSeePrivate: detail.canSeePrivate,
     isMine: detail.isMine,
     canRequest: { meet: canMeet, solo: canSolo },
+    share,
   })
 }

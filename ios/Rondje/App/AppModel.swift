@@ -28,6 +28,22 @@ final class AppModel {
     /// What someone does on Rondje, from their profile: it shapes the tabs and the home screen.
     enum Role { case walker, owner, both }
 
+    /// Whether this person may ask to meet or walk a dog: walkers pass the safety quiz first
+    /// (the server checks it too and answers "needs-quiz").
+    var quizPassed: Bool { me?.profile?.quizPassed == true || me?.trust?.quizPassed == true }
+
+    /// A new walker does the safety quiz right after making the profile, before the app opens.
+    /// Owners and shelter staff skip it. It stays until "Laat me de honden zien" on the quiz's done
+    /// screen (which removes the mark), so passing never jumps past that screen.
+    var needsOnboardingQuiz: Bool {
+        Self.onboardingQuiz(marked: Keepsakes.shared.has("onboarding.quiz"), wantsToWalk: me?.profile?.wantsToWalk == true,
+                            inOrg: !(me?.orgs.isEmpty ?? true))
+    }
+
+    nonisolated static func onboardingQuiz(marked: Bool, wantsToWalk: Bool, inOrg: Bool) -> Bool {
+        marked && wantsToWalk && !inOrg
+    }
+
     var role: Role {
         let p = me?.profile
         switch (p?.wantsToWalk ?? true, p?.hasDogs ?? false) {
@@ -100,6 +116,8 @@ final class AppModel {
             if phase == .ready {
                 await refreshAppointments()
                 await Push.registerIfAllowed()
+                // Whether walks share a live location (features.liveLocation); at most every few minutes.
+                await ServerFeatures.shared.refresh()
             }
         } catch APIError.unauthorized {
             if mine == session { reset() }
@@ -164,10 +182,22 @@ final class AppModel {
         withAnimation(.spring(duration: 0.4)) { banner = Banner(text: text, symbol: symbol, tint: tint) }
     }
 
+    /// The server answered 'live-location-off' to accepting or starting a walk alone: live location went
+    /// off in the meantime. Said calmly with the same note as on the card, never as an error, and the
+    /// cards follow (LiveLocationPause).
+    func liveLocationPaused() async {
+        ServerFeatures.shared.liveLocationSwitchedOff()
+        show(LiveLocationPause.note, symbol: "location.slash", tint: Palette.muted)
+        await refreshAppointments()
+    }
+
     /// The next accepted appointment, for the Home Screen widget (no contact details).
     private func publishNextWalk() {
+        // A walk alone that waits for live location does not start, so it is not the next walk either.
+        let liveLocation = ServerFeatures.shared.liveLocation
         let next = appointments.outgoing
             .filter { $0.status == "accepted" && $0.startsAt > .now.addingTimeInterval(-2 * 3600) }
+            .filter { !$0.waitsForLiveLocation(liveLocation: liveLocation) }
             .min { $0.startsAt < $1.startsAt }
         SharedStore.save(next.map {
             NextWalkSnapshot(dogName: $0.dog.name, startsAt: $0.startsAt, kind: $0.kind, city: $0.dog.city, look: $0.dog.look)

@@ -16,7 +16,7 @@ struct RoleView: View {
 
     private var options: [Option] { [
         Option(id: .walker, title: L("Ik wil wandelen"), text: L("Je ziet honden in de buurt en plant rondjes."), symbol: "figure.walk"),
-        Option(id: .owner, title: L("Ik heb een hond"), text: L("Je ziet wie met je hond wil wandelen, en kijkt live mee."), symbol: "house.fill"),
+        Option(id: .owner, title: L("Ik heb een hond"), text: L("Je ziet wie met je hond wil wandelen, en jij beslist wie er komt."), symbol: "house.fill"),
         Option(id: .both, title: L("Allebei"), text: L("Wandelen met andere honden, en hulp voor je eigen hond."), symbol: "arrow.left.arrow.right"),
     ] }
 
@@ -57,7 +57,7 @@ struct RoleView: View {
             .animation(.snappy, value: model.role)
         }
         .screenBackground()
-        .navigationTitle("Wat doe je op Rondje?")
+        .navigationTitle(L("Wat doe je op \(Brand.name)?"))
     }
 
     private struct Payload: Encodable { var wantsToWalk, hasDogs: Bool }
@@ -71,7 +71,7 @@ struct RoleView: View {
             Haptics.success()
             await model.refreshMe()
         } catch {
-            self.error = error.localizedDescription
+            self.error = error.plainText
         }
     }
 }

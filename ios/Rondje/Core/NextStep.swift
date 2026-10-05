@@ -37,7 +37,6 @@ struct NextStepContext: Sendable {
     var myDogsCount: Int? = nil
     var weekGoal: Int? = nil
     var weekWalks = 0
-    var lessonsDone = 0
     var nearbyDogs: [DogCard] = []
     /// False while the dogs nearby are still loading, so Guus never says there are none before he looked.
     var nearbyLoaded = true
@@ -49,6 +48,9 @@ struct NextStepContext: Sendable {
     var snoozed: Set<String> = []
     /// Appointment ids whose meeting prep is done.
     var prepDone: Set<String> = []
+    /// Live location on the server (features.liveLocation). While it is off, a walk alone with the dog
+    /// does not start, so Guus does not offer to start one, and nothing is "live" to watch.
+    var liveLocation = true
 }
 
 extension NextStep {
@@ -116,10 +118,12 @@ extension NextStep {
         // a. A walk of your own dog happening right now (only for people who walk and have a dog).
         if c.role == .both {
             for item in c.incoming where item.walkStatus == "active" {
+                // "Kijk live mee" only for a walk that shares where they are (never a first meeting).
+                let live = WalkStarter.sharesLocation(kind: item.kind, liveLocation: c.liveLocation)
                 list.append(Candidate(step: NextStep(
                     id: "live.\(item.id)", mood: .happy,
                     text: L("\(item.dog.name) is nu op pad met \(walkerName(item))."),
-                    button: L("Kijk live mee"), action: .follow(item.id), snoozable: false
+                    button: live ? L("Kijk live mee") : L("Bekijk het rondje"), action: .follow(item.id), snoozable: false
                 )))
             }
         }
@@ -127,6 +131,7 @@ extension NextStep {
         // b. A walk that can start now.
         let startable = outgoing
             .filter { $0.canStart(now: c.now) && $0.walkStatus != "ended" && $0.walkStatus != "active" }
+            .filter { !WalkStarter.blockedByLiveLocation($0, liveLocation: c.liveLocation) }
             .sorted { $0.startsAt < $1.startsAt }
         for item in startable {
             let at = when(item.startsAt, c)
@@ -156,29 +161,23 @@ extension NextStep {
             )))
         }
 
-        // e. Nothing planned yet: three dogs to start with. Skipped when they could not be loaded,
-        // so the next step (the Hondenschool) comes through instead of a 'still looking' that never ends.
+        // e. The safety quiz comes before any request (the server checks it too). The five Hondenschool
+        // lessons are an extra, reachable from the quiz and under Jij; they are no step of their own.
+        if !c.quizPassed {
+            list.append(Candidate(step: NextStep(
+                id: "quiz", mood: .curious,
+                text: L("Eerst de veiligheidsquiz, dan kun je een hond aanvragen. Acht vragen, geen tijdsdruk."),
+                button: L("Start de quiz"), action: .quiz
+            ), suggestion: true))
+        }
+
+        // f. Nothing planned yet: three dogs to start with. Skipped when they could not be loaded,
+        // so a later step comes through instead of a 'still looking' that never ends.
         if outgoing.isEmpty && !(c.nearbyFailed && c.nearbyDogs.isEmpty) {
             list.append(Candidate(step: picks(c), suggestion: true))
         }
 
-        // f. The Hondenschool and the quiz.
         let waiting = outgoing.filter { $0.status == "pending" }.sorted { $0.startsAt < $1.startsAt }
-        if !c.quizPassed {
-            if c.lessonsDone < 5 {
-                list.append(Candidate(step: NextStep(
-                    id: "lessons", mood: .curious,
-                    text: waiting.isEmpty ? L("Vijf mini-lessen van 2 minuten. Daarna ben je goed voorbereid op de quiz.") : L("Terwijl je wacht: een mini-les van 2 minuten?"),
-                    button: L("Naar de Hondenschool"), action: .lessons
-                ), suggestion: true))
-            } else {
-                list.append(Candidate(step: NextStep(
-                    id: "quiz", mood: .curious,
-                    text: L("Klaar voor de quiz? Acht vragen, geen tijdsdruk."),
-                    button: L("Start de quiz"), action: .quiz
-                ), suggestion: true))
-            }
-        }
 
         // g. A request the owner is still looking at.
         if let item = waiting.first {

@@ -9,7 +9,7 @@ options:
   createIntermediateGroups: true
 settings:
   base:
-    APP_DISPLAY_NAME: Rondje
+    APP_DISPLAY_NAME: Rondje Mee
     # The app's bundle id; device.sh gives it a personal suffix for a free Apple account.
     RONDJE_BUNDLE_ID: app.rondje.mobile
     # Entitlements per target; device.sh swaps in empty ones for a free Apple ID.
@@ -33,7 +33,7 @@ settings:
       # The simulator talks to `npm run dev` on this Mac (cd web && npx next dev -p 3100).
       RONDJE_API_BASE_URL: http:/$()/localhost:3100
     Release:
-      RONDJE_API_BASE_URL: https:/$()/rondje-five.vercel.app
+      RONDJE_API_BASE_URL: https:/$()/rondjemee.nl
 targets:
   Rondje:
     type: application

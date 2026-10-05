@@ -15,6 +15,7 @@ T = {
     "Ik kan meestal 's avonds.": ("I'm usually free in the evening.", "Je suis souvent libre le soir.", "Normalmente puedo por la tarde-noche."),
     "Ik kan meestal overdag.": ("I'm usually free during the day.", "Je suis souvent libre en journée.", "Normalmente puedo durante el día."),
     "Ik ben student.": ("I'm a student.", "Je suis étudiant·e.", "Soy estudiante."),
+    "Ik ben met pensioen.": ("I'm retired.", "Je suis à la retraite.", "Me he jubilado."),
     "Ik had vroeger zelf een hond.": ("I used to have a dog myself.", "J'avais moi-même un chien avant.", "Antes tenía un perro."),
     "Ik wandel graag in het park.": ("I like walking in the park.", "J'aime me promener au parc.", "Me gusta pasear por el parque."),
     "Ik neem mijn ID mee.": ("I'll bring my ID.", "J'apporte ma pièce d'identité.", "Llevaré mi documento de identidad."),
@@ -71,10 +72,6 @@ T = {
 
     # Sent
     "Verstuurd!": ("Sent!", "Envoyé !", "¡Enviado!"),
-    "Ik laat het je weten zodra de eigenaar van %@ antwoordt.": (
-        "I'll let you know as soon as %@'s owner replies.",
-        "Je te préviens dès que le propriétaire de %@ répond.",
-        "Te aviso en cuanto responda el dueño de %@."),
     "Intussen kun je de Hondenschool doen. Vijf lessen van 2 minuten.": (
         "Meanwhile you can do the Dog School. Five 2-minute lessons.",
         "En attendant, tu peux suivre l'École des chiens. Cinq leçons de 2 minutes.",

@@ -40,12 +40,19 @@ export async function apiViewer(): Promise<Viewer | NextResponse> {
   return viewer
 }
 
-/** Like apiViewer, but the person must have finished their profile and not be banned. */
-export async function apiMember(): Promise<OnboardedViewer | NextResponse> {
+/** Like apiViewer, but refuses banned people: for anything beyond their own account and data. */
+export async function apiActive(): Promise<Viewer | NextResponse> {
   const viewer = await apiViewer()
   if (viewer instanceof NextResponse) return viewer
+  if (viewer.profile?.bannedAt) return fail('banned', 403)
+  return viewer
+}
+
+/** Like apiViewer, but the person must have finished their profile and not be banned. */
+export async function apiMember(): Promise<OnboardedViewer | NextResponse> {
+  const viewer = await apiActive()
+  if (viewer instanceof NextResponse) return viewer
   if (!viewer.profile) return fail('not-onboarded', 403)
-  if (viewer.profile.bannedAt) return fail('banned', 403)
   return viewer as OnboardedViewer
 }
 

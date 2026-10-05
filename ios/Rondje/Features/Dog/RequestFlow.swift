@@ -16,6 +16,9 @@ struct RequestFlow: View {
     let dog: DogFull
     let slots: [Slot]
     let kind: Kind
+    /// The owner or shelter: named in the confirmation. A shelter dog is met on the shelter's
+    /// location, during a walk (the server enforces this too).
+    let host: Host
     let prefill: RequestPrefill?
     var sent: () async -> Void
 
@@ -32,20 +35,34 @@ struct RequestFlow: View {
     @State private var customDate: Date
     @State private var weekly: Bool
     @State private var message: String
+    /// How a first meeting happens; after a first call, the app opens this flow on "Samen wandelen".
+    @State private var via: MeetVia
     @State private var prepared = false
     @State private var busy = false
     @State private var error: String?
     @State private var outcome: Outcome?
+    /// The server answered "needs-quiz" (also when this app thought the quiz was done).
+    @State private var serverNeedsQuiz = false
+    @State private var quizOpen = false
+    /// The server waits for the yes to the updated terms; after it, the request goes out as written.
+    @State private var terms: TermsRequest?
+    /// The server answered 'live-location-off' to a walk alone: it cannot be asked for now. One calm
+    /// note instead of an error, and nothing to send.
+    @State private var liveLocationPaused = false
+    /// The confirmation comes in piece by piece: the paper plane, the text, then the three steps.
+    @State private var shown = 0
     @State private var toLessons = false
 
     private struct Outcome: Equatable { var flagged: Bool }
     private static let steps = 3
     private static let maxMessage = 800
 
-    init(dog: DogFull, slots: [Slot], kind: Kind, prefill: RequestPrefill? = nil, sent: @escaping () async -> Void) {
+    init(dog: DogFull, slots: [Slot], kind: Kind, host: Host, via: MeetVia = .walk,
+         prefill: RequestPrefill? = nil, sent: @escaping () async -> Void) {
         self.dog = dog
         self.slots = slots
         self.kind = kind
+        self.host = host
         self.prefill = prefill
         self.sent = sent
         let calendar = Calendar.current
@@ -56,27 +73,69 @@ struct RequestFlow: View {
         _customDate = State(initialValue: prefill?.date ?? tomorrow)
         _weekly = State(initialValue: kind == .solo && prefill?.weekly == true)
         _message = State(initialValue: prefill?.message ?? "")
+        _via = State(initialValue: via)
     }
 
     private var range: ClosedRange<Date> { Date.now.addingTimeInterval(RequestSuggestions.lead)...Date.now.addingTimeInterval(RequestSuggestions.horizon) }
     private var when: Date? { custom ? customDate : picked }
     private var title: String { kind == .meet ? L("Kennismaken met \(dog.name)") : L("Rondje met \(dog.name)") }
+    /// A shelter meets on its own location, during a walk; a solo walk is always a walk.
+    private var choosesVia: Bool { kind == .meet && !host.isShelter }
+    private var meetVia: MeetVia { choosesVia ? via : .walk }
 
     var body: some View {
         VStack(spacing: 0) {
             if let outcome {
                 done(outcome)
                     .transition(.opacity)
+            } else if needsQuiz {
+                quizFirst
             } else {
                 flow
             }
         }
         .screenBackground()
+        .sheet(isPresented: $quizOpen, onDismiss: { if model.quizPassed { serverNeedsQuiz = false } }) {
+            NavigationStack { QuizGameView(mode: .gate) }
+        }
+        .termsSheet($terms)
         .sensoryFeedback(.selection, trigger: step)
         .onAppear(perform: prepare)
         .onDisappear(perform: finish)
         .onChange(of: message) { _, text in
             if text.count > Self.maxMessage { message = String(text.prefix(Self.maxMessage)) }
+        }
+    }
+
+    /// Walkers do the safety quiz once before any request; the server checks it too.
+    private var needsQuiz: Bool { serverNeedsQuiz || !model.quizPassed }
+
+    /// Instead of the form: one friendly button to the quiz. After passing, the form appears here.
+    private var quizFirst: some View {
+        VStack(spacing: 0) {
+            header
+            Spacer(minLength: 16)
+            VStack(spacing: 16) {
+                if Keepsakes.shared.coachOn {
+                    Guus(mood: .happy, size: typeSize.isAccessibilitySize ? 72 : 100)
+                        .accessibilityHidden(true)
+                }
+                Text("Eerst de veiligheidsquiz")
+                    .font(.display(26))
+                    .multilineTextAlignment(.center)
+                    .accessibilityAddTraits(.isHeader)
+                Text("Acht korte vragen over veilig wandelen. Daarna vraag je \(dog.name) meteen aan.")
+                    .foregroundStyle(Palette.muted)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(24)
+            Spacer(minLength: 16)
+            Button { quizOpen = true } label: {
+                Label("Eerst de quiz (± 3 min)", systemImage: "checkmark.seal.fill")
+            }
+            .buttonStyle(.primary)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 12)
         }
     }
 
@@ -93,7 +152,7 @@ struct RequestFlow: View {
         }
         .padding(.horizontal, 24)
         .padding(.top, 16)
-        .animation(.snappy, value: step)
+        .animation(Motion.klein, value: step)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(L("Stap \(step + 1) van 3"))
 
@@ -107,6 +166,14 @@ struct RequestFlow: View {
                 default: promiseStep
                 }
                 ErrorText(message: error)
+                if liveLocationPaused {
+                    Label(LiveLocationPause.note, systemImage: "location.slash")
+                        .font(.subheadline)
+                        .foregroundStyle(Palette.ink)
+                        .padding(12)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Palette.calmSoft, in: .rect(cornerRadius: 14, style: .continuous))
+                }
             }
             .padding(24)
             .id(step)
@@ -148,16 +215,15 @@ struct RequestFlow: View {
         .padding(.top, 14)
     }
 
-    /// Step 1: a moment, from the dog's regular times when it has them.
+    /// Step 1: how to meet (for a first meeting), and a moment, from the dog's regular times when it has them.
     private var whenStep: some View {
         VStack(alignment: .leading, spacing: 12) {
+            if choosesVia {
+                meetChoice
+                    .padding(.bottom, 12)
+            }
             Text("Wanneer?").font(.display(30))
-            CoachBubble(
-                mood: .curious,
-                text: kind == .meet
-                    ? L("Kies een moment. De eigenaar loopt de eerste keer mee.")
-                    : L("Kies een moment dat je vaak kunt. Vaste momenten werken het best.")
-            )
+            CoachBubble(mood: .curious, text: whenHint)
             .padding(.bottom, 4)
 
             ForEach(moments, id: \.self) { moment in
@@ -196,6 +262,42 @@ struct RequestFlow: View {
         }
     }
 
+    /// What Guus says above the moments. The way of meeting itself is explained on its own tile.
+    private var whenHint: String {
+        guard kind == .meet else { return L("Kies een moment dat je vaak kunt. Vaste momenten werken het best.") }
+        switch meetVia {
+        case .walk: return L("Kies een moment. De eigenaar loopt de eerste keer mee.")
+        case .home: return L("Kies een moment voor je bezoek.")
+        case .phone, .video: return L("Kies een moment voor het gesprek.")
+        }
+    }
+
+    /// The four ways to meet the first time, with their icon and one line each (as on the website).
+    private var meetChoice: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Hoe maken jullie kennis?").font(.display(30))
+            ForEach(MeetVia.allCases) { option in
+                tile(option.title, caption: via == option ? option.hint : nil, symbol: option.symbol, selected: via == option) {
+                    Haptics.tap()
+                    withAnimation(Motion.klein) { via = option }
+                }
+            }
+            switch via {
+            case .home:
+                Label("Veilig op bezoek: spreek overdag af, laat iemand weten waar je bent, en familie of een buur mag er gerust bij zijn. Het adres en het telefoonnummer zie je pas na acceptatie.", systemImage: "shield.lefthalf.filled")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .phone:
+                Label("Na acceptatie zien jullie elkaars telefoonnummer, als dat is ingevuld. Spreek in de chat af wie wie belt. Een gesprek telt nog niet als kennismaking in het echt.", systemImage: "phone.fill")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .video:
+                Label("\(Brand.name) heeft zelf geen videobellen. Spreek in de chat af welke app jullie gebruiken en deel daar de link. Een gesprek telt nog niet als kennismaking in het echt.", systemImage: "video.fill")
+                    .font(.footnote).foregroundStyle(Palette.muted)
+            case .walk:
+                EmptyView()
+            }
+        }
+    }
+
     /// Step 2: a hello that is already written, with sentences to add in one tap.
     private var introStep: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -229,13 +331,18 @@ struct RequestFlow: View {
                 promise("link", L("Altijd aan de lijn"))
                 promise("fork.knife", L("Geen koekjes zonder toestemming"))
                 promise("exclamationmark.bubble.fill", L("Meteen melden als er iets gebeurt"))
-                if kind == .meet {
+                if kind == .meet && meetVia.inPerson {
                     promise("person.text.rectangle", L("Neem je ID mee. De eigenaar bekijkt het."))
                 }
             }
-            Button("Lees de hele gedragscode") { openURL(Brand.web("/legal/conduct")) }
-                .font(.footnote.weight(.semibold))
-                .tint(Palette.grass)
+            Button { openURL(Brand.web("/legal/conduct")) } label: {
+                Text("Lees de hele gedragscode")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Palette.grass)
+                    .frame(minHeight: 44)
+                    .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -246,6 +353,11 @@ struct RequestFlow: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Label(when.map(Format.when) ?? "", systemImage: "calendar")
                         .font(.headline)
+                    if choosesVia {
+                        Label(via.title, systemImage: via.symbol)
+                            .font(.subheadline)
+                            .foregroundStyle(Palette.muted)
+                    }
                     if kind == .solo && weekly {
                         Label("Elke week", systemImage: "repeat")
                             .font(.subheadline)
@@ -301,7 +413,7 @@ struct RequestFlow: View {
                     }
                 }
                 .buttonStyle(.primary)
-                .disabled(busy || when == nil)
+                .disabled(busy || when == nil || liveLocationPaused)
             }
         }
         .padding(.horizontal, 24)
@@ -310,12 +422,13 @@ struct RequestFlow: View {
 
     // MARK: Done
 
+    /// The Hondenschool is an extra while waiting for an answer, until all five lessons are done.
     private var offersLessons: Bool {
-        kind == .meet && model.me?.profile?.quizPassed != true && Keepsakes.shared.lessonsDone.count < 5
+        kind == .meet && Keepsakes.shared.lessonsDone.count < 5
     }
 
-    /// The sheet itself is the confirmation: no banner on top of it. The text scrolls at large text
-    /// sizes; "Klaar" stays pinned below it.
+    /// The sheet itself is the confirmation: no banner on top of it, and it stays until "Klaar".
+    /// The text scrolls at large text sizes; "Klaar" stays pinned below it.
     private func done(_ outcome: Outcome) -> some View {
         ZStack(alignment: .top) {
             VStack(spacing: 16) {
@@ -339,38 +452,134 @@ struct RequestFlow: View {
                     .allowsHitTesting(false)
             }
         }
+        .task { await reveal() }
+    }
+
+    /// The owner's or shelter's name; "de eigenaar" when the server sent none.
+    private var hostName: String {
+        let name = host.name.trimmingCharacters(in: .whitespaces)
+        return name.isEmpty ? L("de eigenaar") : name
+    }
+
+    private var doneTitle: String {
+        host.name.trimmingCharacters(in: .whitespaces).isEmpty ? L("Verstuurd!") : L("Verstuurd naar \(hostName).")
+    }
+
+    private var nextSteps: [String] { Self.nextSteps(kind: kind, via: meetVia, hostName: hostName, dogName: dog.name) }
+
+    /// What happens now, in three steps. Only what is true for this kind of request: a solo walk
+    /// needs no meeting, and after a call you still meet in person.
+    static func nextSteps(kind: Kind, via: MeetVia, hostName: String, dogName: String) -> [String] {
+        let who = hostName.prefix(1).uppercased() + hostName.dropFirst()
+        let read = L("\(who) leest je bericht.")
+        guard kind == .meet else {
+            return [read, L("Zegt \(hostName) ja, dan staat het rondje vast."), L("Op de dag zelf start je het rondje bij Afspraken.")]
+        }
+        let together = switch via {
+        case .walk: L("De eerste keer lopen jullie samen.")
+        case .home: L("De eerste keer kom je langs bij \(hostName) en \(dogName).")
+        case .phone, .video: L("Eerst bellen jullie. Daarna ontmoet je \(dogName) in het echt.")
+        }
+        return [read, L("Jullie spreken een moment af."), together]
     }
 
     private func doneText(_ outcome: Outcome) -> some View {
-            VStack(spacing: 16) {
+        VStack(spacing: 16) {
+            ZStack(alignment: .bottomTrailing) {
                 Guus(mood: .happy, size: typeSize.isAccessibilitySize ? 72 : 120)
-                Text("Verstuurd!")
-                    .font(.display(32))
+                Image(systemName: "paperplane.fill")
+                    .font(.headline)
+                    .foregroundStyle(Palette.onBall)
+                    .frame(width: 44, height: 44)
+                    .background(Palette.ball, in: .circle)
+                    .offset(x: 10, y: 6)
+                    .scaleEffect(shown >= 1 || reduceMotion ? 1 : 0.6)
+                    .opacity(shown >= 1 ? 1 : 0)
+            }
+            .accessibilityHidden(true)
+            VStack(spacing: 8) {
+                Text(doneTitle)
+                    .font(.display(30))
                     .foregroundStyle(Palette.ink)
-                    .accessibilityAddTraits(.isHeader)
-                Text(outcome.flagged
-                     ? L("Verstuurd. Berichten over geld worden gecontroleerd.")
-                     : L("Ik laat het je weten zodra de eigenaar van \(dog.name) antwoordt."))
-                    .font(.body)
-                    .foregroundStyle(Palette.muted)
                     .multilineTextAlignment(.center)
-                if offersLessons {
-                    VStack(spacing: 12) {
-                        Text("Intussen kun je de Hondenschool doen. Vijf lessen van 2 minuten.")
-                            .font(.subheadline)
-                            .foregroundStyle(Palette.ink)
-                            .multilineTextAlignment(.center)
-                        Button("Naar de Hondenschool") {
-                            toLessons = true
-                            dismiss()
-                        }
-                        .buttonStyle(.secondary)
-                    }
-                    .padding(16)
-                    .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
-                    .padding(.top, 8)
+                    .accessibilityAddTraits(.isHeader)
+                if outcome.flagged {
+                    Text("Verstuurd. Berichten over geld worden gecontroleerd.")
+                        .font(.subheadline)
+                        .foregroundStyle(Palette.warn)
+                        .multilineTextAlignment(.center)
                 }
             }
+            .opacity(shown >= 2 ? 1 : 0)
+            .offset(y: shown >= 2 || reduceMotion ? 0 : 8)
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Wat er nu gebeurt")
+                    .font(.headline)
+                    .foregroundStyle(Palette.ink)
+                    .opacity(shown >= 2 ? 1 : 0)
+                ForEach(Array(nextSteps.enumerated()), id: \.offset) { i, line in
+                    HStack(alignment: .firstTextBaseline, spacing: 12) {
+                        Text(verbatim: "\(i + 1)")
+                            .font(.subheadline.weight(.heavy))
+                            .foregroundStyle(Palette.onBall)
+                            .frame(width: 28, height: 28)
+                            .background(Palette.ball, in: .circle)
+                            .accessibilityHidden(true)
+                        Text(line)
+                            .font(.body)
+                            .foregroundStyle(Palette.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                    }
+                    .opacity(shown >= 3 + i ? 1 : 0)
+                    .offset(y: shown >= 3 + i || reduceMotion ? 0 : 6)
+                }
+                Text("Je krijgt een melding zodra \(hostName) antwoordt.")
+                    .font(.subheadline)
+                    .foregroundStyle(Palette.muted)
+                    .padding(.top, 2)
+                    .opacity(shown >= 3 + nextSteps.count ? 1 : 0)
+            }
+            .padding(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
+            if offersLessons {
+                VStack(spacing: 12) {
+                    Text("Intussen kun je de Hondenschool doen. Vijf lessen van 2 minuten.")
+                        .font(.subheadline)
+                        .foregroundStyle(Palette.ink)
+                        .multilineTextAlignment(.center)
+                    Button("Naar de Hondenschool") {
+                        toLessons = true
+                        dismiss()
+                    }
+                    .buttonStyle(.secondary)
+                }
+                .padding(16)
+                .background(Palette.surface, in: .rect(cornerRadius: 20, style: .continuous))
+                .padding(.top, 8)
+                .opacity(shown >= 3 + nextSteps.count ? 1 : 0)
+            }
+        }
+    }
+
+    /// The paper plane pops (500 ms), the text follows 150 ms later, then the steps one by one,
+    /// 80 ms apart. With Reduce Motion everything fades in together in 200 ms.
+    private func reveal() async {
+        guard shown == 0 else { return }
+        let last = 3 + nextSteps.count
+        if reduceMotion {
+            withAnimation(Motion.vervaag) { shown = last }
+            return
+        }
+        withAnimation(Motion.pop) { shown = 1 }
+        try? await Task.sleep(for: .milliseconds(150))
+        withAnimation(Motion.scherm) { shown = 2 }
+        for next in 3...last {
+            try? await Task.sleep(for: .milliseconds(80))
+            guard !Task.isCancelled else { return }
+            withAnimation(Motion.klein) { shown = next }
+        }
     }
 
     // MARK: Pieces
@@ -405,7 +614,7 @@ struct RequestFlow: View {
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(selected ? .isSelected : [])
-        .animation(.snappy, value: selected)
+        .animation(Motion.klein, value: selected)
     }
 
     private func chip(_ sentence: String) -> some View {
@@ -444,10 +653,15 @@ struct RequestFlow: View {
     }
 
     private func edit(_ label: String, action: @escaping () -> Void) -> some View {
-        Button("Aanpassen", action: action)
-            .font(.subheadline.weight(.semibold))
-            .tint(Palette.grass)
-            .accessibilityLabel(label)
+        Button(action: action) {
+            Text("Aanpassen")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Palette.grass)
+                .frame(minWidth: 44, minHeight: 44)
+                .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
     }
 
     // MARK: Actions
@@ -472,14 +686,14 @@ struct RequestFlow: View {
     }
 
     private func go(to target: Int) {
-        withAnimation(reduceMotion ? .easeInOut(duration: 0.2) : .snappy) {
+        withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) {
             step = max(0, min(Self.steps - 1, target))
             error = nil
         }
     }
 
     private func choose(_ moment: RequestSuggestions.Moment) {
-        withAnimation(.snappy) {
+        withAnimation(Motion.klein) {
             custom = false
             picked = moment.date
             weekly = kind == .solo && (moment.fromSlot || prefill?.weekly == true)
@@ -487,7 +701,7 @@ struct RequestFlow: View {
     }
 
     private func chooseOther() {
-        withAnimation(.snappy) {
+        withAnimation(Motion.klein) {
             custom = true
             customDate = min(max(customDate, range.lowerBound), range.upperBound)
             weekly = kind == .solo && prefill?.weekly == true
@@ -497,7 +711,7 @@ struct RequestFlow: View {
     /// Adds the sentence with a space, or takes it out again when it is already in.
     private func toggle(_ sentence: String) {
         Haptics.tap()
-        withAnimation(.snappy) {
+        withAnimation(Motion.klein) {
             var text = message
             if let range = text.range(of: " " + sentence) ?? text.range(of: sentence + " ") ?? text.range(of: sentence) {
                 text.removeSubrange(range)
@@ -510,7 +724,7 @@ struct RequestFlow: View {
     }
 
     private struct Payload: Encodable {
-        var dogId, kind, date, time, message: String
+        var dogId, kind, meetVia, date, time, message: String
         /// Only for solo walks; a first meeting is never weekly.
         var weekly: Bool?
     }
@@ -527,18 +741,33 @@ struct RequestFlow: View {
         let time = String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0)
         struct Sent: Decodable { var ok: Bool; var flagged: Bool }
         do {
-            let payload = Payload(dogId: dog.id, kind: kind.rawValue, date: date, time: time,
+            let payload = Payload(dogId: dog.id, kind: kind.rawValue, meetVia: meetVia.rawValue, date: date, time: time,
                                   message: message.trimmingCharacters(in: .whitespacesAndNewlines),
                                   weekly: kind == .solo ? weekly : nil)
             let result: Sent = try await APIClient.shared.post("/api/v1/requests", payload)
-            Haptics.success()
+            // Felt and heard together with the paper plane (send, 420 ms).
+            Haptics.success(.send)
+            withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { outcome = Outcome(flagged: result.flagged) }
+            AccessibilityNotification.Announcement(doneTitle).post()
             await model.refreshAppointments()
             await sent()
-            withAnimation(.spring(duration: 0.45)) { outcome = Outcome(flagged: result.flagged) }
-            AccessibilityNotification.Announcement(L("Verstuurd!")).post()
+        } catch let error as APIError where error.code == "needs-quiz" {
+            // The server wants the quiz first: show the way there instead of an error.
+            withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { serverNeedsQuiz = true }
+        } catch let error as APIError where error.needsTerms {
+            // The updated terms apply: the calm sheet first; after the yes, this request goes out.
+            terms = TermsRequest(model: model) { await send() }
+        } catch let error as APIError where error.liveLocationOff {
+            // Live location is off, so a walk alone cannot be asked for now: said calmly, no error sound.
+            ServerFeatures.shared.liveLocationSwitchedOff()
+            withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) {
+                self.error = nil
+                liveLocationPaused = true
+            }
+            AccessibilityNotification.Announcement(LiveLocationPause.note).post()
         } catch {
             Haptics.error()
-            withAnimation(.snappy) { self.error = error.localizedDescription }
+            withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) { self.error = error.plainText }
         }
     }
 
