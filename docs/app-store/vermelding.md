@@ -50,7 +50,7 @@ EN VERDER
 • Levels en badges, die alleen jij ziet. Geen streaks en geen druk: elk rondje telt, ook na een pauze.
 • Een widget en een Live Activity voor je volgende rondje.
 
-Rondje Mee is altijd gratis en zonder advertenties, gedragen door leden die het belangrijk vinden. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
+Rondje Mee is altijd gratis en zonder advertenties. We verkopen nooit gegevens. Vanaf 18 jaar. Werkt in Nederland, België en Spanje, in het Nederlands, Engels, Spaans en Frans.
 
 Rondje Mee is geen hulpverlening en stelt geen diagnoses. Gaat het niet goed met je? In de app staat waar je terechtkunt.
 
@@ -101,7 +101,7 @@ AND MORE
 • Levels and badges that only you can see. No streaks and no pressure: every walk counts, even after a break.
 • A widget and a Live Activity for your next walk.
 
-Rondje Mee is always free and ad-free, carried by members who care. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
+Rondje Mee is always free and ad-free. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
 
 Rondje Mee is not a care service and makes no diagnoses. Not feeling well? The app shows where to get help.
 
@@ -131,7 +131,7 @@ The first version. Discover dogs near you, meet them and go on your first walk.
 | Geluidjes | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 | Apple Gezondheid (rondjes en ademminuten bewaren) | in aanbouw (branch `claude/rondje-parity`) | pas noemen na merge |
 
-Wel noemen: "gedragen door leden" (zo betaalt Rondje Mee zich; lid worden en geven gebeurt op de website, nooit in de app). Niet noemen: bedragen, doneren in de app, of namen van organisaties.
+Niet noemen: leden of lidmaatschap (dat bestaat niet), "aftrekbaar", doneren of betalen in de app, bedragen, of namen van organisaties. Helpen gaat via de crowdfunding op Whydonate, in Safari. In de app zijn dat precies twee rustige ingangen, nooit bovenaan (de rij "Help ons via Whydonate" laag onder Jij, en in de schil om de website ook het blok onderaan de voorpagina). Ze blijven zichtbaar tijdens de review en staan uitgelegd in `indienen.md` §5; de server zet ze alleen voorgoed uit met `SUPPORT_IN_APP_IOS=0` als Apple ze niet accepteert.
 
 ## Nog te beslissen door Laurens
 - ~~De naam~~: Rondje Mee, gekozen op 4 oktober 2026.
