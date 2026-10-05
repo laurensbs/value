@@ -39,6 +39,21 @@ function signature(message: string): string[] {
 
 const source = flatten(nl as Tree)
 
+/**
+ * The crowdfunding: Dutch keeps the pun of "Geef een rondje" and counts in rounds of €5 ("Doel: 600
+ * rondjes"); English, Spanish and French name the goal in euros instead, so nothing there reads like a
+ * price per walk (Laurens, 5 okt 2026). The code passes both; these translations use the euros.
+ */
+const EUROS_NOT_ROUNDS: Record<string, string[]> = {
+  'home.helpUs.rounds': ['{goal}', '{percent,plural}'],
+  'support.goalRounds': ['{goal}'],
+  'helpApp.goal': ['{goal}'],
+}
+/** Words for a walk, which never count money outside Dutch. */
+const WALKS = /\b(rounds?|walks?|paseos?|balades?|promenades?)\b/i
+/** The crowdfunding texts. */
+const CROWDFUNDING = ['home.helpUs.', 'helpApp.', 'support.goalRounds', 'support.progress', 'support.onceGive', 'support.onceText', 'support.onceTitle']
+
 describe('interface translations', () => {
   it('every Dutch message parses', () => {
     for (const [key, message] of Object.entries(source)) expect(() => signature(message), key).not.toThrow()
@@ -53,7 +68,17 @@ describe('interface translations', () => {
     it(`${locale} keeps every placeholder and tag`, () => {
       for (const [key, message] of Object.entries(translated)) {
         if (!(key in source)) continue
-        expect(signature(message), `${locale}: ${key}`).toEqual(signature(source[key]))
+        expect(signature(message), `${locale}: ${key}`).toEqual(EUROS_NOT_ROUNDS[key] ?? signature(source[key]))
+      }
+    })
+    it(`${locale} names the crowdfunding in euros, never in walks ("€5 = 1 round", "600 rounds")`, () => {
+      const texts = Object.entries(translated).filter(([key]) => CROWDFUNDING.some((prefix) => key.startsWith(prefix)))
+      expect(texts.length).toBeGreaterThan(5)
+      for (const [key, message] of texts) {
+        // The words people read, without the argument names ({round} is the amount of €5).
+        const words = message.replace(/\{\s*\w+/g, '{')
+        expect(words, `${locale}: ${key}`).not.toMatch(WALKS)
+        expect(words, `${locale}: ${key}`).not.toMatch(/=\s*1\b/)
       }
     })
   }

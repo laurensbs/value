@@ -96,7 +96,7 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await context.close()
 })
 
-test('support link: on the website when the recipient is named; in the app only the campaign link', async ({ browser }) => {
+test('support link: on the website when the recipient is named; in the app none in the footer', async ({ browser }) => {
   const web = await newPerson(browser)
   await web.page.goto('/support')
   const link = web.page.getByRole('link', { name: /Steun Rondje Mee via/ })
@@ -111,9 +111,12 @@ test('support link: on the website when the recipient is named; in the app only 
   await expect(page.getByRole('heading', { name: 'Maak Rondje Mee mogelijk', level: 1 })).toBeVisible()
   await expect(page.getByRole('link', { name: /Steun Rondje Mee via/ })).toHaveCount(0)
   await expect(page.getByText(/Samen ongeveer/)).toHaveCount(0)
-  // "Help ons" in the footer goes straight to the campaign there, never to /support (e2e/help-app.spec.ts).
-  await expect(page.getByRole('contentinfo').locator('a[href="/support"]')).toHaveCount(0)
-  await expect(page.getByRole('contentinfo').getByRole('link', { name: /^Help ons via Whydonate/ })).toHaveAttribute('href', /^https:\/\/whydonate\.com\//)
+  // No "Help ons" in the footer of the app at all (Laurens, 5 okt 2026): not to /support and not to the
+  // campaign. In the app it is only the block at the bottom of the home page and the row in the profile.
+  const footer = page.getByRole('contentinfo')
+  await expect(footer.locator('a[href="/support"]')).toHaveCount(0)
+  await expect(footer.locator('a[href*="whydonate"]')).toHaveCount(0)
+  await expect(footer.getByRole('link', { name: /Help ons/ })).toHaveCount(0)
   await page.goto('/')
   await expect(page.getByRole('link', { name: /Hoe we gratis blijven/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Over Rondje Mee/ }).first()).toBeVisible()

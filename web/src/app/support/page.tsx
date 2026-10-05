@@ -5,7 +5,7 @@ import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { SupportButton } from '@/components/SupportButton'
 import { APP_NAME } from '@/lib/site'
-import { campaign, roundsFor, showsRaised, supportConfig, supportInApp, supportInBothApps } from '@/lib/support'
+import { appQuestion, campaign, roundsFor, showsRaised, supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
 import crowdfunding from '../../../content/crowdfunding.json'
@@ -29,7 +29,7 @@ export default async function SupportPage() {
   const native = await isNativeRequest()
   const cfg = supportConfig()
   const drive = campaign(crowdfunding)
-  // The amount raised once something came in; before that only the goal in rounds.
+  // The amount raised once something came in; before that only the goal (in rounds in Dutch, in euros in the other languages).
   const raised = showsRaised(drive.progress) ? drive.progress : null
   const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const day = (d: string) => format.dateTime(new Date(d), { day: 'numeric', month: 'long', year: 'numeric' })
@@ -39,11 +39,9 @@ export default async function SupportPage() {
   const share =
     drive.shareToCausesPercent !== null ? t('support.shareSet', { percent: format.number(drive.shareToCausesPercent) }) : t('support.shareSoon', { app: APP_NAME })
   // "Help ons via Whydonate" in the apps (HelpUsInApp): the question about the app says where to find
-  // it, and in which app when the switch is off for the other one (SUPPORT_IN_APP_IOS / _ANDROID).
-  const inIos = supportInApp(process.env, 'ios')
-  const inAndroid = supportInApp(process.env, 'android')
-  const appFaq = cfg.crowdfundingUrl && (inIos || inAndroid) ? ('appVia' as const) : ('app' as const)
-  const apps = supportInBothApps() ? 'both' : inIos ? 'ios' : 'android'
+  // it, and in which app when the switch is off for the other one (SUPPORT_IN_APP_IOS / _ANDROID), but
+  // only while the row really shows: a campaign link, a named recipient and the switch on (appQuestion).
+  const { key: appFaq, apps } = appQuestion(process.env, crowdfunding)
   const faq = native
     ? (['free', 'sponsors'] as const)
     : ([...(['free', 'where', 'tax', 'perks', appFaq, 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
@@ -151,7 +149,7 @@ export default async function SupportPage() {
                   </div>
                 ) : drive.progress ? (
                   <p className="im-progress-numbers">
-                    <strong>{t('support.goalRounds', { total: roundsFor(drive.progress.goal) })}</strong>
+                    <strong>{t('support.goalRounds', { total: roundsFor(drive.progress.goal), goal: euro(drive.progress.goal) })}</strong>
                   </p>
                 ) : null}
                 <div>

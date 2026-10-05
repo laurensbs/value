@@ -134,12 +134,12 @@
       "title": "Help us!",
       "lede": "{app} is free and will stay free. Your support helps get the app into the App Store and Google Play, and pays for the first year.",
       "ledeApp": "Your support keeps {app} free and pays for the first year.",
-      "rounds": "{n, plural, =0 {Goal: {total} rounds} one {# of {total} rounds} other {# of {total} rounds}}",
+      "rounds": "{percent, plural, =0 {Goal: {goal}} other {#% of the way}}",
       "give": "Support us",
       "join": "or sign up",
       "note": "Through {platform}, to {operator}, who builds {app}.",
       "more": "Where the money goes",
-      "chip": "{round} = 1 round"
+      "chip": "From {round}"
     }
   },
   "landing": {
@@ -1795,7 +1795,7 @@
     "onceText": "Rather give once? The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
     "onceGive": "Support us via {platform}",
     "progress": "{raised} of {goal} raised",
-    "goalRounds": "Goal: {total, plural, one {# round} other {# rounds}}",
+    "goalRounds": "Goal: {goal}",
     "progressUpdated": "Updated on {date}. The current amount is on {platform}.",
     "platformNote": "You pay through {platform}, under their terms.",
     "newTab": "(opens in a new tab)",
@@ -1819,7 +1819,7 @@
     "label": "Support us via {platform}",
     "from": "From {round}",
     "raised": "{raised} of {goal}",
-    "goal": "Goal: {total, plural, one {# round} other {# rounds}}",
+    "goal": "Goal: {goal}",
     "opens": "opens {platform} in your browser"
   },
   "about": {

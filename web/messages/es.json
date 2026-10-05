@@ -132,14 +132,14 @@
     "helpUs": {
       "eyebrow": "Recaudación",
       "title": "¡Ayúdanos!",
-      "lede": "{app} es gratis y lo seguirá siendo. Con tu paseo, la app llega a la App Store y a Google Play, y el primer año queda pagado.",
+      "lede": "{app} es gratis y lo seguirá siendo. Con tu ayuda, la app llega a la App Store y a Google Play, y el primer año queda pagado.",
       "ledeApp": "Con tu ayuda, {app} sigue siendo gratis y el primer año queda pagado.",
-      "rounds": "{n, plural, =0 {Objetivo: {total} paseos} one {# de {total} paseos} other {# de {total} paseos}}",
+      "rounds": "{percent, plural, =0 {Objetivo: {goal}} other {# % del camino}}",
       "give": "Ayúdanos",
       "join": "o regístrate",
       "note": "A través de {platform}, para {operator}, que crea {app}.",
       "more": "Adónde va el dinero",
-      "chip": "{round} = 1 paseo"
+      "chip": "Desde {round}"
     }
   },
   "landing": {
@@ -1795,7 +1795,7 @@
     "onceText": "¿Prefieres dar una sola vez? Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
     "onceGive": "Ayúdanos vía {platform}",
     "progress": "{raised} de {goal} recaudados",
-    "goalRounds": "Objetivo: {total, plural, one {# paseo} other {# paseos}}",
+    "goalRounds": "Objetivo: {goal}",
     "progressUpdated": "Actualizado el {date}. El importe actual está en {platform}.",
     "platformNote": "Pagas a través de {platform}, según sus condiciones.",
     "newTab": "(se abre en una pestaña nueva)",
@@ -1819,7 +1819,7 @@
     "label": "Ayúdanos vía {platform}",
     "from": "Desde {round}",
     "raised": "{raised} de {goal}",
-    "goal": "Objetivo: {total, plural, one {# paseo} other {# paseos}}",
+    "goal": "Objetivo: {goal}",
     "opens": "abre {platform} en tu navegador"
   },
   "about": {

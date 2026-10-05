@@ -202,3 +202,17 @@ export function appSupport(
     shareToCausesPercent: drive.shareToCausesPercent,
   }
 }
+
+/**
+ * The question about the app on /support (the website). 'appVia' ("Kan ik ook vanuit de app helpen?")
+ * says the row "Help ons via Whydonate" is at the bottom of the profile in the app, so it is only asked
+ * while that row would really show in at least one app: a campaign link with a named recipient
+ * (CROWDFUNDING_URL + OPERATOR_NAME) and the switch for that app on, the same test as appSupport.
+ * Otherwise 'app' ("Waarom kan ik niet steunen in de app?"). `apps` says which app has the row.
+ */
+export function appQuestion(env: Record<string, string | undefined>, raw: unknown): { key: 'appVia' | 'app'; apps: 'both' | 'ios' | 'android' } {
+  const shows = (app: AppPlatform) => appSupport(env, raw, (platform) => platform, app)?.inApp === true
+  const ios = shows('ios')
+  const android = shows('android')
+  return { key: ios || android ? 'appVia' : 'app', apps: ios && android ? 'both' : ios ? 'ios' : 'android' }
+}

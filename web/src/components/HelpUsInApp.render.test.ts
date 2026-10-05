@@ -2,14 +2,17 @@ import type { ReactElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-// The three ways to "Help ons" in the app shell, rendered as the server does for an app request:
-// the row at the bottom of the profile, the footer link and the block on the home page. They follow
-// SUPPORT_IN_APP and the per-app switches (lib/support.ts); the website never changes.
+// The two ways to "Help ons" in the app shell, rendered as the server does for an app request: the
+// row low in the profile and the block at the bottom of the home page. There is no footer link in the
+// apps (components/Footer.tsx; e2e/help-app.spec.ts). Both follow SUPPORT_IN_APP and the per-app
+// switches (lib/support.ts); the website never changes.
 
 // The request (the user agent of the app or browser, and the header the native iPhone app sends)
 // and the campaign numbers (content/crowdfunding.json), changed per test.
 const request = vi.hoisted(() => ({ userAgent: '', platform: null as string | null }))
 const drive = vi.hoisted(() => ({ goal: 3000, raised: 0, shareToCausesPercent: 10, updated: '2026-10-05' }))
+// The language of the request.
+const lang = vi.hoisted(() => ({ locale: 'nl' as 'nl' | 'en' | 'es' | 'fr' }))
 
 vi.mock('server-only', () => ({}))
 vi.mock('../../content/crowdfunding.json', () => ({ default: drive }))
@@ -17,18 +20,24 @@ vi.mock('next/headers', () => ({
   headers: async () =>
     new Headers({ 'user-agent': request.userAgent, ...(request.platform ? { 'x-rondje-platform': request.platform } : {}) }),
 }))
-// next-intl's request helpers, with the real Dutch messages.
+// next-intl's request helpers, with the real messages.
 vi.mock('next-intl/server', async () => {
   const { createFormatter, createTranslator } = await import('next-intl')
-  const { default: messages } = await import('../../messages/nl.json')
+  const all = {
+    nl: (await import('../../messages/nl.json')).default,
+    en: (await import('../../messages/en.json')).default,
+    es: (await import('../../messages/es.json')).default,
+    fr: (await import('../../messages/fr.json')).default,
+  }
   const namespaceOf = (arg?: string | { namespace?: string }) => (typeof arg === 'string' ? arg : arg?.namespace)
   return {
-    getTranslations: async (arg?: string | { namespace?: string }) => createTranslator({ locale: 'nl', messages, namespace: namespaceOf(arg) as never }),
-    getFormatter: async () => createFormatter({ locale: 'nl', timeZone: 'Europe/Amsterdam' }),
+    getTranslations: async (arg?: string | { namespace?: string }) =>
+      createTranslator({ locale: lang.locale, messages: all[lang.locale] as never, namespace: namespaceOf(arg) as never }),
+    getFormatter: async () => createFormatter({ locale: lang.locale, timeZone: 'Europe/Amsterdam' }),
   }
 })
 
-const { HelpUsFooterLink, HelpUsRow } = await import('./HelpUsInApp')
+const { HelpUsRow } = await import('./HelpUsInApp')
 const { HelpUs } = await import('./landing/HelpUs')
 
 const UA = {
@@ -37,15 +46,21 @@ const UA = {
 }
 const CAMPAIGN = 'https://whydonate.com/nl/fundraising/rondjemee'
 
-/** What each of the three renders for the current request: HTML, or null when it is left out. */
+/** What each of the two renders for the current request: HTML, or null when it is left out. */
 async function entries(native = true) {
   const html = (el: ReactElement | null) => (el ? renderToStaticMarkup(el) : null)
   return {
     row: html(await HelpUsRow({ native })),
-    footer: html(await HelpUsFooterLink({ native })),
     home: html(await HelpUs({ native })),
   }
 }
+
+/** The visible text, with the formatters' no-break spaces as plain ones. */
+const text = (html: string | null) =>
+  (html ?? '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[\u00a0\u202f]/g, ' ')
+    .replace(/\s+/g, ' ')
 
 beforeEach(() => {
   vi.stubEnv('CROWDFUNDING_URL', CAMPAIGN)
@@ -54,41 +69,40 @@ beforeEach(() => {
   request.userAgent = UA.iphone
   request.platform = null
   drive.raised = 0
+  lang.locale = 'nl'
 })
 afterEach(() => vi.unstubAllEnvs())
 
 describe('"Help ons" in the app shell', () => {
-  it('shows the row, the footer link and the home block, each a plain link out to the campaign', async () => {
-    const { row, footer, home } = await entries()
-    for (const html of [row, footer, home]) {
+  it('shows the row and the home block, each a plain link out to the campaign', async () => {
+    const { row, home } = await entries()
+    for (const html of [row, home]) {
       expect(html).toContain(`href="${CAMPAIGN}"`)
       expect(html).toContain('target="_blank"')
     }
     expect(row).toContain('Help ons via Whydonate')
-    expect(footer).toContain('Help ons via Whydonate')
     expect(row).toContain('opent Whydonate in je browser')
   })
 
-  it('SUPPORT_IN_APP=0 hides the profile row, the footer link and the home block', async () => {
+  it('SUPPORT_IN_APP=0 hides the profile row and the home block', async () => {
     vi.stubEnv('SUPPORT_IN_APP', '0')
     for (const ua of [UA.iphone, UA.android]) {
       request.userAgent = ua
-      expect(await entries()).toEqual({ row: null, footer: null, home: null })
+      expect(await entries()).toEqual({ row: null, home: null })
     }
   })
 
   it('a typo in SUPPORT_IN_APP hides them too', async () => {
     vi.stubEnv('SUPPORT_IN_APP', 'nee')
-    expect(await entries()).toEqual({ row: null, footer: null, home: null })
+    expect(await entries()).toEqual({ row: null, home: null })
   })
 
   it('SUPPORT_IN_APP_IOS=0 hides them in the iPhone app and keeps them in the Android app', async () => {
     vi.stubEnv('SUPPORT_IN_APP_IOS', '0')
-    expect(await entries()).toEqual({ row: null, footer: null, home: null })
+    expect(await entries()).toEqual({ row: null, home: null })
     request.userAgent = UA.android
     const android = await entries()
     expect(android.row).toContain(CAMPAIGN)
-    expect(android.footer).toContain(CAMPAIGN)
     expect(android.home).toContain(CAMPAIGN)
   })
 
@@ -96,15 +110,14 @@ describe('"Help ons" in the app shell', () => {
     vi.stubEnv('SUPPORT_IN_APP_ANDROID', '0')
     expect((await entries()).row).toContain(CAMPAIGN)
     request.userAgent = UA.android
-    expect(await entries()).toEqual({ row: null, footer: null, home: null })
+    expect(await entries()).toEqual({ row: null, home: null })
   })
 
-  it('the website never changes: no row or footer link there, and the home block stays', async () => {
+  it('the website never changes: no row there, and the home block stays', async () => {
     vi.stubEnv('SUPPORT_IN_APP', '0')
     request.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15'
     const web = await entries(false)
     expect(web.row).toBeNull()
-    expect(web.footer).toBeNull()
     expect(web.home).toContain(CAMPAIGN)
   })
 
@@ -143,5 +156,35 @@ describe('"Help ons" in the app shell', () => {
     expect(home).not.toMatch(/App Store|Google Play/)
     const web = await entries(false)
     expect(web.home).toContain('App Store')
+  })
+
+  it('in English, Spanish and French the goal is in euros and the gift "from €5", never a price per walk', async () => {
+    const expected = {
+      en: { from: 'From €5', goal: 'Goal: €3,000', progress: '1% of the way' },
+      es: { from: 'Desde 5 €', goal: 'Objetivo: 3000 €', progress: '1 % del camino' },
+      fr: { from: 'Dès 5 €', goal: 'Objectif : 3 000 €', progress: '1 % du chemin' },
+    } as const
+    for (const locale of ['en', 'es', 'fr'] as const) {
+      lang.locale = locale
+      drive.raised = 0
+      const before = await entries()
+      expect(text(before.row), locale).toContain(`${expected[locale].from} · ${expected[locale].goal}`)
+      expect(text(before.home), locale).toContain(expected[locale].goal)
+      expect(text(before.home), locale).toContain(expected[locale].from)
+      drive.raised = 45
+      const after = await entries()
+      expect(text(after.home), locale).toContain(expected[locale].progress)
+      for (const html of [before.row, before.home, after.row, after.home]) {
+        expect(text(html), locale).not.toMatch(/\b(rounds?|paseos?|balades?)\b|=\s*1\b|\b600\b/i)
+      }
+    }
+  })
+
+  it('in Dutch the pun stays: "Geef een rondje", the goal in rondjes and €5 = 1 rondje', async () => {
+    const { row, home } = await entries()
+    expect(text(row)).toContain('Geef een rondje vanaf € 5 · Doel: 600 rondjes')
+    expect(text(home)).toContain('€ 5 = 1 rondje')
+    drive.raised = 120
+    expect(text((await entries()).home)).toContain('24 van de 600 rondjes')
   })
 })

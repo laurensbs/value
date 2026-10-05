@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import crowdfunding from '../../content/crowdfunding.json'
 import { appPlatform } from './app-platform'
-import { appSupport, campaign, showsRaised, supportInApp, supportInBothApps, switchOn } from './support'
+import { appQuestion, appSupport, campaign, showsRaised, supportInApp, supportInBothApps, switchOn } from './support'
 
 const label = (platform: string) => `Help ons via ${platform}`
 const LIVE = {
@@ -168,5 +168,22 @@ describe('appSupport', () => {
     const s = appSupport(LIVE, crowdfunding, label)
     expect(s?.goal).toBe(crowdfunding.goal)
     expect(s?.rounds?.goal).toBe(crowdfunding.goal / 5)
+  })
+})
+
+describe('appQuestion: /support only says the app has the row while it really shows', () => {
+  it('asks "Kan ik ook vanuit de app helpen?" with a campaign, a named recipient and the switch on', () => {
+    expect(appQuestion(LIVE, crowdfunding)).toEqual({ key: 'appVia', apps: 'both' })
+    expect(appQuestion({ ...LIVE, SUPPORT_IN_APP_IOS: '0' }, crowdfunding)).toEqual({ key: 'appVia', apps: 'android' })
+    expect(appQuestion({ ...LIVE, SUPPORT_IN_APP_ANDROID: '0' }, crowdfunding)).toEqual({ key: 'appVia', apps: 'ios' })
+  })
+
+  it('without a campaign link, without a named recipient or with both switches off: no row, so the other question', () => {
+    // CROWDFUNDING_URL alone: no recipient, so no row in any app.
+    expect(appQuestion({ CROWDFUNDING_URL: LIVE.CROWDFUNDING_URL }, crowdfunding).key).toBe('app')
+    expect(appQuestion({ OPERATOR_NAME: LIVE.OPERATOR_NAME }, crowdfunding).key).toBe('app')
+    expect(appQuestion({ OPERATOR_NAME: LIVE.OPERATOR_NAME, CROWDFUNDING_URL: 'https://example.com/give' }, crowdfunding).key).toBe('app')
+    expect(appQuestion({ ...LIVE, SUPPORT_IN_APP: '0' }, crowdfunding).key).toBe('app')
+    expect(appQuestion({ ...LIVE, SUPPORT_IN_APP_IOS: '0', SUPPORT_IN_APP_ANDROID: 'nee' }, crowdfunding).key).toBe('app')
   })
 })

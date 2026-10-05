@@ -5,7 +5,6 @@ import { CONTACT_PATH } from '@/lib/contact'
 import { APP_NAME } from '@/lib/site'
 import { supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
-import { HelpUsFooterLink } from './HelpUsInApp'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { Logo } from './Logo'
 
@@ -13,6 +12,10 @@ import { Logo } from './Logo'
  * The site footer. `compact` is the one line under the app pages for signed-in people
  * (FooterSwitch picks it): the essentials and the language, without the big link list.
  * Both have the language switcher.
+ *
+ * "Help ons" is a footer link on the website only (to /support). In the apps the footer has no
+ * support link at all (Laurens, 5 okt 2026): there the only two ways are the block at the bottom of
+ * the home page (landing/HelpUs) and the row low in the profile (HelpUsInApp).
  */
 export async function Footer({ compact = false }: { compact?: boolean }) {
   const t = await getTranslations('footer')
@@ -34,8 +37,7 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
             <Link href={CONTACT_PATH}>{t('contact')}</Link>
             <Link href="/legal/terms">{t('terms')}</Link>
             <Link href="/legal/privacy">{t('privacy')}</Link>
-            {/* In the apps "Help ons" goes straight to the campaign, in the phone's browser (HelpUsInApp). */}
-            {native ? <HelpUsFooterLink native /> : <Link href="/support">{t('support')}</Link>}
+            {native ? null : <Link href="/support">{t('support')}</Link>}
           </nav>
           <LanguageSwitcher current={locale} label={tn('language')} compact />
         </div>
@@ -49,7 +51,7 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
       <div className="footer-inner">
         <nav className="footer-row" aria-label={t('more')}>
           <Link href="/about">{t('about')}</Link>
-          {native ? <HelpUsFooterLink native /> : <Link href="/support">{t('support')}</Link>}
+          {native ? null : <Link href="/support">{t('support')}</Link>}
           <Link href="/suggest">{t('tip')}</Link>
           <Link href="/cities">{tc('footerLink')}</Link>
           <Link href="/shelter">{t('forShelters')}</Link>

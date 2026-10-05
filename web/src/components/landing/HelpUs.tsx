@@ -24,7 +24,11 @@ import { GOLDEN } from './looks'
  * The switch for this app (SUPPORT_IN_APP, _IOS or _ANDROID: lib/support.ts) hides it in the apps,
  * like every other entry (HelpUsInApp).
  *
- * The amount raised shows once something came in; before that only the goal in rounds.
+ * The amount raised shows once something came in; before that only the goal. Dutch keeps the pun of
+ * "Geef een rondje" and counts in rounds of €5 ("Doel: 600 rondjes", "24 van de 600 rondjes",
+ * "€5 = 1 rondje"); English, Spanish and French name the goal in euros ("Goal: €3,000"), say "From €5"
+ * and show how far along the route the campaign is ("4% of the way"), so nothing there reads like a
+ * price per walk (Laurens, 5 okt 2026).
  */
 export async function HelpUs({ native }: { native: boolean }) {
   const cfg = supportConfig()
@@ -62,12 +66,14 @@ export async function HelpUs({ native }: { native: boolean }) {
             </div>
             <p className="im-progress-numbers">
               <strong>{numbers}</strong>
-              <span className="muted small">{t('home.helpUs.rounds', { n: roundsFor(raised.raised), total: roundsFor(raised.goal) })}</span>
+              <span className="muted small">
+                {t('home.helpUs.rounds', { n: roundsFor(raised.raised), total: roundsFor(raised.goal), percent: raised.percent, goal: euro(raised.goal) })}
+              </span>
             </p>
           </div>
         ) : progress ? (
           <p className="im-progress-numbers">
-            <strong>{t('support.goalRounds', { total: roundsFor(progress.goal) })}</strong>
+            <strong>{t('support.goalRounds', { total: roundsFor(progress.goal), goal: euro(progress.goal) })}</strong>
           </p>
         ) : null}
         {/* ?bron= counts sign-ups that came through this block (lib/join.ts); the Whydonate link carries nothing. */}

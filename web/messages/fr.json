@@ -132,14 +132,14 @@
     "helpUs": {
       "eyebrow": "Collecte",
       "title": "Aidez-nous !",
-      "lede": "{app} est gratuit et le restera. Avec votre balade, l’app arrive sur l’App Store et Google Play, et la première année est payée.",
+      "lede": "{app} est gratuit et le restera. Avec votre aide, l’app arrive sur l’App Store et Google Play, et la première année est payée.",
       "ledeApp": "Avec votre aide, {app} reste gratuit et la première année est payée.",
-      "rounds": "{n, plural, =0 {Objectif : {total} balades} one {# balade sur {total}} other {# balades sur {total}}}",
+      "rounds": "{percent, plural, =0 {Objectif : {goal}} other {# % du chemin}}",
       "give": "Aidez-nous",
       "join": "ou inscrivez-vous",
       "note": "Via {platform}, à {operator}, qui crée {app}.",
       "more": "Où va l’argent",
-      "chip": "{round} = 1 balade"
+      "chip": "Dès {round}"
     }
   },
   "landing": {
@@ -1795,7 +1795,7 @@
     "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
     "onceGive": "Aidez-nous via {platform}",
     "progress": "{raised} récoltés sur {goal}",
-    "goalRounds": "Objectif : {total, plural, one {# balade} other {# balades}}",
+    "goalRounds": "Objectif : {goal}",
     "progressUpdated": "Mis à jour le {date}. Le montant actuel figure sur {platform}.",
     "platformNote": "Vous payez via {platform}, selon leurs conditions.",
     "newTab": "(s’ouvre dans un nouvel onglet)",
@@ -1819,7 +1819,7 @@
     "label": "Aidez-nous via {platform}",
     "from": "Dès {round}",
     "raised": "{raised} sur {goal}",
-    "goal": "Objectif : {total, plural, one {# balade} other {# balades}}",
+    "goal": "Objectif : {goal}",
     "opens": "ouvre {platform} dans votre navigateur"
   },
   "about": {

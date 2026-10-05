@@ -9,7 +9,7 @@ const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebK
 // hides all of it: src/components/HelpUsInApp.render.test.ts and src/lib/app-support.test.ts.
 const CAMPAIGN = 'https://whydonate.com/nl/fundraising/example'
 
-test('in the app: "Help ons via Whydonate" at the bottom of the profile, one tap straight to the campaign', async ({ browser }) => {
+test('in the app: "Help ons via Whydonate" at the bottom of the profile, one tap straight to the campaign, no footer link', async ({ browser }) => {
   const { context, page } = await newPerson(browser, undefined, { userAgent: APP_UA })
   await signUp(page, { name: 'Mila', email: `help-app-${unique()}@e2e.test`, intent: 'owner' })
   await onboard(page, { birthDate: '1980-04-04', city: 'Utrecht', bio: 'Ik heb een hond.', phone: '', walker: false, owner: true })
@@ -29,8 +29,9 @@ test('in the app: "Help ons via Whydonate" at the bottom of the profile, one tap
   else if (progress) await expect(row).toContainText(`Doel: ${roundsFor(progress.goal)} rondjes`)
   await expect(row).not.toContainText(/€\s?0\b/)
   // Exactly one, and low on the page: the last list of the profile, below privacy and just above
-  // signing out, never at the top.
+  // signing out, never at the top. The only link to the campaign on the page: none in the footer.
   await expect(page.getByRole('main').getByRole('link', { name: /Whydonate/ })).toHaveCount(1)
+  await expect(page.locator('a[href*="whydonate"]')).toHaveCount(1)
   await expect(page.locator('main .hub-list').last()).toContainText('Help ons via Whydonate')
   await expect(page.locator('main .hub-list').first()).not.toContainText('Whydonate')
   const rowBox = (await row.boundingBox())!
@@ -51,10 +52,11 @@ test('in the app: "Help ons via Whydonate" at the bottom of the profile, one tap
   await campaign.close()
   await expect(page).toHaveURL(/\/profile$/)
 
-  // The footer's "Help ons" goes straight there too.
-  const footer = page.getByRole('contentinfo').getByRole('link', { name: /^Help ons via Whydonate/ })
-  await expect(footer).toHaveAttribute('href', CAMPAIGN)
-  await expect(footer).toHaveAttribute('target', '_blank')
+  // No footer link in the app (Laurens, 5 okt 2026): no "Help ons", not to the campaign and not to /support.
+  const footer = page.getByRole('contentinfo')
+  await expect(footer).toBeVisible()
+  await expect(footer.getByRole('link', { name: /Help ons/ })).toHaveCount(0)
+  await expect(footer.locator('a[href*="whydonate"], a[href="/support"]')).toHaveCount(0)
 
   // The same person on the website: the profile keeps its link to /support, without the app row.
   const web = await browser.newContext({ storageState: await context.storageState() })
