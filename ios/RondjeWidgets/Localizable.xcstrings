@@ -133,6 +133,28 @@
         }
       }
     },
+    "Live locatie staat uit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación en directo desactivada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Localisation en direct désactivée"
+          }
+        }
+      }
+    },
     "Met welke hond je straks gaat wandelen." : {
       "localizations" : {
         "en" : {

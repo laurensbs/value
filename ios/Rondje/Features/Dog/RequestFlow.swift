@@ -44,6 +44,8 @@ struct RequestFlow: View {
     /// The server answered "needs-quiz" (also when this app thought the quiz was done).
     @State private var serverNeedsQuiz = false
     @State private var quizOpen = false
+    /// The server waits for the yes to the updated terms; after it, the request goes out as written.
+    @State private var terms: TermsRequest?
     /// The confirmation comes in piece by piece: the paper plane, the text, then the three steps.
     @State private var shown = 0
     @State private var toLessons = false
@@ -93,6 +95,7 @@ struct RequestFlow: View {
         .sheet(isPresented: $quizOpen, onDismiss: { if model.quizPassed { serverNeedsQuiz = false } }) {
             NavigationStack { QuizGameView(mode: .gate) }
         }
+        .termsSheet($terms)
         .sensoryFeedback(.selection, trigger: step)
         .onAppear(perform: prepare)
         .onDisappear(perform: finish)
@@ -740,6 +743,9 @@ struct RequestFlow: View {
         } catch let error as APIError where error.code == "needs-quiz" {
             // The server wants the quiz first: show the way there instead of an error.
             withAnimation(Motion.or(Motion.scherm, reduce: reduceMotion)) { serverNeedsQuiz = true }
+        } catch let error as APIError where error.needsTerms {
+            // The updated terms apply: the calm sheet first; after the yes, this request goes out.
+            terms = TermsRequest(model: model) { await send() }
         } catch {
             Haptics.error()
             withAnimation(Motion.or(Motion.klein, reduce: reduceMotion)) { self.error = error.plainText }

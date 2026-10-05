@@ -116,7 +116,7 @@ struct WalkLiveActivity: Widget {
                 .clipShape(.rect(cornerRadius: 16, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Rondje met \(context.attributes.dogName)").font(.headline)
-                    Text(context.state.overdue ? L("Over tijd: laat even iets weten") : L("De eigenaar kijkt mee"))
+                    Text(context.state.overdue ? L("Over tijd: laat even iets weten") : context.state.liveLocation == false ? L("Live locatie staat uit") : L("De eigenaar kijkt mee"))
                         .font(.caption)
                         .foregroundStyle(context.state.overdue ? Palette.warn : .secondary)
                 }
@@ -125,7 +125,10 @@ struct WalkLiveActivity: Widget {
                     Text(context.attributes.startedAt, style: .timer)
                         .font(.system(.title3, design: .rounded).weight(.bold).monospacedDigit())
                         .multilineTextAlignment(.trailing)
-                    Text(distance(context.state.distanceM)).font(.caption.monospacedDigit())
+                    // Without live location nothing is measured: no distance.
+                    if context.state.liveLocation != false {
+                        Text(distance(context.state.distanceM)).font(.caption.monospacedDigit())
+                    }
                 }
             }
             .padding(16)
@@ -139,7 +142,7 @@ struct WalkLiveActivity: Widget {
                     Text(context.attributes.startedAt, style: .timer).monospacedDigit().frame(width: 70)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text(distance(context.state.distanceM) + L(" gelopen")).font(.caption)
+                    Text(context.state.liveLocation == false ? L("Live locatie staat uit") : distance(context.state.distanceM) + L(" gelopen")).font(.caption)
                 }
             } compactLeading: {
                 Image(systemName: "pawprint.fill").foregroundStyle(Palette.ball)

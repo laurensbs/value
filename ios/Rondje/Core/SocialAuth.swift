@@ -9,24 +9,31 @@ import Security
 // this app can exchange: it holds the PKCE verifier behind the challenge it sent at the start.
 
 /// The public settings from GET /api/v1/config. Older servers send no `auth`: then e-mail only.
-/// And no `support`: then no "Help ons" row (HelpUs.swift).
+/// And no `support`: then no "Help ons" row (HelpUs.swift). And no `features`: then live location
+/// during walks is on, as it always was (LiveLocation.swift).
 struct AppConfig: Decodable, Sendable {
     var auth: AuthOptions?
     var support: SupportOptions?
+    var features: ServerSwitches?
 
-    init(auth: AuthOptions? = nil, support: SupportOptions? = nil) {
+    init(auth: AuthOptions? = nil, support: SupportOptions? = nil, features: ServerSwitches? = nil) {
         self.auth = auth
         self.support = support
+        self.features = features
     }
 
-    private enum CodingKeys: String, CodingKey { case auth, support }
+    private enum CodingKeys: String, CodingKey { case auth, support, features }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         auth = try c.decodeIfPresent(AuthOptions.self, forKey: .auth)
         // Whatever is wrong with `support` only hides that row; signing in keeps working.
         support = try? c.decodeIfPresent(SupportOptions.self, forKey: .support)
+        features = (try? c.decodeIfPresent(ServerSwitches.self, forKey: .features)) ?? nil
     }
+
+    /// Live location during walks: on unless the server says off.
+    var liveLocation: Bool { features?.liveLocation ?? true }
 }
 
 struct AuthOptions: Decodable, Equatable, Sendable {

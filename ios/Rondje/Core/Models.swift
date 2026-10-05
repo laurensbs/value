@@ -249,6 +249,36 @@ struct Me: Codable, Sendable {
     var trust: Trust?
     var orgs: [Org]
     var unread: Int
+    /// Where this person stands with the terms (server/terms.ts termsForApp; Terms.swift). Missing from
+    /// older servers: then the app asks nothing.
+    var termsVersion: String? = nil
+    var termsAccepted: Bool? = nil
+    var termsEffectiveAt: Date? = nil
+    var termsRequired: Bool? = nil
+    /// Only while the yes is still needed: what changed.
+    var termsChanges: TermsChanges? = nil
+}
+
+extension Me {
+    private enum Keys: String, CodingKey {
+        case user, profile, trust, orgs, unread, termsVersion, termsAccepted, termsEffectiveAt, termsRequired, termsChanges
+    }
+
+    /// The account fields as before; the terms fields leniently, so whatever is odd about them can
+    /// never stop the app from knowing who is signed in.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: Keys.self)
+        user = try c.decode(User.self, forKey: .user)
+        profile = try c.decodeIfPresent(Profile.self, forKey: .profile)
+        trust = try c.decodeIfPresent(Trust.self, forKey: .trust)
+        orgs = try c.decode([Org].self, forKey: .orgs)
+        unread = try c.decode(Int.self, forKey: .unread)
+        termsVersion = (try? c.decodeIfPresent(String.self, forKey: .termsVersion)) ?? nil
+        termsAccepted = (try? c.decodeIfPresent(Bool.self, forKey: .termsAccepted)) ?? nil
+        termsEffectiveAt = (try? c.decodeIfPresent(Date.self, forKey: .termsEffectiveAt)) ?? nil
+        termsRequired = (try? c.decodeIfPresent(Bool.self, forKey: .termsRequired)) ?? nil
+        termsChanges = (try? c.decodeIfPresent(TermsChanges.self, forKey: .termsChanges)) ?? nil
+    }
 }
 
 struct Quiz: Codable, Sendable {
@@ -301,6 +331,9 @@ struct LiveWalk: Codable, Sendable {
     var care: Care?
     var photos: [WalkPhoto]?
     var points: [LivePoint]
+    /// False while live location is switched off on the server (LIVE_LOCATION): no map, no new points.
+    /// Missing from older servers, which always had it on.
+    var liveLocation: Bool?
 }
 
 /// The walk report: how often the dog peed, pooped and drank (0 to 20 each).

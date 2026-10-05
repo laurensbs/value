@@ -4,6 +4,8 @@ import Foundation
 
 /// Records the route of an active walk and sends it to the server, so the owner can watch along.
 /// GPS runs only between "start" and "end"; the Live Activity shows the walk on the Lock Screen.
+/// With live location switched off on the server (LiveLocation.swift) there is no GPS at all: the walk
+/// runs on its timer, report and photos, and nothing about where you are leaves the phone.
 @MainActor
 @Observable
 final class WalkTracker {
@@ -16,6 +18,11 @@ final class WalkTracker {
         var ownerName: String?
         var ownerPhone: String?
         var vetInfo: String?
+        /// Live location for this walk: features.liveLocation when it started, false once the server
+        /// switched it off during the walk. Missing in a walk saved by an older version: on.
+        var liveLocation: Bool? = nil
+
+        var sharesLocation: Bool { liveLocation != false }
     }
 
     static let shared = WalkTracker()
@@ -38,9 +45,14 @@ final class WalkTracker {
     private var activityID: String?
 
     var isActive: Bool { info != nil }
+    /// This walk records and shares where you are (see Info.liveLocation).
+    var sharesLocation: Bool { info?.sharesLocation ?? true }
+    /// GPS is running right now.
+    var isTrackingLocation: Bool { updatesTask != nil }
 
-    init() {
-        if let data = UserDefaults.standard.data(forKey: Self.storageKey),
+    /// `restore`: carry on with a walk the app was closed during (false only in tests).
+    init(restore: Bool = true) {
+        if restore, let data = UserDefaults.standard.data(forKey: Self.storageKey),
            let saved = try? JSONDecoder().decode(Info.self, from: data) {
             // The app was closed during a walk: carry on where it was.
             info = saved
@@ -58,9 +70,35 @@ final class WalkTracker {
         overdueMin = 0
         pending = []
         lastLocation = nil
-        if let data = try? JSONEncoder().encode(info) { UserDefaults.standard.set(data, forKey: Self.storageKey) }
+        save()
         startLiveActivity(info)
         startUpdates()
+    }
+
+    /// The server switched live location off during this walk (features.liveLocation, or
+    /// 403 live-location-off on the points). GPS stops, the points not sent yet are dropped, and the walk
+    /// carries on with the timer, the report and photos.
+    func liveLocationOff() {
+        guard var info, info.sharesLocation else { return }
+        info.liveLocation = false
+        self.info = info
+        save()
+        updatesTask?.cancel()
+        updatesTask = nil
+        background?.invalidate()
+        background = nil
+        pending = []
+        route = []
+        locations = []
+        lastLocation = nil
+        distanceM = 0
+        signalWeak = false
+        Task { await updateLiveActivity() }
+    }
+
+    private func save() {
+        guard let info, let data = try? JSONEncoder().encode(info) else { return }
+        UserDefaults.standard.set(data, forKey: Self.storageKey)
     }
 
     /// Sends the last points and stops GPS. Returns the distance the server measured.
@@ -75,12 +113,14 @@ final class WalkTracker {
     /// Stops everything locally, for example when the server says the walk already ended.
     func stop(finalDistance: Int? = nil) {
         updatesTask?.cancel()
+        updatesTask = nil
         flushTask?.cancel()
+        flushTask = nil
         background?.invalidate()
         background = nil
         let distance = finalDistance ?? Int(distanceM)
         if let activityID {
-            let state = WalkActivityAttributes.ContentState(distanceM: distance, plannedEnd: info?.plannedEnd ?? .now, overdue: false)
+            let state = WalkActivityAttributes.ContentState(distanceM: distance, plannedEnd: info?.plannedEnd ?? .now, overdue: false, liveLocation: info?.liveLocation)
             Task { await Self.endActivity(id: activityID, state: state) }
         }
         activityID = nil
@@ -90,15 +130,19 @@ final class WalkTracker {
 
     private func startUpdates() {
         updatesTask?.cancel()
-        // Keeps location updates alive with the phone in a pocket; iOS shows the blue location pill.
-        background = CLBackgroundActivitySession()
-        updatesTask = Task { [weak self] in
-            do {
-                for try await update in CLLocationUpdate.liveUpdates(.fitness) {
-                    guard let self, !Task.isCancelled else { return }
-                    if let location = update.location { self.record(location) }
-                }
-            } catch {}
+        updatesTask = nil
+        // Live location switched off: no GPS and no background location at all, only the timer.
+        if sharesLocation {
+            // Keeps location updates alive with the phone in a pocket; iOS shows the blue location pill.
+            background = CLBackgroundActivitySession()
+            updatesTask = Task { [weak self] in
+                do {
+                    for try await update in CLLocationUpdate.liveUpdates(.fitness) {
+                        guard let self, !Task.isCancelled else { return }
+                        if let location = update.location { self.record(location) }
+                    }
+                } catch {}
+            }
         }
         flushTask?.cancel()
         flushTask = Task { [weak self] in
@@ -110,6 +154,7 @@ final class WalkTracker {
     }
 
     private func record(_ location: CLLocation) {
+        guard sharesLocation else { return }
         lastFix = .now
         // Inaccurate fixes make a route zig-zag: skip them, and ignore standing still.
         guard location.horizontalAccuracy >= 0, location.horizontalAccuracy <= 50 else {
@@ -146,9 +191,18 @@ final class WalkTracker {
                 pending.removeFirst(min(batch.count, pending.count))
                 if result.status != "active" { stop(); return }
                 overdueMin = result.overdueMin ?? 0
+            } else if !info.sharesLocation {
+                // No points go out, so ask how the walk stands: that is also how running late still
+                // reaches the owner (the server checks it on every look).
+                let live: LiveWalk = try await APIClient.shared.get("/api/walks/\(info.walkId)/live?after=999999999")
+                if live.status != "active" { stop(); return }
+                overdueMin = live.overdueMin
             } else {
                 overdueMin = max(0, Int(Date.now.timeIntervalSince(info.plannedEnd) / 60) - 20)
             }
+        } catch let error as APIError where error.code == "live-location-off" {
+            // Switched off on the server: the points are not kept, and no new ones are recorded.
+            liveLocationOff()
         } catch {
             // Offline: the points stay queued and go out with the next flush.
         }
@@ -158,13 +212,13 @@ final class WalkTracker {
     private func startLiveActivity(_ info: Info) {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
         let attributes = WalkActivityAttributes(walkId: info.walkId, dogName: info.dogName, startedAt: info.startedAt, look: info.look)
-        let state = WalkActivityAttributes.ContentState(distanceM: 0, plannedEnd: info.plannedEnd, overdue: false)
+        let state = WalkActivityAttributes.ContentState(distanceM: 0, plannedEnd: info.plannedEnd, overdue: false, liveLocation: info.liveLocation)
         activityID = (try? Activity.request(attributes: attributes, content: ActivityContent(state: state, staleDate: nil)))?.id
     }
 
     private func updateLiveActivity() async {
         guard let activityID, let info else { return }
-        let state = WalkActivityAttributes.ContentState(distanceM: Int(distanceM), plannedEnd: info.plannedEnd, overdue: overdueMin > 0)
+        let state = WalkActivityAttributes.ContentState(distanceM: Int(distanceM), plannedEnd: info.plannedEnd, overdue: overdueMin > 0, liveLocation: info.liveLocation)
         await Self.updateActivity(id: activityID, state: state)
     }
 

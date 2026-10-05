@@ -161,6 +161,8 @@ final class HelpUs {
         // No connection: keep what we had (nothing, the first time).
         guard let config = try? await APIClient.shared.config() else { return }
         link = HelpUsLink(config.support)
+        // The same answer carries the server's switches (live location during walks).
+        ServerFeatures.shared.apply(config)
         loadedAt = .now
     }
 }

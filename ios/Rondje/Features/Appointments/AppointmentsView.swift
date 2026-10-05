@@ -133,6 +133,8 @@ struct AppointmentCard: View {
     @State private var breathing = false
     /// After a first call: the dog's details, to plan meeting in person in the request sheet.
     @State private var planInPerson: DogDetail?
+    /// The server waits for the yes to the updated terms; after it, accepting or starting goes ahead.
+    @State private var terms: TermsRequest?
     /// Offer the breathing minute before a walk; switched off with "Niet meer tonen".
     @AppStorage("offerBreathing") private var offerBreathing = true
 
@@ -189,6 +191,7 @@ struct AppointmentCard: View {
                     .transition(opening)
             }
             PrepLink(item: item, asOwner: asOwner)
+            liveLocationNote
             actions
         }
         // Accepting: the label turns to "Afgesproken" (klein) and the contact details slide open (scherm).
@@ -228,6 +231,7 @@ struct AppointmentCard: View {
             )
                 .presentationDetents([.large])
         }
+        .termsSheet($terms)
         .confirmationDialog("Afspraak annuleren?", isPresented: $confirmCancel, titleVisibility: .visible) {
             Button("Annuleer afspraak", role: .destructive) { Task { await act("cancel") } }
         } message: {
@@ -236,6 +240,23 @@ struct AppointmentCard: View {
     }
 
     private struct FollowID: Identifiable { let id: String }
+
+    /// Live location is switched off on the server: said before the walk starts, and why a walk alone
+    /// with the dog waits (WalkStarter.blockedByLiveLocation).
+    private var liveLocationOff: Bool { !ServerFeatures.shared.liveLocation }
+    private var walkWaitsForLiveLocation: Bool { WalkStarter.blockedByLiveLocation(item, liveLocation: !liveLocationOff) }
+
+    @ViewBuilder
+    private var liveLocationNote: some View {
+        if !asOwner, liveLocationOff, !item.isCall, item.canStart(), item.walkStatus != "ended" {
+            Label(walkWaitsForLiveLocation
+                  ? L("Live locatie staat op dit moment uit, en zonder live locatie start een rondje alleen met de hond niet. Een kennismaking, samen met de eigenaar, kan wel.")
+                  : L("Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie."),
+                  systemImage: "location.slash")
+                .font(.footnote)
+                .foregroundStyle(Palette.muted)
+        }
+    }
 
     /// Contact details and the meeting place open with opacity and 8 points of movement; only fading with Reduce Motion.
     private var opening: AnyTransition {
@@ -362,7 +383,7 @@ struct AppointmentCard: View {
                         Label(item.walkStatus == "active" ? L("Ga verder met je rondje") : L("Start het rondje"), systemImage: "figure.walk")
                     }
                     .buttonStyle(.ball)
-                    .disabled(busy || walk.isActive)
+                    .disabled(busy || walk.isActive || walkWaitsForLiveLocation)
                 } else if item.walkStatus == "ended", item.feedbackGiven != true, let id = item.walkId {
                     Button("Hoe ging het?") { feedbackFor = id }.buttonStyle(.secondary)
                 }
@@ -387,6 +408,9 @@ struct AppointmentCard: View {
             }
             await model.refreshAppointments()
             if action == "accept" { await Reminders.askIfNeeded() }
+        } catch let error as APIError where error.needsTerms {
+            // The updated terms apply: the calm sheet first, then the yes to this request goes ahead.
+            terms = TermsRequest(model: model) { await act(action) }
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
@@ -410,6 +434,8 @@ struct AppointmentCard: View {
         do {
             try await WalkStarter.start(item, model: model, walk: walk)
             Haptics.success(.start)
+        } catch let error as APIError where error.needsTerms {
+            terms = TermsRequest(model: model) { await start() }
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)

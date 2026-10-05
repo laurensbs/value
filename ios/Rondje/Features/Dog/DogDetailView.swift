@@ -10,6 +10,8 @@ struct DogDetailView: View {
     @State private var requestKind: RequestFlow.Kind?
     @State private var reporting = false
     @State private var quizOpen = false
+    /// The updated terms apply: after the yes, the page loads again and the request buttons are back.
+    @State private var terms: TermsRequest?
 
     var body: some View {
         ScrollView {
@@ -63,6 +65,7 @@ struct DogDetailView: View {
         .sheet(isPresented: $quizOpen, onDismiss: { Task { await load() } }) {
             NavigationStack { QuizGameView(mode: .gate) }
         }
+        .termsSheet($terms)
     }
 
     private var look: DogLook { detail?.dog.look ?? preview?.look ?? .sample }
@@ -192,6 +195,11 @@ struct DogDetailView: View {
         }
     }
 
+    /// The updated terms apply and this person has not agreed yet ("needs-terms", before the quiz).
+    private func needsTerms(_ d: DogDetail) -> Bool {
+        d.canRequest.meet == "needs-terms" || d.canRequest.solo == "needs-terms"
+    }
+
     /// The safety quiz comes before any request: then one friendly button instead of the form.
     /// The server says so too ("needs-quiz"), also to an app that does not know yet.
     private func needsQuiz(_ d: DogDetail) -> Bool {
@@ -202,7 +210,9 @@ struct DogDetailView: View {
     private var actionBar: some View {
         if let d = detail, !d.isMine, !d.host.isShelter {
             VStack(spacing: 8) {
-                if needsQuiz(d) {
+                if needsTerms(d) {
+                    TermsGate { terms = TermsRequest(model: model) { await load() } }
+                } else if needsQuiz(d) {
                     QuizGate { quizOpen = true }
                 } else {
                     if let reason = d.canRequest.meet {

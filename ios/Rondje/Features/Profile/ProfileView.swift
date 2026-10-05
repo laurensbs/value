@@ -10,6 +10,8 @@ struct ProfileView: View {
     @State private var confirmSignOut = false
     @State private var deleting = false
     @State private var help = HelpUs.shared
+    /// The "terms updated" sheet, opened from the notice below the header.
+    @State private var terms: TermsRequest?
 
     private var walks: Bool { model.role != .owner }
 
@@ -18,6 +20,10 @@ struct ProfileView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     header
+                    // Changed terms: a quiet notice until the yes, the same before and after they apply.
+                    if let state = model.me?.termsState, state.needsYes {
+                        TermsNoticeCard(state: state) { terms = TermsRequest(model: model) }
+                    }
                     // The first steps for walkers, until they are done (they used to stand on Ontdek).
                     FirstSteps { model.perform(.quiz) }
                     if let p = progress.progress {
@@ -111,6 +117,7 @@ struct ProfileView: View {
                 Button("Uitloggen", role: .destructive) { Task { await model.signOut() } }
             }
             .sheet(isPresented: $deleting) { DeleteAccountSheet().presentationDetents([.medium]) }
+            .termsSheet($terms)
         }
     }
 

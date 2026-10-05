@@ -48,6 +48,9 @@ struct NextStepContext: Sendable {
     var snoozed: Set<String> = []
     /// Appointment ids whose meeting prep is done.
     var prepDone: Set<String> = []
+    /// Live location on the server (features.liveLocation). While it is off, a walk alone with the dog
+    /// does not start, so Guus does not offer to start one.
+    var liveLocation = true
 }
 
 extension NextStep {
@@ -126,6 +129,7 @@ extension NextStep {
         // b. A walk that can start now.
         let startable = outgoing
             .filter { $0.canStart(now: c.now) && $0.walkStatus != "ended" && $0.walkStatus != "active" }
+            .filter { !WalkStarter.blockedByLiveLocation($0, liveLocation: c.liveLocation) }
             .sorted { $0.startsAt < $1.startsAt }
         for item in startable {
             let at = when(item.startsAt, c)

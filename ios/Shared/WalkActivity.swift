@@ -7,6 +7,8 @@ struct WalkActivityAttributes: ActivityAttributes {
         var distanceM: Int
         var plannedEnd: Date
         var overdue: Bool
+        /// False while live location is switched off: no distance, and no "the owner watches along".
+        var liveLocation: Bool? = nil
     }
 
     var walkId: String

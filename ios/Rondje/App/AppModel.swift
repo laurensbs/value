@@ -116,6 +116,8 @@ final class AppModel {
             if phase == .ready {
                 await refreshAppointments()
                 await Push.registerIfAllowed()
+                // Whether walks share a live location (features.liveLocation); at most every few minutes.
+                await ServerFeatures.shared.refresh()
             }
         } catch APIError.unauthorized {
             if mine == session { reset() }

@@ -2,6 +2,8 @@ import MapKit
 import SwiftUI
 
 /// For the owner or shelter: watch the walk live. Polls every few seconds while open.
+/// While live location is switched off on the server there is no map: the time, the walk report and
+/// the photos still come in, and one calm line says why.
 struct FollowWalkView: View {
     let walkId: String
     let dogName: String
@@ -13,35 +15,45 @@ struct FollowWalkView: View {
     @State private var error: String?
 
     private var coordinates: [CLLocationCoordinate2D] { points.map { .init(latitude: $0.lat, longitude: $0.lng) } }
+    /// The walk's own answer once it is in; before that, what the phone last heard from the server.
+    private var showsMap: Bool { live?.liveLocation ?? ServerFeatures.shared.liveLocation }
 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                Map(position: $camera) {
-                    if coordinates.count > 1 {
-                        MapPolyline(coordinates: coordinates)
-                            .stroke(Palette.route, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
-                    }
-                    if let last = coordinates.last {
-                        Annotation(dogName, coordinate: last) {
-                            Image(systemName: "pawprint.circle.fill")
-                                .font(.system(size: 34))
-                                .foregroundStyle(Palette.onBall, Palette.ball)
-                                .symbolEffect(.pulse)
+                if showsMap {
+                    Map(position: $camera) {
+                        if coordinates.count > 1 {
+                            MapPolyline(coordinates: coordinates)
+                                .stroke(Palette.route, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+                        }
+                        if let last = coordinates.last {
+                            Annotation(dogName, coordinate: last) {
+                                Image(systemName: "pawprint.circle.fill")
+                                    .font(.system(size: 34))
+                                    .foregroundStyle(Palette.onBall, Palette.ball)
+                                    .symbolEffect(.pulse)
+                            }
                         }
                     }
+                    .ignoresSafeArea(edges: .bottom)
+                } else {
+                    Palette.paper.ignoresSafeArea()
                 }
-                .ignoresSafeArea(edges: .bottom)
 
                 VStack(alignment: .leading, spacing: 8) {
                     if let live {
-                        if live.overdueMin == 0 {
+                        if !showsMap {
+                            Label("Live locatie staat op dit moment uit, dus hier staat geen kaart. Je ziet wel de tijd, het rondje-rapport en de foto's.", systemImage: "location.slash")
+                                .font(.subheadline)
+                                .foregroundStyle(Palette.muted)
+                        } else if live.overdueMin == 0 {
                             GuusHint(id: "follow", text: L("Je ziet live waar ze lopen. Foto's en plasjes komen hier vanzelf binnen."))
                         }
                         HStack {
                             Chip(text: live.status == "active" ? L("Onderweg") : L("Terug"), symbol: live.status == "active" ? "figure.walk" : "house.fill")
                             Spacer()
-                            if let lastAt = live.lastAt {
+                            if showsMap, let lastAt = live.lastAt {
                                 Text("Laatste plek \(lastAt, style: .relative) geleden").font(.caption).foregroundStyle(Palette.muted)
                             }
                         }

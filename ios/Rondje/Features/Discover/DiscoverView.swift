@@ -439,6 +439,8 @@ struct GroupWalkCard: View {
     @State private var busy = false
     /// Joining is a reaction too: walkers do the safety quiz first.
     @State private var quizOpen = false
+    /// The server waits for the yes to the updated terms; after it, joining goes ahead.
+    @State private var terms: TermsRequest?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -474,6 +476,7 @@ struct GroupWalkCard: View {
         .frame(width: 260, height: 170, alignment: .topLeading)
         .background(Palette.surface, in: .rect(cornerRadius: 24, style: .continuous))
         .sheet(isPresented: $quizOpen) { NavigationStack { QuizGameView(mode: .gate) } }
+        .termsSheet($terms)
     }
 
     private func toggle() async {
@@ -490,6 +493,8 @@ struct GroupWalkCard: View {
             await changed()
         } catch let error as APIError where error.code == "needs-quiz" {
             quizOpen = true
+        } catch let error as APIError where error.needsTerms {
+            terms = TermsRequest(model: model) { await toggle() }
         } catch {
             Haptics.error()
             model.show(error.plainText, symbol: "exclamationmark.circle.fill", tint: Palette.danger)
