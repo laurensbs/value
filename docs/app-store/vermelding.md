@@ -105,7 +105,7 @@ AND MORE
 • Levels and badges that only you can see. No streaks and no pressure: every walk counts, even after a break.
 • A widget and a Live Activity for your next walk.
 
-{{NAAM}} is always free and ad-free, carried by members who care. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
+{{NAAM}} is always free and ad-free. We never sell data. 18+. Available in the Netherlands, Belgium and Spain, in Dutch, English, Spanish and French.
 
 {{NAAM}} is not a care service and makes no diagnoses. Not feeling well? The app shows where to get help.
 
