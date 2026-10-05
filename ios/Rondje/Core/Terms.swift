@@ -2,8 +2,9 @@ import Foundation
 
 // Changed terms (terms art. 19). GET /api/v1/me says where someone stands (server/terms.ts termsForApp):
 // while their yes is for an older version, the app shows what changed in a calm sheet, with the full
-// terms one tap away in Safari, and "Akkoord" records the yes (POST /api/v1/terms/accept). Before the
-// new terms take effect nothing changes: only a quiet notice under Jij. From that day on, asking,
+// terms one tap away in Safari, and "Akkoord" records the yes (POST /api/v1/terms/accept). "Akkoord"
+// is only there while the server's list of changes is on screen. Before the new terms take effect the
+// app asks for nothing: only a quiet notice under Jij. From that day on, asking,
 // accepting, starting a walk and joining a group walk answer "needs-terms" until the yes; then the same
 // sheet comes up there and, after the yes, does what the person was doing. Declining, cancelling and
 // ending a walk never wait. Older servers send none of this, and then the app asks nothing.
@@ -78,9 +79,12 @@ extension Me {
         return termsRequired == true ? .required(since: termsEffectiveAt) : .upcoming(effectiveAt: termsEffectiveAt)
     }
 
-    /// The version to agree to: the one the sheet shows.
+    /// The version "Akkoord" agrees to: the version of the list of changes the sheet shows. Without
+    /// that list on screen (not loaded, or nothing readable in it) there is nothing to agree to, and so
+    /// no "Akkoord": nobody says yes to changes they have not seen.
     var termsToAgree: String? {
-        [termsChanges?.version, termsVersion].compactMap { $0?.trimmingCharacters(in: .whitespaces) }.first { !$0.isEmpty }
+        guard let changes = termsChanges, !changes.items.isEmpty else { return nil }
+        return [changes.version, termsVersion ?? ""].map { $0.trimmingCharacters(in: .whitespaces) }.first { !$0.isEmpty }
     }
 }
 
@@ -90,6 +94,9 @@ extension APIError {
 }
 
 /// What the sheet and the notice say. The same words as the website's notice (termsUpdate in web/messages).
+/// What changed comes from the server (termsChanges: intro and items, content/legal/<locale>/terms-changes.md);
+/// only the sentence with the date is the app's own. It never says that nothing changes until then: some
+/// changes only describe how Rondje Mee already works.
 enum TermsText {
     /// The day the new terms apply, as the website names it: 00:00 in Amsterdam, so "9 november 2026".
     static func day(_ date: Date, locale: Locale = Format.locale) -> String {
@@ -102,7 +109,7 @@ enum TermsText {
     static func lede(_ state: TermsState, locale: Locale = Format.locale) -> String {
         switch state {
         case .upcoming(let at?):
-            L("Lees in rust wat er verandert. Voor jou gelden de nieuwe voorwaarden vanaf \(day(at, locale: locale)); tot die tijd blijft alles zoals het was.")
+            L("Lees in rust wat er verandert. De nieuwe voorwaarden gelden voor jou vanaf \(day(at, locale: locale)). Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start.")
         case .required(let since?):
             L("De nieuwe voorwaarden gelden sinds \(day(since, locale: locale)). Lees wat er verandert. Na je akkoord kun je weer afspraken maken en rondjes starten.")
         case .required(nil):
@@ -116,7 +123,7 @@ enum TermsText {
     static func notice(_ state: TermsState, locale: Locale = Format.locale) -> String {
         switch state {
         case .upcoming(let at?):
-            L("Voor jou gelden ze vanaf \(day(at, locale: locale)). Tot die tijd blijft alles zoals het was.")
+            L("Voor jou gelden ze vanaf \(day(at, locale: locale)). Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start.")
         case .required:
             L("Na je akkoord kun je weer afspraken maken en rondjes starten.")
         case .upcoming(nil), .agreed:

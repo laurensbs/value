@@ -93,7 +93,7 @@ struct OwnerHomeView: View {
             .task { await load() }
             .sheet(isPresented: $adding) { AddDogView { await load() }.presentationDetents([.large]) }
             .fullScreenCover(item: $following) { item in
-                FollowWalkView(walkId: item.walkId ?? "", dogName: item.dog.name)
+                FollowWalkView(walkId: item.walkId ?? "", dogName: item.dog.name, kind: item.kind)
             }
         }
     }

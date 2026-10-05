@@ -2,7 +2,8 @@ import MapKit
 import SwiftUI
 
 /// Full screen during a walk: the route, time and distance, SOS, and a deliberate way to end.
-/// With live location switched off there is no map and no distance, and the screen says so calmly.
+/// A walk that shares no location (a first meeting, or live location switched off) has no map and no
+/// distance, and the screen says why calmly.
 struct ActiveWalkView: View {
     @Environment(WalkTracker.self) private var walk
     @Environment(AppModel.self) private var model
@@ -53,7 +54,11 @@ struct ActiveWalkView: View {
                             DogPortrait(look: info.look, cornerRadius: 14).frame(width: 44, height: 44)
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("Rondje met \(info.dogName)").font(.headline)
-                                if !walk.sharesLocation {
+                                if !walk.sharesLocation, info.together {
+                                    Text("Jullie lopen samen, dus er is geen kaart nodig.")
+                                        .font(.caption).foregroundStyle(Palette.muted)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                } else if !walk.sharesLocation {
                                     Text("Live locatie staat uit").font(.caption).foregroundStyle(Palette.muted)
                                 } else if !LocationService.shared.allowed && LocationService.shared.authorization != .notDetermined {
                                     Button("Locatie staat uit. Zet hem aan") { openSettings() }
@@ -73,7 +78,7 @@ struct ActiveWalkView: View {
                             }
                             .accessibilityLabel("Hulp nodig")
                         }
-                        if !walk.sharesLocation {
+                        if !walk.sharesLocation, !info.together {
                             Text("Je route wordt niet bijgehouden of gedeeld. De tijd, het rondje-rapport en foto's werken gewoon.")
                                 .font(.footnote)
                                 .foregroundStyle(Palette.muted)
@@ -148,8 +153,9 @@ struct ActiveWalkView: View {
             if let live: LiveWalk = try? await APIClient.shared.get("/api/walks/\(info.walkId)/live?after=999999999") {
                 care = live.care ?? Care()
                 photos = live.photos ?? []
-                // Switched off on the server since the walk started: stop recording where you are.
-                if live.liveLocation == false { walk.liveLocationOff() }
+                // A first meeting, or switched off on the server since the walk started: stop recording
+                // where you are.
+                walk.apply(live)
             }
         }
         .glassy(cornerRadius: 32)

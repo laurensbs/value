@@ -11969,6 +11969,28 @@
         }
       }
     },
+    "Jullie lopen samen, dus er is geen kaart nodig." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're walking together, so there's no need for a map."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paseáis juntos, así que no hace falta mapa."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous vous promenez ensemble, donc pas besoin de carte."
+          }
+        }
+      }
+    },
     "Jullie lopen samen. Daarna beslist de eigenaar of je zelfstandig met %@ mag." : {
       "localizations" : {
         "en" : {
@@ -13223,24 +13245,24 @@
         }
       }
     },
-    "Lees in rust wat er verandert. Voor jou gelden de nieuwe voorwaarden vanaf %@; tot die tijd blijft alles zoals het was." : {
+    "Lees in rust wat er verandert. De nieuwe voorwaarden gelden voor jou vanaf %@. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take your time to read what changes. For you, the new terms apply from %@; until then, everything stays as it was."
+            "value" : "Take your time to read what changes. The new terms apply to you from %@. From then on, we ask for your agreement first, before you arrange something new or start a walk."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lee con calma lo que cambia. Para ti, las nuevas condiciones se aplican a partir del %@; hasta entonces, todo sigue igual."
+            "value" : "Lee con calma lo que cambia. Las nuevas condiciones se aplican para ti a partir del %@. A partir de entonces, te pedimos primero tu aceptación, antes de quedar para algo nuevo o empezar un paseo."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prends le temps de lire ce qui change. Pour toi, les nouvelles conditions s'appliquent à partir du %@ ; d'ici là, rien ne change."
+            "value" : "Prends le temps de lire ce qui change. Les nouvelles conditions s'appliquent pour toi à partir du %@. Dès lors, nous te demandons d'abord ton accord, avant de convenir de quelque chose de nouveau ou de commencer une balade."
           }
         }
       }
@@ -13597,28 +13619,6 @@
         }
       }
     },
-    "Live locatie staat op dit moment uit, en zonder live locatie start een rondje alleen met de hond niet. Een kennismaking, samen met de eigenaar, kan wel." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Live location is off for now, and a walk alone with the dog does not start without it. A first meeting, together with the owner, is possible."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La ubicación en directo está desactivada por ahora, y sin ella no empieza un paseo a solas con el perro. Un primer encuentro, junto con el dueño, sí es posible."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La localisation en direct est désactivée pour le moment, et sans elle une balade seul avec le chien ne démarre pas. Une première rencontre, avec le propriétaire, reste possible."
-          }
-        }
-      }
-    },
     "Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie." : {
       "localizations" : {
         "en" : {
@@ -13659,6 +13659,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Localisation en direct désactivée"
+          }
+        }
+      }
+    },
+    "Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live location is off for now, so a walk alone with the dog doesn't start yet. Walking together with the owner is possible."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ubicación en directo está desactivada por ahora, así que todavía no empieza un paseo a solas con el perro. Pasear junto con el dueño sí es posible."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La localisation en direct est désactivée pour le moment, donc une balade seul avec le chien ne démarre pas encore. Se promener avec le propriétaire reste possible."
           }
         }
       }
@@ -20067,24 +20089,24 @@
         }
       }
     },
-    "Voor jou gelden ze vanaf %@. Tot die tijd blijft alles zoals het was." : {
+    "Voor jou gelden ze vanaf %@. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "For you, they apply from %@. Until then, everything stays as it was."
+            "value" : "For you, they apply from %@. From then on, we ask for your agreement first, before you arrange something new or start a walk."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Para ti, se aplican a partir del %@. Hasta entonces, todo sigue igual."
+            "value" : "Para ti, se aplican a partir del %@. A partir de entonces, te pedimos primero tu aceptación, antes de quedar para algo nuevo o empezar un paseo."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pour toi, elles s'appliquent à partir du %@. D'ici là, rien ne change."
+            "value" : "Pour toi, elles s'appliquent à partir du %@. Dès lors, nous te demandons d'abord ton accord, avant de convenir de quelque chose de nouveau ou de commencer une balade."
           }
         }
       }
@@ -20927,6 +20949,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De l'eau s'il fait chaud"
+          }
+        }
+      }
+    },
+    "We konden de wijzigingen nu niet laden. Probeer het later nog eens." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We couldn't load the changes just now. Please try again later."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hemos podido cargar los cambios ahora. Inténtalo de nuevo más tarde."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nous n'avons pas pu charger les changements pour l'instant. Réessaie plus tard."
           }
         }
       }

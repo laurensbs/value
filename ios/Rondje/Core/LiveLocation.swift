@@ -1,12 +1,17 @@
 import Foundation
 
 // Live location during walks can be switched off for everyone on the server (LIVE_LOCATION, web
-// lib/live-location.ts), for example until the DPIA is done (privacy art. 14). GET /api/v1/config says
-// so as `features.liveLocation`. Off means: the app asks for no location permission for a walk, starts
-// no GPS and no background location, sends no points, and shows no map or distance; it says so calmly
-// instead. A first meeting (the owner or shelter is there) still starts; a walk alone with the dog does
-// not ('live-location-off' from the server, and the Start button says why). Older servers send no
-// `features`, and they always had it on.
+// lib/live-location.ts); since #37 it is off unless the server turns it on, until the DPIA is done
+// (privacy art. 14). GET /api/v1/config says so as `features.liveLocation`. Off means: the app asks for
+// no location permission for a walk, starts no GPS and no background location, sends no points, and
+// shows no map or distance; it says so calmly instead. A first meeting (the owner or shelter is there)
+// still starts; a walk alone with the dog does not ('live-location-off' from the server, and the Start
+// button says why). Older servers send no `features`, and they always had it on.
+//
+// Even with the switch on, only a walk alone with the dog shares where the walker is (web lib/rules.ts
+// walkHasLiveLocation, WalkStarter.sharesLocation). A first meeting never does: "Jullie lopen samen, dus
+// er is geen kaart nodig." POST /api/v1/walks says per walk whether it shares (`liveLocation`), and
+// /live says it with the walk's `kind`.
 
 /// `features` in GET /api/v1/config: switches the server sets for everyone.
 struct ServerSwitches: Decodable, Equatable, Sendable {

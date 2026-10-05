@@ -4,8 +4,10 @@ import Foundation
 
 /// Records the route of an active walk and sends it to the server, so the owner can watch along.
 /// GPS runs only between "start" and "end"; the Live Activity shows the walk on the Lock Screen.
-/// With live location switched off on the server (LiveLocation.swift) there is no GPS at all: the walk
-/// runs on its timer, report and photos, and nothing about where you are leaves the phone.
+/// Only a walk alone with the dog shares where you are, and only with live location switched on
+/// (WalkStarter.sharesLocation). A first meeting never does (they walk together, so no map), and with
+/// the switch off nothing does: then there is no GPS at all, the walk runs on its timer, report and
+/// photos, and nothing about where you are leaves the phone.
 @MainActor
 @Observable
 final class WalkTracker {
@@ -18,11 +20,16 @@ final class WalkTracker {
         var ownerName: String?
         var ownerPhone: String?
         var vetInfo: String?
-        /// Live location for this walk: features.liveLocation when it started, false once the server
-        /// switched it off during the walk. Missing in a walk saved by an older version: on.
+        /// Live location for this walk: the server's answer when it started (WalkStarter.sharesLocation),
+        /// false once the server switched it off during the walk. Missing in a walk saved by an older
+        /// version: on, until the server says otherwise.
         var liveLocation: Bool? = nil
+        /// The appointment's kind: "meet" or "solo". Missing in a walk saved by an older version.
+        var kind: String? = nil
 
         var sharesLocation: Bool { liveLocation != false }
+        /// A first meeting: the owner or shelter walks along, so there is no map.
+        var together: Bool { kind == "meet" }
     }
 
     static let shared = WalkTracker()
@@ -43,6 +50,13 @@ final class WalkTracker {
     private var flushTask: Task<Void, Never>?
     private var background: CLBackgroundActivitySession?
     private var activityID: String?
+
+    /// Points recorded but not sent yet.
+    var queuedPoints: Int { pending.count }
+    /// Sends a batch of points (POST /api/walks/{id}/points). Replaceable in tests.
+    @ObservationIgnored var postPoints: @MainActor (_ walkId: String, _ points: [[String: Double]]) async throws -> PointsResult = { walkId, points in
+        try await APIClient.shared.post("/api/walks/\(walkId)/points", PointsBody(points: points))
+    }
 
     var isActive: Bool { info != nil }
     /// This walk records and shares where you are (see Info.liveLocation).
@@ -75,14 +89,17 @@ final class WalkTracker {
         startUpdates()
     }
 
-    /// The server switched live location off during this walk (features.liveLocation, or
-    /// 403 live-location-off on the points). GPS stops, the points not sent yet are dropped, and the walk
-    /// carries on with the timer, the report and photos.
+    /// The server says this walk collects no location (`liveLocation: false` in /live, or
+    /// 403 live-location-off on the points): switched off during the walk, or a first meeting. GPS stops,
+    /// the points not sent yet are dropped (never queued for later), and the walk carries on with the
+    /// timer, the report and photos.
     func liveLocationOff() {
-        guard var info, info.sharesLocation else { return }
-        info.liveLocation = false
-        self.info = info
-        save()
+        guard var info else { return }
+        if info.sharesLocation {
+            info.liveLocation = false
+            self.info = info
+            save()
+        }
         updatesTask?.cancel()
         updatesTask = nil
         background?.invalidate()
@@ -94,6 +111,20 @@ final class WalkTracker {
         distanceM = 0
         signalWeak = false
         Task { await updateLiveActivity() }
+    }
+
+    /// What GET /api/walks/{id}/live says about this walk: its kind (for the right words) and whether it
+    /// collects location. It only ever switches location off, never on.
+    func apply(_ live: LiveWalk) {
+        guard var info else { return }
+        if let kind = live.kind, info.kind != kind {
+            info.kind = kind
+            self.info = info
+            save()
+            Task { await updateLiveActivity() }
+        }
+        // A first meeting never shares where you are, whatever an older server says.
+        if live.liveLocation == false || live.kind == "meet" { liveLocationOff() }
     }
 
     private func save() {
@@ -120,7 +151,7 @@ final class WalkTracker {
         background = nil
         let distance = finalDistance ?? Int(distanceM)
         if let activityID {
-            let state = WalkActivityAttributes.ContentState(distanceM: distance, plannedEnd: info?.plannedEnd ?? .now, overdue: false, liveLocation: info?.liveLocation)
+            let state = WalkActivityAttributes.ContentState(distanceM: distance, plannedEnd: info?.plannedEnd ?? .now, overdue: false, liveLocation: info?.liveLocation, together: info?.together == true ? true : nil)
             Task { await Self.endActivity(id: activityID, state: state) }
         }
         activityID = nil
@@ -153,7 +184,7 @@ final class WalkTracker {
         }
     }
 
-    private func record(_ location: CLLocation) {
+    func record(_ location: CLLocation) {
         guard sharesLocation else { return }
         lastFix = .now
         // Inaccurate fixes make a route zig-zag: skip them, and ignore standing still.
@@ -180,14 +211,14 @@ final class WalkTracker {
     }
 
     private struct PointsBody: Encodable { var points: [[String: Double]] }
-    private struct PointsResult: Decodable { var status: String; var overdueMin: Int? }
+    struct PointsResult: Decodable, Sendable { var status: String; var overdueMin: Int? }
 
-    private func flush() async {
+    func flush() async {
         guard let info else { return }
         let batch = Array(pending.prefix(120))
         do {
             if !batch.isEmpty {
-                let result: PointsResult = try await APIClient.shared.post("/api/walks/\(info.walkId)/points", PointsBody(points: batch))
+                let result = try await postPoints(info.walkId, batch)
                 pending.removeFirst(min(batch.count, pending.count))
                 if result.status != "active" { stop(); return }
                 overdueMin = result.overdueMin ?? 0
@@ -201,8 +232,12 @@ final class WalkTracker {
                 overdueMin = max(0, Int(Date.now.timeIntervalSince(info.plannedEnd) / 60) - 20)
             }
         } catch let error as APIError where error.code == "live-location-off" {
-            // Switched off on the server: the points are not kept, and no new ones are recorded.
+            // This walk collects no location (switched off, or a first meeting): the points are not kept,
+            // and no new ones are recorded.
             liveLocationOff()
+        } catch let error as APIError where error.code == "invalid" {
+            // The server will never take this batch: drop it, so the queue does not get stuck on it.
+            pending.removeFirst(min(batch.count, pending.count))
         } catch {
             // Offline: the points stay queued and go out with the next flush.
         }
@@ -212,13 +247,13 @@ final class WalkTracker {
     private func startLiveActivity(_ info: Info) {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
         let attributes = WalkActivityAttributes(walkId: info.walkId, dogName: info.dogName, startedAt: info.startedAt, look: info.look)
-        let state = WalkActivityAttributes.ContentState(distanceM: 0, plannedEnd: info.plannedEnd, overdue: false, liveLocation: info.liveLocation)
+        let state = WalkActivityAttributes.ContentState(distanceM: 0, plannedEnd: info.plannedEnd, overdue: false, liveLocation: info.liveLocation, together: info.together ? true : nil)
         activityID = (try? Activity.request(attributes: attributes, content: ActivityContent(state: state, staleDate: nil)))?.id
     }
 
     private func updateLiveActivity() async {
         guard let activityID, let info else { return }
-        let state = WalkActivityAttributes.ContentState(distanceM: Int(distanceM), plannedEnd: info.plannedEnd, overdue: overdueMin > 0, liveLocation: info.liveLocation)
+        let state = WalkActivityAttributes.ContentState(distanceM: Int(distanceM), plannedEnd: info.plannedEnd, overdue: overdueMin > 0, liveLocation: info.liveLocation, together: info.together ? true : nil)
         await Self.updateActivity(id: activityID, state: state)
     }
 

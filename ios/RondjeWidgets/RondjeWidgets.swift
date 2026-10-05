@@ -116,7 +116,7 @@ struct WalkLiveActivity: Widget {
                 .clipShape(.rect(cornerRadius: 16, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Rondje met \(context.attributes.dogName)").font(.headline)
-                    Text(context.state.overdue ? L("Over tijd: laat even iets weten") : context.state.liveLocation == false ? L("Live locatie staat uit") : L("De eigenaar kijkt mee"))
+                    Text(context.state.overdue ? L("Over tijd: laat even iets weten") : noLocation(context.state) ?? L("De eigenaar kijkt mee"))
                         .font(.caption)
                         .foregroundStyle(context.state.overdue ? Palette.warn : .secondary)
                 }
@@ -142,7 +142,7 @@ struct WalkLiveActivity: Widget {
                     Text(context.attributes.startedAt, style: .timer).monospacedDigit().frame(width: 70)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text(context.state.liveLocation == false ? L("Live locatie staat uit") : distance(context.state.distanceM) + L(" gelopen")).font(.caption)
+                    Text(noLocation(context.state) ?? distance(context.state.distanceM) + L(" gelopen")).font(.caption)
                 }
             } compactLeading: {
                 Image(systemName: "pawprint.fill").foregroundStyle(Palette.ball)
@@ -152,6 +152,12 @@ struct WalkLiveActivity: Widget {
                 Image(systemName: "pawprint.fill").foregroundStyle(Palette.ball)
             }
         }
+    }
+
+    /// Why this walk shows no distance, or nil when it shares where you are.
+    private func noLocation(_ state: WalkActivityAttributes.ContentState) -> String? {
+        if state.together == true { return L("Jullie lopen samen") }
+        return state.liveLocation == false ? L("Live locatie staat uit") : nil
     }
 
     private func distance(_ m: Int) -> String {

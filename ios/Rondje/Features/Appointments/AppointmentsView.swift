@@ -208,7 +208,7 @@ struct AppointmentCard: View {
             }
         }
         .fullScreenCover(item: Binding(get: { following.map(FollowID.init) }, set: { following = $0?.id })) { f in
-            FollowWalkView(walkId: f.id, dogName: item.dog.name)
+            FollowWalkView(walkId: f.id, dogName: item.dog.name, kind: item.kind)
         }
         .sheet(item: Binding(get: { feedbackFor.map(FollowID.init) }, set: { feedbackFor = $0?.id })) { f in
             FeedbackSheet(walkId: f.id, role: asOwner ? .owner : .walker, dogName: item.dog.name)
@@ -246,15 +246,23 @@ struct AppointmentCard: View {
     private var liveLocationOff: Bool { !ServerFeatures.shared.liveLocation }
     private var walkWaitsForLiveLocation: Bool { WalkStarter.blockedByLiveLocation(item, liveLocation: !liveLocationOff) }
 
+    /// Before the walk starts: a first meeting shares no location (they walk together), and with live
+    /// location switched off a walk alone with the dog waits.
     @ViewBuilder
     private var liveLocationNote: some View {
-        if !asOwner, liveLocationOff, !item.isCall, item.canStart(), item.walkStatus != "ended" {
-            Label(walkWaitsForLiveLocation
-                  ? L("Live locatie staat op dit moment uit, en zonder live locatie start een rondje alleen met de hond niet. Een kennismaking, samen met de eigenaar, kan wel.")
-                  : L("Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie."),
-                  systemImage: "location.slash")
-                .font(.footnote)
-                .foregroundStyle(Palette.muted)
+        if !asOwner, !item.isCall, item.canStart(), item.walkStatus != "ended" {
+            if item.isMeeting {
+                Label("Jullie lopen samen, dus er is geen kaart nodig.", systemImage: "figure.2")
+                    .font(.footnote)
+                    .foregroundStyle(Palette.muted)
+            } else if liveLocationOff {
+                Label(walkWaitsForLiveLocation
+                      ? L("Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel.")
+                      : L("Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie."),
+                      systemImage: "location.slash")
+                    .font(.footnote)
+                    .foregroundStyle(Palette.muted)
+            }
         }
     }
 

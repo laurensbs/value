@@ -56,8 +56,22 @@ struct TermsTests {
         let me = try decode(Self.me(terms: Self.terms(accepted: true, required: false, changes: nil)))
         #expect(me.termsState == .agreed)
         #expect(!me.termsState.needsYes)
-        // The version is still known (for a yes from an older screen), but nothing asks for it.
-        #expect(me.termsToAgree == "0.3")
+        // No list of changes, so nothing to say yes to.
+        #expect(me.termsToAgree == nil)
+    }
+
+    @Test func akkoordOnlyWithTheChangesOnScreen() throws {
+        // Changes to read: "Akkoord" agrees to the version of that list.
+        #expect(try decode(Self.me(terms: Self.terms(accepted: false, required: true, changes: Self.changes))).termsToAgree == "0.3")
+        // The list without its own version: the server's current version, still with the list in view.
+        let unversioned = #"{"items":["Op een klacht reageren we binnen 14 dagen (artikel 18)."]}"#
+        #expect(try decode(Self.me(terms: Self.terms(accepted: false, required: true, changes: unversioned))).termsToAgree == "0.3")
+        // An outdated yes but no list (not sent, empty, or unreadable): no "Akkoord".
+        for missing in ["null", #"{"version":"0.3","items":[]}"#, #"{"version":"0.3","items":"zie website"}"#, #"{"version":"0.3"}"#] {
+            let me = try decode(Self.me(terms: Self.terms(accepted: false, required: true, changes: missing)))
+            #expect(me.termsState.needsYes, "\(missing)")
+            #expect(me.termsToAgree == nil, "\(missing)")
+        }
     }
 
     @Test func withoutAProfileTheOnboardingAsks() throws {
@@ -87,6 +101,8 @@ struct TermsTests {
         #expect(changes.intro.isEmpty)
         #expect(changes.items.isEmpty)
         #expect(changes.fullTerms == Brand.web("/legal/terms"))
+        // Nothing readable to show, so nothing to agree to.
+        #expect(me.termsToAgree == nil)
 
         let clean = try JSONDecoder().decode(TermsChanges.self, from: Data(#"{"items":["  Eerste punt  ",""]}"#.utf8))
         #expect(clean.items == ["Eerste punt"])
@@ -132,14 +148,39 @@ struct TermsTests {
         #expect(!TermsText.lede(.upcoming(effectiveAt: nil), locale: nl).isEmpty)
     }
 
+    @Test func theWordsNeverSayNothingChanges() throws {
+        // Some changes only describe how Rondje Mee already works (since 2 October 2026), so the app never
+        // says that everything stays as it was until the day; it says what happens from that day on.
+        let upcoming = TermsState.upcoming(effectiveAt: Self.effectiveDate)
+        let nothingChanges = #"blijft alles|zoals het was|stays as it was|rien ne change|sigue igual"#
+        for key in [Self.ledeAhead, Self.noticeAhead] {
+            #expect(key.range(of: nothingChanges, options: [.regularExpression, .caseInsensitive]) == nil, "\(key)")
+            #expect(key.contains("Vanaf dan vragen we eerst je akkoord"), "\(key)")
+        }
+        for lang in ["en", "fr", "es"] {
+            let path = try #require(Bundle.main.path(forResource: lang, ofType: "lproj"), "\(lang).lproj")
+            let bundle = try #require(Bundle(path: path))
+            for key in [Self.ledeAhead, Self.noticeAhead] {
+                let value = bundle.localizedString(forKey: key, value: "", table: nil)
+                #expect(value.range(of: nothingChanges, options: [.regularExpression, .caseInsensitive]) == nil, "\(lang): \(value)")
+            }
+        }
+        let nl = Locale(identifier: "nl_NL")
+        #expect(TermsText.lede(upcoming, locale: nl).range(of: nothingChanges, options: [.regularExpression, .caseInsensitive]) == nil)
+        #expect(TermsText.notice(upcoming, locale: nl).range(of: nothingChanges, options: [.regularExpression, .caseInsensitive]) == nil)
+    }
+
+    private static let ledeAhead = "Lees in rust wat er verandert. De nieuwe voorwaarden gelden voor jou vanaf %@. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start."
+    private static let noticeAhead = "Voor jou gelden ze vanaf %@. Vanaf dan vragen we eerst je akkoord, voordat je iets nieuws afspreekt of een rondje start."
+
     /// Every new sentence (the sheet, the notice, the dog page, and live location off), as the app shows it.
     static let keys = [
         "De voorwaarden zijn bijgewerkt",
-        "Lees in rust wat er verandert. Voor jou gelden de nieuwe voorwaarden vanaf %@; tot die tijd blijft alles zoals het was.",
+        ledeAhead,
         "De nieuwe voorwaarden gelden sinds %@. Lees wat er verandert. Na je akkoord kun je weer afspraken maken en rondjes starten.",
         "Lees wat er verandert. Na je akkoord kun je weer afspraken maken en rondjes starten.",
         "Lees in rust wat er verandert.",
-        "Voor jou gelden ze vanaf %@. Tot die tijd blijft alles zoals het was.",
+        noticeAhead,
         "Na je akkoord kun je weer afspraken maken en rondjes starten.",
         "Lees wat er verandert",
         "Lees de volledige voorwaarden",
@@ -149,11 +190,13 @@ struct TermsTests {
         "Dank je. Je akkoord is opgeslagen.",
         "Je hebt de nieuwste voorwaarden al geaccepteerd.",
         "Eerst graag je akkoord met de bijgewerkte voorwaarden.",
+        "We konden de wijzigingen nu niet laden. Probeer het later nog eens.",
         "Live locatie staat uit",
         "Je route wordt niet bijgehouden of gedeeld. De tijd, het rondje-rapport en foto's werken gewoon.",
         "Live locatie staat op dit moment uit, dus hier staat geen kaart. Je ziet wel de tijd, het rondje-rapport en de foto's.",
-        "Live locatie staat op dit moment uit, en zonder live locatie start een rondje alleen met de hond niet. Een kennismaking, samen met de eigenaar, kan wel.",
+        "Live locatie staat voorlopig uit, dus een rondje alleen met de hond start nog niet. Samen met de eigenaar lopen kan wel.",
         "Live locatie staat op dit moment uit: je telefoon deelt tijdens dit rondje geen locatie.",
+        "Jullie lopen samen, dus er is geen kaart nodig.",
     ]
 
     /// Calm words only, in every language: nothing that hurries, counts down, blames or promises health

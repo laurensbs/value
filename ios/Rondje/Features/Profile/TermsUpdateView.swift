@@ -43,7 +43,8 @@ private struct TermsSheetModifier: ViewModifier {
     }
 }
 
-/// What changed in the terms, a link to all of them, and one "Akkoord".
+/// What changed in the terms, a link to all of them, and one "Akkoord", which is only there while the
+/// list of changes is on screen (Me.termsToAgree).
 struct TermsUpdateSheet: View {
     let agreement: TermsAgreement
 
@@ -56,6 +57,8 @@ struct TermsUpdateSheet: View {
     private var changes: TermsChanges? { model.me?.termsChanges }
     /// Loaded and agreed already, for example on the website (not by a yes in this sheet: that one just closes).
     private var upToDate: Bool { loaded && !agreement.agreed && model.me?.termsAccepted == true && !state.needsYes }
+    /// The version of the list on screen; nil while there is no list to read, and then no "Akkoord".
+    private var shownVersion: String? { model.me?.termsToAgree }
 
     var body: some View {
         NavigationStack {
@@ -79,6 +82,14 @@ struct TermsUpdateSheet: View {
                             changeList(changes)
                         } else if !loaded {
                             ProgressView().frame(maxWidth: .infinity).padding(.vertical, 8)
+                        } else {
+                            // Without the list there is nothing to agree to here: no "Akkoord" below.
+                            Text("We konden de wijzigingen nu niet laden. Probeer het later nog eens.")
+                                .font(.subheadline)
+                                .foregroundStyle(Palette.ink)
+                                .padding(12)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(Palette.calmSoft, in: .rect(cornerRadius: 14, style: .continuous))
                         }
                     }
                     Button {
@@ -99,7 +110,9 @@ struct TermsUpdateSheet: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .scrollBounceBehavior(.basedOnSize)
-            .safeAreaInset(edge: .bottom) { footer }
+            .safeAreaInset(edge: .bottom) {
+                if upToDate || agreement.agreed || shownVersion != nil || agreement.error != nil { footer }
+            }
             .screenBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -147,14 +160,14 @@ struct TermsUpdateSheet: View {
                     dismiss()
                 }
                 .buttonStyle(.primary)
-            } else {
+            } else if shownVersion != nil {
                 Button {
                     Task { await agree() }
                 } label: {
                     if agreement.busy { ProgressView().tint(Palette.onGrass) } else { Text("Akkoord") }
                 }
                 .buttonStyle(.primary)
-                .disabled(agreement.busy || model.me?.termsToAgree == nil)
+                .disabled(agreement.busy)
             }
         }
         .padding(.horizontal, 24)
@@ -164,7 +177,9 @@ struct TermsUpdateSheet: View {
     }
 
     private func agree() async {
-        guard await agreement.agree(version: model.me?.termsToAgree) else {
+        // The version of the list on screen, never a version without its list.
+        guard let version = shownVersion else { return }
+        guard await agreement.agree(version: version) else {
             Haptics.soft()
             return
         }

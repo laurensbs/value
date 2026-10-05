@@ -331,9 +331,48 @@ struct LiveWalk: Codable, Sendable {
     var care: Care?
     var photos: [WalkPhoto]?
     var points: [LivePoint]
-    /// False while live location is switched off on the server (LIVE_LOCATION): no map, no new points.
-    /// Missing from older servers, which always had it on.
+    /// Whether this walk collects location (web lib/rules.ts walkHasLiveLocation): only a walk alone with
+    /// the dog, with LIVE_LOCATION on. False: no map, no new points. Missing from older servers; there it
+    /// was on, or the switch for everyone.
     var liveLocation: Bool?
+    /// "meet" (a first meeting: they walk together, so no map) or "solo". Missing from older servers, and
+    /// null when the request is gone.
+    var kind: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case status, startedAt, plannedEndAt, endedAt, lastAt, overdueMin, care, photos, points, liveLocation, kind
+    }
+
+    init(status: String, startedAt: Date, plannedEndAt: Date, endedAt: Date? = nil, lastAt: Date? = nil, overdueMin: Int = 0,
+         care: Care? = nil, photos: [WalkPhoto]? = nil, points: [LivePoint] = [], liveLocation: Bool? = nil, kind: String? = nil) {
+        self.status = status
+        self.startedAt = startedAt
+        self.plannedEndAt = plannedEndAt
+        self.endedAt = endedAt
+        self.lastAt = lastAt
+        self.overdueMin = overdueMin
+        self.care = care
+        self.photos = photos
+        self.points = points
+        self.liveLocation = liveLocation
+        self.kind = kind
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        status = try c.decode(String.self, forKey: .status)
+        startedAt = try c.decode(Date.self, forKey: .startedAt)
+        plannedEndAt = try c.decode(Date.self, forKey: .plannedEndAt)
+        endedAt = try c.decodeIfPresent(Date.self, forKey: .endedAt)
+        lastAt = try c.decodeIfPresent(Date.self, forKey: .lastAt)
+        overdueMin = try c.decode(Int.self, forKey: .overdueMin)
+        care = try c.decodeIfPresent(Care.self, forKey: .care)
+        photos = try c.decodeIfPresent([WalkPhoto].self, forKey: .photos)
+        points = try c.decode([LivePoint].self, forKey: .points)
+        // The newer fields are read leniently: something odd in them never breaks watching a walk.
+        liveLocation = (try? c.decodeIfPresent(Bool.self, forKey: .liveLocation)) ?? nil
+        kind = (try? c.decodeIfPresent(String.self, forKey: .kind)) ?? nil
+    }
 }
 
 /// The walk report: how often the dog peed, pooped and drank (0 to 20 each).
@@ -357,7 +396,26 @@ struct WalkPhoto: Codable, Identifiable, Hashable, Sendable {
     var t: Double
 }
 
-struct WalkStarted: Codable, Sendable { var walkId: String }
+/// The answer to POST /api/v1/walks. `liveLocation`: whether this walk shares where the walker is (only
+/// a walk alone with the dog, with the switch on); when false the phone sends no points and shows no map.
+/// Missing from older servers (WalkStarter.sharesLocation decides then), and read leniently.
+struct WalkStarted: Codable, Sendable {
+    var walkId: String
+    var liveLocation: Bool?
+
+    init(walkId: String, liveLocation: Bool? = nil) {
+        self.walkId = walkId
+        self.liveLocation = liveLocation
+    }
+
+    private enum CodingKeys: String, CodingKey { case walkId, liveLocation }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        walkId = try c.decode(String.self, forKey: .walkId)
+        liveLocation = (try? c.decodeIfPresent(Bool.self, forKey: .liveLocation)) ?? nil
+    }
+}
 struct WalkEnded: Codable, Sendable { var ok: Bool; var distanceM: Int }
 struct OK: Codable, Sendable { var ok: Bool? }
 

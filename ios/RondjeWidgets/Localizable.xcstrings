@@ -111,6 +111,28 @@
         }
       }
     },
+    "Jullie lopen samen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're walking together"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paseáis juntos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous vous promenez ensemble"
+          }
+        }
+      }
+    },
     "Kennismaken" : {
       "localizations" : {
         "en" : {
