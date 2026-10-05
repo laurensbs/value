@@ -507,7 +507,9 @@ struct TrustSheet: View {
     private var form: some View {
         Form {
             Section {
+                // How to look at it (DPIA maatregel M6): under the switch, and its VoiceOver hint.
                 Toggle("Ik heb het ID van \(walker.firstName) in het echt gezien", isOn: $idSeen)
+                    .fieldNote(IDCheck.how)
                 if !item.dog.isShelter {
                     Toggle("\(walker.firstName) mag zelfstandig met \(item.dog.name) wandelen", isOn: $solo)
                 }

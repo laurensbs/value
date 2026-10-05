@@ -105,6 +105,7 @@
 		D7129D1AC2B00C9F0743761C /* NextStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2389F79FFC9CDADA7EF5C2 /* NextStepTests.swift */; };
 		D816027B3EAAB79AB48528C8 /* CoachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A88616B313C038F92D9E88B /* CoachTests.swift */; };
 		D88E1935E73972B8CCBBC13B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD670507F95B7E0867549B73 /* Theme.swift */; };
+		DBB92D172DD30A2FF1A1C53D /* IDAndStoryHintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DF0126D760DBF98D11ED21 /* IDAndStoryHintTests.swift */; };
 		DBFE493DC52B55DCB51950A9 /* send.wav in Resources */ = {isa = PBXBuildFile; fileRef = 621DAB4172F92ABF01906A0C /* send.wav */; };
 		DD3602AE6C929D0171C60CE8 /* ImageTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19F92B1AB52E54BEE189E52 /* ImageTools.swift */; };
 		E462D23706663587B4C8630B /* LiveLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BB754C495F88A53D38D65 /* LiveLocation.swift */; };
@@ -251,6 +252,7 @@
 		CE38BF1BFD0974FB881BD72B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D19F92B1AB52E54BEE189E52 /* ImageTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTools.swift; sourceTree = "<group>"; };
 		D54FE87577E74A459BC311FD /* RondjeWidgets.free.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RondjeWidgets.free.entitlements; sourceTree = "<group>"; };
+		D7DF0126D760DBF98D11ED21 /* IDAndStoryHintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDAndStoryHintTests.swift; sourceTree = "<group>"; };
 		E05B78B489C3C4D7955EFF48 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		E2EA00A9187BEF701567797A /* RequestFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFlow.swift; sourceTree = "<group>"; };
 		E31286B121AAD5EDE2C4E643 /* LessonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsView.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				16CD97920EE1D4C71B77FF9A /* AppLanguageTests.swift */,
 				1A88616B313C038F92D9E88B /* CoachTests.swift */,
 				24969FFB4603562174882327 /* HelpUsTests.swift */,
+				D7DF0126D760DBF98D11ED21 /* IDAndStoryHintTests.swift */,
 				607B59A0A85BFA9C3288D3A7 /* LessonTests.swift */,
 				6C7C49E8526026CB36BD8EE9 /* LiveLocationTests.swift */,
 				E7C2CD13BF1767A8EEEEBF85 /* MeetingPrepTests.swift */,
@@ -749,6 +752,7 @@
 				160ACF742F45DD22CA4BFDEB /* AppLanguageTests.swift in Sources */,
 				D816027B3EAAB79AB48528C8 /* CoachTests.swift in Sources */,
 				B0B9F97EC34389154B19778F /* HelpUsTests.swift in Sources */,
+				DBB92D172DD30A2FF1A1C53D /* IDAndStoryHintTests.swift in Sources */,
 				33EEC3741BAF509A1EA96790 /* LessonTests.swift in Sources */,
 				389FDB8BAEBF1B04F58B6693 /* LiveLocationTests.swift in Sources */,
 				175F77F5196A62C1655569B1 /* MeetingPrepTests.swift in Sources */,

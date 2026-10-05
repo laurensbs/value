@@ -3358,6 +3358,7 @@
       }
     },
     "Bekijk het even. Maak geen kopie of foto." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5339,6 +5340,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cette balade n'a pas pu être enregistrée dans Apple Santé."
+          }
+        }
+      }
+    },
+    "Dit verhaal is voor iedereen te zien. Schrijf over de hond, niet over jezelf: geen naam, adres of tijden waarop je thuis bent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anyone can read this story. Write about the dog, not yourself: no name, address or times when you are home."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cualquiera puede leer esta historia. Escribe sobre el perro, no sobre ti: sin nombre, dirección ni horas en las que estás en casa."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout le monde peut lire cette histoire. Parle du chien, pas de toi : ni nom, ni adresse, ni heures où tu es chez toi."
           }
         }
       }
@@ -12697,6 +12720,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suivre en direct"
+          }
+        }
+      }
+    },
+    "Kijk naar foto, naam en geboortedatum. Maak geen foto en schrijf niets over, ook geen BSN." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Look at the photo, name and date of birth. Don't take a photo or write anything down, not even the ID number."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mira la foto, el nombre y la fecha de nacimiento. No hagas ninguna foto ni apuntes nada, tampoco el número del DNI o NIE."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regarde la photo, le nom et la date de naissance. Ne prends pas de photo et ne note rien, pas même le numéro de la pièce d'identité."
           }
         }
       }
