@@ -31,6 +31,7 @@ Les cookies fonctionnels ne nécessitent pas de consentement. C'est pourquoi vou
 | `better-auth.state`, `better-auth-passkey` | Sécurité lors de la connexion avec Google, Apple ou une clé d'accès | Quelques minutes |
 | `NEXT_LOCALE` | Retenir la langue dans laquelle vous utilisez Rondje Mee | 1 an |
 | `rondje_ref` | Retenir le lien d'invitation que vous avez suivi, pour que la personne voie que vous nous avez rejoints | 30 jours |
+| `rondje_later` | L’étape d’Une chose maintenant sur Aujourd’hui que vous avez écartée avec « Plus tard » (une semaine ; après deux fois, pour de bon) ou « Non, pas maintenant », pour que la page affiche tout de suite la bonne étape. Nous ne la conservons nulle part | 1 an |
 
 ## 4. Stockage local sur votre appareil
 

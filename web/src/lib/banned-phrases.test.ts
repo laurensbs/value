@@ -26,10 +26,11 @@ const PUSH_TEXTS = [
   'pushAsk.',
   'profile.reminders',
   'profile.alerts',
+  // The home page asks for help and shows new dogs: warm, never a countdown or guilt.
+  'home.helpUs.',
+  'landing.dogs.',
   'today.',
   'challenges.',
-  'discover.together',
-  'discover.mine',
   'progress.week',
   'progress.activeWeeks',
   'walkDone.',
@@ -41,11 +42,11 @@ const PUSH_TEXTS = [
   'profileHub.schoolText',
   'safety.schoolText',
   'safety.schoolLink',
-  // Not on the web yet: Guus and "één ding nu" are checked as soon as they get texts.
-  'guus.',
+  // "Eén ding nu" on Vandaag (lib/next-step.ts). Guus is not on the web yet: checked as soon as he gets texts.
   'nextStep.',
+  'guus.',
 ]
-const NOT_YET = new Set(['guus.', 'nextStep.'])
+const NOT_YET = new Set(['guus.'])
 /** The Hondenschool texts, which also get the "lessons" patterns (no points to earn, no XP, no hearts). */
 const LESSON_TEXTS = ['school.', 'quiz.honest', 'quiz.lessonLink', 'quiz.schoolFirst', 'profileHub.schoolText', 'safety.schoolText', 'safety.schoolLink']
 

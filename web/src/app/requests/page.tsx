@@ -4,14 +4,17 @@ import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
 import { MeetChecklist } from '@/components/MeetChecklist'
 import { MEET_VIA_ICONS, MeetViaLabel } from '@/components/MeetVia'
+import { InstallAsk } from '@/components/InstallAsk'
 import { PushAsk } from '@/components/PushAsk'
 import { AcceptReveal, CancelButton, DecideButtons, DeclinedNote, StartButton, TrustForm, type SoloCaveat } from '@/components/RequestActions'
 import { WalkerCard } from '@/components/WalkerCard'
 import { isRemoteMeeting } from '@/lib/conversation'
 import { canRequestSolo, canStartWalk, isMeetVia, START_WINDOW_BEFORE_MIN } from '@/lib/rules'
+import { rolesOf } from '@/server/progress'
 import {
   hostContacts,
   incomingRequests,
+  myDogs,
   outgoingRequests,
   trustGrantsFor,
   trustSignals,
@@ -157,9 +160,19 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
     )
     return reason === 'needs-quiz' || reason === 'experience' || reason === 'ppp-licence' ? reason : null
   }
-  // Waiting for an answer is the moment a heads-up matters most.
+  // Requests and answers arrive here, so this is where Rondje asks once whether it may give a heads-up,
+  // and (on a phone) whether it may sit on the home screen. Waiting for an answer is when it matters most.
   const waitingFor = mineOpen.find((r) => r.request.status === 'pending')
   const pushKey = webPushKey()
+  const roles = rolesOf(viewer.profile)
+  const ownDog = roles.owner && !waitingFor ? (await myDogs(viewer)).find((d) => !d.isDemo) : undefined
+  const pushText = waitingFor
+    ? t('pushAsk.request', { dog: waitingFor.dog.name })
+    : ownDog
+      ? t('pushAsk.dog', { dog: ownDog.name })
+      : roles.walker
+        ? t('pushAsk.walker')
+        : t('pushAsk.general')
 
   return (
     <div className="stack-l">
@@ -181,7 +194,6 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
 
       {tab === 'mine' ? (
         <section className="stack">
-          {pushKey && waitingFor ? <PushAsk publicKey={pushKey} text={t('pushAsk.request', { dog: waitingFor.dog.name })} /> : null}
           {mineOpen.length === 0 ? (
             <div className="empty card flat stack-s">
               <p>{t('requests.empty')}</p>
@@ -207,13 +219,14 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                       <DogPortrait dog={r.dog} size={72} />
                     </Link>
                     <div className="grow stack-s">
-                      <div className="spread">
-                        <strong className="request-title">
-                          {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
-                        </strong>
+                      <strong className="request-title">
+                        {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
+                      </strong>
+                      {/* Where it stands and how you meet, in one row. */}
+                      <div className="request-tags">
                         <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       </div>
-                      {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="muted small">
                         <Icon name="calendar" size={14} /> {when(r)} · {t('common.minutes', { n: r.request.durationMin })}
                         {r.request.weekly ? ` · ${t('requests.weekly')}` : ''}
@@ -310,31 +323,32 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
                 return (
                   <li key={r.request.id} className="list-item request incoming">
                     <div className="grow stack">
-                      <div className="spread">
-                        <span className="request-title">
-                          <DogPortrait dog={r.dog} size={36} />
-                          <strong>
-                            {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
-                          </strong>
-                        </span>
+                      <span className="request-title">
+                        <DogPortrait dog={r.dog} size={36} />
+                        <strong>
+                          {r.dog.name} · {r.request.kind === 'meet' ? t('request.kindMeet') : t('request.kindSolo')}
+                        </strong>
+                      </span>
+                      <div className="request-tags">
                         <span className={`pill request-status ${statusPill(r.request.status)}`}>{statusText(r)}</span>
+                        {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       </div>
-                      {r.request.kind === 'meet' ? <MeetViaLabel via={r.request.meetVia} /> : null}
                       <p className="small">
                         <Icon name="calendar" size={14} /> {when(r)} · {t('common.minutes', { n: r.request.durationMin })}
                         {r.request.weekly ? ` · ${t('requests.weekly')}` : ''}
                       </p>
                       <WalkerCard walker={r.walker} signals={signals.get(r.walker.id)!} />
                       {r.request.message ? <blockquote className="message">{r.request.message}</blockquote> : null}
-                      <div className="row">
-                        <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
-                      </div>
                       {r.request.flags.length ? (
                         <p className="notice warn small" role="note">
                           <Icon name="alert" size={16} /> {t('requests.flagged')}
                         </p>
                       ) : null}
+                      {/* One main action: yes or no. Chatting first stays one tap away, right under it. */}
                       {r.request.status === 'pending' ? <DecideButtons requestId={r.request.id} walkerName={r.walker.firstName} dogName={r.dog.name} /> : null}
+                      <div className="row">
+                        <ChatLink requestId={r.request.id} label={t('chat.button')} unread={unread.has(r.request.id)} />
+                      </div>
                       {accepted ? (
                         <AcceptReveal requestId={r.request.id} walkerName={r.walker.firstName}>
                           <Contact contact={{ name: r.walker.firstName, phone: r.walker.phone, email: r.walker.email }} label={t('requests.contact')} />
@@ -422,6 +436,10 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
           ) : null}
         </section>
       )}
+
+      {/* After the list, so nothing above it moves when a question appears. */}
+      {pushKey ? <PushAsk publicKey={pushKey} text={pushText} /> : null}
+      <InstallAsk push={Boolean(pushKey)} />
     </div>
   )
 }

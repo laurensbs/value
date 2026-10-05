@@ -4,10 +4,10 @@ import { getFormatter, getLocale, getTranslations } from 'next-intl/server'
 import { Icon } from '@/components/Icon'
 import { factsFor, impact, sourceHost, text, TOPICS, type Topic } from '@/components/impact/facts'
 import { ImpactStat } from '@/components/impact/ImpactStat'
+import { SuicideLines } from '@/components/impact/SuicideLines'
 import { LandingIcon } from '@/components/landing/LandingIcon'
 import { BEAGLE, GOLDEN } from '@/components/landing/looks'
 import { IconTile, PageHero, type Tone } from '@/components/landing/PageHero'
-import { COUNTRY_INFO } from '@/lib/countries'
 import { guessCountry } from '@/lib/guess-country'
 import { APP_NAME } from '@/lib/site'
 import { isNativeRequest } from '@/server/native'
@@ -34,7 +34,6 @@ export default async function WhyPage() {
   const native = await isNativeRequest()
   // The suicide prevention line of the visitor's country, always in view on a page about how people feel.
   const country = await guessCountry()
-  const lines = COUNTRY_INFO[country].helpLines.filter((l) => l.key === 'suicide')
   const checked = format.dateTime(new Date(impact.checked), { day: 'numeric', month: 'long', year: 'numeric' })
 
   const DO: { key: 'walk' | 'dog' | 'tip' | 'support'; href: string; icon: ReactNode; tone: Tone }[] = [
@@ -92,25 +91,7 @@ export default async function WhyPage() {
           <Icon name="help" size={18} />
           <div className="stack-s">
             <p>{t('impact.page.notCare', { app: APP_NAME })}</p>
-            {lines.length ? (
-              <p>
-                {t('impact.page.suicideLines')}{' '}
-                {lines.map((l, i) => (
-                  <span key={l.id}>
-                    {i > 0 ? ' · ' : null}
-                    {l.phone ? (
-                      <a href={`tel:${l.phone.replace(/[^\d+]/g, '')}`} className="im-help-line">
-                        {t('impact.page.helpLine', { name: l.name, phone: l.phone })}
-                      </a>
-                    ) : (
-                      <a href={l.url} target="_blank" rel="noopener noreferrer" className="im-help-line">
-                        {l.name}
-                      </a>
-                    )}
-                  </span>
-                ))}
-              </p>
-            ) : null}
+            <SuicideLines country={country} />
             <p>
               <Link href={`/help?country=${country}`}>{t('impact.page.helpAll')} →</Link>
             </p>

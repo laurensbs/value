@@ -1,15 +1,19 @@
+import '../progress.css'
 import Link from 'next/link'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { ChallengeCard } from '@/components/ChallengeCard'
+import { FirstSteps } from '@/components/discover/HomeCards'
 import { DogPortrait } from '@/components/DogPortrait'
 import { Icon } from '@/components/Icon'
 import { Medal } from '@/components/Medal'
 import { LevelUp } from '@/components/progress/LevelUp'
 import { WeekCard } from '@/components/WeekCard'
+import { WeeklyGoalPicker } from '@/components/WeeklyGoalPicker'
 import { bondFor, KIND_KEYS, LEVEL_KEYS, LEVELS, POINTS, type PointKind } from '@/lib/progress'
 import { challengesFor } from '@/server/challenges'
 import { dogFriendsFor, progressFor, rolesOf } from '@/server/progress'
 import { levelMoment, progressJson } from '@/server/progress-json'
+import { impactTotals } from '@/server/queries'
 import { requireOnboarded } from '@/server/session'
 
 export async function generateMetadata() {
@@ -26,12 +30,15 @@ export default async function ProgressPage() {
   const viewer = await requireOnboarded('/progress')
   const now = new Date()
   const { walker, owner } = rolesOf(viewer.profile)
-  const [t, format, progress, challenges, friends] = await Promise.all([
+  const [t, tt, tf, format, progress, challenges, friends, impact] = await Promise.all([
     getTranslations('progress'),
+    getTranslations('today'),
+    getTranslations('profile'),
     getFormatter(),
     progressFor(viewer, now),
     challengesFor(viewer, now),
     walker ? dogFriendsFor(viewer.userId) : Promise.resolve([]),
+    impactTotals(),
   ])
   const json = await progressJson(progress)
   const earn = [...new Set([...(walker ? WALKER_EARN : []), ...(owner ? OWNER_EARN : [])])]
@@ -59,15 +66,33 @@ export default async function ProgressPage() {
         </div>
       </header>
 
+      {/* Your first steps, all of them, until they are done. Vandaag shows only the next one. */}
+      <div id="steps">
+        <FirstSteps steps={json.steps} />
+      </div>
+
       <p className="notice">
         <Icon name="lock" size={18} />
         <span>{t('private')}</span>
       </p>
 
       <div className="today-grid">
-        {walker ? <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} /> : null}
+        {/* The week only counts once there is something to count: after your first walk. */}
+        {walker && progress.activeWeeks > 0 ? (
+          <WeekCard goal={progress.weeklyGoal} walks={progress.walksThisWeek} days={progress.weekDays} activeWeeks={progress.activeWeeks} now={now} />
+        ) : walker ? (
+          // Before the first walk: nothing to count yet, but the goal can be set or changed in one tap.
+          <section className="card stack-s goal-card" aria-labelledby="goal-title">
+            <h2 id="goal-title" className="small-title">
+              {tf('weeklyGoal')}
+            </h2>
+            <p className="muted small">{tf('weeklyGoalHint')}</p>
+            <WeeklyGoalPicker current={progress.weeklyGoal} />
+          </section>
+        ) : null}
         <ChallengeCard challenges={challenges} />
       </div>
+      {impact.walks > 0 ? <p className="together muted small">{tt('together', { walks: impact.walks, dogs: impact.dogs })}</p> : null}
 
       <section className="stack" aria-labelledby="badges-title">
         <div className="section-title">
@@ -123,8 +148,9 @@ export default async function ProgressPage() {
         </section>
       ) : null}
 
-      <section className="stack" aria-labelledby="path-title">
-        <h2 id="path-title">{t('pathTitle')}</h2>
+      {/* Reference, not news: the whole path and how points come in, folded until you want them. */}
+      <details className="fold">
+        <summary id="path-title">{t('pathTitle')}</summary>
         <ol className="level-path">
           {LEVEL_KEYS.map((key, i) => {
             const n = i + 1
@@ -140,10 +166,10 @@ export default async function ProgressPage() {
             )
           })}
         </ol>
-      </section>
+      </details>
 
-      <section className="card stack" aria-labelledby="earn-title">
-        <h2 id="earn-title">{t('earnTitle')}</h2>
+      <details className="fold">
+        <summary id="earn-title">{t('earnTitle')}</summary>
         <ul className="earn-list">
           {earn.map((kind) => (
             <li key={kind}>
@@ -153,7 +179,7 @@ export default async function ProgressPage() {
           ))}
         </ul>
         <p className="muted small">{t('earnNote')}</p>
-      </section>
+      </details>
 
       <section className="stack" aria-labelledby="recent-title">
         <h2 id="recent-title">{t('recentTitle')}</h2>

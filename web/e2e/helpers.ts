@@ -1,5 +1,7 @@
 import { expect, type Browser, type BrowserContextOptions, type Page } from '@playwright/test'
+import { NOW_HEADER } from '../src/lib/clock'
 import { QUIZ } from '../src/lib/quiz'
+import { toZonedParts, zonedToUtc } from '../src/lib/time'
 
 /** With SHOTS=1, saves a full-page screenshot per step for design review (shots/<name>.png). */
 export async function shot(page: Page, name: string) {
@@ -24,13 +26,26 @@ export function soonSlot(now = new Date()): { date: string; time: string } {
 /** Each person gets their own (test) IP, as in real life: sign-in and sign-up are limited per IP address. */
 const randomIp = () => `10.${1 + Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${1 + Math.floor(Math.random() * 250)}`
 
+/**
+ * The moment pages work with in a test: now, but at night (23:00 to 06:00 in Amsterdam) the next
+ * morning at 08:00, when "Eén ding nu" waits with planning. Sent as a header that only a test server
+ * honours (TEST_CLOCK=1 in playwright.config.ts, never in production), so tests pass at any hour.
+ */
+export function dayNow(now = new Date()): string {
+  const hour = Number(toZonedParts(now).time.slice(0, 2))
+  if (hour >= 6 && hour < 23) return now.toISOString()
+  const morning = hour >= 23 ? toZonedParts(new Date(now.getTime() + 12 * 3600_000)).date : toZonedParts(now).date
+  return zonedToUtc(morning, '08:00').toISOString()
+}
+
 export async function newPerson(browser: Browser, geo?: { latitude: number; longitude: number }, options: BrowserContextOptions = {}) {
+  const { extraHTTPHeaders, ...rest } = options
   const context = await browser.newContext({
     colorScheme: process.env.SHOTS_DARK ? 'dark' : 'light',
     geolocation: geo ?? { latitude: 52.0907, longitude: 5.1214 },
     permissions: ['geolocation'],
-    extraHTTPHeaders: { 'x-forwarded-for': randomIp() },
-    ...options,
+    extraHTTPHeaders: { 'x-forwarded-for': randomIp(), [NOW_HEADER]: dayNow(), ...extraHTTPHeaders },
+    ...rest,
   })
   const page = await context.newPage()
   return { context, page }

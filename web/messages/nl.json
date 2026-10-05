@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · een vast rondje met een hond die op je wacht",
-    "description": "{app} koppelt jongvolwassenen aan honden van buren en opvangen die graag een extra rondje lopen. Gratis en veilig, in Nederland, België en Spanje."
+    "description": "{app} koppelt jongvolwassenen aan honden van buren en opvangen die graag een extra rondje lopen. Gratis en veilig, eerst in Nederland."
   },
   "nav": {
     "dogs": "Honden",
@@ -94,7 +94,6 @@
     "contact": "Contact"
   },
   "home": {
-    "eyebrow": "Nederland · België · España",
     "title": "Een vast rondje met een hond <mark>die op je wacht.</mark>",
     "lede": "Loop een vast rondje met de hond van iemand uit je buurt die zelf niet ver meer kan, of met een hond uit de opvang. Gratis, en de eerste keer altijd samen.",
     "ctaDogs": "Bekijk honden in de buurt",
@@ -119,8 +118,8 @@
     "safety5": "Na elk rondje geven beide kanten privé feedback. Zorgen komen bij ons team terecht, niet bij de ander.",
     "safety6": "Melden en blokkeren kan altijd. Wie zich niet aan de regels houdt, verdwijnt van het platform.",
     "safetyMore": "Lees hoe veiligheid werkt",
-    "countriesTitle": "Nu in drie landen",
-    "countriesText": "Rondje Mee werkt in Nederland, België en Spanje, in het Nederlands, Frans, Spaans en Engels.",
+    "countriesTitle": "Eerst in Nederland",
+    "countriesText": "We beginnen in Nederland, rond Tiel, Vijfheerenlanden en Gorinchem. In België en Spanje kun je ook al meedoen, in het Nederlands, Frans, Spaans en Engels.",
     "freeTitle": "Gratis, en dat blijft zo",
     "freeText": "Geen advertenties, geen abonnement, en we verkopen nooit gegevens. Rondje Mee draait op vrijwillige steun, en later op partners en fondsen die zich aan onze spelregels houden.",
     "exampleDogs": "Voorbeelden, zodat je ziet hoe het werkt",
@@ -129,7 +128,18 @@
     "impactTitle": "Wat we samen liepen",
     "impactWalks": "Rondjes gelopen",
     "impactKm": "Kilometer",
-    "impactDogs": "Honden die naar buiten gingen"
+    "impactDogs": "Honden die naar buiten gingen",
+    "helpUs": {
+      "eyebrow": "Inzameling",
+      "title": "Help ons!",
+      "lede": "{app} is gratis en blijft dat. Met jouw rondje komt de app in de App Store en Google Play, en is het eerste jaar betaald.",
+      "rounds": "{n, plural, =0 {Doel: {total} rondjes} one {# van de {total} rondjes} other {# van de {total} rondjes}}",
+      "give": "Geef een rondje",
+      "join": "of meld je aan",
+      "note": "Via {platform}, naar {operator}, die {app} bouwt.",
+      "more": "Waar het geld heen gaat",
+      "chip": "{round} = 1 rondje"
+    }
   },
   "landing": {
     "pills": {
@@ -165,10 +175,12 @@
       }
     },
     "dogs": {
-      "title": "Wie gaat er vandaag mee?",
-      "lede": "Een paar honden die op een rondje wachten.",
+      "title": "Net aangemeld",
+      "lede": "De nieuwste honden die graag een extra rondje lopen.",
       "all": "Bekijk alle honden",
-      "ledeExamples": "Dit zijn voorbeelden, zodat je ziet hoe het werkt."
+      "emptyTitle": "Heb je een hond die een extra rondje kan gebruiken?",
+      "emptyText": "Of ken je er een, van je buurvrouw of je opa? Met hun toestemming meld je hem ook voor hen aan.",
+      "emptyCta": "Meld hem aan"
     },
     "how": {
       "eyebrow": "In vier stappen",
@@ -458,7 +470,9 @@
     "tipShelter": "Tip een opvang",
     "new": "Nieuw",
     "emptyFiltered": "Geen honden die bij deze keuze passen. Probeer een andere, of bekijk alle honden.",
-    "sendLink": "Stuur je link"
+    "sendLink": "Stuur je link",
+    "viewLabel": "Lijst of kaart",
+    "mapNote": "Honden staan op hun buurt, nooit op een adres."
   },
   "dog": {
     "story": "Over {name}",
@@ -928,9 +942,10 @@
     "alerts": "Meldingen",
     "alertsText": "Berichten, verzoeken en afspraken krijg je altijd; extra seintjes alleen als je ze hieronder zelf aanzet.",
     "reminders": "Extra seintjes",
-    "remindersHint": "Alleen extra's: je eerste stappen, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per week; doe je drie keer niets met zo'n seintje, dan gaan ze vanzelf uit. Berichten, verzoeken en afspraken krijg je altijd, ook als dit uit staat.",
+    "remindersHint": "Alleen extra's: je eerste stappen, de uitdaging in je stad en nieuwe honden bij jou in de buurt. Hooguit één per week; doe je drie keer niets met zo'n seintje, dan gaan ze vanzelf uit.",
     "pushIos": "Meldingen op je iPhone? Die werken zodra Rondje Mee op je beginscherm staat:",
-    "pushIosInApp": "Meldingen op je iPhone? Open Rondje Mee eerst in Safari en zet het daar op je beginscherm."
+    "pushIosInApp": "Meldingen op je iPhone? Open Rondje Mee eerst in Safari en zet het daar op je beginscherm.",
+    "inviteShort": "Nodig uit"
   },
   "quiz": {
     "title": "Veiligheidsquiz",
@@ -1325,6 +1340,7 @@
   },
   "directory": {
     "title": "Opvangen in Nederland, België en Spanje",
+    "titleIn": "Opvangen in {country, select, BE {België} ES {Spanje} other {Nederland}}",
     "lede": "Opvangen met wandelvrijwilligers. Partners zie je direct in Rondje Mee; bij de andere kun je via hun eigen website vrijwilliger worden.",
     "metaDescription": "Opvangen met wandelvrijwilligers. Partners zie je direct in {app}; bij de andere kun je via hun eigen website vrijwilliger worden.",
     "partner": "Op Rondje Mee",
@@ -1829,7 +1845,8 @@
     },
     "contactTitle": "Contact",
     "contact": "Vragen of ideeën? Op de hulppagina lees je hoe je ons bereikt. Gaat het om iemand of een hond? Gebruik het meldknopje op de pagina.",
-    "contactEmail": "Vragen, ideeën of samenwerken? Mail ons:"
+    "contactEmail": "Vragen, ideeën of samenwerken? Mail ons:",
+    "campaign": "Mijn verhaal staat ook op {platform}. Daar kun je een rondje geven."
   },
   "poster": {
     "title": "Poster voor jullie opvang",
@@ -2012,7 +2029,6 @@
     "evening": "Goedenavond, {name}",
     "night": "Hoi {name}",
     "welcomeTitle": "Welkom bij Rondje Mee, {name}!",
-    "welcomeText": "Je bent nu {level}, level 1. Hieronder staan je eerste stappen: elke stap brengt je dichter bij je eerste rondje.",
     "stepsTitle": "Je eerste stappen",
     "stepsCount": "{done} van {total} gedaan",
     "start": "Start",
@@ -2052,24 +2068,13 @@
         "hint": "Je kijkt live mee en krijgt na afloop een verslag."
       }
     },
-    "next": "Je volgende afspraak",
-    "nextWalk": "{when} · rondje met {dog}",
-    "nextMeeting": "{when} · kennismaking met {dog}{via, select, home { (thuis)} phone { (eerst bellen)} video { (eerst videobellen)} other {}}",
-    "nextOpen": "Bekijk",
-    "pending": "{n, plural, one {# nieuw verzoek wacht op je antwoord} other {# nieuwe verzoeken wachten op je antwoord}}",
-    "pendingOpen": "Bekijk verzoeken",
     "nearTitle": "Honden bij jou in de buurt",
-    "nearEmpty": "Nog geen honden bij jou in de buurt. Ken je iemand met een hond? Nodig ze uit met je eigen link.",
     "nearAll": "Alle honden",
-    "nearInvite": "Nodig iemand uit",
     "myDogsTitle": "Jouw honden",
     "dogWeek": "{n, plural, =0 {Deze week nog geen rondje} one {Deze week # rondje} other {Deze week # rondjes}}",
     "dogFriends": "{n, plural, =0 {Nog geen wandelaars} one {# wandelaar} other {# wandelaars}}",
     "addDog": "Hond toevoegen",
     "tipTitle": "Tip van vandaag",
-    "badgesTitle": "Jouw penningen",
-    "badgesAll": "Alle penningen",
-    "badgesEmpty": "Je eerste penning verdien je met je eerste rondje.",
     "together": "Samen liepen we al {walks, plural, one {# rondje} other {# rondjes}} met {dogs, plural, one {# hond} other {# honden}}. Jij hoort erbij.",
     "tips": {
       "walker": {
@@ -2096,7 +2101,8 @@
       }
     },
     "walkersNear": "{n, plural, one {# wandelaar woont} other {# wandelaars wonen}} binnen 5 km van jou.",
-    "walkersFew": "Er wonen nog weinig wandelaars bij jou in de buurt. <link>Vertel je buren over {dog}</link> als je wilt."
+    "walkersFew": "Er wonen nog weinig wandelaars bij jou in de buurt. <link>Vertel je buren over {dog}</link> als je wilt.",
+    "welcomeText": "Je bent nu {level}, level 1."
   },
   "progress": {
     "title": "Jouw voortgang",
@@ -2254,7 +2260,10 @@
     "mine": "{n, plural, =0 {Loop jij er ook een?} one {Jij liep er # mee} other {Jij liep er # mee}}",
     "done": "Gehaald! Dank je wel, iedereen.",
     "stats": "{dogs, plural, one {# hond} other {# honden}} · {walkers, plural, one {# wandelaar} other {# wandelaars}} · {km} km",
-    "private": "We tellen alleen rondjes, nooit wie ze liep."
+    "private": "We tellen alleen rondjes, nooit wie ze liep.",
+    "start": "We beginnen hier.",
+    "empty": "Loop mee met een groepswandeling, of tip een opvang.",
+    "totals": "{dogs, plural, one {# hond} other {# honden}} · {km} km"
   },
   "pushAsk": {
     "title": "Zal ik je een seintje geven?",
@@ -2468,14 +2477,16 @@
     "friendsCount": "{dogs, plural, one {# hondenvriend} other {# hondenvrienden}} · {walks, plural, one {# rondje} other {# rondjes}}",
     "breatheTitle": "Ademminuut",
     "breatheText": "Eén rustige minuut, voor of na een rondje",
-    "quizTodo": "Nog niet gedaan, nodig voor zelfstandige rondjes",
+    "quizTodo": "Nog niet gedaan. Nodig voordat je een hond aanvraagt.",
     "moreTitle": "Help mee",
     "inviteShort": "Ken je iemand die graag wandelt, of iemand met een hond? Deel je eigen link.",
     "supportText": "Gratis en zonder advertenties. Kijk hoe je helpt.",
     "tipText": "Weet je een opvang of iemand met een hond die hulp kan gebruiken?",
     "shelterText": "Werk je bij een opvang? Zet jullie honden hier online.",
     "adminText": "Meldingen, opvangen, cijfers en de lanceerhub",
-    "schoolText": "{done} van {total} lessen, in je eigen tempo"
+    "schoolText": "{done} van {total} lessen, in je eigen tempo",
+    "walkTitle": "Wandelen",
+    "accountTitle": "Account"
   },
   "shell": {
     "tabs": {
@@ -2489,11 +2500,6 @@
     "footerLine": "{name} is gratis en zonder reclame"
   },
   "discover": {
-    "title": "Wie gaat er vandaag mee?",
-    "levelTop": "Hoogste level. Wat een rondjes!",
-    "badges": "{n, plural, =0 {Nog geen penningen} one {# penning} other {# penningen}}",
-    "together": "Samen deze maand",
-    "mine": "{n} van jou",
     "filters": {
       "owner": "Buurt",
       "shelter": "Opvang"
@@ -3549,5 +3555,101 @@
   "loading": {
     "label": "Even laden…",
     "slow": "Dit duurt langer dan normaal."
+  },
+  "nextStep": {
+    "title": "Eén ding nu",
+    "later": "Later",
+    "liveOwn": {
+      "text": "{dog} is nu op pad met {walker}.",
+      "button": "Kijk live mee"
+    },
+    "live": {
+      "text": "Je bent op pad met {dog}.",
+      "button": "Terug naar je rondje"
+    },
+    "start": {
+      "walk": "{when}: een rondje met {dog}. Klaar voor?",
+      "meet": "{when}: kennismaken met {dog}. Neem je ID mee.",
+      "button": "Naar je afspraak"
+    },
+    "decide": {
+      "text": "{count, plural, one {{walker} wil met {dog} wandelen.} other {# mensen willen met je hond wandelen.}}",
+      "detail": "Kijk eerst rustig wie het is. Chatten kan ook eerst.",
+      "button": "{count, plural, one {Bekijk de aanvraag} other {Bekijk de aanvragen}}"
+    },
+    "debrief": {
+      "text": "Hoe was de kennismaking met {walker}?",
+      "detail": "Heb je het ID gezien? Geef alleen vertrouwen als het goed voelde.",
+      "button": "Bekijk",
+      "no": "Nee, nu niet"
+    },
+    "feedback": {
+      "walker": "Hoe ging het met {dog}? Twee tikjes.",
+      "owner": "Hoe was {dog} na het rondje met {walker}?",
+      "detail": "Alleen {app} ziet je antwoord.",
+      "button": "Vertel het"
+    },
+    "upcoming": {
+      "eyebrow": "Je volgende afspraak",
+      "walk": "{when}: een rondje met {dog}.",
+      "meet": "{when}: kennismaken met {dog}{via, select, home { (thuis)} phone { (eerst bellen)} video { (eerst videobellen)} other {}}.",
+      "walkOwner": "{when}: {walker} loopt een rondje met {dog}.",
+      "meetOwner": "{when}: {walker} maakt kennis met {dog}{via, select, home { (bij jou thuis)} phone { (eerst bellen)} video { (eerst videobellen)} other {}}.",
+      "button": "Bekijk je afspraak"
+    },
+    "quiz": {
+      "text": "Eerst de veiligheidsquiz, dan kun je een hond vragen.",
+      "detail": "Acht korte vragen, geen tijdsdruk.",
+      "button": "Start de quiz"
+    },
+    "addDog": {
+      "text": "Zet je hond op {app}.",
+      "detail": "Stap voor stap: een naam, zijn karakter en wanneer hij een rondje kan.",
+      "button": "Hond toevoegen"
+    },
+    "waiting": {
+      "text": "De eigenaar van {dog} kijkt nog naar je aanvraag.",
+      "detail": "Je krijgt bericht zodra er antwoord is.",
+      "button": "Bekijk je aanvraag"
+    },
+    "rebook": {
+      "text": "Nog een rondje met {dog}?",
+      "detail": "Een vast moment in de week werkt voor iedereen het fijnst.",
+      "button": "Plan een moment"
+    },
+    "share": {
+      "text": "Wandelaars in de buurt kunnen {dog} nu vinden.",
+      "detail": "Vertel het ook zelf aan je buren, dan gaat het sneller.",
+      "button": "Vertel je buren over {dog}"
+    },
+    "nearby": {
+      "text": "{dog} woont {distance} bij je vandaan en zoekt een wandelmaatje.",
+      "textCity": "{dog} uit {city} zoekt een wandelmaatje.",
+      "detail": "{count, plural, =0 {Kies een moment dat jou uitkomt.} one {Er is ook # andere hond in de buurt.} other {Er zijn ook # andere honden in de buurt.}}",
+      "button": "Bekijk {dog}"
+    },
+    "emptyTown": {
+      "title": "We beginnen hier.",
+      "text": "Er wonen nog geen honden bij jou in de buurt. Loop mee met een groepswandeling, of tip een opvang.",
+      "button": "Groepswandelingen",
+      "tip": "Tip een opvang"
+    },
+    "ownerWaiting": {
+      "text": "{dog} staat erop. Zodra iemand wil wandelen, hoor je het.",
+      "button": "Bekijk {dog}"
+    },
+    "night": {
+      "text": "Het is al laat. Plannen kan morgen ook.",
+      "button": "Lees een les"
+    },
+    "done": {
+      "text": "Niks te doen. Fijne dag."
+    },
+    "week": "Je week: {done} van {goal}",
+    "shelter": {
+      "plan": "Plan een groepswandeling bij {org}, dan kunnen wandelaars mee.",
+      "next": "{when}: groepswandeling bij {org}.",
+      "button": "Naar {org}"
+    }
   }
 }

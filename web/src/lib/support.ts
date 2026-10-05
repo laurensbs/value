@@ -90,6 +90,14 @@ export interface Campaign {
   updated: string | null
 }
 
+/** "Geef een rondje": on the campaign page one round is €5 (€3,000 = 600 rounds). */
+export const ROUND_EUR = 5
+
+/** How many rounds an amount in euros is, rounded down. */
+export function roundsFor(euros: number): number {
+  return Number.isFinite(euros) && euros > 0 ? Math.floor(euros / ROUND_EUR) : 0
+}
+
 const amount = (v: unknown): number | null => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? Math.round(v) : null)
 
 /**

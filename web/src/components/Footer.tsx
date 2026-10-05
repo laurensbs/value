@@ -11,6 +11,7 @@ import { Logo } from './Logo'
 /**
  * The site footer. `compact` is the one line under the app pages for signed-in people
  * (FooterSwitch picks it): the essentials and the language, without the big link list.
+ * Both have the language switcher.
  */
 export async function Footer({ compact = false }: { compact?: boolean }) {
   const t = await getTranslations('footer')
@@ -39,7 +40,7 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
       </footer>
     )
   }
-  const tc = await getTranslations('cities')
+  const [tc, tn, locale] = await Promise.all([getTranslations('cities'), getTranslations('nav'), getLocale() as Promise<Locale>])
   const { instagram } = supportConfig()
   return (
     <footer className="footer">
@@ -64,6 +65,8 @@ export async function Footer({ compact = false }: { compact?: boolean }) {
         <Link href="/legal/safety">{t('safety')}</Link>
         <Link href="/legal/shelters">{t('shelterTerms')}</Link>
         <Link href="/legal/cookies">{t('cookies')}</Link>
+        {/* Also here, so the language can be changed on every page: signed in on a phone the top bar has no room for it. */}
+        <LanguageSwitcher current={locale} label={tn('language')} compact />
       </div>
     </footer>
   )

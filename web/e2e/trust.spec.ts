@@ -89,7 +89,8 @@ test('trust moments: sent stays until "Klaar", accepting opens warmly, trust is 
   await walker.page.emulateMedia({ reducedMotion: 'no-preference' })
   // Both buttons are full buttons of 56 px; nothing here is too small to tap.
   for (const button of [sent.getByRole('button', { name: 'Klaar' }), sent.getByRole('link', { name: 'Bekijk je afspraken' })]) {
-    expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(56)
+    // Rounded: on a phone with a fractional pixel ratio (Pixel 7: 2.625) 56 px can measure 55.99997.
+    expect(Math.round((await button.boundingBox())!.height)).toBeGreaterThanOrEqual(56)
   }
   expect(await smallTargets(walker.page)).toEqual([])
   // It never leaves on its own.
