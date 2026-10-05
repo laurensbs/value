@@ -45,7 +45,9 @@ test('home: "Help ons!" with the crowdfunding, right after the hero; in the app 
   await expect(appGive).toHaveAttribute('href', 'https://whydonate.com/nl/fundraising/example')
   await expect(appGive).toHaveAttribute('target', '_blank')
   await expect(appGive).toHaveAttribute('rel', /noopener/)
-  await expect(inApp.locator('a[href*="whydonate"]')).toHaveCount(1)
+  // One on the page; the other way there in the app is "Help ons via Whydonate" in the footer (e2e/help-app.spec.ts).
+  await expect(inApp.locator('main a[href*="whydonate"]')).toHaveCount(1)
+  await expect(inApp.getByRole('contentinfo').locator('a[href*="whydonate"]')).toHaveCount(1)
   // /support says nothing about money in the app, so no link there from this block.
   await expect(appHelp.getByRole('link', { name: /Waar het geld heen gaat/ })).toHaveCount(0)
   await app.close()
@@ -113,6 +115,7 @@ test("about: Laurens' story with his photo, the campaign on the website and the 
   await expect(inApp.getByText(/Sinds mijn tiende heb ik te maken met depressie/)).toBeVisible()
   await expect(inApp.getByRole('link', { name: /113 Zelfmoordpreventie/ })).toBeVisible()
   await expect(inApp.getByRole('link', { name: 'Geef een rondje' })).toHaveCount(0)
-  await expect(inApp.locator('a[href*="whydonate"]')).toHaveCount(0)
+  // Not in the story in the app; only the footer's "Help ons via Whydonate" goes there.
+  await expect(inApp.locator('main a[href*="whydonate"]')).toHaveCount(0)
   await app.close()
 })
