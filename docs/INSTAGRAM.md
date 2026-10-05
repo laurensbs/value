@@ -156,7 +156,7 @@ Namen mogen maximaal 15 tekens zijn (te controleren); deze passen.
 
 Dia's:
 1. "Een vast rondje met een hond **die op je wacht**." (het accent in geel)
-2. "Veel jongeren willen naar buiten en houden van honden. Een eigen hond zit er vaak niet in."
+2. "Veel mensen willen naar buiten en houden van honden. Een eigen hond zit er vaak niet in."
 3. "Sommige buren kunnen hun hond niet meer zo vaak uitlaten als ze zouden willen. En in de opvang wacht elke hond op een extra wandeling."
 4. "Rondje brengt jullie bij elkaar. Gratis, vanaf 18 jaar, en de eerste keer altijd samen."
 5. "We beginnen in [stad]. Volg mee."
@@ -267,7 +267,7 @@ Dia's:
 
 > Voor opvangen: al je honden online, met een stapel foto's.
 >
-> Eén foto per hond, een paar vakjes per hond, en ze staan erop. Daarna plan je begeleide groepswandelingen, en melden jonge vrijwilligers van 18+ zich aan. Jullie bepalen welke honden meedoen en wie er komt.
+> Eén foto per hond, een paar vakjes per hond, en ze staan erop. Daarna plan je begeleide groepswandelingen, en melden vrijwilligers van 18+ zich aan. Jullie bepalen welke honden meedoen en wie er komt.
 >
 > Gratis, zonder abonnement. Stuur ons een DM, of kijk bij de highlight Opvangen.
 >
@@ -473,13 +473,13 @@ DM's stuur je alleen aan organisaties, en aan mensen die zelf contact opnamen. N
 Noem stemmen alleen als ze er echt zijn.
 
 **Nederlands**
-> Hoi [opvang]! Ik ben Laurens van Rondje: een gratis app waarmee jongvolwassenen (18+) in kleine, begeleide groepen met opvanghonden wandelen, op momenten die jullie kiezen. Jullie bepalen welke honden meedoen en wie er komt. [Op Rondje gaven al [aantal] mensen aan dat ze bij jullie willen wandelen.] Mag ik een korte mail sturen met hoe het werkt? Naar welk adres kan dat het best?
+> Hoi [opvang]! Ik ben Laurens van Rondje: een gratis app waarmee mensen vanaf 18 jaar in kleine, begeleide groepen met opvanghonden wandelen, op momenten die jullie kiezen. Jullie bepalen welke honden meedoen en wie er komt. [Op Rondje gaven al [aantal] mensen aan dat ze bij jullie willen wandelen.] Mag ik een korte mail sturen met hoe het werkt? Naar welk adres kan dat het best?
 
 **Français**
-> Bonjour [refuge] ! Je suis Laurens, de Rondje : une application gratuite qui permet à des jeunes de 18 ans et plus de promener vos chiens en petits groupes encadrés, aux moments que vous choisissez. Vous décidez quels chiens participent et qui vient. [Sur Rondje, [nombre] personnes ont déjà indiqué vouloir promener chez vous.] Puis-je vous envoyer un court e-mail pour vous expliquer ? À quelle adresse ?
+> Bonjour [refuge] ! Je suis Laurens, de Rondje : une application gratuite qui permet à des personnes de 18 ans et plus de promener vos chiens en petits groupes encadrés, aux moments que vous choisissez. Vous décidez quels chiens participent et qui vient. [Sur Rondje, [nombre] personnes ont déjà indiqué vouloir promener chez vous.] Puis-je vous envoyer un court e-mail pour vous expliquer ? À quelle adresse ?
 
 **Español**
-> ¡Hola, [protectora]! Soy Laurens, de Rondje: una app gratuita para que jóvenes mayores de 18 años paseen a vuestros perros en grupos pequeños y supervisados, en los horarios que elijáis. Vosotros decidís qué perros participan y quién viene. [En Rondje, [número] personas ya han dicho que quieren pasear con vosotros.] ¿Os puedo mandar un correo corto para contaros cómo funciona? ¿A qué dirección?
+> ¡Hola, [protectora]! Soy Laurens, de Rondje: una app gratuita para que personas de 18 años o más paseen a vuestros perros en grupos pequeños y supervisados, en los horarios que elijáis. Vosotros decidís qué perros participan y quién viene. [En Rondje, [número] personas ya han dicho que quieren pasear con vosotros.] ¿Os puedo mandar un correo corto para contaros cómo funciona? ¿A qué dirección?
 
 ### Na een ja
 

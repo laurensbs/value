@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · une balade régulière avec un chien qui vous attend",
-    "description": "{app} relie de jeunes adultes à des chiens de voisins ou de refuges en manque de balades. Gratuit et sûr, d’abord aux Pays-Bas."
+    "description": "{app} relie des personnes de 18 ans et plus à des chiens de voisins ou de refuges en manque de balades. Gratuit et sûr, d’abord aux Pays-Bas."
   },
   "nav": {
     "dogs": "Chiens",
@@ -109,7 +109,7 @@
     "forOwners": "Pour les propriétaires",
     "forOwnersText": "Vous ne pouvez plus marcher bien loin ? C'est vous qui décidez qui promène votre chien, combien de temps, et si les friandises sont permises. Votre famille peut aussi vous inscrire.",
     "forShelters": "Pour les refuges",
-    "forSheltersText": "Mettez tous vos chiens en ligne en une fois, organisez des balades en groupe encadrées et constituez un groupe fidèle de jeunes bénévoles.",
+    "forSheltersText": "Mettez tous vos chiens en ligne en une fois, organisez des balades en groupe encadrées et constituez un groupe fidèle de bénévoles des environs.",
     "safetyTitle": "La confiance se construit pas à pas",
     "safety1": "La première fois, la balade se fait toujours avec le propriétaire ou le refuge.",
     "safety2": "La pièce d'identité est vérifiée en personne lors de la première rencontre. Rondje Mee n'en garde aucune copie.",
@@ -1191,7 +1191,7 @@
   },
   "shelter": {
     "title": "Pour les refuges",
-    "lede": "Mettez vos chiens en ligne en une fois, organisez des balades en groupe encadrées et constituez un groupe fidèle de jeunes bénévoles. Gratuit.",
+    "lede": "Mettez vos chiens en ligne en une fois, organisez des balades en groupe encadrées et constituez un groupe fidèle de bénévoles des environs. Gratuit.",
     "create": "Inscrire un refuge",
     "createLede": "Nous vérifions chaque refuge avant que ses chiens soient visibles. Nous essayons de le faire sous deux jours ouvrables.",
     "name": "Nom du refuge",
@@ -1248,8 +1248,8 @@
     "benefit2": "Planifiez des balades avec un nombre de places limité. Les bénévoles s'inscrivent dans l'application.",
     "benefit3Title": "Vous gardez la main",
     "benefit3": "Lors de la balade, vous vérifiez la pièce d'identité des nouveaux bénévoles et notez qui était là et qui n'est pas venu.",
-    "benefit4Title": "Un groupe fidèle de jeunes promeneurs",
-    "benefit4": "Rondje Mee trouve des promeneurs de 18 à 30 ans qui ont envie de sortir plus souvent. Gratuit, sans abonnement.",
+    "benefit4Title": "Un groupe fidèle de promeneurs",
+    "benefit4": "Rondje Mee trouve des promeneurs de 18 ans et plus qui ont envie de sortir plus souvent, de l'étudiant au retraité. Gratuit, sans abonnement.",
     "loginFirst": "Créez d'abord votre propre compte. Ensuite, inscrivez le refuge ; cela prend deux minutes.",
     "finishProfile": "Complétez d'abord votre profil",
     "where": "Où se trouve le refuge ?",
@@ -1660,7 +1660,7 @@
     "ownerStep2": "Aidez-la à s'inscrire : vous pouvez aussi ajouter un chien pour quelqu'un d'autre, avec son accord.",
     "ownerAddDog": "Ajouter un chien pour quelqu'un d'autre",
     "ownerStep3": "Ou envoyez votre propre lien d'invitation avec ce message :",
-    "ownerMessage": "Je connais une application gratuite où des jeunes du quartier promènent ton chien. On se rencontre toujours d'abord ensemble. Regarde : {url}",
+    "ownerMessage": "Je connais une application gratuite où des gens du quartier promènent ton chien. On se rencontre toujours d'abord ensemble. Regarde : {url}",
     "ownerSignup": "Créez un compte pour obtenir votre lien",
     "ownerPrivacy": "Votre lien montre seulement que quelqu'un est venu par vous. Nous ne demandons jamais les données d'autres personnes.",
     "ownerFlyer": "Ou affichez un flyer dans votre quartier, au supermarché ou chez le vétérinaire"
@@ -1751,7 +1751,7 @@
     "faq": {
       "free": {
         "q": "Pourquoi Rondje Mee est-il gratuit ?",
-        "a": "Parce que l'argent ne doit jamais empêcher de sortir ensemble, ni les jeunes, ni les personnes âgées avec un chien. C'est pourquoi personne ne paie pour utiliser Rondje Mee."
+        "a": "Parce que l'argent ne doit jamais empêcher de sortir ensemble, ni les promeneurs, ni les personnes âgées avec un chien. C'est pourquoi personne ne paie pour utiliser Rondje Mee."
       },
       "where": {
         "q": "Où va ma contribution ?",
@@ -1825,10 +1825,10 @@
   "about": {
     "eyebrow": "À propos de Rondje Mee",
     "title": "Une promenade ensemble, bonne pour vous et pour un chien",
-    "lede": "Rondje Mee met en relation de jeunes adultes avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
-    "metaDescription": "{app} met en relation de jeunes adultes avec des chiens qui veulent sortir plus : de voisins qui ne peuvent plus les promener, et des refuges.",
+    "lede": "Rondje Mee met en relation des personnes de 18 ans et plus avec des chiens qui veulent sortir plus souvent : de voisins qui ne peuvent plus bien promener leur chien, et des refuges.",
+    "metaDescription": "{app} relie des personnes de 18 ans et plus à des chiens qui veulent sortir plus : de voisins qui ne peuvent plus les promener, et des refuges.",
     "whyTitle": "Pourquoi Rondje Mee",
-    "why1": "Beaucoup de jeunes aiment sortir et adorent les chiens, mais ne peuvent pas en avoir un. En même temps, des personnes âgées ou malades ne peuvent plus promener leur chien aussi souvent qu'elles le voudraient. Et dans les refuges, chaque chien attend une promenade de plus.",
+    "why1": "Beaucoup de gens aiment sortir et adorent les chiens, mais ne peuvent pas en avoir un. En même temps, des personnes âgées ou malades ne peuvent plus promener leur chien aussi souvent qu'elles le voudraient. Et dans les refuges, chaque chien attend une promenade de plus.",
     "why2": "Une promenade régulière avec un chien fait du bien à tout le monde : du mouvement, de l'air frais et un brin de causette avec un voisin. Rondje Mee rend cela simple, sûr et gratuit.",
     "why3": "Rondje Mee n'est ni de l'aide professionnelle ni une thérapie. Ça ne va pas ? La page d'aide indique vers qui vous tourner.",
     "howTitle": "Comment ça marche",
@@ -1888,7 +1888,7 @@
     "footer": "Rondje Mee est gratuit et le restera. Rondje Mee met les gens en relation et n'est pas partie à leurs arrangements.",
     "owner": {
       "headline": "Votre chien aurait-il besoin d'une promenade de plus ?",
-      "text": "Vous avez plus de mal à sortir votre chien ? Un jeune du quartier le promène régulièrement, gratuitement. Vous faites toujours connaissance d'abord, et c'est vous qui décidez de ce qui est permis.",
+      "text": "Vous avez plus de mal à sortir votre chien ? Quelqu'un du quartier le promène régulièrement, gratuitement. Vous faites toujours connaissance d'abord, et c'est vous qui décidez de ce qui est permis.",
       "points": {
         "one": "Gratuit, maintenant et plus tard",
         "two": "Toujours une première rencontre ensemble",
@@ -3097,7 +3097,7 @@
       "dogsTitle": "Des chiens qui attendent une promenade",
       "dogs1": "Certaines personnes ne peuvent plus promener leur chien aussi souvent qu’elles le voudraient, parce qu’elles vieillissent, sont malades ou ont du mal à marcher. Leur chien manque d’exercice, et elles manquent parfois d’un brin de causette.",
       "dogs2": "Dans les refuges, des chiens attendent un nouveau foyer. Une promenade hors du refuge est pour eux un changement bienvenu. Avec les chiens de refuge, sur {app}, vous marchez toujours lors de promenades de groupe encadrées.",
-      "dogs3": "{app} réunit ces chiens et de jeunes adultes qui aiment sortir mais ne peuvent pas avoir de chien. En sécurité, pas à pas, et gratuitement.",
+      "dogs3": "{app} réunit ces chiens et des personnes qui aiment sortir mais ne peuvent pas avoir de chien. En sécurité, pas à pas, et gratuitement.",
       "safetyLink": "Comment nous gérons la sécurité",
       "doTitle": "Ce que vous pouvez faire",
       "do": {
@@ -3369,8 +3369,8 @@
       },
       "walker": {
         "title": "Promeneur",
-        "who": "Quelqu’un de 18 à 30 ans qui adore les chiens",
-        "goal": "But : comprendre ce que font les jeunes aujourd’hui quand un chien leur manque, et ce qui les freine.",
+        "who": "Quelqu'un de 18 ans ou plus qui adore les chiens ; parle à des étudiants, des actifs et des retraités",
+        "goal": "But : comprendre ce que font les gens aujourd’hui quand un chien leur manque, et ce qui les freine.",
         "q1": "Quand as-tu promené un chien pour la dernière fois ? Comment c’est arrivé ?",
         "q2": "As-tu déjà cherché un moyen de passer du temps avec des chiens sans en avoir un ? Qu’as-tu trouvé, et pourquoi as-tu commencé ou pas ?",
         "q3": "À quoi ressemble une semaine normale ? Où une heure fixe pourrait-elle trouver sa place ?",
@@ -3451,21 +3451,21 @@
         "title": "Semaine 1",
         "sub": "Je crée une appli gratuite pour que le chien de mamie sorte plus souvent",
         "goal": "Premier test de marché : construire en public. Les commentaires te disent s’il y a de la demande.",
-        "caption": "Semaine 1 : je crée une appli gratuite pour que le chien de mamie sorte plus souvent.\n\nBeaucoup de personnes âgées ne peuvent plus promener leur chien elles-mêmes. Beaucoup de jeunes adorent les chiens mais ne peuvent pas (encore) en avoir. {app} les réunit, et la première fois, le propriétaire est toujours là.\n\nUne question pour toi : connais-tu quelqu’un dont le chien aimerait sortir plus souvent ? Dis-le en commentaire.\n\n#construireenpublic #chiens #promenade",
+        "caption": "Semaine 1 : je crée une appli gratuite pour que le chien de mamie sorte plus souvent.\n\nBeaucoup de personnes âgées ne peuvent plus promener leur chien elles-mêmes. Et beaucoup de gens adorent les chiens mais ne peuvent pas (encore) en avoir. {app} les réunit, et la première fois, le propriétaire est toujours là.\n\nUne question pour toi : connais-tu quelqu’un dont le chien aimerait sortir plus souvent ? Dis-le en commentaire.\n\n#construireenpublic #chiens #promenade",
         "visual": "Enregistrement d’écran de l’appli avec voix off (script A dans docs/GROWTH.md) ; l’image en couverture. Commentaire épinglé : « Je construis ça en public. Une mise à jour chaque semaine. Je ne vends rien. »"
       },
       "p03": {
         "title": "Votre chien aurait-il besoin d’une promenade de plus ?",
-        "sub": "Gratuit, avec un jeune du quartier. On se rencontre d’abord ensemble.",
+        "sub": "Gratuit, avec quelqu’un du quartier. On se rencontre d’abord ensemble.",
         "goal": "Offre : toucher les propriétaires et leur famille dans le quartier.",
-        "caption": "Bonjour les voisins ! Connaissez-vous quelqu’un dont le chien aurait bien besoin d’une promenade de plus ? Par exemple parce que marcher est plus difficile, après une opération, ou parce que les journées sont longues.\n\nAvec {app}, un jeune (18+) du quartier promène gratuitement le chien, à un rythme régulier. La première fois, vous vous rencontrez toujours ensemble, et c’est vous qui décidez de ce qui est permis. {app} ne demande jamais d’argent.\n\nPas de smartphone ? Un proche ou un voisin peut inscrire le chien pour vous, avec votre accord : {link}",
+        "caption": "Bonjour les voisins ! Connaissez-vous quelqu’un dont le chien aurait bien besoin d’une promenade de plus ? Par exemple parce que marcher est plus difficile, après une opération, ou parce que les journées sont longues.\n\nAvec {app}, quelqu’un du quartier (18+) promène gratuitement le chien, à un rythme régulier. La première fois, vous vous rencontrez toujours ensemble, et c’est vous qui décidez de ce qui est permis. {app} ne demande jamais d’argent.\n\nPas de smartphone ? Un proche ou un voisin peut inscrire le chien pour vous, avec votre accord : {link}",
         "visual": "L’image, ou une photo du flyer imprimé pour propriétaires. Demande d’abord à l’administrateur du groupe si tu peux le partager."
       },
       "p04": {
         "title": "Pas de chien à toi ? Envie de sortir ?",
         "sub": "Fais gratuitement une promenade régulière avec un chien de ton quartier",
-        "goal": "Demande : recruter des promeneurs de 18 à 30 ans, dans une ville qui a déjà des chiens.",
-        "caption": "Tu adores les chiens, mais il n’y a pas (encore) de place pour un chien dans ta vie ? Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier, par exemple celui de quelqu’un qui ne peut plus marcher loin.\n\nComment ça se passe :\n1. Tu crées un profil (18+) et tu fais un court quiz de sécurité\n2. Tu rencontres d’abord le propriétaire, ensemble\n3. Ensuite, c’est votre promenade régulière\n\nMarcher ensemble peut faire du bien à ta journée, et pour le chien c’est la fête. Lien en bio.\n\n#viedétudiant #chiens #promenade #dehors",
+        "goal": "Demande : recruter des promeneurs de 18 ans et plus, dans une ville qui a déjà des chiens.",
+        "caption": "Tu adores les chiens, mais il n’y a pas (encore) de place pour un chien dans ta vie ? Avec {app}, tu fais gratuitement une promenade régulière avec un chien de ton quartier, par exemple celui de quelqu’un qui ne peut plus marcher loin.\n\nComment ça se passe :\n1. Tu crées un profil (18+) et tu fais un court quiz de sécurité\n2. Tu rencontres d’abord le propriétaire, ensemble\n3. Ensuite, c’est votre promenade régulière\n\nMarcher ensemble peut faire du bien à ta journée, et pour le chien c’est la fête. Lien en bio.\n\n#bénévolat #chiens #promenade #dehors",
         "visual": "L’image en première diapositive, puis les trois étapes, une par diapositive."
       },
       "p05": {
@@ -3477,9 +3477,9 @@
       },
       "p06": {
         "title": "Recherche : le premier refuge",
-        "sub": "Pour des promenades de groupe encadrées avec de jeunes bénévoles, gratuitement",
+        "sub": "Pour des promenades de groupe encadrées avec des bénévoles, gratuitement",
         "goal": "Partenaires : trouver un refuge, une association sociale ou une haute école pour le premier pilote.",
-        "caption": "Je crée {app} : une plateforme gratuite qui met en relation de jeunes adultes (18–30) avec des chiens qui ont besoin d’une promenade de plus. Des chiens de voisins âgés ou malades, et des chiens de refuge lors de promenades de groupe encadrées.\n\nOù ça en est, honnêtement : la plateforme est en ligne et les étapes de sécurité sont là (rencontre ensemble d’abord, pièce d’identité vue en personne, accord pour chaque chien, un court quiz). Il n’y a pas encore de vrais binômes qui marchent.\n\nCe que je cherche :\n• un refuge qui veut essayer avec quelques chiens débutants\n• une association sociale ou une équipe de quartier qui connaît des propriétaires âgés\n• un enseignant ou un chercheur prêt à réfléchir à une mesure simple\n\nTu connais quelqu’un ? Une mise en relation ou un commentaire aide énormément. {link}\n\n#bénévolat #bienêtreanimal #quartier #impactsocial",
+        "caption": "Je crée {app} : une plateforme gratuite qui met en relation des personnes de 18 ans et plus avec des chiens qui ont besoin d’une promenade de plus. Des chiens de voisins âgés ou malades, et des chiens de refuge lors de promenades de groupe encadrées.\n\nOù ça en est, honnêtement : la plateforme est en ligne et les étapes de sécurité sont là (rencontre ensemble d’abord, pièce d’identité vue en personne, accord pour chaque chien, un court quiz). Il n’y a pas encore de vrais binômes qui marchent.\n\nCe que je cherche :\n• un refuge qui veut essayer avec quelques chiens débutants\n• une association sociale ou une équipe de quartier qui connaît des propriétaires âgés\n• un enseignant ou un chercheur prêt à réfléchir à une mesure simple\n\nTu connais quelqu’un ? Une mise en relation ou un commentaire aide énormément. {link}\n\n#bénévolat #bienêtreanimal #quartier #impactsocial",
         "visual": "L’image avec la publication. Ne tague pas d’organisations sans qu’elles le sachent."
       },
       "p07": {
@@ -3493,7 +3493,7 @@
         "title": "Pour le chien de ta grand-mère, ton voisin ou ta mère",
         "sub": "Inscris un chien, aussi pour quelqu’un d’autre (avec son accord)",
         "goal": "Offre via la famille : ceux qui n’utilisent pas l’appli peuvent quand même participer.",
-        "caption": "Ta mère, ta grand-mère ou ton voisin a un chien qui aimerait sortir plus souvent ? Avec {app}, un jeune du quartier promène gratuitement ce chien, à un rythme régulier.\n\nLe propriétaire n’a pas besoin d’utiliser une appli : tu peux inscrire le chien, avec son accord. La première rencontre se fait toujours ensemble, et {app} ne demande jamais d’argent. {link}",
+        "caption": "Ta mère, ta grand-mère ou ton voisin a un chien qui aimerait sortir plus souvent ? Avec {app}, quelqu’un du quartier promène gratuitement ce chien, à un rythme régulier.\n\nLe propriétaire n’a pas besoin d’utiliser une appli : tu peux inscrire le chien, avec son accord. La première rencontre se fait toujours ensemble, et {app} ne demande jamais d’argent. {link}",
         "visual": "L’image avec deux chiens dessinés. Demande d’abord à l’administrateur du groupe si tu peux le partager."
       },
       "p09": {
@@ -3582,7 +3582,7 @@
       },
       "flyerWalker": {
         "title": "Flyer pour promeneurs",
-        "how": "Affiche-le à la haute école, à la bibliothèque ou dans un kot ou une colocation, de préférence dans une ville qui a déjà des chiens. Il marche le mieux pendant les examens."
+        "how": "Affiche-le à la bibliothèque, à la maison de quartier, au supermarché ou à la haute école, de préférence dans une ville qui a déjà des chiens. À la haute école, il marche le mieux pendant les examens."
       },
       "poster": {
         "title": "Affiche pour un refuge",

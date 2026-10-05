@@ -43,21 +43,21 @@ Dit plan zet alles in één volgorde, met doelen en geld. De uitwerking staat el
 
 ## 2. Positionering en boodschap
 
-**In één zin:** Rondje koppelt jongvolwassenen aan honden die een extra wandeling goed kunnen gebruiken: van oudere of zieke buurtgenoten en uit de opvang. Gratis, vanaf 18 jaar, en de eerste keer altijd samen.
+**In één zin:** Rondje koppelt mensen vanaf 18 jaar aan honden die een extra wandeling goed kunnen gebruiken: van oudere of zieke buurtgenoten en uit de opvang. Gratis, voor jong en oud, en de eerste keer altijd samen.
 
 **De belofte:** *Gratis. Veilig. Eerst samen kennismaken.*
 
 > **Let op met "veilig".** [`legal/REVIEW.md`](legal/REVIEW.md) §2.1 waarschuwt voor een losse claim "veilig" of "geverifieerd": Rondje bewaart geen ID en de eigenaar of opvang doet de check. Zet "veilig" daarom altijd naast het hoe: eerst samen, ID in het echt bekeken, zelfstandig pas na toestemming per hond, live meekijken. Laat de jurist het woord toetsen. Tot die tijd is "Veilig opgezet" de voorzichtige variant.
 
-**Anders dan wat er is:** BorrowMyDoggy is betaald en Brits, OOPOEH is voor 55-plussers en vraagt een bijdrage, Pawshake en Rover zijn betaalde diensten ([`STRATEGY.md`](STRATEGY.md)). Rondje is gratis, verbindt jong en oud, en bouwt vertrouwen stap voor stap op. Zet Rondje nooit neer als "een gratis OOPOEH" ([`SUPPLY.md`](SUPPLY.md)).
+**Anders dan wat er is:** BorrowMyDoggy is betaald en Brits, OOPOEH is voor 55-plussers en vraagt een bijdrage, Pawshake en Rover zijn betaalde diensten ([`STRATEGY.md`](STRATEGY.md)). Rondje is gratis, staat open voor iedereen vanaf 18 jaar, verbindt jong en oud, en bouwt vertrouwen stap voor stap op. Zet Rondje nooit neer als "een gratis OOPOEH" ([`SUPPLY.md`](SUPPLY.md)).
 
 ### Boodschap per doelgroep
 
 | Doelgroep | Wat ze willen, en hun zorg | Kernboodschap | Bewijs uit het product | Oproep |
 |---|---|---|---|---|
-| **Wandelaars (18–30, studenten)** | Naar buiten, een hond zonder eigen hond, iets nuttigs, ritme. Zorg: geen ervaring, geen tijd, een moeilijke hond. | "Een vast rondje met een hond die op je wacht. Gratis, en je begint samen." | Groepswandeling met begeleider; honden ingedeeld op niveau; eerst een kennismaking | Link met code → account → honden of groepswandelingen |
+| **Wandelaars (vanaf 18: studenten, werkenden, gepensioneerden)** | Naar buiten, een hond zonder eigen hond, iets nuttigs, ritme. Zorg: geen ervaring, geen tijd, een moeilijke hond. | "Een vast rondje met een hond die op je wacht. Gratis, en je begint samen." | Groepswandeling met begeleider; honden ingedeeld op niveau; eerst een kennismaking | Link met code → account → honden of groepswandelingen |
 | **Oudere of zieke eigenaren** | Hond blij en in beweging, zelf de baas blijven, een praatje. Zorg: een vreemde aan de deur, sleutels, geld, ingewikkelde apps. | "U bepaalt wie met uw hond loopt. De eerste keer bent u erbij. Het kost niets." | Toestemming per hond voor zelfstandig wandelen; contactgegevens pas na acceptatie; live meekijken; "Rondje vraagt nooit om geld" | Via familie, buur of welzijnswerker |
-| **Volwassen kinderen en buren (zij beslissen vaak)** | Zorg om een ouder delen, de hond gelukkig, de ouder zelfstandig. Zorg: wie zijn die jongeren, kost het tijd? | "Doe het voor je moeder, je buurman, je oma. Jij meldt de hond aan, zij zeggen ja, en de eerste keer zijn jullie erbij." | "Hond aanmelden voor iemand anders" (met toestemming); wie aanmeldt, regelt de aanvragen | WhatsApp-bericht (§11), link met `?intent=owner` |
+| **Volwassen kinderen en buren (zij beslissen vaak)** | Zorg om een ouder delen, de hond gelukkig, de ouder zelfstandig. Zorg: wie zijn die wandelaars, kost het tijd? | "Doe het voor je moeder, je buurman, je oma. Jij meldt de hond aan, zij zeggen ja, en de eerste keer zijn jullie erbij." | "Hond aanmelden voor iemand anders" (met toestemming); wie aanmeldt, regelt de aanvragen | WhatsApp-bericht (§11), link met `?intent=owner` |
 | **Opvangen** | Meer wandelingen, minder plannen, vaste vrijwilligers, zichtbaarheid. Zorg: begeleiderstijd, aansprakelijkheid, moeilijke honden. | "Al je honden in één keer online, begeleide groepswandelingen, jij houdt de regie. Gratis." | Foto's in bulk of CSV; groepswandelingen met een maximum aantal plekken; aanwezigheid en ID-check; eigen pagina `/dogs?org=ID` | Claimlink `/shelter?claim=ID` |
 | **Partners, fondsen, gemeenten** | Meetbare impact op eenzaamheid en beweging, bereik van jong én oud. Zorg: continuïteit, veiligheid, wie erachter zit. | "Een vast rondje dat jong en oud verbindt via de hond. Gratis voor iedereen, gemeten vanaf week één." | KPI's per stad (§8), privacy by design, vaste koppels | Gesprek van 30 minuten, pilot van 8 weken ([`PARTNERS.md`](PARTNERS.md)) |
 
@@ -66,7 +66,7 @@ Dit plan zet alles in één volgorde, met doelen en geld. De uitwerking staat el
 - **Warm en nuchter.** Korte zinnen. Liever een concreet moment ("Saar weet precies hoe laat het is") dan een groot woord ("verbinding").
 - **De hond is de ster.** Humor door de ogen van de hond werkt ([`GROWTH.md`](GROWTH.md)).
 - **Niet zielig.** Geen "eenzame oudjes" of "arme hondjes". Oudere eigenaren hebben iets te bieden: hun hond, hun verhaal, een kop thee.
-- **Aanspreekvorm:** "je" voor jongeren en online; "u" op flyers voor oudere eigenaren en in mails aan organisaties. Frans: "vous". Spaans: "tú" voor wandelaars, "vosotros" voor protectoras, "usted" voor publieke centra ([`OUTREACH.md`](OUTREACH.md)). In Vlaanderen: "gsm" en "vzw".
+- **Aanspreekvorm:** "je" voor wandelaars en online; "u" op flyers voor oudere eigenaren en in mails aan organisaties. Frans: "vous". Spaans: "tú" voor wandelaars, "vosotros" voor protectoras, "usted" voor publieke centra ([`OUTREACH.md`](OUTREACH.md)). In Vlaanderen: "gsm" en "vzw".
 - **Gewone woorden:** "app" of "Rondje", niet "platform" of "matching", behalve tegen organisaties.
 
 | Wel | Niet |
@@ -155,6 +155,7 @@ Wandelaars vinden is makkelijker dan honden: de puppy room van de UvA zat binnen
 - **Studentenverenigingen:** gezelligheids-, sport-, studie- en internationale verenigingen (ESN). Bied een groepswandeling aan als commissie-uitje: 4 tot 8 mensen, één of twee begeleiders van de opvang. Elke vereniging krijgt een eigen code (§11).
 - **Universiteiten en hogescholen:** introductieweken (in Utrecht de UIT in augustus (te controleren); sommige opleidingen starten in februari), het team voor studentenwelzijn, en studieverenigingen van Diergeneeskunde, Psychologie en Sociaal Werk. Universiteit Utrecht heeft de enige faculteit Diergeneeskunde van Nederland ([`PARTNERS.md`](PARTNERS.md)).
 - **Sport- en buitenclubs:** hardloopverenigingen, wandelclubs, roverscouts (18+).
+- **Buurthuizen en bibliotheken:** gepensioneerden en thuiswerkers hebben vaak overdag tijd, juist als studenten college hebben. Hang de flyer voor wandelaars op en vraag of hij in de nieuwsbrief mag.
 - **Vrijwilligersvacaturebanken:** NLvoorelkaar en de lokale vrijwilligerscentrale; in België Give a Day; in Spanje Hacesfalta.org (alle te controleren). Gratis, en vol mensen die iets willen doen.
 - **Instagram en TikTok:** ideeën en scripts in [`GROWTH.md`](GROWTH.md), het account in [`INSTAGRAM.md`](INSTAGRAM.md).
 - **Uitnodigingslinks:** elke wandelaar heeft een eigen link (Profiel → Nodig iemand uit). Campagnes krijgen een eigen code, zoals `/r/INSTA` (§11).
@@ -176,7 +177,7 @@ Een groepswandeling is de laagste drempel: geen ervaring nodig, een begeleider l
 - Na het eerste rondje een persoonlijk berichtje van jou.
 - Na het tweede of derde rondje: stel een vast moment voor.
 - Stopt een koppel? Bel of app binnen een week en vraag waarom, voordat je meer werft ([`GROWTH.md`](GROWTH.md), week 3).
-- Tentamens en vakanties: vraag vaste wandelaars op tijd wie wegvalt, en zoek met de eigenaar vervanging. In de zomer zijn studenten weg, honden niet. Werf daarom ook werkende twintigers.
+- Tentamens en vakanties: vraag vaste wandelaars op tijd wie wegvalt, en zoek met de eigenaar vervanging. In de zomer zijn studenten weg, honden niet. Werf daarom ook werkenden en gepensioneerden.
 
 **Wat je niet doet:** geen streaks, badges of pushdruk (rode lijn). De motor is de hond die op je wacht.
 
@@ -269,7 +270,7 @@ Ga pas naar de volgende stad als de vorige dit haalt:
 - [ ] **Regels voor honden:** aanlijnplicht, rassen met een licentie of muilkorf, verzekering, en de vrijwilligersverzekering bij opvangen ([`OUTREACH.md`](OUTREACH.md) §6).
 - [ ] **Opvanglijst gevuld** in `web/content/shelters.json`: minstens 5 per lanceerstad, zichtbaar op `/shelters`.
 - [ ] **10 opvangen benaderd**, 3 demo's, 1 live, voordat je publiek wandelaars werft.
-- [ ] **Lokale ambassadeur:** 18–30, spreekt de taal, kan bij groepswandelingen zijn.
+- [ ] **Lokale ambassadeur:** vanaf 18 jaar, spreekt de taal, kan bij groepswandelingen zijn.
 - [ ] **Perslijst** van 10 adressen: regionale krant, studentenblad, lokale radio en tv, dierenbladen.
 - [ ] **Instagram:** taal, hashtags en collab-partners ([`INSTAGRAM.md`](INSTAGRAM.md) §9–11).
 - [ ] **Verificatie:** werkt de opzoeklink voor het register (KvK, KBO, CIF/NIF)?
@@ -622,23 +623,23 @@ Ongeveer 10 uur per week, voor één persoon. Week 1 begint maandag 5 oktober 20
 
 ### Korte pitch (2 zinnen)
 
-> Rondje koppelt jongvolwassenen aan honden die een extra wandeling goed kunnen gebruiken: van oudere of zieke buurtgenoten en uit de opvang. Het is gratis, vanaf 18 jaar, en de eerste keer loop je altijd samen met de eigenaar of de opvang.
+> Rondje koppelt mensen vanaf 18 jaar aan honden die een extra wandeling goed kunnen gebruiken: van oudere of zieke buurtgenoten en uit de opvang. Het is gratis, en de eerste keer loop je altijd samen met de eigenaar of de opvang.
 
 **Voor opvangen:**
-> Rondje zet al jullie honden in één keer online en vult begeleide groepswandelingen met jonge vrijwilligers van 18 jaar en ouder. Het is gratis, en jullie bepalen welke honden meedoen en wie er komt.
+> Rondje zet al jullie honden in één keer online en vult begeleide groepswandelingen met vrijwilligers van 18 jaar en ouder. Het is gratis, en jullie bepalen welke honden meedoen en wie er komt.
 
 **Voor fondsen en gemeenten:**
-> Rondje verbindt jongeren en oudere buurtgenoten via een vast wekelijks rondje met de hond, en laat opvanghonden vaker naar buiten gaan. Gratis voor iedereen, met cijfers per stad vanaf week één.
+> Rondje verbindt buurtgenoten van elke leeftijd via een vast wekelijks rondje met de hond, en laat opvanghonden vaker naar buiten gaan. Gratis voor iedereen, met cijfers per stad vanaf week één.
 
 ### Persmail
 
 Alleen echte cijfers uit Beheer, met datum. Geen onderzoekscijfers, tenzij je ze op de bron hebt gecheckt. Geen adressen of gezondheidsdetails van eigenaren. Iedereen die genoemd wordt of op een foto staat, heeft toestemming gegeven.
 
-> **Onderwerp:** [Stad]: jonge vrijwilligers lopen elke [zaterdag] met de honden van [opvang]
+> **Onderwerp:** [Stad]: vrijwilligers lopen elke [zaterdag] met de honden van [opvang]
 >
 > Beste [naam],
 >
-> Elke [zaterdag] lopen er nu jonge [Utrechters] mee met de honden van [opvang], in kleine groepen en met een begeleider van de opvang. Dat loopt via Rondje: een gratis app die jongvolwassenen koppelt aan honden die een extra wandeling goed kunnen gebruiken, uit de opvang en van oudere buurtgenoten die zelf niet ver meer kunnen lopen.
+> Elke [zaterdag] lopen er nu [Utrechters] mee met de honden van [opvang], in kleine groepen en met een begeleider van de opvang. Dat loopt via Rondje: een gratis app die mensen vanaf 18 jaar koppelt aan honden die een extra wandeling goed kunnen gebruiken, uit de opvang en van oudere buurtgenoten die zelf niet ver meer kunnen lopen.
 >
 > Waarom dit misschien iets is voor [krant of programma]:
 > - [Voornaam] ([leeftijd]) loopt sinds [maand] elke week met [hond]. "[Eén zin van de wandelaar of eigenaar, met toestemming.]"
@@ -659,7 +660,7 @@ Alleen echte cijfers uit Beheer, met datum. Geen onderzoekscijfers, tenzij je ze
 
 > **Wandel mee met onze honden**
 >
-> Elke [zaterdag 10:00] lopen er jonge vrijwilligers mee met onze honden, in een kleine groep en met een begeleider van ons. Geen ervaring nodig.
+> Elke [zaterdag 10:00] lopen er vrijwilligers mee met onze honden, in een kleine groep en met een begeleider van ons. Geen ervaring nodig.
 >
 > Gratis, voor iedereen van 18 jaar en ouder. Neem bij je eerste keer je ID mee.
 >
@@ -679,7 +680,7 @@ Vraag altijd eerst toestemming om op te hangen, en vervang de flyers elke 4–6 
 
 > **Kan uw hond wel een extra rondje gebruiken?**
 >
-> Jonge mensen uit de buurt lopen gratis een vast rondje met uw hond.
+> Mensen uit de buurt lopen gratis een vast rondje met uw hond.
 > - De eerste keer bent u erbij.
 > - U bepaalt wie er met uw hond loopt, en hoe lang.
 > - Het kost niets. Rondje vraagt nooit om geld.
@@ -703,7 +704,7 @@ Gebruik je eigen uitnodigingslink (Profiel → Nodig iemand uit) met `?intent=ow
 
 **Aan je moeder, vader of oma:**
 
-> Hoi mam, ik zag iets dat misschien fijn is voor jou en [hond]. Het heet Rondje: jonge mensen uit de buurt lopen gratis een vast rondje met je hond. De eerste keer ben jij erbij, en jij bepaalt of ze daarna alleen mogen. Je hebt er zelf geen app voor nodig, ik regel het. En ze vragen nooit om geld: doet iemand dat wel, dan klopt het niet. Zullen we het zondag samen bekijken? [link]
+> Hoi mam, ik zag iets dat misschien fijn is voor jou en [hond]. Het heet Rondje: mensen uit de buurt lopen gratis een vast rondje met je hond. De eerste keer ben jij erbij, en jij bepaalt of ze daarna alleen mogen. Je hebt er zelf geen app voor nodig, ik regel het. En ze vragen nooit om geld: doet iemand dat wel, dan klopt het niet. Zullen we het zondag samen bekijken? [link]
 
 **In de familie-app:**
 
