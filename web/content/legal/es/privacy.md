@@ -1,7 +1,7 @@
 ---
 title: Política de privacidad
 description: "Qué datos personales tratamos, por qué y durante cuánto tiempo, quién los ve y qué derechos tienes. Tu dirección exacta nunca es pública."
-version: "0.5"
+version: "0.6"
 updated: "2026-10-05"
 status: "Borrador – pendiente de revisión jurídica"
 ---
@@ -119,7 +119,7 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 - **La ubicación en tiempo real** puede estar desactivada. Cuando está activada, solo la recogemos durante un paseo a solas con el perro: desde que lo inicias como paseante hasta que lo terminas. Tu móvil te pedirá permiso. Puedes retirarlo en los ajustes del móvil, pero entonces el mapa en tiempo real no funcionará.
 - En un primer encuentro y en un paseo en grupo nunca recogemos la ubicación: el propietario o la protectora va con vosotros.
 - Cuando la ubicación en tiempo real está activada, el propietario o la protectora del perro ve un mapa en tiempo real con el recorrido durante un paseo a solas con el perro. Tú ves tu propio recorrido.
-- Si un paseo a solas con el perro dura mucho más de lo previsto, el propietario o la protectora recibe un aviso.
+- Si un paseo dura mucho más de lo previsto, Rondje Mee a veces envía un aviso, pero no siempre. Así que no cuentes con ello.
 - **Mientras la EIPD no esté terminada** (ver apartado 14), la ubicación en tiempo real está desactivada para todos, y también después podemos desactivarla. Mientras esté desactivada, no recogemos ni guardamos ninguna ubicación, y el propietario o la protectora no ve ningún mapa en tiempo real. Entonces no se puede solicitar, aceptar ni iniciar un paseo a solas con el perro; un primer encuentro, sí. En Rondje Mee verás entonces que la ubicación en tiempo real está desactivada.
 - Borramos los puntos del recorrido a los **30 días**. Si hay una denuncia de incidente abierta, conservamos el recorrido de ese paseo hasta que se cierre.
 - No usamos los datos de ubicación para publicidad ni para elaborar perfiles, y nunca los vendemos.
@@ -136,7 +136,7 @@ Cuando nos basamos en el interés legítimo, hemos valorado que ese interés pre
 ## 7. ¿Quién ve tus datos?
 
 - **Los propietarios y las protectoras** ven de un paseante que les envía una solicitud: nombre, foto, franja de edad (por ejemplo, 25-34 años), localidad, desde qué año está en Rondje Mee, experiencia con perros, lo que escribió sobre sí mismo y el mensaje de la solicitud. También ven lo que el paseante hizo en Rondje Mee: el número de paseos realizados, cuántas veces un propietario o una protectora vio su documento de identidad en persona y si aprobó el test de seguridad. Nunca ven la fecha de nacimiento completa.
-- **Quien ve el perfil de un perro con una cuenta** ve del propietario el nombre, la foto, la localidad, lo que escribió sobre sí mismo y sus horarios fijos, y la ubicación del perro redondeada a unos 500 metros. **Sin cuenta** solo se ve el perro, la localidad y que hay un propietario cerca.
+- **Los miembros de Rondje Mee** (con la sesión iniciada, el perfil completado y la cuenta no suspendida) ven, en la página del perro de un propietario, el nombre, la foto, la localidad, lo que escribió sobre sí mismo y los horarios fijos del propietario, y la ubicación del perro redondeada a unos 500 metros. **Quien no es miembro** solo ve el perro, la localidad y que hay un propietario cerca.
 - **Tras aceptar** una solicitud, ambas partes ven también el teléfono y el correo electrónico de la otra, y el paseante ve los datos reservados que el propietario haya habilitado para ello.
 - **Las protectoras** ven de los paseantes que se apuntan a un paseo en grupo: nombre, foto, franja de edad y teléfono, y si la protectora ya vio su documento de identidad en persona. La protectora también registra la asistencia. Si una protectora usa esos datos en su propia gestión de voluntariado, es responsable de ello.
 - **Las valoraciones privadas** nunca las ve la otra persona. Solo puede leerlas un número limitado de personas del equipo de Rondje Mee.

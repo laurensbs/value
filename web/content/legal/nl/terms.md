@@ -40,7 +40,7 @@ Je moet **18 jaar of ouder** zijn en Rondje Mee als particulier voor jezelf gebr
 - Je hebt één account en deelt het met niemand. Houd je inloggegevens geheim en meld misbruik meteen.
 - Je bent verantwoordelijk voor wat er via je account gebeurt, tenzij je dat redelijkerwijs niet kon voorkomen.
 
-Wat anderen van je zien, hangt af van wie er kijkt. Eigenaren en opvangen zien van een wandelaar die hun een verzoek stuurt onder meer de voornaam, foto, leeftijdsgroep en woonplaats. Bij de hond van een eigenaar zien leden van Rondje Mee (ingelogd, met een afgerond profiel en niet geblokkeerd) onder meer de voornaam, foto en woonplaats van de eigenaar, en de plek van de hond afgerond op zo'n 500 meter. Wie geen lid is, ziet bij die hond alleen de hond, de woonplaats en dat er een eigenaar in de buurt is. Je telefoonnummer en e-mailadres ziet de ander pas als een verzoek is geaccepteerd. Meld je je aan voor een groepswandeling, dan ziet de opvang je telefoonnummer meteen. Zie de Privacyverklaring.
+Wat anderen van je zien, hangt af van wie er kijkt. Eigenaren en opvangen zien van een wandelaar die hun een verzoek stuurt onder meer de voornaam, foto, leeftijdsgroep en woonplaats. Bij de hond van een eigenaar zien leden van Rondje Mee (ingelogd, met een afgerond profiel en niet geblokkeerd door Rondje Mee) onder meer de voornaam, foto en woonplaats van de eigenaar, en de plek van de hond afgerond op zo'n 500 meter. Wie geen lid is, ziet bij die hond alleen de hond, de woonplaats en dat er een eigenaar in de buurt is. Je telefoonnummer en e-mailadres ziet de ander pas als een verzoek is geaccepteerd. Meld je je aan voor een groepswandeling, dan ziet de opvang je telefoonnummer meteen. Zie de Privacyverklaring.
 
 ## 5. Rollen
 

@@ -40,7 +40,7 @@ You must be **18 or older** and use Rondje Mee as a private individual, for your
 - You have one account and share it with no one. Keep your login details secret and report any misuse immediately.
 - You are responsible for what happens through your account, unless you could not reasonably have prevented it.
 
-What others see of you depends on who is looking. Owners and shelters see, among other things, the first name, photo, age group and town of a walker who sends them a request. On the page of a dog that belongs to an owner, members of Rondje Mee (signed in, with a finished profile and not blocked) see, among other things, the owner's first name, photo and town, and the dog's location rounded to about 500 metres. Anyone who is not a member only sees the dog, the town and that there is an owner nearby. The other person only sees your phone number and email address once a request has been accepted. If you sign up for a group walk, the shelter sees your phone number straight away. See the Privacy Policy.
+What others see of you depends on who is looking. Owners and shelters see, among other things, the first name, photo, age group and town of a walker who sends them a request. On the page of a dog that belongs to an owner, members of Rondje Mee (signed in, with a finished profile and not suspended) see, among other things, the owner's first name, photo and town, and the dog's location rounded to about 500 metres. Anyone who is not a member only sees the dog, the town and that there is an owner nearby. The other person only sees your phone number and email address once a request has been accepted. If you sign up for a group walk, the shelter sees your phone number straight away. See the Privacy Policy.
 
 ## 5. Roles
 

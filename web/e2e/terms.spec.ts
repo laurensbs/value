@@ -192,7 +192,7 @@ test('changed terms: a calm notice first, and once they take effect the yes befo
   await walker.context.close()
 })
 
-test('legal pages: terms 0.4 and safety protocol 0.2 promise nothing the app does not do', async ({ page }) => {
+test('legal pages: terms 0.4, safety protocol 0.2 and privacy 0.6 promise nothing the app does not do', async ({ page }) => {
   await page.goto('/legal/terms')
   const terms = page.locator('article.legal')
   await expect(terms).toContainText('Versie 0.4')
@@ -209,6 +209,8 @@ test('legal pages: terms 0.4 and safety protocol 0.2 promise nothing the app doe
   await expect(terms).toContainText('Live locatie kan aan of uit staan.')
   await expect(terms).toContainText('Het SOS-scherm stuurt zelf niets naar de eigenaar of opvang en deelt geen locatie.')
   await expect(terms).toContainText('Wie geen lid is, ziet bij die hond alleen de hond, de woonplaats en dat er een eigenaar in de buurt is.')
+  // A ban by Rondje Mee, not someone blocking you (art. 14): that is what the dog page checks.
+  await expect(terms).toContainText('niet geblokkeerd door Rondje Mee')
   await expect(terms).toContainText('Een wandeling alleen met de hond kan bovendien alleen zolang live locatie aan staat (artikel 13).')
   // Help lines stay where they were: 112 first, always.
   await expect(terms).toContainText('Bij gevaar bel je altijd eerst 112.')
@@ -229,4 +231,14 @@ test('legal pages: terms 0.4 and safety protocol 0.2 promise nothing the app doe
   await expect(safety).toContainText('Staat live locatie uit, dan is er geen kaart.')
   await expect(safety).toContainText('113 Zelfmoordpreventie')
   await shot(page, 'legal-safety-02')
+
+  // The privacy statement says the same as terms art. 13: no promised alert when a walk runs late.
+  await page.goto('/legal/privacy')
+  const privacy = page.locator('article.legal')
+  await expect(privacy).toContainText('Versie 0.6')
+  for (const gone of ['Dan krijgt de eigenaar of opvang een melding', 'Wie met een account een hondenprofiel bekijkt']) {
+    await expect(privacy).not.toContainText(gone)
+  }
+  await expect(privacy).toContainText('Duurt een wandeling veel langer dan gepland, dan stuurt Rondje Mee soms een melding, maar niet altijd. Reken er dus niet op.')
+  await expect(privacy).toContainText('Wie geen lid is, ziet bij die hond alleen de hond, de woonplaats en dat er een eigenaar in de buurt is.')
 })
