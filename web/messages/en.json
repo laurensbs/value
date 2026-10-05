@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{app} · a regular walk with a dog who's waiting for you",
-    "description": "{app} connects young adults with dogs from neighbours and shelters that could use an extra walk. Free and safe, starting in the Netherlands."
+    "description": "{app} connects people aged 18 and over with dogs from neighbours and shelters that could use an extra walk. Free, safe, starting in the Netherlands."
   },
   "nav": {
     "dogs": "Dogs",
@@ -109,7 +109,7 @@
     "forOwners": "For owners",
     "forOwnersText": "Can't walk far any more? You decide who walks your dog, for how long, and whether treats are allowed. Family can sign you up too.",
     "forShelters": "For shelters",
-    "forSheltersText": "Put all your dogs online in one go, plan supervised group walks and get a regular group of young volunteers.",
+    "forSheltersText": "Put all your dogs online in one go, plan supervised group walks and get a regular group of local volunteers.",
     "safetyTitle": "Trust is built step by step",
     "safety1": "The first time, you always walk together with the owner or the shelter.",
     "safety2": "ID is checked in person at the first meeting. Rondje Mee doesn't keep a copy.",
@@ -1197,7 +1197,7 @@
   },
   "shelter": {
     "title": "For shelters",
-    "lede": "Put your dogs online in one go, plan supervised group walks and get a regular group of young volunteers. Free.",
+    "lede": "Put your dogs online in one go, plan supervised group walks and get a regular group of local volunteers. Free.",
     "create": "Register a shelter",
     "createLede": "We check every shelter before its dogs become visible. We try to do so within two working days.",
     "name": "Shelter name",
@@ -1254,8 +1254,8 @@
     "benefit2": "Plan walks with a maximum number of spots. Volunteers sign up in the app.",
     "benefit3Title": "You stay in control",
     "benefit3": "At each walk, you check new volunteers' ID and keep track of who came and who didn't.",
-    "benefit4Title": "A regular group of young walkers",
-    "benefit4": "Rondje Mee finds walkers aged 18 to 30 who'd love to get outside more often. Free, with no subscription.",
+    "benefit4Title": "A regular group of walkers",
+    "benefit4": "Rondje Mee finds walkers aged 18 and over who'd love to get outside more often, from students to retirees. Free, with no subscription.",
     "loginFirst": "First create your own account. Then register the shelter; it takes two minutes.",
     "finishProfile": "Finish your profile first",
     "where": "Where is the shelter?",
@@ -1666,7 +1666,7 @@
     "ownerStep2": "Help them sign up: you can also add a dog for someone else, if they agree.",
     "ownerAddDog": "Add a dog for someone else",
     "ownerStep3": "Or send your own invite link with this message:",
-    "ownerMessage": "I know a free app where young people from the neighbourhood walk your dog. You always meet together first. Have a look: {url}",
+    "ownerMessage": "I know a free app where people from the neighbourhood walk your dog. You always meet together first. Have a look: {url}",
     "ownerSignup": "Create an account to get your link",
     "ownerPrivacy": "Your link only shows that someone came through you. We never ask anyone for other people's details.",
     "ownerFlyer": "Or put up a flyer in your neighbourhood, at the supermarket or the vet"
@@ -1757,7 +1757,7 @@
     "faq": {
       "free": {
         "q": "Why is Rondje Mee free?",
-        "a": "Because money should never stop anyone from getting outside together, whether young people or older people with a dog. That is why nobody pays to use Rondje Mee."
+        "a": "Because money should never stop anyone from getting outside together, whether walkers or older people with a dog. That is why nobody pays to use Rondje Mee."
       },
       "where": {
         "q": "Where does my contribution go?",
@@ -1831,10 +1831,10 @@
   "about": {
     "eyebrow": "About Rondje Mee",
     "title": "A walk together, good for you and for a dog",
-    "lede": "Rondje Mee connects young adults with dogs that want to get out more: from neighbours who can no longer walk their dog well, and from shelters.",
-    "metaDescription": "{app} connects young adults with dogs that want to get out more: from neighbours who can no longer walk their dog well, and from shelters.",
+    "lede": "Rondje Mee connects people aged 18 and over with dogs that want to get out more: from neighbours who can no longer walk their dog well, and from shelters.",
+    "metaDescription": "{app} connects people aged 18 and over with dogs that want to get out more: from neighbours who can no longer walk their dog well, and from shelters.",
     "whyTitle": "Why Rondje Mee",
-    "why1": "Many young people love being outside and love dogs, but cannot have one themselves. At the same time, older people and people who are ill cannot walk their dog as often as they would like. And in shelters, every dog is waiting for one more walk.",
+    "why1": "Many people love being outside and love dogs, but cannot have one themselves. At the same time, older people and people who are ill cannot walk their dog as often as they would like. And in shelters, every dog is waiting for one more walk.",
     "why2": "A regular walk with a dog is good for everyone: exercise, fresh air and a chat with a neighbour. Rondje Mee makes that easy, safe and free.",
     "why3": "Rondje Mee is not care or therapy. Not feeling well? The help page shows where you can turn.",
     "howTitle": "How it works",
@@ -1894,7 +1894,7 @@
     "footer": "Rondje Mee is free and will stay free. Rondje Mee connects people and is not a party to their arrangements.",
     "owner": {
       "headline": "Could your dog use an extra walk?",
-      "text": "Finding it harder to walk your dog? A young person from the neighbourhood walks your dog regularly, for free. You always meet first, and you decide what is allowed.",
+      "text": "Finding it harder to walk your dog? Someone from the neighbourhood walks your dog regularly, for free. You always meet first, and you decide what is allowed.",
       "points": {
         "one": "Free, now and later",
         "two": "Always meet together first",
@@ -3061,7 +3061,7 @@
       "dogsTitle": "Dogs waiting for a walk",
       "dogs1": "Some people can no longer walk their dog as often as they would like, because they are getting older, are ill or find walking hard. Their dog misses the exercise, and they sometimes miss a chat.",
       "dogs2": "In shelters, dogs wait for a new home. A walk outside the shelter is a welcome change for them. With shelter dogs, you always walk in guided group walks on {app}.",
-      "dogs3": "{app} brings these dogs together with young adults who love being outside but cannot have a dog of their own. Safely, step by step, and for free.",
+      "dogs3": "{app} brings these dogs together with people who love being outside but cannot have a dog of their own. Safely, step by step, and for free.",
       "safetyLink": "How we handle safety",
       "doTitle": "What you can do",
       "do": {
@@ -3333,8 +3333,8 @@
       },
       "walker": {
         "title": "Walker",
-        "who": "Someone aged 18 to 30 who loves dogs",
-        "goal": "Goal: understand what young people do now when they miss a dog, and what holds them back.",
+        "who": "Someone aged 18 or over who loves dogs; talk to a mix of students, working people and retirees",
+        "goal": "Goal: understand what people do now when they miss a dog, and what holds them back.",
         "q1": "When did you last walk a dog? How did that come about?",
         "q2": "Have you ever looked for a way to spend time with dogs without having one? What did you find, and why did you start or not?",
         "q3": "What does a normal week look like? Where would a regular hour fit in?",
@@ -3415,21 +3415,21 @@
         "title": "Week 1",
         "sub": "I am building a free app so grandma’s dog can go out more often",
         "goal": "First market test: building in public. Comments tell you whether there is demand.",
-        "caption": "Week 1: I am building a free app so grandma’s dog can go out more often.\n\nMany older people can no longer walk their dog themselves. Many young people love dogs but cannot have one (yet). {app} brings them together, and the first time the owner is always there.\n\nA question for you: do you know someone whose dog would like to go out more often? Tell me in the comments.\n\n#buildinpublic #dogs #walking",
+        "caption": "Week 1: I am building a free app so grandma’s dog can go out more often.\n\nMany older people can no longer walk their dog themselves. And many people love dogs but cannot have one (yet). {app} brings them together, and the first time the owner is always there.\n\nA question for you: do you know someone whose dog would like to go out more often? Tell me in the comments.\n\n#buildinpublic #dogs #walking",
         "visual": "Screen recording of the app with a voice-over (script A in docs/GROWTH.md); the image as the cover. Pinned comment: ‘I am building this in public. An update every week. I am not selling anything.’"
       },
       "p03": {
         "title": "Could your dog use an extra walk?",
-        "sub": "Free, with a young person from the neighbourhood. You meet first.",
+        "sub": "Free, with someone from the neighbourhood. You meet first.",
         "goal": "Supply: reach owners and their families in the neighbourhood.",
-        "caption": "Hello neighbours! Do you know someone whose dog could use an extra walk? For example because walking is a bit harder, after surgery, or because the days are long.\n\nThrough {app}, a young person (18+) from the neighbourhood takes the dog for a regular walk, for free. The first time you always meet together, and you decide what is allowed. {app} never asks for money.\n\nNo smartphone? A family member or neighbour can sign the dog up for you, with your consent: {link}",
+        "caption": "Hello neighbours! Do you know someone whose dog could use an extra walk? For example because walking is a bit harder, after surgery, or because the days are long.\n\nThrough {app}, someone from the neighbourhood (18+) takes the dog for a regular walk, for free. The first time you always meet together, and you decide what is allowed. {app} never asks for money.\n\nNo smartphone? A family member or neighbour can sign the dog up for you, with your consent: {link}",
         "visual": "The image, or a photo of the printed flyer for owners. Ask the group admin first whether you may share this."
       },
       "p04": {
         "title": "No dog of your own? Fancy going outside?",
         "sub": "Take a regular walk with a dog from your neighbourhood, for free",
-        "goal": "Demand: recruit walkers aged 18 to 30, in a city that already has dogs.",
-        "caption": "Love dogs, but there is no room for one in your life (yet)? With {app} you take a regular walk with a dog from your neighbourhood for free, for example the dog of someone who can no longer walk far.\n\nHow it goes:\n1. You make a profile (18+) and do a short safety quiz\n2. You meet the owner together first\n3. After that it is your regular walk\n\nWalking together can do your day good, and for the dog it is a treat. Link in bio.\n\n#studentlife #dogs #walking #outdoors",
+        "goal": "Demand: recruit walkers aged 18 and over, in a city that already has dogs.",
+        "caption": "Love dogs, but there is no room for one in your life (yet)? With {app} you take a regular walk with a dog from your neighbourhood for free, for example the dog of someone who can no longer walk far.\n\nHow it goes:\n1. You make a profile (18+) and do a short safety quiz\n2. You meet the owner together first\n3. After that it is your regular walk\n\nWalking together can do your day good, and for the dog it is a treat. Link in bio.\n\n#volunteering #dogs #walking #outdoors",
         "visual": "The image as the first slide, then the three steps as separate slides."
       },
       "p05": {
@@ -3441,9 +3441,9 @@
       },
       "p06": {
         "title": "Wanted: the first shelter",
-        "sub": "For guided group walks with young volunteers, for free",
+        "sub": "For guided group walks with volunteers, for free",
         "goal": "Partners: find a shelter, welfare organisation or university for the first pilot.",
-        "caption": "I am building {app}: a free platform that connects young adults (18–30) with dogs that could use an extra walk. Dogs of older or ill neighbours, and shelter dogs in guided group walks.\n\nWhere it stands, honestly: the platform is live and the safety steps are in place (meeting together first, ID seen in person, consent per dog, a short quiz). There are no real pairs walking yet.\n\nWhat I am looking for:\n• an animal shelter that wants to try it with a few starter dogs\n• a welfare organisation or neighbourhood team that knows older dog owners\n• a lecturer or researcher who wants to help think about a simple measurement\n\nDo you know someone? An introduction or a comment helps a lot. {link}\n\n#volunteering #animalwelfare #community #socialimpact",
+        "caption": "I am building {app}: a free platform that connects people aged 18 and over with dogs that could use an extra walk. Dogs of older or ill neighbours, and shelter dogs in guided group walks.\n\nWhere it stands, honestly: the platform is live and the safety steps are in place (meeting together first, ID seen in person, consent per dog, a short quiz). There are no real pairs walking yet.\n\nWhat I am looking for:\n• an animal shelter that wants to try it with a few starter dogs\n• a welfare organisation or neighbourhood team that knows older dog owners\n• a lecturer or researcher who wants to help think about a simple measurement\n\nDo you know someone? An introduction or a comment helps a lot. {link}\n\n#volunteering #animalwelfare #community #socialimpact",
         "visual": "The image with the post. Do not tag organisations without them knowing."
       },
       "p07": {
@@ -3457,7 +3457,7 @@
         "title": "For the dog of your grandma, your neighbour or your mum",
         "sub": "Sign up a dog, also for someone else (with consent)",
         "goal": "Supply through family: people who do not use the app themselves can still join.",
-        "caption": "Does your mum, grandma or neighbour have a dog that would like to go out more often? With {app}, a young person from the neighbourhood takes that dog for a regular walk, for free.\n\nThe owner does not need to use an app: you can sign the dog up, with consent. The first meeting is always together, and {app} never asks for money. {link}",
+        "caption": "Does your mum, grandma or neighbour have a dog that would like to go out more often? With {app}, someone from the neighbourhood takes that dog for a regular walk, for free.\n\nThe owner does not need to use an app: you can sign the dog up, with consent. The first meeting is always together, and {app} never asks for money. {link}",
         "visual": "The image with two drawn dogs. Ask the group admin first whether you may share this."
       },
       "p09": {
@@ -3546,7 +3546,7 @@
       },
       "flyerWalker": {
         "title": "Flyer for walkers",
-        "how": "Put it up at the university, the library or in a student house, preferably in a city that already has dogs. It works best around exams."
+        "how": "Put it up at the library, the community centre, the supermarket or the university, preferably in a city that already has dogs. At a university it works best around exams."
       },
       "poster": {
         "title": "Poster for a shelter",

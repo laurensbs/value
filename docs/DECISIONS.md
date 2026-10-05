@@ -18,9 +18,9 @@ De velden in `PROMPT.md` waren niet ingevuld, dus ik gebruik de voorbeeldwaarden
 
 | # | Keuze | Waarom |
 |---|---|---|
-| 1 | Het idee wordt **honden + jongeren**, uitgebreid met oudere eigenaren | Hoogste score (4,15 tegenover 2,30 en 2,25), zie `STRATEGY.md` |
+| 1 | Het idee wordt **honden + jongeren**, uitgebreid met oudere eigenaren (sinds 5 okt 2026: wandelaars zijn iedereen vanaf 18 jaar, zie keuze 3) | Hoogste score (4,15 tegenover 2,30 en 2,25), zie `STRATEGY.md` |
 | 2 | Naam: **Rondje** | Gewoon Nederlands ("even een rondje lopen"), kort, warm en niet klinisch. Domein en merk nog niet gecontroleerd: dat is een actie voor jou. |
-| 3 | Wandelaars vanaf **18 jaar** | Alle vergelijkbare diensten werken met 18+ of met volwassen begeleiding. Onder de 18 verwijst de app door naar opvangen met jeugdplekken en naar de Kindertelefoon. |
+| 3 | Wandelaars vanaf **18 jaar**, **zonder bovengrens** (bijgewerkt 5 okt 2026, besluit Laurens; eerst richtte de tekst zich op 18–30) | Alle vergelijkbare diensten werken met 18+ of met volwassen begeleiding. Iedereen vanaf 18 kan wandelen: studenten, werkenden en gepensioneerden. Teksten zeggen daarom "mensen vanaf 18 jaar" of gewoon "wandelaars", niet "jongvolwassenen" of "18–30". Cijfers over jongvolwassenen (zoals de GGD-monitor) blijven staan waar ze kloppen. Onder de 18 verwijst de app door naar opvangen met jeugdplekken en naar de Kindertelefoon. |
 | 4 | **Eerste keer altijd samen** met de eigenaar of de opvang | Zo doen BorrowMyDoggy en OOPOEH het ook. Dit verlaagt het risico voor beide kanten. |
 | 5 | Check-ins blijven **alleen op het apparaat** | Stemming telt als gezondheidsgegeven. Zonder server is er geen datalek-risico, en een DPIA is pas nodig als data wél gedeeld wordt. |
 | 6 | **Chat per aanvraag, geen AI** (eerst: geen chat) | Sinds oktober 2026 is er een chat per aanvraag, zodat niemand een telefoonnummer hoeft te delen vóór de kennismaking. Gaat een bericht over geld of staat er een link in, dan ziet de ontvanger een waarschuwing en kan die het melden. Beheer ziet alleen wie en hoe vaak, nooit de tekst. Chats gaan na een jaar weg. Geen AI-chat over welzijn (onderzoek van de Autoriteit Persoonsgegevens, AI Act). |

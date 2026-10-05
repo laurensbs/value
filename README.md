@@ -1,6 +1,6 @@
 # Rondje
 
-Rondje koppelt jongvolwassenen (18–30) aan honden die een extra wandeling goed kunnen gebruiken. Het gaat vooral om honden van oudere of zieke buurtgenoten die zelf niet ver meer kunnen lopen, en daarnaast om honden uit de opvang. Gratis, veilig, en goed voor allebei.
+Rondje koppelt mensen vanaf 18 jaar aan honden die een extra wandeling goed kunnen gebruiken. Het gaat vooral om honden van oudere of zieke buurtgenoten die zelf niet ver meer kunnen lopen, en daarnaast om honden uit de opvang. Wandelen kan iedereen vanaf 18, zonder bovengrens: student, werkende of gepensioneerde. Gratis, veilig, en goed voor allebei.
 
 **Live (website en app):** https://rondjemee.nl · **Zo start je:** [`docs/LAUNCH.md`](docs/LAUNCH.md)
 
@@ -10,7 +10,7 @@ Eerste prototype (privé): https://claude.ai/artifact/V3UNzZhwMgq3rVwSJzZuFw
 
 Drie ideeën zijn onderzocht en gescoord: honden + jongeren, een mentale-gezondheidsapp, en alles-in-één nieuws + aandelen. Rondje scoorde het hoogst (4,15 van 5):
 
-- Het probleem is groot: 23% van de 16–25-jarigen is sterk eenzaam.
+- Het probleem is groot: bijna 10% van de Nederlanders van 15 jaar en ouder voelt zich sterk eenzaam (CBS, 2024); de GGD-monitor, die anders meet, komt bij 16–25-jarigen op 23%.
 - Er is geen directe concurrent in Nederland.
 - Er bestaat een bewezen financieringsmodel (OOPOEH).
 - Het is de beste content voor TikTok en Instagram.

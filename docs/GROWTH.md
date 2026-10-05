@@ -7,7 +7,7 @@ Fase 5 van [`PROMPT.md`](../PROMPT.md). Dit zijn concepten: er is nog niets gepo
 - **"Dagje uit"- en "eerste wandeling"-video's van honden halen miljoenen views.** "Dog for the Day" haalde 2,7 miljoen. Dierentehuis Den Bosch haalde bijna 1 miljoen met de honden die het langst wachtten, en Nala werd binnen een paar dagen geadopteerd. Zie [`research/honden-jongeren.md`](research/honden-jongeren.md).
 - **Honden in video's lijken adopteerbaarder.** Buitenbeelden en oogcontact helpen.
 - **Instagram beloont sinds april 2026 originele content**, en straft accounts die vooral content van anderen herposten. Eigen beelden zijn dus een voordeel.
-- **Rondje heeft drie soorten verhalen tegelijk:** een hond, een jongere en een oudere buurtgenoot. Dat is warm, herkenbaar en deelbaar ("tag je oma").
+- **Rondje heeft drie soorten verhalen tegelijk:** een hond, een wandelaar (een student, een thuiswerker of een gepensioneerde) en een oudere buurtgenoot. Dat is warm, herkenbaar en deelbaar ("tag je oma").
 
 ## Spelregels
 
@@ -56,7 +56,7 @@ Alle 10 werken zonder jouw gezicht in beeld.
 | Tijd | Beeld | Voice-over / tekst |
 |---|---|---|
 | 0–2 s | Schermopname van de app: de lijst met hondentekeningen scrolt omhoog | Tekst: **"Week 1: ik bouw een gratis app zodat oma's hond weer naar buiten kan."** |
-| 2–10 s | Eigen foto van een riem aan een haakje | "Veel ouderen kunnen hun hond niet meer uitlaten. En bijna een kwart van de jongeren voelt zich sterk eenzaam." |
+| 2–10 s | Eigen foto van een riem aan een haakje | "Veel ouderen kunnen hun hond niet meer uitlaten. En bijna 1 op de 10 Nederlanders voelt zich sterk eenzaam." |
 | 10–20 s | De app: tik op Saar, het verhaal van Ans opent | "Dus ik bouw Rondje. Jij loopt een vast rondje met een hond uit je buurt. Gratis, en de eerste keer altijd samen met de eigenaar." |
 | 20–30 s | Code en schetsen, snel achter elkaar | "Wat ik deze week leerde: opvangen zitten niet vol met honden, zoals ik dacht. De honden zitten vooral bij mensen thuis." |
 | 30–40 s | Terug naar de app: het scherm "Ken je een hond die vaker naar buiten wil?" | "Vraag aan jou: ken jij iemand wiens hond vaker naar buiten zou willen? Vertel het in de reacties." |
