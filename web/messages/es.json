@@ -133,8 +133,9 @@
       "eyebrow": "Recaudación",
       "title": "¡Ayúdanos!",
       "lede": "{app} es gratis y lo seguirá siendo. Con tu paseo, la app llega a la App Store y a Google Play, y el primer año queda pagado.",
+      "ledeApp": "Con tu ayuda, {app} sigue siendo gratis y el primer año queda pagado.",
       "rounds": "{n, plural, =0 {Objetivo: {total} paseos} one {# de {total} paseos} other {# de {total} paseos}}",
-      "give": "Regala un paseo",
+      "give": "Ayúdanos",
       "join": "o regístrate",
       "note": "A través de {platform}, para {operator}, que crea {app}.",
       "more": "Adónde va el dinero",
@@ -1774,7 +1775,7 @@
       },
       "appVia": {
         "q": "¿Puedo ayudar también desde la app?",
-        "a": "Sí. Al final de tu perfil en la app está ‘Ayúdanos en {platform}’. Ese botón abre {platform} en tu navegador. Dentro de la app nunca pagas nada: allí todo gira en torno a pasear."
+        "a": "{apps, select, ios {Sí, en la app para iPhone.} android {Sí, en la app para Android.} other {Sí.}} Al final de tu perfil en la app está ‘Ayúdanos vía {platform}’. Ese botón abre {platform} en tu navegador. Dentro de la app nunca pagas nada: allí todo gira en torno a pasear."
       },
       "share": {
         "q": "¿Vosotros también donáis a causas solidarias?"
@@ -1792,8 +1793,9 @@
     "oncePill": "Una vez",
     "onceTitle": "Súmate al crowdfunding",
     "onceText": "¿Prefieres dar una sola vez? Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
-    "onceGive": "Regala un paseo en {platform}",
+    "onceGive": "Ayúdanos vía {platform}",
     "progress": "{raised} de {goal} recaudados",
+    "goalRounds": "Objetivo: {total, plural, one {# paseo} other {# paseos}}",
     "progressUpdated": "Actualizado el {date}. El importe actual está en {platform}.",
     "platformNote": "Pagas a través de {platform}, según sus condiciones.",
     "newTab": "(se abre en una pestaña nueva)",
@@ -1814,9 +1816,10 @@
     "whyLink": "Lee por qué"
   },
   "helpApp": {
-    "label": "Ayúdanos en {platform}",
-    "text": "Regala un paseo desde {round} · {raised} de {goal}",
-    "textShort": "Regala un paseo desde {round}",
+    "label": "Ayúdanos vía {platform}",
+    "from": "Desde {round}",
+    "raised": "{raised} de {goal}",
+    "goal": "Objetivo: {total, plural, one {# paseo} other {# paseos}}",
     "opens": "abre {platform} en tu navegador"
   },
   "about": {
@@ -1857,7 +1860,7 @@
     "contactTitle": "Contacto",
     "contact": "¿Preguntas o ideas? En la página de ayuda verás cómo contactarnos. ¿Se trata de una persona o un perro? Usa el botón de denuncia en su página.",
     "contactEmail": "¿Preguntas, ideas o quieres colaborar? Escríbenos:",
-    "campaign": "Mi historia también está en {platform}, donde puedes regalar un paseo."
+    "campaign": "Mi historia también está en {platform}, donde puedes ayudarnos."
   },
   "poster": {
     "title": "Cartel para vuestra protectora",

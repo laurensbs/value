@@ -5,7 +5,7 @@ import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { SupportButton } from '@/components/SupportButton'
 import { APP_NAME } from '@/lib/site'
-import { campaign, supportConfig, supportInApp } from '@/lib/support'
+import { campaign, roundsFor, showsRaised, supportConfig, supportInApp, supportInBothApps } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
 import crowdfunding from '../../../content/crowdfunding.json'
@@ -29,6 +29,8 @@ export default async function SupportPage() {
   const native = await isNativeRequest()
   const cfg = supportConfig()
   const drive = campaign(crowdfunding)
+  // The amount raised once something came in; before that only the goal in rounds.
+  const raised = showsRaised(drive.progress) ? drive.progress : null
   const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const day = (d: string) => format.dateTime(new Date(d), { day: 'numeric', month: 'long', year: 'numeric' })
   const operator = cfg.operator ?? t('support.operatorUnknown')
@@ -36,8 +38,12 @@ export default async function SupportPage() {
   // Until there are real agreements, an honest intention instead of a promised share or names.
   const share =
     drive.shareToCausesPercent !== null ? t('support.shareSet', { percent: format.number(drive.shareToCausesPercent) }) : t('support.shareSoon', { app: APP_NAME })
-  // "Help ons via Whydonate" in the apps (HelpUsInApp): the question about the app says where to find it.
-  const appFaq = cfg.crowdfundingUrl && supportInApp() ? ('appVia' as const) : ('app' as const)
+  // "Help ons via Whydonate" in the apps (HelpUsInApp): the question about the app says where to find
+  // it, and in which app when the switch is off for the other one (SUPPORT_IN_APP_IOS / _ANDROID).
+  const inIos = supportInApp(process.env, 'ios')
+  const inAndroid = supportInApp(process.env, 'android')
+  const appFaq = cfg.crowdfundingUrl && (inIos || inAndroid) ? ('appVia' as const) : ('app' as const)
+  const apps = supportInBothApps() ? 'both' : inIos ? 'ios' : 'android'
   const faq = native
     ? (['free', 'sponsors'] as const)
     : ([...(['free', 'where', 'tax', 'perks', appFaq, 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
@@ -125,7 +131,7 @@ export default async function SupportPage() {
                 <span className="pill ball">{t('support.oncePill')}</span>
                 <h3 id="once-title">{t('support.onceTitle')}</h3>
                 <p className="muted">{t('support.onceText', { app: APP_NAME })}</p>
-                {drive.progress ? (
+                {raised ? (
                   <div className="stack-s">
                     <div
                       className="lp-progress im-progress"
@@ -133,16 +139,20 @@ export default async function SupportPage() {
                       aria-labelledby="once-title"
                       aria-valuemin={0}
                       aria-valuemax={100}
-                      aria-valuenow={drive.progress.percent}
-                      aria-valuetext={t('support.progress', { raised: euro(drive.progress.raised), goal: euro(drive.progress.goal) })}
+                      aria-valuenow={raised.percent}
+                      aria-valuetext={t('support.progress', { raised: euro(raised.raised), goal: euro(raised.goal) })}
                     >
-                      <span style={{ width: `${Math.max(drive.progress.percent, drive.progress.raised > 0 ? 3 : 0)}%` }} />
+                      <span style={{ width: `${Math.max(raised.percent, 3)}%` }} />
                     </div>
                     <p className="im-progress-numbers">
-                      <strong>{t('support.progress', { raised: euro(drive.progress.raised), goal: euro(drive.progress.goal) })}</strong>
+                      <strong>{t('support.progress', { raised: euro(raised.raised), goal: euro(raised.goal) })}</strong>
                       {drive.updated ? <span className="muted small">{t('support.progressUpdated', { date: day(drive.updated), platform: cfg.crowdfundingPlatform ?? '' })}</span> : null}
                     </p>
                   </div>
+                ) : drive.progress ? (
+                  <p className="im-progress-numbers">
+                    <strong>{t('support.goalRounds', { total: roundsFor(drive.progress.goal) })}</strong>
+                  </p>
                 ) : null}
                 <div>
                   {/* Straight to the campaign in a new tab; the arrow says it leaves the site. */}
@@ -256,7 +266,7 @@ export default async function SupportPage() {
             <summary>
               <strong>{t(`support.faq.${k}.q`, { app: APP_NAME })}</strong>
             </summary>
-            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME, platform: cfg.crowdfundingPlatform ?? '' })}</p>
+            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME, platform: cfg.crowdfundingPlatform ?? '', apps })}</p>
           </details>
         ))}
       </section>

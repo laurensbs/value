@@ -133,6 +133,7 @@
       "eyebrow": "Inzameling",
       "title": "Help ons!",
       "lede": "{app} is gratis en blijft dat. Met jouw rondje komt de app in de App Store en Google Play, en is het eerste jaar betaald.",
+      "ledeApp": "Met jouw rondje blijft {app} gratis en is het eerste jaar betaald.",
       "rounds": "{n, plural, =0 {Doel: {total} rondjes} one {# van de {total} rondjes} other {# van de {total} rondjes}}",
       "give": "Geef een rondje",
       "join": "of meld je aan",
@@ -1774,7 +1775,7 @@
       },
       "appVia": {
         "q": "Kan ik ook vanuit de app helpen?",
-        "a": "Ja. Onderaan je profiel in de app staat ‘Help ons via {platform}’. Die knop opent {platform} in je browser. In de app zelf betaal je nooit iets: daar draait alles om wandelen."
+        "a": "{apps, select, ios {Ja, in de iPhone-app.} android {Ja, in de Android-app.} other {Ja.}} Onderaan je profiel in de app staat ‘Help ons via {platform}’. Die knop opent {platform} in je browser. In de app zelf betaal je nooit iets: daar draait alles om wandelen."
       },
       "share": {
         "q": "Geven jullie zelf ook aan goede doelen?"
@@ -1794,6 +1795,7 @@
     "onceText": "Liever één keer iets geven? Met de crowdfunding betalen we de eenmalige kosten, zoals de apps in de App Store en Google Play, de juridische check en flyers voor opvangen.",
     "onceGive": "Geef een rondje via {platform}",
     "progress": "{raised} van {goal} opgehaald",
+    "goalRounds": "Doel: {total, plural, one {# rondje} other {# rondjes}}",
     "progressUpdated": "Bijgewerkt op {date}. Het actuele bedrag staat op {platform}.",
     "platformNote": "Je betaalt via {platform}, onder hun voorwaarden.",
     "newTab": "(opent in een nieuw tabblad)",
@@ -1815,8 +1817,9 @@
   },
   "helpApp": {
     "label": "Help ons via {platform}",
-    "text": "Geef een rondje vanaf {round} · {raised} van {goal}",
-    "textShort": "Geef een rondje vanaf {round}",
+    "from": "Geef een rondje vanaf {round}",
+    "raised": "{raised} van {goal}",
+    "goal": "Doel: {total, plural, one {# rondje} other {# rondjes}}",
     "opens": "opent {platform} in je browser"
   },
   "about": {

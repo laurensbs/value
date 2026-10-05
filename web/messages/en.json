@@ -132,9 +132,10 @@
     "helpUs": {
       "eyebrow": "Fundraiser",
       "title": "Help us!",
-      "lede": "{app} is free and will stay free. Your round helps get the app into the App Store and Google Play, and pays for the first year.",
+      "lede": "{app} is free and will stay free. Your support helps get the app into the App Store and Google Play, and pays for the first year.",
+      "ledeApp": "Your support keeps {app} free and pays for the first year.",
       "rounds": "{n, plural, =0 {Goal: {total} rounds} one {# of {total} rounds} other {# of {total} rounds}}",
-      "give": "Buy a round",
+      "give": "Support us",
       "join": "or sign up",
       "note": "Through {platform}, to {operator}, who builds {app}.",
       "more": "Where the money goes",
@@ -1774,7 +1775,7 @@
       },
       "appVia": {
         "q": "Can I help from the app too?",
-        "a": "Yes. At the bottom of your profile in the app you will find ‘Help us via {platform}’. That button opens {platform} in your browser. You never pay inside the app itself: there, everything is about walking."
+        "a": "{apps, select, ios {Yes, in the iPhone app.} android {Yes, in the Android app.} other {Yes.}} At the bottom of your profile in the app you will find ‘Support us via {platform}’. That button opens {platform} in your browser. You never pay inside the app itself: there, everything is about walking."
       },
       "share": {
         "q": "Do you give to good causes yourselves?"
@@ -1792,8 +1793,9 @@
     "oncePill": "One-off",
     "onceTitle": "Join the crowdfunding",
     "onceText": "Rather give once? The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
-    "onceGive": "Buy a round via {platform}",
+    "onceGive": "Support us via {platform}",
     "progress": "{raised} of {goal} raised",
+    "goalRounds": "Goal: {total, plural, one {# round} other {# rounds}}",
     "progressUpdated": "Updated on {date}. The current amount is on {platform}.",
     "platformNote": "You pay through {platform}, under their terms.",
     "newTab": "(opens in a new tab)",
@@ -1814,9 +1816,10 @@
     "whyLink": "Read why"
   },
   "helpApp": {
-    "label": "Help us via {platform}",
-    "text": "Buy a round from {round} · {raised} of {goal}",
-    "textShort": "Buy a round from {round}",
+    "label": "Support us via {platform}",
+    "from": "From {round}",
+    "raised": "{raised} of {goal}",
+    "goal": "Goal: {total, plural, one {# round} other {# rounds}}",
     "opens": "opens {platform} in your browser"
   },
   "about": {
@@ -1857,7 +1860,7 @@
     "contactTitle": "Contact",
     "contact": "Questions or ideas? The help page explains how to reach us. Is it about a person or a dog? Use the report button on their page.",
     "contactEmail": "Questions, ideas or want to work together? Email us:",
-    "campaign": "My story is also on {platform}, where you can buy a round."
+    "campaign": "My story is also on {platform}, where you can support us."
   },
   "poster": {
     "title": "Poster for your shelter",

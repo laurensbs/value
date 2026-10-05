@@ -133,8 +133,9 @@
       "eyebrow": "Collecte",
       "title": "Aidez-nous !",
       "lede": "{app} est gratuit et le restera. Avec votre balade, l’app arrive sur l’App Store et Google Play, et la première année est payée.",
+      "ledeApp": "Avec votre aide, {app} reste gratuit et la première année est payée.",
       "rounds": "{n, plural, =0 {Objectif : {total} balades} one {# balade sur {total}} other {# balades sur {total}}}",
-      "give": "Offrez une balade",
+      "give": "Aidez-nous",
       "join": "ou inscrivez-vous",
       "note": "Via {platform}, à {operator}, qui crée {app}.",
       "more": "Où va l’argent",
@@ -1774,7 +1775,7 @@
       },
       "appVia": {
         "q": "Puis-je aussi aider depuis l’appli ?",
-        "a": "Oui. En bas de votre profil dans l’appli, vous trouverez « Aidez-nous via {platform} ». Ce bouton ouvre {platform} dans votre navigateur. Dans l’appli elle-même, vous ne payez jamais rien : tout y tourne autour de la promenade."
+        "a": "{apps, select, ios {Oui, dans l’appli iPhone.} android {Oui, dans l’appli Android.} other {Oui.}} En bas de votre profil dans l’appli, vous trouverez « Aidez-nous via {platform} ». Ce bouton ouvre {platform} dans votre navigateur. Dans l’appli elle-même, vous ne payez jamais rien : tout y tourne autour de la promenade."
       },
       "share": {
         "q": "Donnez-vous vous-mêmes à de bonnes causes ?"
@@ -1792,8 +1793,9 @@
     "oncePill": "Ponctuel",
     "onceTitle": "Participer au financement participatif",
     "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
-    "onceGive": "Offrez une balade via {platform}",
+    "onceGive": "Aidez-nous via {platform}",
     "progress": "{raised} récoltés sur {goal}",
+    "goalRounds": "Objectif : {total, plural, one {# balade} other {# balades}}",
     "progressUpdated": "Mis à jour le {date}. Le montant actuel figure sur {platform}.",
     "platformNote": "Vous payez via {platform}, selon leurs conditions.",
     "newTab": "(s’ouvre dans un nouvel onglet)",
@@ -1815,8 +1817,9 @@
   },
   "helpApp": {
     "label": "Aidez-nous via {platform}",
-    "text": "Offrez une balade dès {round} · {raised} sur {goal}",
-    "textShort": "Offrez une balade dès {round}",
+    "from": "Dès {round}",
+    "raised": "{raised} sur {goal}",
+    "goal": "Objectif : {total, plural, one {# balade} other {# balades}}",
     "opens": "ouvre {platform} dans votre navigateur"
   },
   "about": {
@@ -1857,7 +1860,7 @@
     "contactTitle": "Contact",
     "contact": "Des questions ou des idées ? La page d'aide explique comment nous joindre. Il s'agit d'une personne ou d'un chien ? Utilisez le bouton de signalement sur sa page.",
     "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :",
-    "campaign": "Mon histoire est aussi sur {platform}, où vous pouvez offrir une balade."
+    "campaign": "Mon histoire est aussi sur {platform}, où vous pouvez nous aider."
   },
   "poster": {
     "title": "Affiche pour votre refuge",

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import crowdfunding from '../content/crowdfunding.json'
-import { campaign } from '../src/lib/support'
+import { campaign, roundsFor, showsRaised } from '../src/lib/support'
 import { newPerson, shot } from './helpers'
 
 const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp'
@@ -49,6 +49,8 @@ test('support page: monthly support, open about money, and an honest promise abo
   // The apps have "Help ons via Whydonate" (e2e/help-app.spec.ts): the question says where it is.
   await expect(page.getByText('Kan ik ook vanuit de app helpen?')).toBeVisible()
   await expect(page.getByText('Waarom kan ik niet steunen in de app?')).toHaveCount(0)
+  // Both apps have it while no per-app switch is off, so the answer names no app.
+  await expect(page.getByText(/^Ja\. Onderaan je profiel in de app staat ‘Help ons via Whydonate’/)).toBeAttached()
   const monthly = page.getByRole('link', { name: /Steun Rondje Mee via/ })
   if (await monthly.count()) {
     await expect(monthly).toHaveAttribute('href', /patreon\.com/)
@@ -59,7 +61,11 @@ test('support page: monthly support, open about money, and an honest promise abo
     await expect(give).toHaveAttribute('target', '_blank')
     await expect(give).toHaveAttribute('rel', /noopener/)
     await expect(give).toHaveAccessibleName(/opent in een nieuw tabblad/)
-    await expect(page.getByRole('progressbar')).toHaveCount(campaign(crowdfunding).progress ? 1 : 0)
+    // The amount raised once something came in; before that only the goal in rounds.
+    const { progress } = campaign(crowdfunding)
+    await expect(page.getByRole('progressbar')).toHaveCount(showsRaised(progress) ? 1 : 0)
+    if (progress && !showsRaised(progress)) await expect(page.locator('#crowdfunding').getByText(`Doel: ${roundsFor(progress.goal)} rondjes`)).toBeVisible()
+    await expect(page.locator('#crowdfunding')).not.toContainText(/€\s?0 van/)
   }
   await shot(page, '41-support')
   await context.close()

@@ -1,35 +1,40 @@
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { appSupport, ROUND_EUR } from '@/lib/support'
+import { requestPlatform } from '@/server/native'
 import crowdfunding from '../../content/crowdfunding.json'
 import { Icon } from './Icon'
 
 /**
- * "Help ons via Whydonate" in the iOS and Android apps (Laurens, 5 okt 2026): one row low on the
- * profile and one link in the footer, never at the top, and one tap goes straight to the campaign.
+ * "Help ons via Whydonate" in the iOS and Android apps (Laurens, 5 okt 2026): one row at the bottom of
+ * the profile and one link in the footer, never at the top, and one tap goes straight to the campaign.
  *
  * Nothing is paid inside the app. The link is a plain link to another site with target="_blank":
  * the Capacitor shell hands every link outside rondjemee.nl to Safari or the phone's browser
  * (WebViewDelegationHandler on iOS, Bridge.launchIntent on Android), never to an in-app webview.
  *
  * Shown only in the apps (`native`), while there is a campaign with a named recipient
- * (CROWDFUNDING_URL + OPERATOR_NAME), and not when the server switches it off (SUPPORT_IN_APP=0).
+ * (CROWDFUNDING_URL + OPERATOR_NAME), and while the switch for this app is on (SUPPORT_IN_APP, or
+ * SUPPORT_IN_APP_IOS / SUPPORT_IN_APP_ANDROID: lib/support.ts).
  */
 export async function inAppHelp(native: boolean) {
   if (!native) return null
-  const t = await getTranslations('helpApp')
-  const help = appSupport(process.env, crowdfunding, (platform) => t('label', { platform }))
+  const [t, app] = await Promise.all([getTranslations('helpApp'), requestPlatform()])
+  const help = appSupport(process.env, crowdfunding, (platform) => t('label', { platform }), app)
   if (!help?.inApp) return null
   const format = await getFormatter()
   const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
-  const round = euro(ROUND_EUR)
+  // No countdown and no "nog maar": the amount raised next to the goal once something came in,
+  // before that only the goal in rounds (lib/support.ts, showsRaised).
+  const progress =
+    help.goal !== null && help.raised !== null && help.rounds
+      ? help.raised > 0
+        ? t('raised', { raised: euro(help.raised), goal: euro(help.goal) })
+        : t('goal', { total: help.rounds.goal })
+      : null
   return {
     url: help.crowdfundingUrl,
     label: help.label,
-    // No countdown and no "nog maar": the amount raised next to the goal, that is all.
-    text:
-      help.goal !== null && help.raised !== null
-        ? t('text', { round, raised: euro(help.raised), goal: euro(help.goal) })
-        : t('textShort', { round }),
+    text: [t('from', { round: euro(ROUND_EUR) }), progress].filter(Boolean).join(' · '),
     opens: t('opens', { platform: help.platform }),
   }
 }
