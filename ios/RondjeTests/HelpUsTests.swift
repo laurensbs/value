@@ -29,14 +29,35 @@ struct HelpUsTests {
         #expect(HelpUsLink(try config(#"{"support":null}"#).support) == nil)
     }
 
+    /// `support` exactly as the website sends it (appSupport() in web/src/lib/support.ts, branch
+    /// claude/help-ons-app): the extra fields (label, platform, operator, rounds, share) are ignored.
+    private static func server(inApp: Bool, goal: String = "3000", raised: String = "120") -> String {
+        #"{"apiVersion":1,"membership":{"inApp":false,"path":"/support"},"support":{"inApp":\#(inApp),"label":"Help ons via Whydonate","crowdfundingUrl":"\#(campaign)","platform":"Whydonate","operator":"Laurens Bos","goal":\#(goal),"raised":\#(raised),"rounds":{"goal":600,"raised":24},"shareToCausesPercent":10},"auth":{"providers":["apple","google"],"appleNative":true}}"#
+    }
+
     @Test func showsTheCampaignWhenTheServerAllowsIt() throws {
-        let both = try config(#"{"auth":{"providers":["apple","google"],"appleNative":true},"support":{"inApp":true,"crowdfundingUrl":"https://whydonate.com/nl/fundraising/rondjemee","crowdfundingPlatform":"Whydonate","goal":3000,"raised":120}}"#)
+        let both = try config(Self.server(inApp: true))
         let row = try #require(HelpUsLink(both.support))
         #expect(row.url.absoluteString == Self.campaign)
         #expect(row.platform == "Whydonate")
         #expect(row.progress?.goal == 3000)
         #expect(row.progress?.raised == 120)
         #expect(both.auth?.providers == ["apple", "google"])
+    }
+
+    @Test func noNumbersYetMeansNoProgress() throws {
+        // The website sends null while content/crowdfunding.json has no goal.
+        let row = try #require(HelpUsLink(try config(Self.server(inApp: true, goal: "null", raised: "null")).support))
+        #expect(row.progress == nil)
+    }
+
+    @Test func supportInAppZeroHidesTheRow() throws {
+        // SUPPORT_IN_APP=0 on the server: the block is there, the row is not.
+        let off = try config(Self.server(inApp: false))
+        #expect(off.support != nil)
+        #expect(off.support?.inApp == false)
+        #expect(HelpUsLink(off.support) == nil)
+        #expect(off.auth?.appleNative == true)
     }
 
     @Test func readsTheNumbersFlatOrNested() throws {
@@ -141,12 +162,16 @@ struct HelpUsTests {
 
     // MARK: The copy
 
-    private static let rowKeys = ["Help ons via %@", "Opent %@ in je browser", "Geef een rondje vanaf %@", "Geef een rondje vanaf %@ · %@ van %@ opgehaald"]
+    private static let rowKeys = ["Help ons via %@", "Opent %@ in je browser", "Geef een rondje vanaf %@", "Geef een rondje vanaf %@ · %@ van %@"]
 
     /// No membership, no tax deduction (Rondje has no ANBI status), no pressure, no health claims.
     private static func breaksTheRules(_ text: String) -> Bool {
         let words = #"\b(lid|leden|lidmaatschap|aftrekbaar|members?|membership|tax|membres?|adhésion|déductible|socios?|deducible|nu|now|maintenant|ahora|vandaag|today|gezond|gezondheid|healthy|health|santé|salud)\b"#
-        return GuusLine.isBanned(text) || text.range(of: words, options: [.regularExpression, .caseInsensitive]) != nil
+        // A few of the countdown patterns from web/src/lib/banned-phrases.json: no "nog maar", no "only 3 left".
+        let countdown = #"\bnog (maar )?\d|laatste kans|\bonly \d|\b\d+ more\b|last chance|\bhurry\b|plus que \d|dernière chance|\bquedan? \d|última oportunidad"#
+        return GuusLine.isBanned(text)
+            || text.range(of: words, options: [.regularExpression, .caseInsensitive]) != nil
+            || text.range(of: countdown, options: [.regularExpression, .caseInsensitive]) != nil
     }
 
     @Test func theRowsCopyIsCalmInEveryLanguage() throws {

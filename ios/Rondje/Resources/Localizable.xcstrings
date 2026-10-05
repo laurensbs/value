@@ -7207,6 +7207,56 @@
         }
       }
     },
+    "Geef een rondje vanaf %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buy a round from %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regala un paseo desde %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offre une balade dès %@"
+          }
+        }
+      }
+    },
+    "Geef een rondje vanaf %@ · %@ van %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buy a round from %1$@ · %2$@ of %3$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regala un paseo desde %1$@ · %2$@ de %3$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offre une balade dès %1$@ · %2$@ sur %3$@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Geef een rondje vanaf %1$@ · %2$@ van %3$@"
+          }
+        }
+      }
+    },
     "Geef vertrouwen" : {
       "localizations" : {
         "en" : {
@@ -8281,6 +8331,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A déjà mordu. %@"
+          }
+        }
+      }
+    },
+    "Help ons via %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help us via %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayúdanos en %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide-nous via %@"
           }
         }
       }
@@ -15793,6 +15865,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir Réglages"
+          }
+        }
+      }
+    },
+    "Opent %@ in je browser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens %@ in your browser"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre %@ en tu navegador"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre %@ dans ton navigateur"
           }
         }
       }

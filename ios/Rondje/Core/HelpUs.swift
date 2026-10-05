@@ -106,12 +106,13 @@ struct HelpUsLink: Equatable, Sendable {
     /// For VoiceOver: the tap leaves the app.
     var hint: String { L("Opent \(platform) in je browser") }
 
-    /// "Geef een rondje vanaf €5", plus "· €120 van €3.000 opgehaald" when the server sends the numbers.
+    /// "Geef een rondje vanaf €5", plus "· €120 van €3.000" when the server sends the numbers. The same
+    /// words as the row in the website's app shell (helpApp in web/messages): no countdown, no "nog maar".
     func subtitle(locale: Locale = .current) -> String {
         let from = Self.euros(Self.smallestGift, locale: locale)
         guard let progress else { return L("Geef een rondje vanaf \(from)") }
         let raised = Self.euros(progress.raised, locale: locale), goal = Self.euros(progress.goal, locale: locale)
-        return L("Geef een rondje vanaf \(from) · \(raised) van \(goal) opgehaald")
+        return L("Geef een rondje vanaf \(from) · \(raised) van \(goal)")
     }
 
     /// Whole euros in the reader's own notation: "€ 3.000", "€3,000", "3 000 €".
