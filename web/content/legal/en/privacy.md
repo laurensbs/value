@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 description: "Which personal data we process, why and for how long, who sees it and what your rights are. Your exact address is never public."
-version: "0.5"
+version: "0.6"
 updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -118,9 +118,9 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 - **Where you live** is only shown rounded to about 500 metres. The other person only sees the exact address or meeting point after acceptance, and only if you enter it.
 - **Live location** can be off. When it is on, we only collect it during a walk alone with the dog: from the moment you start it as a walker, until you end it. Your phone will ask for permission. You can withdraw that permission in your phone's settings, but the live map will then not work.
 - At a first meeting and on a group walk, we never collect location: the owner or the shelter walks along.
-- When live location is on, the dog's owner or shelter sees a live map with the route during a walk alone with the dog. You see your own route.
-- If a walk alone with the dog runs well over the planned time, the owner or shelter receives an alert.
-- **Until the DPIA is finished** (see section 14), live location is off for everyone, and we can switch it off after that too. While it is off, we do not collect or store any location, and the owner or shelter sees no live map. A walk alone with the dog cannot be requested, accepted or started then; a first meeting can. Rondje Mee then tells you that live location is off.
+- When live location is on, the dog's owner sees a live map with the route during a walk alone with the dog. You see your own route.
+- If a walk runs well over the planned time, Rondje Mee sometimes sends an alert, but not always. So do not count on it.
+- **Until the DPIA is finished** (see section 14), live location is off for everyone, and we can switch it off after that too. While it is off, we do not collect or store any location, and the owner sees no live map. A walk alone with the dog cannot be requested, accepted or started then; a first meeting can. Rondje Mee then tells you that live location is off.
 - We delete route points after **30 days**. If there is an open incident report, we keep the route of that walk until the report has been closed.
 - We do not use location data for advertising or profiling, and we never sell it.
 
@@ -136,7 +136,7 @@ Where we rely on legitimate interest, we have weighed that interest against the 
 ## 7. Who can see your data?
 
 - **Owners and shelters** see the following about a walker who sends them a request: first name, photo, age group (for example 25-34 years), town, the year they joined Rondje Mee, experience with dogs, what they wrote about themselves and the message with the request. They also see what the walker did on Rondje Mee: the number of walks completed, how often an owner or shelter saw their ID in person, and whether they passed the safety quiz. They never see the full date of birth.
-- **Anyone with an account viewing a dog profile** sees the owner's first name, photo, town, what they wrote about themselves and their regular times, and the dog's location rounded to about 500 metres. **Without an account** you only see the dog, the town and that an owner lives nearby.
+- **Members of Rondje Mee** (signed in, with a finished profile and not suspended) see, on the page of a dog that belongs to an owner, the owner's first name, photo, town, what they wrote about themselves and their regular times, and the dog's location rounded to about 500 metres. **Anyone who is not a member** only sees the dog, the town and that there is an owner nearby.
 - **Once a request is accepted**, both sides also see each other's phone number and email address, and the walker sees the protected details that the owner has released for that purpose.
 - **Shelters** see the following about walkers who sign up for a group walk: first name, photo, age group and phone number, and whether the shelter has already seen their ID in person. The shelter also records attendance. If a shelter uses that data in its own volunteer records, the shelter is responsible for that itself.
 - **Private feedback** is never shown to the other person. Only a limited number of Rondje Mee team members can read it.

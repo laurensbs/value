@@ -1432,10 +1432,10 @@
     "level3": "Ensuite : demander des balades en autonomie aux propriétaires qui l’autorisent pour leur chien.",
     "level3Off": "Ensuite : des balades en autonomie avec les propriétaires qui l’autorisent pour leur chien. La localisation en direct est désactivée pour le moment, donc une balade seul ne démarre pas encore. Se promener ensemble reste possible.",
     "during": "Pendant la balade",
-    "duringText": "Votre téléphone partage votre position avec le propriétaire pendant toute la balade. Si elle dure plus longtemps que prévu, vous recevez tous les deux une notification. Le bouton d'aide vous montre tout de suite qui appeler.",
+    "duringText": "Si vous promenez le chien seul, votre téléphone partage votre position avec le propriétaire pendant toute la balade. Vous êtes en retard ? Prévenez le propriétaire : une notification de Rondje Mee n'arrive pas toujours. Le bouton d'aide vous montre tout de suite qui appeler.",
     "duringTextOff": "La localisation en direct est désactivée pour le moment, donc votre téléphone ne partage aucune position. D’ici là, vous vous promenez avec le propriétaire ou le refuge. Le bouton d'aide vous montre tout de suite qui appeler.",
     "after": "Après la balade",
-    "afterText": "Chacun donne son avis en privé. Si un chien est blessé ou stressé, ou si quelqu'un ne s'est pas senti en sécurité, notre équipe est prévenue immédiatement.",
+    "afterText": "Chacun donne son avis en privé. Si un chien est blessé ou stressé, ou si quelqu'un ne s'est pas senti en sécurité, cela parvient directement à notre équipe.",
     "fraud": "Fraude et abus",
     "fraudText": "Rondje Mee est gratuit : quiconque demande de l'argent se fait remarquer. Les messages contenant des demandes de paiement, des numéros de compte ou des liens sont marqués. Les refuges sont vérifiés grâce à leur numéro KvK, BCE/KBO ou CIF. Quiconque maltraite un chien ou une personne est bloqué et signalé aux autorités si nécessaire.",
     "liability": "Qui est responsable de quoi ?",
@@ -1812,6 +1812,10 @@
         "q": "Donnez-vous vous-mêmes à de bonnes causes ?"
       },
       "once": {
+        "q": "Puis-je aussi soutenir chaque mois ?",
+        "a": "Non, il n’y a pas de contribution mensuelle fixe pour l’instant. Vous pouvez soutenir {app} par un don unique via {platform}, du montant que vous voulez. L’argent va à {operator}, pour les frais de {app}.{percent, select, none {} other { Sur tous les dons, {operator} reverse {percent} % à de bonnes causes pour les chiens et les gens du quartier.}} Un don n’est pas déductible des impôts. Et vous n’avez rien à donner pour utiliser {app}."
+      },
+      "onceMonthly": {
         "q": "Quelle est la différence entre le soutien mensuel et le financement participatif ?",
         "a": "Une contribution mensuelle aide à couvrir les frais fixes, comme l’hébergement et les cartes. Le financement participatif est une campagne ponctuelle pour des frais ponctuels, comme les applis et la vérification juridique. Les deux vont à {operator}."
       }
@@ -1823,7 +1827,7 @@
     "monthlyText": "Une petite contribution régulière chaque mois couvre les frais fixes, comme l’hébergement et les cartes. Ainsi, {app} reste gratuit pour tout le monde.",
     "oncePill": "Ponctuel",
     "onceTitle": "Participer au financement participatif",
-    "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
+    "onceText": "Donnez une seule fois, le montant que vous voulez. Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
     "onceGive": "Aidez-nous via {platform}",
     "progress": "{raised} récoltés sur {goal}",
     "goalRounds": "Objectif : {goal}",

@@ -11,7 +11,8 @@ import { termsForApp } from '@/server/terms'
  * Who is signed in, their profile and their trust signals, and where they stand with the terms
  * (server/terms.ts termsForApp): `termsVersion`, `termsAccepted`, `termsEffectiveAt`, `termsRequired`
  * and `termsChanges` (only while they still have to agree; then the app shows the notice, and
- * POST /api/v1/terms/accept records the yes).
+ * POST /api/v1/terms/accept records the yes). `termsChanges` lists what changed since the version they
+ * agreed to: `items` for every version they skipped, newest first, and the same per version in `sections`.
  */
 export async function GET() {
   const viewer = await apiViewer()

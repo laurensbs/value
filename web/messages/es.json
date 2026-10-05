@@ -1432,10 +1432,10 @@
     "level3": "Después: pedir paseos por tu cuenta a los dueños que lo permitan para su perro.",
     "level3Off": "Después: paseos por tu cuenta con los dueños que lo permitan para su perro. La ubicación en directo está desactivada por ahora, así que un paseo a solas todavía no empieza. Pasear juntos sí es posible.",
     "during": "Durante el paseo",
-    "duringText": "Tu móvil comparte tu ubicación con el dueño mientras dura el paseo. Si se alarga, los dos recibís un aviso. Con el botón de ayuda ves al momento a quién llamar.",
+    "duringText": "Si paseas solo con el perro, tu móvil comparte tu ubicación con el dueño mientras dura el paseo. ¿Se alarga? Avisa al dueño: el aviso de Rondje Mee no siempre llega. Con el botón de ayuda ves al momento a quién llamar.",
     "duringTextOff": "La ubicación en directo está desactivada por ahora, así que tu móvil no comparte ninguna ubicación. Hasta entonces paseas junto al dueño o la protectora. Con el botón de ayuda ves al momento a quién llamar.",
     "after": "Después del paseo",
-    "afterText": "Ambas partes dan su opinión en privado. Si un perro acaba herido o estresado, o alguien no se ha sentido a salvo, nuestro equipo lo sabe al momento.",
+    "afterText": "Ambas partes dan su opinión en privado. Si un perro acaba herido o estresado, o alguien no se ha sentido a salvo, eso llega directamente a nuestro equipo.",
     "fraud": "Fraude y abusos",
     "fraudText": "Rondje Mee es gratis: quien pide dinero llama la atención. Los mensajes con solicitudes de pago, números de cuenta o enlaces se marcan. Las protectoras se verifican con su número KvK, KBO o CIF. Quien trate mal a un perro o a una persona será bloqueado y denunciado cuando corresponda.",
     "liability": "¿Quién es responsable de qué?",
@@ -1812,6 +1812,10 @@
         "q": "¿Vosotros también donáis a causas solidarias?"
       },
       "once": {
+        "q": "¿Puedo apoyar también cada mes?",
+        "a": "No, ahora no hay una aportación mensual fija. Puedes apoyar a {app} con un donativo único a través de {platform}, de la cantidad que quieras. El dinero va a {operator}, para los costes de {app}.{percent, select, none {} other { De todos los donativos, {operator} destina el {percent} % a causas solidarias para perros y personas del barrio.}} Un donativo no desgrava. Y no tienes que dar nada para usar {app}."
+      },
+      "onceMonthly": {
         "q": "¿Qué diferencia hay entre apoyar cada mes y el crowdfunding?",
         "a": "Una aportación mensual ayuda a cubrir los costes fijos, como el alojamiento web y los mapas. El crowdfunding es una campaña única para costes únicos, como las apps y la revisión legal. Ambas van a {operator}."
       }
@@ -1823,7 +1827,7 @@
     "monthlyText": "Una pequeña aportación fija al mes cubre los costes fijos, como el alojamiento web y los mapas. Así {app} sigue siendo gratis para todos.",
     "oncePill": "Una vez",
     "onceTitle": "Súmate al crowdfunding",
-    "onceText": "¿Prefieres dar una sola vez? Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
+    "onceText": "Da una sola vez, lo que tú quieras. Con el crowdfunding pagamos los costes únicos, como las apps en App Store y Google Play, la revisión legal y folletos para protectoras.",
     "onceGive": "Ayúdanos vía {platform}",
     "progress": "{raised} de {goal} recaudados",
     "goalRounds": "Objetivo: {goal}",

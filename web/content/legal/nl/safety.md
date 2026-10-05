@@ -1,7 +1,7 @@
 ---
 title: Veiligheids- en incidentprotocol
 description: "Veilig wandelen, en wat je doet als er iets misgaat: voor en tijdens het rondje, belangrijke nummers, hulp voor jezelf en hoe je iets meldt."
-version: "0.1"
+version: "0.2"
 updated: "2026-10-05"
 status: "Concept – nog niet juridisch getoetst"
 ---
@@ -33,9 +33,10 @@ Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch i
 
 ## 2. Tijdens de wandeling
 
-- **Start de wandeling in de app.** Je live locatie wordt dan gedeeld met de eigenaar of opvang, tot je de wandeling beëindigt.
-- **Te laat?** Duurt de wandeling veel langer dan gepland, dan krijgt de eigenaar of opvang een melding. Loop je uit? Laat het de eigenaar even weten.
-- **SOS-scherm.** Hier vind je de noodnummers, het nummer van de eigenaar en van de dierenarts, en de stappen voor als de hond ontsnapt.
+- **Start de wandeling in de app.** Dan weet de eigenaar of opvang dat je onderweg bent, en heb je het SOS-scherm bij de hand. Bij een groepswandeling van een opvang start je niets in de app: de opvang loopt mee.
+- **Live locatie.** Staat live locatie aan en wandel je alleen met de hond, dan deelt je telefoon je locatie met de eigenaar, tot je de wandeling beëindigt. Bij een kennismaking, bij een groepswandeling en als live locatie uit staat, deel je geen locatie.
+- **Loop je uit?** Laat het de eigenaar even weten. Rondje Mee stuurt soms een melding als een wandeling veel langer duurt dan gepland, maar niet altijd. Reken er dus niet op.
+- **SOS-scherm.** Hier vind je de noodnummers, een knop om de eigenaar of opvang te bellen (als het nummer bekend is), wat er over de dierenarts op het hondenprofiel staat, en de eerste stappen als de hond wegloopt. Het scherm stuurt zelf niets naar de eigenaar of opvang en deelt geen locatie: bellen doe je zelf.
 - **Beëindig de wandeling** in de app als je de hond hebt teruggebracht.
 
 ## 3. Wat doe je als…
@@ -45,8 +46,8 @@ Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch i
 1. Blijf rustig. Ren niet achter de hond aan, want dan rent hij vaak harder weg.
 2. Roep de naam van de hond op een vrolijke toon. Ga door je knieën of loop een stukje de andere kant op. Veel honden komen dan naar je toe.
 3. Mogen er snoepjes? Laat ze zien of rammel ermee.
-4. Bel meteen de eigenaar of opvang via het SOS-scherm. De eigenaar kent de hond het best.
-5. Kies in de app voor "hond ontsnapt". Zo weet de eigenaar waar je de hond voor het laatst zag.
+4. Bel meteen de eigenaar of opvang, bijvoorbeeld met de knop in het SOS-scherm (als het nummer bekend is). De eigenaar kent de hond het best.
+5. Vertel aan de telefoon waar en wanneer je de hond voor het laatst zag. Het SOS-scherm stuurt zelf niets naar de eigenaar en deelt geen locatie: het toont de nummers en een paar eerste stappen.
 6. Blijf in de buurt van de plek waar de hond wegliep, tenzij de eigenaar iets anders zegt.
 7. Is er gevaar voor het verkeer of voor mensen? Bel **112**.
 8. Is de hond na korte tijd nog niet terug? De eigenaar meldt de hond als vermist, zie de nummers in artikel 4. Meld het ook bij Rondje Mee.
@@ -64,7 +65,7 @@ Dit protocol helpt je om veilig te wandelen en om goed te handelen als er toch i
 **Is de hond gewond?**
 
 1. Breng de hond en jezelf in veiligheid. Een gewonde hond kan uit pijn bijten.
-2. Bel de eigenaar of opvang, en de dierenarts via het SOS-scherm.
+2. Bel de eigenaar of opvang, en de dierenarts. Wat de eigenaar over de dierenarts invulde, staat in het SOS-scherm.
 3. In Nederland kun je bij een dier in nood ook **144** bellen.
 
 **Altijd:** meld het incident daarna in de app. In Spanje kan na een beet een verplichte controle van de hond door een dierenarts gelden.
@@ -88,12 +89,12 @@ Voel je je somber, gestrest of gaat het mentaal niet goed met je? Praat erover. 
 
 ### 3.5 De eigenaar kan de wandelaar niet bereiken
 
-1. Kijk op de live kaart waar de wandelaar is en of er beweging is.
+1. Staat live locatie aan en wandelt iemand alleen met je hond? Kijk dan op de live kaart waar de wandelaar is en of er beweging is. Staat live locatie uit, dan is er geen kaart.
 2. Bel of app de wandelaar. Geef het een paar minuten: misschien is de batterij leeg of is het netwerk slecht.
-3. Denk je aan een noodsituatie, zoals een ongeluk of een onwel geworden wandelaar? Bel **112** en geef de laatst bekende locatie door.
+3. Denk je aan een noodsituatie, zoals een ongeluk of een onwel geworden wandelaar? Bel **112** en vertel waar de wandelaar zou lopen, en de laatst bekende locatie als je die op de live kaart zag.
 4. Denk je dat de wandelaar de hond niet terugbrengt? Bel de politie (zie artikel 4) en meld het in de app.
 
-Rondje Mee kan iemands locatie alleen zien tijdens een actieve wandeling. Buiten een wandeling kunnen we niemand opsporen.
+Rondje Mee weet alleen waar iemand is tijdens een wandeling alleen met de hond, en alleen als live locatie aan staat. Verder kunnen we niemand opsporen.
 
 ### 3.6 Je vermoedt mishandeling of verwaarlozing
 
@@ -159,7 +160,7 @@ Meld elk incident en elke onveilige situatie via de knop **Melden** in de app, o
 - We bevestigen dat we je melding hebben ontvangen.
 - We streven ernaar een melding over veiligheid **binnen 24 uur** te beoordelen. Dat is een streven, geen garantie.
 - Tijdens het onderzoek kunnen we accounts tijdelijk beperken of blokkeren.
-- We bewaren de route van de wandeling zolang de melding open is.
+- Stond live locatie aan tijdens de wandeling? Dan bewaren we de route zolang de melding open is.
 - We horen waar mogelijk beide kanten. Je privé-feedback delen we nooit met de ander.
 - We nemen een besluit en leggen dat uit. Je kunt bezwaar maken.
 - We werken mee met politie en andere instanties als de wet dat verplicht, of als iemands leven of veiligheid in gevaar is.

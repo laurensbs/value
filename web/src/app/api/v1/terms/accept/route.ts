@@ -4,7 +4,7 @@ import { acceptCurrentTerms } from '@/server/terms'
 
 /**
  * The yes to the current terms, from the app's notice (terms art. 19). Body, required:
- * `{ "version": "0.3" }`, the version the app showed (`termsVersion` from /api/v1/me). Without it:
+ * `{ "version": "0.4" }`, the version the app showed (`termsVersion` from /api/v1/me). Without it:
  * 400 `invalid`, since a yes must say which text it is for. Any other version: 409 `terms-changed`
  * (fetch /api/v1/me again and show the new changes). Answers `{ ok: true, termsVersion, termsAcceptedAt }`.
  * Agreeing again when already up to date changes nothing.

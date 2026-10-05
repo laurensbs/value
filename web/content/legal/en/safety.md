@@ -1,7 +1,7 @@
 ---
 title: Safety and Incident Protocol
 description: "Walking safely, and what to do if something goes wrong: before and during the walk, important numbers, help for yourself and how to report."
-version: "0.1"
+version: "0.2"
 updated: "2026-10-05"
 status: "Draft – not yet reviewed by a lawyer"
 ---
@@ -33,9 +33,10 @@ This protocol helps you walk safely and act well if something does go wrong. It 
 
 ## 2. During the walk
 
-- **Start the walk in the app.** Your live location is then shared with the owner or shelter until you end the walk.
-- **Running late?** If a walk runs well over the planned time, the owner or shelter receives an alert. If you are going to be late, let the owner know.
-- **SOS screen.** Here you will find emergency numbers, the owner's and the vet's phone numbers, and the steps to take if the dog escapes.
+- **Start the walk in the app.** The owner or shelter then knows you are on your way, and you have the SOS screen at hand. For a group walk at a shelter you do not start anything in the app: the shelter walks along.
+- **Live location.** If live location is on and you walk alone with the dog, your phone shares your location with the owner until you end the walk. During a first meeting, during a group walk and when live location is off, you share no location.
+- **Running late?** Let the owner know. Rondje Mee sometimes sends an alert when a walk runs well over the planned time, but not always. So do not count on it.
+- **SOS screen.** Here you will find emergency numbers, a button to call the owner or shelter (if their number is known), what the dog's profile says about the vet, and the first steps if the dog runs off. The screen does not send anything to the owner or shelter by itself and does not share your location: you make the call yourself.
 - **End the walk** in the app once you have brought the dog back.
 
 ## 3. What to do if…
@@ -45,8 +46,8 @@ This protocol helps you walk safely and act well if something does go wrong. It 
 1. Stay calm. Do not chase the dog, as it will often run further away.
 2. Call the dog's name in a cheerful voice. Crouch down or walk a few steps in the opposite direction. Many dogs will then come to you.
 3. Are treats allowed? Show them or rattle the bag.
-4. Call the owner or shelter immediately from the SOS screen. The owner knows the dog best.
-5. Select "dog escaped" in the app. This shows the owner where you last saw the dog.
+4. Call the owner or shelter immediately, for example with the button on the SOS screen (if their number is known). The owner knows the dog best.
+5. Tell them on the phone where and when you last saw the dog. The SOS screen does not send anything to the owner by itself and does not share your location: it shows the numbers and a few first steps.
 6. Stay near the place where the dog ran off, unless the owner tells you otherwise.
 7. Is there danger to traffic or people? Call **112**.
 8. If the dog has not come back after a short time, the owner reports the dog as missing (see the numbers in section 4). Report it to Rondje Mee as well.
@@ -64,7 +65,7 @@ This protocol helps you walk safely and act well if something does go wrong. It 
 **Is the dog injured?**
 
 1. Get the dog and yourself to safety. An injured dog may bite out of pain.
-2. Call the owner or shelter, and the vet from the SOS screen.
+2. Call the owner or shelter, and the vet. What the owner filled in about the vet is on the SOS screen.
 3. In the Netherlands, you can also call **144** for an animal in need.
 
 **Always:** report the incident in the app afterwards. In Spain, a bite may lead to a mandatory veterinary observation of the dog.
@@ -88,12 +89,12 @@ Feeling low, stressed or struggling mentally? Talk about it. You will find helpl
 
 ### 3.5 The owner cannot reach the walker
 
-1. Check on the live map where the walker is and whether they are moving.
+1. Is live location on and is someone walking your dog alone? Then check on the live map where the walker is and whether they are moving. If live location is off, there is no map.
 2. Call or message the walker. Give it a few minutes: their battery may be flat or the signal may be poor.
-3. Do you think there is an emergency, such as an accident or the walker being unwell? Call **112** and give the last known location.
+3. Do you think there is an emergency, such as an accident or the walker being unwell? Call **112** and say where the walker planned to walk, and the last known location if you saw it on the live map.
 4. Do you think the walker is not bringing the dog back? Call the police (see section 4) and report it in the app.
 
-Rondje Mee can only see someone's location during an active walk. Outside a walk, we cannot locate anyone.
+Rondje Mee only knows where someone is during a walk alone with the dog, and only while live location is on. Otherwise we cannot locate anyone.
 
 ### 3.6 You suspect abuse or neglect
 
@@ -159,7 +160,7 @@ Report every incident and every unsafe situation using the **Report** button in 
 - We confirm that we have received your report.
 - We aim to review safety reports **within 24 hours**. This is a target, not a guarantee.
 - During the investigation, we may temporarily restrict or suspend accounts.
-- We keep the route of the walk for as long as the report is open.
+- Was live location on during the walk? Then we keep the route for as long as the report is open.
 - Where possible, we hear both sides. We never share your private feedback with the other person.
 - We make a decision and explain it. You can appeal.
 - We cooperate with the police and other authorities when the law requires it, or when someone's life or safety is at risk.

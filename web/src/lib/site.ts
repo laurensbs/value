@@ -52,9 +52,12 @@ export function adminAccess(
  * The terms someone accepts when they create a profile, stored with it (profile.termsVersion and
  * termsAcceptedAt). Equal to `version` in content/legal/<locale>/terms.md (checked in
  * legal-placeholders.test.ts). When it goes up, people who accepted an older version see what changed
- * (content/legal/<locale>/terms-changes.md) and can agree again (lib/rules.ts termsReason).
+ * since their version (content/legal/<locale>/terms-changes.md: the newest version on top, older ones
+ * under a "## " heading each, server/terms.ts termsChanges) and can agree again (lib/rules.ts termsReason).
+ * 0.4 (5 Oct 2026) follows 0.3 on the same day: someone on 0.3 sees only what 0.4 changes, someone on
+ * 0.2 sees both lists. One notice and one effective day cover both.
  */
-export const TERMS_VERSION = '0.3'
+export const TERMS_VERSION = '0.4'
 
 /**
  * The day the in-app notice about TERMS_VERSION goes live: the deploy that shows people who accepted

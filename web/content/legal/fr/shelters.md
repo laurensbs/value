@@ -1,7 +1,7 @@
 ---
 title: Conditions partenaires pour les refuges
 description: "Les conditions de partenariat pour les refuges : vérification, profils des chiens, rencontres et balades en groupe, assurance, données et photos."
-version: "0.1"
+version: "0.2"
 updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -36,11 +36,10 @@ Ces conditions s'appliquent aux refuges, asiles et autres organisations qui publ
 - Le refuge veille à ce que les chiens soient identifiés par puce électronique, enregistrés et vaccinés comme l'exige la loi, et assurés pour les dommages causés à autrui.
 - En Espagne, le refuge indique quels chiens sont des chiens PPP et respecte les règles qui s'y appliquent.
 
-## 4. Premières rencontres et promenades en solo
+## 4. Premières rencontres, et pas de promenades en solo
 
 - Lors d'une première rencontre, un membre du refuge est toujours présent. Cette personne effectue la vérification d'identité : elle contrôle que le nom, la photo et l'âge correspondent, puis coche la case dans l'application. Ne copiez pas et ne photographiez pas la pièce d'identité.
-- Le refuge n'accorde la confiance solo à un promeneur que si c'est responsable pour ce chien précis. Le refuge peut la retirer à tout moment.
-- Le refuge peut appliquer des règles plus strictes, comme un nombre minimum de promenades encadrées avant qu'une personne puisse promener un chien seule.
+- Un promeneur ne promène jamais seul un chien du refuge. Quelqu'un du refuge est toujours là : lors d'une première rencontre ou d'une promenade de groupe encadrée (article 5). Un refuge ne peut donc pas accorder la confiance solo, par laquelle un propriétaire laisse quelqu'un promener seul son chien.
 
 ## 5. Promenades de groupe encadrées
 

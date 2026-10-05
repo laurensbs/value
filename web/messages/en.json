@@ -1432,7 +1432,7 @@
     "level3": "After that: request solo walks with owners who allow them for their dog.",
     "level3Off": "After that: solo walks with owners who allow them for their dog. Live location is off for now, so a walk alone doesn't start yet. Walking together is possible.",
     "during": "During the walk",
-    "duringText": "Your phone shares your location with the owner while the walk is on. If it runs over, you both get a notification. The help button shows you straight away who to call.",
+    "duringText": "On a walk alone with the dog, your phone shares your location with the owner while the walk is on. Running late? Let the owner know: a notification from Rondje Mee does not always come. The help button shows you straight away who to call.",
     "duringTextOff": "Live location is off for now, so your phone shares no location. Until then you walk together with the owner or the shelter. The help button shows you straight away who to call.",
     "after": "After the walk",
     "afterText": "Both sides give private feedback. Reports of an injured or stressed dog, or of someone feeling unsafe, go straight to our team.",
@@ -1812,6 +1812,10 @@
         "q": "Do you give to good causes yourselves?"
       },
       "once": {
+        "q": "Can I also support every month?",
+        "a": "No, there is no fixed monthly contribution at the moment. You can support {app} with a one-off gift through {platform}, as large or small as you like. The money goes to {operator}, for the costs of {app}.{percent, select, none {} other { Of all gifts, {operator} passes {percent}% on to good causes for dogs and people in the neighbourhood.}} A gift is not tax-deductible. And you do not need to give anything to use {app}."
+      },
+      "onceMonthly": {
         "q": "What is the difference between monthly support and the crowdfunding?",
         "a": "A monthly contribution helps cover the running costs, like hosting and maps. The crowdfunding is a one-off campaign for one-off costs, like the apps and the legal check. Both go to {operator}."
       }
@@ -1823,7 +1827,7 @@
     "monthlyText": "A small regular amount each month covers the running costs, like hosting and maps. That keeps {app} free for everyone.",
     "oncePill": "One-off",
     "onceTitle": "Join the crowdfunding",
-    "onceText": "Rather give once? The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
+    "onceText": "Give once, as much or as little as you like. The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
     "onceGive": "Support us via {platform}",
     "progress": "{raised} of {goal} raised",
     "goalRounds": "Goal: {goal}",

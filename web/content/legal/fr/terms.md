@@ -1,7 +1,7 @@
 ---
 title: Conditions d'utilisation
 description: "Les conditions pour promeneurs, propriétaires et refuges : qui peut participer, se rencontrer d'abord, pas d'argent, responsabilité et plaintes."
-version: "0.3"
+version: "0.4"
 updated: "2026-10-05"
 status: "Projet – pas encore vérifié par un juriste"
 ---
@@ -40,7 +40,7 @@ Vous devez avoir **18 ans ou plus** et utiliser Rondje Mee en tant que particuli
 - Vous avez un seul compte et ne le partagez avec personne. Gardez vos identifiants secrets et signalez immédiatement tout abus.
 - Vous êtes responsable de ce qui se passe via votre compte, sauf si vous ne pouviez raisonnablement pas l'empêcher.
 
-Les autres voient notamment votre prénom, votre photo et l'endroit approximatif où vous habitez (arrondi à environ 500 mètres). Ils ne voient votre numéro de téléphone et votre adresse e-mail qu'après l'acceptation d'une demande. Si vous vous inscrivez à une promenade de groupe, le refuge voit tout de suite votre numéro de téléphone. Voir la Politique de confidentialité.
+Ce que les autres voient de vous dépend de qui regarde. Les propriétaires et les refuges voient notamment le prénom, la photo, la tranche d'âge et la commune d'un promeneur qui leur envoie une demande. Sur la page du chien d'un propriétaire, les membres de Rondje Mee (connectés, avec un profil complété et non suspendus) voient notamment le prénom, la photo et la commune du propriétaire, ainsi que l'emplacement du chien arrondi à environ 500 mètres. Une personne qui n'est pas membre ne voit que le chien, la commune et qu'il y a un propriétaire près d'ici. L'autre personne ne voit votre numéro de téléphone et votre adresse e-mail qu'après l'acceptation d'une demande. Si vous vous inscrivez à une promenade de groupe, le refuge voit tout de suite votre numéro de téléphone. Voir la Politique de confidentialité.
 
 ## 5. Rôles
 
@@ -56,10 +56,10 @@ Vous pouvez avoir plusieurs rôles.
 2. **Coordonnées.** Après acceptation, chacun voit le numéro de téléphone et l'adresse e-mail de l'autre, ainsi que les informations protégées nécessaires, comme le lieu de rendez-vous. Utilisez-les uniquement pour la promenade.
 3. **Première rencontre.** La première fois est toujours une première rencontre, en présence du propriétaire ou d'un membre du refuge.
 4. **Vérification d'identité.** Lors de la première rencontre, le promeneur montre une pièce d'identité valable. Le propriétaire ou le refuge vérifie que le nom, la photo et l'âge correspondent, puis coche une case dans l'application. Rondje Mee ne conserve aucune copie. N'en faites pas non plus de photo ou de copie vous-même.
-5. **Confiance solo.** Promener un chien seul n'est permis qu'après l'autorisation expresse du propriétaire ou du refuge dans l'application. Elle ne vaut que pour ce chien précis et peut être retirée à tout moment.
+5. **Confiance solo.** Promener seul le chien d'un propriétaire n'est permis qu'après l'autorisation expresse de ce propriétaire dans l'application. Elle ne vaut que pour ce chien précis et peut être retirée à tout moment. De plus, une promenade seul avec le chien n'est possible que tant que la localisation en direct est activée (article 13). Vous ne promenez jamais seul le chien d'un refuge : quelqu'un du refuge est toujours là, lors de la première rencontre ou d'une promenade de groupe encadrée (article 7).
 6. **Quiz de sécurité.** Avant de demander une première rencontre ou de rejoindre une balade en groupe, vous répondez à un court quiz de sécurité.
-7. **Les nouveaux comptes** ne peuvent d'abord faire que des premières rencontres et des promenades encadrées. L'application indique quand cela change.
-8. **Promenades régulières.** Vous pouvez convenir d'une promenade fixe chaque semaine. Empêché ? Annulez le plus tôt possible via l'application.
+7. **Les nouveaux comptes** ne peuvent d'abord faire que des premières rencontres et des promenades encadrées. Promener un chien seul n'est possible qu'avec la confiance solo (point 5), et seulement tant que la localisation en direct est activée. L'application vous indique si c'est possible pour vous et un chien.
+8. **Promenades régulières.** Une promenade seul avec le chien peut aussi être convenue comme promenade fixe chaque semaine. Ce n'est donc possible qu'avec la confiance solo et tant que la localisation en direct est activée. Empêché ? Annulez le plus tôt possible via l'application.
 
 ## 7. Promenades de groupe dans les refuges
 
@@ -107,7 +107,7 @@ En tant que promeneur :
 - vous ne donnez des friandises que si c'est permis, et uniquement celles qui sont autorisées ;
 - vous n'emmenez pas d'autres chiens et ne confiez le chien à personne ;
 - vous ne promenez le chien que si vous êtes en forme, et jamais sous l'influence de l'alcool ou de drogues ;
-- vous démarrez la promenade dans l'application, pour que la localisation en direct fonctionne ;
+- vous démarrez dans l'application la promenade convenue via Rondje Mee, pour que le propriétaire ou le refuge sache que vous êtes en route (inutile pour une promenade de groupe d'un refuge) ;
 - vous signalez immédiatement tout incident au propriétaire ou au refuge, et à Rondje Mee.
 
 Nous vous recommandons vivement d'avoir votre propre **assurance responsabilité civile** (voir l'article 15).
@@ -125,13 +125,16 @@ La Ley 7/2023 sur les droits et le bien-être des animaux s'applique aussi. Selo
 
 ## 13. Localisation en direct pendant la promenade
 
-- Quand vous démarrez une promenade en tant que promeneur, votre téléphone partage votre position avec le propriétaire ou le refuge jusqu'à la fin de la promenade. C'est le seul moment où nous collectons votre position.
-- Le propriétaire ou le refuge voit une carte en direct avec le trajet. Vous voyez votre propre trajet.
-- Si la promenade dure nettement plus longtemps que prévu, le propriétaire ou le refuge reçoit une alerte.
-- L'écran SOS affiche les numéros d'urgence, ceux du propriétaire et du vétérinaire, et la marche à suivre si le chien s'échappe.
-- Nous supprimons les trajets après 30 jours, sauf s'ils sont nécessaires pour un signalement en cours.
+La localisation en direct peut être activée ou désactivée. Tant que l'analyse d'impact relative à la protection des données (AIPD) n'est pas terminée, elle est désactivée pour tout le monde (voir la Politique de confidentialité). Rondje Mee vous indique quand elle est désactivée.
 
-La localisation en direct dépend de votre téléphone, de la batterie et du réseau. C'est une aide, pas une garantie. En cas de danger, appelez toujours d'abord le **112**.
+- La localisation en direct ne concerne qu'une promenade seul avec le chien. Lors d'une première rencontre et d'une promenade de groupe, nous ne suivons jamais votre parcours : le propriétaire ou le refuge marche avec vous.
+- Si la localisation en direct est activée et que vous démarrez, en tant que promeneur, une promenade seul avec le chien, votre téléphone partage votre position avec le propriétaire jusqu'à la fin de la promenade. C'est le seul moment où nous suivons votre parcours. Le propriétaire voit alors une carte en direct avec le trajet. Vous voyez votre propre trajet.
+- Si la localisation en direct est désactivée, nous ne suivons pas votre parcours et personne ne voit de carte en direct. Vous ne pouvez alors ni demander, ni accepter, ni démarrer une promenade seul avec le chien. Une première rencontre reste possible.
+- Si une promenade dure nettement plus longtemps que prévu, Rondje Mee envoie parfois une alerte, mais pas toujours. N'y comptez donc pas.
+- L'écran SOS affiche les numéros d'urgence, un bouton pour appeler le propriétaire ou le refuge (si le numéro est connu), ce que le profil du chien indique sur le vétérinaire, et les premières étapes si le chien s'échappe. L'écran SOS n'envoie rien de lui-même au propriétaire ou au refuge et ne partage pas votre position.
+- Nous supprimons les trajets des promenades avec localisation en direct après 30 jours, sauf s'ils sont nécessaires pour un signalement en cours.
+
+Lorsque la localisation en direct est activée, elle dépend de votre téléphone, de la batterie et du réseau. C'est une aide, pas une garantie. En cas de danger, appelez toujours d'abord le **112**.
 
 ## 14. Avis, signalements et modération
 
