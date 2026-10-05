@@ -2415,7 +2415,7 @@
     "copied": "Copied. Paste it wherever you like.",
     "copyFailed": "Copying didn't work. Select the text above and copy it yourself.",
     "poster": "Prefer paper? Print a poster",
-    "privacy": "Anyone who opens the link sees the same page for {name} as everyone on Rondje Mee. Your address and phone number stay private until you accept an appointment.",
+    "privacy": "Anyone who opens the link without an account sees {name}, the town and that an owner lives nearby; your first name and regular times only after signing up. Your address and phone number stay private until you accept an appointment.",
     "posterMetaTitle": "Poster for your dog",
     "posterTitle": "Poster for {name}",
     "posterLede": "Print the poster and put it up where neighbours will see it: at the supermarket, the library, the vet or in your building's entrance. Do ask first whether that's okay.",

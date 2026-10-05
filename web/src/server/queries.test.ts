@@ -155,6 +155,19 @@ describe('a private owner, seen without an account (DPIA maatregel M4)', () => {
     expect(detail?.dog.lat).toBe(52.095)
   })
 
+  it('a bare account is not enough: without onboarding, or when banned, the owner stays shielded', async () => {
+    const fleur = await viewer('fleur')
+    const [bare, banned] = await Promise.all([
+      getDogDetail('bello', { ...fleur, profile: null }),
+      getDogDetail('bello', { ...fleur, profile: { ...fleur.profile, bannedAt: new Date() } }),
+    ])
+    for (const detail of [bare, banned]) {
+      expect(detail?.ownerShielded).toBe(true)
+      expect(detail?.slots).toEqual([])
+      expect(JSON.stringify(detail)).not.toMatch(/veertig|ans\.jpg|07:45|52\.095/)
+    }
+  })
+
   it('leaves a shelter dog as it is', async () => {
     const [visitor, member] = await Promise.all([getDogDetail('rex', null), getDogDetail('rex', await viewer('fleur'))])
     expect(visitor?.ownerShielded).toBe(false)

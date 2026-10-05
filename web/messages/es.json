@@ -2415,7 +2415,7 @@
     "copied": "Copiado. Pégalo donde quieras.",
     "copyFailed": "No se pudo copiar. Selecciona el texto de arriba y cópialo tú.",
     "poster": "¿Mejor en papel? Imprime un cartel",
-    "privacy": "Quien abra el enlace verá la misma página de {name} que ve todo el mundo en Rondje Mee. Tu dirección y tu teléfono siguen siendo privados hasta que aceptes una cita.",
+    "privacy": "Quien abra el enlace sin cuenta verá a {name}, la localidad y que hay un dueño cerca; tu nombre y tus horarios fijos, solo después de registrarse. Tu dirección y tu teléfono siguen siendo privados hasta que aceptes una cita.",
     "posterMetaTitle": "Cartel para tu perro",
     "posterTitle": "Cartel para {name}",
     "posterLede": "Imprime el cartel y cuélgalo donde lo vean tus vecinos: en el supermercado, la biblioteca, el veterinario o tu portal. Pregunta antes si se puede.",

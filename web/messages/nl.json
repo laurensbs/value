@@ -2415,7 +2415,7 @@
     "copied": "Gekopieerd. Plak het waar je wilt.",
     "copyFailed": "Kopiëren lukte niet. Selecteer de tekst hierboven en kopieer hem zelf.",
     "poster": "Liever op papier? Print een poster",
-    "privacy": "Wie de link opent, ziet dezelfde pagina van {name} als iedereen op Rondje Mee. Je adres en telefoonnummer blijven privé tot je een afspraak accepteert.",
+    "privacy": "Wie de link zonder account opent, ziet {name}, de plaats en dat er een eigenaar in de buurt is; je voornaam en vaste momenten pas na aanmelden. Je adres en telefoonnummer blijven privé tot je een afspraak accepteert.",
     "posterMetaTitle": "Poster voor je hond",
     "posterTitle": "Poster voor {name}",
     "posterLede": "Print de poster en hang hem op waar buren hem zien: bij de supermarkt, de bibliotheek, de dierenarts of in je portiek. Vraag wel even of het mag.",

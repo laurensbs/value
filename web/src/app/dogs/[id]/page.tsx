@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   // looking for, in the owner's language like the message they sent (chat apps fetch it without one).
   const owned = host.kind === 'owner'
   const t = await getTranslations({ locale: owned ? await localeOf(host.id) : await getLocale(), namespace: 'dogShare' })
-  const description = dog.story || (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : '') || dog.name
+  // A private owner's own words stay off link previews: they can say when someone is home, or who they are.
+  const description = (owned ? t('posterText', { name: dog.name, minutes: dog.walkMinutes, city: dog.city }) : dog.story) || dog.name
   const photo = dog.photos.find((src) => src.startsWith('https://'))
   return pageMetadata({
     path: `/dogs/${dog.id}`,

@@ -2415,7 +2415,7 @@
     "copied": "Copié. Collez-le où vous voulez.",
     "copyFailed": "La copie n'a pas fonctionné. Sélectionnez le texte ci-dessus et copiez-le vous-même.",
     "poster": "Plutôt sur papier ? Imprimez une affiche",
-    "privacy": "Les personnes qui ouvrent le lien voient la même page de {name} que tout le monde sur Rondje Mee. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
+    "privacy": "Les personnes qui ouvrent le lien sans compte voient {name}, la ville et qu'un propriétaire habite près d'ici ; votre prénom et vos moments fixes, seulement après inscription. Votre adresse et votre téléphone restent privés jusqu'à ce que vous acceptiez un rendez-vous.",
     "posterMetaTitle": "Affiche pour votre chien",
     "posterTitle": "Affiche pour {name}",
     "posterLede": "Imprimez l'affiche et accrochez-la là où vos voisins la verront : au supermarché, à la bibliothèque, chez le vétérinaire ou dans votre hall d'immeuble. Demandez d'abord si c'est permis.",

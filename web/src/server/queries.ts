@@ -333,7 +333,9 @@ export async function getDogDetail(id: string, viewer: Viewer | null): Promise<D
   // Without an account: the dog, its town and "an owner nearby" (DPIA R3, maatregel M4). Not who the
   // owner is, not the weekly moments (when they are home without their dog), and not the dog's spot
   // to about 500 m. Left out here, so no page, link preview or payload can show them by accident.
-  const ownerShielded = !viewer && host.kind === 'owner'
+  // Only a member sees the owner: signed in, onboarded (18+, terms) and not banned. A bare account is not enough.
+  const member = Boolean(viewer?.profile && !viewer.profile.bannedAt)
+  const ownerShielded = host.kind === 'owner' && !member && !isMine && !viewer?.isAdmin
   if (ownerShielded) {
     host = { ...shieldedOwner(host.id, dog.city), phone: null, email: null }
     dog.lat = null
