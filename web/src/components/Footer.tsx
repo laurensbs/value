@@ -12,6 +12,10 @@ import { Logo } from './Logo'
  * The site footer. `compact` is the one line under the app pages for signed-in people
  * (FooterSwitch picks it): the essentials and the language, without the big link list.
  * Both have the language switcher.
+ *
+ * "Help ons" is a footer link on the website only (to /support). In the apps the footer has no
+ * support link at all (Laurens, 5 okt 2026): there the only two ways are the block at the bottom of
+ * the home page (landing/HelpUs) and the row low in the profile (HelpUsInApp).
  */
 export async function Footer({ compact = false }: { compact?: boolean }) {
   const t = await getTranslations('footer')

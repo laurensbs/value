@@ -9,7 +9,10 @@ const config: CapacitorConfig = {
   appId: 'app.rondje.mobile',
   appName: 'Rondje Mee',
   webDir: 'native-shell',
-  // Lets the website recognise the apps (src/server/native.ts): they never show ways to give money.
+  // Lets the website recognise the apps (src/server/native.ts): no costs, no /support page and no way to
+  // pay in the apps. The only way to give is "Help ons via Whydonate", a plain link that opens the
+  // campaign in Safari or the phone's browser (src/components/HelpUsInApp.tsx); the per-app switches
+  // are SUPPORT_IN_APP_IOS and SUPPORT_IN_APP_ANDROID (src/lib/support.ts).
   appendUserAgent: 'RondjeApp',
   server: {
     url: serverUrl,

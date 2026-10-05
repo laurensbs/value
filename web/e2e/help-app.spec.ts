@@ -1,0 +1,91 @@
+import { expect, test } from '@playwright/test'
+import crowdfunding from '../content/crowdfunding.json'
+import { campaign as campaignOf, roundsFor, showsRaised } from '../src/lib/support'
+import { newPerson, onboard, shot, signUp, unique } from './helpers'
+
+// The iOS and Android apps add "RondjeApp" to the user agent (capacitor.config.ts).
+const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp'
+// CROWDFUNDING_URL in playwright.config.ts (fake). SUPPORT_IN_APP=0 (or _IOS / _ANDROID for one app)
+// hides all of it: src/components/HelpUsInApp.render.test.ts and src/lib/app-support.test.ts.
+const CAMPAIGN = 'https://whydonate.com/nl/fundraising/example'
+
+test('in the app: "Help ons via Whydonate" at the bottom of the profile, one tap straight to the campaign, no footer link', async ({ browser }) => {
+  const { context, page } = await newPerson(browser, undefined, { userAgent: APP_UA })
+  await signUp(page, { name: 'Mila', email: `help-app-${unique()}@e2e.test`, intent: 'owner' })
+  await onboard(page, { birthDate: '1980-04-04', city: 'Utrecht', bio: 'Ik heb een hond.', phone: '', walker: false, owner: true })
+
+  await page.goto('/profile')
+  const row = page.getByRole('main').getByRole('link', { name: /^Help ons via Whydonate/ })
+  await expect(row).toBeVisible()
+  // Says where it goes and what a round is, and that it leaves the app for the browser.
+  await expect(row).toHaveAttribute('href', CAMPAIGN)
+  await expect(row).toHaveAttribute('target', '_blank')
+  await expect(row).toHaveAttribute('rel', /noopener/)
+  await expect(row).toContainText(/Geef een rondje vanaf €\s?5/)
+  await expect(row).toHaveAccessibleName(/opent Whydonate in je browser/)
+  // The amount raised once something came in; before that only the goal in rounds, never "€ 0 van € 3.000".
+  const { progress } = campaignOf(crowdfunding)
+  if (progress && showsRaised(progress)) await expect(row).toContainText(/van €\s?\d/)
+  else if (progress) await expect(row).toContainText(`Doel: ${roundsFor(progress.goal)} rondjes`)
+  await expect(row).not.toContainText(/€\s?0\b/)
+  // Exactly one, and low on the page: the last list of the profile, below privacy and just above
+  // signing out, never at the top. The only link to the campaign on the page: none in the footer.
+  await expect(page.getByRole('main').getByRole('link', { name: /Whydonate/ })).toHaveCount(1)
+  await expect(page.locator('a[href*="whydonate"]')).toHaveCount(1)
+  await expect(page.locator('main .hub-list').last()).toContainText('Help ons via Whydonate')
+  await expect(page.locator('main .hub-list').first()).not.toContainText('Whydonate')
+  const rowBox = (await row.boundingBox())!
+  expect(rowBox.y).toBeGreaterThan((await page.getByRole('heading', { name: 'Je gegevens', level: 3 }).boundingBox())!.y)
+  const signOut = (await page.getByRole('main').getByRole('button', { name: 'Uitloggen' }).boundingBox())!
+  expect(signOut.y).toBeGreaterThanOrEqual(rowBox.y + rowBox.height)
+  // No other way to give money in the app: no /support row, no membership.
+  await expect(page.locator('main a[href="/support"]')).toHaveCount(0)
+  await expect(page.getByText(/Word lid|lidmaatschap|aftrekbaar/i)).toHaveCount(0)
+  await row.scrollIntoViewIfNeeded()
+  await shot(page, '50-help-app-profile')
+
+  // One tap opens the campaign itself, no sheet or page in between. (The Capacitor shell opens a
+  // link outside rondjemee.nl in Safari or the phone's browser; here it is a new tab.)
+  await context.route('https://whydonate.com/**', (route) => route.fulfill({ contentType: 'text/html', body: '<title>Whydonate</title>' }))
+  const [campaign] = await Promise.all([context.waitForEvent('page'), row.click()])
+  await expect(campaign).toHaveURL(CAMPAIGN)
+  await campaign.close()
+  await expect(page).toHaveURL(/\/profile$/)
+
+  // No footer link in the app (Laurens, 5 okt 2026): no "Help ons", not to the campaign and not to /support.
+  const footer = page.getByRole('contentinfo')
+  await expect(footer).toBeVisible()
+  await expect(footer.getByRole('link', { name: /Help ons/ })).toHaveCount(0)
+  await expect(footer.locator('a[href*="whydonate"], a[href="/support"]')).toHaveCount(0)
+
+  // The same person on the website: the profile keeps its link to /support, without the app row.
+  const web = await browser.newContext({ storageState: await context.storageState() })
+  const site = await web.newPage()
+  await site.goto('/profile')
+  await expect(site.locator('main a[href="/support"]')).toHaveCount(1)
+  await expect(site.getByRole('main').getByRole('link', { name: /Whydonate/ })).toHaveCount(0)
+  await expect(site.getByRole('contentinfo').locator('a[href="/support"]')).toHaveCount(1)
+  await web.close()
+  await context.close()
+})
+
+test('the app config: the campaign for the apps next to the old membership field', async ({ request }) => {
+  // As the native iPhone app asks (ios/Rondje/Core/APIClient.swift), and as a plain request.
+  const asks: Record<string, string>[] = [{ 'user-agent': 'RondjeApp/1 iOS', 'x-rondje-platform': 'ios' }, {}]
+  for (const headers of asks) {
+    const res = await request.get('/api/v1/config', { headers })
+    expect(res.status()).toBe(200)
+    const body = await res.json()
+    // Old app builds read this one: unchanged.
+    expect(body.membership).toEqual({ inApp: false, path: '/support' })
+    // No switch is set in the tests, so every app gets it (SUPPORT_IN_APP_IOS=0: src/app/api/v1/config/route.test.ts).
+    expect(body.support).toMatchObject({
+      inApp: true,
+      label: 'Help ons via Whydonate',
+      crowdfundingUrl: CAMPAIGN,
+      platform: 'Whydonate',
+      operator: 'Voorbeeld',
+    })
+    if (body.support.goal !== null) expect(body.support.rounds).toEqual({ goal: body.support.goal / 5, raised: Math.floor(body.support.raised / 5) })
+  }
+})

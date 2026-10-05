@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import crowdfunding from '../content/crowdfunding.json'
-import { campaign } from '../src/lib/support'
+import { campaign, roundsFor, showsRaised } from '../src/lib/support'
 import { addDog, newPerson, onboard, shot, signUp, unique } from './helpers'
 
 const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp'
@@ -22,13 +22,22 @@ test('home: "Help ons!" with the crowdfunding, right after the hero; in the app 
   await expect(help.getByRole('link', { name: /of meld je aan/ })).toHaveAttribute('href', '/aanmelden?bron=helpons')
   await expect(help.getByText(/naar Voorbeeld, die Rondje Mee bouwt/)).toBeVisible()
   await expect(help.getByRole('link', { name: /Waar het geld heen gaat/ })).toHaveAttribute('href', '/support#crowdfunding')
-  // The numbers from content/crowdfunding.json, once it has a goal and an amount raised.
+  // The numbers from content/crowdfunding.json: the amount raised once something came in, before
+  // that only the goal in rounds ("Doel: 600 rondjes"), never "€ 0 van € 3.000".
   const { progress } = campaign(crowdfunding)
-  await expect(help.getByRole('progressbar')).toHaveCount(progress ? 1 : 0)
+  await expect(help.getByRole('progressbar')).toHaveCount(showsRaised(progress) ? 1 : 0)
   if (progress) await expect(help.getByText(/rondjes/).first()).toBeVisible()
+  if (progress && !showsRaised(progress)) await expect(help.getByText(`Doel: ${roundsFor(progress.goal)} rondjes`)).toBeVisible()
+  await expect(help).not.toContainText(/€\s?0 van/)
+  await expect(help.getByText(/Met jouw rondje komt de app in de App Store en Google Play/)).toBeVisible()
   // Warm, never pushy.
   await expect(help).not.toContainText(/nog maar|laatste kans|streak|vandaag nog|snel/i)
   await shot(page, '60-home-help')
+  // In English the goal is in euros and the gift "From €5": nothing reads like a price per walk (Laurens, 5 okt 2026).
+  const english = await (await page.request.get('/', { headers: { 'accept-language': 'en' } })).text()
+  expect(english).toContain('From €5')
+  if (progress && !showsRaised(progress)) expect(english).toContain(`Goal: €${progress.goal.toLocaleString('en')}`)
+  expect(english).not.toMatch(/\b\d+ rounds\b|= 1 round/)
   await context.close()
 
   const app = await browser.newContext({ userAgent: APP_UA })
@@ -40,12 +49,18 @@ test('home: "Help ons!" with the crowdfunding, right after the hero; in the app 
   await expect(appHelp.getByRole('heading', { name: 'Help ons!', level: 2 })).toBeVisible()
   await expect(inApp.locator('.lp > section').last()).toHaveId('help-ons')
   await expect(inApp.locator('.lp > section').nth(1)).not.toHaveId('help-ons')
+  // Inside the app it says what a round does there, not that the app is coming to the stores.
+  await expect(appHelp.getByText('Met jouw rondje blijft Rondje Mee gratis en is het eerste jaar betaald.')).toBeVisible()
+  await expect(appHelp).not.toContainText(/App Store|Google Play/)
   // Nothing is paid inside the app: a plain link to another site, which the app shell opens in Safari or the browser.
   const appGive = appHelp.getByRole('link', { name: 'Geef een rondje' })
   await expect(appGive).toHaveAttribute('href', 'https://whydonate.com/nl/fundraising/example')
   await expect(appGive).toHaveAttribute('target', '_blank')
   await expect(appGive).toHaveAttribute('rel', /noopener/)
+  // One on the page and none in the footer: in the app the only other way is the row in the profile (e2e/help-app.spec.ts).
+  await expect(inApp.locator('main a[href*="whydonate"]')).toHaveCount(1)
   await expect(inApp.locator('a[href*="whydonate"]')).toHaveCount(1)
+  await expect(inApp.getByRole('contentinfo').locator('a[href*="whydonate"], a[href="/support"]')).toHaveCount(0)
   // /support says nothing about money in the app, so no link there from this block.
   await expect(appHelp.getByRole('link', { name: /Waar het geld heen gaat/ })).toHaveCount(0)
   await app.close()
@@ -113,6 +128,8 @@ test("about: Laurens' story with his photo, the campaign on the website and the 
   await expect(inApp.getByText(/Sinds mijn tiende heb ik te maken met depressie/)).toBeVisible()
   await expect(inApp.getByRole('link', { name: /113 Zelfmoordpreventie/ })).toBeVisible()
   await expect(inApp.getByRole('link', { name: 'Geef een rondje' })).toHaveCount(0)
+  // Not in the story in the app, and no footer link either: in the app only the block at the bottom of
+  // the home page and the row in the profile go there.
   await expect(inApp.locator('a[href*="whydonate"]')).toHaveCount(0)
   await app.close()
 })

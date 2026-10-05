@@ -34,6 +34,10 @@ const PUSH_TEXTS = [
   'progress.week',
   'progress.activeWeeks',
   'walkDone.',
+  // "Help ons via Whydonate" in the apps and on /support: an invitation, never pressure or guilt.
+  'helpApp.',
+  'support.onceGive',
+  'support.faq.appVia',
   // The Hondenschool: the lessons, the path, the wall after lesson 1, and the new lines around the quiz.
   'school.',
   'quiz.honest',

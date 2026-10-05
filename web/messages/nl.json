@@ -133,6 +133,7 @@
       "eyebrow": "Inzameling",
       "title": "Help ons!",
       "lede": "{app} is gratis en blijft dat. Met jouw rondje komt de app in de App Store en Google Play, en is het eerste jaar betaald.",
+      "ledeApp": "Met jouw rondje blijft {app} gratis en is het eerste jaar betaald.",
       "rounds": "{n, plural, =0 {Doel: {total} rondjes} one {# van de {total} rondjes} other {# van de {total} rondjes}}",
       "give": "Geef een rondje",
       "join": "of meld je aan",
@@ -1772,6 +1773,10 @@
         "q": "Waarom kan ik niet steunen in de app?",
         "a": "Omdat geld niet in de app hoort: daar draait alles om wandelen. Bovendien hebben Apple en Google eigen regels voor betalingen in apps. Steunen kan daarom alleen hier op de website."
       },
+      "appVia": {
+        "q": "Kan ik ook vanuit de app helpen?",
+        "a": "{apps, select, ios {Ja, in de iPhone-app.} android {Ja, in de Android-app.} other {Ja.}} Onderaan je profiel in de app staat ‘Help ons via {platform}’. Die knop opent {platform} in je browser. In de app zelf betaal je nooit iets: daar draait alles om wandelen."
+      },
       "share": {
         "q": "Geven jullie zelf ook aan goede doelen?"
       },
@@ -1788,10 +1793,12 @@
     "oncePill": "Eenmalig",
     "onceTitle": "Doe mee aan de crowdfunding",
     "onceText": "Liever één keer iets geven? Met de crowdfunding betalen we de eenmalige kosten, zoals de apps in de App Store en Google Play, de juridische check en flyers voor opvangen.",
-    "onceButton": "Doe mee via {platform}",
+    "onceGive": "Geef een rondje via {platform}",
     "progress": "{raised} van {goal} opgehaald",
+    "goalRounds": "Doel: {total, plural, one {# rondje} other {# rondjes}}",
     "progressUpdated": "Bijgewerkt op {date}. Het actuele bedrag staat op {platform}.",
     "platformNote": "Je betaalt via {platform}, onder hun voorwaarden.",
+    "newTab": "(opent in een nieuw tabblad)",
     "giveNoteAll": "Een bijdrage is vrijwillig, niet fiscaal aftrekbaar, en geeft geen voordelen in {app}.",
     "openTitle": "Eerlijk over geld",
     "open": {
@@ -1807,6 +1814,13 @@
     "whyTitle": "Waarom we dit doen",
     "whyText": "Eenzaamheid, te weinig bewegen, en honden die meer aandacht kunnen gebruiken: bekijk de cijfers achter {app}, met bronnen.",
     "whyLink": "Lees waarom"
+  },
+  "helpApp": {
+    "label": "Help ons via {platform}",
+    "from": "Geef een rondje vanaf {round}",
+    "raised": "{raised} van {goal}",
+    "goal": "Doel: {total, plural, one {# rondje} other {# rondjes}}",
+    "opens": "opent {platform} in je browser"
   },
   "about": {
     "eyebrow": "Over Rondje Mee",
@@ -1997,7 +2011,7 @@
     "noWalks": "Er staan nog geen groepswandelingen gepland in {city}.",
     "allWalks": "Alle groepswandelingen",
     "freeTitle": "Altijd gratis, nooit advertenties",
-    "freeText": "Rondje Mee kost niets, voor wandelaars, eigenaren en opvangen. Er komen geen advertenties en geen betaalde versie. Leden en partners houden Rondje Mee in de lucht, en steunen geeft nooit voorrang.",
+    "freeText": "Rondje Mee kost niets, voor wandelaars, eigenaren en opvangen. Er komen geen advertenties en geen betaalde versie. Vrijwillige giften en partners houden Rondje Mee in de lucht, en steunen geeft nooit voorrang.",
     "howFree": "Zo blijft Rondje Mee gratis",
     "otherCities": "Andere steden",
     "all": "Alle steden",

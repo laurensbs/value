@@ -132,13 +132,14 @@
     "helpUs": {
       "eyebrow": "Collecte",
       "title": "Aidez-nous !",
-      "lede": "{app} est gratuit et le restera. Avec votre balade, l’app arrive sur l’App Store et Google Play, et la première année est payée.",
-      "rounds": "{n, plural, =0 {Objectif : {total} balades} one {# balade sur {total}} other {# balades sur {total}}}",
-      "give": "Offrez une balade",
+      "lede": "{app} est gratuit et le restera. Avec votre aide, l’app arrive sur l’App Store et Google Play, et la première année est payée.",
+      "ledeApp": "Avec votre aide, {app} reste gratuit et la première année est payée.",
+      "rounds": "{percent, plural, =0 {Objectif : {goal}} other {# % du chemin}}",
+      "give": "Aidez-nous",
       "join": "ou inscrivez-vous",
       "note": "Via {platform}, à {operator}, qui crée {app}.",
       "more": "Où va l’argent",
-      "chip": "{round} = 1 balade"
+      "chip": "Dès {round}"
     }
   },
   "landing": {
@@ -1772,6 +1773,10 @@
         "q": "Pourquoi ne puis-je pas contribuer dans l’appli ?",
         "a": "Parce que l’argent n’a pas sa place dans l’appli : tout y tourne autour de la promenade. De plus, Apple et Google ont leurs propres règles pour les paiements dans les applis. C’est pourquoi on ne peut contribuer qu’ici, sur le site."
       },
+      "appVia": {
+        "q": "Puis-je aussi aider depuis l’appli ?",
+        "a": "{apps, select, ios {Oui, dans l’appli iPhone.} android {Oui, dans l’appli Android.} other {Oui.}} En bas de votre profil dans l’appli, vous trouverez « Aidez-nous via {platform} ». Ce bouton ouvre {platform} dans votre navigateur. Dans l’appli elle-même, vous ne payez jamais rien : tout y tourne autour de la promenade."
+      },
       "share": {
         "q": "Donnez-vous vous-mêmes à de bonnes causes ?"
       },
@@ -1788,10 +1793,12 @@
     "oncePill": "Ponctuel",
     "onceTitle": "Participer au financement participatif",
     "onceText": "Vous préférez donner une seule fois ? Le financement participatif paie les frais ponctuels, comme les applis sur l’App Store et Google Play, la vérification juridique et les flyers pour les refuges.",
-    "onceButton": "Participer sur {platform}",
+    "onceGive": "Aidez-nous via {platform}",
     "progress": "{raised} récoltés sur {goal}",
+    "goalRounds": "Objectif : {goal}",
     "progressUpdated": "Mis à jour le {date}. Le montant actuel figure sur {platform}.",
     "platformNote": "Vous payez via {platform}, selon leurs conditions.",
+    "newTab": "(s’ouvre dans un nouvel onglet)",
     "giveNoteAll": "Une contribution est volontaire, non déductible des impôts, et ne donne aucun avantage dans {app}.",
     "openTitle": "Transparents sur l’argent",
     "open": {
@@ -1807,6 +1814,13 @@
     "whyTitle": "Pourquoi nous le faisons",
     "whyText": "La solitude, le manque de mouvement et des chiens qui auraient besoin de plus d’attention : découvrez les chiffres derrière {app}, avec leurs sources.",
     "whyLink": "Lire pourquoi"
+  },
+  "helpApp": {
+    "label": "Aidez-nous via {platform}",
+    "from": "Dès {round}",
+    "raised": "{raised} sur {goal}",
+    "goal": "Objectif : {goal}",
+    "opens": "ouvre {platform} dans votre navigateur"
   },
   "about": {
     "eyebrow": "À propos de Rondje Mee",
@@ -1846,7 +1860,7 @@
     "contactTitle": "Contact",
     "contact": "Des questions ou des idées ? La page d'aide explique comment nous joindre. Il s'agit d'une personne ou d'un chien ? Utilisez le bouton de signalement sur sa page.",
     "contactEmail": "Des questions, des idées ou envie de collaborer ? Écrivez-nous :",
-    "campaign": "Mon histoire est aussi sur {platform}, où vous pouvez offrir une balade."
+    "campaign": "Mon histoire est aussi sur {platform}, où vous pouvez nous aider."
   },
   "poster": {
     "title": "Affiche pour votre refuge",
@@ -1997,7 +2011,7 @@
     "noWalks": "Aucune promenade en groupe n'est encore prévue à {city}.",
     "allWalks": "Toutes les promenades en groupe",
     "freeTitle": "Toujours gratuit, jamais de publicité",
-    "freeText": "Rondje Mee ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n'y aura ni publicité ni version payante. Les membres et partenaires font vivre Rondje Mee, et soutenir ne donne jamais de priorité.",
+    "freeText": "Rondje Mee ne coûte rien, ni aux promeneurs, ni aux propriétaires, ni aux refuges. Il n’y aura ni publicité ni version payante. Les dons volontaires et les partenaires font vivre Rondje Mee, et soutenir ne donne jamais de priorité.",
     "howFree": "Comment Rondje Mee reste gratuit",
     "otherCities": "Autres villes",
     "all": "Toutes les villes",

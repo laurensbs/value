@@ -132,13 +132,14 @@
     "helpUs": {
       "eyebrow": "Fundraiser",
       "title": "Help us!",
-      "lede": "{app} is free and will stay free. Your round helps get the app into the App Store and Google Play, and pays for the first year.",
-      "rounds": "{n, plural, =0 {Goal: {total} rounds} one {# of {total} rounds} other {# of {total} rounds}}",
-      "give": "Buy a round",
+      "lede": "{app} is free and will stay free. Your support helps get the app into the App Store and Google Play, and pays for the first year.",
+      "ledeApp": "Your support keeps {app} free and pays for the first year.",
+      "rounds": "{percent, plural, =0 {Goal: {goal}} other {#% of the way}}",
+      "give": "Support us",
       "join": "or sign up",
       "note": "Through {platform}, to {operator}, who builds {app}.",
       "more": "Where the money goes",
-      "chip": "{round} = 1 round"
+      "chip": "From {round}"
     }
   },
   "landing": {
@@ -1772,6 +1773,10 @@
         "q": "Why can I not contribute in the app?",
         "a": "Because money does not belong in the app: there, everything is about walking. Apple and Google also have their own rules for payments in apps. That is why you can only contribute here on the website."
       },
+      "appVia": {
+        "q": "Can I help from the app too?",
+        "a": "{apps, select, ios {Yes, in the iPhone app.} android {Yes, in the Android app.} other {Yes.}} At the bottom of your profile in the app you will find ‘Support us via {platform}’. That button opens {platform} in your browser. You never pay inside the app itself: there, everything is about walking."
+      },
       "share": {
         "q": "Do you give to good causes yourselves?"
       },
@@ -1788,10 +1793,12 @@
     "oncePill": "One-off",
     "onceTitle": "Join the crowdfunding",
     "onceText": "Rather give once? The crowdfunding pays for one-off costs, like the apps in the App Store and Google Play, the legal check and flyers for shelters.",
-    "onceButton": "Join on {platform}",
+    "onceGive": "Support us via {platform}",
     "progress": "{raised} of {goal} raised",
+    "goalRounds": "Goal: {goal}",
     "progressUpdated": "Updated on {date}. The current amount is on {platform}.",
     "platformNote": "You pay through {platform}, under their terms.",
+    "newTab": "(opens in a new tab)",
     "giveNoteAll": "A contribution is voluntary, not tax-deductible, and gives no benefits in {app}.",
     "openTitle": "Open about money",
     "open": {
@@ -1807,6 +1814,13 @@
     "whyTitle": "Why we do this",
     "whyText": "Loneliness, moving too little, and dogs who could use more attention: see the figures behind {app}, with sources.",
     "whyLink": "Read why"
+  },
+  "helpApp": {
+    "label": "Support us via {platform}",
+    "from": "From {round}",
+    "raised": "{raised} of {goal}",
+    "goal": "Goal: {goal}",
+    "opens": "opens {platform} in your browser"
   },
   "about": {
     "eyebrow": "About Rondje Mee",
@@ -1846,7 +1860,7 @@
     "contactTitle": "Contact",
     "contact": "Questions or ideas? The help page explains how to reach us. Is it about a person or a dog? Use the report button on their page.",
     "contactEmail": "Questions, ideas or want to work together? Email us:",
-    "campaign": "My story is also on {platform}, where you can buy a round."
+    "campaign": "My story is also on {platform}, where you can support us."
   },
   "poster": {
     "title": "Poster for your shelter",
@@ -1997,7 +2011,7 @@
     "noWalks": "No group walks are planned in {city} yet.",
     "allWalks": "All group walks",
     "freeTitle": "Always free, never ads",
-    "freeText": "Rondje Mee costs nothing, for walkers, owners and shelters. There will be no ads and no paid version. Members and partners keep Rondje Mee running, and support never buys priority.",
+    "freeText": "Rondje Mee costs nothing, for walkers, owners and shelters. There will be no ads and no paid version. Voluntary gifts and partners keep Rondje Mee running, and support never buys priority.",
     "howFree": "How Rondje Mee stays free",
     "otherCities": "Other cities",
     "all": "All cities",

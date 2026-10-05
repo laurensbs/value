@@ -49,7 +49,19 @@ Deze gegevens staan niet in de code maar in Vercel, zodat je ze zonder programme
 
 2. **Deployments → Redeploy**, zodat de nieuwe waarden gelden.
 3. **Let op: Vercel-abonnement.** Het gratis Hobby-abonnement van Vercel is bedoeld voor niet-commercieel gebruik. Zodra je bijdragen vraagt, val je mogelijk daarbuiten. Controleer de voorwaarden van Vercel en neem zo nodig **Pro** (ongeveer $20 per maand) voordat je `SUPPORT_URL` zet.
-4. **In de apps verschijnt nooit iets over geld.** Apple en Google staan geen externe betaal- of donatielinks toe voor bedrijven. De apps sturen "RondjeApp" mee in hun user agent (na `npx cap sync`, zie stap 6 en 7); de site laat dan de kosten, de steunknop en de link in de footer weg.
+4. **In de apps precies twee rustige ingangen naar de crowdfunding, nooit bovenaan, en betalen gebeurt nooit in de app** (besluit 5 okt 2026). De apps sturen "RondjeApp" mee in hun user agent (na `npx cap sync`, zie stap 6 en 7); de site laat dan de kosten, de steunknop en de pagina `/support` weg. Wel staan er twee ingangen (alleen als `CROWDFUNDING_URL` en `OPERATOR_NAME` gezet zijn): het blok "Help ons!" onderaan de voorpagina en de rij "Help ons via Whydonate" onderaan het profiel (net boven Uitloggen). Geen link in de footer van de app. Eén tik opent de actie van Whydonate in Safari of de browser van de telefoon, nooit in de app zelf. Het geeft niets in de app: geen functies, geen voorrang, geen inhoud.
+
+   **App Review: de rij blijft gewoon zichtbaar.** Zet hem niet uit om hem voor de reviewers te verbergen en daarna weer aan. Een functie die Apple tijdens de review niet ziet en die daarna wel verschijnt, is een verborgen functie (richtlijn 2.3.1), en dat kan het hele ontwikkelaarsaccount kosten. Leg de rij in plaats daarvan uit in de App Review Notes: de kant-en-klare Engelse notitie staat in [`app-store/indienen.md`](app-store/indienen.md), §5. Bij Google Play net zo.
+
+   **Wijst Apple of Google de rij af,** zet hem dan voor die app **voorgoed** uit en schrijf dat in de notities bij de nieuwe indiening:
+
+   | Naam | Waarde | Wat het doet |
+   |---|---|---|
+   | `SUPPORT_IN_APP` | leeg (aan) of `0` | De standaard voor beide apps. |
+   | `SUPPORT_IN_APP_IOS` | `0` | Alleen iPhone en iPad: de app-schil en de eigen iPhone-app (via `/api/v1/config`, die stuurt `X-Rondje-Platform: ios` mee). Leeg: volgt `SUPPORT_IN_APP`. |
+   | `SUPPORT_IN_APP_ANDROID` | `0` | Alleen de Android-app. Leeg: volgt `SUPPORT_IN_APP`. |
+
+   Aan is `1`, `true`, `on`, `ja` of `aan`; elke andere waarde, ook een tikfout, is uit. Daarna **Redeploy**. De website verandert nooit. Een schakelaar werkt meteen voor elke versie van de app die al in de winkel staat, dus zet een app die is afgewezen niet zelf weer aan: vraag het eerst aan Apple of Google (bij een nieuwe indiening of in het Resolution Center) en zet hem pas na hun akkoord terug.
 
 **E-mail (wachtwoord vergeten en meldingen).** Zonder e-mail kan niemand een nieuw wachtwoord aanvragen, en hoort een eigenaar alleen in de app over een nieuwe aanvraag of een rondje dat uitloopt. Zo zet je het aan:
 

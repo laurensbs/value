@@ -1,3 +1,4 @@
+import type { AppPlatform } from './app-platform'
 import { normalizeInstagram } from './org-fields'
 
 // Only these platforms can receive support: a typo or a lookalike link never shows up as a button.
@@ -114,4 +115,104 @@ export function campaign(raw: unknown): Campaign {
     shareToCausesPercent: typeof share === 'number' && Number.isFinite(share) && share > 0 && share <= 100 ? Math.round(share * 10) / 10 : null,
     updated: typeof c.updated === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(c.updated) ? c.updated : null,
   }
+}
+
+/** The words that switch something on; unset (or empty) means the default. */
+const ON = new Set(['1', 'true', 'on', 'ja', 'aan'])
+
+/**
+ * One on/off switch from Vercel. Unset or empty: `fallback`. '1', 'true', 'on', 'ja' or 'aan' (any
+ * case, spaces around it ignored): on. Anything else, a typo included, is off: a switch someone meant
+ * to turn off never stays on by accident.
+ */
+export function switchOn(raw: string | undefined, fallback: boolean): boolean {
+  const value = raw?.trim().toLowerCase()
+  if (!value) return fallback
+  return ON.has(value)
+}
+
+/**
+ * Whether "Help ons via Whydonate" shows inside an app. SUPPORT_IN_APP is the default for both apps
+ * (unset: on); SUPPORT_IN_APP_IOS and SUPPORT_IN_APP_ANDROID override it for one app and default to
+ * it. For example: if Apple does not accept the row, SUPPORT_IN_APP_IOS=0 takes it out of the iPhone
+ * app for good, and Android keeps it. These switches are never for hiding the row from app reviewers
+ * and turning it back on afterwards (docs/app-store/indienen.md). The website never changes.
+ */
+export function supportInApp(env: Record<string, string | undefined> = process.env, platform: AppPlatform | null = null): boolean {
+  const all = switchOn(env.SUPPORT_IN_APP, true)
+  if (platform === 'ios') return switchOn(env.SUPPORT_IN_APP_IOS, all)
+  if (platform === 'android') return switchOn(env.SUPPORT_IN_APP_ANDROID, all)
+  return all
+}
+
+/** True while the row may show in both apps: then the website can say "in the app" without "which one". */
+export function supportInBothApps(env: Record<string, string | undefined> = process.env): boolean {
+  return supportInApp(env, 'ios') && supportInApp(env, 'android')
+}
+
+/**
+ * Whether to show the amount raised ("€120 van €3.000"). Only once something came in: before that,
+ * the goal in rounds ("Doel: 600 rondjes"), so nobody reads "€0" as a measure of anything.
+ */
+export function showsRaised(progress: Campaign['progress']): boolean {
+  return progress !== null && progress.raised > 0
+}
+
+/** "Help ons via Whydonate" in the apps: everything the app needs for one row that opens the campaign. */
+export interface AppSupport {
+  /** False when the switch for this app is off (SUPPORT_IN_APP, _IOS, _ANDROID): the app then shows nothing about it. */
+  inApp: boolean
+  label: string
+  crowdfundingUrl: string
+  platform: string
+  operator: string
+  /** Goal and amount raised in whole euros; null until both are filled in (content/crowdfunding.json). */
+  goal: number | null
+  raised: number | null
+  /** The same numbers in rounds of €5 ("Geef een rondje"). */
+  rounds: { goal: number; raised: number } | null
+  shareToCausesPercent: number | null
+}
+
+/**
+ * The campaign for the apps, or null while there is no campaign link with a named recipient
+ * (CROWDFUNDING_URL + OPERATOR_NAME). The apps only ever open the link in the phone's browser:
+ * nothing is paid inside an app. `label` gets the platform's name, e.g. "Whydonate". `app` picks the
+ * switch: SUPPORT_IN_APP_IOS or _ANDROID, or SUPPORT_IN_APP alone when it is not clear which app asks.
+ */
+export function appSupport(
+  env: Record<string, string | undefined>,
+  raw: unknown,
+  label: (platform: string) => string,
+  app: AppPlatform | null = null,
+): AppSupport | null {
+  const cfg = supportConfig(env)
+  if (!cfg.crowdfundingUrl || !cfg.crowdfundingPlatform || !cfg.operator) return null
+  const drive = campaign(raw)
+  const progress = drive.progress
+  return {
+    inApp: supportInApp(env, app),
+    label: label(cfg.crowdfundingPlatform),
+    crowdfundingUrl: cfg.crowdfundingUrl,
+    platform: cfg.crowdfundingPlatform,
+    operator: cfg.operator,
+    goal: progress?.goal ?? null,
+    raised: progress?.raised ?? null,
+    rounds: progress ? { goal: roundsFor(progress.goal), raised: roundsFor(progress.raised) } : null,
+    shareToCausesPercent: drive.shareToCausesPercent,
+  }
+}
+
+/**
+ * The question about the app on /support (the website). 'appVia' ("Kan ik ook vanuit de app helpen?")
+ * says the row "Help ons via Whydonate" is at the bottom of the profile in the app, so it is only asked
+ * while that row would really show in at least one app: a campaign link with a named recipient
+ * (CROWDFUNDING_URL + OPERATOR_NAME) and the switch for that app on, the same test as appSupport.
+ * Otherwise 'app' ("Waarom kan ik niet steunen in de app?"). `apps` says which app has the row.
+ */
+export function appQuestion(env: Record<string, string | undefined>, raw: unknown): { key: 'appVia' | 'app'; apps: 'both' | 'ios' | 'android' } {
+  const shows = (app: AppPlatform) => appSupport(env, raw, (platform) => platform, app)?.inApp === true
+  const ios = shows('ios')
+  const android = shows('android')
+  return { key: ios || android ? 'appVia' : 'app', apps: ios && android ? 'both' : ios ? 'ios' : 'android' }
 }

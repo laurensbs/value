@@ -5,7 +5,7 @@ import { COLLIE } from '@/components/landing/looks'
 import { IconTile, PageHero } from '@/components/landing/PageHero'
 import { SupportButton } from '@/components/SupportButton'
 import { APP_NAME } from '@/lib/site'
-import { campaign, supportConfig } from '@/lib/support'
+import { appQuestion, campaign, roundsFor, showsRaised, supportConfig } from '@/lib/support'
 import { isNativeRequest } from '@/server/native'
 import costs from '../../../content/costs.json'
 import crowdfunding from '../../../content/crowdfunding.json'
@@ -29,6 +29,8 @@ export default async function SupportPage() {
   const native = await isNativeRequest()
   const cfg = supportConfig()
   const drive = campaign(crowdfunding)
+  // The amount raised once something came in; before that only the goal (in rounds in Dutch, in euros in the other languages).
+  const raised = showsRaised(drive.progress) ? drive.progress : null
   const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const day = (d: string) => format.dateTime(new Date(d), { day: 'numeric', month: 'long', year: 'numeric' })
   const operator = cfg.operator ?? t('support.operatorUnknown')
@@ -36,9 +38,13 @@ export default async function SupportPage() {
   // Until there are real agreements, an honest intention instead of a promised share or names.
   const share =
     drive.shareToCausesPercent !== null ? t('support.shareSet', { percent: format.number(drive.shareToCausesPercent) }) : t('support.shareSoon', { app: APP_NAME })
+  // "Help ons via Whydonate" in the apps (HelpUsInApp): the question about the app says where to find
+  // it, and in which app when the switch is off for the other one (SUPPORT_IN_APP_IOS / _ANDROID), but
+  // only while the row really shows: a campaign link, a named recipient and the switch on (appQuestion).
+  const { key: appFaq, apps } = appQuestion(process.env, crowdfunding)
   const faq = native
     ? (['free', 'sponsors'] as const)
-    : ([...(['free', 'where', 'tax', 'perks', 'app', 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
+    : ([...(['free', 'where', 'tax', 'perks', appFaq, 'share'] as const), ...(cfg.crowdfundingUrl ? (['once'] as const) : []), 'sponsors'] as const)
   const total = costs.items.reduce((sum, c) => ({ min: sum.min + perMonth(c, c.min), max: sum.max + perMonth(c, c.max) }), { min: 0, max: 0 })
   // The amount stays on one line; "per maand" may move under it on a small phone.
   const amount = (c: Cost) => (
@@ -118,6 +124,45 @@ export default async function SupportPage() {
             <p>{t('support.giveIntro', { operator, app: APP_NAME })}</p>
           </div>
           <div className="im-give">
+            {cfg.crowdfundingUrl ? (
+              <article className="im-give-option stack-s" id="crowdfunding">
+                <span className="pill ball">{t('support.oncePill')}</span>
+                <h3 id="once-title">{t('support.onceTitle')}</h3>
+                <p className="muted">{t('support.onceText', { app: APP_NAME })}</p>
+                {raised ? (
+                  <div className="stack-s">
+                    <div
+                      className="lp-progress im-progress"
+                      role="progressbar"
+                      aria-labelledby="once-title"
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={raised.percent}
+                      aria-valuetext={t('support.progress', { raised: euro(raised.raised), goal: euro(raised.goal) })}
+                    >
+                      <span style={{ width: `${Math.max(raised.percent, 3)}%` }} />
+                    </div>
+                    <p className="im-progress-numbers">
+                      <strong>{t('support.progress', { raised: euro(raised.raised), goal: euro(raised.goal) })}</strong>
+                      {drive.updated ? <span className="muted small">{t('support.progressUpdated', { date: day(drive.updated), platform: cfg.crowdfundingPlatform ?? '' })}</span> : null}
+                    </p>
+                  </div>
+                ) : drive.progress ? (
+                  <p className="im-progress-numbers">
+                    <strong>{t('support.goalRounds', { total: roundsFor(drive.progress.goal), goal: euro(drive.progress.goal) })}</strong>
+                  </p>
+                ) : null}
+                <div>
+                  {/* Straight to the campaign in a new tab; the arrow says it leaves the site. */}
+                  <a href={cfg.crowdfundingUrl} target="_blank" rel="noopener noreferrer" className="button primary">
+                    <Icon name="heart" size={18} /> {t('support.onceGive', { platform: cfg.crowdfundingPlatform ?? '' })}
+                    <Icon name="external" size={16} />
+                    <span className="visually-hidden">{t('support.newTab')}</span>
+                  </a>
+                </div>
+                <p className="muted small">{t('support.platformNote', { platform: cfg.crowdfundingPlatform ?? '' })}</p>
+              </article>
+            ) : null}
             {cfg.url ? (
               <article className="im-give-option stack-s">
                 <span className="pill blue">{t('support.monthlyPill')}</span>
@@ -127,36 +172,6 @@ export default async function SupportPage() {
                   <SupportButton url={cfg.url} label={t('support.giveButton', { app: APP_NAME, platform: cfg.platform ?? '' })} />
                 </div>
                 <p className="muted small">{t('support.platformNote', { platform: cfg.platform ?? '' })}</p>
-              </article>
-            ) : null}
-            {cfg.crowdfundingUrl ? (
-              <article className="im-give-option stack-s" id="crowdfunding">
-                <span className="pill ball">{t('support.oncePill')}</span>
-                <h3 id="once-title">{t('support.onceTitle')}</h3>
-                <p className="muted">{t('support.onceText', { app: APP_NAME })}</p>
-                {drive.progress ? (
-                  <div className="stack-s">
-                    <div
-                      className="lp-progress im-progress"
-                      role="progressbar"
-                      aria-labelledby="once-title"
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-valuenow={drive.progress.percent}
-                      aria-valuetext={t('support.progress', { raised: euro(drive.progress.raised), goal: euro(drive.progress.goal) })}
-                    >
-                      <span style={{ width: `${Math.max(drive.progress.percent, drive.progress.raised > 0 ? 3 : 0)}%` }} />
-                    </div>
-                    <p className="im-progress-numbers">
-                      <strong>{t('support.progress', { raised: euro(drive.progress.raised), goal: euro(drive.progress.goal) })}</strong>
-                      {drive.updated ? <span className="muted small">{t('support.progressUpdated', { date: day(drive.updated), platform: cfg.crowdfundingPlatform ?? '' })}</span> : null}
-                    </p>
-                  </div>
-                ) : null}
-                <div>
-                  <SupportButton url={cfg.crowdfundingUrl} label={t('support.onceButton', { platform: cfg.crowdfundingPlatform ?? '' })} />
-                </div>
-                <p className="muted small">{t('support.platformNote', { platform: cfg.crowdfundingPlatform ?? '' })}</p>
               </article>
             ) : null}
           </div>
@@ -249,7 +264,7 @@ export default async function SupportPage() {
             <summary>
               <strong>{t(`support.faq.${k}.q`, { app: APP_NAME })}</strong>
             </summary>
-            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME })}</p>
+            <p>{k === 'share' ? share : t(`support.faq.${k}.a`, { operator, app: APP_NAME, platform: cfg.crowdfundingPlatform ?? '', apps })}</p>
           </details>
         ))}
       </section>

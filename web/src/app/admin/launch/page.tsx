@@ -118,7 +118,7 @@ export default async function LaunchPage() {
           </div>
         </section>
 
-        {/* The app shells never show anything about money (App Store and Play rules). */}
+        {/* The app shells never show the costs (only "Help ons via Whydonate", a link out: HelpUsInApp). */}
         {native ? null : <CostsCard costs={data.costs} members={data.members} />}
       </section>
     </div>

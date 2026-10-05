@@ -96,7 +96,7 @@ test('pages: support, about, robots, sitemap and short links', async ({ browser 
   await context.close()
 })
 
-test('support link: on the website when the recipient is named, never in the app', async ({ browser }) => {
+test('support link: on the website when the recipient is named; in the app none in the footer', async ({ browser }) => {
   const web = await newPerson(browser)
   await web.page.goto('/support')
   const link = web.page.getByRole('link', { name: /Steun Rondje Mee via/ })
@@ -104,14 +104,19 @@ test('support link: on the website when the recipient is named, never in the app
   await expect(link).toHaveAttribute('href', /patreon\.com/)
   await expect(web.page.getByRole('contentinfo').getByRole('link', { name: 'Help ons' })).toBeVisible()
 
-  // The iOS and Android apps add "RondjeApp" to the user agent: no money anywhere.
+  // The iOS and Android apps add "RondjeApp" to the user agent: no costs and no support page there.
   const app = await browser.newContext({ userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 RondjeApp' })
   const page = await app.newPage()
   await page.goto('/support')
   await expect(page.getByRole('heading', { name: 'Maak Rondje Mee mogelijk', level: 1 })).toBeVisible()
   await expect(page.getByRole('link', { name: /Steun Rondje Mee via/ })).toHaveCount(0)
   await expect(page.getByText(/Samen ongeveer/)).toHaveCount(0)
-  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Help ons' })).toHaveCount(0)
+  // No "Help ons" in the footer of the app at all (Laurens, 5 okt 2026): not to /support and not to the
+  // campaign. In the app it is only the block at the bottom of the home page and the row in the profile.
+  const footer = page.getByRole('contentinfo')
+  await expect(footer.locator('a[href="/support"]')).toHaveCount(0)
+  await expect(footer.locator('a[href*="whydonate"]')).toHaveCount(0)
+  await expect(footer.getByRole('link', { name: /Help ons/ })).toHaveCount(0)
   await page.goto('/')
   await expect(page.getByRole('link', { name: /Hoe we gratis blijven/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Over Rondje Mee/ }).first()).toBeVisible()

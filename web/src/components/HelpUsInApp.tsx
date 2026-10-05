@@ -1,0 +1,68 @@
+import { getFormatter, getTranslations } from 'next-intl/server'
+import { appSupport, ROUND_EUR } from '@/lib/support'
+import { requestPlatform } from '@/server/native'
+import crowdfunding from '../../content/crowdfunding.json'
+import { Icon } from './Icon'
+
+/**
+ * "Help ons via Whydonate" in the iOS and Android apps (Laurens, 5 okt 2026): one row low in the
+ * profile, never at the top, and one tap goes straight to the campaign. With the block at the bottom of
+ * the home page (landing/HelpUs) these are the only two ways in the apps: no footer link there.
+ *
+ * Nothing is paid inside the app. The link is a plain link to another site with target="_blank":
+ * the Capacitor shell hands every link outside rondjemee.nl to Safari or the phone's browser
+ * (WebViewDelegationHandler on iOS, Bridge.launchIntent on Android), never to an in-app webview.
+ *
+ * Shown only in the apps (`native`), while there is a campaign with a named recipient
+ * (CROWDFUNDING_URL + OPERATOR_NAME), and while the switch for this app is on (SUPPORT_IN_APP, or
+ * SUPPORT_IN_APP_IOS / SUPPORT_IN_APP_ANDROID: lib/support.ts).
+ */
+export async function inAppHelp(native: boolean) {
+  if (!native) return null
+  const [t, app] = await Promise.all([getTranslations('helpApp'), requestPlatform()])
+  const help = appSupport(process.env, crowdfunding, (platform) => t('label', { platform }), app)
+  if (!help?.inApp) return null
+  const format = await getFormatter()
+  const euro = (n: number) => format.number(n, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
+  // No countdown and no "nog maar": the amount raised next to the goal once something came in,
+  // before that only the goal (lib/support.ts, showsRaised). Dutch counts the goal in rounds
+  // ("Doel: 600 rondjes"); English, Spanish and French name it in euros ("Goal: €3,000"), so nothing
+  // reads like a price per walk there.
+  const progress =
+    help.goal !== null && help.raised !== null && help.rounds
+      ? help.raised > 0
+        ? t('raised', { raised: euro(help.raised), goal: euro(help.goal) })
+        : t('goal', { total: help.rounds.goal, goal: euro(help.goal) })
+      : null
+  return {
+    url: help.crowdfundingUrl,
+    label: help.label,
+    text: [t('from', { round: euro(ROUND_EUR) }), progress].filter(Boolean).join(' · '),
+    opens: t('opens', { platform: help.platform }),
+  }
+}
+
+/** The row at the bottom of the profile in the apps. */
+export async function HelpUsRow({ native }: { native: boolean }) {
+  const help = await inAppHelp(native)
+  if (!help) return null
+  return (
+    <ul className="hub-list" id="help-ons">
+      <li>
+        <a href={help.url} target="_blank" rel="noopener noreferrer" className="hub-row">
+          <span className="hub-icon ball" aria-hidden="true">
+            <Icon name="heart" size={20} />
+          </span>
+          <span className="hub-row-text">
+            <strong>{help.label}</strong>
+            <span>{help.text}</span>
+          </span>
+          <span className="visually-hidden">({help.opens})</span>
+          <span className="hub-chevron" aria-hidden="true">
+            <Icon name="external" size={18} />
+          </span>
+        </a>
+      </li>
+    </ul>
+  )
+}

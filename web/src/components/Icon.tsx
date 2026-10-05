@@ -45,6 +45,8 @@ const PATHS = {
   moon: 'M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10Z',
   trophy: 'M8 4h8v5a4 4 0 0 1-8 0V4ZM8 6H4.5a3.5 3.5 0 0 0 3.6 3.9M16 6h3.5a3.5 3.5 0 0 1-3.6 3.9M12 13v4M8.5 20.5h7M9.5 17h5v3.5h-5z',
   star: 'M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5Z',
+  // A link that leaves Rondje Mee (opens in another tab, or in the phone's browser from the apps).
+  external: 'M14 4h6v6M20 4l-8.5 8.5M18 13.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5.5',
 } as const
 
 export type IconName = keyof typeof PATHS
