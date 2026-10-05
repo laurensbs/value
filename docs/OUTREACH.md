@@ -14,13 +14,13 @@ Startlijst: [`web/content/shelters.json`](../web/content/shelters.json), 39 opva
 | Land | De eerlijke nuance | Wat je benadrukt |
 |---|---|---|
 | **Nederland** | Opvangen zitten meestal niet vol. Er is eerder een tekort aan adopteerbare honden, en opvanghonden hebben vaak gedragsproblemen ([PAWS](https://pawsnederland.org/feiten-en-fabels-in-nederland-zitten-de-asiels-niet-vol-er-is-een-tekort-aan-leuke-gezelschapshonden/), [Friends4StrayDogs](https://www.stichting-friends4straydogs.nl/misverstand-overvolle-asiels)). Wel komen er jaarlijks ruim 10.000 honden binnen ([Dierenbescherming](https://www.dierenbescherming.nl/in-actie-komen/op-school/spreekbeurten/honden)). | Kwaliteit, geen massa: begeleide groepswandelingen met niveaus (starter en ervaren) en betrouwbare, vaste wandelaars. |
-| **België** | Ertussenin. Vlaanderen heeft al een wandelclub (Dierenasiel Gent) en online boeken (Animal Trust). Wallonië en Brussel zijn Franstalig. | Minder planwerk en nieuwe jonge wandelaars, naast wat er al is. |
+| **België** | Ertussenin. Vlaanderen heeft al een wandelclub (Dierenasiel Gent) en online boeken (Animal Trust). Wallonië en Brussel zijn Franstalig. | Minder planwerk en nieuwe wandelaars, naast wat er al is. |
 | **Spanje** | Veel grotere aantallen: in de orde van ruim 100.000 opgevangen honden per jaar (Fundación Affinity) **[te verifiëren]**. Veel protectoras hebben al een *voluntariado de paseo*. | Meer wandelingen voor meer honden, zonder papierwerk. Let op PPP-honden (§6). |
 
 ## 2. Wat Rondje een opvang biedt
 
 - **Meer wandelingen**, op momenten die de opvang kiest. Onderzoek koppelt regelmatige wandelingen aan positievere emoties bij opvanghonden ([ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S1558787823001338)), maar beloof geen effect.
-- **Gescreende jonge vrijwilligers:** 18+, de eerste kennismaking altijd begeleid, en een ID-check in persoon bij het eerste bezoek.
+- **Gescreende vrijwilligers:** 18+, van student tot gepensioneerde, de eerste kennismaking altijd begeleid, en een ID-check in persoon bij het eerste bezoek.
 - **Een gratis hulpmiddel:** groepswandelingen boeken (maximaal 4 wandelaars per begeleider), aanwezigheid, herinneringen, en tijdens de wandeling de live route voor de begeleider.
 - **Geen extra administratie:** alle honden in één keer importeren met een CSV-bestand.
 - **Zichtbaarheid voor adoptie**, als de opvang dat wil: korte video's van langverblijvers, met toestemming.
@@ -50,7 +50,7 @@ Begin bij particuliere opvangen en benader publieke centra tegelijk. Sommige Ned
 | 8. Doorverwijzen | Vraag twee introducties bij andere opvangen (§4) | 1 op de 3 live opvangen |
 
 **Wat nu in de app staat (oktober 2026)** en de funnel sneller maakt:
-- **Wie eerst?** Kijk in **Beheer → Tips en stemmen**: opvangen waar mensen "Ik wil hier wandelen" klikten of die ze tipten, met het meest gevraagd bovenaan. Noem dat aantal in je eerste mail ("12 jongeren in jouw stad willen bij jullie wandelen").
+- **Wie eerst?** Kijk in **Beheer → Tips en stemmen**: opvangen waar mensen "Ik wil hier wandelen" klikten of die ze tipten, met het meest gevraagd bovenaan. Noem dat aantal in je eerste mail ("12 mensen in jouw stad willen bij jullie wandelen").
 - **Aanmeldlink per opvang:** `/shelter?claim=<id>` vult de gegevens uit de lijst al in. De link staat in Beheer bij elke tip.
 - **Stap 5 in een kwartier:** met **Snel toevoegen met foto's** kiest de opvang één foto per hond. Elke foto wordt een concept, en heet de foto "Bram.jpg", dan staat de naam er al. CSV kan nog steeds.
 - **Poster met QR-code** (dashboard → Poster): ophangen bij de ingang en in de wachtruimte. Bezoekers zien zo meteen de honden van de opvang.
@@ -114,11 +114,11 @@ In Vlaanderen schrijf je "vzw" en "gsm".
 
 **Eerste mail**
 
-> **Onderwerp:** Extra wandelingen voor uw honden, met jonge vrijwilligers (gratis)
+> **Onderwerp:** Extra wandelingen voor uw honden, met vrijwilligers uit de buurt (gratis)
 >
 > Beste [naam],
 >
-> Ik ben [je naam] van Rondje: een gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling goed kunnen gebruiken. Ik zou graag samenwerken met [opvang].
+> Ik ben [je naam] van Rondje: een gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling goed kunnen gebruiken. Ik zou graag samenwerken met [opvang].
 >
 > - U bepaalt welke honden meedoen en welke wandelaars komen.
 > - Er wordt gewandeld in kleine groepen, altijd onder begeleiding, op momenten die u kiest.
@@ -148,7 +148,7 @@ In Vlaanderen schrijf je "vzw" en "gsm".
 
 > "Goedemorgen, u spreekt met [je naam] van Rondje. Spreek ik met [naam], of met wie de vrijwilligers coördineert? Heeft u één minuut?
 >
-> Rondje is een gratis platform dat jongvolwassenen van 18 jaar en ouder koppelt aan honden die een extra wandeling kunnen gebruiken. Bij opvangen gaat dat in kleine groepen, altijd onder begeleiding, op momenten die u kiest. U bepaalt welke honden meedoen en wie er mag komen. Uw begeleider controleert bij het eerste bezoek het ID en ziet tijdens de wandeling de route live. Inschrijven en aanwezigheid regelen wij.
+> Rondje is een gratis platform dat mensen vanaf 18 jaar koppelt aan honden die een extra wandeling kunnen gebruiken. Bij opvangen gaat dat in kleine groepen, altijd onder begeleiding, op momenten die u kiest. U bepaalt welke honden meedoen en wie er mag komen. Uw begeleider controleert bij het eerste bezoek het ID en ziet tijdens de wandeling de route live. Inschrijven en aanwezigheid regelen wij.
 >
 > Ik bel om te horen of dit bij [opvang] past. Heeft u twintig minuten voor een gesprek, bijvoorbeeld [dag] of [dag]?"
 >
@@ -159,11 +159,11 @@ In Vlaanderen schrijf je "vzw" en "gsm".
 
 **Premier e-mail**
 
-> **Objet :** Des promenades en plus pour vos chiens, avec de jeunes bénévoles (gratuit)
+> **Objet :** Des promenades en plus pour vos chiens, avec des bénévoles des environs (gratuit)
 >
 > Bonjour [naam],
 >
-> Je suis [je naam], de Rondje : une plateforme gratuite qui met en relation des jeunes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. J'aimerais beaucoup collaborer avec [refuge].
+> Je suis [je naam], de Rondje : une plateforme gratuite qui met en relation des personnes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. J'aimerais beaucoup collaborer avec [refuge].
 >
 > - Vous choisissez les chiens qui participent et les promeneurs qui viennent.
 > - Les promenades se font en petits groupes, toujours encadrés, aux moments que vous fixez.
@@ -193,7 +193,7 @@ In Vlaanderen schrijf je "vzw" en "gsm".
 
 > « Bonjour, [je naam], de Rondje. Je parle bien à [naam], ou à la personne responsable des bénévoles ? Vous avez une minute ?
 >
-> Rondje est une plateforme gratuite qui met en relation des jeunes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. Avec les refuges, cela se fait en petits groupes, toujours encadrés, aux moments que vous choisissez. Vous décidez quels chiens participent et qui peut venir. Votre encadrant vérifie la pièce d'identité à la première visite et voit l'itinéraire en direct pendant la promenade. Nous gérons les inscriptions et les présences.
+> Rondje est une plateforme gratuite qui met en relation des personnes de 18 ans et plus avec des chiens qui ont besoin d'une promenade en plus. Avec les refuges, cela se fait en petits groupes, toujours encadrés, aux moments que vous choisissez. Vous décidez quels chiens participent et qui peut venir. Votre encadrant vérifie la pièce d'identité à la première visite et voit l'itinéraire en direct pendant la promenade. Nous gérons les inscriptions et les présences.
 >
 > Je vous appelle pour savoir si cela pourrait convenir à [refuge]. Auriez-vous 20 minutes pour en parler, par exemple [jour] ou [jour] ? »
 >
@@ -206,11 +206,11 @@ In Vlaanderen schrijf je "vzw" en "gsm".
 
 **Primer correo**
 
-> **Asunto:** Más paseos para vuestros perros, con voluntarios jóvenes (gratis)
+> **Asunto:** Más paseos para vuestros perros, con voluntarios de la zona (gratis)
 >
 > Hola, [naam]:
 >
-> Soy [je naam], de Rondje: una plataforma gratuita que pone en contacto a jóvenes mayores de 18 años con perros que necesitan un paseo más. Me encantaría colaborar con [protectora].
+> Soy [je naam], de Rondje: una plataforma gratuita que pone en contacto a personas de 18 años o más con perros que necesitan un paseo más. Me encantaría colaborar con [protectora].
 >
 > - Vosotros decidís qué perros participan y qué voluntarios vienen.
 > - Los paseos son en grupos pequeños, siempre supervisados, en los horarios que elijáis.
@@ -241,7 +241,7 @@ In Vlaanderen schrijf je "vzw" en "gsm".
 
 > «Hola, buenos días. Soy [je naam], de Rondje. ¿Hablo con [naam], o con quien coordina el voluntariado? ¿Tienes un minuto?
 >
-> Rondje es una plataforma gratuita que pone en contacto a jóvenes mayores de 18 años con perros que necesitan un paseo más. Con las protectoras funciona con paseos en grupos pequeños, siempre supervisados, en los horarios que elijáis. Vosotros decidís qué perros participan y quién viene. Vuestro responsable comprueba el DNI o NIE en la primera visita y ve la ruta en directo durante el paseo. Nosotros nos encargamos de las inscripciones y la asistencia.
+> Rondje es una plataforma gratuita que pone en contacto a personas de 18 años o más con perros que necesitan un paseo más. Con las protectoras funciona con paseos en grupos pequeños, siempre supervisados, en los horarios que elijáis. Vosotros decidís qué perros participan y quién viene. Vuestro responsable comprueba el DNI o NIE en la primera visita y ve la ruta en directo durante el paseo. Nosotros nos encargamos de las inscripciones y la asistencia.
 >
 > Te llamo para saber si podría encajar con [protectora]. ¿Tendrías 20 minutos para hablarlo, por ejemplo el [día] o el [día]?»
 >
