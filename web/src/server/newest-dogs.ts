@@ -45,7 +45,7 @@ export async function queryNewestDogs(limit = NEWEST_DOGS_LIMIT): Promise<Newest
 
 /**
  * The same list for every visitor, kept for five minutes. Adding, pausing, hiding or deleting a dog
- * on the website clears it at once (dogsChanged); changes from the app show within five minutes.
+ * on the website or in the app clears it at once (dogsChanged).
  */
 export const newestRealDogs = unstable_cache(() => queryNewestDogs(), ['newest-real-dogs-v1'], { revalidate: 300, tags: [NEWEST_DOGS_TAG] })
 
