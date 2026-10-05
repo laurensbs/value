@@ -229,7 +229,7 @@ Not happy with how we handle your data? Please tell us first. You can also alway
 
 ## 14. Data protection impact assessment (DPIA)
 
-Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are preparing a data protection impact assessment (DPIA). It is not finished yet. We will complete it before Rondje Mee goes live on a wide scale with live location during walks, and keep it up to date after that. Until then, section 5 applies: live location only during a walk that the walker starts, and routes are deleted after 30 days.
+Rondje Mee processes location data during walks. People in vulnerable situations, such as older or ill owners, may also use Rondje Mee. That is why we are preparing a data protection impact assessment (DPIA). It is not finished yet. We will complete it before the first real walk with live location takes place, and keep it up to date after that. Live location always works as described in section 5: only during a walk that the walker starts, and routes are deleted after 30 days.
 
 ## 15. Age
 

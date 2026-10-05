@@ -3,6 +3,7 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { parseFrontMatter } from './front-matter'
 import { TERMS_VERSION } from './site'
+import { campaign } from './support'
 
 const CONTENT = path.join(process.cwd(), 'content')
 
@@ -105,6 +106,18 @@ describe('legal versions', () => {
       .filter((file) => path.basename(file, '.md') === doc)
       .map((file) => `${read(file).data.version} ${read(file).data.updated}`)
     expect(new Set(versions).size).toBe(1)
+  })
+})
+
+describe('support in the terms (art. 8)', () => {
+  // /support shows the share for good causes from content/crowdfunding.json; the terms promise the same number.
+  const { shareToCausesPercent } = campaign(JSON.parse(readFileSync(path.join(CONTENT, 'crowdfunding.json'), 'utf8')))
+  const terms = textFiles('legal').filter((file) => path.basename(file) === 'terms.md')
+
+  it.each(terms)('%s names the share for good causes that /support shows', (file) => {
+    expect(shareToCausesPercent, 'no share set in crowdfunding.json: take the sentence out of terms art. 8').not.toBeNull()
+    const share = new RegExp(`(?<![\\d.,])${String(shareToCausesPercent).replace('.', '[.,]')}[\\s\\u00a0\\u202f]?%`)
+    expect(read(file).body).toMatch(share)
   })
 })
 

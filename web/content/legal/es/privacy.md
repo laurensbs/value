@@ -229,7 +229,7 @@ Algunos datos no podemos borrarlos de inmediato, por ejemplo si son necesarios p
 
 ## 14. Evaluación de impacto (EIPD)
 
-Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso estamos preparando una evaluación de impacto relativa a la protección de datos (EIPD). Todavía no está terminada. La completaremos antes de que Rondje Mee se abra a gran escala con la ubicación en tiempo real durante los paseos, y después la mantendremos actualizada. Hasta entonces se aplica lo que dice el apartado 5: ubicación en tiempo real solo durante un paseo que inicia el paseante, y los recorridos se borran a los 30 días.
+Rondje Mee trata datos de ubicación durante los paseos. Además, pueden usar Rondje Mee personas en situación vulnerable, como propietarios mayores o enfermos. Por eso estamos preparando una evaluación de impacto relativa a la protección de datos (EIPD). Todavía no está terminada. La completaremos antes de que se haga el primer paseo de verdad con ubicación en tiempo real, y después la mantendremos actualizada. La ubicación en tiempo real funciona siempre como dice el apartado 5: solo durante un paseo que inicia el paseante, y los recorridos se borran a los 30 días.
 
 ## 15. Edad
 

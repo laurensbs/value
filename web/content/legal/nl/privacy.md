@@ -229,7 +229,7 @@ Ben je niet tevreden over hoe we met je gegevens omgaan? Laat het ons eerst wete
 
 ## 14. Gegevensbeschermingseffectbeoordeling (DPIA)
 
-Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom maken we een gegevensbeschermingseffectbeoordeling (DPIA). Die is nog niet klaar. We ronden haar af voordat Rondje Mee breed live gaat met live locatie tijdens wandelingen, en daarna houden we haar actueel. Tot die tijd geldt wat in artikel 5 staat: live locatie alleen tijdens een wandeling die de wandelaar zelf start, en routes verwijderen we na 30 dagen.
+Rondje Mee verwerkt locatiegegevens tijdens wandelingen. Ook mensen in een kwetsbare situatie, zoals oudere of zieke eigenaren, kunnen Rondje Mee gebruiken. Daarom maken we een gegevensbeschermingseffectbeoordeling (DPIA). Die is nog niet klaar. We ronden haar af voordat de eerste echte wandeling met live locatie plaatsvindt, en daarna houden we haar actueel. Live locatie werkt altijd zoals in artikel 5 staat: alleen tijdens een wandeling die de wandelaar zelf start, en routes verwijderen we na 30 dagen.
 
 ## 15. Leeftijd
 

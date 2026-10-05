@@ -229,7 +229,7 @@ Vous n'êtes pas satisfait de la manière dont nous traitons vos données ? Dite
 
 ## 14. Analyse d'impact (AIPD)
 
-Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous préparons une analyse d'impact relative à la protection des données (AIPD). Elle n'est pas encore terminée. Nous la finaliserons avant que Rondje Mee ne soit ouvert à grande échelle avec la localisation en direct pendant les promenades, puis nous la tiendrons à jour. D'ici là, l'article 5 s'applique : localisation en direct uniquement pendant une promenade que le promeneur démarre lui-même, et suppression des trajets après 30 jours.
+Rondje Mee traite des données de localisation pendant les promenades. Des personnes en situation de vulnérabilité, comme des propriétaires âgés ou malades, peuvent aussi utiliser Rondje Mee. C'est pourquoi nous préparons une analyse d'impact relative à la protection des données (AIPD). Elle n'est pas encore terminée. Nous la finaliserons avant la première vraie promenade avec localisation en direct, puis nous la tiendrons à jour. La localisation en direct fonctionne toujours comme le prévoit l'article 5 : uniquement pendant une promenade que le promeneur démarre lui-même, et suppression des trajets après 30 jours.
 
 ## 15. Âge
 
